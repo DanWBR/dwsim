@@ -205,10 +205,10 @@ Haga clic en "Siguiente" para continuar.</value>
     <value>Inside-Out (Equilibrio Líquido-Líquido-Vapor)</value>
   </data>
   <data name="ListBoxPP.Items4" xml:space="preserve">
-    <value>Minimización de Energia Libre de Gibbs (Equilibrio Líquido-Vapor)</value>
+    <value>Minimización de EnergyFlow Libre de Gibbs (Equilibrio Líquido-Vapor)</value>
   </data>
   <data name="ListBoxPP.Items5" xml:space="preserve">
-    <value>Minimización de Energia Libre de Gibbs (Equilibrio Líquido-Líquido-Vapor)</value>
+    <value>Minimización de EnergyFlow Libre de Gibbs (Equilibrio Líquido-Líquido-Vapor)</value>
   </data>
   <data name="ListBoxPP.Items6" xml:space="preserve">
     <value>Bucles Anidados  (Equilibrio Sólido-Líquido - Sistemas Eutécticos)</value>

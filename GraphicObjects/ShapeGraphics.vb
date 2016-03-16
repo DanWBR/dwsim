@@ -394,7 +394,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Pump
+            Me.ObjectType = GraphicObjects.ObjectType.Pump
             Me.Description = "Bomba"
         End Sub
 
@@ -600,7 +600,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Pipe
+            Me.ObjectType = GraphicObjects.ObjectType.Pipe
             Me.Description = "Tubulao"
         End Sub
 
@@ -742,7 +742,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Tank
+            Me.ObjectType = GraphicObjects.ObjectType.Tank
             Me.Description = "Tanque"
         End Sub
 
@@ -1060,12 +1060,12 @@ Namespace GraphicObjects
             'posicionar pontos nos primeiros slots livres
             Dim StartPos, EndPos As New Point
             Dim StartDir, EndDir As ConDir
-            If Me.AttachedFrom.TipoObjeto = GraphicObjects.TipoObjeto.EnergyStream Then
-                If Me.AttachedTo.TipoObjeto = GraphicObjects.TipoObjeto.CustomUO Or _
-                Me.AttachedTo.TipoObjeto = GraphicObjects.TipoObjeto.ShortcutColumn Or _
-                Me.AttachedTo.TipoObjeto = GraphicObjects.TipoObjeto.OT_EnergyRecycle Or _
-                Me.AttachedTo.TipoObjeto = GraphicObjects.TipoObjeto.CapeOpenUO Or _
-                Me.AttachedTo.TipoObjeto = GraphicObjects.TipoObjeto.Vessel Then
+            If Me.AttachedFrom.ObjectType = GraphicObjects.ObjectType.EnergyStream Then
+                If Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.CustomUO Or _
+                Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.ShortcutColumn Or _
+                Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.OT_EnergyRecycle Or _
+                Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.CapeOpenUO Or _
+                Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.Vessel Then
                     StartPos = Me.AttachedFrom.OutputConnectors(0).Position
                     EndPos = Me.AttachedTo.InputConnectors(Me.AttachedToConnectorIndex).Position
                     StartDir = Me.AttachedFrom.OutputConnectors(0).Direction
@@ -1642,7 +1642,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.NodeIn
+            Me.ObjectType = GraphicObjects.ObjectType.NodeIn
             Me.Description = "Misturador"
             Me.m_mixpoint = True
         End Sub
@@ -1842,7 +1842,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.NodeOut
+            Me.ObjectType = GraphicObjects.ObjectType.NodeOut
             Me.Description = "Divisor"
             Me.m_splitpoint = True
         End Sub
@@ -2017,7 +2017,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.NodeEn
+            Me.ObjectType = GraphicObjects.ObjectType.NodeEn
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -2190,7 +2190,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Vessel
+            Me.ObjectType = GraphicObjects.ObjectType.Vessel
             Me.Description = "VasoSeparadorGL"
             Me.m_splitpoint = True
         End Sub
@@ -2445,7 +2445,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Compressor
+            Me.ObjectType = GraphicObjects.ObjectType.Compressor
             Me.Description = "CompressorAdiabtico"
         End Sub
 
@@ -2617,7 +2617,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Heater
+            Me.ObjectType = GraphicObjects.ObjectType.Heater
             Me.Description = "Aquecedor"
         End Sub
 
@@ -2824,7 +2824,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Cooler
+            Me.ObjectType = GraphicObjects.ObjectType.Cooler
             Me.Description = "Resfriador"
         End Sub
 
@@ -2998,7 +2998,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.MaterialStream
+            Me.ObjectType = GraphicObjects.ObjectType.MaterialStream
             Me.Description = "CorrentedeMatria"
         End Sub
 
@@ -3162,9 +3162,9 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.EnergyStream
+            Me.ObjectType = GraphicObjects.ObjectType.EnergyStream
             Me.IsEnergyStream = True
-            Me.Description = "Correntedeenergia"
+            Me.Description = "CorrentedeEnergyFlow"
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -3324,7 +3324,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Valve
+            Me.ObjectType = GraphicObjects.ObjectType.Valve
             Me.Description = "Vlvula"
         End Sub
 
@@ -3512,7 +3512,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Expander
+            Me.ObjectType = GraphicObjects.ObjectType.Expander
             Me.Description = "TurbinaAdiabtica"
         End Sub
 
@@ -3675,7 +3675,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.TPVessel
+            Me.ObjectType = GraphicObjects.ObjectType.TPVessel
             Me.Description = "VasoSeparadorGL"
         End Sub
 
@@ -4003,7 +4003,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.OT_Ajuste
+            Me.ObjectType = GraphicObjects.ObjectType.OT_Adjust
             Me.Description = "Ajuste"
         End Sub
 
@@ -4250,7 +4250,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.OT_Especificacao
+            Me.ObjectType = GraphicObjects.ObjectType.OT_Spec
             Me.Description = "Especificao"
         End Sub
 
@@ -4472,7 +4472,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.OT_Reciclo
+            Me.ObjectType = GraphicObjects.ObjectType.OT_Recycle
             Me.Description = "Reciclo"
         End Sub
 
@@ -4660,7 +4660,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.OT_EnergyRecycle
+            Me.ObjectType = GraphicObjects.ObjectType.OT_EnergyRecycle
             Me.Description = "EnergyRecycle"
         End Sub
 
@@ -4853,7 +4853,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.RCT_Conversion
+            Me.ObjectType = GraphicObjects.ObjectType.RCT_Conversion
             Me.Description = "ReatorConversao"
             Me.m_splitpoint = True
         End Sub
@@ -4988,7 +4988,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.RCT_Equilibrium
+            Me.ObjectType = GraphicObjects.ObjectType.RCT_Equilibrium
             Me.Description = "ReatorEquilibrio"
             Me.m_splitpoint = True
         End Sub
@@ -5120,7 +5120,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.RCT_Gibbs
+            Me.ObjectType = GraphicObjects.ObjectType.RCT_Gibbs
             Me.Description = "ReatorGibbs"
             Me.m_splitpoint = True
         End Sub
@@ -5254,7 +5254,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.RCT_CSTR
+            Me.ObjectType = GraphicObjects.ObjectType.RCT_CSTR
             Me.Description = "ReatorCSTR"
         End Sub
 
@@ -5438,7 +5438,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.RCT_PFR
+            Me.ObjectType = GraphicObjects.ObjectType.RCT_PFR
             Me.Description = "ReatorPFR"
         End Sub
 
@@ -5595,7 +5595,7 @@ Namespace GraphicObjects
 #Region "Constructors"
         Public Sub New()
             'Defines the unitop type.
-            TipoObjeto = GraphicObjects.TipoObjeto.HeatExchanger
+            ObjectType = GraphicObjects.ObjectType.HeatExchanger
             'Creates 2 in and 2 out connection points.
             Me.m_mixpoint = True
             Me.m_splitpoint = True
@@ -5748,7 +5748,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.ShortcutColumn
+            Me.ObjectType = GraphicObjects.ObjectType.ShortcutColumn
             CreateConnectors(2, 2)
             Me.InputConnectors(1).Type = ConType.ConEn
             Me.Description = "ShortcutColumn"
@@ -6009,7 +6009,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.DistillationColumn
+            Me.ObjectType = GraphicObjects.ObjectType.DistillationColumn
             Me.Description = "DistillationColumn"
             Me.m_mixpoint = True
             Me.m_splitpoint = True
@@ -6282,7 +6282,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.AbsorptionColumn
+            Me.ObjectType = GraphicObjects.ObjectType.AbsorptionColumn
             Me.Description = "AbsorptionColumn"
             Me.m_mixpoint = True
             Me.m_splitpoint = True
@@ -6531,7 +6531,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.ReboiledAbsorber
+            Me.ObjectType = GraphicObjects.ObjectType.ReboiledAbsorber
             'CreateConnectors(2, 2)
             'Me.InputConnectors(1).Type = ConType.ConEn
             Me.Description = "ReboiledAbsorber"
@@ -6777,7 +6777,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.RefluxedAbsorber
+            Me.ObjectType = GraphicObjects.ObjectType.RefluxedAbsorber
             'CreateConnectors(2, 2)
             'Me.InputConnectors(1).Type = ConType.ConEn
             Me.Description = "RefluxedAbsorber"
@@ -7054,7 +7054,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.ComponentSeparator
+            Me.ObjectType = GraphicObjects.ObjectType.ComponentSeparator
             Me.Description = "ComponentSeparator"
             Me.m_mixpoint = False
             Me.m_splitpoint = True
@@ -7181,7 +7181,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.SolidSeparator
+            Me.ObjectType = GraphicObjects.ObjectType.SolidSeparator
             Me.Description = "SolidSeparator"
             Me.m_mixpoint = False
             Me.m_splitpoint = True
@@ -7303,7 +7303,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.Filter
+            Me.ObjectType = GraphicObjects.ObjectType.Filter
             Me.Description = "Filter"
             Me.m_mixpoint = False
             Me.m_splitpoint = True
@@ -7429,7 +7429,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.OrificePlate
+            Me.ObjectType = GraphicObjects.ObjectType.OrificePlate
             Me.Description = "OrificePlate"
         End Sub
 
@@ -7590,7 +7590,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.CustomUO
+            Me.ObjectType = GraphicObjects.ObjectType.CustomUO
             Me.Description = "Custom Unit Operation"
             Me.m_mixpoint = True
             Me.m_splitpoint = True
@@ -7864,7 +7864,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.ExcelUO
+            Me.ObjectType = GraphicObjects.ObjectType.ExcelUO
             Me.Description = "ExcelUO"
         End Sub
 
@@ -8090,7 +8090,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.FlowsheetUO
+            Me.ObjectType = GraphicObjects.ObjectType.FlowsheetUO
             Me.Description = "FlowsheetUO"
         End Sub
 
@@ -8328,7 +8328,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.CapeOpenUO
+            Me.ObjectType = GraphicObjects.ObjectType.CapeOpenUO
             Me.Description = "CapeOpenUnitOperation"
             Me.m_mixpoint = True
             Me.m_splitpoint = True

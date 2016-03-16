@@ -1,6 +1,6 @@
 ﻿Public Class PumpCurvesEditorForm
 
-    Public selectedpump As DWSIM.SimulationObjects.UnitOps.Pump
+    Public selectedpump As DWSIM.SimulationObjects.UnitOperations.Pump
     Private headunit, powerunit, effunit, flowunit As String
     Public curveeditorshowmode As Integer = 0
     Public loaded As Boolean = False
@@ -19,7 +19,7 @@
             Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         End If
 
-        Dim curve As DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve
+        Dim curve As DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve
         Dim cv As New DWSIM.SystemsOfUnits.Converter
         Dim i As Integer = 0
 

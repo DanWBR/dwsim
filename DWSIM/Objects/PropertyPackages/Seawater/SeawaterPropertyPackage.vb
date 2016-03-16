@@ -463,7 +463,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             End If
         End Function
 
-        Public Overrides Function DW_CalcEnergiaMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcEnergyFlowMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
             Dim ent_massica = Me.m_iapws97.enthalpyW(T, P / 100000)
             Dim flow = Me.CurrentMaterialStream.Phases(0).Properties.massflow
             Return ent_massica * flow
@@ -542,7 +542,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Overrides Function DW_CalcBubT(ByVal Vx As System.Array, ByVal P As Double, Optional ByVal Tref As Double = 0, Optional ByVal K As System.Array = Nothing, Optional ByVal ReuseK As Boolean = False) As Object
             Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-            Return New Object() {Me.AUX_TSATi(P, water.Nome)}
+            Return New Object() {Me.AUX_TSATi(P, water.Name)}
         End Function
 
         Public Overrides Function DW_CalcDewP(ByVal Vx As System.Array, ByVal T As Double, Optional ByVal Pref As Double = 0, Optional ByVal K As System.Array = Nothing, Optional ByVal ReuseK As Boolean = False) As Object
@@ -551,7 +551,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Overrides Function DW_CalcDewT(ByVal Vx As System.Array, ByVal P As Double, Optional ByVal Tref As Double = 0, Optional ByVal K As System.Array = Nothing, Optional ByVal ReuseK As Boolean = False) As Object
             Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-            Return New Object() {Me.AUX_TSATi(P, water.Nome)}
+            Return New Object() {Me.AUX_TSATi(P, water.Name)}
         End Function
 
         Public Overrides Function DW_CalcCv_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
@@ -648,11 +648,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
             Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
 
-            If water.Nome = sub1 Then
+            If water.Name = sub1 Then
 
                 Return Me.SIA.sea_vaporpressure(CalcSalinity, T)
 
-            ElseIf salt.Nome = sub1 Then
+            ElseIf salt.Name = sub1 Then
 
                 Return 0.0#
 
@@ -687,8 +687,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim i As Integer = 0
             For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                If s.Nome = water.Nome Then idw = i
-                If s.Nome = salt.Nome Then ids = i
+                If s.Name = water.Name Then idw = i
+                If s.Name = salt.Name Then ids = i
                 i += 1
             Next
 
@@ -750,7 +750,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim i As Integer = 0
             For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                If s.Nome = water.Nome Then idw = i
+                If s.Name = water.Name Then idw = i
                 i += 1
             Next
 

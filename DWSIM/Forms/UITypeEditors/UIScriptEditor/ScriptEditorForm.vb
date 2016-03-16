@@ -171,7 +171,7 @@ Imports System.Linq
     End Sub
 
     Private Sub btnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
-        Dim mycuo As DWSIM.SimulationObjects.UnitOps.CustomUO = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(My.Application.ActiveSimulation.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        Dim mycuo As DWSIM.SimulationObjects.UnitOperations.CustomUO = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(My.Application.ActiveSimulation.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
         mycuo.Includes = includes
         mycuo.ScriptText = Me.txtScript.Text
         DWSIM.Flowsheet.FlowsheetSolver.CalculateObject(My.Application.ActiveSimulation, mycuo.Name)

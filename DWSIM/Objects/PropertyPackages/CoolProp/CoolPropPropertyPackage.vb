@@ -259,7 +259,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                If IsCompoundSupported(subst.Nome) Then
+                If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
                     Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
@@ -333,7 +333,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             i = 0
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                If IsCompoundSupported(subst.Nome) Then
+                If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
                     Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
@@ -389,7 +389,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                If IsCompoundSupported(subst.Nome) Then
+                If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
                     Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
@@ -621,7 +621,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             i = 0
             Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                If IsCompoundSupported(subst.Nome) Then
+                If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
                     Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
@@ -700,7 +700,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                If IsCompoundSupported(subst.Nome) Then
+                If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
                     Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
@@ -793,7 +793,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     i = 0
                     For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
-                        If IsCompoundSupported(subst.Nome) Then
+                        If IsCompoundSupported(subst.Name) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
                             Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
@@ -834,7 +834,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Case Phase.Vapor
                     i = 0
                     For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
-                        If IsCompoundSupported(subst.Nome) Then
+                        If IsCompoundSupported(subst.Name) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
                             Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
@@ -909,7 +909,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     i = 0
                     For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
-                        If IsCompoundSupported(subst.Nome) Then
+                        If IsCompoundSupported(subst.Name) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
                             Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
@@ -950,7 +950,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Case Phase.Vapor
                     i = 0
                     For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
-                        If IsCompoundSupported(subst.Nome) Then
+                        If IsCompoundSupported(subst.Name) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
                             Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
@@ -1552,7 +1552,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcEnergiaMistura_ISOL(T As Double, P As Double) As Double
+        Public Overrides Function DW_CalcEnergyFlowMistura_ISOL(T As Double, P As Double) As Double
 
         End Function
 

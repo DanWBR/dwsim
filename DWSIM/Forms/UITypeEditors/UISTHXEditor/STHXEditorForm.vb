@@ -1,6 +1,6 @@
 ﻿Public Class STHXEditorForm
 
-    Public props As DWSIM.SimulationObjects.UnitOps.Auxiliary.HeatExchanger.STHXProperties
+    Public props As DWSIM.SimulationObjects.UnitOperations.Auxiliary.HeatExchanger.STHXProperties
 
     Dim su As DWSIM.SystemsOfUnits.Units = My.Application.ActiveSimulation.Options.SelectedUnitSystem
     Dim cv As New DWSIM.SystemsOfUnits.Converter

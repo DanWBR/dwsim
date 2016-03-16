@@ -50,13 +50,13 @@ Namespace DWSIM.Editors.Reactors
                 selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & selectionControl.Text
                 selectionControl.form = form
                 If selectionControl.gr.GraphicObject.InputConnectors(0).IsAttached Then
-                    selectionControl.inlet = form.Collections.CLCS_MaterialStreamCollection(selectionControl.gr.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                    selectionControl.inlet = form.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
                 End If
                 If selectionControl.gr.GraphicObject.OutputConnectors(0).IsAttached Then
-                    selectionControl.outletv = form.Collections.CLCS_MaterialStreamCollection(selectionControl.gr.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                    selectionControl.outletv = form.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 End If
                 If selectionControl.gr.GraphicObject.OutputConnectors(1).IsAttached Then
-                    selectionControl.outletl = form.Collections.CLCS_MaterialStreamCollection(selectionControl.gr.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+                    selectionControl.outletl = form.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
                 End If
 
                 editorService.ShowDialog(selectionControl)

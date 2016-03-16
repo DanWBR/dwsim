@@ -1,5 +1,5 @@
 ﻿Imports Microsoft.Win32
-Imports DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen
+Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
 Imports CapeOpen
 Imports DWSIM.Interfaces
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
@@ -11,7 +11,7 @@ Imports System.Linq
 
     <System.NonSerialized()> Public _copp, _pptpl As Object
     Public _selts As CapeOpenUnitOpInfo
-    Private _coobjects As New List(Of DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
+    Private _coobjects As New List(Of DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
     Private _loaded As Boolean = False
     Public _coversion As String
     Public _ppname As String
@@ -313,7 +313,7 @@ Imports System.Linq
                     For Each s2 As String In arr
                         If s2.ToLower = CLSID Then
                             'this is a CAPE-OPEN UO
-                            Dim myuo As New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
+                            Dim myuo As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
                             With myuo
                                 .AboutInfo = mykey.OpenSubKey("CapeDescription").GetValue("About")
                                 .CapeVersion = mykey.OpenSubKey("CapeDescription").GetValue("CapeVersion")

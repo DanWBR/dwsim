@@ -1828,7 +1828,7 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>151482.307329</Energia>
+      <EnergyFlow>151482.307329</EnergyFlow>
       <ComponentDescription>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</ComponentDescription>
       <ComponentName>ESTR-000</ComponentName>
       <Calculated>true</Calculated>
@@ -1839,7 +1839,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <Annotation></Annotation>
@@ -1955,7 +1955,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2003,7 +2003,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>RCT_PFR</TipoObjeto>
+      <ObjectType>RCT_PFR</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -2038,7 +2038,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2075,11 +2075,11 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>EnergyStream</TipoObjeto>
+      <ObjectType>EnergyStream</ObjectType>
       <IsEnergyStream>true</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2124,7 +2124,7 @@ Based on the following document: http://www.chem.mtu.edu/~jmkeith/fuel_cell_curr
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

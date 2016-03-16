@@ -47,7 +47,7 @@ Namespace DWSIM.Editors.Distillation
 
             End If
 
-            Dim dc As SimulationObjects.UnitOps.Column
+            Dim dc As SimulationObjects.UnitOperations.Column
             Dim form As FormFlowsheet
             form = My.Application.ActiveSimulation
             dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)

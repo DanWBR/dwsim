@@ -863,7 +863,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Valve</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Valve</Type>
       <CalcMode>DeltaP</CalcMode>
       <DeltaP>500002</DeltaP>
       <DeltaT>0.0788818098189381</DeltaT>
@@ -1678,7 +1678,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -1719,7 +1719,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>Valve</TipoObjeto>
+      <ObjectType>Valve</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -1765,7 +1765,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -1798,7 +1798,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -1850,7 +1850,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <ObjectType>GO_Table</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -1903,7 +1903,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <ObjectType>GO_Table</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

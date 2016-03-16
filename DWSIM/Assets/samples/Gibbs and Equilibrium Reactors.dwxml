@@ -59,7 +59,7 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>416.992307</Energia>
+      <EnergyFlow>416.992307</EnergyFlow>
       <ComponentDescription>EN-46d4f822-46d8-4fe8-a0e0-41a825bcb576</ComponentDescription>
       <ComponentName>e2</ComponentName>
       <Calculated>true</Calculated>
@@ -70,7 +70,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-46d4f822-46d8-4fe8-a0e0-41a825bcb576</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <Annotation></Annotation>
@@ -1942,7 +1942,7 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>416.992307</Energia>
+      <EnergyFlow>416.992307</EnergyFlow>
       <ComponentDescription>EN-08dc3a7b-ff57-41ec-b145-15fe697cce82</ComponentDescription>
       <ComponentName>e1</ComponentName>
       <Calculated>true</Calculated>
@@ -1953,7 +1953,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-08dc3a7b-ff57-41ec-b145-15fe697cce82</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <Annotation></Annotation>
@@ -5278,7 +5278,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>RCT_Gibbs</TipoObjeto>
+      <ObjectType>RCT_Gibbs</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -5321,7 +5321,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -5362,7 +5362,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -5403,7 +5403,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -5439,11 +5439,11 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>EnergyStream</TipoObjeto>
+      <ObjectType>EnergyStream</ObjectType>
       <IsEnergyStream>true</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -5485,7 +5485,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -5526,7 +5526,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -5567,7 +5567,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -5603,11 +5603,11 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>EnergyStream</TipoObjeto>
+      <ObjectType>EnergyStream</ObjectType>
       <IsEnergyStream>true</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -5649,7 +5649,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>RCT_Equilibrium</TipoObjeto>
+      <ObjectType>RCT_Equilibrium</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -5686,7 +5686,7 @@ unreacted state, there are present 2 mol of CH4 and
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -5720,7 +5720,7 @@ unreacted state, there are present 2 mol of CH4 and
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -5757,7 +5757,7 @@ Try playing with the Gibbs reactor solving method options and compare the result
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

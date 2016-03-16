@@ -925,7 +925,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.CustomUO</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.CustomUO</Type>
       <FontName>Consolas</FontName>
       <FontSize>10</FontSize>
       <ScriptText># Simple Hydrocyclone Unit Operation
@@ -2878,7 +2878,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2919,7 +2919,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>CustomUO</TipoObjeto>
+      <ObjectType>CustomUO</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2966,7 +2966,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -3007,7 +3007,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -3053,7 +3053,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

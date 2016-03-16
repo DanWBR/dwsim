@@ -43,7 +43,7 @@ Partial Class frmLog
         Me.Imagem = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Indice = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Data = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ObjectType = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Mensagem = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()

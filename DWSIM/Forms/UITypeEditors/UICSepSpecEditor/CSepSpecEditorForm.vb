@@ -1,4 +1,4 @@
-﻿Imports DWSIM.DWSIM.SimulationObjects.UnitOps
+﻿Imports DWSIM.DWSIM.SimulationObjects.UnitOperations
 
 Public Class CSepSpecEditorForm
 

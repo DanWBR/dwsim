@@ -19,7 +19,7 @@
 Imports Microsoft.MSDN.Samples.GraphicObjects
 Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
 
-Namespace DWSIM.SimulationObjects.UnitOps
+Namespace DWSIM.SimulationObjects.UnitOperations
 
     <System.Serializable()> Public Class Vessel
 
@@ -113,7 +113,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
             Me.FillNodeItems()
             Me.QTFillNodeItems()
@@ -124,23 +124,23 @@ Namespace DWSIM.SimulationObjects.UnitOps
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
             Dim form As FormFlowsheet = Me.FlowSheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
            If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.Vessel
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.Vessel
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.Vessel
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.Vessel
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
@@ -152,16 +152,16 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 If Not Me.GraphicObject.InputConnectors(6).IsAttached Then
                     'Call function to calculate flowsheet
                     With objargs
-                        .Calculado = False
-                        .Nome = Me.Nome
-                        .Tipo = TipoObjeto.Vessel
+                        .Calculated = False
+                        .Name = Me.Name
+                        .ObjectType = ObjectType.Vessel
                     End With
                     CalculateFlowsheet(FlowSheet, objargs, Nothing)
                     Throw New Exception(DWSIM.App.GetLocalString("EnergyStreamRequired"))
                 End If
             Else
                 If Me.GraphicObject.InputConnectors(6).IsAttached Then
-                    E0 = form.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Name).Energia.GetValueOrDefault
+                    E0 = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Name).EnergyFlow.GetValueOrDefault
                 End If
             End If
 
@@ -186,7 +186,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 If cp.IsAttached And cp.Type = ConType.ConIn Then
                     nc += 1
                     If cp.AttachedConnector.AttachedFrom.Calculated = False Then Throw New Exception(DWSIM.App.GetLocalString("Umaoumaiscorrentesna"))
-                    ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedFrom.Name)
+                    ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
                     ms.Validate()
                     If Me.PressureCalculation = PressureBehavior.Minimum Then
                         If ms.Phases(0).Properties.pressure.GetValueOrDefault < P Then
@@ -222,17 +222,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             T = 0
 
-            Dim n As Integer = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name).Phases(0).Compounds.Count
+            Dim n As Integer = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name).Phases(0).Compounds.Count
             Dim Vw As New Dictionary(Of String, Double)
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached And cp.Type = ConType.ConIn Then
-                    ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedFrom.Name)
+                    ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     For Each comp In ms.Phases(0).Compounds.Values
-                        If Not Vw.ContainsKey(comp.Nome) Then
-                            Vw.Add(comp.Nome, 0)
+                        If Not Vw.ContainsKey(comp.Name) Then
+                            Vw.Add(comp.Name, 0)
                         End If
-                        Vw(comp.Nome) += comp.FracaoMassica.GetValueOrDefault * ms.Phases(0).Properties.massflow.GetValueOrDefault
+                        Vw(comp.Name) += comp.FracaoMassica.GetValueOrDefault * ms.Phases(0).Properties.massflow.GetValueOrDefault
                     Next
                     If W <> 0.0# Then T += ms.Phases(0).Properties.massflow.GetValueOrDefault / W * ms.Phases(0).Properties.temperature.GetValueOrDefault
                 End If
@@ -254,7 +254,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 .Phases(2).Properties.molarfraction = VF
                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                 For Each comp In .Phases(0).Compounds.Values
-                    If W <> 0.0# Then comp.FracaoMassica = Vw(comp.Nome) / W
+                    If W <> 0.0# Then comp.FracaoMassica = Vw(comp.Name) / W
                 Next
                 Dim mass_div_mm As Double = 0
                 Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
@@ -376,10 +376,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End If
             i = 0
             For Each comp In mix.Phases(0).Compounds.Values
-                VnL1(i) = mix.Phases(3).Compounds(comp.Nome).MolarFlow.GetValueOrDefault + SR * mix.Phases(7).Compounds(comp.Nome).MolarFlow.GetValueOrDefault
-                VmL1(i) = mix.Phases(3).Compounds(comp.Nome).MassFlow.GetValueOrDefault + SR * mix.Phases(7).Compounds(comp.Nome).MassFlow.GetValueOrDefault
-                VnL2(i) = mix.Phases(4).Compounds(comp.Nome).MolarFlow.GetValueOrDefault + (1 - SR) * mix.Phases(7).Compounds(comp.Nome).MolarFlow.GetValueOrDefault
-                VmL2(i) = mix.Phases(4).Compounds(comp.Nome).MassFlow.GetValueOrDefault + (1 - SR) * mix.Phases(7).Compounds(comp.Nome).MassFlow.GetValueOrDefault
+                VnL1(i) = mix.Phases(3).Compounds(comp.Name).MolarFlow.GetValueOrDefault + SR * mix.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault
+                VmL1(i) = mix.Phases(3).Compounds(comp.Name).MassFlow.GetValueOrDefault + SR * mix.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault
+                VnL2(i) = mix.Phases(4).Compounds(comp.Name).MolarFlow.GetValueOrDefault + (1 - SR) * mix.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault
+                VmL2(i) = mix.Phases(4).Compounds(comp.Name).MassFlow.GetValueOrDefault + (1 - SR) * mix.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault
                 i += 1
             Next
             If VnL1.SumY > 0.0# Then VnL1 = VnL1.NormalizeY
@@ -407,7 +407,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             cp = Me.GraphicObject.OutputConnectors(0) 'vapour phase
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .ClearAllProps()
                     .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
@@ -417,15 +417,15 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .Phases(0).Properties.massflow = mix.Phases(2).Properties.massflow
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = mix.Phases(2).Compounds(comp.Nome).FracaoMolar
-                        comp.FracaoMassica = mix.Phases(2).Compounds(comp.Nome).FracaoMassica
+                        comp.FracaoMolar = mix.Phases(2).Compounds(comp.Name).FracaoMolar
+                        comp.FracaoMassica = mix.Phases(2).Compounds(comp.Name).FracaoMassica
                     Next
                 End With
             End If
 
             cp = Me.GraphicObject.OutputConnectors(1) 'liquid 1
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .ClearAllProps()
                     .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
@@ -446,7 +446,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             If mix.Phases(4).Properties.massflow.GetValueOrDefault > 0.0# Then
                 cp = Me.GraphicObject.OutputConnectors(2) 'liquid 2
                 If cp.IsAttached Then
-                    ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                    ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                     With ms
                         .ClearAllProps()
                         .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
@@ -473,18 +473,18 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             'Energy stream - update power value (kJ/s)
             If Me.GraphicObject.InputConnectors(6).IsAttached Then
-                With form.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Name)
-                    .Energia = Me.DeltaQ.GetValueOrDefault
+                With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Name)
+                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                     .GraphicObject.Calculated = True
                 End With
             End If
 
             'Call function to calculate flowsheet
             With objargs
-                .Calculado = True
-                .Nome = Me.Nome
+                .Calculated = True
+                .Name = Me.Name
                 .Tag = Me.GraphicObject.Tag
-                .Tipo = TipoObjeto.Vessel
+                .ObjectType = ObjectType.Vessel
             End With
 
             form.CalculationQueue.Enqueue(objargs)
@@ -506,7 +506,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -527,7 +527,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -547,11 +547,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End If
 
             'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
             With objargs
-                .Calculado = False
-                .Nome = Me.Nome
-                .Tipo = TipoObjeto.Vessel
+                .Calculated = False
+                .Name = Me.Name
+                .ObjectType = ObjectType.Vessel
             End With
 
             form.CalculationQueue.Enqueue(objargs)
@@ -679,7 +679,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
                 End With
 
-                .Item.Add(DWSIM.App.GetLocalString("Correntedeenergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlow"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector

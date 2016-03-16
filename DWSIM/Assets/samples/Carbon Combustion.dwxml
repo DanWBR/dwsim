@@ -9,7 +9,7 @@
   <SimulationObjects>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>20819.55723</Energia>
+      <EnergyFlow>20819.55723</EnergyFlow>
       <ComponentDescription>EN-5ec8fa6a-0871-4a3b-bcc7-1649cbcd559d</ComponentDescription>
       <ComponentName>Heat</ComponentName>
       <Calculated>true</Calculated>
@@ -17,7 +17,7 @@
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -27,7 +27,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-5ec8fa6a-0871-4a3b-bcc7-1649cbcd559d</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -56,7 +56,7 @@
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -86,7 +86,7 @@
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -944,7 +944,7 @@
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
       <CompositionBasis>Mass_Fractions</CompositionBasis>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -1833,7 +1833,7 @@
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -2720,7 +2720,7 @@
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -3603,7 +3603,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Mixer</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Mixer</Type>
       <PressureCalculation>Minimum</PressureCalculation>
       <ScriptExt_FontName>Courier New</ScriptExt_FontName>
       <ScriptExt_FontSize>10</ScriptExt_FontSize>
@@ -3621,7 +3621,7 @@
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -3641,7 +3641,7 @@
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Flows</CompositionBasis>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -4655,7 +4655,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>RCT_Conversion</TipoObjeto>
+      <ObjectType>RCT_Conversion</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -4707,7 +4707,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -4750,7 +4750,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -4782,11 +4782,11 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>EnergyStream</TipoObjeto>
+      <ObjectType>EnergyStream</ObjectType>
       <IsEnergyStream>true</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -4825,7 +4825,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -4871,7 +4871,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -4914,7 +4914,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -4950,7 +4950,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>NodeIn</TipoObjeto>
+      <ObjectType>NodeIn</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -5005,7 +5005,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>

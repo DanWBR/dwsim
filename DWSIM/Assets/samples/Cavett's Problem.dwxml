@@ -9,13 +9,13 @@
   <SimulationObjects>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>1048.135585</Energia>
+      <EnergyFlow>1048.135585</EnergyFlow>
       <ComponentDescription>EN-7edb4dab-3bcd-44a3-9d5c-e92afc7f32c2</ComponentDescription>
       <ComponentName>ESTR-006</ComponentName>
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -25,7 +25,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-7edb4dab-3bcd-44a3-9d5c-e92afc7f32c2</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -44,7 +44,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -2489,7 +2489,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Vessel</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
       <FlashSpecification>PH</FlashSpecification>
       <PressureCalculation>Average</PressureCalculation>
       <OverrideT>true</OverrideT>
@@ -2511,7 +2511,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -2541,7 +2541,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -4961,13 +4961,13 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>3902.420325</Energia>
+      <EnergyFlow>3902.420325</EnergyFlow>
       <ComponentDescription>EN-21088100-96b9-4108-ad58-28d15a864580</ComponentDescription>
       <ComponentName>e1</ComponentName>
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -4977,7 +4977,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Corrente de Energia</Descricao>
+      <Descricao>Corrente de EnergyFlow</Descricao>
       <Nome>EN-21088100-96b9-4108-ad58-28d15a864580</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -4996,7 +4996,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -7431,7 +7431,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Compressor</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Compressor</Type>
       <CalcMode>Delta_P</CalcMode>
       <IgnorePhase>true</IgnorePhase>
       <EficienciaAdiabatica>75</EficienciaAdiabatica>
@@ -7453,7 +7453,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -7483,7 +7483,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -9921,7 +9921,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -12369,7 +12369,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -14791,13 +14791,13 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>2543.376724</Energia>
+      <EnergyFlow>2543.376724</EnergyFlow>
       <ComponentDescription>EN-e092daf6-7248-4987-9357-125d05c2aa3c</ComponentDescription>
       <ComponentName>e2</ComponentName>
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -14807,7 +14807,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Corrente de Energia</Descricao>
+      <Descricao>Corrente de EnergyFlow</Descricao>
       <Nome>EN-e092daf6-7248-4987-9357-125d05c2aa3c</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -14867,7 +14867,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -14890,13 +14890,13 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>-1463.300288</Energia>
+      <EnergyFlow>-1463.300288</EnergyFlow>
       <ComponentDescription>EN-3cdfadda-3538-4087-8212-90deaf0b736c</ComponentDescription>
       <ComponentName>ESTR-004</ComponentName>
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -14906,13 +14906,13 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-3cdfadda-3538-4087-8212-90deaf0b736c</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Mixer</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Mixer</Type>
       <PressureCalculation>Minimum</PressureCalculation>
       <ScriptExt_FontName>Courier New</ScriptExt_FontName>
       <ScriptExt_FontSize>0</ScriptExt_FontSize>
@@ -14928,7 +14928,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -14958,7 +14958,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -17393,7 +17393,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Compressor</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Compressor</Type>
       <CalcMode>Delta_P</CalcMode>
       <IgnorePhase>true</IgnorePhase>
       <EficienciaAdiabatica>75</EficienciaAdiabatica>
@@ -17415,7 +17415,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -17432,7 +17432,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Vessel</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
       <FlashSpecification>PH</FlashSpecification>
       <PressureCalculation>Average</PressureCalculation>
       <OverrideT>true</OverrideT>
@@ -17454,7 +17454,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -17484,7 +17484,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -19905,7 +19905,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Valve</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Valve</Type>
       <OutletPressure>101325</OutletPressure>
       <CalcMode>DeltaP</CalcMode>
       <DeltaP>1523741.95999</DeltaP>
@@ -19925,7 +19925,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -19942,7 +19942,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Mixer</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Mixer</Type>
       <PressureCalculation>Minimum</PressureCalculation>
       <ScriptExt_FontName>Courier New</ScriptExt_FontName>
       <ScriptExt_FontSize>0</ScriptExt_FontSize>
@@ -19958,7 +19958,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -19976,13 +19976,13 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>-4843.419312</Energia>
+      <EnergyFlow>-4843.419312</EnergyFlow>
       <ComponentDescription>EN-ef41adac-db74-448d-8770-b96d925fd712</ComponentDescription>
       <ComponentName>ESTR-003</ComponentName>
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -19992,13 +19992,13 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-ef41adac-db74-448d-8770-b96d925fd712</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Compressor</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Compressor</Type>
       <CalcMode>Delta_P</CalcMode>
       <IgnorePhase>true</IgnorePhase>
       <EficienciaAdiabatica>75</EficienciaAdiabatica>
@@ -20020,7 +20020,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -20050,7 +20050,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -22501,7 +22501,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -24952,7 +24952,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -27381,7 +27381,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Valve</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Valve</Type>
       <OutletPressure>101325</OutletPressure>
       <CalcMode>DeltaP</CalcMode>
       <DeltaP>3654222.79999</DeltaP>
@@ -27401,7 +27401,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -27472,7 +27472,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -27507,7 +27507,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -29945,7 +29945,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Vessel</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
       <FlashSpecification>PH</FlashSpecification>
       <PressureCalculation>Average</PressureCalculation>
       <OverrideT>true</OverrideT>
@@ -29967,7 +29967,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -29997,7 +29997,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -32418,7 +32418,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Vessel</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
       <FlashSpecification>PH</FlashSpecification>
       <PressureCalculation>Average</PressureCalculation>
       <OverrideT>true</OverrideT>
@@ -32440,7 +32440,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -32457,7 +32457,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Valve</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Valve</Type>
       <OutletPressure>101325</OutletPressure>
       <CalcMode>DeltaP</CalcMode>
       <DeltaP>248211.36</DeltaP>
@@ -32477,7 +32477,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -32495,13 +32495,13 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>53.657879</Energia>
+      <EnergyFlow>53.657879</EnergyFlow>
       <ComponentDescription>EN-fa6f3d1d-3e8a-4d6e-b900-7b84adca024f</ComponentDescription>
       <ComponentName>e3</ComponentName>
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -32511,7 +32511,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Corrente de Energia</Descricao>
+      <Descricao>Corrente de EnergyFlow</Descricao>
       <Nome>EN-fa6f3d1d-3e8a-4d6e-b900-7b84adca024f</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -32530,7 +32530,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -34981,7 +34981,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -37419,7 +37419,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -39851,7 +39851,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -42348,7 +42348,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -42371,13 +42371,13 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>-7242.81445</Energia>
+      <EnergyFlow>-7242.81445</EnergyFlow>
       <ComponentDescription>EN-ddfaf51b-d8a4-47dd-8068-1619df2cfcf1</ComponentDescription>
       <ComponentName>ESTR-005</ComponentName>
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -42387,7 +42387,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-ddfaf51b-d8a4-47dd-8068-1619df2cfcf1</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -42406,7 +42406,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -44838,7 +44838,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -47272,7 +47272,7 @@
       <Calculated>true</Calculated>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -50236,7 +50236,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -50494,7 +50494,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>OT_Reciclo</TipoObjeto>
+      <TipoObjeto>OT_Recycle</TipoObjeto>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -50955,7 +50955,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51000,7 +51000,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>OT_Reciclo</TipoObjeto>
+      <TipoObjeto>OT_Recycle</TipoObjeto>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -51337,7 +51337,7 @@
       <Shape>0</Shape>
       <FlippedH>true</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>OT_Reciclo</TipoObjeto>
+      <TipoObjeto>OT_Recycle</TipoObjeto>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -51374,7 +51374,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51415,7 +51415,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51456,7 +51456,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51497,7 +51497,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51538,7 +51538,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51598,7 +51598,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <TipoObjeto>GO_Table</TipoObjeto>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -51651,7 +51651,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <TipoObjeto>GO_Table</TipoObjeto>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -51704,7 +51704,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <TipoObjeto>GO_Table</TipoObjeto>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>

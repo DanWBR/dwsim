@@ -21,7 +21,7 @@ Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization.Formatters
 Imports System.IO
-Imports DWSIM.DWSIM.Outros
+Imports DWSIM.DWSIM.Extras
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Linq
 Imports DWSIM.DWSIM.Flowsheet
@@ -208,8 +208,8 @@ Public Class FormSimulSettings
         FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.NumberFormat
         FrmChild.ToolStripComboBoxNumberFractionFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
 
-        If Me.FrmChild.Options.SelectedUnitSystem.nome <> "" Then
-            ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.nome
+        If Me.FrmChild.Options.SelectedUnitSystem.Name <> "" Then
+            ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.Name
             FrmChild.ToolStripComboBoxUnitSystem.SelectedItem = ComboBox2.SelectedItem
         Else
             ComboBox2.SelectedIndex = 0
@@ -320,7 +320,7 @@ Public Class FormSimulSettings
             .Add(New String() {DWSIM.App.GetLocalString("CapacidadeCalorfica"), su.heatCapacityCp, DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity})
             .Add(New String() {DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity, DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity})
             .Add(New String() {DWSIM.App.GetLocalString("DeltaT2"), su.deltaT, DWSIM.App.GetLocalString("DeltaP"), su.deltaP})
-            .Add(New String() {DWSIM.App.GetLocalString("ComprimentoHead"), su.head, DWSIM.App.GetLocalString("FluxodeEnergia"), su.heatflow})
+            .Add(New String() {DWSIM.App.GetLocalString("ComprimentoHead"), su.head, DWSIM.App.GetLocalString("FluxodeEnergyFlow"), su.heatflow})
             .Add(New String() {DWSIM.App.GetLocalString("Tempo"), su.time, DWSIM.App.GetLocalString("Volume"), su.volume})
             .Add(New String() {DWSIM.App.GetLocalString("VolumeMolar"), su.molar_volume, DWSIM.App.GetLocalString("rea"), su.area})
             .Add(New String() {DWSIM.App.GetLocalString("DimetroEspessura"), su.diameter, DWSIM.App.GetLocalString("Fora"), su.force})
@@ -476,7 +476,7 @@ Public Class FormSimulSettings
             .Style.Tag = 17
         End With
 
-        '.Add(New Object() {DWSIM.App.GetLocalString("FluxodeEnergia")})
+        '.Add(New Object() {DWSIM.App.GetLocalString("FluxodeEnergyFlow")})
         With DirectCast(Me.DataGridView1.Rows.Item(8).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"})
@@ -789,11 +789,11 @@ Public Class FormSimulSettings
             End Select
 
             If initialized Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,
-                         .ObjID = su.nome,
+                         .ObjID = su.Name,
                          .ObjID2 = member,
                          .NewValue = cell.Value,
                          .OldValue = oldvalue,
-                         .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsChanged"), su.nome, Me.DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex - 1).Value, .OldValue, .NewValue)})
+                         .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsChanged"), su.Name, Me.DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex - 1).Value, .OldValue, .NewValue)})
 
             Me.FrmChild.FormSurface.UpdateSelectedObject()
 
@@ -823,7 +823,7 @@ Public Class FormSimulSettings
 
             FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsRemoved,
                   .NewValue = FormMain.AvailableUnitSystems(str),
-                 .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsRemoved"), FormMain.AvailableUnitSystems(str).nome)})
+                 .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsRemoved"), FormMain.AvailableUnitSystems(str).Name)})
 
             My.Application.UserUnitSystems.Remove(str)
 
@@ -886,17 +886,17 @@ Public Class FormSimulSettings
                 Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                 Try
                     su = DirectCast(mySerializer.Deserialize(myStream), DWSIM.SystemsOfUnits.Units)
-                    If FormMain.AvailableUnitSystems.ContainsKey(su.nome) Then
-                        su.nome += "_1"
+                    If FormMain.AvailableUnitSystems.ContainsKey(su.Name) Then
+                        su.Name += "_1"
                     End If
-                    FormMain.AvailableUnitSystems.Add(su.nome, su)
-                    Me.ComboBox2.Items.Add(su.nome)
-                    Me.FrmChild.Options.SelectedUnitSystem.nome = su.nome
+                    FormMain.AvailableUnitSystems.Add(su.Name, su)
+                    Me.ComboBox2.Items.Add(su.Name)
+                    Me.FrmChild.Options.SelectedUnitSystem.Name = su.Name
                     Dim array1(FormMain.AvailableUnitSystems.Count - 1) As String
                     FormMain.AvailableUnitSystems.Keys.CopyTo(array1, 0)
                     FrmChild.ToolStripComboBoxUnitSystem.Items.Clear()
                     FrmChild.ToolStripComboBoxUnitSystem.Items.AddRange(array1)
-                    ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.nome
+                    ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.Name
                     FrmChild.ToolStripComboBoxUnitSystem.SelectedItem = ComboBox2.SelectedItem
                 Catch ex As System.Runtime.Serialization.SerializationException
                     MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1140,13 +1140,13 @@ Public Class FormSimulSettings
                     Next
 
                     proplist.Clear()
-                    For Each pi As DWSIM.Outros.NodeItem In ms.NodeTableItems.Values
+                    For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
                         If pi.Checked Then
                             proplist.Add(pi.Text)
                         End If
                     Next
                     ms.FillNodeItems()
-                    For Each pi As DWSIM.Outros.NodeItem In ms.NodeTableItems.Values
+                    For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
                         If proplist.Contains(pi.Text) Then
                             pi.Checked = True
                         End If
@@ -1201,13 +1201,13 @@ Public Class FormSimulSettings
             Next
 
             proplist.Clear()
-            For Each pi As DWSIM.Outros.NodeItem In ms.NodeTableItems.Values
+            For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
                 If pi.Checked Then
                     proplist.Add(pi.Text)
                 End If
             Next
             ms.FillNodeItems()
-            For Each pi As DWSIM.Outros.NodeItem In ms.NodeTableItems.Values
+            For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
                 If proplist.Contains(pi.Text) Then
                     pi.Checked = True
                 End If
@@ -1470,17 +1470,17 @@ Public Class FormSimulSettings
                         tmpsubst = phase.Compounds(Me.ListViewA.SelectedItems(0).Tag)
                         phase.Compounds.Remove(Me.ListViewA.SelectedItems(0).Tag)
                         tmpsubst.ConstantProperties = toreplace
-                        tmpsubst.Nome = toreplace.Name
-                        phase.Compounds.Add(tmpsubst.Nome, tmpsubst)
+                        tmpsubst.Name = toreplace.Name
+                        phase.Compounds.Add(tmpsubst.Name, tmpsubst)
                     Next
                     proplist.Clear()
-                    For Each pi As DWSIM.Outros.NodeItem In mstr.NodeTableItems.Values
+                    For Each pi As DWSIM.Extras.NodeItem In mstr.NodeTableItems.Values
                         If pi.Checked Then
                             proplist.Add(pi.Text)
                         End If
                     Next
                     mstr.FillNodeItems()
-                    For Each pi As DWSIM.Outros.NodeItem In mstr.NodeTableItems.Values
+                    For Each pi As DWSIM.Extras.NodeItem In mstr.NodeTableItems.Values
                         If proplist.Contains(pi.Text) Then
                             pi.Checked = True
                         End If

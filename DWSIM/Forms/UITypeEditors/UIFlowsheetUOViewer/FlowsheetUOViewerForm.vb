@@ -2,7 +2,7 @@
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Public fsuo As DWSIM.SimulationObjects.UnitOps.Flowsheet
+    Public fsuo As DWSIM.SimulationObjects.UnitOperations.Flowsheet
 
     Private Sub FlowsheetUOViewerForm_Load(sender As Object, e As EventArgs) Handles Me.Load
 

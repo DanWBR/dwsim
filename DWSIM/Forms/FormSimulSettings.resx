@@ -3426,7 +3426,7 @@
     <value>27</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
-    <value>Tolerância para a variação da Energia Livre de Gibbs:</value>
+    <value>Tolerância para a variação da EnergyFlow Livre de Gibbs:</value>
   </data>
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
@@ -3513,10 +3513,10 @@
     <value>Inside-Out (ELLV)</value>
   </data>
   <data name="ComboBoxFlashAlg.Items4" xml:space="preserve">
-    <value>Minimização da Energia Livre de Gibbs (ELV)</value>
+    <value>Minimização da EnergyFlow Livre de Gibbs (ELV)</value>
   </data>
   <data name="ComboBoxFlashAlg.Items5" xml:space="preserve">
-    <value>Minimização da Energia Livre de Gibbs (ELLV)</value>
+    <value>Minimização da EnergyFlow Livre de Gibbs (ELLV)</value>
   </data>
   <data name="ComboBoxFlashAlg.Items6" xml:space="preserve">
     <value>Loops Aninhados (ESL - Sistemas Eutéticos)</value>

@@ -302,7 +302,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim form As FormFlowsheet = proppack.CurrentMaterialStream.Flowsheet
 
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             Me.Reactions.Clear()
             Me.ReactionExtents.Clear()

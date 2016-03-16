@@ -696,7 +696,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.ExcelUO</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.ExcelUO</Type>
       <ScriptExt_Language>IronPython</ScriptExt_Language>
       <ScriptExt_ScriptTextB></ScriptExt_ScriptTextB>
       <ScriptExt_ScriptTextA></ScriptExt_ScriptTextA>
@@ -1340,7 +1340,7 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>8.03790358659251</Energia>
+      <EnergyFlow>8.03790358659251</EnergyFlow>
       <ComponentDescription>EN-1ec7c26e-e8a8-424d-9591-112938b5e2a7</ComponentDescription>
       <ComponentName>E</ComponentName>
       <IsAdjustAttached>false</IsAdjustAttached>
@@ -1349,14 +1349,14 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-1ec7c26e-e8a8-424d-9591-112938b5e2a7</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <Annotation></Annotation>
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Vessel</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
       <ScriptExt_Language>IronPython</ScriptExt_Language>
       <ScriptExt_ScriptTextB></ScriptExt_ScriptTextB>
       <ScriptExt_ScriptTextA></ScriptExt_ScriptTextA>
@@ -2612,7 +2612,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2653,7 +2653,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>ExcelUO</TipoObjeto>
+      <ObjectType>ExcelUO</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2701,7 +2701,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2738,11 +2738,11 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>EnergyStream</TipoObjeto>
+      <ObjectType>EnergyStream</ObjectType>
       <IsEnergyStream>true</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2783,7 +2783,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>Vessel</TipoObjeto>
+      <ObjectType>Vessel</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2831,7 +2831,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2872,7 +2872,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2910,7 +2910,7 @@ Excel definition file "Electrolysis.xlsx" from sample folder.
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -2944,7 +2944,7 @@ Excel definition file "Electrolysis.xlsx" from sample folder.
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

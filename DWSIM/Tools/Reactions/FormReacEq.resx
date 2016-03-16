@@ -312,7 +312,7 @@
     <value>12</value>
   </data>
   <data name="rbKeqGibbs.Text" xml:space="preserve">
-    <value>Calcular a partir da Energia Livre de Gibbs</value>
+    <value>Calcular a partir da EnergyFlow Livre de Gibbs</value>
   </data>
   <data name="&gt;&gt;rbKeqGibbs.Name" xml:space="preserve">
     <value>rbKeqGibbs</value>

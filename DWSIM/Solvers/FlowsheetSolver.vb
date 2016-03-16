@@ -26,7 +26,7 @@ Imports System.IO
 Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Threading
 Imports System.Threading.Tasks
-Imports DWSIM.DWSIM.Outros
+Imports DWSIM.DWSIM.Extras
 Imports Microsoft.Scripting.Hosting
 Imports System.Linq
 
@@ -49,7 +49,7 @@ Namespace DWSIM.Flowsheet
         ''' <param name="objArgs">A StatusChangeEventArgs object containing information about the object to be calculated and its current status.</param>
         ''' <param name="sender"></param>
         ''' <remarks></remarks>
-        Public Shared Sub CalculateFlowsheet(ByVal form As FormFlowsheet, ByVal objArgs As DWSIM.Outros.StatusChangeEventArgs, ByVal sender As Object, Optional ByVal OnlyMe As Boolean = False)
+        Public Shared Sub CalculateFlowsheet(ByVal form As FormFlowsheet, ByVal objArgs As DWSIM.Extras.StatusChangeEventArgs, ByVal sender As Object, Optional ByVal OnlyMe As Boolean = False)
 
             Dim preLab As String = form.FormSurface.LabelCalculator.Text
 
@@ -57,28 +57,28 @@ Namespace DWSIM.Flowsheet
 
                 RaiseEvent UnitOpCalculationStarted(form, New System.EventArgs(), objArgs)
 
-                form.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, objArgs.Nome)
+                form.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, objArgs.Name)
 
-                Select Case objArgs.Tipo
-                    Case TipoObjeto.MaterialStream
-                        Dim myObj As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(objArgs.Nome)
+                Select Case objArgs.ObjectType
+                    Case ObjectType.MaterialStream
+                        Dim myObj As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                         Dim gobj As GraphicObject = myObj.GraphicObject
                         If Not gobj Is Nothing Then
                             If gobj.OutputConnectors(0).IsAttached = True Then
                                 Dim myUnitOp As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
                                 myUnitOp = form.Collections.FlowsheetObjectCollection(myObj.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-                                If objArgs.Emissor = "Spec" Or objArgs.Emissor = "FlowsheetSolver" Then
+                                If objArgs.Sender = "Spec" Or objArgs.Sender = "FlowsheetSolver" Then
                                     CalculateMaterialStream(form, myObj, , OnlyMe)
                                     myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                                 Else
-                                    If objArgs.Calculado = True Then
+                                    If objArgs.Calculated = True Then
                                         gobj = myUnitOp.GraphicObject
                                         gobj.Calculated = True
                                         preLab = form.FormSurface.LabelCalculator.Text
                                         form.UpdateStatusLabel(String.Format(DWSIM.App.GetLocalString("CalculatingWith"), gobj.Tag, "'" & myObj.PropertyPackage.Tag & "' (" & myObj.PropertyPackage.ComponentName & ")"))
                                         myUnitOp.Solve()
                                         gobj.Status = Status.Calculated
-                                        If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(myUnitOp.AttachedSpecId).Calculate()
+                                        If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myUnitOp.AttachedSpecId), Spec).Calculate()
                                         form.WriteToLog(gobj.Tag & ": " & DWSIM.App.GetLocalString("Calculadocomsucesso"), Color.DarkGreen, DWSIM.Flowsheet.MessageType.Information)
                                         form.UpdateStatusLabel(preLab)
                                     Else
@@ -88,18 +88,18 @@ Namespace DWSIM.Flowsheet
                                     End If
                                 End If
                             End If
-                            If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(myObj.AttachedSpecId).Calculate()
+                            If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                             form.FormSurface.Refresh()
                         End If
-                    Case TipoObjeto.EnergyStream
-                        Dim myObj As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.CLCS_EnergyStreamCollection(objArgs.Nome)
+                    Case ObjectType.EnergyStream
+                        Dim myObj As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                         myObj.Calculated = True
                         Dim gobj As GraphicObject = myObj.GraphicObject
                         If Not gobj Is Nothing Then
                             If gobj.OutputConnectors(0).IsAttached = True And Not OnlyMe Then
                                 Dim myUnitOp As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
                                 myUnitOp = form.Collections.FlowsheetObjectCollection(myObj.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-                                If objArgs.Calculado = True Then
+                                If objArgs.Calculated = True Then
                                     preLab = form.FormSurface.LabelCalculator.Text
                                     myUnitOp.GraphicObject.Calculated = False
                                     form.UpdateStatusLabel(String.Format(DWSIM.App.GetLocalString("CalculatingWith"), gobj.Tag, "'" & myUnitOp.PropertyPackage.Tag & "' (" & myUnitOp.PropertyPackage.ComponentName & ")"))
@@ -107,7 +107,7 @@ Namespace DWSIM.Flowsheet
                                     myUnitOp.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                                     form.WriteToLog(gobj.Tag & ": " & DWSIM.App.GetLocalString("Calculadocomsucesso"), Color.DarkGreen, DWSIM.Flowsheet.MessageType.Information)
                                     myUnitOp.GraphicObject.Calculated = True
-                                    If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(myUnitOp.AttachedSpecId).Calculate()
+                                    If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myUnitOp.AttachedSpecId), Spec).Calculate()
                                     form.UpdateStatusLabel(preLab)
                                     gobj = myUnitOp.GraphicObject
                                     gobj.Calculated = True
@@ -118,22 +118,22 @@ Namespace DWSIM.Flowsheet
                                 myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                                 form.FormSurface.Refresh()
                             End If
-                            If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(myObj.AttachedSpecId).Calculate()
+                            If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                         End If
                     Case Else
-                        If objArgs.Emissor = "PropertyGrid" Or objArgs.Emissor = "Adjust" Or objArgs.Emissor = "FlowsheetSolver" Then
-                            Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Nome)
+                        If objArgs.Sender = "PropertyGrid" Or objArgs.Sender = "Adjust" Or objArgs.Sender = "FlowsheetSolver" Then
+                            Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                             myObj.GraphicObject.Calculated = False
                             form.UpdateStatusLabel(String.Format(DWSIM.App.GetLocalString("CalculatingWith"), myObj.GraphicObject.Tag, "'" & myObj.PropertyPackage.Tag & "' (" & myObj.PropertyPackage.ComponentName & ")"))
                             myObj.Solve()
                             form.WriteToLog(objArgs.Tag & ": " & DWSIM.App.GetLocalString("Calculadocomsucesso"), Color.DarkGreen, DWSIM.Flowsheet.MessageType.Information)
                             myObj.GraphicObject.Calculated = True
-                            If myObj.IsSpecAttached = True And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(myObj.AttachedSpecId).Calculate()
+                            If myObj.IsSpecAttached = True And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                             form.FormProps.PGEx1.Refresh()
                             myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                         Else
-                            Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Nome)
-                            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByName(objArgs.Nome, form.FormSurface.FlowsheetDesignSurface)
+                            Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Name)
+                            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByName(objArgs.Name, form.FormSurface.FlowsheetDesignSurface)
                             If Not OnlyMe Then
                                 For Each cp As ConnectionPoint In gobj.OutputConnectors
                                     If cp.IsAttached And cp.Type = ConType.ConOut Then
@@ -148,12 +148,12 @@ Namespace DWSIM.Flowsheet
                                     End If
                                 Next
                             End If
-                            If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(myObj.AttachedSpecId).Calculate()
+                            If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                             myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                         End If
                 End Select
 
-                form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, objArgs.Nome)
+                form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, objArgs.Name)
 
                 RaiseEvent UnitOpCalculationFinished(form, New System.EventArgs(), objArgs)
 
@@ -172,34 +172,34 @@ Namespace DWSIM.Flowsheet
         ''' <param name="objArgs">A StatusChangeEventArgs object containing information about the object to be calculated and its current status.</param>
         ''' <param name="ct">The cancellation token, used to listen for calculation cancellation requests from the user.</param>
         ''' <remarks></remarks>
-        Public Shared Sub CalculateFlowsheetAsync(ByVal form As FormFlowsheet, ByVal objArgs As DWSIM.Outros.StatusChangeEventArgs, ct As Threading.CancellationToken)
+        Public Shared Sub CalculateFlowsheetAsync(ByVal form As FormFlowsheet, ByVal objArgs As DWSIM.Extras.StatusChangeEventArgs, ct As Threading.CancellationToken)
 
             If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
 
-            If objArgs.Emissor = "FlowsheetSolver" Then
-                form.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, objArgs.Nome)
-                Select Case objArgs.Tipo
-                    Case TipoObjeto.MaterialStream
-                        Dim myObj As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(objArgs.Nome)
+            If objArgs.Sender = "FlowsheetSolver" Then
+                form.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, objArgs.Name)
+                Select Case objArgs.ObjectType
+                    Case ObjectType.MaterialStream
+                        Dim myObj As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                         RaiseEvent MaterialStreamCalculationStarted(form, New System.EventArgs(), myObj)
                         CalculateMaterialStreamAsync(form, myObj, ct)
-                        If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(myObj.AttachedSpecId).Calculate()
+                        If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                         myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                         RaiseEvent MaterialStreamCalculationFinished(form, New System.EventArgs(), myObj)
-                    Case TipoObjeto.EnergyStream
-                        Dim myObj As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.CLCS_EnergyStreamCollection(objArgs.Nome)
-                        If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(myObj.AttachedSpecId).Calculate()
+                    Case ObjectType.EnergyStream
+                        Dim myObj As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.FlowsheetObjectCollection(objArgs.Name)
+                        If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                         myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                         myObj.Calculated = True
                     Case Else
-                        Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Nome)
+                        Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                         RaiseEvent UnitOpCalculationStarted(form, New System.EventArgs(), objArgs)
                         myObj.Solve()
-                        If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(myObj.AttachedSpecId).Calculate()
+                        If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                         myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                         RaiseEvent UnitOpCalculationFinished(form, New System.EventArgs(), objArgs)
                 End Select
-                form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, objArgs.Nome)
+                form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, objArgs.Name)
             End If
 
         End Sub
@@ -221,7 +221,7 @@ Namespace DWSIM.Flowsheet
 
                 RaiseEvent MaterialStreamCalculationStarted(form, New System.EventArgs(), ms)
 
-                form.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, ms.Nome)
+                form.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, ms.Name)
 
                 ms.GraphicObject.Calculated = False
 
@@ -233,7 +233,7 @@ Namespace DWSIM.Flowsheet
 
                 form.WriteToLog(ms.GraphicObject.Tag & ": " & DWSIM.App.GetLocalString("Calculadocomsucesso"), Color.DarkGreen, DWSIM.Flowsheet.MessageType.Information)
 
-                form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, ms.Nome)
+                form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, ms.Name)
 
                 RaiseEvent MaterialStreamCalculationFinished(form, New System.EventArgs(), ms)
 
@@ -241,11 +241,11 @@ Namespace DWSIM.Flowsheet
                 ms.Calculated = True
 
                 If Not OnlyMe Then
-                    Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                    Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                     With objargs
-                        .Calculado = True
-                        .Nome = ms.Nome
-                        .Tipo = TipoObjeto.MaterialStream
+                        .Calculated = True
+                        .Name = ms.Name
+                        .ObjectType = ObjectType.MaterialStream
                     End With
                     CalculateFlowsheet(form, objargs, Nothing)
                 End If
@@ -271,15 +271,15 @@ Namespace DWSIM.Flowsheet
 
             RaiseEvent MaterialStreamCalculationStarted(form, New System.EventArgs(), ms)
 
-            form.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, ms.Nome)
+            form.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, ms.Name)
 
             ms.Calculate(True, True)
 
-            form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, ms.Nome)
+            form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, ms.Name)
 
             RaiseEvent MaterialStreamCalculationFinished(form, New System.EventArgs(), ms)
 
-            If ms.IsSpecAttached = True And ms.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then form.Collections.CLCS_SpecCollection(ms.AttachedSpecId).Calculate()
+            If ms.IsSpecAttached = True And ms.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(ms.AttachedSpecId), Spec).Calculate()
 
             ms.LastUpdated = Date.Now
             ms.Calculated = True
@@ -294,7 +294,7 @@ Namespace DWSIM.Flowsheet
         ''' <remarks></remarks>
         Public Shared Sub DeCalculateObject(ByVal form As FormFlowsheet, ByVal obj As GraphicObject)
 
-            If obj.TipoObjeto = TipoObjeto.MaterialStream Then
+            If obj.ObjectType = ObjectType.MaterialStream Then
 
                 Dim con As ConnectionPoint
                 For Each con In obj.InputConnectors
@@ -312,7 +312,7 @@ Namespace DWSIM.Flowsheet
                     End If
                 Next
 
-            ElseIf obj.TipoObjeto = TipoObjeto.EnergyStream Then
+            ElseIf obj.ObjectType = ObjectType.EnergyStream Then
 
                 Dim con As ConnectionPoint
                 For Each con In obj.InputConnectors
@@ -349,7 +349,7 @@ Namespace DWSIM.Flowsheet
         ''' <remarks></remarks>
         Public Shared Sub DeCalculateDisconnectedObject(ByVal form As FormFlowsheet, ByVal obj As GraphicObject, ByVal side As String)
 
-            If obj.TipoObjeto = TipoObjeto.MaterialStream Then
+            If obj.ObjectType = ObjectType.MaterialStream Then
 
                 Dim con As ConnectionPoint
 
@@ -359,7 +359,7 @@ Namespace DWSIM.Flowsheet
                         If con.IsAttached Then
                             Try
                                 Dim UnitOp = form.Collections.FlowsheetObjectCollection(con.AttachedConnector.AttachedFrom.Name)
-                                form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculado = False, .Emissor = "FlowsheetSolver", .Nome = UnitOp.Nome, .Tag = UnitOp.GraphicObject.Tag, .Tipo = UnitOp.GraphicObject.TipoObjeto})
+                                form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculated = False, .Sender = "FlowsheetSolver", .Name = UnitOp.Name, .Tag = UnitOp.GraphicObject.Tag, .ObjectType = UnitOp.GraphicObject.ObjectType})
                             Catch ex As Exception
 
                             End Try
@@ -372,7 +372,7 @@ Namespace DWSIM.Flowsheet
                         If con.IsAttached Then
                             Try
                                 Dim UnitOp = form.Collections.FlowsheetObjectCollection(con.AttachedConnector.AttachedTo.Name)
-                                form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculado = False, .Emissor = "FlowsheetSolver", .Nome = UnitOp.Nome, .Tag = UnitOp.GraphicObject.Tag, .Tipo = UnitOp.GraphicObject.TipoObjeto})
+                                form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculated = False, .Sender = "FlowsheetSolver", .Name = UnitOp.Name, .Tag = UnitOp.GraphicObject.Tag, .ObjectType = UnitOp.GraphicObject.ObjectType})
                             Catch ex As Exception
 
                             End Try
@@ -381,7 +381,7 @@ Namespace DWSIM.Flowsheet
 
                 End If
 
-            ElseIf obj.TipoObjeto = TipoObjeto.EnergyStream Then
+            ElseIf obj.ObjectType = ObjectType.EnergyStream Then
 
                 Dim con As ConnectionPoint
                 If side = "In" Then
@@ -389,7 +389,7 @@ Namespace DWSIM.Flowsheet
                     For Each con In obj.InputConnectors
                         If con.IsAttached Then
                             Dim UnitOp = form.Collections.FlowsheetObjectCollection(con.AttachedConnector.AttachedFrom.Name)
-                            form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculado = False, .Emissor = "FlowsheetSolver", .Nome = UnitOp.Nome, .Tag = UnitOp.GraphicObject.Tag, .Tipo = UnitOp.GraphicObject.TipoObjeto})
+                            form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculated = False, .Sender = "FlowsheetSolver", .Name = UnitOp.Name, .Tag = UnitOp.GraphicObject.Tag, .ObjectType = UnitOp.GraphicObject.ObjectType})
                         End If
                     Next
 
@@ -398,7 +398,7 @@ Namespace DWSIM.Flowsheet
                     For Each con In obj.OutputConnectors
                         If con.IsAttached Then
                             Dim UnitOp = form.Collections.FlowsheetObjectCollection(con.AttachedConnector.AttachedTo.Name)
-                            form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculado = False, .Emissor = "FlowsheetSolver", .Nome = UnitOp.Nome, .Tag = UnitOp.GraphicObject.Tag, .Tipo = UnitOp.GraphicObject.TipoObjeto})
+                            form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculated = False, .Sender = "FlowsheetSolver", .Name = UnitOp.Name, .Tag = UnitOp.GraphicObject.Tag, .ObjectType = UnitOp.GraphicObject.ObjectType})
                         End If
                     Next
 
@@ -410,7 +410,7 @@ Namespace DWSIM.Flowsheet
 
                     Try
                         Dim UnitOp = form.Collections.FlowsheetObjectCollection(obj.Name)
-                        form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculado = False, .Emissor = "FlowsheetSolver", .Nome = UnitOp.Nome, .Tag = UnitOp.GraphicObject.Tag, .Tipo = UnitOp.GraphicObject.TipoObjeto})
+                        form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculated = False, .Sender = "FlowsheetSolver", .Name = UnitOp.Name, .Tag = UnitOp.GraphicObject.Tag, .ObjectType = UnitOp.GraphicObject.ObjectType})
                     Catch ex As Exception
 
                     End Try
@@ -419,7 +419,7 @@ Namespace DWSIM.Flowsheet
 
                     Try
                         Dim UnitOp = form.Collections.FlowsheetObjectCollection(obj.Name)
-                        form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculado = False, .Emissor = "FlowsheetSolver", .Nome = UnitOp.Nome, .Tag = UnitOp.GraphicObject.Tag, .Tipo = UnitOp.GraphicObject.TipoObjeto})
+                        form.CalculationQueue.Enqueue(New StatusChangeEventArgs() With {.Calculated = False, .Sender = "FlowsheetSolver", .Name = UnitOp.Name, .Tag = UnitOp.GraphicObject.Tag, .ObjectType = UnitOp.GraphicObject.ObjectType})
                     Catch ex As Exception
 
                     End Try
@@ -492,35 +492,35 @@ Namespace DWSIM.Flowsheet
 
                 If form.FormSurface.Timer2.Enabled = False Then form.FormSurface.Timer2.Start()
 
-                Dim myinfo As DWSIM.Outros.StatusChangeEventArgs = form.CalculationQueue.Peek()
+                Dim myinfo As DWSIM.Extras.StatusChangeEventArgs = form.CalculationQueue.Peek()
 
                 Try
                     form.FormQueue.TextBox1.Clear()
-                    For Each c As DWSIM.Outros.StatusChangeEventArgs In form.CalculationQueue
-                        form.FormQueue.TextBox1.AppendText(form.Collections.FlowsheetObjectCollection(c.Nome).GraphicObject.Tag & vbTab & vbTab & vbTab & "[" & DWSIM.App.GetLocalString(form.Collections.FlowsheetObjectCollection(c.Nome).Descricao) & "]" & vbCrLf)
+                    For Each c As DWSIM.Extras.StatusChangeEventArgs In form.CalculationQueue
+                        form.FormQueue.TextBox1.AppendText(form.Collections.FlowsheetObjectCollection(c.Name).GraphicObject.Tag & vbTab & vbTab & vbTab & "[" & DWSIM.App.GetLocalString(form.Collections.FlowsheetObjectCollection(c.Name).Descricao) & "]" & vbCrLf)
                     Next
                 Catch ex As Exception
 
                 End Try
 
-                If form.Collections.FlowsheetObjectCollection.ContainsKey(myinfo.Nome) Then
+                If form.Collections.FlowsheetObjectCollection.ContainsKey(myinfo.Name) Then
 
-                    Dim myobj = form.Collections.FlowsheetObjectCollection(myinfo.Nome)
+                    Dim myobj = form.Collections.FlowsheetObjectCollection(myinfo.Name)
                     Try
                         myobj.ErrorMessage = ""
                         If myobj.GraphicObject.Active Then
                             If FlowsheetSolverMode Then
-                                If myinfo.Emissor = "FlowsheetSolver" Then
-                                    If myinfo.Tipo = TipoObjeto.MaterialStream Then
-                                        CalculateMaterialStream(form, form.Collections.CLCS_MaterialStreamCollection(myinfo.Nome), , Isolated)
+                                If myinfo.Sender = "FlowsheetSolver" Then
+                                    If myinfo.ObjectType = ObjectType.MaterialStream Then
+                                        CalculateMaterialStream(form, form.Collections.FlowsheetObjectCollection(myinfo.Name), , Isolated)
                                     Else
                                         If My.Settings.EnableGPUProcessing Then DWSIM.App.InitComputeDevice()
                                         CalculateFlowsheet(form, myinfo, Nothing, Isolated)
                                     End If
                                 End If
                             Else
-                                If myinfo.Tipo = TipoObjeto.MaterialStream Then
-                                    CalculateMaterialStream(form, form.Collections.CLCS_MaterialStreamCollection(myinfo.Nome), , Isolated)
+                                If myinfo.ObjectType = ObjectType.MaterialStream Then
+                                    CalculateMaterialStream(form, form.Collections.FlowsheetObjectCollection(myinfo.Name), , Isolated)
                                 Else
                                     If My.Settings.EnableGPUProcessing Then DWSIM.App.InitComputeDevice()
                                     CalculateFlowsheet(form, myinfo, Nothing, Isolated)
@@ -544,7 +544,7 @@ Namespace DWSIM.Flowsheet
                     form.FormWatch.UpdateList()
 
                     For Each g As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects
-                        If g.TipoObjeto = TipoObjeto.GO_MasterTable Then
+                        If g.ObjectType = ObjectType.GO_MasterTable Then
                             CType(g, DWSIM.GraphicObjects.MasterTableGraphic).Update(form)
                         End If
                     Next
@@ -604,14 +604,14 @@ Namespace DWSIM.Flowsheet
 
                 If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
 
-                Dim myinfo As DWSIM.Outros.StatusChangeEventArgs = form.CalculationQueue.Peek()
+                Dim myinfo As DWSIM.Extras.StatusChangeEventArgs = form.CalculationQueue.Peek()
 
-                'form.UIThread(Sub() UpdateDisplayStatus(form, New String() {myinfo.Nome}, True))
-                Dim myobj = form.Collections.FlowsheetObjectCollection(myinfo.Nome)
+                'form.UIThread(Sub() UpdateDisplayStatus(form, New String() {myinfo.Name}, True))
+                Dim myobj = form.Collections.FlowsheetObjectCollection(myinfo.Name)
                 Try
                     myobj.ErrorMessage = ""
                     If myobj.GraphicObject.Active Then
-                        If myinfo.Tipo = TipoObjeto.MaterialStream Then
+                        If myinfo.ObjectType = ObjectType.MaterialStream Then
                             CalculateMaterialStreamAsync(form, myobj, ct)
                         Else
                             CalculateFlowsheetAsync(form, myinfo, ct)
@@ -619,7 +619,7 @@ Namespace DWSIM.Flowsheet
                         myobj.GraphicObject.Calculated = True
                     End If
                 Catch ex As AggregateException
-                    form.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Nome)
+                    form.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
                     myobj.ErrorMessage = ""
                     For Each iex In ex.InnerExceptions
                         myobj.ErrorMessage += iex.Message.ToString & vbCrLf
@@ -627,12 +627,12 @@ Namespace DWSIM.Flowsheet
                     Next
                     If My.Settings.SolverBreakOnException Then Exit While
                 Catch ex As Exception
-                    form.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Nome)
+                    form.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
                     myobj.ErrorMessage = ex.Message.ToString
                     loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
                     If My.Settings.SolverBreakOnException Then Exit While
                 Finally
-                    form.UIThread(Sub() UpdateDisplayStatus(form, New String() {myinfo.Nome}))
+                    form.UIThread(Sub() UpdateDisplayStatus(form, New String() {myinfo.Name}))
                 End Try
 
                 If form.CalculationQueue.Count = 1 Then form.FormSpreadsheet.InternalCounter = 0
@@ -675,15 +675,15 @@ Namespace DWSIM.Flowsheet
             For Each li In orderedlist
                 Dim objlist As New ArrayList
                 For Each item In li.Value
-                    objlist.Add(item.Nome)
+                    objlist.Add(item.Name)
                 Next
                 Parallel.ForEach(li.Value, poptions, Sub(myinfo, state)
                                                          If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
-                                                         Dim myobj = form.Collections.FlowsheetObjectCollection(myinfo.Nome)
+                                                         Dim myobj = form.Collections.FlowsheetObjectCollection(myinfo.Name)
                                                          myobj.ErrorMessage = ""
                                                          Try
                                                              If myobj.GraphicObject.Active Then
-                                                                 If myinfo.Tipo = TipoObjeto.MaterialStream Then
+                                                                 If myinfo.ObjectType = ObjectType.MaterialStream Then
                                                                      CalculateMaterialStreamAsync(form, myobj, ct)
                                                                  Else
                                                                      CalculateFlowsheetAsync(form, myinfo, ct)
@@ -691,7 +691,7 @@ Namespace DWSIM.Flowsheet
                                                                  myobj.GraphicObject.Calculated = True
                                                              End If
                                                          Catch ex As AggregateException
-                                                             form.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Nome)
+                                                             form.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
                                                              myobj.ErrorMessage = ""
                                                              For Each iex In ex.InnerExceptions
                                                                  myobj.ErrorMessage += iex.Message.ToString & vbCrLf
@@ -699,12 +699,12 @@ Namespace DWSIM.Flowsheet
                                                              Next
                                                              If My.Settings.SolverBreakOnException Then state.Break()
                                                          Catch ex As Exception
-                                                             form.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Nome)
+                                                             form.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
                                                              myobj.ErrorMessage = ex.Message.ToString
                                                              loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
                                                              If My.Settings.SolverBreakOnException Then state.Break()
                                                          Finally
-                                                             form.UIThread(Sub() UpdateDisplayStatus(form, New String() {myinfo.Nome}))
+                                                             form.UIThread(Sub() UpdateDisplayStatus(form, New String() {myinfo.Name}))
                                                          End Try
                                                      End Sub)
             Next
@@ -807,7 +807,7 @@ Namespace DWSIM.Flowsheet
             Dim filteredlist As New Dictionary(Of Integer, List(Of String))
             Dim objstack As New List(Of String)
 
-            Dim onqueue As DWSIM.Outros.StatusChangeEventArgs = Nothing
+            Dim onqueue As DWSIM.Extras.StatusChangeEventArgs = Nothing
 
             Dim listidx As Integer = 0
             Dim maxidx As Integer = 0
@@ -821,7 +821,7 @@ Namespace DWSIM.Flowsheet
 
                     lists.Add(0, New List(Of String))
 
-                    lists(0).Add(onqueue.Nome)
+                    lists(0).Add(onqueue.Name)
 
                     'now start walking through the flowsheet until it reaches its end starting from this particular object.
 
@@ -835,7 +835,7 @@ Namespace DWSIM.Flowsheet
                                 If obj.GraphicObject.Active Then
                                     For Each c As ConnectionPoint In obj.GraphicObject.OutputConnectors
                                         If c.IsAttached Then
-                                            If obj.GraphicObject.TipoObjeto = TipoObjeto.OT_Reciclo Or obj.GraphicObject.TipoObjeto = TipoObjeto.OT_EnergyRecycle Then Exit For
+                                            If obj.GraphicObject.ObjectType = ObjectType.OT_Recycle Or obj.GraphicObject.ObjectType = ObjectType.OT_EnergyRecycle Then Exit For
                                             lists(listidx).Add(c.AttachedConnector.AttachedTo.Name)
                                         End If
                                     Next
@@ -879,17 +879,17 @@ Namespace DWSIM.Flowsheet
                 lists.Add(0, New List(Of String))
 
                 For Each baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
-                    If baseobj.GraphicObject.TipoObjeto = TipoObjeto.MaterialStream Then
+                    If baseobj.GraphicObject.ObjectType = ObjectType.MaterialStream Then
                         Dim ms As Streams.MaterialStream = baseobj
                         If ms.GraphicObject.OutputConnectors(0).IsAttached = False Then
-                            lists(0).Add(baseobj.Nome)
+                            lists(0).Add(baseobj.Name)
                         End If
-                    ElseIf baseobj.GraphicObject.TipoObjeto = TipoObjeto.EnergyStream Then
-                        lists(0).Add(baseobj.Nome)
-                    ElseIf baseobj.GraphicObject.TipoObjeto = TipoObjeto.OT_Reciclo Then
-                        lists(0).Add(baseobj.Nome)
-                    ElseIf baseobj.GraphicObject.TipoObjeto = TipoObjeto.OT_EnergyRecycle Then
-                        lists(0).Add(baseobj.Nome)
+                    ElseIf baseobj.GraphicObject.ObjectType = ObjectType.EnergyStream Then
+                        lists(0).Add(baseobj.Name)
+                    ElseIf baseobj.GraphicObject.ObjectType = ObjectType.OT_Recycle Then
+                        lists(0).Add(baseobj.Name)
+                    ElseIf baseobj.GraphicObject.ObjectType = ObjectType.OT_EnergyRecycle Then
+                        lists(0).Add(baseobj.Name)
                     End If
                 Next
 
@@ -903,12 +903,12 @@ Namespace DWSIM.Flowsheet
                         For Each o As String In lists(listidx - 1)
                             obj = form.Collections.FlowsheetObjectCollection(o)
                             If Not onqueue Is Nothing Then
-                                If onqueue.Nome = obj.Nome Then Exit Do
+                                If onqueue.Name = obj.Name Then Exit Do
                             End If
                             For Each c As ConnectionPoint In obj.GraphicObject.InputConnectors
                                 If c.IsAttached Then
-                                    If c.AttachedConnector.AttachedFrom.TipoObjeto <> TipoObjeto.OT_Reciclo And
-                                        c.AttachedConnector.AttachedFrom.TipoObjeto <> TipoObjeto.OT_EnergyRecycle Then
+                                    If c.AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle And
+                                        c.AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_EnergyRecycle Then
                                         lists(listidx).Add(c.AttachedConnector.AttachedFrom.Name)
                                     End If
                                 End If
@@ -945,14 +945,16 @@ Namespace DWSIM.Flowsheet
 
             End If
 
-            If form.Collections.CLCS_SpecCollection.Count > 0 Then
+            Dim speclist = (From s As BaseClass In form.Collections.FlowsheetObjectCollection.Values Select s Where s.GraphicObject.ObjectType = ObjectType.OT_Spec).ToArray
+
+            If speclist.Count > 0 Then
                 Dim newstack As New List(Of String)
                 For Each o In objstack
                     newstack.Add(o)
                     obj = form.Collections.FlowsheetObjectCollection(o)
                     'if the object has a spec attached to it, set the destination object to be calculated after it.
                     If obj.IsSpecAttached And obj.SpecVarType = SpecialOps.Helpers.Spec.TipoVar.Fonte Then
-                        newstack.Add(form.Collections.CLCS_SpecCollection(obj.AttachedSpecId).TargetObjectData.m_ID)
+                        newstack.Add(DirectCast(form.Collections.FlowsheetObjectCollection(obj.AttachedSpecId), Spec).TargetObjectData.m_ID)
                     End If
                 Next
                 Dim newfilteredlist As New Dictionary(Of Integer, List(Of String))
@@ -963,7 +965,7 @@ Namespace DWSIM.Flowsheet
                         obj = form.Collections.FlowsheetObjectCollection(o)
                         'if the object has a spec attached to it, set the destination object to be calculated after it.
                         If obj.IsSpecAttached And obj.SpecVarType = SpecialOps.Helpers.Spec.TipoVar.Fonte Then
-                            newlist.Add(form.Collections.CLCS_SpecCollection(obj.AttachedSpecId).TargetObjectData.m_ID)
+                            newlist.Add(DirectCast(form.Collections.FlowsheetObjectCollection(obj.AttachedSpecId), Spec).TargetObjectData.m_ID)
                         End If
                     Next
                     newfilteredlist.Add(kvp.Key, newlist)
@@ -1053,12 +1055,12 @@ Namespace DWSIM.Flowsheet
 
                 For Each r In objstack
                     Dim robj = form.Collections.FlowsheetObjectCollection(r)
-                    If robj.GraphicObject.TipoObjeto = TipoObjeto.OT_Reciclo Then
-                        recycles.Add(robj.Nome)
-                        Dim rec = form.Collections.CLCS_RecycleCollection(robj.Nome)
+                    If robj.GraphicObject.ObjectType = ObjectType.OT_Recycle Then
+                        recycles.Add(robj.Name)
+                        Dim rec = form.Collections.CLCS_RecycleCollection(robj.Name)
                         If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
                             If rec.Values.Count = 0 Then rec.Calculate()
-                            totalv += form.Collections.CLCS_RecycleCollection(robj.Nome).Values.Count
+                            totalv += form.Collections.CLCS_RecycleCollection(robj.Name).Values.Count
                         End If
                     End If
                 Next
@@ -1112,11 +1114,11 @@ Namespace DWSIM.Flowsheet
 
                         'process/calculate the queue.
 
-                        If form.CalculationQueue Is Nothing Then form.CalculationQueue = New Queue(Of DWSIM.Outros.StatusChangeEventArgs)
+                        If form.CalculationQueue Is Nothing Then form.CalculationQueue = New Queue(Of DWSIM.Extras.StatusChangeEventArgs)
 
                         My.Application.MasterCalculatorStopRequested = False
 
-                        Dim objargs As DWSIM.Outros.StatusChangeEventArgs = Nothing
+                        Dim objargs As DWSIM.Extras.StatusChangeEventArgs = Nothing
 
                         Dim maintask As New Task(Sub()
 
@@ -1128,12 +1130,12 @@ Namespace DWSIM.Flowsheet
 
                                                          For Each o As String In objstack
                                                              obj = form.Collections.FlowsheetObjectCollection(o)
-                                                             objargs = New DWSIM.Outros.StatusChangeEventArgs
+                                                             objargs = New DWSIM.Extras.StatusChangeEventArgs
                                                              With objargs
-                                                                 .Emissor = "FlowsheetSolver"
-                                                                 .Calculado = True
-                                                                 .Nome = obj.Nome
-                                                                 .Tipo = obj.GraphicObject.TipoObjeto
+                                                                 .Sender = "FlowsheetSolver"
+                                                                 .Calculated = True
+                                                                 .Name = obj.Name
+                                                                 .ObjectType = obj.GraphicObject.ObjectType
                                                                  .Tag = obj.GraphicObject.Tag
                                                                  form.CalculationQueue.Enqueue(objargs)
                                                              End With
@@ -1157,7 +1159,7 @@ Namespace DWSIM.Flowsheet
                                                                  Dim objcalclist As New List(Of StatusChangeEventArgs)
                                                                  For Each o In li.Value
                                                                      obj = form.Collections.FlowsheetObjectCollection(o)
-                                                                     objcalclist.Add(New StatusChangeEventArgs() With {.Emissor = "FlowsheetSolver", .Nome = obj.Nome, .Tipo = obj.GraphicObject.TipoObjeto, .Tag = obj.GraphicObject.Tag})
+                                                                     objcalclist.Add(New StatusChangeEventArgs() With {.Sender = "FlowsheetSolver", .Name = obj.Name, .ObjectType = obj.GraphicObject.ObjectType, .Tag = obj.GraphicObject.Tag})
                                                                  Next
                                                                  filteredlist2.Add(li.Key, objcalclist)
                                                              Next
@@ -1265,7 +1267,7 @@ Namespace DWSIM.Flowsheet
                         'save temporary data of cape-open objects
 
                         For Each s In objstack
-                            If TypeOf form.Collections.FlowsheetObjectCollection(s) Is SimulationObjects.UnitOps.CapeOpenUO Then
+                            If TypeOf form.Collections.FlowsheetObjectCollection(s) Is SimulationObjects.UnitOperations.CapeOpenUO Then
                                 'saves UO data to a temporary list so it can be loaded correctly by other threads
                                 form.Collections.CLCS_CapeOpenUOCollection(s).SaveTempData()
                             End If
@@ -1410,7 +1412,7 @@ Namespace DWSIM.Flowsheet
 
                         Dim stask As Task = Task.Factory.StartNew(Sub()
                                                                       Try
-                                                                          Dim retbytes As MemoryStream = DWSIM.SimulationObjects.UnitOps.Flowsheet.ReturnProcessData(form)
+                                                                          Dim retbytes As MemoryStream = DWSIM.SimulationObjects.UnitOperations.Flowsheet.ReturnProcessData(form)
                                                                           Using retbytes
                                                                               Dim uncompressedbytes As Byte() = retbytes.ToArray
                                                                               Using compressedstream As New MemoryStream()
@@ -1476,7 +1478,7 @@ Namespace DWSIM.Flowsheet
                     form.FormQueue.TextBox1.Clear()
 
                     For Each g As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects
-                        If g.TipoObjeto = TipoObjeto.GO_MasterTable Then
+                        If g.ObjectType = ObjectType.GO_MasterTable Then
                             CType(g, DWSIM.GraphicObjects.MasterTableGraphic).Update(form)
                         End If
                     Next
@@ -1542,11 +1544,11 @@ Namespace DWSIM.Flowsheet
 
                 Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass = form.Collections.FlowsheetObjectCollection(ObjID)
 
-                Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                 With objargs
-                    .Calculado = True
-                    .Nome = baseobj.Nome
-                    .Tipo = baseobj.GraphicObject.TipoObjeto
+                    .Calculated = True
+                    .Name = baseobj.Name
+                    .ObjectType = baseobj.GraphicObject.ObjectType
                     .Tag = baseobj.GraphicObject.Tag
                 End With
 
@@ -1570,34 +1572,34 @@ Namespace DWSIM.Flowsheet
 
                 Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass = form.Collections.FlowsheetObjectCollection(ObjID)
 
-                If baseobj.GraphicObject.TipoObjeto = TipoObjeto.MaterialStream Then
+                If baseobj.GraphicObject.ObjectType = ObjectType.MaterialStream Then
                     Dim ms As Streams.MaterialStream = baseobj
                     If ms.GraphicObject.InputConnectors(0).IsAttached = False Then
                         'add this stream to the calculator queue list
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = True
-                            .Nome = ms.Nome
-                            .Tipo = TipoObjeto.MaterialStream
+                            .Calculated = True
+                            .Name = ms.Name
+                            .ObjectType = ObjectType.MaterialStream
                             .Tag = ms.GraphicObject.Tag
                         End With
                         If ms.IsSpecAttached = True And ms.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then
-                            form.Collections.CLCS_SpecCollection(ms.AttachedSpecId).Calculate()
+                            DirectCast(form.Collections.FlowsheetObjectCollection(ms.AttachedSpecId), Spec).Calculate()
                         End If
                         form.CalculationQueue.Enqueue(objargs)
                         ProcessQueueInternal(form)
                     Else
-                        If ms.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.TipoObjeto = TipoObjeto.OT_Reciclo Then
+                        If ms.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
                             'add this stream to the calculator queue list
-                            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                             With objargs
-                                .Calculado = True
-                                .Nome = ms.Nome
-                                .Tipo = TipoObjeto.MaterialStream
+                                .Calculated = True
+                                .Name = ms.Name
+                                .ObjectType = ObjectType.MaterialStream
                                 .Tag = ms.GraphicObject.Tag
                             End With
                             If ms.IsSpecAttached = True And ms.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then
-                                form.Collections.CLCS_SpecCollection(ms.AttachedSpecId).Calculate()
+                                DirectCast(form.Collections.FlowsheetObjectCollection(ms.AttachedSpecId), Spec).Calculate()
                             End If
                             form.CalculationQueue.Enqueue(objargs)
                             ProcessQueueInternal(form)
@@ -1605,12 +1607,12 @@ Namespace DWSIM.Flowsheet
                     End If
                 Else
                     Dim unit As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = baseobj
-                    Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                    Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                     With objargs
-                        .Emissor = "PropertyGrid"
-                        .Calculado = True
-                        .Nome = unit.Nome
-                        .Tipo = unit.GraphicObject.TipoObjeto
+                        .Sender = "PropertyGrid"
+                        .Calculated = True
+                        .Name = unit.Name
+                        .ObjectType = unit.GraphicObject.ObjectType
                         .Tag = unit.GraphicObject.Tag
                     End With
                     form.CalculationQueue.Enqueue(objargs)
@@ -1634,12 +1636,12 @@ Namespace DWSIM.Flowsheet
 
                 Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass = form.Collections.FlowsheetObjectCollection(ObjID)
 
-                Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                 With objargs
-                    .Emissor = "PropertyGrid"
-                    .Calculado = True
-                    .Nome = baseobj.Nome
-                    .Tipo = TipoObjeto.MaterialStream
+                    .Sender = "PropertyGrid"
+                    .Calculated = True
+                    .Name = baseobj.Name
+                    .ObjectType = ObjectType.MaterialStream
                     .Tag = baseobj.GraphicObject.Tag
                 End With
                 form.CalculationQueue.Enqueue(objargs)
@@ -1650,12 +1652,12 @@ Namespace DWSIM.Flowsheet
 
                 For Each o As String In objstack
                     Dim obj = form.Collections.FlowsheetObjectCollection(o)
-                    objargs = New DWSIM.Outros.StatusChangeEventArgs
+                    objargs = New DWSIM.Extras.StatusChangeEventArgs
                     With objargs
-                        .Emissor = "FlowsheetSolver"
-                        .Calculado = True
-                        .Nome = obj.Nome
-                        .Tipo = obj.GraphicObject.TipoObjeto
+                        .Sender = "FlowsheetSolver"
+                        .Calculated = True
+                        .Name = obj.Name
+                        .ObjectType = obj.GraphicObject.ObjectType
                         .Tag = obj.GraphicObject.Tag
                         form.CalculationQueue.Enqueue(objargs)
                     End With

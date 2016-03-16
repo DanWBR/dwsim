@@ -669,7 +669,7 @@
   <data name="Semttulo" xml:space="preserve">
     <value>Sin titulo</value>
   </data>
-  <data name="Correntesdeenergiasp2" xml:space="preserve">
+  <data name="CorrentesdeEnergyFlowsp2" xml:space="preserve">
     <value>Corrientes de Energía sólo pueden conectarse a ("objeto" -&gt; "Corriente de energía"): </value>
   </data>
   <data name="CoordenadasReacoes" xml:space="preserve">
@@ -861,7 +861,7 @@
   <data name="ViscosidadedinmicaFa" xml:space="preserve">
     <value>Viscosidad dinámica (Phase Vapor) </value>
   </data>
-  <data name="Quantidadedeenergiap" xml:space="preserve">
+  <data name="QuantidadedeEnergyFlowp" xml:space="preserve">
     <value>Cantidad de energía por unidad de tiempo en la corriente.</value>
   </data>
   <data name="_Pxileno" xml:space="preserve">
@@ -939,7 +939,7 @@
   <data name="Valormnimoparaavariv" xml:space="preserve">
     <value>Valor mínimo para la variable de destino. Opcional, pero recomendada, ya que puede ser utilizada como un factor de seguridad en el cálculo de la corriente. </value>
   </data>
-  <data name="Correntesdeenergiasp" xml:space="preserve">
+  <data name="CorrentesdeEnergyFlowsp" xml:space="preserve">
     <value>Corrientes de Energía sólo pueden conectarse a ("Corriente de energía '-&gt;' objeto '): </value>
   </data>
   <data name="Ateno" xml:space="preserve">
@@ -1353,7 +1353,7 @@
   <data name="FraoMolarx" xml:space="preserve">
     <value>Fracción Molar (x) --</value>
   </data>
-  <data name="Erronaenergia" xml:space="preserve">
+  <data name="ErronaEnergyFlow" xml:space="preserve">
     <value>Error en la energía</value>
   </data>
   <data name="SCCondenserPressure" xml:space="preserve">
@@ -2837,7 +2837,7 @@ Densidad de la Phase Líquida: conductividad térmica Rackett método de Phase L
   <data name="Cpiasdesegurana" xml:space="preserve">
     <value>Copias de seguridad </value>
   </data>
-  <data name="Energiadisponvel" xml:space="preserve">
+  <data name="EnergyFlowdisponvel" xml:space="preserve">
     <value>Energía disponible </value>
   </data>
   <data name="PontodeOperao" xml:space="preserve">
@@ -3240,7 +3240,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="Divisor" xml:space="preserve">
     <value>Divisor</value>
   </data>
-  <data name="EnergiadeGibbsdeForm2" xml:space="preserve">
+  <data name="EnergyFlowdeGibbsdeForm2" xml:space="preserve">
     <value>Energía libre  de Formación de Gibbs de un Gas ideal @ 25 °C </value>
   </data>
   <data name="DCResults1" xml:space="preserve">
@@ -3285,16 +3285,16 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="Erroaosalvararquivo" xml:space="preserve">
     <value>Error al guardar el archivo: </value>
   </data>
-  <data name="Nohcorrentedeenergia2" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow2" xml:space="preserve">
     <value>No hay corriente de energía asociada con el calentador.</value>
   </data>
-  <data name="Nohcorrentedeenergia3" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow3" xml:space="preserve">
     <value>Flujo de Energía no asociada a la tubería.</value>
   </data>
-  <data name="Nohcorrentedeenergia4" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow4" xml:space="preserve">
     <value>No hay corriente de energía asociada a la bomba.</value>
   </data>
-  <data name="Nohcorrentedeenergia5" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow5" xml:space="preserve">
     <value>No hay corriente de energía asociada a la turbina.</value>
   </data>
   <data name="ConfigurarPacotedePropriedades" xml:space="preserve">
@@ -3330,8 +3330,8 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="DCMaxIt" xml:space="preserve">
     <value>Número máximo de iteraciones </value>
   </data>
-  <data name="Correntedeenergia" xml:space="preserve">
-    <value>Corriente de Energia </value>
+  <data name="CorrentedeEnergyFlow" xml:space="preserve">
+    <value>Corriente de EnergyFlow </value>
   </data>
   <data name="DCEnthBalTol" xml:space="preserve">
     <value>Tolerancia de Balance Entálpico</value>
@@ -3444,7 +3444,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="SistemaSI" xml:space="preserve">
     <value>Sistema SI </value>
   </data>
-  <data name="FluxodeEnergia" xml:space="preserve">
+  <data name="FluxodeEnergyFlow" xml:space="preserve">
     <value>Flujo de Energía </value>
   </data>
   <data name="Cancelado" xml:space="preserve">
@@ -3591,7 +3591,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="CordeBottomocasoomodod" xml:space="preserve">
     <value>Color de fondo, si no está habilitado gradiente </value>
   </data>
-  <data name="EnergiadeGibbsdeForm" xml:space="preserve">
+  <data name="EnergyFlowdeGibbsdeForm" xml:space="preserve">
     <value>Energía libre de Formación de Gibbs de un Gas ideal @ 25 °C </value>
   </data>
   <data name="PropPack_FlashMaxIt" xml:space="preserve">
@@ -3675,7 +3675,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="ParmetrosdomtododeWe" xml:space="preserve">
     <value>Parámetros del método de Wegstein. </value>
   </data>
-  <data name="Energia" xml:space="preserve">
+  <data name="EnergyFlow" xml:space="preserve">
     <value>Energía </value>
   </data>
   <data name="Vlvula" xml:space="preserve">
@@ -3723,7 +3723,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="CritptPRSRKOnly" xml:space="preserve">
     <value>Esta utilidad sólo puede utilizarse con el paquete de propiedades  "Peng-Robinson" o "SRK" .</value>
   </data>
-  <data name="Energianecessria" xml:space="preserve">
+  <data name="EnergyFlownecessria" xml:space="preserve">
     <value>Energía necesaria </value>
   </data>
   <data name="Estilodabordatraceja" xml:space="preserve">
@@ -3837,7 +3837,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="EditarReacaoCinetica" xml:space="preserve">
     <value>Editar las Reacciones Cinética. </value>
   </data>
-  <data name="Nohcorrentedeenergia" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow" xml:space="preserve">
     <value>No hay corriente de energía asociada con el compresor.</value>
   </data>
   <data name="Pergunta" xml:space="preserve">
@@ -3888,7 +3888,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="DCStopAtIter" xml:space="preserve">
     <value>Detener en la iteración </value>
   </data>
-  <data name="Energiaporunidadedet" xml:space="preserve">
+  <data name="EnergyFlowporunidadedet" xml:space="preserve">
     <value>Energía por unidad de tiempo </value>
   </data>
   <data name="FatorAcntrico1" xml:space="preserve">
@@ -4323,7 +4323,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="CompressorAdiabtico_Desc" xml:space="preserve">
     <value>Modelo de un compresor adiabático industrial.</value>
   </data>
-  <data name="Correntedeenergia_Desc" xml:space="preserve">
+  <data name="CorrentedeEnergyFlow_Desc" xml:space="preserve">
     <value>Representa los Flujos de Energía de Entrada y Salida de Las Operaciónes Unitarias.</value>
   </data>
   <data name="CorrentedeMatria_Desc" xml:space="preserve">
@@ -4336,7 +4336,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
     <value>Divide una corriente de materia en hasta tres otras.</value>
   </data>
   <data name="EnergyRecycle_Desc" xml:space="preserve">
-    <value>Utilizado para realizar retorno de correntes de energia para pontos a montante no fluxograma.</value>
+    <value>Utilizado para realizar retorno de correntes de EnergyFlow para pontos a montante no fluxograma.</value>
   </data>
   <data name="Especificao_Desc" xml:space="preserve">
     <value>Especifica una propiedad de un objeto en función de una propiedad de otro objeto.</value>
@@ -4431,11 +4431,11 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="DescCSPP" xml:space="preserve">
     <value>Paquete de Propiedades utilizando el método COSMO-SAC implementado en el JCOSMO la colección de Rafael Renan Soares y Gerber para la predicción de los coeficientes de actividad de los componentes en la Phase Líquida. La entalpía, entropía y el calor residual de la capacidad se calcula a partir del modelo de Lee-Kesler. La Phase de vapor es modelada por la EDE Peng-Robinson.</value>
   </data>
-  <data name="CorrentedeenergiaE" xml:space="preserve">
-    <value>Corriente de Energia (Entrada)</value>
+  <data name="CorrentedeEnergyFlowE" xml:space="preserve">
+    <value>Corriente de EnergyFlow (Entrada)</value>
   </data>
-  <data name="CorrentedeenergiaS" xml:space="preserve">
-    <value>Corriente de Energia (Salida)</value>
+  <data name="CorrentedeEnergyFlowS" xml:space="preserve">
+    <value>Corriente de EnergyFlow (Salida)</value>
   </data>
   <data name="UO_ScriptLanguage" xml:space="preserve">
     <value>Lenguaje del Script</value>
@@ -4748,7 +4748,7 @@ Una modificiación al termino de atracción en la EE de Peng-Robinson publicado 
     <value>[Electrolito] Capacidad Calorífica en Condiciones Estándar a 298 K</value>
   </data>
   <data name="Electrolyte_DelGF" xml:space="preserve">
-    <value>[Electrolito] Energia de Gibbs de Formación en Condiciones Estándar a 298 K</value>
+    <value>[Electrolito] EnergyFlow de Gibbs de Formación en Condiciones Estándar a 298 K</value>
   </data>
   <data name="Electrolyte_DelHF" xml:space="preserve">
     <value>[Electrolito] Entalpía de Formación en Condiciones Estándar a 298 K</value>
@@ -4790,7 +4790,7 @@ Una modificiación al termino de atracción en la EE de Peng-Robinson publicado 
     <value>Especificación del Cálculo Flash</value>
   </data>
   <data name="FlashSpecificationDesc" xml:space="preserve">
-    <value>Selecione o tipo de cálculo Flash a ser realizado para resolver o balance de Energia.</value>
+    <value>Selecione o tipo de cálculo Flash a ser realizado para resolver o balance de EnergyFlow.</value>
   </data>
   <data name="HydrateEquilibriumCurve" xml:space="preserve">
     <value>Curva de Equilibrio de Hidratos</value>
@@ -4831,7 +4831,7 @@ Una modificiación al termino de atracción en la EE de Peng-Robinson publicado 
   <data name="Correntedesaida4" xml:space="preserve">
     <value>Corriente de Salida (4)</value>
   </data>
-  <data name="Nohcorrentedeenergia1" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow1" xml:space="preserve">
     <value>No hay corriente de energía asociada a la ExcelUO.</value>
   </data>
   <data name="ExcelUOEditor" xml:space="preserve">

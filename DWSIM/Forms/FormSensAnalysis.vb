@@ -444,7 +444,7 @@ Public Class FormSensAnalysis
                         .id = dgrow.Cells(0).Value
                         If dgrow.Cells(1).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
                             .objectTAG = dgrow.Cells(1).Value
-                            .objectID = Me.ReturnObject(dgrow.Cells(1).Value).Nome
+                            .objectID = Me.ReturnObject(dgrow.Cells(1).Value).Name
                         Else
                             .objectTAG = dgrow.Cells(1).Value
                             .objectID = "SpreadsheetCell"
@@ -475,7 +475,7 @@ Public Class FormSensAnalysis
                     .name = dgrow.Cells(1).Value
                     If dgrow.Cells(1).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
                         .objectTAG = dgrow.Cells(2).Value
-                        .objectID = Me.ReturnObject(dgrow.Cells(2).Value).Nome
+                        .objectID = Me.ReturnObject(dgrow.Cells(2).Value).Name
                     Else
                         .objectTAG = dgrow.Cells(2).Value
                         .objectID = "SpreadsheetCell"

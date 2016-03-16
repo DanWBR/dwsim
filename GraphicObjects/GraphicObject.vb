@@ -16,7 +16,7 @@ Imports System.Linq
 
 Namespace GraphicObjects
 
-    Public Enum TipoObjeto
+    Public Enum ObjectType
 
         NodeIn
         NodeOut
@@ -34,13 +34,13 @@ Namespace GraphicObjects
         Pipe
         Valve
         Nenhum
-        GO_Tabela
-        GO_Texto
-        GO_Figura
-        GO_TabelaRapida
-        OT_Ajuste
-        OT_Especificacao
-        OT_Reciclo
+        GO_Table
+        GO_Text
+        GO_Image
+        GO_FloatingTable
+        OT_Adjust
+        OT_Spec
+        OT_Recycle
         RCT_Conversion
         RCT_Equilibrium
         RCT_Gibbs
@@ -120,7 +120,7 @@ Namespace GraphicObjects
         Protected m_active As Boolean = True
         Protected m_calculated As Boolean = False
         Protected m_isenergy As Boolean = False
-        Protected m_tipoobjeto As TipoObjeto = TipoObjeto.Nenhum
+        Protected m_ObjectType As ObjectType = ObjectType.Nenhum
         Protected m_flippedV As Boolean = False
         Protected m_flippedH As Boolean = False
         Protected m_shape As Integer = 0
@@ -216,12 +216,12 @@ Namespace GraphicObjects
             End Set
         End Property
 
-        Public Property TipoObjeto() As TipoObjeto
+        Public Property ObjectType() As ObjectType
             Get
-                Return m_tipoobjeto
+                Return m_ObjectType
             End Get
-            Set(ByVal tipo As TipoObjeto)
-                m_tipoobjeto = tipo
+            Set(ByVal tipo As ObjectType)
+                m_ObjectType = tipo
             End Set
         End Property
 

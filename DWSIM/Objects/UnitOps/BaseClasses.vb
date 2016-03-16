@@ -45,8 +45,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Const ClassId As String = ""
 
-        Protected m_nodeitems As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
-        Protected m_qtnodeitems As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+        Protected m_nodeitems As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
+        Protected m_qtnodeitems As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
         Protected m_table As DWSIM.GraphicObjects.TableGraphic
         Protected m_qtable As DWSIM.GraphicObjects.QuickTableGraphic
 
@@ -121,7 +121,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <remarks></remarks>
         Public Overridable Sub FillNodeItems(Optional ByVal NoPropVals As Boolean = False)
 
-            If Me.NodeTableItems Is Nothing Then Me.NodeTableItems = New Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+            If Me.NodeTableItems Is Nothing Then Me.NodeTableItems = New Dictionary(Of Integer, DWSIM.Extras.NodeItem)
 
             With Me.NodeTableItems
 
@@ -132,9 +132,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Dim key As Integer = 0
                 For Each prop As String In props
                     If Not NoPropVals Then
-                        .Add(key, New DWSIM.Outros.NodeItem(prop, GetPropertyValue(prop, FlowSheet.Options.SelectedUnitSystem), GetPropertyUnit(prop, FlowSheet.Options.SelectedUnitSystem), key, 0, ""))
+                        .Add(key, New DWSIM.Extras.NodeItem(prop, GetPropertyValue(prop, FlowSheet.Options.SelectedUnitSystem), GetPropertyUnit(prop, FlowSheet.Options.SelectedUnitSystem), key, 0, ""))
                     Else
-                        .Add(key, New DWSIM.Outros.NodeItem(prop, "", "", key, 0, ""))
+                        .Add(key, New DWSIM.Extras.NodeItem(prop, "", "", key, 0, ""))
                     End If
                     key += 1
                 Next
@@ -151,7 +151,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Protected m_graphicobject As GraphicObject = Nothing
 
-        Protected m_annotation As DWSIM.Outros.Annotation
+        Protected m_annotation As DWSIM.Extras.Annotation
 
         Public Enum PropertyType
             RO = 0
@@ -211,9 +211,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 value = e.ChangedItem.GetValue
                 units = e.ChangedItem.GetUnits
 
-                If sobj.TipoObjeto = TipoObjeto.FlowsheetUO Then
+                If sobj.ObjectType = ObjectType.FlowsheetUO Then
 
-                    Dim fs As DWSIM.SimulationObjects.UnitOps.Flowsheet = FlowSheet.Collections.CLCS_FlowsheetUOCollection.Item(sobj.Name)
+                    Dim fs As DWSIM.SimulationObjects.UnitOperations.Flowsheet = FlowSheet.Collections.CLCS_FlowsheetUOCollection.Item(sobj.Name)
 
                     If e.ChangedItem.PropertyDescriptor.Category.Equals(DWSIM.App.GetLocalString("LinkedInputParms")) Then
 
@@ -227,13 +227,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             FlowSheet.FormProps.HandleObjectStatusChanged(sobj)
 
                             'Call function to calculate flowsheet
-                            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                             With objargs
-                                .Calculado = True
-                                .Nome = sobj.Name
+                                .Calculated = True
+                                .Name = sobj.Name
                                 .Tag = sobj.Tag
-                                .Tipo = TipoObjeto.FlowsheetUO
-                                .Emissor = "PropertyGrid"
+                                .ObjectType = ObjectType.FlowsheetUO
+                                .Sender = "PropertyGrid"
                             End With
 
                             If fs.IsSpecAttached = True And fs.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(fs.AttachedSpecId).Calculate()
@@ -243,7 +243,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.MaterialStream Then
+                ElseIf sobj.ObjectType = ObjectType.MaterialStream Then
 
                     Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream = FlowSheet.Collections.CLCS_MaterialStreamCollection.Item(sobj.Name)
 
@@ -312,29 +312,29 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         End If
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
-                            .Nome = sobj.Name
+                            .Calculated = False
+                            .Name = sobj.Name
                             .Tag = sobj.Tag
-                            .Tipo = TipoObjeto.MaterialStream
-                            .Emissor = "PropertyGrid"
+                            .ObjectType = ObjectType.MaterialStream
+                            .Sender = "PropertyGrid"
                         End With
 
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.EnergyStream Then
+                ElseIf sobj.ObjectType = ObjectType.EnergyStream Then
 
                     Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = FlowSheet.Collections.CLCS_EnergyStreamCollection.Item(sobj.Name)
 
-                    If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Energia")) Then
+                    If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("EnergyFlow")) Then
 
                         If units <> "" Then
-                            es.Energia = Converter.ConvertToSI(units, value)
+                            es.EnergyFlow = Converter.ConvertToSI(units, value)
                         Else
-                            es.Energia = Converter.ConvertToSI(FlowSheet.Options.SelectedUnitSystem.heatflow, e.ChangedItem.Value)
+                            es.EnergyFlow = Converter.ConvertToSI(FlowSheet.Options.SelectedUnitSystem.heatflow, e.ChangedItem.Value)
                         End If
 
                     End If
@@ -345,13 +345,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         FlowSheet.FormProps.HandleObjectStatusChanged(sobj)
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = True
-                            .Nome = sobj.Name
+                            .Calculated = True
+                            .Name = sobj.Name
                             .Tag = sobj.Tag
-                            .Tipo = TipoObjeto.EnergyStream
-                            .Emissor = "PropertyGrid"
+                            .ObjectType = ObjectType.EnergyStream
+                            .Sender = "PropertyGrid"
                         End With
 
                         If es.IsSpecAttached = True And es.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(es.AttachedSpecId).Calculate()
@@ -360,9 +360,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     End If
 
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.NodeOut Then
+                ElseIf sobj.ObjectType = ObjectType.NodeOut Then
 
-                    Dim sp As DWSIM.SimulationObjects.UnitOps.Splitter = FlowSheet.Collections.CLCS_SplitterCollection.Item(sobj.Name)
+                    Dim sp As DWSIM.SimulationObjects.UnitOperations.Splitter = FlowSheet.Collections.CLCS_SplitterCollection.Item(sobj.Name)
                     sp.OutCount = 0
                     For Each cp In sp.GraphicObject.OutputConnectors
                         If cp.IsAttached Then sp.OutCount += 1
@@ -398,13 +398,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetPropertyName("PROP_SP_1")) Then
 
                         Select Case sp.OperationMode
-                            Case SimulationObjects.UnitOps.Splitter.OpMode.StreamMassFlowSpec
+                            Case SimulationObjects.UnitOperations.Splitter.OpMode.StreamMassFlowSpec
                                 If units <> "" Then
                                     sp.StreamFlowSpec = Converter.ConvertToSI(units, value)
                                 Else
                                     sp.StreamFlowSpec = Converter.ConvertToSI(FlowSheet.Options.SelectedUnitSystem.massflow, e.ChangedItem.Value)
                                 End If
-                            Case SimulationObjects.UnitOps.Splitter.OpMode.StreamMoleFlowSpec
+                            Case SimulationObjects.UnitOperations.Splitter.OpMode.StreamMoleFlowSpec
                                 If units <> "" Then
                                     sp.StreamFlowSpec = Converter.ConvertToSI(units, value)
                                 Else
@@ -415,13 +415,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetPropertyName("PROP_SP_2")) Then
 
                         Select Case sp.OperationMode
-                            Case SimulationObjects.UnitOps.Splitter.OpMode.StreamMassFlowSpec
+                            Case SimulationObjects.UnitOperations.Splitter.OpMode.StreamMassFlowSpec
                                 If units <> "" Then
                                     sp.Stream2FlowSpec = Converter.ConvertToSI(units, value)
                                 Else
                                     sp.Stream2FlowSpec = Converter.ConvertToSI(FlowSheet.Options.SelectedUnitSystem.molarflow, e.ChangedItem.Value)
                                 End If
-                            Case SimulationObjects.UnitOps.Splitter.OpMode.StreamMoleFlowSpec
+                            Case SimulationObjects.UnitOperations.Splitter.OpMode.StreamMoleFlowSpec
                                 If units <> "" Then
                                     sp.Stream2FlowSpec = Converter.ConvertToSI(units, value)
                                 Else
@@ -438,13 +438,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         FlowSheet.FormProps.HandleObjectStatusChanged(sobj)
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
-                            .Nome = sobj.Name
+                            .Calculated = False
+                            .Name = sobj.Name
                             .Tag = sobj.Tag
-                            .Tipo = TipoObjeto.NodeOut
-                            .Emissor = "PropertyGrid"
+                            .ObjectType = ObjectType.NodeOut
+                            .Sender = "PropertyGrid"
                         End With
 
                         If sp.IsSpecAttached = True And sp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(sp.AttachedSpecId).Calculate()
@@ -452,9 +452,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Pump Then
+                ElseIf sobj.ObjectType = ObjectType.Pump Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOps.Pump = FlowSheet.Collections.CLCS_PumpCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Pump = FlowSheet.Collections.CLCS_PumpCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains("Delta P") Then
 
@@ -483,13 +483,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.Pump
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.Pump
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -497,9 +497,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Valve Then
+                ElseIf sobj.ObjectType = ObjectType.Valve Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOps.Valve = FlowSheet.Collections.CLCS_ValveCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Valve = FlowSheet.Collections.CLCS_ValveCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Quedadepresso")) Then
 
@@ -524,13 +524,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.Valve
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.Valve
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -538,9 +538,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Filter Then
+                ElseIf sobj.ObjectType = ObjectType.Filter Then
 
-                    Dim ft As DWSIM.SimulationObjects.UnitOps.Filter = FlowSheet.Collections.CLCS_FilterCollection.Item(sobj.Name)
+                    Dim ft As DWSIM.SimulationObjects.UnitOperations.Filter = FlowSheet.Collections.CLCS_FilterCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("FilterMediumResistance")) Then
                         If units <> "" Then
@@ -577,13 +577,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = sobj.TipoObjeto
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = sobj.ObjectType
+                            .Sender = "PropertyGrid"
                         End With
 
                         If ft.IsSpecAttached = True And ft.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(ft.AttachedSpecId).Calculate()
@@ -591,9 +591,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Compressor Then
+                ElseIf sobj.ObjectType = ObjectType.Compressor Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOps.Compressor = FlowSheet.Collections.CLCS_CompressorCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Compressor = FlowSheet.Collections.CLCS_CompressorCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains("Delta P") Then
 
@@ -620,13 +620,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.Compressor
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.Compressor
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -634,9 +634,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Expander Then
+                ElseIf sobj.ObjectType = ObjectType.Expander Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOps.Expander = FlowSheet.Collections.CLCS_TurbineCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Expander = FlowSheet.Collections.CLCS_TurbineCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains("Delta P") Then
 
@@ -664,13 +664,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.Expander
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.Expander
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -678,9 +678,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Pipe Then
+                ElseIf sobj.ObjectType = ObjectType.Pipe Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOps.Pipe = FlowSheet.Collections.CLCS_PipeCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Pipe = FlowSheet.Collections.CLCS_PipeCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature")) Then
 
@@ -703,13 +703,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.Pipe
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.Pipe
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -717,9 +717,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Heater Then
+                ElseIf sobj.ObjectType = ObjectType.Heater Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOps.Heater = FlowSheet.Collections.CLCS_HeaterCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Heater = FlowSheet.Collections.CLCS_HeaterCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Eficincia")) Then
 
@@ -759,13 +759,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.Heater
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.Heater
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -773,9 +773,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Cooler Then
+                ElseIf sobj.ObjectType = ObjectType.Cooler Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOps.Cooler = FlowSheet.Collections.CLCS_CoolerCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Cooler = FlowSheet.Collections.CLCS_CoolerCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Eficincia")) Then
 
@@ -815,13 +815,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.Cooler
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.Cooler
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -829,9 +829,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Tank Then
+                ElseIf sobj.ObjectType = ObjectType.Tank Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOps.Tank = FlowSheet.Collections.CLCS_TankCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Tank = FlowSheet.Collections.CLCS_TankCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Quedadepresso")) Then
 
@@ -864,13 +864,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
                             .Tag = sobj.Tag
-                            .Calculado = False
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.Tank
-                            .Emissor = "PropertyGrid"
+                            .Calculated = False
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.Tank
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -878,7 +878,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.OT_Ajuste Then
+                ElseIf sobj.ObjectType = ObjectType.OT_Adjust Then
 
                     Dim adj As DWSIM.SimulationObjects.SpecialOps.Adjust = FlowSheet.Collections.CLCS_AdjustCollection.Item(sobj.Name)
 
@@ -886,7 +886,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelControlada")) Then
                             .ControlledObject = FlowSheet.Collections.FlowsheetObjectCollection(.ControlledObjectData.m_ID)
                             .ControlledVariable = .ControlledObjectData.m_Property
-                            CType(FlowSheet.Collections.AdjustCollection(adj.Nome), AdjustGraphic).ConnectedToCv = .ControlledObject.GraphicObject
+                            CType(FlowSheet.Collections.AdjustCollection(adj.Name), AdjustGraphic).ConnectedToCv = .ControlledObject.GraphicObject
                             .ReferenceObject = Nothing
                             .ReferenceVariable = Nothing
                             With .ReferencedObjectData
@@ -897,13 +897,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End With
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelManipulada")) Then
                             .ManipulatedObject = FlowSheet.Collections.FlowsheetObjectCollection(.ManipulatedObjectData.m_ID)
-                            Dim gr As AdjustGraphic = FlowSheet.Collections.AdjustCollection(adj.Nome)
+                            Dim gr As AdjustGraphic = FlowSheet.Collections.AdjustCollection(adj.Name)
                             gr.ConnectedToMv = .ManipulatedObject.GraphicObject
                             .ManipulatedVariable = .ManipulatedObjectData.m_Property
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("ObjetoVariveldeRefer")) Then
                             .ReferenceObject = FlowSheet.Collections.FlowsheetObjectCollection(.ReferencedObjectData.m_ID)
                             .ReferenceVariable = .ReferencedObjectData.m_Property
-                            Dim gr As AdjustGraphic = FlowSheet.Collections.AdjustCollection(adj.Nome)
+                            Dim gr As AdjustGraphic = FlowSheet.Collections.AdjustCollection(adj.Name)
                             gr.ConnectedToRv = .ReferenceObject.GraphicObject
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Valormnimoopcional")) Then
                             adj.MinVal = Converter.ConvertToSI(adj.ManipulatedObject.GetPropertyUnit(adj.ManipulatedObjectData.m_Property, FlowSheet.Options.SelectedUnitSystem), e.ChangedItem.Value)
@@ -914,7 +914,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         End If
                     End With
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.OT_Especificacao Then
+                ElseIf sobj.ObjectType = ObjectType.OT_Spec Then
 
                     Dim spec As DWSIM.SimulationObjects.SpecialOps.Spec = FlowSheet.Collections.CLCS_SpecCollection.Item(sobj.Name)
 
@@ -922,18 +922,18 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelDestino")) Then
                             .TargetObject = FlowSheet.Collections.FlowsheetObjectCollection(.TargetObjectData.m_ID)
                             .TargetVariable = .TargetObjectData.m_Property
-                            CType(FlowSheet.Collections.SpecCollection(spec.Nome), SpecGraphic).ConnectedToTv = .TargetObject.GraphicObject
+                            CType(FlowSheet.Collections.SpecCollection(spec.Name), SpecGraphic).ConnectedToTv = .TargetObject.GraphicObject
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelFonte")) Then
                             .SourceObject = FlowSheet.Collections.FlowsheetObjectCollection(.SourceObjectData.m_ID)
-                            Dim gr As SpecGraphic = FlowSheet.Collections.SpecCollection(spec.Nome)
+                            Dim gr As SpecGraphic = FlowSheet.Collections.SpecCollection(spec.Name)
                             gr.ConnectedToSv = .SourceObject.GraphicObject
                             .SourceVariable = .SourceObjectData.m_Property
                         End If
                     End With
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.Vessel Then
+                ElseIf sobj.ObjectType = ObjectType.Vessel Then
 
-                    Dim vessel As DWSIM.SimulationObjects.UnitOps.Vessel = FlowSheet.Collections.CLCS_VesselCollection.Item(sobj.Name)
+                    Dim vessel As DWSIM.SimulationObjects.UnitOperations.Vessel = FlowSheet.Collections.CLCS_VesselCollection.Item(sobj.Name)
 
                     Dim T, P As Double
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Temperatura")) Then
@@ -955,13 +955,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
                             .Tag = sobj.Tag
-                            .Calculado = False
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.Vessel
-                            .Emissor = "PropertyGrid"
+                            .Calculated = False
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.Vessel
+                            .Sender = "PropertyGrid"
                         End With
 
                         If vessel.IsSpecAttached = True And vessel.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(vessel.AttachedSpecId).Calculate()
@@ -969,7 +969,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.OT_Reciclo Then
+                ElseIf sobj.ObjectType = ObjectType.OT_Recycle Then
 
                     Dim rec As DWSIM.SimulationObjects.SpecialOps.Recycle = FlowSheet.Collections.CLCS_RecycleCollection.Item(sobj.Name)
 
@@ -985,7 +985,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         rec.ConvergenceParameters.VazaoMassica = W
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.RCT_Conversion Then
+                ElseIf sobj.ObjectType = ObjectType.RCT_Conversion Then
 
                     Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_Conversion = FlowSheet.Collections.CLCS_ReactorConversionCollection.Item(sobj.Name)
 
@@ -1011,13 +1011,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.RCT_Conversion
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.RCT_Conversion
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -1025,7 +1025,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.RCT_Equilibrium Then
+                ElseIf sobj.ObjectType = ObjectType.RCT_Equilibrium Then
 
                     Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium = FlowSheet.Collections.CLCS_ReactorEquilibriumCollection.Item(sobj.Name)
 
@@ -1051,13 +1051,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.RCT_Equilibrium
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.RCT_Equilibrium
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -1065,7 +1065,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.RCT_Gibbs Then
+                ElseIf sobj.ObjectType = ObjectType.RCT_Gibbs Then
 
                     Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_Gibbs = FlowSheet.Collections.CLCS_ReactorGibbsCollection.Item(sobj.Name)
 
@@ -1091,13 +1091,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.RCT_Gibbs
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.RCT_Gibbs
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -1105,7 +1105,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.RCT_CSTR Then
+                ElseIf sobj.ObjectType = ObjectType.RCT_CSTR Then
 
                     Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_CSTR = FlowSheet.Collections.CLCS_ReactorCSTRCollection.Item(sobj.Name)
 
@@ -1157,13 +1157,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.RCT_CSTR
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.RCT_CSTR
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -1171,7 +1171,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.RCT_PFR Then
+                ElseIf sobj.ObjectType = ObjectType.RCT_PFR Then
 
                     Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_PFR = FlowSheet.Collections.CLCS_ReactorPFRCollection.Item(sobj.Name)
 
@@ -1233,13 +1233,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.RCT_PFR
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.RCT_PFR
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -1247,9 +1247,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.HeatExchanger Then
+                ElseIf sobj.ObjectType = ObjectType.HeatExchanger Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOps.HeatExchanger = FlowSheet.Collections.CLCS_HeatExchangerCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.HeatExchanger = FlowSheet.Collections.CLCS_HeatExchangerCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("OverallHeatTranferCoefficient")) Then
 
@@ -1313,13 +1313,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
                             .Tag = sobj.Tag
-                            .Calculado = False
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.HeatExchanger
-                            .Emissor = "PropertyGrid"
+                            .Calculated = False
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.HeatExchanger
+                            .Sender = "PropertyGrid"
                         End With
 
                         If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
@@ -1327,9 +1327,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.ShortcutColumn Then
+                ElseIf sobj.ObjectType = ObjectType.ShortcutColumn Then
 
-                    Dim sc As DWSIM.SimulationObjects.UnitOps.ShortcutColumn = FlowSheet.Collections.CLCS_ShortcutColumnCollection.Item(sobj.Name)
+                    Dim sc As DWSIM.SimulationObjects.UnitOperations.ShortcutColumn = FlowSheet.Collections.CLCS_ShortcutColumnCollection.Item(sobj.Name)
                     Dim Pr, Pc As Double
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("SCCondenserType")) Then
@@ -1357,13 +1357,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
                             .Tag = sobj.Tag
-                            .Calculado = False
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.ShortcutColumn
-                            .Emissor = "PropertyGrid"
+                            .Calculated = False
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.ShortcutColumn
+                            .Sender = "PropertyGrid"
                         End With
 
                         If sc.IsSpecAttached = True And sc.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(sc.AttachedSpecId).Calculate()
@@ -1371,9 +1371,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.OrificePlate Then
+                ElseIf sobj.ObjectType = ObjectType.OrificePlate Then
 
-                    Dim op As DWSIM.SimulationObjects.UnitOps.OrificePlate = FlowSheet.Collections.CLCS_OrificePlateCollection.Item(sobj.Name)
+                    Dim op As DWSIM.SimulationObjects.UnitOperations.OrificePlate = FlowSheet.Collections.CLCS_OrificePlateCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("OPOrificeDiameter")) Then
                         If units <> "" Then
@@ -1390,13 +1390,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.OrificePlate
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.OrificePlate
+                            .Sender = "PropertyGrid"
                         End With
 
                         If op.IsSpecAttached = True And op.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(op.AttachedSpecId).Calculate()
@@ -1405,9 +1405,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     End If
 
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.ExcelUO Then
+                ElseIf sobj.ObjectType = ObjectType.ExcelUO Then
 
-                    Dim eo As DWSIM.SimulationObjects.UnitOps.ExcelUO = FlowSheet.Collections.CLCS_ExcelUOCollection.Item(sobj.Name)
+                    Dim eo As DWSIM.SimulationObjects.UnitOperations.ExcelUO = FlowSheet.Collections.CLCS_ExcelUOCollection.Item(sobj.Name)
                     Dim P1 As Integer
                     Dim L As String
                     P1 = InStr(1, e.ChangedItem.Label, "(") - 2
@@ -1421,13 +1421,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     If FlowSheet.Options.CalculatorActivated Then
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
+                            .Calculated = False
                             .Tag = sobj.Tag
-                            .Nome = sobj.Name
-                            .Tipo = TipoObjeto.ExcelUO
-                            .Emissor = "PropertyGrid"
+                            .Name = sobj.Name
+                            .ObjectType = ObjectType.ExcelUO
+                            .Sender = "PropertyGrid"
                         End With
 
                         If eo.IsSpecAttached = True And eo.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(eo.AttachedSpecId).Calculate()
@@ -1435,8 +1435,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     End If
 
-                ElseIf sobj.TipoObjeto = TipoObjeto.DistillationColumn Or sobj.TipoObjeto = TipoObjeto.AbsorptionColumn Or sobj.TipoObjeto = TipoObjeto.ReboiledAbsorber Or
-                    sobj.TipoObjeto = TipoObjeto.RefluxedAbsorber Or sobj.TipoObjeto = TipoObjeto.CapeOpenUO Then
+                ElseIf sobj.ObjectType = ObjectType.DistillationColumn Or sobj.ObjectType = ObjectType.AbsorptionColumn Or sobj.ObjectType = ObjectType.ReboiledAbsorber Or
+                    sobj.ObjectType = ObjectType.RefluxedAbsorber Or sobj.ObjectType = ObjectType.CapeOpenUO Then
 
 
                     If FlowSheet.Options.CalculatorActivated Then
@@ -1445,13 +1445,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         FlowSheet.FormProps.HandleObjectStatusChanged(sobj)
 
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = True
-                            .Nome = sobj.Name
+                            .Calculated = True
+                            .Name = sobj.Name
                             .Tag = sobj.Tag
-                            .Tipo = sobj.TipoObjeto
-                            .Emissor = "PropertyGrid"
+                            .ObjectType = sobj.ObjectType
+                            .Sender = "PropertyGrid"
                         End With
 
                         Dim obj = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
@@ -1479,11 +1479,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             If Not sobj Is Nothing Then
 
                 'connections
-                If sobj.TipoObjeto = TipoObjeto.Cooler Or sobj.TipoObjeto = TipoObjeto.Pipe Or sobj.TipoObjeto = TipoObjeto.Expander Then
+                If sobj.ObjectType = ObjectType.Cooler Or sobj.ObjectType = ObjectType.Pipe Or sobj.ObjectType = ObjectType.Expander Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1502,7 +1502,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1518,10 +1518,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeenergia")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height + 30, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height + 30, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1538,11 +1538,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.ExcelUO Then
+                ElseIf sobj.ObjectType = ObjectType.ExcelUO Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 45, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 45, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1561,7 +1561,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 15, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 15, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1580,7 +1580,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada3")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 15, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 15, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1599,7 +1599,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada4")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 45, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 45, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1618,7 +1618,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 45, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 45, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1637,7 +1637,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 15, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 15, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1656,7 +1656,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida3")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 15, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 15, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1675,7 +1675,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida4")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 45, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 45, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1691,10 +1691,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(3).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeenergia")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X - 60, sobj.Y + 75, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + 75, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1711,12 +1711,12 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.Compressor Or sobj.TipoObjeto = TipoObjeto.Heater Or sobj.TipoObjeto = TipoObjeto.Pump Or
-                             sobj.TipoObjeto = TipoObjeto.RCT_PFR Or sobj.TipoObjeto = TipoObjeto.RCT_CSTR Then
+                ElseIf sobj.ObjectType = ObjectType.Compressor Or sobj.ObjectType = ObjectType.Heater Or sobj.ObjectType = ObjectType.Pump Or
+                             sobj.ObjectType = ObjectType.RCT_PFR Or sobj.ObjectType = ObjectType.RCT_CSTR Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1735,7 +1735,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1751,10 +1751,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeenergia")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X - 60, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1771,11 +1771,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.Valve Or sobj.TipoObjeto = TipoObjeto.OrificePlate Or sobj.TipoObjeto = TipoObjeto.OT_Reciclo Or sobj.TipoObjeto = TipoObjeto.Tank Then
+                ElseIf sobj.ObjectType = ObjectType.Valve Or sobj.ObjectType = ObjectType.OrificePlate Or sobj.ObjectType = ObjectType.OT_Recycle Or sobj.ObjectType = ObjectType.Tank Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1794,7 +1794,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1811,11 +1811,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.Vessel Then
+                ElseIf sobj.ObjectType = ObjectType.Vessel Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 50, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 50, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1834,7 +1834,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 20, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 20, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1853,7 +1853,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada3")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1872,7 +1872,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada4")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 40, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 40, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1891,7 +1891,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada5")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 70, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 70, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1910,7 +1910,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada6")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 100, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 100, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1929,7 +1929,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label = (DWSIM.App.GetLocalString("Saidadevapor")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 20, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 20, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1948,7 +1948,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label = (DWSIM.App.GetLocalString("Saidadelquido")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 50, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 50, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1967,7 +1967,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label = (DWSIM.App.GetLocalString("Saidadelquido") & " (2)") Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 100, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 100, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -1983,10 +1983,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(2).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeenergia")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X - 60, sobj.Y + 130, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + 130, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2003,11 +2003,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.FlowsheetUO Then
+                ElseIf sobj.ObjectType = ObjectType.FlowsheetUO Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 60, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 60, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2026,7 +2026,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 30, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 30, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2045,7 +2045,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada3")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 0, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 0, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2064,7 +2064,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada4")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 30, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 30, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2083,7 +2083,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada5")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 60, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 60, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2102,7 +2102,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada6")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 90, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 90, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2121,7 +2121,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada7")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 120, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 120, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2140,7 +2140,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada8")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 150, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 150, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2159,7 +2159,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada9")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 180, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 180, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2178,7 +2178,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada10")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 210, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 210, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2197,7 +2197,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 60, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 60, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2216,7 +2216,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 30, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 30, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2235,7 +2235,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida3")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2254,7 +2254,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida4")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 30, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 30, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2273,7 +2273,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida5")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 60, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 60, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2292,7 +2292,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida6")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 90, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 90, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2311,7 +2311,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida7")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 120, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 120, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2330,7 +2330,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida8")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 150, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 150, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2349,7 +2349,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida9")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 180, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 180, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2368,7 +2368,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida10")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 210, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 210, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2385,11 +2385,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.RCT_Conversion Or sobj.TipoObjeto = TipoObjeto.RCT_Equilibrium Or sobj.TipoObjeto = TipoObjeto.RCT_Gibbs Then
+                ElseIf sobj.ObjectType = ObjectType.RCT_Conversion Or sobj.ObjectType = ObjectType.RCT_Equilibrium Or sobj.ObjectType = ObjectType.RCT_Gibbs Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2408,7 +2408,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label = (DWSIM.App.GetLocalString("Saidadevapor")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0.17 * sobj.Height - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0.17 * sobj.Height - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2427,7 +2427,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label = (DWSIM.App.GetLocalString("Saidadelquido")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height * 0.843 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height * 0.843 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2443,10 +2443,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeenergia")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X - 60, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2463,11 +2463,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.NodeIn Then
+                ElseIf sobj.ObjectType = ObjectType.NodeIn Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 75, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 75, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2486,7 +2486,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 45, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 45, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2505,7 +2505,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada3")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 15, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 15, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2524,7 +2524,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada4")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 15, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 15, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2543,7 +2543,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada5")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 45, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 45, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2562,7 +2562,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada6")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 75, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 75, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2581,7 +2581,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Conectadoasada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2598,11 +2598,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.NodeOut Then
+                ElseIf sobj.ObjectType = ObjectType.NodeOut Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2621,7 +2621,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 30, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 30, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2640,7 +2640,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2659,7 +2659,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida3")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 30, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 30, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2676,11 +2676,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.ShortcutColumn Then
+                ElseIf sobj.ObjectType = ObjectType.ShortcutColumn Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("SCFeed")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 0.5 * sobj.Height - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 0.5 * sobj.Height - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2699,7 +2699,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("SCReboilerDuty")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X - 60, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2718,7 +2718,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("SCDistillate")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0.3 * sobj.Height - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0.3 * sobj.Height - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2737,7 +2737,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("SCBottoms")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0.98 * sobj.Height - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0.98 * sobj.Height - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2756,7 +2756,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("SCCondenserDuty")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + 0.175 * sobj.Height - 30, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + 0.175 * sobj.Height - 30, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2773,11 +2773,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.HeatExchanger Then
+                ElseIf sobj.ObjectType = ObjectType.HeatExchanger Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2796,7 +2796,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 50, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height / 2 - 50, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2815,7 +2815,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2834,7 +2834,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 + 30, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height / 2 + 30, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2851,11 +2851,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.OT_EnergyRecycle Then
+                ElseIf sobj.ObjectType = ObjectType.OT_EnergyRecycle Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X - 60, sobj.Y, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2874,7 +2874,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2891,11 +2891,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.ComponentSeparator Or sobj.TipoObjeto = TipoObjeto.SolidSeparator Or sobj.TipoObjeto = TipoObjeto.Filter Then
+                ElseIf sobj.ObjectType = ObjectType.ComponentSeparator Or sobj.ObjectType = ObjectType.SolidSeparator Or sobj.ObjectType = ObjectType.Filter Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height * 0.5 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + sobj.Height * 0.5 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2914,7 +2914,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("OutletStream1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0.17 * sobj.Height - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 0.17 * sobj.Height - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2933,7 +2933,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("OutletStream2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height * 0.83 - 10, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height * 0.83 - 10, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2949,10 +2949,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeenergia")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2969,11 +2969,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     End If
-                ElseIf sobj.TipoObjeto = TipoObjeto.CustomUO Then
+                ElseIf sobj.ObjectType = ObjectType.CustomUO Then
                     If e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 65, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 65, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -2992,7 +2992,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 35, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 35, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3011,7 +3011,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada3")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y - 5, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y - 5, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3030,7 +3030,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada4")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 25, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 25, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3049,7 +3049,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada5")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 55, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 55, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3068,7 +3068,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedeentrada6")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X - 60, sobj.Y + 85, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X - 60, sobj.Y + 85, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3084,10 +3084,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj.InputConnectors(6).AttachedConnector.AttachedFrom, sobj)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeenergiaE")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlowE")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X - 60, sobj.Y + 115, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + 115, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3106,7 +3106,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida1")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 65, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 65, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3125,7 +3125,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida2")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 35, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 35, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3144,7 +3144,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida3")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 5, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y - 5, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3163,7 +3163,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida4")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 25, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 25, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3182,7 +3182,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida5")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 55, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 55, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3201,7 +3201,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("Correntedesaida6")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 85, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, sobj.X + sobj.Width + 40, sobj.Y + 85, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3217,10 +3217,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(6).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeenergiaS")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlowS")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + 115, e.ChangedItem.Value)
+                                Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + 115, e.ChangedItem.Value)
                             ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                                 MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Exit Sub
@@ -3301,12 +3301,12 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End Get
         End Property
 
-        Public Property Annotation() As DWSIM.Outros.Annotation
+        Public Property Annotation() As DWSIM.Extras.Annotation
             Get
-                If Me.m_annotation Is Nothing Then Me.m_annotation = New DWSIM.Outros.Annotation
+                If Me.m_annotation Is Nothing Then Me.m_annotation = New DWSIM.Extras.Annotation
                 Return Me.m_annotation
             End Get
-            Set(ByVal value As DWSIM.Outros.Annotation)
+            Set(ByVal value As DWSIM.Extras.Annotation)
                 Me.m_annotation = value
             End Set
         End Property
@@ -3414,22 +3414,22 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End Set
         End Property
 
-        Public Property NodeTableItems() As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+        Public Property NodeTableItems() As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
             Get
-                If m_nodeitems Is Nothing Then m_nodeitems = New Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)()
+                If m_nodeitems Is Nothing Then m_nodeitems = New Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)()
                 Return m_nodeitems
             End Get
-            Set(ByVal value As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem))
+            Set(ByVal value As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem))
                 m_nodeitems = value
             End Set
         End Property
 
-        Public Property QTNodeTableItems() As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+        Public Property QTNodeTableItems() As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
             Get
-                If m_qtnodeitems Is Nothing Then m_qtnodeitems = New Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)()
+                If m_qtnodeitems Is Nothing Then m_qtnodeitems = New Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)()
                 Return m_qtnodeitems
             End Get
-            Set(ByVal value As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem))
+            Set(ByVal value As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem))
                 m_qtnodeitems = value
             End Set
         End Property
@@ -3454,7 +3454,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks>This property is the same as the graphic object 'Name' property.</remarks>
-        Public Property Nome() As String
+        Public Property Name() As String
             Get
                 Return m_ComponentName
             End Get
@@ -3504,9 +3504,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Sub CreateNew()
             CreatedWithThreadID = Threading.Thread.CurrentThread.ManagedThreadId
-            Me.m_annotation = New DWSIM.Outros.Annotation
-            Me.m_nodeitems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
-            Me.m_qtnodeitems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+            Me.m_annotation = New DWSIM.Extras.Annotation
+            Me.m_nodeitems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
+            Me.m_qtnodeitems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
         End Sub
 
         ''' <summary>
@@ -3571,7 +3571,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "NodeItems").Elements
                 Dim text As String = xel2.@Text
-                Dim ni2 As DWSIM.Outros.NodeItem = (From ni As DWSIM.Outros.NodeItem In m_nodeitems.Values Select ni Where ni.Text = text).SingleOrDefault
+                Dim ni2 As DWSIM.Extras.NodeItem = (From ni As DWSIM.Extras.NodeItem In m_nodeitems.Values Select ni Where ni.Text = text).SingleOrDefault
                 If Not ni2 Is Nothing Then
                     ni2.Checked = True
                 End If
@@ -3592,7 +3592,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             With elements
 
                 .Add(New XElement("NodeItems"))
-                For Each kvp As KeyValuePair(Of Integer, DWSIM.Outros.NodeItem) In m_nodeitems
+                For Each kvp As KeyValuePair(Of Integer, DWSIM.Extras.NodeItem) In m_nodeitems
                     If kvp.Value.Checked Then .Item(.Count - 1).Add(New XElement("NodeItem", New XAttribute("ID", kvp.Key),
                                                                     New XAttribute("Checked", kvp.Value.Checked),
                                                                     New XAttribute("Text", kvp.Value.Text),
@@ -3623,7 +3623,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass
             Dim properties() As String
             Dim description As String
-            Dim objtype As Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto
+            Dim objtype As Microsoft.Msdn.Samples.GraphicObjects.ObjectType
             Dim propidx, r1, r2, r3, r4, r5, r6 As Integer
             r1 = 5
             r2 = 12
@@ -3634,9 +3634,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             baseobj = Me
             properties = baseobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
-            objtype = baseobj.GraphicObject.TipoObjeto
+            objtype = baseobj.GraphicObject.ObjectType
             description = DWSIM.App.GetLocalString(baseobj.GraphicObject.Description)
-            If objtype = Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.MaterialStream Then
+            If objtype = Microsoft.Msdn.Samples.GraphicObjects.ObjectType.MaterialStream Then
                 Dim value As String
                 For propidx = 0 To r1 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3656,7 +3656,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaMistura"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(0).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r2 To r3 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3668,7 +3668,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseVapor"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(2).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r3 To r4 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3680,7 +3680,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(1).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r4 To r5 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3692,7 +3692,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(3).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r5 To r6 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3704,7 +3704,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(4).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r6 To 101
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3716,7 +3716,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(6).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                 Next
             Else
                 For Each prop As String In properties
@@ -3757,7 +3757,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         'CAPE-OPEN Error Interfaces
         Implements ECapeUser, ECapeUnknown, ECapeRoot
 
-        Public ObjectType As Integer
         Friend _pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
         Friend _ppid As String = ""
 
@@ -3986,13 +3985,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Overridable Sub Validate()
 
             Dim vForm As Global.DWSIM.FormFlowsheet = FlowSheet
-            Dim vEventArgs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim vEventArgs As New DWSIM.Extras.StatusChangeEventArgs
             Dim vCon As ConnectionPoint
 
             With vEventArgs
-                .Calculado = False
-                .Nome = Me.Nome
-                .Tipo = Me.ObjectType
+                .Calculated = False
+                .Name = Me.Name
+                .ObjectType = Me.ObjectType
             End With
 
             'Validate input connections.
@@ -4058,7 +4057,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         .CustomEditor = New DWSIM.Editors.Annotation.UIAnnotationEditor
                     End With
                 End If
-                .Item.Add("ID", Me.Nome, True, DWSIM.App.GetLocalString("Outros"), "", True)
+                .Item.Add("ID", Me.Name, True, DWSIM.App.GetLocalString("Outros"), "", True)
                 .Item.Add(DWSIM.App.GetLocalString("LastUpdatedOn"), Me.LastUpdated.ToString("O"), True, DWSIM.App.GetLocalString("Outros"), "", True)
 
             End With
@@ -4196,7 +4195,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         <Xml.Serialization.XmlIgnore()> Public ReadOnly Property ports() As Object Implements CapeOpen.ICapeUnit.ports
             Get
                 If Not Me._capeopenmode Then
-                    If Not Me.GraphicObject.TipoObjeto = TipoObjeto.CapeOpenUO Then
+                    If Not Me.GraphicObject.ObjectType = ObjectType.CapeOpenUO Then
                         _ports = New CapeOpen.PortCollection
                         For Each c As ConnectionPoint In Me.GraphicObject.InputConnectors
                             If c.Type = ConType.ConIn Then
@@ -4489,7 +4488,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public ReadOnly Property Name() As String Implements CapeOpen.ECapeRoot.Name
             Get
-                Return Me.Nome
+                Return Me.Name
             End Get
         End Property
 

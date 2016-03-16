@@ -11,7 +11,7 @@
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -615,9 +615,9 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Cooler</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Cooler</Type>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -658,7 +658,7 @@
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -1265,7 +1265,7 @@
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>6.374675</Energia>
+      <EnergyFlow>6.374675</EnergyFlow>
       <ComponentDescription>EN-3e8c2aa8-9aa6-4623-9eb5-02b342109550</ComponentDescription>
       <ComponentName>E</ComponentName>
       <Calculated>false</Calculated>
@@ -1273,7 +1273,7 @@
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -1283,7 +1283,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-3e8c2aa8-9aa6-4623-9eb5-02b342109550</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -1408,7 +1408,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -1443,7 +1443,7 @@ absolute moisture
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -1489,7 +1489,7 @@ absolute moisture
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>Cooler</TipoObjeto>
+      <ObjectType>Cooler</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -1532,7 +1532,7 @@ absolute moisture
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -1564,11 +1564,11 @@ absolute moisture
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>EnergyStream</TipoObjeto>
+      <ObjectType>EnergyStream</ObjectType>
       <IsEnergyStream>true</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -1608,7 +1608,7 @@ Dew Temperature</Text>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -1663,7 +1663,7 @@ Dew Temperature</Text>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <ObjectType>GO_Table</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

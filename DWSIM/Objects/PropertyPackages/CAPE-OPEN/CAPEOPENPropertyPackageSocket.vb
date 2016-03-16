@@ -24,11 +24,11 @@ Imports System.Runtime.Serialization
 Imports System.IO
 Imports System.Math
 Imports CapeOpen
-Imports DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen
+Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
 Imports Microsoft.Win32
 Imports System.Linq
 Imports System.Runtime.InteropServices
-Imports DWSIM.DWSIM.SimulationObjects.UnitOps
+Imports DWSIM.DWSIM.SimulationObjects.UnitOperations
 
 Namespace DWSIM.SimulationObjects.PropertyPackages
 
@@ -245,7 +245,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
                     Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
                     For Each subst In Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Compounds.Values
-                        subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, pi.DWPhaseIndex)
+                        subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, pi.DWPhaseIndex)
                     Next
                 End If
             Next
@@ -549,7 +549,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcEnergiaMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcEnergyFlowMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
 
             'do nothing
 
@@ -1055,7 +1055,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim j As Integer = 0
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
                 mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * mw(i)
-                If subst = sub1.Nome Then j = i
+                If subst = sub1.Name Then j = i
                 i += 1
             Next
 
@@ -1080,7 +1080,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim j As Integer = 0
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
                 mass_div_mm += sub1.FracaoMassica.GetValueOrDefault / mw(i)
-                If subst = sub1.Nome Then j = i
+                If subst = sub1.Name Then j = i
                 i += 1
             Next
 
@@ -1577,12 +1577,12 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             If Not _pptpl Is Nothing Then
                 Dim myuo As Interfaces2.IPersistStream = TryCast(_pptpl, Interfaces2.IPersistStream)
                 If myuo IsNot Nothing Then
-                    _istrts = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
+                    _istrts = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
                     myuo.Save(_istrts, True)
                 Else
                     Dim myuo2 As Interfaces2.IPersistStreamInit = TryCast(_pptpl, Interfaces2.IPersistStreamInit)
                     If myuo2 IsNot Nothing Then
-                        _istrts = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
+                        _istrts = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
                         myuo2.Save(_istrts, True)
                     End If
                 End If
@@ -1591,12 +1591,12 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             If Not _copp Is Nothing Then
                 Dim myuo As Interfaces2.IPersistStream = TryCast(_copp, Interfaces2.IPersistStream)
                 If myuo IsNot Nothing Then
-                    _istrpp = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
+                    _istrpp = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
                     myuo.Save(_istrpp, True)
                 Else
                     Dim myuo2 As Interfaces2.IPersistStreamInit = TryCast(_copp, Interfaces2.IPersistStreamInit)
                     If myuo2 IsNot Nothing Then
-                        _istrpp = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
+                        _istrpp = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
                         myuo2.Save(_istrpp, True)
                     End If
                 End If
@@ -1626,12 +1626,12 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim pdata1 As XElement = (From el As XElement In data Select el Where el.Name = "PersistedData1").SingleOrDefault
             If Not pdata1 Is Nothing Then
-                _istrts = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(Convert.FromBase64String(pdata1.Value)))
+                _istrts = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(Convert.FromBase64String(pdata1.Value)))
             End If
 
             Dim pdata2 As XElement = (From el As XElement In data Select el Where el.Name = "PersistedData2").SingleOrDefault
             If Not pdata2 Is Nothing Then
-                _istrpp = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(Convert.FromBase64String(pdata2.Value)))
+                _istrpp = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(Convert.FromBase64String(pdata2.Value)))
             End If
 
             Dim info As XElement = (From el As XElement In data Select el Where el.Name = "CAPEOPEN_Object_Info").SingleOrDefault
@@ -1671,13 +1671,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 If Not _pptpl Is Nothing Then
                     Dim myuo As Interfaces2.IPersistStream = TryCast(_pptpl, Interfaces2.IPersistStream)
                     If myuo IsNot Nothing Then
-                        Dim mbs As New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream)
+                        Dim mbs As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream)
                         myuo.Save(mbs, True)
                         .Add(New XElement("PersistedData1", Convert.ToBase64String(CType(mbs.baseStream, MemoryStream).ToArray())))
                     Else
                         Dim myuo2 As Interfaces2.IPersistStreamInit = TryCast(_pptpl, Interfaces2.IPersistStreamInit)
                         If myuo2 IsNot Nothing Then
-                            Dim mbs As New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream)
+                            Dim mbs As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream)
                             myuo2.Save(mbs, True)
                             .Add(New XElement("PersistedData1", Convert.ToBase64String(CType(mbs.baseStream, MemoryStream).ToArray())))
                         End If
@@ -1687,13 +1687,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 If Not _copp Is Nothing Then
                     Dim myuo As Interfaces2.IPersistStream = TryCast(_copp, Interfaces2.IPersistStream)
                     If myuo IsNot Nothing Then
-                        Dim mbs As New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream)
+                        Dim mbs As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream)
                         myuo.Save(mbs, True)
                         .Add(New XElement("PersistedData2", Convert.ToBase64String(CType(mbs.baseStream, MemoryStream).ToArray())))
                     Else
                         Dim myuo2 As Interfaces2.IPersistStreamInit = TryCast(_copp, Interfaces2.IPersistStreamInit)
                         If myuo2 IsNot Nothing Then
-                            Dim mbs As New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream)
+                            Dim mbs As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream)
                             myuo2.Save(mbs, True)
                             .Add(New XElement("PersistedData2", Convert.ToBase64String(CType(mbs.baseStream, MemoryStream).ToArray())))
                         End If

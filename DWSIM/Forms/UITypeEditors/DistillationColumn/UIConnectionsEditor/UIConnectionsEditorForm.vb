@@ -15,8 +15,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.SepOps
-Imports DWSIM.DWSIM.SimulationObjects.UnitOps
+Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
+Imports DWSIM.DWSIM.SimulationObjects.UnitOperations
 Imports DWSIM.DWSIM.SimulationObjects
 Imports Microsoft.Msdn.Samples.GraphicObjects
 Imports System.Linq
@@ -27,7 +27,7 @@ Public Class UIConnectionsEditorForm
     Dim cb As Object
     Dim loaded As Boolean = False
 
-    Dim tpl As DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors.Templates
+    Dim tpl As DWSIM.SimulationObjects.UnitOperations.Auxiliary.DGVCBSelectors.Templates
     Dim cvt As DWSIM.SystemsOfUnits.Converter
 
     Private Sub UIConnectionsEditorForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -59,7 +59,7 @@ Public Class UIConnectionsEditorForm
         form = My.Application.ActiveSimulation
         dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
-        tpl = New DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors.Templates(form, dc)
+        tpl = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.DGVCBSelectors.Templates(form, dc)
 
         Dim sgt1 As New DataGridViewComboBoxCell
         Dim sgt2 As New DataGridViewComboBoxCell

@@ -568,7 +568,7 @@
     <value>266, 13</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
-    <value>Tolerancia para variación de la Energia Libre de Gibbs:</value>
+    <value>Tolerancia para variación de la EnergyFlow Libre de Gibbs:</value>
   </data>
   <data name="chkValidateEqCalc.Text" xml:space="preserve">
     <value>Validar resultado de los cálculos de equilibrio</value>

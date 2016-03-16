@@ -125,7 +125,7 @@ Public Class FormUnitGen
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"})
             cb.Value = currentset.heatflow
-            .Add(New Object() {DWSIM.App.GetLocalString("FluxodeEnergia")})
+            .Add(New Object() {DWSIM.App.GetLocalString("FluxodeEnergyFlow")})
             .Item(.Count - 1).Cells(1) = cb
 
             cb = New DataGridViewComboBoxCell
@@ -249,7 +249,7 @@ Public Class FormUnitGen
 
             Dim su As New DWSIM.SystemsOfUnits.Units
             With su
-                .nome = Me.TextBox1.Text
+                .Name = Me.TextBox1.Text
                 .pdp_boilingPointTemperature = Me.DataGridView1.Rows(0).Cells(1).Value
                 .pdp_meltingTemperature = Me.DataGridView1.Rows(0).Cells(1).Value
                 .activity = Me.DataGridView1.Rows(1).Cells(1).Value
@@ -313,7 +313,7 @@ Public Class FormUnitGen
                 .foulingfactor = Me.DataGridView1.Rows(33).Cells(1).Value
             End With
 
-            If FormMain.AvailableUnitSystems.ContainsKey(su.nome) Then
+            If FormMain.AvailableUnitSystems.ContainsKey(su.Name) Then
 
                 MessageBox.Show(DWSIM.App.GetLocalString("JexisteumSistemadeUn") & vbCrLf & DWSIM.App.GetLocalString("Porfavormodifiqueoet"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
 
@@ -323,7 +323,7 @@ Public Class FormUnitGen
 
                 frm.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsAdded,
                                          .NewValue = su,
-                                         .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsAdded"), su.nome)})
+                                         .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsAdded"), su.Name)})
 
                 Me.Close()
 

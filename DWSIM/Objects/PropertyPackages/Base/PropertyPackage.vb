@@ -842,7 +842,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             i = 0
             For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                If K(i) = 0 Then K(i) = Me.AUX_PVAPi(subst.Nome, T) / P
+                If K(i) = 0 Then K(i) = Me.AUX_PVAPi(subst.Name, T) / P
                 If Double.IsInfinity(K(i)) Or Double.IsNaN(K(i)) Then
                     Dim Pc, Tc, w As Double
                     Pc = subst.ConstantProperties.Critical_Pressure
@@ -1327,20 +1327,20 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             For Each c As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
 
-                cml1 = Me.CurrentMaterialStream.Phases(3).Compounds(c.Nome).FracaoMolar.GetValueOrDefault
-                cml2 = Me.CurrentMaterialStream.Phases(4).Compounds(c.Nome).FracaoMolar.GetValueOrDefault
-                cml3 = Me.CurrentMaterialStream.Phases(5).Compounds(c.Nome).FracaoMolar.GetValueOrDefault
-                cmw = Me.CurrentMaterialStream.Phases(6).Compounds(c.Nome).FracaoMolar.GetValueOrDefault
+                cml1 = Me.CurrentMaterialStream.Phases(3).Compounds(c.Name).FracaoMolar.GetValueOrDefault
+                cml2 = Me.CurrentMaterialStream.Phases(4).Compounds(c.Name).FracaoMolar.GetValueOrDefault
+                cml3 = Me.CurrentMaterialStream.Phases(5).Compounds(c.Name).FracaoMolar.GetValueOrDefault
+                cmw = Me.CurrentMaterialStream.Phases(6).Compounds(c.Name).FracaoMolar.GetValueOrDefault
 
                 If Not cml1.IsValid Then cml1 = 0.0#
                 If Not cml2.IsValid Then cml2 = 0.0#
                 If Not cml3.IsValid Then cml3 = 0.0#
                 If Not cmw.IsValid Then cmw = 0.0#
 
-                cwl1 = Me.CurrentMaterialStream.Phases(3).Compounds(c.Nome).FracaoMassica.GetValueOrDefault
-                cwl2 = Me.CurrentMaterialStream.Phases(4).Compounds(c.Nome).FracaoMassica.GetValueOrDefault
-                cwl3 = Me.CurrentMaterialStream.Phases(5).Compounds(c.Nome).FracaoMassica.GetValueOrDefault
-                cww = Me.CurrentMaterialStream.Phases(6).Compounds(c.Nome).FracaoMassica.GetValueOrDefault
+                cwl1 = Me.CurrentMaterialStream.Phases(3).Compounds(c.Name).FracaoMassica.GetValueOrDefault
+                cwl2 = Me.CurrentMaterialStream.Phases(4).Compounds(c.Name).FracaoMassica.GetValueOrDefault
+                cwl3 = Me.CurrentMaterialStream.Phases(5).Compounds(c.Name).FracaoMassica.GetValueOrDefault
+                cww = Me.CurrentMaterialStream.Phases(6).Compounds(c.Name).FracaoMassica.GetValueOrDefault
 
                 If Not cwl1.IsValid Then cwl1 = 0.0#
                 If Not cwl2.IsValid Then cwl2 = 0.0#
@@ -1645,7 +1645,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 3)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
@@ -1657,7 +1657,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 4)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
@@ -1669,7 +1669,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 2)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
@@ -1681,7 +1681,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 7)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                             Next
 
                             Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -1805,7 +1805,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 3)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
@@ -1817,7 +1817,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 4)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
@@ -1829,7 +1829,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 2)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                             Next
 
                             i = 0
@@ -1842,7 +1842,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 7)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                             Next
 
                             Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -1898,7 +1898,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
                                 Tsat = 0.0#
                                 For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                    Tsat += subst.FracaoMolar * Me.AUX_TSATi(P, subst.Nome)
+                                    Tsat += subst.FracaoMolar * Me.AUX_TSATi(P, subst.Name)
                                 Next
 
                                 hl = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
@@ -2036,7 +2036,7 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 3)
+                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                                     i += 1
                                 Next
                                 i = 0
@@ -2050,7 +2050,7 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 4)
+                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                                     i += 1
                                 Next
                                 i = 0
@@ -2064,7 +2064,7 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 2)
+                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                                     i += 1
                                 Next
                                 i = 0
@@ -2077,7 +2077,7 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
                                     i += 1
                                 Next
                                 For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 7)
+                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                                 Next
 
                                 Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -2124,7 +2124,7 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
 
                                 Tsat = 0.0#
                                 For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                    Tsat += subst.FracaoMolar * Me.AUX_TSATi(P, subst.Nome)
+                                    Tsat += subst.FracaoMolar * Me.AUX_TSATi(P, subst.Name)
                                 Next
 
                                 hl = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
@@ -2222,7 +2222,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 3)
+                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                                     i += 1
                                 Next
                                 i = 0
@@ -2236,7 +2236,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 4)
+                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                                     i += 1
                                 Next
                                 i = 0
@@ -2251,7 +2251,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 2)
+                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                                     i += 1
                                 Next
 
@@ -2265,7 +2265,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     i += 1
                                 Next
                                 For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 7)
+                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                                 Next
 
                                 Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -2317,7 +2317,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                                 Tsat = 0.0#
                                 For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                    Tsat += subst.FracaoMolar * Me.AUX_TSATi(P, subst.Nome)
+                                    Tsat += subst.FracaoMolar * Me.AUX_TSATi(P, subst.Name)
                                 Next
 
                                 HL = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
@@ -2372,7 +2372,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 3)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
@@ -2384,7 +2384,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 4)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
@@ -2396,7 +2396,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 2)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                             Next
 
                             i = 0
@@ -2409,7 +2409,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 7)
+                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                             Next
 
                             Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -2971,7 +2971,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
-        Public MustOverride Function DW_CalcEnergiaMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
+        Public MustOverride Function DW_CalcEnergyFlowMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
 
         Public MustOverride Function DW_CalcCp_ISOL(ByVal Phase1 As DWSIM.SimulationObjects.PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
 
@@ -5424,7 +5424,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                subst.Kvalue = Me.CurrentMaterialStream.Phases(2).Compounds(subst.Nome).FracaoMolar.GetValueOrDefault / Me.CurrentMaterialStream.Phases(1).Compounds(subst.Nome).FracaoMolar.GetValueOrDefault
+                subst.Kvalue = Me.CurrentMaterialStream.Phases(2).Compounds(subst.Name).FracaoMolar.GetValueOrDefault / Me.CurrentMaterialStream.Phases(1).Compounds(subst.Name).FracaoMolar.GetValueOrDefault
                 subst.lnKvalue = Log(subst.Kvalue)
             Next
 
@@ -5863,9 +5863,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 Tc = subst.ConstantProperties.Critical_Temperature
                 If T / Tc <= 1 Then
-                    val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_PVAPi(subst.Nome, T)
+                    val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, T)
                 Else
-                    val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_PVAPi(subst.Nome, 0.5 * Tc)
+                    val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, 0.5 * Tc)
                 End If
             Next
 
@@ -5945,7 +5945,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             For Each subst1 In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 For Each subst2 In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                    Tc += Me.AUX_Rackett_PHIi(subst1.Nome, Phase) * Me.AUX_Rackett_PHIi(subst2.Nome, Phase) * Me.AUX_Rackett_Tcij(subst1.Nome, subst2.Nome)
+                    Tc += Me.AUX_Rackett_PHIi(subst1.Name, Phase) * Me.AUX_Rackett_PHIi(subst2.Name, Phase) * Me.AUX_Rackett_Tcij(subst1.Name, subst2.Name)
                 Next
             Next
 
@@ -6023,7 +6023,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_CPi(subst.Nome, T)
+                val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_CPi(subst.Name, T)
             Next
 
             Return val 'KJ/Kg/K
@@ -6136,7 +6136,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                If i = index Then nome = subst.Nome
+                If i = index Then nome = subst.Name
                 i += 1
             Next
 
@@ -6361,7 +6361,7 @@ Final3:
 
             i = 0
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vxw(i) * Me.AUX_HVAPi(subst.Nome, T)
+                val += Vxw(i) * Me.AUX_HVAPi(subst.Name, T)
                 i += 1
             Next
 
@@ -6496,9 +6496,9 @@ Final3:
             val = 0
             val2 = 0
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                'logvisc = Math.Log(Me.AUX_LIQVISCi(subst.Nome, T))
+                'logvisc = Math.Log(Me.AUX_LIQVISCi(subst.Name, T))
                 If Not Double.IsInfinity(logvisc) Then
-                    val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_LIQVISCi(subst.Nome, T)
+                    val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_LIQVISCi(subst.Name, T)
                 Else
                     val2 += subst.FracaoMolar.GetValueOrDefault
                 End If
@@ -6793,13 +6793,13 @@ Final3:
                                             vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                                             vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
                                         Else
-                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                         End If
                                     Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                     End If
                                 Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
                                 vk(i) = subst.FracaoMassica / vk(i)
                                 i = i + 1
@@ -6855,13 +6855,13 @@ Final3:
                                         ElseIf subst.ConstantProperties.IsIon Or subst.ConstantProperties.IsSalt Then
                                             vk(i) = 1.0E+20
                                         Else
-                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                         End If
                                     Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                     End If
                                 Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
                                 vk(i) = subst.FracaoMassica / vk(i)
                                 i = i + 1
@@ -6900,13 +6900,13 @@ Final3:
                                         ElseIf T > subst.ConstantProperties.Critical_Temperature Then
                                             vk(i) = 800
                                         Else
-                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                         End If
                                     Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                     End If
                                 Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
                                 vk(i) = subst.FracaoMassica / vk(i)
                                 i = i + 1
@@ -6945,13 +6945,13 @@ Final3:
                                         ElseIf T > subst.ConstantProperties.Critical_Temperature Then
                                             vk(i) = 800
                                         Else
-                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                         End If
                                     Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                     End If
                                 Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
                                 vk(i) = subst.FracaoMassica / vk(i)
                                 i = i + 1
@@ -6988,13 +6988,13 @@ Final3:
                                             vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                                             vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
                                         Else
-                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                         End If
                                     Else
-                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                     End If
                                 Else
-                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
                                 vk(i) = subst.FracaoMassica / vk(i)
                                 i = i + 1
@@ -7033,13 +7033,13 @@ Final3:
                             vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                             vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
                         Else
-                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                         End If
                     Else
-                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                        vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                     End If
                 Else
-                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
+                    vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                 End If
                 If T > subst.ConstantProperties.Critical_Temperature Then
                     vk(i) = 1.0E+20
@@ -7065,7 +7065,7 @@ Final3:
                 val = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                 val = subst.ConstantProperties.Molar_Weight * val
             Else
-                val = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, 101325, Me.AUX_PVAPi(subst.Nome, T))
+                val = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, 101325, Me.AUX_PVAPi(subst.Name, T))
             End If
 
             Return val 'kg/m3
@@ -7210,54 +7210,54 @@ Final3:
 
                     For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, Me.RET_PHASEID(Phase))
+                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Nome)
+                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid
 
                     For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                         If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, Me.RET_PHASEID(Phase))
+                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Nome)
+                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1
 
                     For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                         If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, Me.RET_PHASEID(Phase))
+                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Nome)
+                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid2
 
                     For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
                         If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, Me.RET_PHASEID(Phase))
+                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Nome)
+                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid3
 
                     For Each subst In Me.CurrentMaterialStream.Phases(5).Compounds.Values
                         If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, Me.RET_PHASEID(Phase))
+                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Nome)
+                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor
 
                     For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                         If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, Me.RET_PHASEID(Phase))
+                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Nome)
+                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
             End Select
@@ -7273,9 +7273,9 @@ Final3:
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, Me.RET_PHASEID(Phase))
+                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                 End If
-                val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDT_Ti(T1, T2, subst.Nome)
+                val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDT_Ti(T1, T2, subst.Name)
             Next
 
             Return val
@@ -7699,7 +7699,7 @@ Final3:
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = Me.AUX_CPi(subst.Nome, T)
+                val(i) = Me.AUX_CPi(subst.Name, T)
                 i += 1
             Next
 
@@ -7714,7 +7714,7 @@ Final3:
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val(i) = Me.AUX_HVAPi(subst.Nome, T)
+                val(i) = Me.AUX_HVAPi(subst.Name, T)
                 i += 1
             Next
 
@@ -8140,7 +8140,7 @@ Final3:
 
             val = 0.0#
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vw(i) * Me.AUX_INT_CPDTi(T1, T2, subst.Nome)
+                val += Vw(i) * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                 i += 1
             Next
 
@@ -8154,7 +8154,7 @@ Final3:
             Dim i As Integer = 0
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vw(i) * Me.AUX_INT_CPDTi_L(T1, T2, subst.Nome)
+                val += Vw(i) * Me.AUX_INT_CPDTi_L(T1, T2, subst.Name)
                 i += 1
             Next
 
@@ -8168,7 +8168,7 @@ Final3:
             Dim i As Integer = 0
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vw(i) * Me.AUX_INT_CPDT_Ti(T1, T2, subst.Nome)
+                val += Vw(i) * Me.AUX_INT_CPDT_Ti(T1, T2, subst.Name)
                 i += 1
             Next
 
@@ -9381,7 +9381,7 @@ Final3:
                     Next
                 Else
                     For Each c As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                        comps.Add(c.Nome)
+                        comps.Add(c.Name)
                     Next
                 End If
 
@@ -9691,7 +9691,7 @@ Final3:
                 Dim res As New ArrayList
                 Dim comps As New ArrayList
                 For Each c As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                    comps.Add(c.Nome)
+                    comps.Add(c.Name)
                 Next
 
                 Dim basis As String = Nothing

@@ -2702,38 +2702,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Corrente de Energia.
+        '''  Looks up a localized string similar to Corrente de EnergyFlow.
         '''</summary>
-        Friend Shared ReadOnly Property Correntedeenergia() As String
+        Friend Shared ReadOnly Property CorrentedeEnergyFlow() As String
             Get
-                Return ResourceManager.GetString("Correntedeenergia", resourceCulture)
+                Return ResourceManager.GetString("CorrentedeEnergyFlow", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Representa o fluxo de energia que entra e/ou sai de um equipamento ou processo..
+        '''  Looks up a localized string similar to Representa o fluxo de EnergyFlow que entra e/ou sai de um equipamento ou processo..
         '''</summary>
-        Friend Shared ReadOnly Property Correntedeenergia_Desc() As String
+        Friend Shared ReadOnly Property CorrentedeEnergyFlow_Desc() As String
             Get
-                Return ResourceManager.GetString("Correntedeenergia_Desc", resourceCulture)
+                Return ResourceManager.GetString("CorrentedeEnergyFlow_Desc", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Corrente de Energia (Entrada).
+        '''  Looks up a localized string similar to Corrente de EnergyFlow (Entrada).
         '''</summary>
-        Friend Shared ReadOnly Property CorrentedeenergiaE() As String
+        Friend Shared ReadOnly Property CorrentedeEnergyFlowE() As String
             Get
-                Return ResourceManager.GetString("CorrentedeenergiaE", resourceCulture)
+                Return ResourceManager.GetString("CorrentedeEnergyFlowE", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Corrente de Energia (Saída).
+        '''  Looks up a localized string similar to Corrente de EnergyFlow (Saída).
         '''</summary>
-        Friend Shared ReadOnly Property CorrentedeenergiaS() As String
+        Friend Shared ReadOnly Property CorrentedeEnergyFlowS() As String
             Get
-                Return ResourceManager.GetString("CorrentedeenergiaS", resourceCulture)
+                Return ResourceManager.GetString("CorrentedeEnergyFlowS", resourceCulture)
             End Get
         End Property
         
@@ -2981,20 +2981,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Correntes de energia só podem se conectar a (sentido &apos;corrente de energia&apos; -&gt; &apos;objeto&apos;):.
+        '''  Looks up a localized string similar to Correntes de EnergyFlow só podem se conectar a (sentido &apos;corrente de EnergyFlow&apos; -&gt; &apos;objeto&apos;):.
         '''</summary>
-        Friend Shared ReadOnly Property Correntesdeenergiasp() As String
+        Friend Shared ReadOnly Property CorrentesdeEnergyFlowsp() As String
             Get
-                Return ResourceManager.GetString("Correntesdeenergiasp", resourceCulture)
+                Return ResourceManager.GetString("CorrentesdeEnergyFlowsp", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Correntes de energia só podem se conectar a (sentido &apos;objeto&apos; -&gt; &apos;corrente de energia&apos;):.
+        '''  Looks up a localized string similar to Correntes de EnergyFlow só podem se conectar a (sentido &apos;objeto&apos; -&gt; &apos;corrente de EnergyFlow&apos;):.
         '''</summary>
-        Friend Shared ReadOnly Property Correntesdeenergiasp2() As String
+        Friend Shared ReadOnly Property CorrentesdeEnergyFlowsp2() As String
             Get
-                Return ResourceManager.GetString("Correntesdeenergiasp2", resourceCulture)
+                Return ResourceManager.GetString("CorrentesdeEnergyFlowsp2", resourceCulture)
             End Get
         End Property
         
@@ -3089,7 +3089,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Balanço de energia.
+        '''  Looks up a localized string similar to Balanço de EnergyFlow.
         '''</summary>
         Friend Shared ReadOnly Property CSepEnergyImbalance() As String
             Get
@@ -4258,7 +4258,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Utiliza a EE Peng-Robinson com a regra de mistura de Wong e Sandler. A energia de Gibbs em excesso (GE/RT) é calculada pelo modelo UNIFAC.
+        '''  Looks up a localized string similar to Utiliza a EE Peng-Robinson com a regra de mistura de Wong e Sandler. A EnergyFlow de Gibbs em excesso (GE/RT) é calculada pelo modelo UNIFAC.
         '''Recomendada para uso com misturas binárias ou ternárias de substâncias polares em altas pressões e temperaturas. Para cálculo do ELV de hidrocarbonetos e/ou não-condensáveis, utilize a EE PR ou SRK..
         '''</summary>
         Friend Shared ReadOnly Property DescPRWSPP() As String
@@ -4879,7 +4879,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Eficiência do aquecedor em relação ao processo ideal, onde todo o calor perdido pela corrente de entrada seria disponibilizado à corrente de energia.
+        '''  Looks up a localized string similar to Eficiência do aquecedor em relação ao processo ideal, onde todo o calor perdido pela corrente de entrada seria disponibilizado à corrente de EnergyFlow.
         '''</summary>
         Friend Shared ReadOnly Property Eficinciadoaquecedor() As String
             Get
@@ -4888,7 +4888,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Eficiência do aquecedor em relação ao processo ideal, onde todo o calor cedido pela corrente de energia seria disponibilizado à corrente de saída.
+        '''  Looks up a localized string similar to Eficiência do aquecedor em relação ao processo ideal, onde todo o calor cedido pela corrente de EnergyFlow seria disponibilizado à corrente de saída.
         '''</summary>
         Friend Shared ReadOnly Property Eficinciadoaquecedor2() As String
             Get
@@ -4924,7 +4924,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to [Eletrólito] Energia de Gibbs de Formação no Estado Padrão a 298 K.
+        '''  Looks up a localized string similar to [Eletrólito] EnergyFlow de Gibbs de Formação no Estado Padrão a 298 K.
         '''</summary>
         Friend Shared ReadOnly Property Electrolyte_DelGF() As String
             Get
@@ -4969,61 +4969,61 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Energia.
+        '''  Looks up a localized string similar to EnergyFlow.
         '''</summary>
-        Friend Shared ReadOnly Property Energia() As String
+        Friend Shared ReadOnly Property EnergyFlow() As String
             Get
-                Return ResourceManager.GetString("Energia", resourceCulture)
+                Return ResourceManager.GetString("EnergyFlow", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Energia de Gibbs de Formação do Gás Ideal a 25°C.
+        '''  Looks up a localized string similar to EnergyFlow de Gibbs de Formação do Gás Ideal a 25°C.
         '''</summary>
-        Friend Shared ReadOnly Property EnergiadeGibbsdeForm() As String
+        Friend Shared ReadOnly Property EnergyFlowdeGibbsdeForm() As String
             Get
-                Return ResourceManager.GetString("EnergiadeGibbsdeForm", resourceCulture)
+                Return ResourceManager.GetString("EnergyFlowdeGibbsdeForm", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Energia de Gibbs de Formação no Estado de Gás Ideal a 25°C.
+        '''  Looks up a localized string similar to EnergyFlow de Gibbs de Formação no Estado de Gás Ideal a 25°C.
         '''</summary>
-        Friend Shared ReadOnly Property EnergiadeGibbsdeForm2() As String
+        Friend Shared ReadOnly Property EnergyFlowdeGibbsdeForm2() As String
             Get
-                Return ResourceManager.GetString("EnergiadeGibbsdeForm2", resourceCulture)
+                Return ResourceManager.GetString("EnergyFlowdeGibbsdeForm2", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Energia disponível.
+        '''  Looks up a localized string similar to EnergyFlow disponível.
         '''</summary>
-        Friend Shared ReadOnly Property Energiadisponvel() As String
+        Friend Shared ReadOnly Property EnergyFlowdisponvel() As String
             Get
-                Return ResourceManager.GetString("Energiadisponvel", resourceCulture)
+                Return ResourceManager.GetString("EnergyFlowdisponvel", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Energia necessária.
+        '''  Looks up a localized string similar to EnergyFlow necessária.
         '''</summary>
-        Friend Shared ReadOnly Property Energianecessria() As String
+        Friend Shared ReadOnly Property EnergyFlownecessria() As String
             Get
-                Return ResourceManager.GetString("Energianecessria", resourceCulture)
+                Return ResourceManager.GetString("EnergyFlownecessria", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Potência.
         '''</summary>
-        Friend Shared ReadOnly Property Energiaporunidadedet() As String
+        Friend Shared ReadOnly Property EnergyFlowporunidadedet() As String
             Get
-                Return ResourceManager.GetString("Energiaporunidadedet", resourceCulture)
+                Return ResourceManager.GetString("EnergyFlowporunidadedet", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Reciclo de Energia.
+        '''  Looks up a localized string similar to Reciclo de EnergyFlow.
         '''</summary>
         Friend Shared ReadOnly Property EnergyRecycle() As String
             Get
@@ -5032,7 +5032,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Utilizado para realizar retorno de correntes de energia para pontos a montante no fluxograma..
+        '''  Looks up a localized string similar to Utilizado para realizar retorno de correntes de EnergyFlow para pontos a montante no fluxograma..
         '''</summary>
         Friend Shared ReadOnly Property EnergyRecycle_Desc() As String
             Get
@@ -5041,7 +5041,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to O modo de cálculo selecionado exige que uma Corrente de Energia esteja conectada à Operação Unitária..
+        '''  Looks up a localized string similar to O modo de cálculo selecionado exige que uma Corrente de EnergyFlow esteja conectada à Operação Unitária..
         '''</summary>
         Friend Shared ReadOnly Property EnergyStreamRequired() As String
             Get
@@ -5392,11 +5392,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Erro na energia.
+        '''  Looks up a localized string similar to Erro na EnergyFlow.
         '''</summary>
-        Friend Shared ReadOnly Property Erronaenergia() As String
+        Friend Shared ReadOnly Property ErronaEnergyFlow() As String
             Get
-                Return ResourceManager.GetString("Erronaenergia", resourceCulture)
+                Return ResourceManager.GetString("ErronaEnergyFlow", resourceCulture)
             End Get
         End Property
         
@@ -5779,7 +5779,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Correntes de Energia.
+        '''  Looks up a localized string similar to Correntes de EnergyFlow.
         '''</summary>
         Friend Shared ReadOnly Property EStreams() As String
             Get
@@ -6328,7 +6328,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Selecione o tipo de cálculo Flash a ser realizado para resolver o balanço de energia no vaso..
+        '''  Looks up a localized string similar to Selecione o tipo de cálculo Flash a ser realizado para resolver o balanço de EnergyFlow no vaso..
         '''</summary>
         Friend Shared ReadOnly Property FlashSpecificationDesc() As String
             Get
@@ -6454,11 +6454,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fluxo de Energia.
+        '''  Looks up a localized string similar to Fluxo de EnergyFlow.
         '''</summary>
-        Friend Shared ReadOnly Property FluxodeEnergia() As String
+        Friend Shared ReadOnly Property FluxodeEnergyFlow() As String
             Get
-                Return ResourceManager.GetString("FluxodeEnergia", resourceCulture)
+                Return ResourceManager.GetString("FluxodeEnergyFlow", resourceCulture)
             End Get
         End Property
         
@@ -8812,7 +8812,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Misturadores Matéria+Energia, Bombas, Compressores e Aquecedores..
+        '''  Looks up a localized string similar to Misturadores Matéria+EnergyFlow, Bombas, Compressores e Aquecedores..
         '''</summary>
         Friend Shared ReadOnly Property MisturadoresMatriaEn() As String
             Get
@@ -9397,7 +9397,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Não há corrente de energia associada ao reator..
+        '''  Looks up a localized string similar to Não há corrente de EnergyFlow associada ao reator..
         '''</summary>
         Friend Shared ReadOnly Property Nohcorrentedeenerg17() As String
             Get
@@ -9406,56 +9406,56 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Não há corrente de energia associada ao compressor..
+        '''  Looks up a localized string similar to Não há corrente de EnergyFlow associada ao compressor..
         '''</summary>
-        Friend Shared ReadOnly Property Nohcorrentedeenergia() As String
+        Friend Shared ReadOnly Property NohcorrentedeEnergyFlow() As String
             Get
-                Return ResourceManager.GetString("Nohcorrentedeenergia", resourceCulture)
+                Return ResourceManager.GetString("NohcorrentedeEnergyFlow", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Não há corrente de energia associada ao ExcelUO..
+        '''  Looks up a localized string similar to Não há corrente de EnergyFlow associada ao ExcelUO..
         '''</summary>
-        Friend Shared ReadOnly Property Nohcorrentedeenergia1() As String
+        Friend Shared ReadOnly Property NohcorrentedeEnergyFlow1() As String
             Get
-                Return ResourceManager.GetString("Nohcorrentedeenergia1", resourceCulture)
+                Return ResourceManager.GetString("NohcorrentedeEnergyFlow1", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Não há corrente de energia associada ao aquecedor..
+        '''  Looks up a localized string similar to Não há corrente de EnergyFlow associada ao aquecedor..
         '''</summary>
-        Friend Shared ReadOnly Property Nohcorrentedeenergia2() As String
+        Friend Shared ReadOnly Property NohcorrentedeEnergyFlow2() As String
             Get
-                Return ResourceManager.GetString("Nohcorrentedeenergia2", resourceCulture)
+                Return ResourceManager.GetString("NohcorrentedeEnergyFlow2", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Não há corrente de energia associada à tubulação..
+        '''  Looks up a localized string similar to Não há corrente de EnergyFlow associada à tubulação..
         '''</summary>
-        Friend Shared ReadOnly Property Nohcorrentedeenergia3() As String
+        Friend Shared ReadOnly Property NohcorrentedeEnergyFlow3() As String
             Get
-                Return ResourceManager.GetString("Nohcorrentedeenergia3", resourceCulture)
+                Return ResourceManager.GetString("NohcorrentedeEnergyFlow3", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Não há corrente de energia associada à bomba..
+        '''  Looks up a localized string similar to Não há corrente de EnergyFlow associada à bomba..
         '''</summary>
-        Friend Shared ReadOnly Property Nohcorrentedeenergia4() As String
+        Friend Shared ReadOnly Property NohcorrentedeEnergyFlow4() As String
             Get
-                Return ResourceManager.GetString("Nohcorrentedeenergia4", resourceCulture)
+                Return ResourceManager.GetString("NohcorrentedeEnergyFlow4", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Não há corrente de energia associada à turbina..
+        '''  Looks up a localized string similar to Não há corrente de EnergyFlow associada à turbina..
         '''</summary>
-        Friend Shared ReadOnly Property Nohcorrentedeenergia5() As String
+        Friend Shared ReadOnly Property NohcorrentedeEnergyFlow5() As String
             Get
-                Return ResourceManager.GetString("Nohcorrentedeenergia5", resourceCulture)
+                Return ResourceManager.GetString("NohcorrentedeEnergyFlow5", resourceCulture)
             End Get
         End Property
         
@@ -11602,11 +11602,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Quantidade de energia por unidade de tempo presente na corrente.
+        '''  Looks up a localized string similar to Quantidade de EnergyFlow por unidade de tempo presente na corrente.
         '''</summary>
-        Friend Shared ReadOnly Property Quantidadedeenergiap() As String
+        Friend Shared ReadOnly Property QuantidadedeEnergyFlowp() As String
             Get
-                Return ResourceManager.GetString("Quantidadedeenergiap", resourceCulture)
+                Return ResourceManager.GetString("QuantidadedeEnergyFlowp", resourceCulture)
             End Get
         End Property
         
@@ -11917,7 +11917,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Modelo de reator para reações de equilíbrio (minimização da energia livre de Gibbs)..
+        '''  Looks up a localized string similar to Modelo de reator para reações de equilíbrio (minimização da EnergyFlow livre de Gibbs)..
         '''</summary>
         Friend Shared ReadOnly Property ReatorGibbs_Desc() As String
             Get
@@ -12295,7 +12295,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Selecione &quot;ReactionExtents&quot; para utilizar as reações de equilíbrio selecionadas no Conjunto de Reações. Selecione &quot;DirectMinimization&quot; para utilizar o método de Minimização Direta da Energia Livre de Gibbs da mistura, que não necessita de informações sobre as reações que irão ocorrer..
+        '''  Looks up a localized string similar to Selecione &quot;ReactionExtents&quot; para utilizar as reações de equilíbrio selecionadas no Conjunto de Reações. Selecione &quot;DirectMinimization&quot; para utilizar o método de Minimização Direta da EnergyFlow Livre de Gibbs da mistura, que não necessita de informações sobre as reações que irão ocorrer..
         '''</summary>
         Friend Shared ReadOnly Property RGCalcMode_description() As String
             Get
@@ -12367,7 +12367,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Energia Livre de Gibbs (final).
+        '''  Looks up a localized string similar to EnergyFlow Livre de Gibbs (final).
         '''</summary>
         Friend Shared ReadOnly Property RGFinalG() As String
             Get
@@ -12376,7 +12376,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Energia Livre de Gibbs da mistura final, depois da reação..
+        '''  Looks up a localized string similar to EnergyFlow Livre de Gibbs da mistura final, depois da reação..
         '''</summary>
         Friend Shared ReadOnly Property RGFinalG_description() As String
             Get
@@ -12403,7 +12403,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Energia Livre de Gibbs (inicial).
+        '''  Looks up a localized string similar to EnergyFlow Livre de Gibbs (inicial).
         '''</summary>
         Friend Shared ReadOnly Property RGInitialG() As String
             Get
@@ -12412,7 +12412,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Energia Livre de Gibbs da mistura inicial, antes da reação..
+        '''  Looks up a localized string similar to EnergyFlow Livre de Gibbs da mistura inicial, antes da reação..
         '''</summary>
         Friend Shared ReadOnly Property RGInitialG_description() As String
             Get
@@ -12970,7 +12970,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Selecione &apos;True&apos; para usar o Delta-P fornecido, independentemente do valor da potência associada à corrente de energia conectada à bomba. O valor da potência na corrente de energia será atualizado de acordo com o Delta-P da bomba. Esta opção só tem efeito caso a corrente de energia seja editável..
+        '''  Looks up a localized string similar to Selecione &apos;True&apos; para usar o Delta-P fornecido, independentemente do valor da potência associada à corrente de EnergyFlow conectada à bomba. O valor da potência na corrente de EnergyFlow será atualizado de acordo com o Delta-P da bomba. Esta opção só tem efeito caso a corrente de EnergyFlow seja editável..
         '''</summary>
         Friend Shared ReadOnly Property SelecioLiquidrueparausa() As String
             Get
@@ -12979,7 +12979,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Selecione &apos;True&apos; para usar o valor informado para o calor fornecido, independentemente do valor da potência associada à corrente de energia conectada ao aquecedor. O valor da potência na corrente de energia será atualizado de acordo com o Delta-Q do aquecedor. Esta opção só tem efeito caso a corrente de energia seja editável..
+        '''  Looks up a localized string similar to Selecione &apos;True&apos; para usar o valor informado para o calor fornecido, independentemente do valor da potência associada à corrente de EnergyFlow conectada ao aquecedor. O valor da potência na corrente de EnergyFlow será atualizado de acordo com o Delta-Q do aquecedor. Esta opção só tem efeito caso a corrente de EnergyFlow seja editável..
         '''</summary>
         Friend Shared ReadOnly Property SelecioLiquidrueparausa3() As String
             Get
@@ -14500,7 +14500,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Utiliza a EE Peng-Robinson com a regra de mistura de Wong e Sandler. A energia de Gibbs em excesso (GE/RT) é calculada pelo modelo UNIFAC..
+        '''  Looks up a localized string similar to Utiliza a EE Peng-Robinson com a regra de mistura de Wong e Sandler. A EnergyFlow de Gibbs em excesso (GE/RT) é calculada pelo modelo UNIFAC..
         '''</summary>
         Friend Shared ReadOnly Property UtilizaaEEPengRobins() As String
             Get

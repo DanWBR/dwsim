@@ -92,10 +92,10 @@ Public Class FormHYD
                 Dim i As Integer = 0
                 For Each comp In mat.Phases(0).Compounds.Values
                     Vz(i) = comp.FracaoMolar.GetValueOrDefault
-                    nomes(i) = comp.Nome
+                    nomes(i) = comp.Name
                     i += 1
                 Next
-                nomesglobal = nomes
+                nomesglobal = names
                 T = mat.Phases(0).Properties.temperature
                 P = mat.Phases(0).Properties.pressure
 
@@ -306,7 +306,7 @@ Public Class FormHYD
             .T = Converter.ConvertToSI(su.temperature, Label9.Text)
             If Label10.ToString.Contains("sII") Then .sI = False
             .model = ComboBox1.SelectedIndex
-            .nomes = nomesglobal
+            .Names = namesglobal
             .ShowDialog(Me)
         End With
 
@@ -322,7 +322,7 @@ Public Class FormHYD
             .T = Converter.ConvertToSI(su.temperature, Label14.Text)
             If Label12.ToString.Contains("sII") Then .sI = False
             .model = ComboBox1.SelectedIndex
-            .nomes = nomesglobal
+            .Names = namesglobal
             .ShowDialog(Me)
         End With
     End Sub

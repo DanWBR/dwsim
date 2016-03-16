@@ -167,7 +167,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             m_ConvHist = New ConvergenceHistoryE
             m_WegPars = New WegsteinParameters
 
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
             Me.FillNodeItems()
             Me.QTFillNodeItems()
@@ -180,8 +180,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
                 .Clear()
 
-                .Add(0, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("Iteraes"), "", "", 0, 0, ""))
-                .Add(1, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("ErroE"), "", "", 1, 0, ""))
+                .Add(0, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Iteraes"), "", "", 0, 0, ""))
+                .Add(1, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("ErroE"), "", "", 1, 0, ""))
 
             End With
 
@@ -191,19 +191,19 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 Me.FillNodeItems()
             End If
 
             Try
 
-                For Each nti As Outros.NodeItem In Me.NodeTableItems.Values
+                For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
                     nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
                     nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
                 Next
 
                 If Me.QTNodeTableItems Is Nothing Then
-                    Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                    Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                     Me.QTFillNodeItems()
                 End If
 
@@ -229,40 +229,40 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
             Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.OT_Reciclo
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.OT_Recycle
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
-                Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedeenergia2"))
+                Throw New Exception(DWSIM.App.GetLocalString("NohcorrentedeEnergyFlow2"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.OT_Reciclo
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.OT_Recycle
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
-                Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedeenergia2"))
+                Throw New Exception(DWSIM.App.GetLocalString("NohcorrentedeEnergyFlow2"))
             End If
 
             Dim Enew As Double
 
-            Dim ees As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            Dim ees As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             With ees
 
-                Me.ConvergenceHistory.EnergyE = .Energia.GetValueOrDefault - Me.ConvergenceHistory.Energy
+                Me.ConvergenceHistory.EnergyE = .EnergyFlow.GetValueOrDefault - Me.ConvergenceHistory.Energy
 
                 Me.ConvergenceHistory.EnergyE0 = Me.ConvergenceHistory.Energy - Me.ConvergenceHistory.Energy0
 
                 Me.ConvergenceHistory.Energy0 = Me.ConvergenceHistory.Energy
 
-                Me.ConvergenceHistory.Energy = .Energia.GetValueOrDefault
+                Me.ConvergenceHistory.Energy = .EnergyFlow.GetValueOrDefault
 
             End With
 
@@ -303,12 +303,12 @@ SS:             Enew = Me.ConvergenceHistory.Energy
 
             End If
 
-            'Corrente de energia - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
 
-            Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 
             With es
-                .Energia = Enew
+                .EnergyFlow = Enew
                 .GraphicObject.Calculated = True
             End With
 
@@ -329,9 +329,9 @@ SS:             Enew = Me.ConvergenceHistory.Energy
 
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = True
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.OT_EnergyRecycle
+                    .Calculated = True
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.OT_EnergyRecycle
                 End With
 
                 form.CalculationQueue.Enqueue(objargs)
@@ -429,11 +429,11 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
                 Dim valor As Double
 
                 valor = Format(Converter.ConvertFromSI(su.heatflow, Me.ConvergenceParameters.Energy), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Energia"), su.heatflow), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), "", True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("EnergyFlow"), su.heatflow), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), "", True)
 
                 .Item.Add(DWSIM.App.GetLocalString("Iteraesnecessrias"), Me, "IterationsTaken", True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Nmerodeiteraesusadas"), True)
                 valor = Format(Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.EnergyE), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Erronaenergia"), su.heatflow), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("ErronaEnergyFlow"), su.heatflow), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor"), True)
 
                 If Not Me.Annotation Is Nothing Then
                     .Item.Add(DWSIM.App.GetLocalString("Anotaes"), Me, "Annotation", False, DWSIM.App.GetLocalString("Outros"), DWSIM.App.GetLocalString("Cliquenobotocomretic"), True)

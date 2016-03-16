@@ -23,7 +23,7 @@
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -1722,7 +1722,7 @@
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -3423,7 +3423,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.CustomUO</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.CustomUO</Type>
       <HighlightSpaces>false</HighlightSpaces>
       <HighlightTabs>false</HighlightTabs>
       <FontName>Consolas</FontName>
@@ -3579,7 +3579,7 @@ else:
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -3644,7 +3644,7 @@ else:
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -5383,7 +5383,7 @@ else:
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -7122,7 +7122,7 @@ else:
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -8821,7 +8821,7 @@ else:
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -10681,7 +10681,7 @@ else:
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -10724,7 +10724,7 @@ else:
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -10767,7 +10767,7 @@ else:
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -10810,7 +10810,7 @@ else:
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -10853,7 +10853,7 @@ else:
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -10896,7 +10896,7 @@ else:
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -10939,7 +10939,7 @@ else:
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>CustomUO</TipoObjeto>
+      <ObjectType>CustomUO</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -11005,7 +11005,7 @@ outlet temperatures.</Text>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -11059,7 +11059,7 @@ outlet temperatures.</Text>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <ObjectType>GO_Table</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

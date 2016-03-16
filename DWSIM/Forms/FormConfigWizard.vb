@@ -18,7 +18,7 @@
 Imports OutlookStyleControls
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
-Imports DWSIM.DWSIM.Outros
+Imports DWSIM.DWSIM.Extras
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 
 Public Class FormConfigWizard
@@ -281,13 +281,13 @@ Public Class FormConfigWizard
                     Next
 
                     proplist.Clear()
-                    For Each pi As DWSIM.Outros.NodeItem In ms.NodeTableItems.Values
+                    For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
                         If pi.Checked Then
                             proplist.Add(pi.Text)
                         End If
                     Next
                     ms.FillNodeItems()
-                    For Each pi As DWSIM.Outros.NodeItem In ms.NodeTableItems.Values
+                    For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
                         If proplist.Contains(pi.Text) Then
                             pi.Checked = True
                         End If
@@ -327,13 +327,13 @@ Public Class FormConfigWizard
             Next
 
             proplist.Clear()
-            For Each pi As DWSIM.Outros.NodeItem In ms.NodeTableItems.Values
+            For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
                 If pi.Checked Then
                     proplist.Add(pi.Text)
                 End If
             Next
             ms.FillNodeItems()
-            For Each pi As DWSIM.Outros.NodeItem In ms.NodeTableItems.Values
+            For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
                 If proplist.Contains(pi.Text) Then
                     pi.Checked = True
                 End If
@@ -386,7 +386,7 @@ Public Class FormConfigWizard
             .Add(New Object() {DWSIM.App.GetLocalString("CapacidadeCalorfica"), su.heatCapacityCp, DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity})
             .Add(New Object() {DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity, DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity})
             .Add(New Object() {DWSIM.App.GetLocalString("DeltaT2"), su.deltaT, DWSIM.App.GetLocalString("DeltaP"), su.deltaP})
-            .Add(New Object() {DWSIM.App.GetLocalString("ComprimentoHead"), su.head, DWSIM.App.GetLocalString("FluxodeEnergia"), su.heatflow})
+            .Add(New Object() {DWSIM.App.GetLocalString("ComprimentoHead"), su.head, DWSIM.App.GetLocalString("FluxodeEnergyFlow"), su.heatflow})
             .Add(New Object() {DWSIM.App.GetLocalString("Tempo"), su.time, DWSIM.App.GetLocalString("Volume"), su.volume})
             .Add(New Object() {DWSIM.App.GetLocalString("VolumeMolar"), su.molar_volume, DWSIM.App.GetLocalString("rea"), su.area})
             .Add(New Object() {DWSIM.App.GetLocalString("DimetroEspessura"), su.diameter, DWSIM.App.GetLocalString("Fora"), su.force})

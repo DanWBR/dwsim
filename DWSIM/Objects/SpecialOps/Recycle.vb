@@ -185,7 +185,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             m_ConvHist = New ConvergenceHistory
             m_WegPars = New WegsteinParameters
 
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
             Me.FillNodeItems()
             Me.QTFillNodeItems()
@@ -198,10 +198,10 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
                 .Clear()
 
-                .Add(0, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("Iteraes"), "", "", 0, 0, ""))
-                .Add(1, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("ErroT"), "", "", 1, 0, ""))
-                .Add(2, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("ErroP"), "", "", 2, 0, ""))
-                .Add(3, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("ErroW"), "", "", 3, 0, ""))
+                .Add(0, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Iteraes"), "", "", 0, 0, ""))
+                .Add(1, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("ErroT"), "", "", 1, 0, ""))
+                .Add(2, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("ErroP"), "", "", 2, 0, ""))
+                .Add(3, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("ErroW"), "", "", 3, 0, ""))
 
             End With
 
@@ -211,19 +211,19 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 Me.FillNodeItems()
             End If
 
             Try
 
-                For Each nti As Outros.NodeItem In Me.NodeTableItems.Values
+                For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
                     nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
                     nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
                 Next
 
                 If Me.QTNodeTableItems Is Nothing Then
-                    Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                    Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                     Me.QTFillNodeItems()
                 End If
 
@@ -276,7 +276,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     .Phases(0).Properties.enthalpy = Values("Enthalpy")
 
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = msfrom.Phases(0).Compounds(comp.Nome).FracaoMolar
+                        comp.FracaoMolar = msfrom.Phases(0).Compounds(comp.Name).FracaoMolar
                     Next
 
                     .CalcOverallCompMassFractions()
@@ -290,28 +290,28 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
             Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.OT_Reciclo
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.OT_Recycle
                 End With
                 Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac7"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.OT_Reciclo
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.OT_Recycle
                 End With
                 Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
             End If
 
             Dim Tnew, Pnew, Wnew, Hnew, Snew As Double
 
-            Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
 
             With ems.Phases(0).Properties
 
@@ -348,7 +348,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
             End With
 
-            Dim oms As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            Dim oms As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 
             With oms.Phases(0).Properties
 
@@ -469,7 +469,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             If Not Me.AccelerationMethod = AccelMethod.GlobalBroyden And copydata Then
 
                 Dim tmp As Object = Nothing
-                Me.PropertyPackage.CurrentMaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                Me.PropertyPackage.CurrentMaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
 
                 Select Case Me.FlashType
                     Case Helpers.Recycle.FlashType.FlashTP
@@ -504,7 +504,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                         Dim cp As ConnectionPoint
                         cp = Me.GraphicObject.InputConnectors(0)
                         If cp.IsAttached Then
-                            ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedFrom.Name)
+                            ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
                             Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                             i = 0
                             For Each comp In ms.Phases(0).Compounds.Values
@@ -522,7 +522,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
                         cp = Me.GraphicObject.OutputConnectors(0)
                         If cp.IsAttached Then
-                            ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                            ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                             With ms
                                 .PropertyPackage.CurrentMaterialStream = ms
                                 .Phases(0).Properties.temperature = Tnew
@@ -532,8 +532,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                                 j = 0
                                 For Each comp In .Phases(0).Compounds.Values
-                                    comp.FracaoMolar = ems.Phases(0).Compounds(comp.Nome).FracaoMolar
-                                    comp.FracaoMassica = ems.Phases(0).Compounds(comp.Nome).FracaoMassica
+                                    comp.FracaoMolar = ems.Phases(0).Compounds(comp.Name).FracaoMolar
+                                    comp.FracaoMassica = ems.Phases(0).Compounds(comp.Name).FracaoMassica
                                     j += 1
                                 Next
                                 ms.PropertyPackage.DW_CalcVazaoMolar()
@@ -561,13 +561,13 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     Case Helpers.Recycle.FlashType.None
 
                         Dim msfrom, msto As DWSIM.SimulationObjects.Streams.MaterialStream
-                        msfrom = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                        msfrom = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
 
                         If Not msfrom.Calculated And Not msfrom.AtEquilibrium Then
                             Throw New Exception(DWSIM.App.GetLocalString("RecycleStreamNotCalculated"))
                         End If
 
-                        msto = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                        msto = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                         msto.Assign(msfrom)
                         msto.AssignProps(msfrom)
 
@@ -588,9 +588,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = True
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.OT_Reciclo
+                    .Calculated = True
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.OT_Recycle
                 End With
 
                 form.CalculationQueue.Enqueue(objargs)

@@ -263,14 +263,14 @@ Partial Class FormWelcome
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(9, Byte), Integer), CType(CType(86, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Label2.ForeColor = System.Drawing.Color.White
         Me.Label2.Name = "Label2"
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.BackColor = System.Drawing.Color.Transparent
-        Me.Label16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(9, Byte), Integer), CType(CType(86, Byte), Integer), CType(CType(123, Byte), Integer))
+        Me.Label16.ForeColor = System.Drawing.Color.White
         Me.Label16.Name = "Label16"
         '
         'lvlatestfolders
@@ -292,8 +292,8 @@ Partial Class FormWelcome
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Black
-        Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.DWSIM_branco
+        Me.BackColor = System.Drawing.Color.White
+        Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.splashWelcome_Background
         Me.Controls.Add(Me.lvlatestfolders)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label2)
@@ -328,6 +328,7 @@ Partial Class FormWelcome
         Me.Name = "FormWelcome"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
+        Me.TransparencyKey = System.Drawing.Color.Transparent
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

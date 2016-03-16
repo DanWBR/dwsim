@@ -170,7 +170,7 @@
     <value>True</value>
   </metadata>
   <data name="Column6.HeaderText" xml:space="preserve">
-    <value>Fluxo de Energia (kW)</value>
+    <value>Fluxo de EnergyFlow (kW)</value>
   </data>
   <data name="Column6.Width" type="System.Int32, mscorlib">
     <value>86</value>

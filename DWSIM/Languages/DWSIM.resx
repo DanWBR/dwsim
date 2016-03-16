@@ -762,8 +762,8 @@
   <data name="Corrente1" xml:space="preserve">
     <value>Corrente</value>
   </data>
-  <data name="Correntedeenergia" xml:space="preserve">
-    <value>Corrente de Energia</value>
+  <data name="CorrentedeEnergyFlow" xml:space="preserve">
+    <value>Corrente de EnergyFlow</value>
   </data>
   <data name="Correntedeentrada" xml:space="preserve">
     <value>Corrente de entrada</value>
@@ -801,11 +801,11 @@
   <data name="Correntedesaida3" xml:space="preserve">
     <value>Corrente de saída (3)</value>
   </data>
-  <data name="Correntesdeenergiasp" xml:space="preserve">
-    <value>Correntes de energia só podem se conectar a (sentido 'corrente de energia' -&gt; 'objeto'):</value>
+  <data name="CorrentesdeEnergyFlowsp" xml:space="preserve">
+    <value>Correntes de EnergyFlow só podem se conectar a (sentido 'corrente de EnergyFlow' -&gt; 'objeto'):</value>
   </data>
-  <data name="Correntesdeenergiasp2" xml:space="preserve">
-    <value>Correntes de energia só podem se conectar a (sentido 'objeto' -&gt; 'corrente de energia'):</value>
+  <data name="CorrentesdeEnergyFlowsp2" xml:space="preserve">
+    <value>Correntes de EnergyFlow só podem se conectar a (sentido 'objeto' -&gt; 'corrente de EnergyFlow'):</value>
   </data>
   <data name="Corsemgradiente" xml:space="preserve">
     <value>Cor (sem gradiente)</value>
@@ -874,7 +874,7 @@
     <value>Neste Pacote de Propriedades, as Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler.</value>
   </data>
   <data name="DescPRWSPP" xml:space="preserve">
-    <value>Utiliza a EE Peng-Robinson com a regra de mistura de Wong e Sandler. A energia de Gibbs em excesso (GE/RT) é calculada pelo modelo UNIFAC.
+    <value>Utiliza a EE Peng-Robinson com a regra de mistura de Wong e Sandler. A EnergyFlow de Gibbs em excesso (GE/RT) é calculada pelo modelo UNIFAC.
 Recomendada para uso com misturas binárias ou ternárias de substâncias polares em altas pressões e temperaturas. Para cálculo do ELV de hidrocarbonetos e/ou não-condensáveis, utilize a EE PR ou SRK.</value>
   </data>
   <data name="Descrio1" xml:space="preserve">
@@ -1031,10 +1031,10 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Eficiência da turbina em relação ao processo ideal isentropic/adiabático</value>
   </data>
   <data name="Eficinciadoaquecedor" xml:space="preserve">
-    <value>Eficiência do aquecedor em relação ao processo ideal, onde todo o calor perdido pela corrente de entrada seria disponibilizado à corrente de energia</value>
+    <value>Eficiência do aquecedor em relação ao processo ideal, onde todo o calor perdido pela corrente de entrada seria disponibilizado à corrente de EnergyFlow</value>
   </data>
   <data name="Eficinciadoaquecedor2" xml:space="preserve">
-    <value>Eficiência do aquecedor em relação ao processo ideal, onde todo o calor cedido pela corrente de energia seria disponibilizado à corrente de saída</value>
+    <value>Eficiência do aquecedor em relação ao processo ideal, onde todo o calor cedido pela corrente de EnergyFlow seria disponibilizado à corrente de saída</value>
   </data>
   <data name="Eficinciadocompresso" xml:space="preserve">
     <value>Eficiência do compressor em relação ao processo ideal isentropic/adiabático.</value>
@@ -1048,22 +1048,22 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
   <data name="en" xml:space="preserve">
     <value>en</value>
   </data>
-  <data name="Energia" xml:space="preserve">
-    <value>Energia</value>
+  <data name="EnergyFlow" xml:space="preserve">
+    <value>EnergyFlow</value>
   </data>
-  <data name="EnergiadeGibbsdeForm" xml:space="preserve">
-    <value>Energia de Gibbs de Formação do Gás Ideal a 25°C</value>
+  <data name="EnergyFlowdeGibbsdeForm" xml:space="preserve">
+    <value>EnergyFlow de Gibbs de Formação do Gás Ideal a 25°C</value>
   </data>
-  <data name="EnergiadeGibbsdeForm2" xml:space="preserve">
-    <value>Energia de Gibbs de Formação no Estado de Gás Ideal a 25°C</value>
+  <data name="EnergyFlowdeGibbsdeForm2" xml:space="preserve">
+    <value>EnergyFlow de Gibbs de Formação no Estado de Gás Ideal a 25°C</value>
   </data>
-  <data name="Energiadisponvel" xml:space="preserve">
-    <value>Energia disponível</value>
+  <data name="EnergyFlowdisponvel" xml:space="preserve">
+    <value>EnergyFlow disponível</value>
   </data>
-  <data name="Energianecessria" xml:space="preserve">
-    <value>Energia necessária</value>
+  <data name="EnergyFlownecessria" xml:space="preserve">
+    <value>EnergyFlow necessária</value>
   </data>
-  <data name="Energiaporunidadedet" xml:space="preserve">
+  <data name="EnergyFlowporunidadedet" xml:space="preserve">
     <value>Potência</value>
   </data>
   <data name="EntalpiadeFormaodoGs" xml:space="preserve">
@@ -1375,8 +1375,8 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
   <data name="FluxodeCalorkW" xml:space="preserve">
     <value>Fluxo de Calor (kW)</value>
   </data>
-  <data name="FluxodeEnergia" xml:space="preserve">
-    <value>Fluxo de Energia</value>
+  <data name="FluxodeEnergyFlow" xml:space="preserve">
+    <value>Fluxo de EnergyFlow</value>
   </data>
   <data name="Fluxograma" xml:space="preserve">
     <value>Fluxograma</value>
@@ -1925,7 +1925,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Misturadores Mat+En</value>
   </data>
   <data name="MisturadoresMatriaEn" xml:space="preserve">
-    <value>Misturadores Matéria+Energia, Bombas, Compressores e Aquecedores.</value>
+    <value>Misturadores Matéria+EnergyFlow, Bombas, Compressores e Aquecedores.</value>
   </data>
   <data name="MisturadorMATEN" xml:space="preserve">
     <value>Misturador MAT+EN</value>
@@ -2072,22 +2072,22 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Não há componentes a adicionar ao Material Stream.</value>
   </data>
   <data name="Nohcorrentedeenerg17" xml:space="preserve">
-    <value>Não há corrente de energia associada ao reator.</value>
+    <value>Não há corrente de EnergyFlow associada ao reator.</value>
   </data>
-  <data name="Nohcorrentedeenergia" xml:space="preserve">
-    <value>Não há corrente de energia associada ao compressor.</value>
+  <data name="NohcorrentedeEnergyFlow" xml:space="preserve">
+    <value>Não há corrente de EnergyFlow associada ao compressor.</value>
   </data>
-  <data name="Nohcorrentedeenergia2" xml:space="preserve">
-    <value>Não há corrente de energia associada ao aquecedor.</value>
+  <data name="NohcorrentedeEnergyFlow2" xml:space="preserve">
+    <value>Não há corrente de EnergyFlow associada ao aquecedor.</value>
   </data>
-  <data name="Nohcorrentedeenergia3" xml:space="preserve">
-    <value>Não há corrente de energia associada à tubulação.</value>
+  <data name="NohcorrentedeEnergyFlow3" xml:space="preserve">
+    <value>Não há corrente de EnergyFlow associada à tubulação.</value>
   </data>
-  <data name="Nohcorrentedeenergia4" xml:space="preserve">
-    <value>Não há corrente de energia associada à bomba.</value>
+  <data name="NohcorrentedeEnergyFlow4" xml:space="preserve">
+    <value>Não há corrente de EnergyFlow associada à bomba.</value>
   </data>
-  <data name="Nohcorrentedeenergia5" xml:space="preserve">
-    <value>Não há corrente de energia associada à turbina.</value>
+  <data name="NohcorrentedeEnergyFlow5" xml:space="preserve">
+    <value>Não há corrente de EnergyFlow associada à turbina.</value>
   </data>
   <data name="Nohcorrentedematriac10" xml:space="preserve">
     <value>Não há corrente de matéria conectada à entrada do separador.</value>
@@ -2521,8 +2521,8 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
   <data name="Quantidadedecalortro" xml:space="preserve">
     <value>Quantidade de calor trocado com o ambiente</value>
   </data>
-  <data name="Quantidadedeenergiap" xml:space="preserve">
-    <value>Quantidade de energia por unidade de tempo presente na corrente</value>
+  <data name="QuantidadedeEnergyFlowp" xml:space="preserve">
+    <value>Quantidade de EnergyFlow por unidade de tempo presente na corrente</value>
   </data>
   <data name="Queda" xml:space="preserve">
     <value>Queda</value>
@@ -2747,10 +2747,10 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Selecione 'True' para que a figura seja auto-dimensionada</value>
   </data>
   <data name="SelecioLiquidrueparausa" xml:space="preserve">
-    <value>Selecione 'True' para usar o Delta-P fornecido, independentemente do valor da potência associada à corrente de energia conectada à bomba. O valor da potência na corrente de energia será atualizado de acordo com o Delta-P da bomba. Esta opção só tem efeito caso a corrente de energia seja editável.</value>
+    <value>Selecione 'True' para usar o Delta-P fornecido, independentemente do valor da potência associada à corrente de EnergyFlow conectada à bomba. O valor da potência na corrente de EnergyFlow será atualizado de acordo com o Delta-P da bomba. Esta opção só tem efeito caso a corrente de EnergyFlow seja editável.</value>
   </data>
   <data name="SelecioLiquidrueparausa3" xml:space="preserve">
-    <value>Selecione 'True' para usar o valor informado para o calor fornecido, independentemente do valor da potência associada à corrente de energia conectada ao aquecedor. O valor da potência na corrente de energia será atualizado de acordo com o Delta-Q do aquecedor. Esta opção só tem efeito caso a corrente de energia seja editável.</value>
+    <value>Selecione 'True' para usar o valor informado para o calor fornecido, independentemente do valor da potência associada à corrente de EnergyFlow conectada ao aquecedor. O valor da potência na corrente de EnergyFlow será atualizado de acordo com o Delta-Q do aquecedor. Esta opção só tem efeito caso a corrente de EnergyFlow seja editável.</value>
   </data>
   <data name="Selecioneabaseparaav" xml:space="preserve">
     <value>Selecione a base para a visualização da composição da corrente.</value>
@@ -3056,7 +3056,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Regressão cancelada pelo usuário.</value>
   </data>
   <data name="UtilizaaEEPengRobins" xml:space="preserve">
-    <value>Utiliza a EE Peng-Robinson com a regra de mistura de Wong e Sandler. A energia de Gibbs em excesso (GE/RT) é calculada pelo modelo UNIFAC.</value>
+    <value>Utiliza a EE Peng-Robinson com a regra de mistura de Wong e Sandler. A EnergyFlow de Gibbs em excesso (GE/RT) é calculada pelo modelo UNIFAC.</value>
   </data>
   <data name="Utilizadocomo" xml:space="preserve">
     <value>Utilizado como</value>
@@ -3599,7 +3599,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Soave-Redlich-Kwong (Flash Multifásico)</value>
   </data>
   <data name="EStreams" xml:space="preserve">
-    <value>Correntes de Energia</value>
+    <value>Correntes de EnergyFlow</value>
   </data>
   <data name="HXgers" xml:space="preserve">
     <value>Trocadores de Calor</value>
@@ -3953,13 +3953,13 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Compressibilidade de Rackett</value>
   </data>
   <data name="EnergyRecycle" xml:space="preserve">
-    <value>Reciclo de Energia</value>
+    <value>Reciclo de EnergyFlow</value>
   </data>
   <data name="ErroE" xml:space="preserve">
     <value>Erro E</value>
   </data>
-  <data name="Erronaenergia" xml:space="preserve">
-    <value>Erro na energia</value>
+  <data name="ErronaEnergyFlow" xml:space="preserve">
+    <value>Erro na EnergyFlow</value>
   </data>
   <data name="HeaterCoolerCalcMode" xml:space="preserve">
     <value>Modo de Cálculo</value>
@@ -4202,7 +4202,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Editar Especificações</value>
   </data>
   <data name="CSepEnergyImbalance" xml:space="preserve">
-    <value>Balanço de energia</value>
+    <value>Balanço de EnergyFlow</value>
   </data>
   <data name="CSepSeparationSpecs" xml:space="preserve">
     <value>Especificações de separação</value>
@@ -4244,22 +4244,22 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Placa de Orifício</value>
   </data>
   <data name="RGFinalG" xml:space="preserve">
-    <value>Energia Livre de Gibbs (final)</value>
+    <value>EnergyFlow Livre de Gibbs (final)</value>
   </data>
   <data name="RGFinalG_description" xml:space="preserve">
-    <value>Energia Livre de Gibbs da mistura final, depois da reação.</value>
+    <value>EnergyFlow Livre de Gibbs da mistura final, depois da reação.</value>
   </data>
   <data name="RGInitialG" xml:space="preserve">
-    <value>Energia Livre de Gibbs (inicial)</value>
+    <value>EnergyFlow Livre de Gibbs (inicial)</value>
   </data>
   <data name="RGInitialG_description" xml:space="preserve">
-    <value>Energia Livre de Gibbs da mistura inicial, antes da reação.</value>
+    <value>EnergyFlow Livre de Gibbs da mistura inicial, antes da reação.</value>
   </data>
   <data name="RGCalcMode" xml:space="preserve">
     <value>Método de Cálculo</value>
   </data>
   <data name="RGCalcMode_description" xml:space="preserve">
-    <value>Selecione "ReactionExtents" para utilizar as reações de equilíbrio selecionadas no Conjunto de Reações. Selecione "DirectMinimization" para utilizar o método de Minimização Direta da Energia Livre de Gibbs da mistura, que não necessita de informações sobre as reações que irão ocorrer.</value>
+    <value>Selecione "ReactionExtents" para utilizar as reações de equilíbrio selecionadas no Conjunto de Reações. Selecione "DirectMinimization" para utilizar o método de Minimização Direta da EnergyFlow Livre de Gibbs da mistura, que não necessita de informações sobre as reações que irão ocorrer.</value>
   </data>
   <data name="RGComponents" xml:space="preserve">
     <value>Componentes</value>
@@ -4315,8 +4315,8 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
   <data name="CompressorAdiabtico_Desc" xml:space="preserve">
     <value>Modelo de um compressor adiabático industrial.</value>
   </data>
-  <data name="Correntedeenergia_Desc" xml:space="preserve">
-    <value>Representa o fluxo de energia que entra e/ou sai de um equipamento ou processo.</value>
+  <data name="CorrentedeEnergyFlow_Desc" xml:space="preserve">
+    <value>Representa o fluxo de EnergyFlow que entra e/ou sai de um equipamento ou processo.</value>
   </data>
   <data name="CorrentedeMatria_Desc" xml:space="preserve">
     <value>Representa o fluxo de matéria que entra e/ou sai de um equipamento ou processo.</value>
@@ -4328,7 +4328,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Divide uma corrente de matéria em até três outras.</value>
   </data>
   <data name="EnergyRecycle_Desc" xml:space="preserve">
-    <value>Utilizado para realizar retorno de correntes de energia para pontos a montante no fluxograma.</value>
+    <value>Utilizado para realizar retorno de correntes de EnergyFlow para pontos a montante no fluxograma.</value>
   </data>
   <data name="Especificao_Desc" xml:space="preserve">
     <value>Especifica uma propriedade de um objeto como uma função de outra propriedade de outro objeto.</value>
@@ -4352,7 +4352,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Modelo de reator para reações de equilíbrio.</value>
   </data>
   <data name="ReatorGibbs_Desc" xml:space="preserve">
-    <value>Modelo de reator para reações de equilíbrio (minimização da energia livre de Gibbs).</value>
+    <value>Modelo de reator para reações de equilíbrio (minimização da EnergyFlow livre de Gibbs).</value>
   </data>
   <data name="ReatorPFR_Desc" xml:space="preserve">
     <value>Modelo de reator de fluxo.</value>
@@ -4423,11 +4423,11 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
   <data name="DescCSPP" xml:space="preserve">
     <value>Pacote de Propriedades que utiliza o método COSMO-SAC implementado na biblioteca JCOSMO por Rafael Soares e Renan Gerber para a predição do coeficiente de atividade dos componentes na Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A Phase vapor é modelada através da EDE Peng-Robinson.</value>
   </data>
-  <data name="CorrentedeenergiaE" xml:space="preserve">
-    <value>Corrente de Energia (Entrada)</value>
+  <data name="CorrentedeEnergyFlowE" xml:space="preserve">
+    <value>Corrente de EnergyFlow (Entrada)</value>
   </data>
-  <data name="CorrentedeenergiaS" xml:space="preserve">
-    <value>Corrente de Energia (Saída)</value>
+  <data name="CorrentedeEnergyFlowS" xml:space="preserve">
+    <value>Corrente de EnergyFlow (Saída)</value>
   </data>
   <data name="UO_ScriptLanguage" xml:space="preserve">
     <value>Linguagem do Script</value>
@@ -4781,7 +4781,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>[Eletrólito] Capacidade Calorífica no Estado Padrão a 298 K</value>
   </data>
   <data name="Electrolyte_DelGF" xml:space="preserve">
-    <value>[Eletrólito] Energia de Gibbs de Formação no Estado Padrão a 298 K</value>
+    <value>[Eletrólito] EnergyFlow de Gibbs de Formação no Estado Padrão a 298 K</value>
   </data>
   <data name="Electrolyte_DelHF" xml:space="preserve">
     <value>[Eletrólito] Entalpia de Formação no Estado Padrão a 298 K</value>
@@ -4823,7 +4823,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Especificação do cálculo Flash</value>
   </data>
   <data name="FlashSpecificationDesc" xml:space="preserve">
-    <value>Selecione o tipo de cálculo Flash a ser realizado para resolver o balanço de energia no vaso.</value>
+    <value>Selecione o tipo de cálculo Flash a ser realizado para resolver o balanço de EnergyFlow no vaso.</value>
   </data>
   <data name="HydrateEquilibriumCurve" xml:space="preserve">
     <value>Curva de Equilíbrio de Hidratos</value>
@@ -4864,8 +4864,8 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
   <data name="Correntedesaida4" xml:space="preserve">
     <value>Corrente de saída (4)</value>
   </data>
-  <data name="Nohcorrentedeenergia1" xml:space="preserve">
-    <value>Não há corrente de energia associada ao ExcelUO.</value>
+  <data name="NohcorrentedeEnergyFlow1" xml:space="preserve">
+    <value>Não há corrente de EnergyFlow associada ao ExcelUO.</value>
   </data>
   <data name="ExcelUOEditor" xml:space="preserve">
     <value>Editor</value>
@@ -4883,7 +4883,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>A simulação carregada contém um sistema de unidades definido pelo usuário que não está presente na sua lista de sistemas. Deseja adicionar esse sistema à sua lista?</value>
   </data>
   <data name="EnergyStreamRequired" xml:space="preserve">
-    <value>O modo de cálculo selecionado exige que uma Corrente de Energia esteja conectada à Operação Unitária.</value>
+    <value>O modo de cálculo selecionado exige que uma Corrente de EnergyFlow esteja conectada à Operação Unitária.</value>
   </data>
   <data name="RemoveScriptQuestion" xml:space="preserve">
     <value>Tem certeza de que deseja remover esse script da lista?</value>

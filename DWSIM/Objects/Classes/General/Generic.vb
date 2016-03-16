@@ -22,7 +22,7 @@ Imports System.Reflection
 Imports System.Linq
 Imports CapeOpen
 
-Namespace DWSIM.Outros
+Namespace DWSIM.Extras
 
     ''' <summary>
     ''' Serialization Binder Class to enable loading of pre-3.0 simulations in DWSIM 3.0+.
@@ -41,7 +41,7 @@ Namespace DWSIM.Outros
                 ElseIf typeName.Contains("System.Collections.Generic.List`1[[CapeOpen.ICapeParameter") Then
                     typeName = typeName.Replace("List`1[[CapeOpen.ICapeParameter", "List`1[[CapeOpen.CapeParameter")
                     typeName = typeName.Replace("CapeOpen, Version=1.0.4118.14986, Culture=neutral, PublicKeyToken=100cc1b5ee8fe630", "CapeOpen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=90d5303f0e924b64")
-                ElseIf typeName.Contains("DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CRealParameter") Then
+                ElseIf typeName.Contains("DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CRealParameter") Then
                     typeName = "CapeOpen.RealParameter"
                     assemblyName = "CapeOpen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=90d5303f0e924b64"
                 ElseIf typeName.Contains("CapeOpen.CRealParameter") Then
@@ -74,56 +74,11 @@ Namespace DWSIM.Outros
 
     <System.Serializable()> <System.Runtime.InteropServices.ComVisible(False)> Public Class StatusChangeEventArgs
 
-        Protected m_tag As String = ""
-        Protected m_nome As String = ""
-        Protected m_tipo As TipoObjeto = TipoObjeto.Nenhum
-        Protected m_calculado As Boolean = False
-        Protected m_sender As String = ""
-
-        Public Property Emissor() As String
-            Get
-                Return m_sender
-            End Get
-            Set(ByVal value As String)
-                m_sender = value
-            End Set
-        End Property
-
-        Public Property Calculado() As Boolean
-            Get
-                Return m_calculado
-            End Get
-            Set(ByVal value As Boolean)
-                m_calculado = value
-            End Set
-        End Property
-
-        Public Property Tag() As String
-            Get
-                Return m_tag
-            End Get
-            Set(ByVal value As String)
-                m_tag = value
-            End Set
-        End Property
-
-        Public Property Nome() As String
-            Get
-                Return m_nome
-            End Get
-            Set(ByVal value As String)
-                m_nome = value
-            End Set
-        End Property
-
-        Public Property Tipo() As TipoObjeto
-            Get
-                Return m_tipo
-            End Get
-            Set(ByVal value As TipoObjeto)
-                m_tipo = value
-            End Set
-        End Property
+        Public Property Sender As String
+        Public Property Calculated As Boolean
+        Public Property Tag As String
+        Public Property Name As String
+        Public Property ObjectType As ObjectType
 
     End Class
 
@@ -335,7 +290,7 @@ Namespace DWSIM.Outros
 
 End Namespace
 
-Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen
+Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
 
     ''' <summary>
     ''' This class if for legacy compatibility only. It should NOT be used. Use CapeOpen.RealParameter instead if necessary.

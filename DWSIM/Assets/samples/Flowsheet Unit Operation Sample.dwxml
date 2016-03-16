@@ -726,7 +726,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Flowsheet</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet</Type>
       <SimulationFile>C:\Users\Daniel\Documents\Visual Studio 2013\Projects\DWSIM3\DWSIM\bin\x86\Release\samples\fstest_in.dwxml</SimulationFile>
       <InitializeOnLoad>true</InitializeOnLoad>
       <UpdateOnSave>false</UpdateOnSave>
@@ -787,13 +787,13 @@
       </OutputConnections>
       <InputParameters>
         <FlowsheetUOParameter>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.FlowsheetUOParameter</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.FlowsheetUOParameter</Type>
           <ID>b1e57996-481b-40ea-9948-eb9b1ba17953</ID>
           <ObjectID>MAT-a5392a27-dc1c-4749-bedd-a0a278eddceb</ObjectID>
           <ObjectProperty>PROP_MS_1</ObjectProperty>
         </FlowsheetUOParameter>
         <FlowsheetUOParameter>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.FlowsheetUOParameter</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.FlowsheetUOParameter</Type>
           <ID>07d664e7-8c86-4f38-a5ef-cd331b84ab11</ID>
           <ObjectID>MAT-a5392a27-dc1c-4749-bedd-a0a278eddceb</ObjectID>
           <ObjectProperty>PROP_MS_0</ObjectProperty>
@@ -801,7 +801,7 @@
       </InputParameters>
       <OutputParameters>
         <FlowsheetUOParameter>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.FlowsheetUOParameter</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.FlowsheetUOParameter</Type>
           <ID>0cc8309c-ccab-4e1d-a734-169384d5e2c7</ID>
           <ObjectID>MAT-937ec614-986b-4b26-a5c9-0665a97568b7</ObjectID>
           <ObjectProperty>PROP_MS_2</ObjectProperty>
@@ -2071,7 +2071,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2107,7 +2107,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>FlowsheetUO</TipoObjeto>
+      <ObjectType>FlowsheetUO</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2171,7 +2171,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2212,7 +2212,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -2263,7 +2263,7 @@
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <ObjectType>GO_Table</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -2301,7 +2301,7 @@ The inner flowsheet can be opened and edited independently of this simulation (f
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

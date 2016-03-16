@@ -15,10 +15,10 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.SepOps
+Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 
-Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors
+Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.DGVCBSelectors
 
     <System.Serializable()> Public Class Templates
 
@@ -86,7 +86,7 @@ Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors
                     'If Not estr.GraphicObject.InputConnectors(0).IsAttached Then
                     .Add(estr.GraphicObject.Tag.ToString)
                     'End If
-                    If dc.EnergyStreams.ContainsKey(estr.Nome) Then
+                    If dc.EnergyStreams.ContainsKey(estr.Name) Then
                         .Add(estr.GraphicObject.Tag.ToString)
                     End If
                 Next
@@ -108,7 +108,7 @@ Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors
                     'If Not estr.GraphicObject.OutputConnectors(0).IsAttached Then
                     .Add(estr.GraphicObject.Tag.ToString)
                     'End If
-                    If dc.EnergyStreams.ContainsKey(estr.Nome) Then
+                    If dc.EnergyStreams.ContainsKey(estr.Name) Then
                         .Add(estr.GraphicObject.Tag.ToString)
                     End If
                 Next

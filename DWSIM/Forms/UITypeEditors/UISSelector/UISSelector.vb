@@ -81,13 +81,13 @@ Namespace DWSIM.Editors.Streams
                 form = My.Application.ActiveSimulation
 
                 Me.ListView2.Items.Clear()
-                For Each mstr As MaterialStream In form.Collections.CLCS_MaterialStreamCollection.Values
+                For Each mstr As MaterialStream In form.Collections.FlowsheetObjectCollection.Values
                     If Not mstr.GraphicObject.OutputConnectors(0).IsAttached Then
                         Dim lvi As New ListViewItem()
                         With lvi
                             .Text = mstr.GraphicObject.Tag
-                            .Tag = mstr.Nome
-                            .Name = mstr.Nome
+                            .Tag = mstr.Name
+                            .Name = mstr.Name
                         End With
                         ListView2.Items.Add(lvi)
                     End If
@@ -187,13 +187,13 @@ Namespace DWSIM.Editors.Streams
                 form = My.Application.ActiveSimulation
 
                 Me.ListView2.Items.Clear()
-                For Each mstr As MaterialStream In form.Collections.CLCS_MaterialStreamCollection.Values
+                For Each mstr As MaterialStream In form.Collections.FlowsheetObjectCollection.Values
                     If Not mstr.GraphicObject.InputConnectors(0).IsAttached Then
                         Dim lvi As New ListViewItem()
                         With lvi
                             .Text = mstr.GraphicObject.Tag
-                            .Tag = mstr.Nome
-                            .Name = mstr.Nome
+                            .Tag = mstr.Name
+                            .Name = mstr.Name
                         End With
                         ListView2.Items.Add(lvi)
                     End If
@@ -294,13 +294,13 @@ Namespace DWSIM.Editors.Streams
                 form = My.Application.ActiveSimulation
 
                 Me.ListView2.Items.Clear()
-                For Each estr As EnergyStream In form.Collections.CLCS_EnergyStreamCollection.Values
+                For Each estr As EnergyStream In form.Collections.FlowsheetObjectCollection.Values
                     If Not estr.GraphicObject.OutputConnectors(0).IsAttached Then
                         Dim lvi As New ListViewItem()
                         With lvi
                             .Text = estr.GraphicObject.Tag
-                            .Tag = estr.Nome
-                            .Name = estr.Nome
+                            .Tag = estr.Name
+                            .Name = estr.Name
                         End With
                         ListView2.Items.Add(lvi)
                     End If
@@ -401,13 +401,13 @@ Namespace DWSIM.Editors.Streams
                 form = My.Application.ActiveSimulation
 
                 Me.ListView2.Items.Clear()
-                For Each estr As EnergyStream In form.Collections.CLCS_EnergyStreamCollection.Values
+                For Each estr As EnergyStream In form.Collections.FlowsheetObjectCollection.Values
                     If Not estr.GraphicObject.InputConnectors(0).IsAttached Then
                         Dim lvi As New ListViewItem()
                         With lvi
                             .Text = estr.GraphicObject.Tag
-                            .Tag = estr.Nome
-                            .Name = estr.Nome
+                            .Tag = estr.Name
+                            .Name = estr.Name
                         End With
                         ListView2.Items.Add(lvi)
                     End If

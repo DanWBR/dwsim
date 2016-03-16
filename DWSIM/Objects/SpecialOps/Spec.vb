@@ -258,7 +258,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 .Imports.AddType(GetType(System.Math))
             End With
 
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
             Me.FillNodeItems()
             Me.QTFillNodeItems()
@@ -433,15 +433,14 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
 
                     Me.TargetObject = form.Collections.FlowsheetObjectCollection(Me.TargetObjectData.m_ID)
-                    Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                    Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                     'Call function to calculate flowsheet
                     With objargs
-                        .Calculado = False
-
-                        .Nome = Me.TargetObject.Nome
+                        .Calculated = False
+                        .Name = Me.TargetObject.Name
                         .Tag = Me.TargetObject.GraphicObject.Tag
-                        .Tipo = Me.TargetObject.GraphicObject.TipoObjeto
-                        .Emissor = "Spec"
+                        .ObjectType = Me.TargetObject.GraphicObject.ObjectType
+                        .Sender = "Spec"
                     End With
                     form.CalculationQueue.Enqueue(objargs)
 

@@ -4773,7 +4773,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.CustomUO</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.CustomUO</Type>
       <FontName>Consolas</FontName>
       <FontSize>10</FontSize>
       <ScriptText># Simple Membrane Unit Operation
@@ -5082,7 +5082,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -5123,7 +5123,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -5164,7 +5164,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -5205,7 +5205,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>CustomUO</TipoObjeto>
+      <ObjectType>CustomUO</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -5272,7 +5272,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Texto</TipoObjeto>
+      <ObjectType>GO_Text</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -5324,7 +5324,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <ObjectType>GO_Table</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>
@@ -5377,7 +5377,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_Tabela</TipoObjeto>
+      <ObjectType>GO_Table</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

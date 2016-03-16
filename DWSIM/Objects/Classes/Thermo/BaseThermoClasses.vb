@@ -185,7 +185,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             End Set
         End Property
 
-        Public Property Nome() As String
+        Public Property Name() As String
             Get
                 Return m_ComponentName
             End Get
@@ -200,7 +200,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Public Sub New(ByVal name As String, ByVal description As String)
 
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = description
 
         End Sub
@@ -229,7 +229,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
                 Return ComponentName
             End Get
             Set(value As String)
-                ComponentName = Nome
+                ComponentName = name
             End Set
         End Property
 
@@ -263,7 +263,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             For Each xel As XElement In datac
                 Dim s As New Compound("", "")
                 s.LoadData(xel.Elements.ToList)
-                Me.Compounds.Add(s.Nome, s)
+                Me.Compounds.Add(s.Name, s)
             Next
 
             XMLSerializer.XMLSerializer.Deserialize(Me.Properties, (From xel As XElement In data Select xel Where xel.Name = "Properties").Elements.ToList)

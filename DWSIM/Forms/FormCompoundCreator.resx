@@ -3598,7 +3598,7 @@
     <value>75</value>
   </data>
   <data name="Label53.Text" xml:space="preserve">
-    <value>Energia de Gibbs de Formação (Gás Ideal a 25 C)</value>
+    <value>EnergyFlow de Gibbs de Formação (Gás Ideal a 25 C)</value>
   </data>
   <data name="&gt;&gt;Label53.Name" xml:space="preserve">
     <value>Label53</value>

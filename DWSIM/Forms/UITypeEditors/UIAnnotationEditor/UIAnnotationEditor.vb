@@ -51,7 +51,7 @@ Namespace DWSIM.Editors.Annotation
 
                 editorService.ShowDialog(selectionControl)
 
-                value = New DWSIM.Outros.Annotation(selectionControl.RichTextBoxExtended1.Rtf, selectionControl.RichTextBoxExtended1.rtb1.Text)
+                value = New DWSIM.Extras.Annotation(selectionControl.RichTextBoxExtended1.Rtf, selectionControl.RichTextBoxExtended1.rtb1.Text)
 
             End If
 

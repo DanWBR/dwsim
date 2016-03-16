@@ -339,7 +339,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             m_ManipulatedObjectData = New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ManipulatedObjectInfo
             m_ControlledObjectData = New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ControlledObjectInfo
             m_ReferencedObjectData = New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ReferenceObjectInfo
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
             Me.FillNodeItems()
             Me.QTFillNodeItems()

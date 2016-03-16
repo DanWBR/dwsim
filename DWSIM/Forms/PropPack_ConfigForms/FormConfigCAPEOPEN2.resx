@@ -181,7 +181,7 @@
     <value>2</value>
   </data>
   <data name="ComboBoxFlashAlg.Items4" xml:space="preserve">
-    <value>Minimização da Energia Livre de Gibbs (ELV)</value>
+    <value>Minimização da EnergyFlow Livre de Gibbs (ELV)</value>
   </data>
   <data name="ListView1.Items1" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -1703,7 +1703,7 @@
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ComboBoxFlashAlg.Items5" xml:space="preserve">
-    <value>Minimização da Energia Livre de Gibbs (ELLV)</value>
+    <value>Minimização da EnergyFlow Livre de Gibbs (ELLV)</value>
   </data>
   <data name="&gt;&gt;chkEnableParallelCalcs.Parent" xml:space="preserve">
     <value>GroupBox7</value>

@@ -23,7 +23,7 @@
                     For Each obj In formC.Collections.MaterialStreamCollection.Values
                         If obj.Name <> Me.selectionDataCV.m_ID Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
-                Case DWSIM.App.GetLocalString("Correntedeenergia")
+                Case DWSIM.App.GetLocalString("CorrentedeEnergyFlow")
                     For Each obj In formC.Collections.EnergyStreamCollection.Values
                         If obj.Name <> Me.selectionDataCV.m_ID Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next

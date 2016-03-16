@@ -53,7 +53,7 @@ Namespace DWSIM.Editors.Pump
                     selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("PumpViewCurves")
                 End If
 
-                Dim myPump As SimulationObjects.UnitOps.Pump = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                Dim myPump As SimulationObjects.UnitOperations.Pump = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
                 selectionControl.selectedpump = myPump
 

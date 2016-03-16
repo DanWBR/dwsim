@@ -52,7 +52,7 @@ Public Class FormReportConfig
         Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass
         Dim properties() As String
         Dim description As String
-        Dim objtype As Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto
+        Dim objtype As Microsoft.Msdn.Samples.GraphicObjects.ObjectType
         Dim propidx, r1, r2, r3, r4, r5, r6 As Integer
         Dim inclcond, inclcomp, inclmist, inclvap, inclliqm, inclliq1, inclliq2, inclaq As Boolean
         r1 = 5
@@ -73,9 +73,9 @@ Public Class FormReportConfig
         For Each lvi As ListViewItem In Me.ListView1.Items
             baseobj = frm.Collections.FlowsheetObjectCollection(lvi.Tag)
             properties = baseobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
-            objtype = baseobj.GraphicObject.TipoObjeto
+            objtype = baseobj.GraphicObject.ObjectType
             description = DWSIM.App.GetLocalString(baseobj.GraphicObject.Description)
-            If objtype = Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.MaterialStream Then
+            If objtype = Microsoft.Msdn.Samples.GraphicObjects.ObjectType.MaterialStream Then
                 Dim value As String
                 If inclcond Then
                     For propidx = 0 To r1 - 1
@@ -99,7 +99,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaMistura"), "", ""})
                         For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(0).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -115,7 +115,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseVapor"), "", ""})
                         For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(2).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -131,7 +131,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                         For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(1).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -147,7 +147,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                         For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(3).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -163,7 +163,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                         For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(4).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -179,7 +179,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                         For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(6).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -214,82 +214,82 @@ Public Class FormReportConfig
         Next
 
         For Each obj In frm.Collections.CLCS_MaterialStreamCollection.Values
-            Me.TreeViewObj.Nodes(0).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(0).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_EnergyStreamCollection.Values
-            Me.TreeViewObj.Nodes(1).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(1).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_MixerCollection.Values
-            Me.TreeViewObj.Nodes(2).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(2).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_SplitterCollection.Values
-            Me.TreeViewObj.Nodes(3).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(3).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_PipeCollection.Values
-            Me.TreeViewObj.Nodes(4).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(4).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_ValveCollection.Values
-            Me.TreeViewObj.Nodes(5).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(5).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_PumpCollection.Values
-            Me.TreeViewObj.Nodes(6).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(6).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_TankCollection.Values
-            Me.TreeViewObj.Nodes(7).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(7).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_VesselCollection.Values
-            Me.TreeViewObj.Nodes(8).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(8).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_CompressorCollection.Values
-            Me.TreeViewObj.Nodes(9).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(9).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_HeaterCollection.Values
-            Me.TreeViewObj.Nodes(10).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(10).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_CoolerCollection.Values
-            Me.TreeViewObj.Nodes(11).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(11).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_TurbineCollection.Values
-            Me.TreeViewObj.Nodes(12).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(12).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_ReactorConversionCollection.Values
-            Me.TreeViewObj.Nodes(13).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(13).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_ReactorEquilibriumCollection.Values
-            Me.TreeViewObj.Nodes(14).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(14).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_ReactorGibbsCollection.Values
-            Me.TreeViewObj.Nodes(15).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(15).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_ReactorCSTRCollection.Values
-            Me.TreeViewObj.Nodes(16).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(16).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_ReactorPFRCollection.Values
-            Me.TreeViewObj.Nodes(17).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(17).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_HeatExchangerCollection.Values
-            Me.TreeViewObj.Nodes(18).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(18).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_ShortcutColumnCollection.Values
-            Me.TreeViewObj.Nodes(19).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(19).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_DistillationColumnCollection.Values
-            Me.TreeViewObj.Nodes(20).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(20).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_AbsorptionColumnCollection.Values
-            Me.TreeViewObj.Nodes(21).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(21).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_ReboiledAbsorberCollection.Values
-            Me.TreeViewObj.Nodes(22).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(22).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_RefluxedAbsorberCollection.Values
-            Me.TreeViewObj.Nodes(23).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(23).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_ComponentSeparatorCollection.Values
-            Me.TreeViewObj.Nodes(24).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(24).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
         For Each obj In frm.Collections.CLCS_OrificePlateCollection.Values
-            Me.TreeViewObj.Nodes(25).Nodes.Add(obj.Nome, obj.GraphicObject.Tag).Tag = obj.Nome
+            Me.TreeViewObj.Nodes(25).Nodes.Add(obj.Name, obj.GraphicObject.Tag).Tag = obj.Name
         Next
     End Sub
 

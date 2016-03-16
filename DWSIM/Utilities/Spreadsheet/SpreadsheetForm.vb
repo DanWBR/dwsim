@@ -759,12 +759,12 @@ Public Class SpreadsheetForm
                         obj = formc.Collections.FlowsheetObjectCollection(ccparams.ObjectID)
                         obj.SetPropertyValue(ccparams.PropID, ce.Value, su)
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
                         With objargs
-                            .Calculado = False
-                            .Nome = obj.Nome
+                            .Calculated = False
+                            .Name = obj.Name
                             .Tag = obj.GraphicObject.Tag
-                            .Tipo = obj.GraphicObject.TipoObjeto
+                            .ObjectType = obj.GraphicObject.ObjectType
                         End With
                         My.Application.ActiveSimulation.CalculationQueue.Enqueue(objargs)
                     End If

@@ -22,7 +22,7 @@ Namespace DWSIM.SystemsOfUnits
 
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
 
-        Public nome As String
+        Public Name As String
 
         Public mass As String = "kg", reac_rate_heterog As String = "mol/[kg.s]", area, distance,
             time, volume, molar_volume, diameter, thickness, molar_conc, mass_conc,
@@ -102,7 +102,7 @@ Namespace DWSIM.SystemsOfUnits
 
             With Me
 
-                .nome = DWSIM.App.GetLocalString("SistemaSI")
+                .Name = DWSIM.App.GetLocalString("SistemaSI")
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -186,7 +186,7 @@ Namespace DWSIM.SystemsOfUnits
 
             With Me
 
-                .nome = DWSIM.App.GetLocalString("Personalizado1BR")
+                .Name = DWSIM.App.GetLocalString("Personalizado1BR")
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -270,7 +270,7 @@ Namespace DWSIM.SystemsOfUnits
 
             With Me
 
-                .nome = DWSIM.App.GetLocalString("Personalizado2SC")
+                .Name = DWSIM.App.GetLocalString("Personalizado2SC")
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -354,7 +354,7 @@ Namespace DWSIM.SystemsOfUnits
 
             With Me
 
-                .nome = DWSIM.App.GetLocalString("Personalizado3CNTP")
+                .Name = DWSIM.App.GetLocalString("Personalizado3CNTP")
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -438,7 +438,7 @@ Namespace DWSIM.SystemsOfUnits
 
             With Me
 
-                .nome = DWSIM.App.GetLocalString("Personalizado4")
+                .Name = DWSIM.App.GetLocalString("Personalizado4")
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -522,7 +522,7 @@ Namespace DWSIM.SystemsOfUnits
 
             With Me
 
-                .nome = DWSIM.App.GetLocalString("Personalizado5")
+                .Name = DWSIM.App.GetLocalString("Personalizado5")
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -606,7 +606,7 @@ Namespace DWSIM.SystemsOfUnits
 
             With Me
 
-                .nome = DWSIM.App.GetLocalString("SistemaIngls")
+                .Name = DWSIM.App.GetLocalString("SistemaIngls")
 
                 .gor = "ft3/bbl"
 
@@ -692,7 +692,7 @@ Namespace DWSIM.SystemsOfUnits
 
             With Me
 
-                .nome = DWSIM.App.GetLocalString("SistemaCGS")
+                .Name = DWSIM.App.GetLocalString("SistemaCGS")
 
                 .accel = "cm/s2"
                 .area = "cm2"

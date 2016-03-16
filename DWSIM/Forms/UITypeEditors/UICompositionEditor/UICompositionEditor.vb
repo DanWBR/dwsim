@@ -49,32 +49,32 @@ Namespace DWSIM.Editors.Composition
                 selectionControl.Compounds = value
                 selectionControl.NF = form.Options.NumberFormat
                 selectionControl.SU = form.Options.SelectedUnitSystem
-                selectionControl.Q = form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.molarflow.GetValueOrDefault
-                selectionControl.W = form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.massflow.GetValueOrDefault
-                selectionControl.Solvent = form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ReferenceSolvent
-                selectionControl.InitialComposition = form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InputComposition
-                selectionControl.Stream = form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                selectionControl.Q = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.molarflow.GetValueOrDefault
+                selectionControl.W = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.massflow.GetValueOrDefault
+                selectionControl.Solvent = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ReferenceSolvent
+                selectionControl.InitialComposition = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InputComposition
+                selectionControl.Stream = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                 selectionControl.tbTag.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
 
                 editorService.ShowDialog(selectionControl)
 
-                form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.molarflow = selectionControl.Q
-                form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.massflow = selectionControl.W
-                form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ReferenceSolvent = selectionControl.Solvent
-                form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InputComposition = selectionControl.InitialComposition
+                form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.molarflow = selectionControl.Q
+                form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.massflow = selectionControl.W
+                form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ReferenceSolvent = selectionControl.Solvent
+                form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InputComposition = selectionControl.InitialComposition
 
                 value = selectionControl.Compounds
 
             End If
 
             'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
             With objargs
-                .Calculado = False
-                .Tag = form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.Tag
-                .Nome = form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Nome
-                .Tipo = form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.TipoObjeto
-                .Emissor = "PropertyGrid"
+                .Calculated = False
+                .Tag = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.Tag
+                .Name = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Name
+                .ObjectType = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.ObjectType
+                .Sender = "PropertyGrid"
             End With
 
             form.CalculationQueue.Enqueue(objargs)

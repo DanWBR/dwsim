@@ -6,7 +6,7 @@ Imports System.Drawing.Text
 Imports System.Reflection
 Imports System.ComponentModel
 Imports FarsiLibrary.Win
-Imports DWSIM.DWSIM.Outros
+Imports DWSIM.DWSIM.Extras
 Imports System.Threading
 
 <System.Serializable()> Public Class FormScript

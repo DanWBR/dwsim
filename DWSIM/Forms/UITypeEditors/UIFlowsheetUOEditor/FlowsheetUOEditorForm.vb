@@ -1,9 +1,9 @@
-﻿Imports DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary
+﻿Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary
 Imports Microsoft.MSDN.Samples.GraphicObjects
 Imports System.Linq
 Public Class FlowsheetUOEditorForm
 
-    Public fsuo As DWSIM.SimulationObjects.UnitOps.Flowsheet
+    Public fsuo As DWSIM.SimulationObjects.UnitOperations.Flowsheet
 
     Private loaded As Boolean = True
 
@@ -38,7 +38,7 @@ Public Class FlowsheetUOEditorForm
     Private Sub btnInitialize_Click(sender As Object, e As EventArgs) Handles btnInitialize.Click
 
         Try
-            fsuo.Fsheet = DWSIM.SimulationObjects.UnitOps.Flowsheet.InitializeFlowsheet(fsuo.SimulationFile)
+            fsuo.Fsheet = DWSIM.SimulationObjects.UnitOperations.Flowsheet.InitializeFlowsheet(fsuo.SimulationFile)
             fsuo.Initialized = True
         Catch ex As AggregateException
             fsuo.FlowSheet.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, DWSIM.Flowsheet.MessageType.GeneralError)

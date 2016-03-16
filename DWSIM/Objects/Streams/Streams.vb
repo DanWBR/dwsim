@@ -254,7 +254,7 @@ Namespace DWSIM.SimulationObjects.Streams
             Me.SetFlowsheet(flowsheet)
             If Me.PropertyPackage Is Nothing Then Me.PropertyPackage = proppack
 
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
 
             Me.Phases.Add(0, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Mistura"), ""))
@@ -282,7 +282,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
             MyBase.CreateNew()
 
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
 
             Me.Phases.Add(0, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Mistura"), ""))
@@ -603,16 +603,16 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 Me.FillNodeItems()
             End If
 
-            For Each nti As Outros.NodeItem In Me.NodeTableItems.Values
+            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
                 nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
                 nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
             Next
 
-            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
             Me.QTFillNodeItems()
 
             With Me.QTNodeTableItems
@@ -702,16 +702,16 @@ Namespace DWSIM.SimulationObjects.Streams
 
                 .Clear()
 
-                .Add(0, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("Temperatura"), "", "", 0, 1, ""))
-                .Add(1, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("Presso"), "", "", 1, 1, ""))
-                .Add(2, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("Vazomssica"), "", "", 2, 1, ""))
-                .Add(3, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("Vazomolar"), "", "", 3, 1, ""))
-                .Add(4, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("Vazovolumtrica"), "", "", 4, 1, ""))
-                .Add(5, New DWSIM.Outros.NodeItem(DWSIM.App.GetPropertyName("PROP_MS_106"), "", "", 5, 1, ""))
-                .Add(6, New DWSIM.Outros.NodeItem(DWSIM.App.GetPropertyName("PROP_MS_146"), "", "", 6, 1, ""))
-                .Add(7, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("MolarEnthalpy"), "", "", 7, 1, ""))
-                .Add(8, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("MolarEntropy"), "", "", 8, 1, ""))
-                .Add(9, New DWSIM.Outros.NodeItem(DWSIM.App.GetPropertyName("PROP_MS_154"), "", "", 9, 1, ""))
+                .Add(0, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Temperatura"), "", "", 0, 1, ""))
+                .Add(1, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Presso"), "", "", 1, 1, ""))
+                .Add(2, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Vazomssica"), "", "", 2, 1, ""))
+                .Add(3, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Vazomolar"), "", "", 3, 1, ""))
+                .Add(4, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Vazovolumtrica"), "", "", 4, 1, ""))
+                .Add(5, New DWSIM.Extras.NodeItem(DWSIM.App.GetPropertyName("PROP_MS_106"), "", "", 5, 1, ""))
+                .Add(6, New DWSIM.Extras.NodeItem(DWSIM.App.GetPropertyName("PROP_MS_146"), "", "", 6, 1, ""))
+                .Add(7, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("MolarEnthalpy"), "", "", 7, 1, ""))
+                .Add(8, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("MolarEntropy"), "", "", 8, 1, ""))
+                .Add(9, New DWSIM.Extras.NodeItem(DWSIM.App.GetPropertyName("PROP_MS_154"), "", "", 9, 1, ""))
 
             End With
 
@@ -742,10 +742,10 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
 
                     For Each comp In Phases(i).Compounds.Values
-                        comp.FracaoMolar = ASource.Phases(i).Compounds(comp.Nome).FracaoMolar
-                        comp.FracaoMassica = ASource.Phases(i).Compounds(comp.Nome).FracaoMassica
-                        comp.MassFlow = ASource.Phases(i).Compounds(comp.Nome).MassFlow
-                        comp.MolarFlow = ASource.Phases(i).Compounds(comp.Nome).MolarFlow
+                        comp.FracaoMolar = ASource.Phases(i).Compounds(comp.Name).FracaoMolar
+                        comp.FracaoMassica = ASource.Phases(i).Compounds(comp.Name).FracaoMassica
+                        comp.MassFlow = ASource.Phases(i).Compounds(comp.Name).MassFlow
+                        comp.MolarFlow = ASource.Phases(i).Compounds(comp.Name).MolarFlow
                     Next
 
                     'Should be defined after concentrations?!?! [yes, no, maybe... whatever]
@@ -977,7 +977,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
                 If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                     .Item.Add("[1] " & DWSIM.App.GetLocalString("Especificao"), Me, "SpecType", False, DWSIM.App.GetLocalString("Condies1"), "")
-                ElseIf Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.TipoObjeto = TipoObjeto.OT_Reciclo Then
+                ElseIf Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
                     .Item.Add("[1] " & DWSIM.App.GetLocalString("Especificao"), Me, "SpecType", False, DWSIM.App.GetLocalString("Condies1"), "")
                 End If
                 .Item(.Item.Count - 1).Tag2 = "SpecType"
@@ -1085,7 +1085,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 End With
                 .Item.Add("[A] " & DWSIM.App.GetLocalString("EditordeComposies"), Me.Phases(0), "Componentes", False, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("UtilizeoEditordeComp"), True)
                 If Me.GraphicObject.InputConnectors(0).IsAttached Then
-                    If Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.TipoObjeto <> TipoObjeto.OT_Reciclo Then
+                    If Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle Then
                         .Item(.Item.Count - 1).IsReadOnly = True
                         .Item(.Item.Count - 1).DefaultType = GetType(Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Compound))
                         .Item(.Item.Count - 1).Visible = False
@@ -1102,7 +1102,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 .Item.Add("[B] " & DWSIM.App.GetLocalString("Basedacomposio"), Me, "CompositionBasis", False, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("Selecioneabaseparaav"), True)
 
                 If Me.GraphicObject.InputConnectors(0).IsAttached Then
-                    If Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.TipoObjeto <> TipoObjeto.OT_Reciclo Then
+                    If Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle Then
                         .Item(1).IsReadOnly = True
                         .Item(2).IsReadOnly = True
                         .Item(3).IsReadOnly = True
@@ -1138,7 +1138,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         .CustomEditor = New DWSIM.Editors.Annotation.UIAnnotationEditor
                     End With
                 End If
-                .Item.Add("ID", Me.Nome, True, DWSIM.App.GetLocalString("Outros"), "", True)
+                .Item.Add("ID", Me.Name, True, DWSIM.App.GetLocalString("Outros"), "", True)
                 .Item.Add(DWSIM.App.GetLocalString("LastUpdatedOn"), Me.LastUpdated.ToString("O"), True, DWSIM.App.GetLocalString("Outros"), "", True)
 
                 .PropertySort = PropertySort.Categorized
@@ -1846,7 +1846,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     proplist.Add("PROP_MS_27")
                     For i = 102 To 105
                         For Each subst As Compound In Me.Phases(0).Compounds.Values
-                            proplist.Add("PROP_MS_" + CStr(i) + "," + subst.Nome)
+                            proplist.Add("PROP_MS_" + CStr(i) + "," + subst.Name)
                         Next
                     Next
                 Case PropertyType.ALL
@@ -2403,7 +2403,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 If Not Me.GraphicObject Is Nothing Then Return Me.GraphicObject.Tag Else Return "temporary stream"
             End Get
             Set(ByVal value As String)
-                Me.Nome = value
+                Me.Name = value
             End Set
         End Property
 
@@ -2611,7 +2611,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     Next
                 Else
                     For Each c As Compound In Me.Phases(0).Compounds.Values
-                        comps.Add(c.Nome)
+                        comps.Add(c.Name)
                     Next
                 End If
             End If
@@ -2958,7 +2958,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     Next
                 Else
                     For Each c As Compound In Me.Phases(0).Compounds.Values
-                        comps.Add(c.Nome)
+                        comps.Add(c.Name)
                     Next
                 End If
             End If
@@ -3946,7 +3946,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Next
             Else
                 For Each c As Compound In Me.Phases(0).Compounds.Values
-                    comps.Add(c.Nome)
+                    comps.Add(c.Name)
                 Next
             End If
             Dim f As Integer = -1
@@ -4204,7 +4204,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Next
             Else
                 For Each c As Compound In Me.Phases(0).Compounds.Values
-                    comps.Add(c.Nome)
+                    comps.Add(c.Name)
                 Next
             End If
             Select Case phaseLabel.ToLower
@@ -4289,7 +4289,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Next
             Else
                 For Each c As Compound In Me.Phases(0).Compounds.Values
-                    comps.Add(c.Nome)
+                    comps.Add(c.Name)
                 Next
             End If
             Select Case [property].ToLower
@@ -4430,7 +4430,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Next
             Else
                 For Each c As Compound In Me.Phases(0).Compounds.Values
-                    comps.Add(c.Nome)
+                    comps.Add(c.Name)
                 Next
             End If
             Dim f As Integer = -1
@@ -4683,7 +4683,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Next
             Else
                 For Each c As Compound In Me.Phases(0).Compounds.Values
-                    comps.Add(c.Nome)
+                    comps.Add(c.Name)
                 Next
             End If
             Select Case [property].ToLower
@@ -5343,7 +5343,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Public ReadOnly Property Name() As String Implements CapeOpen.ECapeRoot.Name
             Get
-                Return Me.Nome
+                Return Me.Name
             End Get
         End Property
 
@@ -5409,7 +5409,7 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
             Init()
 
@@ -5423,10 +5423,10 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Sub CreateParamCol()
             ' If m_params Is Nothing Then
-            m_work = New CapeOpen.RealParameter("work", Me.Energia.GetValueOrDefault, 0.0#, "J/s")
-            'm_af = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.RealParameter("axisFrequency", 0.0#, 0.0#, "s-1")
-            'm_tlo = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.RealParameter("temperatureLow", 0.0#, 0.0#, "K")
-            'm_thi = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.RealParameter("temperatureHigh", 0.0#, 0.0#, "K")
+            m_work = New CapeOpen.RealParameter("work", Me.EnergyFlow.GetValueOrDefault, 0.0#, "J/s")
+            'm_af = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.RealParameter("axisFrequency", 0.0#, 0.0#, "s-1")
+            'm_tlo = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.RealParameter("temperatureLow", 0.0#, 0.0#, "K")
+            'm_thi = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.RealParameter("temperatureHigh", 0.0#, 0.0#, "K")
             ' m_params = New List(Of CapeOpen.ICapeParameter)
             ' m_params.Add(m_work)
             'm_params.Add(m_af)
@@ -5441,7 +5441,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property Energia() As Nullable(Of Double)
+        Public Property EnergyFlow() As Nullable(Of Double)
             Get
                 Return Me.m_energy
             End Get
@@ -5458,7 +5458,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
             'Copy properties from the ASource stream.
 
-            Me.Energia = ASource.Energia
+            Me.EnergyFlow = ASource.EnergyFlow
 
         End Sub
 
@@ -5466,17 +5466,17 @@ Namespace DWSIM.SimulationObjects.Streams
 
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 Me.FillNodeItems()
             End If
 
-            For Each nti As Outros.NodeItem In Me.NodeTableItems.Values
+            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
                 nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
                 nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
             Next
 
             'If Me.QTNodeTableItems Is Nothing Then
-            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
             Me.QTFillNodeItems()
             'End If
 
@@ -5484,8 +5484,8 @@ Namespace DWSIM.SimulationObjects.Streams
 
                 Dim valor As String
 
-                If Me.Energia.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.Energia), nf)
+                If Me.EnergyFlow.HasValue Then
+                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow), nf)
                 Else
                     valor = DWSIM.App.GetLocalString("NC")
                 End If
@@ -5502,7 +5502,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
                 .Clear()
 
-                .Add(0, New DWSIM.Outros.NodeItem(DWSIM.App.GetPropertyName("PROP_ES_0"), "", "", 0, 1, ""))
+                .Add(0, New DWSIM.Extras.NodeItem(DWSIM.App.GetPropertyName("PROP_ES_0"), "", "", 0, 1, ""))
 
             End With
 
@@ -5540,8 +5540,8 @@ Namespace DWSIM.SimulationObjects.Streams
                     .DefaultValue = Nothing
                 End With
 
-                Dim valor = Format(Converter.ConvertFromSI(su.heatflow, Me.Energia.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_ES_0"), su.heatflow), valor, False, DWSIM.App.GetLocalString("Propriedades2"), DWSIM.App.GetLocalString("Quantidadedeenergiap"), True)
+                Dim valor = Format(Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_ES_0"), su.heatflow), valor, False, DWSIM.App.GetLocalString("Propriedades2"), DWSIM.App.GetLocalString("QuantidadedeEnergyFlowp"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
                     .Tag2 = "PROP_ES_0"
@@ -5550,10 +5550,10 @@ Namespace DWSIM.SimulationObjects.Streams
                 End With
 
                 If Me.GraphicObject.InputConnectors(0).IsAttached Then
-                    If Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.TipoObjeto = TipoObjeto.AbsorptionColumn And
-                        Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.TipoObjeto = TipoObjeto.DistillationColumn And
-                        Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.TipoObjeto = TipoObjeto.ReboiledAbsorber And
-                        Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.TipoObjeto = TipoObjeto.RefluxedAbsorber Then
+                    If Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.AbsorptionColumn And
+                        Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.DistillationColumn And
+                        Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.ReboiledAbsorber And
+                        Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.RefluxedAbsorber Then
                         .Item(2).IsReadOnly = True
                     End If
                 Else
@@ -5568,7 +5568,7 @@ Namespace DWSIM.SimulationObjects.Streams
                             .Item.Add(DWSIM.App.GetLocalString("Utilizadocomo"), DWSIM.App.GetLocalString("SpecSource"), True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
                     End Select
                 End If
-                .Item.Add("ID", Me.Nome, True, DWSIM.App.GetLocalString("Outros"), "", True)
+                .Item.Add("ID", Me.Name, True, DWSIM.App.GetLocalString("Outros"), "", True)
                 .Item.Add(DWSIM.App.GetLocalString("LastUpdatedOn"), Me.LastUpdated.ToString("O"), True, DWSIM.App.GetLocalString("Outros"), "", True)
             End With
 
@@ -5585,7 +5585,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
                 Case 0
                     'PROP_ES_0	Power
-                    value = Converter.ConvertFromSI(su.heatflow, Me.Energia.GetValueOrDefault)
+                    value = Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault)
 
             End Select
 
@@ -5626,7 +5626,7 @@ Namespace DWSIM.SimulationObjects.Streams
             Select Case propidx
                 Case 0
                     'PROP_ES_0	Power
-                    Me.Energia = Converter.ConvertToSI(su.heatflow, propval)
+                    Me.EnergyFlow = Converter.ConvertToSI(su.heatflow, propval)
             End Select
             Return 1
         End Function
@@ -5671,7 +5671,7 @@ Namespace DWSIM.SimulationObjects.Streams
         End Property
 
         Private Sub m_work_OnParameterValueChanged(ByVal sender As Object, ByVal args As System.EventArgs) Handles m_work.ParameterValueChanged
-            Me.Energia = m_work.SIValue / 1000
+            Me.EnergyFlow = m_work.SIValue / 1000
         End Sub
 
         Public Function Count() As Integer Implements CapeOpen.ICapeCollection.Count

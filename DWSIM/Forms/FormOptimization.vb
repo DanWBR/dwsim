@@ -1287,7 +1287,7 @@ Public Class FormOptimization
                         .objectID = "SpreadsheetCell"
                         .propID = dgrow.Cells(4).Value
                     Else
-                        .objectID = Me.ReturnObject(dgrow.Cells(3).Value).Nome
+                        .objectID = Me.ReturnObject(dgrow.Cells(3).Value).Name
                         .propID = Me.ReturnPropertyID(.objectID, dgrow.Cells(4).Value)
                     End If
                     .lowerlimit = Converter.ConvertToSI(dgrow.Cells(9).Value, dgrow.Cells(5).Value)

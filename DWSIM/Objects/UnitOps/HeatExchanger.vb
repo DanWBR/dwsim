@@ -19,13 +19,13 @@
 Imports Microsoft.Msdn.Samples.GraphicObjects
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.DWSIM.SimulationObjects.Streams
-Imports DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.HeatExchanger
+Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.HeatExchanger
 Imports System.Globalization
 Imports System.Reflection
 Imports System.Threading.Tasks
 Imports System.Math
 
-Namespace DWSIM.SimulationObjects.UnitOps
+Namespace DWSIM.SimulationObjects.UnitOperations
 
     Public Enum HeatExchangerCalcMode
 
@@ -138,12 +138,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
-            m_ComponentName = nome
+            m_ComponentName = name
             m_ComponentDescription = descricao
             FillNodeItems()
             QTFillNodeItems()
             'Define the unitop type for later use.
-            ObjectType = TipoObjeto.HeatExchanger
+            ObjectType = ObjectType.HeatExchanger
             Type = HeatExchangerType.DoublePipe
 
         End Sub
@@ -252,7 +252,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             Dim Ti1, Ti2, w1, w2, A, Tc1, Th1, Wc, Wh, P1, P2, Th2, Tc2, U As Double
             Dim Pc1, Ph1, Pc2, Ph2, DeltaHc, DeltaHh, H1, H2, Hc1, Hh1, Hc2, Hh2, CPC, CPH As Double
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
             Dim StIn0, StIn1, StOut0, StOut1, StInCold, StInHot, StOutHot, StOutCold As Streams.MaterialStream
             Dim coldidx As Integer = 0
 
@@ -1090,22 +1090,22 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                 If Th2 < Tc1 Or Tc2 > Th1 Then
                     FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": Temperature Cross", Color.DarkOrange, DWSIM.Flowsheet.MessageType.Warning)
-                        End If
+                End If
 
-                        'Call the flowsheet calculation routine
-                        With objargs
-                            .Calculado = True
-                            .Nome = Me.Nome
-                            .Tipo = Me.ObjectType
-                        End With
+                'Call the flowsheet calculation routine
+                With objargs
+                    .Calculated = True
+                    .Name = Me.Name
+                    .ObjectType = Me.ObjectType
+                End With
 
-                        FlowSheet.CalculationQueue.Enqueue(objargs)
+                FlowSheet.CalculationQueue.Enqueue(objargs)
 
-                    Else
+            Else
 
-                        AppendDebugLine("Calculation finished successfully.")
+                AppendDebugLine("Calculation finished successfully.")
 
-                    End If
+            End If
 
         End Function
 
@@ -1128,12 +1128,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End If
 
             'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
             With objargs
-                .Calculado = False
-                .Nome = Me.Nome
+                .Calculated = False
+                .Name = Me.Name
                 .Tag = Me.GraphicObject.Tag
-                .Tipo = Me.ObjectType
+                .ObjectType = Me.ObjectType
             End With
 
             FlowSheet.CalculationQueue.Enqueue(objargs)
@@ -1144,17 +1144,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If NodeTableItems Is Nothing Then
-                NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 FillNodeItems()
             End If
 
-            For Each nti As Outros.NodeItem In Me.NodeTableItems.Values
+            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
                 nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
                 nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
             Next
 
             If QTNodeTableItems Is Nothing Then
-                QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 QTFillNodeItems()
             End If
 
@@ -1190,8 +1190,8 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                 .Clear()
 
-                .Add(0, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("Area"), "", "", 0, 0, ""))
-                .Add(1, New DWSIM.Outros.NodeItem(DWSIM.App.GetLocalString("HeatLoad"), "", "", 1, 0, ""))
+                .Add(0, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Area"), "", "", 0, 0, ""))
+                .Add(1, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("HeatLoad"), "", "", 1, 0, ""))
 
             End With
 
@@ -1731,7 +1731,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
 End Namespace
 
-Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.HeatExchanger
+Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.HeatExchanger
 
     <System.Serializable()> Public Class STHXProperties
 

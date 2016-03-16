@@ -248,7 +248,7 @@ Public Class FormCompoundCreator
         Me.cbUnits.Items.Clear()
 
         For Each su2 In CType(Me.MdiParent, FormMain).AvailableUnitSystems.Values
-            Me.cbUnits.Items.Add(su2.nome)
+            Me.cbUnits.Items.Add(su2.Name)
         Next
 
         Me.cbUnits.SelectedIndex = 0
@@ -327,21 +327,21 @@ Public Class FormCompoundCreator
             Me.Text = .Filename
             If .su.temperature IsNot Nothing Then
                 Me.su = .su
-                If Not CType(Me.MdiParent, FormMain).AvailableUnitSystems.ContainsKey(.su.nome) Then
+                If Not CType(Me.MdiParent, FormMain).AvailableUnitSystems.ContainsKey(.su.Name) Then
                     If Not TypeOf .su Is DWSIM.SystemsOfUnits.SI And Not _
                         TypeOf .su Is DWSIM.SystemsOfUnits.CGS And Not _
                         TypeOf .su Is DWSIM.SystemsOfUnits.English Then
-                        CType(Me.MdiParent, FormMain).AvailableUnitSystems.Add(.su.nome, .su)
+                        CType(Me.MdiParent, FormMain).AvailableUnitSystems.Add(.su.Name, .su)
                     End If
-                    Me.cbUnits.Items.Add(mycase.su.nome)
+                    Me.cbUnits.Items.Add(mycase.su.Name)
                 Else
                     UpdateUnits()
                 End If
             Else
                 .su = Me.su
             End If
-            If cbUnits.Items.Contains(.su.nome) Then
-                cbUnits.SelectedIndex = cbUnits.Items.IndexOf(.su.nome)
+            If cbUnits.Items.Contains(.su.Name) Then
+                cbUnits.SelectedIndex = cbUnits.Items.IndexOf(.su.Name)
             Else
                 cbUnits.SelectedIndex = 0
             End If

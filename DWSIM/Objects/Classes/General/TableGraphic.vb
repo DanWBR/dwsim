@@ -20,7 +20,7 @@ Imports System.Drawing
 Imports Microsoft.MSDN.Samples.GraphicObjects
 Imports System.Drawing.Drawing2D
 Imports DWSIM.DWSIM.SimulationObjects
-Imports DWSIM.DWSIM.Outros
+Imports DWSIM.DWSIM.Extras
 Imports System.Linq
 
 Namespace DWSIM.GraphicObjects
@@ -52,7 +52,7 @@ Namespace DWSIM.GraphicObjects
         Protected m_BorderColor As Color = Color.Black
 
         Protected m_TextRenderStyle As Drawing2D.SmoothingMode = Drawing2D.SmoothingMode.Default
-        Protected m_objectfamily As TipoObjeto = Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.MaterialStream
+        Protected m_objectfamily As ObjectType = Microsoft.Msdn.Samples.GraphicObjects.ObjectType.MaterialStream
 
         Protected m_objectlist As Dictionary(Of String, Boolean)
         Protected m_propertylist As Dictionary(Of String, Boolean)
@@ -60,7 +60,7 @@ Namespace DWSIM.GraphicObjects
         Protected m_sortableitems As ArrayList
         Protected m_sortedlist As List(Of String)
 
-        Protected m_items As Dictionary(Of String, List(Of DWSIM.Outros.NodeItem))
+        Protected m_items As Dictionary(Of String, List(Of DWSIM.Extras.NodeItem))
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
@@ -118,7 +118,7 @@ Namespace DWSIM.GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = TipoObjeto.GO_MasterTable
+            Me.ObjectType = ObjectType.GO_MasterTable
             m_objectlist = New Dictionary(Of String, Boolean)
             m_propertylist = New Dictionary(Of String, Boolean)
             m_sortableitems = New ArrayList
@@ -186,11 +186,11 @@ Namespace DWSIM.GraphicObjects
             End Set
         End Property
 
-        Public Property ObjectFamily() As TipoObjeto
+        Public Property ObjectFamily() As ObjectType
             Get
                 Return m_objectfamily
             End Get
-            Set(ByVal value As TipoObjeto)
+            Set(ByVal value As ObjectType)
                 m_objectfamily = value
                 m_objectlist.Clear()
                 m_propertylist.Clear()
@@ -339,7 +339,7 @@ Namespace DWSIM.GraphicObjects
             Dim su As DWSIM.SystemsOfUnits.Units = form.Options.SelectedUnitSystem
             Dim nf As String = form.Options.NumberFormat
 
-            m_items = New Dictionary(Of String, List(Of DWSIM.Outros.NodeItem))
+            m_items = New Dictionary(Of String, List(Of DWSIM.Extras.NodeItem))
 
             Dim objectstoremove As New ArrayList
 
@@ -492,14 +492,14 @@ Namespace DWSIM.GraphicObjects
                 .Item.Add(DWSIM.App.GetLocalString("MT_ObjectFamily"), Me, "ObjectFamily", False, "1. " & DWSIM.App.GetLocalString("MT_ObjectFamily"), "", True)
 
                 For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
-                    If obj.GraphicObject.TipoObjeto = Me.ObjectFamily Then
+                    If obj.GraphicObject.ObjectType = Me.ObjectFamily Then
                         If m_objectlist.ContainsKey(obj.GraphicObject.Tag) Then
                             .Item.Add(obj.GraphicObject.Tag, m_objectlist(obj.GraphicObject.Tag), False, "2. " & DWSIM.App.GetLocalString("MT_ObjectsToShow"), "", True)
                         Else
                             .Item.Add(obj.GraphicObject.Tag, False, False, "2. " & DWSIM.App.GetLocalString("MT_ObjectsToShow"), "", True)
                         End If
                         .Item(.Item.Count - 1).DefaultType = Type.GetType("System.Boolean")
-                        .Item(.Item.Count - 1).Tag = "Object|" & obj.Nome
+                        .Item(.Item.Count - 1).Tag = "Object|" & obj.Name
                     End If
                 Next
 
@@ -780,7 +780,7 @@ Namespace DWSIM.GraphicObjects
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
 
             With elements
-                If BaseOwner IsNot Nothing Then .Add(New XElement("Owner", BaseOwner.Nome))
+                If BaseOwner IsNot Nothing Then .Add(New XElement("Owner", BaseOwner.Name))
             End With
 
             Return elements
@@ -795,7 +795,7 @@ Namespace DWSIM.GraphicObjects
 
 #Region "Constructors"
         Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass)
-            Me.TipoObjeto = TipoObjeto.GO_Tabela
+            Me.ObjectType = ObjectType.GO_Table
             Me.BaseOwner = owner
         End Sub
 
@@ -809,7 +809,7 @@ Namespace DWSIM.GraphicObjects
         End Sub
 
         Public Sub New()
-            Me.TipoObjeto = TipoObjeto.GO_Tabela
+            Me.ObjectType = ObjectType.GO_Table
         End Sub
 
 #End Region
@@ -966,7 +966,7 @@ Namespace DWSIM.GraphicObjects
 
                 .Item.Clear()
 
-                Dim ni As DWSIM.Outros.NodeItem
+                Dim ni As DWSIM.Extras.NodeItem
 
                 For Each ni In Me.BaseOwner.NodeTableItems.Values
                     .Item.Add(DWSIM.App.GetPropertyName(ni.Text), ni, "Checked", False, "", "", True)
@@ -1032,7 +1032,7 @@ Namespace DWSIM.GraphicObjects
             maxH = 0
             count = 1
             Dim size As SizeF
-            Dim ni As DWSIM.Outros.NodeItem
+            Dim ni As DWSIM.Extras.NodeItem
             For Each ni In Me.BaseOwner.NodeTableItems.Values
                 If ni.Checked = True Then
                     If ni.Level = 0 And ni.ParentNode = "" Or ni.Level > 0 And ni.ParentNode <> "" Then
@@ -1143,11 +1143,11 @@ Namespace DWSIM.GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.TipoObjeto = TipoObjeto.GO_TabelaRapida
+            Me.ObjectType = ObjectType.GO_FloatingTable
         End Sub
 
         Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass)
-            Me.TipoObjeto = TipoObjeto.GO_TabelaRapida
+            Me.ObjectType = ObjectType.GO_FloatingTable
             Me.BaseOwner = owner
         End Sub
 
@@ -1316,7 +1316,7 @@ Namespace DWSIM.GraphicObjects
                     If size.Width > maxL1 Then maxL1 = size.Width
                     If size.Height > maxH Then maxH = size.Height
 
-                    Dim ni As DWSIM.Outros.NodeItem
+                    Dim ni As DWSIM.Extras.NodeItem
                     For Each ni In Me.BaseOwner.QTNodeTableItems.Values
                         size = g.MeasureString(ni.Text, New Font(Me.HeaderFont, FontStyle.Bold), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
                         If size.Width > maxL1 Then maxL1 = size.Width
@@ -1474,7 +1474,7 @@ Namespace DWSIM.GraphicObjects
 #Region "Constructors"
 
         Public Sub New(ByVal sheet As SpreadsheetForm)
-            Me.TipoObjeto = TipoObjeto.GO_Tabela
+            Me.ObjectType = ObjectType.GO_Table
             Me.Spreadsheet = sheet
         End Sub
 
@@ -1488,7 +1488,7 @@ Namespace DWSIM.GraphicObjects
         End Sub
 
         Public Sub New()
-            Me.TipoObjeto = TipoObjeto.GO_Tabela
+            Me.ObjectType = ObjectType.GO_Table
         End Sub
 
 #End Region

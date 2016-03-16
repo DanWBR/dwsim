@@ -14,7 +14,7 @@ Public Class SelectorForm
         With TreeView1.Nodes
             .Clear()
             .Add(DWSIM.App.GetLocalString("CorrentedeMatria"), DWSIM.App.GetLocalString("CorrentedeMatria"))
-            .Add(DWSIM.App.GetLocalString("Correntedeenergia"), DWSIM.App.GetLocalString("Correntedeenergia"))
+            .Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlow"), DWSIM.App.GetLocalString("CorrentedeEnergyFlow"))
             .Add(DWSIM.App.GetLocalString("Misturador"), DWSIM.App.GetLocalString("Misturador"))
             .Add(DWSIM.App.GetLocalString("Divisor"), DWSIM.App.GetLocalString("Divisor"))
             .Add(DWSIM.App.GetLocalString("Tubulao"), DWSIM.App.GetLocalString("Tubulao"))

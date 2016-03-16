@@ -23,7 +23,7 @@ Imports Mapack
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Threading.Tasks
 
-Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.SepOps.SolvingMethods
+Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.SolvingMethods
 
     Public Enum DistColSolvingMethod
         Russell_InsideOut = 0

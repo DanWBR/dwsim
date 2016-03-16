@@ -135,7 +135,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcEnergiaMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcEnergyFlowMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
 
             Dim HM, HV, HL As Double
 
@@ -634,7 +634,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
         '        If s.FracaoMolar.GetValueOrDefault >= maxZ Then
-        '            name = s.Nome
+        '            name = s.Name
         '            maxZ = Vz(i)
         '        End If
         '        i += 1
@@ -652,7 +652,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
         '        If s.FracaoMolar.GetValueOrDefault >= maxZ Then
-        '            name = s.Nome
+        '            name = s.Name
         '            maxZ = s.FracaoMolar.GetValueOrDefault
         '        End If
         '        i += 1

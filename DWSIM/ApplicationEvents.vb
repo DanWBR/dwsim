@@ -54,8 +54,8 @@ Namespace My
             xdoc.Add(New XElement("Units"))
 
             For Each su2 As DWSIM.SystemsOfUnits.Units In UserUnitSystems.Values
-                xdoc.Element("Units").Add(New XElement(XmlConvert.EncodeName(su2.nome)))
-                xel = xdoc.Element("Units").Element(XmlConvert.EncodeName(su2.nome))
+                xdoc.Element("Units").Add(New XElement(XmlConvert.EncodeName(su2.Name)))
+                xel = xdoc.Element("Units").Element(XmlConvert.EncodeName(su2.Name))
                 xel.Add(su2.SaveData())
             Next
 

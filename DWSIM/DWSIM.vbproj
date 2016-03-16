@@ -289,7 +289,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Import Include="DWSIM.DWSIM.Flowsheet" />
+    <Import Include="DWSIM.DWSIM.SimulationObjects.PropertyPackages" />
+    <Import Include="DWSIM.DWSIM.SimulationObjects.Reactors" />
+    <Import Include="DWSIM.DWSIM.SimulationObjects.SpecialOps" />
+    <Import Include="DWSIM.DWSIM.SimulationObjects.Streams" />
+    <Import Include="DWSIM.DWSIM.SimulationObjects.UnitOperations" />
     <Import Include="DWSIM.DWSIM.SystemsOfUnits" />
+    <Import Include="DWSIM.DWSIM.Thermodynamics" />
+    <Import Include="DWSIM.DWSIM.Thermodynamics.BaseClasses" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -2705,6 +2713,7 @@
     <Content Include="Assets\help\UT_Triangular_LLE.htm" />
     <Content Include="Assets\help\UT_TrueCriticalPoint.htm" />
     <Content Include="Assets\help\UT_VesselSizing.htm" />
+    <None Include="Resources\splashWelcome_Background.png" />
     <None Include="Resources\splashScreen2.png" />
     <None Include="Resources\uo_split_16.png" />
     <None Include="Resources\stream_mat_16.png" />

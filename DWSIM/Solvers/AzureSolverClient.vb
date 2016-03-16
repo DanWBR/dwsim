@@ -226,7 +226,7 @@ Namespace DWSIM.Flowsheet
                                                     fs.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatingData") & " " & Math.Round(decompressedstream.Length / 1024).ToString & " KB", Color.Brown, DWSIM.Flowsheet.MessageType.Information)
                                                     decompressedstream.Position = 0
                                                     Dim xdoc As XDocument = XDocument.Load(decompressedstream)
-                                                    DWSIM.SimulationObjects.UnitOps.Flowsheet.UpdateProcessData(fs, xdoc)
+                                                    DWSIM.SimulationObjects.UnitOperations.Flowsheet.UpdateProcessData(fs, xdoc)
                                                     fs.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatedDataOK"), Color.Brown, DWSIM.Flowsheet.MessageType.Information)
                                                 End Using
                                             End Using

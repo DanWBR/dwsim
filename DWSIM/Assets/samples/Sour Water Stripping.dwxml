@@ -23,7 +23,7 @@
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -631,7 +631,7 @@
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -1224,9 +1224,9 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.HeatExchanger</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.HeatExchanger</Type>
       <STProperties>
-        <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.HeatExchanger.STHXProperties</Type>
+        <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.HeatExchanger.STHXProperties</Type>
         <Shell_NumberOfShellsInSeries>1</Shell_NumberOfShellsInSeries>
         <Shell_NumberOfPasses>2</Shell_NumberOfPasses>
         <Shell_Di>0.5</Shell_Di>
@@ -1308,7 +1308,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
 </DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -1325,7 +1325,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <PropertyPackage>PP-f19ee93e-351a-4917-a793-33d3158a4b86</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Pump</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Pump</Type>
       <CurveFlow>0</CurveFlow>
       <CurveSysHead>0</CurveSysHead>
       <CurvePower>0</CurvePower>
@@ -1357,7 +1357,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -1374,7 +1374,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <PropertyPackage>PP-f19ee93e-351a-4917-a793-33d3158a4b86</PropertyPackage>
       <Curves>
         <Curve ID="NPSH">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>NPSH</Name>
           <ID>14209d8e-94f8-4ce3-9c3d-836196bd5066</ID>
@@ -1385,7 +1385,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <x></x>
         </Curve>
         <Curve ID="HEAD">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>HEAD</Name>
           <ID>b67b0204-82b2-4362-9a4b-fb0eeea4ec62</ID>
@@ -1396,7 +1396,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <x></x>
         </Curve>
         <Curve ID="EFF">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>EFF</Name>
           <ID>a46d38c3-78f2-452f-a554-5884a0f6471c</ID>
@@ -1407,7 +1407,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <x></x>
         </Curve>
         <Curve ID="POWER">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>POWER</Name>
           <ID>8896d84f-29bf-4cc8-be6a-fe6640efee9f</ID>
@@ -1418,7 +1418,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <x></x>
         </Curve>
         <Curve ID="SYSTEM">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>SYSTEM</Name>
           <ID>92185625-c4c3-42f0-ae5f-053c16ce9df4</ID>
@@ -1446,7 +1446,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -2039,9 +2039,9 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.CapeOpenUO</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.CapeOpenUO</Type>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -2075,7 +2075,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <NodeItems />
       <PropertyPackage>PP-f19ee93e-351a-4917-a793-33d3158a4b86</PropertyPackage>
       <CAPEOPEN_Object_Info>
-        <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo</Type>
+        <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo</Type>
         <TypeName>ChemSepUO.ChemSep_UnitOperation.1</TypeName>
         <Version>2.0.0.6</Version>
         <Description>ChemSep CAPE-OPEN 1.0 Unit Operation</Description>
@@ -2106,7 +2106,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -2699,9 +2699,9 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.HeatExchanger</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.HeatExchanger</Type>
       <STProperties>
-        <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.HeatExchanger.STHXProperties</Type>
+        <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.HeatExchanger.STHXProperties</Type>
         <Shell_NumberOfShellsInSeries>1</Shell_NumberOfShellsInSeries>
         <Shell_NumberOfPasses>2</Shell_NumberOfPasses>
         <Shell_Di>0.5</Shell_Di>
@@ -2789,7 +2789,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
 </DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -2821,7 +2821,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -3429,7 +3429,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -4023,7 +4023,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>0.851892</Energia>
+      <EnergyFlow>0.851892</EnergyFlow>
       <ComponentDescription>EN-5bed16f0-c577-4046-90ae-25f0dd1d06f2</ComponentDescription>
       <ComponentName>ESTR-000</ComponentName>
       <Calculated>true</Calculated>
@@ -4031,7 +4031,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -4041,13 +4041,13 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-5bed16f0-c577-4046-90ae-25f0dd1d06f2</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Pump</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Pump</Type>
       <CurveFlow>0</CurveFlow>
       <CurveSysHead>0</CurveSysHead>
       <CurvePower>0</CurvePower>
@@ -4093,7 +4093,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
 </DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -4110,7 +4110,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <PropertyPackage>PP-f19ee93e-351a-4917-a793-33d3158a4b86</PropertyPackage>
       <Curves>
         <Curve ID="NPSH">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>NPSH</Name>
           <ID>c44fa57a-6044-4b33-ae67-cad02052c9ab</ID>
@@ -4121,7 +4121,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <x></x>
         </Curve>
         <Curve ID="HEAD">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>HEAD</Name>
           <ID>394cfe62-e660-4175-ac65-8f594e8361be</ID>
@@ -4132,7 +4132,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <x></x>
         </Curve>
         <Curve ID="EFF">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>EFF</Name>
           <ID>b5b2f1a7-e6e5-40d3-bde5-209cf1da2d24</ID>
@@ -4143,7 +4143,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <x></x>
         </Curve>
         <Curve ID="POWER">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>POWER</Name>
           <ID>58161aa1-e8e6-488a-a608-f12ff05f0d95</ID>
@@ -4154,7 +4154,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <x></x>
         </Curve>
         <Curve ID="SYSTEM">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.PipingOps.Curve</Type>
+          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve</Type>
           <Enabled>true</Enabled>
           <Name>SYSTEM</Name>
           <ID>4d28c915-d9a2-472c-b9a8-abff9d1b2247</ID>
@@ -4182,7 +4182,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -4790,7 +4790,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -5398,7 +5398,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -5992,7 +5992,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
     </SimulationObject>
     <SimulationObject>
       <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
-      <Energia>50.812175</Energia>
+      <EnergyFlow>50.812175</EnergyFlow>
       <ComponentDescription>EN-9ed0a3e2-5ec4-4cd0-8010-a6153c4f45f3</ComponentDescription>
       <ComponentName>ESTR-005</ComponentName>
       <Calculated>true</Calculated>
@@ -6000,7 +6000,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -6010,7 +6010,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>Correntedeenergia</Descricao>
+      <Descricao>CorrentedeEnergyFlow</Descricao>
       <Nome>EN-9ed0a3e2-5ec4-4cd0-8010-a6153c4f45f3</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -6073,7 +6073,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -6106,7 +6106,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -6699,9 +6699,9 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.CapeOpenUO</Type>
+      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.CapeOpenUO</Type>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -6737,7 +6737,7 @@ Calculated OK.</DebugText>
       <NodeItems />
       <PropertyPackage>PP-f19ee93e-351a-4917-a793-33d3158a4b86</PropertyPackage>
       <CAPEOPEN_Object_Info>
-        <Type>DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo</Type>
+        <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo</Type>
         <TypeName>ChemSepUO.ChemSep_UnitOperation.1</TypeName>
         <Version>2.0.0.6</Version>
         <Description>ChemSep CAPE-OPEN 1.0 Unit Operation</Description>
@@ -6768,7 +6768,7 @@ Calculated OK.</DebugText>
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -7418,7 +7418,7 @@ Calculated OK.</DebugText>
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -7451,7 +7451,7 @@ Calculated OK.</DebugText>
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -8059,7 +8059,7 @@ Calculated OK.</DebugText>
       <DebugText></DebugText>
       <ErrorMessage></ErrorMessage>
       <Annotation>
-        <Type>DWSIM.DWSIM.Outros.Annotation</Type>
+        <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
         <m_rtfText></m_rtfText>
       </Annotation>
@@ -8771,7 +8771,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -8814,7 +8814,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>Pump</TipoObjeto>
+      <ObjectType>Pump</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -8865,7 +8865,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -8897,11 +8897,11 @@ Calculated OK.</DebugText>
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>EnergyStream</TipoObjeto>
+      <ObjectType>EnergyStream</ObjectType>
       <IsEnergyStream>true</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -8951,7 +8951,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -8987,7 +8987,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>true</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>HeatExchanger</TipoObjeto>
+      <ObjectType>HeatExchanger</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -9039,7 +9039,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9082,7 +9082,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>true</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9118,7 +9118,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>true</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>HeatExchanger</TipoObjeto>
+      <ObjectType>HeatExchanger</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -9170,7 +9170,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9213,7 +9213,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9256,7 +9256,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>true</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9299,7 +9299,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9342,7 +9342,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9385,7 +9385,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9428,7 +9428,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9464,7 +9464,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>OT_Reciclo</TipoObjeto>
+      <ObjectType>OT_Recycle</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -9514,7 +9514,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>Pump</TipoObjeto>
+      <ObjectType>Pump</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9547,11 +9547,11 @@ Calculated OK.</DebugText>
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>Correntedeenergia</Description>
+      <Description>CorrentedeEnergyFlow</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>EnergyStream</TipoObjeto>
+      <ObjectType>EnergyStream</ObjectType>
       <IsEnergyStream>true</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -9601,7 +9601,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>MaterialStream</TipoObjeto>
+      <ObjectType>MaterialStream</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9637,7 +9637,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>OT_Reciclo</TipoObjeto>
+      <ObjectType>OT_Recycle</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -9680,7 +9680,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>CapeOpenUO</TipoObjeto>
+      <ObjectType>CapeOpenUO</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>true</Calculated>
@@ -9734,7 +9734,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>CapeOpenUO</TipoObjeto>
+      <ObjectType>CapeOpenUO</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Calculated>true</Calculated>
       <AutoSize>false</AutoSize>
@@ -9792,7 +9792,7 @@ Calculated OK.</DebugText>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
-      <TipoObjeto>GO_SpreadsheetTable</TipoObjeto>
+      <ObjectType>GO_SpreadsheetTable</ObjectType>
       <IsEnergyStream>false</IsEnergyStream>
       <Active>true</Active>
       <Calculated>false</Calculated>

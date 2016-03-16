@@ -734,7 +734,7 @@ Partial Class FormMain
             End If
 
             For Each su As DWSIM.SystemsOfUnits.Units In myarraylist
-                If Not My.Application.UserUnitSystems.ContainsKey(su.nome) Then My.Application.UserUnitSystems.Add(su.nome, su)
+                If Not My.Application.UserUnitSystems.ContainsKey(su.Name) Then My.Application.UserUnitSystems.Add(su.Name, su)
             Next
 
         End If
@@ -761,7 +761,7 @@ Partial Class FormMain
                 If My.Application.UserUnitSystems.Count > 0 Then
                     Dim su As New DWSIM.SystemsOfUnits.Units
                     For Each su In My.Application.UserUnitSystems.Values
-                        If Not .ContainsKey(su.nome) Then .Add(su.nome, su)
+                        If Not .ContainsKey(su.Name) Then .Add(su.Name, su)
                     Next
                 End If
             End If

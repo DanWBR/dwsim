@@ -42,7 +42,7 @@ Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Text
 Imports System.Xml.Linq
 Imports Microsoft.Msdn.Samples.GraphicObjects
-Imports DWSIM.DWSIM.Outros
+Imports DWSIM.DWSIM.Extras
 Imports System.Net
 
 Public Class FormMain
@@ -70,7 +70,7 @@ Public Class FormMain
     Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
     Public PropertyPackages As New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
 
-    Public COMonitoringObjects As New Dictionary(Of String, DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
+    Public COMonitoringObjects As New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
 
 #Region "    Form Events"
 
@@ -251,7 +251,7 @@ Public Class FormMain
                     For Each s2 As String In arr
                         If s2.ToLower = "{7ba1af89-b2e4-493d-bd80-2970bf4cbe99}" Then
                             'this is a CAPE-OPEN MO
-                            Dim myuo As New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
+                            Dim myuo As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
                             With myuo
                                 .AboutInfo = mykey.OpenSubKey("CapeDescription").GetValue("About")
                                 .CapeVersion = mykey.OpenSubKey("CapeDescription").GetValue("CapeVersion")
@@ -1034,7 +1034,7 @@ Public Class FormMain
                 Application.DoEvents()
 
                 Using stream As New MemoryStream(st.WatchItems)
-                    flowsheet.FormWatch.items = DirectCast(mySerializer.Deserialize(stream), Dictionary(Of Integer, DWSIM.Outros.WatchItem))
+                    flowsheet.FormWatch.items = DirectCast(mySerializer.Deserialize(stream), Dictionary(Of Integer, DWSIM.Extras.WatchItem))
                     flowsheet.FormWatch.PopulateList()
                 End Using
 
@@ -1062,7 +1062,7 @@ Public Class FormMain
                 For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In flowsheet.Collections.FlowsheetObjectCollection.Values
                     With obj
                         If .NodeTableItems.Count > 0 Then
-                            For Each nvi As DWSIM.Outros.NodeItem In .NodeTableItems.Values
+                            For Each nvi As DWSIM.Extras.NodeItem In .NodeTableItems.Values
                                 Try
                                     If Not nvi.Text.Contains("PROP_") Then
                                         refill = True
@@ -1257,8 +1257,8 @@ Public Class FormMain
 
         For Each obj In objlist
             Try
-                obj.Nome = pkey & obj.Nome
-                Dim id = obj.Nome
+                obj.Name = pkey & obj.Name
+                Dim id = obj.Name
                 Dim gobj = obj.GraphicObject
                 form.Collections.FlowsheetObjectCollection.Add(id, obj)
                 obj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
@@ -1295,9 +1295,9 @@ Public Class FormMain
                         DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
                     End If
                 End If
-                If TryCast(so, DWSIM.SimulationObjects.UnitOps.CapeOpenUO) IsNot Nothing Then
-                    DirectCast(so, DWSIM.SimulationObjects.UnitOps.CapeOpenUO).UpdateConnectors2()
-                    DirectCast(so, DWSIM.SimulationObjects.UnitOps.CapeOpenUO).UpdatePortsFromConnectors()
+                If TryCast(so, DWSIM.SimulationObjects.UnitOperations.CapeOpenUO) IsNot Nothing Then
+                    DirectCast(so, DWSIM.SimulationObjects.UnitOperations.CapeOpenUO).UpdateConnectors2()
+                    DirectCast(so, DWSIM.SimulationObjects.UnitOperations.CapeOpenUO).UpdatePortsFromConnectors()
                 End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Unit Operation Connection Information", ex))
@@ -1413,7 +1413,7 @@ Public Class FormMain
                                                                form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                                            obj.GraphicObject = gobj
                                            obj.SetFlowsheet(form)
-                                           If Not obj.GraphicObject.TipoObjeto = TipoObjeto.FlowsheetUO Then
+                                           If Not obj.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
                                                obj.FillNodeItems(True)
                                                obj.QTFillNodeItems()
                                            End If
@@ -1444,7 +1444,7 @@ Public Class FormMain
                                         form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                     obj.GraphicObject = gobj
                     obj.SetFlowsheet(form)
-                    If Not obj.GraphicObject.TipoObjeto = TipoObjeto.FlowsheetUO Then
+                    If Not obj.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
                         obj.FillNodeItems(True)
                         obj.QTFillNodeItems()
                     End If
@@ -1475,7 +1475,7 @@ Public Class FormMain
                     Dim clist = p.Compounds.Values.ToList().OrderBy(Function(o) o.ConstantProperties.Normal_Boiling_Point)
                     p.Compounds.Clear()
                     For Each c In clist
-                        p.Compounds.Add(c.Nome, c)
+                        p.Compounds.Add(c.Name, c)
                     Next
                 Next
             End If
@@ -1597,7 +1597,7 @@ Public Class FormMain
             Dim i As Integer = 0
             For Each xel As XElement In data
                 Try
-                    Dim obj As New DWSIM.Outros.Script()
+                    Dim obj As New DWSIM.Extras.Script()
                     obj.LoadData(xel.Elements.ToList)
                     form.ScriptCollection.Add(obj.ID, obj)
                 Catch ex As Exception
@@ -1622,7 +1622,7 @@ Public Class FormMain
 
 
         For Each obj In form.FormSurface.FlowsheetDesignSurface.drawingObjects
-            If obj.TipoObjeto = TipoObjeto.GO_SpreadsheetTable Then
+            If obj.ObjectType = ObjectType.GO_SpreadsheetTable Then
                 DirectCast(obj, DWSIM.GraphicObjects.SpreadsheetTableGraphic).SetSpreadsheet(form.FormSpreadsheet)
             End If
         Next
@@ -1734,7 +1734,7 @@ Public Class FormMain
         'Master Property Tables
 
         For Each g As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects
-            If g.TipoObjeto = TipoObjeto.GO_MasterTable Then
+            If g.ObjectType = ObjectType.GO_MasterTable Then
                 CType(g, DWSIM.GraphicObjects.MasterTableGraphic).Update(form)
             End If
         Next
@@ -1900,7 +1900,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ScriptItems"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems")
 
-        For Each scr As DWSIM.Outros.Script In form.ScriptCollection.Values
+        For Each scr As DWSIM.Extras.Script In form.ScriptCollection.Values
             xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
         Next
 
@@ -2066,7 +2066,7 @@ simx:               Dim myStream As System.IO.FileStream
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
                         myStream.Close()
-                        Me.filename = nome
+                        Me.filename = name
                         Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                         Application.DoEvents()
                         Application.DoEvents()
@@ -2078,7 +2078,7 @@ simx2:              Dim myStream As System.IO.FileStream
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
                         myStream.Close()
-                        Me.filename = nome
+                        Me.filename = name
                         Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                         Application.DoEvents()
                         Application.DoEvents()
@@ -2090,7 +2090,7 @@ simx2:              Dim myStream As System.IO.FileStream
                     '                    If Not (myStream Is Nothing) Then
                     '                        Dim nome = myStream.Name
                     '                        myStream.Close()
-                    '                        Me.filename = nome
+                    '                        Me.filename = name
                     '                        Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                     '                        Application.DoEvents()
                     '                        Application.DoEvents()
@@ -2191,7 +2191,7 @@ ruf:                Application.DoEvents()
                     If Path.GetExtension(Me.filename).ToLower = ".dwxml" Then
                         Task.Factory.StartNew(Sub() SaveXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
                                                                                                               Me.ToolStripStatusLabel1.Text = ""
-                                                                                                              If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                              If Not t.Exception Is Nothing Then form2.writetolog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                           End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
                         Task.Factory.StartNew(Sub() SaveXMLZIP(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
@@ -2267,7 +2267,7 @@ ruf:                Application.DoEvents()
 
         If myLink.Text <> DWSIM.App.GetLocalString("vazio") Then
             Dim nome = myLink.Tag.ToString
-            Me.filename = nome
+            Me.filename = name
             Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " (" + nome + ")"
             Application.DoEvents()
             Try
@@ -2385,7 +2385,7 @@ ruf:                Application.DoEvents()
             If File.Exists(myLink.Tag.ToString) Then
                 Dim nome = myLink.Tag.ToString
                 Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " (" + nome + ")"
-                Me.filename = nome
+                Me.filename = name
                 Application.DoEvents()
                 Dim objStreamReader As FileStream = Nothing
                 Try
@@ -2404,7 +2404,7 @@ ruf:                Application.DoEvents()
                             Dim x As New BinaryFormatter()
                             NewMDIChild.mycase = x.Deserialize(objStreamReader)
                             objStreamReader.Close()
-                            NewMDIChild.mycase.Filename = nome
+                            NewMDIChild.mycase.Filename = name
                             NewMDIChild.WriteData()
                         Case ".dwrsd"
                             Dim NewMDIChild As New FormDataRegression()
@@ -2422,7 +2422,7 @@ ruf:                Application.DoEvents()
                             objStreamReader = New FileStream(nome, FileMode.Open)
                             Dim x As New BinaryFormatter()
                             NewMDIChild.mycase = x.Deserialize(objStreamReader)
-                            NewMDIChild.mycase.Filename = nome
+                            NewMDIChild.mycase.Filename = name
                             objStreamReader.Close()
                             NewMDIChild.LoadCase(NewMDIChild.mycase, False)
                     End Select

@@ -446,7 +446,7 @@ Public Class DCCharacterizationWizard
 
             With subst
                 .ConstantProperties = cprops
-                .Nome = cprops.Name
+                .Name = cprops.Name
                 .FracaoDePetroleo = True
             End With
 
@@ -600,7 +600,7 @@ Public Class DCCharacterizationWizard
         End If
 
         For Each c As Compound In ccol.Values
-            tms.Phases(0).Compounds.Add(c.Nome, c)
+            tms.Phases(0).Compounds.Add(c.Name, c)
         Next
 
         Dim recalcVc As Boolean = False
@@ -692,7 +692,7 @@ Public Class DCCharacterizationWizard
         Me.DataGridView2.Rows.Clear()
         For Each subst As Compound In ccol.Values
             With subst
-                nm = .Nome
+                nm = .Name
                 fm = Format(.FracaoMolar, nf)
                 nbp = Format(Converter.ConvertFromSI(su.temperature, .ConstantProperties.NBP), nf)
                 sg = Format(.ConstantProperties.PF_SG, nf)
@@ -755,15 +755,15 @@ Public Class DCCharacterizationWizard
         Next
         For Each subst In ccol.Values
             With myCOMS.Phases(0).Compounds
-                .Item(subst.Nome).ConstantProperties = subst.ConstantProperties
-                .Item(subst.Nome).FracaoMassica = subst.FracaoMassica
-                .Item(subst.Nome).FracaoMolar = subst.FracaoMolar
+                .Item(subst.Name).ConstantProperties = subst.ConstantProperties
+                .Item(subst.Name).FracaoMassica = subst.FracaoMassica
+                .Item(subst.Name).FracaoMolar = subst.FracaoMolar
             End With
-            myCOMS.Phases(1).Compounds.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
-            myCOMS.Phases(2).Compounds.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
+            myCOMS.Phases(1).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
+            myCOMS.Phases(2).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
         Next
-        form.Collections.FlowsheetObjectCollection.Add(myCOMS.Nome, myCOMS)
-        form.Collections.CLCS_MaterialStreamCollection.Add(myCOMS.Nome, myCOMS)
+        form.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
+        form.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
         form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
         form.FormSurface.FlowsheetDesignSurface.Invalidate()
 

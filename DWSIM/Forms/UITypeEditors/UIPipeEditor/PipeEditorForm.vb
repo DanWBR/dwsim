@@ -18,7 +18,7 @@
                 With Me.PipeEditor1.Profile
                     Dim i As Integer = 1
                     Do
-                        If .Sections(i).Tipo = "Tubulaosimples" Then
+                        If .Sections(i).ObjectType = "Tubulaosimples" Then
                             If i >= 2 Then
                                 px.Add(px(px.Count - 1) + Convert.ToDouble(.Sections(i).Comprimento))
                                 py.Add(py(py.Count - 1) + Convert.ToDouble(.Sections(i).Elevacao))
@@ -48,7 +48,7 @@
                 With Me.PipeEditor1.Profile
                     Dim i As Integer = 1
                     Do
-                        If .Sections(i).Tipo = "Tubulaosimples" Then
+                        If .Sections(i).ObjectType = "Tubulaosimples" Then
                             If i >= 2 Then
                                 px.Add(px(px.Count - 1) + (Convert.ToDouble(.Sections(i).Comprimento ^ 2 - .Sections(i).Elevacao ^ 2) ^ 0.5))
                                 py.Add(py(py.Count - 1) + Convert.ToDouble(.Sections(i).Elevacao))

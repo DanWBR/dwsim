@@ -336,7 +336,7 @@ out:
                     Else
                         j = 0
                         For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                            If subst.Nome = Me.StabSearchCompIDs(i) Then
+                            If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
                             End If
@@ -1133,7 +1133,7 @@ alt:
                     Else
                         j = 0
                         For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                            If subst.Nome = Me.StabSearchCompIDs(i) Then
+                            If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
                             End If
@@ -1253,7 +1253,7 @@ alt:
                     Else
                         j = 0
                         For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                            If subst.Nome = Me.StabSearchCompIDs(i) Then
+                            If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
                             End If

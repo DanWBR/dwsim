@@ -5,7 +5,7 @@ Public Class FrmPsvSize
 
     Inherits System.Windows.Forms.Form
 
-    Dim valve As DWSIM.SimulationObjects.UnitOps.Valve
+    Dim valve As DWSIM.SimulationObjects.UnitOperations.Valve
     Dim entmat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim saimat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet

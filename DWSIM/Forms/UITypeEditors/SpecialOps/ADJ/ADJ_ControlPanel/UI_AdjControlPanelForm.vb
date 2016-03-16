@@ -448,8 +448,8 @@ Final3:
     '                    Case Else
     '                        Return Nothing
     '                End Select
-    '            Case "Corrente de Energia"
-    '                Return Me.formC.Collections.CLCS_EnergyStreamCollection(.m_ID).Energia.GetValueOrDefault
+    '            Case "Corrente de EnergyFlow"
+    '                Return Me.formC.Collections.CLCS_EnergyStreamCollection(.m_ID).EnergyFlow.GetValueOrDefault
     '            Case DWSIM.App.GetLocalString("Misturadores")
     '                Return Nothing
     '            Case DWSIM.App.GetLocalString("MisturadoresMatEn")

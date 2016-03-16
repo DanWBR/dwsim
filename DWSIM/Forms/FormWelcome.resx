@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>648, 503</value>
+    <value>620, 467</value>
   </data>
   <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
@@ -154,7 +154,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 373</value>
+    <value>459, 344</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 13</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 350</value>
+    <value>459, 321</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 17</value>
@@ -218,7 +218,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAXABAAFwAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAZgBAAGYAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -290,10 +290,10 @@
 </value>
   </data>
   <data name="lvlatest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 94</value>
+    <value>66, 70</value>
   </data>
   <data name="lvlatest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>343, 171</value>
+    <value>330, 171</value>
   </data>
   <data name="lvlatest.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -317,7 +317,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 422</value>
+    <value>119, 392</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 13</value>
@@ -350,7 +350,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 399</value>
+    <value>119, 369</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 17</value>
@@ -380,7 +380,7 @@
     <value>NoControl</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 397</value>
+    <value>67, 367</value>
   </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 42</value>
@@ -407,16 +407,16 @@
     <value>NoControl</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 328</value>
+    <value>459, 299</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 13</value>
+    <value>245, 13</value>
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
-    <value>Abre uma nova janela do utilitário de criação de componentes.</value>
+    <value>Abre uma nova janela do criador de componentes.</value>
   </data>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
@@ -440,7 +440,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 304</value>
+    <value>459, 275</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 17</value>
@@ -470,7 +470,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 328</value>
+    <value>119, 298</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 13</value>
@@ -500,7 +500,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 373</value>
+    <value>119, 343</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 13</value>
@@ -533,7 +533,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 304</value>
+    <value>119, 274</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 17</value>
@@ -566,7 +566,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 350</value>
+    <value>119, 320</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 17</value>
@@ -596,7 +596,7 @@
     <value>NoControl</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 349</value>
+    <value>67, 319</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 42</value>
@@ -623,7 +623,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 422</value>
+    <value>459, 393</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 13</value>
@@ -656,7 +656,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 399</value>
+    <value>459, 370</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 17</value>
@@ -686,7 +686,7 @@
     <value>NoControl</value>
   </data>
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>387, 399</value>
+    <value>407, 370</value>
   </data>
   <data name="Button6.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 42</value>
@@ -713,10 +713,10 @@
     <value>NoControl</value>
   </data>
   <data name="LabelWithDivider12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 447</value>
+    <value>67, 417</value>
   </data>
   <data name="LabelWithDivider12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 18</value>
+    <value>652, 18</value>
   </data>
   <data name="LabelWithDivider12.TabIndex" type="System.Int32, mscorlib">
     <value>72</value>
@@ -740,10 +740,10 @@
     <value>NoControl</value>
   </data>
   <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 474</value>
+    <value>69, 438</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>619, 59</value>
+    <value>545, 73</value>
   </data>
   <data name="Label15.TabIndex" type="System.Int32, mscorlib">
     <value>73</value>
@@ -767,7 +767,7 @@
     <value>NoControl</value>
   </data>
   <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>648, 474</value>
+    <value>620, 438</value>
   </data>
   <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 23</value>
@@ -797,7 +797,7 @@
     <value>NoControl</value>
   </data>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>387, 351</value>
+    <value>407, 322</value>
   </data>
   <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 42</value>
@@ -824,7 +824,7 @@
     <value>NoControl</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>387, 303</value>
+    <value>407, 274</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 42</value>
@@ -851,7 +851,7 @@
     <value>NoControl</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>27, 303</value>
+    <value>67, 273</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 42</value>
@@ -881,7 +881,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 274</value>
+    <value>65, 247</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 19</value>
@@ -914,7 +914,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 70</value>
+    <value>62, 48</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 19</value>
@@ -947,7 +947,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>383, 69</value>
+    <value>403, 48</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 19</value>
@@ -971,10 +971,10 @@
     <value>1</value>
   </data>
   <data name="lvlatestfolders.Location" type="System.Drawing.Point, System.Drawing">
-    <value>387, 94</value>
+    <value>407, 70</value>
   </data>
   <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
-    <value>360, 171</value>
+    <value>312, 171</value>
   </data>
   <data name="lvlatestfolders.TabIndex" type="System.Int32, mscorlib">
     <value>78</value>

@@ -59,11 +59,11 @@ Public Class frmProps
 
         If Not sobj Is Nothing Then
 
-            If sobj.TipoObjeto <> TipoObjeto.GO_Tabela And sobj.TipoObjeto <> TipoObjeto.GO_MasterTable And sobj.TipoObjeto <> TipoObjeto.GO_SpreadsheetTable Then
+            If sobj.ObjectType <> ObjectType.GO_Table And sobj.ObjectType <> ObjectType.GO_MasterTable And sobj.ObjectType <> ObjectType.GO_SpreadsheetTable Then
 
                 Flowsheet.Collections.FlowsheetObjectCollection(sobj.Name).HandlePropertyChange(s, e)
 
-            ElseIf sobj.TipoObjeto = TipoObjeto.GO_MasterTable Then
+            ElseIf sobj.ObjectType = ObjectType.GO_MasterTable Then
 
                 Dim mt As DWSIM.GraphicObjects.MasterTableGraphic = sobj
 
@@ -139,7 +139,7 @@ Public Class frmProps
             Finally
                 'CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.OldValue, Flowsheet.FormSurface.FlowsheetDesignSurface), GraphicObject).Tag = e.ChangedItem.Value
                 For Each g As GraphicObject In Flowsheet.FormSurface.FlowsheetDesignSurface.drawingObjects
-                    If g.TipoObjeto = TipoObjeto.GO_MasterTable Then
+                    If g.ObjectType = ObjectType.GO_MasterTable Then
                         CType(g, DWSIM.GraphicObjects.MasterTableGraphic).Update(Flowsheet)
                     End If
                 Next

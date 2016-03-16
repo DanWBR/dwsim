@@ -445,7 +445,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             End If
         End Function
 
-        Public Overrides Function DW_CalcEnergiaMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcEnergyFlowMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
             Return 0.0#
         End Function
 

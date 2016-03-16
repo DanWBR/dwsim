@@ -337,10 +337,10 @@ Namespace DWSIM.SimulationObjects.Reactors
             sum1 = 0
             sumn = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Nome) Then
-                    s.MolarFlow = N(s.Nome)
-                    s.FracaoMolar = N(s.Nome) / sumfm
-                    sum1 += N(s.Nome) * s.ConstantProperties.Molar_Weight / 1000
+                If Me.ComponentIDs.Contains(s.Name) Then
+                    s.MolarFlow = N(s.Name)
+                    s.FracaoMolar = N(s.Name) / sumfm
+                    sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 Else
                     s.FracaoMolar = s.MolarFlow / sumfm
                 End If
@@ -351,8 +351,8 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             sumw = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Nome) Then
-                    s.MassFlow = N(s.Nome) * s.ConstantProperties.Molar_Weight / 1000
+                If Me.ComponentIDs.Contains(s.Name) Then
+                    s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 End If
                 s.FracaoMassica = s.MassFlow / (sum1 + Winerts)
                 sumw += s.MassFlow
@@ -382,7 +382,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             i = 0
             For Each s As Compound In tms.Phases(2).Compounds.Values
                 If s.FracaoMolar <> 0.0# Then
-                    DGf = pp.AUX_DELGF_T(298.15, T, s.Nome) * s.ConstantProperties.Molar_Weight
+                    DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
                     fugs(i) = s.FugacityCoeff.GetValueOrDefault
                     'XC = s.FracaoMolar.GetValueOrDefault
                     If s.FracaoMolar.GetValueOrDefault <= 0 Then
@@ -439,10 +439,10 @@ Namespace DWSIM.SimulationObjects.Reactors
             sum1 = 0
             sumn = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Nome) Then
-                    s.MolarFlow = N(s.Nome)
-                    s.FracaoMolar = N(s.Nome) / sumfm
-                    sum1 += N(s.Nome) * s.ConstantProperties.Molar_Weight / 1000
+                If Me.ComponentIDs.Contains(s.Name) Then
+                    s.MolarFlow = N(s.Name)
+                    s.FracaoMolar = N(s.Name) / sumfm
+                    sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 Else
                     s.FracaoMolar = s.MolarFlow / sumfm
                 End If
@@ -453,8 +453,8 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             sumw = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Nome) Then
-                    s.MassFlow = N(s.Nome) * s.ConstantProperties.Molar_Weight / 1000
+                If Me.ComponentIDs.Contains(s.Name) Then
+                    s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 End If
                 s.FracaoMassica = s.MassFlow / (sum1 + Winerts)
                 sumw += s.MassFlow
@@ -488,7 +488,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             i = 0
             For Each s As Compound In tms.Phases(2).Compounds.Values
                 If s.FracaoMolar > 0.0# Then
-                    DGf = pp.AUX_DELGF_T(298.15, T, s.Nome) * s.ConstantProperties.Molar_Weight
+                    DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
                     fugs(i) = s.FugacityCoeff.GetValueOrDefault
                     CP(i) = (DGf + Log(fugs(i) * s.FracaoMolar * P / P0))
                 Else
@@ -577,10 +577,10 @@ Namespace DWSIM.SimulationObjects.Reactors
             sum1 = 0
             sumn = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Nome) Then
-                    s.MolarFlow = N(s.Nome)
-                    s.FracaoMolar = N(s.Nome) / sumfm
-                    sum1 += N(s.Nome) * s.ConstantProperties.Molar_Weight / 1000
+                If Me.ComponentIDs.Contains(s.Name) Then
+                    s.MolarFlow = N(s.Name)
+                    s.FracaoMolar = N(s.Name) / sumfm
+                    sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 Else
                     s.FracaoMolar = s.MolarFlow / sumfm
                 End If
@@ -591,8 +591,8 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             sumw = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Nome) Then
-                    s.MassFlow = N(s.Nome) * s.ConstantProperties.Molar_Weight / 1000
+                If Me.ComponentIDs.Contains(s.Name) Then
+                    s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 End If
                 s.FracaoMassica = s.MassFlow / (sum1 + Winerts)
                 sumw += s.MassFlow
@@ -622,7 +622,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             i = 0
             For Each s As Compound In tms.Phases(2).Compounds.Values
                 If s.FracaoMolar > 0.0# Then
-                    DGf = pp.AUX_DELGF_T(298.15, T, s.Nome) * s.ConstantProperties.Molar_Weight
+                    DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
                     fugs(i) = s.FugacityCoeff.GetValueOrDefault
                     CP(i) = s.FracaoMolar * (DGf + Log(fugs(i) * s.FracaoMolar.GetValueOrDefault * P / P0))
                 Else
@@ -747,7 +747,7 @@ Namespace DWSIM.SimulationObjects.Reactors
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.New()
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
             Me.FillNodeItems()
             Me.QTFillNodeItems()
@@ -761,59 +761,59 @@ Namespace DWSIM.SimulationObjects.Reactors
         Public Overrides Sub Validate()
 
             'MyBase.Validate()
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Gibbs
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Gibbs
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac10"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Gibbs
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Gibbs
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac11"))
             ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Gibbs
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Gibbs
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac11"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Gibbs
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Gibbs
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Gibbs
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Gibbs
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Gibbs
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Gibbs
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
@@ -834,7 +834,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             Dim form As FormFlowsheet = Me.FlowSheet
 
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             Dim i, j, l, m As Integer
 
@@ -847,7 +847,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             Me.DeltaT = 0
 
             Dim rx As Reaction
-            ims = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Clone
+            ims = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Clone
             Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Me.PropertyPackage
             Dim ppr As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
 
@@ -1097,8 +1097,8 @@ Namespace DWSIM.SimulationObjects.Reactors
                     'calculate component conversions.
 
                     For Each sb As Compound In ims.Phases(0).Compounds.Values
-                        If Me.ComponentConversions.ContainsKey(sb.Nome) Then
-                            Me.ComponentConversions(sb.Nome) = -DN(sb.Nome) / N0(sb.Nome)
+                        If Me.ComponentConversions.ContainsKey(sb.Name) Then
+                            Me.ComponentConversions(sb.Name) = -DN(sb.Name) / N0(sb.Name)
                         End If
                     Next
 
@@ -1107,8 +1107,8 @@ Namespace DWSIM.SimulationObjects.Reactors
                     Dim DHr As Double = 0
 
                     For Each sb As Compound In ims.Phases(0).Compounds.Values
-                        If N0.ContainsKey(sb.Nome) Then
-                            DHr += sb.ConstantProperties.IG_Enthalpy_of_Formation_25C * sb.ConstantProperties.Molar_Weight * DN(sb.Nome) / 1000
+                        If N0.ContainsKey(sb.Name) Then
+                            DHr += sb.ConstantProperties.IG_Enthalpy_of_Formation_25C * sb.ConstantProperties.Molar_Weight * DN(sb.Name) / 1000
                         End If
                     Next
 
@@ -1448,8 +1448,8 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                         ' comp. conversions
                         For Each sb As Compound In ims.Phases(0).Compounds.Values
-                            If Me.ComponentConversions.ContainsKey(sb.Nome) Then
-                                Me.ComponentConversions(sb.Nome) = -DN(sb.Nome) / N0(sb.Nome)
+                            If Me.ComponentConversions.ContainsKey(sb.Name) Then
+                                Me.ComponentConversions(sb.Name) = -DN(sb.Name) / N0(sb.Name)
                             End If
                         Next
 
@@ -1473,7 +1473,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                             Case OperationMode.Adiabatic
 
-                                'Me.DeltaQ = form.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name).Energia.GetValueOrDefault
+                                'Me.DeltaQ = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name).EnergyFlow.GetValueOrDefault
                                 Me.DeltaQ = 0.0# 'adiabatic !
 
                                 'Products Enthalpy (kJ/kg * kg/s = kW)
@@ -1616,7 +1616,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             Dim cp As ConnectionPoint
             cp = Me.GraphicObject.InputConnectors(0)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedFrom.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                 i = 0
                 For Each comp In ms.Phases(0).Compounds.Values
@@ -1634,7 +1634,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .ClearAllProps()
                     .Phases(0).Properties.temperature = T
@@ -1665,7 +1665,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .ClearAllProps()
                     .Phases(0).Properties.temperature = T
@@ -1694,18 +1694,18 @@ Namespace DWSIM.SimulationObjects.Reactors
                 End With
             End If
 
-            'Corrente de energia - atualizar valor da potência (kJ/s)
-            With form.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
-                .Energia = Me.DeltaQ.GetValueOrDefault
+            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
             End With
 
             'Call function to calculate flowsheet
             With objargs
-                .Calculado = True
-                .Nome = Me.Nome
+                .Calculated = True
+                .Name = Me.Name
                 .Tag = Me.GraphicObject.Tag
-                .Tipo = TipoObjeto.RCT_Gibbs
+                .ObjectType = ObjectType.RCT_Gibbs
             End With
 
             form.CalculationQueue.Enqueue(objargs)
@@ -1722,7 +1722,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
 
-            'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             'Dim W As Double = ems.Phases(0).Properties.massflow.GetValueOrDefault
             'Dim j As Integer = 0
 
@@ -1731,7 +1731,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -1752,7 +1752,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -1772,11 +1772,11 @@ Namespace DWSIM.SimulationObjects.Reactors
             End If
 
             'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
             With objargs
-                .Calculado = False
-                .Nome = Me.Nome
-                .Tipo = TipoObjeto.RCT_Gibbs
+                .Calculated = False
+                .Name = Me.Name
+                .ObjectType = ObjectType.RCT_Gibbs
             End With
 
             form.CalculationQueue.Enqueue(objargs)
@@ -1843,7 +1843,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
                 End With
 
-                .Item.Add(DWSIM.App.GetLocalString("Correntedeenergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlow"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector

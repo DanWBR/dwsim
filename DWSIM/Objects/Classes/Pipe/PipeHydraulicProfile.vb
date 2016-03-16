@@ -61,7 +61,7 @@ Imports System.Linq
         For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Sections").Elements.ToList
             Dim pr As New PipeSection()
             pr.LoadData(xel.Elements.ToList)
-            pr.Tipo = pr.Tipo.Replace("°", " dg")
+            pr.ObjectType = pr.Tipo.Replace("°", " dg")
             m_collection.Add(xel.@ID, pr)
         Next
 
@@ -311,7 +311,7 @@ End Class
             .VapRe = VAPRE
             .LiqRe = LIQRE
             .CalorTransferido = QTRANSF
-            .Energia_Inicial = EINICIAL
+            .EnergyFlow_Inicial = EINICIAL
             .HTC = HTC
         End With
 
@@ -481,7 +481,7 @@ End Class
         End Set
     End Property
 
-    Public Property Energia_Inicial() As Nullable(Of Double)
+    Public Property EnergyFlow_Inicial() As Nullable(Of Double)
         Get
             Return Me.m_Einicial
         End Get

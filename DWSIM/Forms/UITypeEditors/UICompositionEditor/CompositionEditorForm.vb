@@ -22,11 +22,11 @@ Public Class CompositionEditorForm
         If Solvent Is Nothing Then Solvent = ""
         If InitialComposition Is Nothing Then InitialComposition = New Dictionary(Of String, Double)()
         For Each comp In Me.Compounds.Values
-            If Not InitialComposition.ContainsKey(comp.Nome) Then InitialComposition.Add(comp.Nome, comp.FracaoMolar)
-            GridComp.Rows.Add(New Object() {comp.FracaoMolar, InitialComposition(comp.Nome)})
-            GridComp.Rows(GridComp.Rows.Count - 1).HeaderCell.Value = DWSIM.App.GetComponentName(comp.Nome) & " (" & comp.ConstantProperties.OriginalDB & ")"
-            GridComp.Rows(GridComp.Rows.Count - 1).HeaderCell.Tag = comp.Nome
-            ComboBox1.Items.Add(DWSIM.App.GetComponentName(comp.Nome))
+            If Not InitialComposition.ContainsKey(comp.Name) Then InitialComposition.Add(comp.Name, comp.FracaoMolar)
+            GridComp.Rows.Add(New Object() {comp.FracaoMolar, InitialComposition(comp.Name)})
+            GridComp.Rows(GridComp.Rows.Count - 1).HeaderCell.Value = DWSIM.App.GetComponentName(comp.Name) & " (" & comp.ConstantProperties.OriginalDB & ")"
+            GridComp.Rows(GridComp.Rows.Count - 1).HeaderCell.Tag = comp.Name
+            ComboBox1.Items.Add(DWSIM.App.GetComponentName(comp.Name))
         Next
         If Solvent <> "" Then ComboBox1.SelectedItem = Solvent Else ComboBox1.SelectedIndex = 0
         Try
@@ -280,7 +280,7 @@ Public Class CompositionEditorForm
 
             Me.InitialComposition.Clear()
             For Each comp In Me.Compounds.Values
-                Me.InitialComposition.Add(comp.Nome, comp.FracaoMolar.GetValueOrDefault)
+                Me.InitialComposition.Add(comp.Name, comp.FracaoMolar.GetValueOrDefault)
             Next
 
         End If

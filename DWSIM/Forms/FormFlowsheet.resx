@@ -1045,7 +1045,7 @@
     <value>179, 22</value>
   </data>
   <data name="TSMIEnergyStream.Text" xml:space="preserve">
-    <value>Corrente de Energia</value>
+    <value>Corrente de EnergyFlow</value>
   </data>
   <data name="CorrentesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
@@ -1339,7 +1339,7 @@
     <value>170, 22</value>
   </data>
   <data name="TSMIEnergyRecycle.Text" xml:space="preserve">
-    <value>Reciclo de Energia</value>
+    <value>Reciclo de EnergyFlow</value>
   </data>
   <data name="TSMIAdjust.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>White</value>

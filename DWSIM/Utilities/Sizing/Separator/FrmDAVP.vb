@@ -2,7 +2,7 @@
 
     Inherits System.Windows.Forms.Form
 
-    Dim vessel As DWSIM.SimulationObjects.UnitOps.Vessel
+    Dim vessel As DWSIM.SimulationObjects.UnitOperations.Vessel
     Dim entmat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
     Dim rhol, rhov, ql, qv, qe, rhoe, wl, wv As Double

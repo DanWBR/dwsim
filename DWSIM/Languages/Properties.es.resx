@@ -166,7 +166,7 @@
     <comment>1</comment>
   </data>
   <data name="PROP_CP_0" xml:space="preserve">
-    <value>Balance de Energia</value>
+    <value>Balance de EnergyFlow</value>
     <comment>0</comment>
   </data>
   <data name="PROP_CR_0" xml:space="preserve">
@@ -226,11 +226,11 @@
     <comment>0</comment>
   </data>
   <data name="PROP_ES_0" xml:space="preserve">
-    <value>Flujo de Energia</value>
+    <value>Flujo de EnergyFlow</value>
     <comment>1</comment>
   </data>
   <data name="PROP_FT_0" xml:space="preserve">
-    <value>Balance de Energia</value>
+    <value>Balance de EnergyFlow</value>
   </data>
   <data name="PROP_FT_1" xml:space="preserve">
     <value>Área Total de Filtro</value>
@@ -1113,7 +1113,7 @@
     <value>Especificación Flujo (2)</value>
   </data>
   <data name="PROP_SS_0" xml:space="preserve">
-    <value>Balance de Energia</value>
+    <value>Balance de EnergyFlow</value>
     <comment>0</comment>
   </data>
   <data name="PROP_SS_1" xml:space="preserve">
@@ -1222,6 +1222,6 @@
     <value>pH da Phase Líquida 1</value>
   </data>
   <data name="PROP_MS_154" xml:space="preserve">
-    <value>Flujo de Energia</value>
+    <value>Flujo de EnergyFlow</value>
   </data>
 </root>

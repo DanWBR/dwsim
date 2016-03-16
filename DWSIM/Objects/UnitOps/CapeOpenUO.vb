@@ -31,10 +31,10 @@ Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Reflection
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen
+Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
 Imports System.Threading
 
-Namespace DWSIM.SimulationObjects.UnitOps
+Namespace DWSIM.SimulationObjects.UnitOperations
 
     <System.Serializable()> Public Class CapeOpenUO
 
@@ -46,13 +46,13 @@ Namespace DWSIM.SimulationObjects.UnitOps
         Private m_reactionSetID As String = "DefaultSet"
         Private m_reactionSetName As String = ""
 
-        Private _seluo As DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
+        Private _seluo As DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
         Private Shadows _ports As List(Of ICapeUnitPort)
         <System.NonSerialized()> Private _params As List(Of ICapeParameter)
 
         <System.NonSerialized> Private _tempdata As List(Of XElement)
 
-        <System.NonSerialized()> Private _istr As DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper
+        <System.NonSerialized()> Private _istr As DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper
         Private _persisteddata As Byte()
 
         Private _restorefromcollections As Boolean = False
@@ -191,7 +191,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End If
 
             If _persisteddata IsNot Nothing Then
-                _istr = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(_persisteddata))
+                _istr = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(_persisteddata))
             End If
 
             If _istr IsNot Nothing Then
@@ -248,7 +248,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 If Not myuo Is Nothing Then
                     Dim myuo2 As Interfaces.IPersistStreamInit = TryCast(_couo, Interfaces.IPersistStreamInit)
                     If myuo2 IsNot Nothing Then
-                        _istr = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
+                        _istr = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
                         Try
                             _istr.baseStream.Position = 0
                             myuo2.Save(_istr, True)
@@ -266,7 +266,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 Else
                     Dim myuo2 As Interfaces2.IPersistStream = TryCast(_couo, Interfaces2.IPersistStream)
                     If myuo2 IsNot Nothing Then
-                        _istr = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
+                        _istr = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
                         Try
                             _istr.baseStream.Position = 0
                             myuo2.Save(_istr, True)
@@ -867,7 +867,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         Dim pdata As XElement = (From el As XElement In data Select el Where el.Name = "PersistedData").SingleOrDefault
 
                         If Not pdata Is Nothing Then
-                            _istr = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(Convert.FromBase64String(pdata.Value)))
+                            _istr = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(Convert.FromBase64String(pdata.Value)))
                             PersistLoad(Nothing)
                         End If
 
@@ -914,7 +914,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Init()
 
                     Dim pdata As XElement = (From el As XElement In data Select el Where el.Name = "PersistedData").SingleOrDefault
-                    _istr = New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(Convert.FromBase64String(pdata.Value)))
+                    _istr = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream(Convert.FromBase64String(pdata.Value)))
                     PersistLoad(Nothing)
 
                     Dim paramdata As XElement = (From el As XElement In data Select el Where el.Name = "ParameterData").SingleOrDefault
@@ -1020,7 +1020,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             UpdatePortsFromConnectors()
 
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not _couo Is Nothing Then
                 For Each c As ConnectionPoint In Me.GraphicObject.InputConnectors
@@ -1041,10 +1041,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     End If
                 Catch ex As Exception
                     With objargs
-                        .Calculado = False
-                        .Nome = Me.Nome
+                        .Calculated = False
+                        .Name = Me.Name
                         .Tag = Me.GraphicObject.Tag
-                        .Tipo = TipoObjeto.CapeOpenUO
+                        .ObjectType = ObjectType.CapeOpenUO
                     End With
                     For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
                         If c.Type = ConType.ConEn Then
@@ -1072,16 +1072,16 @@ Namespace DWSIM.SimulationObjects.UnitOps
                                 Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name)
                                 mat.PropertyPackage.CurrentMaterialStream = mat
                                 For Each subst As Compound In mat.Phases(0).Compounds.Values
-                                    subst.FracaoMassica = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 0)
+                                    subst.FracaoMassica = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
                                 Next
                             End If
                         Next
                         'Call function to calculate flowsheet
                         With objargs
-                            .Calculado = True
-                            .Nome = Me.Nome
+                            .Calculated = True
+                            .Name = Me.Name
                             .Tag = Me.GraphicObject.Tag
-                            .Tipo = TipoObjeto.CapeOpenUO
+                            .ObjectType = ObjectType.CapeOpenUO
                         End With
                         For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.Type = ConType.ConEn And c.IsAttached Then
@@ -1104,10 +1104,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         End If
                     Catch ex As Exception
                         With objargs
-                            .Calculado = False
-                            .Nome = Me.Nome
+                            .Calculated = False
+                            .Name = Me.Name
                             .Tag = Me.GraphicObject.Tag
-                            .Tipo = TipoObjeto.CapeOpenUO
+                            .ObjectType = ObjectType.CapeOpenUO
                         End With
                         For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.Type = ConType.ConEn Then
@@ -1121,10 +1121,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag + ": CO Unit not validated. Reason: " + msg, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                     'Call function to calculate flowsheet
                     With objargs
-                        .Calculado = False
-                        .Nome = Me.Nome
+                        .Calculated = False
+                        .Name = Me.Name
                         .Tag = Me.GraphicObject.Tag
-                        .Tipo = TipoObjeto.CapeOpenUO
+                        .ObjectType = ObjectType.CapeOpenUO
                     End With
                     For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
                         If c.Type = ConType.ConEn Then
@@ -1141,12 +1141,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
         Public Overrides Function DeCalculate() As Integer
 
             'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
             With objargs
-                .Calculado = False
-                .Nome = Me.Nome
+                .Calculated = False
+                .Name = Me.Name
                 .Tag = Me.GraphicObject.Tag
-                .Tipo = TipoObjeto.CapeOpenUO
+                .ObjectType = ObjectType.CapeOpenUO
             End With
 
             Try
@@ -1336,7 +1336,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Next
                     If e.ChangedItem.Value <> "" Then
                         If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, Me.GraphicObject.X - 40, Me.GraphicObject.Y, e.ChangedItem.Value)
+                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, Me.GraphicObject.X - 40, Me.GraphicObject.Y, e.ChangedItem.Value)
                         ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                             MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                             Exit Sub
@@ -1370,7 +1370,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Next
                     If e.ChangedItem.Value <> "" Then
                         If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.MaterialStream, Me.GraphicObject.X + Me.GraphicObject.Width + 40, Me.GraphicObject.Y, e.ChangedItem.Value)
+                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, Me.GraphicObject.X + Me.GraphicObject.Width + 40, Me.GraphicObject.Y, e.ChangedItem.Value)
                         ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                             MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                             Exit Sub
@@ -1404,7 +1404,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Next
                     If e.ChangedItem.Value <> "" Then
                         If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, Me.GraphicObject.X - 40, Me.GraphicObject.Y, e.ChangedItem.Value)
+                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, Me.GraphicObject.X - 40, Me.GraphicObject.Y, e.ChangedItem.Value)
                         ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
                             MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                             Exit Sub
@@ -1438,7 +1438,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Next
                     If e.ChangedItem.Value <> "" Then
                         If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(TipoObjeto.EnergyStream, Me.GraphicObject.X + Me.GraphicObject.Width + 40, Me.GraphicObject.Y, e.ChangedItem.Value)
+                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, Me.GraphicObject.X + Me.GraphicObject.Width + 40, Me.GraphicObject.Y, e.ChangedItem.Value)
                         ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
                             MessageBox.Show(DWSIM.App.GetLocalString("Todasasconexespossve"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                             Exit Sub
@@ -1494,12 +1494,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
         End Function
 
         Public Overrides Sub QTFillNodeItems()
-            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
             If Not _seluo Is Nothing Then
                 With _seluo
-                    Me.QTNodeTableItems.Add(0, New Outros.NodeItem("Name", .Name, "", 0, 0, Nothing))
-                    Me.QTNodeTableItems.Add(1, New Outros.NodeItem("Type Name", .TypeName, "", 1, 0, Nothing))
-                    Me.QTNodeTableItems.Add(2, New Outros.NodeItem("Version", .Version, "", 2, 0, Nothing))
+                    Me.QTNodeTableItems.Add(0, New Extras.NodeItem("Name", .Name, "", 0, 0, Nothing))
+                    Me.QTNodeTableItems.Add(1, New Extras.NodeItem("Type Name", .TypeName, "", 1, 0, Nothing))
+                    Me.QTNodeTableItems.Add(2, New Extras.NodeItem("Version", .Version, "", 2, 0, Nothing))
                 End With
             End If
         End Sub
@@ -1557,7 +1557,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
 End Namespace
 
-Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen
+Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
 
     <System.Serializable()> Public Class CapeOpenUnitOpInfo
 

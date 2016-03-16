@@ -21,12 +21,12 @@ Imports Microsoft.MSDN.Samples.GraphicObjects
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.MathEx
 Imports System.Math
-Imports DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.SepOps
+Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 Imports Mapack
 Imports System.Linq
 Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
 
-Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.SepOps
+Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 
     <System.Serializable()> Public Class Parameter
 
@@ -1105,7 +1105,7 @@ Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.SepOps
 
 End Namespace
 
-Namespace DWSIM.SimulationObjects.UnitOps
+Namespace DWSIM.SimulationObjects.UnitOperations
 
     <Serializable()> Public Class DistillationColumn
 
@@ -2017,7 +2017,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             MyBase.CreateNew()
 
-            m_ComponentName = nome
+            m_ComponentName = name
             m_ComponentDescription = descricao
             FillNodeItems()
             QTFillNodeItems()
@@ -2544,10 +2544,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 .Clear()
 
                 If Me.ColumnType = ColType.DistillationColumn Or Me.ColumnType = ColType.RefluxedAbsorber Then
-                    .Add(0, New DWSIM.Outros.NodeItem("QC", "", "", 0, 0, ""))
+                    .Add(0, New DWSIM.Extras.NodeItem("QC", "", "", 0, 0, ""))
                 End If
                 If Me.ColumnType = ColType.DistillationColumn Or Me.ColumnType = ColType.ReboiledAbsorber Then
-                    .Add(1, New DWSIM.Outros.NodeItem("QR", "", "", 1, 0, ""))
+                    .Add(1, New DWSIM.Extras.NodeItem("QR", "", "", 1, 0, ""))
                 End If
 
             End With
@@ -2558,17 +2558,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 Me.FillNodeItems()
             End If
 
-            For Each nti As Outros.NodeItem In Me.NodeTableItems.Values
+            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
                 nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
                 nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
             Next
 
             If Me.QTNodeTableItems Is Nothing Then
-                Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 Me.QTFillNodeItems()
             End If
 
@@ -3191,7 +3191,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             'Validate unitop status.
             Me.Validate()
@@ -3271,7 +3271,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             VSS(StageIndex(ms.AssociatedStage)) = ms.FlowRate.Value
                         End If
                     Case StreamInformation.Behavior.InterExchanger
-                        Q(StageIndex(ms.AssociatedStage)) = -FlowSheet.Collections.CLCS_EnergyStreamCollection(ms.StreamID).Energia.GetValueOrDefault
+                        Q(StageIndex(ms.AssociatedStage)) = -FlowSheet.Collections.CLCS_EnergyStreamCollection(ms.StreamID).EnergyFlow.GetValueOrDefault
                 End Select
                 i += 1
             Next
@@ -3279,7 +3279,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             For Each ms As StreamInformation In Me.EnergyStreams.Values
                 Select Case ms.StreamBehavior
                     Case StreamInformation.Behavior.InterExchanger
-                        Q(StageIndex(ms.AssociatedStage)) = -FlowSheet.Collections.CLCS_EnergyStreamCollection(ms.StreamID).Energia.GetValueOrDefault
+                        Q(StageIndex(ms.AssociatedStage)) = -FlowSheet.Collections.CLCS_EnergyStreamCollection(ms.StreamID).EnergyFlow.GetValueOrDefault
                 End Select
                 i += 1
             Next
@@ -3329,7 +3329,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             compids = New ArrayList
             compids.Clear()
             For Each comp As Thermodynamics.BaseClasses.Compound In stream.Phases(0).Compounds.Values
-                compids.Add(comp.Nome)
+                compids.Add(comp.Name)
             Next
 
             For i = ns To 0 Step -1
@@ -3540,7 +3540,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 sp.SType = ColumnSpec.SpecType.Component_Recovery Then
                     i = 0
                     For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In stream.Phases(0).Compounds.Values
-                        If sp.ComponentID = comp.Nome Then sp.ComponentIndex = i
+                        If sp.ComponentID = comp.Name Then sp.ComponentIndex = i
                         i = i + 1
                     Next
                 End If
@@ -3744,12 +3744,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
                     'condenser
                     esm = FlowSheet.Collections.CLCS_EnergyStreamCollection(sinf.StreamID)
-                    esm.Energia = Q(0)
+                    esm.EnergyFlow = Q(0)
                     esm.GraphicObject.Calculated = True
                 ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
                     'reboiler
                     esm = FlowSheet.Collections.CLCS_EnergyStreamCollection(sinf.StreamID)
-                    esm.Energia = Q(Me.NumberOfStages - 1)
+                    esm.EnergyFlow = Q(Me.NumberOfStages - 1)
                     esm.GraphicObject.Calculated = True
                 End If
             Next
@@ -3757,9 +3757,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
             'call the flowsheet calculation routine
 
             With objargs
-                .Calculado = True
-                .Nome = Me.Nome
-                .Tipo = Me.GraphicObject.TipoObjeto
+                .Calculated = True
+                .Name = Me.Name
+                .ObjectType = Me.GraphicObject.ObjectType
             End With
 
 final:      FlowSheet.CalculationQueue.Enqueue(objargs)
@@ -3799,7 +3799,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             Dim i As Integer
 
@@ -3888,12 +3888,12 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                     If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
                         'condenser
                         esm = FlowSheet.Collections.CLCS_EnergyStreamCollection(sinf.StreamID)
-                        esm.Energia = 0
+                        esm.EnergyFlow = 0
                         esm.GraphicObject.Calculated = False
                     ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
                         'reboiler
                         esm = FlowSheet.Collections.CLCS_EnergyStreamCollection(sinf.StreamID)
-                        esm.Energia = 0
+                        esm.EnergyFlow = 0
                         esm.GraphicObject.Calculated = False
                     End If
                 End If
@@ -3902,9 +3902,9 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             'call the flowsheet calculation routine
 
             With objargs
-                .Calculado = False
-                .Nome = Me.Nome
-                .Tipo = Me.GraphicObject.TipoObjeto
+                .Calculated = False
+                .Name = Me.Name
+                .ObjectType = Me.GraphicObject.ObjectType
             End With
 
 final:      FlowSheet.CalculationQueue.Enqueue(objargs)

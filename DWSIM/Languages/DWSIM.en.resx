@@ -822,7 +822,7 @@
   <data name="Corrente1" xml:space="preserve">
     <value>Stream</value>
   </data>
-  <data name="Correntedeenergia" xml:space="preserve">
+  <data name="CorrentedeEnergyFlow" xml:space="preserve">
     <value>Energy Stream</value>
   </data>
   <data name="Correntedeentrada" xml:space="preserve">
@@ -861,10 +861,10 @@
   <data name="Correntedesaida3" xml:space="preserve">
     <value>Outlet Stream 3</value>
   </data>
-  <data name="Correntesdeenergiasp" xml:space="preserve">
+  <data name="CorrentesdeEnergyFlowsp" xml:space="preserve">
     <value>Energy streams can only connect to ('energy stream' -&gt; 'object'):</value>
   </data>
-  <data name="Correntesdeenergiasp2" xml:space="preserve">
+  <data name="CorrentesdeEnergyFlowsp2" xml:space="preserve">
     <value>Energy streams can only connect from ('object' -&gt; 'energy stream'):</value>
   </data>
   <data name="Corsemgradiente" xml:space="preserve">
@@ -1329,22 +1329,22 @@
   <data name="en" xml:space="preserve">
     <value>en</value>
   </data>
-  <data name="Energia" xml:space="preserve">
+  <data name="EnergyFlow" xml:space="preserve">
     <value>Energy</value>
   </data>
-  <data name="EnergiadeGibbsdeForm" xml:space="preserve">
+  <data name="EnergyFlowdeGibbsdeForm" xml:space="preserve">
     <value>Ideal Gas Gibbs Energy of Formation at 25 °C</value>
   </data>
-  <data name="EnergiadeGibbsdeForm2" xml:space="preserve">
+  <data name="EnergyFlowdeGibbsdeForm2" xml:space="preserve">
     <value>Ideal Gas Gibbs Energy of Formation at 25 °C</value>
   </data>
-  <data name="Energiadisponvel" xml:space="preserve">
+  <data name="EnergyFlowdisponvel" xml:space="preserve">
     <value>Power available</value>
   </data>
-  <data name="Energianecessria" xml:space="preserve">
+  <data name="EnergyFlownecessria" xml:space="preserve">
     <value>Power required</value>
   </data>
-  <data name="Energiaporunidadedet" xml:space="preserve">
+  <data name="EnergyFlowporunidadedet" xml:space="preserve">
     <value>Power (Energy per unit of time)</value>
   </data>
   <data name="EnergyRecycle" xml:space="preserve">
@@ -1458,7 +1458,7 @@
   <data name="Erromximodatemperatu" xml:space="preserve">
     <value>Maximum temperature error</value>
   </data>
-  <data name="Erronaenergia" xml:space="preserve">
+  <data name="ErronaEnergyFlow" xml:space="preserve">
     <value>Energy error</value>
   </data>
   <data name="ErronaexpressoVerifi" xml:space="preserve">
@@ -1689,7 +1689,7 @@
   <data name="FluxodeCalorkW" xml:space="preserve">
     <value>Heat Flow (kW)</value>
   </data>
-  <data name="FluxodeEnergia" xml:space="preserve">
+  <data name="FluxodeEnergyFlow" xml:space="preserve">
     <value>Energy Flow</value>
   </data>
   <data name="Fluxograma" xml:space="preserve">
@@ -2442,19 +2442,19 @@
   <data name="Nohcorrentedeenerg17" xml:space="preserve">
     <value>No energy stream associated with the reactor.</value>
   </data>
-  <data name="Nohcorrentedeenergia" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow" xml:space="preserve">
     <value>No energy stream associated with the compressor.</value>
   </data>
-  <data name="Nohcorrentedeenergia2" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow2" xml:space="preserve">
     <value>No energy stream associated with the heater.</value>
   </data>
-  <data name="Nohcorrentedeenergia3" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow3" xml:space="preserve">
     <value>No energy stream associated with pipe.</value>
   </data>
-  <data name="Nohcorrentedeenergia4" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow4" xml:space="preserve">
     <value>No energy stream associated with the pump.</value>
   </data>
-  <data name="Nohcorrentedeenergia5" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow5" xml:space="preserve">
     <value>No energy stream associated with the turbine.</value>
   </data>
   <data name="Nohcorrentedematriac10" xml:space="preserve">
@@ -2979,7 +2979,7 @@
   <data name="Quantidadedecalortro" xml:space="preserve">
     <value>Quantity of heat exchanged with the environment</value>
   </data>
-  <data name="Quantidadedeenergiap" xml:space="preserve">
+  <data name="QuantidadedeEnergyFlowp" xml:space="preserve">
     <value>Quantity of energy per unit of time in this stream</value>
   </data>
   <data name="Queda" xml:space="preserve">
@@ -4305,7 +4305,7 @@
   <data name="CompressorAdiabtico_Desc" xml:space="preserve">
     <value>Industrial adiabatic compressor model.</value>
   </data>
-  <data name="Correntedeenergia_Desc" xml:space="preserve">
+  <data name="CorrentedeEnergyFlow_Desc" xml:space="preserve">
     <value>Represents energy flows in and out of unit operations.</value>
   </data>
   <data name="CorrentedeMatria_Desc" xml:space="preserve">
@@ -4413,10 +4413,10 @@
   <data name="DescCSPP" xml:space="preserve">
     <value>Liquid Phase Activity Coefficients are predicted by the COSMO-SAC JCOSMO implementation of Rafael Soares and Renan Gerber. Enthalpies, Entropies and Heat Capacities (both phases) are calculated by the Lee-Kesler method. The remaining properties, including vapor phase Fugacity Coefficients (optionally), are calculated using the Peng-Robinson EOS.</value>
   </data>
-  <data name="CorrentedeenergiaE" xml:space="preserve">
+  <data name="CorrentedeEnergyFlowE" xml:space="preserve">
     <value>Energy Stream (In)</value>
   </data>
-  <data name="CorrentedeenergiaS" xml:space="preserve">
+  <data name="CorrentedeEnergyFlowS" xml:space="preserve">
     <value>Energy Stream (Out)</value>
   </data>
   <data name="UO_ScriptLanguage" xml:space="preserve">
@@ -4857,7 +4857,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
   <data name="Correntedesaida4" xml:space="preserve">
     <value>Outlet Stream 4</value>
   </data>
-  <data name="Nohcorrentedeenergia1" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow1" xml:space="preserve">
     <value>No energy stream associated with the ExcelUO.</value>
   </data>
   <data name="ExcelUOEditor" xml:space="preserve">

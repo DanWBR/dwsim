@@ -60,7 +60,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             End If
 
-            Dim wkey As String = water.Nome
+            Dim wkey As String = water.Name
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 
@@ -905,7 +905,7 @@ FINAL:
             End If
         End Function
 
-        Public Overrides Function DW_CalcEnergiaMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcEnergyFlowMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
             Dim ent_massica = Me.m_iapws97.enthalpyW(T, P / 100000)
             Dim flow = Me.CurrentMaterialStream.Phases(0).Properties.massflow
             Return ent_massica * flow

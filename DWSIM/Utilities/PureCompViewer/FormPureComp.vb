@@ -711,7 +711,7 @@ Public Class FormPureComp
             .Add(New Object() {DWSIM.App.GetLocalString("CompressibilidadeCrt"), Format(constprop.Critical_Compressibility, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("FatorAcntrico"), Format(constprop.Acentric_Factor, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.enthalpy})
-            .Add(New Object() {DWSIM.App.GetLocalString("EnergiadeGibbsdeForm2"), Format(Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("EnergyFlowdeGibbsdeForm2"), Format(Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
             .Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(Converter.ConvertFromSI(su.temperature, constprop.Normal_Boiling_Point), nf), su.temperature})
             .Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(Converter.ConvertFromSI(su.temperature, constprop.TemperatureOfFusion), nf), su.temperature})
             .Add(New Object() {DWSIM.App.GetLocalString("EnthalpyOfFusionAtTf"), Format(constprop.EnthalpyOfFusionAtTf, nf), "kJ/mol"})
@@ -785,7 +785,7 @@ Public Class FormPureComp
                 constprop.Acentric_Factor = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 10 '.Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.enthalpy})
                 constprop.IG_Enthalpy_of_Formation_25C = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 11 '.Add(New Object() {DWSIM.App.GetLocalString("EnergiadeGibbsdeForm2"), Format(Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
+            Case 11 '.Add(New Object() {DWSIM.App.GetLocalString("EnergyFlowdeGibbsdeForm2"), Format(Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
                 constprop.IG_Gibbs_Energy_of_Formation_25C = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 12 '.Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(Converter.ConvertFromSI(su.temperature, constprop.Normal_Boiling_Point), nf), su.temperature})
                 constprop.Normal_Boiling_Point = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)

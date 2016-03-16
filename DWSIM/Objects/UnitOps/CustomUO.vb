@@ -28,7 +28,7 @@ Imports System.ComponentModel
 Imports Wexman.Design
 Imports System.Drawing.Design
 
-Namespace DWSIM.SimulationObjects.UnitOps
+Namespace DWSIM.SimulationObjects.UnitOperations
 
     <Guid(CustomUO.ClassId)> <System.Serializable()> <ComVisible(True)> Public Class CustomUO
 
@@ -105,7 +105,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             MyBase.CreateNew()
             InputVariables = New Dictionary(Of String, Double)
             OutputVariables = New Dictionary(Of String, Double)
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
             Me.FillNodeItems()
             Me.QTFillNodeItems()
@@ -260,12 +260,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End If
 
             'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
             With objargs
-                .Calculado = True
-                .Nome = Me.Nome
+                .Calculated = True
+                .Name = Me.Name
                 .Tag = Me.GraphicObject.Tag
-                .Tipo = TipoObjeto.CustomUO
+                .ObjectType = ObjectType.CustomUO
             End With
 
             FlowSheet.CalculationQueue.Enqueue(objargs)
@@ -277,12 +277,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
         Public Overrides Function DeCalculate() As Integer
 
             'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
             With objargs
-                .Calculado = False
-                .Nome = Me.Nome
+                .Calculated = False
+                .Name = Me.Name
                 .Tag = Me.GraphicObject.Tag
-                .Tipo = TipoObjeto.CustomUO
+                .ObjectType = ObjectType.CustomUO
             End With
 
             FlowSheet.CalculationQueue.Enqueue(objargs)
@@ -411,7 +411,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
                 End With
-                .Item.Add(DWSIM.App.GetLocalString("CorrentedeenergiaE"), ent4, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlowE"), ent4, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
@@ -447,7 +447,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
                 End With
-                .Item.Add(DWSIM.App.GetLocalString("CorrentedeenergiaS"), saida4, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlowS"), saida4, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector
@@ -510,12 +510,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
         End Function
 
         Public Overrides Sub QTFillNodeItems()
-            If Me.QTNodeTableItems Is Nothing Then Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+            If Me.QTNodeTableItems Is Nothing Then Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
             With Me.QTNodeTableItems
                 .Clear()
                 Dim i As Integer = 0
                 For Each item In Me.OutputVariables
-                    .Add(i, New DWSIM.Outros.NodeItem(item.Key, Format(item.Value, FlowSheet.Options.NumberFormat), "", i, 0, ""))
+                    .Add(i, New DWSIM.Extras.NodeItem(item.Key, Format(item.Value, FlowSheet.Options.NumberFormat), "", i, 0, ""))
                     i += 1
                 Next
             End With
@@ -530,21 +530,21 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 Me.FillNodeItems()
             End If
 
-            For Each nti As Outros.NodeItem In Me.NodeTableItems.Values
+            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
                 If Me.OutputVariables.ContainsKey(nti.Text) Then nti.Value = Me.OutputVariables(nti.Text)
                 nti.Unit = ""
             Next
 
             If Me.QTNodeTableItems Is Nothing Then
-                Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+                Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
                 Me.QTFillNodeItems()
             End If
 
-            For Each nti As Outros.NodeItem In Me.QTNodeTableItems.Values
+            For Each nti As Extras.NodeItem In Me.QTNodeTableItems.Values
                 If Me.OutputVariables.ContainsKey(nti.Text) Then nti.Value = Format(Me.OutputVariables(nti.Text), Me.FlowSheet.Options.NumberFormat)
                 nti.Unit = ""
             Next
@@ -576,7 +576,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "NodeItems").Elements
                 Dim text As String = xel2.@Text
-                Dim ni2 As DWSIM.Outros.NodeItem = (From ni As DWSIM.Outros.NodeItem In m_nodeitems.Values Select ni Where ni.Text = text).SingleOrDefault
+                Dim ni2 As DWSIM.Extras.NodeItem = (From ni As DWSIM.Extras.NodeItem In m_nodeitems.Values Select ni Where ni.Text = text).SingleOrDefault
                 If Not ni2 Is Nothing Then
                     ni2.Checked = True
                 End If

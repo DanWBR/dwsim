@@ -62,8 +62,8 @@ Public Class frmMatList
         Dim su As DWSIM.SystemsOfUnits.Units
         su = Flowsheet.Options.SelectedUnitSystem
 
-        Me.DataGridView1.Columns.Add(ms.Nome, ms.GraphicObject.Tag)
-        Me.DataGridView1.Columns(ms.Nome).SortMode = DataGridViewColumnSortMode.NotSortable
+        Me.DataGridView1.Columns.Add(ms.Name, ms.GraphicObject.Tag)
+        Me.DataGridView1.Columns(ms.Name).SortMode = DataGridViewColumnSortMode.NotSortable
 
         Dim props As String() = ms.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
         Dim unit As String = ""
@@ -91,7 +91,7 @@ Public Class frmMatList
         RowsCreated = True
 
         'populate rows
-        Dim col As DataGridViewColumn = Me.DataGridView1.Columns(ms.Nome)
+        Dim col As DataGridViewColumn = Me.DataGridView1.Columns(ms.Name)
         Dim i As Integer = 0
         Dim value As String
 

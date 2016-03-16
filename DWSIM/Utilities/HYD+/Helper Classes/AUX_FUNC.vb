@@ -54,7 +54,7 @@ Namespace DWSIM.Utilities.HYD
             INDICE = -1
             Dim i = 0
             Do
-                If MAT_INIB(i, 0) = Nome Then INDICE = i + 1
+                If MAT_INIB(i, 0) = name Then INDICE = i + 1
                 i = i + 1
             Loop Until i = 47
 
@@ -65,7 +65,7 @@ Namespace DWSIM.Utilities.HYD
             STRU = 0
             Dim i = 0
             Do
-                If MAT_INIB(i, 0) = Nome Then STRU = Convert.ToInt32(MAT_INIB(i, 2))
+                If MAT_INIB(i, 0) = name Then STRU = Convert.ToInt32(MAT_INIB(i, 2))
                 i = i + 1
             Loop Until i = 47
 
@@ -76,7 +76,7 @@ Namespace DWSIM.Utilities.HYD
             ISINIB = 0
             Dim i = 0
             Do
-                If MAT_INIB(i, 0) = Nome Then ISINIB = Convert.ToInt32(MAT_INIB(i, 1))
+                If MAT_INIB(i, 0) = name Then ISINIB = Convert.ToInt32(MAT_INIB(i, 1))
                 i = i + 1
             Loop Until i = 47
 

@@ -21,10 +21,10 @@ Public Class FormConfigureTable
 
     Inherits System.Windows.Forms.Form
 
-    Private nitems As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+    Private nitems As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
     Public objname As String
 
-    Public ReadOnly Property NodeItems() As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+    Public ReadOnly Property NodeItems() As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
         Get
             Return nitems
         End Get
@@ -36,14 +36,14 @@ Public Class FormConfigureTable
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        nitems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
+        nitems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
 
     End Sub
 
     Private Sub FormConfigureTable_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         'populate treeview
-        Dim ni As DWSIM.Outros.NodeItem
+        Dim ni As DWSIM.Extras.NodeItem
 
         Me.TreeView1.Nodes.Clear()
 
@@ -59,7 +59,7 @@ Public Class FormConfigureTable
 
         Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Me.objname)
 
-        Dim ni As DWSIM.Outros.NodeItem
+        Dim ni As DWSIM.Extras.NodeItem
         For Each ni In obj.NodeTableItems.Values
             ni.Checked = Me.TreeView1.Nodes.Find(ni.Key, True)(0).Checked
         Next

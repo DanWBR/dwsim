@@ -751,7 +751,7 @@ Imports System.Collections.Generic
         Dim maxy As Integer = 0
 
         For Each gobj As GraphicObject In Me.drawingObjects
-            If gobj.TipoObjeto <> TipoObjeto.Nenhum Then
+            If gobj.ObjectType <> ObjectType.Nenhum Then
                 If gobj.X <= minx Then minx = gobj.X
                 If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 60
                 If gobj.Y <= miny Then miny = gobj.Y
@@ -801,7 +801,7 @@ Imports System.Collections.Generic
         Dim middlex, middley As Integer
 
         For Each gobj As GraphicObject In Me.drawingObjects
-            If gobj.TipoObjeto <> TipoObjeto.Nenhum Then
+            If gobj.ObjectType <> ObjectType.Nenhum Then
                 If gobj.X <= minx Then minx = gobj.X
                 If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 60
                 If gobj.Y <= miny Then miny = gobj.Y
@@ -854,16 +854,16 @@ Imports System.Collections.Generic
                 Dim obj As GraphicObject = Me.drawingObjects.FindObjectAtPoint(dragPoint)
 
                 If Not obj Is Nothing Then
-                    If obj.TipoObjeto <> TipoObjeto.GO_TabelaRapida And obj.TipoObjeto <> TipoObjeto.GO_Texto _
-                    And obj.TipoObjeto <> TipoObjeto.GO_Figura And obj.TipoObjeto <> TipoObjeto.GO_Tabela _
-                    And obj.TipoObjeto <> TipoObjeto.Nenhum And obj.TipoObjeto <> TipoObjeto.GO_SpreadsheetTable _
-                    And obj.TipoObjeto <> TipoObjeto.GO_MasterTable Then
+                    If obj.ObjectType <> ObjectType.GO_FloatingTable And obj.ObjectType <> ObjectType.GO_Text _
+                    And obj.ObjectType <> ObjectType.GO_Image And obj.ObjectType <> ObjectType.GO_Table _
+                    And obj.ObjectType <> ObjectType.Nenhum And obj.ObjectType <> ObjectType.GO_SpreadsheetTable _
+                    And obj.ObjectType <> ObjectType.GO_MasterTable Then
                         With Me.hoverRect
                             hoverrotation = obj.Rotation
                             .X = obj.X - 10
                             .Y = obj.Y - 10
-                            Select Case obj.TipoObjeto
-                                Case TipoObjeto.GO_Animation, TipoObjeto.GO_Figura, TipoObjeto.GO_Tabela, TipoObjeto.GO_TabelaRapida, TipoObjeto.GO_Texto, TipoObjeto.GO_MasterTable, TipoObjeto.GO_SpreadsheetTable
+                            Select Case obj.ObjectType
+                                Case ObjectType.GO_Animation, ObjectType.GO_Image, ObjectType.GO_Table, ObjectType.GO_FloatingTable, ObjectType.GO_Text, ObjectType.GO_MasterTable, ObjectType.GO_SpreadsheetTable
                                     .Height = obj.Height + 20
                                     .Width = obj.Width + 20
                                 Case Else

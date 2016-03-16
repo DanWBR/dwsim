@@ -967,7 +967,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary
 
         Sub New(ByVal MainGroupName As String, ByVal Nome As String, ByVal PrimGroup As String, ByVal SecGroup As String, ByVal R As Double, ByVal Q As Double)
             Me.PrimGroupName = MainGroupName
-            Me.GroupName = Nome
+            Me.GroupName = name
             Me.PrimaryGroup = PrimGroup
             Me.Secondary_Group = SecGroup
             Me.R = R

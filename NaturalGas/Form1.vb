@@ -32,8 +32,10 @@ Public Class Form1
 
         RemoveHandler fsheet.FormSurface.ObjectSelected, eventhandler
 
-        For Each f In fsheet.Collections.CLCS_FlowsheetUOCollection.Values
-            RemoveHandler f.Fsheet.FormSurface.ObjectSelected, eventhandler
+        For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
+            If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
+                RemoveHandler DirectCast(f, DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet).Fsheet.FormSurface.ObjectSelected, eventhandler
+            End If
         Next
 
         My.Settings.Save()
@@ -62,8 +64,10 @@ Public Class Form1
 
         AddHandler fsheet.FormSurface.ObjectSelected, eventhandler
 
-        For Each f In fsheet.Collections.CLCS_FlowsheetUOCollection.Values
-            AddHandler f.Fsheet.FormSurface.ObjectSelected, eventhandler
+        For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
+            If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
+                AddHandler DirectCast(f, DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet).Fsheet.FormSurface.ObjectSelected, eventhandler
+            End If
         Next
 
     End Sub
@@ -82,7 +86,7 @@ Public Class Form1
         If Not fsheet.FormSurface.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
             'check if the selected object is a material stream.
-            If fsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.TipoObjeto = Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.MaterialStream Then
+            If fsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.ObjectType = Microsoft.Msdn.Samples.GraphicObjects.ObjectType.MaterialStream Then
 
                 'get a reference to the material stream graphic object.
                 Dim gobj As GraphicObject = fsheet.FormSurface.FlowsheetDesignSurface.SelectedObject

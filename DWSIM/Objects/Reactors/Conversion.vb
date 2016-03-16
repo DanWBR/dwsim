@@ -36,7 +36,7 @@ Namespace DWSIM.SimulationObjects.Reactors
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.New()
-            Me.m_ComponentName = nome
+            Me.m_ComponentName = name
             Me.m_ComponentDescription = descricao
             Me.FillNodeItems()
             Me.QTFillNodeItems()
@@ -47,41 +47,41 @@ Namespace DWSIM.SimulationObjects.Reactors
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
             Dim form As FormFlowsheet = Me.FlowSheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Conversion
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Conversion
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac16"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Conversion
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Conversion
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac15"))
             ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Conversion
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Conversion
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac15"))
             ElseIf Not Me.GraphicObject.InputConnectors(1).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
-                    .Calculado = False
-                    .Nome = Me.Nome
-                    .Tipo = TipoObjeto.RCT_Conversion
+                    .Calculated = False
+                    .Name = Me.Name
+                    .ObjectType = ObjectType.RCT_Conversion
                 End With
                 CalculateFlowsheet(FlowSheet, objargs, Nothing)
                 Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedeenerg17"))
@@ -125,7 +125,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                 i = i + 1
             Loop Until i = maxrank + 1
 
-            Dim ims As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Clone
+            Dim ims As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Clone
             Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Me.PropertyPackage
             Dim ppr As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
 
@@ -291,18 +291,18 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                             Nsum = 0
                             For Each s2 As Compound In ims.Phases(0).Compounds.Values
-                                If rxn.Components.ContainsKey(s2.Nome) Then
-                                    Nsum += N(s2.Nome)
+                                If rxn.Components.ContainsKey(s2.Name) Then
+                                    Nsum += N(s2.Name)
                                 Else
-                                    Nsum += ims.Phases(0).Compounds(s2.Nome).FracaoMolar.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
+                                    Nsum += ims.Phases(0).Compounds(s2.Name).FracaoMolar.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
                                 End If
                             Next
 
                             For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                                If rxn.Components.ContainsKey(s3.Nome) Then
-                                    s3.FracaoMolar = N(s3.Nome) / Nsum
+                                If rxn.Components.ContainsKey(s3.Name) Then
+                                    s3.FracaoMolar = N(s3.Name) / Nsum
                                 Else
-                                    s3.FracaoMolar = ims.Phases(0).Compounds(s3.Nome).FracaoMolar.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault / Nsum
+                                    s3.FracaoMolar = ims.Phases(0).Compounds(s3.Name).FracaoMolar.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault / Nsum
                                 End If
                             Next
 
@@ -338,7 +338,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                     Case OperationMode.Adiabatic
 
-                        Me.DeltaQ = form.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name).Energia.GetValueOrDefault
+                        Me.DeltaQ = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name).EnergyFlow.GetValueOrDefault
 
                         'Products Enthalpy (kJ/kg * kg/s = kW)
                         Hp = Me.DeltaQ.GetValueOrDefault + Hr + Hid_p - Hid_r - DHr
@@ -468,7 +468,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             Dim cp As ConnectionPoint
             cp = Me.GraphicObject.InputConnectors(0)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedFrom.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                 i = 0
                 For Each comp In ms.Phases(0).Compounds.Values
@@ -488,7 +488,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
@@ -507,7 +507,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
@@ -525,18 +525,18 @@ Namespace DWSIM.SimulationObjects.Reactors
                 End With
             End If
 
-            'Corrente de energia - atualizar valor da potência (kJ/s)
-            With form.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
-                .Energia = Me.DeltaQ.GetValueOrDefault
+            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
             End With
 
             'Call function to calculate flowsheet
             With objargs
-                .Calculado = True
-                .Nome = Me.Nome
+                .Calculated = True
+                .Name = Me.Name
                 .Tag = Me.GraphicObject.Tag
-                .Tipo = TipoObjeto.RCT_Conversion
+                .ObjectType = ObjectType.RCT_Conversion
             End With
 
             form.CalculationQueue.Enqueue(objargs)
@@ -551,7 +551,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
 
-            'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             'Dim W As Double = ems.Phases(0).Properties.massflow.GetValueOrDefault
             Dim j As Integer = 0
 
@@ -560,7 +560,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -581,7 +581,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -601,11 +601,11 @@ Namespace DWSIM.SimulationObjects.Reactors
             End If
 
             'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
+            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
             With objargs
-                .Calculado = False
-                .Nome = Me.Nome
-                .Tipo = TipoObjeto.RCT_Conversion
+                .Calculated = False
+                .Name = Me.Name
+                .ObjectType = ObjectType.RCT_Conversion
             End With
 
             form.CalculationQueue.Enqueue(objargs)
@@ -672,7 +672,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
                 End With
 
-                .Item.Add(DWSIM.App.GetLocalString("Correntedeenergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlow"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector

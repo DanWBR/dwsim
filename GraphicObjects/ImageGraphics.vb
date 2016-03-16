@@ -20,7 +20,7 @@ Namespace GraphicObjects
         Inherits GraphicObject
         Protected Sub New()
             MyBase.New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.GO_Figura
+            Me.ObjectType = GraphicObjects.ObjectType.GO_Image
         End Sub
         Public MustOverride Function GetImage() As Image
     End Class
@@ -33,7 +33,7 @@ Namespace GraphicObjects
 #Region "Constructors"
         Public Sub New()
             MyBase.New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.GO_Figura
+            Me.ObjectType = GraphicObjects.ObjectType.GO_Image
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point, ByVal ImagePath As String)
@@ -144,7 +144,7 @@ Namespace GraphicObjects
 #Region "Constructors"
         Public Sub New()
             MyBase.New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.GO_Figura
+            Me.ObjectType = GraphicObjects.ObjectType.GO_Image
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point, ByVal startingImage As Image)
@@ -285,7 +285,7 @@ Namespace GraphicObjects
 #Region "Constructors"
         Public Sub New()
             MyBase.New()
-            Me.TipoObjeto = GraphicObjects.TipoObjeto.GO_Animation
+            Me.ObjectType = GraphicObjects.ObjectType.GO_Animation
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point, ByVal startingImage As Image)

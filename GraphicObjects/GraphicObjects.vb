@@ -42,8 +42,8 @@ Namespace GraphicObjects
 
                 Dim hoverRect As New Rectangle
                 With hoverRect
-                    Select Case selectedObject.TipoObjeto
-                        Case TipoObjeto.GO_Animation, TipoObjeto.GO_MasterTable, TipoObjeto.GO_Figura, TipoObjeto.GO_Tabela, TipoObjeto.GO_TabelaRapida, TipoObjeto.GO_Texto, TipoObjeto.GO_SpreadsheetTable
+                    Select Case selectedObject.ObjectType
+                        Case ObjectType.GO_Animation, ObjectType.GO_MasterTable, ObjectType.GO_Image, ObjectType.GO_Table, ObjectType.GO_FloatingTable, ObjectType.GO_Text, ObjectType.GO_SpreadsheetTable
                             .X = selectedObject.X - 10
                             .Y = selectedObject.Y - 10
                             .Height = selectedObject.Height + 20
@@ -128,7 +128,7 @@ Namespace GraphicObjects
             If Not Me.InnerList Is Nothing AndAlso Me.InnerList.Count > 0 Then
                 For i = 0 To Me.InnerList.Count - 1
                     drawObj = CType(Me.InnerList(i), GraphicObject)
-                    If drawObj.TipoObjeto = TipoObjeto.Nenhum Then
+                    If drawObj.ObjectType = ObjectType.Nenhum Then
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
                                 oldlinecolor = .LineColor
@@ -156,7 +156,7 @@ Namespace GraphicObjects
                 Next
                 For i = 0 To Me.InnerList.Count - 1
                     drawObj = CType(Me.InnerList(i), GraphicObject)
-                    If drawObj.TipoObjeto <> TipoObjeto.Nenhum Then
+                    If drawObj.ObjectType <> ObjectType.Nenhum Then
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
                                 oldlinecolor = .LineColor

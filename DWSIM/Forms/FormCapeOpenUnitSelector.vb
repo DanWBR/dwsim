@@ -2,8 +2,8 @@
 
 Public Class FormCapeOpenUnitSelector
 
-    Private _couos As New List(Of DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
-    Public _seluo As DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
+    Private _couos As New List(Of DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
+    Public _seluo As DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
 
     Private Sub FormCapeOpenUnitSelector_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -31,7 +31,7 @@ Public Class FormCapeOpenUnitSelector
         Me.Enabled = True
 
         With Me.ListBox1.Items
-            For Each uo As DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo In _couos
+            For Each uo As DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo In _couos
                 .Add(uo.Name)
             Next
         End With
@@ -55,7 +55,7 @@ Public Class FormCapeOpenUnitSelector
                     For Each s2 As String In arr
                         If s2.ToLower = "{678c09a5-7d66-11d2-a67d-00105a42887f}" Then
                             'this is a CAPE-OPEN UO
-                            Dim myuo As New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
+                            Dim myuo As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
                             With myuo
                                 .AboutInfo = mykey.OpenSubKey("CapeDescription").GetValue("About")
                                 .CapeVersion = mykey.OpenSubKey("CapeDescription").GetValue("CapeVersion")

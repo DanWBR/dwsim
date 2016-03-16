@@ -822,7 +822,7 @@
   <data name="Corrente1" xml:space="preserve">
     <value>Strom</value>
   </data>
-  <data name="Correntedeenergia" xml:space="preserve">
+  <data name="CorrentedeEnergyFlow" xml:space="preserve">
     <value>Energiestrom</value>
   </data>
   <data name="Correntedeentrada" xml:space="preserve">
@@ -861,10 +861,10 @@
   <data name="Correntedesaida3" xml:space="preserve">
     <value>Austrittsstrom 3</value>
   </data>
-  <data name="Correntesdeenergiasp" xml:space="preserve">
+  <data name="CorrentesdeEnergyFlowsp" xml:space="preserve">
     <value>Energieströme können nur verbunden werden mit ('Energiestrom' -&gt; 'Objekt'):</value>
   </data>
-  <data name="Correntesdeenergiasp2" xml:space="preserve">
+  <data name="CorrentesdeEnergyFlowsp2" xml:space="preserve">
     <value>Energieströme können nur verbunden werden mit ('Objekt' -&gt; 'Energiestrom'):</value>
   </data>
   <data name="Corsemgradiente" xml:space="preserve">
@@ -1339,22 +1339,22 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="en" xml:space="preserve">
     <value>En</value>
   </data>
-  <data name="Energia" xml:space="preserve">
+  <data name="EnergyFlow" xml:space="preserve">
     <value>Energie</value>
   </data>
-  <data name="EnergiadeGibbsdeForm" xml:space="preserve">
+  <data name="EnergyFlowdeGibbsdeForm" xml:space="preserve">
     <value>Gibbs'sche Bildungsenergie des idealen Gases bei 25 °C</value>
   </data>
-  <data name="EnergiadeGibbsdeForm2" xml:space="preserve">
+  <data name="EnergyFlowdeGibbsdeForm2" xml:space="preserve">
     <value>Gibbs'sche Bildungsenergie des idealen Gases bei 25 °C</value>
   </data>
-  <data name="Energiadisponvel" xml:space="preserve">
+  <data name="EnergyFlowdisponvel" xml:space="preserve">
     <value>Verfügbare Leistung</value>
   </data>
-  <data name="Energianecessria" xml:space="preserve">
+  <data name="EnergyFlownecessria" xml:space="preserve">
     <value>Benötigte Leistung</value>
   </data>
-  <data name="Energiaporunidadedet" xml:space="preserve">
+  <data name="EnergyFlowporunidadedet" xml:space="preserve">
     <value>Leistung (Energie pro Zeiteinheit)</value>
   </data>
   <data name="EnergyRecycle" xml:space="preserve">
@@ -1468,7 +1468,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Erromximodatemperatu" xml:space="preserve">
     <value>Maximaltemperaturfehler</value>
   </data>
-  <data name="Erronaenergia" xml:space="preserve">
+  <data name="ErronaEnergyFlow" xml:space="preserve">
     <value>Energiefehler</value>
   </data>
   <data name="ErronaexpressoVerifi" xml:space="preserve">
@@ -1699,7 +1699,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="FluxodeCalorkW" xml:space="preserve">
     <value>Wärmestrom (kW)</value>
   </data>
-  <data name="FluxodeEnergia" xml:space="preserve">
+  <data name="FluxodeEnergyFlow" xml:space="preserve">
     <value>Energiestrom</value>
   </data>
   <data name="Fluxograma" xml:space="preserve">
@@ -2452,19 +2452,19 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Nohcorrentedeenerg17" xml:space="preserve">
     <value>Kein Energiestrom dem Reaktor zugeordnet.</value>
   </data>
-  <data name="Nohcorrentedeenergia" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow" xml:space="preserve">
     <value>Kein Energiestrom dem Verdichter zugeordnet.</value>
   </data>
-  <data name="Nohcorrentedeenergia2" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow2" xml:space="preserve">
     <value>Kein Energiestrom dem Heizer zugeordnet.</value>
   </data>
-  <data name="Nohcorrentedeenergia3" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow3" xml:space="preserve">
     <value>Kein Energiestrom der Rohrleitung zugeordnet.</value>
   </data>
-  <data name="Nohcorrentedeenergia4" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow4" xml:space="preserve">
     <value>Kein Energiestrom der Pumpe zugeordnet.</value>
   </data>
-  <data name="Nohcorrentedeenergia5" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow5" xml:space="preserve">
     <value>Kein Energiestrom der Turbine zugeordnet.</value>
   </data>
   <data name="Nohcorrentedematriac10" xml:space="preserve">
@@ -2989,7 +2989,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Quantidadedecalortro" xml:space="preserve">
     <value>Wärmemenge, die mit der Umgebung ausgetauscht wird</value>
   </data>
-  <data name="Quantidadedeenergiap" xml:space="preserve">
+  <data name="QuantidadedeEnergyFlowp" xml:space="preserve">
     <value>Energiemenge pro Zeiteinheit in diesem Strom</value>
   </data>
   <data name="Queda" xml:space="preserve">
@@ -4315,7 +4315,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="CompressorAdiabtico_Desc" xml:space="preserve">
     <value>Industrielles adiabates Verdichtermodell.</value>
   </data>
-  <data name="Correntedeenergia_Desc" xml:space="preserve">
+  <data name="CorrentedeEnergyFlow_Desc" xml:space="preserve">
     <value>Repräsentiert Energieströme von und zu Grundoperationen.</value>
   </data>
   <data name="CorrentedeMatria_Desc" xml:space="preserve">
@@ -4420,10 +4420,10 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="DescCSPP" xml:space="preserve">
     <value>Paket von Eigenschaften mit dem COSMO-SAC-Methode in der Bibliothek JCOSMO von Rafael Soares Renan und Gerber für die Vorhersage von Aktivitätskoeffizienten der Komponenten in der flüssigen Phase durchgeführt. Die Enthalpie, Entropie und Wärmekapazität Residuen wird mit der Lee-Kesler Modell berechnet. Die Dampfphase wird durch die Peng-Robinson EDE modelliert.</value>
   </data>
-  <data name="CorrentedeenergiaE" xml:space="preserve">
+  <data name="CorrentedeEnergyFlowE" xml:space="preserve">
     <value>Energiestrom (E)</value>
   </data>
-  <data name="CorrentedeenergiaS" xml:space="preserve">
+  <data name="CorrentedeEnergyFlowS" xml:space="preserve">
     <value>Energiestrom (S)</value>
   </data>
   <data name="UO_ScriptLanguage" xml:space="preserve">
@@ -4859,7 +4859,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
   <data name="Correntedesaida4" xml:space="preserve">
     <value>Austrittsstrom 4</value>
   </data>
-  <data name="Nohcorrentedeenergia1" xml:space="preserve">
+  <data name="NohcorrentedeEnergyFlow1" xml:space="preserve">
     <value>Kein Energiestrom der ExcelUO zugeordnet.</value>
   </data>
   <data name="ExcelUOEditor" xml:space="preserve">
