@@ -1,20 +1,20 @@
-﻿Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+﻿Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 
 Public Class CompositionEditorForm
     Inherits System.Windows.Forms.Form
-    Public Componentes As Dictionary(Of String, Substancia)
+    Public Componentes As Dictionary(Of String, Compound)
     Public InitialComposition As Dictionary(Of String, Double)
     Public Stream As MaterialStream
     Public Solvent As String = ""
     Public Q, W, T As Double
-    Public SU As DWSIM.SistemasDeUnidades.Unidades
+    Public SU As DWSIM.SystemsOfUnits.Units
     Public NF As String = ""
     Private loaded As Boolean = False
 
     Private Sub CompositionEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+        Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
         GridComp.Rows.Clear()
         GridComp.Columns(0).CellTemplate.Style.Format = Stream.FlowSheet.Options.FractionNumberFormat
         GridComp.Columns(1).CellTemplate.Style.Format = Stream.FlowSheet.Options.FractionNumberFormat
@@ -77,7 +77,7 @@ Public Class CompositionEditorForm
 
         If Not Me.Label2.Text = DWSIM.App.GetLocalString("Erro") Then
 
-            Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim row As DataGridViewRow
             Dim mmtotal As Double = 0
             Dim mtotal As Double = 0
@@ -113,8 +113,8 @@ Public Class CompositionEditorForm
                 For Each row In GridComp.Rows
                     total += row.Cells(0).Value
                 Next
-                Dim cv As New DWSIM.SistemasDeUnidades.Conversor
-                Q = Conversor.ConverterParaSI(SU.spmp_molarflow, total)
+                Dim cv As New DWSIM.SystemsOfUnits.Converter
+                Q = Converter.ConvertToSI(SU.molarflow, total)
                 For Each row In Me.GridComp.Rows
                     Me.Componentes(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / total
                 Next
@@ -133,8 +133,8 @@ Public Class CompositionEditorForm
                 For Each row In GridComp.Rows
                     total += row.Cells(0).Value
                 Next
-                Dim cv As New DWSIM.SistemasDeUnidades.Conversor
-                W = Conversor.ConverterParaSI(SU.spmp_massflow, total)
+                Dim cv As New DWSIM.SystemsOfUnits.Converter
+                W = Converter.ConvertToSI(SU.massflow, total)
                 For Each row In Me.GridComp.Rows
                     Me.Componentes(row.HeaderCell.Tag).FracaoMassica = row.Cells(0).Value / total
                 Next
@@ -155,7 +155,7 @@ Public Class CompositionEditorForm
                 Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
                 ipp.CurrentMaterialStream = Stream
                 Dim i As Integer = 0
-                For Each s As Substancia In Me.Componentes.Values
+                For Each s As Compound In Me.Componentes.Values
                     nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                     If T > nbp(i) Then
                         liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -245,7 +245,7 @@ Public Class CompositionEditorForm
                 Dim T As Double = 273.15 + 15.56 'standard temperature
                 Dim i As Integer = 0
                 totalvol = 0.0#
-                For Each s As Substancia In Me.Componentes.Values
+                For Each s As Compound In Me.Componentes.Values
                     nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                     If T > nbp(i) Then
                         liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -314,7 +314,7 @@ Public Class CompositionEditorForm
                     ipp.CurrentMaterialStream = Stream
                     Dim i As Integer = 0
                     totalvol = 0.0#
-                    For Each s As Substancia In Me.Componentes.Values
+                    For Each s As Compound In Me.Componentes.Values
                         nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                         If T > nbp(i) Then
                             liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -351,13 +351,13 @@ Public Class CompositionEditorForm
                 If Me.RadioButton1.Checked Or Me.RadioButton2.Checked Then
                     Me.Label3.Text = Format(v, "#0.0000")
                 ElseIf Me.RadioButton3.Checked Then
-                    Me.Label3.Text = Format(v, NF) & " " & SU.spmp_molarflow
+                    Me.Label3.Text = Format(v, NF) & " " & SU.molarflow
                 ElseIf Me.RadioButton4.Checked Then
-                    Me.Label3.Text = Format(v, NF) & " " & SU.spmp_massflow
+                    Me.Label3.Text = Format(v, NF) & " " & SU.massflow
                 ElseIf Me.RadioButton5.Checked Then
-                    Me.Label3.Text = Format(v, NF) & " " & SU.spmp_molarflow
+                    Me.Label3.Text = Format(v, NF) & " " & SU.molarflow
                 ElseIf Me.RadioButton6.Checked Then
-                    Me.Label3.Text = Format(v, NF) & " " & SU.spmp_molarflow
+                    Me.Label3.Text = Format(v, NF) & " " & SU.molarflow
                 ElseIf Me.RadioButton7.Checked Then
                     Me.Label3.Text = Format(v, "#0.0000")
                 End If
@@ -414,14 +414,14 @@ Public Class CompositionEditorForm
                         row.Cells(0).Value = Me.Componentes(row.HeaderCell.Tag).FracaoMassica
                     Next
                 ElseIf Me.RadioButton3.Checked Then
-                    Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+                    Dim cv As New DWSIM.SystemsOfUnits.Converter
                     For Each row In Me.GridComp.Rows
-                        row.Cells(0).Value = Conversor.ConverterDoSI(SU.spmp_molarflow, Me.Componentes(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q)
+                        row.Cells(0).Value = Converter.ConvertFromSI(SU.molarflow, Me.Componentes(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q)
                     Next
                 ElseIf Me.RadioButton4.Checked Then
-                    Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+                    Dim cv As New DWSIM.SystemsOfUnits.Converter
                     For Each row In Me.GridComp.Rows
-                        row.Cells(0).Value = Conversor.ConverterDoSI(SU.spmp_massflow, Me.Componentes(row.HeaderCell.Tag).FracaoMassica.GetValueOrDefault * W)
+                        row.Cells(0).Value = Converter.ConvertFromSI(SU.massflow, Me.Componentes(row.HeaderCell.Tag).FracaoMassica.GetValueOrDefault * W)
                     Next
                 ElseIf Me.RadioButton5.Checked Then
                     'molarity = mol solute per liter solution
@@ -430,7 +430,7 @@ Public Class CompositionEditorForm
                     Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
                     ipp.CurrentMaterialStream = Stream
                     Dim i As Integer = 0
-                    For Each s As Substancia In Me.Componentes.Values
+                    For Each s As Compound In Me.Componentes.Values
                         nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                         If T > nbp(i) Then
                             liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -439,7 +439,7 @@ Public Class CompositionEditorForm
                         End If
                         i += 1
                     Next
-                    Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+                    Dim cv As New DWSIM.SystemsOfUnits.Converter
                     i = 0
                     For Each row In Me.GridComp.Rows
                         If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
@@ -451,7 +451,7 @@ Public Class CompositionEditorForm
                     Next
                 ElseIf Me.RadioButton6.Checked Then
                     'molarity = mol solute per kg solvent
-                    Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+                    Dim cv As New DWSIM.SystemsOfUnits.Converter
                     For Each row In Me.GridComp.Rows
                         If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
                             row.Cells(0).Value = Me.Componentes(row.HeaderCell.Tag).FracaoMassica.GetValueOrDefault * W
@@ -467,7 +467,7 @@ Public Class CompositionEditorForm
                     ipp.CurrentMaterialStream = Stream
                     Dim i As Integer = 0
                     totalvol = 0.0#
-                    For Each s As Substancia In Me.Componentes.Values
+                    For Each s As Compound In Me.Componentes.Values
                         nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                         If T > nbp(i) Then
                             liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))

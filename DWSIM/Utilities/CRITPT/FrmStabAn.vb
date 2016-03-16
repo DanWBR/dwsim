@@ -24,8 +24,8 @@ Public Class FrmStabAn
 
     Dim cp As DWSIM.Utilities.TCP.Methods
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -39,12 +39,12 @@ Public Class FrmStabAn
 
             pr.CurrentMaterialStream = mat
 
-            Dim n As Integer = mat.Fases(0).Componentes.Count - 1
+            Dim n As Integer = mat.Phases(0).Componentes.Count - 1
 
             Dim Vz(n) As Double
-            Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
-            For Each comp In mat.Fases(0).Componentes.Values
+            For Each comp In mat.Phases(0).Componentes.Values
                 Vz(i) += comp.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
@@ -99,8 +99,8 @@ Public Class FrmStabAn
 
                 i = 0
                 Do
-                    px.Add(Conversor.ConverterDoSI(su.spmp_temperature, res(i)(0)))
-                    py.Add(Conversor.ConverterDoSI(su.spmp_pressure, res(i)(1)))
+                    px.Add(Converter.ConvertFromSI(su.temperature, res(i)(0)))
+                    py.Add(Converter.ConvertFromSI(su.pressure, res(i)(1)))
                     i += 1
                 Loop Until i = res.Count
 
@@ -113,7 +113,7 @@ Public Class FrmStabAn
                 End With
                 With Me.GraphPvap.GraphPane
                     .CurveList.Clear()
-                    .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Conversor.ConverterDoSI(su.spmp_temperature, pc(0))}, New Double() {Conversor.ConverterDoSI(su.spmp_pressure, pc(1))}, Color.Black, ZedGraph.SymbolType.Circle)
+                    .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Converter.ConvertFromSI(su.temperature, pc(0))}, New Double() {Converter.ConvertFromSI(su.pressure, pc(1))}, Color.Black, ZedGraph.SymbolType.Circle)
                     .AddCurve(DWSIM.App.GetLocalString("LimitedeEstabilidade"), px.ToArray(GetType(Double)), py.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.None).Line.IsSmooth = True
                     .AxisChange(Me.CreateGraphics)
                 End With
@@ -157,8 +157,8 @@ Public Class FrmStabAn
             .CurveList.Clear()
             '.AddCurve(Me.ComboBox2.SelectedItem, Me.m_vx, Me.m_vy, Color.Blue, ZedGraph.SymbolType.Circle)
             .Title.Text = ""
-            .XAxis.Title.Text = "T / " & su.spmp_temperature
-            .YAxis.Title.Text = "P / " & su.spmp_pressure
+            .XAxis.Title.Text = "T / " & su.temperature
+            .YAxis.Title.Text = "P / " & su.pressure
             .AxisChange(Me.CreateGraphics)
         End With
 

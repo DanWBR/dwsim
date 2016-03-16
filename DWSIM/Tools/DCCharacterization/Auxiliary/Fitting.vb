@@ -18,7 +18,7 @@
 
 Imports System.Math
 Imports DWSIM.DWSIM.MathEx.BrentOpt
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 Imports DWSIM.DWSIM.SimulationObjects.Streams
@@ -27,7 +27,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
     Public Class DensityFitting
 
-        Public _comp As Substancia
+        Public _comp As Compound
 
         Public Function FunctionValue(ByVal t As Double) As Double
             Dim result As Double = 0
@@ -48,7 +48,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
         End Function
 
-        Public Function CalcDensityDiff(ByVal T As Double, ByVal multipl As Double, ByVal comp As Substancia) As Double
+        Public Function CalcDensityDiff(ByVal T As Double, ByVal multipl As Double, ByVal comp As Compound) As Double
 
             Dim dens1, dens2 As Double
 
@@ -77,7 +77,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
         Public Function FunctionValue(ByVal t As Double) As Double
             Dim result As Double = 0
             Dim i As Integer = 0
-            For Each c As Substancia In _ms.Fases(0).Componentes.Values
+            For Each c As Compound In _ms.Phases(0).Componentes.Values
                 If i = _idx Then
                     c.ConstantProperties.Acentric_Factor *= t
                     result = CalcNBPDiff(i, 101325, t, c) ^ 2
@@ -85,7 +85,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
                 i += 1
             Next
             i = 0
-            For Each c As Substancia In _ms.Fases(0).Componentes.Values
+            For Each c As Compound In _ms.Phases(0).Componentes.Values
                 If i = _idx Then
                     c.ConstantProperties.Acentric_Factor /= t
                 End If
@@ -107,11 +107,11 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
         End Function
 
-        Public Function CalcNBPDiff(ByVal index As Integer, ByVal P As Double, ByVal multipl As Double, ByVal comp As Substancia) As Double
+        Public Function CalcNBPDiff(ByVal index As Integer, ByVal P As Double, ByVal multipl As Double, ByVal comp As Compound) As Double
 
             Dim NBP1, NBP2 As Double
 
-            Dim Vx(_ms.Fases(0).Componentes.Count - 1) As Double
+            Dim Vx(_ms.Phases(0).Componentes.Count - 1) As Double
 
             Vx(index) = 1.0#
 
@@ -133,7 +133,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
     Public Class PRVSFitting
 
-        Public _comp As Substancia
+        Public _comp As Compound
 
         Sub New()
         End Sub
@@ -157,7 +157,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
         End Function
 
-        Public Function CalcDensityDiff(ByVal T As Double, ByVal P As Double, ByVal multipl As Double, ByVal comp As Substancia) As Double
+        Public Function CalcDensityDiff(ByVal T As Double, ByVal P As Double, ByVal multipl As Double, ByVal comp As Compound) As Double
 
             Dim dens1, dens2 As Double
             Dim pr As New PengRobinson()
@@ -185,7 +185,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
     Public Class SRKVSFitting
 
-        Public _comp As Substancia
+        Public _comp As Compound
 
         Sub New()
         End Sub
@@ -209,7 +209,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
         End Function
 
-        Public Function CalcDensityDiff(ByVal T As Double, ByVal P As Double, ByVal multipl As Double, ByVal comp As Substancia) As Double
+        Public Function CalcDensityDiff(ByVal T As Double, ByVal P As Double, ByVal multipl As Double, ByVal comp As Compound) As Double
 
             Dim dens1, dens2 As Double
             Dim srk As New SRK()

@@ -217,7 +217,7 @@ Haga clic en "Siguiente" para continuar.</value>
     <value>Bucles Anidados  (Equilibrio Sólido-Líquido - Solución Sólida)</value>
   </data>
   <data name="ListBoxPP.Items8" xml:space="preserve">
-    <value>Bucles Anidados  (Equilibrio Líquido-Líquido-Vapor, Fases Líquidas Completamente Inmiscibles)</value>
+    <value>Bucles Anidados  (Equilibrio Líquido-Líquido-Vapor, Phases Líquidas Completamente Inmiscibles)</value>
   </data>
   <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>429, 15</value>
@@ -226,7 +226,7 @@ Haga clic en "Siguiente" para continuar.</value>
     <value>Haga clic aquí para más detalles y los límites de aplicabilidad de cada algoritmo.</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Seleccione un algoritmo de flash adecuado para su simulación. Si su sistema exhibe inestabilidades en la fase líquida (sistemas inmiscibles), seleccione un algoritmo capaz de predecir el equilibrio entre tres fases (VLLE). Para calcular el equilibrio que incluye una fase sólida, seleccione el algoritmo correspondiente. Para sistemas complejos, utilice el algoritmo de minimización de Gibbs más apropiado (dos o tres fases).
+    <value>Seleccione un algoritmo de flash adecuado para su simulación. Si su sistema exhibe inestabilidades en la Phase líquida (sistemas inmiscibles), seleccione un algoritmo capaz de predecir el equilibrio entre tres Phases (VLLE). Para calcular el equilibrio que incluye una Phase sólida, seleccione el algoritmo correspondiente. Para sistemas complejos, utilice el algoritmo de minimización de Gibbs más apropiado (dos o tres Phases).
 
 Haha clic en"Siguiente" para continuar.</value>
   </data>

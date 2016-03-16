@@ -17,7 +17,7 @@
 
 
 Imports Ciloci.Flee
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 
 Public Class FormReacConv
 
@@ -26,8 +26,8 @@ Public Class FormReacConv
     Public mode As String = "Add"
     Public rc As Reaction
     Public fc As FormFlowsheet
-    Public su As DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
     Public loaded As Boolean = False
 

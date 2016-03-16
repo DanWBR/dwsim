@@ -77,7 +77,7 @@
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>5.80999574460228</lnKvalue>
               <Kvalue>333.617705995523</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -95,7 +95,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>-2.79506146137511</lnKvalue>
               <Kvalue>0.0611111182438003</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -113,7 +113,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>-5.37946262008023</lnKvalue>
               <Kvalue>0.00461029874640791</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -133,8 +133,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>6.93872447910682</density>
             <enthalpy>-526.172842350777</enthalpy>
             <entropy>-1.26659509276161</entropy>
@@ -149,17 +149,17 @@
             <volumetric_flow>4.61179862327077</volumetric_flow>
             <molar_enthalpy>-30928.965846221</molar_enthalpy>
             <molar_entropy>-74.4517261476203</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.0637719800124004</surfaceTension>
-          </TPMProperties>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -177,7 +177,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -195,7 +195,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -215,8 +215,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>862.39455719077</density>
             <enthalpy>-582.05548088966</enthalpy>
@@ -234,16 +234,16 @@
             <volumetric_flow>0</volumetric_flow>
             <molar_enthalpy>-47065.2852987661</molar_enthalpy>
             <molar_entropy>-113.891655584434</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -261,7 +261,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -279,7 +279,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -299,8 +299,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.99746686603674</compressibilityFactor>
             <density>0.667790031208097</density>
             <enthalpy>2.85397046943629</enthalpy>
@@ -318,16 +318,16 @@
             <volumetric_flow>4.57823780511284</volumetric_flow>
             <molar_enthalpy>46.7953335613261</molar_enthalpy>
             <molar_entropy>1.25834136653868</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -345,7 +345,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -363,7 +363,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -383,8 +383,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.00843254063431396</compressibilityFactor>
             <density>842.97303640442</density>
             <enthalpy>-347.634693613918</enthalpy>
@@ -402,16 +402,16 @@
             <volumetric_flow>0.0306439207761288</volumetric_flow>
             <molar_enthalpy>-48472.6840162199</molar_enthalpy>
             <molar_entropy>-105.762194112209</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -429,7 +429,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -447,7 +447,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -467,8 +467,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.000863507844458432</compressibilityFactor>
             <density>1066.42779830065</density>
             <enthalpy>-2528.74208709888</enthalpy>
@@ -486,16 +486,16 @@
             <volumetric_flow>0.00291693422645928</volumetric_flow>
             <molar_enthalpy>-45555.2839444149</molar_enthalpy>
             <molar_entropy>-122.613773688545</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -511,7 +511,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -527,7 +527,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -545,18 +545,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -572,7 +572,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -588,7 +588,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -606,18 +606,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -635,7 +635,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -653,7 +653,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -673,12 +673,12 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Solid</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
       </Phases>
     </SimulationObject>
@@ -708,7 +708,7 @@
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>NaN</lnKvalue>
               <Kvalue>NaN</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -726,7 +726,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>NaN</lnKvalue>
               <Kvalue>NaN</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -744,7 +744,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>NaN</lnKvalue>
               <Kvalue>NaN</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -764,8 +764,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>0.667790031208096</density>
             <enthalpy>2.85397046943629</enthalpy>
             <entropy>0.0767441714218163</entropy>
@@ -782,17 +782,17 @@
             <volumetric_flow>4.57823780511284</volumetric_flow>
             <molar_enthalpy>46.7953335613261</molar_enthalpy>
             <molar_entropy>1.25834136653868</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>NaN</surfaceTension>
-          </TPMProperties>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -810,7 +810,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -828,7 +828,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -848,8 +848,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>NaN</density>
             <enthalpy>0</enthalpy>
@@ -867,16 +867,16 @@
             <volumetric_flow>NaN</volumetric_flow>
             <molar_enthalpy>NaN</molar_enthalpy>
             <molar_entropy>NaN</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -894,7 +894,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -912,7 +912,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -932,8 +932,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.99746686603674</compressibilityFactor>
             <density>0.667790031208096</density>
             <enthalpy>2.85397046943629</enthalpy>
@@ -951,16 +951,16 @@
             <volumetric_flow>4.57823780511284</volumetric_flow>
             <molar_enthalpy>46.7953335613261</molar_enthalpy>
             <molar_entropy>1.25834136653868</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -978,7 +978,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -996,7 +996,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1016,8 +1016,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <activity>0</activity>
             <activityCoefficient>0</activityCoefficient>
             <fugacity>0</fugacity>
@@ -1025,16 +1025,16 @@
             <logFugacityCoefficient>0</logFugacityCoefficient>
             <pressure>0</pressure>
             <temperature>0</temperature>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1052,7 +1052,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1070,7 +1070,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1090,18 +1090,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1117,7 +1117,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1133,7 +1133,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1151,18 +1151,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1178,7 +1178,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1194,7 +1194,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1212,18 +1212,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1241,7 +1241,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1259,7 +1259,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1279,12 +1279,12 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Solid</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
       </Phases>
     </SimulationObject>
@@ -1314,7 +1314,7 @@
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>5.15157243929813</lnKvalue>
               <Kvalue>172.702841654305</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1332,7 +1332,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0.555024982750274</lnKvalue>
               <Kvalue>1.7419845037943</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1350,7 +1350,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>-6.03805068218427</lnKvalue>
               <Kvalue>0.00238620585654926</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1370,8 +1370,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>842.97303640442</density>
             <enthalpy>-347.634693613918</enthalpy>
             <entropy>-0.758501590995672</entropy>
@@ -1388,17 +1388,17 @@
             <volumetric_flow>0.0306439207761288</volumetric_flow>
             <molar_enthalpy>-48472.6840162199</molar_enthalpy>
             <molar_entropy>-105.762194112209</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.0243404281063433</surfaceTension>
-          </TPMProperties>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1416,7 +1416,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1434,7 +1434,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1454,8 +1454,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>842.97303640442</density>
             <enthalpy>-347.634693613918</enthalpy>
@@ -1473,16 +1473,16 @@
             <volumetric_flow>0</volumetric_flow>
             <molar_enthalpy>-48472.6840162199</molar_enthalpy>
             <molar_entropy>-105.762194112209</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1500,7 +1500,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1518,7 +1518,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1538,8 +1538,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <activity>0</activity>
             <activityCoefficient>0</activityCoefficient>
             <fugacity>0</fugacity>
@@ -1547,16 +1547,16 @@
             <logFugacityCoefficient>0</logFugacityCoefficient>
             <pressure>0</pressure>
             <temperature>0</temperature>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1574,7 +1574,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1592,7 +1592,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1612,8 +1612,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.00843254063431396</compressibilityFactor>
             <density>842.97303640442</density>
             <enthalpy>-347.634693613918</enthalpy>
@@ -1631,16 +1631,16 @@
             <volumetric_flow>0.0306439207761288</volumetric_flow>
             <molar_enthalpy>-48472.6840162199</molar_enthalpy>
             <molar_entropy>-105.762194112209</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1658,7 +1658,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1676,7 +1676,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1696,18 +1696,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1723,7 +1723,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1739,7 +1739,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1757,18 +1757,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1784,7 +1784,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1800,7 +1800,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1818,18 +1818,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1847,7 +1847,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1865,7 +1865,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1885,12 +1885,12 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Solid</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
       </Phases>
     </SimulationObject>
@@ -1920,7 +1920,7 @@
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>10.0763119812325</lnKvalue>
               <Kvalue>23773.1478526919</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1938,7 +1938,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>-0.0229269833792135</lnKvalue>
               <Kvalue>0.977333842782629</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1956,7 +1956,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>-2.67228179178526</lnKvalue>
               <Kvalue>0.0690943862968887</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1976,8 +1976,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>1066.42779830065</density>
             <enthalpy>-2528.74208709888</enthalpy>
             <entropy>-6.80620518933796</entropy>
@@ -1994,17 +1994,17 @@
             <volumetric_flow>0.00291693422645927</volumetric_flow>
             <molar_enthalpy>-45555.2839444149</molar_enthalpy>
             <molar_entropy>-122.613773688545</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.105841184945733</surfaceTension>
-          </TPMProperties>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2022,7 +2022,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2040,7 +2040,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2060,8 +2060,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>1066.42779830065</density>
             <enthalpy>-2528.74208709888</enthalpy>
@@ -2079,16 +2079,16 @@
             <volumetric_flow>0</volumetric_flow>
             <molar_enthalpy>-45555.2839444149</molar_enthalpy>
             <molar_entropy>-122.613773688545</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2106,7 +2106,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2124,7 +2124,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2144,8 +2144,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <activity>0</activity>
             <activityCoefficient>0</activityCoefficient>
             <fugacity>0</fugacity>
@@ -2153,16 +2153,16 @@
             <logFugacityCoefficient>0</logFugacityCoefficient>
             <pressure>0</pressure>
             <temperature>0</temperature>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2180,7 +2180,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2198,7 +2198,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2218,8 +2218,8 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.000863507844458432</compressibilityFactor>
             <density>1066.42779830065</density>
             <enthalpy>-2528.74208709888</enthalpy>
@@ -2237,16 +2237,16 @@
             <volumetric_flow>0.00291693422645927</volumetric_flow>
             <molar_enthalpy>-45555.2839444149</molar_enthalpy>
             <molar_entropy>-122.613773688545</molar_entropy>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2264,7 +2264,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2282,7 +2282,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2302,18 +2302,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2329,7 +2329,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2345,7 +2345,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2363,18 +2363,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2390,7 +2390,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2406,7 +2406,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2424,18 +2424,18 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2453,7 +2453,7 @@
               <Nome>Methane</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2471,7 +2471,7 @@
               <Nome>Water</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia</Type>
+              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2491,12 +2491,12 @@
           </Compounds>
           <Descricao></Descricao>
           <Nome>Solid</Nome>
-          <SPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.SinglePhaseMixtureProperties</Type>
-          </SPMProperties>
-          <TPMProperties>
-            <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.TwoPhaseMixtureProperties</Type>
-          </TPMProperties>
+          <Properties>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+          </Properties>
+          <Properties2>
+            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+          </Properties2>
         </Phase>
       </Phases>
     </SimulationObject>
@@ -2792,7 +2792,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
   </PropertyPackages>
   <Compounds>
     <Compound>
-      <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties</Type>
+      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
       <Name>Methane</Name>
       <CAS_Number>74-82-8</CAS_Number>
       <Formula>CH4</Formula>
@@ -2918,7 +2918,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       <Elements />
     </Compound>
     <Compound>
-      <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties</Type>
+      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
       <Name>Water</Name>
       <CAS_Number>7732-18-5</CAS_Number>
       <Formula>HOH</Formula>
@@ -3048,7 +3048,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       <Elements />
     </Compound>
     <Compound>
-      <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties</Type>
+      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
       <Name>N-decane</Name>
       <CAS_Number>124-18-5</CAS_Number>
       <Formula>CH3(CH2)8CH3</Formula>

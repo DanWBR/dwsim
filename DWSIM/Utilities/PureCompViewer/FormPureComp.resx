@@ -976,7 +976,7 @@
     <value>FaTabStripItem18</value>
   </data>
   <data name="FaTabStripItem17.Title" xml:space="preserve">
-    <value>Propriedades da Fase Vapor</value>
+    <value>Propriedades da Phase Vapor</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn15.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1048,7 +1048,7 @@
     <value>T4</value>
   </data>
   <data name="FaTabStripItem16.Title" xml:space="preserve">
-    <value>Propriedades da Fase Líquida</value>
+    <value>Propriedades da Phase Líquida</value>
   </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1156,7 +1156,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FaTabStripItem18.Title" xml:space="preserve">
-    <value>Propriedades da Fase Sólida</value>
+    <value>Propriedades da Phase Sólida</value>
   </data>
   <data name="&gt;&gt;GraphVapThermCond.ZOrder" xml:space="preserve">
     <value>0</value>

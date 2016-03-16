@@ -606,10 +606,10 @@
   <data name="Composiesvolumtrica2" xml:space="preserve">
     <value>2. Volumetrische Zusammensetzung</value>
   </data>
-  <data name="ComposiodaFaseLquida" xml:space="preserve">
+  <data name="ComposiodaPhaseLquida" xml:space="preserve">
     <value>Zusammensetzung der flüssigen Phase</value>
   </data>
-  <data name="ComposiodaFaseVapor" xml:space="preserve">
+  <data name="ComposiodaPhaseVapor" xml:space="preserve">
     <value>Zusammensetzung der Dampfphase</value>
   </data>
   <data name="ComposiodaMistura" xml:space="preserve">
@@ -870,16 +870,16 @@
   <data name="Corsemgradiente" xml:space="preserve">
     <value>Farbe (ohne Gradient)</value>
   </data>
-  <data name="CpCvFaseLquida" xml:space="preserve">
+  <data name="CpCvPhaseLquida" xml:space="preserve">
     <value>Cp/Cv (Flüssigphase)</value>
   </data>
-  <data name="CpCvFaseVapor" xml:space="preserve">
+  <data name="CpCvPhaseVapor" xml:space="preserve">
     <value>Cp/Cv (Dampfphase)</value>
   </data>
-  <data name="CpFaseLquida" xml:space="preserve">
+  <data name="CpPhaseLquida" xml:space="preserve">
     <value>Cp (Flüssigphase)</value>
   </data>
-  <data name="CpFaseVapor" xml:space="preserve">
+  <data name="CpPhaseVapor" xml:space="preserve">
     <value>Cp (Dampfphase)</value>
   </data>
   <data name="Cpiasdesegurana" xml:space="preserve">
@@ -1612,19 +1612,19 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Existemsimulaesabert" xml:space="preserve">
     <value>Es sind Simulationen offen. Sind Sie sicher, daß Sie DWSIM schließen wollen?</value>
   </data>
-  <data name="Existeumafaselquidan" xml:space="preserve">
+  <data name="ExisteumaPhaselquidan" xml:space="preserve">
     <value>Auf der Saugseite des Verdichters ist eine Flüssigphase.</value>
   </data>
-  <data name="Existeumafaselquidan2" xml:space="preserve">
+  <data name="ExisteumaPhaselquidan2" xml:space="preserve">
     <value>Am Eintritt der Turbine ist eine Flüssigphase.</value>
   </data>
-  <data name="Existeumafasevaporna" xml:space="preserve">
+  <data name="ExisteumaPhasevaporna" xml:space="preserve">
     <value>Auf der Saugseite der Pumpe ist eine Dampfphase.</value>
   </data>
-  <data name="Existeumafasevaporna2" xml:space="preserve">
+  <data name="ExisteumaPhasevaporna2" xml:space="preserve">
     <value>Im Eingangsstrom des Tanks ist eine Dampfphase.</value>
   </data>
-  <data name="Existeumafasevaporna21" xml:space="preserve">
+  <data name="ExisteumaPhasevaporna21" xml:space="preserve">
     <value>Im Eingangsstrom zum Wärmetauscher ist eine Dampfphase.</value>
   </data>
   <data name="Existeumerronaconfig" xml:space="preserve">
@@ -1679,7 +1679,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
     <value>Gußeisen</value>
   </data>
   <data name="Fibradevidro" xml:space="preserve">
-    <value>Glasfaser</value>
+    <value>GlasPhaser</value>
   </data>
   <data name="FIGURA" xml:space="preserve">
     <value>Abbildung -</value>
@@ -1705,10 +1705,10 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Fluxograma" xml:space="preserve">
     <value>Fließbild</value>
   </data>
-  <data name="FMFaseLquida" xml:space="preserve">
+  <data name="FMPhaseLquida" xml:space="preserve">
     <value>Flüssigphase MF</value>
   </data>
-  <data name="FMFaseVapor" xml:space="preserve">
+  <data name="FMPhaseVapor" xml:space="preserve">
     <value>Dampfphase MF</value>
   </data>
   <data name="FMMistura" xml:space="preserve">
@@ -1849,22 +1849,22 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="FraoMolar2" xml:space="preserve">
     <value>Kumulierter Molanteil</value>
   </data>
-  <data name="Fraomolardafase" xml:space="preserve">
+  <data name="FraomolardaPhase" xml:space="preserve">
     <value>Phasenmolanteil</value>
   </data>
-  <data name="FraomolardafaseFaseL" xml:space="preserve">
+  <data name="FraomolardaPhasePhaseL" xml:space="preserve">
     <value>Molanteil (Flüssigphase)</value>
   </data>
-  <data name="FraomolardafaseFaseV" xml:space="preserve">
+  <data name="FraomolardaPhasePhaseV" xml:space="preserve">
     <value>Molanteil (Dampfphase)</value>
   </data>
-  <data name="Fraomolardafasenamis" xml:space="preserve">
+  <data name="FraomolardaPhasenamis" xml:space="preserve">
     <value>Molanteil im Gemisch</value>
   </data>
-  <data name="FraomolarnaFaseLquid" xml:space="preserve">
+  <data name="FraomolarnaPhaseLquid" xml:space="preserve">
     <value>Molanteil in der Flüssigphase</value>
   </data>
-  <data name="FraomolarnaFaseVapor" xml:space="preserve">
+  <data name="FraomolarnaPhaseVapor" xml:space="preserve">
     <value>Molanteil in der Dampfphase</value>
   </data>
   <data name="FraomolarnaMistura" xml:space="preserve">
@@ -1882,28 +1882,28 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="FraoMssica" xml:space="preserve">
     <value>Massenanteil</value>
   </data>
-  <data name="Fraomssicadafase" xml:space="preserve">
+  <data name="FraomssicadaPhase" xml:space="preserve">
     <value>Phasenmassenanteil</value>
   </data>
-  <data name="FraomssicadafaseFase" xml:space="preserve">
+  <data name="FraomssicadaPhasePhase" xml:space="preserve">
     <value>Massenanteil (Dampfphase)</value>
   </data>
-  <data name="FraomssicadafaseFase2" xml:space="preserve">
+  <data name="FraomssicadaPhasePhase2" xml:space="preserve">
     <value>Massenanteil (Flüssigphase)</value>
   </data>
-  <data name="FraomssicadafaseFase3" xml:space="preserve">
+  <data name="FraomssicadaPhasePhase3" xml:space="preserve">
     <value>Massenanteil (Wasserdampf)</value>
   </data>
-  <data name="FraomssicadafaseFase4" xml:space="preserve">
+  <data name="FraomssicadaPhasePhase4" xml:space="preserve">
     <value>Massenanteil (Flüssigphase)</value>
   </data>
-  <data name="Fraomssicadafasenami" xml:space="preserve">
+  <data name="FraomssicadaPhasenami" xml:space="preserve">
     <value>Massenanteil im Gemisch</value>
   </data>
-  <data name="FraomssicanaFaseLqui" xml:space="preserve">
+  <data name="FraomssicanaPhaseLqui" xml:space="preserve">
     <value>Massenanteil in der Flüssigphase</value>
   </data>
-  <data name="FraomssicanaFaseVapo" xml:space="preserve">
+  <data name="FraomssicanaPhaseVapo" xml:space="preserve">
     <value>Massenanteil in der Dampfphase</value>
   </data>
   <data name="FraomssicanaMistura" xml:space="preserve">
@@ -2110,10 +2110,10 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="LIQEntropiaEspecfica" xml:space="preserve">
     <value>Spezifische Entropie flüss.</value>
   </data>
-  <data name="LIQFraomolardafase" xml:space="preserve">
+  <data name="LIQFraomolardaPhase" xml:space="preserve">
     <value>Molanteil Flüssigphase</value>
   </data>
-  <data name="LIQFraomssicadafase" xml:space="preserve">
+  <data name="LIQFraomssicadaPhase" xml:space="preserve">
     <value>Massenanteil Flüssigphase</value>
   </data>
   <data name="LIQMassaespecfica" xml:space="preserve">
@@ -2179,22 +2179,22 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Massaespecfica" xml:space="preserve">
     <value>Dichte</value>
   </data>
-  <data name="Massaespecficadafase" xml:space="preserve">
+  <data name="MassaespecficadaPhase" xml:space="preserve">
     <value>Dichte der Dampfphase</value>
   </data>
-  <data name="Massaespecficadafase2" xml:space="preserve">
+  <data name="MassaespecficadaPhase2" xml:space="preserve">
     <value>Dichte der Flüssigphase</value>
   </data>
-  <data name="MassaEspecficadaFase3" xml:space="preserve">
+  <data name="MassaEspecficadaPhase3" xml:space="preserve">
     <value>Dichte der Flüssigphase: Rackett</value>
   </data>
   <data name="Massaespecficadamist" xml:space="preserve">
     <value>Dichte des Gemisches</value>
   </data>
-  <data name="MassaespecficaFaseLq" xml:space="preserve">
+  <data name="MassaespecficaPhaseLq" xml:space="preserve">
     <value>Dichte (Flüssigphase)</value>
   </data>
-  <data name="MassaespecficaFaseVa" xml:space="preserve">
+  <data name="MassaespecficaPhaseVa" xml:space="preserve">
     <value>Dichte (Dampfphase)</value>
   </data>
   <data name="MassaespecficaMistur" xml:space="preserve">
@@ -2203,19 +2203,19 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Massamolar" xml:space="preserve">
     <value>Molare Masse</value>
   </data>
-  <data name="Massamolardafaselqui" xml:space="preserve">
+  <data name="MassamolardaPhaselqui" xml:space="preserve">
     <value>Molare Masse der Flüssigphase.</value>
   </data>
-  <data name="Massamolardafasevapo" xml:space="preserve">
+  <data name="MassamolardaPhasevapo" xml:space="preserve">
     <value>Molare Masse der Dampfphase.</value>
   </data>
   <data name="Massamolardamistura" xml:space="preserve">
     <value>Molare Masse des Gemisches.</value>
   </data>
-  <data name="MassamolarFaseLquida" xml:space="preserve">
+  <data name="MassamolarPhaseLquida" xml:space="preserve">
     <value>Molare Masse (Flüssigphase)</value>
   </data>
-  <data name="MassamolarFaseVapor" xml:space="preserve">
+  <data name="MassamolarPhaseVapor" xml:space="preserve">
     <value>Molare Masse (Dampfphase)</value>
   </data>
   <data name="MassamolarMistura" xml:space="preserve">
@@ -2947,13 +2947,13 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Propriedades3" xml:space="preserve">
     <value>3. Eigenschaften</value>
   </data>
-  <data name="PropriedadesdaFaseLq" xml:space="preserve">
+  <data name="PropriedadesdaPhaseLq" xml:space="preserve">
     <value>Eigenschaften der Flüssigphase</value>
   </data>
-  <data name="Propriedadesdafaseva" xml:space="preserve">
+  <data name="PropriedadesdaPhaseva" xml:space="preserve">
     <value>Eigenschaften der Dampfphase</value>
   </data>
-  <data name="PropriedadesdaFaseVa2" xml:space="preserve">
+  <data name="PropriedadesdaPhaseVa2" xml:space="preserve">
     <value>Eigenschaften der Dampfphase</value>
   </data>
   <data name="Propriedadesdamistur" xml:space="preserve">
@@ -3433,7 +3433,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="StatusOcioso" xml:space="preserve">
     <value>Status: Leerlauf</value>
   </data>
-  <data name="Substancia" xml:space="preserve">
+  <data name="Compound" xml:space="preserve">
     <value>Komponente</value>
   </data>
   <data name="Substnciaremovida" xml:space="preserve">
@@ -3688,10 +3688,10 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="VAPEntropiaEspecfica" xml:space="preserve">
     <value>Dampf Spezifische Entropie</value>
   </data>
-  <data name="VAPFraomolardafase" xml:space="preserve">
+  <data name="VAPFraomolardaPhase" xml:space="preserve">
     <value>Dampfphase Molanteil</value>
   </data>
-  <data name="VAPFraomssicadafase" xml:space="preserve">
+  <data name="VAPFraomssicadaPhase" xml:space="preserve">
     <value>Dampfphase Massenanteil</value>
   </data>
   <data name="VAPMassaespecfica" xml:space="preserve">
@@ -3769,19 +3769,19 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Vazomssicadamistura" xml:space="preserve">
     <value>Massenstrom des Gemisches</value>
   </data>
-  <data name="VazomssicaFaseLquida" xml:space="preserve">
+  <data name="VazomssicaPhaseLquida" xml:space="preserve">
     <value>Massenstrom (Flüssigphase)</value>
   </data>
-  <data name="VazomssicaFaseVapor" xml:space="preserve">
+  <data name="VazomssicaPhaseVapor" xml:space="preserve">
     <value>Massenstrom (Dampfphase)</value>
   </data>
   <data name="VazomssicaMistura" xml:space="preserve">
     <value>Massenstrom (Gemisch)</value>
   </data>
-  <data name="VazomssicanaFaseLqui" xml:space="preserve">
+  <data name="VazomssicanaPhaseLqui" xml:space="preserve">
     <value>Massenstrom der Flüssigphase</value>
   </data>
-  <data name="VazomssicanaFaseVapo" xml:space="preserve">
+  <data name="VazomssicanaPhaseVapo" xml:space="preserve">
     <value>Massenstrom der Dampfphase</value>
   </data>
   <data name="VazomssicanaMistura" xml:space="preserve">
@@ -3790,10 +3790,10 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="VazoTP" xml:space="preserve">
     <value>Durchfluß bei T, P</value>
   </data>
-  <data name="VazoTPFaseLquida" xml:space="preserve">
+  <data name="VazoTPPhaseLquida" xml:space="preserve">
     <value>Durchfluß bei T, P (Flüssigphase)</value>
   </data>
-  <data name="VazoTPFaseVapor" xml:space="preserve">
+  <data name="VazoTPPhaseVapor" xml:space="preserve">
     <value>Durchfluß bei T, P (Dampfphase)</value>
   </data>
   <data name="Vazovolumtrica" xml:space="preserve">
@@ -3805,10 +3805,10 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Vazovolumtricadamist" xml:space="preserve">
     <value>Volumenstrom des Gemisches</value>
   </data>
-  <data name="VazovolumtricanaFase" xml:space="preserve">
+  <data name="VazovolumtricanaPhase" xml:space="preserve">
     <value>Volumenstrom der Dampfphase</value>
   </data>
-  <data name="VazovolumtricanaFase1" xml:space="preserve">
+  <data name="VazovolumtricanaPhase1" xml:space="preserve">
     <value>Volumenstrom der Flüssigphase</value>
   </data>
   <data name="VazovolumtricanaMist" xml:space="preserve">
@@ -4000,10 +4000,10 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
   <data name="Wegstein" xml:space="preserve">
     <value>Wegstein ...</value>
   </data>
-  <data name="ZFaseLquida" xml:space="preserve">
+  <data name="ZPhaseLquida" xml:space="preserve">
     <value>Z (Flüssigphase)</value>
   </data>
-  <data name="ZFaseVapor" xml:space="preserve">
+  <data name="ZPhaseVapor" xml:space="preserve">
     <value>Z (Dampfphase)</value>
   </data>
   <data name="PropPack_FlashTrivialSolution" xml:space="preserve">

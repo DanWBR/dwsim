@@ -272,7 +272,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            ' CALCULO DAS RAIZES PARA A FASE VAPOR
+            ' CALCULO DAS RAIZES PARA A Phase VAPOR
 
             i = 0
             Do
@@ -357,7 +357,7 @@ Namespace DWSIM.Utilities.HYD
 
             End Try
 
-            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA FASE VAPOR
+            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA Phase VAPOR
 
             i = 0
             Do
@@ -379,7 +379,7 @@ Namespace DWSIM.Utilities.HYD
 
             Else
 
-                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA FASE AQUOSA
+                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
                 i = 0
                 Do
@@ -409,7 +409,7 @@ Namespace DWSIM.Utilities.HYD
                 PQRG = 302 * 4.1868 / (R * T0) + DH / R * (1 / T - 1 / T0) + 3 * 0.000001 / R * dPdT * Math.Log(T / T0)
                 PQG = PQRG * R * T + 3 * 0.000001 * (P - PR)
 
-                'CALCULO DO POTENCIAL QUÍMICO DA ÁGUA NA FASE LÍQUIDA
+                'CALCULO DO POTENCIAL QUÍMICO DA ÁGUA NA Phase LÍQUIDA
                 act = WAC
                 DH = -4.1868 * (1463.3 + 275 + (9.11 + 0.0336 * 273.1) * (T - T0) - 0.0168 * (T ^ 2 - T0 ^ 2))
                 PQRL = 302 * 4.1868 / (R * T0) + DH / R * (1 / T - 1 / T0) + (3 * 0.000001 + Math.Exp(-10.9241) - 0.00001912) / R * dPdT * Math.Log(T / T0)
@@ -1044,7 +1044,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            ' CALCULO DAS RAIZES PARA A FASE VAPOR
+            ' CALCULO DAS RAIZES PARA A Phase VAPOR
 
             i = 0
             Do
@@ -1129,7 +1129,7 @@ STEP2:
 
             End Try
 
-            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA FASE VAPOR
+            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA Phase VAPOR
 
             i = 0
             Do
@@ -1158,7 +1158,7 @@ STEP2:
 
             Else
 
-                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA FASE AQUOSA
+                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
                 Dim fresult As Object = unfPP.FlashBase.Flash_PT(Vy, P, T, unfPP)
                 If fresult(0) > 0.0# Then
@@ -1211,7 +1211,7 @@ STEP2:
                 PQRG = 302 * 4.1868 / (R * T0) + DH / R * (1 / T - 1 / T0) + 3 * 0.000001 / R * dPdT * Math.Log(T / T0)
                 PQG = PQRG * R * T + 3 * 0.000001 * (P - PR)
 
-                'CALCULO DO POTENCIAL QUÍMICO DA ÁGUA NA FASE LÍQUIDA
+                'CALCULO DO POTENCIAL QUÍMICO DA ÁGUA NA Phase LÍQUIDA
                 act = WAC
                 DH = -4.1868 * (1463.3 + 275 + (9.11 + 0.0336 * 273.1) * (T - T0) - 0.0168 * (T ^ 2 - T0 ^ 2))
                 PQRL = 302 * 4.1868 / (R * T0) + DH / R * (1 / T - 1 / T0) + (3 * 0.000001 + Math.Exp(-10.9241) - 0.00001912) / R * dPdT * Math.Log(T / T0)

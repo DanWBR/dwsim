@@ -23,7 +23,7 @@ Public Class ScriptEditorControl
         cbLinkedObject.Items.AddRange(New String() {"Simulation", "Solver"})
         cbLinkedEvent.Items.AddRange(New String() {"Simulation Opened", "Simulation Saved", "Simulation Closed", "1 min. Timer", "5 min. Timer", "15 min. Timer", "30 min. Timer", "60 min. Timer"})
 
-        For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
             cbLinkedObject.Items.Add(obj.GraphicObject.Tag)
         Next
 

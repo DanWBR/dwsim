@@ -202,7 +202,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            ' CALCULO DAS RAIZES PARA A FASE VAPOR
+            ' CALCULO DAS RAIZES PARA A Phase VAPOR
 
             i = 0
             Do
@@ -287,7 +287,7 @@ Namespace DWSIM.Utilities.HYD
 
             End Try
 
-            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA FASE VAPOR
+            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA Phase VAPOR
 
             i = 0
             Do
@@ -329,7 +329,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA FASE AQUOSA
+            'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
             i = 0
             Do
@@ -866,7 +866,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            ' CALCULO DAS RAIZES PARA A FASE VAPOR
+            ' CALCULO DAS RAIZES PARA A Phase VAPOR
 
             i = 0
             Do
@@ -951,7 +951,7 @@ STEP2:
 
             End Try
 
-            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA FASE VAPOR
+            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA Phase VAPOR
 
             i = 0
             Do
@@ -992,7 +992,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA FASE AQUOSA
+            'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
             Dim VyNW(n) As Double
             For i = 0 To n

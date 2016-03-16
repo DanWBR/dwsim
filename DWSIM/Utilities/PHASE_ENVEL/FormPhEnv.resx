@@ -604,7 +604,7 @@
     <value>FormPhEnv</value>
   </data>
   <data name="CheckBox3.Text" xml:space="preserve">
-    <value>Incluir curva de estabilidade das fases (PT/TP apenas)</value>
+    <value>Incluir curva de estabilidade das Phases (PT/TP apenas)</value>
   </data>
   <data name="&gt;&gt;CheckBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -694,7 +694,7 @@
     <value>89, 13</value>
   </data>
   <data name="chkpip.Text" xml:space="preserve">
-    <value>Incluir curva de identificação de fases</value>
+    <value>Incluir curva de identificação de Phases</value>
   </data>
   <data name="FaTabStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

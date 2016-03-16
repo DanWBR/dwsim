@@ -23,7 +23,7 @@ Public NotInheritable Class SplashScreen
 
     Private Sub SplashScreen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-      
+
         'Set up the dialog text at runtime according to the application's assembly information.  
 
         'TODO: Customize the application's assembly information in the "Application" pane of the project 
@@ -39,8 +39,8 @@ Public NotInheritable Class SplashScreen
         Dim dt As DateTime = CType("01/01/2000", DateTime). _
                             AddDays(My.Application.Info.Version.Build). _
                             AddSeconds(My.Application.Info.Version.Revision * 2)
-        Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
-        Version.Text += ", Build " & My.Application.Info.Version.Build & " [git-" & DWSIM.App.GetGitHash() & "] (" & Format(dt, "dd/MM/yyyy") & ")"
+        Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & vbCrLf
+        Version.Text += "Build " & My.Application.Info.Version.Build & " [git-" & DWSIM.App.GetGitHash() & "] (" & Format(dt, "dd/MM/yyyy") & ")"
 
         'Copyright info
         'Copyright.Text = My.Application.Info.Copyright
@@ -50,11 +50,10 @@ Public NotInheritable Class SplashScreen
         ' Do nothing here!
     End Sub
 
-    'Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
-    '    Dim gfx As Graphics = pevent.Graphics
-    '    Dim mypng As System.Drawing.Bitmap = My.Resources.dwsim_3_bg
-    '    mypng.MakeTransparent(Color.Red)
-    '    gfx.DrawImage(mypng, New Rectangle(0, 0, Me.Width, Me.Height))
-    'End Sub
+    Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
+
+        pevent.Graphics.DrawImage(My.Resources.splashScreen2, New Rectangle(0, 0, Me.Width, Me.Height))
+
+    End Sub
 
 End Class

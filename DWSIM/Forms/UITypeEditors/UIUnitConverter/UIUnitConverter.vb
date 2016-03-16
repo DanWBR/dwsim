@@ -19,7 +19,7 @@
 Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
 Imports System.ComponentModel
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Reactors
 
 Namespace DWSIM.Editors.Generic
@@ -33,7 +33,7 @@ Namespace DWSIM.Editors.Generic
         Dim loaded As Boolean = False
 
         Public WithEvents lb As System.Windows.Forms.ComboBox
-        Public us As SistemasDeUnidades.Unidades
+        Public us As SystemsOfUnits.Units
         Public nf As String
         Public utype As String
         Public ufrom As String
@@ -98,11 +98,11 @@ Namespace DWSIM.Editors.Generic
 
                 editorService.DropDownControl(lb)
 
-                Dim cv As New SistemasDeUnidades.Conversor
+                Dim cv As New SystemsOfUnits.Converter
 
                 If Not ufrom Is Nothing Then
                     If Double.TryParse(uvalue, New Double) Then
-                        value = Conversor.ConverterDoSI(uto, Conversor.ConverterParaSI(ufrom, uvalue))
+                        value = Converter.ConvertFromSI(uto, Converter.ConvertToSI(ufrom, uvalue))
                     Else
                         MsgBox("Input value is not a valid number.", MsgBoxStyle.OkOnly, "Error")
                     End If

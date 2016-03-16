@@ -6,10 +6,10 @@ Imports Microsoft.Msdn.Samples.GraphicObjects
 Imports DWSIM
 Imports System.Windows.Forms
 Imports System.Linq
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Threading.Tasks
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
-Imports DWSIM.DWSIM.SistemasDeUnidades
+Imports DWSIM.DWSIM.SystemsOfUnits
 
 Public Class Form1
 
@@ -98,7 +98,7 @@ Public Class Form1
                 Dim dobj As DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream = fsheet.Collections.CLCS_MaterialStreamCollection(gobj.Name)
 
                 'check if the stream is vapor only.
-                If dobj.Fases(2).SPMProperties.molarfraction = 1 Then
+                If dobj.Phases(2).Properties.molarfraction = 1 Then
                     Me.lblVapOnly.Text = "Yes"
                 Else
                     Me.lblVapOnly.Text = "No"
@@ -136,10 +136,10 @@ Public Class Form1
 
                 'methane number variables
                 Dim mon, mn, xc1, xc2, xc3, xc4, xco2, xn2 As Double
-                Dim c1, c2, c3, ic4, nc4, co2, n2 As Substancia
+                Dim c1, c2, c3, ic4, nc4, co2, n2 As Compound
 
                 'molecular weight
-                Dim mw As Double = dobj.Fases(0).SPMProperties.molecularWeight
+                Dim mw As Double = dobj.Phases(0).Properties.molecularWeight
 
                 'declare a temporary material stream so we can do calculations without messing with the simulation.
                 Dim tmpms As New DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream("", "")
@@ -150,10 +150,10 @@ Public Class Form1
                 'get the current composition, check if there is water and create a new, "dry" composition
                 'vx = current composition
                 'vxnw = dry composition
-                Dim vx(dobj.Fases(0).Componentes.Count - 1), vxnw(dobj.Fases(0).Componentes.Count - 1), vxw(dobj.Fases(0).Componentes.Count - 1) As Double
+                Dim vx(dobj.Phases(0).Componentes.Count - 1), vxnw(dobj.Phases(0).Componentes.Count - 1), vxw(dobj.Phases(0).Componentes.Count - 1) As Double
                 Dim i As Integer = 0
                 Dim iw As Integer = -1
-                For Each c As DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia In dobj.Fases(0).Componentes.Values
+                For Each c As Compound In dobj.Phases(0).Componentes.Values
                     vx(i) = c.FracaoMolar
                     If c.ConstantProperties.CAS_Number = "7732-18-5" Then
                         iw = i
@@ -165,7 +165,7 @@ Public Class Form1
                     If vx(iw) <> 0.0# Then
                         'water is present
                         i = 0
-                        For Each c As DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia In dobj.Fases(0).Componentes.Values
+                        For Each c As Compound In dobj.Phases(0).Componentes.Values
                             If i <> iw Then
                                 vxnw(i) = vx(i) / (1 - vx(iw))
                                 vxw(i) = 0.0#
@@ -211,10 +211,10 @@ Public Class Form1
                     If iw <> -1 Then
                         If vx(iw) <> 0.0# Then
                             Dim t1 As Task = Task.Factory.StartNew(Sub()
-                                                                       Dim result As Object = pp1.FlashBase.Flash_PV(vx, tmpms.Fases(0).SPMProperties.pressure, 1, 250, pp1)
-                                                                       iwdp = pp1.AUX_TSATi(vx(iw) * tmpms.Fases(0).SPMProperties.pressure.GetValueOrDefault, iw)
-                                                                       hdp = pp1.FlashBase.Flash_PV(vxnw, tmpms.Fases(0).SPMProperties.pressure, 1, result(4), pp1)(4)
-                                                                       wdp = fa.Flash_PV_3P(vx, 0.999, 0.0000000001, 0.001, result(3), result(2), vxw, tmpms.Fases(0).SPMProperties.pressure, 0.999, iwdp, pp1)(4)
+                                                                       Dim result As Object = pp1.FlashBase.Flash_PV(vx, tmpms.Phases(0).Properties.pressure, 1, 250, pp1)
+                                                                       iwdp = pp1.AUX_TSATi(vx(iw) * tmpms.Phases(0).Properties.pressure.GetValueOrDefault, iw)
+                                                                       hdp = pp1.FlashBase.Flash_PV(vxnw, tmpms.Phases(0).Properties.pressure, 1, result(4), pp1)(4)
+                                                                       wdp = fa.Flash_PV_3P(vx, 0.999, 0.0000000001, 0.001, result(3), result(2), vxw, tmpms.Phases(0).Properties.pressure, 0.999, iwdp, pp1)(4)
 
                                                                    End Sub)
                             Dim t2 As Task = Task.Factory.StartNew(Sub()
@@ -244,7 +244,7 @@ Public Class Form1
                 End Try
 
                 'set stream pressure
-                tmpms.Fases(0).SPMProperties.pressure = 101325
+                tmpms.Phases(0).Properties.pressure = 101325
 
                 'compressibility factors and specific gravities
                 Dim z0, z15, z20, d0, d15, d20, d As Double
@@ -252,28 +252,28 @@ Public Class Form1
                 'ideal gas specific gravity
                 d = mw / 28.9626
 
-                tmpms.Fases(0).SPMProperties.temperature = 273.15 + 0
-                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
-                z0 = tmpms.Fases(2).SPMProperties.compressibilityFactor
+                tmpms.Phases(0).Properties.temperature = 273.15 + 0
+                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                z0 = tmpms.Phases(2).Properties.compressibilityFactor
                 d0 = d / z0
 
-                tmpms.Fases(0).SPMProperties.temperature = 273.15 + 15.56
-                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
-                z15 = tmpms.Fases(2).SPMProperties.compressibilityFactor
+                tmpms.Phases(0).Properties.temperature = 273.15 + 15.56
+                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                z15 = tmpms.Phases(2).Properties.compressibilityFactor
                 d15 = d / z15
 
-                tmpms.Fases(0).SPMProperties.temperature = 273.15 + 20
-                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
-                z20 = tmpms.Fases(2).SPMProperties.compressibilityFactor
+                tmpms.Phases(0).Properties.temperature = 273.15 + 20
+                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                z20 = tmpms.Phases(2).Properties.compressibilityFactor
                 d20 = d / z20
 
                 If iw <> -1 Then
                     If vx(iw) <> 0.0# Then
                         'water content in mg/m3
-                        If tmpms.Fases(0).Componentes.ContainsKey("Agua") Then
-                            wcb = vx(iw) * tmpms.Fases(0).Componentes("Agua").ConstantProperties.Molar_Weight * 1000 * 1000
-                        ElseIf tmpms.Fases(0).Componentes.ContainsKey("Water") Then
-                            wcb = vx(iw) * tmpms.Fases(0).Componentes("Water").ConstantProperties.Molar_Weight * 1000 * 1000
+                        If tmpms.Phases(0).Componentes.ContainsKey("Agua") Then
+                            wcb = vx(iw) * tmpms.Phases(0).Componentes("Agua").ConstantProperties.Molar_Weight * 1000 * 1000
+                        ElseIf tmpms.Phases(0).Componentes.ContainsKey("Water") Then
+                            wcb = vx(iw) * tmpms.Phases(0).Componentes("Water").ConstantProperties.Molar_Weight * 1000 * 1000
                         End If
                         wc0 = wcb / (1 * z0 * 8314.47 * (273.15 + 0) / 101325)
                         wc15 = wcb / (1 * z15 * 8314.47 * (273.15 + 15.56) / 101325)
@@ -282,7 +282,7 @@ Public Class Form1
                 End If
 
                 'calculation of heating values at various conditions
-                For Each c As DWSIM.DWSIM.ClassesBasicasTermodinamica.Substancia In dobj.Fases(0).Componentes.Values
+                For Each c As Compound In dobj.Phases(0).Componentes.Values
                     If dmc.ContainsKey(c.ConstantProperties.CAS_Number) Then
                         hhv25m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup25 * 1000
                         hhv20m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup20 * 1000
@@ -322,13 +322,13 @@ Public Class Form1
                 iw20r = hhv2020vr / d20 ^ 0.5
 
                 'methane number
-                c1 = (From c As Substancia In dobj.Fases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "74-82-8").FirstOrDefault
-                c2 = (From c As Substancia In dobj.Fases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "74-84-0").FirstOrDefault
-                c3 = (From c As Substancia In dobj.Fases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "74-98-6").FirstOrDefault
-                nc4 = (From c As Substancia In dobj.Fases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "106-97-8").FirstOrDefault
-                ic4 = (From c As Substancia In dobj.Fases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "75-28-5").FirstOrDefault
-                co2 = (From c As Substancia In dobj.Fases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "124-38-9").FirstOrDefault
-                n2 = (From c As Substancia In dobj.Fases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "7727-37-9").FirstOrDefault
+                c1 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "74-82-8").FirstOrDefault
+                c2 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "74-84-0").FirstOrDefault
+                c3 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "74-98-6").FirstOrDefault
+                nc4 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "106-97-8").FirstOrDefault
+                ic4 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "75-28-5").FirstOrDefault
+                co2 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "124-38-9").FirstOrDefault
+                n2 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "7727-37-9").FirstOrDefault
 
                 If Not c1 Is Nothing Then xc1 = c1.FracaoMolar.GetValueOrDefault
                 If Not c2 Is Nothing Then xc2 = c2.FracaoMolar.GetValueOrDefault
@@ -345,10 +345,10 @@ Public Class Form1
                 Dim nf As String = fsheet.Options.NumberFormat
 
                 'get a reference to the current unit system.
-                Dim su As DWSIM.DWSIM.SistemasDeUnidades.Unidades = fsheet.Options.SelectedUnitSystem
+                Dim su As DWSIM.DWSIM.SystemsOfUnits.Units = fsheet.Options.SelectedUnitSystem
 
                 'declare a new unit conversor to convert (some) calculated values to the current unit system.
-                Dim cv As New DWSIM.DWSIM.SistemasDeUnidades.Conversor()
+                Dim cv As New DWSIM.DWSIM.SystemsOfUnits.Converter()
 
                 'populate property grid with calculated values.
 
@@ -363,22 +363,22 @@ Public Class Form1
                     .Item.Add("Specific Gravity @ NC", Format(d0, nf), True, "Natural Gas Properties", "NC = Normal Conditions (T = 0 °C, P = 1 atm)", True)
                     .Item.Add("Specific Gravity @ SC", Format(d15, nf), True, "Natural Gas Properties", "SC = Standard Conditions (T = 15.56 °C, P = 1 atm)", True)
                     .Item.Add("Specific Gravity @ BR", Format(d20, nf), True, "Natural Gas Properties", "BR = CNTP (T = 20 °C, P = 1 atm)", True)
-                    .Item.Add("Mass LHV @ 0 °C (" & su.spmp_enthalpy & ")", Format(Conversor.ConverterDoSI(su.spmp_enthalpy, lhv0m), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
-                    .Item.Add("Mass LHV @ 15 °C (" & su.spmp_enthalpy & ")", Format(Conversor.ConverterDoSI(su.spmp_enthalpy, lhv15m), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
-                    .Item.Add("Mass LHV @ 20 °C (" & su.spmp_enthalpy & ")", Format(Conversor.ConverterDoSI(su.spmp_enthalpy, lhv20m), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
-                    .Item.Add("Mass LHV @ 25 °C (" & su.spmp_enthalpy & ")", Format(Conversor.ConverterDoSI(su.spmp_enthalpy, lhv25m), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
-                    .Item.Add("Mass HHV @ 0 °C (" & su.spmp_enthalpy & ")", Format(Conversor.ConverterDoSI(su.spmp_enthalpy, hhv0m), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
-                    .Item.Add("Mass HHV @ 15 °C (" & su.spmp_enthalpy & ")", Format(Conversor.ConverterDoSI(su.spmp_enthalpy, hhv15m), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
-                    .Item.Add("Mass HHV @ 20 °C (" & su.spmp_enthalpy & ")", Format(Conversor.ConverterDoSI(su.spmp_enthalpy, hhv20m), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
-                    .Item.Add("Mass HHV @ 25 °C (" & su.spmp_enthalpy & ")", Format(Conversor.ConverterDoSI(su.spmp_enthalpy, hhv25m), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
-                    .Item.Add("Molar LHV @ 0 °C (" & su.molar_enthalpy & ")", Format(Conversor.ConverterDoSI(su.molar_enthalpy, lhv0m * mw), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
-                    .Item.Add("Molar LHV @ 15 °C (" & su.molar_enthalpy & ")", Format(Conversor.ConverterDoSI(su.molar_enthalpy, lhv15m * mw), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
-                    .Item.Add("Molar LHV @ 20 °C (" & su.molar_enthalpy & ")", Format(Conversor.ConverterDoSI(su.molar_enthalpy, lhv20m * mw), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
-                    .Item.Add("Molar LHV @ 25 °C (" & su.molar_enthalpy & ")", Format(Conversor.ConverterDoSI(su.molar_enthalpy, lhv25m * mw), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
-                    .Item.Add("Molar HHV @ 0 °C (" & su.molar_enthalpy & ")", Format(Conversor.ConverterDoSI(su.molar_enthalpy, hhv0m * mw), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
-                    .Item.Add("Molar HHV @ 15 °C (" & su.molar_enthalpy & ")", Format(Conversor.ConverterDoSI(su.molar_enthalpy, hhv15m * mw), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
-                    .Item.Add("Molar HHV @ 20 °C (" & su.molar_enthalpy & ")", Format(Conversor.ConverterDoSI(su.molar_enthalpy, hhv20m * mw), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
-                    .Item.Add("Molar HHV @ 25 °C (" & su.molar_enthalpy & ")", Format(Conversor.ConverterDoSI(su.molar_enthalpy, hhv25m * mw), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
+                    .Item.Add("Mass LHV @ 0 °C (" & su.enthalpy & ")", Format(Converter.ConvertFromSI(su.enthalpy, lhv0m), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
+                    .Item.Add("Mass LHV @ 15 °C (" & su.enthalpy & ")", Format(Converter.ConvertFromSI(su.enthalpy, lhv15m), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
+                    .Item.Add("Mass LHV @ 20 °C (" & su.enthalpy & ")", Format(Converter.ConvertFromSI(su.enthalpy, lhv20m), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
+                    .Item.Add("Mass LHV @ 25 °C (" & su.enthalpy & ")", Format(Converter.ConvertFromSI(su.enthalpy, lhv25m), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
+                    .Item.Add("Mass HHV @ 0 °C (" & su.enthalpy & ")", Format(Converter.ConvertFromSI(su.enthalpy, hhv0m), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
+                    .Item.Add("Mass HHV @ 15 °C (" & su.enthalpy & ")", Format(Converter.ConvertFromSI(su.enthalpy, hhv15m), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
+                    .Item.Add("Mass HHV @ 20 °C (" & su.enthalpy & ")", Format(Converter.ConvertFromSI(su.enthalpy, hhv20m), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
+                    .Item.Add("Mass HHV @ 25 °C (" & su.enthalpy & ")", Format(Converter.ConvertFromSI(su.enthalpy, hhv25m), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
+                    .Item.Add("Molar LHV @ 0 °C (" & su.molar_enthalpy & ")", Format(Converter.ConvertFromSI(su.molar_enthalpy, lhv0m * mw), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
+                    .Item.Add("Molar LHV @ 15 °C (" & su.molar_enthalpy & ")", Format(Converter.ConvertFromSI(su.molar_enthalpy, lhv15m * mw), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
+                    .Item.Add("Molar LHV @ 20 °C (" & su.molar_enthalpy & ")", Format(Converter.ConvertFromSI(su.molar_enthalpy, lhv20m * mw), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
+                    .Item.Add("Molar LHV @ 25 °C (" & su.molar_enthalpy & ")", Format(Converter.ConvertFromSI(su.molar_enthalpy, lhv25m * mw), nf), True, "Natural Gas Properties", "LHV = Lower Heating Value", True)
+                    .Item.Add("Molar HHV @ 0 °C (" & su.molar_enthalpy & ")", Format(Converter.ConvertFromSI(su.molar_enthalpy, hhv0m * mw), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
+                    .Item.Add("Molar HHV @ 15 °C (" & su.molar_enthalpy & ")", Format(Converter.ConvertFromSI(su.molar_enthalpy, hhv15m * mw), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
+                    .Item.Add("Molar HHV @ 20 °C (" & su.molar_enthalpy & ")", Format(Converter.ConvertFromSI(su.molar_enthalpy, hhv20m * mw), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
+                    .Item.Add("Molar HHV @ 25 °C (" & su.molar_enthalpy & ")", Format(Converter.ConvertFromSI(su.molar_enthalpy, hhv25m * mw), nf), True, "Natural Gas Properties", "HHV = Higher Heating Value", True)
                     .Item.Add("Ideal Gas Vol. LHV @ NC (kJ/m3)", Format(lhv00v, nf), True, "Natural Gas Properties", "NC = Normal Conditions (T = 0 °C, P = 1 atm)", True)
                     .Item.Add("Ideal Gas Vol. LHV @ SC (kJ/m3)", Format(lhv1515v, nf), True, "Natural Gas Properties", "SC = Standard Conditions (T = 15.56 °C, P = 1 atm)", True)
                     .Item.Add("Ideal Gas Vol. LHV @ BR (kJ/m3)", Format(lhv2020v, nf), True, "Natural Gas Properties", "BR = CNTP (T = 20 °C, P = 1 atm)", True)
@@ -399,12 +399,12 @@ Public Class Form1
                     .Item.Add("Wobbe Index @ BR (kJ/m3)", Format(iw20r, nf), True, "Natural Gas Properties", "BR = CNTP (T = 20 °C, P = 1 atm)", True)
                     .Item.Add("Motor Octane Number (MON)", Format(mon, nf), True, "Natural Gas Properties", "Motor Octane Number", True)
                     .Item.Add("Methane Number (MN)", Format(mn, nf), True, "Natural Gas Properties", "Methane Number", True)
-                    .Item.Add("Water Dew Point @ P (" & su.spmp_temperature & ")", Format(Conversor.ConverterDoSI(su.spmp_temperature, wdp), nf), True, "Natural Gas Properties", "", True)
-                    .Item.Add("Water Dew Point @ 1 atm (" & su.spmp_temperature & ")", Format(Conversor.ConverterDoSI(su.spmp_temperature, wdp1), nf), True, "Natural Gas Properties", "", True)
-                    .Item.Add("Water Dew Point (Ideal) @ P (" & su.spmp_temperature & ")", Format(Conversor.ConverterDoSI(su.spmp_temperature, iwdp), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
-                    .Item.Add("Water Dew Point (Ideal) @ 1 atm (" & su.spmp_temperature & ")", Format(Conversor.ConverterDoSI(su.spmp_temperature, iwdp1), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
-                    .Item.Add("HC Dew Point @ P (" & su.spmp_temperature & ")", Format(Conversor.ConverterDoSI(su.spmp_temperature, hdp), nf), True, "Natural Gas Properties", "Hydrocarbon Dew Point at System Pressure", True)
-                    .Item.Add("HC Dew Point @ 1 atm (" & su.spmp_temperature & ")", Format(Conversor.ConverterDoSI(su.spmp_temperature, hdp1), nf), True, "Natural Gas Properties", "Hydrocarbon Dew Point at System Pressure", True)
+                    .Item.Add("Water Dew Point @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, wdp), nf), True, "Natural Gas Properties", "", True)
+                    .Item.Add("Water Dew Point @ 1 atm (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, wdp1), nf), True, "Natural Gas Properties", "", True)
+                    .Item.Add("Water Dew Point (Ideal) @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, iwdp), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
+                    .Item.Add("Water Dew Point (Ideal) @ 1 atm (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, iwdp1), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
+                    .Item.Add("HC Dew Point @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, hdp), nf), True, "Natural Gas Properties", "Hydrocarbon Dew Point at System Pressure", True)
+                    .Item.Add("HC Dew Point @ 1 atm (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, hdp1), nf), True, "Natural Gas Properties", "Hydrocarbon Dew Point at System Pressure", True)
                     .Item.Add("Water Content @ NC (mg/m3)", Format(wc0, nf), True, "Natural Gas Properties", "Water concentration at NC = Normal Conditions (T = 0 °C, P = 1 atm)", True)
                     .Item.Add("Water Content @ SC (mg/m3)", Format(wc15, nf), True, "Natural Gas Properties", "Water concentration at SC = Standard Conditions (T = 15.56 °C, P = 1 atm)", True)
                     .Item.Add("Water Content @ BR (mg/m3)", Format(wc20, nf), True, "Natural Gas Properties", "Water concentration at BR = CNTP (T = 20 °C, P = 1 atm)", True)

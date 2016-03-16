@@ -3153,7 +3153,7 @@
     <value>0</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
-    <value>Componentes-chave para a segunda fase líquida:</value>
+    <value>Componentes-chave para a segunda Phase líquida:</value>
   </data>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
@@ -3342,7 +3342,7 @@
     <value>29</value>
   </data>
   <data name="chkDoPhaseId.Text" xml:space="preserve">
-    <value>Aplicar algoritmo de identificação de fases após o cálculo de equilíbrio</value>
+    <value>Aplicar algoritmo de identificação de Phases após o cálculo de equilíbrio</value>
   </data>
   <data name="&gt;&gt;chkDoPhaseId.Name" xml:space="preserve">
     <value>chkDoPhaseId</value>
@@ -3525,7 +3525,7 @@
     <value>Loops Aninhados (ESL - Solução Sólida)</value>
   </data>
   <data name="ComboBoxFlashAlg.Items8" xml:space="preserve">
-    <value>Loops Aninhados (ELLV - Fases Líquidas Imiscíveis)</value>
+    <value>Loops Aninhados (ELLV - Phases Líquidas Imiscíveis)</value>
   </data>
   <data name="ComboBoxFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
     <value>255, 18</value>

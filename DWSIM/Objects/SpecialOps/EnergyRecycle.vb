@@ -27,7 +27,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
     <System.Serializable()> Public Class EnergyRecycle
 
-        Inherits SimulationObjects_UnitOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         Protected m_ConvPar As ConvergenceParametersE
         Protected m_ConvHist As ConvergenceHistoryE
@@ -159,7 +159,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
 
@@ -187,9 +187,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
                 Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
                 Me.FillNodeItems()
@@ -214,9 +214,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     .Item(0).Value = Me.IterationsTaken
                     .Item(0).Unit = ""
 
-                    valor = Format(Conversor.ConverterDoSI(su.spmp_heatflow, Me.ConvergenceHistory.EnergyE), nf)
+                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.ConvergenceHistory.EnergyE), nf)
                     .Item(1).Value = valor
-                    .Item(1).Unit = su.spmp_heatflow
+                    .Item(1).Unit = su.heatflow
 
                 End With
 
@@ -375,9 +375,9 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
 
         End Function
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 
@@ -428,12 +428,12 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
 
                 Dim valor As Double
 
-                valor = Format(Conversor.ConverterDoSI(su.spmp_heatflow, Me.ConvergenceParameters.Energy), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Energia"), su.spmp_heatflow), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), "", True)
+                valor = Format(Converter.ConvertFromSI(su.heatflow, Me.ConvergenceParameters.Energy), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Energia"), su.heatflow), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), "", True)
 
                 .Item.Add(DWSIM.App.GetLocalString("Iteraesnecessrias"), Me, "IterationsTaken", True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Nmerodeiteraesusadas"), True)
-                valor = Format(Conversor.ConverterDoSI(su.spmp_deltaT, Me.ConvergenceHistory.EnergyE), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Erronaenergia"), su.spmp_heatflow), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor"), True)
+                valor = Format(Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.EnergyE), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Erronaenergia"), su.heatflow), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor"), True)
 
                 If Not Me.Annotation Is Nothing Then
                     .Item.Add(DWSIM.App.GetLocalString("Anotaes"), Me, "Annotation", False, DWSIM.App.GetLocalString("Outros"), DWSIM.App.GetLocalString("Cliquenobotocomretic"), True)
@@ -449,9 +449,9 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -462,16 +462,16 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
                     value = Me.MaximumIterations
                 Case 1
                     'PROP_ER_1	Power Tolerance
-                    value = Conversor.ConverterDoSI(su.spmp_heatflow, Me.ConvergenceParameters.Energy)
+                    value = Converter.ConvertFromSI(su.heatflow, Me.ConvergenceParameters.Energy)
                 Case 2
                     'PROP_ER_2	Power Error
-                    value = Conversor.ConverterDoSI(su.spmp_heatflow, Me.ConvergenceHistory.EnergyE)
+                    value = Converter.ConvertFromSI(su.heatflow, Me.ConvergenceHistory.EnergyE)
             End Select
 
             Return value
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
             Select Case proptype
@@ -496,9 +496,9 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
             Select Case propidx
@@ -508,15 +508,15 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
                     Me.MaximumIterations = propval
                 Case 1
                     'PROP_ER_1	Power Tolerance
-                    Me.ConvergenceParameters.Energy = Conversor.ConverterParaSI(su.spmp_heatflow, propval)
+                    Me.ConvergenceParameters.Energy = Converter.ConvertToSI(su.heatflow, propval)
 
             End Select
             Return 1
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -527,10 +527,10 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
                     value = ""
                 Case 1
                     'PROP_ER_1	Power Tolerance
-                    value = su.spmp_heatflow
+                    value = su.heatflow
                 Case 2
                     'PROP_ER_2	Power Error
-                    value = su.spmp_heatflow
+                    value = su.heatflow
             End Select
 
             Return value

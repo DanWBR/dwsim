@@ -196,7 +196,7 @@ Namespace DWSIM
             End If
         End Function
 
-        Public Shared Function GetComponentType(ByRef comp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties) As String
+        Public Shared Function GetComponentType(ByRef comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties) As String
             If comp.IsHYPO Then
                 Return GetLocalString("CompHypo")
             ElseIf comp.IsPF Then

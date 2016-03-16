@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DWSIM_Reaction_Data>
   <Reaction>
-    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Reaction</Type>
     <StoichBalance>0</StoichBalance>
     <ReactionHeatCO>0</ReactionHeatCO>
     <ReactionHeat>11820</ReactionHeat>

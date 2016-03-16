@@ -30,7 +30,7 @@ Imports System.Xml.Linq
 Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Reflection
 Imports System.Runtime.Serialization.Formatters.Binary
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen
 Imports System.Threading
 
@@ -38,7 +38,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
     <System.Serializable()> Public Class CapeOpenUO
 
-        Inherits SimulationObjects_UnitOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         <System.NonSerialized()> Private _couo As Object
         <System.NonSerialized()> Private _form As FormCapeOpenUnitSelector
@@ -80,14 +80,14 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Function
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String, ByVal gobj As GraphicObject)
+        Public Sub New(ByVal name As String, ByVal description As String, ByVal gobj As GraphicObject)
 
             Me.New()
 
             Me.GraphicObject = gobj
 
-            Me.ComponentName = nome
-            Me.ComponentDescription = descricao
+            Me.ComponentName = name
+            Me.ComponentDescription = description
             Me.FillNodeItems()
             Me.QTFillNodeItems()
 
@@ -444,7 +444,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                                 End Try
                                 If cnobj IsNot Nothing Then
                                     If Not Me.FlowSheet Is Nothing Then
-                                        Dim mystr As SimulationObjects_BaseClass = Me.FlowSheet.Collections.ObjectCollection(CType(cnobj, ICapeIdentification).ComponentDescription)
+                                        Dim mystr As DWSIM.SimulationObjects.UnitOperations.BaseClass = Me.FlowSheet.Collections.ObjectCollection(CType(cnobj, ICapeIdentification).ComponentDescription)
                                         Try
                                             cnobj = myport.connectedObject
                                         Catch ex As Exception
@@ -1071,7 +1071,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             If c.IsAttached And c.Type = ConType.ConOut Then
                                 Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedTo.Name)
                                 mat.PropertyPackage.CurrentMaterialStream = mat
-                                For Each subst As Substancia In mat.Fases(0).Componentes.Values
+                                For Each subst As Compound In mat.Phases(0).Componentes.Values
                                     subst.FracaoMassica = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 0)
                                 Next
                             End If
@@ -1161,11 +1161,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
             MyBase.Validate()
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
             UpdatePortsFromConnectors()
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 
@@ -1463,7 +1463,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Sub
 
-        Public Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             If Not Me._params Is Nothing Then
                 Dim props As New ArrayList
                 For Each p As ICapeIdentification In Me._params
@@ -1475,11 +1475,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End If
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             Return ""
         End Function
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             If Not Me._params Is Nothing Then
                 For Each p As ICapeIdentification In Me._params
                     If p.ComponentName = prop Then
@@ -1504,7 +1504,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End If
         End Sub
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             For Each p As ICapeIdentification In Me._params
                 If p.ComponentName = prop Then
                     CType(p, ICapeParameter).value = propval
@@ -1515,7 +1515,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             Return 0
         End Function
 
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
             Me.QTFillNodeItems()
 

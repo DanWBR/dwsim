@@ -29,7 +29,7 @@ Public Class FormUnitGen
 
         frm = My.Application.ActiveSimulation
 
-        Dim currentset As DWSIM.SistemasDeUnidades.Unidades = frm.Options.SelectedUnitSystem
+        Dim currentset As DWSIM.SystemsOfUnits.Units = frm.Options.SelectedUnitSystem
 
         Dim rd As New Random
         Me.TextBox1.Text = "UNID_" & rd.Next(1000, 9999)
@@ -39,92 +39,92 @@ Public Class FormUnitGen
             .Clear()
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New String() {"K", "R", "C", "F"})
-            cb.Value = currentset.spmp_temperature
+            cb.Value = currentset.temperature
             .Add(New Object() {DWSIM.App.GetLocalString("Temperatura")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
-            cb.Value = currentset.spmp_pressure
+            cb.Value = currentset.pressure
             .Add(New Object() {DWSIM.App.GetLocalString("Presso")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"})
-            cb.Value = currentset.spmp_massflow
+            cb.Value = currentset.massflow
             .Add(New Object() {DWSIM.App.GetLocalString("Vazomssica")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"})
-            cb.Value = currentset.spmp_molarflow
+            cb.Value = currentset.molarflow
             .Add(New Object() {DWSIM.App.GetLocalString("Vazomolar")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s"})
-            cb.Value = currentset.spmp_volumetricFlow
+            cb.Value = currentset.volumetricFlow
             .Add(New Object() {DWSIM.App.GetLocalString("Vazovolumtrica")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"})
-            cb.Value = currentset.spmp_enthalpy
+            cb.Value = currentset.enthalpy
             .Add(New Object() {DWSIM.App.GetLocalString("EntalpiaEspecfica")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
-            cb.Value = currentset.spmp_entropy
+            cb.Value = currentset.entropy
             .Add(New Object() {DWSIM.App.GetLocalString("EntropiaEspecfica")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"kg/kmol", "g/mol", "lbm/lbmol"})
-            cb.Value = currentset.spmp_molecularWeight
+            cb.Value = currentset.molecularWeight
             .Add(New Object() {DWSIM.App.GetLocalString("Massamolar")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"N/m", "dyn/cm", "lbf/in"})
-            cb.Value = currentset.tdp_surfaceTension
+            cb.Value = currentset.surfaceTension
             .Add(New Object() {DWSIM.App.GetLocalString("Tensosuperficial")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"kg/m3", "g/cm3", "lbm/ft3"})
-            cb.Value = currentset.spmp_density
+            cb.Value = currentset.density
             .Add(New Object() {DWSIM.App.GetLocalString("Massaespecfica")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
-            cb.Value = currentset.spmp_heatCapacityCp
+            cb.Value = currentset.heatCapacityCp
             .Add(New Object() {DWSIM.App.GetLocalString("CapacidadeCalorfica")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"W/[m.K]", "cal/[cm.s.C]", "BTU/[ft.h.R]"})
-            cb.Value = currentset.spmp_thermalConductivity
+            cb.Value = currentset.thermalConductivity
             .Add(New Object() {DWSIM.App.GetLocalString("Condutividadetrmica")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"m2/s", "cSt", "ft2/s", "mm2/s"})
-            cb.Value = currentset.spmp_cinematic_viscosity
+            cb.Value = currentset.cinematic_viscosity
             .Add(New Object() {DWSIM.App.GetLocalString("Viscosidadecinemtica")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"})
-            cb.Value = currentset.spmp_viscosity
+            cb.Value = currentset.viscosity
             .Add(New Object() {DWSIM.App.GetLocalString("ViscosidadeDinmica1")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kPa", "bar", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi"})
-            cb.Value = currentset.spmp_deltaP
+            cb.Value = currentset.deltaP
             .Add(New Object() {DWSIM.App.GetLocalString("DeltaP")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"C.", "K.", "F.", "R."})
-            cb.Value = currentset.spmp_deltaT
+            cb.Value = currentset.deltaT
             .Add(New Object() {DWSIM.App.GetLocalString("DeltaT2")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"m", "ft", "cm"})
-            cb.Value = currentset.spmp_head
+            cb.Value = currentset.head
             .Add(New Object() {DWSIM.App.GetLocalString("ComprimentoHead")})
             .Item(.Count - 1).Cells(1) = cb
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(New Object() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"})
-            cb.Value = currentset.spmp_heatflow
+            cb.Value = currentset.heatflow
             .Add(New Object() {DWSIM.App.GetLocalString("FluxodeEnergia")})
             .Item(.Count - 1).Cells(1) = cb
 
@@ -247,52 +247,52 @@ Public Class FormUnitGen
 
         If Me.TextBox1.Text <> "" Then
 
-            Dim su As New DWSIM.SistemasDeUnidades.Unidades
+            Dim su As New DWSIM.SystemsOfUnits.Units
             With su
                 .nome = Me.TextBox1.Text
                 .pdp_boilingPointTemperature = Me.DataGridView1.Rows(0).Cells(1).Value
                 .pdp_meltingTemperature = Me.DataGridView1.Rows(0).Cells(1).Value
-                .spmp_activity = Me.DataGridView1.Rows(1).Cells(1).Value
-                .spmp_activityCoefficient = "-"
-                .spmp_compressibility = "-"
-                .spmp_compressibilityFactor = "-"
-                .spmp_density = Me.DataGridView1.Rows(9).Cells(1).Value
-                .spmp_enthalpy = Me.DataGridView1.Rows(5).Cells(1).Value
-                .spmp_entropy = Me.DataGridView1.Rows(6).Cells(1).Value
-                .spmp_excessEnthalpy = Me.DataGridView1.Rows(5).Cells(1).Value
-                .spmp_excessEntropy = Me.DataGridView1.Rows(6).Cells(1).Value
-                .spmp_fugacity = Me.DataGridView1.Rows(1).Cells(1).Value
-                .spmp_fugacityCoefficient = "-"
-                .spmp_heatCapacityCp = Me.DataGridView1.Rows(10).Cells(1).Value
-                .spmp_heatCapacityCv = Me.DataGridView1.Rows(10).Cells(1).Value
-                .spmp_jouleThomsonCoefficient = "-"
-                .spmp_logFugacityCoefficient = "-"
-                .spmp_massflow = Me.DataGridView1.Rows(2).Cells(1).Value
-                .spmp_massfraction = "-"
-                .spmp_molarflow = Me.DataGridView1.Rows(3).Cells(1).Value
-                .spmp_molarfraction = "-"
-                .spmp_molecularWeight = Me.DataGridView1.Rows(7).Cells(1).Value
-                .spmp_pressure = Me.DataGridView1.Rows(1).Cells(1).Value
-                .spmp_speedOfSound = "-"
-                .spmp_temperature = Me.DataGridView1.Rows(0).Cells(1).Value
-                .spmp_thermalConductivity = Me.DataGridView1.Rows(11).Cells(1).Value
-                .spmp_viscosity = Me.DataGridView1.Rows(13).Cells(1).Value
-                .spmp_volumetricFlow = Me.DataGridView1.Rows(4).Cells(1).Value
-                .spmp_cinematic_viscosity = Me.DataGridView1.Rows(12).Cells(1).Value
-                .tdp_idealGasHeatCapacity = Me.DataGridView1.Rows(10).Cells(1).Value
-                .tdp_surfaceTension = Me.DataGridView1.Rows(8).Cells(1).Value
-                .tdp_thermalConductivityOfLiquid = Me.DataGridView1.Rows(11).Cells(1).Value
-                .tdp_thermalConductivityOfVapor = Me.DataGridView1.Rows(11).Cells(1).Value
-                .tdp_vaporPressure = Me.DataGridView1.Rows(1).Cells(1).Value
-                .tdp_viscosityOfLiquid = Me.DataGridView1.Rows(13).Cells(1).Value
-                .tdp_viscosityOfVapor = Me.DataGridView1.Rows(13).Cells(1).Value
+                .activity = Me.DataGridView1.Rows(1).Cells(1).Value
+                .activityCoefficient = "-"
+                .compressibility = "-"
+                .compressibilityFactor = "-"
+                .density = Me.DataGridView1.Rows(9).Cells(1).Value
+                .enthalpy = Me.DataGridView1.Rows(5).Cells(1).Value
+                .entropy = Me.DataGridView1.Rows(6).Cells(1).Value
+                .excessEnthalpy = Me.DataGridView1.Rows(5).Cells(1).Value
+                .excessEntropy = Me.DataGridView1.Rows(6).Cells(1).Value
+                .fugacity = Me.DataGridView1.Rows(1).Cells(1).Value
+                .fugacityCoefficient = "-"
+                .heatCapacityCp = Me.DataGridView1.Rows(10).Cells(1).Value
+                .heatCapacityCv = Me.DataGridView1.Rows(10).Cells(1).Value
+                .jouleThomsonCoefficient = "-"
+                .logFugacityCoefficient = "-"
+                .massflow = Me.DataGridView1.Rows(2).Cells(1).Value
+                .massfraction = "-"
+                .molarflow = Me.DataGridView1.Rows(3).Cells(1).Value
+                .molarfraction = "-"
+                .molecularWeight = Me.DataGridView1.Rows(7).Cells(1).Value
+                .pressure = Me.DataGridView1.Rows(1).Cells(1).Value
+                .speedOfSound = "-"
+                .temperature = Me.DataGridView1.Rows(0).Cells(1).Value
+                .thermalConductivity = Me.DataGridView1.Rows(11).Cells(1).Value
+                .viscosity = Me.DataGridView1.Rows(13).Cells(1).Value
+                .volumetricFlow = Me.DataGridView1.Rows(4).Cells(1).Value
+                .cinematic_viscosity = Me.DataGridView1.Rows(12).Cells(1).Value
+                .idealGasHeatCapacity = Me.DataGridView1.Rows(10).Cells(1).Value
+                .surfaceTension = Me.DataGridView1.Rows(8).Cells(1).Value
+                .thermalConductivityOfLiquid = Me.DataGridView1.Rows(11).Cells(1).Value
+                .thermalConductivityOfVapor = Me.DataGridView1.Rows(11).Cells(1).Value
+                .vaporPressure = Me.DataGridView1.Rows(1).Cells(1).Value
+                .viscosityOfLiquid = Me.DataGridView1.Rows(13).Cells(1).Value
+                .viscosityOfVapor = Me.DataGridView1.Rows(13).Cells(1).Value
                 .tpmp_kvalue = "-"
                 .tpmp_logKvalue = "-"
                 .tpmp_surfaceTension = Me.DataGridView1.Rows(8).Cells(1).Value
-                .spmp_heatflow = Me.DataGridView1.Rows(17).Cells(1).Value
-                .spmp_head = Me.DataGridView1.Rows(16).Cells(1).Value
-                .spmp_deltaP = Me.DataGridView1.Rows(14).Cells(1).Value
-                .spmp_deltaT = Me.DataGridView1.Rows(15).Cells(1).Value
+                .heatflow = Me.DataGridView1.Rows(17).Cells(1).Value
+                .head = Me.DataGridView1.Rows(16).Cells(1).Value
+                .deltaP = Me.DataGridView1.Rows(14).Cells(1).Value
+                .deltaT = Me.DataGridView1.Rows(15).Cells(1).Value
                 .distance = Me.DataGridView1.Rows(16).Cells(1).Value
                 .time = Me.DataGridView1.Rows(18).Cells(1).Value
                 .volume = Me.DataGridView1.Rows(19).Cells(1).Value

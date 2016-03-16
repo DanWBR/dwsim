@@ -26,7 +26,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
     <System.Serializable()> Public Class Recycle
 
-        Inherits SimulationObjects_UnitOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         Protected m_ConvPar As ConvergenceParameters
         Protected m_ConvHist As ConvergenceHistory
@@ -177,7 +177,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
 
@@ -207,9 +207,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
                 Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
                 Me.FillNodeItems()
@@ -234,17 +234,17 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     .Item(0).Value = Me.IterationsTaken
                     .Item(0).Unit = ""
 
-                    valor = Format(Conversor.ConverterDoSI(su.spmp_deltaT, Me.ConvergenceHistory.TemperaturaE), nf)
+                    valor = Format(Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.TemperaturaE), nf)
                     .Item(1).Value = valor
-                    .Item(1).Unit = su.spmp_deltaT
+                    .Item(1).Unit = su.deltaT
 
-                    valor = Format(Conversor.ConverterDoSI(su.spmp_deltaP, Me.ConvergenceHistory.PressaoE), nf)
+                    valor = Format(Converter.ConvertFromSI(su.deltaP, Me.ConvergenceHistory.PressaoE), nf)
                     .Item(2).Value = valor
-                    .Item(2).Unit = su.spmp_deltaP
+                    .Item(2).Unit = su.deltaP
 
-                    valor = Format(Conversor.ConverterDoSI(su.spmp_massflow, Me.ConvergenceHistory.VazaoMassicaE), nf)
+                    valor = Format(Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE), nf)
                     .Item(3).Value = valor
-                    .Item(3).Unit = su.spmp_massflow
+                    .Item(3).Unit = su.massflow
 
                 End With
 
@@ -270,13 +270,13 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 With msto
 
                     .PropertyPackage.CurrentMaterialStream = msto
-                    .Fases(0).SPMProperties.temperature = Values("Temperature")
-                    .Fases(0).SPMProperties.pressure = Values("Pressure")
-                    .Fases(0).SPMProperties.massflow = Values("MassFlow")
-                    .Fases(0).SPMProperties.enthalpy = Values("Enthalpy")
+                    .Phases(0).Properties.temperature = Values("Temperature")
+                    .Phases(0).Properties.pressure = Values("Pressure")
+                    .Phases(0).Properties.massflow = Values("MassFlow")
+                    .Phases(0).Properties.enthalpy = Values("Enthalpy")
 
-                    For Each comp In .Fases(0).Componentes.Values
-                        comp.FracaoMolar = msfrom.Fases(0).Componentes(comp.Nome).FracaoMolar
+                    For Each comp In .Phases(0).Componentes.Values
+                        comp.FracaoMolar = msfrom.Phases(0).Componentes(comp.Nome).FracaoMolar
                     Next
 
                     .CalcOverallCompMassFractions()
@@ -313,7 +313,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
             Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
 
-            With ems.Fases(0).SPMProperties
+            With ems.Phases(0).Properties
 
                 Me.ConvergenceHistory.TemperaturaE = .temperature.GetValueOrDefault - Me.ConvergenceHistory.Temperatura
                 Me.ConvergenceHistory.PressaoE = .pressure.GetValueOrDefault - Me.ConvergenceHistory.Pressao
@@ -350,7 +350,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
             Dim oms As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 
-            With oms.Fases(0).SPMProperties
+            With oms.Phases(0).Properties
 
                 If Me.Values.Count = 0 Then
                     Me.Values.Add("Temperature", .temperature.GetValueOrDefault)
@@ -463,7 +463,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             If Me.CopyOnStreamDataError Then
                 copydata = True
             Else
-                If Not Tnew.IsValid Or Not Pnew.IsValid Or Not Wnew.IsValid Or Not ems.PropertyPackage.RET_VMOL(PropertyPackages.Fase.Mixture).SumY.IsValid Then copydata = False
+                If Not Tnew.IsValid Or Not Pnew.IsValid Or Not Wnew.IsValid Or Not ems.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).SumY.IsValid Then copydata = False
             End If
 
             If Not Me.AccelerationMethod = AccelMethod.GlobalBroyden And copydata Then
@@ -487,7 +487,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     Case Helpers.Recycle.FlashType.FlashPH, Helpers.Recycle.FlashType.FlashPS, Helpers.Recycle.FlashType.FlashTP
 
                         Dim xl, xv, T, P, H, S, wtotalx, wtotaly As Double
-                        Dim Vx(ems.Fases(0).Componentes.Count - 1), Vy(ems.Fases(0).Componentes.Count - 1), Vwx(ems.Fases(0).Componentes.Count - 1), Vwy(ems.Fases(0).Componentes.Count - 1) As Double
+                        Dim Vx(ems.Phases(0).Componentes.Count - 1), Vy(ems.Phases(0).Componentes.Count - 1), Vwx(ems.Phases(0).Componentes.Count - 1), Vwy(ems.Phases(0).Componentes.Count - 1) As Double
                         xl = tmp(0)
                         xv = tmp(1)
                         T = tmp(2)
@@ -505,15 +505,15 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                         cp = Me.GraphicObject.InputConnectors(0)
                         If cp.IsAttached Then
                             ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedFrom.Name)
-                            Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                             i = 0
-                            For Each comp In ms.Fases(0).Componentes.Values
+                            For Each comp In ms.Phases(0).Componentes.Values
                                 wtotalx += Vx(i) * comp.ConstantProperties.Molar_Weight
                                 wtotaly += Vy(i) * comp.ConstantProperties.Molar_Weight
                                 i += 1
                             Next
                             i = 0
-                            For Each comp In ms.Fases(0).Componentes.Values
+                            For Each comp In ms.Phases(0).Componentes.Values
                                 Vwx(i) = Vx(i) * comp.ConstantProperties.Molar_Weight / wtotalx
                                 Vwy(i) = Vy(i) * comp.ConstantProperties.Molar_Weight / wtotaly
                                 i += 1
@@ -525,36 +525,36 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                             ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
                             With ms
                                 .PropertyPackage.CurrentMaterialStream = ms
-                                .Fases(0).SPMProperties.temperature = Tnew
-                                .Fases(0).SPMProperties.pressure = Pnew
-                                .Fases(0).SPMProperties.massflow = Wnew
-                                .Fases(0).SPMProperties.enthalpy = H
-                                Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                                .Phases(0).Properties.temperature = Tnew
+                                .Phases(0).Properties.pressure = Pnew
+                                .Phases(0).Properties.massflow = Wnew
+                                .Phases(0).Properties.enthalpy = H
+                                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                                 j = 0
-                                For Each comp In .Fases(0).Componentes.Values
-                                    comp.FracaoMolar = ems.Fases(0).Componentes(comp.Nome).FracaoMolar
-                                    comp.FracaoMassica = ems.Fases(0).Componentes(comp.Nome).FracaoMassica
+                                For Each comp In .Phases(0).Componentes.Values
+                                    comp.FracaoMolar = ems.Phases(0).Componentes(comp.Nome).FracaoMolar
+                                    comp.FracaoMassica = ems.Phases(0).Componentes(comp.Nome).FracaoMassica
                                     j += 1
                                 Next
                                 ms.PropertyPackage.DW_CalcVazaoMolar()
                                 j = 0
-                                For Each comp In .Fases(1).Componentes.Values
+                                For Each comp In .Phases(1).Componentes.Values
                                     comp.FracaoMolar = Vx(j)
                                     comp.FracaoMassica = Vwx(j)
                                     j += 1
                                 Next
                                 j = 0
-                                For Each comp In .Fases(2).Componentes.Values
+                                For Each comp In .Phases(2).Componentes.Values
                                     comp.FracaoMolar = Vy(j)
                                     comp.FracaoMassica = Vwy(j)
                                     j += 1
                                 Next
-                                .Fases(0).SPMProperties.massfraction = 1
-                                .Fases(0).SPMProperties.molarfraction = 1
-                                .Fases(1).SPMProperties.massfraction = wtotalx
-                                .Fases(1).SPMProperties.molarfraction = xl
-                                .Fases(2).SPMProperties.massfraction = wtotaly
-                                .Fases(2).SPMProperties.molarfraction = xv
+                                .Phases(0).Properties.massfraction = 1
+                                .Phases(0).Properties.molarfraction = 1
+                                .Phases(1).Properties.massfraction = wtotalx
+                                .Phases(1).Properties.molarfraction = xl
+                                .Phases(2).Properties.massfraction = wtotaly
+                                .Phases(2).Properties.molarfraction = xv
                             End With
                         End If
 
@@ -640,9 +640,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Function
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 
@@ -695,20 +695,20 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
                 Dim valor As Double
 
-                valor = Format(Conversor.ConverterDoSI(su.spmp_deltaT, Me.ConvergenceParameters.Temperatura), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Temperatura"), su.spmp_deltaT), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), DWSIM.App.GetLocalString("Tolernciaparaadifere"), True)
-                valor = Format(Conversor.ConverterDoSI(su.spmp_deltaP, Me.ConvergenceParameters.Pressao), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Presso"), su.spmp_deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), DWSIM.App.GetLocalString("Tolernciaparaadifere2"), True)
-                valor = Format(Conversor.ConverterDoSI(su.spmp_massflow, Me.ConvergenceParameters.VazaoMassica), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Vazomssica"), su.spmp_massflow), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), DWSIM.App.GetLocalString("Tolernciaparaadifere3"), True)
+                valor = Format(Converter.ConvertFromSI(su.deltaT, Me.ConvergenceParameters.Temperatura), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Temperatura"), su.deltaT), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), DWSIM.App.GetLocalString("Tolernciaparaadifere"), True)
+                valor = Format(Converter.ConvertFromSI(su.deltaP, Me.ConvergenceParameters.Pressao), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Presso"), su.deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), DWSIM.App.GetLocalString("Tolernciaparaadifere2"), True)
+                valor = Format(Converter.ConvertFromSI(su.massflow, Me.ConvergenceParameters.VazaoMassica), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), DWSIM.App.GetLocalString("Tolernciaparaadifere3"), True)
 
                 .Item.Add(DWSIM.App.GetLocalString("Iteraesnecessrias"), Me, "IterationsTaken", True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Nmerodeiteraesusadas"), True)
-                valor = Format(Conversor.ConverterDoSI(su.spmp_deltaT, Me.ConvergenceHistory.TemperaturaE), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Erronatemperatura"), su.spmp_deltaT), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor"), True)
-                valor = Format(Conversor.ConverterDoSI(su.spmp_deltaP, Me.ConvergenceHistory.PressaoE), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Erronapresso"), su.spmp_deltaP), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor2"), True)
-                valor = Format(Conversor.ConverterDoSI(su.spmp_massflow, Me.ConvergenceHistory.VazaoMassicaE), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Erronavazomssica"), su.spmp_massflow), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor3"), True)
+                valor = Format(Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.TemperaturaE), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Erronatemperatura"), su.deltaT), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor"), True)
+                valor = Format(Converter.ConvertFromSI(su.deltaP, Me.ConvergenceHistory.PressaoE), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Erronapresso"), su.deltaP), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor2"), True)
+                valor = Format(Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Erronavazomssica"), su.massflow), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor3"), True)
 
                 If Not Me.Annotation Is Nothing Then
                     .Item.Add(DWSIM.App.GetLocalString("Anotaes"), Me, "Annotation", False, DWSIM.App.GetLocalString("Outros"), DWSIM.App.GetLocalString("Cliquenobotocomretic"), True)
@@ -724,10 +724,10 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -738,22 +738,22 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     value = Me.MaximumIterations
                 Case 1
                     'PROP_RY_1	Mass Flow Tolerance
-                    value = Conversor.ConverterDoSI(su.spmp_massflow, Me.ConvergenceParameters.VazaoMassica)
+                    value = Converter.ConvertFromSI(su.massflow, Me.ConvergenceParameters.VazaoMassica)
                 Case 2
                     'PROP_RY_2	Temperature Tolerance
-                    value = Conversor.ConverterDoSI(su.spmp_temperature, Me.ConvergenceParameters.Temperatura)
+                    value = Converter.ConvertFromSI(su.temperature, Me.ConvergenceParameters.Temperatura)
                 Case 3
                     'PROP_RY_3	Pressure Tolerance
-                    value = Conversor.ConverterDoSI(su.spmp_pressure, Me.ConvergenceParameters.Pressao)
+                    value = Converter.ConvertFromSI(su.pressure, Me.ConvergenceParameters.Pressao)
                 Case 4
                     'PROP_RY_4	Mass Flow Error
-                    value = Conversor.ConverterDoSI(su.spmp_massflow, Me.ConvergenceHistory.VazaoMassicaE)
+                    value = Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE)
                 Case 5
                     'PROP_RY_5	Temperature Error
-                    value = Conversor.ConverterDoSI(su.spmp_temperature, Me.ConvergenceHistory.TemperaturaE)
+                    value = Converter.ConvertFromSI(su.temperature, Me.ConvergenceHistory.TemperaturaE)
                 Case 6
                     'PROP_RY_6	Pressure Error
-                    value = Conversor.ConverterDoSI(su.spmp_pressure, Me.ConvergenceHistory.PressaoE)
+                    value = Converter.ConvertFromSI(su.pressure, Me.ConvergenceHistory.PressaoE)
             End Select
 
             Return value
@@ -762,7 +762,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
             Select Case proptype
@@ -787,9 +787,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
             Select Case propidx
@@ -799,21 +799,21 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     Me.MaximumIterations = propval
                 Case 1
                     'PROP_RY_1	Mass Flow Tolerance
-                    Me.ConvergenceParameters.VazaoMassica = Conversor.ConverterParaSI(su.spmp_massflow, propval)
+                    Me.ConvergenceParameters.VazaoMassica = Converter.ConvertToSI(su.massflow, propval)
                 Case 2
                     'PROP_RY_2	Temperature Tolerance
-                    Me.ConvergenceParameters.Temperatura = Conversor.ConverterParaSI(su.spmp_temperature, propval)
+                    Me.ConvergenceParameters.Temperatura = Converter.ConvertToSI(su.temperature, propval)
                 Case 3
                     'PROP_RY_3	Pressure Tolerance
-                    Me.ConvergenceParameters.Pressao = Conversor.ConverterParaSI(su.spmp_pressure, propval)
+                    Me.ConvergenceParameters.Pressao = Converter.ConvertToSI(su.pressure, propval)
 
             End Select
             Return 1
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -824,22 +824,22 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     value = ""
                 Case 1
                     'PROP_RY_1	Mass Flow Tolerance
-                    value = su.spmp_massflow
+                    value = su.massflow
                 Case 2
                     'PROP_RY_2	Temperature Tolerance
-                    value = su.spmp_temperature
+                    value = su.temperature
                 Case 3
                     'PROP_RY_3	Pressure Tolerance
-                    value = su.spmp_pressure
+                    value = su.pressure
                 Case 4
                     'PROP_RY_4	Mass Flow Error
-                    value = su.spmp_massflow
+                    value = su.massflow
                 Case 5
                     'PROP_RY_5	Temperature Error
-                    value = su.spmp_deltaT
+                    value = su.deltaT
                 Case 6
                     'PROP_RY_6	Pressure Error
-                    value = su.spmp_deltaP
+                    value = su.deltaP
             End Select
 
             Return value

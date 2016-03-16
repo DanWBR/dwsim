@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports Microsoft.MSDN.Samples.GraphicObjects
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports Ciloci.Flee
 Imports System.Math
 Imports System.Linq
@@ -33,7 +33,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             MyBase.New()
         End Sub
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.New()
             Me.m_ComponentName = nome
@@ -142,15 +142,15 @@ Namespace DWSIM.SimulationObjects.Reactors
             Dim BC As String = ""
             Dim tmp As Object
          
-            Tin = ims.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            Pin = ims.Fases(0).SPMProperties.pressure.GetValueOrDefault
-            W = ims.Fases(0).SPMProperties.massflow.GetValueOrDefault
-            Pout = ims.Fases(0).SPMProperties.pressure.GetValueOrDefault - Me.DeltaP.GetValueOrDefault
-            ims.Fases(0).SPMProperties.pressure = Pout
+            Tin = ims.Phases(0).Properties.temperature.GetValueOrDefault
+            Pin = ims.Phases(0).Properties.pressure.GetValueOrDefault
+            W = ims.Phases(0).Properties.massflow.GetValueOrDefault
+            Pout = ims.Phases(0).Properties.pressure.GetValueOrDefault - Me.DeltaP.GetValueOrDefault
+            ims.Phases(0).Properties.pressure = Pout
 
             'Reactants Enthalpy (kJ/kg * kg/s = kW)
 
-            Hr = ims.Fases(0).SPMProperties.enthalpy.GetValueOrDefault * ims.Fases(0).SPMProperties.massflow.GetValueOrDefault
+            Hr = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             Dim rxn As Reaction
 
@@ -177,26 +177,26 @@ Namespace DWSIM.SimulationObjects.Reactors
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Liquid
                                 If Not N0.ContainsKey(sb.CompName) Then
-                                    N0.Add(sb.CompName, ims.Fases(1).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Fases(1).SPMProperties.molarflow.GetValueOrDefault)
+                                    N0.Add(sb.CompName, ims.Phases(1).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Phases(1).Properties.molarflow.GetValueOrDefault)
                                     N.Add(sb.CompName, N0(sb.CompName))
                                 Else
-                                    N0(sb.CompName) = ims.Fases(1).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Fases(1).SPMProperties.molarflow.GetValueOrDefault
+                                    N0(sb.CompName) = ims.Phases(1).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Phases(1).Properties.molarflow.GetValueOrDefault
                                     'N(sb.CompName) = N0(sb.CompName)
                                 End If
                             Case PhaseName.Vapor
                                 If Not N0.ContainsKey(sb.CompName) Then
-                                    N0.Add(sb.CompName, ims.Fases(2).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Fases(2).SPMProperties.molarflow.GetValueOrDefault)
+                                    N0.Add(sb.CompName, ims.Phases(2).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Phases(2).Properties.molarflow.GetValueOrDefault)
                                     N.Add(sb.CompName, N0(sb.CompName))
                                 Else
-                                    N0(sb.CompName) = ims.Fases(2).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Fases(2).SPMProperties.molarflow.GetValueOrDefault
+                                    N0(sb.CompName) = ims.Phases(2).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Phases(2).Properties.molarflow.GetValueOrDefault
                                     'N(sb.CompName) = N0(sb.CompName)
                                 End If
                             Case PhaseName.Mixture
                                 If Not N0.ContainsKey(sb.CompName) Then
-                                    N0.Add(sb.CompName, ims.Fases(0).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Fases(0).SPMProperties.molarflow.GetValueOrDefault)
+                                    N0.Add(sb.CompName, ims.Phases(0).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault)
                                     N.Add(sb.CompName, N0(sb.CompName))
                                 Else
-                                    N0(sb.CompName) = ims.Fases(0).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Fases(0).SPMProperties.molarflow.GetValueOrDefault
+                                    N0(sb.CompName) = ims.Phases(0).Componentes(sb.CompName).FracaoMolar.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
                                     'N(sb.CompName) = N0(sb.CompName)
                                 End If
                         End Select
@@ -209,7 +209,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     rxn.ExpContext.Imports.AddType(GetType(System.Math))
                     rxn.ExpContext.Variables.Clear()
                     rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                    rxn.ExpContext.Variables.Add("T", ims.Fases(0).SPMProperties.temperature.GetValueOrDefault)
+                    rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
 
                     rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.Expression)
                     X = rxn.Expr.Evaluate / 100
@@ -247,7 +247,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     rxn.ExpContext = New Ciloci.Flee.ExpressionContext
                     rxn.ExpContext.Imports.AddType(GetType(System.Math))
                     rxn.ExpContext.Variables.Clear()
-                    rxn.ExpContext.Variables.Add("T", ims.Fases(0).SPMProperties.temperature.GetValueOrDefault)
+                    rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
 
                     rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.Expression)
                     X = rxn.Expr.Evaluate / 100.0#
@@ -283,45 +283,45 @@ Namespace DWSIM.SimulationObjects.Reactors
                         Next
 
                         'Ideal Gas Reactants Enthalpy (kJ/kg * kg/s = kW)
-                        Hid_r += 0 'ppr.RET_Hid(298.15, ims.Fases(0).SPMProperties.temperature.GetValueOrDefault, PropertyPackages.Fase.Mixture) * ims.Fases(0).SPMProperties.massflow.GetValueOrDefault
+                        Hid_r += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                         'update mole flows/fractions
-                        Dim Nall(ims.Fases(0).Componentes.Count - 1), Nsum As Double
+                        Dim Nall(ims.Phases(0).Componentes.Count - 1), Nsum As Double
                         For Each sb As ReactionStoichBase In rxn.Components.Values
 
                             Nsum = 0
-                            For Each s2 As Substancia In ims.Fases(0).Componentes.Values
+                            For Each s2 As Compound In ims.Phases(0).Componentes.Values
                                 If rxn.Components.ContainsKey(s2.Nome) Then
                                     Nsum += N(s2.Nome)
                                 Else
-                                    Nsum += ims.Fases(0).Componentes(s2.Nome).FracaoMolar.GetValueOrDefault * ims.Fases(0).SPMProperties.molarflow.GetValueOrDefault
+                                    Nsum += ims.Phases(0).Componentes(s2.Nome).FracaoMolar.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
                                 End If
                             Next
 
-                            For Each s3 As Substancia In ims.Fases(0).Componentes.Values
+                            For Each s3 As Compound In ims.Phases(0).Componentes.Values
                                 If rxn.Components.ContainsKey(s3.Nome) Then
                                     s3.FracaoMolar = N(s3.Nome) / Nsum
                                 Else
-                                    s3.FracaoMolar = ims.Fases(0).Componentes(s3.Nome).FracaoMolar.GetValueOrDefault * ims.Fases(0).SPMProperties.molarflow.GetValueOrDefault / Nsum
+                                    s3.FracaoMolar = ims.Phases(0).Componentes(s3.Nome).FracaoMolar.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault / Nsum
                                 End If
                             Next
 
-                            ims.Fases(0).SPMProperties.molarflow = Nsum
+                            ims.Phases(0).Properties.molarflow = Nsum
 
                             Dim mmm As Double = 0
 
-                            For Each s3 As Substancia In ims.Fases(0).Componentes.Values
+                            For Each s3 As Compound In ims.Phases(0).Componentes.Values
                                 mmm += s3.FracaoMolar.GetValueOrDefault * s3.ConstantProperties.Molar_Weight
                             Next
 
-                            For Each s3 As Substancia In ims.Fases(0).Componentes.Values
+                            For Each s3 As Compound In ims.Phases(0).Componentes.Values
                                 s3.FracaoMassica = s3.FracaoMolar.GetValueOrDefault * s3.ConstantProperties.Molar_Weight / mmm
                             Next
 
                         Next
 
                         'Ideal Gas Products Enthalpy (kJ/kg * kg/s = kW)
-                        Hid_p += 0 'ppr.RET_Hid(298.15, ims.Fases(0).SPMProperties.temperature.GetValueOrDefault, PropertyPackages.Fase.Mixture) * ims.Fases(0).SPMProperties.massflow.GetValueOrDefault
+                        Hid_p += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                     End If
 
@@ -348,26 +348,26 @@ Namespace DWSIM.SimulationObjects.Reactors
                         Dim Tout As Double = tmp(2)
                         Me.DeltaT = Tout - Tin
 
-                        ims.Fases(0).SPMProperties.temperature = Tout
+                        ims.Phases(0).Properties.temperature = Tout
 
                         With pp
 
                             'Calcular corrente de matéria com T e P
                             .DW_CalcVazaoMolar()
                             .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
-                            If ims.Fases(1).SPMProperties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Liquid)
+                            If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Liquid)
+                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
                             End If
-                            If ims.Fases(2).SPMProperties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
+                            If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
+                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
                             End If
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Mixture)
+                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)
                             .DW_CalcOverallProps()
-                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
+                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
                             .DW_CalcVazaoVolumetrica()
 
                         End With
@@ -379,25 +379,25 @@ Namespace DWSIM.SimulationObjects.Reactors
                             'Calcular corrente de matéria com T e P
                             .DW_CalcVazaoMolar()
                             .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
-                            If ims.Fases(1).SPMProperties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Liquid)
+                            If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Liquid)
+                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
                             End If
-                            If ims.Fases(2).SPMProperties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
+                            If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
+                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
                             End If
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Mixture)
+                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)
                             .DW_CalcOverallProps()
-                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
+                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
                             .DW_CalcVazaoVolumetrica()
 
                         End With
 
                         'Products Enthalpy (kJ/kg * kg/s = kW)
-                        Hp = ims.Fases(0).SPMProperties.enthalpy.GetValueOrDefault * ims.Fases(0).SPMProperties.massflow.GetValueOrDefault
+                        Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                         'Heat (kW)
                         Me.DeltaQ = Me.DeltaQ.GetValueOrDefault + DHr + Hid_r + Hp - Hr - Hid_p
@@ -410,32 +410,32 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                         Me.DeltaT = Tout - Tin
 
-                        ims.Fases(0).SPMProperties.temperature = Tout
+                        ims.Phases(0).Properties.temperature = Tout
 
                         With pp
 
                             'Calcular corrente de matéria com T e P
                             .DW_CalcVazaoMolar()
                             .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
-                            If ims.Fases(1).SPMProperties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Liquid)
+                            If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Liquid)
+                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
                             End If
-                            If ims.Fases(2).SPMProperties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
+                            If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
+                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
                             End If
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Mixture)
+                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)
                             .DW_CalcOverallProps()
-                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Fase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Fase.Vapor)
+                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
                             .DW_CalcVazaoVolumetrica()
 
                         End With
 
                         'Products Enthalpy (kJ/kg * kg/s = kW)
-                        Hp = ims.Fases(0).SPMProperties.enthalpy.GetValueOrDefault * ims.Fases(0).SPMProperties.massflow.GetValueOrDefault
+                        Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                         'Heat (kW)
                         Me.DeltaQ = Me.DeltaQ.GetValueOrDefault + DHr + Hid_r + Hp - Hr - Hid_p
@@ -446,8 +446,8 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             'Copy results to upstream MS
             Dim xl, xv, xs, T, P, H, S, wtotalx, wtotaly, wtotalS As Double
-            Dim nc As Integer = ims.Fases(0).Componentes.Count - 1
-            tmp = pp.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P, ims.Fases(0).SPMProperties.temperature.GetValueOrDefault, ims.Fases(0).SPMProperties.pressure.GetValueOrDefault, 0)
+            Dim nc As Integer = ims.Phases(0).Componentes.Count - 1
+            tmp = pp.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P, ims.Phases(0).Properties.temperature.GetValueOrDefault, ims.Phases(0).Properties.pressure.GetValueOrDefault, 0)
 
             Dim Vx(nc), Vy(nc), Vs(nc), Vwx(nc), Vwy(nc), Vws(nc) As Double
             xl = tmp(0)
@@ -469,16 +469,16 @@ Namespace DWSIM.SimulationObjects.Reactors
             cp = Me.GraphicObject.InputConnectors(0)
             If cp.IsAttached Then
                 ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedFrom.Name)
-                Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                 i = 0
-                For Each comp In ms.Fases(0).Componentes.Values
+                For Each comp In ms.Phases(0).Componentes.Values
                     wtotalx += Vx(i) * comp.ConstantProperties.Molar_Weight
                     wtotaly += Vy(i) * comp.ConstantProperties.Molar_Weight
                     wtotalS += Vs(i) * comp.ConstantProperties.Molar_Weight
                     i += 1
                 Next
                 i = 0
-                For Each comp In ms.Fases(0).Componentes.Values
+                For Each comp In ms.Phases(0).Componentes.Values
                     If wtotalx > 0 Then Vwx(i) = Vx(i) * comp.ConstantProperties.Molar_Weight / wtotalx
                     If wtotaly > 0 Then Vwy(i) = Vy(i) * comp.ConstantProperties.Molar_Weight / wtotaly
                     If wtotalS > 0 Then Vws(i) = Vs(i) * comp.ConstantProperties.Molar_Weight / wtotalS
@@ -490,18 +490,18 @@ Namespace DWSIM.SimulationObjects.Reactors
             If cp.IsAttached Then
                 ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
-                    .Fases(0).SPMProperties.temperature = T
-                    .Fases(0).SPMProperties.pressure = P
-                    Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                    .Phases(0).Properties.temperature = T
+                    .Phases(0).Properties.pressure = P
+                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
-                    For Each comp In .Fases(0).Componentes.Values
+                    For Each comp In .Phases(0).Componentes.Values
                         comp.FracaoMolar = Vy(j)
                         comp.FracaoMassica = Vwy(j)
                         j += 1
                     Next
-                    .Fases(0).SPMProperties.massflow = W * (wtotaly * xv / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
-                    .Fases(0).SPMProperties.massfraction = (wtotaly * xv / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
-                    .Fases(0).SPMProperties.molarfraction = 1
+                    .Phases(0).Properties.massflow = W * (wtotaly * xv / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
+                    .Phases(0).Properties.massfraction = (wtotaly * xv / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
+                    .Phases(0).Properties.molarfraction = 1
                 End With
             End If
 
@@ -509,19 +509,19 @@ Namespace DWSIM.SimulationObjects.Reactors
             If cp.IsAttached Then
                 ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
-                    .Fases(0).SPMProperties.temperature = T
-                    .Fases(0).SPMProperties.pressure = P
-                    Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                    .Phases(0).Properties.temperature = T
+                    .Phases(0).Properties.pressure = P
+                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
-                    For Each comp In .Fases(0).Componentes.Values
+                    For Each comp In .Phases(0).Componentes.Values
                         comp.FracaoMolar = (Vx(j) * xl + Vs(j) * xs) / (xl + xs)
                         comp.FracaoMassica = (Vwx(j) * wtotalx + Vws(j) * wtotalS) / (wtotalx + wtotalS)
                         j += 1
                     Next
                     j = 0
-                    .Fases(0).SPMProperties.massflow = W * ((wtotalx * xl + wtotalS * xs) / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
-                    .Fases(0).SPMProperties.massfraction = ((wtotalx * xl + wtotalS * xs) / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
-                    .Fases(0).SPMProperties.molarfraction = 1
+                    .Phases(0).Properties.massflow = W * ((wtotalx * xl + wtotalS * xs) / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
+                    .Phases(0).Properties.massfraction = ((wtotalx * xl + wtotalS * xs) / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
+                    .Phases(0).Properties.molarfraction = 1
                 End With
             End If
 
@@ -552,7 +552,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
 
             'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            'Dim W As Double = ems.Fases(0).SPMProperties.massflow.GetValueOrDefault
+            'Dim W As Double = ems.Phases(0).Properties.massflow.GetValueOrDefault
             Dim j As Integer = 0
 
             Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
@@ -562,19 +562,19 @@ Namespace DWSIM.SimulationObjects.Reactors
             If cp.IsAttached Then
                 ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
-                    .Fases(0).SPMProperties.temperature = Nothing
-                    .Fases(0).SPMProperties.pressure = Nothing
-                    .Fases(0).SPMProperties.enthalpy = Nothing
-                    Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                    .Phases(0).Properties.temperature = Nothing
+                    .Phases(0).Properties.pressure = Nothing
+                    .Phases(0).Properties.enthalpy = Nothing
+                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
-                    For Each comp In .Fases(0).Componentes.Values
+                    For Each comp In .Phases(0).Componentes.Values
                         comp.FracaoMolar = 0
                         comp.FracaoMassica = 0
                         j += 1
                     Next
-                    .Fases(0).SPMProperties.massflow = Nothing
-                    .Fases(0).SPMProperties.massfraction = 1
-                    .Fases(0).SPMProperties.molarfraction = 1
+                    .Phases(0).Properties.massflow = Nothing
+                    .Phases(0).Properties.massfraction = 1
+                    .Phases(0).Properties.molarfraction = 1
                     .GraphicObject.Calculated = False
                 End With
             End If
@@ -583,19 +583,19 @@ Namespace DWSIM.SimulationObjects.Reactors
             If cp.IsAttached Then
                 ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
-                    .Fases(0).SPMProperties.temperature = Nothing
-                    .Fases(0).SPMProperties.pressure = Nothing
-                    .Fases(0).SPMProperties.enthalpy = Nothing
-                    Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                    .Phases(0).Properties.temperature = Nothing
+                    .Phases(0).Properties.pressure = Nothing
+                    .Phases(0).Properties.enthalpy = Nothing
+                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
-                    For Each comp In .Fases(0).Componentes.Values
+                    For Each comp In .Phases(0).Componentes.Values
                         comp.FracaoMolar = 0
                         comp.FracaoMassica = 0
                         j += 1
                     Next
-                    .Fases(0).SPMProperties.massflow = Nothing
-                    .Fases(0).SPMProperties.massfraction = 1
-                    .Fases(0).SPMProperties.molarfraction = 1
+                    .Phases(0).Properties.massflow = Nothing
+                    .Phases(0).Properties.massfraction = 1
+                    .Phases(0).Properties.molarfraction = 1
                     .GraphicObject.Calculated = False
                 End With
             End If
@@ -616,13 +616,13 @@ Namespace DWSIM.SimulationObjects.Reactors
 
         End Sub
 
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 
@@ -692,16 +692,16 @@ Namespace DWSIM.SimulationObjects.Reactors
                 Dim valor As Double
 
                 If Me.ReactorOperationMode = OperationMode.OutletTemperature Then
-                    valor = Format(Conversor.ConverterDoSI(su.spmp_temperature, Me.OutletTemperature), FlowSheet.Options.NumberFormat)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature"), su.spmp_temperature), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
+                    valor = Format(Converter.ConvertFromSI(su.temperature, Me.OutletTemperature), FlowSheet.Options.NumberFormat)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature"), su.temperature), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
                     With .Item(.Item.Count - 1)
-                        .Tag = New Object() {FlowSheet.Options.NumberFormat, su.spmp_temperature, "T"}
+                        .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
                         .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                     End With
                 End If
 
-                valor = Format(Conversor.ConverterDoSI(su.spmp_deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.spmp_deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Quedadepressoaplicad6"), True)
+                valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Quedadepressoaplicad6"), True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .DefaultType = GetType(Nullable(Of Double))
@@ -709,13 +709,13 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                 If Me.GraphicObject.Calculated Then
 
-                    .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.spmp_deltaT), Format(Conversor.ConverterDoSI(su.spmp_deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
                     End With
 
-                    .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.spmp_heatflow), Format(Conversor.ConverterDoSI(su.spmp_heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
@@ -745,9 +745,9 @@ Namespace DWSIM.SimulationObjects.Reactors
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -755,7 +755,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                 Case 0
                     'PROP_HT_0    Pressure Drop
-                    value = Conversor.ConverterDoSI(su.spmp_deltaP, Me.DeltaP.GetValueOrDefault)
+                    value = Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
 
             End Select
 
@@ -763,7 +763,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
             Select Case proptype
@@ -784,24 +784,24 @@ Namespace DWSIM.SimulationObjects.Reactors
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
             Select Case propidx
 
                 Case 0
                     'PROP_HT_0	Pressure Drop
-                    Me.DeltaP = Conversor.ConverterParaSI(su.spmp_deltaP, propval)
+                    Me.DeltaP = Converter.ConvertToSI(su.deltaP, propval)
 
             End Select
             Return 1
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -809,7 +809,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                 Case 0
                     'PROP_HT_0	Pressure Drop
-                    value = su.spmp_deltaP
+                    value = su.deltaP
 
             End Select
 

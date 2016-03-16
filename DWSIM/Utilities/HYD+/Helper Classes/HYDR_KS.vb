@@ -382,7 +382,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            ' CALCULO DAS RAIZES PARA A FASE VAPOR
+            ' CALCULO DAS RAIZES PARA A Phase VAPOR
 
             i = 0
             Do
@@ -467,7 +467,7 @@ Namespace DWSIM.Utilities.HYD
 
             End Try
 
-            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA FASE VAPOR
+            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA Phase VAPOR
 
             i = 0
             Do
@@ -489,7 +489,7 @@ Namespace DWSIM.Utilities.HYD
 
             Else
 
-                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA FASE AQUOSA
+                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
                 i = 0
                 Do
@@ -520,7 +520,7 @@ Namespace DWSIM.Utilities.HYD
                 'CALCULO DA FUGACIDADE DA ÁGUA NO GELO
                 FG = Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T) * Math.Exp((VMG / (R * T) * (P - Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T))))
 
-                'CALCULO DA FUGACIDADE DA ÁGUA NA FASE LÍQUIDA
+                'CALCULO DA FUGACIDADE DA ÁGUA NA Phase LÍQUIDA
                 act = WAC
                 FL = Vxaq(pos) * act * Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 7.6537 - 0.0161277 * T) * Math.Exp((VLW / (R * T) * (P - Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 2.9446 - 0.0161266 * T))))
 
@@ -1158,7 +1158,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            ' CALCULO DAS RAIZES PARA A FASE VAPOR
+            ' CALCULO DAS RAIZES PARA A Phase VAPOR
 
             i = 0
             Do
@@ -1243,7 +1243,7 @@ STEP2:
 
             End Try
 
-            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA FASE VAPOR
+            ' CALCULO DO COEFICIENTE DE FUGACIDADE DA Phase VAPOR
 
             i = 0
             Do
@@ -1265,7 +1265,7 @@ STEP2:
 
             Else
 
-                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA FASE AQUOSA
+                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
                 Dim fresult As Object = unfPP.FlashBase.Flash_PT(Vy, P, T, unfPP)
                 If fresult(0) > 0.0# Then
@@ -1319,7 +1319,7 @@ STEP2:
                 'CALCULO DA FUGACIDADE DA ÁGUA NO GELO
                 FG = Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T) * Math.Exp((VMG / (R * T) * (P - Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T))))
 
-                'CALCULO DA FUGACIDADE DA ÁGUA NA FASE LÍQUIDA
+                'CALCULO DA FUGACIDADE DA ÁGUA NA Phase LÍQUIDA
                 act = WAC
                 FL = Vxaq(pos) * act * Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 7.6537 - 0.0161277 * T) * Math.Exp((VLW / (R * T) * (P - Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 2.9446 - 0.0161266 * T))))
 

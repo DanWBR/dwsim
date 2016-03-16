@@ -38,7 +38,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
     <System.Serializable()> Public Class ExcelUO
 
-        Inherits SimulationObjects_UnitOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         Protected m_DQ As Nullable(Of Double)
         Protected m_FileName As String = ""
@@ -71,7 +71,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End Set
         End Property
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
             MyBase.CreateNew()
             Me.m_ComponentName = nome
             Me.m_ComponentDescription = descricao
@@ -212,10 +212,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         If Me.GraphicObject.InputConnectors(k).IsAttached Then
                             S = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(k).AttachedConnector.AttachedFrom.Name)
                             Me.PropertyPackage.CurrentMaterialStream = S
-                            Ti = S.Fases(0).SPMProperties.temperature.GetValueOrDefault.ToString
-                            Pi = S.Fases(0).SPMProperties.pressure.GetValueOrDefault.ToString
-                            Hi = S.Fases(0).SPMProperties.enthalpy.GetValueOrDefault.ToString
-                            Wi = S.Fases(0).SPMProperties.massflow.GetValueOrDefault.ToString
+                            Ti = S.Phases(0).Properties.temperature.GetValueOrDefault.ToString
+                            Pi = S.Phases(0).Properties.pressure.GetValueOrDefault.ToString
+                            Hi = S.Phases(0).Properties.enthalpy.GetValueOrDefault.ToString
+                            Wi = S.Phases(0).Properties.massflow.GetValueOrDefault.ToString
                             Hin += Hi * Wi
                             Win += Wi
 
@@ -225,7 +225,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             mysheetIn.Cells(8, 2 + k).Value = Hi
 
                             Dim dy As Integer = 0
-                            For Each comp As DWSIM.ClassesBasicasTermodinamica.Substancia In S.Fases(0).Componentes.Values
+                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Componentes.Values
                                 mysheetIn.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetOut.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetIn.Cells(12 + dy, 2 + k).Value = comp.MolarFlow
@@ -236,7 +236,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             mysheetIn.Cells(7, 2 + k).Value = ""
                             mysheetIn.Cells(8, 2 + k).Value = ""
                             Dim dy As Integer = 0
-                            For Each comp As DWSIM.ClassesBasicasTermodinamica.Substancia In Me.PropertyPackage.CurrentMaterialStream.Fases(0).Componentes.Values
+                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Componentes.Values
                                 mysheetIn.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetOut.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetIn.Cells(12 + dy, 2 + k).Value = ""
@@ -262,31 +262,31 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                             'Atribuir valores à corrente de matéria conectada à jusante
                             With Me.PropertyPackage.CurrentMaterialStream
-                                .Fases(0).SPMProperties.temperature = T2
-                                .Fases(0).SPMProperties.pressure = P2
+                                .Phases(0).Properties.temperature = T2
+                                .Phases(0).Properties.pressure = P2
 
-                                Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                                 i = 0
                                 SMole = 0
                                 SMass = 0
                                 Vmol.Clear()
-                                For Each comp In .Fases(0).Componentes.Values
+                                For Each comp In .Phases(0).Componentes.Values
                                     v = mysheetOut.Cells(12 + i, 2 + k).Value
                                     Vmol.Add(comp.Nome, v)
                                     SMole += Vmol(comp.Nome)
                                     SMass += Vmol(comp.Nome) * comp.ConstantProperties.Molar_Weight / 1000
                                     i += 1
                                 Next
-                                For Each comp In .Fases(0).Componentes.Values
+                                For Each comp In .Phases(0).Componentes.Values
                                     comp.FracaoMolar = Vmol(comp.Nome) / SMole
                                     comp.FracaoMassica = Vmol(comp.Nome) * comp.ConstantProperties.Molar_Weight / SMass / 1000
                                 Next
-                                .Fases(0).SPMProperties.massflow = SMass
+                                .Phases(0).Properties.massflow = SMass
 
                                 Try
                                     Dim tmp = Me.PropertyPackage.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P, T2, P2, 0)
                                     H2 = tmp(4)
-                                    .Fases(0).SPMProperties.enthalpy = H2
+                                    .Phases(0).Properties.enthalpy = H2
                                 Catch ex As Exception
                                     mybook.Close(saveChanges:=True)
                                     xcl.Quit()
@@ -432,10 +432,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     If Me.GraphicObject.InputConnectors(k).IsAttached Then
                         S = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(k).AttachedConnector.AttachedFrom.Name)
                         Me.PropertyPackage.CurrentMaterialStream = S
-                        Ti = S.Fases(0).SPMProperties.temperature.GetValueOrDefault
-                        Pi = S.Fases(0).SPMProperties.pressure.GetValueOrDefault
-                        Hi = S.Fases(0).SPMProperties.enthalpy.GetValueOrDefault
-                        Wi = S.Fases(0).SPMProperties.massflow.GetValueOrDefault
+                        Ti = S.Phases(0).Properties.temperature.GetValueOrDefault
+                        Pi = S.Phases(0).Properties.pressure.GetValueOrDefault
+                        Hi = S.Phases(0).Properties.enthalpy.GetValueOrDefault
+                        Wi = S.Phases(0).Properties.massflow.GetValueOrDefault
                         Hin += Hi * Wi
                         Win += Wi
 
@@ -445,7 +445,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         mysheetIn.Cells(7, 1 + k).Value = Hi
 
                         Dim dy As Integer = 0
-                        For Each comp As DWSIM.ClassesBasicasTermodinamica.Substancia In S.Fases(0).Componentes.Values
+                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Componentes.Values
                             mysheetIn.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetOut.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetIn.Cells(11 + dy, 1 + k).Value = comp.MolarFlow.GetValueOrDefault
@@ -456,7 +456,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         mysheetIn.Cells(6, 1 + k).Value = ""
                         mysheetIn.Cells(7, 1 + k).Value = ""
                         Dim dy As Integer = 0
-                        For Each comp As DWSIM.ClassesBasicasTermodinamica.Substancia In Me.PropertyPackage.CurrentMaterialStream.Fases(0).Componentes.Values
+                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Componentes.Values
                             mysheetIn.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetOut.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetIn.Cells(11 + dy, 1 + k).Value = ""
@@ -504,31 +504,31 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                         'Atribuir valores à corrente de matéria conectada à jusante
                         With Me.PropertyPackage.CurrentMaterialStream
-                            .Fases(0).SPMProperties.temperature = T2
-                            .Fases(0).SPMProperties.pressure = P2
+                            .Phases(0).Properties.temperature = T2
+                            .Phases(0).Properties.pressure = P2
 
-                            Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                             i = 0
                             SMole = 0
                             SMass = 0
                             Vmol.Clear()
-                            For Each comp In .Fases(0).Componentes.Values
+                            For Each comp In .Phases(0).Componentes.Values
                                 v = mysheetOut.Cells(11 + i, 1 + k).Value
                                 Vmol.Add(comp.Nome, v)
                                 SMole += Vmol(comp.Nome)
                                 SMass += Vmol(comp.Nome) * comp.ConstantProperties.Molar_Weight / 1000
                                 i += 1
                             Next
-                            For Each comp In .Fases(0).Componentes.Values
+                            For Each comp In .Phases(0).Componentes.Values
                                 comp.FracaoMolar = Vmol(comp.Nome) / SMole
                                 comp.FracaoMassica = Vmol(comp.Nome) * comp.ConstantProperties.Molar_Weight / SMass / 1000
                             Next
-                            .Fases(0).SPMProperties.massflow = SMass
+                            .Phases(0).Properties.massflow = SMass
 
                             Try
                                 Dim tmp = Me.PropertyPackage.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P, T2, P2, 0)
                                 H2 = tmp(4)
-                                .Fases(0).SPMProperties.enthalpy = H2
+                                .Phases(0).Properties.enthalpy = H2
                             Catch ex As Exception
                                 Throw New Exception("Flash calculation error")
                             End Try
@@ -598,20 +598,20 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                     'Zerar valores da corrente de matéria conectada a jusante
                     With form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(k).AttachedConnector.AttachedTo.Name)
-                        .Fases(0).SPMProperties.temperature = Nothing
-                        .Fases(0).SPMProperties.pressure = Nothing
-                        .Fases(0).SPMProperties.enthalpy = Nothing
-                        .Fases(0).SPMProperties.molarfraction = 1
-                        .Fases(0).SPMProperties.massfraction = 1
-                        Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                        .Phases(0).Properties.temperature = Nothing
+                        .Phases(0).Properties.pressure = Nothing
+                        .Phases(0).Properties.enthalpy = Nothing
+                        .Phases(0).Properties.molarfraction = 1
+                        .Phases(0).Properties.massfraction = 1
+                        Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                         Dim i As Integer = 0
-                        For Each comp In .Fases(0).Componentes.Values
+                        For Each comp In .Phases(0).Componentes.Values
                             comp.FracaoMolar = 0
                             comp.FracaoMassica = 0
                             i += 1
                         Next
-                        .Fases(0).SPMProperties.massflow = Nothing
-                        .Fases(0).SPMProperties.molarflow = Nothing
+                        .Phases(0).Properties.massflow = Nothing
+                        .Phases(0).Properties.molarflow = Nothing
                         .GraphicObject.Calculated = False
                     End With
 
@@ -639,9 +639,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Function
 
-        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
                 Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
                 Me.FillNodeItems()
@@ -792,19 +792,19 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             End If
 
-                With Me.QTNodeTableItems
+            With Me.QTNodeTableItems
 
-                    Dim valor As String
+                Dim valor As String
 
-                    If Me.DeltaQ.HasValue Then
-                        valor = Format(Conversor.ConverterDoSI(su.spmp_heatflow, Me.DeltaQ), nf)
-                    Else
-                        valor = DWSIM.App.GetLocalString("NC")
-                    End If
-                    .Item(0).Value = valor
-                    .Item(0).Unit = su.spmp_heatflow
+                If Me.DeltaQ.HasValue Then
+                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ), nf)
+                Else
+                    valor = DWSIM.App.GetLocalString("NC")
+                End If
+                .Item(0).Value = valor
+                .Item(0).Unit = su.heatflow
 
-                End With
+            End With
 
         End Sub
 
@@ -818,8 +818,8 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End With
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 
@@ -951,9 +951,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 Next
 
                 '======== heat due to enthalpy balance ============
-                Dim valor = Format(Conversor.ConverterDoSI(su.spmp_heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("CalorFornecido"), su.spmp_heatflow), valor, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Quantidadedecalortro"), True)
-                .Item(.Item.Count - 1).Tag = New Object() {FlowSheet.Options.NumberFormat, su.spmp_heatflow, "E"}
+                Dim valor = Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("CalorFornecido"), su.heatflow), valor, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Quantidadedecalortro"), True)
+                .Item(.Item.Count - 1).Tag = New Object() {FlowSheet.Options.NumberFormat, su.heatflow, "E"}
 
                 '========== Error message =========================
                 If Me.GraphicObject.Calculated = False Then
@@ -967,10 +967,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As Double = 0
 
             Dim propType As String = prop.Split("_")(0)
@@ -978,7 +978,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             Select Case propType
                 Case "Calc"
-                    value = Conversor.ConverterDoSI(su.spmp_heatflow, DeltaQ.GetValueOrDefault)
+                    value = Converter.ConvertFromSI(su.heatflow, DeltaQ.GetValueOrDefault)
                 Case "In"
                     value = InputParams(propID).Value
                 Case "Out"
@@ -988,7 +988,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             Return value
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
 
             Dim proplist As New ArrayList
 
@@ -1024,16 +1024,16 @@ Namespace DWSIM.SimulationObjects.UnitOps
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
 
             Dim propType As String = prop.Split("_")(0)
             Dim propID As String = prop.Split("_")(1)
 
             Select Case propType
                 Case "Calc"
-                    DeltaQ = Conversor.ConverterParaSI(su.spmp_heatflow, propval)
+                    DeltaQ = Converter.ConvertToSI(su.heatflow, propval)
                 Case "In"
                     InputParams(propID).Value = propval
                 Case "Out"
@@ -1043,9 +1043,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
             Return 1
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As String = ""
 
             Dim propType As String = prop.Split("_")(0)
@@ -1053,7 +1053,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             Select Case propType
                 Case "Calc"
-                    value = su.spmp_heatflow
+                    value = su.heatflow
                 Case "In"
                     value = InputParams(propID).Unit
                 Case "Out"

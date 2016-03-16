@@ -175,7 +175,7 @@
     <value>Limpiar</value>
   </data>
   <data name="FaTabStripItem5.Title" xml:space="preserve">
-    <value>Composiciones (Fase Vapor)</value>
+    <value>Composiciones (Phase Vapor)</value>
   </data>
   <data name="sfd1.Filter" xml:space="preserve">
     <value>Archivo con las estimados iniciales para la columna de destilación | *. dwcdi</value>
@@ -211,7 +211,7 @@
     <value>Composiciones</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Composiciones (Fase Líquida)</value>
+    <value>Composiciones (Phase Líquida)</value>
   </data>
   <data name="Button3.ToolTip" xml:space="preserve">
     <value>Actualizar estimados con solución actual</value>

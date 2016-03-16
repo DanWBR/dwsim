@@ -29,8 +29,8 @@ Public Class FormGraph
 
     Sub GetXY(ByVal EixoX As Integer, ByVal EixoY As Integer)
 
-        Dim cv As New DWSIM.SistemasDeUnidades.Conversor
-        Dim su As DWSIM.SistemasDeUnidades.Unidades = m_form.Options.SelectedUnitSystem
+        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim su As DWSIM.SystemsOfUnits.Units = m_form.Options.SelectedUnitSystem
 
         Dim count As Integer = 0
         Dim ps0 As PipeSection
@@ -59,13 +59,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.distance, comp_ant)
+                                vx(i) = Converter.ConvertFromSI(su.distance, comp_ant)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.distance, comp_ant)
+                                vx(i) = Converter.ConvertFromSI(su.distance, comp_ant)
                                 i += 1
                             Next
                         End If
@@ -73,7 +73,7 @@ Public Class FormGraph
                     Next
                 End With
             Case 1
-                Me.m_xtitle = Replace(DWSIM.App.GetLocalString("PressoPa"), "(Pa)", "(" & su.spmp_pressure & ")")
+                Me.m_xtitle = Replace(DWSIM.App.GetLocalString("PressoPa"), "(Pa)", "(" & su.pressure & ")")
                 With Me.Profile
                     Dim ps As PipeSection
                     Dim res As PipeResults
@@ -82,20 +82,20 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.spmp_pressure, res.PressaoInicial)
+                                vx(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.spmp_pressure, res.PressaoInicial)
+                                vx(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 i += 1
                             Next
                         End If
                     Next
                 End With
             Case 2
-                Me.m_xtitle = Replace(DWSIM.App.GetLocalString("TemperaturaK"), "(K)", "(" & su.spmp_temperature & ")")
+                Me.m_xtitle = Replace(DWSIM.App.GetLocalString("TemperaturaK"), "(K)", "(" & su.temperature & ")")
                 With Me.Profile
                     Dim ps As PipeSection
                     Dim res As PipeResults
@@ -104,13 +104,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.spmp_temperature, res.TemperaturaInicial)
+                                vx(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.spmp_temperature, res.TemperaturaInicial)
+                                vx(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 i += 1
                             Next
                         End If
@@ -126,13 +126,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.velocity, res.LiqVel)
+                                vx(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.velocity, res.LiqVel)
+                                vx(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 i += 1
                             Next
                         End If
@@ -148,20 +148,20 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.velocity, res.VapVel)
+                                vx(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.velocity, res.VapVel)
+                                vx(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
                                 i += 1
                             Next
                         End If
                     Next
                 End With
             Case 5
-                Me.m_xtitle = Replace(DWSIM.App.GetLocalString("FluxodeCalorkW"), "(kW)", "(" & su.spmp_heatflow & ")")
+                Me.m_xtitle = Replace(DWSIM.App.GetLocalString("FluxodeCalorkW"), "(kW)", "(" & su.heatflow & ")")
                 With Me.Profile
                     Dim ps As PipeSection
                     Dim res As PipeResults
@@ -170,13 +170,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.spmp_heatflow, res.CalorTransferido)
+                                vx(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Conversor.ConverterDoSI(su.spmp_heatflow, res.CalorTransferido)
+                                vx(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 i += 1
                             Next
                         End If
@@ -195,7 +195,7 @@ Public Class FormGraph
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
                         For Each res In ps.Resultados
-                            vy(i) = Conversor.ConverterDoSI(su.heat_transf_coeff, res.HTC)
+                            vy(i) = Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC)
                             i += 1
                         Next
                     Next
@@ -231,20 +231,20 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.distance, comp_ant)
+                                vy(i) = Converter.ConvertFromSI(su.distance, comp_ant)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.distance, comp_ant)
+                                vy(i) = Converter.ConvertFromSI(su.distance, comp_ant)
                                 i += 1
                             Next
                         End If
                     Next
                 End With
             Case 1
-                Me.m_ytitle = Replace(DWSIM.App.GetLocalString("PressoPa"), "(Pa)", "(" & su.spmp_pressure & ")")
+                Me.m_ytitle = Replace(DWSIM.App.GetLocalString("PressoPa"), "(Pa)", "(" & su.pressure & ")")
                 With Me.Profile
                     Dim ps As PipeSection
                     Dim res As PipeResults
@@ -253,20 +253,20 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.spmp_pressure, res.PressaoInicial)
+                                vy(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.spmp_pressure, res.PressaoInicial)
+                                vy(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 i += 1
                             Next
                         End If
                     Next
                 End With
             Case 2
-                Me.m_ytitle = Replace(DWSIM.App.GetLocalString("TemperaturaK"), "(K)", "(" & su.spmp_temperature & ")")
+                Me.m_ytitle = Replace(DWSIM.App.GetLocalString("TemperaturaK"), "(K)", "(" & su.temperature & ")")
                 With Me.Profile
                     Dim ps As PipeSection
                     Dim res As PipeResults
@@ -275,13 +275,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.spmp_temperature, res.TemperaturaInicial)
+                                vy(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.spmp_temperature, res.TemperaturaInicial)
+                                vy(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 i += 1
                             Next
                         End If
@@ -297,13 +297,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.velocity, res.LiqVel)
+                                vy(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.velocity, res.LiqVel)
+                                vy(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 i += 1
                             Next
                         End If
@@ -319,20 +319,20 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.velocity, res.VapVel)
+                                vy(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
                                 i += 1
-                                vy(i) = Conversor.ConverterDoSI(su.velocity, res.VapVel)
+                                vy(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
                             Next
                         End If
                     Next
                 End With
             Case 5
-                Me.m_ytitle = Replace(DWSIM.App.GetLocalString("FluxodeCalorkW"), "(kW)", "(" & su.spmp_heatflow & ")")
+                Me.m_ytitle = Replace(DWSIM.App.GetLocalString("FluxodeCalorkW"), "(kW)", "(" & su.heatflow & ")")
                 With Me.Profile
                     Dim ps As PipeSection
                     Dim res As PipeResults
@@ -341,13 +341,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.spmp_heatflow, res.CalorTransferido)
+                                vy(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Conversor.ConverterDoSI(su.spmp_heatflow, res.CalorTransferido)
+                                vy(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 i += 1
                             Next
                         End If

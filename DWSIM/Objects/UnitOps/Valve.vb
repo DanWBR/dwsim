@@ -23,7 +23,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
     <System.Serializable()> Public Class Valve
 
-        Inherits SimulationObjects_UnitOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         Protected m_dp As Nullable(Of Double)
         Protected m_dt As Nullable(Of Double)
@@ -40,7 +40,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             MyBase.New()
         End Sub
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
             Me.m_ComponentName = nome
@@ -124,10 +124,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             Me.PropertyPackage.CurrentMaterialStream = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             Me.PropertyPackage.CurrentMaterialStream.Validate()
-            Ti = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Fases(0).SPMProperties.temperature.GetValueOrDefault.ToString
-            Pi = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Fases(0).SPMProperties.pressure.GetValueOrDefault.ToString
-            Hi = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Fases(0).SPMProperties.enthalpy.GetValueOrDefault.ToString
-            Wi = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Fases(0).SPMProperties.massflow.GetValueOrDefault.ToString
+            Ti = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.temperature.GetValueOrDefault.ToString
+            Pi = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.pressure.GetValueOrDefault.ToString
+            Hi = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.enthalpy.GetValueOrDefault.ToString
+            Wi = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault.ToString
             ei = Hi * Wi
             ein = ei
 
@@ -168,18 +168,18 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                 'Atribuir valores à corrente de matéria conectada à jusante
                 With form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-                    .Fases(0).SPMProperties.temperature = T2
-                    .Fases(0).SPMProperties.pressure = P2
-                    .Fases(0).SPMProperties.enthalpy = H2
-                    Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                    .Phases(0).Properties.temperature = T2
+                    .Phases(0).Properties.pressure = P2
+                    .Phases(0).Properties.enthalpy = H2
+                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     Dim i As Integer = 0
-                    For Each comp In .Fases(0).Componentes.Values
-                        comp.FracaoMolar = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Fases(0).Componentes(comp.Nome).FracaoMolar
-                        comp.FracaoMassica = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Fases(0).Componentes(comp.Nome).FracaoMassica
+                    For Each comp In .Phases(0).Componentes.Values
+                        comp.FracaoMolar = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Componentes(comp.Nome).FracaoMolar
+                        comp.FracaoMassica = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Componentes(comp.Nome).FracaoMassica
                         i += 1
                     Next
                     .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
-                    .Fases(0).SPMProperties.massflow = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Fases(0).SPMProperties.massflow.GetValueOrDefault
+                    .Phases(0).Properties.massflow = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
                 End With
 
                 'Call function to calculate flowsheet
@@ -209,20 +209,20 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                 'Zerar valores da corrente de matéria conectada a jusante
                 With form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-                    .Fases(0).SPMProperties.temperature = Nothing
-                    .Fases(0).SPMProperties.pressure = Nothing
-                    .Fases(0).SPMProperties.molarfraction = 1
-                    .Fases(0).SPMProperties.massfraction = 1
-                    .Fases(0).SPMProperties.enthalpy = Nothing
-                    Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                    .Phases(0).Properties.temperature = Nothing
+                    .Phases(0).Properties.pressure = Nothing
+                    .Phases(0).Properties.molarfraction = 1
+                    .Phases(0).Properties.massfraction = 1
+                    .Phases(0).Properties.enthalpy = Nothing
+                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     Dim i As Integer = 0
-                    For Each comp In .Fases(0).Componentes.Values
+                    For Each comp In .Phases(0).Componentes.Values
                         comp.FracaoMolar = 0
                         comp.FracaoMassica = 0
                         i += 1
                     Next
-                    .Fases(0).SPMProperties.massflow = Nothing
-                    .Fases(0).SPMProperties.molarflow = Nothing
+                    .Phases(0).Properties.massflow = Nothing
+                    .Phases(0).Properties.molarflow = Nothing
                     .GraphicObject.Calculated = False
                 End With
 
@@ -240,9 +240,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Function
 
-        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
                 Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
                 Me.FillNodeItems()
@@ -263,20 +263,20 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 Dim valor As String
 
                 If Me.DeltaP.HasValue Then
-                    valor = Format(Conversor.ConverterDoSI(su.spmp_deltaP, Me.DeltaP), nf)
+                    valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP), nf)
                 Else
                     valor = DWSIM.App.GetLocalString("NC")
                 End If
                 .Item(0).Value = valor
-                .Item(0).Unit = su.spmp_deltaP
+                .Item(0).Unit = su.deltaP
 
                 If Me.DeltaT.HasValue Then
-                    valor = Format(Conversor.ConverterDoSI(su.spmp_deltaT, Me.DeltaT), nf)
+                    valor = Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT), nf)
                 Else
                     valor = DWSIM.App.GetLocalString("NC")
                 End If
                 .Item(1).Value = valor
-                .Item(1).Unit = su.spmp_deltaT
+                .Item(1).Unit = su.deltaT
 
             End With
 
@@ -295,9 +295,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End With
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 
@@ -346,29 +346,29 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                     Case CalculationMode.DeltaP
 
-                        valor = Format(Conversor.ConverterDoSI(su.spmp_deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.spmp_deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString(""), True)
+                        valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                        .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString(""), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
                             .Tag2 = "PROP_VA_1"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.spmp_deltaP, "DP"}
+                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.deltaP, "DP"}
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
 
                     Case CalculationMode.OutletPressure
 
-                        valor = Format(Conversor.ConverterDoSI(su.spmp_pressure, Me.OutletPressure.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(DWSIM.App.GetLocalString("ValveOutletPressure"), su.spmp_pressure), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
+                        valor = Format(Converter.ConvertFromSI(su.pressure, Me.OutletPressure.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                        .Item.Add(FT(DWSIM.App.GetLocalString("ValveOutletPressure"), su.pressure), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
                             .Tag2 = "PROP_VA_2"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.spmp_pressure, "P"}
+                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.pressure, "P"}
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
 
                 End Select
 
-                .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.spmp_deltaT), Format(Conversor.ConverterDoSI(su.spmp_deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .DefaultType = GetType(Nullable(Of Double))
@@ -385,10 +385,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -399,20 +399,20 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     value = Me.CalcMode
                 Case 1
                     'PROP_VA_1	Pressure Drop
-                    value = Conversor.ConverterDoSI(su.spmp_deltaP, Me.DeltaP.GetValueOrDefault)
+                    value = Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
                 Case 2
                     'PROP_VA_2	Outlet Pressure
-                    value = Conversor.ConverterDoSI(su.spmp_pressure, Me.OutletPressure.GetValueOrDefault)
+                    value = Converter.ConvertFromSI(su.pressure, Me.OutletPressure.GetValueOrDefault)
                 Case 3
                     'PROP_VA_3	Temperature Drop
-                    value = Conversor.ConverterDoSI(su.spmp_deltaT, Me.DeltaT.GetValueOrDefault)
+                    value = Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
             End Select
 
             Return value
 
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
             Select Case proptype
@@ -437,9 +437,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
             Select Case propidx
@@ -448,16 +448,16 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Me.CalcMode = propval
                 Case 1
                     'PROP_VA_1	Pressure Drop
-                    Me.DeltaP = Conversor.ConverterParaSI(su.spmp_deltaP, propval)
+                    Me.DeltaP = Converter.ConvertToSI(su.deltaP, propval)
                 Case 2
                     'PROP_VA_2	Outlet Pressure
-                    Me.OutletPressure = Conversor.ConverterParaSI(su.spmp_pressure, propval)
+                    Me.OutletPressure = Converter.ConvertToSI(su.pressure, propval)
             End Select
             Return 1
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim value As String = ""
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -468,13 +468,13 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     value = ""
                 Case 1
                     'PROP_VA_1	Pressure Drop
-                    value = su.spmp_deltaP
+                    value = su.deltaP
                 Case 2
                     'PROP_VA_2	Outlet Pressure
-                    value = su.spmp_pressure
+                    value = su.pressure
                 Case 3
                     'PROP_VA_3	Temperature Drop
-                    value = su.spmp_deltaT
+                    value = su.deltaT
 
             End Select
 

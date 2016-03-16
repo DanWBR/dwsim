@@ -695,7 +695,7 @@
   <data name="AnáliseDePetróleosToolStripMenuItem.Text" xml:space="preserve">
     <value>Análisis de Petróleo</value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="DiagramaDePhasesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
@@ -712,13 +712,13 @@
         JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DiagramaDePhasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 22</value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem.Text" xml:space="preserve">
+  <data name="DiagramaDePhasesToolStripMenuItem.Text" xml:space="preserve">
     <value>Límite de Estabilidad</value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DiagramaDePhasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 22</value>
   </data>
   <data name="DiagramaBinárioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">

@@ -285,7 +285,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary
 
         End Function
 
-        Function RET_VN(ByVal cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties) As Dictionary(Of Integer, Double)
+        Function RET_VN(ByVal cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties) As Dictionary(Of Integer, Double)
 
             Dim i As Integer = 0
             Dim res As New Dictionary(Of Integer, Double)
@@ -465,8 +465,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary
             'load user database interactions
             If Not My.Settings.UserInteractionsDatabases Is Nothing Then
                 For Each IPDBPath As String In My.Settings.UserInteractionsDatabases
-                    Dim Interactions As DWSIM.ClassesBasicasTermodinamica.InteractionParameter()
-                    Dim IP As DWSIM.ClassesBasicasTermodinamica.InteractionParameter
+                    Dim Interactions As DWSIM.Thermodynamics.BaseClasses.InteractionParameter()
+                    Dim IP As DWSIM.Thermodynamics.BaseClasses.InteractionParameter
                     Try
                         Interactions = DWSIM.Databases.UserIPDB.ReadInteractions(IPDBPath, "Modified UNIFAC (Dortmund)")
                         For Each IP In Interactions

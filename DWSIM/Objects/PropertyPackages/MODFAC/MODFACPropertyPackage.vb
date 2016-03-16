@@ -20,7 +20,7 @@
 'Imports DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 Imports System.Math
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 
 Namespace DWSIM.SimulationObjects.PropertyPackages
 
@@ -65,7 +65,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
 #Region "    Auxiliary Functions"
 
-        Public Function RET_VN(ByVal subst As DWSIM.ClassesBasicasTermodinamica.Substancia) As Object
+        Public Function RET_VN(ByVal subst As DWSIM.Thermodynamics.BaseClasses.Compound) As Object
 
             Return Me.m_uni.RET_VN(subst.ConstantProperties)
 
@@ -73,12 +73,12 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Function RET_VQ() As Object
 
-            Dim subst As DWSIM.ClassesBasicasTermodinamica.Substancia
-            Dim VQ(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
+            Dim VQ(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             Dim i As Integer = 0
             Dim sum As Double = 0
 
-            For Each subst In Me.CurrentMaterialStream.Fases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
                 VQ(i) = Me.m_uni.RET_Qi(Me.RET_VN(subst))
                 i += 1
             Next
@@ -89,12 +89,12 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Function RET_VR() As Object
 
-            Dim subst As DWSIM.ClassesBasicasTermodinamica.Substancia
-            Dim VR(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
+            Dim VR(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             Dim i As Integer = 0
             Dim sum As Double = 0
 
-            For Each subst In Me.CurrentMaterialStream.Fases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
                 VR(i) = Me.m_uni.RET_Ri(Me.RET_VN(subst))
                 i += 1
             Next
@@ -105,11 +105,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Function RET_VEKI() As List(Of Dictionary(Of Integer, Double))
 
-            Dim subst As DWSIM.ClassesBasicasTermodinamica.Substancia
+            Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim VEKI As New List(Of Dictionary(Of Integer, Double))
             Dim i As Integer = 0
             Dim sum As Double
-            For Each subst In Me.CurrentMaterialStream.Fases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
                 sum = 0
                 For Each s As String In subst.ConstantProperties.MODFACGroups.Collection.Keys
                     sum += subst.ConstantProperties.MODFACGroups.Collection(s) * Me.m_uni.ModfGroups.Groups(s).Q

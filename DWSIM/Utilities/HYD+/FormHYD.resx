@@ -472,7 +472,7 @@
     <value>24</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
-    <value>Fases em equilíbrio:</value>
+    <value>Phases em equilíbrio:</value>
   </data>
   <data name="&gt;&gt;Label11.Name" xml:space="preserve">
     <value>Label11</value>
@@ -742,7 +742,7 @@
     <value>16</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
-    <value>Fases em equilíbrio:</value>
+    <value>Phases em equilíbrio:</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>

@@ -19,7 +19,7 @@
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 Imports System.Math
 Imports DWSIM.DWSIM.MathEx
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.InteropServices
 Imports CoolProp
 Imports System.Linq
@@ -202,7 +202,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQDENSi(cprop As ClassesBasicasTermodinamica.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_LIQDENSi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -227,7 +227,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQ_Cpi(cprop As ClassesBasicasTermodinamica.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_LIQ_Cpi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -256,9 +256,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             i = 0
-            For Each subst As Substancia In Me.CurrentMaterialStream.Fases(2).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -329,10 +329,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             i = 0
-            Dim P As Double = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
-            For Each subst As Substancia In Me.CurrentMaterialStream.Fases(phaseid).Componentes.Values
+            Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Componentes.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -386,9 +386,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             i = 0
-            For Each subst As Substancia In Me.CurrentMaterialStream.Fases(1).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(1).Componentes.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -421,7 +421,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQDENSi(subst As ClassesBasicasTermodinamica.Substancia, T As Double) As Double
+        Public Overrides Function AUX_LIQDENSi(subst As Thermodynamics.BaseClasses.Compound, T As Double) As Double
             Dim sub1 = subst.ConstantProperties.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -446,7 +446,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQTHERMCONDi(cprop As ClassesBasicasTermodinamica.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_LIQTHERMCONDi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -495,7 +495,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_SURFTi(constprop As ClassesBasicasTermodinamica.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_SURFTi(constprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
             Dim sub1 = constprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -526,16 +526,16 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Overrides Function AUX_SURFTM(T As Double) As Double
 
-            Dim subst As DWSIM.ClassesBasicasTermodinamica.Substancia
+            Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim val As Double = 0
-            For Each subst In Me.CurrentMaterialStream.Fases(1).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(1).Componentes.Values
                 val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_SURFTi(subst.ConstantProperties, T)
             Next
             Return val
 
         End Function
 
-        Public Overrides Function AUX_VAPTHERMCONDi(cprop As ClassesBasicasTermodinamica.ConstantProperties, T As Double, P As Double) As Double
+        Public Overrides Function AUX_VAPTHERMCONDi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double, P As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -588,10 +588,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_VAPVISCi(cprop As ClassesBasicasTermodinamica.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_VAPVISCi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, val As Double
-            Dim P = Me.CurrentMaterialStream.Fases(2).SPMProperties.pressure.GetValueOrDefault
+            Dim P = Me.CurrentMaterialStream.Phases(2).Properties.pressure.GetValueOrDefault
             If IsCompoundSupported(sub1) Then
                 Tmin = CoolProp.Props1SI(cprop.Name, "TMIN")
                 Tmax = CoolProp.Props1SI(cprop.Name, "TMAX")
@@ -617,10 +617,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             i = 0
-            Dim xv As Double = Me.CurrentMaterialStream.Fases(2).SPMProperties.molarfraction.GetValueOrDefault
-            For Each subst As Substancia In Me.CurrentMaterialStream.Fases(2).Componentes.Values
+            Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -679,9 +679,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim val As Double
             Dim i As Integer
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             i = 0
-            For Each subst As Substancia In Me.CurrentMaterialStream.Fases(phaseid).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Componentes.Values
                 vk(i) = subst.FracaoMassica / Me.AUX_LIQDENSi(subst.ConstantProperties, T)
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
                 i = i + 1
@@ -697,9 +697,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             i = 0
-            For Each subst As Substancia In Me.CurrentMaterialStream.Fases(2).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -713,7 +713,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 vk(i) = CoolProp.PropsSI("D", "T", T, "P", P, subst.ConstantProperties.Name)
                             Catch ex As Exception
                                 WriteWarningMessage(ex.Message.ToString & ". Estimating value [Fluid: " & subst.ConstantProperties.Name & "]")
-                                vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Fase.Vapor) / 1000
+                                vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Phase.Vapor) / 1000
                             End Try
                         Else
                             Try
@@ -733,18 +733,18 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                             Catch ex As Exception
                                 WriteWarningMessage(ex.Message.ToString & ". Estimating value [Fluid: " & subst.ConstantProperties.Name & "]")
-                                vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Fase.Vapor) / 1000
+                                vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Phase.Vapor) / 1000
                             End Try
                         End If
                     Else
                         WriteWarningMessage("CoolProp Warning: unable to calculate Vapor Phase Density for " &
                                                                               subst.ConstantProperties.Name & " at T = " & T & " K and P = " & P &
                                                                               " Pa. Estimating value...")
-                        vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Fase.Vapor) / 1000
+                        vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Phase.Vapor) / 1000
                     End If
                 Else
                     WriteWarningMessage("CoolProp Warning: compound " & subst.ConstantProperties.Name & " not supported. Estimating Vapor Density...")
-                    vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Fase.Vapor) / 1000
+                    vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Phase.Vapor) / 1000
                 End If
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
                 vk(i) = subst.FracaoMolar * vk(i)
@@ -755,44 +755,44 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Fase, ByVal T As Double, ByVal P As Double)
+        Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
 
-            For Each subst As ClassesBasicasTermodinamica.Substancia In Me.CurrentMaterialStream.Fases(0).Componentes.Values
+            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
                 subst.PartialVolume = 0.0#
             Next
 
         End Sub
 
-        Public Overrides Function DW_CalcCp_ISOL(ByVal fase1 As Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
             Dim phaseID As Integer
-            Select Case fase1
-                Case PropertyPackages.Fase.Mixture
+            Select Case Phase1
+                Case PropertyPackages.Phase.Mixture
                     phaseID = 0
-                Case PropertyPackages.Fase.Vapor
+                Case PropertyPackages.Phase.Vapor
                     phaseID = 2
-                Case PropertyPackages.Fase.Liquid1
+                Case PropertyPackages.Phase.Liquid1
                     phaseID = 3
-                Case PropertyPackages.Fase.Liquid2
+                Case PropertyPackages.Phase.Liquid2
                     phaseID = 4
-                Case PropertyPackages.Fase.Liquid3
+                Case PropertyPackages.Phase.Liquid3
                     phaseID = 5
-                Case PropertyPackages.Fase.Liquid
+                Case PropertyPackages.Phase.Liquid
                     phaseID = 1
-                Case PropertyPackages.Fase.Aqueous
+                Case PropertyPackages.Phase.Aqueous
                     phaseID = 6
-                Case PropertyPackages.Fase.Solid
+                Case PropertyPackages.Phase.Solid
                     phaseID = 7
             End Select
 
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
-            Select Case fase1
-                Case Fase.Aqueous, Fase.Liquid, Fase.Liquid1, Fase.Liquid2, Fase.Liquid3
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Select Case Phase1
+                Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     i = 0
-                    For Each subst As Substancia In Me.CurrentMaterialStream.Fases(phaseID).Componentes.Values
+                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Componentes.Values
                         If IsCompoundSupported(subst.Nome) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -831,9 +831,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                         vk(i) = subst.FracaoMassica * vk(i)
                         i = i + 1
                     Next
-                Case Fase.Vapor
+                Case Phase.Vapor
                     i = 0
-                    For Each subst As Substancia In Me.CurrentMaterialStream.Fases(phaseID).Componentes.Values
+                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Componentes.Values
                         If IsCompoundSupported(subst.Nome) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -879,36 +879,36 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcCv_ISOL(ByVal fase1 As Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcCv_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
             Dim phaseID As Integer
-            Select Case fase1
-                Case PropertyPackages.Fase.Mixture
+            Select Case Phase1
+                Case PropertyPackages.Phase.Mixture
                     phaseID = 0
-                Case PropertyPackages.Fase.Vapor
+                Case PropertyPackages.Phase.Vapor
                     phaseID = 2
-                Case PropertyPackages.Fase.Liquid1
+                Case PropertyPackages.Phase.Liquid1
                     phaseID = 3
-                Case PropertyPackages.Fase.Liquid2
+                Case PropertyPackages.Phase.Liquid2
                     phaseID = 4
-                Case PropertyPackages.Fase.Liquid3
+                Case PropertyPackages.Phase.Liquid3
                     phaseID = 5
-                Case PropertyPackages.Fase.Liquid
+                Case PropertyPackages.Phase.Liquid
                     phaseID = 1
-                Case PropertyPackages.Fase.Aqueous
+                Case PropertyPackages.Phase.Aqueous
                     phaseID = 6
-                Case PropertyPackages.Fase.Solid
+                Case PropertyPackages.Phase.Solid
                     phaseID = 7
             End Select
 
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
-            Select Case fase1
-                Case Fase.Aqueous, Fase.Liquid, Fase.Liquid1, Fase.Liquid2, Fase.Liquid3
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Select Case Phase1
+                Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     i = 0
-                    For Each subst As Substancia In Me.CurrentMaterialStream.Fases(phaseID).Componentes.Values
+                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Componentes.Values
                         If IsCompoundSupported(subst.Nome) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -947,9 +947,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                         vk(i) = subst.FracaoMassica * vk(i)
                         i = i + 1
                     Next
-                Case Fase.Vapor
+                Case Phase.Vapor
                     i = 0
-                    For Each subst As Substancia In Me.CurrentMaterialStream.Fases(phaseID).Componentes.Values
+                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Componentes.Values
                         If IsCompoundSupported(subst.Nome) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -1001,8 +1001,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim val As Double
             Dim i As Integer
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
-            Dim xv As Double = Me.CurrentMaterialStream.Fases(2).SPMProperties.molarfraction.GetValueOrDefault
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             Dim vn As String() = Me.RET_VNAMES
             Dim Vxw As Double() = AUX_CONVERT_MOL_TO_MASS(Vx)
             Dim n As Integer = Vx.Length - 1
@@ -1104,8 +1104,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim val As Double
             Dim i As Integer
-            Dim vk(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
-            Dim xv As Double = Me.CurrentMaterialStream.Fases(2).SPMProperties.molarfraction.GetValueOrDefault
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             Dim vn As String() = Me.RET_VNAMES
             Dim Vxw As Double() = AUX_CONVERT_MOL_TO_MASS(Vx)
             Dim n As Integer = Vx.Length - 1
@@ -1232,152 +1232,152 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcK_ISOL(ByVal fase1 As Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcK_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
             Return 0.0#
 
         End Function
 
-        Public Overrides Function DW_CalcMassaEspecifica_ISOL(ByVal fase1 As Fase, ByVal T As Double, ByVal P As Double, Optional ByVal Pvp As Double = 0.0) As Double
+        Public Overrides Function DW_CalcMassaEspecifica_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double, Optional ByVal Pvp As Double = 0.0) As Double
 
             Return 0.0#
 
         End Function
 
-        Public Overrides Function DW_CalcMM_ISOL(ByVal fase1 As Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcMM_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
-            Return Me.AUX_MMM(fase1)
+            Return Me.AUX_MMM(Phase1)
 
         End Function
 
-        Public Overrides Sub DW_CalcPhaseProps(ByVal fase As Fase)
+        Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As Phase)
 
             DWSIM.App.CheckParallelPInvoke()
 
             Dim result As Double
-            Dim dwpl As Fase
+            Dim dwpl As Phase
 
             Dim T, P As Double
             Dim phasemolarfrac As Double = Nothing
             Dim overallmolarflow As Double = Nothing
 
             Dim phaseID As Integer
-            T = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            P = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
+            T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-            Select Case fase
-                Case PropertyPackages.Fase.Mixture
+            Select Case Phase
+                Case PropertyPackages.Phase.Mixture
                     phaseID = 0
-                    dwpl = PropertyPackages.Fase.Mixture
-                Case PropertyPackages.Fase.Vapor
+                    dwpl = PropertyPackages.Phase.Mixture
+                Case PropertyPackages.Phase.Vapor
                     phaseID = 2
-                    dwpl = PropertyPackages.Fase.Vapor
-                Case PropertyPackages.Fase.Liquid1
+                    dwpl = PropertyPackages.Phase.Vapor
+                Case PropertyPackages.Phase.Liquid1
                     phaseID = 3
-                    dwpl = PropertyPackages.Fase.Liquid1
-                Case PropertyPackages.Fase.Liquid2
+                    dwpl = PropertyPackages.Phase.Liquid1
+                Case PropertyPackages.Phase.Liquid2
                     phaseID = 4
-                    dwpl = PropertyPackages.Fase.Liquid2
-                Case PropertyPackages.Fase.Liquid3
+                    dwpl = PropertyPackages.Phase.Liquid2
+                Case PropertyPackages.Phase.Liquid3
                     phaseID = 5
-                    dwpl = PropertyPackages.Fase.Liquid3
-                Case PropertyPackages.Fase.Liquid
+                    dwpl = PropertyPackages.Phase.Liquid3
+                Case PropertyPackages.Phase.Liquid
                     phaseID = 1
-                    dwpl = PropertyPackages.Fase.Liquid
-                Case PropertyPackages.Fase.Aqueous
+                    dwpl = PropertyPackages.Phase.Liquid
+                Case PropertyPackages.Phase.Aqueous
                     phaseID = 6
-                    dwpl = PropertyPackages.Fase.Aqueous
-                Case PropertyPackages.Fase.Solid
+                    dwpl = PropertyPackages.Phase.Aqueous
+                Case PropertyPackages.Phase.Solid
                     phaseID = 7
-                    dwpl = PropertyPackages.Fase.Solid
+                    dwpl = PropertyPackages.Phase.Solid
             End Select
 
             If phaseID > 0 Then
 
-                overallmolarflow = Me.CurrentMaterialStream.Fases(0).SPMProperties.molarflow.GetValueOrDefault
-                phasemolarfrac = Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molarfraction.GetValueOrDefault
+                overallmolarflow = Me.CurrentMaterialStream.Phases(0).Properties.molarflow.GetValueOrDefault
+                phasemolarfrac = Me.CurrentMaterialStream.Phases(phaseID).Properties.molarfraction.GetValueOrDefault
                 result = overallmolarflow * phasemolarfrac
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molarflow = result
-                result = result * Me.AUX_MMM(fase) / 1000
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.massflow = result
-                result = phasemolarfrac * overallmolarflow * Me.AUX_MMM(fase) / 1000 / Me.CurrentMaterialStream.Fases(0).SPMProperties.massflow.GetValueOrDefault
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.massfraction = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = result
+                result = result * Me.AUX_MMM(Phase) / 1000
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow = result
+                result = phasemolarfrac * overallmolarflow * Me.AUX_MMM(Phase) / 1000 / Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.massfraction = result
                 Me.DW_CalcCompVolFlow(phaseID)
-                Me.DW_CalcCompFugCoeff(fase)
+                Me.DW_CalcCompFugCoeff(Phase)
             End If
 
             If phaseID = 3 Or phaseID = 4 Or phaseID = 5 Or phaseID = 6 Then
 
 
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.density = AUX_LIQDENS(T, P, 0.0#, phaseID)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.density = AUX_LIQDENS(T, P, 0.0#, phaseID)
 
                 result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.enthalpy = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
 
                 result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.entropy = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
 
-                result = P / (Me.AUX_LIQDENS(T, P, 0, phaseID) * 8.314 * T) / 1000 * AUX_MMM(fase)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.compressibilityFactor = result
+                result = P / (Me.AUX_LIQDENS(T, P, 0, phaseID) * 8.314 * T) / 1000 * AUX_MMM(Phase)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
 
-                result = Me.DW_CalcCp_ISOL(fase, T, P)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.heatCapacityCp = result
+                result = Me.DW_CalcCp_ISOL(Phase, T, P)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
 
-                result = Me.DW_CalcCv_ISOL(fase, T, P)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.heatCapacityCv = result
+                result = Me.DW_CalcCv_ISOL(Phase, T, P)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
 
-                result = Me.AUX_MMM(fase)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight = result
+                result = Me.AUX_MMM(Phase)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = result
 
-                result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid) * Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight.GetValueOrDefault
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molar_enthalpy = result
+                result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid) * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
 
-                result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid) * Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight.GetValueOrDefault
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molar_entropy = result
+                result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid) * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
 
                 result = Me.AUX_CONDTL(T)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.thermalConductivity = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
 
                 result = Me.AUX_LIQVISCm(T)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.viscosity = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
 
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.kinematic_viscosity = result / Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.density.Value
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.Value
 
             ElseIf phaseID = 2 Then
 
                 result = Me.AUX_VAPDENS(T, P)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.density = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
 
                 result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.enthalpy = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
 
                 result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Vapor)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.entropy = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
 
-                result = P / (Me.AUX_VAPDENS(T, P) * 8.314 * T) / 1000 * AUX_MMM(fase)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.compressibilityFactor = result
+                result = P / (Me.AUX_VAPDENS(T, P) * 8.314 * T) / 1000 * AUX_MMM(Phase)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
 
-                result = Me.DW_CalcCp_ISOL(fase, T, P)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.heatCapacityCp = result
+                result = Me.DW_CalcCp_ISOL(Phase, T, P)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
 
-                result = Me.DW_CalcCv_ISOL(fase, T, P)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.heatCapacityCv = result
+                result = Me.DW_CalcCv_ISOL(Phase, T, P)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
 
-                result = Me.AUX_MMM(fase)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight = result
+                result = Me.AUX_MMM(Phase)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = result
 
-                result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor) * Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight.GetValueOrDefault
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molar_enthalpy = result
+                result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor) * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
 
-                result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Vapor) * Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight.GetValueOrDefault
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molar_entropy = result
+                result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Vapor) * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
 
                 result = Me.AUX_CONDTG(T, P)
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.thermalConductivity = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
 
-                result = Me.AUX_VAPVISCMIX(T, P, Me.AUX_MMM(fase))
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.viscosity = result
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.kinematic_viscosity = result / Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.density.GetValueOrDefault
+                result = Me.AUX_VAPVISCMIX(T, P, Me.AUX_MMM(Phase))
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault
 
             ElseIf phaseID = 1 Then
 
@@ -1392,14 +1392,14 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
 
             If phaseID > 0 Then
-                result = overallmolarflow * phasemolarfrac * Me.AUX_MMM(fase) / 1000 / Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.density.GetValueOrDefault
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.volumetric_flow = result
+                result = overallmolarflow * phasemolarfrac * Me.AUX_MMM(Phase) / 1000 / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.volumetric_flow = result
             End If
 
 
         End Sub
 
-        Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Fase)
+        Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
 
             DWSIM.App.CheckParallelPInvoke()
 
@@ -1410,91 +1410,91 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim fstate As State = PropertyPackages.State.Solid
 
             Dim T, P As Double
-            T = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            P = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
+            T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case Fase.Vapor
+                Case Phase.Vapor
                     state = "V"
                     fstate = PropertyPackages.State.Vapor
-                Case Fase.Liquid, Fase.Liquid1, Fase.Liquid2, Fase.Liquid3, Fase.Aqueous
+                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
                     state = "L"
                     fstate = PropertyPackages.State.Liquid
-                Case Fase.Solid
+                Case Phase.Solid
                     state = "S"
                     fstate = PropertyPackages.State.Solid
             End Select
 
             Select Case phase
-                Case PropertyPackages.Fase.Mixture
+                Case PropertyPackages.Phase.Mixture
                     phaseID = 0
-                Case PropertyPackages.Fase.Vapor
+                Case PropertyPackages.Phase.Vapor
                     phaseID = 2
-                Case PropertyPackages.Fase.Liquid1
+                Case PropertyPackages.Phase.Liquid1
                     phaseID = 3
-                Case PropertyPackages.Fase.Liquid2
+                Case PropertyPackages.Phase.Liquid2
                     phaseID = 4
-                Case PropertyPackages.Fase.Liquid3
+                Case PropertyPackages.Phase.Liquid3
                     phaseID = 5
-                Case PropertyPackages.Fase.Liquid
+                Case PropertyPackages.Phase.Liquid
                     phaseID = 1
-                Case PropertyPackages.Fase.Aqueous
+                Case PropertyPackages.Phase.Aqueous
                     phaseID = 6
-                Case PropertyPackages.Fase.Solid
+                Case PropertyPackages.Phase.Solid
                     phaseID = 7
             End Select
 
-            Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight = Me.AUX_MMM(phase)
+            Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = Me.AUX_MMM(phase)
 
             Select Case [property].ToLower
                 Case "compressibilityfactor"
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.compressibilityFactor = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
                 Case "heatcapacity", "heatcapacitycp"
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.heatCapacityCp = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
                 Case "heatcapacitycv"
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.heatCapacityCv = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                 Case "enthalpy", "enthalpynf"
                     result = Me.DW_CalcEnthalpy(RET_VMOL(phase), T, P, phase)
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.enthalpy = result
-                    result = result * Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight.GetValueOrDefault
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molar_enthalpy = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
+                    result = result * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                 Case "entropy", "entropynf"
                     result = Me.DW_CalcEntropy(RET_VMOL(phase), T, P, phase)
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.entropy = result
-                    result = result * Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight.GetValueOrDefault
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molar_entropy = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
+                    result = result * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
                 Case "excessenthalpy"
                     result = Me.DW_CalcEnthalpyDeparture(RET_VMOL(phase), T, P, phase)
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.excessEnthalpy = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.excessEnthalpy = result
                 Case "excessentropy"
                     result = Me.DW_CalcEntropyDeparture(RET_VMOL(phase), T, P, phase)
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.excessEntropy = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.excessEntropy = result
                 Case "enthalpyf"
                     Dim entF As Double = 0.0#
                     result = Me.DW_CalcEnthalpy(RET_VMOL(phase), T, P, phase)
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.enthalpyF = result + entF
-                    result = result * Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight.GetValueOrDefault
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molar_enthalpyF = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpyF = result + entF
+                    result = result * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpyF = result
                 Case "entropyf"
                     Dim entF As Double = 0.0#
                     result = Me.DW_CalcEntropy(RET_VMOL(phase), T, P, phase)
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.entropyF = result + entF
-                    result = Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.entropyF.GetValueOrDefault * Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molecularWeight.GetValueOrDefault
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molar_entropyF = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF = result + entF
+                    result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = result
                 Case "viscosity"
                     If state = "L" Then
                         result = Me.AUX_LIQVISCm(T)
                     Else
                         result = Me.AUX_VAPVISCMIX(T, P, Me.AUX_MMM(phase))
                     End If
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.viscosity = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
                 Case "thermalconductivity"
                     If state = "L" Then
                         result = Me.AUX_CONDTL(T)
                     Else
                         result = Me.AUX_CONDTG(T, P)
                     End If
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.thermalConductivity = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
                 Case "fugacity", "fugacitycoefficient", "logfugacitycoefficient", "activity", "activitycoefficient"
                     Me.DW_CalcCompFugCoeff(phase)
                 Case "volume", "density"
@@ -1503,9 +1503,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Else
                         result = Me.AUX_VAPDENS(T, P)
                     End If
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.density = result
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Case "surfacetension"
-                    Me.CurrentMaterialStream.Fases(0).TPMProperties.surfaceTension = Me.AUX_SURFTM(T)
+                    Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
                 Case Else
                     Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                     ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -1519,32 +1519,32 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcTensaoSuperficial_ISOL(ByVal fase1 As Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcTensaoSuperficial_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
             Return Me.AUX_SURFTM(T)
 
         End Function
 
-        Public Overrides Sub DW_CalcTwoPhaseProps(ByVal fase1 As Fase, ByVal fase2 As Fase)
+        Public Overrides Sub DW_CalcTwoPhaseProps(ByVal Phase1 As Phase, ByVal Phase2 As Phase)
 
             Dim T As Double
 
-            T = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Fases(0).TPMProperties.surfaceTension = Me.AUX_SURFTM(T)
+            T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
 
         End Sub
 
-        Public Overrides Function DW_CalcViscosidadeDinamica_ISOL(ByVal fase1 As Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcViscosidadeDinamica_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
-            If fase1 = Fase.Liquid Then
+            If Phase1 = Phase.Liquid Then
                 Return Me.AUX_LIQVISCm(T)
-            ElseIf fase1 = Fase.Vapor Then
-                Return Me.AUX_VAPVISCm(T, Me.AUX_VAPDENS(T, P), Me.AUX_MMM(Fase.Vapor))
+            ElseIf Phase1 = Phase.Vapor Then
+                Return Me.AUX_VAPVISCm(T, Me.AUX_VAPDENS(T, P), Me.AUX_MMM(Phase.Vapor))
             End If
 
         End Function
 
-        Public Overrides Function SupportsComponent(ByVal comp As ClassesBasicasTermodinamica.ConstantProperties) As Boolean
+        Public Overrides Function SupportsComponent(ByVal comp As Thermodynamics.BaseClasses.ConstantProperties) As Boolean
 
             CheckIfCompoundIsSupported(comp.Name)
 

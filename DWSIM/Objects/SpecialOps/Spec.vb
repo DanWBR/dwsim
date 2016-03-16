@@ -25,7 +25,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
     <System.Serializable()> Public Class Spec
 
-        Inherits SimulationObjects_SpecialOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.SpecialOpBaseClass
 
         Protected m_SourceObjectData As New SourceObjectInfo
         Protected m_TargetObjectData As New TargetObjectInfo
@@ -35,8 +35,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         Protected m_CV_OK As Boolean = False
         Protected m_MV_OK As Boolean = False
 
-        Protected m_SourceObject As SimulationObjects_BaseClass
-        Protected m_TargetObject As SimulationObjects_BaseClass
+        Protected m_SourceObject As DWSIM.SimulationObjects.UnitOperations.BaseClass
+        Protected m_TargetObject As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
         Protected m_SourceVariable As String = ""
         Protected m_TargetVariable As String = ""
@@ -52,8 +52,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         <System.NonSerialized()> Protected m_eopt As ExpressionContext
 
         <System.NonSerialized()> Protected formC As Global.DWSIM.FormFlowsheet
-        Protected su As DWSIM.SistemasDeUnidades.Unidades
-        Protected cv As New DWSIM.SistemasDeUnidades.Conversor
+        Protected su As DWSIM.SystemsOfUnits.Units
+        Protected cv As New DWSIM.SystemsOfUnits.Converter
         Protected nf As String = ""
 
         Public Property CalculateTargetObject() As Boolean
@@ -137,20 +137,20 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             End Set
         End Property
 
-        <Xml.Serialization.XmlIgnore()> Public Property SourceObject() As SimulationObjects_BaseClass
+        <Xml.Serialization.XmlIgnore()> Public Property SourceObject() As DWSIM.SimulationObjects.UnitOperations.BaseClass
             Get
                 Return Me.m_SourceObject
             End Get
-            Set(ByVal value As SimulationObjects_BaseClass)
+            Set(ByVal value As DWSIM.SimulationObjects.UnitOperations.BaseClass)
                 Me.m_SourceObject = value
             End Set
         End Property
 
-        <Xml.Serialization.XmlIgnore()> Public Property TargetObject() As SimulationObjects_BaseClass
+        <Xml.Serialization.XmlIgnore()> Public Property TargetObject() As DWSIM.SimulationObjects.UnitOperations.BaseClass
             Get
                 Return Me.m_TargetObject
             End Get
-            Set(ByVal value As SimulationObjects_BaseClass)
+            Set(ByVal value As DWSIM.SimulationObjects.UnitOperations.BaseClass)
                 Me.m_TargetObject = value
             End Set
         End Property
@@ -246,7 +246,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             MyBase.New()
         End Sub
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
 
@@ -292,7 +292,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
         End Sub
 
@@ -458,8 +458,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Function
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With FlowSheet.FormProps.PGEx1
 
@@ -549,24 +549,24 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             Return 0
 
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
             Return 0
 
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             Return 0
 
         End Function

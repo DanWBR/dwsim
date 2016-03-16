@@ -116,7 +116,7 @@ Imports System.Threading
         Catch ex As Exception
         End Try
         engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-        engine.Runtime.LoadAssembly(GetType(DWSIM.ClassesBasicasTermodinamica.ConstantProperties).Assembly)
+        engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
         engine.Runtime.LoadAssembly(GetType(Microsoft.Msdn.Samples.GraphicObjects.GraphicObject).Assembly)
         engine.Runtime.LoadAssembly(GetType(Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface).Assembly)
         If My.Application.CommandLineMode Then
@@ -131,7 +131,7 @@ Imports System.Threading
         scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
         Dim Solver As New DWSIM.Flowsheet.FlowsheetSolver
         scope.SetVariable("Solver", Solver)
-        For Each obj As SimulationObjects_BaseClass In fsheet.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsheet.Collections.ObjectCollection.Values
             scope.SetVariable(obj.GraphicObject.Tag.Replace("-", "_"), obj)
         Next
         Dim txtcode As String = scripttext

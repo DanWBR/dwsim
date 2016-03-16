@@ -16,7 +16,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Xml.Serialization
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization.Formatters
 Imports System.IO

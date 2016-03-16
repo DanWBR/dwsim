@@ -19,7 +19,7 @@
 Imports System.Xml
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 Imports DWSIM.DWSIM.SimulationObjects.Streams
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization

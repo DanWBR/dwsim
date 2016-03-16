@@ -157,7 +157,7 @@ Public Class FlowsheetUOEditorForm
         cbc2.Sorted = True
         cbc2.MaxDropDownItems = 10
         cbc2.Items.Add("")
-        For Each obj As SimulationObjects_BaseClass In fsuo.Fsheet.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.ObjectCollection.Values
             cbc2.Items.Add(obj.GraphicObject.Tag)
         Next
 
@@ -202,12 +202,12 @@ Public Class FlowsheetUOEditorForm
 
     Private Function ReturnProperties(ByVal objectTAG As String, ByVal dependent As Boolean) As String()
 
-        For Each obj As SimulationObjects_BaseClass In fsuo.Fsheet.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.ObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 If dependent Then
-                    Return obj.GetProperties(SimulationObjects_BaseClass.PropertyType.ALL)
+                    Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
                 Else
-                    Return obj.GetProperties(SimulationObjects_BaseClass.PropertyType.WR)
+                    Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
                 End If
                 Exit Function
             End If
@@ -217,9 +217,9 @@ Public Class FlowsheetUOEditorForm
 
     End Function
 
-    Private Function ReturnObject(ByVal objectTAG As String) As SimulationObjects_BaseClass
+    Private Function ReturnObject(ByVal objectTAG As String) As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
-        For Each obj As SimulationObjects_BaseClass In fsuo.Fsheet.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.ObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 Return obj
                 Exit Function
@@ -232,7 +232,7 @@ Public Class FlowsheetUOEditorForm
 
     Private Function ReturnPropertyID(ByVal objectID As String, ByVal propTAG As String) As String
 
-        Dim props As String() = fsuo.Fsheet.Collections.ObjectCollection(objectID).GetProperties(SimulationObjects_BaseClass.PropertyType.ALL)
+        Dim props As String() = fsuo.Fsheet.Collections.ObjectCollection(objectID).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
         For Each prop As String In props
             If DWSIM.App.GetPropertyName(prop) = propTAG Then
                 Return prop

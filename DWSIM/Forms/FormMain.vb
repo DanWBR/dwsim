@@ -18,7 +18,7 @@
 'Imports DWSIM.SimulationObjects
 Imports System.ComponentModel
 Imports FileHelpers
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters
 Imports System.Runtime.Serialization
 Imports System.IO
@@ -66,8 +66,8 @@ Public Class FormMain
 
     Private tmpform2 As FormFlowsheet
 
-    Public AvailableComponents As New Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
-    Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SistemasDeUnidades.Unidades)
+    Public AvailableComponents As New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+    Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
     Public PropertyPackages As New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
 
     Public COMonitoringObjects As New Dictionary(Of String, DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
@@ -92,9 +92,9 @@ Public Class FormMain
                         Application.DoEvents()
                         Me.LoadAndExtractXMLZIP(MyFiles(i))
                     Case ".dwsim"
-                        Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + MyFiles(i) + "..."
-                        Application.DoEvents()
-                        Me.LoadF(MyFiles(i))
+                        'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + MyFiles(i) + "..."
+                        'Application.DoEvents()
+                        'Me.LoadF(MyFiles(i))
                     Case ".dwcsd"
                         Dim NewMDIChild As New FormCompoundCreator()
                         NewMDIChild.MdiParent = Me
@@ -566,29 +566,6 @@ Public Class FormMain
 
         PropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
 
-        'Check if DWSIM is running in Portable/Mono mode, if not then load the COSMO-SAC Property Package.
-        If Not DWSIM.App.IsRunningOnMono Then
-
-            Dim CSPP As COSMOSACPropertyPackage = New COSMOSACPropertyPackage()
-            CSPP.ComponentName = "COSMO-SAC (JCOSMO)"
-            CSPP.ComponentDescription = DWSIM.App.GetLocalString("DescCSPP")
-
-            PropertyPackages.Add(CSPP.ComponentName.ToString, CSPP)
-
-            Dim COPP As CAPEOPENPropertyPackage = New CAPEOPENPropertyPackage()
-            COPP.ComponentName = "CAPE-OPEN"
-            COPP.ComponentDescription = DWSIM.App.GetLocalString("DescCOPP")
-
-            PropertyPackages.Add(COPP.ComponentName.ToString, COPP)
-
-        End If
-
-        'Dim LQPP As LIQUAC2PropertyPackage = New LIQUAC2PropertyPackage()
-        'LQPP.ComponentName = "LIQUAC2 (Aqueous Electrolytes)"
-        'LQPP.ComponentDescription = DWSIM.App.GetLocalString("DescLQPP")
-
-        'PropertyPackages.Add(LQPP.ComponentName.ToString, LQPP)
-
         Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
         EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
         EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")
@@ -637,7 +614,7 @@ Public Class FormMain
                         Application.DoEvents()
                         Select Case Path.GetExtension(Me.filename).ToLower()
                             Case ".dwsim"
-                                Me.LoadF(Me.filename)
+                                'Me.LoadF(Me.filename)
                             Case ".dwxml"
                                 Me.LoadXML(Me.filename)
                             Case ".dwxmz"
@@ -769,10 +746,10 @@ Public Class FormMain
     Public Sub LoadCSDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim csdb As New DWSIM.Databases.ChemSep
-            Dim cpa() As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
             csdb.Load(filename)
             cpa = csdb.Transfer()
-            For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In cpa
+            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
                 cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
                 If Not Me.AvailableComponents.ContainsKey(cp.Name) Then
                     Me.AvailableComponents.Add(cp.Name, cp)
@@ -785,10 +762,10 @@ Public Class FormMain
     Public Sub LoadDWSIMDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim dwdb As New DWSIM.Databases.DWSIM
-            Dim cpa() As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
             dwdb.Load(filename)
             cpa = dwdb.Transfer()
-            For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In cpa
+            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
                 cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
                 If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
             Next
@@ -798,10 +775,10 @@ Public Class FormMain
     Public Sub LoadBDDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim bddb As New DWSIM.Databases.Biodiesel
-            Dim cpa() As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
             bddb.Load(filename)
             cpa = bddb.Transfer()
-            For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In cpa
+            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
                 If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
             Next
         End If
@@ -810,10 +787,10 @@ Public Class FormMain
     Public Sub LoadEDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim edb As New DWSIM.Databases.Electrolyte
-            Dim cpa() As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
             edb.Load(filename)
             cpa = edb.Transfer()
-            For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In cpa
+            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
                 If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
             Next
         End If
@@ -822,11 +799,11 @@ Public Class FormMain
     Public Sub LoadCPDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim cpdb As New DWSIM.Databases.CoolProp
-            Dim cpa() As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
             cpdb.Load(filename)
             Try
                 cpa = cpdb.Transfer()
-                For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In cpa
+                For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
                     If Not Me.AvailableComponents.ContainsKey(cp.Name) Then
                         Me.AvailableComponents.Add(cp.Name, cp)
                     Else
@@ -937,13 +914,6 @@ Public Class FormMain
                     st.Options = stream.ToArray()
                 End Using
 
-                If Not DWSIM.App.IsRunningOnMono Then
-                    Using stream As New MemoryStream()
-                        TreeViewDataAccess.SaveTreeViewData(flowsheet.FormObjList.TreeViewObj, stream)
-                        st.TreeViewObjects = stream.ToArray()
-                    End Using
-                End If
-
                 Application.DoEvents()
 
                 flowsheet.FormSpreadsheet.CopyToDT()
@@ -1044,15 +1014,6 @@ Public Class FormMain
                     flowsheet.Options = Nothing
                     flowsheet.Options = DirectCast(mySerializer.Deserialize(stream), DWSIM.FormClasses.ClsFormOptions)
                 End Using
-
-                Application.DoEvents()
-
-                If Not DWSIM.App.IsRunningOnMono Then
-                    Using stream As New MemoryStream(st.TreeViewObjects)
-                        flowsheet.FormObjList.TreeViewObj.Nodes.Clear()
-                        TreeViewDataAccess.LoadTreeViewData(flowsheet.FormObjList.TreeViewObj, stream)
-                    End Using
-                End If
 
                 Application.DoEvents()
 
@@ -1212,7 +1173,7 @@ Public Class FormMain
                 Dim refill As Boolean = False
 
                 'refill (quick)table items for backwards compatibility
-                For Each obj As SimulationObjects_BaseClass In flowsheet.Collections.ObjectCollection.Values
+                For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In flowsheet.Collections.ObjectCollection.Values
                     With obj
                         If .NodeTableItems.Count > 0 Then
                             For Each nvi As DWSIM.Outros.NodeItem In .NodeTableItems.Values
@@ -1267,8 +1228,6 @@ Public Class FormMain
         Select Case str
             Case "DWSIM.frmProps"
                 Return Me.tmpform2.FormProps
-            Case "DWSIM.frmObjList"
-                Return Me.tmpform2.FormObjList
             Case "DWSIM.frmLog"
                 Return Me.tmpform2.FormLog
             Case "DWSIM.frmMatList"
@@ -1277,688 +1236,12 @@ Public Class FormMain
                 Return Me.tmpform2.FormSurface
             Case "DWSIM.SpreadsheetForm"
                 Return Me.tmpform2.FormSpreadsheet
-            Case "DWSIM.frmObjListView"
-                Return Me.tmpform2.FormObjListView
             Case "DWSIM.frmWatch"
                 Return Me.tmpform2.FormWatch
         End Select
         Return Nothing
     End Function
 
-    Sub LoadF(ByVal caminho As String)
-
-        If System.IO.File.Exists(caminho) Then
-
-            Dim rnd As New Random()
-            Dim fn As String = rnd.Next(10000, 99999)
-
-            Dim diretorio As String = Path.GetDirectoryName(caminho)
-            Dim arquivo As String = Path.GetFileName(caminho)
-            Dim arquivoCAB As String = "dwsim" + fn
-
-            Dim ziperror As Boolean = False
-            Dim loadedok As Boolean = False
-            Try
-                Dim zp As New ZipFile(caminho)
-                zp = Nothing
-                'is a zip file
-            Catch ex As Exception
-                ziperror = True
-            End Try
-
-            loadedok = Me.LoadAndExtractZIP(caminho)
-
-            If Not loadedok Then Exit Sub
-
-            Me.SuspendLayout()
-            m_childcount += 1
-
-            Dim form As FormFlowsheet = New FormFlowsheet()
-            If Not DWSIM.App.IsRunningOnMono Then form.FormObjList = New frmObjList
-            My.Application.CAPEOPENMode = False
-            My.Application.ActiveSimulation = form
-
-            'is not a zip file
-            If ziperror Then
-                Try
-                    If Not DWSIM.App.IsRunningOnMono() Then
-                        'Call Me.LoadAndExtractCAB(caminho)
-                    Else
-                        MsgBox("This file is not loadable when running DWSIM on Mono.", MsgBoxStyle.Critical, "Error!")
-                        Exit Sub
-                    End If
-                Catch ex As Exception
-                    MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    form = Nothing
-                End Try
-            End If
-
-            Me.filename = caminho
-
-            Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-
-            If My.Settings.LegacyBinaryFileLoading Then mySerializer.Binder = New DWSIM.Outros.VersionDeserializationBinder
-
-            Dim fs3 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\3.bin", FileMode.Open)
-
-            Using fs3
-                form.FormSurface.FlowsheetDesignSurface.m_drawingObjects = Nothing
-                form.FormSurface.FlowsheetDesignSurface.m_drawingObjects = DirectCast(mySerializer.Deserialize(fs3), Microsoft.Msdn.Samples.GraphicObjects.GraphicObjectCollection)
-            End Using
-
-            Dim fs As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\1.bin", FileMode.Open)
-
-            Using fs
-                form.Collections = Nothing
-                form.Collections = DirectCast(mySerializer.Deserialize(fs), DWSIM.FormClasses.ClsObjectCollections)
-            End Using
-
-            Dim fs2 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\2.bin", FileMode.Open)
-
-            Using fs2
-                form.Options = Nothing
-                form.Options = DirectCast(mySerializer.Deserialize(fs2), DWSIM.FormClasses.ClsFormOptions)
-                If form.Options.PropertyPackages.Count = 0 Then form.Options.PropertyPackages = Me.PropertyPackages
-            End Using
-
-            If Not DWSIM.App.IsRunningOnMono Then
-                form.FormObjList.TreeViewObj.Nodes.Clear()
-                TreeViewDataAccess.LoadTreeViewData(form.FormObjList.TreeViewObj, My.Computer.FileSystem.SpecialDirectories.Temp & "\5.bin")
-            End If
-
-            Dim fs7 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\7.bin", FileMode.Open)
-
-            Using fs7
-                form.Text = DirectCast(mySerializer.Deserialize(fs7), String)
-            End Using
-
-            If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\8.bin") Then
-                Dim fs8 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\8.bin", FileMode.Open)
-                Using fs8
-                    form.FormLog.GridDT.Rows.Clear()
-                    form.FormLog.GridDT = DirectCast(mySerializer.Deserialize(fs8), DataTable)
-                End Using
-            End If
-
-            If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\9.bin") Then
-                Dim fs9 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\9.bin", FileMode.Open)
-                Using fs9
-                    form.FormSpreadsheet.dt1 = DirectCast(mySerializer.Deserialize(fs9), Object(,))
-                End Using
-            End If
-
-            If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\10.bin") Then
-                Dim fs10 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\10.bin", FileMode.Open)
-                Using fs10
-                    form.FormSpreadsheet.dt2 = DirectCast(mySerializer.Deserialize(fs10), Object(,))
-                End Using
-            End If
-
-            If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\11.bin") Then
-                Dim fs11 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\11.bin", FileMode.Open)
-                Using fs11
-                    form.FormWatch.items = DirectCast(mySerializer.Deserialize(fs11), Dictionary(Of Integer, DWSIM.Outros.WatchItem))
-                    form.FormWatch.PopulateList()
-                End Using
-            End If
-
-            If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\scripts.bin") Then
-                Dim fs12 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\scripts.bin", FileMode.Open)
-                Using fs12
-                    form.ScriptCollection = DirectCast(mySerializer.Deserialize(fs12), Dictionary(Of String, DWSIM.Outros.Script))
-                End Using
-            End If
-
-            If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\13.bin") Then
-                Dim fs13 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\13.bin", FileMode.Open)
-                Using fs13
-                    form.FlowsheetStates = DirectCast(mySerializer.Deserialize(fs13), Dictionary(Of Date, FlowsheetState))
-                    form.UpdateStateList()
-                End Using
-            End If
-
-            form.CheckCollections()
-
-            With form.Collections
-                Dim gObj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject
-                For Each gObj In form.FormSurface.FlowsheetDesignSurface.drawingObjects
-                    Select Case gObj.TipoObjeto
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Compressor
-                            .CLCS_CompressorCollection(gObj.Name).GraphicObject = gObj
-                            .CompressorCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Cooler
-                            .CLCS_CoolerCollection(gObj.Name).GraphicObject = gObj
-                            .CoolerCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.EnergyStream
-                            .CLCS_EnergyStreamCollection(gObj.Name).GraphicObject = gObj
-                            .EnergyStreamCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Heater
-                            .CLCS_HeaterCollection(gObj.Name).GraphicObject = gObj
-                            .HeaterCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.MaterialStream
-                            .CLCS_MaterialStreamCollection(gObj.Name).GraphicObject = gObj
-                            .MaterialStreamCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.NodeEn
-                            .CLCS_EnergyMixerCollection(gObj.Name).GraphicObject = gObj
-                            .MixerENCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.NodeIn
-                            .CLCS_MixerCollection(gObj.Name).GraphicObject = gObj
-                            .MixerCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.NodeOut
-                            .CLCS_SplitterCollection(gObj.Name).GraphicObject = gObj
-                            .SplitterCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Pipe
-                            .CLCS_PipeCollection(gObj.Name).GraphicObject = gObj
-                            .PipeCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Pump
-                            .CLCS_PumpCollection(gObj.Name).GraphicObject = gObj
-                            .PumpCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Tank
-                            .CLCS_TankCollection(gObj.Name).GraphicObject = gObj
-                            .TankCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Expander
-                            .CLCS_TurbineCollection(gObj.Name).GraphicObject = gObj
-                            .TurbineCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Valve
-                            .CLCS_ValveCollection(gObj.Name).GraphicObject = gObj
-                            .ValveCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Vessel
-                            .CLCS_VesselCollection(gObj.Name).GraphicObject = gObj
-                            .SeparatorCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.GO_Tabela
-                            .ObjectCollection(gObj.Tag).Tabela = gObj
-                            CType(gObj, DWSIM.GraphicObjects.TableGraphic).BaseOwner = .ObjectCollection(gObj.Tag)
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Expander
-                            .CLCS_TurbineCollection(gObj.Name).GraphicObject = gObj
-                            .TurbineCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_Ajuste
-                            .CLCS_AdjustCollection(gObj.Name).GraphicObject = gObj
-                            .AdjustCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_Reciclo
-                            .CLCS_RecycleCollection(gObj.Name).GraphicObject = gObj
-                            .RecycleCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_Especificacao
-                            .CLCS_SpecCollection(gObj.Name).GraphicObject = gObj
-                            .SpecCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_Conversion
-                            .CLCS_ReactorConversionCollection(gObj.Name).GraphicObject = gObj
-                            .ReactorConversionCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_Equilibrium
-                            .CLCS_ReactorEquilibriumCollection(gObj.Name).GraphicObject = gObj
-                            .ReactorEquilibriumCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_Gibbs
-                            .CLCS_ReactorGibbsCollection(gObj.Name).GraphicObject = gObj
-                            .ReactorGibbsCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_CSTR
-                            .CLCS_ReactorCSTRCollection(gObj.Name).GraphicObject = gObj
-                            .ReactorCSTRCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_PFR
-                            .CLCS_ReactorPFRCollection(gObj.Name).GraphicObject = gObj
-                            .ReactorPFRCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.HeatExchanger
-                            .CLCS_HeatExchangerCollection(gObj.Name).GraphicObject = gObj
-                            .HeatExchangerCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ShortcutColumn
-                            .CLCS_ShortcutColumnCollection(gObj.Name).GraphicObject = gObj
-                            .ShortcutColumnCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.DistillationColumn
-                            .CLCS_DistillationColumnCollection(gObj.Name).GraphicObject = gObj
-                            .DistillationColumnCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.AbsorptionColumn
-                            .CLCS_AbsorptionColumnCollection(gObj.Name).GraphicObject = gObj
-                            .AbsorptionColumnCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RefluxedAbsorber
-                            .CLCS_RefluxedAbsorberCollection(gObj.Name).GraphicObject = gObj
-                            .RefluxedAbsorberCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ReboiledAbsorber
-                            .CLCS_ReboiledAbsorberCollection(gObj.Name).GraphicObject = gObj
-                            .ReboiledAbsorberCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_EnergyRecycle
-                            .CLCS_EnergyRecycleCollection(gObj.Name).GraphicObject = gObj
-                            .EnergyRecycleCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.GO_TabelaRapida
-                            .ObjectCollection(CType(gObj, DWSIM.GraphicObjects.QuickTableGraphic).BaseOwner.Nome).TabelaRapida = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ComponentSeparator
-                            .CLCS_ComponentSeparatorCollection(gObj.Name).GraphicObject = gObj
-                            .ComponentSeparatorCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OrificePlate
-                            .CLCS_OrificePlateCollection(gObj.Name).GraphicObject = gObj
-                            .OrificePlateCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.CustomUO
-                            .CLCS_CustomUOCollection(gObj.Name).GraphicObject = gObj
-                            .CustomUOCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ExcelUO
-                            .CLCS_ExcelUOCollection(gObj.Name).GraphicObject = gObj
-                            .ExcelUOCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.CapeOpenUO
-                            .CLCS_CapeOpenUOCollection(gObj.Name).GraphicObject = gObj
-                            .CapeOpenUOCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.SolidSeparator
-                            .CLCS_SolidsSeparatorCollection(gObj.Name).GraphicObject = gObj
-                            .SolidsSeparatorCollection(gObj.Name) = gObj
-                        Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Filter
-                            .CLCS_FilterCollection(gObj.Name).GraphicObject = gObj
-                            .FilterCollection(gObj.Name) = gObj
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.FlowsheetUO
-                            .CLCS_FlowsheetUOCollection(gObj.Name).GraphicObject = gObj
-                            .FlowsheetUOCollection(gObj.Name) = gObj
-                    End Select
-                Next
-            End With
-
-            My.Application.ActiveSimulation = form
-
-            Dim refill As Boolean = False
-
-            'refill (quick)table items for backwards compatibility
-            For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
-                With obj
-                    If .NodeTableItems.Count > 0 Then
-                        For Each nvi As DWSIM.Outros.NodeItem In .NodeTableItems.Values
-                            Try
-                                If Not nvi.Text.Contains("PROP_") Then
-                                    refill = True
-                                    Exit For
-                                End If
-                            Catch ex As Exception
-
-                            End Try
-                        Next
-                    End If
-                    If refill Then
-                        .NodeTableItems.Clear()
-                        .QTNodeTableItems.Clear()
-                        .FillNodeItems()
-                        .QTFillNodeItems()
-                    End If
-                End With
-            Next
-
-            form.MdiParent = Me
-            form.m_IsLoadedFromFile = True
-
-            Me.tmpform2 = form
-            form.dckPanel.SuspendLayout(True)
-            form.FormLog.DockPanel = Nothing
-            If Not DWSIM.App.IsRunningOnMono Then form.FormObjList.DockPanel = Nothing
-            form.FormProps.DockPanel = Nothing
-            form.FormMatList.DockPanel = Nothing
-            form.FormSpreadsheet.DockPanel = Nothing
-            form.FormWatch.DockPanel = Nothing
-            form.FormSurface.DockPanel = Nothing
-
-            If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\4.xml") Then form.dckPanel.LoadFromXml(My.Computer.FileSystem.SpecialDirectories.Temp & "\4.xml", New DeserializeDockContent(AddressOf Me.ReturnForm))
-
-            ''Set DockPanel and Form  properties
-
-            form.dckPanel.ActiveAutoHideContent = Nothing
-            form.dckPanel.Parent = form
-
-            form.Options.FilePath = Me.filename
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-            form.Text += " (" + Me.filename + ")"
-
-            form.FormObjListView.Show(form.dckPanel)
-            form.FormLog.Show(form.dckPanel)
-            form.FormMatList.Show(form.dckPanel)
-            form.FormSpreadsheet.Show(form.dckPanel)
-            form.FormSurface.Show(form.dckPanel)
-            If Not DWSIM.App.IsRunningOnMono Then form.FormObjList.Show(form.dckPanel)
-            form.FormProps.Show(form.dckPanel)
-
-            form.FormOutput.Show(form.dckPanel)
-            form.FormOutput.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
-            form.FormOutput.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
-            form.FormOutput.Hide()
-            form.FormQueue.Show(form.dckPanel)
-            form.FormQueue.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
-            form.FormQueue.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
-            form.FormQueue.Hide()
-            form.FormWatch.Show(form.dckPanel)
-            form.FormWatch.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
-            form.FormWatch.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
-            form.FormWatch.Hide()
-
-            form.dckPanel.ResumeLayout(True, True)
-            form.dckPanel.BringToFront()
-
-            Me.ResumeLayout()
-
-            Dim repositionpfd As Boolean = True
-
-            If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\12.bin") Then
-                repositionpfd = False
-            End If
-
-            If Not My.Settings.MostRecentFiles.Contains(caminho) And Path.GetExtension(caminho).ToLower <> ".dwbcs" Then
-                My.Settings.MostRecentFiles.Add(caminho)
-                Me.UpdateMRUList()
-            End If
-
-            form.MdiParent = Me
-            form.Show()
-            form.MdiParent = Me
-
-            My.Application.ActiveSimulation = form
-
-            If Not repositionpfd Then
-                Dim text As String() = File.ReadAllLines(My.Computer.FileSystem.SpecialDirectories.Temp & "\12.bin")
-                form.FormSurface.FlowsheetDesignSurface.Zoom = text(0)
-                'form.TSTBZoom.Text = CStr(CInt(text(0) * 100)) & "%"
-                form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Maximum = 7000
-                form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value = CInt(text(1))
-                form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Maximum = 10000
-                form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value = CInt(text(2))
-            Else
-                form.FormSurface.FlowsheetDesignSurface.Zoom = 1
-                form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Maximum = 7000
-                form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value = 3500
-                form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Maximum = 10000
-                form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value = 5000
-                For Each obj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects
-                    obj.X += 5000
-                    obj.Y += 3500
-                Next
-            End If
-
-            form.Invalidate()
-            Application.DoEvents()
-
-            form.FrmStSim1.Init(True)
-
-            'form = Nothing
-            Me.ToolStripStatusLabel1.Text = ""
-
-            'delete files
-
-            Dim filespath As String = My.Computer.FileSystem.SpecialDirectories.Temp & pathsep
-
-            If File.Exists(filespath & "1.bin") Then File.Delete(filespath & "1.bin")
-            If File.Exists(filespath & "2.bin") Then File.Delete(filespath & "2.bin")
-            If File.Exists(filespath & "3.bin") Then File.Delete(filespath & "3.bin")
-            If File.Exists(filespath & "4.xml") Then File.Delete(filespath & "4.xml")
-            If File.Exists(filespath & "5.bin") Then File.Delete(filespath & "5.bin")
-            If File.Exists(filespath & "7.bin") Then File.Delete(filespath & "7.bin")
-            If File.Exists(filespath & "8.bin") Then File.Delete(filespath & "8.bin")
-            If File.Exists(filespath & "9.bin") Then File.Delete(filespath & "9.bin")
-            If File.Exists(filespath & "10.bin") Then File.Delete(filespath & "10.bin")
-            If File.Exists(filespath & "11.bin") Then File.Delete(filespath & "11.bin")
-            If File.Exists(filespath & "12.bin") Then File.Delete(filespath & "12.bin")
-            If File.Exists(filespath & "13.bin") Then File.Delete(filespath & "13.bin")
-            If File.Exists(filespath & "scripts.bin") Then File.Delete(filespath & "scripts.bin")
-
-        Else
-
-            MessageBox.Show(DWSIM.App.GetLocalString("Oarquivonoexisteoufo"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-        End If
-
-
-    End Sub
-
-    Function LoadFileForCommandLine(ByVal caminho As String) As FormFlowsheet
-
-        If System.IO.File.Exists(caminho) Then
-
-            If Path.GetExtension(caminho).ToLower = ".dwsim" Then
-
-                Dim rnd As New Random()
-                Dim fn As String = rnd.Next(10000, 99999)
-
-                Dim diretorio As String = Path.GetDirectoryName(caminho)
-                Dim arquivo As String = Path.GetFileName(caminho)
-                Dim arquivoCAB As String = "dwsim" + fn
-
-                Dim formc As FormFlowsheet = New FormFlowsheet()
-
-                Dim ziperror As Boolean = False
-                Try
-                    Dim zp As New ZipFile(caminho)
-                    'is a zip file
-                    zp = Nothing
-                    Call Me.LoadAndExtractZIP(caminho)
-                Catch ex As Exception
-                    ziperror = True
-                End Try
-
-                'is not a zip file
-                If ziperror Then
-                    Try
-                        If Not DWSIM.App.IsRunningOnMono() Then
-                            'Call Me.LoadAndExtractCAB(caminho)
-                        Else
-                            MsgBox("This file is not loadable when running DWSIM on Mono.", MsgBoxStyle.Critical, "Error!")
-                            Return Nothing
-                            Exit Function
-                        End If
-                    Catch ex As Exception
-                        MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        formc = Nothing
-                    End Try
-                End If
-
-                Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-
-                If My.Settings.LegacyBinaryFileLoading Then mySerializer.Binder = New DWSIM.Outros.VersionDeserializationBinder
-
-                Dim fs3 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\3.bin", FileMode.Open)
-                Try
-                    formc.FormSurface.FlowsheetDesignSurface.m_drawingObjects = Nothing
-                    formc.FormSurface.FlowsheetDesignSurface.m_drawingObjects = DirectCast(mySerializer.Deserialize(fs3), Microsoft.Msdn.Samples.GraphicObjects.GraphicObjectCollection)
-                Catch ex As System.Runtime.Serialization.SerializationException
-                    Console.WriteLine("Failed to serialize. Reason: " & ex.Message)
-                    MessageBox.Show(ex.Message)
-                Finally
-                    fs3.Close()
-                End Try
-                Dim fs As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\1.bin", FileMode.Open)
-                Try
-                    formc.Collections = Nothing
-                    formc.Collections = DirectCast(mySerializer.Deserialize(fs), DWSIM.FormClasses.ClsObjectCollections)
-                Catch ex As System.Runtime.Serialization.SerializationException
-                    Console.WriteLine("Failed to serialize. Reason: " & ex.Message)
-                    MessageBox.Show(ex.Message)
-                Finally
-                    fs.Close()
-                End Try
-                Dim fs2 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\2.bin", FileMode.Open)
-                Try
-                    formc.Options = Nothing
-                    formc.Options = DirectCast(mySerializer.Deserialize(fs2), DWSIM.FormClasses.ClsFormOptions)
-                    If formc.Options.PropertyPackages.Count = 0 Then formc.Options.PropertyPackages = Me.PropertyPackages
-                Catch ex As System.Runtime.Serialization.SerializationException
-                    Console.WriteLine("Failed to serialize. Reason: " & ex.Message)
-                    MessageBox.Show(ex.Message)
-                Finally
-                    fs2.Close()
-                End Try
-                If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\9.bin") Then
-                    Dim fs9 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\9.bin", FileMode.Open)
-                    Try
-                        formc.FormSpreadsheet.dt1 = DirectCast(mySerializer.Deserialize(fs9), Object(,))
-                    Catch ex As System.Runtime.Serialization.SerializationException
-                        Console.WriteLine("Failed to serialize. Reason: " & ex.Message)
-                        MessageBox.Show(ex.Message)
-                    Finally
-                        fs9.Close()
-                    End Try
-                End If
-                If File.Exists(My.Computer.FileSystem.SpecialDirectories.Temp & "\10.bin") Then
-                    Dim fs10 As New FileStream(My.Computer.FileSystem.SpecialDirectories.Temp & "\10.bin", FileMode.Open)
-                    Try
-                        formc.FormSpreadsheet.dt2 = DirectCast(mySerializer.Deserialize(fs10), Object(,))
-                    Catch ex As System.Runtime.Serialization.SerializationException
-                        Console.WriteLine("Failed to serialize. Reason: " & ex.Message)
-                        MessageBox.Show(ex.Message)
-                    Finally
-                        fs10.Close()
-                    End Try
-                End If
-
-                With formc.Collections
-                    Dim gObj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject
-                    For Each gObj In formc.FormSurface.FlowsheetDesignSurface.drawingObjects
-                        Select Case gObj.TipoObjeto
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Compressor
-                                .CLCS_CompressorCollection(gObj.Name).GraphicObject = gObj
-                                .CompressorCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Cooler
-                                .CLCS_CoolerCollection(gObj.Name).GraphicObject = gObj
-                                .CoolerCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.EnergyStream
-                                .CLCS_EnergyStreamCollection(gObj.Name).GraphicObject = gObj
-                                .EnergyStreamCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Heater
-                                .CLCS_HeaterCollection(gObj.Name).GraphicObject = gObj
-                                .HeaterCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.MaterialStream
-                                .CLCS_MaterialStreamCollection(gObj.Name).GraphicObject = gObj
-                                .MaterialStreamCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.NodeEn
-                                .CLCS_EnergyMixerCollection(gObj.Name).GraphicObject = gObj
-                                .MixerENCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.NodeIn
-                                .CLCS_MixerCollection(gObj.Name).GraphicObject = gObj
-                                .MixerCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.NodeOut
-                                .CLCS_SplitterCollection(gObj.Name).GraphicObject = gObj
-                                .SplitterCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Pipe
-                                .CLCS_PipeCollection(gObj.Name).GraphicObject = gObj
-                                .PipeCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Pump
-                                .CLCS_PumpCollection(gObj.Name).GraphicObject = gObj
-                                .PumpCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Tank
-                                .CLCS_TankCollection(gObj.Name).GraphicObject = gObj
-                                .TankCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Expander
-                                .CLCS_TurbineCollection(gObj.Name).GraphicObject = gObj
-                                .TurbineCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Valve
-                                .CLCS_ValveCollection(gObj.Name).GraphicObject = gObj
-                                .ValveCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Vessel
-                                .CLCS_VesselCollection(gObj.Name).GraphicObject = gObj
-                                .SeparatorCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.GO_Tabela
-                                .ObjectCollection(gObj.Tag).Tabela = gObj
-                                CType(gObj, DWSIM.GraphicObjects.TableGraphic).BaseOwner = .ObjectCollection(gObj.Tag)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Expander
-                                .CLCS_TurbineCollection(gObj.Name).GraphicObject = gObj
-                                .TurbineCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_Ajuste
-                                .CLCS_AdjustCollection(gObj.Name).GraphicObject = gObj
-                                .AdjustCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_Reciclo
-                                .CLCS_RecycleCollection(gObj.Name).GraphicObject = gObj
-                                .RecycleCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_Especificacao
-                                .CLCS_SpecCollection(gObj.Name).GraphicObject = gObj
-                                .SpecCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_Conversion
-                                .CLCS_ReactorConversionCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorConversionCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_Equilibrium
-                                .CLCS_ReactorEquilibriumCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorEquilibriumCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_Gibbs
-                                .CLCS_ReactorGibbsCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorGibbsCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_CSTR
-                                .CLCS_ReactorCSTRCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorCSTRCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_PFR
-                                .CLCS_ReactorPFRCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorPFRCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.HeatExchanger
-                                .CLCS_HeatExchangerCollection(gObj.Name).GraphicObject = gObj
-                                .HeatExchangerCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ShortcutColumn
-                                .CLCS_ShortcutColumnCollection(gObj.Name).GraphicObject = gObj
-                                .ShortcutColumnCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.DistillationColumn
-                                .CLCS_DistillationColumnCollection(gObj.Name).GraphicObject = gObj
-                                .DistillationColumnCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.AbsorptionColumn
-                                .CLCS_AbsorptionColumnCollection(gObj.Name).GraphicObject = gObj
-                                .AbsorptionColumnCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RefluxedAbsorber
-                                .CLCS_RefluxedAbsorberCollection(gObj.Name).GraphicObject = gObj
-                                .RefluxedAbsorberCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ReboiledAbsorber
-                                .CLCS_ReboiledAbsorberCollection(gObj.Name).GraphicObject = gObj
-                                .ReboiledAbsorberCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_EnergyRecycle
-                                .CLCS_EnergyRecycleCollection(gObj.Name).GraphicObject = gObj
-                                .EnergyRecycleCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.SolidSeparator
-                                .CLCS_SolidsSeparatorCollection(gObj.Name).GraphicObject = gObj
-                                .SolidsSeparatorCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Filter
-                                .CLCS_FilterCollection(gObj.Name).GraphicObject = gObj
-                                .FilterCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ExcelUO
-                                .CLCS_ExcelUOCollection(gObj.Name).GraphicObject = gObj
-                                .ExcelUOCollection(gObj.Name) = gObj
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.FlowsheetUO
-                                .CLCS_FlowsheetUOCollection(gObj.Name).GraphicObject = gObj
-                                .FlowsheetUOCollection(gObj.Name) = gObj
-                        End Select
-                    Next
-                End With
-
-                My.Application.ActiveSimulation = formc
-
-                Dim refill As Boolean = False
-
-                'refill (quick)table items for backwards compatibility
-                For Each obj As SimulationObjects_BaseClass In formc.Collections.ObjectCollection.Values
-                    With obj
-                        If .NodeTableItems.Count > 0 Then
-                            For Each nvi As DWSIM.Outros.NodeItem In .NodeTableItems.Values
-                                If Not nvi.Text.Contains("PROP_") Then
-                                    refill = True
-                                    Exit For
-                                End If
-                            Next
-                        End If
-                        If refill Then
-                            .NodeTableItems.Clear()
-                            .QTNodeTableItems.Clear()
-                            .FillNodeItems()
-                            .QTFillNodeItems()
-                        End If
-                    End With
-                Next
-
-                formc.m_IsLoadedFromFile = True
-
-                Return formc
-
-            ElseIf Path.GetExtension(caminho).ToLower = ".dwxml" Then
-
-                LoadXML(caminho, , True)
-
-                Return My.Application.ActiveSimulation
-
-            Else
-
-                Return Nothing
-
-            End If
-
-        Else
-
-            Return Nothing
-
-        End If
-
-    End Function
-
-    '/ '/ Generates a random string with the given length
-    '/ '/ Size of the string '/ If true, generate lowercase string
-    '/ Random string
     Private Function RandomString(ByVal size As Integer, ByVal lowerCase As Boolean) As String
         Dim builder As New StringBuilder()
         Dim random As New Random()
@@ -2083,112 +1366,6 @@ Public Class FormMain
                             Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Filter
                                 .FilterCollection.Add(obj.Name, obj)
                         End Select
-                        If Not DWSIM.App.IsRunningOnMono Then
-                            Select Case obj.TipoObjeto
-                                Case TipoObjeto.NodeIn
-                                    form.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.NodeEn
-                                    form.FormObjList.TreeViewObj.Nodes("NodeME").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeME").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.NodeOut
-                                    form.FormObjList.TreeViewObj.Nodes("NodeSP").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeSP").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Pump
-                                    form.FormObjList.TreeViewObj.Nodes("NodePU").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodePU").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Tank
-                                    form.FormObjList.TreeViewObj.Nodes("NodeTQ").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeTQ").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Vessel
-                                    form.FormObjList.TreeViewObj.Nodes("NodeSE").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeSE").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.TPVessel
-                                    form.FormObjList.TreeViewObj.Nodes("NodeTP").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeTP").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.MaterialStream
-                                    form.FormObjList.TreeViewObj.Nodes("NodeMS").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeMS").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.EnergyStream
-                                    form.FormObjList.TreeViewObj.Nodes("NodeEN").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeEN").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Compressor
-                                    form.FormObjList.TreeViewObj.Nodes("NodeCO").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeCO").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Expander
-                                    form.FormObjList.TreeViewObj.Nodes("NodeTU").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeTU").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Cooler
-                                    form.FormObjList.TreeViewObj.Nodes("NodeCL").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeCL").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Heater
-                                    form.FormObjList.TreeViewObj.Nodes("NodeHT").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeHT").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Pipe
-                                    form.FormObjList.TreeViewObj.Nodes("NodePI").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodePI").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Valve
-                                    form.FormObjList.TreeViewObj.Nodes("NodeVA").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeVA").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.RCT_Conversion
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRCONV").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRCONV").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.RCT_Equilibrium
-                                    form.FormObjList.TreeViewObj.Nodes("NodeREQ").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeREQ").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.RCT_Gibbs
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRGIB").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRGIB").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.RCT_CSTR
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRCSTR").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRCSTR").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.RCT_PFR
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRPFR").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRPFR").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.HeatExchanger
-                                    form.FormObjList.TreeViewObj.Nodes("NodeHE").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeHE").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.ShortcutColumn
-                                    form.FormObjList.TreeViewObj.Nodes("NodeSC").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeSC").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.DistillationColumn
-                                    form.FormObjList.TreeViewObj.Nodes("NodeDC").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeDC").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.AbsorptionColumn
-                                    form.FormObjList.TreeViewObj.Nodes("NodeAC").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeAC").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.ReboiledAbsorber
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRBA").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRBA").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.RefluxedAbsorber
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRFA").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeRFA").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.ComponentSeparator
-                                    form.FormObjList.TreeViewObj.Nodes("NodeCSEP").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeCSEP").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.OrificePlate
-                                    form.FormObjList.TreeViewObj.Nodes("NodeOPL").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeOPL").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.CustomUO
-                                    form.FormObjList.TreeViewObj.Nodes("NodeUO").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeUO").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.ExcelUO
-                                    form.FormObjList.TreeViewObj.Nodes("NodeExcel").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeExcel").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.CapeOpenUO
-                                    form.FormObjList.TreeViewObj.Nodes("NodeCOUO").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeCOUO").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.SolidSeparator
-                                    form.FormObjList.TreeViewObj.Nodes("NodeSS").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeSS").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.Filter
-                                    form.FormObjList.TreeViewObj.Nodes("NodeFT").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeFT").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                Case TipoObjeto.FlowsheetUO
-                                    form.FormObjList.TreeViewObj.Nodes("NodeFS").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                    form.FormObjList.TreeViewObj.Nodes("NodeFS").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                            End Select
-                        End If
                     End With
                 End If
             Catch ex As Exception
@@ -2275,7 +1452,7 @@ Public Class FormMain
 
     End Sub
 
-    Sub AddSimulationObjects(form As FormFlowsheet, objlist As Concurrent.ConcurrentBag(Of SimulationObjects_BaseClass), excs As Concurrent.ConcurrentBag(Of Exception), Optional ByVal pkey As String = "")
+    Sub AddSimulationObjects(form As FormFlowsheet, objlist As Concurrent.ConcurrentBag(Of DWSIM.SimulationObjects.UnitOperations.BaseClass), excs As Concurrent.ConcurrentBag(Of Exception), Optional ByVal pkey As String = "")
 
         For Each obj In objlist
             Try
@@ -2374,7 +1551,7 @@ Public Class FormMain
             End Try
         Next
 
-        For Each so As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
             Try
                 If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Adjust) IsNot Nothing Then
                     Dim so2 As DWSIM.SimulationObjects.SpecialOps.Adjust = so
@@ -2424,7 +1601,6 @@ Public Class FormMain
         Dim xdoc As XDocument = XDocument.Load(path)
 
         Dim form As FormFlowsheet = New FormFlowsheet()
-        If Not DWSIM.App.IsRunningOnMono Then form.FormObjList = New frmObjList
         My.Application.CAPEOPENMode = False
         My.Application.ActiveSimulation = form
 
@@ -2508,7 +1684,7 @@ Public Class FormMain
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
 
-        Dim objlist As New Concurrent.ConcurrentBag(Of SimulationObjects_BaseClass)
+        Dim objlist As New Concurrent.ConcurrentBag(Of DWSIM.SimulationObjects.UnitOperations.BaseClass)
 
         If form.Collections.FlowsheetUOCollection.Count = 0 Then
 
@@ -2516,7 +1692,7 @@ Public Class FormMain
                                        Try
                                            Dim id As String = xel.<Nome>.Value
                                            Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                                           Dim obj As SimulationObjects_BaseClass = Activator.CreateInstance(t)
+                                           Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
                                            Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
                                                                form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                                            obj.GraphicObject = gobj
@@ -2528,7 +1704,7 @@ Public Class FormMain
                                            If Not gobj Is Nothing Then
                                                obj.LoadData(xel.Elements.ToList)
                                                If TypeOf obj Is Streams.MaterialStream Then
-                                                   For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In DirectCast(obj, Streams.MaterialStream).Fases.Values
+                                                   For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                                                        For Each c As ConstantProperties In form.Options.SelectedComponents.Values
                                                            phase.Componentes(c.Name).ConstantProperties = c
                                                        Next
@@ -2547,7 +1723,7 @@ Public Class FormMain
                 Try
                     Dim id As String = xel.<Nome>.Value
                     Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                    Dim obj As SimulationObjects_BaseClass = Activator.CreateInstance(t)
+                    Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
                     Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
                                         form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                     obj.GraphicObject = gobj
@@ -2559,7 +1735,7 @@ Public Class FormMain
                     If Not gobj Is Nothing Then
                         obj.LoadData(xel.Elements.ToList)
                         If TypeOf obj Is Streams.MaterialStream Then
-                            For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In DirectCast(obj, Streams.MaterialStream).Fases.Values
+                            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                                 For Each c As ConstantProperties In form.Options.SelectedComponents.Values
                                     phase.Componentes(c.Name).ConstantProperties = c
                                 Next
@@ -2579,7 +1755,7 @@ Public Class FormMain
         For Each obj In objlist
             If TypeOf obj Is Streams.MaterialStream Then
                 Dim mstr As Streams.MaterialStream = DirectCast(obj, Streams.MaterialStream)
-                For Each p In mstr.Fases.Values
+                For Each p In mstr.Phases.Values
                     Dim clist = p.Componentes.Values.ToList().OrderBy(Function(o) o.ConstantProperties.Normal_Boiling_Point)
                     p.Componentes.Clear()
                     For Each c In clist
@@ -2592,21 +1768,6 @@ Public Class FormMain
         AddSimulationObjects(form, objlist, excs)
 
         If Not forcommandline Then
-
-            If Not DWSIM.App.IsRunningOnMono Then
-                Dim arrays As New ArrayList
-                Dim aNode, aNode2 As TreeNode
-                Dim i As Integer = 0
-                For Each aNode In form.FormObjList.TreeViewObj.Nodes
-                    For Each aNode2 In aNode.Nodes
-                        arrays.Add(aNode2.Text)
-                        i += 1
-                    Next
-                Next
-                form.FormObjList.ACSC.Clear()
-                form.FormObjList.ACSC.AddRange(arrays.ToArray(Type.GetType("System.String")))
-                form.FormObjList.TBSearch.AutoCompleteCustomSource = form.FormObjList.ACSC
-            End If
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
@@ -2758,11 +1919,11 @@ Public Class FormMain
             End Try
         Next
 
-        form.Options.NotSelectedComponents = New Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
+        form.Options.NotSelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
 
-        Dim tmpc As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+        Dim tmpc As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
         For Each tmpc In Me.AvailableComponents.Values
-            Dim newc As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+            Dim newc As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
             newc = tmpc
             If Not form.Options.SelectedComponents.ContainsKey(tmpc.Name) Then
                 form.Options.NotSelectedComponents.Add(tmpc.Name, newc)
@@ -2784,7 +1945,6 @@ Public Class FormMain
             Me.tmpform2 = form
             'form.dckPanel.SuspendLayout(True)
             form.FormLog.DockPanel = Nothing
-            If Not DWSIM.App.IsRunningOnMono Then form.FormObjList.DockPanel = Nothing
             form.FormProps.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
             form.FormSpreadsheet.DockPanel = Nothing
@@ -2805,9 +1965,6 @@ Public Class FormMain
             End If
 
             Try
-                form.FormLog.Show(form.dckPanel)
-                form.FormObjListView.Show(form.dckPanel)
-                If Not DWSIM.App.IsRunningOnMono Then form.FormObjList.Show(form.dckPanel)
                 form.FormProps.Show(form.dckPanel)
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
@@ -2924,7 +2081,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-        For Each so As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
             so.SetFlowsheet(form)
             xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
         Next
@@ -3080,189 +2237,6 @@ Public Class FormMain
 
     End Sub
 
-    Sub SaveF(ByVal caminho As String, ByVal form As FormFlowsheet)
-
-        form.ProcessScripts(Script.EventType.SimulationSaved, Script.ObjectType.Simulation)
-
-        Dim rndfolder As String = My.Computer.FileSystem.SpecialDirectories.Temp & pathsep & RandomString(8, True) & pathsep
-
-        Directory.CreateDirectory(rndfolder)
-
-        Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-        Dim fs As New FileStream(rndfolder & "1.bin", FileMode.Create)
-        Try
-            mySerializer.Serialize(fs, form.Collections)
-        Catch ex As Exception
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs.Close()
-        End Try
-        Dim fs2 As New FileStream(rndfolder & "2.bin", FileMode.Create)
-        Try
-            mySerializer.Serialize(fs2, form.Options)
-        Catch ex As System.Runtime.Serialization.SerializationException
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs2.Close()
-        End Try
-        Dim fs3 As New FileStream(rndfolder & "3.bin", FileMode.Create)
-        Try
-            mySerializer.Serialize(fs3, form.FormSurface.FlowsheetDesignSurface.drawingObjects)
-        Catch ex As System.Runtime.Serialization.SerializationException
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs3.Close()
-        End Try
-        Try
-            form.dckPanel.SaveAsXml(rndfolder & "4.xml")
-        Catch ex As Exception
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-
-        End Try
-        If Not DWSIM.App.IsRunningOnMono Then
-            Try
-                TreeViewDataAccess.SaveTreeViewData(form.FormObjList.TreeViewObj, rndfolder & "5.bin")
-            Catch ex As System.Runtime.Serialization.SerializationException
-                form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-            Finally
-
-            End Try
-        End If
-
-        Dim fs7 As New FileStream(rndfolder & "7.bin", FileMode.Create)
-        Try
-            mySerializer.Serialize(fs7, form.Options.SimNome)
-        Catch ex As System.Runtime.Serialization.SerializationException
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs7.Close()
-        End Try
-        Dim fs8 As New FileStream(rndfolder & "8.bin", FileMode.Create)
-        Try
-            mySerializer.Serialize(fs8, form.FormLog.GridDT)
-        Catch ex As System.Runtime.Serialization.SerializationException
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs8.Close()
-        End Try
-        form.FormSpreadsheet.CopyToDT()
-        Dim fs9 As New FileStream(rndfolder & "9.bin", FileMode.Create)
-        Try
-            mySerializer.Serialize(fs9, form.FormSpreadsheet.dt1)
-        Catch ex As System.Runtime.Serialization.SerializationException
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs9.Close()
-        End Try
-        Dim fs10 As New FileStream(rndfolder & "10.bin", FileMode.Create)
-        Try
-            mySerializer.Serialize(fs10, form.FormSpreadsheet.dt2)
-        Catch ex As System.Runtime.Serialization.SerializationException
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs10.Close()
-        End Try
-        Dim fs11 As New FileStream(rndfolder & "11.bin", FileMode.Create)
-        Try
-            mySerializer.Serialize(fs11, form.FormWatch.items)
-        Catch ex As System.Runtime.Serialization.SerializationException
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs11.Close()
-        End Try
-        Dim fs12 As New FileStream(rndfolder & "scripts.bin", FileMode.Create)
-        Try
-            mySerializer.Serialize(fs12, form.ScriptCollection)
-        Catch ex As System.Runtime.Serialization.SerializationException
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs12.Close()
-        End Try
-
-        Dim flsconfig As New StringBuilder()
-
-        With flsconfig
-            .AppendLine(form.FormSurface.FlowsheetDesignSurface.Zoom)
-            .AppendLine(form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value)
-            .AppendLine(form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value)
-        End With
-
-        File.WriteAllText(rndfolder & "12.bin", flsconfig.ToString)
-
-        Dim fs13 As New FileStream(rndfolder & "13.bin", FileMode.Create)
-        Try
-            If form.FlowsheetStates Is Nothing Then form.FlowsheetStates = New Dictionary(Of Date, FlowsheetState)
-            mySerializer.Serialize(fs13, form.FlowsheetStates)
-        Catch ex As System.Runtime.Serialization.SerializationException
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        Finally
-            fs13.Close()
-        End Try
-
-        Dim pwd As String = Nothing
-        If form.Options.UsePassword Then pwd = form.Options.Password
-
-        Try
-            Call Me.SaveZIP(caminho, rndfolder, pwd)
-        Catch ex As Exception
-            form.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.ToString, Color.Red, TipoAviso.Erro)
-        End Try
-
-        Dim ext As String = Path.GetExtension(caminho)
-
-        Me.UIThread(New System.Action(Sub()
-                                          If ext <> ".dwbcs" Then
-                                              'lista dos mais recentes, modificar
-                                              With My.Settings.MostRecentFiles
-                                                  If Not .Contains(Me.filename) Then
-                                                      If My.Settings.MostRecentFiles.Count = 3 Then
-                                                          .Item(2) = .Item(1)
-                                                          .Item(1) = .Item(0)
-                                                          .Item(0) = Me.filename
-                                                      ElseIf My.Settings.MostRecentFiles.Count = 2 Then
-                                                          .Add(.Item(1))
-                                                          .Item(1) = .Item(0)
-                                                          .Item(0) = Me.filename
-                                                      ElseIf My.Settings.MostRecentFiles.Count = 1 Then
-                                                          .Add(.Item(0))
-                                                          .Item(0) = Me.filename
-                                                      ElseIf My.Settings.MostRecentFiles.Count = 0 Then
-                                                          .Add(Me.filename)
-                                                      End If
-                                                  End If
-                                              End With
-                                              'processar lista de arquivos recentes
-                                              If Not My.Settings.MostRecentFiles.Contains(caminho) Then
-                                                  My.Settings.MostRecentFiles.Add(caminho)
-                                                  If Not My.Application.CommandLineArgs.Count > 1 Then Me.UpdateMRUList()
-                                              End If
-                                              form.Options.FilePath = Me.filename
-                                              form.UpdateFormText()
-                                              form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-                                          End If
-                                      End Sub))
-
-    End Sub
-
-    Sub SaveFileForCommandLine(ByVal caminho As String, ByVal form As FormFlowsheet)
-
-        If System.IO.File.Exists(caminho) Then
-
-            If Path.GetExtension(caminho).ToLower = ".dwsim" Then
-
-                SaveF(caminho, form)
-
-            ElseIf Path.GetExtension(caminho).ToLower = ".dwxml" Then
-
-                SaveXML(caminho, form)
-
-            End If
-
-        End If
-
-    End Sub
-
     Private Function IsZipFilePasswordProtected(ByVal ZipFile As String) As Boolean
         Using fsIn As New FileStream(ZipFile, FileMode.Open, FileAccess.Read)
             Using zipInStream As New ZipInputStream(fsIn)
@@ -3270,58 +2244,6 @@ Public Class FormMain
                 Return zEntry.IsCrypted
             End Using
         End Using
-    End Function
-
-    Function LoadAndExtractZIP(ByVal caminho As String) As Boolean
-
-        Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
-
-        If (caminho.Length < 1) Then
-            MsgBox("Usage UnzipFile NameOfFile")
-            Return False
-        ElseIf Not File.Exists(caminho) Then
-            MsgBox("Cannot find file '{0}'", caminho)
-            Return False
-        Else
-            Dim pwd As String = Nothing
-            If IsZipFilePasswordProtected(caminho) Then
-                Dim fp As New FormPassword
-                If fp.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                    pwd = fp.tbPassword.Text
-                End If
-            End If
-
-            Try
-                Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(caminho))
-                    stream.Password = pwd
-                    Dim entry As ZipEntry
-Label_00CC:
-                    entry = stream.GetNextEntry()
-                    Do While (Not entry Is Nothing)
-                        Dim fileName As String = Path.GetFileName(entry.Name)
-                        If (fileName <> String.Empty) Then
-                            Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
-                                Dim count As Integer = 2048
-                                Dim buffer As Byte() = New Byte(2048) {}
-                                Do While True
-                                    count = stream.Read(buffer, 0, buffer.Length)
-                                    If (count <= 0) Then
-                                        GoTo Label_00CC
-                                    End If
-                                    stream2.Write(buffer, 0, count)
-                                Loop
-                            End Using
-                        End If
-                        entry = stream.GetNextEntry
-                    Loop
-                End Using
-                Return True
-            Catch ex As Exception
-                MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return False
-            End Try
-        End If
-
     End Function
 
     Function LoadAndExtractXMLZIP(ByVal caminho As String) As Boolean
@@ -3371,63 +2293,6 @@ Label_00CC:
         End Try
 
     End Function
-
-    Sub SaveZIP(ByVal caminho As String, ByVal filespath As String, ByVal password As String)
-
-        Dim i_Files As ArrayList = New ArrayList()
-        If File.Exists(filespath & "1.bin") Then i_Files.Add(filespath & "1.bin")
-        If File.Exists(filespath & "2.bin") Then i_Files.Add(filespath & "2.bin")
-        If File.Exists(filespath & "3.bin") Then i_Files.Add(filespath & "3.bin")
-        If File.Exists(filespath & "4.xml") Then i_Files.Add(filespath & "4.xml")
-        If File.Exists(filespath & "5.bin") Then i_Files.Add(filespath & "5.bin")
-        If File.Exists(filespath & "7.bin") Then i_Files.Add(filespath & "7.bin")
-        If File.Exists(filespath & "8.bin") Then i_Files.Add(filespath & "8.bin")
-        If File.Exists(filespath & "9.bin") Then i_Files.Add(filespath & "9.bin")
-        If File.Exists(filespath & "10.bin") Then i_Files.Add(filespath & "10.bin")
-        If File.Exists(filespath & "11.bin") Then i_Files.Add(filespath & "11.bin")
-        If File.Exists(filespath & "12.bin") Then i_Files.Add(filespath & "12.bin")
-        If File.Exists(filespath & "13.bin") Then i_Files.Add(filespath & "13.bin")
-
-        Dim astrFileNames() As String = i_Files.ToArray(GetType(String))
-        Dim strmZipOutputStream As ZipOutputStream
-
-        strmZipOutputStream = New ZipOutputStream(File.Create(caminho))
-
-        ' Compression Level: 0-9
-        ' 0: no(Compression)
-        ' 9: maximum compression
-        strmZipOutputStream.SetLevel(9)
-
-        'save with password, if set
-        strmZipOutputStream.Password = password
-
-        Dim strFile As String
-
-        For Each strFile In astrFileNames
-
-            Dim strmFile As FileStream = File.OpenRead(strFile)
-            Dim abyBuffer(strmFile.Length - 1) As Byte
-
-            strmFile.Read(abyBuffer, 0, abyBuffer.Length)
-            Dim objZipEntry As ZipEntry = New ZipEntry(strFile)
-
-            objZipEntry.DateTime = DateTime.Now
-            objZipEntry.Size = strmFile.Length
-            strmFile.Close()
-            strmZipOutputStream.PutNextEntry(objZipEntry)
-            strmZipOutputStream.Write(abyBuffer, 0, abyBuffer.Length)
-
-        Next
-
-        strmZipOutputStream.Finish()
-        strmZipOutputStream.Close()
-
-        Dim ext As String = Path.GetExtension(caminho)
-        Dim diretorio As String = Path.GetDirectoryName(caminho)
-
-        Directory.Delete(filespath, True)
-
-    End Sub
 
     Sub SaveXMLZIP(ByVal zipfilename As String, ByVal form As FormFlowsheet)
 
@@ -3504,17 +2369,17 @@ simx2:              Dim myStream As System.IO.FileStream
                         Me.LoadAndExtractXMLZIP(Me.filename)
                     End If
                 Case 3
-sim:                Dim myStream As System.IO.FileStream
-                    myStream = Me.OpenFileDialog1.OpenFile()
-                    If Not (myStream Is Nothing) Then
-                        Dim nome = myStream.Name
-                        myStream.Close()
-                        Me.filename = nome
-                        Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
-                        Application.DoEvents()
-                        Application.DoEvents()
-                        Me.LoadF(Me.filename)
-                    End If
+                    'sim:                Dim myStream As System.IO.FileStream
+                    '                    myStream = Me.OpenFileDialog1.OpenFile()
+                    '                    If Not (myStream Is Nothing) Then
+                    '                        Dim nome = myStream.Name
+                    '                        myStream.Close()
+                    '                        Me.filename = nome
+                    '                        Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
+                    '                        Application.DoEvents()
+                    '                        Application.DoEvents()
+                    '                        Me.LoadF(Me.filename)
+                    '                    End If
                 Case 4
 csd:                Application.DoEvents()
                     Dim NewMDIChild As New FormCompoundCreator()
@@ -3570,7 +2435,7 @@ ruf:                Application.DoEvents()
                         Case ".dwxmz"
                             GoTo simx2
                         Case ".dwsim"
-                            GoTo sim
+                            'GoTo sim
                         Case ".dwcsd"
                             GoTo csd
                         Case ".dwrsd"
@@ -3654,53 +2519,6 @@ ruf:                Application.DoEvents()
 
     End Sub
 
-    Private Sub bgLoadFile_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgLoadFile.DoWork
-        Dim bw As BackgroundWorker = CType(sender, BackgroundWorker)
-        ' Start the time-consuming operation.
-        Me.LoadF(Me.filename)
-    End Sub
-
-    Private Sub bgSaveFile_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgSaveFile.DoWork
-        Dim bw As BackgroundWorker = CType(sender, BackgroundWorker)
-        ' Start the time-consuming operation.
-        Me.SaveF(Me.filename, Me.ActiveMdiChild)
-    End Sub
-
-    Private Sub bgLoadFile_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgLoadFile.RunWorkerCompleted
-        If Not (e.Error Is Nothing) Then
-            ' There was an error during the operation.
-            'FrmLoadSave.Hide()
-            MessageBox.Show("Erro ao carregar arquivo: " & e.Error.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            'Me.Close()
-        Else
-            'Me.FrmLoadSave.Close()
-        End If
-        Me.ToolStripStatusLabel1.Text = ""
-    End Sub
-
-    Private Sub bgSaveFile_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgSaveFile.RunWorkerCompleted
-        If Not (e.Error Is Nothing) Then
-            ' There was an error during the operation.
-            MessageBox.Show("Erro ao salvar arquivo: " & e.Error.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Else
-
-            'lista dos mais recentes, modificar
-
-            With My.Settings.MostRecentFiles
-                If Not .Contains(Me.filename) Then
-                    .Item(2) = .Item(1)
-                    .Item(1) = .Item(0)
-                    .Item(0) = Me.filename
-                End If
-            End With
-
-            'processar lista de arquivos recentes
-
-
-        End If
-        Me.ToolStripStatusLabel1.Text = ""
-    End Sub
-
 #End Region
 
 #Region "    Click Handlers"
@@ -3739,7 +2557,7 @@ ruf:                Application.DoEvents()
             Try
                 Select Case Path.GetExtension(Me.filename).ToLower
                     Case ".dwsim"
-                        Me.LoadF(Me.filename)
+                        'Me.LoadF(Me.filename)
                     Case ".dwcsd"
                         Dim NewMDIChild As New FormCompoundCreator()
                         NewMDIChild.MdiParent = Me
@@ -3773,7 +2591,6 @@ ruf:                Application.DoEvents()
     Public Sub NewToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewToolStripButton.Click, NewToolStripMenuItem.Click
 
         Dim newform As New FormFlowsheet()
-        If Not DWSIM.App.IsRunningOnMono Then newform.FormObjList = New frmObjList
 
         With newform
             .Text = "Simulation" & m_childcount
@@ -3862,7 +2679,7 @@ ruf:                Application.DoEvents()
                         Case ".dwxmz"
                             Me.LoadAndExtractXMLZIP(nome)
                         Case ".dwsim"
-                            Me.LoadF(nome)
+                            ' Me.LoadF(nome)
                         Case ".dwcsd"
                             Dim NewMDIChild As New FormCompoundCreator()
                             NewMDIChild.MdiParent = Me
@@ -3922,13 +2739,13 @@ ruf:                Application.DoEvents()
                             Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Salvandosimulao") + " (" + Me.filename + ")"
                             SaveBackup(form2.Options.FilePath)
                             If Path.GetExtension(form2.Options.FilePath).ToLower = ".dwsim" Then
-                                Try
-                                    SaveF(form2.Options.FilePath, form2)
-                                Catch ex As Exception
-                                    MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                Finally
-                                    Me.ToolStripStatusLabel1.Text = ""
-                                End Try
+                                'Try
+                                '    SaveF(form2.Options.FilePath, form2)
+                                'Catch ex As Exception
+                                '    MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                'Finally
+                                '    Me.ToolStripStatusLabel1.Text = ""
+                                'End Try
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".dwxml" Then
                                 Task.Factory.StartNew(Sub() SaveXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
                                                                                                                      form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
@@ -3947,13 +2764,13 @@ ruf:                Application.DoEvents()
                                 If Not (myStream Is Nothing) Then
                                     Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Salvandosimulao") + " (" + Me.filename + ")"
                                     If Path.GetExtension(myStream.Name).ToLower = ".dwsim" Then
-                                        Try
-                                            SaveF(myStream.Name, form2)
-                                        Catch ex As Exception
-                                            MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                        Finally
-                                            Me.ToolStripStatusLabel1.Text = ""
-                                        End Try
+                                        'Try
+                                        '    SaveF(myStream.Name, form2)
+                                        'Catch ex As Exception
+                                        '    MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                        'Finally
+                                        '    Me.ToolStripStatusLabel1.Text = ""
+                                        'End Try
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxml" Then
                                         Task.Factory.StartNew(Sub() SaveXML(myStream.Name, form2)).ContinueWith(Sub(t)
                                                                                                                     form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
@@ -4024,7 +2841,7 @@ ruf:                Application.DoEvents()
                     SaveBackup(Me.filename)
                     If Path.GetExtension(Me.filename).ToLower = ".dwsim" Then
                         Try
-                            SaveF(form2.Options.FilePath, form2)
+                            'SaveF(form2.Options.FilePath, form2)
                         Catch ex As Exception
                             MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Finally
@@ -4063,7 +2880,7 @@ ruf:                Application.DoEvents()
                             Application.DoEvents()
                             If Path.GetExtension(Me.filename).ToLower = ".dwsim" Then
                                 Try
-                                    SaveF(myStream.Name, form2)
+                                    'SaveF(myStream.Name, form2)
                                 Catch ex As Exception
                                     MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Finally
@@ -4366,25 +3183,6 @@ ruf:                Application.DoEvents()
             If Not Me.bgSaveBackup.IsBusy Then Me.bgSaveBackup.RunWorkerAsync()
         End If
 
-    End Sub
-
-    Private Sub bgSaveBackup_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgSaveBackup.DoWork
-        If Not My.Application.CalculatorBusy Then
-            Dim bw As BackgroundWorker = CType(sender, BackgroundWorker)
-            Dim folder As String = My.Settings.BackupFolder
-            If Not Directory.Exists(My.Settings.BackupFolder) Then Directory.CreateDirectory(My.Settings.BackupFolder)
-            Dim path As String = ""
-            For Each form0 As Form In Me.MdiChildren
-                If TypeOf form0 Is FormFlowsheet Then
-                    path = folder + IO.Path.DirectorySeparatorChar + CType(form0, FormFlowsheet).Options.BackupFileName
-                    Me.SaveF(path, form0)
-                    If Not My.Settings.BackupFiles.Contains(path) Then
-                        My.Settings.BackupFiles.Add(path)
-                        If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
-                    End If
-                End If
-            Next
-        End If
     End Sub
 
     Private Sub bgSaveBackup_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgSaveBackup.RunWorkerCompleted

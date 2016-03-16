@@ -321,7 +321,7 @@ out:
                 Dim ff As Integer
 
                 i = 0
-                For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In PP.CurrentMaterialStream.Fases(0).Componentes.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Componentes.Values
                     ff = Array.IndexOf(StabSearchCompIDs, subst.Nome)
                     If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then nt += 1
                     i += 1
@@ -333,7 +333,7 @@ out:
 
                 i = 0
                 j = 0
-                For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In PP.CurrentMaterialStream.Fases(0).Componentes.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Componentes.Values
                     ff = Array.IndexOf(StabSearchCompIDs, subst.Nome)
                     If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then
                         idx(j) = i
@@ -1217,7 +1217,7 @@ alt:
                 Dim nc As Integer = UBound(Vz)
 
                 i = 0
-                For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In PP.CurrentMaterialStream.Fases(0).Componentes.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Componentes.Values
                     ff = Array.IndexOf(StabSearchCompIDs, subst.Nome)
                     If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then nt += 1
                     i += 1
@@ -1229,7 +1229,7 @@ alt:
 
                 i = 0
                 j = 0
-                For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In PP.CurrentMaterialStream.Fases(0).Componentes.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Componentes.Values
                     ff = Array.IndexOf(StabSearchCompIDs, subst.Nome)
                     If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then
                         idx(j) = i
@@ -1338,7 +1338,7 @@ alt:
                 Dim nc As Integer = UBound(Vz)
 
                 i = 0
-                For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In PP.CurrentMaterialStream.Fases(0).Componentes.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Componentes.Values
                     ff = Array.IndexOf(StabSearchCompIDs, subst.Nome)
                     If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then nt += 1
                     i += 1
@@ -1350,7 +1350,7 @@ alt:
 
                 i = 0
                 j = 0
-                For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In PP.CurrentMaterialStream.Fases(0).Componentes.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Componentes.Values
                     ff = Array.IndexOf(StabSearchCompIDs, subst.Nome)
                     If ff >= 0 And Vz(i) > 0 And T < subst.ConstantProperties.Critical_Temperature Then
                         idx(j) = i

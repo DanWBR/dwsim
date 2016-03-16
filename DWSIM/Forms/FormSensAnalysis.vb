@@ -16,7 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Optimization
 Imports DWSIM.DWSIM.SimulationObjects
 Imports Microsoft.MSDN.Samples
@@ -29,8 +29,8 @@ Public Class FormSensAnalysis
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Public nf As String
-    Public su As DWSIM.SistemasDeUnidades.Unidades
-    Public cv As DWSIM.SistemasDeUnidades.Conversor
+    Public su As DWSIM.SystemsOfUnits.Units
+    Public cv As DWSIM.SystemsOfUnits.Converter
     Public form As FormFlowsheet
 
     Public abortCalc As Boolean = False
@@ -57,7 +57,7 @@ Public Class FormSensAnalysis
 
         form = My.Application.ActiveSimulation
 
-        cv = New DWSIM.SistemasDeUnidades.Conversor
+        cv = New DWSIM.SystemsOfUnits.Converter
         su = form.Options.SelectedUnitSystem
         nf = form.Options.NumberFormat
 
@@ -76,7 +76,7 @@ Public Class FormSensAnalysis
 
         Me.cbObjIndVar1.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
         Me.cbObjIndVar2.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
-        For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
             Me.cbObjIndVar1.Items.Add(obj.GraphicObject.Tag)
             Me.cbObjIndVar2.Items.Add(obj.GraphicObject.Tag)
         Next
@@ -85,7 +85,7 @@ Public Class FormSensAnalysis
         cbc0.Sorted = True
         cbc0.MaxDropDownItems = 10
         cbc0.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
-        For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
             cbc0.Items.Add(obj.GraphicObject.Tag)
         Next
         cbc1 = New DataGridViewComboBoxCell
@@ -95,7 +95,7 @@ Public Class FormSensAnalysis
         cbc2.Sorted = True
         cbc2.MaxDropDownItems = 10
         cbc2.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
-        For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
             cbc2.Items.Add(obj.GraphicObject.Tag)
         Next
         cbc3 = New DataGridViewComboBoxCell
@@ -141,12 +141,12 @@ Public Class FormSensAnalysis
         If objectTAG = DWSIM.App.GetLocalString("SpreadsheetCell") Then
             Return form.FormSpreadsheet.GetCellString()
         Else
-            For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+            For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
                 If objectTAG = obj.GraphicObject.Tag Then
                     If dependent Then
-                        Return obj.GetProperties(SimulationObjects_BaseClass.PropertyType.ALL)
+                        Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
                     Else
-                        Return obj.GetProperties(SimulationObjects_BaseClass.PropertyType.WR)
+                        Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
                     End If
                     Exit Function
                 End If
@@ -193,7 +193,7 @@ Public Class FormSensAnalysis
         If Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
             For Each prop As String In props
                 If DWSIM.App.GetPropertyName(prop) = Me.cbPropIndVar1.SelectedItem.ToString Then
-                    For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+                    For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
                         If Me.cbObjIndVar1.SelectedItem.ToString = obj.GraphicObject.Tag Then
                             Me.tbUnitIndVar1.Text = obj.GetPropertyUnit(prop, su)
                             If EnableAutoSave Then SaveForm(selectedsacase)
@@ -212,7 +212,7 @@ Public Class FormSensAnalysis
         If Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
             For Each prop As String In props
                 If DWSIM.App.GetPropertyName(prop) = Me.cbPropIndVar2.SelectedItem.ToString Then
-                    For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+                    For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
                         If Me.cbObjIndVar2.SelectedItem.ToString = obj.GraphicObject.Tag Then
                             Me.tbUnitIndVar2.Text = obj.GetPropertyUnit(prop, su)
                             If EnableAutoSave Then SaveForm(selectedsacase)
@@ -299,7 +299,7 @@ Public Class FormSensAnalysis
             Next
             Me.dgvResults.Rows.Clear()
             For Each result As Double() In .results
-                Me.dgvResults.Rows.Add(New Object() {Format(Conversor.ConverterDoSI(sacase.iv1.unit, result(0)), nf), Format(Conversor.ConverterDoSI(sacase.iv2.unit, result(1)), nf), Format(Conversor.ConverterDoSI(sacase.dv.unit, result(2)), nf)})
+                Me.dgvResults.Rows.Add(New Object() {Format(Converter.ConvertFromSI(sacase.iv1.unit, result(0)), nf), Format(Converter.ConvertFromSI(sacase.iv2.unit, result(1)), nf), Format(Converter.ConvertFromSI(sacase.dv.unit, result(2)), nf)})
             Next
             Me.tbStats.Text = .stats
             Me.tbExpression.Text = .expression
@@ -321,7 +321,7 @@ Public Class FormSensAnalysis
                         dgrow.Cells(2).Value = DWSIM.App.GetLocalString("SpreadsheetCell")
                         dgrow.Cells(3).Value = DWSIM.App.GetPropertyName(.propID)
                     End If
-                    dgrow.Cells(4).Value = Conversor.ConverterDoSI(.unit, .currentvalue)
+                    dgrow.Cells(4).Value = Converter.ConvertFromSI(.unit, .currentvalue)
                     dgrow.Cells(5).Value = .unit
                 End With
             Next
@@ -481,7 +481,7 @@ Public Class FormSensAnalysis
                         .objectID = "SpreadsheetCell"
                     End If
                     .propID = Me.ReturnPropertyID(.objectID, dgrow.Cells(3).Value)
-                    .currentvalue = Conversor.ConverterParaSI(dgrow.Cells(5).Value, dgrow.Cells(4).Value)
+                    .currentvalue = Converter.ConvertToSI(dgrow.Cells(5).Value, dgrow.Cells(4).Value)
                     .unit = dgrow.Cells(5).Value
                 End With
                 .variables.Add(var.id, var)
@@ -525,14 +525,14 @@ Public Class FormSensAnalysis
         SaveForm(sacase)
 
         With sacase
-            iv1ll = Conversor.ConverterParaSI(.iv1.unit, .iv1.lowerlimit)
-            iv1ul = Conversor.ConverterParaSI(.iv1.unit, .iv1.upperlimit)
+            iv1ll = Converter.ConvertToSI(.iv1.unit, .iv1.lowerlimit)
+            iv1ul = Converter.ConvertToSI(.iv1.unit, .iv1.upperlimit)
             iv1np = .iv1.points - 1
             iv1id = .iv1.objectID
             iv1prop = .iv1.propID
             If chkIndVar2.Checked Then
-                iv2ll = Conversor.ConverterParaSI(.iv2.unit, .iv2.lowerlimit)
-                iv2ul = Conversor.ConverterParaSI(.iv2.unit, .iv2.upperlimit)
+                iv2ll = Converter.ConvertToSI(.iv2.unit, .iv2.lowerlimit)
+                iv2ul = Converter.ConvertToSI(.iv2.unit, .iv2.upperlimit)
                 iv2np = .iv2.points - 1
                 iv2id = .iv2.objectID
                 iv2prop = .iv2.propID
@@ -621,7 +621,7 @@ Public Class FormSensAnalysis
                             .Imports.AddType(GetType(System.Math))
                             For Each var As SAVariable In selectedsacase.variables.Values
                                 If var.objectID <> "SpreadsheetCell" Then
-                                    .Variables.Add(var.name, Conversor.ConverterDoSI(var.unit, form.Collections.ObjectCollection(var.objectID).GetPropertyValue(var.propID)))
+                                    .Variables.Add(var.name, Converter.ConvertFromSI(var.unit, form.Collections.ObjectCollection(var.objectID).GetPropertyValue(var.propID)))
                                 Else
                                     .Variables.Add(var.name, form.FormSpreadsheet.GetCellValue(var.propID).Value)
                                 End If
@@ -647,13 +647,13 @@ Public Class FormSensAnalysis
                         res.Add(currresults.ToArray(Type.GetType("System.Double")))
                     End If
                     If rbExp.Checked Then
-                        Me.dgvResults.Rows.Add(New Object() {Format(Conversor.ConverterDoSI(sacase.iv1.unit, iv1val), nf), Format(Conversor.ConverterDoSI(sacase.iv2.unit, iv2val), nf), Format(dvval, nf)})
+                        Me.dgvResults.Rows.Add(New Object() {Format(Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf), Format(Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf), Format(dvval, nf)})
                     Else
                         Dim formattedvalues As New ArrayList
-                        formattedvalues.Add(Format(Conversor.ConverterDoSI(sacase.iv1.unit, iv1val), nf))
-                        formattedvalues.Add(Format(Conversor.ConverterDoSI(sacase.iv2.unit, iv2val), nf))
+                        formattedvalues.Add(Format(Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf))
+                        formattedvalues.Add(Format(Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf))
                         For Each var As SAVariable In selectedsacase.depvariables.Values
-                            formattedvalues.Add(Format(Conversor.ConverterDoSI(var.unit, var.currentvalue), nf))
+                            formattedvalues.Add(Format(Converter.ConvertFromSI(var.unit, var.currentvalue), nf))
                         Next
                         Me.dgvResults.Rows.Add(formattedvalues.ToArray())
                     End If
@@ -791,7 +791,7 @@ Public Class FormSensAnalysis
                             Dim props As String() = Me.ReturnProperties(Me.dgVariables.Rows(e.RowIndex).Cells(2).Value, True)
                             For Each prop As String In props
                                 If DWSIM.App.GetPropertyName(prop) = Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
-                                    Dim obj As SimulationObjects_BaseClass = ReturnObject(Me.dgVariables.Rows(e.RowIndex).Cells(2).Value)
+                                    Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = ReturnObject(Me.dgVariables.Rows(e.RowIndex).Cells(2).Value)
                                     tbc0.Value = Format(Val(obj.GetPropertyValue(prop, su)), nf)
                                     tbc1.Value = obj.GetPropertyUnit(prop, su)
                                     Exit For
@@ -827,7 +827,7 @@ Public Class FormSensAnalysis
                             Dim props As String() = Me.ReturnProperties(Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value, True)
                             For Each prop As String In props
                                 If DWSIM.App.GetPropertyName(prop) = Me.dgDepVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
-                                    Dim obj As SimulationObjects_BaseClass = ReturnObject(Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value)
+                                    Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = ReturnObject(Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value)
                                     tbc0.Value = obj.GetPropertyUnit(prop, su)
                                     Exit For
                                 End If
@@ -839,9 +839,9 @@ Public Class FormSensAnalysis
         End If
     End Sub
 
-    Private Function ReturnObject(ByVal objectTAG As String) As SimulationObjects_BaseClass
+    Private Function ReturnObject(ByVal objectTAG As String) As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
-        For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 Return obj
                 Exit Function
@@ -857,7 +857,7 @@ Public Class FormSensAnalysis
         If objectID = "SpreadsheetCell" Then
             Return propTAG
         Else
-            Dim props As String() = form.Collections.ObjectCollection(objectID).GetProperties(SimulationObjects_BaseClass.PropertyType.ALL)
+            Dim props As String() = form.Collections.ObjectCollection(objectID).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
             For Each prop As String In props
                 If DWSIM.App.GetPropertyName(prop) = propTAG Then
                     Return prop

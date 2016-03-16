@@ -20,7 +20,7 @@ Imports System.Collections.Generic
 Imports FileHelpers
 Imports System.Math
 Imports System.Xml.Linq
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 
 Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary
 

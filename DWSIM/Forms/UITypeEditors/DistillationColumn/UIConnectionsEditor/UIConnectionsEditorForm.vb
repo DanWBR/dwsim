@@ -28,7 +28,7 @@ Public Class UIConnectionsEditorForm
     Dim loaded As Boolean = False
 
     Dim tpl As DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors.Templates
-    Dim cvt As DWSIM.SistemasDeUnidades.Conversor
+    Dim cvt As DWSIM.SystemsOfUnits.Converter
 
     Private Sub UIConnectionsEditorForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         Dim i As Integer = 0
@@ -52,7 +52,7 @@ Public Class UIConnectionsEditorForm
 
     Private Sub UIConnectionsEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cvt = New DWSIM.SistemasDeUnidades.Conversor()
+        cvt = New DWSIM.SystemsOfUnits.Converter()
 
         Dim i As Integer = 0
 
@@ -89,7 +89,7 @@ Public Class UIConnectionsEditorForm
         dgv4.Columns(0).CellTemplate = sgt1.Clone
         dgv4.Columns(1).CellTemplate = tpl.GetEnergyStreamInSelector
 
-        dgv2.Columns(4).HeaderText += " (" & form.Options.SelectedUnitSystem.spmp_molarflow & ")"
+        dgv2.Columns(4).HeaderText += " (" & form.Options.SelectedUnitSystem.molarflow & ")"
 
         For Each str As StreamInformation In dc.MaterialStreams.Values
             If str.StreamBehavior = StreamInformation.Behavior.Feed Then
@@ -106,7 +106,7 @@ Public Class UIConnectionsEditorForm
                 Dim st = (From st2 As Stage In dc.Stages Select st2 Where st2.ID = str.AssociatedStage).FirstOrDefault
                 If st Is Nothing Then st = (From st2 As Stage In dc.Stages Select st2 Where st2.Name = str.AssociatedStage).FirstOrDefault
                 If st Is Nothing Then st = dc.Stages(0)
-                Me.dgv2.Rows.Add(New Object() {dgv2.Rows.Count + 1, st.Name, ReturnObjTag(str.StreamID), str.StreamPhase.ToString, Conversor.ConverterDoSI(form.Options.SelectedUnitSystem.spmp_molarflow, str.FlowRate.Value), str.ID})
+                Me.dgv2.Rows.Add(New Object() {dgv2.Rows.Count + 1, st.Name, ReturnObjTag(str.StreamID), str.StreamPhase.ToString, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, str.FlowRate.Value), str.ID})
                 Me.dgv2.Rows(Me.dgv2.Rows.Count - 1).Cells(2).Tag = st.ID
             End If
         Next
@@ -556,7 +556,7 @@ Public Class UIConnectionsEditorForm
                         If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).StreamPhase = StreamInformation.Phase.V
                     End If
                 Case 4
-                    If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).FlowRate.Value = Conversor.ConverterParaSI(form.Options.SelectedUnitSystem.spmp_molarflow, value)
+                    If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).FlowRate.Value = Converter.ConvertToSI(form.Options.SelectedUnitSystem.molarflow, value)
             End Select
             dc.CheckConnPos()
             form.FormSurface.FlowsheetDesignSurface.Invalidate()

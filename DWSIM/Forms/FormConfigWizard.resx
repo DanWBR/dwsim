@@ -738,7 +738,7 @@ Clique em "Próximo" para continuar.</value>
     <value>Loops Aninhados (Equilíbrio Sólido-Líquido - Solução Sólida)</value>
   </data>
   <data name="ListBoxPP.Items8" xml:space="preserve">
-    <value>Loops Aninhados (Equilíbrio Líquido-Líquido-Vapor, Fases Líquidas Completamente Imiscíveis)</value>
+    <value>Loops Aninhados (Equilíbrio Líquido-Líquido-Vapor, Phases Líquidas Completamente Imiscíveis)</value>
   </data>
   <data name="ListBoxPP.Location" type="System.Drawing.Point, System.Drawing">
     <value>100, 114</value>
@@ -834,7 +834,7 @@ Clique em "Próximo" para continuar.</value>
     <value>3</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Selecione um Algoritmo Flash adequado para a sua simulação. Se seu sistema pode apresentar instabilidades na fase líquida (sistemas imiscíveis), selecione um algoritmo capaz de prever o equilíbrio entre três fases (ELLV). Para calcular equilíbrio incluindo uma fase sólida, selecione o algoritmo correspondente. Para sistemas complexos, utilize o algoritmo de minimização de Gibbs mais adequado (duas ou três fases).
+    <value>Selecione um Algoritmo Flash adequado para a sua simulação. Se seu sistema pode apresentar instabilidades na Phase líquida (sistemas imiscíveis), selecione um algoritmo capaz de prever o equilíbrio entre três Phases (ELLV). Para calcular equilíbrio incluindo uma Phase sólida, selecione o algoritmo correspondente. Para sistemas complexos, utilize o algoritmo de minimização de Gibbs mais adequado (duas ou três Phases).
 
 Clique em "Próximo" para continuar.</value>
   </data>

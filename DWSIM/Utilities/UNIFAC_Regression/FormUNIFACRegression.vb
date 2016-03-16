@@ -18,7 +18,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 Imports DWSIM.DWSIM.MathEx
@@ -37,19 +37,19 @@ Public Class FormUNIFACRegression
 
     Friend mycase As New UNIFACIPRegressionCase
 
-    Public cv As DWSIM.SistemasDeUnidades.Conversor
+    Public cv As DWSIM.SystemsOfUnits.Converter
     Public ci As Globalization.CultureInfo = Globalization.CultureInfo.CurrentUICulture
     Public _pp As Object
-    Public _comps As New Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
+    Public _comps As New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
     Public uni As Object = Nothing
-    Public IP As New DWSIM.ClassesBasicasTermodinamica.InteractionParameter
+    Public IP As New DWSIM.Thermodynamics.BaseClasses.InteractionParameter
 
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim GI1, GI2 As Integer
     Dim GN1, GN2, Comp1, Comp2 As String
 
     Private Sub FormUNIFACRegression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cv = New DWSIM.SistemasDeUnidades.Conversor
+        cv = New DWSIM.SystemsOfUnits.Converter
         mat = New MaterialStream("", "")
         Comp1 = ""
         Comp2 = ""
@@ -554,22 +554,22 @@ Public Class FormUNIFACRegression
             _pp.m_uni.ModfGroups.InteracParam_cij(GI2)(GI1) = IP(1, 2)
         End If
 
-        mat.Fases(0).SPMProperties.pressure = P
-        mat.Fases(0).SPMProperties.temperature = T
-        For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
+        mat.Phases(0).Properties.pressure = P
+        mat.Phases(0).Properties.temperature = T
+        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
             phase.Componentes.Clear() 'delete old assignment
         Next
-        For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
-            phase.Componentes.Add(Comp1, New DWSIM.ClassesBasicasTermodinamica.Substancia(Comp1, ""))
+        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+            phase.Componentes.Add(Comp1, New DWSIM.Thermodynamics.BaseClasses.Compound(Comp1, ""))
             phase.Componentes(Comp1).ConstantProperties = _comps.Values(0)
 
-            phase.Componentes.Add(Comp2, New DWSIM.ClassesBasicasTermodinamica.Substancia(Comp2, ""))
+            phase.Componentes.Add(Comp2, New DWSIM.Thermodynamics.BaseClasses.Compound(Comp2, ""))
             phase.Componentes(Comp2).ConstantProperties = _comps.Values(1)
         Next
         _pp.CurrentMaterialStream = mat
 
 
-        mat.Fases(0).SPMProperties.temperature = T
+        mat.Phases(0).Properties.temperature = T
         Dim slle As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE()
         Dim resultL As Object = slle.Flash_PT(VZ, P, T, _pp)
         L1 = resultL(0)
@@ -989,7 +989,7 @@ Public Class FormUNIFACRegression
 
         If Me.tbIPDBName.Text <> "" Then
             Try
-                DWSIM.Databases.UserIPDB.AddInteractionParameters(New DWSIM.ClassesBasicasTermodinamica.InteractionParameter() {IP}, tbIPDBName.Text, True)
+                DWSIM.Databases.UserIPDB.AddInteractionParameters(New DWSIM.Thermodynamics.BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
                 MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1016,7 +1016,7 @@ End Class
 <System.Serializable()> Public Class UNIFACIPRegressionCase
     Public Filename As String = ""
     Public Databasepath As String = ""
-    Public su As DWSIM.SistemasDeUnidades.Unidades
+    Public su As DWSIM.SystemsOfUnits.Units
     Public Title, Description As String
     Public Component1, Component2 As String
     Public ModelType As String

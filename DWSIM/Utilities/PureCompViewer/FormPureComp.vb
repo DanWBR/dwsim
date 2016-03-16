@@ -1,5 +1,5 @@
 ﻿Imports com.ggasoftware.indigo
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports System.IO
 
@@ -33,7 +33,7 @@ Public Class FormPureComp
 
     Dim vxCp, vyCp, vxPvap, vyPvap, vxVisc, vyVisc, vxDHvap, vyDHvap, vxLD, vyLD, vxSD, vySD, vxSCP, vySCP, vxVapVisc,
         vyVapVisc, vxVapThCond, vyVapThCond, vxLiqThCond, vyLiqThCond, vxSurfTens, vySurfTens, vxLiqCp, vyLiqCp As New ArrayList
-    Public constprop As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+    Public constprop As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
 
     Private Sub FormPureComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -44,7 +44,7 @@ Public Class FormPureComp
             OnlyViewing = True
 
             With Me.Flowsheet
-                Dim subst As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+                Dim subst As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
                 Me.ComboBox1.Items.Clear()
                 For Each subst In .Options.SelectedComponents.Values
                     Me.ComboBox1.Items.Add(DWSIM.App.GetComponentName(subst.Name) + " [" + subst.Name + "]")
@@ -64,8 +64,8 @@ Public Class FormPureComp
 
     Sub Populate()
 
-        Dim su As DWSIM.SistemasDeUnidades.Unidades = Flowsheet.Options.SelectedUnitSystem
-        Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Dim su As DWSIM.SystemsOfUnits.Units = Flowsheet.Options.SelectedUnitSystem
+        Dim cv As New DWSIM.SystemsOfUnits.Converter
         Dim nf As String = Flowsheet.Options.NumberFormat
         Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Flowsheet.Options.SelectedPropertyPackage
 
@@ -83,38 +83,38 @@ Public Class FormPureComp
         'setting up liquid table
         Me.DataTableLiquid.Rows.Clear()
         Me.DataTableLiquid.Rows.Add(51)
-        Me.DataTableLiquid.Columns.Item(0).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableLiquid.Columns.Item(2).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableLiquid.Columns.Item(4).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableLiquid.Columns.Item(6).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableLiquid.Columns.Item(8).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableLiquid.Columns.Item(10).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableLiquid.Columns.Item(12).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableLiquid.Columns.Item(1).HeaderText = DWSIM.App.GetLocalString("CapacidadeCalorfica") & " " & su.spmp_heatCapacityCp
-        Me.DataTableLiquid.Columns.Item(3).HeaderText = DWSIM.App.GetLocalString("EntalpiadeVaporizao") & " " & su.spmp_enthalpy
-        Me.DataTableLiquid.Columns.Item(5).HeaderText = DWSIM.App.GetLocalString("PressodeVapor") & " " & su.spmp_pressure
+        Me.DataTableLiquid.Columns.Item(0).HeaderText = "Temp " & su.temperature
+        Me.DataTableLiquid.Columns.Item(2).HeaderText = "Temp " & su.temperature
+        Me.DataTableLiquid.Columns.Item(4).HeaderText = "Temp " & su.temperature
+        Me.DataTableLiquid.Columns.Item(6).HeaderText = "Temp " & su.temperature
+        Me.DataTableLiquid.Columns.Item(8).HeaderText = "Temp " & su.temperature
+        Me.DataTableLiquid.Columns.Item(10).HeaderText = "Temp " & su.temperature
+        Me.DataTableLiquid.Columns.Item(12).HeaderText = "Temp " & su.temperature
+        Me.DataTableLiquid.Columns.Item(1).HeaderText = DWSIM.App.GetLocalString("CapacidadeCalorfica") & " " & su.heatCapacityCp
+        Me.DataTableLiquid.Columns.Item(3).HeaderText = DWSIM.App.GetLocalString("EntalpiadeVaporizao") & " " & su.enthalpy
+        Me.DataTableLiquid.Columns.Item(5).HeaderText = DWSIM.App.GetLocalString("PressodeVapor") & " " & su.pressure
         Me.DataTableLiquid.Columns.Item(7).HeaderText = DWSIM.App.GetLocalString("Tensosuperficial") & " " & su.tpmp_surfaceTension
-        Me.DataTableLiquid.Columns.Item(9).HeaderText = DWSIM.App.GetLocalString("ViscosidadeLquido") & " " & su.spmp_viscosity
-        Me.DataTableLiquid.Columns.Item(11).HeaderText = DWSIM.App.GetLocalString("LiquidDensity") & " " & su.spmp_density
-        Me.DataTableLiquid.Columns.Item(13).HeaderText = DWSIM.App.GetLocalString("Condutividadetrmica") & " " & su.spmp_thermalConductivity
+        Me.DataTableLiquid.Columns.Item(9).HeaderText = DWSIM.App.GetLocalString("ViscosidadeLquido") & " " & su.viscosity
+        Me.DataTableLiquid.Columns.Item(11).HeaderText = DWSIM.App.GetLocalString("LiquidDensity") & " " & su.density
+        Me.DataTableLiquid.Columns.Item(13).HeaderText = DWSIM.App.GetLocalString("Condutividadetrmica") & " " & su.thermalConductivity
 
         'setting up vapour table
         Me.DataTableVapour.Rows.Clear()
         Me.DataTableVapour.Rows.Add(51)
-        Me.DataTableVapour.Columns.Item(0).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableVapour.Columns.Item(2).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableVapour.Columns.Item(4).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableVapour.Columns.Item(1).HeaderText = DWSIM.App.GetLocalString("CapacidadeCalorfica") & " " & su.spmp_heatCapacityCp
-        Me.DataTableVapour.Columns.Item(3).HeaderText = DWSIM.App.GetLocalString("ViscosidadeLquido") & " " & su.spmp_viscosity
-        Me.DataTableVapour.Columns.Item(5).HeaderText = DWSIM.App.GetLocalString("Condutividadetrmica") & " " & su.spmp_thermalConductivity
+        Me.DataTableVapour.Columns.Item(0).HeaderText = "Temp " & su.temperature
+        Me.DataTableVapour.Columns.Item(2).HeaderText = "Temp " & su.temperature
+        Me.DataTableVapour.Columns.Item(4).HeaderText = "Temp " & su.temperature
+        Me.DataTableVapour.Columns.Item(1).HeaderText = DWSIM.App.GetLocalString("CapacidadeCalorfica") & " " & su.heatCapacityCp
+        Me.DataTableVapour.Columns.Item(3).HeaderText = DWSIM.App.GetLocalString("ViscosidadeLquido") & " " & su.viscosity
+        Me.DataTableVapour.Columns.Item(5).HeaderText = DWSIM.App.GetLocalString("Condutividadetrmica") & " " & su.thermalConductivity
 
         'setting up solid table
         Me.DataTableSolid.Rows.Clear()
         Me.DataTableSolid.Rows.Add(51)
-        Me.DataTableSolid.Columns.Item(0).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableSolid.Columns.Item(2).HeaderText = "Temp " & su.spmp_temperature
-        Me.DataTableSolid.Columns.Item(1).HeaderText = DWSIM.App.GetLocalString("SolidDensity") & " " & su.spmp_density
-        Me.DataTableSolid.Columns.Item(3).HeaderText = DWSIM.App.GetLocalString("SolidCp") & " " & su.spmp_heatCapacityCp
+        Me.DataTableSolid.Columns.Item(0).HeaderText = "Temp " & su.temperature
+        Me.DataTableSolid.Columns.Item(2).HeaderText = "Temp " & su.temperature
+        Me.DataTableSolid.Columns.Item(1).HeaderText = DWSIM.App.GetLocalString("SolidDensity") & " " & su.density
+        Me.DataTableSolid.Columns.Item(3).HeaderText = DWSIM.App.GetLocalString("SolidCp") & " " & su.heatCapacityCp
 
         If Not constprop.IsBlackOil Then
 
@@ -136,8 +136,8 @@ Public Class FormPureComp
 
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, pp.AUX_CPi(constprop.Name, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_CPi(constprop.Name, T))
                     vxCp.Add(TD)
                     vyCp.Add(VD)
                     Me.DataTableVapour.Item(0, Row).Value = Format(TD, nf)
@@ -155,8 +155,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = "Cp [ " & su.spmp_heatCapacityCp & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = "Cp [ " & su.heatCapacityCp & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphCp.Invalidate()
@@ -174,8 +174,8 @@ Public Class FormPureComp
             vyVapVisc.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_viscosity, pp.AUX_VAPVISCi(constprop, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.viscosity, pp.AUX_VAPVISCi(constprop, T))
                     vxVapVisc.Add(TD)
                     vyVapVisc.Add(VD)
                     Me.DataTableVapour.Item(2, Row).Value = Format(TD, nf)
@@ -193,8 +193,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = "Visc [ " & su.spmp_viscosity & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = "Visc [ " & su.viscosity & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphVapVisc.Invalidate()
@@ -214,8 +214,8 @@ Public Class FormPureComp
             vyVapThCond.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_thermalConductivity, pp.AUX_VAPTHERMCONDi(constprop, T, 101325))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.thermalConductivity, pp.AUX_VAPTHERMCONDi(constprop, T, 101325))
                     vxVapThCond.Add(TD)
                     vyVapThCond.Add(VD)
                     Me.DataTableVapour.Item(4, Row).Value = Format(TD, nf)
@@ -233,8 +233,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = DWSIM.App.GetLocalString("CondutividadetrmicaF3") & " [ " & su.spmp_thermalConductivity & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = DWSIM.App.GetLocalString("CondutividadetrmicaF3") & " [ " & su.thermalConductivity & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphVapThermCond.Invalidate()
@@ -258,8 +258,8 @@ Public Class FormPureComp
 
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, pp.AUX_LIQ_Cpi(constprop, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_LIQ_Cpi(constprop, T))
                     vxLiqCp.Add(TD)
                     vyLiqCp.Add(VD)
                     Me.DataTableLiquid.Item(0, Row).Value = Format(TD, nf)
@@ -277,8 +277,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = "Cp [ " & su.spmp_heatCapacityCp & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = "Cp [ " & su.heatCapacityCp & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphLiqCp.Invalidate()
@@ -297,8 +297,8 @@ Public Class FormPureComp
             vyDHvap.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_enthalpy, pp.AUX_HVAPi(constprop.Name, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.enthalpy, pp.AUX_HVAPi(constprop.Name, T))
                     vxDHvap.Add(TD)
                     vyDHvap.Add(VD)
                     Me.DataTableLiquid.Item(2, Row).Value = Format(TD, nf)
@@ -316,8 +316,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = "DHvap [ " & su.spmp_enthalpy & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = "DHvap [ " & su.enthalpy & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphDHVAP.Invalidate()
@@ -337,8 +337,8 @@ Public Class FormPureComp
             vyPvap.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_pressure, pp.AUX_PVAPi(constprop.Name, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.pressure, pp.AUX_PVAPi(constprop.Name, T))
                     vxPvap.Add(TD)
                     vyPvap.Add(VD)
                     Me.DataTableLiquid.Item(4, Row).Value = Format(TD, nf)
@@ -356,8 +356,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = "Pvap [ " & su.spmp_pressure & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = "Pvap [ " & su.pressure & " ] "
                 .YAxis.Type = ZedGraph.AxisType.Log
                 .AxisChange(Me.CreateGraphics)
             End With
@@ -379,8 +379,8 @@ Public Class FormPureComp
             vySurfTens.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.tpmp_surfaceTension, pp.AUX_SURFTi(constprop, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.tpmp_surfaceTension, pp.AUX_SURFTi(constprop, T))
                     vxSurfTens.Add(TD)
                     vySurfTens.Add(VD)
                     Me.DataTableLiquid.Item(6, Row).Value = Format(TD, nf)
@@ -398,7 +398,7 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
                 .YAxis.Title.Text = DWSIM.App.GetLocalString("Tensosuperficial") & " [ " & su.tpmp_surfaceTension & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
@@ -417,8 +417,8 @@ Public Class FormPureComp
             vyVisc.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_viscosity, pp.AUX_LIQVISCi(constprop.Name, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.viscosity, pp.AUX_LIQVISCi(constprop.Name, T))
                     vxVisc.Add(TD)
                     vyVisc.Add(VD)
                     Me.DataTableLiquid.Item(8, Row).Value = Format(TD, nf)
@@ -436,8 +436,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = "Visc [ " & su.spmp_viscosity & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = "Visc [ " & su.viscosity & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphVisc.Invalidate()
@@ -458,8 +458,8 @@ Public Class FormPureComp
             vyLD.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_density, pp.AUX_LIQDENSi(constprop, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.density, pp.AUX_LIQDENSi(constprop, T))
                     vxLD.Add(TD)
                     vyLD.Add(VD)
                     Me.DataTableLiquid.Item(10, Row).Value = Format(TD, nf)
@@ -477,8 +477,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = DWSIM.App.GetLocalString("LiquidDensity") & " [ " & su.spmp_density & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = DWSIM.App.GetLocalString("LiquidDensity") & " [ " & su.density & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphLiqDens.Invalidate()
@@ -498,8 +498,8 @@ Public Class FormPureComp
             vyLiqThCond.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_thermalConductivity, pp.AUX_LIQTHERMCONDi(constprop, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.thermalConductivity, pp.AUX_LIQTHERMCONDi(constprop, T))
                     vxLiqThCond.Add(TD)
                     vyLiqThCond.Add(VD)
                     Me.DataTableLiquid.Item(12, Row).Value = Format(TD, nf)
@@ -517,8 +517,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = DWSIM.App.GetLocalString("CondutividadetrmicaF2") & " [ " & su.spmp_thermalConductivity & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = DWSIM.App.GetLocalString("CondutividadetrmicaF2") & " [ " & su.thermalConductivity & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphLiqThermCond.Invalidate()
@@ -540,8 +540,8 @@ Public Class FormPureComp
             vySD.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_density, pp.AUX_SOLIDDENSi(constprop, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.density, pp.AUX_SOLIDDENSi(constprop, T))
                     vxSD.Add(TD)
                     vySD.Add(VD)
                     'Me.DataTable.Item(10, Row).Value = Format(TD, nf)
@@ -562,8 +562,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = DWSIM.App.GetLocalString("SolidDensity") & " [ " & su.spmp_density & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = DWSIM.App.GetLocalString("SolidDensity") & " [ " & su.density & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphSolidDens.Invalidate()
@@ -584,8 +584,8 @@ Public Class FormPureComp
             vySCP.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Conversor.ConverterDoSI(su.spmp_temperature, T)
-                    VD = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, pp.AUX_SolidHeatCapacity(constprop, T))
+                    TD = Converter.ConvertFromSI(su.temperature, T)
+                    VD = Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_SolidHeatCapacity(constprop, T))
                     vxSCP.Add(TD)
                     vySCP.Add(VD)
                     'Me.DataTable.Item(12, Row).Value = Format(TD, nf)
@@ -606,8 +606,8 @@ Public Class FormPureComp
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.IsVisible = False
-                .XAxis.Title.Text = "T [ " & su.spmp_temperature & " ] "
-                .YAxis.Title.Text = DWSIM.App.GetLocalString("SolidCp") & " [ " & su.spmp_heatCapacityCp & " ] "
+                .XAxis.Title.Text = "T [ " & su.temperature & " ] "
+                .YAxis.Title.Text = DWSIM.App.GetLocalString("SolidCp") & " [ " & su.heatCapacityCp & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphCpSolid.Invalidate()
@@ -704,19 +704,19 @@ Public Class FormPureComp
             .Add(New Object() {DWSIM.App.GetLocalString("Type"), DWSIM.App.GetComponentType(constprop), ""})
             .Add(New Object() {"ID", constprop.ID, ""})
             .Add(New Object() {DWSIM.App.GetLocalString("CASNumber"), constprop.CAS_Number, ""})
-            .Add(New Object() {DWSIM.App.GetLocalString("Massamolar"), Format(constprop.Molar_Weight, nf), su.spmp_molecularWeight})
-            .Add(New Object() {DWSIM.App.GetLocalString("TemperaturaCrtica"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.Critical_Temperature), nf), su.spmp_temperature})
-            .Add(New Object() {DWSIM.App.GetLocalString("PressoCrtica"), Format(Conversor.ConverterDoSI(su.spmp_pressure, constprop.Critical_Pressure), nf), su.spmp_pressure})
-            .Add(New Object() {DWSIM.App.GetLocalString("VolumeCrtico"), Format(Conversor.ConverterDoSI(su.molar_volume, constprop.Critical_Volume), nf), su.molar_volume})
+            .Add(New Object() {DWSIM.App.GetLocalString("Massamolar"), Format(constprop.Molar_Weight, nf), su.molecularWeight})
+            .Add(New Object() {DWSIM.App.GetLocalString("TemperaturaCrtica"), Format(Converter.ConvertFromSI(su.temperature, constprop.Critical_Temperature), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("PressoCrtica"), Format(Converter.ConvertFromSI(su.pressure, constprop.Critical_Pressure), nf), su.pressure})
+            .Add(New Object() {DWSIM.App.GetLocalString("VolumeCrtico"), Format(Converter.ConvertFromSI(su.molar_volume, constprop.Critical_Volume), nf), su.molar_volume})
             .Add(New Object() {DWSIM.App.GetLocalString("CompressibilidadeCrt"), Format(constprop.Critical_Compressibility, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("FatorAcntrico"), Format(constprop.Acentric_Factor, nf), ""})
-            .Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(Conversor.ConverterDoSI(su.spmp_enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.spmp_enthalpy})
-            .Add(New Object() {DWSIM.App.GetLocalString("EnergiadeGibbsdeForm2"), Format(Conversor.ConverterDoSI(su.spmp_entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.spmp_enthalpy})
-            .Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.Normal_Boiling_Point), nf), su.spmp_temperature})
-            .Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.TemperatureOfFusion), nf), su.spmp_temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("EnergiadeGibbsdeForm2"), Format(Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(Converter.ConvertFromSI(su.temperature, constprop.Normal_Boiling_Point), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(Converter.ConvertFromSI(su.temperature, constprop.TemperatureOfFusion), nf), su.temperature})
             .Add(New Object() {DWSIM.App.GetLocalString("EnthalpyOfFusionAtTf"), Format(constprop.EnthalpyOfFusionAtTf, nf), "kJ/mol"})
-            .Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfSolidDensity_Ts"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.SolidTs), nf), su.spmp_temperature})
-            .Add(New Object() {DWSIM.App.GetLocalString("SolidDensityAtTs"), Format(Conversor.ConverterDoSI(su.spmp_density, constprop.SolidDensityAtTs), nf), su.spmp_density})
+            .Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfSolidDensity_Ts"), Format(Converter.ConvertFromSI(su.temperature, constprop.SolidTs), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("SolidDensityAtTs"), Format(Converter.ConvertFromSI(su.density, constprop.SolidDensityAtTs), nf), su.density})
             .Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderAcentricFactor"), Format(constprop.Chao_Seader_Acentricity, nf), "-"})
             .Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderSolubilityParameter"), Format(constprop.Chao_Seader_Solubility_Parameter, nf), "(cal/mL)^0.5"})
             .Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderLiquidMolarVolume"), Format(constprop.Chao_Seader_Liquid_Molar_Volume, nf), "mL/mol"})
@@ -729,18 +729,18 @@ Public Class FormPureComp
             .Add(New Object() {DWSIM.App.GetLocalString("HydrationNumber"), constprop.HydrationNumber, ""})
             .Add(New Object() {DWSIM.App.GetLocalString("PositiveIon"), constprop.PositiveIon, ""})
             .Add(New Object() {DWSIM.App.GetLocalString("NegativeIon"), constprop.NegativeIon, ""})
-            .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(Conversor.ConverterDoSI(su.spmp_enthalpy, constprop.Electrolyte_DelGF), nf), su.spmp_enthalpy})
-            .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(Conversor.ConverterDoSI(su.spmp_enthalpy, constprop.Electrolyte_DelHF), nf), su.spmp_enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelHF), nf), su.enthalpy})
             .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_Cp0"), Format(constprop.Electrolyte_Cp0, nf), "kJ/[mol.K]"})
             .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_StdStateMolVol"), Format(constprop.StandardStateMolarVolume, nf), "cm3/mol"})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGG"), Format(constprop.BO_SGG, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGO"), Format(constprop.BO_SGO, nf), ""})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(Conversor.ConverterDoSI(su.gor, constprop.BO_GOR), nf), su.gor})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(Converter.ConvertFromSI(su.gor, constprop.BO_GOR), nf), su.gor})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_BSW"), Format(constprop.BO_BSW, nf), ""})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, constprop.BO_OilVisc1), nf), su.spmp_cinematic_viscosity})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.BO_OilViscTemp1), nf), su.spmp_temperature})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, constprop.BO_OilVisc2), nf), su.spmp_cinematic_viscosity})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.BO_OilViscTemp2), nf), su.spmp_temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(Converter.ConvertFromSI(su.cinematic_viscosity, constprop.BO_OilVisc1), nf), su.cinematic_viscosity})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(Converter.ConvertFromSI(su.temperature, constprop.BO_OilViscTemp1), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(Converter.ConvertFromSI(su.cinematic_viscosity, constprop.BO_OilVisc2), nf), su.cinematic_viscosity})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(Converter.ConvertFromSI(su.temperature, constprop.BO_OilViscTemp2), nf), su.temperature})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_P"), Format(constprop.BO_PNA_P, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_N"), Format(constprop.BO_PNA_N, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_A"), Format(constprop.BO_PNA_A, nf), ""})
@@ -764,32 +764,32 @@ Public Class FormPureComp
 
     Private Sub GridProps_CellEndEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles GridProps.CellEndEdit
 
-        Dim cv As New DWSIM.SistemasDeUnidades.Conversor
-        Dim su As DWSIM.SistemasDeUnidades.Unidades = Flowsheet.Options.SelectedUnitSystem
+        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim su As DWSIM.SystemsOfUnits.Units = Flowsheet.Options.SelectedUnitSystem
         Select Case e.RowIndex
             Case 0 '.Add(New Object() {DWSIM.App.GetLocalString("Database"), constprop.CurrentDB, ""})
             Case 1 '.Add(New Object() {DWSIM.App.GetLocalString("Type"), DWSIM.App.GetComponentType(constprop), ""})
             Case 2 '.Add(New Object() {"ID", constprop.ID, ""})
             Case 3 '.Add(New Object() {DWSIM.App.GetLocalString("CASNumber"), constprop.CAS_Number, ""})
-            Case 4 '.Add(New Object() {DWSIM.App.GetLocalString("Massamolar"), Format(constprop.Molar_Weight, nf), su.spmp_molecularWeight})
-                constprop.Molar_Weight = Conversor.ConverterParaSI(su.spmp_molecularWeight, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 5 '.Add(New Object() {DWSIM.App.GetLocalString("TemperaturaCrtica"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.Critical_Temperature), nf), su.spmp_temperature})
-                constprop.Critical_Temperature = Conversor.ConverterParaSI(su.spmp_temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 6 '.Add(New Object() {DWSIM.App.GetLocalString("PressoCrtica"), Format(Conversor.ConverterDoSI(su.spmp_pressure, constprop.Critical_Pressure), nf), su.spmp_pressure})
-                constprop.Critical_Pressure = Conversor.ConverterParaSI(su.spmp_pressure, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 7 '.Add(New Object() {DWSIM.App.GetLocalString("VolumeCrtico"), Format(Conversor.ConverterDoSI(su.molar_volume, constprop.Critical_Volume), nf), su.molar_volume})
-                constprop.Critical_Volume = Conversor.ConverterParaSI(su.volume, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 4 '.Add(New Object() {DWSIM.App.GetLocalString("Massamolar"), Format(constprop.Molar_Weight, nf), su.molecularWeight})
+                constprop.Molar_Weight = Converter.ConvertToSI(su.molecularWeight, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 5 '.Add(New Object() {DWSIM.App.GetLocalString("TemperaturaCrtica"), Format(Converter.ConvertFromSI(su.temperature, constprop.Critical_Temperature), nf), su.temperature})
+                constprop.Critical_Temperature = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 6 '.Add(New Object() {DWSIM.App.GetLocalString("PressoCrtica"), Format(Converter.ConvertFromSI(su.pressure, constprop.Critical_Pressure), nf), su.pressure})
+                constprop.Critical_Pressure = Converter.ConvertToSI(su.pressure, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 7 '.Add(New Object() {DWSIM.App.GetLocalString("VolumeCrtico"), Format(Converter.ConvertFromSI(su.molar_volume, constprop.Critical_Volume), nf), su.molar_volume})
+                constprop.Critical_Volume = Converter.ConvertToSI(su.volume, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 8 '.Add(New Object() {DWSIM.App.GetLocalString("CompressibilidadeCrt"), Format(constprop.Critical_Compressibility, nf), ""})
                 constprop.Critical_Compressibility = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 9 '.Add(New Object() {DWSIM.App.GetLocalString("FatorAcntrico"), Format(constprop.Acentric_Factor, nf), ""})
                 constprop.Acentric_Factor = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 10 '.Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(Conversor.ConverterDoSI(su.spmp_enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.spmp_enthalpy})
-                constprop.IG_Enthalpy_of_Formation_25C = Conversor.ConverterParaSI(su.spmp_enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 11 '.Add(New Object() {DWSIM.App.GetLocalString("EnergiadeGibbsdeForm2"), Format(Conversor.ConverterDoSI(su.spmp_entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.spmp_enthalpy})
-                constprop.IG_Gibbs_Energy_of_Formation_25C = Conversor.ConverterParaSI(su.spmp_enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 12 '.Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.Normal_Boiling_Point), nf), su.spmp_temperature})
-                constprop.Normal_Boiling_Point = Conversor.ConverterParaSI(su.spmp_temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-                constprop.NBP = Conversor.ConverterParaSI(su.spmp_temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 10 '.Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.enthalpy})
+                constprop.IG_Enthalpy_of_Formation_25C = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 11 '.Add(New Object() {DWSIM.App.GetLocalString("EnergiadeGibbsdeForm2"), Format(Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
+                constprop.IG_Gibbs_Energy_of_Formation_25C = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 12 '.Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(Converter.ConvertFromSI(su.temperature, constprop.Normal_Boiling_Point), nf), su.temperature})
+                constprop.Normal_Boiling_Point = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+                constprop.NBP = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 17 '.Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderAcentricFactor"), Format(constprop.Chao_Seader_Acentricity, nf), "-"})
                 constprop.Chao_Seader_Acentricity = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 18 '.Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderSolubilityParameter"), Format(constprop.Chao_Seader_Solubility_Parameter, nf), "(cal/mL)^0.5"})
@@ -814,19 +814,19 @@ Public Class FormPureComp
                 constprop.PositiveIon = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 28 '.Add(New Object() {DWSIM.App.GetLocalString("NegativeIon"), constprop.NegativeIon, ""})
                 constprop.NegativeIon = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 13 '.Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.TemperatureOfFusion), nf), su.spmp_temperature})
-                constprop.TemperatureOfFusion = Conversor.ConverterParaSI(su.spmp_temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 13 '.Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(Converter.ConvertFromSI(su.temperature, constprop.TemperatureOfFusion), nf), su.temperature})
+                constprop.TemperatureOfFusion = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 14 '.Add(New Object() {DWSIM.App.GetLocalString("EnthalpyOfFusionAtTf"), Format(constprop.EnthalpyOfFusionAtTf, nf), "kJ/mol"})
                 constprop.EnthalpyOfFusionAtTf = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 15 '.Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfSolidDensity_Ts"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.SolidTs), nf), su.spmp_temperature})
-                constprop.SolidTs = Conversor.ConverterParaSI(su.spmp_temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 16 '.Add(New Object() {DWSIM.App.GetLocalString("SolidDensityAtTs"), Format(Conversor.ConverterDoSI(su.spmp_density, constprop.SolidDensityAtTs), nf), su.spmp_density})
-                constprop.SolidDensityAtTs = Conversor.ConverterParaSI(su.spmp_density, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 29 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(Conversor.ConverterDoSI(su.spmp_enthalpy, constprop.Electrolyte_DelGF), nf), su.spmp_enthalpy})
-                constprop.Electrolyte_DelGF = Conversor.ConverterParaSI(su.spmp_enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 30 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(Conversor.ConverterDoSI(su.spmp_enthalpy, constprop.Electrolyte_DelGF), nf), su.spmp_enthalpy})
-                constprop.Electrolyte_DelHF = Conversor.ConverterParaSI(su.spmp_enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 31 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_Cp0"), Format(Conversor.ConverterDoSI(su.spmp_heatCapacityCp, constprop.Electrolyte_Cp0), nf), su.spmp_heatCapacityCp})
+            Case 15 '.Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfSolidDensity_Ts"), Format(Converter.ConvertFromSI(su.temperature, constprop.SolidTs), nf), su.temperature})
+                constprop.SolidTs = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 16 '.Add(New Object() {DWSIM.App.GetLocalString("SolidDensityAtTs"), Format(Converter.ConvertFromSI(su.density, constprop.SolidDensityAtTs), nf), su.density})
+                constprop.SolidDensityAtTs = Converter.ConvertToSI(su.density, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 29 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
+                constprop.Electrolyte_DelGF = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 30 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
+                constprop.Electrolyte_DelHF = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 31 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_Cp0"), Format(Converter.ConvertFromSI(su.heatCapacityCp, constprop.Electrolyte_Cp0), nf), su.heatCapacityCp})
                 constprop.Electrolyte_Cp0 = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 32 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_StdStateMolVol"), Format(constprop.StandardStateMolarVolume, nf), "cm3/mol"})
                 constprop.StandardStateMolarVolume = GridProps.Rows(e.RowIndex).Cells(1).Value
@@ -834,18 +834,18 @@ Public Class FormPureComp
                 constprop.BO_SGG = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 34 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGO"), Format(constprop.BO_SGO, nf), ""})
                 constprop.BO_SGO = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 35 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(Conversor.ConverterDoSI(su.gor, constprop.BO_GOR), nf), su.gor})
-                constprop.BO_GOR = Conversor.ConverterParaSI(su.gor, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 35 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(Converter.ConvertFromSI(su.gor, constprop.BO_GOR), nf), su.gor})
+                constprop.BO_GOR = Converter.ConvertToSI(su.gor, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 36 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_BSW"), Format(constprop.BO_BSW, nf), ""})
                 constprop.BO_BSW = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 37 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.spmp_cinematic_viscosity})
-                constprop.BO_OilVisc1 = Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 38 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.Electrolyte_DelGF), nf), su.spmp_temperature})
-                constprop.BO_OilViscTemp1 = Conversor.ConverterParaSI(su.spmp_temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 39 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.spmp_cinematic_viscosity})
-                constprop.BO_OilVisc2 = Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 40 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(Conversor.ConverterDoSI(su.spmp_temperature, constprop.Electrolyte_DelGF), nf), su.spmp_temperature})
-                constprop.BO_OilViscTemp2 = Conversor.ConverterParaSI(su.spmp_temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 37 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
+                constprop.BO_OilVisc1 = Converter.ConvertToSI(su.cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 38 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
+                constprop.BO_OilViscTemp1 = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 39 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
+                constprop.BO_OilVisc2 = Converter.ConvertToSI(su.cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 40 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
+                constprop.BO_OilViscTemp2 = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 41 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_P"), Format(constprop.BO_PNA_P, nf), ""})
                 constprop.BO_PNA_P = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 42 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_N"), Format(constprop.BO_PNA_N, nf), ""})
@@ -858,8 +858,8 @@ Public Class FormPureComp
         SetCompStatus()
 
         For Each mat As DWSIM.SimulationObjects.Streams.MaterialStream In Me.Flowsheet.Collections.CLCS_MaterialStreamCollection.Values
-            For Each p As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
-                For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In p.Componentes.Values
+            For Each p As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In p.Componentes.Values
                     If subst.ConstantProperties.Name = constprop.Name Then
                         subst.ConstantProperties = constprop
                         Exit For
@@ -892,7 +892,7 @@ Public Class FormPureComp
     End Sub
 
     Private Sub BtnRestaurar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnRestaurar.Click
-        Dim cpa() As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+        Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
 
         Select Case constprop.OriginalDB
             Case "DWSIM"
@@ -978,8 +978,8 @@ Public Class FormPureComp
         End Select
 
         For Each mat As DWSIM.SimulationObjects.Streams.MaterialStream In Me.Flowsheet.Collections.CLCS_MaterialStreamCollection.Values
-            For Each p As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
-                For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In p.Componentes.Values
+            For Each p As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In p.Componentes.Values
                     subst.ConstantProperties = constprop
                 Next
             Next

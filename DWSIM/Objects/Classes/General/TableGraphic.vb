@@ -336,7 +336,7 @@ Namespace DWSIM.GraphicObjects
 
         Public Sub Update(ByRef form As FormFlowsheet)
 
-            Dim su As DWSIM.SistemasDeUnidades.Unidades = form.Options.SelectedUnitSystem
+            Dim su As DWSIM.SystemsOfUnits.Units = form.Options.SelectedUnitSystem
             Dim nf As String = form.Options.NumberFormat
 
             m_items = New Dictionary(Of String, List(Of DWSIM.Outros.NodeItem))
@@ -355,12 +355,12 @@ Namespace DWSIM.GraphicObjects
 
             For Each kvp As KeyValuePair(Of String, Boolean) In m_objectlist
                 If kvp.Value = True Then
-                    Dim myobj As SimulationObjects_BaseClass = form.GetFlowsheetSimulationObject(kvp.Key)
+                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.BaseClass = form.GetFlowsheetSimulationObject(kvp.Key)
                     m_items.Add(kvp.Key, New List(Of NodeItem))
                     m_items(kvp.Key).Add(New NodeItem(DWSIM.App.GetLocalString("Objeto"), kvp.Key, "", 0, 0, ""))
                     If Me.HeaderText = "" Then Me.HeaderText = DWSIM.App.GetLocalString("MasterTable") & " - " & DWSIM.App.GetLocalString(myobj.Descricao)
                     Dim mypropid As String = ""
-                    Dim props() As String = myobj.GetProperties(SimulationObjects_BaseClass.PropertyType.ALL)
+                    Dim props() As String = myobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
                     For Each kvp2 As KeyValuePair(Of String, Boolean) In m_propertylist
                         If kvp2.Value = True Then
                             For Each p As String In props
@@ -491,7 +491,7 @@ Namespace DWSIM.GraphicObjects
 
                 .Item.Add(DWSIM.App.GetLocalString("MT_ObjectFamily"), Me, "ObjectFamily", False, "1. " & DWSIM.App.GetLocalString("MT_ObjectFamily"), "", True)
 
-                For Each obj As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+                For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
                     If obj.GraphicObject.TipoObjeto = Me.ObjectFamily Then
                         If m_objectlist.ContainsKey(obj.GraphicObject.Tag) Then
                             .Item.Add(obj.GraphicObject.Tag, m_objectlist(obj.GraphicObject.Tag), False, "2. " & DWSIM.App.GetLocalString("MT_ObjectsToShow"), "", True)
@@ -507,7 +507,7 @@ Namespace DWSIM.GraphicObjects
 
                 If m_objectlist.Count > 0 Then
                     For Each s As String In m_objectlist.Keys
-                        props = form.GetFlowsheetSimulationObject(s).GetProperties(SimulationObjects_BaseClass.PropertyType.ALL)
+                        props = form.GetFlowsheetSimulationObject(s).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
                         Exit For
                     Next
                     For Each p As String In props
@@ -749,7 +749,7 @@ Namespace DWSIM.GraphicObjects
 
         Inherits ShapeGraphic
 
-        Public BaseOwner As SimulationObjects_BaseClass
+        Public BaseOwner As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
         Protected m_Font_Col1 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
         Protected m_Font_Col2 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
@@ -794,17 +794,17 @@ Namespace DWSIM.GraphicObjects
         End Function
 
 #Region "Constructors"
-        Public Sub New(ByRef owner As SimulationObjects_BaseClass)
+        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass)
             Me.TipoObjeto = TipoObjeto.GO_Tabela
             Me.BaseOwner = owner
         End Sub
 
-        Public Sub New(ByRef owner As SimulationObjects_BaseClass, ByVal graphicPosition As Point)
+        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal graphicPosition As Point)
             Me.New(owner)
             Me.SetPosition(graphicPosition)
         End Sub
 
-        Public Sub New(ByRef owner As SimulationObjects_BaseClass, ByVal posX As Integer, ByVal posY As Integer)
+        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal posX As Integer, ByVal posY As Integer)
             Me.New(owner, New Point(posX, posY))
         End Sub
 
@@ -1117,7 +1117,7 @@ Namespace DWSIM.GraphicObjects
     <Serializable()> Public Class QuickTableGraphic
         Inherits ShapeGraphic
 
-        Public BaseOwner As SimulationObjects_BaseClass
+        Public BaseOwner As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
         Protected m_HeaderFont As Font = New Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Pixel, 0, False)
 
@@ -1146,17 +1146,17 @@ Namespace DWSIM.GraphicObjects
             Me.TipoObjeto = TipoObjeto.GO_TabelaRapida
         End Sub
 
-        Public Sub New(ByRef owner As SimulationObjects_BaseClass)
+        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass)
             Me.TipoObjeto = TipoObjeto.GO_TabelaRapida
             Me.BaseOwner = owner
         End Sub
 
-        Public Sub New(ByRef owner As SimulationObjects_BaseClass, ByVal graphicPosition As Point)
+        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal graphicPosition As Point)
             Me.New(owner)
             Me.SetPosition(graphicPosition)
         End Sub
 
-        Public Sub New(ByRef owner As SimulationObjects_BaseClass, ByVal posX As Integer, ByVal posY As Integer)
+        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal posX As Integer, ByVal posY As Integer)
             Me.New(owner, New Point(posX, posY))
         End Sub
 

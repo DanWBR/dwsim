@@ -1,4 +1,4 @@
-﻿Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+﻿Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
@@ -27,8 +27,8 @@ Public Class FormBinEnv
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
     Dim mw1, mw2 As Double
 
@@ -87,18 +87,18 @@ Public Class FormBinEnv
 
             cbXAxisBasis.SelectedIndex = 0
 
-            Me.lblP.Text = su.spmp_pressure
-            Me.lblT.Text = su.spmp_temperature
+            Me.lblP.Text = su.pressure
+            Me.lblT.Text = su.temperature
 
-            Me.tbP.Text = Format(Conversor.ConverterDoSI(su.spmp_pressure, 101325), nf)
-            Me.tbT.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, 298.15), nf)
+            Me.tbP.Text = Format(Converter.ConvertFromSI(su.pressure, 101325), nf)
+            Me.tbT.Text = Format(Converter.ConvertFromSI(su.temperature, 298.15), nf)
 
             Me.GraphControl.IsShowPointValues = True
 
             Me.GridExpData.Columns(1).HeaderText = "x1 (" & DWSIM.App.GetLocalString("FraoMolar1") & ")"
             Me.GridExpData.Columns(2).HeaderText = "y1 (" & DWSIM.App.GetLocalString("FraoMolar1") & ")"
-            Me.GridExpData.Columns(3).HeaderText = "T (" & su.spmp_temperature & ")"
-            Me.GridExpData.Columns(4).HeaderText = "P (" & su.spmp_pressure & ")"
+            Me.GridExpData.Columns(3).HeaderText = "T (" & su.temperature & ")"
+            Me.GridExpData.Columns(4).HeaderText = "P (" & su.pressure & ")"
 
             Try
                 If Frm.Options.BinaryEnvelopeExpData <> "" Then Me.GridExpData.PasteData2(Frm.Options.BinaryEnvelopeExpData)
@@ -135,11 +135,11 @@ Public Class FormBinEnv
 
             Me.mat = New MaterialStream("", "")
 
-            For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
+            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
                 For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
                     If DWSIM.App.GetComponentName(cp.Name) = cbComp1.SelectedItem.ToString Then
                         With phase
-                            .Componentes.Add(cp.Name, New DWSIM.ClassesBasicasTermodinamica.Substancia(cp.Name, ""))
+                            .Componentes.Add(cp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(cp.Name, ""))
                             .Componentes(cp.Name).ConstantProperties = cp
                             mw1 = cp.Molar_Weight
                         End With
@@ -148,11 +148,11 @@ Public Class FormBinEnv
                 Next
             Next
 
-            For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
+            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
                 For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
                     If DWSIM.App.GetComponentName(cp.Name) = cbComp2.SelectedItem.ToString Then
                         With phase
-                            .Componentes.Add(cp.Name, New DWSIM.ClassesBasicasTermodinamica.Substancia(cp.Name, ""))
+                            .Componentes.Add(cp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(cp.Name, ""))
                             .Componentes(cp.Name).ConstantProperties = cp
                             mw2 = cp.Molar_Weight
                         End With
@@ -161,8 +161,8 @@ Public Class FormBinEnv
                 Next
             Next
 
-            P = Conversor.ConverterParaSI(su.spmp_pressure, tbP.Text)
-            T = Conversor.ConverterParaSI(su.spmp_temperature, tbT.Text)
+            P = Converter.ConvertToSI(su.pressure, tbP.Text)
+            T = Converter.ConvertToSI(su.temperature, tbT.Text)
 
             Dim tipocalc As String = ""
             If Me.RadioButton1.Checked Then
@@ -409,11 +409,11 @@ Public Class FormBinEnv
                     Do
                         If py1(i) <> 0.0# Then
                             vx1.Add(px(i))
-                            vy1.Add(Conversor.ConverterDoSI(su.spmp_temperature, py1(i)))
+                            vy1.Add(Converter.ConvertFromSI(su.temperature, py1(i)))
                         End If
                         If py2(i) <> 0.0# Then
                             vx2.Add(px(i))
-                            vy2.Add(Conversor.ConverterDoSI(su.spmp_temperature, py2(i)))
+                            vy2.Add(Converter.ConvertFromSI(su.temperature, py2(i)))
                         End If
                         i += 1
                     Loop Until i = px.Count
@@ -424,7 +424,7 @@ Public Class FormBinEnv
                     Do
                         vx1l1.Add(px1l1(i))
                         vx1l2.Add(px1l2(i))
-                        vy3.Add(Conversor.ConverterDoSI(su.spmp_temperature, py3(i)))
+                        vy3.Add(Converter.ConvertFromSI(su.temperature, py3(i)))
                         i += 1
                     Loop Until i = px1l1.Count
                 End If
@@ -433,7 +433,7 @@ Public Class FormBinEnv
                     i = 0
                     Do
                         vxs1.Add(pxs1(i))
-                        vys1.Add(Conversor.ConverterDoSI(su.spmp_temperature, pys1(i)))
+                        vys1.Add(Converter.ConvertFromSI(su.temperature, pys1(i)))
                         i += 1
                     Loop Until i = pys1.Count
                 End If
@@ -442,7 +442,7 @@ Public Class FormBinEnv
                     i = 0
                     Do
                         vxs2.Add(pxs2(i))
-                        vys2.Add(Conversor.ConverterDoSI(su.spmp_temperature, pys2(i)))
+                        vys2.Add(Converter.ConvertFromSI(su.temperature, pys2(i)))
                         i += 1
                     Loop Until i = pys2.Count
                 End If
@@ -451,26 +451,26 @@ Public Class FormBinEnv
                     i = 0
                     Do
                         vxc.Add(pxc(i))
-                        vyc.Add(Conversor.ConverterDoSI(su.spmp_temperature, pyc(i)))
+                        vyc.Add(Converter.ConvertFromSI(su.temperature, pyc(i)))
                         i += 1
                     Loop Until i = pxc.Count
                 End If
 
                 With Me.Grid1.Columns
                     .Add("[" & ppname & "] ""c1", "[" & ppname & "] " & "VLE x (" & c(0) & ")")
-                    .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & "VLE Tbub (" & su.spmp_temperature & ")")
+                    .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & "VLE Tbub (" & su.temperature & ")")
                     .Add("[" & ppname & "] ""c3", "[" & ppname & "] " & "VLE x (" & c(0) & ")")
-                    .Add("[" & ppname & "] ""c4", "[" & ppname & "] " & "VLE Tdew (" & su.spmp_temperature & ")")
+                    .Add("[" & ppname & "] ""c4", "[" & ppname & "] " & "VLE Tdew (" & su.temperature & ")")
                     .Add("[" & ppname & "] ""c5", "[" & ppname & "] " & "LLE x' (" & c(0) & ")")
-                    .Add("[" & ppname & "] ""c6", "[" & ppname & "] " & "LLE T (" & su.spmp_temperature & ")")
+                    .Add("[" & ppname & "] ""c6", "[" & ppname & "] " & "LLE T (" & su.temperature & ")")
                     .Add("[" & ppname & "] ""c7", "[" & ppname & "] " & "LLE x'' (" & c(0) & ")")
-                    .Add("[" & ppname & "] ""c8", "[" & ppname & "] " & "LLE T (" & su.spmp_temperature & ")")
+                    .Add("[" & ppname & "] ""c8", "[" & ppname & "] " & "LLE T (" & su.temperature & ")")
                     .Add("[" & ppname & "] ""c9", "[" & ppname & "] " & "SLE x (" & c(0) & ")")
-                    .Add("[" & ppname & "] ""c10", "[" & ppname & "] " & "SLE L/SL T (" & su.spmp_temperature & ")")
+                    .Add("[" & ppname & "] ""c10", "[" & ppname & "] " & "SLE L/SL T (" & su.temperature & ")")
                     .Add("[" & ppname & "] ""c11", "[" & ppname & "] " & "SLE x (" & c(0) & ")")
-                    .Add("[" & ppname & "] ""c12", "[" & ppname & "] " & "SLE S/SL T (" & su.spmp_temperature & ")")
+                    .Add("[" & ppname & "] ""c12", "[" & ppname & "] " & "SLE S/SL T (" & su.temperature & ")")
                     .Add("[" & ppname & "] ""c13", "[" & ppname & "] " & "CRIT x (" & c(0) & ")")
-                    .Add("[" & ppname & "] ""c14", "[" & ppname & "] " & "CRIT T (" & su.spmp_temperature & ")")
+                    .Add("[" & ppname & "] ""c14", "[" & ppname & "] " & "CRIT T (" & su.temperature & ")")
                 End With
 
                 If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(100)
@@ -541,7 +541,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "P = " & Conversor.ConverterDoSI(su.spmp_pressure, P) & " " & su.spmp_pressure
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "P = " & Converter.ConvertFromSI(su.pressure, P) & " " & su.pressure
                     With .AddCurve("[" & ppname & "] " & DWSIM.App.GetLocalString("PontosdeBolha"), vx1.ToArray(GetType(Double)), vy1.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.SmoothTension = 0.3
@@ -599,7 +599,7 @@ Public Class FormBinEnv
                         End With
                     End If
                     .XAxis.Title.Text = cbXAxisBasis.SelectedItem.ToString & " / " & c(0)
-                    .YAxis.Title.Text = "T / " & su.spmp_temperature
+                    .YAxis.Title.Text = "T / " & su.temperature
                     .Legend.IsVisible = True
                     .Legend.Position = ZedGraph.LegendPos.BottomFlushLeft
                     Me.GraphControl.IsAutoScrollRange = True
@@ -629,11 +629,11 @@ Public Class FormBinEnv
                 Do
                     If py1(i) <> 0.0# Then
                         vx1.Add(px(i))
-                        vy1.Add(Conversor.ConverterDoSI(su.spmp_pressure, py1(i)))
+                        vy1.Add(Converter.ConvertFromSI(su.pressure, py1(i)))
                     End If
                     If py2(i) <> 0.0# Then
                         vx2.Add(px(i))
-                        vy2.Add(Conversor.ConverterDoSI(su.spmp_pressure, py2(i)))
+                        vy2.Add(Converter.ConvertFromSI(su.pressure, py2(i)))
                     End If
                     i += 1
                 Loop Until i = px.Count
@@ -643,16 +643,16 @@ Public Class FormBinEnv
                     Do
                         vx1l1.Add(px1l1(i))
                         vx1l2.Add(px1l2(i))
-                        vy3.Add(Conversor.ConverterDoSI(su.spmp_pressure, py3(i)))
+                        vy3.Add(Converter.ConvertFromSI(su.pressure, py3(i)))
                         i += 1
                     Loop Until i = px1l1.Count
                 End If
 
                 With Me.Grid1.Columns
                     .Add("[" & ppname & "] ""c1", "[" & ppname & "] " & "x (" & c(0) & ")")
-                    .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & "Pbub (" & su.spmp_pressure & ")")
+                    .Add("[" & ppname & "] ""c2", "[" & ppname & "] " & "Pbub (" & su.pressure & ")")
                     .Add("[" & ppname & "] ""c3", "[" & ppname & "] " & "x (" & c(0) & ")")
-                    .Add("[" & ppname & "] ""c4", "[" & ppname & "] " & "Pdew (" & su.spmp_pressure & ")")
+                    .Add("[" & ppname & "] ""c4", "[" & ppname & "] " & "Pdew (" & su.pressure & ")")
                 End With
 
                 If Me.Grid1.Rows.Count = 0 Then Me.Grid1.Rows.Add(100)
@@ -693,7 +693,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & Conversor.ConverterDoSI(su.spmp_temperature, T) & " " & su.spmp_temperature
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & Converter.ConvertFromSI(su.temperature, T) & " " & su.temperature
                     With .AddCurve("[" & ppname & "] " & DWSIM.App.GetLocalString("PontosdeBolha"), vx1.ToArray(GetType(Double)), vy1.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.Style = linetype
@@ -721,7 +721,7 @@ Public Class FormBinEnv
                         End With
                     End If
                     .XAxis.Title.Text = cbXAxisBasis.SelectedItem.ToString & " / " & c(0)
-                    .YAxis.Title.Text = "P / " & su.spmp_pressure
+                    .YAxis.Title.Text = "P / " & su.pressure
                     .Legend.IsVisible = True
                     .Legend.Position = ZedGraph.LegendPos.BottomFlushLeft
                     Me.GraphControl.IsAutoScrollRange = True
@@ -787,7 +787,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "P = " & Conversor.ConverterDoSI(su.spmp_pressure, P) & " " & su.spmp_pressure
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "P = " & Converter.ConvertFromSI(su.pressure, P) & " " & su.pressure
                     With .AddCurve("[" & ppname & "]", vx.ToArray(GetType(Double)), vy.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.Style = linetype
@@ -870,7 +870,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & Conversor.ConverterDoSI(su.spmp_temperature, T) & " " & su.spmp_temperature
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & Converter.ConvertFromSI(su.temperature, T) & " " & su.temperature
                     With .AddCurve("[" & ppname & "]", vx.ToArray(GetType(Double)), vy.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.Style = linetype
@@ -953,7 +953,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & Conversor.ConverterDoSI(su.spmp_temperature, T) & " " & su.spmp_temperature & ", P = " & Conversor.ConverterDoSI(su.spmp_pressure, P) & " " & su.spmp_pressure
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & Converter.ConvertFromSI(su.temperature, T) & " " & su.temperature & ", P = " & Converter.ConvertFromSI(su.pressure, P) & " " & su.pressure
                     With .AddCurve("[" & ppname & "]", vx.ToArray(GetType(Double)), vy.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.Style = linetype

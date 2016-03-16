@@ -553,7 +553,7 @@
     <value>241, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
-    <value>Componentes clave para la segunda fase líquida:</value>
+    <value>Componentes clave para la segunda Phase líquida:</value>
   </data>
   <data name="gb1.Text" xml:space="preserve">
     <value>Configuración Global (a excepción de los paquetes de CAPE-OPEN y Electrolitos)</value>
@@ -562,7 +562,7 @@
     <value>363, 17</value>
   </data>
   <data name="chkDoPhaseId.Text" xml:space="preserve">
-    <value>Aplicar algoritmo de identificación de fase luego del cálculo de equilibrio</value>
+    <value>Aplicar algoritmo de identificación de Phase luego del cálculo de equilibrio</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>266, 13</value>

@@ -134,7 +134,6 @@ Public Class frmProps
                 If Not Flowsheet.Collections.ObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela Is Nothing Then
                     Flowsheet.Collections.ObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela.HeaderText = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
                 End If
-                Flowsheet.FormObjList.TreeViewObj.Nodes.Find(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name, True)(0).Text = e.ChangedItem.Value
             Catch ex As Exception
                 'Flowsheet.WriteToLog(ex.ToString, Color.Red, FormClasses.TipoAviso.Erro)
             Finally

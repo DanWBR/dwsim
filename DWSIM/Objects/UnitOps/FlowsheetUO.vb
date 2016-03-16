@@ -24,7 +24,7 @@ Imports System.Linq
 Imports System.Xml.Linq
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 Imports Microsoft.Msdn.Samples
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Outros
 Imports System.IO
 Imports System.Threading.Tasks
@@ -58,7 +58,7 @@ End Namespace
 Namespace DWSIM.SimulationObjects.UnitOps
     <System.Serializable()> Public Class Flowsheet
 
-        Inherits SimulationObjects_UnitOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         Public Property SimulationFile As String = ""
         <System.Xml.Serialization.XmlIgnore> Public Property Initialized As Boolean = False
@@ -74,7 +74,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
         Public Property RedirectOutput As Boolean = False
         Public Property CompoundMappings As Dictionary(Of String, String)
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
             Me.m_ComponentName = nome
@@ -166,7 +166,6 @@ Namespace DWSIM.SimulationObjects.UnitOps
             Dim form As FormFlowsheet = Nothing
 
             form = New FormFlowsheet()
-            If Not DWSIM.App.IsRunningOnMono Then form.FormObjList = New frmObjList
 
             Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Elements.ToList
 
@@ -274,112 +273,6 @@ Namespace DWSIM.SimulationObjects.UnitOps
                                 Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Filter
                                     .FilterCollection.Add(obj.Name, obj)
                             End Select
-                            If Not DWSIM.App.IsRunningOnMono Then
-                                Select Case obj.TipoObjeto
-                                    Case TipoObjeto.NodeIn
-                                        form.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.NodeEn
-                                        form.FormObjList.TreeViewObj.Nodes("NodeME").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeME").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.NodeOut
-                                        form.FormObjList.TreeViewObj.Nodes("NodeSP").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeSP").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Pump
-                                        form.FormObjList.TreeViewObj.Nodes("NodePU").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodePU").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Tank
-                                        form.FormObjList.TreeViewObj.Nodes("NodeTQ").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeTQ").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Vessel
-                                        form.FormObjList.TreeViewObj.Nodes("NodeSE").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeSE").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.TPVessel
-                                        form.FormObjList.TreeViewObj.Nodes("NodeTP").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeTP").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.MaterialStream
-                                        form.FormObjList.TreeViewObj.Nodes("NodeMS").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeMS").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.EnergyStream
-                                        form.FormObjList.TreeViewObj.Nodes("NodeEN").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeEN").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Compressor
-                                        form.FormObjList.TreeViewObj.Nodes("NodeCO").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeCO").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Expander
-                                        form.FormObjList.TreeViewObj.Nodes("NodeTU").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeTU").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Cooler
-                                        form.FormObjList.TreeViewObj.Nodes("NodeCL").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeCL").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Heater
-                                        form.FormObjList.TreeViewObj.Nodes("NodeHT").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeHT").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Pipe
-                                        form.FormObjList.TreeViewObj.Nodes("NodePI").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodePI").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Valve
-                                        form.FormObjList.TreeViewObj.Nodes("NodeVA").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeVA").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.RCT_Conversion
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRCONV").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRCONV").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.RCT_Equilibrium
-                                        form.FormObjList.TreeViewObj.Nodes("NodeREQ").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeREQ").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.RCT_Gibbs
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRGIB").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRGIB").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.RCT_CSTR
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRCSTR").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRCSTR").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.RCT_PFR
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRPFR").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRPFR").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.HeatExchanger
-                                        form.FormObjList.TreeViewObj.Nodes("NodeHE").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeHE").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.ShortcutColumn
-                                        form.FormObjList.TreeViewObj.Nodes("NodeSC").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeSC").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.DistillationColumn
-                                        form.FormObjList.TreeViewObj.Nodes("NodeDC").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeDC").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.AbsorptionColumn
-                                        form.FormObjList.TreeViewObj.Nodes("NodeAC").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeAC").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.ReboiledAbsorber
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRBA").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRBA").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.RefluxedAbsorber
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRFA").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeRFA").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.ComponentSeparator
-                                        form.FormObjList.TreeViewObj.Nodes("NodeCSEP").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeCSEP").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.OrificePlate
-                                        form.FormObjList.TreeViewObj.Nodes("NodeOPL").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeOPL").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.CustomUO
-                                        form.FormObjList.TreeViewObj.Nodes("NodeUO").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeUO").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.ExcelUO
-                                        form.FormObjList.TreeViewObj.Nodes("NodeExcel").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeExcel").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.CapeOpenUO
-                                        form.FormObjList.TreeViewObj.Nodes("NodeCOUO").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeCOUO").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.SolidSeparator
-                                        form.FormObjList.TreeViewObj.Nodes("NodeSS").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeSS").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.Filter
-                                        form.FormObjList.TreeViewObj.Nodes("NodeFT").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeFT").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                    Case TipoObjeto.FlowsheetUO
-                                        form.FormObjList.TreeViewObj.Nodes("NodeFS").Nodes.Add(obj.Name, obj.Tag).Name = obj.Name
-                                        form.FormObjList.TreeViewObj.Nodes("NodeFS").Nodes(obj.Name).ContextMenuStrip = form.FormObjList.ContextMenuStrip1
-                                End Select
-                            End If
                         End With
                     End If
                 Catch ex As Exception
@@ -488,13 +381,13 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
 
-            Dim objlist As New Concurrent.ConcurrentBag(Of SimulationObjects_BaseClass)
+            Dim objlist As New Concurrent.ConcurrentBag(Of DWSIM.SimulationObjects.UnitOperations.BaseClass)
 
             Parallel.ForEach(data, Sub(xel)
                                        Try
                                            Dim id As String = xel.<Nome>.Value
                                            Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                                           Dim obj As SimulationObjects_BaseClass = Activator.CreateInstance(t)
+                                           Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
                                            Dim gobj As GraphicObject = (From go As GraphicObject In
                                                                form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                                            obj.GraphicObject = gobj
@@ -506,7 +399,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                                            If Not gobj Is Nothing Then
                                                obj.LoadData(xel.Elements.ToList)
                                                If TypeOf obj Is Streams.MaterialStream Then
-                                                   For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In DirectCast(obj, Streams.MaterialStream).Fases.Values
+                                                   For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                                                        For Each c As ConstantProperties In form.Options.SelectedComponents.Values
                                                            phase.Componentes(c.Name).ConstantProperties = c
                                                        Next
@@ -615,7 +508,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 End Try
             Next
 
-            For Each so As SimulationObjects_BaseClass In form.Collections.ObjectCollection.Values
+            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
                 Try
                     If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Adjust) IsNot Nothing Then
                         Dim so2 As DWSIM.SimulationObjects.SpecialOps.Adjust = so
@@ -734,11 +627,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 End Try
             Next
 
-            form.Options.NotSelectedComponents = New Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
+            form.Options.NotSelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
 
-            Dim tmpc As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+            Dim tmpc As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
             For Each tmpc In FormMain.AvailableComponents.Values
-                Dim newc As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+                Dim newc As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
                 newc = tmpc
                 If Not form.Options.SelectedComponents.ContainsKey(tmpc.Name) Then
                     form.Options.NotSelectedComponents.Add(tmpc.Name, newc)
@@ -790,7 +683,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Dim obj = form.Collections.ObjectCollection(id)
                     obj.LoadData(xel.Elements.ToList)
                     If TypeOf obj Is Streams.MaterialStream Then
-                        For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In DirectCast(obj, Streams.MaterialStream).Fases.Values
+                        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                             For Each c As ConstantProperties In form.Options.SelectedComponents.Values
                                 phase.Componentes(c.Name).ConstantProperties = c
                             Next
@@ -818,7 +711,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
             xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-            For Each so As SimulationObjects_BaseClass In Form.Collections.ObjectCollection.Values
+            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Form.Collections.ObjectCollection.Values
                 xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
             Next
 
@@ -857,7 +750,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
                     xel.RemoveAll()
 
-                    For Each so As SimulationObjects_BaseClass In Me.Fsheet.Collections.ObjectCollection.Values
+                    For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Fsheet.Collections.ObjectCollection.Values
                         xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
                     Next
 
@@ -897,13 +790,13 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     msfrom = FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedFrom.Name)
                     msto = Fsheet.Collections.ObjectCollection(InputConnections(Me.GraphicObject.InputConnectors.IndexOf(c)))
 
-                    win += msfrom.Fases(0).SPMProperties.massflow.GetValueOrDefault
+                    win += msfrom.Phases(0).Properties.massflow.GetValueOrDefault
 
                     msto.Clear()
 
-                    msto.Fases(0).SPMProperties.temperature = msfrom.Fases(0).SPMProperties.temperature.GetValueOrDefault
-                    msto.Fases(0).SPMProperties.pressure = msfrom.Fases(0).SPMProperties.pressure.GetValueOrDefault
-                    msto.Fases(0).SPMProperties.enthalpy = msfrom.Fases(0).SPMProperties.enthalpy.GetValueOrDefault
+                    msto.Phases(0).Properties.temperature = msfrom.Phases(0).Properties.temperature.GetValueOrDefault
+                    msto.Phases(0).Properties.pressure = msfrom.Phases(0).Properties.pressure.GetValueOrDefault
+                    msto.Phases(0).Properties.enthalpy = msfrom.Phases(0).Properties.enthalpy.GetValueOrDefault
                     msto.SpecType = Streams.MaterialStream.Flashspec.Temperature_and_Pressure
 
                     Dim wt, mt As Double
@@ -914,17 +807,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                             wt = 0.0#
                             For Each s In CompoundMappings
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Key) And msto.Fases(0).Componentes.ContainsKey(s.Value) Then
-                                    wt += msfrom.Fases(0).Componentes(s.Key).MassFlow.GetValueOrDefault
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
+                                    wt += msfrom.Phases(0).Componentes(s.Key).MassFlow.GetValueOrDefault
                                 End If
                             Next
 
-                            msto.Fases(0).SPMProperties.massflow = wt
+                            msto.Phases(0).Properties.massflow = wt
 
                             For Each s In CompoundMappings
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Key) And msto.Fases(0).Componentes.ContainsKey(s.Value) Then
-                                    If Not msto.Fases(0).Componentes(s.Value).FracaoMassica.HasValue Then msto.Fases(0).Componentes(s.Value).FracaoMassica = 0.0#
-                                    msto.Fases(0).Componentes(s.Value).FracaoMassica += msfrom.Fases(0).Componentes(s.Key).MassFlow.GetValueOrDefault / wt
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
+                                    If Not msto.Phases(0).Componentes(s.Value).FracaoMassica.HasValue Then msto.Phases(0).Componentes(s.Value).FracaoMassica = 0.0#
+                                    msto.Phases(0).Componentes(s.Value).FracaoMassica += msfrom.Phases(0).Componentes(s.Key).MassFlow.GetValueOrDefault / wt
                                 End If
                             Next
 
@@ -932,12 +825,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                         Case FlowsheetUOMassTransferMode.CompoundMassFractions
 
-                            msto.Fases(0).SPMProperties.massflow = msfrom.Fases(0).SPMProperties.massflow.GetValueOrDefault
+                            msto.Phases(0).Properties.massflow = msfrom.Phases(0).Properties.massflow.GetValueOrDefault
 
                             For Each s In CompoundMappings
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Key) And msto.Fases(0).Componentes.ContainsKey(s.Value) Then
-                                    If Not msto.Fases(0).Componentes(s.Value).FracaoMassica.HasValue Then msto.Fases(0).Componentes(s.Value).FracaoMassica = 0.0#
-                                    msto.Fases(0).Componentes(s.Value).FracaoMassica += msfrom.Fases(0).Componentes(s.Key).FracaoMassica.GetValueOrDefault
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
+                                    If Not msto.Phases(0).Componentes(s.Value).FracaoMassica.HasValue Then msto.Phases(0).Componentes(s.Value).FracaoMassica = 0.0#
+                                    msto.Phases(0).Componentes(s.Value).FracaoMassica += msfrom.Phases(0).Componentes(s.Key).FracaoMassica.GetValueOrDefault
                                 End If
                             Next
 
@@ -949,17 +842,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                             mt = 0.0#
                             For Each s In CompoundMappings
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Key) And msto.Fases(0).Componentes.ContainsKey(s.Value) Then
-                                    mt += msfrom.Fases(0).Componentes(s.Key).MolarFlow.GetValueOrDefault
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
+                                    mt += msfrom.Phases(0).Componentes(s.Key).MolarFlow.GetValueOrDefault
                                 End If
                             Next
 
-                            msto.Fases(0).SPMProperties.molarflow = mt
+                            msto.Phases(0).Properties.molarflow = mt
 
                             For Each s In CompoundMappings
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Key) And msto.Fases(0).Componentes.ContainsKey(s.Value) Then
-                                    If Not msto.Fases(0).Componentes(s.Value).FracaoMolar.HasValue Then msto.Fases(0).Componentes(s.Value).FracaoMolar = 0.0#
-                                    msto.Fases(0).Componentes(s.Value).FracaoMolar += msfrom.Fases(0).Componentes(s.Key).MolarFlow.GetValueOrDefault / mt
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
+                                    If Not msto.Phases(0).Componentes(s.Value).FracaoMolar.HasValue Then msto.Phases(0).Componentes(s.Value).FracaoMolar = 0.0#
+                                    msto.Phases(0).Componentes(s.Value).FracaoMolar += msfrom.Phases(0).Componentes(s.Key).MolarFlow.GetValueOrDefault / mt
                                 End If
                             Next
 
@@ -967,12 +860,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                         Case FlowsheetUOMassTransferMode.CompoundMoleFractions
 
-                            msto.Fases(0).SPMProperties.molarflow = msfrom.Fases(0).SPMProperties.molarflow.GetValueOrDefault
+                            msto.Phases(0).Properties.molarflow = msfrom.Phases(0).Properties.molarflow.GetValueOrDefault
 
                             For Each s In CompoundMappings
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Key) And msto.Fases(0).Componentes.ContainsKey(s.Value) Then
-                                    If Not msto.Fases(0).Componentes(s.Value).FracaoMolar.HasValue Then msto.Fases(0).Componentes(s.Value).FracaoMolar = 0.0#
-                                    msto.Fases(0).Componentes(s.Value).FracaoMolar += msfrom.Fases(0).Componentes(s.Key).FracaoMolar.GetValueOrDefault
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
+                                    If Not msto.Phases(0).Componentes(s.Value).FracaoMolar.HasValue Then msto.Phases(0).Componentes(s.Value).FracaoMolar = 0.0#
+                                    msto.Phases(0).Componentes(s.Value).FracaoMolar += msfrom.Phases(0).Componentes(s.Key).FracaoMolar.GetValueOrDefault
                                 End If
                             Next
 
@@ -1011,13 +904,13 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     msto = FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedTo.Name)
                     msfrom = Fsheet.Collections.ObjectCollection(OutputConnections(Me.GraphicObject.OutputConnectors.IndexOf(c)))
 
-                    wout += msfrom.Fases(0).SPMProperties.massflow.GetValueOrDefault
+                    wout += msfrom.Phases(0).Properties.massflow.GetValueOrDefault
 
                     msto.Clear()
 
-                    msto.Fases(0).SPMProperties.temperature = msfrom.Fases(0).SPMProperties.temperature.GetValueOrDefault
-                    msto.Fases(0).SPMProperties.pressure = msfrom.Fases(0).SPMProperties.pressure.GetValueOrDefault
-                    msto.Fases(0).SPMProperties.enthalpy = msfrom.Fases(0).SPMProperties.enthalpy.GetValueOrDefault
+                    msto.Phases(0).Properties.temperature = msfrom.Phases(0).Properties.temperature.GetValueOrDefault
+                    msto.Phases(0).Properties.pressure = msfrom.Phases(0).Properties.pressure.GetValueOrDefault
+                    msto.Phases(0).Properties.enthalpy = msfrom.Phases(0).Properties.enthalpy.GetValueOrDefault
                     msto.SpecType = Streams.MaterialStream.Flashspec.Temperature_and_Pressure
 
                     Dim wt, mt As Double
@@ -1027,17 +920,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         Case FlowsheetUOMassTransferMode.CompoundMassFlows
 
                             wt = 0.0#
-                            For Each s In msto.Fases(0).Componentes.Values
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Nome) And msto.Fases(0).Componentes.ContainsKey(s.Nome) Then
-                                    wt += msfrom.Fases(0).Componentes(s.Nome).MassFlow.GetValueOrDefault
+                            For Each s In msto.Phases(0).Componentes.Values
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
+                                    wt += msfrom.Phases(0).Componentes(s.Nome).MassFlow.GetValueOrDefault
                                 End If
                             Next
 
-                            msto.Fases(0).SPMProperties.massflow = wt
+                            msto.Phases(0).Properties.massflow = wt
 
-                            For Each s In msto.Fases(0).Componentes.Values
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Nome) And msto.Fases(0).Componentes.ContainsKey(s.Nome) Then
-                                    msto.Fases(0).Componentes(s.Nome).FracaoMassica = msfrom.Fases(0).Componentes(s.Nome).MassFlow.GetValueOrDefault / wt
+                            For Each s In msto.Phases(0).Componentes.Values
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
+                                    msto.Phases(0).Componentes(s.Nome).FracaoMassica = msfrom.Phases(0).Componentes(s.Nome).MassFlow.GetValueOrDefault / wt
                                 End If
                             Next
 
@@ -1045,11 +938,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                         Case FlowsheetUOMassTransferMode.CompoundMassFractions
 
-                            msto.Fases(0).SPMProperties.massflow = msfrom.Fases(0).SPMProperties.massflow.GetValueOrDefault
+                            msto.Phases(0).Properties.massflow = msfrom.Phases(0).Properties.massflow.GetValueOrDefault
 
-                            For Each s In msto.Fases(0).Componentes.Values
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Nome) And msto.Fases(0).Componentes.ContainsKey(s.Nome) Then
-                                    msto.Fases(0).Componentes(s.Nome).FracaoMassica = msfrom.Fases(0).Componentes(s.Nome).FracaoMassica.GetValueOrDefault
+                            For Each s In msto.Phases(0).Componentes.Values
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
+                                    msto.Phases(0).Componentes(s.Nome).FracaoMassica = msfrom.Phases(0).Componentes(s.Nome).FracaoMassica.GetValueOrDefault
                                 End If
                             Next
 
@@ -1060,17 +953,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         Case FlowsheetUOMassTransferMode.CompoundMoleFlows
 
                             mt = 0.0#
-                            For Each s In msto.Fases(0).Componentes.Values
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Nome) And msto.Fases(0).Componentes.ContainsKey(s.Nome) Then
-                                    mt += msfrom.Fases(0).Componentes(s.Nome).MolarFlow.GetValueOrDefault
+                            For Each s In msto.Phases(0).Componentes.Values
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
+                                    mt += msfrom.Phases(0).Componentes(s.Nome).MolarFlow.GetValueOrDefault
                                 End If
                             Next
 
-                            msto.Fases(0).SPMProperties.molarflow = mt
+                            msto.Phases(0).Properties.molarflow = mt
 
-                            For Each s In msto.Fases(0).Componentes.Values
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Nome) And msto.Fases(0).Componentes.ContainsKey(s.Nome) Then
-                                    msto.Fases(0).Componentes(s.Nome).FracaoMolar = msfrom.Fases(0).Componentes(s.Nome).MolarFlow.GetValueOrDefault / mt
+                            For Each s In msto.Phases(0).Componentes.Values
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
+                                    msto.Phases(0).Componentes(s.Nome).FracaoMolar = msfrom.Phases(0).Componentes(s.Nome).MolarFlow.GetValueOrDefault / mt
                                 End If
                             Next
 
@@ -1078,11 +971,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                         Case FlowsheetUOMassTransferMode.CompoundMoleFractions
 
-                            msto.Fases(0).SPMProperties.molarflow = msfrom.Fases(0).SPMProperties.molarflow.GetValueOrDefault
+                            msto.Phases(0).Properties.molarflow = msfrom.Phases(0).Properties.molarflow.GetValueOrDefault
 
-                            For Each s In msto.Fases(0).Componentes.Values
-                                If msfrom.Fases(0).Componentes.ContainsKey(s.Nome) And msto.Fases(0).Componentes.ContainsKey(s.Nome) Then
-                                    msto.Fases(0).Componentes(s.Nome).FracaoMolar = msfrom.Fases(0).Componentes(s.Nome).FracaoMolar.GetValueOrDefault
+                            For Each s In msto.Phases(0).Componentes.Values
+                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
+                                    msto.Phases(0).Componentes(s.Nome).FracaoMolar = msfrom.Phases(0).Componentes(s.Nome).FracaoMolar.GetValueOrDefault
                                 End If
                             Next
 
@@ -1134,10 +1027,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
 
             Try
@@ -1152,7 +1045,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             Dim proplist As New ArrayList
             If Initialized Then
                 Select Case proptype
@@ -1176,10 +1069,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
             Return proplist.ToArray(GetType(System.String))
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
 
             Fsheet.Collections.ObjectCollection(InputParams(pkey).ObjectID).SetPropertyValue(InputParams(pkey).ObjectProperty, propval, su)
@@ -1188,7 +1081,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
             Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
 
@@ -1212,9 +1105,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End With
         End Sub
 
-        Public Overrides Sub UpdatePropertyNodes(su As SistemasDeUnidades.Unidades, nf As String)
+        Public Overrides Sub UpdatePropertyNodes(su As SystemsOfUnits.Units, nf As String)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
                 Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
                 Me.FillNodeItems()
@@ -1239,9 +1132,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 

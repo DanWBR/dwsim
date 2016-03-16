@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports Microsoft.MSDN.Samples.GraphicObjects
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Linq
 
@@ -109,7 +109,7 @@ Namespace DWSIM.FormClasses
 
         Public ObjectCounter As Dictionary(Of String, Integer)
 
-        Public ObjectCollection As Dictionary(Of String, SimulationObjects_BaseClass)
+        Public ObjectCollection As Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
 
         'These are collections for holding the actual unit operations instances.
         Public CLCS_ReactorConversionCollection As Dictionary(Of String, DWSIM.SimulationObjects.Reactors.Reactor_Conversion)
@@ -196,7 +196,7 @@ Namespace DWSIM.FormClasses
             FilterCollection = New Dictionary(Of String, FilterGraphic)
             FlowsheetUOCollection = New Dictionary(Of String, FlowsheetUOGraphic)
 
-            ObjectCollection = New Dictionary(Of String, SimulationObjects_BaseClass)
+            ObjectCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
 
             'Creates all the actual unit operations collections.
             CLCS_MaterialStreamCollection = New Dictionary(Of String, DWSIM.SimulationObjects.Streams.MaterialStream)
@@ -301,7 +301,7 @@ Namespace DWSIM.FormClasses
 
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
 
-        Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SistemasDeUnidades.Unidades)
+        Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
         Public PropertyPackages As Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
 
         Public ReadOnly Property SelectedPropertyPackage() As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
@@ -314,18 +314,18 @@ Namespace DWSIM.FormClasses
             End Get
         End Property
 
-        Public SelectedComponents As Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
-        Public NotSelectedComponents As Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
+        Public SelectedComponents As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+        Public NotSelectedComponents As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
 
         Public Databases As Dictionary(Of String, String())
 
-        Public Reactions As Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.Reaction)
-        Public ReactionSets As Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ReactionSet)
+        Public Reactions As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Reaction)
+        Public ReactionSets As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ReactionSet)
         Public SimulationMode As String = ""
 
         Public PetroleumAssays As Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)
 
-        Public SelectedUnitSystem As DWSIM.SistemasDeUnidades.Unidades
+        Public SelectedUnitSystem As DWSIM.SystemsOfUnits.Units
 
         Public NumberFormat As String = "#0.0####"
         Public FractionNumberFormat As String = "#0.0######"
@@ -371,11 +371,11 @@ Namespace DWSIM.FormClasses
 
         Sub New()
 
-            SelectedComponents = New Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
-            NotSelectedComponents = New Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
-            SelectedUnitSystem = New SistemasDeUnidades.UnidadesSI()
-            Reactions = New Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.Reaction)
-            ReactionSets = New Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ReactionSet)
+            SelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+            NotSelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+            SelectedUnitSystem = New SystemsOfUnits.SI()
+            Reactions = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Reaction)
+            ReactionSets = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ReactionSet)
             Databases = New Dictionary(Of String, String())
             PropertyPackages = New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
             PetroleumAssays = New Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)

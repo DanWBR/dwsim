@@ -316,7 +316,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
                             idx(i) = i
                         Else
                             j = 0
-                            For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In PP.CurrentMaterialStream.Fases(0).Componentes.Values
+                            For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Componentes.Values
                                 If subst.Nome = Me.StabSearchCompIDs(i) Then
                                     idx(i) = j
                                     Exit For
@@ -1075,7 +1075,7 @@ alt:
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In PP.CurrentMaterialStream.Fases(0).Componentes.Values
+                        For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Componentes.Values
                             If subst.Nome = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -1196,7 +1196,7 @@ alt:
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In PP.CurrentMaterialStream.Fases(0).Componentes.Values
+                        For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Componentes.Values
                             If subst.Nome = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For

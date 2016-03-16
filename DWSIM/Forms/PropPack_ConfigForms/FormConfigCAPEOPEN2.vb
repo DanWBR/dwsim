@@ -1,4 +1,4 @@
-﻿Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+﻿Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports OutlookStyleControls
 Imports Cudafy
 Imports Cudafy.Host
@@ -7,8 +7,8 @@ Public Class FormConfigCAPEOPEN2
 
     Inherits FormConfigBase
 
-    Public _selcomps As Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
-    Public _availcomps As Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.ConstantProperties)
+    Public _selcomps As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+    Public _availcomps As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
 
     Public loaded As Boolean = False
 
@@ -89,7 +89,7 @@ Public Class FormConfigCAPEOPEN2
         Me.lblName.Text = _pp.ComponentName
         Me.lblDescription.Text = _pp.ComponentDescription
 
-        Dim comp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+        Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
 
         If Not loaded Then
 
@@ -267,7 +267,7 @@ Public Class FormConfigCAPEOPEN2
 
     End Sub
 
-    Public Function AddCompToGrid(ByRef comp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties) As Integer
+    Public Function AddCompToGrid(ByRef comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties) As Integer
 
         Dim contains As Boolean = False
         For Each r As OutlookGridRow In ogc1.Rows
@@ -310,7 +310,7 @@ Public Class FormConfigCAPEOPEN2
 
     Sub AddComponent(ByVal compID As String)
         If Not _selcomps.ContainsKey(compID) Then
-            Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+            Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
             tmpcomp = _availcomps(compID)
             _selcomps.Add(tmpcomp.Name, tmpcomp)
             _availcomps.Remove(tmpcomp.Name)
@@ -326,7 +326,7 @@ Public Class FormConfigCAPEOPEN2
 
         If Me.loaded Then
             If Not _selcomps.ContainsKey(ogc1.Rows(index).Cells(0).Value) Then
-                Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+                Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
                 tmpcomp = _availcomps(ogc1.Rows(index).Cells(0).Value)
                 _selcomps.Add(tmpcomp.Name, tmpcomp)
                 _availcomps.Remove(tmpcomp.Name)
@@ -339,7 +339,7 @@ Public Class FormConfigCAPEOPEN2
 
     Sub RemoveCompFromSimulation(ByVal compid As String)
 
-        Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
         Dim nm As String = compid
         tmpcomp = _selcomps(nm)
         _selcomps.Remove(tmpcomp.Name)

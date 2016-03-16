@@ -164,8 +164,8 @@ Partial Class FormFlowsheet
         Me.HYDVerificaçãoDasCondiçõesDeFormaçãoDeHidratosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropriedadesDosComponentesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnáliseDePetróleosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DiagramaDeFasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DiagramaDeFasesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DiagramaDePhasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DiagramaDePhasesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DiagramaBinárioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LLEDiagramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropriedadesEspeciaisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -1150,7 +1150,7 @@ Partial Class FormFlowsheet
         '
         'SuplementosToolStripMenuItem
         '
-        Me.SuplementosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PontoCríticoRealToolStripMenuItem, Me.HYDVerificaçãoDasCondiçõesDeFormaçãoDeHidratosToolStripMenuItem, Me.PropriedadesDosComponentesToolStripMenuItem, Me.AnáliseDePetróleosToolStripMenuItem, Me.DiagramaDeFasesToolStripMenuItem, Me.DiagramaDeFasesToolStripMenuItem1, Me.DiagramaBinárioToolStripMenuItem, Me.LLEDiagramToolStripMenuItem, Me.PropriedadesEspeciaisToolStripMenuItem, Me.PSVSizingToolStripMenuItem, Me.FlashVesselSizingToolStripMenuItem, Me.PropriedadesDePetróleosToolStripMenuItem})
+        Me.SuplementosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PontoCríticoRealToolStripMenuItem, Me.HYDVerificaçãoDasCondiçõesDeFormaçãoDeHidratosToolStripMenuItem, Me.PropriedadesDosComponentesToolStripMenuItem, Me.AnáliseDePetróleosToolStripMenuItem, Me.DiagramaDePhasesToolStripMenuItem, Me.DiagramaDePhasesToolStripMenuItem1, Me.DiagramaBinárioToolStripMenuItem, Me.LLEDiagramToolStripMenuItem, Me.PropriedadesEspeciaisToolStripMenuItem, Me.PSVSizingToolStripMenuItem, Me.FlashVesselSizingToolStripMenuItem, Me.PropriedadesDePetróleosToolStripMenuItem})
         Me.SuplementosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.SuplementosToolStripMenuItem.MergeIndex = 4
         Me.SuplementosToolStripMenuItem.Name = "SuplementosToolStripMenuItem"
@@ -1178,16 +1178,16 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.AnáliseDePetróleosToolStripMenuItem, "AnáliseDePetróleosToolStripMenuItem")
         Me.AnáliseDePetróleosToolStripMenuItem.Name = "AnáliseDePetróleosToolStripMenuItem"
         '
-        'DiagramaDeFasesToolStripMenuItem
+        'DiagramaDePhasesToolStripMenuItem
         '
-        resources.ApplyResources(Me.DiagramaDeFasesToolStripMenuItem, "DiagramaDeFasesToolStripMenuItem")
-        Me.DiagramaDeFasesToolStripMenuItem.Name = "DiagramaDeFasesToolStripMenuItem"
+        resources.ApplyResources(Me.DiagramaDePhasesToolStripMenuItem, "DiagramaDePhasesToolStripMenuItem")
+        Me.DiagramaDePhasesToolStripMenuItem.Name = "DiagramaDePhasesToolStripMenuItem"
         '
-        'DiagramaDeFasesToolStripMenuItem1
+        'DiagramaDePhasesToolStripMenuItem1
         '
-        Me.DiagramaDeFasesToolStripMenuItem1.Image = Global.DWSIM.My.Resources.Resources.cog
-        Me.DiagramaDeFasesToolStripMenuItem1.Name = "DiagramaDeFasesToolStripMenuItem1"
-        resources.ApplyResources(Me.DiagramaDeFasesToolStripMenuItem1, "DiagramaDeFasesToolStripMenuItem1")
+        Me.DiagramaDePhasesToolStripMenuItem1.Image = Global.DWSIM.My.Resources.Resources.cog
+        Me.DiagramaDePhasesToolStripMenuItem1.Name = "DiagramaDePhasesToolStripMenuItem1"
+        resources.ApplyResources(Me.DiagramaDePhasesToolStripMenuItem1, "DiagramaDePhasesToolStripMenuItem1")
         '
         'DiagramaBinárioToolStripMenuItem
         '
@@ -1511,7 +1511,7 @@ Partial Class FormFlowsheet
     Public WithEvents bgCalc As System.ComponentModel.BackgroundWorker
     Public WithEvents PropriedadesDosComponentesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents AnáliseDePetróleosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents DiagramaDeFasesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents DiagramaDePhasesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents OtimizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents AnáliseDeSensibilidadeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripFlowsheet As System.Windows.Forms.ToolStrip
@@ -1531,7 +1531,7 @@ Partial Class FormFlowsheet
     Public WithEvents tsbAtivar As System.Windows.Forms.ToolStripButton
     Public WithEvents tsbDesat As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Public WithEvents DiagramaDeFasesToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents DiagramaDePhasesToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents PropriedadesEspeciaisToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents DiagramaBinárioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ArquivoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

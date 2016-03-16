@@ -27,11 +27,11 @@ Public Class UISteamedSideStripperEditorForm
     Dim loaded As Boolean = False
 
     Dim tpl As DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors.Templates
-    Dim cvt As DWSIM.SistemasDeUnidades.Conversor
+    Dim cvt As DWSIM.SystemsOfUnits.Converter
 
     Private Sub UISteamedSideStripperEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cvt = New DWSIM.SistemasDeUnidades.Conversor()
+        cvt = New DWSIM.SystemsOfUnits.Converter()
 
         form = My.Application.ActiveSimulation
         dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
@@ -58,14 +58,14 @@ Public Class UISteamedSideStripperEditorForm
             .Clear()
             For Each sss As SteamedSideStripper In dc.StmSStrCol.Collection.Values
                 If dc.MaterialStreams.ContainsKey(sss.ProductStreamID) And dc.MaterialStreams.ContainsKey(sss.SteamStreamID) Then
-                    '.Add(New Object() {.Count + 1, sss.Name, sss.Stages.Count, sss.FromStage, sss.ToStage, Conversor.ConverterDoSI(form.Options.SelectedUnitSystem.spmp_molarflow, sss.ProductRate), dc.MaterialStreams(sss.ProductStreamID).Tag, dc.MaterialStreams(sss.SteamStreamID).Tag, sss.ID})
+                    '.Add(New Object() {.Count + 1, sss.Name, sss.Stages.Count, sss.FromStage, sss.ToStage, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, sss.ProductRate), dc.MaterialStreams(sss.ProductStreamID).Tag, dc.MaterialStreams(sss.SteamStreamID).Tag, sss.ID})
                 Else
-                    .Add(New Object() {.Count + 1, sss.Name, sss.Stages.Count, sss.FromStage, sss.ToStage, Conversor.ConverterDoSI(form.Options.SelectedUnitSystem.spmp_molarflow, sss.ProductRate), "", "", sss.ID})
+                    .Add(New Object() {.Count + 1, sss.Name, sss.Stages.Count, sss.FromStage, sss.ToStage, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, sss.ProductRate), "", "", sss.ID})
                 End If
             Next
         End With
 
-        dgv1.Columns(5).HeaderText += " (" & form.Options.SelectedUnitSystem.spmp_molarflow & ")"
+        dgv1.Columns(5).HeaderText += " (" & form.Options.SelectedUnitSystem.molarflow & ")"
 
         loaded = True
 
@@ -126,7 +126,7 @@ Public Class UISteamedSideStripperEditorForm
                 Case 4
                     dc.StmSStrCol.Collection(id).ToStage = value
                 Case 5
-                    dc.StmSStrCol.Collection(id).ProductRate = Conversor.ConverterParaSI(form.Options.SelectedUnitSystem.spmp_molarflow, value)
+                    dc.StmSStrCol.Collection(id).ProductRate = Converter.ConvertToSI(form.Options.SelectedUnitSystem.molarflow, value)
                 Case 6
                     Dim msid As String = dc.StmSStrCol.Collection(id).ProductStreamID
                     If dc.MaterialStreams.ContainsKey(msid) Then

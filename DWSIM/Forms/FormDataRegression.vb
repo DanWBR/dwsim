@@ -16,7 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports Microsoft.Msdn.Samples
 Imports DWSIM.DWSIM.MathEx
 Imports System.Math
@@ -33,7 +33,7 @@ Public Class FormDataRegression
 
     Inherits Form
 
-    Public cv As DWSIM.SistemasDeUnidades.Conversor
+    Public cv As DWSIM.SystemsOfUnits.Converter
     Public fmin As Double
     Public info As Integer
     Public cancel As Boolean = False
@@ -45,7 +45,7 @@ Public Class FormDataRegression
     Private forceclose As Boolean = False
 
     Public currcase As RegressionCase
-    Public IP As DWSIM.ClassesBasicasTermodinamica.InteractionParameter
+    Public IP As DWSIM.Thermodynamics.BaseClasses.InteractionParameter
 
     Public proppack As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
     Public ppname As String = ""
@@ -57,8 +57,8 @@ Public Class FormDataRegression
 
     Private Sub FormDataRegression_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cv = New DWSIM.SistemasDeUnidades.Conversor
-        IP = New DWSIM.ClassesBasicasTermodinamica.InteractionParameter
+        cv = New DWSIM.SystemsOfUnits.Converter
+        IP = New DWSIM.Thermodynamics.BaseClasses.InteractionParameter
 
         'get list of compounds
         Dim compounds As New ArrayList
@@ -352,8 +352,8 @@ Public Class FormDataRegression
                     If b Then
                         Vx1.Add(currcase.x1p(i))
                         Vy.Add(currcase.yp(i))
-                        VP.Add(Conversor.ConverterParaSI(currcase.punit, currcase.pp(i)))
-                        VT.Add(Conversor.ConverterParaSI(currcase.tunit, currcase.tp(0)))
+                        VP.Add(Converter.ConvertToSI(currcase.punit, currcase.pp(i)))
+                        VT.Add(Converter.ConvertToSI(currcase.tunit, currcase.tp(0)))
                     End If
                     i += 1
                 Next
@@ -363,8 +363,8 @@ Public Class FormDataRegression
                     If b Then
                         Vx1.Add(currcase.x1p(i))
                         Vy.Add(currcase.yp(i))
-                        VP.Add(Conversor.ConverterParaSI(currcase.punit, currcase.pp(0)))
-                        VT.Add(Conversor.ConverterParaSI(currcase.tunit, currcase.tp(i)))
+                        VP.Add(Converter.ConvertToSI(currcase.punit, currcase.pp(0)))
+                        VT.Add(Converter.ConvertToSI(currcase.tunit, currcase.tp(i)))
                     End If
                     i += 1
                 Next
@@ -375,8 +375,8 @@ Public Class FormDataRegression
                     If b Then
                         Vx1.Add(currcase.x1p(i))
                         Vy.Add(currcase.yp(i))
-                        VP.Add(Conversor.ConverterParaSI(currcase.punit, currcase.pp(i)))
-                        VT.Add(Conversor.ConverterParaSI(currcase.tunit, currcase.tp(i)))
+                        VP.Add(Converter.ConvertToSI(currcase.punit, currcase.pp(i)))
+                        VT.Add(Converter.ConvertToSI(currcase.tunit, currcase.tp(i)))
                     End If
                     i += 1
                 Next
@@ -386,8 +386,8 @@ Public Class FormDataRegression
                     If b Then
                         Vx1.Add(currcase.x1p(i))
                         Vx2.Add(currcase.x2p(i))
-                        VP.Add(Conversor.ConverterParaSI(currcase.punit, currcase.pp(i)))
-                        VT.Add(Conversor.ConverterParaSI(currcase.tunit, currcase.tp(0)))
+                        VP.Add(Converter.ConvertToSI(currcase.punit, currcase.pp(i)))
+                        VT.Add(Converter.ConvertToSI(currcase.tunit, currcase.tp(0)))
                     End If
                     i += 1
                 Next
@@ -397,8 +397,8 @@ Public Class FormDataRegression
                     If b Then
                         Vx1.Add(currcase.x1p(i))
                         Vx2.Add(currcase.x2p(i))
-                        VP.Add(Conversor.ConverterParaSI(currcase.punit, currcase.pp(0)))
-                        VT.Add(Conversor.ConverterParaSI(currcase.tunit, currcase.tp(i)))
+                        VP.Add(Converter.ConvertToSI(currcase.punit, currcase.pp(0)))
+                        VT.Add(Converter.ConvertToSI(currcase.tunit, currcase.tp(i)))
                     End If
                     i += 1
                 Next
@@ -408,8 +408,8 @@ Public Class FormDataRegression
                     If b Then
                         Vx1.Add(currcase.x1p(i))
                         Vx2.Add(currcase.x2p(i))
-                        VP.Add(Conversor.ConverterParaSI(currcase.punit, currcase.pp(i)))
-                        VT.Add(Conversor.ConverterParaSI(currcase.tunit, currcase.tp(i)))
+                        VP.Add(Converter.ConvertToSI(currcase.punit, currcase.pp(i)))
+                        VT.Add(Converter.ConvertToSI(currcase.tunit, currcase.tp(i)))
                     End If
                     i += 1
                 Next
@@ -418,9 +418,9 @@ Public Class FormDataRegression
                 For Each b As Boolean In currcase.checkp
                     If b Then
                         Vx1.Add(currcase.x1p(i))
-                        VP.Add(Conversor.ConverterParaSI(currcase.punit, currcase.pp(0)))
-                        VTL.Add(Conversor.ConverterParaSI(currcase.tunit, currcase.tl(i)))
-                        VTS.Add(Conversor.ConverterParaSI(currcase.tunit, currcase.ts(i)))
+                        VP.Add(Converter.ConvertToSI(currcase.punit, currcase.pp(0)))
+                        VTL.Add(Converter.ConvertToSI(currcase.tunit, currcase.tl(i)))
+                        VTS.Add(Converter.ConvertToSI(currcase.tunit, currcase.ts(i)))
                     End If
                     i += 1
                 Next
@@ -1441,7 +1441,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
                 For i As Integer = 0 To currcase.tp.Count - 1
                     If currcase.checkp(i) Then
-                        px(i) = Conversor.ConverterParaSI(Me.cbTunit.SelectedItem.ToString(), currcase.tp(i))
+                        px(i) = Converter.ConvertToSI(Me.cbTunit.SelectedItem.ToString(), currcase.tp(i))
                     End If
                 Next
 
@@ -1562,8 +1562,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                             Try
                                 px.Add(Double.Parse(.x1p(i)))
                                 py1.Add(Double.Parse(.tp(i)))
-                                py2.Add(Conversor.ConverterDoSI(.tunit, .calct(j)))
-                                py4.Add(Conversor.ConverterDoSI(.tunit, .calct(j)))
+                                py2.Add(Converter.ConvertFromSI(.tunit, .calct(j)))
+                                py4.Add(Converter.ConvertFromSI(.tunit, .calct(j)))
                                 px2.Add(Double.Parse(.yp(i)))
                                 py3.Add(Double.Parse(.tp(i)))
                                 py5.Add(Double.Parse(.calcy(j)))
@@ -1591,8 +1591,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                             Try
                                 px.Add(Double.Parse(.x1p(i)))
                                 py1.Add(Double.Parse(.pp(i)))
-                                py2.Add(Conversor.ConverterDoSI(.punit, .calcp(j)))
-                                py4.Add(Conversor.ConverterDoSI(.punit, .calcp(j)))
+                                py2.Add(Converter.ConvertFromSI(.punit, .calcp(j)))
+                                py4.Add(Converter.ConvertFromSI(.punit, .calcp(j)))
                                 px2.Add(Double.Parse(.yp(i)))
                                 py3.Add(Double.Parse(.pp(i)))
                                 py5.Add(Double.Parse(.calcy(j)))
@@ -1620,8 +1620,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                             Try
                                 px.Add(Double.Parse(.x1p(i)))
                                 py1.Add(Double.Parse(.tp(i)))
-                                py2.Add(Conversor.ConverterDoSI(.tunit, .calct(j)))
-                                py4.Add(Conversor.ConverterDoSI(.punit, .calcp(j)))
+                                py2.Add(Converter.ConvertFromSI(.tunit, .calct(j)))
+                                py4.Add(Converter.ConvertFromSI(.punit, .calcp(j)))
                                 py3.Add(Double.Parse(.pp(i)))
                                 py5.Add(Double.Parse(.calcy(j)))
                             Catch ex As Exception
@@ -1763,10 +1763,10 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             For Each b As Boolean In .checkp
                 If b Then
                     Try
-                        Me.gridstats.Rows.Add(New Object() {.x1p(i), .calcx1l1(j), .x2p(i), .calcx1l2(j), .yp(i), .calcy(j), .tp(i), Conversor.ConverterDoSI(.tunit, .calct(j)), .pp(i), Conversor.ConverterDoSI(.punit, .calcp(j)), _
+                        Me.gridstats.Rows.Add(New Object() {.x1p(i), .calcx1l1(j), .x2p(i), .calcx1l2(j), .yp(i), .calcy(j), .tp(i), Converter.ConvertFromSI(.tunit, .calct(j)), .pp(i), Converter.ConvertFromSI(.punit, .calcp(j)), _
                                                             .calcy(j) - .yp(i), (.calcy(j) - .yp(i)) / .yp(i), (.calcy(j) - .yp(i)) / .yp(i) * 100, _
-                                                           Conversor.ConverterDoSI(.punit, .calcp(j)) - .pp(i), (Conversor.ConverterDoSI(.punit, .calcp(j)) - .pp(i)) / .pp(i), (Conversor.ConverterDoSI(.punit, .calcp(j)) - .pp(i)) / .pp(i) * 100, _
-                                                            Conversor.ConverterDoSI(.tunit, .calct(j)) - .tp(i), (Conversor.ConverterDoSI(.tunit, .calct(j)) - .tp(i)) / .tp(i), (Conversor.ConverterDoSI(.tunit, .calct(j)) - .tp(i)) / .tp(i) * 100, _
+                                                           Converter.ConvertFromSI(.punit, .calcp(j)) - .pp(i), (Converter.ConvertFromSI(.punit, .calcp(j)) - .pp(i)) / .pp(i), (Converter.ConvertFromSI(.punit, .calcp(j)) - .pp(i)) / .pp(i) * 100, _
+                                                            Converter.ConvertFromSI(.tunit, .calct(j)) - .tp(i), (Converter.ConvertFromSI(.tunit, .calct(j)) - .tp(i)) / .tp(i), (Converter.ConvertFromSI(.tunit, .calct(j)) - .tp(i)) / .tp(i) * 100, _
                                                             .calcx1l1(j) - .x1p(i), (.calcx1l1(j) - .x1p(i)) / .x1p(i), (.calcx1l1(j) - .x1p(i)) / .x1p(i) * 100, _
                                                             .calcx1l2(j) - .x2p(i), (.calcx1l2(j) - .x2p(i)) / .x2p(i), (.calcx1l2(j) - .x2p(i)) / .x2p(i) * 100, (.calctl(j) - .tl(i)) / .tl(i) * 100, (.calcts(j) - .ts(i)) / .ts(i) * 100})
                     Catch ex As Exception
@@ -2824,11 +2824,11 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         comp2 = FormMain.AvailableComponents(id2)
 
         With ms
-            For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                 With phase
-                    .Componentes.Add(comp1.Name, New DWSIM.ClassesBasicasTermodinamica.Substancia(comp1.Name, ""))
+                    .Componentes.Add(comp1.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp1.Name, ""))
                     .Componentes(comp1.Name).ConstantProperties = comp1
-                    .Componentes.Add(comp2.Name, New DWSIM.ClassesBasicasTermodinamica.Substancia(comp2.Name, ""))
+                    .Componentes.Add(comp2.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp2.Name, ""))
                     .Componentes(comp2.Name).ConstantProperties = comp2
                 End With
             Next
@@ -3004,11 +3004,11 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         comp2 = FormMain.AvailableComponents(id2)
 
         With ms
-            For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                 With phase
-                    .Componentes.Add(comp1.Name, New DWSIM.ClassesBasicasTermodinamica.Substancia(comp1.Name, ""))
+                    .Componentes.Add(comp1.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp1.Name, ""))
                     .Componentes(comp1.Name).ConstantProperties = comp1
-                    .Componentes.Add(comp2.Name, New DWSIM.ClassesBasicasTermodinamica.Substancia(comp2.Name, ""))
+                    .Componentes.Add(comp2.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp2.Name, ""))
                     .Componentes(comp2.Name).ConstantProperties = comp2
                 End With
             Next
@@ -3225,7 +3225,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
             If Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value IsNot Nothing Then
                 If Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value.ToString() <> "" Then
-                    P = Conversor.ConverterParaSI(Me.cbPunit.SelectedItem.ToString(), Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value)
+                    P = Converter.ConvertToSI(Me.cbPunit.SelectedItem.ToString(), Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value)
                 Else
                     P = 0
                 End If
@@ -3234,7 +3234,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             End If
             If Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value IsNot Nothing Then
                 If Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value.ToString() <> "" Then
-                    T = Conversor.ConverterParaSI(Me.cbTunit.SelectedItem.ToString(), Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value)
+                    T = Converter.ConvertToSI(Me.cbTunit.SelectedItem.ToString(), Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value)
                 Else
                     T = 0
                 End If
@@ -3280,14 +3280,14 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                             result = Interfaces.ExcelIntegration.TVFFlash(model, 1, T, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             x11 = result(2, 1)
-                            Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Conversor.ConverterDoSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
+                            Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Converter.ConvertFromSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("colx1").Value = Format(x11, "N4")
                         ElseIf T = 0.0# Then
                             'P-y => x, T
                             result = Interfaces.ExcelIntegration.PVFFlash(model, 1, P, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             T = result(4, 0)
                             x11 = result(2, 1)
-                            Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Conversor.ConverterDoSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
+                            Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Converter.ConvertFromSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("colx1").Value = Format(x11, "N4")
                         End If
                     Case 2
@@ -3296,14 +3296,14 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                             result = Interfaces.ExcelIntegration.TVFFlash(model, 1, T, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             y1 = result(2, 0)
-                            Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Conversor.ConverterDoSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
+                            Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Converter.ConvertFromSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("coly1").Value = Format(y1, "N4")
                         ElseIf T = 0.0# Then
                             'P-x => y, T
                             result = Interfaces.ExcelIntegration.PVFFlash(model, 1, P, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             T = result(4, 0)
                             y1 = result(2, 0)
-                            Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Conversor.ConverterDoSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
+                            Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Converter.ConvertFromSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("coly1").Value = Format(y1, "N4")
                         End If
                     Case 3
@@ -3312,14 +3312,14 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                             result = Interfaces.ExcelIntegration.PVFFlash(model, 1, P, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             T = result(4, 0)
                             y1 = result(2, 0)
-                            Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Conversor.ConverterDoSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
+                            Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Converter.ConvertFromSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("coly1").Value = Format(y1, "N4")
                         ElseIf x11 = -1 Then
                             'P-y => x, T
                             result = Interfaces.ExcelIntegration.PVFFlash(model, 1, P, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             x11 = result(2, 1)
-                            Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Conversor.ConverterDoSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
+                            Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Converter.ConvertFromSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("colx1").Value = Format(x11, "N4")
                         End If
                     Case 4
@@ -3328,14 +3328,14 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                             result = Interfaces.ExcelIntegration.TVFFlash(model, 1, T, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             y1 = result(2, 0)
-                            Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Conversor.ConverterDoSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
+                            Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Converter.ConvertFromSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("coly1").Value = Format(y1, "N4")
                         ElseIf x11 = -1 Then
                             'T-y => x, P
                             result = Interfaces.ExcelIntegration.TVFFlash(model, 1, T, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             x11 = result(2, 1)
-                            Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Conversor.ConverterDoSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
+                            Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Converter.ConvertFromSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("colx1").Value = Format(x11, "N4")
                         End If
                 End Select
@@ -3610,7 +3610,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             End With
             If Me.tbIPDBName.Text <> "" Then
                 Try
-                    DWSIM.Databases.UserIPDB.AddInteractionParameters(New DWSIM.ClassesBasicasTermodinamica.InteractionParameter() {IP}, tbIPDBName.Text, True)
+                    DWSIM.Databases.UserIPDB.AddInteractionParameters(New DWSIM.Thermodynamics.BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
                     MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
                 Catch ex As Exception
                     MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)

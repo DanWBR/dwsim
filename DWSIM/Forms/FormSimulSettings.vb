@@ -17,7 +17,7 @@
 
 Imports OutlookStyleControls
 Imports System.Xml.Serialization
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization.Formatters
 Imports System.IO
@@ -106,7 +106,7 @@ Public Class FormSimulSettings
 
         FrmChild = My.Application.ActiveSimulation
 
-        Dim comp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+        Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
         If Not loaded Or reset Then
 
             ACSC1 = New AutoCompleteStringCollection
@@ -308,19 +308,19 @@ Public Class FormSimulSettings
     Public Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
         FrmChild.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
-        Dim su As DWSIM.SistemasDeUnidades.Unidades = FrmChild.Options.SelectedUnitSystem
+        Dim su As DWSIM.SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
 
         With Me.DataGridView1.Rows
             .Clear()
-            .Add(New String() {DWSIM.App.GetLocalString("Temperatura"), su.spmp_temperature, DWSIM.App.GetLocalString("Presso"), su.spmp_pressure})
-            .Add(New String() {DWSIM.App.GetLocalString("Vazomssica"), su.spmp_massflow, DWSIM.App.GetLocalString("Vazomolar"), su.spmp_molarflow})
-            .Add(New String() {DWSIM.App.GetLocalString("Vazovolumtrica"), su.spmp_volumetricFlow, DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.spmp_enthalpy})
-            .Add(New String() {DWSIM.App.GetLocalString("EntropiaEspecfica"), su.spmp_entropy, DWSIM.App.GetLocalString("Massamolar"), su.spmp_molecularWeight})
-            .Add(New String() {DWSIM.App.GetLocalString("Massaespecfica"), su.spmp_density, DWSIM.App.GetLocalString("Tensosuperficial"), su.tdp_surfaceTension})
-            .Add(New String() {DWSIM.App.GetLocalString("CapacidadeCalorfica"), su.spmp_heatCapacityCp, DWSIM.App.GetLocalString("Condutividadetrmica"), su.spmp_thermalConductivity})
-            .Add(New String() {DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.spmp_cinematic_viscosity, DWSIM.App.GetLocalString("Viscosidadedinmica"), su.spmp_viscosity})
-            .Add(New String() {DWSIM.App.GetLocalString("DeltaT2"), su.spmp_deltaT, DWSIM.App.GetLocalString("DeltaP"), su.spmp_deltaP})
-            .Add(New String() {DWSIM.App.GetLocalString("ComprimentoHead"), su.spmp_head, DWSIM.App.GetLocalString("FluxodeEnergia"), su.spmp_heatflow})
+            .Add(New String() {DWSIM.App.GetLocalString("Temperatura"), su.temperature, DWSIM.App.GetLocalString("Presso"), su.pressure})
+            .Add(New String() {DWSIM.App.GetLocalString("Vazomssica"), su.massflow, DWSIM.App.GetLocalString("Vazomolar"), su.molarflow})
+            .Add(New String() {DWSIM.App.GetLocalString("Vazovolumtrica"), su.volumetricFlow, DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy})
+            .Add(New String() {DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy, DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight})
+            .Add(New String() {DWSIM.App.GetLocalString("Massaespecfica"), su.density, DWSIM.App.GetLocalString("Tensosuperficial"), su.surfaceTension})
+            .Add(New String() {DWSIM.App.GetLocalString("CapacidadeCalorfica"), su.heatCapacityCp, DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity})
+            .Add(New String() {DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity, DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity})
+            .Add(New String() {DWSIM.App.GetLocalString("DeltaT2"), su.deltaT, DWSIM.App.GetLocalString("DeltaP"), su.deltaP})
+            .Add(New String() {DWSIM.App.GetLocalString("ComprimentoHead"), su.head, DWSIM.App.GetLocalString("FluxodeEnergia"), su.heatflow})
             .Add(New String() {DWSIM.App.GetLocalString("Tempo"), su.time, DWSIM.App.GetLocalString("Volume"), su.volume})
             .Add(New String() {DWSIM.App.GetLocalString("VolumeMolar"), su.molar_volume, DWSIM.App.GetLocalString("rea"), su.area})
             .Add(New String() {DWSIM.App.GetLocalString("DimetroEspessura"), su.diameter, DWSIM.App.GetLocalString("Fora"), su.force})
@@ -345,7 +345,7 @@ Public Class FormSimulSettings
             .Items.Clear()
             .Items.AddRange(New String() {"K", "R", "C", "F"})
             .Style.Tag = 1
-            .Value = su.spmp_temperature
+            .Value = su.temperature
         End With
 
         '.Add(New Object() {DWSIM.App.GetLocalString("Presso")})
@@ -353,7 +353,7 @@ Public Class FormSimulSettings
             .Items.Clear()
             .Items.AddRange(New String() {"Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
             .Style.Tag = 2
-            .Value = su.spmp_pressure
+            .Value = su.pressure
         End With
 
         '.Add(New Object() {DWSIM.App.GetLocalString("Vazomssica")})
@@ -361,14 +361,14 @@ Public Class FormSimulSettings
             .Items.Clear()
             .Items.AddRange(New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"})
             .Style.Tag = 3
-            .Value = su.spmp_massflow
+            .Value = su.massflow
         End With
 
         '.Add(New Object() {DWSIM.App.GetLocalString("Vazomolar")})
         With DirectCast(Me.DataGridView1.Rows.Item(1).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"})
-            .Value = su.spmp_molarflow
+            .Value = su.molarflow
             .Style.Tag = 4
         End With
 
@@ -376,7 +376,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(2).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s"})
-            .Value = su.spmp_volumetricFlow
+            .Value = su.volumetricFlow
             .Style.Tag = 5
         End With
 
@@ -384,7 +384,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(2).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"})
-            .Value = su.spmp_enthalpy
+            .Value = su.enthalpy
             .Style.Tag = 6
         End With
 
@@ -392,7 +392,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(3).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
-            .Value = su.spmp_entropy
+            .Value = su.entropy
             .Style.Tag = 7
         End With
 
@@ -400,7 +400,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(3).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"kg/kmol", "g/mol", "lbm/lbmol"})
-            .Value = su.spmp_molecularWeight
+            .Value = su.molecularWeight
             .Style.Tag = 8
         End With
 
@@ -408,7 +408,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(4).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"kg/m3", "g/cm3", "lbm/ft3"})
-            .Value = su.spmp_density
+            .Value = su.density
             .Style.Tag = 10
         End With
 
@@ -416,7 +416,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(4).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"N/m", "dyn/cm", "lbf/in"})
-            .Value = su.tdp_surfaceTension
+            .Value = su.surfaceTension
             .Style.Tag = 9
         End With
 
@@ -424,7 +424,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(5).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
-            .Value = su.spmp_heatCapacityCp
+            .Value = su.heatCapacityCp
             .Style.Tag = 11
         End With
 
@@ -432,7 +432,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(5).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"W/[m.K]", "cal/[cm.s.C]", "BTU/[ft.h.R]"})
-            .Value = su.spmp_thermalConductivity
+            .Value = su.thermalConductivity
             .Style.Tag = 12
         End With
 
@@ -440,7 +440,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(6).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"m2/s", "cSt", "ft2/s", "mm2/s"})
-            .Value = su.spmp_cinematic_viscosity
+            .Value = su.cinematic_viscosity
             .Style.Tag = 13
         End With
 
@@ -448,7 +448,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(6).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"})
-            .Value = su.spmp_viscosity
+            .Value = su.viscosity
             .Style.Tag = 14
         End With
 
@@ -456,7 +456,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(7).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kPa", "bar", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi"})
-            .Value = su.spmp_deltaP
+            .Value = su.deltaP
             .Style.Tag = 15
         End With
 
@@ -464,7 +464,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(7).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"C.", "K.", "F.", "R."})
-            .Value = su.spmp_deltaT
+            .Value = su.deltaT
             .Style.Tag = 16
         End With
 
@@ -472,7 +472,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(8).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"m", "ft", "cm"})
-            .Value = su.spmp_head
+            .Value = su.head
             .Style.Tag = 17
         End With
 
@@ -480,7 +480,7 @@ Public Class FormSimulSettings
         With DirectCast(Me.DataGridView1.Rows.Item(8).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
             .Items.AddRange(New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"})
-            .Value = su.spmp_heatflow
+            .Value = su.heatflow
             .Style.Tag = 18
         End With
 
@@ -639,81 +639,81 @@ Public Class FormSimulSettings
             Dim oldvalue As String = ""
             Dim member As String = ""
 
-            Dim su As DWSIM.SistemasDeUnidades.Unidades = FrmChild.Options.SelectedUnitSystem
+            Dim su As DWSIM.SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
 
             Select Case cell.Style.Tag
                 Case 1
                     member = "spmp_temperature"
-                    oldvalue = su.spmp_temperature
-                    su.spmp_temperature = cell.Value
+                    oldvalue = su.temperature
+                    su.temperature = cell.Value
                 Case 2
                     member = "spmp_pressure"
-                    oldvalue = su.spmp_pressure
-                    su.spmp_pressure = cell.Value
+                    oldvalue = su.pressure
+                    su.pressure = cell.Value
                 Case 3
                     member = "spmp_massflow"
-                    oldvalue = su.spmp_massflow
-                    su.spmp_massflow = cell.Value
+                    oldvalue = su.massflow
+                    su.massflow = cell.Value
                 Case 4
                     member = "spmp_molarflow"
-                    oldvalue = su.spmp_molarflow
-                    su.spmp_molarflow = cell.Value
+                    oldvalue = su.molarflow
+                    su.molarflow = cell.Value
                 Case 5
                     member = "spmp_volumetricFlow"
-                    oldvalue = su.spmp_volumetricFlow
-                    su.spmp_volumetricFlow = cell.Value
+                    oldvalue = su.volumetricFlow
+                    su.volumetricFlow = cell.Value
                 Case 6
                     member = "spmp_enthalpy"
-                    oldvalue = su.spmp_enthalpy
-                    su.spmp_enthalpy = cell.Value
+                    oldvalue = su.enthalpy
+                    su.enthalpy = cell.Value
                 Case 7
                     member = "spmp_entropy"
-                    oldvalue = su.spmp_entropy
-                    su.spmp_entropy = cell.Value
+                    oldvalue = su.entropy
+                    su.entropy = cell.Value
                 Case 8
                     member = "spmp_molecularWeight"
-                    oldvalue = su.spmp_molecularWeight
-                    su.spmp_molecularWeight = cell.Value
+                    oldvalue = su.molecularWeight
+                    su.molecularWeight = cell.Value
                 Case 9
                     member = "tdp_surfaceTension"
-                    oldvalue = su.tdp_surfaceTension
-                    su.tdp_surfaceTension = cell.Value
+                    oldvalue = su.surfaceTension
+                    su.surfaceTension = cell.Value
                 Case 10
                     member = "spmp_density"
-                    oldvalue = su.spmp_density
-                    su.spmp_density = cell.Value
+                    oldvalue = su.density
+                    su.density = cell.Value
                 Case 11
                     member = "spmp_heatCapacityCp"
-                    oldvalue = su.spmp_heatCapacityCp
-                    su.spmp_heatCapacityCp = cell.Value
+                    oldvalue = su.heatCapacityCp
+                    su.heatCapacityCp = cell.Value
                 Case 12
                     member = "spmp_thermalConductivity"
-                    oldvalue = su.spmp_thermalConductivity
-                    su.spmp_thermalConductivity = cell.Value
+                    oldvalue = su.thermalConductivity
+                    su.thermalConductivity = cell.Value
                 Case 13
                     member = "spmp_cinematic_viscosity"
-                    oldvalue = su.spmp_cinematic_viscosity
-                    su.spmp_cinematic_viscosity = cell.Value
+                    oldvalue = su.cinematic_viscosity
+                    su.cinematic_viscosity = cell.Value
                 Case 14
                     member = "spmp_viscosity"
-                    oldvalue = su.spmp_viscosity
-                    su.spmp_viscosity = cell.Value
+                    oldvalue = su.viscosity
+                    su.viscosity = cell.Value
                 Case 15
                     member = "spmp_deltaP"
-                    oldvalue = su.spmp_deltaP
-                    su.spmp_deltaP = cell.Value
+                    oldvalue = su.deltaP
+                    su.deltaP = cell.Value
                 Case 16
                     member = "spmp_deltaT"
-                    oldvalue = su.spmp_deltaT
-                    su.spmp_deltaT = cell.Value
+                    oldvalue = su.deltaT
+                    su.deltaT = cell.Value
                 Case 17
                     member = "spmp_head"
-                    oldvalue = su.spmp_head
-                    su.spmp_head = cell.Value
+                    oldvalue = su.head
+                    su.head = cell.Value
                 Case 18
                     member = "spmp_heatflow"
-                    oldvalue = su.spmp_heatflow
-                    su.spmp_heatflow = cell.Value
+                    oldvalue = su.heatflow
+                    su.heatflow = cell.Value
                 Case 19
                     member = "time"
                     oldvalue = su.time
@@ -857,7 +857,7 @@ Public Class FormSimulSettings
             If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 myStream = Me.SaveFileDialog1.OpenFile()
                 If Not (myStream Is Nothing) Then
-                    Dim su As DWSIM.SistemasDeUnidades.Unidades = FrmChild.Options.SelectedUnitSystem
+                    Dim su As DWSIM.SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
                     Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                     Try
                         mySerializer.Serialize(myStream, su)
@@ -882,10 +882,10 @@ Public Class FormSimulSettings
         If Me.OpenFileDialog2.ShowDialog() = Windows.Forms.DialogResult.OK Then
             myStream = Me.OpenFileDialog2.OpenFile()
             If Not (myStream Is Nothing) Then
-                Dim su As New DWSIM.SistemasDeUnidades.Unidades
+                Dim su As New DWSIM.SystemsOfUnits.Units
                 Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                 Try
-                    su = DirectCast(mySerializer.Deserialize(myStream), DWSIM.SistemasDeUnidades.Unidades)
+                    su = DirectCast(mySerializer.Deserialize(myStream), DWSIM.SystemsOfUnits.Units)
                     If FormMain.AvailableUnitSystems.ContainsKey(su.nome) Then
                         su.nome += "_1"
                     End If
@@ -917,7 +917,7 @@ Public Class FormSimulSettings
 
     End Sub
 
-    Public Function AddCompToGrid(ByRef comp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties) As Integer
+    Public Function AddCompToGrid(ByRef comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties) As Integer
 
 
 
@@ -961,7 +961,7 @@ Public Class FormSimulSettings
 
     End Function
 
-    Public Function GetCompRowIndex(ByRef comp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties) As Integer
+    Public Function GetCompRowIndex(ByRef comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties) As Integer
 
         For Each r As OutlookGridRow In ogc1.Rows
 
@@ -1120,7 +1120,7 @@ Public Class FormSimulSettings
 
             If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(ogc1.Rows(index).Cells(0).Value) Then
 
-                Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+                Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
                 tmpcomp = Me.FrmChild.Options.NotSelectedComponents(ogc1.Rows(index).Cells(0).Value)
 
                 If tmpcomp.OriginalDB = "CoolProp" And My.Settings.ShowCoolPropWarning Then
@@ -1134,8 +1134,8 @@ Public Class FormSimulSettings
 
                 Dim proplist As New ArrayList
                 For Each ms In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
-                    For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
-                        phase.Componentes.Add(tmpcomp.Name, New DWSIM.ClassesBasicasTermodinamica.Substancia(tmpcomp.Name, ""))
+                    For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                        phase.Componentes.Add(tmpcomp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(tmpcomp.Name, ""))
                         phase.Componentes(tmpcomp.Name).ConstantProperties = tmpcomp
                     Next
 
@@ -1185,7 +1185,7 @@ Public Class FormSimulSettings
 
     Sub RemoveCompFromSimulation(ByVal compid As String)
 
-        Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
         Dim nm As String = compid
         tmpcomp = Me.FrmChild.Options.SelectedComponents(nm)
         Me.FrmChild.Options.SelectedComponents.Remove(tmpcomp.Name)
@@ -1196,7 +1196,7 @@ Public Class FormSimulSettings
         Dim proplist As New ArrayList
 
         For Each ms In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
-            For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                 phase.Componentes.Remove(tmpcomp.Name)
             Next
 
@@ -1364,7 +1364,7 @@ Public Class FormSimulSettings
 
         Dim myStream As System.IO.FileStream
         Dim cp As ConstantProperties
-        Dim col As New DWSIM.ClassesBasicasTermodinamica.ConstantPropertiesCollection
+        Dim col As New DWSIM.Thermodynamics.BaseClasses.ConstantPropertiesCollection
         Dim col2 As New ArrayList
 
         Dim dbid As String = "User_" & Guid.NewGuid().ToString
@@ -1375,13 +1375,13 @@ Public Class FormSimulSettings
             col2.Add(cp)
         Next
 
-        col.Collection = col2.ToArray(Type.GetType("DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties"))
+        col.Collection = col2.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
 
         If Me.sfdxml1.ShowDialog() = Windows.Forms.DialogResult.OK Then
             myStream = Me.sfdxml1.OpenFile()
             Dim filename As String = myStream.Name
             myStream.Close()
-            Dim x As Serialization.XmlSerializer = New Serialization.XmlSerializer(GetType(DWSIM.ClassesBasicasTermodinamica.ConstantPropertiesCollection))
+            Dim x As Serialization.XmlSerializer = New Serialization.XmlSerializer(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantPropertiesCollection))
             Dim writer As IO.TextWriter = New IO.StreamWriter(filename)
             x.Serialize(writer, col)
             writer.Close()
@@ -1451,8 +1451,8 @@ Public Class FormSimulSettings
 
             If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
 
-                Dim tmpsubst As New DWSIM.ClassesBasicasTermodinamica.Substancia("", "")
-                Dim toreplace As DWSIM.ClassesBasicasTermodinamica.ConstantProperties = Nothing
+                Dim tmpsubst As New DWSIM.Thermodynamics.BaseClasses.Compound("", "")
+                Dim toreplace As DWSIM.Thermodynamics.BaseClasses.ConstantProperties = Nothing
 
                 If DWSIM.App.IsRunningOnMono Then
                     If Me.ogc1.SelectedCells.Count > 0 Then
@@ -1466,7 +1466,7 @@ Public Class FormSimulSettings
 
                 Dim proplist As New ArrayList
                 For Each mstr In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
-                    For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In mstr.Fases.Values
+                    For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mstr.Phases.Values
                         tmpsubst = phase.Componentes(Me.ListViewA.SelectedItems(0).Tag)
                         phase.Componentes.Remove(Me.ListViewA.SelectedItems(0).Tag)
                         tmpsubst.ConstantProperties = toreplace

@@ -580,7 +580,7 @@
     <value>1</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Composições (Fase Líquida)</value>
+    <value>Composições (Phase Líquida)</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Name" xml:space="preserve">
     <value>FaTabStripItem2</value>
@@ -718,7 +718,7 @@
     <value>2</value>
   </data>
   <data name="FaTabStripItem5.Title" xml:space="preserve">
-    <value>Composições (Fase Vapor)</value>
+    <value>Composições (Phase Vapor)</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Name" xml:space="preserve">
     <value>FaTabStripItem5</value>

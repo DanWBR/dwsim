@@ -136,7 +136,8 @@
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AeroWizard">
+    <Reference Include="AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>References\AeroWizard.dll</HintPath>
     </Reference>
     <Reference Include="CapeOpen, Version=1.0.4118.14986, Culture=neutral, PublicKeyToken=100cc1b5ee8fe630, processorArchitecture=x86">
@@ -179,14 +180,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="IKVM.OpenJDK.Core, Version=0.44.0.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\IKVM.OpenJDK.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="IKVM.OpenJDK.Jdbc, Version=0.44.0.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\IKVM.OpenJDK.Jdbc.dll</HintPath>
-    </Reference>
     <Reference Include="indigo-dotnet">
       <HintPath>References\indigo-dotnet.dll</HintPath>
     </Reference>
@@ -214,10 +207,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\IronPython.Modules.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="jcosmo_net, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\jcosmo_net.dll</HintPath>
     </Reference>
     <Reference Include="Jolt">
       <HintPath>References\Jolt.dll</HintPath>
@@ -279,8 +268,6 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Runtime" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
@@ -302,7 +289,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Import Include="DWSIM.DWSIM.SistemasDeUnidades" />
+    <Import Include="DWSIM.DWSIM.SystemsOfUnits" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -517,12 +504,6 @@
       <DependentUpon>frmCOReports.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmCOReports.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmObjListView.Designer.vb">
-      <DependentUpon>frmObjListView.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmObjListView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmOutput.Designer.vb">
@@ -745,8 +726,6 @@
     <Compile Include="Objects\PropertyPackages\ChaoSeader\ChaoSeaderPropertyPackage.vb" />
     <Compile Include="Objects\PropertyPackages\ChaoSeader\Helper Classes\CS.vb" />
     <Compile Include="Objects\PropertyPackages\CoolProp\CoolPropPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\COSMOSAC\COSMOSACPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\COSMOSAC\Helper Classes\COSMOSAC.vb" />
     <Compile Include="Objects\PropertyPackages\ExtendedUNIQUAC\ExUNIQUACPropertyPackage.vb" />
     <Compile Include="Objects\PropertyPackages\ExtendedUNIQUAC\Model\ExUNIQUAC.vb" />
     <Compile Include="Objects\PropertyPackages\FPROPS\FPROPSPropertyPackage.vb" />
@@ -881,12 +860,6 @@
     <Compile Include="Forms\FormFlowsheet_SubForms\frmLog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmObjList.Designer.vb">
-      <DependentUpon>frmObjList.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmObjList.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmProps.Designer.vb">
       <DependentUpon>frmProps.vb</DependentUpon>
     </Compile>
@@ -942,7 +915,6 @@
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
     <Compile Include="Objects\Classes\Optimization\SensitivityAnalysis.vb" />
     <Compile Include="Solvers\AzureSolverClient.vb" />
-    <Compile Include="Solvers\CommandLineProcessor.vb" />
     <Compile Include="Solvers\FlowsheetSolver.vb" />
     <Compile Include="Solvers\RigorousColumnSolver.vb" />
     <Compile Include="Objects\Classes\PetroleumAssay\AssayClass.vb" />
@@ -1380,9 +1352,6 @@
     <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPRSV2.es.resx">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SplashScreen.es.resx">
-      <DependentUpon>SplashScreen.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.es.resx">
       <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -1699,10 +1668,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmMatList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmObjList.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmObjList.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmProps.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmProps.vb</DependentUpon>
@@ -1766,10 +1731,6 @@
     <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmLog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmLog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmObjList.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmObjList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmProps.resx">
       <SubType>Designer</SubType>
@@ -2748,6 +2709,7 @@
     <Content Include="Assets\help\UT_Triangular_LLE.htm" />
     <Content Include="Assets\help\UT_TrueCriticalPoint.htm" />
     <Content Include="Assets\help\UT_VesselSizing.htm" />
+    <None Include="Resources\splashScreen2.png" />
     <None Include="Resources\uo_split_16.png" />
     <None Include="Resources\stream_mat_16.png" />
     <None Include="Resources\uo_mixer_16.png" />
@@ -2902,7 +2864,6 @@
     <None Include="Resources\jscript-file-icon.png" />
     <None Include="Resources\pic_customuo.jpg" />
     <None Include="Resources\password-icon.png" />
-    <None Include="Resources\Lab-icon.png" />
     <None Include="Resources\images.png" />
     <None Include="Resources\logo.gif" />
     <None Include="Resources\lightning1.png" />
@@ -2918,6 +2879,7 @@
     <None Include="Resources\re_equi_16.png" />
     <None Include="Resources\re_conv_16.png" />
     <None Include="Resources\re_gibbs_16.png" />
+    <None Include="Resources\Lab-icon.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
@@ -3022,20 +2984,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmMatList.es.resx">
       <DependentUpon>frmMatList.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmObjList.de.resx">
-      <DependentUpon>frmObjList.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmObjList.es.resx">
-      <DependentUpon>frmObjList.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmObjListView.de.resx">
-      <DependentUpon>frmObjListView.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmObjListView.es.resx">
-      <DependentUpon>frmObjListView.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmOutput.de.resx">
       <DependentUpon>frmOutput.vb</DependentUpon>
@@ -3447,14 +3395,6 @@
     <None Include="Resources\page_copy.png" />
     <None Include="Resources\paste_plain.png" />
     <None Include="Resources\copy.gif" />
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmObjListView.en.resx">
-      <DependentUpon>frmObjListView.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmObjListView.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmObjListView.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditorForm.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>UIConnectionsEditorForm.vb</DependentUpon>

@@ -1468,7 +1468,7 @@
   <data name="AnáliseDePetróleosToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="DiagramaDePhasesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
@@ -1485,20 +1485,20 @@
         JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DiagramaDePhasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>327, 22</value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem.Text" xml:space="preserve">
+  <data name="DiagramaDePhasesToolStripMenuItem.Text" xml:space="preserve">
     <value>Limite de Estabilidade</value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+  <data name="DiagramaDePhasesToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DiagramaDePhasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>327, 22</value>
   </data>
-  <data name="DiagramaDeFasesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Diagrama de Fases</value>
+  <data name="DiagramaDePhasesToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Diagrama de Phases</value>
   </data>
   <data name="DiagramaBinárioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>327, 22</value>
@@ -1510,7 +1510,7 @@
     <value>327, 22</value>
   </data>
   <data name="LLEDiagramToolStripMenuItem.Text" xml:space="preserve">
-    <value>Diagrama de Fases Triangular (ELL)</value>
+    <value>Diagrama de Phases Triangular (ELL)</value>
   </data>
   <data name="PropriedadesEspeciaisToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -8963,16 +8963,16 @@
   <data name="&gt;&gt;AnáliseDePetróleosToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DiagramaDeFasesToolStripMenuItem.Name" xml:space="preserve">
-    <value>DiagramaDeFasesToolStripMenuItem</value>
+  <data name="&gt;&gt;DiagramaDePhasesToolStripMenuItem.Name" xml:space="preserve">
+    <value>DiagramaDePhasesToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;DiagramaDeFasesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;DiagramaDePhasesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DiagramaDeFasesToolStripMenuItem1.Name" xml:space="preserve">
-    <value>DiagramaDeFasesToolStripMenuItem1</value>
+  <data name="&gt;&gt;DiagramaDePhasesToolStripMenuItem1.Name" xml:space="preserve">
+    <value>DiagramaDePhasesToolStripMenuItem1</value>
   </data>
-  <data name="&gt;&gt;DiagramaDeFasesToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;DiagramaDePhasesToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DiagramaBinárioToolStripMenuItem.Name" xml:space="preserve">

@@ -228,9 +228,9 @@ Public Class FormPropSelection
 
             Dim properties As String()
             If mode = 0 Then
-                properties = formC.Collections.ObjectCollection(key).GetProperties(SimulationObjects_BaseClass.PropertyType.ALL)
+                properties = formC.Collections.ObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
             Else
-                properties = formC.Collections.ObjectCollection(key).GetProperties(SimulationObjects_BaseClass.PropertyType.WR)
+                properties = formC.Collections.ObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
             End If
 
             For Each prop As String In properties
@@ -261,8 +261,8 @@ Public Class FormPropSelection
                     ssheet.UpdateValue(ssheet.DataGridView1.SelectedCells(0), cparams.Expression)
                 End If
             Else
-                Dim obj As SimulationObjects_BaseClass = formC.GetFlowsheetSimulationObject(Me.TreeView2.SelectedNode.Text)
-                If obj.GetProperties(SimulationObjects_BaseClass.PropertyType.RO).Contains(Me.TreeView3.SelectedNode.Tag) Then
+                Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = formC.GetFlowsheetSimulationObject(Me.TreeView2.SelectedNode.Text)
+                If obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.RO).Contains(Me.TreeView3.SelectedNode.Tag) Then
                     Me.wi = New DWSIM.Outros.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, True)
                 Else
                     Me.wi = New DWSIM.Outros.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, False)

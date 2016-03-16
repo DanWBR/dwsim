@@ -10,11 +10,11 @@ Public Class UIReboiledSideStripperEditorForm
     Dim loaded As Boolean = False
 
     Dim tpl As DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors.Templates
-    Dim cvt As DWSIM.SistemasDeUnidades.Conversor
+    Dim cvt As DWSIM.SystemsOfUnits.Converter
 
     Private Sub UIReboiledSideStripperEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cvt = New DWSIM.SistemasDeUnidades.Conversor()
+        cvt = New DWSIM.SystemsOfUnits.Converter()
 
         form = My.Application.ActiveSimulation
         dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
@@ -40,14 +40,14 @@ Public Class UIReboiledSideStripperEditorForm
             .Clear()
             For Each rss As ReboiledSideStripper In dc.RebSStrCol.Collection.Values
                 If dc.MaterialStreams.ContainsKey(rss.ProductStreamID) Then
-                    '.Add(New Object() {.Count + 1, rss.Name, rss.Stages.Count, rss.FromStage, rss.ToStage, Conversor.ConverterDoSI(form.Options.SelectedUnitSystem.spmp_molarflow, rss.ProductRate), rss.BoilUpRatio, dc.MaterialStreams(rss.ProductStreamID).Tag, rss.ID})
+                    '.Add(New Object() {.Count + 1, rss.Name, rss.Stages.Count, rss.FromStage, rss.ToStage, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.ProductRate), rss.BoilUpRatio, dc.MaterialStreams(rss.ProductStreamID).Tag, rss.ID})
                 Else
-                    .Add(New Object() {.Count + 1, rss.Name, rss.Stages.Count, rss.FromStage, rss.ToStage, rss.BoilUpRatio, Conversor.ConverterDoSI(form.Options.SelectedUnitSystem.spmp_molarflow, rss.ProductRate), "", rss.ID})
+                    .Add(New Object() {.Count + 1, rss.Name, rss.Stages.Count, rss.FromStage, rss.ToStage, rss.BoilUpRatio, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.ProductRate), "", rss.ID})
                 End If
             Next
         End With
 
-        dgv1.Columns(6).HeaderText += " (" & form.Options.SelectedUnitSystem.spmp_molarflow & ")"
+        dgv1.Columns(6).HeaderText += " (" & form.Options.SelectedUnitSystem.molarflow & ")"
 
         loaded = True
 
@@ -108,7 +108,7 @@ Public Class UIReboiledSideStripperEditorForm
                 Case 5
                     dc.RebSStrCol.Collection(id).BoilUpRatio = value
                 Case 6
-                    dc.RebSStrCol.Collection(id).ProductRate = Conversor.ConverterParaSI(form.Options.SelectedUnitSystem.spmp_molarflow, value)
+                    dc.RebSStrCol.Collection(id).ProductRate = Converter.ConvertToSI(form.Options.SelectedUnitSystem.molarflow, value)
                 Case 7
                     Dim msid As String = dc.RebSStrCol.Collection(id).ProductStreamID
                     If dc.MaterialStreams.ContainsKey(msid) Then

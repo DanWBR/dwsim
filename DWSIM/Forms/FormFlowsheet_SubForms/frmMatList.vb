@@ -4,7 +4,7 @@ Public Class frmMatList
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Protected Conversor As DWSIM.SistemasDeUnidades.Conversor
+    Protected Conversor As DWSIM.SystemsOfUnits.Converter
     Protected filename As String = ""
     Protected Flowsheet As FormFlowsheet
     Protected RowsCreated As Boolean = False
@@ -57,15 +57,15 @@ Public Class frmMatList
     Sub AddColumn(ByRef ms As DWSIM.SimulationObjects.Streams.MaterialStream)
 
         Me.Flowsheet = My.Application.ActiveSimulation
-        Me.Conversor = New DWSIM.SistemasDeUnidades.Conversor
+        Me.Conversor = New DWSIM.SystemsOfUnits.Converter
 
-        Dim su As DWSIM.SistemasDeUnidades.Unidades
+        Dim su As DWSIM.SystemsOfUnits.Units
         su = Flowsheet.Options.SelectedUnitSystem
 
         Me.DataGridView1.Columns.Add(ms.Nome, ms.GraphicObject.Tag)
         Me.DataGridView1.Columns(ms.Nome).SortMode = DataGridViewColumnSortMode.NotSortable
 
-        Dim props As String() = ms.GetProperties(SimulationObjects_BaseClass.PropertyType.ALL)
+        Dim props As String() = ms.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
         Dim unit As String = ""
 
         Me.SuspendLayout()

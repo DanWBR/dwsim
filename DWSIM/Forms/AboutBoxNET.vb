@@ -94,8 +94,6 @@ Public Class AboutBoxNET
             .Add(New Object() {"GemBox.Spreadsheet", "39.3.30.1037", "2015", "GemBox Software", "http://www.gemboxsoftware.com/spreadsheet/overview", "EULA", "http://www.gemboxsoftware.com/Spreadsheet/Eula.rtf"})
             .Add(New Object() {"FileHelpers", "1.6", "2007", "Marcos Meli", "https://sourceforge.net/projects/filehelpers", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
             .Add(New Object() {"SharpZipLib", "0.85.4.369", "2010", "IC#Code", "http://www.icsharpcode.net/OpenSource/SharpZipLib", "GPLv2", "http://www.gnu.org/licenses/gpl.html"})
-            .Add(New Object() {"IKVM", "0.44.0.5", "2011", "Jeroen Frijters", "http://www.ikvm.net", "IKVM License", "http://sourceforge.net/apps/mediawiki/ikvm/index.php?title=License"})
-            .Add(New Object() {"JCosmo", "1.0", "2011", "Rafael de Pelegrini Soares, Renan Pereira Gerber", "https://code.google.com/p/jcosmo/", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
             .Add(New Object() {"Indigo", "1.1", "2013", "GGA Software Services LLC", "http://www.ggasoftware.com/opensource/indigo", "GPLv3", "http://www.gnu.org/licenses/gpl.html"})
             .Add(New Object() {"Nini", "1.1", "2010", "Brent R. Matzelle", "https://sourceforge.net/projects/nini", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
             .Add(New Object() {"SyntaxBox", "1.4.10.17492", "2010", "Roger Alsing", "https://syntaxbox.codeplex.com", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})

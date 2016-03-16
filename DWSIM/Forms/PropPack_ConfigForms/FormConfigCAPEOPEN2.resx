@@ -778,7 +778,7 @@
     <value>Label8</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
-    <value>Componentes-chave para segunda fase líquida:</value>
+    <value>Componentes-chave para segunda Phase líquida:</value>
   </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1301,7 +1301,7 @@
     <value>Tipo</value>
   </data>
   <data name="ComboBoxFlashAlg.Items8" xml:space="preserve">
-    <value>Loops Aninhados (ELLV - Fases Líquidas Imiscíveis)</value>
+    <value>Loops Aninhados (ELLV - Phases Líquidas Imiscíveis)</value>
   </data>
   <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>

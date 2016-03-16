@@ -294,11 +294,11 @@ Module ScintillaExtender
                         suggestions += (m.Name) + " "
                     Next
                 Case "UnitOp", "Me"
-                    Dim props = Type.GetType("DWSIM.SimulationObjects_UnitOpBaseClass").GetProperties()
+                    Dim props = Type.GetType("DWSIM.DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
                     Next
-                    Dim methods = Type.GetType("DWSIM.SimulationObjects_UnitOpBaseClass").GetMethods()
+                    Dim methods = Type.GetType("DWSIM.DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass").GetMethods()
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
@@ -373,7 +373,7 @@ Module ScintillaExtender
                     Dim prop = Type.GetType("DWSIM.DWSIM.SimulationObjects.PropertyPackages.PropertyPackage").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "UnitOp", "Me"
-                    Dim prop = Type.GetType("DWSIM.SimulationObjects_UnitOpBaseClass").GetMember(lastkeyword)
+                    Dim prop = Type.GetType("DWSIM.DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "Solver"
                     Dim prop = Type.GetType("DWSIM.DWSIM.Flowsheet.FlowsheetSolver").GetMember(lastkeyword)

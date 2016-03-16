@@ -26,8 +26,8 @@ Public Class FormHYD
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
 
     Dim resPC, resTC As Object
@@ -84,20 +84,20 @@ Public Class FormHYD
 
                 unif.CurrentMaterialStream = mat
 
-                Dim n As Integer = mat.Fases(0).Componentes.Count - 1
+                Dim n As Integer = mat.Phases(0).Componentes.Count - 1
 
                 Dim Vz(n), T, P As Double
-                Dim nomes(mat.Fases(0).Componentes.Count - 1) As String
-                Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+                Dim nomes(mat.Phases(0).Componentes.Count - 1) As String
+                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                 Dim i As Integer = 0
-                For Each comp In mat.Fases(0).Componentes.Values
+                For Each comp In mat.Phases(0).Componentes.Values
                     Vz(i) = comp.FracaoMolar.GetValueOrDefault
                     nomes(i) = comp.Nome
                     i += 1
                 Next
                 nomesglobal = nomes
-                T = mat.Fases(0).SPMProperties.temperature
-                P = mat.Fases(0).SPMProperties.pressure
+                T = mat.Phases(0).Properties.temperature
+                P = mat.Phases(0).Properties.pressure
 
                 Dim pform(1) As Object, tform(1) As Object, PH As Double, TH As Double
 
@@ -215,54 +215,54 @@ Public Class FormHYD
 
                 'unidades
                 Dim uP, uT As String
-                uP = su.spmp_pressure
-                uT = su.spmp_temperature
+                uP = su.pressure
+                uT = su.temperature
 
                 Label5.Text = uP
                 Label15.Text = uP
                 Label1.Text = uT
                 Label16.Text = uT
 
-                Dim fasesTC As String = ""
+                Dim PhasesTC As String = ""
                 If PH > 600 * 101325 Then
                     Label8.Text = DWSIM.App.GetLocalString("ND")
                     Me.KryptonButton2.Enabled = False
-                    fasesTC = DWSIM.App.GetLocalString("ND")
+                    PhasesTC = DWSIM.App.GetLocalString("ND")
                 Else
-                    Label8.Text = Format(Conversor.ConverterDoSI(su.spmp_pressure, PH), nf)
+                    Label8.Text = Format(Converter.ConvertFromSI(su.pressure, PH), nf)
                     Me.KryptonButton2.Enabled = True
                     If CheckBox1.Checked Then
-                        fasesTC = DWSIM.App.GetLocalString("VaporAndHydrate") & " (" & tipoTC & ")"
+                        PhasesTC = DWSIM.App.GetLocalString("VaporAndHydrate") & " (" & tipoTC & ")"
                     Else
                         If Math.Abs(T - resTC(0)) < 0.1 Or T = resTC(0) Then
-                            fasesTC = DWSIM.App.GetLocalString("SlidoGeloLquidoguaGs1") & tipoTC & ")"
+                            PhasesTC = DWSIM.App.GetLocalString("SlidoGeloLquidoguaGs1") & tipoTC & ")"
                         ElseIf T < resTC(0) Then
-                            fasesTC = DWSIM.App.GetLocalString("SlidoGeloGseHidrato1") & tipoTC & ")"
+                            PhasesTC = DWSIM.App.GetLocalString("SlidoGeloGseHidrato1") & tipoTC & ")"
                         ElseIf T > resTC(0) Then
-                            fasesTC = DWSIM.App.GetLocalString("LquidoguaGseHidrato") & tipoTC & ")"
+                            PhasesTC = DWSIM.App.GetLocalString("LquidoguaGseHidrato") & tipoTC & ")"
                         End If
                     End If
                 End If
-                Dim fasesPC As String = ""
+                Dim PhasesPC As String = ""
                 If TH < 0 Then
                     Label14.Text = DWSIM.App.GetLocalString("ND")
                     Me.KryptonButton3.Enabled = False
-                    fasesPC = DWSIM.App.GetLocalString("ND")
+                    PhasesPC = DWSIM.App.GetLocalString("ND")
                 Else
-                    Label14.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, TH), nf)
+                    Label14.Text = Format(Converter.ConvertFromSI(su.temperature, TH), nf)
                     Me.KryptonButton3.Enabled = True
                     If CheckBox1.Checked Then
-                        fasesPC = DWSIM.App.GetLocalString("VaporAndHydrate") & " (" & tipoPC & ")"
+                        PhasesPC = DWSIM.App.GetLocalString("VaporAndHydrate") & " (" & tipoPC & ")"
                     Else
-                        fasesPC = DWSIM.App.GetLocalString("SlidoGeloGseHidrato1") & tipoPC & ")"
-                        If TH > resPC(0) Then fasesPC = DWSIM.App.GetLocalString("LquidoguaGseHidrato") & tipoPC & ")"
-                        If Math.Abs(TH - resPC(0)) < 0.01 Then fasesPC = DWSIM.App.GetLocalString("SlidoGeloLquidoguaGs1") & tipoPC & ")"
+                        PhasesPC = DWSIM.App.GetLocalString("SlidoGeloGseHidrato1") & tipoPC & ")"
+                        If TH > resPC(0) Then PhasesPC = DWSIM.App.GetLocalString("LquidoguaGseHidrato") & tipoPC & ")"
+                        If Math.Abs(TH - resPC(0)) < 0.01 Then PhasesPC = DWSIM.App.GetLocalString("SlidoGeloLquidoguaGs1") & tipoPC & ")"
                     End If
                 End If
-                Label17.Text = Format(Conversor.ConverterDoSI(su.spmp_pressure, P), nf)
-                Label9.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, T), nf)
-                Label12.Text = fasesPC
-                Label10.Text = fasesTC
+                Label17.Text = Format(Converter.ConvertFromSI(su.pressure, P), nf)
+                Label9.Text = Format(Converter.ConvertFromSI(su.temperature, T), nf)
+                Label12.Text = PhasesPC
+                Label10.Text = PhasesTC
 
                 'lógica para verificar se forma hidrato ou não
                 If T <= TH Then
@@ -302,8 +302,8 @@ Public Class FormHYD
         Dim frmdet As New FormHYD_DET
         With frmdet
             .res = resTC
-            .P = Conversor.ConverterParaSI(su.spmp_pressure, Label8.Text)
-            .T = Conversor.ConverterParaSI(su.spmp_temperature, Label9.Text)
+            .P = Converter.ConvertToSI(su.pressure, Label8.Text)
+            .T = Converter.ConvertToSI(su.temperature, Label9.Text)
             If Label10.ToString.Contains("sII") Then .sI = False
             .model = ComboBox1.SelectedIndex
             .nomes = nomesglobal
@@ -318,8 +318,8 @@ Public Class FormHYD
         Dim frmdet As New FormHYD_DET
         With frmdet
             .res = resPC
-            .P = Conversor.ConverterParaSI(su.spmp_pressure, Label17.Text)
-            .T = Conversor.ConverterParaSI(su.spmp_temperature, Label14.Text)
+            .P = Converter.ConvertToSI(su.pressure, Label17.Text)
+            .T = Converter.ConvertToSI(su.temperature, Label14.Text)
             If Label12.ToString.Contains("sII") Then .sI = False
             .model = ComboBox1.SelectedIndex
             .nomes = nomesglobal

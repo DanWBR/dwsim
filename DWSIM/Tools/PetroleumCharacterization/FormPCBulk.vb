@@ -19,7 +19,7 @@ Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary
 Imports System.Math
 Imports DWSIM.DWSIM.MathEx.GammaFunctions
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
 
 
@@ -27,8 +27,8 @@ Public Class FormPCBulk
     Inherits System.Windows.Forms.Form
     Public Shared Vf_l(,)
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
 
     Private frm As FormFlowsheet
@@ -41,7 +41,7 @@ Public Class FormPCBulk
     Private m_action As String
     Private error_v, error_p, error_cp As Integer
 
-    Dim ccol As Dictionary(Of String, Substancia)
+    Dim ccol As Dictionary(Of String, Compound)
 
     Dim MW0, SG0, TB0, V10, V20, A_MW, B_MW, A_SG, B_SG, A_TB, B_TB, A_V, B_V, SGav_, MWav_, TBav_, V1av_, V2av_, SGav, MWav, TBav, V1av, V2av As Double
     Dim dMF, dMW, dSG, dTB, dMW_, dSG_, dTB_, dVA, dVB, dV1, dV2, dV1_, dV2_, q As Double()
@@ -51,7 +51,7 @@ Public Class FormPCBulk
 
     Dim n As Integer
 
-    Public m_comps As New System.Collections.Generic.Dictionary(Of String, DWSIM.ClassesBasicasTermodinamica.Substancia)
+    Public m_comps As New System.Collections.Generic.Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Compound)
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KButton1.Click
 
@@ -61,15 +61,15 @@ Public Class FormPCBulk
 
         If tb_mw.Text <> "" Then MW = Double.Parse(tb_mw.Text)
         If tb_sg.Text <> "" Then SG = Double.Parse(tb_sg.Text)
-        If tb_wk.Text <> "" Then TB = Conversor.ConverterParaSI(su.spmp_temperature, Double.Parse(tb_wk.Text))
-        If tb_v1.Text <> "" Then V1 = Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, Double.Parse(tb_v1.Text)) Else V1 = 0.0#
-        If tb_v2.Text <> "" Then V2 = Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, Double.Parse(tb_v2.Text)) Else V2 = 0.0#
-        If tb_t1.Text <> "" Then T1 = Conversor.ConverterParaSI(su.spmp_temperature, Double.Parse(tb_t1.Text))
-        If tb_t2.Text <> "" Then T2 = Conversor.ConverterParaSI(su.spmp_temperature, Double.Parse(tb_t2.Text))
+        If tb_wk.Text <> "" Then TB = Converter.ConvertToSI(su.temperature, Double.Parse(tb_wk.Text))
+        If tb_v1.Text <> "" Then V1 = Converter.ConvertToSI(su.cinematic_viscosity, Double.Parse(tb_v1.Text)) Else V1 = 0.0#
+        If tb_v2.Text <> "" Then V2 = Converter.ConvertToSI(su.cinematic_viscosity, Double.Parse(tb_v2.Text)) Else V2 = 0.0#
+        If tb_t1.Text <> "" Then T1 = Converter.ConvertToSI(su.temperature, Double.Parse(tb_t1.Text))
+        If tb_t2.Text <> "" Then T2 = Converter.ConvertToSI(su.temperature, Double.Parse(tb_t2.Text))
 
         MW0 = Double.Parse(Me.TextBoxMW0.Text)
         SG0 = Double.Parse(Me.TextBoxSG0.Text)
-        TB0 = Conversor.ConverterParaSI(su.spmp_temperature, Double.Parse(Me.TextBoxTB0.Text))
+        TB0 = Converter.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTB0.Text))
 
         'Dim dMF(n), dMW(n), dSG(n), dTB(n), dMW_(n), dSG_(n), dTB_(n), dVA(n), dVB(n), dV1(n), dV2(n), dV1_(n), dV2_(n), q(n) As Double()
         Array.Resize(dMF, n + 1)
@@ -283,7 +283,7 @@ Public Class FormPCBulk
         Dim rnd As New Random
         Dim id = rnd.Next(1000, 9999)
 
-        ccol = New Dictionary(Of String, Substancia)
+        ccol = New Dictionary(Of String, Compound)
         ccol.Clear()
 
         For i = 1 To n
@@ -387,7 +387,7 @@ Public Class FormPCBulk
 
             End With
 
-            Dim subst As New Substancia(cprop.Name, "")
+            Dim subst As New Compound(cprop.Name, "")
 
             With subst
                 .FracaoMolar = dMF(i)
@@ -416,14 +416,14 @@ Public Class FormPCBulk
             pp = New DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage()
         End If
 
-        For Each c As Substancia In ccol.Values
-            tms.Fases(0).Componentes.Add(c.Nome, c)
+        For Each c As Compound In ccol.Values
+            tms.Phases(0).Componentes.Add(c.Nome, c)
         Next
 
         Dim recalcVc As Boolean = False
 
         i = 0
-        For Each c As Substancia In ccol.Values
+        For Each c As Compound In ccol.Values
             If Me.CheckBoxADJAF.Checked Then
                 With nbpfit
                     ._pp = pp
@@ -497,18 +497,18 @@ Public Class FormPCBulk
         Dim nm, fm, nbp, sgi, mm, ct, cp, af, visc1, visc2, prvs, srkvs As String
 
         Me.DataGridView2.Rows.Clear()
-        For Each subst As Substancia In ccol.Values
+        For Each subst As Compound In ccol.Values
             With subst
                 nm = .Nome
                 fm = Format(.FracaoMolar, nf)
-                nbp = Format(Conversor.ConverterDoSI(su.spmp_temperature, .ConstantProperties.NBP), nf)
+                nbp = Format(Converter.ConvertFromSI(su.temperature, .ConstantProperties.NBP), nf)
                 sgi = Format(.ConstantProperties.PF_SG, nf)
                 mm = Format(.ConstantProperties.PF_MM, nf)
-                ct = Format(Conversor.ConverterDoSI(su.spmp_temperature, .ConstantProperties.Critical_Temperature), nf)
-                cp = Format(Conversor.ConverterDoSI(su.spmp_pressure, .ConstantProperties.Critical_Pressure), nf)
+                ct = Format(Converter.ConvertFromSI(su.temperature, .ConstantProperties.Critical_Temperature), nf)
+                cp = Format(Converter.ConvertFromSI(su.pressure, .ConstantProperties.Critical_Pressure), nf)
                 af = Format(.ConstantProperties.Acentric_Factor, nf)
-                visc1 = Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, .ConstantProperties.PF_v1), "E")
-                visc2 = Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, .ConstantProperties.PF_v2), "E")
+                visc1 = Format(Converter.ConvertFromSI(su.cinematic_viscosity, .ConstantProperties.PF_v1), "E")
+                visc2 = Format(Converter.ConvertFromSI(su.cinematic_viscosity, .ConstantProperties.PF_v2), "E")
                 prvs = Format(.ConstantProperties.PR_Volume_Translation_Coefficient, "N6")
                 srkvs = Format(.ConstantProperties.SRK_Volume_Translation_Coefficient, "N6")
             End With
@@ -692,28 +692,28 @@ Public Class FormPCBulk
         Me.ComboBoxTC.SelectedIndex = 0
         Me.ComboBoxPC.SelectedIndex = 0
 
-        Me.LabelTemp1.Text = su.spmp_temperature
-        Me.LabelTemp2.Text = su.spmp_temperature
-        Me.LabelTemp3.Text = su.spmp_temperature
-        Me.LabelTemp4.Text = su.spmp_temperature
+        Me.LabelTemp1.Text = su.temperature
+        Me.LabelTemp2.Text = su.temperature
+        Me.LabelTemp3.Text = su.temperature
+        Me.LabelTemp4.Text = su.temperature
 
-        Me.LabelVisc1.Text = su.spmp_cinematic_viscosity
-        Me.LabelVisc2.Text = su.spmp_cinematic_viscosity
+        Me.LabelVisc1.Text = su.cinematic_viscosity
+        Me.LabelVisc2.Text = su.cinematic_viscosity
 
-        Me.tb_t1.Text = Conversor.ConverterDoSI(su.spmp_temperature, 37.78 + 273.15).ToString(nf)
-        Me.tb_t2.Text = Conversor.ConverterDoSI(su.spmp_temperature, 98.89 + 273.15).ToString(nf)
+        Me.tb_t1.Text = Converter.ConvertFromSI(su.temperature, 37.78 + 273.15).ToString(nf)
+        Me.tb_t2.Text = Converter.ConvertFromSI(su.temperature, 98.89 + 273.15).ToString(nf)
 
         Me.TextBoxSG0.Text = (0.7).ToString(nf)
         Me.TextBoxMW0.Text = 80
-        Me.TextBoxTB0.Text = Conversor.ConverterDoSI(su.spmp_temperature, 333).ToString(nf)
+        Me.TextBoxTB0.Text = Converter.ConvertFromSI(su.temperature, 333).ToString(nf)
 
         With Me.DataGridView2.Columns
-            .Item(2).HeaderText += " (" & su.spmp_temperature & ")"
-            .Item(4).HeaderText += " (" & su.spmp_molecularWeight & ")"
-            .Item(5).HeaderText += " (" & su.spmp_temperature & ")"
-            .Item(6).HeaderText += " (" & su.spmp_pressure & ")"
-            .Item(8).HeaderText += " (" & su.spmp_cinematic_viscosity & ")"
-            .Item(9).HeaderText += " (" & su.spmp_cinematic_viscosity & ")"
+            .Item(2).HeaderText += " (" & su.temperature & ")"
+            .Item(4).HeaderText += " (" & su.molecularWeight & ")"
+            .Item(5).HeaderText += " (" & su.temperature & ")"
+            .Item(6).HeaderText += " (" & su.pressure & ")"
+            .Item(8).HeaderText += " (" & su.cinematic_viscosity & ")"
+            .Item(9).HeaderText += " (" & su.cinematic_viscosity & ")"
         End With
 
     End Sub
@@ -723,8 +723,8 @@ Public Class FormPCBulk
         'finalize button
 
         Dim corr As String = Me.TextBox1.Text
-        Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
-        Dim subst As DWSIM.ClassesBasicasTermodinamica.Substancia
+        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+        Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
         Dim gObj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject = Nothing
         Dim idx As Integer = 0
 
@@ -744,7 +744,6 @@ Public Class FormPCBulk
         gObj = myMStr
         gObj.Name = "MAT-" & Guid.NewGuid.ToString
         frm.Collections.MaterialStreamCollection.Add(gObj.Name, myMStr)
-        If Not DWSIM.App.IsRunningOnMono Then frm.FormObjList.TreeViewObj.Nodes("NodeMS").Nodes.Add(gObj.Name, gObj.Tag).Name = gObj.Name
         'OBJETO DWSIM
         Dim myCOMS As DWSIM.SimulationObjects.Streams.MaterialStream = New DWSIM.SimulationObjects.Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr
@@ -757,13 +756,13 @@ Public Class FormPCBulk
             subst.FracaoMassica = subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight / wtotal
         Next
         For Each subst In ccol.Values
-            With myCOMS.Fases(0).Componentes
+            With myCOMS.Phases(0).Componentes
                 .Item(subst.Nome).ConstantProperties = subst.ConstantProperties
                 .Item(subst.Nome).FracaoMassica = subst.FracaoMassica
                 .Item(subst.Nome).FracaoMolar = subst.FracaoMolar
             End With
-            myCOMS.Fases(1).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
-            myCOMS.Fases(2).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
+            myCOMS.Phases(1).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
+            myCOMS.Phases(2).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
         Next
         frm.Collections.ObjectCollection.Add(myCOMS.Nome, myCOMS)
         frm.Collections.CLCS_MaterialStreamCollection.Add(myCOMS.Nome, myCOMS)
@@ -785,7 +784,7 @@ Public Class FormPCBulk
         'salvar ensaio
 
         Try
-            Dim myassay As Assay.Assay = New Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text, Conversor.ConverterParaSI("C", tb_t1.Text), Conversor.ConverterParaSI("C", tb_t2.Text), Conversor.ConverterParaSI("cSt", tb_v1.Text), Conversor.ConverterParaSI("cSt", tb_v2.Text))
+            Dim myassay As Assay.Assay = New Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text, Converter.ConvertToSI("C", tb_t1.Text), Converter.ConvertToSI("C", tb_t2.Text), Converter.ConvertToSI("cSt", tb_v1.Text), Converter.ConvertToSI("cSt", tb_v2.Text))
             myassay.Name = Me.TextBox1.Text
             frm.Options.PetroleumAssays.Add(Guid.NewGuid().ToString, myassay)
             MessageBox.Show("Assay data was saved succesfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -809,11 +808,11 @@ Public Class FormPCBulk
 
                 Me.tb_mw.Text = Format(myassay.MW, nf)
                 Me.tb_sg.Text = Format(myassay.SG60, nf)
-                Me.tb_t1.Text = Format(Conversor.ConverterDoSI("C", myassay.T1), nf)
-                Me.tb_t2.Text = Format(Conversor.ConverterDoSI("C", myassay.T2), nf)
+                Me.tb_t1.Text = Format(Converter.ConvertFromSI("C", myassay.T1), nf)
+                Me.tb_t2.Text = Format(Converter.ConvertFromSI("C", myassay.T2), nf)
                 Me.tb_wk.Text = Format(myassay.NBPAVG, nf)
-                Me.tb_v1.Text = Format(Conversor.ConverterDoSI("cSt", myassay.V1), nf)
-                Me.tb_v2.Text = Format(Conversor.ConverterDoSI("cSt", myassay.V2), nf)
+                Me.tb_v1.Text = Format(Converter.ConvertFromSI("cSt", myassay.V1), nf)
+                Me.tb_v2.Text = Format(Converter.ConvertFromSI("cSt", myassay.V2), nf)
 
             End If
 

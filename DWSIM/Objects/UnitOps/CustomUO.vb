@@ -32,7 +32,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
     <Guid(CustomUO.ClassId)> <System.Serializable()> <ComVisible(True)> Public Class CustomUO
 
-        Inherits SimulationObjects_UnitOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         Private _scripttext As String = ""
         Private _scriptlanguage As scriptlanguage = scriptlanguage.IronPython
@@ -101,7 +101,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             OutputVariables = New Dictionary(Of String, Double)
         End Sub
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
             MyBase.CreateNew()
             InputVariables = New Dictionary(Of String, Double)
             OutputVariables = New Dictionary(Of String, Double)
@@ -197,7 +197,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Catch ex As Exception
                     End Try
                     engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-                    engine.Runtime.LoadAssembly(GetType(DWSIM.ClassesBasicasTermodinamica.ConstantProperties).Assembly)
+                    engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
                     engine.Runtime.LoadAssembly(GetType(Microsoft.Msdn.Samples.GraphicObjects.GraphicObject).Assembly)
                     engine.Runtime.LoadAssembly(GetType(Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface).Assembly)
                     scope = engine.CreateScope()
@@ -293,9 +293,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
             MyBase.Validate()
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 
@@ -486,7 +486,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             MyBase.PropertyValueChanged(s, e)
         End Sub
 
-        Public Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             Select Case proptype
                 Case PropertyType.ALL
                     Return Me.OutputVariables.Keys.ToArray.Union(Me.InputVariables.Keys.ToArray).ToArray
@@ -499,11 +499,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End Select
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             Return ""
         End Function
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             If Me.OutputVariables.ContainsKey(prop) Then Return Me.OutputVariables(prop)
             If Me.InputVariables.ContainsKey(prop) Then Return Me.InputVariables(prop)
             Return Nothing
@@ -521,14 +521,14 @@ Namespace DWSIM.SimulationObjects.UnitOps
             End With
         End Sub
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             If Me.InputVariables.ContainsKey(prop) Then Me.InputVariables(prop) = propval
             Return Nothing
         End Function
 
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
                 Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
                 Me.FillNodeItems()
@@ -727,7 +727,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     'Dim lscript As New Lua
                     'Try
                     '    lscript("pme") = Me._simcontext
-                    '    lscript("dwsim") = GetType(DWSIM.ClassesBasicasTermodinamica.Fase).Assembly
+                    '    lscript("dwsim") = GetType(DWSIM.Thermodynamics.BaseClasses.Phase).Assembly
                     '    lscript("capeopen") = GetType(ICapeIdentification).Assembly
                     '    lscript("ims1") = ims1
                     '    lscript("ims2") = ims2
@@ -776,7 +776,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
                         engine.Runtime.LoadAssembly(GetType(CAPEOPEN110.ICapeIdentification).Assembly)
                         engine.Runtime.LoadAssembly(GetType(CapeOpen.ICapeIdentification).Assembly)
-                        engine.Runtime.LoadAssembly(GetType(DWSIM.ClassesBasicasTermodinamica.ConstantProperties).Assembly)
+                        engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
                         scope = engine.CreateScope()
                         scope.SetVariable("pme", Me._simcontext)
                         scope.SetVariable("this", Me)

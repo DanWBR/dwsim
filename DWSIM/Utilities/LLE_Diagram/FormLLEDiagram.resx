@@ -988,7 +988,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>DWSIM - Utilitários: Diagrama de Fases Triangular (ELL)</value>
+    <value>DWSIM - Utilitários: Diagrama de Phases Triangular (ELL)</value>
   </data>
   <data name="&gt;&gt;PrintDocument1.Name" xml:space="preserve">
     <value>PrintDocument1</value>

@@ -46,21 +46,17 @@ Partial Class SplashScreen
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.White
-        Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.dwsim_3_bg
+        Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.splashScreen2
         Me.ControlBox = False
         Me.Controls.Add(Me.LabelLicense)
         Me.Controls.Add(Me.Version)
-        Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "SplashScreen"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.TransparencyKey = System.Drawing.Color.Red
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Public WithEvents Version As System.Windows.Forms.Label

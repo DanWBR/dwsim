@@ -606,10 +606,10 @@
   <data name="Composiesvolumtrica2" xml:space="preserve">
     <value>2. Volumetric Composition</value>
   </data>
-  <data name="ComposiodaFaseLquida" xml:space="preserve">
+  <data name="ComposiodaPhaseLquida" xml:space="preserve">
     <value>Composition of the Liquid Phase</value>
   </data>
-  <data name="ComposiodaFaseVapor" xml:space="preserve">
+  <data name="ComposiodaPhaseVapor" xml:space="preserve">
     <value>Composition of the Vapor Phase</value>
   </data>
   <data name="ComposiodaMistura" xml:space="preserve">
@@ -870,16 +870,16 @@
   <data name="Corsemgradiente" xml:space="preserve">
     <value>Color (without gradient)</value>
   </data>
-  <data name="CpCvFaseLquida" xml:space="preserve">
+  <data name="CpCvPhaseLquida" xml:space="preserve">
     <value>Cp/Cv (Liquid Phase)</value>
   </data>
-  <data name="CpCvFaseVapor" xml:space="preserve">
+  <data name="CpCvPhaseVapor" xml:space="preserve">
     <value>Cp/Cv (Vapor Phase)</value>
   </data>
-  <data name="CpFaseLquida" xml:space="preserve">
+  <data name="CpPhaseLquida" xml:space="preserve">
     <value>Cp (Liquid Phase)</value>
   </data>
-  <data name="CpFaseVapor" xml:space="preserve">
+  <data name="CpPhaseVapor" xml:space="preserve">
     <value>Cp (Vapor Phase)</value>
   </data>
   <data name="Cpiasdesegurana" xml:space="preserve">
@@ -1602,19 +1602,19 @@
   <data name="Existemsimulaesabert" xml:space="preserve">
     <value>There are open simulations. Are you sure you want to close DWSIM?</value>
   </data>
-  <data name="Existeumafaselquidan" xml:space="preserve">
+  <data name="ExisteumaPhaselquidan" xml:space="preserve">
     <value>There is a liquid phase at the suction of the compressor.</value>
   </data>
-  <data name="Existeumafaselquidan2" xml:space="preserve">
+  <data name="ExisteumaPhaselquidan2" xml:space="preserve">
     <value>There is a liquid phase at the suction of the turbine.</value>
   </data>
-  <data name="Existeumafasevaporna" xml:space="preserve">
+  <data name="ExisteumaPhasevaporna" xml:space="preserve">
     <value>There is a vapor phase in the suction of the pump.</value>
   </data>
-  <data name="Existeumafasevaporna2" xml:space="preserve">
+  <data name="ExisteumaPhasevaporna2" xml:space="preserve">
     <value>There is a vapor phase in the input stream of the tank.</value>
   </data>
-  <data name="Existeumafasevaporna21" xml:space="preserve">
+  <data name="ExisteumaPhasevaporna21" xml:space="preserve">
     <value>There is a vapor phase in the input stream of the heat exchanger.</value>
   </data>
   <data name="Existeumerronaconfig" xml:space="preserve">
@@ -1695,10 +1695,10 @@
   <data name="Fluxograma" xml:space="preserve">
     <value>Flowsheet</value>
   </data>
-  <data name="FMFaseLquida" xml:space="preserve">
+  <data name="FMPhaseLquida" xml:space="preserve">
     <value>Liquid Phase MF</value>
   </data>
-  <data name="FMFaseVapor" xml:space="preserve">
+  <data name="FMPhaseVapor" xml:space="preserve">
     <value>Vapor Phase MF</value>
   </data>
   <data name="FMMistura" xml:space="preserve">
@@ -1839,22 +1839,22 @@
   <data name="FraoMolar2" xml:space="preserve">
     <value>Cumulative Molar Fraction</value>
   </data>
-  <data name="Fraomolardafase" xml:space="preserve">
+  <data name="FraomolardaPhase" xml:space="preserve">
     <value>Phase molar fraction</value>
   </data>
-  <data name="FraomolardafaseFaseL" xml:space="preserve">
+  <data name="FraomolardaPhasePhaseL" xml:space="preserve">
     <value>Phase molar fraction (Liquid Phase)</value>
   </data>
-  <data name="FraomolardafaseFaseV" xml:space="preserve">
+  <data name="FraomolardaPhasePhaseV" xml:space="preserve">
     <value>Phase molar fraction (Vapor Phase)</value>
   </data>
-  <data name="Fraomolardafasenamis" xml:space="preserve">
+  <data name="FraomolardaPhasenamis" xml:space="preserve">
     <value>Phase molar fraction in the mixture</value>
   </data>
-  <data name="FraomolarnaFaseLquid" xml:space="preserve">
+  <data name="FraomolarnaPhaseLquid" xml:space="preserve">
     <value>Liquid Phase Molar Fraction</value>
   </data>
-  <data name="FraomolarnaFaseVapor" xml:space="preserve">
+  <data name="FraomolarnaPhaseVapor" xml:space="preserve">
     <value>Vapor Phase Molar Fraction</value>
   </data>
   <data name="FraomolarnaMistura" xml:space="preserve">
@@ -1872,28 +1872,28 @@
   <data name="FraoMssica" xml:space="preserve">
     <value>Mass Fraction</value>
   </data>
-  <data name="Fraomssicadafase" xml:space="preserve">
+  <data name="FraomssicadaPhase" xml:space="preserve">
     <value>Phase mass fraction</value>
   </data>
-  <data name="FraomssicadafaseFase" xml:space="preserve">
+  <data name="FraomssicadaPhasePhase" xml:space="preserve">
     <value>Phase mass fraction (Vapor Phase)</value>
   </data>
-  <data name="FraomssicadafaseFase2" xml:space="preserve">
+  <data name="FraomssicadaPhasePhase2" xml:space="preserve">
     <value>Phase mass fraction (Liquid Phase)</value>
   </data>
-  <data name="FraomssicadafaseFase3" xml:space="preserve">
+  <data name="FraomssicadaPhasePhase3" xml:space="preserve">
     <value>Phase mass fraction (Phase Steam)</value>
   </data>
-  <data name="FraomssicadafaseFase4" xml:space="preserve">
+  <data name="FraomssicadaPhasePhase4" xml:space="preserve">
     <value>Phase mass fraction (Liquid Phase)</value>
   </data>
-  <data name="Fraomssicadafasenami" xml:space="preserve">
+  <data name="FraomssicadaPhasenami" xml:space="preserve">
     <value>Phase mass fraction in the mixture</value>
   </data>
-  <data name="FraomssicanaFaseLqui" xml:space="preserve">
+  <data name="FraomssicanaPhaseLqui" xml:space="preserve">
     <value>Liquid Phase Mass Fraction</value>
   </data>
-  <data name="FraomssicanaFaseVapo" xml:space="preserve">
+  <data name="FraomssicanaPhaseVapo" xml:space="preserve">
     <value>Vapor Phase Mass Fraction</value>
   </data>
   <data name="FraomssicanaMistura" xml:space="preserve">
@@ -2100,10 +2100,10 @@
   <data name="LIQEntropiaEspecfica" xml:space="preserve">
     <value>LIQ Specific Entropy</value>
   </data>
-  <data name="LIQFraomolardafase" xml:space="preserve">
+  <data name="LIQFraomolardaPhase" xml:space="preserve">
     <value>LIQ Phase Molar Fraction</value>
   </data>
-  <data name="LIQFraomssicadafase" xml:space="preserve">
+  <data name="LIQFraomssicadaPhase" xml:space="preserve">
     <value>LIQ Phase Mass Fraction</value>
   </data>
   <data name="LIQMassaespecfica" xml:space="preserve">
@@ -2169,22 +2169,22 @@
   <data name="Massaespecfica" xml:space="preserve">
     <value>Density</value>
   </data>
-  <data name="Massaespecficadafase" xml:space="preserve">
+  <data name="MassaespecficadaPhase" xml:space="preserve">
     <value>Density of vapor phase</value>
   </data>
-  <data name="Massaespecficadafase2" xml:space="preserve">
+  <data name="MassaespecficadaPhase2" xml:space="preserve">
     <value>Density of liquid phase</value>
   </data>
-  <data name="MassaEspecficadaFase3" xml:space="preserve">
+  <data name="MassaEspecficadaPhase3" xml:space="preserve">
     <value>Density of Liquid Phase: Rackett</value>
   </data>
   <data name="Massaespecficadamist" xml:space="preserve">
     <value>Density of the mixture</value>
   </data>
-  <data name="MassaespecficaFaseLq" xml:space="preserve">
+  <data name="MassaespecficaPhaseLq" xml:space="preserve">
     <value>Density (Liquid Phase)</value>
   </data>
-  <data name="MassaespecficaFaseVa" xml:space="preserve">
+  <data name="MassaespecficaPhaseVa" xml:space="preserve">
     <value>Density (Vapor Phase)</value>
   </data>
   <data name="MassaespecficaMistur" xml:space="preserve">
@@ -2193,19 +2193,19 @@
   <data name="Massamolar" xml:space="preserve">
     <value>Molecular Weight</value>
   </data>
-  <data name="Massamolardafaselqui" xml:space="preserve">
+  <data name="MassamolardaPhaselqui" xml:space="preserve">
     <value>Molecular Weight of the liquid phase</value>
   </data>
-  <data name="Massamolardafasevapo" xml:space="preserve">
+  <data name="MassamolardaPhasevapo" xml:space="preserve">
     <value>Molecular Weight of the vapor phase</value>
   </data>
   <data name="Massamolardamistura" xml:space="preserve">
     <value>Molecular Weight of the mixture</value>
   </data>
-  <data name="MassamolarFaseLquida" xml:space="preserve">
+  <data name="MassamolarPhaseLquida" xml:space="preserve">
     <value>Molecular Weight (Liquid Phase)</value>
   </data>
-  <data name="MassamolarFaseVapor" xml:space="preserve">
+  <data name="MassamolarPhaseVapor" xml:space="preserve">
     <value>Molecular Weight (Vapor Phase)</value>
   </data>
   <data name="MassamolarMistura" xml:space="preserve">
@@ -2937,13 +2937,13 @@
   <data name="Propriedades3" xml:space="preserve">
     <value>3. Properties</value>
   </data>
-  <data name="PropriedadesdaFaseLq" xml:space="preserve">
+  <data name="PropriedadesdaPhaseLq" xml:space="preserve">
     <value>Liquid Phase Properties</value>
   </data>
-  <data name="Propriedadesdafaseva" xml:space="preserve">
+  <data name="PropriedadesdaPhaseva" xml:space="preserve">
     <value>Vapor Phase Properties</value>
   </data>
-  <data name="PropriedadesdaFaseVa2" xml:space="preserve">
+  <data name="PropriedadesdaPhaseVa2" xml:space="preserve">
     <value>Vapor Phase Properties</value>
   </data>
   <data name="Propriedadesdamistur" xml:space="preserve">
@@ -3423,7 +3423,7 @@
   <data name="StatusOcioso" xml:space="preserve">
     <value>Status: Idle</value>
   </data>
-  <data name="Substancia" xml:space="preserve">
+  <data name="Compound" xml:space="preserve">
     <value>Component</value>
   </data>
   <data name="Substnciaremovida" xml:space="preserve">
@@ -3678,10 +3678,10 @@
   <data name="VAPEntropiaEspecfica" xml:space="preserve">
     <value>VAP Specific Entropy</value>
   </data>
-  <data name="VAPFraomolardafase" xml:space="preserve">
+  <data name="VAPFraomolardaPhase" xml:space="preserve">
     <value>VAP Phase Molar Fraction</value>
   </data>
-  <data name="VAPFraomssicadafase" xml:space="preserve">
+  <data name="VAPFraomssicadaPhase" xml:space="preserve">
     <value>VAP Phase Mass Fraction</value>
   </data>
   <data name="VAPMassaespecfica" xml:space="preserve">
@@ -3759,19 +3759,19 @@
   <data name="Vazomssicadamistura" xml:space="preserve">
     <value>Mass flow rate of the mixture</value>
   </data>
-  <data name="VazomssicaFaseLquida" xml:space="preserve">
+  <data name="VazomssicaPhaseLquida" xml:space="preserve">
     <value>Mass flow rate (Liquid Phase)</value>
   </data>
-  <data name="VazomssicaFaseVapor" xml:space="preserve">
+  <data name="VazomssicaPhaseVapor" xml:space="preserve">
     <value>Mass flow rate (Vapor Phase)</value>
   </data>
   <data name="VazomssicaMistura" xml:space="preserve">
     <value>Mass flow rate (Mixture)</value>
   </data>
-  <data name="VazomssicanaFaseLqui" xml:space="preserve">
+  <data name="VazomssicanaPhaseLqui" xml:space="preserve">
     <value>Mass flow rate in Liquid Phase</value>
   </data>
-  <data name="VazomssicanaFaseVapo" xml:space="preserve">
+  <data name="VazomssicanaPhaseVapo" xml:space="preserve">
     <value>Mass flow rate in Vapor Phase</value>
   </data>
   <data name="VazomssicanaMistura" xml:space="preserve">
@@ -3780,10 +3780,10 @@
   <data name="VazoTP" xml:space="preserve">
     <value>Flow Rate @ T, P</value>
   </data>
-  <data name="VazoTPFaseLquida" xml:space="preserve">
+  <data name="VazoTPPhaseLquida" xml:space="preserve">
     <value>Flow Rate @ T, P (Liquid Phase)</value>
   </data>
-  <data name="VazoTPFaseVapor" xml:space="preserve">
+  <data name="VazoTPPhaseVapor" xml:space="preserve">
     <value>Flow Rate @ T, P (Vapor Phase)</value>
   </data>
   <data name="Vazovolumtrica" xml:space="preserve">
@@ -3795,10 +3795,10 @@
   <data name="Vazovolumtricadamist" xml:space="preserve">
     <value>Volumetric flow rate in the mixture</value>
   </data>
-  <data name="VazovolumtricanaFase" xml:space="preserve">
+  <data name="VazovolumtricanaPhase" xml:space="preserve">
     <value>Volumetric flow rate in the vapor phase</value>
   </data>
-  <data name="VazovolumtricanaFase1" xml:space="preserve">
+  <data name="VazovolumtricanaPhase1" xml:space="preserve">
     <value>Volumetric flow rate in the liquid phase</value>
   </data>
   <data name="VazovolumtricanaMist" xml:space="preserve">
@@ -3990,10 +3990,10 @@
   <data name="Wegstein" xml:space="preserve">
     <value>Wegstein ...</value>
   </data>
-  <data name="ZFaseLquida" xml:space="preserve">
+  <data name="ZPhaseLquida" xml:space="preserve">
     <value>Z (Liquid Phase)</value>
   </data>
-  <data name="ZFaseVapor" xml:space="preserve">
+  <data name="ZPhaseVapor" xml:space="preserve">
     <value>Z (Vapor Phase)</value>
   </data>
   <data name="PropPack_FlashTrivialSolution" xml:space="preserve">

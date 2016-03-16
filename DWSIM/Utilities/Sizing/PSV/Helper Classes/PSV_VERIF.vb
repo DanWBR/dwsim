@@ -26,7 +26,7 @@
             'rhog = densidade do gás em kg/m3
             'rhom = densidade da mistura em kg/m3
             'rhom90 = densidade da mistura em kg/m3 a 90% de P
-            'xo = fração volumétrica de óleo na fase líquida
+            'xo = fração volumétrica de óleo na Phase líquida
 
             A = AREA_API(L)
 
@@ -204,7 +204,7 @@
             'BP = contrapressão em kgf/cm²_g
             'Q = vazão da mistura em kg/h
             'A = área em in.2
-            'xo = fração volumétrica de óleo na fase líquida
+            'xo = fração volumétrica de óleo na Phase líquida
 
             vg0 = (1 / rhog) * 16.0185
             v0 = (1 / rhom) * 16.0185

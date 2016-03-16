@@ -29,8 +29,8 @@ Public Class FormHYD_DET
 
     Dim Frm As FormFlowsheet
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
 
     Public Sub FormDET_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -43,8 +43,8 @@ Public Class FormHYD_DET
 
         'unidades
         Dim uP, uT As String
-        uP = su.spmp_pressure
-        uT = su.spmp_temperature
+        uP = su.pressure
+        uT = su.temperature
 
         Label15.Text = uP
         Label16.Text = uT
@@ -135,18 +135,18 @@ Public Class FormHYD_DET
         'vdwP,KS,SL     {Td, act, (FG)PQAG, (FG)PQHYD, Vx, Vy, Vh}
         'CG             {Td, act}
 
-        Dim fases As String = ""
-        If T < res(0) Then fases = DWSIM.App.GetLocalString("SlidoGeloGseHidrato")
-        If T > res(0) Then fases = DWSIM.App.GetLocalString("LquidoguaGseHidrato2")
-        If Math.Abs(T - res(0)) < 0.01 Then fases = DWSIM.App.GetLocalString("SlidoGeloLquidoguaGs")
-        If soma = 0.0# Then fases = DWSIM.App.GetLocalString("VaporAndHydrate")
+        Dim Phases As String = ""
+        If T < res(0) Then Phases = DWSIM.App.GetLocalString("SlidoGeloGseHidrato")
+        If T > res(0) Then Phases = DWSIM.App.GetLocalString("LquidoguaGseHidrato2")
+        If Math.Abs(T - res(0)) < 0.01 Then Phases = DWSIM.App.GetLocalString("SlidoGeloLquidoguaGs")
+        If soma = 0.0# Then Phases = DWSIM.App.GetLocalString("VaporAndHydrate")
 
         If model <> 2 Then
 
-            Label8.Text = Format(Conversor.ConverterDoSI(su.spmp_pressure, P), nf)
-            Label9.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, T), nf)
-            Label10.Text = fases
-            Label11.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, res(0)), nf)
+            Label8.Text = Format(Converter.ConvertFromSI(su.pressure, P), nf)
+            Label9.Text = Format(Converter.ConvertFromSI(su.temperature, T), nf)
+            Label10.Text = Phases
+            Label11.Text = Format(Converter.ConvertFromSI(su.temperature, res(0)), nf)
             Label12.Text = Format(res(1), "####0.########")
             Label13.Text = Format(res(2) / 1000, "####0.0000#")
             Label14.Text = Format(res(3) / 1000, "####0.0000#")
@@ -163,10 +163,10 @@ Public Class FormHYD_DET
 
         Else
 
-            Label8.Text = Format(Conversor.ConverterDoSI(su.spmp_pressure, P), nf)
-            Label9.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, T), nf)
-            Label10.Text = fases
-            Label11.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, res(0)), nf)
+            Label8.Text = Format(Converter.ConvertFromSI(su.pressure, P), nf)
+            Label9.Text = Format(Converter.ConvertFromSI(su.temperature, T), nf)
+            Label10.Text = Phases
+            Label11.Text = Format(Converter.ConvertFromSI(su.temperature, res(0)), nf)
             Label12.Text = Format(res(1), "####0.########")
             Label13.Text = DWSIM.App.GetLocalString("ND") 'Format(res(2) / 1000, "####0.0000#")
             Label14.Text = DWSIM.App.GetLocalString("ND") 'Format(res(3) / 1000, "####0.0000#")

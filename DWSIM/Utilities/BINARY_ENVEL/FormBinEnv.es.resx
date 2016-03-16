@@ -154,10 +154,10 @@
     <value>Puntos Críticos</value>
   </data>
   <data name="colx1.ToolTipText" xml:space="preserve">
-    <value>Fracción Molar de Componente 1 en Fase Líquida 1</value>
+    <value>Fracción Molar de Componente 1 en Phase Líquida 1</value>
   </data>
   <data name="coly1.ToolTipText" xml:space="preserve">
-    <value>Fracción Molar de Componente 1 en Fase Vapor</value>
+    <value>Fracción Molar de Componente 1 en Phase Vapor</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Tabla</value>

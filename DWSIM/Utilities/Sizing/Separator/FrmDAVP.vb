@@ -58,25 +58,25 @@
 
             Me.entmat = Frm.Collections.CLCS_MaterialStreamCollection(Me.vessel.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
 
-            Me.rhol = msl.Fases(0).SPMProperties.density.GetValueOrDefault
-            Me.rhov = msv.Fases(0).SPMProperties.density.GetValueOrDefault
-            Me.ql = msl.Fases(0).SPMProperties.volumetric_flow.GetValueOrDefault
-            Me.qv = msv.Fases(0).SPMProperties.volumetric_flow.GetValueOrDefault
-            Me.wl = msl.Fases(0).SPMProperties.massflow.GetValueOrDefault
-            Me.wv = msv.Fases(0).SPMProperties.massflow.GetValueOrDefault
-            Me.rhoe = Me.entmat.Fases(0).SPMProperties.density.GetValueOrDefault
-            Me.qe = Me.entmat.Fases(0).SPMProperties.volumetric_flow.GetValueOrDefault
+            Me.rhol = msl.Phases(0).Properties.density.GetValueOrDefault
+            Me.rhov = msv.Phases(0).Properties.density.GetValueOrDefault
+            Me.ql = msl.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+            Me.qv = msv.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+            Me.wl = msl.Phases(0).Properties.massflow.GetValueOrDefault
+            Me.wv = msv.Phases(0).Properties.massflow.GetValueOrDefault
+            Me.rhoe = Me.entmat.Phases(0).Properties.density.GetValueOrDefault
+            Me.qe = Me.entmat.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
-            Dim su As DWSIM.SistemasDeUnidades.Unidades = Frm.Options.SelectedUnitSystem
-            Dim conv As New DWSIM.SistemasDeUnidades.Conversor
+            Dim su As DWSIM.SystemsOfUnits.Units = Frm.Options.SelectedUnitSystem
+            Dim conv As New DWSIM.SystemsOfUnits.Converter
 
-            Me.LblLiq.Text = Format(Conversor.ConverterDoSI(su.spmp_volumetricFlow, ql), Frm.Options.NumberFormat) & " " & su.spmp_volumetricFlow & _
-                            ", " & Format(Conversor.ConverterDoSI(su.spmp_massflow, wl), Frm.Options.NumberFormat) & " " & su.spmp_massflow & _
-                            ", " & Format(Conversor.ConverterDoSI(su.spmp_density, rhol), Frm.Options.NumberFormat) & " " & su.spmp_density
+            Me.LblLiq.Text = Format(Converter.ConvertFromSI(su.volumetricFlow, ql), Frm.Options.NumberFormat) & " " & su.volumetricFlow & _
+                            ", " & Format(Converter.ConvertFromSI(su.massflow, wl), Frm.Options.NumberFormat) & " " & su.massflow & _
+                            ", " & Format(Converter.ConvertFromSI(su.density, rhol), Frm.Options.NumberFormat) & " " & su.density
 
-            Me.LblGas.Text = Format(Conversor.ConverterDoSI(su.spmp_molarflow, msv.Fases(0).SPMProperties.molarflow.GetValueOrDefault), Frm.Options.NumberFormat) & " " & su.spmp_molarflow & _
-                            ", " & Format(Conversor.ConverterDoSI(su.spmp_massflow, wv), Frm.Options.NumberFormat) & " " & su.spmp_massflow & _
-                            ", " & Format(Conversor.ConverterDoSI(su.spmp_density, rhov), Frm.Options.NumberFormat) & " " & su.spmp_density
+            Me.LblGas.Text = Format(Converter.ConvertFromSI(su.molarflow, msv.Phases(0).Properties.molarflow.GetValueOrDefault), Frm.Options.NumberFormat) & " " & su.molarflow & _
+                            ", " & Format(Converter.ConvertFromSI(su.massflow, wv), Frm.Options.NumberFormat) & " " & su.massflow & _
+                            ", " & Format(Converter.ConvertFromSI(su.density, rhov), Frm.Options.NumberFormat) & " " & su.density
 
             Me.RLD = Me.tbRLD.Text
             Me.C = Me.tbC.Text

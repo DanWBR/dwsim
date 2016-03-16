@@ -1357,7 +1357,7 @@ Final3:
 
             If TIPO = "L" Then
                 Zcalc = ZV
-                ' CALCULO DO COEFICIENTE DE FUGACIDADE DA FASE LIQUIDA
+                ' CALCULO DO COEFICIENTE DE FUGACIDADE DA Phase LIQUIDA
                 i = 0
                 Do
                     t1 = bi(i) * (Zcalc - 1) / bml
@@ -1372,7 +1372,7 @@ Final3:
                 Return LN_CF
             Else
                 Zcalc = ZV
-                ' CALCULO DO COEFICIENTE DE FUGACIDADE DA FASE VAPOR
+                ' CALCULO DO COEFICIENTE DE FUGACIDADE DA Phase VAPOR
                 i = 0
                 Do
                     t1 = bi(i) * (Zcalc - 1) / bml

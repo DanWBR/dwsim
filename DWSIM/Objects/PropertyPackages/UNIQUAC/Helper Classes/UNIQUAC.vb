@@ -174,8 +174,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary
             If Not My.Settings.UserInteractionsDatabases Is Nothing Then
                 For Each IPDBPath As String In My.Settings.UserInteractionsDatabases
 
-                    Dim Interactions As DWSIM.ClassesBasicasTermodinamica.InteractionParameter()
-                    Dim IP As DWSIM.ClassesBasicasTermodinamica.InteractionParameter
+                    Dim Interactions As DWSIM.Thermodynamics.BaseClasses.InteractionParameter()
+                    Dim IP As DWSIM.Thermodynamics.BaseClasses.InteractionParameter
                     Try
                         Interactions = DWSIM.Databases.UserIPDB.ReadInteractions(IPDBPath, "UNIQUAC")
                         For Each IP In Interactions

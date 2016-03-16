@@ -127,20 +127,11 @@
   <data name="dialog-error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dialog-error.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CB058398_LoRes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CB058398_LoRes.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="book_go1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\book_go1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CB058398_LoRes copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CB058398_LoRes copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="applications-development" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\applications-development.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="wizardbg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wizardbg1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="shape_square" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shape_square.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,23 +157,11 @@
   <data name="Widgets Alt Badge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Widgets Alt Badge.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="wizardbg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wizardbg2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="page_white_acrobat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_white_acrobat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\minus.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dwsim3bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dwsim3bg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="wizardbg3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wizardbg3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_customuo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_customuo.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="orifice" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\orifice.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,9 +193,6 @@
   <data name="shape_align_middle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shape_align_middle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dwsim_tela2(2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dwsim_tela2(2).png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="r_pfr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\r_pfr.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -225,12 +201,6 @@
   </data>
   <data name="greyscale_34" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greyscale_34.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\logo.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_compressor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_compressor.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrow_branch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_branch.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -249,9 +219,6 @@
   </data>
   <data name="text-x-generic-template" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\text-x-generic-template.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_valve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_valve.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Clipboard01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Clipboard01.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -307,14 +274,8 @@
   <data name="document-open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document-open.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\splash1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="dwsim_file_mini" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dwsim_file_mini.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_heatxchanger" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_heatxchanger.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="layers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\layers.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -322,17 +283,11 @@
   <data name="node_en copy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\node_en copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pic_material" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_material.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="wi0124-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wi0124-16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bullet_arrow_bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_arrow_bottom.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_pipeline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_pipeline.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lock.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -348,9 +303,6 @@
   </data>
   <data name="Straight-tube_heat_exchanger_1-pass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Straight-tube_heat_exchanger_1-pass.PNG;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="wfplogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wfplogo.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bullet_arrow_top" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_arrow_top.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -379,9 +331,6 @@
   <data name="Straight-tube_heat_exchanger_2-pass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Straight-tube_heat_exchanger_2-pass.PNG;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Services" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Services.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="shape_align_middle1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shape_align_middle1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -397,9 +346,6 @@
   <data name="greyscale_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greyscale_12.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CSL2094_LoRes copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CSL2094_LoRes copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="table_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\table_gear.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -411,9 +357,6 @@
   </data>
   <data name="newspaper_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\newspaper_go.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_compsep" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_compsep.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_page_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder_page_white.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -433,12 +376,6 @@
   <data name="undo_161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\undo_162.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pic_absorption" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_absorption.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="splash1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\splash2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Leak Badge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Leak Badge.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -451,20 +388,11 @@
   <data name="table_row_insert1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\table_row_insert1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jscript-file-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\jscript-file-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="280px-python_logo_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\280px-python_logo_2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="chart_line1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chart_line1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dwsim 3 bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dwsim 3 bg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_pump" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_pump.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\picture.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -519,9 +447,6 @@
   </data>
   <data name="help-browser1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\help-browser1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_separator" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_separator.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="colan" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\colan.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -583,14 +508,8 @@
   <data name="zoom_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom_refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pic_cooler" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_cooler.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="lightning1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lightning1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_mixer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_mixer.bmp;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lightbulb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lightbulb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -600,9 +519,6 @@
   </data>
   <data name="siderectifier" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\siderectifier.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_reactor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_reactor.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="clipboard_sign" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\clipboard_sign.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -619,23 +535,11 @@
   <data name="arrow_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mail11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mail11.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="emblem-symbolic-link" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\emblem-symbolic-link.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dwsim3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dwsim3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="delete1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="irlogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\irlogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dwsim_splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dwsim_splash.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="shape_align_center" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shape_align_center.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -648,9 +552,6 @@
   </data>
   <data name="brick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\brick.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dwsim31" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dwsim31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="book" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\book.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -675,9 +576,6 @@
   </data>
   <data name="lock_open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lock_open.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_turbine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_turbine.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="application_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application_edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -733,9 +631,6 @@
   <data name="dialog-information" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dialog-information.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pic_distillation" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_distillation.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="page_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -748,14 +643,8 @@
   <data name="control_stop_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\control_stop_blue.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pic_splitter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_splitter.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="password-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\password-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_orifice" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_orifice.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dwsim_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dwsim_file.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -765,12 +654,6 @@
   </data>
   <data name="font" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\font.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bgvs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bgvs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bg_pp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bg_pp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arrow-right3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow-right3.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -793,9 +676,6 @@
   <data name="page_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_gear.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pic_tank" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_tank.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="application_side_contract" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application_side_contract.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -805,17 +685,11 @@
   <data name="application_view_icons" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application_view_icons.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pic_pfr" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_pfr.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="printer_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\printer_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="black_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\black_down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic21" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic22.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="control_pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\control_pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -853,12 +727,6 @@
   <data name="information1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\information1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lab-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Lab-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dwsim1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dwsim1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="greyscale_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greyscale_20.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -874,23 +742,14 @@
   <data name="shape_square_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\shape_square_delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Davos-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Davos-1.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="delete2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_heater" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_heater.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tick1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tick1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="application_view_icons1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application_view_icons1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_energy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_energy.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="text-x-generic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\text-x-generic.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -922,12 +781,6 @@
   <data name="help1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\help1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dwsim2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dwsim2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="dwsim" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dwsim.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="text-x-generic1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\text-x-generic1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -936,9 +789,6 @@
   </data>
   <data name="style_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\style_edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic_cstr" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic_cstr.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="r_cstr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\r_cstr.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1011,12 +861,6 @@
   </data>
   <data name="plugin_disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plugin_disabled.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pic2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pic21.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bg_un" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bg_un.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="power" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\power.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1137,5 +981,17 @@
   </data>
   <data name="uo_valve_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_valve_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lab_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lab-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pic21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pic21.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Services" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Services.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="splashScreen2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\splashScreen2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

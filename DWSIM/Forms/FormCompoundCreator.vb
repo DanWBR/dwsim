@@ -31,8 +31,8 @@ Public Class FormCompoundCreator
 
     Inherits Form
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
 
     Public methods As DWSIM.Utilities.Hypos.Methods.HYP
@@ -325,12 +325,12 @@ Public Class FormCompoundCreator
                 Me.tbDBPath.Text = ""
             End If
             Me.Text = .Filename
-            If .su.spmp_temperature IsNot Nothing Then
+            If .su.temperature IsNot Nothing Then
                 Me.su = .su
                 If Not CType(Me.MdiParent, FormMain).AvailableUnitSystems.ContainsKey(.su.nome) Then
-                    If Not TypeOf .su Is DWSIM.SistemasDeUnidades.UnidadesSI And Not _
-                        TypeOf .su Is DWSIM.SistemasDeUnidades.UnidadesCGS And Not _
-                        TypeOf .su Is DWSIM.SistemasDeUnidades.UnidadesINGLES Then
+                    If Not TypeOf .su Is DWSIM.SystemsOfUnits.SI And Not _
+                        TypeOf .su Is DWSIM.SystemsOfUnits.CGS And Not _
+                        TypeOf .su Is DWSIM.SystemsOfUnits.English Then
                         CType(Me.MdiParent, FormMain).AvailableUnitSystems.Add(.su.nome, .su)
                     End If
                     Me.cbUnits.Items.Add(mycase.su.nome)
@@ -356,15 +356,15 @@ Public Class FormCompoundCreator
 
                 RadioButton2.Checked = True
 
-                tbBOGOR.Text = Conversor.ConverterDoSI(su.gor, .cp.BO_GOR)
+                tbBOGOR.Text = Converter.ConvertFromSI(su.gor, .cp.BO_GOR)
                 tbBOBSW.Text = .cp.BO_BSW
                 tbBOSGG.Text = .cp.BO_SGG
                 tbBOSGO.Text = .cp.BO_SGO
 
-                tbBOV1.Text = Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, .cp.BO_OilVisc1)
-                tbBOV2.Text = Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, .cp.BO_OilVisc2)
-                tbBOT1.Text = Conversor.ConverterDoSI(su.spmp_temperature, .cp.BO_OilViscTemp1)
-                tbBOT2.Text = Conversor.ConverterDoSI(su.spmp_temperature, .cp.BO_OilViscTemp2)
+                tbBOV1.Text = Converter.ConvertFromSI(su.cinematic_viscosity, .cp.BO_OilVisc1)
+                tbBOV2.Text = Converter.ConvertFromSI(su.cinematic_viscosity, .cp.BO_OilVisc2)
+                tbBOT1.Text = Converter.ConvertFromSI(su.temperature, .cp.BO_OilViscTemp1)
+                tbBOT2.Text = Converter.ConvertFromSI(su.temperature, .cp.BO_OilViscTemp2)
 
                 tbBOPNAP.Text = .cp.BO_PNA_P
                 tbBOPNAN.Text = .cp.BO_PNA_N
@@ -380,24 +380,24 @@ Public Class FormCompoundCreator
                 TextBoxCSAF.Text = .cp.Chao_Seader_Acentricity
                 TextBoxCSLV.Text = .cp.Chao_Seader_Liquid_Molar_Volume
                 TextBoxCSSP.Text = .cp.Chao_Seader_Solubility_Parameter
-                TextBoxDGF.Text = Conversor.ConverterDoSI(su.spmp_enthalpy, .cp.IG_Gibbs_Energy_of_Formation_25C)
-                TextBoxDHF.Text = Conversor.ConverterDoSI(su.spmp_enthalpy, .cp.IG_Enthalpy_of_Formation_25C)
+                TextBoxDGF.Text = Converter.ConvertFromSI(su.enthalpy, .cp.IG_Gibbs_Energy_of_Formation_25C)
+                TextBoxDHF.Text = Converter.ConvertFromSI(su.enthalpy, .cp.IG_Enthalpy_of_Formation_25C)
                 TextBoxFormula.Text = .cp.Formula
                 TextBoxMW.Text = .cp.Molar_Weight
-                TextBoxNBP.Text = Conversor.ConverterDoSI(su.spmp_temperature, .cp.Normal_Boiling_Point)
-                TextBoxPc.Text = Conversor.ConverterDoSI(su.spmp_pressure, .cp.Critical_Pressure)
+                TextBoxNBP.Text = Converter.ConvertFromSI(su.temperature, .cp.Normal_Boiling_Point)
+                TextBoxPc.Text = Converter.ConvertFromSI(su.pressure, .cp.Critical_Pressure)
                 TextBoxPCSAFTEpsilon.Text = .cp.PC_SAFT_epsilon_k
                 TextBoxPCSAFTm.Text = .cp.PC_SAFT_m
                 TextBoxPCSAFTSigma.Text = .cp.PC_SAFT_sigma
                 TextBoxUNIQUAC_Q.Text = .cp.UNIQUAC_Q
                 TextBoxUNIQUAC_R.Text = .cp.UNIQUAC_R
-                TextBoxTc.Text = Conversor.ConverterDoSI(su.spmp_temperature, .cp.Critical_Temperature)
+                TextBoxTc.Text = Converter.ConvertFromSI(su.temperature, .cp.Critical_Temperature)
                 TextBoxVTCPR.Text = .cp.PR_Volume_Translation_Coefficient
                 TextBoxVTCSRK.Text = .cp.SRK_Volume_Translation_Coefficient
                 TextBoxZc.Text = .cp.Critical_Compressibility
                 TextBoxZRa.Text = .cp.Z_Rackett
-                TextBoxMeltingTemp.Text = Conversor.ConverterDoSI(su.spmp_temperature, .cp.TemperatureOfFusion)
-                TextBoxEnthOfFusion.Text = Conversor.ConverterDoSI(su.spmp_enthalpy, .cp.EnthalpyOfFusionAtTf)
+                TextBoxMeltingTemp.Text = Converter.ConvertFromSI(su.temperature, .cp.TemperatureOfFusion)
+                TextBoxEnthOfFusion.Text = Converter.ConvertFromSI(su.enthalpy, .cp.EnthalpyOfFusionAtTf)
                 TextBoxSMILES.Text = .cp.SMILES
                 If Not .cp.SMILES = "" Then
                     RenderSMILES()
@@ -554,7 +554,7 @@ Public Class FormCompoundCreator
                 Next
 
                 If .cp.NISTMODFACGroups Is Nothing Then
-                    .cp.NISTMODFACGroups = New DWSIM.ClassesBasicasTermodinamica.UNIFACGroupCollection
+                    .cp.NISTMODFACGroups = New DWSIM.Thermodynamics.BaseClasses.UNIFACGroupCollection
                 End If
 
                 For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
@@ -592,31 +592,31 @@ Public Class FormCompoundCreator
 
                 Me.GridExpDataPVAP.Rows.Clear()
                 For i = 0 To .DataPVAP.Count - 1
-                    Me.GridExpDataPVAP.Rows.Add(New Object() {Conversor.ConverterDoSI(su.spmp_temperature, .DataPVAP(i)(0)), Conversor.ConverterDoSI(su.spmp_pressure, .DataPVAP(i)(1))})
+                    Me.GridExpDataPVAP.Rows.Add(New Object() {Converter.ConvertFromSI(su.temperature, .DataPVAP(i)(0)), Converter.ConvertFromSI(su.pressure, .DataPVAP(i)(1))})
                 Next
                 Me.GridExpDataCPIG.Rows.Clear()
                 For i = 0 To .DataCPIG.Count - 1
-                    Me.GridExpDataCPIG.Rows.Add(New Object() {Conversor.ConverterDoSI(su.spmp_temperature, .DataCPIG(i)(0)), Conversor.ConverterDoSI(su.spmp_heatCapacityCp, .DataCPIG(i)(1))})
+                    Me.GridExpDataCPIG.Rows.Add(New Object() {Converter.ConvertFromSI(su.temperature, .DataCPIG(i)(0)), Converter.ConvertFromSI(su.heatCapacityCp, .DataCPIG(i)(1))})
                 Next
                 Me.GridExpDataCPLiquid.Rows.Clear()
                 For i = 0 To .DataCPLiquid.Count - 1
-                    Me.GridExpDataCPLiquid.Rows.Add(New Object() {Conversor.ConverterDoSI(su.spmp_temperature, .DataCPLiquid(i)(0)), Conversor.ConverterDoSI(su.spmp_heatCapacityCp, .DataCPLiquid(i)(1))})
+                    Me.GridExpDataCPLiquid.Rows.Add(New Object() {Converter.ConvertFromSI(su.temperature, .DataCPLiquid(i)(0)), Converter.ConvertFromSI(su.heatCapacityCp, .DataCPLiquid(i)(1))})
                 Next
                 Me.GridExpDataLIQDENS.Rows.Clear()
                 For i = 0 To .DataLDENS.Count - 1
-                    Me.GridExpDataLIQDENS.Rows.Add(New Object() {Conversor.ConverterDoSI(su.spmp_temperature, .DataLDENS(i)(0)), Conversor.ConverterDoSI(su.spmp_density, .DataLDENS(i)(1))})
+                    Me.GridExpDataLIQDENS.Rows.Add(New Object() {Converter.ConvertFromSI(su.temperature, .DataLDENS(i)(0)), Converter.ConvertFromSI(su.density, .DataLDENS(i)(1))})
                 Next
                 Me.GridExpDataLIQVISC.Rows.Clear()
                 For i = 0 To .DataLVISC.Count - 1
-                    Me.GridExpDataLIQVISC.Rows.Add(New Object() {Conversor.ConverterDoSI(su.spmp_temperature, .DataLVISC(i)(0)), Conversor.ConverterDoSI(su.spmp_viscosity, .DataLVISC(i)(1))})
+                    Me.GridExpDataLIQVISC.Rows.Add(New Object() {Converter.ConvertFromSI(su.temperature, .DataLVISC(i)(0)), Converter.ConvertFromSI(su.viscosity, .DataLVISC(i)(1))})
                 Next
                 Me.GridExpDataRoS.Rows.Clear()
                 For i = 0 To .DataRoS.Count - 1
-                    Me.GridExpDataRoS.Rows.Add(New Object() {Conversor.ConverterDoSI(su.spmp_temperature, .DataRoS(i)(0)), Conversor.ConverterDoSI(su.spmp_density, .DataRoS(i)(1)) * .cp.Molar_Weight})
+                    Me.GridExpDataRoS.Rows.Add(New Object() {Converter.ConvertFromSI(su.temperature, .DataRoS(i)(0)), Converter.ConvertFromSI(su.density, .DataRoS(i)(1)) * .cp.Molar_Weight})
                 Next
                 Me.GridExpDataCpS.Rows.Clear()
                 For i = 0 To .DataCpS.Count - 1
-                    Me.GridExpDataCpS.Rows.Add(New Object() {Conversor.ConverterDoSI(su.spmp_temperature, .DataCpS(i)(0)), Conversor.ConverterDoSI(su.spmp_heatCapacityCp, .DataCpS(i)(1)) / .cp.Molar_Weight})
+                    Me.GridExpDataCpS.Rows.Add(New Object() {Converter.ConvertFromSI(su.temperature, .DataCpS(i)(0)), Converter.ConvertFromSI(su.heatCapacityCp, .DataCpS(i)(1)) / .cp.Molar_Weight})
                 Next
                 If .RegressOKPVAP Then tbStatusPVAP.Text = "OK" Else tbStatusPVAP.Text = .ErrorMsgPVAP
                 If .RegressOKCPIG Then tbStatusCPIG.Text = "OK" Else tbStatusCPIG.Text = .ErrorMsgCPIG
@@ -681,25 +681,25 @@ Public Class FormCompoundCreator
                 .cp.Chao_Seader_Acentricity = CheckEmptyTextBox(TextBoxCSAF)
                 .cp.Chao_Seader_Liquid_Molar_Volume = CheckEmptyTextBox(TextBoxCSLV)
                 .cp.Chao_Seader_Solubility_Parameter = CheckEmptyTextBox(TextBoxCSSP)
-                .cp.IG_Gibbs_Energy_of_Formation_25C = Conversor.ConverterParaSI(su.spmp_enthalpy, CheckEmptyTextBox(TextBoxDGF))
-                .cp.IG_Enthalpy_of_Formation_25C = Conversor.ConverterParaSI(su.spmp_enthalpy, CheckEmptyTextBox(TextBoxDHF))
+                .cp.IG_Gibbs_Energy_of_Formation_25C = Converter.ConvertToSI(su.enthalpy, CheckEmptyTextBox(TextBoxDGF))
+                .cp.IG_Enthalpy_of_Formation_25C = Converter.ConvertToSI(su.enthalpy, CheckEmptyTextBox(TextBoxDHF))
                 .cp.Formula = TextBoxFormula.Text
                 .cp.Molar_Weight = CheckEmptyTextBox(TextBoxMW)
-                .cp.Normal_Boiling_Point = Conversor.ConverterParaSI(su.spmp_temperature, CheckEmptyTextBox(TextBoxNBP))
-                .cp.Critical_Pressure = Conversor.ConverterParaSI(su.spmp_pressure, CheckEmptyTextBox(TextBoxPc))
+                .cp.Normal_Boiling_Point = Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(TextBoxNBP))
+                .cp.Critical_Pressure = Converter.ConvertToSI(su.pressure, CheckEmptyTextBox(TextBoxPc))
                 .cp.PC_SAFT_epsilon_k = CheckEmptyTextBox(TextBoxPCSAFTEpsilon)
                 .cp.PC_SAFT_m = CheckEmptyTextBox(TextBoxPCSAFTm)
                 .cp.PC_SAFT_sigma = CheckEmptyTextBox(TextBoxPCSAFTSigma)
                 .cp.UNIQUAC_Q = CheckEmptyTextBox(TextBoxUNIQUAC_Q)
                 .cp.UNIQUAC_R = CheckEmptyTextBox(TextBoxUNIQUAC_R)
-                .cp.Critical_Temperature = Conversor.ConverterParaSI(su.spmp_temperature, CheckEmptyTextBox(TextBoxTc))
+                .cp.Critical_Temperature = Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(TextBoxTc))
                 .cp.PR_Volume_Translation_Coefficient = CheckEmptyTextBox(TextBoxVTCPR)
                 .cp.SRK_Volume_Translation_Coefficient = CheckEmptyTextBox(TextBoxVTCSRK)
                 .cp.Critical_Compressibility = CheckEmptyTextBox(TextBoxZc)
                 .cp.Z_Rackett = CheckEmptyTextBox(TextBoxZRa)
                 .cp.SMILES = TextBoxSMILES.Text
-                .cp.TemperatureOfFusion = Conversor.ConverterParaSI(su.spmp_temperature, CheckEmptyTextBox(TextBoxMeltingTemp))
-                .cp.EnthalpyOfFusionAtTf = Conversor.ConverterParaSI(su.spmp_enthalpy, CheckEmptyTextBox(TextBoxEnthOfFusion))
+                .cp.TemperatureOfFusion = Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(TextBoxMeltingTemp))
+                .cp.EnthalpyOfFusionAtTf = Converter.ConvertToSI(su.enthalpy, CheckEmptyTextBox(TextBoxEnthOfFusion))
 
                 .RegressPVAP = rbRegressPVAP.Checked
                 .RegressCPIG = rbRegressCPIG.Checked
@@ -824,52 +824,52 @@ Public Class FormCompoundCreator
 
                 mycase.DataPVAP.Clear()
                 For Each row As DataGridViewRow In Me.GridExpDataPVAP.Rows
-                    If row.Index < Me.GridExpDataPVAP.Rows.Count - 1 Then mycase.DataPVAP.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_pressure, row.Cells(1).Value)})
+                    If row.Index < Me.GridExpDataPVAP.Rows.Count - 1 Then mycase.DataPVAP.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.pressure, row.Cells(1).Value)})
                 Next
 
                 mycase.DataCPIG.Clear()
                 For Each row As DataGridViewRow In Me.GridExpDataCPIG.Rows
-                    If row.Index < Me.GridExpDataCPIG.Rows.Count - 1 Then mycase.DataCPIG.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_heatCapacityCp, row.Cells(1).Value)})
+                    If row.Index < Me.GridExpDataCPIG.Rows.Count - 1 Then mycase.DataCPIG.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value)})
                 Next
 
                 mycase.DataCPLiquid.Clear()
                 For Each row As DataGridViewRow In Me.GridExpDataCPLiquid.Rows
-                    If row.Index < Me.GridExpDataCPLiquid.Rows.Count - 1 Then mycase.DataCPLiquid.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_heatCapacityCp, row.Cells(1).Value)})
+                    If row.Index < Me.GridExpDataCPLiquid.Rows.Count - 1 Then mycase.DataCPLiquid.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value)})
                 Next
 
                 mycase.DataLDENS.Clear()
                 For Each row As DataGridViewRow In Me.GridExpDataLIQDENS.Rows
-                    If row.Index < Me.GridExpDataLIQDENS.Rows.Count - 1 Then mycase.DataLDENS.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_density, row.Cells(1).Value)})
+                    If row.Index < Me.GridExpDataLIQDENS.Rows.Count - 1 Then mycase.DataLDENS.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.density, row.Cells(1).Value)})
                 Next
 
                 mycase.DataLVISC.Clear()
                 For Each row As DataGridViewRow In Me.GridExpDataLIQVISC.Rows
-                    If row.Index < Me.GridExpDataLIQVISC.Rows.Count - 1 Then mycase.DataLVISC.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_viscosity, row.Cells(1).Value)})
+                    If row.Index < Me.GridExpDataLIQVISC.Rows.Count - 1 Then mycase.DataLVISC.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.viscosity, row.Cells(1).Value)})
                 Next
 
                 mycase.DataRoS.Clear()
                 For Each row As DataGridViewRow In Me.GridExpDataRoS.Rows
-                    If row.Index < Me.GridExpDataRoS.Rows.Count - 1 Then mycase.DataRoS.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_density, row.Cells(1).Value) / .cp.Molar_Weight})
+                    If row.Index < Me.GridExpDataRoS.Rows.Count - 1 Then mycase.DataRoS.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.density, row.Cells(1).Value) / .cp.Molar_Weight})
                 Next
 
                 mycase.DataCpS.Clear()
                 For Each row As DataGridViewRow In Me.GridExpDataCpS.Rows
-                    If row.Index < Me.GridExpDataCpS.Rows.Count - 1 Then mycase.DataCpS.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_heatCapacityCp, row.Cells(1).Value) * .cp.Molar_Weight})
+                    If row.Index < Me.GridExpDataCpS.Rows.Count - 1 Then mycase.DataCpS.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * .cp.Molar_Weight})
                 Next
 
             Else
 
                 .cp.IsBlackOil = True
 
-                .cp.BO_GOR = Conversor.ConverterParaSI(su.gor, CheckEmptyTextBox(tbBOGOR))
+                .cp.BO_GOR = Converter.ConvertToSI(su.gor, CheckEmptyTextBox(tbBOGOR))
                 .cp.BO_BSW = CheckEmptyTextBox(tbBOBSW)
                 .cp.BO_SGG = CheckEmptyTextBox(tbBOSGG)
                 .cp.BO_SGO = CheckEmptyTextBox(tbBOSGO)
 
-                .cp.BO_OilVisc1 = Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, CheckEmptyTextBox(tbBOV1))
-                .cp.BO_OilVisc2 = Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, CheckEmptyTextBox(tbBOV2))
-                .cp.BO_OilViscTemp1 = Conversor.ConverterParaSI(su.spmp_temperature, CheckEmptyTextBox(tbBOT1))
-                .cp.BO_OilViscTemp2 = Conversor.ConverterParaSI(su.spmp_temperature, CheckEmptyTextBox(tbBOT2))
+                .cp.BO_OilVisc1 = Converter.ConvertToSI(su.cinematic_viscosity, CheckEmptyTextBox(tbBOV1))
+                .cp.BO_OilVisc2 = Converter.ConvertToSI(su.cinematic_viscosity, CheckEmptyTextBox(tbBOV2))
+                .cp.BO_OilViscTemp1 = Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(tbBOT1))
+                .cp.BO_OilViscTemp2 = Converter.ConvertToSI(su.temperature, CheckEmptyTextBox(tbBOT2))
 
                 .cp.BO_PNA_P = CheckEmptyTextBox(tbBOPNAP)
                 .cp.BO_PNA_N = CheckEmptyTextBox(tbBOPNAN)
@@ -1016,18 +1016,18 @@ Public Class FormCompoundCreator
 
                 'boiling point
                 Tb = jb.CalcTb(JGD)
-                If CheckBoxNBP.Checked Then Me.TextBoxNBP.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, Tb), "N")
+                If CheckBoxNBP.Checked Then Me.TextBoxNBP.Text = Format(Converter.ConvertFromSI(su.temperature, Tb), "N")
                 If CheckValidDF(Me.TextBoxNBP.Text) Then
-                    Tb = Conversor.ConverterParaSI(su.spmp_temperature, Me.TextBoxNBP.Text)
+                    Tb = Converter.ConvertToSI(su.temperature, Me.TextBoxNBP.Text)
                 Else : Tb = -1
                 End If
 
                 'critical temperature
                 If Tb > 0 Then
                     Tc = jb.CalcTc(Tb, JGD)
-                    If CheckBoxTc.Checked Then Me.TextBoxTc.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, Tc), "N")
+                    If CheckBoxTc.Checked Then Me.TextBoxTc.Text = Format(Converter.ConvertFromSI(su.temperature, Tc), "N")
                     If CheckValidDF(Me.TextBoxTc.Text) Then
-                        Tc = Conversor.ConverterParaSI(su.spmp_temperature, Me.TextBoxTc.Text)
+                        Tc = Converter.ConvertToSI(su.temperature, Me.TextBoxTc.Text)
                     Else : Tc = -1
                     End If
                 Else
@@ -1037,9 +1037,9 @@ Public Class FormCompoundCreator
 
                 'critical pressure
                 Pc = jb.CalcPc(JGD)
-                If CheckBoxPc.Checked Then Me.TextBoxPc.Text = Format(Conversor.ConverterDoSI(su.spmp_pressure, Pc), "N")
+                If CheckBoxPc.Checked Then Me.TextBoxPc.Text = Format(Converter.ConvertFromSI(su.pressure, Pc), "N")
                 If CheckValidDF(Me.TextBoxPc.Text) Then
-                    Pc = Conversor.ConverterParaSI(su.spmp_pressure, Me.TextBoxPc.Text)
+                    Pc = Converter.ConvertToSI(su.pressure, Me.TextBoxPc.Text)
                 Else : Pc = -1
                 End If
 
@@ -1069,8 +1069,8 @@ Public Class FormCompoundCreator
                 End If
 
 
-                If CheckBoxDHF.Checked Then Me.TextBoxDHF.Text = Format(Conversor.ConverterDoSI(su.spmp_enthalpy, jb.CalcDHf(JGD) / MM), "N")
-                If CheckBoxDGF.Checked Then Me.TextBoxDGF.Text = Format(Conversor.ConverterDoSI(su.spmp_enthalpy, jb.CalcDGf(JGD) / MM), "N")
+                If CheckBoxDHF.Checked Then Me.TextBoxDHF.Text = Format(Converter.ConvertFromSI(su.enthalpy, jb.CalcDHf(JGD) / MM), "N")
+                If CheckBoxDGF.Checked Then Me.TextBoxDGF.Text = Format(Converter.ConvertFromSI(su.enthalpy, jb.CalcDGf(JGD) / MM), "N")
                 If CheckBoxCSAF.Checked Then
                     If w > 0 Then
                         Me.TextBoxCSAF.Text = w
@@ -1089,10 +1089,10 @@ Public Class FormCompoundCreator
                 End If
 
 
-                If CheckBoxMeltingTemp.Checked Then Me.TextBoxMeltingTemp.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, jb.CalcTf(JGD)), "N") 'melting temperature - temperature of fusion
+                If CheckBoxMeltingTemp.Checked Then Me.TextBoxMeltingTemp.Text = Format(Converter.ConvertFromSI(su.temperature, jb.CalcTf(JGD)), "N") 'melting temperature - temperature of fusion
                 If CheckBoxEnthOfFusion.Checked Then Me.TextBoxEnthOfFusion.Text = Format(jb.CalcHf(JGD), "N") 'enthalpy of fusion - KJ/mol
                 If CheckValidDF(Me.TextBoxPc.Text) Then
-                    Tf = Conversor.ConverterParaSI(su.spmp_temperature, Me.TextBoxMeltingTemp.Text)
+                    Tf = Converter.ConvertToSI(su.temperature, Me.TextBoxMeltingTemp.Text)
                 Else : Tf = -1
                 End If
 
@@ -1216,7 +1216,7 @@ Public Class FormCompoundCreator
     Private Sub SalvarNoBancoDeDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Try
-            DWSIM.Databases.UserDB.AddCompounds(New DWSIM.ClassesBasicasTermodinamica.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
+            DWSIM.Databases.UserDB.AddCompounds(New DWSIM.Thermodynamics.BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
             MessageBox.Show("Compound added to the database.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             MessageBox.Show("Error adding compound to the database: " & ex.Message.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1228,36 +1228,36 @@ Public Class FormCompoundCreator
 
         With su
 
-            lblTc.Text = .spmp_temperature
-            lblPc.Text = .spmp_pressure
-            lblNBP.Text = .spmp_temperature
-            lblMW.Text = .spmp_molecularWeight
-            lblDHF.Text = .spmp_enthalpy
-            lblDGF.Text = .spmp_enthalpy
-            lblMeltingTemp.Text = .spmp_temperature
-            lblEnthOfFusion.Text = .spmp_enthalpy
+            lblTc.Text = .temperature
+            lblPc.Text = .pressure
+            lblNBP.Text = .temperature
+            lblMW.Text = .molecularWeight
+            lblDHF.Text = .enthalpy
+            lblDGF.Text = .enthalpy
+            lblMeltingTemp.Text = .temperature
+            lblEnthOfFusion.Text = .enthalpy
 
             lblBORGO.Text = .gor
-            lblBOT1.Text = .spmp_temperature
-            lblBOT2.Text = .spmp_temperature
-            lblBOVisc1.Text = .spmp_cinematic_viscosity
-            lblBOVisc2.Text = .spmp_cinematic_viscosity
+            lblBOT1.Text = .temperature
+            lblBOT2.Text = .temperature
+            lblBOVisc1.Text = .cinematic_viscosity
+            lblBOVisc2.Text = .cinematic_viscosity
 
-            Me.GridExpDataPVAP.Columns(0).HeaderText = "T [" & su.spmp_temperature & "]"
-            Me.GridExpDataCPIG.Columns(0).HeaderText = "T [" & su.spmp_temperature & "]"
-            Me.GridExpDataCPLiquid.Columns(0).HeaderText = "T [" & su.spmp_temperature & "]"
-            Me.GridExpDataLIQDENS.Columns(0).HeaderText = "T [" & su.spmp_temperature & "]"
-            Me.GridExpDataLIQVISC.Columns(0).HeaderText = "T [" & su.spmp_temperature & "]"
-            Me.GridExpDataCpS.Columns(0).HeaderText = "T [" & su.spmp_temperature & "]"
-            Me.GridExpDataRoS.Columns(0).HeaderText = "T [" & su.spmp_temperature & "]"
+            Me.GridExpDataPVAP.Columns(0).HeaderText = "T [" & su.temperature & "]"
+            Me.GridExpDataCPIG.Columns(0).HeaderText = "T [" & su.temperature & "]"
+            Me.GridExpDataCPLiquid.Columns(0).HeaderText = "T [" & su.temperature & "]"
+            Me.GridExpDataLIQDENS.Columns(0).HeaderText = "T [" & su.temperature & "]"
+            Me.GridExpDataLIQVISC.Columns(0).HeaderText = "T [" & su.temperature & "]"
+            Me.GridExpDataCpS.Columns(0).HeaderText = "T [" & su.temperature & "]"
+            Me.GridExpDataRoS.Columns(0).HeaderText = "T [" & su.temperature & "]"
 
-            Me.GridExpDataPVAP.Columns(1).HeaderText = "Pvap [" & su.spmp_pressure & "]"
-            Me.GridExpDataCPIG.Columns(1).HeaderText = "Cpig [" & su.spmp_heatCapacityCp & "]"
-            Me.GridExpDataCPLiquid.Columns(1).HeaderText = "Cp Liquid [" & su.spmp_heatCapacityCp & "]"
-            Me.GridExpDataLIQDENS.Columns(1).HeaderText = "Dens [" & su.spmp_density & "]"
-            Me.GridExpDataLIQVISC.Columns(1).HeaderText = "Visc [" & su.spmp_viscosity & "]"
-            Me.GridExpDataCpS.Columns(1).HeaderText = "CpS [" & su.spmp_heatCapacityCp & "]"
-            Me.GridExpDataRoS.Columns(1).HeaderText = "DensS [" & su.spmp_density & "]"
+            Me.GridExpDataPVAP.Columns(1).HeaderText = "Pvap [" & su.pressure & "]"
+            Me.GridExpDataCPIG.Columns(1).HeaderText = "Cpig [" & su.heatCapacityCp & "]"
+            Me.GridExpDataCPLiquid.Columns(1).HeaderText = "Cp Liquid [" & su.heatCapacityCp & "]"
+            Me.GridExpDataLIQDENS.Columns(1).HeaderText = "Dens [" & su.density & "]"
+            Me.GridExpDataLIQVISC.Columns(1).HeaderText = "Visc [" & su.viscosity & "]"
+            Me.GridExpDataCpS.Columns(1).HeaderText = "CpS [" & su.heatCapacityCp & "]"
+            Me.GridExpDataRoS.Columns(1).HeaderText = "DensS [" & su.density & "]"
         End With
     End Sub
 
@@ -1426,7 +1426,7 @@ Public Class FormCompoundCreator
         For Each row As DataGridViewRow In Me.GridExpDataPVAP.Rows
             If row.Index < Me.GridExpDataPVAP.Rows.Count - 1 Then
                 Try
-                    mycase.DataPVAP.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_pressure, row.Cells(1).Value)})
+                    mycase.DataPVAP.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.pressure, row.Cells(1).Value)})
                 Catch ex As Exception
 
                 End Try
@@ -1470,8 +1470,8 @@ Public Class FormCompoundCreator
         mycase.DataCpS.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataCpS.Rows
             If row.Index < Me.GridExpDataCpS.Rows.Count - 1 Then
-                XL = Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value)
-                YL = Conversor.ConverterParaSI(su.spmp_heatCapacityCp, row.Cells(1).Value) * MW
+                XL = Converter.ConvertToSI(su.temperature, row.Cells(0).Value)
+                YL = Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * MW
                 mycase.DataCpS.Add(New Double() {XL, YL})
             End If
         Next
@@ -1513,8 +1513,8 @@ Public Class FormCompoundCreator
         mycase.DataRoS.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataRoS.Rows
             If row.Index < Me.GridExpDataRoS.Rows.Count - 1 Then
-                XL = Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value)
-                YL = Conversor.ConverterParaSI(su.spmp_density, row.Cells(1).Value) / MW
+                XL = Converter.ConvertToSI(su.temperature, row.Cells(0).Value)
+                YL = Converter.ConvertToSI(su.density, row.Cells(1).Value) / MW
                 mycase.DataRoS.Add(New Double() {XL, YL})
             End If
         Next
@@ -1557,7 +1557,7 @@ Public Class FormCompoundCreator
         mycase.DataCPIG.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataCPIG.Rows
             Try
-                If row.Index < Me.GridExpDataCPIG.Rows.Count - 1 Then mycase.DataCPIG.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_heatCapacityCp, row.Cells(1).Value) * MW})
+                If row.Index < Me.GridExpDataCPIG.Rows.Count - 1 Then mycase.DataCPIG.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * MW})
             Catch ex As Exception
             End Try
         Next
@@ -1599,7 +1599,7 @@ Public Class FormCompoundCreator
         mycase.DataLDENS.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataLIQDENS.Rows
             Try
-                If row.Index < Me.GridExpDataLIQDENS.Rows.Count - 1 Then mycase.DataLDENS.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_density, row.Cells(1).Value)})
+                If row.Index < Me.GridExpDataLIQDENS.Rows.Count - 1 Then mycase.DataLDENS.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.density, row.Cells(1).Value)})
             Catch ex As Exception
             End Try
         Next
@@ -1640,7 +1640,7 @@ Public Class FormCompoundCreator
         loaded = False
         mycase.DataLVISC.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataLIQVISC.Rows
-            If row.Index < Me.GridExpDataLIQVISC.Rows.Count - 1 Then mycase.DataLVISC.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_viscosity, row.Cells(1).Value)})
+            If row.Index < Me.GridExpDataLIQVISC.Rows.Count - 1 Then mycase.DataLVISC.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.viscosity, row.Cells(1).Value)})
         Next
 
         Dim result As Object = RegressData(2, False)
@@ -1786,25 +1786,25 @@ Public Class FormCompoundCreator
                 T += dT
             Loop While T <= T2
             Heading1 = "T"
-            Heading2 = "[" & su.spmp_temperature & "]"
+            Heading2 = "[" & su.temperature & "]"
         Else
             For Each d As Double() In mycase.DataPVAP
-                x = Conversor.ConverterDoSI(su.spmp_temperature, d(0))
+                x = Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
-                y = Conversor.ConverterDoSI(su.spmp_pressure, d(1))
+                y = Converter.ConvertFromSI(su.pressure, d(1))
                 py1.Add(y)
             Next
             CurveCount = +1
             frc.y1ctitle = "Experiment"
             Heading1 = "T" & vbTab & "yExp"
-            Heading2 = "[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_pressure & "]"
+            Heading2 = "[" & su.temperature & "]" & vbTab & "[" & su.pressure & "]"
             LT.Add(1) 'Point type curve
         End If
 
         'Add calculated Lee-Kesler Data
         For k2 = 0 To px.Count - 1
-            T = Conversor.ConverterParaSI(su.spmp_temperature, px(k2))
-            y = Conversor.ConverterDoSI(su.spmp_pressure, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, Conversor.ConverterParaSI(su.spmp_temperature, TextBoxTc.Text), Conversor.ConverterParaSI(su.spmp_pressure, TextBoxPc.Text), TextBoxAF.Text))
+            T = Converter.ConvertToSI(su.temperature, px(k2))
+            y = Converter.ConvertFromSI(su.pressure, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, Converter.ConvertToSI(su.temperature, TextBoxTc.Text), Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text))
             Select Case CurveCount
                 Case 0
                     py1.Add(y)
@@ -1820,14 +1820,14 @@ Public Class FormCompoundCreator
         End Select
         CurveCount += 1
         Heading1 = Heading1 & vbTab & vbTab & "Y Lee-Kesler"
-        Heading2 = Heading2 & vbTab & vbTab & "[" & su.spmp_pressure & "]"
+        Heading2 = Heading2 & vbTab & vbTab & "[" & su.pressure & "]"
         LT.Add(4) 'dashed line type curve
 
         'Add regressed/user curve
         If Not Eq = "0" Then
             For k2 = 0 To px.Count - 1
-                T = Conversor.ConverterParaSI(su.spmp_temperature, px(k2))
-                y = Conversor.ConverterDoSI(su.spmp_pressure, pp.CalcCSTDepProp(Eq, tbPVAP_A.Text, tbPVAP_B.Text, tbPVAP_C.Text, tbPVAP_D.Text, tbPVAP_E.Text, T, 0))
+                T = Converter.ConvertToSI(su.temperature, px(k2))
+                y = Converter.ConvertFromSI(su.pressure, pp.CalcCSTDepProp(Eq, tbPVAP_A.Text, tbPVAP_B.Text, tbPVAP_C.Text, tbPVAP_D.Text, tbPVAP_E.Text, T, 0))
 
                 Select Case CurveCount
                     Case 1
@@ -1844,7 +1844,7 @@ Public Class FormCompoundCreator
             End Select
             CurveCount += 1
             Heading1 = Heading1 & vbTab & "YCalc"
-            Heading2 = Heading2 & vbTab & vbTab & "[" & su.spmp_pressure & "]"
+            Heading2 = Heading2 & vbTab & vbTab & "[" & su.pressure & "]"
             LT.Add(3) 'solid line type curve
         End If
 
@@ -1875,8 +1875,8 @@ Public Class FormCompoundCreator
             .px = px
             .xformat = 1
             .yformat = 2
-            .ytitle = "Pvap [" & su.spmp_pressure & "]"
-            .xtitle = "T [" & su.spmp_temperature & "]"
+            .ytitle = "Pvap [" & su.pressure & "]"
+            .xtitle = "T [" & su.temperature & "]"
             .ShowDialog(Me)
         End With
     End Sub
@@ -1889,11 +1889,11 @@ Public Class FormCompoundCreator
         ' in case of missing experimental data - draw only calculated curve
         If mycase.DataCPIG.Count = 0 Then
             mytext.AppendLine("T" & vbTab & "yCALC")
-            mytext.AppendLine("[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_heatCapacityCp & "]")
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]")
             For T = 200 To 1500 Step 25
-                x = Conversor.ConverterDoSI(su.spmp_temperature, T)
+                x = Converter.ConvertFromSI(su.temperature, T)
                 px.Add(x)
-                y1 = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, pp.CalcCSTDepProp(cbEqCPIG.SelectedItem.Split(":")(0), tbCPIG_A.Text, tbCPIG_B.Text, tbCPIG_C.Text, tbCPIG_D.Text, tbCPIG_E.Text, T, 0) / 1000) / TextBoxMW.Text
+                y1 = Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(cbEqCPIG.SelectedItem.Split(":")(0), tbCPIG_A.Text, tbCPIG_B.Text, tbCPIG_C.Text, tbCPIG_D.Text, tbCPIG_E.Text, T, 0) / 1000) / TextBoxMW.Text
                 py1.Add(y1)
                 mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2))
             Next
@@ -1907,14 +1907,14 @@ Public Class FormCompoundCreator
             End With
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
-            mytext.AppendLine("[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_heatCapacityCp & "]" & vbTab & "[" & su.spmp_heatCapacityCp & "]")
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]" & vbTab & "[" & su.heatCapacityCp & "]")
             For Each d As Double() In mycase.DataCPIG
                 x = d(0)
                 px.Add(x)
                 y1 = d(1)
                 py1.Add(y1)
-                T = Conversor.ConverterParaSI(su.spmp_temperature, x)
-                y2 = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, pp.CalcCSTDepProp(cbEqCPIG.SelectedItem.Split(":")(0), tbCPIG_A.Text, tbCPIG_B.Text, tbCPIG_C.Text, tbCPIG_D.Text, tbCPIG_E.Text, T, 0) / 1000) / TextBoxMW.Text
+                T = Converter.ConvertToSI(su.temperature, x)
+                y2 = Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(cbEqCPIG.SelectedItem.Split(":")(0), tbCPIG_A.Text, tbCPIG_B.Text, tbCPIG_C.Text, tbCPIG_D.Text, tbCPIG_E.Text, T, 0) / 1000) / TextBoxMW.Text
                 py2.Add(y2)
                 mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2) & vbTab & vbTab & FormatNumber(y2, 2))
             Next
@@ -1933,8 +1933,8 @@ Public Class FormCompoundCreator
             .tbtext = mytext.ToString
             .xformat = 1
             .yformat = 1
-            .ytitle = "Cpig [" & su.spmp_heatCapacityCp & "]"
-            .xtitle = "T [" & su.spmp_temperature & "]"
+            .ytitle = "Cpig [" & su.heatCapacityCp & "]"
+            .xtitle = "T [" & su.temperature & "]"
             .title = "Ideal Gas Heat Capacity Fitting Results"
             .ShowDialog(Me)
         End With
@@ -1962,24 +1962,24 @@ Public Class FormCompoundCreator
                 T += dT
             Loop While T <= T2
             Heading1 = "T"
-            Heading2 = "[" & su.spmp_temperature & "]"
+            Heading2 = "[" & su.temperature & "]"
         Else
             For Each d As Double() In mycase.DataLDENS
-                px.Add(Conversor.ConverterDoSI(su.spmp_temperature, d(0)))
-                py1.Add(Conversor.ConverterDoSI(su.spmp_density, d(1)))
+                px.Add(Converter.ConvertFromSI(su.temperature, d(0)))
+                py1.Add(Converter.ConvertFromSI(su.density, d(1)))
             Next
             CurveCount = +1
             frc.y1ctitle = "Experiment"
             Heading1 = "T" & vbTab & "yExp"
-            Heading2 = "[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_density & "]"
+            Heading2 = "[" & su.temperature & "]" & vbTab & "[" & su.density & "]"
             LT.Add(1) 'Point type curve
         End If
 
         'Add calculated Rackett Data
         For k2 = 0 To px.Count - 1
-            T = Conversor.ConverterParaSI(su.spmp_temperature, px(k2))
-            PV = DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, Conversor.ConverterParaSI(su.spmp_temperature, TextBoxTc.Text), Conversor.ConverterParaSI(su.spmp_pressure, TextBoxPc.Text), TextBoxAF.Text)
-            y = Conversor.ConverterDoSI(su.spmp_density, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(T, Conversor.ConverterParaSI(su.spmp_temperature, TextBoxTc.Text), Conversor.ConverterParaSI(su.spmp_pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text, TextBoxZRa.Text, 101325, PV))
+            T = Converter.ConvertToSI(su.temperature, px(k2))
+            PV = DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, Converter.ConvertToSI(su.temperature, TextBoxTc.Text), Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text)
+            y = Converter.ConvertFromSI(su.density, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(T, Converter.ConvertToSI(su.temperature, TextBoxTc.Text), Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text, TextBoxZRa.Text, 101325, PV))
 
             Select Case CurveCount
                 Case 0
@@ -1996,14 +1996,14 @@ Public Class FormCompoundCreator
         End Select
         CurveCount += 1
         Heading1 = Heading1 & vbTab & "Y Rackett"
-        Heading2 = Heading2 & vbTab & "[" & su.spmp_density & "]"
+        Heading2 = Heading2 & vbTab & "[" & su.density & "]"
         LT.Add(4) 'dashed line type curve
 
         'Add regressed/user curve
         If Not Eq = "0" Then
             For k2 = 0 To px.Count - 1
-                T = Conversor.ConverterParaSI(su.spmp_temperature, px(k2))
-                y = Conversor.ConverterDoSI(su.spmp_density, pp.CalcCSTDepProp(Eq, tbLIQDENS_A.Text, tbLIQDENS_B.Text, tbLIQDENS_C.Text, tbLIQDENS_D.Text, tbLIQDENS_E.Text, T, 0))
+                T = Converter.ConvertToSI(su.temperature, px(k2))
+                y = Converter.ConvertFromSI(su.density, pp.CalcCSTDepProp(Eq, tbLIQDENS_A.Text, tbLIQDENS_B.Text, tbLIQDENS_C.Text, tbLIQDENS_D.Text, tbLIQDENS_E.Text, T, 0))
 
                 Select Case CurveCount
                     Case 1
@@ -2020,7 +2020,7 @@ Public Class FormCompoundCreator
             End Select
             CurveCount += 1
             Heading1 = Heading1 & vbTab & "YCalc"
-            Heading2 = Heading2 & vbTab & vbTab & "[" & su.spmp_density & "]"
+            Heading2 = Heading2 & vbTab & vbTab & "[" & su.density & "]"
             LT.Add(3) 'solid line type curve
         End If
 
@@ -2051,8 +2051,8 @@ Public Class FormCompoundCreator
             .px = px
             .xformat = 1
             .yformat = 1
-            .ytitle = "Rho [" & su.spmp_density & "]"
-            .xtitle = "T [" & su.spmp_temperature & "]"
+            .ytitle = "Rho [" & su.density & "]"
+            .xtitle = "T [" & su.temperature & "]"
             .ShowDialog(Me)
         End With
     End Sub
@@ -2069,20 +2069,20 @@ Public Class FormCompoundCreator
         If mycase.DataCpS.Count = 0 Then
             T = 0
             mytext.AppendLine("T" & vbTab & "yCALC")
-            mytext.AppendLine("[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_heatCapacityCp & "]")
-            dT = Conversor.ConverterParaSI(su.spmp_temperature, TextBoxMeltingTemp.Text) / 25
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]")
+            dT = Converter.ConvertToSI(su.temperature, TextBoxMeltingTemp.Text) / 25
             Do
-                x = Conversor.ConverterDoSI(su.spmp_temperature, T)
+                x = Converter.ConvertFromSI(su.temperature, T)
                 px.Add(x)
                 If Eq = "0" Then
                     y1 = 0
                 Else
-                    y1 = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, pp.CalcCSTDepProp(Eq, tbCpS_A.Text, tbCpS_B.Text, tbCpS_C.Text, tbCpS_D.Text, tbCpS_E.Text, T, 0)) / TextBoxMW.Text / 1000
+                    y1 = Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(Eq, tbCpS_A.Text, tbCpS_B.Text, tbCpS_C.Text, tbCpS_D.Text, tbCpS_E.Text, T, 0)) / TextBoxMW.Text / 1000
                 End If
                 py1.Add(y1)
                 mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2))
                 T += dT
-            Loop Until T > Conversor.ConverterParaSI(su.spmp_temperature, TextBoxMeltingTemp.Text)
+            Loop Until T > Converter.ConvertToSI(su.temperature, TextBoxMeltingTemp.Text)
             With frc
                 .px = px
                 .py1 = py1
@@ -2092,16 +2092,16 @@ Public Class FormCompoundCreator
             End With
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
-            mytext.AppendLine("[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_heatCapacityCp & "]" & vbTab & "[" & su.spmp_heatCapacityCp & "]")
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]" & vbTab & "[" & su.heatCapacityCp & "]")
             For Each d As Double() In mycase.DataCpS
-                x = Conversor.ConverterDoSI(su.spmp_temperature, d(0))
+                x = Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
-                y1 = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, d(1)) / TextBoxMW.Text
+                y1 = Converter.ConvertFromSI(su.heatCapacityCp, d(1)) / TextBoxMW.Text
                 py1.Add(y1)
                 If Eq = "0" Then
                     y2 = 0
                 Else
-                    y2 = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, pp.CalcCSTDepProp(Eq, tbCpS_A.Text, tbCpS_B.Text, tbCpS_C.Text, tbCpS_D.Text, tbCpS_E.Text, d(0), 0)) / TextBoxMW.Text / 1000
+                    y2 = Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(Eq, tbCpS_A.Text, tbCpS_B.Text, tbCpS_C.Text, tbCpS_D.Text, tbCpS_E.Text, d(0), 0)) / TextBoxMW.Text / 1000
                 End If
                 py2.Add(y2)
                 mytext.AppendLine(x & vbTab & FormatNumber(y1, 2) & vbTab & vbTab & FormatNumber(y2, 2))
@@ -2121,8 +2121,8 @@ Public Class FormCompoundCreator
             .tbtext = mytext.ToString
             .xformat = 1
             .yformat = 1
-            .ytitle = "Cp [ " & su.spmp_heatCapacityCp & " ]"
-            .xtitle = "T [ " & su.spmp_temperature & " ]"
+            .ytitle = "Cp [ " & su.heatCapacityCp & " ]"
+            .xtitle = "T [ " & su.temperature & " ]"
             .ShowDialog(Me)
         End With
     End Sub
@@ -2136,20 +2136,20 @@ Public Class FormCompoundCreator
         If mycase.DataRoS.Count = 0 Then
             T = 0
             mytext.AppendLine("T" & vbTab & "yCALC")
-            mytext.AppendLine("[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_density & "]")
-            dT = Conversor.ConverterParaSI(su.spmp_temperature, TextBoxMeltingTemp.Text) / 25
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.density & "]")
+            dT = Converter.ConvertToSI(su.temperature, TextBoxMeltingTemp.Text) / 25
             Do
-                x = Conversor.ConverterDoSI(su.spmp_temperature, T)
+                x = Converter.ConvertFromSI(su.temperature, T)
                 px.Add(x)
                 If Eq = "0" Then
                     y1 = 0
                 Else
-                    y1 = Conversor.ConverterDoSI(su.spmp_density, pp.CalcCSTDepProp(Eq, tbRoS_A.Text, tbRoS_B.Text, tbRoS_C.Text, tbRoS_D.Text, tbRoS_E.Text, T, 0) * TextBoxMW.Text)
+                    y1 = Converter.ConvertFromSI(su.density, pp.CalcCSTDepProp(Eq, tbRoS_A.Text, tbRoS_B.Text, tbRoS_C.Text, tbRoS_D.Text, tbRoS_E.Text, T, 0) * TextBoxMW.Text)
                 End If
                 py1.Add(y1)
                 mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2))
                 T += dT
-            Loop Until T > Conversor.ConverterParaSI(su.spmp_temperature, TextBoxMeltingTemp.Text)
+            Loop Until T > Converter.ConvertToSI(su.temperature, TextBoxMeltingTemp.Text)
             With frc
                 .py1 = py1
                 .ycurvetypes = New ArrayList(New Integer() {3})
@@ -2158,16 +2158,16 @@ Public Class FormCompoundCreator
             End With
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & "  yCALC")
-            mytext.AppendLine("[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_density & "]" & vbTab & "  [" & su.spmp_density & "]")
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.density & "]" & vbTab & "  [" & su.density & "]")
             For Each d As Double() In mycase.DataRoS
-                x = Conversor.ConverterDoSI(su.spmp_temperature, d(0))
+                x = Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
-                y1 = Conversor.ConverterDoSI(su.spmp_density, d(1)) * TextBoxMW.Text
+                y1 = Converter.ConvertFromSI(su.density, d(1)) * TextBoxMW.Text
                 py1.Add(y1)
                 If Eq = "0" Then
                     y2 = 0
                 Else
-                    y2 = Conversor.ConverterDoSI(su.spmp_density, pp.CalcCSTDepProp(Eq, tbRoS_A.Text, tbRoS_B.Text, tbRoS_C.Text, tbRoS_D.Text, tbRoS_E.Text, d(0), 0) * TextBoxMW.Text)
+                    y2 = Converter.ConvertFromSI(su.density, pp.CalcCSTDepProp(Eq, tbRoS_A.Text, tbRoS_B.Text, tbRoS_C.Text, tbRoS_D.Text, tbRoS_E.Text, d(0), 0) * TextBoxMW.Text)
                 End If
                 py2.Add(y2)
                 mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2) & vbTab & "  " & FormatNumber(y2, 2))
@@ -2187,8 +2187,8 @@ Public Class FormCompoundCreator
             .px = px
             .xformat = 1
             .yformat = 1
-            .ytitle = "Rho [" & su.spmp_density & "]"
-            .xtitle = "T [" & su.spmp_temperature & "]"
+            .ytitle = "Rho [" & su.density & "]"
+            .xtitle = "T [" & su.temperature & "]"
             .ShowDialog(Me)
         End With
     End Sub
@@ -2214,23 +2214,23 @@ Public Class FormCompoundCreator
                 T += dT
             Loop While T <= T2
             Heading1 = "T"
-            Heading2 = "[" & su.spmp_temperature & "]"
+            Heading2 = "[" & su.temperature & "]"
         Else
             For Each d As Double() In mycase.DataLVISC
-                px.Add(Conversor.ConverterDoSI(su.spmp_temperature, d(0)))
-                py1.Add(Conversor.ConverterDoSI(su.spmp_viscosity, d(1)))
+                px.Add(Converter.ConvertFromSI(su.temperature, d(0)))
+                py1.Add(Converter.ConvertFromSI(su.viscosity, d(1)))
             Next
             CurveCount = +1
             frc.y1ctitle = "Experiment"
             Heading1 = "T" & vbTab & "yExp"
-            Heading2 = "[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_viscosity & "]"
+            Heading2 = "[" & su.temperature & "]" & vbTab & "[" & su.viscosity & "]"
             LT.Add(1) 'Point type curve
         End If
 
         'Add calculated Letsou-Stiel Data
         For k2 = 0 To px.Count - 1
-            T = Conversor.ConverterParaSI(su.spmp_temperature, px(k2))
-            y = Conversor.ConverterDoSI(su.spmp_viscosity, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS.viscl_letsti(T, Conversor.ConverterParaSI(su.spmp_temperature, TextBoxTc.Text), Conversor.ConverterParaSI(su.spmp_pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text))
+            T = Converter.ConvertToSI(su.temperature, px(k2))
+            y = Converter.ConvertFromSI(su.viscosity, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS.viscl_letsti(T, Converter.ConvertToSI(su.temperature, TextBoxTc.Text), Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text))
             Select Case CurveCount
                 Case 0
                     py1.Add(y)
@@ -2246,14 +2246,14 @@ Public Class FormCompoundCreator
         End Select
         CurveCount += 1
         Heading1 = Heading1 & vbTab & "Y Letsou-Stiel"
-        Heading2 = Heading2 & vbTab & "[" & su.spmp_viscosity & "]"
+        Heading2 = Heading2 & vbTab & "[" & su.viscosity & "]"
         LT.Add(4) 'dashed line type curve
 
         'Add regressed/user curve
         If Not Eq = "0" Then
             For k2 = 0 To px.Count - 1
-                T = Conversor.ConverterParaSI(su.spmp_temperature, px(k2))
-                y = Conversor.ConverterDoSI(su.spmp_viscosity, pp.CalcCSTDepProp(Eq, tbLIQVISC_A.Text, tbLIQVISC_B.Text, tbLIQVISC_C.Text, tbLIQVISC_D.Text, tbLIQVISC_E.Text, T, 0))
+                T = Converter.ConvertToSI(su.temperature, px(k2))
+                y = Converter.ConvertFromSI(su.viscosity, pp.CalcCSTDepProp(Eq, tbLIQVISC_A.Text, tbLIQVISC_B.Text, tbLIQVISC_C.Text, tbLIQVISC_D.Text, tbLIQVISC_E.Text, T, 0))
 
                 Select Case CurveCount
                     Case 1
@@ -2270,7 +2270,7 @@ Public Class FormCompoundCreator
             End Select
             CurveCount += 1
             Heading1 = Heading1 & vbTab & "YCalc"
-            Heading2 = Heading2 & vbTab & vbTab & "[" & su.spmp_viscosity & "]"
+            Heading2 = Heading2 & vbTab & vbTab & "[" & su.viscosity & "]"
             LT.Add(3) 'solid line type curve
         End If
 
@@ -2301,8 +2301,8 @@ Public Class FormCompoundCreator
             .px = px
             .xformat = 1
             .yformat = 1
-            .ytitle = "Visc. [" & su.spmp_viscosity & "]"
-            .xtitle = "T [" & su.spmp_temperature & "]"
+            .ytitle = "Visc. [" & su.viscosity & "]"
+            .xtitle = "T [" & su.temperature & "]"
             .ShowDialog(Me)
         End With
     End Sub
@@ -2716,7 +2716,7 @@ Public Class FormCompoundCreator
                 mycase.cp.NISTMODFACGroups.Collection.Clear()
             End If
 
-            DWSIM.Databases.UserDB.AddCompounds(New DWSIM.ClassesBasicasTermodinamica.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
+            DWSIM.Databases.UserDB.AddCompounds(New DWSIM.Thermodynamics.BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
             SetUserDBSaveStatus(True)
         Catch ex As Exception
             MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -2751,7 +2751,7 @@ Public Class FormCompoundCreator
 
     Private Sub TextBoxEnthOfFusion_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxEnthOfFusion.TextChanged
         Try
-            TextBoxEnthOfFusion2.Text = Conversor.ConverterParaSI(su.spmp_enthalpy, TextBoxEnthOfFusion.Text) / Me.TextBoxMW.Text * 1000
+            TextBoxEnthOfFusion2.Text = Converter.ConvertToSI(su.enthalpy, TextBoxEnthOfFusion.Text) / Me.TextBoxMW.Text * 1000
         Catch ex As Exception
             TextBoxEnthOfFusion2.Text = ""
         End Try
@@ -2788,11 +2788,11 @@ Public Class FormCompoundCreator
         ' in case of missing experimental data - draw only calculated curve
         If mycase.DataCPLiquid.Count = 0 Then
             mytext.AppendLine("T" & vbTab & "yCALC")
-            mytext.AppendLine("[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_heatCapacityCp & "]")
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]")
             For T = 200 To 1500 Step 25
-                x = Conversor.ConverterDoSI(su.spmp_temperature, T)
+                x = Converter.ConvertFromSI(su.temperature, T)
                 px.Add(x)
-                y1 = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, pp.CalcCSTDepProp(cbEqCPLiquid.SelectedItem.Split(":")(0), tbCPLiquid_A.Text, tbCPLiquid_B.Text, tbCPLiquid_C.Text, tbCPLiquid_D.Text, tbCPLiquid_E.Text, T, 0) / 1000) / TextBoxMW.Text
+                y1 = Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(cbEqCPLiquid.SelectedItem.Split(":")(0), tbCPLiquid_A.Text, tbCPLiquid_B.Text, tbCPLiquid_C.Text, tbCPLiquid_D.Text, tbCPLiquid_E.Text, T, 0) / 1000) / TextBoxMW.Text
                 py1.Add(y1)
                 mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2))
             Next
@@ -2806,14 +2806,14 @@ Public Class FormCompoundCreator
             End With
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
-            mytext.AppendLine("[" & su.spmp_temperature & "]" & vbTab & "[" & su.spmp_heatCapacityCp & "]" & vbTab & "[" & su.spmp_heatCapacityCp & "]")
+            mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]" & vbTab & "[" & su.heatCapacityCp & "]")
             For Each d As Double() In mycase.DataCPLiquid
-                x = Conversor.ConverterDoSI(su.spmp_temperature, d(0))
+                x = Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
-                y1 = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, d(1))
+                y1 = Converter.ConvertFromSI(su.heatCapacityCp, d(1))
                 py1.Add(y1)
                 T = d(0)
-                y2 = Conversor.ConverterDoSI(su.spmp_heatCapacityCp, pp.CalcCSTDepProp(cbEqCPLiquid.SelectedItem.Split(":")(0), tbCPLiquid_A.Text, tbCPLiquid_B.Text, tbCPLiquid_C.Text, tbCPLiquid_D.Text, tbCPLiquid_E.Text, T, 0) / 1000) / TextBoxMW.Text
+                y2 = Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(cbEqCPLiquid.SelectedItem.Split(":")(0), tbCPLiquid_A.Text, tbCPLiquid_B.Text, tbCPLiquid_C.Text, tbCPLiquid_D.Text, tbCPLiquid_E.Text, T, 0) / 1000) / TextBoxMW.Text
                 py2.Add(y2)
                 mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2) & vbTab & vbTab & FormatNumber(y2, 2))
             Next
@@ -2832,8 +2832,8 @@ Public Class FormCompoundCreator
             .tbtext = mytext.ToString
             .xformat = 1
             .yformat = 1
-            .ytitle = "Cp Liquid [" & su.spmp_heatCapacityCp & "]"
-            .xtitle = "T [" & su.spmp_temperature & "]"
+            .ytitle = "Cp Liquid [" & su.heatCapacityCp & "]"
+            .xtitle = "T [" & su.temperature & "]"
             .title = "Liquid Heat Capacity Fitting Results"
             .ShowDialog(Me)
         End With
@@ -2846,7 +2846,7 @@ Public Class FormCompoundCreator
         mycase.DataCPLiquid.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataCPLiquid.Rows
             Try
-                If row.Index < Me.GridExpDataCPLiquid.Rows.Count - 1 Then mycase.DataCPLiquid.Add(New Double() {Conversor.ConverterParaSI(su.spmp_temperature, row.Cells(0).Value), Conversor.ConverterParaSI(su.spmp_heatCapacityCp, row.Cells(1).Value) * MW})
+                If row.Index < Me.GridExpDataCPLiquid.Rows.Count - 1 Then mycase.DataCPLiquid.Add(New Double() {Converter.ConvertToSI(su.temperature, row.Cells(0).Value), Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * MW})
             Catch ex As Exception
             End Try
         Next
@@ -2986,15 +2986,15 @@ End Class
 <System.Serializable()> Public Class CompoundGeneratorCase
 
     Sub New()
-        cp = New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
-        su = New DWSIM.SistemasDeUnidades.UnidadesSI
+        cp = New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+        su = New DWSIM.SystemsOfUnits.SI
     End Sub
 
     Public Filename As String = ""
 
-    Public cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+    Public cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
     Public database As String = ""
-    Public su As DWSIM.SistemasDeUnidades.Unidades
+    Public su As DWSIM.SystemsOfUnits.Units
 
     Public nf As String = My.Computer.Info.InstalledUICulture.NumberFormat.ToString
 

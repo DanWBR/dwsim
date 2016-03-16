@@ -262,7 +262,6 @@ Partial Class frmSurface
         'EditCompTSMI
         '
         resources.ApplyResources(Me.EditCompTSMI, "EditCompTSMI")
-        Me.EditCompTSMI.Image = Global.DWSIM.My.Resources.Resources.Lab_icon
         Me.EditCompTSMI.Name = "EditCompTSMI"
         '
         'CopyFromTSMI

@@ -28,9 +28,9 @@ Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports System.Reflection
 Imports System.Globalization
 
-Namespace DWSIM.ClassesBasicasTermodinamica
+Namespace DWSIM.Thermodynamics.BaseClasses
 
-    <System.Serializable()> Public Class Substancia
+    <System.Serializable()> Public Class Compound
 
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
 
@@ -198,10 +198,10 @@ Namespace DWSIM.ClassesBasicasTermodinamica
         Public PDProperties As New PressureDependentProperties
         Public ConstantProperties As New ConstantProperties
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
             Me.m_ComponentName = nome
-            Me.m_ComponentDescription = descricao
+            Me.m_ComponentDescription = description
 
         End Sub
 
@@ -217,7 +217,7 @@ Namespace DWSIM.ClassesBasicasTermodinamica
 
     End Class
 
-    <System.Serializable()> Public Class Fase
+    <System.Serializable()> Public Class Phase
 
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
 
@@ -233,42 +233,30 @@ Namespace DWSIM.ClassesBasicasTermodinamica
             End Set
         End Property
 
-        Public Componentes As Dictionary(Of String, Substancia)
+        Public Property Componentes As Dictionary(Of String, Compound)
 
-        Public SPMProperties As New SinglePhaseMixtureProperties
-        Public TPMProperties As New TwoPhaseMixtureProperties
+        Public Property Properties As New SinglePhaseMixtureProperties
+        Public Property Properties2 As New TwoPhaseMixtureProperties
 
-        Public ReadOnly Property Properties As SinglePhaseMixtureProperties
-            Get
-                Return SPMProperties
-            End Get
-        End Property
-
-        Public ReadOnly Property Properties2 As TwoPhaseMixtureProperties
-            Get
-                Return TPMProperties
-            End Get
-        End Property
-
-        Public ReadOnly Property Compounds As Dictionary(Of String, Substancia)
+        Public ReadOnly Property Compounds As Dictionary(Of String, Compound)
             Get
                 Return Componentes
             End Get
         End Property
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
-            Me.ComponentName = nome
-            Me.ComponentDescription = descricao
-            Me.Componentes = New Dictionary(Of String, Substancia)
+            Me.ComponentName = name
+            Me.ComponentDescription = description
+            Me.Componentes = New Dictionary(Of String, Compound)
 
         End Sub
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String, ByVal substancias As Dictionary(Of String, Substancia))
+        Public Sub New(ByVal name As String, ByVal description As String, ByVal Compounds As Dictionary(Of String, Compound))
 
-            Me.ComponentName = nome
-            Me.ComponentDescription = descricao
-            Me.Componentes = substancias
+            Me.ComponentName = name
+            Me.ComponentDescription = description
+            Me.Componentes = Compounds
 
         End Sub
 
@@ -279,13 +267,13 @@ Namespace DWSIM.ClassesBasicasTermodinamica
             Dim datac As List(Of XElement) = (From xel As XElement In data Select xel Where xel.Name = "Compounds").Elements.ToList
 
             For Each xel As XElement In datac
-                Dim s As New Substancia("", "")
+                Dim s As New Compound("", "")
                 s.LoadData(xel.Elements.ToList)
                 Me.Componentes.Add(s.Nome, s)
             Next
 
-            XMLSerializer.XMLSerializer.Deserialize(Me.SPMProperties, (From xel As XElement In data Select xel Where xel.Name = "SPMProperties").Elements.ToList)
-            XMLSerializer.XMLSerializer.Deserialize(Me.TPMProperties, (From xel As XElement In data Select xel Where xel.Name = "TPMProperties").Elements.ToList)
+            XMLSerializer.XMLSerializer.Deserialize(Me.Properties, (From xel As XElement In data Select xel Where xel.Name = "Properties").Elements.ToList)
+            XMLSerializer.XMLSerializer.Deserialize(Me.Properties2, (From xel As XElement In data Select xel Where xel.Name = "Properties2").Elements.ToList)
 
         End Function
 
@@ -298,7 +286,7 @@ Namespace DWSIM.ClassesBasicasTermodinamica
 
                 .Add(New XElement("Compounds"))
 
-                For Each kvp As KeyValuePair(Of String, Substancia) In Me.Componentes
+                For Each kvp As KeyValuePair(Of String, Compound) In Me.Componentes
                     elements(elements.Count - 1).Add(New XElement("Compound", kvp.Value.SaveData().ToArray()))
                 Next
 
@@ -311,11 +299,11 @@ Namespace DWSIM.ClassesBasicasTermodinamica
                     End If
                 Next
 
-                .Add(New XElement("SPMProperties"))
-                elements(elements.Count - 1).Add(XMLSerializer.XMLSerializer.Serialize(Me.SPMProperties))
+                .Add(New XElement("Properties"))
+                elements(elements.Count - 1).Add(XMLSerializer.XMLSerializer.Serialize(Me.Properties))
 
-                .Add(New XElement("TPMProperties"))
-                elements(elements.Count - 1).Add(XMLSerializer.XMLSerializer.Serialize(Me.TPMProperties))
+                .Add(New XElement("Properties2"))
+                elements(elements.Count - 1).Add(XMLSerializer.XMLSerializer.Serialize(Me.Properties2))
 
             End With
 
@@ -1191,7 +1179,7 @@ Namespace DWSIM.ClassesBasicasTermodinamica
                                 Case "mole"
                                     res.Add(ro.ReactionHeatCO)
                                 Case "mass"
-                                    res.Add(ro.ReactionHeatCO / Me.m_str.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault)
+                                    res.Add(ro.ReactionHeatCO / Me.m_str.Phases(0).Properties.molecularWeight.GetValueOrDefault)
                             End Select
                         Case Else
                             Throw New CapeOpen.CapeNoImplException
@@ -1278,16 +1266,16 @@ Namespace DWSIM.ClassesBasicasTermodinamica
 
                                     Select Case ro.ReactionPhase
                                         Case PhaseName.Liquid
-                                            co.Add(sb.CompName, ims.Fases(1).Componentes(sb.CompName).MolarFlow.GetValueOrDefault / ims.Fases(1).SPMProperties.volumetric_flow.GetValueOrDefault)
+                                            co.Add(sb.CompName, ims.Phases(1).Componentes(sb.CompName).MolarFlow.GetValueOrDefault / ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault)
                                         Case PhaseName.Vapor
-                                            co.Add(sb.CompName, ims.Fases(2).Componentes(sb.CompName).MolarFlow.GetValueOrDefault / ims.Fases(2).SPMProperties.volumetric_flow.GetValueOrDefault)
+                                            co.Add(sb.CompName, ims.Phases(2).Componentes(sb.CompName).MolarFlow.GetValueOrDefault / ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault)
                                         Case PhaseName.Mixture
-                                            co.Add(sb.CompName, ims.Fases(0).Componentes(sb.CompName).MolarFlow.GetValueOrDefault / ims.Fases(0).SPMProperties.volumetric_flow.GetValueOrDefault)
+                                            co.Add(sb.CompName, ims.Phases(0).Componentes(sb.CompName).MolarFlow.GetValueOrDefault / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault)
                                     End Select
 
                                 Next
 
-                                Dim T = ims.Fases(0).SPMProperties.temperature.GetValueOrDefault
+                                Dim T = ims.Phases(0).Properties.temperature.GetValueOrDefault
 
                                 Dim kxf As Double = ro.A_Forward * Math.Exp(-ro.E_Forward / (8.314 * T))
                                 Dim kxr As Double = ro.A_Reverse * Math.Exp(-ro.E_Reverse / (8.314 * T))
@@ -1309,7 +1297,7 @@ Namespace DWSIM.ClassesBasicasTermodinamica
 
                             Case "chemicalequilibriumconstant"
 
-                                Dim T = Me.m_str.Fases(0).SPMProperties.temperature.GetValueOrDefault
+                                Dim T = Me.m_str.Phases(0).Properties.temperature.GetValueOrDefault
 
                                 'equilibrium constant calculation
 
@@ -1345,7 +1333,7 @@ Namespace DWSIM.ClassesBasicasTermodinamica
 
                                 'Dim rh As Double = 0.0#
 
-                                'Dim T = Me.m_str.Fases(0).SPMProperties.temperature.GetValueOrDefault
+                                'Dim T = Me.m_str.Phases(0).Properties.temperature.GetValueOrDefault
 
                                 'Dim id(.Components.Count - 1) As String
                                 'Dim stcoef(.Components.Count - 1) As Double
@@ -2383,7 +2371,7 @@ Namespace DWSIM.ClassesBasicasTermodinamica
 
             Dim unif As New SimulationObjects.PropertyPackages.Auxiliary.Unifac
             Dim modf As New SimulationObjects.PropertyPackages.Auxiliary.Modfac
-        
+
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "UNIFACGroups").Elements
                 If xel2.@Name Is Nothing Then
                     Me.UNIFACGroups.Collection.Add(xel2.@GroupID.ToString, xel2.@Value)

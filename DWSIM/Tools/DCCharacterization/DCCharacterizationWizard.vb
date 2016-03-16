@@ -18,7 +18,7 @@
 
 Imports System.Math
 Imports DWSIM.DWSIM.MathEx
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
@@ -38,14 +38,14 @@ Public Class DCCharacterizationWizard
     End Class
 
     Dim nf As String
-    Dim cv As DWSIM.SistemasDeUnidades.Conversor
-    Dim su As DWSIM.SistemasDeUnidades.Unidades
+    Dim cv As DWSIM.SystemsOfUnits.Converter
+    Dim su As DWSIM.SystemsOfUnits.Units
     Dim form As FormFlowsheet
 
     Dim pxt, pyt, pxv1, pyv1, pxv2, pyv2, pxm, pym, pxd, pyd As ArrayList
     Dim gxt, gyt, gxv1, gyv1, gxv2, gyv2, gxm, gym, gxd, gyd As ArrayList
     Dim Tmin, Tmax As Double
-    Dim ccol As Dictionary(Of String, Substancia)
+    Dim ccol As Dictionary(Of String, Compound)
     Dim tccol As List(Of tmpcomp)
 
     Private Sub DCCharacterizationWizard_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -53,7 +53,7 @@ Public Class DCCharacterizationWizard
         form = My.Application.ActiveSimulation
         su = form.Options.SelectedUnitSystem
         nf = form.Options.NumberFormat
-        ccol = New Dictionary(Of String, Substancia)
+        ccol = New Dictionary(Of String, Compound)
         tccol = New List(Of tmpcomp)
 
         Me.ComboBoxAF.SelectedIndex = 1
@@ -66,19 +66,19 @@ Public Class DCCharacterizationWizard
         Me.ComboBoxViscM.SelectedIndex = 0
 
         With Me.DataGridView1.Columns
-            .Item("temp").HeaderText += " (" & su.spmp_temperature & ")"
-            .Item("mm").HeaderText += " (" & su.spmp_molecularWeight & ")"
-            .Item("visc1").HeaderText += " (" & su.spmp_cinematic_viscosity & ")"
-            .Item("visc2").HeaderText += " (" & su.spmp_cinematic_viscosity & ")"
+            .Item("temp").HeaderText += " (" & su.temperature & ")"
+            .Item("mm").HeaderText += " (" & su.molecularWeight & ")"
+            .Item("visc1").HeaderText += " (" & su.cinematic_viscosity & ")"
+            .Item("visc2").HeaderText += " (" & su.cinematic_viscosity & ")"
         End With
 
         With Me.DataGridView2.Columns
-            .Item(2).HeaderText += " (" & su.spmp_temperature & ")"
-            .Item(4).HeaderText += " (" & su.spmp_molecularWeight & ")"
-            .Item(5).HeaderText += " (" & su.spmp_temperature & ")"
-            .Item(6).HeaderText += " (" & su.spmp_pressure & ")"
-            .Item(8).HeaderText += " (" & su.spmp_cinematic_viscosity & ")"
-            .Item(9).HeaderText += " (" & su.spmp_cinematic_viscosity & ")"
+            .Item(2).HeaderText += " (" & su.temperature & ")"
+            .Item(4).HeaderText += " (" & su.molecularWeight & ")"
+            .Item(5).HeaderText += " (" & su.temperature & ")"
+            .Item(6).HeaderText += " (" & su.pressure & ")"
+            .Item(8).HeaderText += " (" & su.cinematic_viscosity & ")"
+            .Item(9).HeaderText += " (" & su.cinematic_viscosity & ")"
         End With
 
         P0.BringToFront()
@@ -259,7 +259,7 @@ Public Class DCCharacterizationWizard
 
         fittedt.Clear()
         For i = 0 To tbp.Length - 1
-            fittedt.Add(Conversor.ConverterDoSI(su.spmp_temperature, coeff(0) + coeff(1) * tbpx(i) + coeff(2) * tbpx(i) ^ 2 + coeff(3) * tbpx(i) ^ 3 + coeff(4) * tbpx(i) ^ 4 + coeff(5) * tbpx(i) ^ 5 + coeff(6) * tbpx(i) ^ 6))
+            fittedt.Add(Converter.ConvertFromSI(su.temperature, coeff(0) + coeff(1) * tbpx(i) + coeff(2) * tbpx(i) ^ 2 + coeff(3) * tbpx(i) ^ 3 + coeff(4) * tbpx(i) ^ 4 + coeff(5) * tbpx(i) ^ 5 + coeff(6) * tbpx(i) ^ 6))
         Next
 
         'create pseudos
@@ -300,7 +300,7 @@ Public Class DCCharacterizationWizard
                 If i = np - 1 Then
                     tc.tbpf = Tmax
                 Else
-                    tc.tbpf = Conversor.ConverterParaSI(su.spmp_temperature, temps(i))
+                    tc.tbpf = Converter.ConvertToSI(su.temperature, temps(i))
                 End If
                 tc.fv0 = GetFV(coeff, fv0, tc.tbp0)
                 tc.fvf = GetFV(coeff, fv0, tc.tbpf)
@@ -308,7 +308,7 @@ Public Class DCCharacterizationWizard
                 tc.tbpm = GetT(coeff, tc.fvm)
                 tccol.Add(tc)
                 fv0 = tc.fvf
-                If i < np - 1 Then t0 = Conversor.ConverterParaSI(su.spmp_temperature, temps(i))
+                If i < np - 1 Then t0 = Converter.ConvertToSI(su.temperature, temps(i))
             Next
         End If
 
@@ -316,7 +316,7 @@ Public Class DCCharacterizationWizard
             .GraphObjList.Clear()
             .CurveList.Clear()
             .YAxisList.Clear()
-            Dim ya0 As New ZedGraph.YAxis("T (" & su.spmp_temperature & ")")
+            Dim ya0 As New ZedGraph.YAxis("T (" & su.temperature & ")")
             .YAxisList.Add(ya0)
             With .AddCurve(DWSIM.App.GetLocalString("PF_TBP"), tbpx, fittedt.ToArray(GetType(Double)), Color.Black)
                 .Line.IsVisible = True
@@ -325,10 +325,10 @@ Public Class DCCharacterizationWizard
                 .Symbol.Type = ZedGraph.SymbolType.Circle
                 .Symbol.Fill.Color = Color.Red
                 .Symbol.Fill.IsVisible = True
-                .YAxisIndex = Me.GraphComps.GraphPane.YAxisList.IndexOf("T (" & su.spmp_temperature & ")")
+                .YAxisIndex = Me.GraphComps.GraphPane.YAxisList.IndexOf("T (" & su.temperature & ")")
             End With
             For i = 0 To tccol.Count - 1
-                Dim box As New ZedGraph.BoxObj(tccol(i).fv0, Conversor.ConverterDoSI(su.spmp_temperature, tccol(i).tbpm), tccol(i).fvf - tccol(i).fv0, Conversor.ConverterDoSI(su.spmp_temperature, tccol(i).tbpm), Color.FromArgb(100, Color.Red), Color.Empty)
+                Dim box As New ZedGraph.BoxObj(tccol(i).fv0, Converter.ConvertFromSI(su.temperature, tccol(i).tbpm), tccol(i).fvf - tccol(i).fv0, Converter.ConvertFromSI(su.temperature, tccol(i).tbpm), Color.FromArgb(100, Color.Red), Color.Empty)
                 box.Fill = New ZedGraph.Fill(Color.FromArgb(100, Color.Red), Color.White, 90.0F)
                 box.Fill.IsScaled = True
                 box.ZOrder = ZedGraph.ZOrder.E_BehindCurves
@@ -442,7 +442,7 @@ Public Class DCCharacterizationWizard
 
             i += 1
 
-            Dim subst As New Substancia(cprops.Name, "")
+            Dim subst As New Compound(cprops.Name, "")
 
             With subst
                 .ConstantProperties = cprops
@@ -458,28 +458,28 @@ Public Class DCCharacterizationWizard
 
         If Me.TextBoxBulkMW.Text <> "" Then
             Dim mixtMW As Double = 0
-            For Each c As Substancia In ccol.Values
+            For Each c As Compound In ccol.Values
                 mixtMW += c.FracaoMolar * c.ConstantProperties.Molar_Weight
             Next
             Dim facm As Double = CDbl(Me.TextBoxBulkMW.Text) / mixtMW
-            For Each c As Substancia In ccol.Values
+            For Each c As Compound In ccol.Values
                 c.ConstantProperties.Molar_Weight *= facm
             Next
         End If
 
         If Me.TextBoxBulkD.Text <> "" Then
             Dim mixtD As Double = 0
-            For Each c As Substancia In ccol.Values
+            For Each c As Compound In ccol.Values
                 mixtD += c.FracaoMassica * c.ConstantProperties.PF_SG.GetValueOrDefault
             Next
             Dim facd As Double = 141.5 / (131.5 + CDbl(Me.TextBoxBulkD.Text)) / mixtD
-            For Each c As Substancia In ccol.Values
+            For Each c As Compound In ccol.Values
                 c.ConstantProperties.PF_SG *= facd
             Next
         End If
 
         i = 0
-        For Each subst As Substancia In ccol.Values
+        For Each subst As Compound In ccol.Values
 
             Dim cprops As ConstantProperties = subst.ConstantProperties
 
@@ -599,14 +599,14 @@ Public Class DCCharacterizationWizard
             pp = New DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage()
         End If
 
-        For Each c As Substancia In ccol.Values
-            tms.Fases(0).Componentes.Add(c.Nome, c)
+        For Each c As Compound In ccol.Values
+            tms.Phases(0).Componentes.Add(c.Nome, c)
         Next
 
         Dim recalcVc As Boolean = False
 
         i = 0
-        For Each c As Substancia In ccol.Values
+        For Each c As Compound In ccol.Values
             If Me.CheckBoxADJAF.Checked Then
                 With nbpfit
                     ._pp = pp
@@ -690,18 +690,18 @@ Public Class DCCharacterizationWizard
         Dim nm, fm, nbp, sg, mm, ct, cp, af, visc1, visc2, prvs, srkvs As String
 
         Me.DataGridView2.Rows.Clear()
-        For Each subst As Substancia In ccol.Values
+        For Each subst As Compound In ccol.Values
             With subst
                 nm = .Nome
                 fm = Format(.FracaoMolar, nf)
-                nbp = Format(Conversor.ConverterDoSI(su.spmp_temperature, .ConstantProperties.NBP), nf)
+                nbp = Format(Converter.ConvertFromSI(su.temperature, .ConstantProperties.NBP), nf)
                 sg = Format(.ConstantProperties.PF_SG, nf)
                 mm = Format(.ConstantProperties.PF_MM, nf)
-                ct = Format(Conversor.ConverterDoSI(su.spmp_temperature, .ConstantProperties.Critical_Temperature), nf)
-                cp = Format(Conversor.ConverterDoSI(su.spmp_pressure, .ConstantProperties.Critical_Pressure), nf)
+                ct = Format(Converter.ConvertFromSI(su.temperature, .ConstantProperties.Critical_Temperature), nf)
+                cp = Format(Converter.ConvertFromSI(su.pressure, .ConstantProperties.Critical_Pressure), nf)
                 af = Format(.ConstantProperties.Acentric_Factor, nf)
-                visc1 = Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, .ConstantProperties.PF_v1), "E")
-                visc2 = Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, .ConstantProperties.PF_v2), "E")
+                visc1 = Format(Converter.ConvertFromSI(su.cinematic_viscosity, .ConstantProperties.PF_v1), "E")
+                visc2 = Format(Converter.ConvertFromSI(su.cinematic_viscosity, .ConstantProperties.PF_v2), "E")
                 prvs = Format(.ConstantProperties.PR_Volume_Translation_Coefficient, "N6")
                 srkvs = Format(.ConstantProperties.SRK_Volume_Translation_Coefficient, "N6")
             End With
@@ -721,8 +721,8 @@ Public Class DCCharacterizationWizard
         'finalize button
 
         Dim corr As String = Me.TextBoxStreamName.Text
-        Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
-        Dim subst As DWSIM.ClassesBasicasTermodinamica.Substancia
+        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+        Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
         Dim gObj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject = Nothing
         Dim idx As Integer = 0
 
@@ -742,7 +742,6 @@ Public Class DCCharacterizationWizard
         gObj = myMStr
         gObj.Name = "MAT-" & Guid.NewGuid.ToString
         form.Collections.MaterialStreamCollection.Add(gObj.Name, myMStr)
-        If Not DWSIM.App.IsRunningOnMono Then form.FormObjList.TreeViewObj.Nodes("NodeMS").Nodes.Add(gObj.Name, gObj.Tag).Name = gObj.Name
         'OBJETO DWSIM
         Dim myCOMS As DWSIM.SimulationObjects.Streams.MaterialStream = New DWSIM.SimulationObjects.Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr
@@ -755,13 +754,13 @@ Public Class DCCharacterizationWizard
             subst.FracaoMassica = subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight / wtotal
         Next
         For Each subst In ccol.Values
-            With myCOMS.Fases(0).Componentes
+            With myCOMS.Phases(0).Componentes
                 .Item(subst.Nome).ConstantProperties = subst.ConstantProperties
                 .Item(subst.Nome).FracaoMassica = subst.FracaoMassica
                 .Item(subst.Nome).FracaoMolar = subst.FracaoMolar
             End With
-            myCOMS.Fases(1).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
-            myCOMS.Fases(2).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
+            myCOMS.Phases(1).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
+            myCOMS.Phases(2).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
         Next
         form.Collections.ObjectCollection.Add(myCOMS.Nome, myCOMS)
         form.Collections.CLCS_MaterialStreamCollection.Add(myCOMS.Nome, myCOMS)
@@ -914,7 +913,7 @@ Public Class DCCharacterizationWizard
                 'liquid volume percent
                 i = 0
                 sum1 = 0
-                For Each subst As Substancia In Me.ccol.Values
+                For Each subst As Compound In Me.ccol.Values
                     fv = (tccol(i).fvf - tccol(i).fv0) / (tccol(tccol.Count - 1).fvf - tccol(0).fv0)
                     fw = fv * subst.ConstantProperties.PF_SG.GetValueOrDefault
                     fm = fw / subst.ConstantProperties.Molar_Weight
@@ -922,7 +921,7 @@ Public Class DCCharacterizationWizard
                     i = i + 1
                 Next
                 i = 0
-                For Each subst As Substancia In Me.ccol.Values
+                For Each subst As Compound In Me.ccol.Values
                     fv = (tccol(i).fvf - tccol(i).fv0) / (tccol(tccol.Count - 1).fvf - tccol(0).fv0)
                     fw = fv * subst.ConstantProperties.PF_SG.GetValueOrDefault
                     fm = fw / subst.ConstantProperties.Molar_Weight
@@ -932,7 +931,7 @@ Public Class DCCharacterizationWizard
             Case 1
                 'mole percent
                 i = 0
-                For Each subst As Substancia In Me.ccol.Values
+                For Each subst As Compound In Me.ccol.Values
                     subst.FracaoMolar = (tccol(i).fvf - tccol(i).fv0) / (tccol(tccol.Count - 1).fvf - tccol(0).fv0)
                     i = i + 1
                 Next
@@ -940,14 +939,14 @@ Public Class DCCharacterizationWizard
                 'weight percent
                 i = 0
                 sum1 = 0
-                For Each subst As Substancia In Me.ccol.Values
+                For Each subst As Compound In Me.ccol.Values
                     fw = (tccol(i).fvf - tccol(i).fv0) / (tccol(tccol.Count - 1).fvf - tccol(0).fv0)
                     fm = fw / subst.ConstantProperties.Molar_Weight
                     sum1 += fm
                     i = i + 1
                 Next
                 i = 0
-                For Each subst As Substancia In Me.ccol.Values
+                For Each subst As Compound In Me.ccol.Values
                     fw = (tccol(i).fvf - tccol(i).fv0) / (tccol(tccol.Count - 1).fvf - tccol(0).fv0)
                     fm = fw / subst.ConstantProperties.Molar_Weight
                     subst.FracaoMolar = fm / sum1
@@ -958,18 +957,18 @@ Public Class DCCharacterizationWizard
 
         Dim wxtotal As Double = 0
 
-        For Each subst As Substancia In ccol.Values
+        For Each subst As Compound In ccol.Values
             wxtotal += subst.FracaoMolar * subst.ConstantProperties.Molar_Weight
         Next
 
-        For Each subst As Substancia In ccol.Values
+        For Each subst As Compound In ccol.Values
             subst.FracaoMassica = subst.FracaoMolar * subst.ConstantProperties.Molar_Weight / wxtotal
         Next
 
     End Sub
 
     Private Sub Button28_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        cv = New DWSIM.SistemasDeUnidades.Conversor
+        cv = New DWSIM.SystemsOfUnits.Converter
 
         'analyze data, interpolate, bla, bla bla...
 
@@ -999,7 +998,7 @@ Public Class DCCharacterizationWizard
         For Each r As DataGridViewRow In Me.DataGridView1.Rows
             If r.Cells("temp").Value <> Nothing Then
                 pxt.Add(r.Cells(0).Value / 100)
-                pyt.Add(Conversor.ConverterParaSI(su.spmp_temperature, r.Cells("temp").Value))
+                pyt.Add(Converter.ConvertToSI(su.temperature, r.Cells("temp").Value))
                 gxt.Add(CDbl(r.Cells(0).Value))
                 gyt.Add(CDbl(r.Cells("temp").Value))
             End If
@@ -1017,13 +1016,13 @@ Public Class DCCharacterizationWizard
             End If
             If r.Cells("visc1").Value <> Nothing Then
                 pxv1.Add(r.Cells(0).Value / 100)
-                pyv1.Add(Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, r.Cells("visc1").Value))
+                pyv1.Add(Converter.ConvertToSI(su.cinematic_viscosity, r.Cells("visc1").Value))
                 gxv1.Add(CDbl(r.Cells(0).Value))
                 gyv1.Add(CDbl(r.Cells("visc1").Value))
             End If
             If r.Cells("visc2").Value <> Nothing Then
                 pxv2.Add(r.Cells(0).Value / 100)
-                pyv2.Add(Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, r.Cells("visc2").Value))
+                pyv2.Add(Converter.ConvertToSI(su.cinematic_viscosity, r.Cells("visc2").Value))
                 gxv2.Add(CDbl(r.Cells(0).Value))
                 gyv2.Add(CDbl(r.Cells("visc2").Value))
             End If
@@ -1033,7 +1032,7 @@ Public Class DCCharacterizationWizard
             .CurveList.Clear()
             .YAxisList.Clear()
             If pyt.Count > 0 Then
-                Dim ya0 As New ZedGraph.YAxis("T (" & su.spmp_temperature & ")")
+                Dim ya0 As New ZedGraph.YAxis("T (" & su.temperature & ")")
                 .YAxisList.Add(ya0)
                 With .AddCurve(Me.ComboBoxDistMethod.Text, gxt.ToArray(GetType(Double)), gyt.ToArray(GetType(Double)), Color.Black)
                     .Line.IsVisible = True
@@ -1042,7 +1041,7 @@ Public Class DCCharacterizationWizard
                     .Symbol.Type = ZedGraph.SymbolType.Circle
                     .Symbol.Fill.Color = Color.Red
                     .Symbol.Fill.IsVisible = True
-                    .YAxisIndex = Me.GraphCurves.GraphPane.YAxisList.IndexOf("T (" & su.spmp_temperature & ")")
+                    .YAxisIndex = Me.GraphCurves.GraphPane.YAxisList.IndexOf("T (" & su.temperature & ")")
                 End With
             End If
             If pyd.Count > 0 Then
@@ -1059,7 +1058,7 @@ Public Class DCCharacterizationWizard
                 End With
             End If
             If pym.Count > 0 Then
-                Dim ya2 As New ZedGraph.YAxis("MW (" & su.spmp_molecularWeight & ")")
+                Dim ya2 As New ZedGraph.YAxis("MW (" & su.molecularWeight & ")")
                 .YAxisList.Add(ya2)
                 With .AddCurve(DWSIM.App.GetLocalString("PF_MW"), gxm.ToArray(GetType(Double)), gym.ToArray(GetType(Double)), Color.Black)
                     .Line.IsVisible = True
@@ -1068,11 +1067,11 @@ Public Class DCCharacterizationWizard
                     .Symbol.Type = ZedGraph.SymbolType.Circle
                     .Symbol.Fill.Color = Color.Gold
                     .Symbol.Fill.IsVisible = True
-                    .YAxisIndex = Me.GraphCurves.GraphPane.YAxisList.IndexOf("MW (" & su.spmp_molecularWeight & ")")
+                    .YAxisIndex = Me.GraphCurves.GraphPane.YAxisList.IndexOf("MW (" & su.molecularWeight & ")")
                 End With
             End If
             If pyv1.Count > 0 And pyv2.Count > 0 Then
-                Dim ya3 As New ZedGraph.YAxis("Visc (" & su.spmp_cinematic_viscosity & ")")
+                Dim ya3 As New ZedGraph.YAxis("Visc (" & su.cinematic_viscosity & ")")
                 .YAxisList.Add(ya3)
                 With .AddCurve(DWSIM.App.GetLocalString("PF_Visc1"), gxv1.ToArray(GetType(Double)), gyv1.ToArray(GetType(Double)), Color.Black)
                     .Line.IsVisible = True
@@ -1081,7 +1080,7 @@ Public Class DCCharacterizationWizard
                     .Symbol.Type = ZedGraph.SymbolType.Circle
                     .Symbol.Fill.Color = Color.LightGreen
                     .Symbol.Fill.IsVisible = True
-                    .YAxisIndex = Me.GraphCurves.GraphPane.YAxisList.IndexOf("Visc (" & su.spmp_cinematic_viscosity & ")")
+                    .YAxisIndex = Me.GraphCurves.GraphPane.YAxisList.IndexOf("Visc (" & su.cinematic_viscosity & ")")
                 End With
                 With .AddCurve(DWSIM.App.GetLocalString("PF_Visc2"), gxv2.ToArray(GetType(Double)), gyv2.ToArray(GetType(Double)), Color.Black)
                     .Line.IsVisible = True
@@ -1090,7 +1089,7 @@ Public Class DCCharacterizationWizard
                     .Symbol.Type = ZedGraph.SymbolType.Circle
                     .Symbol.Fill.Color = Color.Green
                     .Symbol.Fill.IsVisible = True
-                    .YAxisIndex = Me.GraphCurves.GraphPane.YAxisList.IndexOf("Visc (" & su.spmp_cinematic_viscosity & ")")
+                    .YAxisIndex = Me.GraphCurves.GraphPane.YAxisList.IndexOf("Visc (" & su.cinematic_viscosity & ")")
                 End With
             End If
             With .Legend
@@ -1123,7 +1122,7 @@ Public Class DCCharacterizationWizard
 
         Dim frmam As New FormAssayManager
 
-        cv = New DWSIM.SistemasDeUnidades.Conversor
+        cv = New DWSIM.SystemsOfUnits.Converter
 
         If frmam.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Dim myassay As Assay.Assay = frmam.currentassay
@@ -1133,10 +1132,10 @@ Public Class DCCharacterizationWizard
                     ComboBoxBasis.SelectedItem = .CurveBasis
                     TextBoxBulkD.Text = Format(.API, nf)
                     If .API = 0.0# Then TextBoxBulkD.Text = ""
-                    TextBoxBulkMW.Text = Format(Conversor.ConverterDoSI(su.spmp_molecularWeight, .MW), nf)
+                    TextBoxBulkMW.Text = Format(Converter.ConvertFromSI(su.molecularWeight, .MW), nf)
                     If .MW = 0.0# Then TextBoxBulkMW.Text = ""
-                    TextBoxVT1.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, .T1), nf)
-                    TextBoxVT2.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, .T2), nf)
+                    TextBoxVT1.Text = Format(Converter.ConvertFromSI(su.temperature, .T1), nf)
+                    TextBoxVT2.Text = Format(Converter.ConvertFromSI(su.temperature, .T2), nf)
                     TextBoxKAPI.Text = Format(.K_API, nf)
                     CheckBoxMW.Checked = .HasMWCurve
                     CheckBoxSG.Checked = .HasSGCurve
@@ -1158,7 +1157,7 @@ Public Class DCCharacterizationWizard
                     For i = 0 To .PX.Count - 1
                         idx = DataGridView1.Rows.Add()
                         DataGridView1.Rows(idx).Cells("vap").Value = Format(.PX(i) * 100, nf)
-                        DataGridView1.Rows(idx).Cells("temp").Value = Format(Conversor.ConverterDoSI(su.spmp_temperature, .PY_NBP(i)), nf)
+                        DataGridView1.Rows(idx).Cells("temp").Value = Format(Converter.ConvertFromSI(su.temperature, .PY_NBP(i)), nf)
                         If CheckBoxMW.Checked Then
                             DataGridView1.Rows(idx).Cells("mm").Value = Format(.PY_MW(i), nf)
                         End If
@@ -1166,8 +1165,8 @@ Public Class DCCharacterizationWizard
                             DataGridView1.Rows(idx).Cells("dens").Value = Format(.PY_SG(i), nf)
                         End If
                         If CheckBoxVISC.Checked Then
-                            DataGridView1.Rows(idx).Cells("visc1").Value = Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, .PY_V1(i)), nf)
-                            DataGridView1.Rows(idx).Cells("visc2").Value = Format(Conversor.ConverterDoSI(su.spmp_cinematic_viscosity, .PY_V2(i)), nf)
+                            DataGridView1.Rows(idx).Cells("visc1").Value = Format(Converter.ConvertFromSI(su.cinematic_viscosity, .PY_V1(i)), nf)
+                            DataGridView1.Rows(idx).Cells("visc2").Value = Format(Converter.ConvertFromSI(su.cinematic_viscosity, .PY_V2(i)), nf)
                         End If
                     Next
                 End With
@@ -1187,7 +1186,7 @@ Public Class DCCharacterizationWizard
         'save assay
 
         Try
-            cv = New DWSIM.SistemasDeUnidades.Conversor
+            cv = New DWSIM.SystemsOfUnits.Converter
             pxt = New ArrayList
             pyt = New ArrayList
             pyv1 = New ArrayList
@@ -1199,7 +1198,7 @@ Public Class DCCharacterizationWizard
                     If r.Cells("temp").Value <> Nothing Then
                         If Double.TryParse(r.Cells("temp").Value, New Double()) Then
                             pxt.Add(r.Cells(0).Value / 100)
-                            pyt.Add(Conversor.ConverterParaSI(su.spmp_temperature, r.Cells("temp").Value))
+                            pyt.Add(Converter.ConvertToSI(su.temperature, r.Cells("temp").Value))
                         End If
                     End If
                     If r.Cells("mm").Value <> Nothing Then
@@ -1210,12 +1209,12 @@ Public Class DCCharacterizationWizard
                     End If
                     If r.Cells("visc1").Value <> Nothing Then
                         If Double.TryParse(r.Cells("visc1").Value, New Double()) Then
-                            pyv1.Add(Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, r.Cells("visc1").Value))
+                            pyv1.Add(Converter.ConvertToSI(su.cinematic_viscosity, r.Cells("visc1").Value))
                         End If
                     End If
                     If r.Cells("visc2").Value <> Nothing Then
                         If Double.TryParse(r.Cells("visc2").Value, New Double()) Then
-                            pyv2.Add(Conversor.ConverterParaSI(su.spmp_cinematic_viscosity, r.Cells("visc2").Value))
+                            pyv2.Add(Converter.ConvertToSI(su.cinematic_viscosity, r.Cells("visc2").Value))
                         End If
                     End If
                 End If
@@ -1224,8 +1223,8 @@ Public Class DCCharacterizationWizard
             k_api = TextBoxKAPI.Text
             If TextBoxBulkMW.Text <> "" Then mw = TextBoxBulkMW.Text Else mw = 0.0#
             If TextBoxBulkD.Text <> "" Then api = TextBoxBulkD.Text Else api = 0.0#
-            vt1 = Conversor.ConverterParaSI(su.spmp_temperature, TextBoxVT1.Text)
-            vt2 = Conversor.ConverterParaSI(su.spmp_temperature, TextBoxVT2.Text)
+            vt1 = Converter.ConvertToSI(su.temperature, TextBoxVT1.Text)
+            vt2 = Converter.ConvertToSI(su.temperature, TextBoxVT2.Text)
             Dim myassay As Assay.Assay = New Assay.Assay(k_api, mw, api, vt1, vt2, ComboBoxDistMethod.SelectedIndex, ComboBoxBasis.SelectedItem.ToString, pxt, pyt, pym, pyd, pyv1, pyv2)
             myassay.CurveBasis = ComboBoxBasis.SelectedItem.ToString
             myassay.Name = "NBP_ASSAY_" & New Random().Next(10000).ToString

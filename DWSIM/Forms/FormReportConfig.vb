@@ -31,8 +31,8 @@ Public Class FormReportConfig
 
     Dim DT As New DataTable
     Dim filename As String
-    Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
-    Dim su As New DWSIM.SistemasDeUnidades.Unidades
+    Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+    Dim su As New DWSIM.SystemsOfUnits.Units
     Dim nf As String
 
     Private Sub FillDataTable()
@@ -49,7 +49,7 @@ Public Class FormReportConfig
         DT.Rows.Clear()
 
 
-        Dim baseobj As SimulationObjects_BaseClass
+        Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass
         Dim properties() As String
         Dim description As String
         Dim objtype As Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto
@@ -72,7 +72,7 @@ Public Class FormReportConfig
 
         For Each lvi As ListViewItem In Me.ListView1.Items
             baseobj = frm.Collections.ObjectCollection(lvi.Tag)
-            properties = baseobj.GetProperties(SimulationObjects_BaseClass.PropertyType.ALL)
+            properties = baseobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
             objtype = baseobj.GraphicObject.TipoObjeto
             description = DWSIM.App.GetLocalString(baseobj.GraphicObject.Description)
             If objtype = Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.MaterialStream Then
@@ -98,7 +98,7 @@ Public Class FormReportConfig
                     Next
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaMistura"), "", ""})
-                        For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Fases(0).Componentes.Values
+                        For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(0).Componentes.Values
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
@@ -113,8 +113,8 @@ Public Class FormReportConfig
                         End If
                     Next
                     If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaFaseVapor"), "", ""})
-                        For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Fases(2).Componentes.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseVapor"), "", ""})
+                        For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(2).Componentes.Values
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
@@ -129,8 +129,8 @@ Public Class FormReportConfig
                         End If
                     Next
                     If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), "", ""})
-                        For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Fases(1).Componentes.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
+                        For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(1).Componentes.Values
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
@@ -145,8 +145,8 @@ Public Class FormReportConfig
                         End If
                     Next
                     If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), "", ""})
-                        For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Fases(3).Componentes.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
+                        For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(3).Componentes.Values
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
@@ -161,8 +161,8 @@ Public Class FormReportConfig
                         End If
                     Next
                     If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), "", ""})
-                        For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Fases(4).Componentes.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
+                        For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(4).Componentes.Values
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
@@ -177,8 +177,8 @@ Public Class FormReportConfig
                         End If
                     Next
                     If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), "", ""})
-                        For Each subst As DWSIM.ClassesBasicasTermodinamica.Substancia In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Fases(6).Componentes.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
+                        For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In frm.Collections.CLCS_MaterialStreamCollection(lvi.Tag).Phases(6).Componentes.Values
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Nome), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
                         Next
                     End If
@@ -207,7 +207,7 @@ Public Class FormReportConfig
         KButton4.Enabled = Not DWSIM.App.IsRunningOnMono
         KButton5.Enabled = Not DWSIM.App.IsRunningOnMono
 
-        Dim obj As SimulationObjects_BaseClass
+        Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
         For Each n As TreeNode In Me.TreeViewObj.Nodes
             n.Nodes.Clear()

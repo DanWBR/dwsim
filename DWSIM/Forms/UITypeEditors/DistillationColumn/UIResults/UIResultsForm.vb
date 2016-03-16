@@ -25,14 +25,14 @@ Public Class UIResultsForm
     Public form As FormFlowsheet
 
     Dim loaded As Boolean = False
-    Dim cv As DWSIM.SistemasDeUnidades.Conversor
-    Dim su As DWSIM.SistemasDeUnidades.Unidades
+    Dim cv As DWSIM.SystemsOfUnits.Converter
+    Dim su As DWSIM.SystemsOfUnits.Units
     Dim nf As String
     Dim SelTab As Integer
 
     Private Sub UIResultsForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cv = New DWSIM.SistemasDeUnidades.Conversor()
+        cv = New DWSIM.SystemsOfUnits.Converter()
         dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
         nf = form.Options.NumberFormat
         su = form.Options.SelectedUnitSystem
@@ -58,17 +58,17 @@ Public Class UIResultsForm
         Dim cx0(nc)(), cxf(nc)(), cy0(nc)(), cyf(nc)(), cK0(nc)(), cKf(nc)(), cxm(nc)(), cym(nc)() As Double
 
         For i = 0 To ns
-            T0(i) = Format(Conversor.ConverterDoSI(su.spmp_temperature, dc.T0(i)), nf)
-            Tf(i) = Format(Conversor.ConverterDoSI(su.spmp_temperature, dc.Tf(i)), nf)
-            V0(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.V0(i)), nf)
-            Vf(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.Vf(i)), nf)
-            L0(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.L0(i)), nf)
-            Lf(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.Lf(i)), nf)
-            VSS0(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.VSS0(i)), nf)
-            VSSf(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.VSSf(i)), nf)
-            LSS0(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.LSS0(i)), nf)
-            LSSf(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.LSSf(i)), nf)
-            P0(i) = Format(Conversor.ConverterDoSI(su.spmp_pressure, dc.P0(i)), nf)
+            T0(i) = Format(Converter.ConvertFromSI(su.temperature, dc.T0(i)), nf)
+            Tf(i) = Format(Converter.ConvertFromSI(su.temperature, dc.Tf(i)), nf)
+            V0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.V0(i)), nf)
+            Vf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.Vf(i)), nf)
+            L0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.L0(i)), nf)
+            Lf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.Lf(i)), nf)
+            VSS0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.VSS0(i)), nf)
+            VSSf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.VSSf(i)), nf)
+            LSS0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.LSS0(i)), nf)
+            LSSf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.LSSf(i)), nf)
+            P0(i) = Format(Converter.ConvertFromSI(su.pressure, dc.P0(i)), nf)
             x0(i) = dc.x0(i)
             xf(i) = dc.xf(i)
             y0(i) = dc.y0(i)
@@ -102,8 +102,8 @@ Public Class UIResultsForm
         'Fill tables
         With TableTP
             .Columns.Clear()
-            .Columns.Add("0", "T0 (" & su.spmp_temperature & ")")
-            .Columns.Add("1", "Tf (" & su.spmp_temperature & ")")
+            .Columns.Add("0", "T0 (" & su.temperature & ")")
+            .Columns.Add("1", "Tf (" & su.temperature & ")")
             .Rows.Clear()
             For i = 0 To ns
                 .Rows.Add(New Object() {T0(i), Tf(i)})
@@ -112,10 +112,10 @@ Public Class UIResultsForm
         End With
         With TableVL
             .Columns.Clear()
-            .Columns.Add("0", "L0 (" & su.spmp_molarflow & ")")
-            .Columns.Add("1", "Lf (" & su.spmp_molarflow & ")")
-            .Columns.Add("2", "V0 (" & su.spmp_molarflow & ")")
-            .Columns.Add("3", "Vf (" & su.spmp_molarflow & ")")
+            .Columns.Add("0", "L0 (" & su.molarflow & ")")
+            .Columns.Add("1", "Lf (" & su.molarflow & ")")
+            .Columns.Add("2", "V0 (" & su.molarflow & ")")
+            .Columns.Add("3", "Vf (" & su.molarflow & ")")
             .Rows.Clear()
             For i = 0 To ns
                 .Rows.Add(New Object() {L0(i), Lf(i), V0(i), Vf(i)})
@@ -125,10 +125,10 @@ Public Class UIResultsForm
         With DataGridView4
             .Columns.Clear()
             For i = 0 To nc
-                .Columns.Add("[V]" & i, "[V] " & DWSIM.App.GetComponentName(dc.compids(i)) & " (" & su.spmp_molarfraction & ")")
+                .Columns.Add("[V]" & i, "[V] " & DWSIM.App.GetComponentName(dc.compids(i)) & " (" & su.molarfraction & ")")
             Next
             For i = 0 To nc
-                .Columns.Add("[L]" & i, "[L] " & DWSIM.App.GetComponentName(dc.compids(i)) & " (" & su.spmp_molarfraction & ")")
+                .Columns.Add("[L]" & i, "[L] " & DWSIM.App.GetComponentName(dc.compids(i)) & " (" & su.molarfraction & ")")
             Next
             .Rows.Clear()
             For i = 0 To ns
@@ -150,10 +150,10 @@ Public Class UIResultsForm
         With TableCP
             .Columns.Clear()
             For i = 0 To nc
-                .Columns.Add("[V]" & i, "[V] " & DWSIM.App.GetComponentName(dc.compids(i)) & " (" & su.spmp_molarflow & ")")
+                .Columns.Add("[V]" & i, "[V] " & DWSIM.App.GetComponentName(dc.compids(i)) & " (" & su.molarflow & ")")
             Next
             For i = 0 To nc
-                .Columns.Add("[L]" & i, "[L] " & DWSIM.App.GetComponentName(dc.compids(i)) & " (" & su.spmp_molarflow & ")")
+                .Columns.Add("[L]" & i, "[L] " & DWSIM.App.GetComponentName(dc.compids(i)) & " (" & su.molarflow & ")")
             Next
             For i = 0 To nc
                 .Columns.Add("[Kval]" & i, "[Kval] " & DWSIM.App.GetComponentName(dc.compids(i)))
@@ -181,7 +181,7 @@ Public Class UIResultsForm
     End Sub
     Private Sub FillGraphs()
 
-        cv = New DWSIM.SistemasDeUnidades.Conversor()
+        cv = New DWSIM.SystemsOfUnits.Converter()
 
         Dim ns As Integer = dc.NumberOfStages - 1
         Dim nc As Integer = UBound(dc.x0(0))
@@ -195,17 +195,17 @@ Public Class UIResultsForm
             py(i) = i + 1
         Next
         For i = 0 To ns
-            T0(i) = Format(Conversor.ConverterDoSI(su.spmp_temperature, dc.T0(i)), nf)
-            Tf(i) = Format(Conversor.ConverterDoSI(su.spmp_temperature, dc.Tf(i)), nf)
-            V0(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.V0(i)), nf)
-            Vf(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.Vf(i)), nf)
-            L0(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.L0(i)), nf)
-            Lf(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.Lf(i)), nf)
-            VSS0(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.VSS0(i)), nf)
-            VSSf(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.VSSf(i)), nf)
-            LSS0(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.LSS0(i)), nf)
-            LSSf(i) = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.LSSf(i)), nf)
-            P0(i) = Format(Conversor.ConverterDoSI(su.spmp_pressure, dc.P0(i)), nf)
+            T0(i) = Format(Converter.ConvertFromSI(su.temperature, dc.T0(i)), nf)
+            Tf(i) = Format(Converter.ConvertFromSI(su.temperature, dc.Tf(i)), nf)
+            V0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.V0(i)), nf)
+            Vf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.Vf(i)), nf)
+            L0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.L0(i)), nf)
+            Lf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.Lf(i)), nf)
+            VSS0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.VSS0(i)), nf)
+            VSSf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.VSSf(i)), nf)
+            LSS0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.LSS0(i)), nf)
+            LSSf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.LSSf(i)), nf)
+            P0(i) = Format(Converter.ConvertFromSI(su.pressure, dc.P0(i)), nf)
             x0(i) = dc.x0(i)
             xf(i) = dc.xf(i)
             y0(i) = dc.y0(i)
@@ -267,9 +267,9 @@ Public Class UIResultsForm
                 .Position = ZedGraph.LegendPos.BottomCenter
             End With
             .Title.IsVisible = False
-            .XAxis.Title.Text = "T (" & su.spmp_temperature & ")"
+            .XAxis.Title.Text = "T (" & su.temperature & ")"
             .X2Axis.IsVisible = True
-            .X2Axis.Title.Text = "P (" & su.spmp_pressure & ")"
+            .X2Axis.Title.Text = "P (" & su.pressure & ")"
             .YAxis.Title.Text = DWSIM.App.GetLocalString("DCStage")
             .YAxis.Scale.IsReverse = True
             .AxisChange(Me.CreateGraphics)
@@ -300,7 +300,7 @@ Public Class UIResultsForm
                 .Position = ZedGraph.LegendPos.BottomCenter
             End With
             .Title.IsVisible = False
-            .XAxis.Title.Text = DWSIM.App.GetLocalString("FraoMolar") & " (" & su.spmp_molarfraction & ")"
+            .XAxis.Title.Text = DWSIM.App.GetLocalString("FraoMolar") & " (" & su.molarfraction & ")"
             .YAxis.Title.Text = DWSIM.App.GetLocalString("DCStage")
             .YAxis.Scale.IsReverse = True
             .AxisChange(Me.CreateGraphics)
@@ -339,7 +339,7 @@ Public Class UIResultsForm
                 .Position = ZedGraph.LegendPos.BottomCenter
             End With
             .Title.IsVisible = False
-            .XAxis.Title.Text = DWSIM.App.GetLocalString("DCFlows") & " (" & su.spmp_molarflow & ")"
+            .XAxis.Title.Text = DWSIM.App.GetLocalString("DCFlows") & " (" & su.molarflow & ")"
             .YAxis.Title.Text = DWSIM.App.GetLocalString("DCStage")
             .YAxis.Scale.IsReverse = True
             .AxisChange(Me.CreateGraphics)
@@ -405,7 +405,7 @@ Public Class UIResultsForm
                 .Position = ZedGraph.LegendPos.BottomCenter
             End With
             .Title.IsVisible = False
-            .XAxis.Title.Text = DWSIM.App.GetLocalString("DCFlows") & " (" & su.spmp_molarflow & ")"
+            .XAxis.Title.Text = DWSIM.App.GetLocalString("DCFlows") & " (" & su.molarflow & ")"
             .YAxis.Title.Text = DWSIM.App.GetLocalString("DCStage")
             .YAxis.Scale.IsReverse = True
             .YAxis.Title.Text = DWSIM.App.GetLocalString("DCStage")
@@ -413,10 +413,10 @@ Public Class UIResultsForm
             If CheckBox3.Checked And CheckBox4.Checked Then
                 .X2Axis.IsVisible = True
                 .X2Axis.Title.Text = "K"
-                .XAxis.Title.Text = DWSIM.App.GetLocalString("DCFlows") & " (" & su.spmp_molarflow & ")"
+                .XAxis.Title.Text = DWSIM.App.GetLocalString("DCFlows") & " (" & su.molarflow & ")"
             ElseIf CheckBox3.Checked Then
                 .X2Axis.IsVisible = False
-                .XAxis.Title.Text = DWSIM.App.GetLocalString("DCFlows") & " (" & su.spmp_molarflow & ")"
+                .XAxis.Title.Text = DWSIM.App.GetLocalString("DCFlows") & " (" & su.molarflow & ")"
             ElseIf CheckBox4.Checked Then
                 .X2Axis.IsVisible = False
                 .XAxis.Title.Text = "K"

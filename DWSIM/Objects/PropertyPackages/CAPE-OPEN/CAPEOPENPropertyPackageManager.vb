@@ -73,9 +73,6 @@ Public Class CAPEOPENPropertyPackageManager
             Case "Raoult's Law"
                 pp = New RaoultPropertyPackage(True)
                 pp.ComponentDescription = DWSIM.App.GetLocalString("DescRPP")
-            Case "COSMO-SAC (JCOSMO)"
-                pp = New COSMOSACPropertyPackage(True)
-                pp.ComponentDescription = DWSIM.App.GetLocalString("DescCSPP")
             Case "IAPWS-IF97 Steam Tables"
                 pp = New SteamTablesPropertyPackage(True)
                 pp.ComponentDescription = DWSIM.App.GetLocalString("DescSteamTablesPP")

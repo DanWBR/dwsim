@@ -113,9 +113,9 @@ Namespace DWSIM.Databases
 
         End Sub
 
-        Public Function Transfer(Optional ByVal CompName As String = "") As ClassesBasicasTermodinamica.ConstantProperties()
+        Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
-            Dim cp As ClassesBasicasTermodinamica.ConstantProperties
+            Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New ArrayList()
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
@@ -124,7 +124,7 @@ Namespace DWSIM.Databases
             Dim modf As New Global.DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
 
             For Each node As XmlNode In xmldoc.ChildNodes(0).ChildNodes
-                cp = New ClassesBasicasTermodinamica.ConstantProperties
+                cp = New Thermodynamics.BaseClasses.ConstantProperties
                 With cp
                     .CurrentDB = "ChemSep"
                     .OriginalDB = "ChemSep"
@@ -474,7 +474,7 @@ Namespace DWSIM.Databases
 
             Next
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties"))
+            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
 
         End Function
 
@@ -504,9 +504,9 @@ Namespace DWSIM.Databases
 
         End Sub
 
-        Public Function Transfer(Optional ByVal CompName As String = "") As ClassesBasicasTermodinamica.ConstantProperties()
+        Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
-            Dim cp As ClassesBasicasTermodinamica.ConstantProperties
+            Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New ArrayList()
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
@@ -515,7 +515,7 @@ Namespace DWSIM.Databases
             Dim modf As New SimulationObjects.PropertyPackages.Auxiliary.Modfac
 
             For Each node As XmlNode In xmldoc.ChildNodes(1)
-                cp = New ClassesBasicasTermodinamica.ConstantProperties
+                cp = New Thermodynamics.BaseClasses.ConstantProperties
                 With cp
                     .OriginalDB = "DWSIM"
                     For Each node2 As XmlNode In node.ChildNodes
@@ -650,7 +650,7 @@ Namespace DWSIM.Databases
             unif = Nothing
             modf = Nothing
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties"))
+            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
 
         End Function
 
@@ -680,15 +680,15 @@ Namespace DWSIM.Databases
 
         End Sub
 
-        Public Function Transfer(Optional ByVal CompName As String = "") As ClassesBasicasTermodinamica.ConstantProperties()
+        Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
-            Dim cp As ClassesBasicasTermodinamica.ConstantProperties
+            Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New ArrayList()
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
             Dim i As Integer = 100000
             For Each node As XmlNode In xmldoc.ChildNodes(1)
-                cp = New ClassesBasicasTermodinamica.ConstantProperties
+                cp = New Thermodynamics.BaseClasses.ConstantProperties
                 With cp
                     .OriginalDB = "Biodiesel"
                     For Each node2 As XmlNode In node.ChildNodes
@@ -771,7 +771,7 @@ Namespace DWSIM.Databases
                 i += 1
             Next
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties"))
+            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
 
         End Function
 
@@ -795,7 +795,7 @@ Namespace DWSIM.Databases
 
         End Sub
 
-        Public Shared Sub AddCompounds(ByVal comps() As ClassesBasicasTermodinamica.ConstantProperties, ByVal xmlpath As String, ByVal replace As Boolean)
+        Public Shared Sub AddCompounds(ByVal comps() As Thermodynamics.BaseClasses.ConstantProperties, ByVal xmlpath As String, ByVal replace As Boolean)
 
             Dim xmldoc As XmlDocument
             Dim reader As XmlReader = XmlReader.Create(xmlpath)
@@ -813,7 +813,7 @@ Namespace DWSIM.Databases
             xmldoc = New XmlDocument
             xmldoc.Load(reader)
 
-            For Each comp As ClassesBasicasTermodinamica.ConstantProperties In comps
+            For Each comp As Thermodynamics.BaseClasses.ConstantProperties In comps
                 Dim index As Integer = -1
                 Dim i As Integer = 0
                 If xmldoc.ChildNodes.Count > 0 Then
@@ -1006,7 +1006,7 @@ Namespace DWSIM.Databases
 
         End Sub
 
-        Public Shared Function ReadComps(ByVal xmlpath As String) As ClassesBasicasTermodinamica.ConstantProperties()
+        Public Shared Function ReadComps(ByVal xmlpath As String) As Thermodynamics.BaseClasses.ConstantProperties()
 
             Dim xmldoc As XmlDocument
             Dim reader As XmlReader = XmlReader.Create(xmlpath)
@@ -1015,13 +1015,13 @@ Namespace DWSIM.Databases
             xmldoc = New XmlDocument
             xmldoc.Load(reader)
 
-            Dim cp As ClassesBasicasTermodinamica.ConstantProperties
+            Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New ArrayList()
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
             For Each node As XmlNode In xmldoc.ChildNodes(1)
-                cp = New ClassesBasicasTermodinamica.ConstantProperties
+                cp = New Thermodynamics.BaseClasses.ConstantProperties
                 With cp
                     .OriginalDB = "User"
                     .CurrentDB = "User"
@@ -1256,7 +1256,7 @@ Namespace DWSIM.Databases
             reader.Close()
             reader = Nothing
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties"))
+            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
 
         End Function
 
@@ -1284,7 +1284,7 @@ Namespace DWSIM.Databases
 
         End Sub
 
-        Public Shared Sub AddInteractionParameters(ByVal IPDS() As ClassesBasicasTermodinamica.InteractionParameter, ByVal xmlpath As String, ByVal replace As Boolean)
+        Public Shared Sub AddInteractionParameters(ByVal IPDS() As Thermodynamics.BaseClasses.InteractionParameter, ByVal xmlpath As String, ByVal replace As Boolean)
             Dim xmldoc As XmlDocument
             Dim reader As XmlReader = XmlReader.Create(xmlpath)
             Try
@@ -1302,7 +1302,7 @@ Namespace DWSIM.Databases
             xmldoc = New XmlDocument
             xmldoc.Load(reader)
 
-            For Each IP As ClassesBasicasTermodinamica.InteractionParameter In IPDS
+            For Each IP As Thermodynamics.BaseClasses.InteractionParameter In IPDS
                 Dim index As Integer = -1
                 Dim i As Integer = 0
                 Dim C1, C2, M, S1, S2 As String
@@ -1359,7 +1359,7 @@ Namespace DWSIM.Databases
             xmldoc = Nothing
         End Sub
 
-        Public Shared Function ReadInteractions(ByVal xmlpath As String, ByVal Model As String) As ClassesBasicasTermodinamica.InteractionParameter()
+        Public Shared Function ReadInteractions(ByVal xmlpath As String, ByVal Model As String) As Thermodynamics.BaseClasses.InteractionParameter()
 
             Dim xmldoc As XmlDocument
             Dim reader As XmlReader = XmlReader.Create(xmlpath)
@@ -1368,12 +1368,12 @@ Namespace DWSIM.Databases
             xmldoc = New XmlDocument
             xmldoc.Load(reader)
 
-            Dim IP As ClassesBasicasTermodinamica.InteractionParameter
+            Dim IP As Thermodynamics.BaseClasses.InteractionParameter
             Dim IPA As New ArrayList()
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
             For Each node As XmlNode In xmldoc.ChildNodes(1)
-                IP = New ClassesBasicasTermodinamica.InteractionParameter
+                IP = New Thermodynamics.BaseClasses.InteractionParameter
                 With IP
                     For Each node2 As XmlNode In node.ChildNodes
                         Select Case node2.Name
@@ -1408,25 +1408,25 @@ Namespace DWSIM.Databases
             reader.Close()
             reader = Nothing
 
-            Return IPA.ToArray(Type.GetType("DWSIM.DWSIM.ClassesBasicasTermodinamica.InteractionParameter"))
+            Return IPA.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.InteractionParameter"))
 
         End Function
 
-        Public Shared Function GetStoredIPsets(ByVal comp1 As String, ByVal comp2 As String, ByVal model As String) As List(Of ClassesBasicasTermodinamica.InteractionParameter)
+        Public Shared Function GetStoredIPsets(ByVal comp1 As String, ByVal comp2 As String, ByVal model As String) As List(Of Thermodynamics.BaseClasses.InteractionParameter)
 
-            Dim results As New List(Of ClassesBasicasTermodinamica.InteractionParameter)
+            Dim results As New List(Of Thermodynamics.BaseClasses.InteractionParameter)
 
             If Not My.Settings.UserInteractionsDatabases Is Nothing Then
                 For Each IPDBPath As String In My.Settings.UserInteractionsDatabases
-                    Dim Interactions As ClassesBasicasTermodinamica.InteractionParameter()
+                    Dim Interactions As Thermodynamics.BaseClasses.InteractionParameter()
                     Try
                         Interactions = UserIPDB.ReadInteractions(IPDBPath, model)
-                        For Each ipset As ClassesBasicasTermodinamica.InteractionParameter In Interactions
+                        For Each ipset As Thermodynamics.BaseClasses.InteractionParameter In Interactions
                             If ipset.Comp1 = comp1 And ipset.Comp2 = comp2 Then
                                 results.Add(ipset)
                             ElseIf ipset.Comp1 = comp2 And ipset.Comp2 = comp1 Then
                                 'invert parameters
-                                Dim ipset2 As ClassesBasicasTermodinamica.InteractionParameter = ipset.Clone
+                                Dim ipset2 As Thermodynamics.BaseClasses.InteractionParameter = ipset.Clone
                                 Dim tmpval As Object
                                 With ipset2
                                     .Comp1 = comp2
@@ -1488,15 +1488,15 @@ Namespace DWSIM.Databases
 
         End Sub
 
-        Public Function Transfer(Optional ByVal CompName As String = "") As ClassesBasicasTermodinamica.ConstantProperties()
+        Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
-            Dim cp As ClassesBasicasTermodinamica.ConstantProperties
+            Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New ArrayList()
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
             Dim i As Integer = 200000
             For Each node As XmlNode In xmldoc.ChildNodes(1)
-                cp = New ClassesBasicasTermodinamica.ConstantProperties
+                cp = New Thermodynamics.BaseClasses.ConstantProperties
                 With cp
                     .OriginalDB = "Electrolytes"
                     For Each node2 As XmlNode In node.ChildNodes
@@ -1582,7 +1582,7 @@ Namespace DWSIM.Databases
                 i += 1
             Next
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties"))
+            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
 
         End Function
 
@@ -1602,13 +1602,13 @@ Namespace DWSIM.Databases
 
         End Sub
 
-        Public Function Transfer() As ClassesBasicasTermodinamica.ConstantProperties()
+        Public Function Transfer() As Thermodynamics.BaseClasses.ConstantProperties()
 
-            Dim cp As ClassesBasicasTermodinamica.ConstantProperties
+            Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New ArrayList()
             Dim i As Integer = 300000
             For Each s As String In text
-                cp = New ClassesBasicasTermodinamica.ConstantProperties
+                cp = New Thermodynamics.BaseClasses.ConstantProperties
                 With cp
                     .OriginalDB = "CoolProp"
                     .Name = s ' & " [CoolProp]"
@@ -1629,7 +1629,7 @@ Namespace DWSIM.Databases
                 i += 1
             Next
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.ClassesBasicasTermodinamica.ConstantProperties"))
+            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
 
         End Function
 

@@ -33,35 +33,35 @@ Public Class UIInitialEstimatesEditorForm
     Dim _ies As InitialEstimates
 
     Dim loaded As Boolean = False
-    Dim cvt As DWSIM.SistemasDeUnidades.Conversor
-    Dim su As DWSIM.SistemasDeUnidades.Unidades
+    Dim cvt As DWSIM.SystemsOfUnits.Converter
+    Dim su As DWSIM.SystemsOfUnits.Units
     Dim nf As String
 
     Private Sub UIInitialEstimatesEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         pathsep = Path.DirectorySeparatorChar
 
-        cvt = New DWSIM.SistemasDeUnidades.Conversor()
+        cvt = New DWSIM.SystemsOfUnits.Converter()
         form = My.Application.ActiveSimulation
         dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
         nf = form.Options.NumberFormat
         su = form.Options.SelectedUnitSystem
 
-        dgvv.Columns(1).HeaderText += " (" & form.Options.SelectedUnitSystem.spmp_temperature & ")"
-        dgvv.Columns(2).HeaderText += " (" & form.Options.SelectedUnitSystem.spmp_molarflow & ")"
-        dgvv.Columns(3).HeaderText += " (" & form.Options.SelectedUnitSystem.spmp_molarflow & ")"
+        dgvv.Columns(1).HeaderText += " (" & form.Options.SelectedUnitSystem.temperature & ")"
+        dgvv.Columns(2).HeaderText += " (" & form.Options.SelectedUnitSystem.molarflow & ")"
+        dgvv.Columns(3).HeaderText += " (" & form.Options.SelectedUnitSystem.molarflow & ")"
 
         dgvv.Rows.Clear()
         Dim i As Integer = 0
         Dim count As Integer = dc.Stages.Count
         For Each st As Stage In dc.Stages
-            dgvv.Rows.Add(New Object() {dc.Stages(i).Name, Format(Conversor.ConverterDoSI(su.spmp_temperature, dc.InitialEstimates.StageTemps(i).Value), nf), Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.InitialEstimates.VapMolarFlows(i).Value), nf), Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.InitialEstimates.LiqMolarFlows(i).Value), nf)})
+            dgvv.Rows.Add(New Object() {dc.Stages(i).Name, Format(Converter.ConvertFromSI(su.temperature, dc.InitialEstimates.StageTemps(i).Value), nf), Format(Converter.ConvertFromSI(su.molarflow, dc.InitialEstimates.VapMolarFlows(i).Value), nf), Format(Converter.ConvertFromSI(su.molarflow, dc.InitialEstimates.LiqMolarFlows(i).Value), nf)})
             dgvv.Rows(dgvv.Rows.Count - 1).HeaderCell.Value = i.ToString()
             i += 1
         Next
 
         Dim j As Integer = 0
-        For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In form.Options.SelectedComponents.Values
+        For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
             dgvcl.Columns.Add(cp.Name, DWSIM.App.GetComponentName(cp.Name))
             dgvcv.Columns.Add(cp.Name, DWSIM.App.GetComponentName(cp.Name))
             j = j + 1
@@ -81,7 +81,7 @@ Public Class UIInitialEstimatesEditorForm
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name
-            For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In form.Options.SelectedComponents.Values
+            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
                 ob(j) = Format(dc.InitialEstimates.LiqCompositions(i)(cp.Name).Value, nf)
                 j = j + 1
             Next
@@ -94,7 +94,7 @@ Public Class UIInitialEstimatesEditorForm
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name
-            For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In form.Options.SelectedComponents.Values
+            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
                 ob(j) = Format(dc.InitialEstimates.VapCompositions(i)(cp.Name).Value, nf)
                 j = j + 1
             Next
@@ -219,11 +219,11 @@ Public Class UIInitialEstimatesEditorForm
             Dim count As Integer = dc.Stages.Count
             Select Case e.ColumnIndex
                 Case 1
-                    dc.InitialEstimates.StageTemps(e.RowIndex).Value = Conversor.ConverterParaSI(su.spmp_temperature, value)
+                    dc.InitialEstimates.StageTemps(e.RowIndex).Value = Converter.ConvertToSI(su.temperature, value)
                 Case 2
-                    dc.InitialEstimates.VapMolarFlows(e.RowIndex).Value = Conversor.ConverterParaSI(su.spmp_molarflow, value)
+                    dc.InitialEstimates.VapMolarFlows(e.RowIndex).Value = Converter.ConvertToSI(su.molarflow, value)
                 Case 3
-                    dc.InitialEstimates.LiqMolarFlows(e.RowIndex).Value = Conversor.ConverterParaSI(su.spmp_molarflow, value)
+                    dc.InitialEstimates.LiqMolarFlows(e.RowIndex).Value = Converter.ConvertToSI(su.molarflow, value)
             End Select
         End If
     End Sub
@@ -291,9 +291,9 @@ Public Class UIInitialEstimatesEditorForm
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         Dim i, j As Integer
         For i = 0 To dc.NumberOfStages - 1
-            dgvv.Rows(i).Cells(1).Value = Format(Conversor.ConverterDoSI(su.spmp_temperature, dc.Tf(i)), nf)
-            dgvv.Rows(i).Cells(2).Value = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.Vf(i)), nf)
-            dgvv.Rows(i).Cells(3).Value = Format(Conversor.ConverterDoSI(su.spmp_molarflow, dc.Lf(i)), nf)
+            dgvv.Rows(i).Cells(1).Value = Format(Converter.ConvertFromSI(su.temperature, dc.Tf(i)), nf)
+            dgvv.Rows(i).Cells(2).Value = Format(Converter.ConvertFromSI(su.molarflow, dc.Vf(i)), nf)
+            dgvv.Rows(i).Cells(3).Value = Format(Converter.ConvertFromSI(su.molarflow, dc.Lf(i)), nf)
             For j = 0 To dc.compids.Count - 1
                 dgvcl.Rows(i).Cells(j + 1).Value = Format(dc.xf(i)(j), nf)
                 dgvcv.Rows(i).Cells(j + 1).Value = Format(dc.yf(i)(j), nf)
@@ -305,20 +305,20 @@ Public Class UIInitialEstimatesEditorForm
 
         loaded = False
 
-        cvt = New DWSIM.SistemasDeUnidades.Conversor()
+        cvt = New DWSIM.SystemsOfUnits.Converter()
         form = My.Application.ActiveSimulation
         dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
         nf = form.Options.NumberFormat
         su = form.Options.SelectedUnitSystem
 
-        'dgvv.Columns(1).HeaderText += " (" & form.Options.SelectedUnitSystem.spmp_temperature & ")"
-        'dgvv.Columns(2).HeaderText += " (" & form.Options.SelectedUnitSystem.spmp_molarflow & ")"
+        'dgvv.Columns(1).HeaderText += " (" & form.Options.SelectedUnitSystem.temperature & ")"
+        'dgvv.Columns(2).HeaderText += " (" & form.Options.SelectedUnitSystem.molarflow & ")"
 
         dgvv.Rows.Clear()
         Dim i As Integer = 0
         Dim count As Integer = dc.Stages.Count
         For Each st As Stage In dc.Stages
-            dgvv.Rows.Add(New Object() {dc.Stages(i).Name, Format(Conversor.ConverterDoSI(su.spmp_temperature, _ies.StageTemps(i).Value), nf), Format(Conversor.ConverterDoSI(su.spmp_molarflow, _ies.VapMolarFlows(i).Value), nf), Format(Conversor.ConverterDoSI(su.spmp_molarflow, _ies.LiqMolarFlows(i).Value), nf)})
+            dgvv.Rows.Add(New Object() {dc.Stages(i).Name, Format(Converter.ConvertFromSI(su.temperature, _ies.StageTemps(i).Value), nf), Format(Converter.ConvertFromSI(su.molarflow, _ies.VapMolarFlows(i).Value), nf), Format(Converter.ConvertFromSI(su.molarflow, _ies.LiqMolarFlows(i).Value), nf)})
             dgvv.Rows(dgvv.Rows.Count - 1).HeaderCell.Value = i
             dgvv_CellValueChanged(Me, New DataGridViewCellEventArgs(1, dgvcv.Rows.Count - 1))
             dgvv_CellValueChanged(Me, New DataGridViewCellEventArgs(2, dgvcv.Rows.Count - 1))
@@ -327,7 +327,7 @@ Public Class UIInitialEstimatesEditorForm
         Next
 
         Dim j As Integer = 0
-        For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In form.Options.SelectedComponents.Values
+        For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
             dgvcl.Columns.Add(cp.Name, DWSIM.App.GetComponentName(cp.Name))
             dgvcv.Columns.Add(cp.Name, DWSIM.App.GetComponentName(cp.Name))
             j = j + 1
@@ -338,7 +338,7 @@ Public Class UIInitialEstimatesEditorForm
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name
-            For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In form.Options.SelectedComponents.Values
+            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
                 ob(j) = Format(_ies.LiqCompositions(i)(cp.Name).Value, nf)
                 j = j + 1
             Next
@@ -354,7 +354,7 @@ Public Class UIInitialEstimatesEditorForm
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name
-            For Each cp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties In form.Options.SelectedComponents.Values
+            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
                 ob(j) = Format(_ies.VapCompositions(i)(cp.Name).Value, nf)
                 j = j + 1
             Next

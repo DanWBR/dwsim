@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DWSIM_Reaction_Data>
   <Reaction>
-    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Reaction</Type>
     <StoichBalance>0</StoichBalance>
     <ReactionHeatCO>0</ReactionHeatCO>
     <ReactionHeat>635324</ReactionHeat>
@@ -38,7 +38,7 @@
     </Compounds>
   </Reaction>
   <Reaction>
-    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Reaction</Type>
     <StoichBalance>0</StoichBalance>
     <ReactionHeatCO>0</ReactionHeatCO>
     <ReactionHeat>0</ReactionHeat>
@@ -74,7 +74,7 @@
     </Compounds>
   </Reaction>
   <Reaction>
-    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Reaction</Type>
     <StoichBalance>0</StoichBalance>
     <ReactionHeatCO>0</ReactionHeatCO>
     <ReactionHeat>-86612</ReactionHeat>
@@ -110,7 +110,7 @@
     </Compounds>
   </Reaction>
   <Reaction>
-    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Reaction</Type>
     <StoichBalance>0</StoichBalance>
     <ReactionHeatCO>0</ReactionHeatCO>
     <ReactionHeat>-195916</ReactionHeat>
@@ -147,7 +147,7 @@
     </Compounds>
   </Reaction>
   <Reaction>
-    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Reaction</Type>
     <StoichBalance>0</StoichBalance>
     <ReactionHeatCO>0</ReactionHeatCO>
     <ReactionHeat>20630</ReactionHeat>
@@ -183,7 +183,7 @@
     </Compounds>
   </Reaction>
   <Reaction>
-    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Reaction</Type>
     <StoichBalance>0</StoichBalance>
     <ReactionHeatCO>0</ReactionHeatCO>
     <ReactionHeat>0</ReactionHeat>
@@ -219,7 +219,7 @@
     </Compounds>
   </Reaction>
   <Reaction>
-    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Reaction</Type>
     <StoichBalance>0</StoichBalance>
     <ReactionHeatCO>0</ReactionHeatCO>
     <ReactionHeat>11820</ReactionHeat>
@@ -255,7 +255,7 @@
     </Compounds>
   </Reaction>
   <Reaction>
-    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Reaction</Type>
     <StoichBalance>0</StoichBalance>
     <ReactionHeatCO>0</ReactionHeatCO>
     <ReactionHeat>-177870.348392</ReactionHeat>

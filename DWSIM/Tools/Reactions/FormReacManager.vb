@@ -15,7 +15,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization.Formatters
 Imports System.Globalization
@@ -26,7 +26,7 @@ Public Class FormReacManager
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Protected frmchild As FormFlowsheet
-    Public col As DWSIM.ClassesBasicasTermodinamica.ReactionsCollection
+    Public col As DWSIM.Thermodynamics.BaseClasses.ReactionsCollection
 
     Sub New()
 
@@ -120,7 +120,7 @@ Public Class FormReacManager
 
         Dim myStream As System.IO.FileStream
         col = New ReactionsCollection
-        col.Collection = New DWSIM.ClassesBasicasTermodinamica.Reaction(frmchild.Options.Reactions.Count - 1) {}
+        col.Collection = New DWSIM.Thermodynamics.BaseClasses.Reaction(frmchild.Options.Reactions.Count - 1) {}
         frmchild.Options.Reactions.Values.CopyTo(col.Collection, 0)
 
         If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
@@ -221,7 +221,7 @@ Public Class FormReacManager
                     Dim res As MsgBoxResult = MessageBox.Show(str + str2 + str3, DWSIM.App.GetLocalString("Aviso"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
                     If res = MsgBoxResult.Yes Then
                         'add Components
-                        Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+                        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
                         i = 0
                         Do
                             If Not Me.frmchild.Options.SelectedComponents.ContainsKey(carray(i)) Then

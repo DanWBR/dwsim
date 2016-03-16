@@ -22,7 +22,7 @@
 Imports ExcelDna.Integration
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Reflection
 Imports System.IO
 
@@ -44,8 +44,8 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
-                    phase.Componentes.Add(compound, New DWSIM.ClassesBasicasTermodinamica.Substancia(compound, ""))
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                    phase.Componentes.Add(compound, New DWSIM.Thermodynamics.BaseClasses.Compound(compound, ""))
                     phase.Componentes(compound).ConstantProperties = pp._availablecomps(compound)
                 Next
 
@@ -93,8 +93,8 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
-                    phase.Componentes.Add(compound, New DWSIM.ClassesBasicasTermodinamica.Substancia(compound, ""))
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                    phase.Componentes.Add(compound, New DWSIM.Thermodynamics.BaseClasses.Compound(compound, ""))
                     phase.Componentes(compound).ConstantProperties = pp._availablecomps(compound)
                 Next
 
@@ -436,7 +436,7 @@ Namespace Interfaces
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
             If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-            Dim iplist As List(Of DWSIM.ClassesBasicasTermodinamica.InteractionParameter) = DWSIM.Databases.UserIPDB.GetStoredIPsets(Compound1, Compound2, Model)
+            Dim iplist As List(Of DWSIM.Thermodynamics.BaseClasses.InteractionParameter) = DWSIM.Databases.UserIPDB.GetStoredIPsets(Compound1, Compound2, Model)
 
             Dim ipdata(iplist.Count, 9) As Object
 
@@ -614,9 +614,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -627,14 +627,14 @@ Namespace Interfaces
                     pp._availablecomps.Remove(c)
                 Next
 
-                Dim dwp As PropertyPackages.Fase = PropertyPackages.Fase.Mixture
+                Dim dwp As PropertyPackages.Phase = PropertyPackages.Phase.Mixture
                 For Each pi As PropertyPackages.PhaseInfo In pp.PhaseMappings.Values
                     If pi.PhaseLabel = phaselabel Then dwp = pi.DWPhaseID
                 Next
 
                 ms.SetPhaseComposition(molefractions, dwp)
-                ms.Fases(0).SPMProperties.temperature = temperature
-                ms.Fases(0).SPMProperties.pressure = pressure
+                ms.Phases(0).Properties.temperature = temperature
+                ms.Phases(0).Properties.pressure = pressure
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -730,9 +730,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -744,8 +744,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(0).SPMProperties.temperature = T
-                ms.Fases(0).SPMProperties.pressure = P
+                ms.Phases(0).Properties.temperature = T
+                ms.Phases(0).Properties.pressure = P
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -938,9 +938,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -952,8 +952,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(0).SPMProperties.enthalpy = H
-                ms.Fases(0).SPMProperties.pressure = P
+                ms.Phases(0).Properties.enthalpy = H
+                ms.Phases(0).Properties.pressure = P
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -969,7 +969,7 @@ Namespace Interfaces
                 Next
                 pp._tpcompids = comps
 
-                ms.Fases(0).SPMProperties.temperature = InitialEstimate
+                ms.Phases(0).Properties.temperature = InitialEstimate
 
                 If My.Settings.EnableGPUProcessing Then
                     DWSIM.App.InitComputeDevice()
@@ -1007,7 +1007,7 @@ Namespace Interfaces
                     i += 1
                 Next
 
-                fractions(compounds.Length + 2, 0) = ms.Fases(0).SPMProperties.temperature.GetValueOrDefault
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.temperature.GetValueOrDefault
 
                 If TypeOf proppack Is String Then
                     pp.Dispose()
@@ -1062,9 +1062,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1076,8 +1076,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(0).SPMProperties.entropy = S
-                ms.Fases(0).SPMProperties.pressure = P
+                ms.Phases(0).Properties.entropy = S
+                ms.Phases(0).Properties.pressure = P
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -1093,7 +1093,7 @@ Namespace Interfaces
                 Next
                 pp._tpcompids = comps
 
-                ms.Fases(0).SPMProperties.temperature = InitialEstimate
+                ms.Phases(0).Properties.temperature = InitialEstimate
 
                 If My.Settings.EnableGPUProcessing Then
                     DWSIM.App.InitComputeDevice()
@@ -1131,7 +1131,7 @@ Namespace Interfaces
                     i += 1
                 Next
 
-                fractions(compounds.Length + 2, 0) = ms.Fases(0).SPMProperties.temperature.GetValueOrDefault
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.temperature.GetValueOrDefault
 
                 If TypeOf proppack Is String Then
                     pp.Dispose()
@@ -1186,9 +1186,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1200,8 +1200,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(2).SPMProperties.molarfraction = VF
-                ms.Fases(0).SPMProperties.pressure = P
+                ms.Phases(2).Properties.molarfraction = VF
+                ms.Phases(0).Properties.pressure = P
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -1217,7 +1217,7 @@ Namespace Interfaces
                 Next
                 pp._tpcompids = comps
 
-                ms.Fases(0).SPMProperties.temperature = InitialEstimate
+                ms.Phases(0).Properties.temperature = InitialEstimate
 
                 If My.Settings.EnableGPUProcessing Then
                     DWSIM.App.InitComputeDevice()
@@ -1255,7 +1255,7 @@ Namespace Interfaces
                     i += 1
                 Next
 
-                fractions(compounds.Length + 2, 0) = ms.Fases(0).SPMProperties.temperature.GetValueOrDefault
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.temperature.GetValueOrDefault
 
                 If TypeOf proppack Is String Then
                     pp.Dispose()
@@ -1310,9 +1310,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1324,8 +1324,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(2).SPMProperties.molarfraction = VF
-                ms.Fases(0).SPMProperties.temperature = T
+                ms.Phases(2).Properties.molarfraction = VF
+                ms.Phases(0).Properties.temperature = T
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -1341,7 +1341,7 @@ Namespace Interfaces
                 Next
                 pp._tpcompids = comps
 
-                ms.Fases(0).SPMProperties.pressure = InitialEstimate
+                ms.Phases(0).Properties.pressure = InitialEstimate
 
                 If My.Settings.EnableGPUProcessing Then
                     DWSIM.App.InitComputeDevice()
@@ -1379,7 +1379,7 @@ Namespace Interfaces
                     i += 1
                 Next
 
-                fractions(compounds.Length + 2, 0) = ms.Fases(0).SPMProperties.pressure.GetValueOrDefault
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.pressure.GetValueOrDefault
 
                 If TypeOf proppack Is String Then
                     pp.Dispose()
@@ -1698,25 +1698,6 @@ Namespace Interfaces
                             Next
                         End If
                     End With
-                Case "COSMO-SAC (JCOSMO)"
-                    With CType(pp, COSMOSACPropertyPackage).m_pr.InteractionParameters
-                        If Not TypeOf ip1 Is ExcelMissing And Not ip1 Is Nothing Then
-                            .Clear()
-                            i = 0
-                            For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.PR_IPData))
-                                j = 0
-                                For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.PR_IPData())
-                                    With .Item(c1).Item(c2)
-                                        .kij = ip1(i, j)
-                                    End With
-                                    j += 1
-                                Next
-                                i += 1
-                            Next
-                        End If
-                    End With
                 Case "Chao-Seader"
                 Case "Grayson-Streed"
                 Case "IAPWS-IF97 Steam Tables"
@@ -1729,9 +1710,9 @@ Namespace Interfaces
 
             Dim ms As New Streams.MaterialStream("", "")
 
-            For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                 For Each c As String In compounds
-                    phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                    phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                     phase.Componentes(c).ConstantProperties = proppack._availablecomps(c)
                 Next
             Next
@@ -1783,9 +1764,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1797,8 +1778,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(0).SPMProperties.temperature = T
-                ms.Fases(0).SPMProperties.pressure = P
+                ms.Phases(0).Properties.temperature = T
+                ms.Phases(0).Properties.pressure = P
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -1896,9 +1877,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1910,8 +1891,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(0).SPMProperties.enthalpy = H
-                ms.Fases(0).SPMProperties.pressure = P
+                ms.Phases(0).Properties.enthalpy = H
+                ms.Phases(0).Properties.pressure = P
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -1963,7 +1944,7 @@ Namespace Interfaces
                     i += 1
                 Next
 
-                fractions(compounds.Length + 2, 0) = ms.Fases(0).SPMProperties.temperature.GetValueOrDefault
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.temperature.GetValueOrDefault
 
                 ms.Dispose()
                 ms = Nothing
@@ -2011,9 +1992,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -2025,8 +2006,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(0).SPMProperties.entropy = S
-                ms.Fases(0).SPMProperties.pressure = P
+                ms.Phases(0).Properties.entropy = S
+                ms.Phases(0).Properties.pressure = P
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -2078,7 +2059,7 @@ Namespace Interfaces
                     i += 1
                 Next
 
-                fractions(compounds.Length + 2, 0) = ms.Fases(0).SPMProperties.temperature.GetValueOrDefault
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.temperature.GetValueOrDefault
 
                 ms.Dispose()
                 ms = Nothing
@@ -2126,9 +2107,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -2140,8 +2121,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(2).SPMProperties.molarfraction = VF
-                ms.Fases(0).SPMProperties.pressure = P
+                ms.Phases(2).Properties.molarfraction = VF
+                ms.Phases(0).Properties.pressure = P
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -2193,7 +2174,7 @@ Namespace Interfaces
                     i += 1
                 Next
 
-                fractions(compounds.Length + 2, 0) = ms.Fases(0).SPMProperties.temperature.GetValueOrDefault
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.temperature.GetValueOrDefault
 
                 ms.Dispose()
                 ms = Nothing
@@ -2241,9 +2222,9 @@ Namespace Interfaces
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.ClassesBasicasTermodinamica.Substancia(c, ""))
+                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
                         phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -2255,8 +2236,8 @@ Namespace Interfaces
                 Next
 
                 ms.SetOverallComposition(molefractions)
-                ms.Fases(2).SPMProperties.molarfraction = VF
-                ms.Fases(0).SPMProperties.temperature = T
+                ms.Phases(2).Properties.molarfraction = VF
+                ms.Phases(0).Properties.temperature = T
 
                 ms._pp = pp
                 pp.SetMaterial(ms)
@@ -2308,7 +2289,7 @@ Namespace Interfaces
                     i += 1
                 Next
 
-                fractions(compounds.Length + 2, 0) = ms.Fases(0).SPMProperties.pressure.GetValueOrDefault
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.pressure.GetValueOrDefault
 
                 ms.Dispose()
                 ms = Nothing

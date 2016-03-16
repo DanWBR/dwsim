@@ -200,7 +200,7 @@
     <value>Asignación de Componentes</value>
   </data>
   <data name="FaTabStripItem3.Title" xml:space="preserve">
-    <value>Asignación de Fases</value>
+    <value>Asignación de Phases</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>510, 13</value>
@@ -209,7 +209,7 @@
     <value>Configurar el mapeo de componente/compuesto de DWSIM para el Paquete de Propiedades CAPE-OPEN.</value>
   </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>Fase en el DWSIM</value>
+    <value>Phase en el DWSIM</value>
   </data>
   <data name="DataGridViewComboBoxColumn1.HeaderText" xml:space="preserve">
     <value>Equivalente en el PP CAPE-OPEN</value>
@@ -218,7 +218,7 @@
     <value>421, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Configurar el mapeo de fases de DWSIM para el Paquete de Propiedades CAPE-OPEN.</value>
+    <value>Configurar el mapeo de Phases de DWSIM para el Paquete de Propiedades CAPE-OPEN.</value>
   </data>
   <data name="id.HeaderText" xml:space="preserve">
     <value>ID</value>

@@ -2090,7 +2090,7 @@
     <value>dP</value>
   </data>
   <data name="chkIdealVaporPhase.Text" xml:space="preserve">
-    <value>Considerar Fase Vapor Ideal</value>
+    <value>Considerar Phase Vapor Ideal</value>
   </data>
   <data name="btnDoReg.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 23</value>

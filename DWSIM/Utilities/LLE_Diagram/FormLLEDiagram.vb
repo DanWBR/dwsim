@@ -15,7 +15,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 
@@ -26,8 +26,8 @@ Public Class FormLLEDiagram
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
     Public Names() As String
 
@@ -319,9 +319,9 @@ Public Class FormLLEDiagram
         Dim Ko As New Konode
 
         'calculate compositions
-        mat.Fases(0).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar = Pt.X
-        mat.Fases(0).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar = Pt.Y
-        mat.Fases(0).Componentes(Names(cbComp3.SelectedIndex)).FracaoMolar = 1 - Pt.X - Pt.Y
+        mat.Phases(0).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar = Pt.X
+        mat.Phases(0).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar = Pt.Y
+        mat.Phases(0).Componentes(Names(cbComp3.SelectedIndex)).FracaoMolar = 1 - Pt.X - Pt.Y
 
         If My.Settings.EnableGPUProcessing Then
             DWSIM.App.InitComputeDevice()
@@ -342,15 +342,15 @@ Public Class FormLLEDiagram
 
         'added .GetValueOrDefault to avoid null object errors
 
-        Ko.X11 = mat.Fases(3).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
-        Ko.X12 = mat.Fases(3).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
+        Ko.X11 = mat.Phases(3).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
+        Ko.X12 = mat.Phases(3).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
 
-        If mat.Fases(4).SPMProperties.molarfraction > 0 Then
-            Ko.X21 = mat.Fases(4).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
-            Ko.X22 = mat.Fases(4).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
+        If mat.Phases(4).Properties.molarfraction > 0 Then
+            Ko.X21 = mat.Phases(4).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
+            Ko.X22 = mat.Phases(4).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
         Else
-            Ko.X21 = mat.Fases(3).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
-            Ko.X22 = mat.Fases(3).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
+            Ko.X21 = mat.Phases(3).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
+            Ko.X22 = mat.Phases(3).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
         End If
 
         Return Ko
@@ -391,24 +391,24 @@ Public Class FormLLEDiagram
         ' assign components to phases
         '=============================
 
-        For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
+        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
             phase.Componentes.Clear() 'delete old assignment
         Next
 
         Dim N As String
         N = Names(cbComp1.SelectedIndex)
-        For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
-            phase.Componentes.Add(N, New DWSIM.ClassesBasicasTermodinamica.Substancia(N, ""))
+        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+            phase.Componentes.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
             phase.Componentes(N).ConstantProperties = Frm.Options.SelectedComponents(N)
         Next
         N = Names(cbComp2.SelectedIndex)
-        For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
-            phase.Componentes.Add(N, New DWSIM.ClassesBasicasTermodinamica.Substancia(N, ""))
+        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+            phase.Componentes.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
             phase.Componentes(N).ConstantProperties = Frm.Options.SelectedComponents(N)
         Next
         N = Names(cbComp3.SelectedIndex)
-        For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In mat.Fases.Values
-            phase.Componentes.Add(N, New DWSIM.ClassesBasicasTermodinamica.Substancia(N, ""))
+        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+            phase.Componentes.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
             phase.Componentes(N).ConstantProperties = Frm.Options.SelectedComponents(N)
         Next
 
@@ -450,10 +450,10 @@ Public Class FormLLEDiagram
 
         mat.SetFlowsheet(Frm)
         pp.CurrentMaterialStream = mat
-        P = Conversor.ConverterParaSI(su.spmp_pressure, tbP.Text)
-        T = Conversor.ConverterParaSI(su.spmp_temperature, tbT.Text)
-        mat.Fases(0).SPMProperties.pressure = P
-        mat.Fases(0).SPMProperties.temperature = T
+        P = Converter.ConvertToSI(su.pressure, tbP.Text)
+        T = Converter.ConvertToSI(su.temperature, tbT.Text)
+        mat.Phases(0).Properties.pressure = P
+        mat.Phases(0).Properties.temperature = T
 
         LLECurve.Clear()
         LLEPoints.Clear()
@@ -619,11 +619,11 @@ Public Class FormLLEDiagram
             Next
             cbPropPack.SelectedIndex = 0
 
-            Me.lblT.Text = su.spmp_temperature
-            Me.tbT.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, 298.15), nf)
+            Me.lblT.Text = su.temperature
+            Me.tbT.Text = Format(Converter.ConvertFromSI(su.temperature, 298.15), nf)
 
-            Me.lblP.Text = su.spmp_pressure
-            Me.tbP.Text = Format(Conversor.ConverterDoSI(su.spmp_pressure, 101400), nf)
+            Me.lblP.Text = su.pressure
+            Me.tbP.Text = Format(Converter.ConvertFromSI(su.pressure, 101400), nf)
 
             DataGridView1.Columns(0).HeaderText = "[1] " & cbComp1.Text
             DataGridView1.Columns(1).HeaderText = "[1] " & cbComp2.Text

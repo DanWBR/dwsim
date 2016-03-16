@@ -259,7 +259,7 @@
     <value>GroupBox2</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Configure o mapeamento de fases entre o DWSIM e o Pacote de Propriedades CAPE-OPEN.</value>
+    <value>Configure o mapeamento de Phases entre o DWSIM e o Pacote de Propriedades CAPE-OPEN.</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 19</value>
@@ -907,7 +907,7 @@
     <value>615, 44</value>
   </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>Fase no DWSIM</value>
+    <value>Phase no DWSIM</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>485, 13</value>
@@ -916,7 +916,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FaTabStripItem3.Title" xml:space="preserve">
-    <value>Mapeamento de Fases</value>
+    <value>Mapeamento de Phases</value>
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>id</value>

@@ -20,7 +20,7 @@ Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 Imports System.Math
 Imports System.Xml.Linq
 Imports System.Linq
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.MathEx
 Imports DWSIM.DWSIM.MathEx.Common
 Imports Ciloci.Flee

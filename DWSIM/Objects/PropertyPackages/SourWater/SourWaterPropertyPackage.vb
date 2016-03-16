@@ -28,7 +28,7 @@ Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary
 Imports DWSIM.DWSIM.MathEx
 Imports System.Linq
 Imports System.Math
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 
 Namespace DWSIM.SimulationObjects.PropertyPackages
 
@@ -79,7 +79,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
                 Dim constprops As New List(Of ConstantProperties)
-                For Each su As Substancia In Me.CurrentMaterialStream.Fases(0).Componentes.Values
+                For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
                     constprops.Add(su.ConstantProperties)
                 Next
                 Return New Auxiliary.FlashAlgorithms.SourWater With {.CompoundProperties = constprops}

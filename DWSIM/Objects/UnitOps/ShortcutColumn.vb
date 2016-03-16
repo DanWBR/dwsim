@@ -28,7 +28,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
     <System.Serializable()> Public Class ShortcutColumn
 
-        Inherits SimulationObjects_UnitOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         Public Enum CondenserType
             TotalCond = 0
@@ -51,7 +51,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             MyBase.New()
         End Sub
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
             m_ComponentName = nome
@@ -150,7 +150,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             'classify components by relative volatility
 
-            Dim n As Integer = feed.Fases(0).Componentes.Count - 1
+            Dim n As Integer = feed.Phases(0).Componentes.Count - 1
             Dim i As Integer = 0
 
             Dim lnk, dnk, hnk As New ArrayList
@@ -158,15 +158,15 @@ Namespace DWSIM.SimulationObjects.UnitOps
             Dim K(n), alpha(n), z(n), xb(n), xd(n), F, D, Dant, B, R, q, T, P As Double
             Dim id(n) As String
 
-            F = feed.Fases(0).SPMProperties.molarflow.GetValueOrDefault
-            q = feed.Fases(1).SPMProperties.molarfraction.GetValueOrDefault
-            T = feed.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            P = feed.Fases(0).SPMProperties.pressure.GetValueOrDefault
+            F = feed.Phases(0).Properties.molarflow.GetValueOrDefault
+            q = feed.Phases(1).Properties.molarfraction.GetValueOrDefault
+            T = feed.Phases(0).Properties.temperature.GetValueOrDefault
+            P = feed.Phases(0).Properties.pressure.GetValueOrDefault
 
             i = 0
-            For Each comp As DWSIM.ClassesBasicasTermodinamica.Substancia In feed.Fases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In feed.Phases(0).Componentes.Values
                 z(i) = comp.FracaoMolar.GetValueOrDefault
-                'K(i) = feed.Fases(2).Componentes(comp.Nome).FracaoMolar.GetValueOrDefault / feed.Fases(1).Componentes(comp.Nome).FracaoMolar.GetValueOrDefault
+                'K(i) = feed.Phases(2).Componentes(comp.Nome).FracaoMolar.GetValueOrDefault / feed.Phases(1).Componentes(comp.Nome).FracaoMolar.GetValueOrDefault
                 id(i) = comp.Nome
                 'If Double.IsInfinity(K(i)) Then K(i) = 1.0E+20
                 If Me.m_lightkey = comp.Nome Then lki = i
@@ -357,40 +357,40 @@ restart:    B = F - D
 
             i = 0
             Dmw = 0
-            For Each comp As DWSIM.ClassesBasicasTermodinamica.Substancia In distillate.Fases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Componentes.Values
                 If Double.IsNaN(xd(i)) = False Then comp.FracaoMolar = xd(i) Else comp.FracaoMolar = 0
                 Dmw += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 i = i + 1
             Next
-            With distillate.Fases(0)
-                .SPMProperties.pressure = Me.m_condenserpressure
-                .SPMProperties.molarflow = D
-                .SPMProperties.massflow = Dmw * D / 1000
+            With distillate.Phases(0)
+                .Properties.pressure = Me.m_condenserpressure
+                .Properties.molarflow = D
+                .Properties.massflow = Dmw * D / 1000
             End With
 
             i = 0
             Bmw = 0
-            For Each comp As DWSIM.ClassesBasicasTermodinamica.Substancia In bottoms.Fases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Componentes.Values
                 If Double.IsNaN(xb(i)) = False Then comp.FracaoMolar = xb(i) Else comp.FracaoMolar = 0
                 Bmw += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 i = i + 1
             Next
-            With bottoms.Fases(0)
-                .SPMProperties.pressure = Me.m_boilerpressure
-                .SPMProperties.molarflow = B
-                .SPMProperties.massflow = Bmw * B / 1000
+            With bottoms.Phases(0)
+                .Properties.pressure = Me.m_boilerpressure
+                .Properties.molarflow = B
+                .Properties.massflow = Bmw * B / 1000
             End With
 
             Dim result As Object
             Dim TD, TB, TF, HF, HD, HD0, HB, HL As Double
             Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Me.PropertyPackage
 
-            TF = feed.Fases(0).SPMProperties.temperature
-            HF = feed.Fases(0).SPMProperties.enthalpy.GetValueOrDefault * feed.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
+            TF = feed.Phases(0).Properties.temperature
+            HF = feed.Phases(0).Properties.enthalpy.GetValueOrDefault * feed.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
             pp.CurrentMaterialStream = distillate
 
-            For Each comp As DWSIM.ClassesBasicasTermodinamica.Substancia In distillate.Fases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Componentes.Values
                 comp.FracaoMassica = pp.AUX_CONVERT_MOL_TO_MASS(comp.Nome, 0)
             Next
 
@@ -401,38 +401,38 @@ restart:    B = F - D
                 result = pp.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.VAP, m_condenserpressure, 0, 0)
                 TD = result(2)
             End If
-            With distillate.Fases(0)
-                .SPMProperties.temperature = TD
+            With distillate.Phases(0)
+                .Properties.temperature = TD
             End With
             CalculateMaterialStream(FlowSheet, distillate, , True)
 
-            HD = distillate.Fases(0).SPMProperties.enthalpy.GetValueOrDefault * distillate.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
+            HD = distillate.Phases(0).Properties.enthalpy.GetValueOrDefault * distillate.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
             pp.CurrentMaterialStream = bottoms
 
-            For Each comp As DWSIM.ClassesBasicasTermodinamica.Substancia In bottoms.Fases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Componentes.Values
                 comp.FracaoMassica = pp.AUX_CONVERT_MOL_TO_MASS(comp.Nome, 0)
             Next
 
             result = pp.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.VAP, m_boilerpressure, 0.001, 0)
             TB = result(2)
-            With bottoms.Fases(0)
-                .SPMProperties.temperature = TB
+            With bottoms.Phases(0)
+                .Properties.temperature = TB
             End With
             CalculateMaterialStream(FlowSheet, bottoms, , True)
 
-            HB = bottoms.Fases(0).SPMProperties.enthalpy.GetValueOrDefault * bottoms.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
+            HB = bottoms.Phases(0).Properties.enthalpy.GetValueOrDefault * bottoms.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
             pp.CurrentMaterialStream = distillate
             If Me.condtype = CondenserType.PartialCond Then
                 result = pp.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.VAP, m_condenserpressure, 0, 0)
-                HL = result(4) * distillate.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
+                HL = result(4) * distillate.Phases(0).Properties.molecularWeight.GetValueOrDefault
                 m_Qc = -(HL - HD) * L / 1000
             ElseIf Me.condtype = CondenserType.TotalCond Then
                 result = pp.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.VAP, m_condenserpressure, 1, 0)
-                HD0 = result(4) * distillate.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
+                HD0 = result(4) * distillate.Phases(0).Properties.molecularWeight.GetValueOrDefault
                 result = pp.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.VAP, m_condenserpressure, 0, 0)
-                HL = result(4) * distillate.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
+                HL = result(4) * distillate.Phases(0).Properties.molecularWeight.GetValueOrDefault
                 m_Qc = -(HL - HD0) * (L + D) / 1000
             End If
 
@@ -443,8 +443,8 @@ restart:    B = F - D
             Dim NminS, Ss, Ns As Double
 
             Ss = z(lki) / z(hki) * xb(hki) / xb(lki)
-            'alpha_s = bottoms.Fases(2).Componentes(m_lightkey).FracaoMolar.GetValueOrDefault / bottoms.Fases(1).Componentes(m_lightkey).FracaoMolar.GetValueOrDefault
-            'alpha_s = alpha_s / (bottoms.Fases(2).Componentes(m_heavykey).FracaoMolar.GetValueOrDefault / bottoms.Fases(1).Componentes(m_heavykey).FracaoMolar.GetValueOrDefault)
+            'alpha_s = bottoms.Phases(2).Componentes(m_lightkey).FracaoMolar.GetValueOrDefault / bottoms.Phases(1).Componentes(m_lightkey).FracaoMolar.GetValueOrDefault
+            'alpha_s = alpha_s / (bottoms.Phases(2).Componentes(m_heavykey).FracaoMolar.GetValueOrDefault / bottoms.Phases(1).Componentes(m_heavykey).FracaoMolar.GetValueOrDefault)
             NminS = Log(Ss) / Log(alpha(lki))
             Ns = NminS * m_N / m_Nmin
             ofs = Ns
@@ -535,9 +535,9 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
 
         End Function
 
-        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
             If Me.NodeTableItems Is Nothing Then
                 Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Outros.NodeItem)
                 Me.FillNodeItems()
@@ -558,20 +558,20 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                 Dim valor As String
 
                 If Me.m_Qc Then
-                    valor = Format(Conversor.ConverterDoSI(su.spmp_heatflow, Me.m_Qc), nf)
+                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.m_Qc), nf)
                 Else
                     valor = DWSIM.App.GetLocalString("NC")
                 End If
                 .Item(0).Value = valor
-                .Item(0).Unit = su.spmp_heatflow
+                .Item(0).Unit = su.heatflow
 
                 If Me.m_Qb Then
-                    valor = Format(Conversor.ConverterDoSI(su.spmp_heatflow, Me.m_Qb), nf)
+                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.m_Qb), nf)
                 Else
                     valor = DWSIM.App.GetLocalString("NC")
                 End If
                 .Item(1).Value = valor
-                .Item(1).Unit = su.spmp_heatflow
+                .Item(1).Unit = su.heatflow
 
             End With
 
@@ -590,8 +590,8 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
 
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 
@@ -680,20 +680,20 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                 End With
                 .Item.Add(DWSIM.App.GetLocalString("SCHeavyKeyMF"), Me, "m_heavykeymolarfrac", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SCHeavyKeyMF"), True)
                 .Item(.Item.Count - 1).Tag2 = "PROP_SC_1"
-                Dim valor = Format(Conversor.ConverterDoSI(su.spmp_pressure, Me.m_condenserpressure), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("SCCondenserPressure"), su.spmp_pressure), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SCCondenserPressure"), True)
+                Dim valor = Format(Converter.ConvertFromSI(su.pressure, Me.m_condenserpressure), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("SCCondenserPressure"), su.pressure), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SCCondenserPressure"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
                     .Tag2 = "PROP_SC_3"
-                    .Tag = New Object() {FlowSheet.Options.NumberFormat, su.spmp_pressure, "P"}
+                    .Tag = New Object() {FlowSheet.Options.NumberFormat, su.pressure, "P"}
                     .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                 End With
-                valor = Format(Conversor.ConverterDoSI(su.spmp_pressure, Me.m_boilerpressure), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("SCReboilerPressure"), su.spmp_pressure), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SCReboilerPressure"), True)
+                valor = Format(Converter.ConvertFromSI(su.pressure, Me.m_boilerpressure), FlowSheet.Options.NumberFormat)
+                .Item.Add(FT(DWSIM.App.GetLocalString("SCReboilerPressure"), su.pressure), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SCReboilerPressure"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
                     .Tag2 = "PROP_SC_4"
-                    .Tag = New Object() {FlowSheet.Options.NumberFormat, su.spmp_pressure, "P"}
+                    .Tag = New Object() {FlowSheet.Options.NumberFormat, su.pressure, "P"}
                     .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                 End With
 
@@ -719,32 +719,32 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
                     End With
-                    .Item.Add(FT(DWSIM.App.GetLocalString("SCStrippingLiquid"), su.spmp_molarflow), Format(Conversor.ConverterDoSI(su.spmp_molarflow, Me.L_), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCStrippingLiquid"), True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("SCStrippingLiquid"), su.molarflow), Format(Converter.ConvertFromSI(su.molarflow, Me.L_), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCStrippingLiquid"), True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
                     End With
-                    .Item.Add(FT(DWSIM.App.GetLocalString("SCRectifyLiquid"), su.spmp_molarflow), Format(Conversor.ConverterDoSI(su.spmp_molarflow, Me.L), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCRectifyLiquid"), True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("SCRectifyLiquid"), su.molarflow), Format(Converter.ConvertFromSI(su.molarflow, Me.L), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCRectifyLiquid"), True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
                     End With
-                    .Item.Add(FT(DWSIM.App.GetLocalString("SCStrippingVapor"), su.spmp_molarflow), Format(Conversor.ConverterDoSI(su.spmp_molarflow, Me.V_), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCStrippingVapor"), True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("SCStrippingVapor"), su.molarflow), Format(Converter.ConvertFromSI(su.molarflow, Me.V_), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCStrippingVapor"), True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
                     End With
-                    .Item.Add(FT(DWSIM.App.GetLocalString("SCRectifyVapor"), su.spmp_molarflow), Format(Conversor.ConverterDoSI(su.spmp_molarflow, Me.V), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCRectifyVapor"), True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("SCRectifyVapor"), su.molarflow), Format(Converter.ConvertFromSI(su.molarflow, Me.V), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCRectifyVapor"), True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
                     End With
-                    .Item.Add(FT(DWSIM.App.GetLocalString("SCCondenserDuty"), su.spmp_heatflow), Format(Conversor.ConverterDoSI(su.spmp_heatflow, Me.m_Qc), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCCondenserDuty"), True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("SCCondenserDuty"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.m_Qc), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCCondenserDuty"), True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
                     End With
-                    .Item.Add(FT(DWSIM.App.GetLocalString("SCReboilerDuty"), su.spmp_heatflow), Format(Conversor.ConverterDoSI(su.spmp_heatflow, Me.m_Qb), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCReboilerDuty"), True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("SCReboilerDuty"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.m_Qb), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("SCReboilerDuty"), True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
@@ -758,10 +758,10 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -778,10 +778,10 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                     value = Me.m_lightkeymolarfrac
                 Case 3
                     'PROP_SC_3	Condenser Pressure
-                    value = Conversor.ConverterDoSI(su.spmp_pressure, Me.m_condenserpressure)
+                    value = Converter.ConvertFromSI(su.pressure, Me.m_condenserpressure)
                 Case 4
                     'PROP_SC_4	Reboiler Pressure
-                    value = Conversor.ConverterDoSI(su.spmp_pressure, Me.m_boilerpressure)
+                    value = Converter.ConvertFromSI(su.pressure, Me.m_boilerpressure)
                 Case 5
                     'PROP_SC_5	Minimun Reflux Ratio
                     value = Me.m_Rmin
@@ -793,22 +793,22 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                     value = Me.ofs
                 Case 8
                     'PROP_SC_8	Stripping Liquid Molar Flow
-                    value = Conversor.ConverterDoSI(su.spmp_molarflow, Me.L_)
+                    value = Converter.ConvertFromSI(su.molarflow, Me.L_)
                 Case 9
                     'PROP_SC_9	Rectify Liquid Molar Flow
-                    value = Conversor.ConverterDoSI(su.spmp_molarflow, Me.L)
+                    value = Converter.ConvertFromSI(su.molarflow, Me.L)
                 Case 10
                     'PROP_SC_10	Stripping Vapor Molar Flow
-                    value = Conversor.ConverterDoSI(su.spmp_molarflow, Me.V_)
+                    value = Converter.ConvertFromSI(su.molarflow, Me.V_)
                 Case 11
                     'PROP_SC_11	Rectify Vapor Molar Flow
-                    value = Conversor.ConverterDoSI(su.spmp_molarflow, Me.V)
+                    value = Converter.ConvertFromSI(su.molarflow, Me.V)
                 Case 12
                     'PROP_SC_12	Condenser Duty
-                    value = Conversor.ConverterDoSI(su.spmp_heatflow, Me.m_Qc)
+                    value = Converter.ConvertFromSI(su.heatflow, Me.m_Qc)
                 Case 13
                     'PROP_SC_13	Reboiler Duty
-                    value = Conversor.ConverterDoSI(su.spmp_heatflow, Me.m_Qb)
+                    value = Converter.ConvertFromSI(su.heatflow, Me.m_Qb)
             End Select
 
             Return value
@@ -816,7 +816,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
         End Function
 
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
             Select Case proptype
@@ -841,9 +841,9 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
             Select Case propidx
@@ -859,18 +859,18 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                     Me.m_lightkeymolarfrac = propval
                 Case 3
                     'PROP_SC_3	Condenser Pressure
-                    Me.m_condenserpressure = Conversor.ConverterParaSI(su.spmp_pressure, propval)
+                    Me.m_condenserpressure = Converter.ConvertToSI(su.pressure, propval)
                 Case 4
                     'PROP_SC_4	Reboiler Pressure
-                    Me.m_boilerpressure = Conversor.ConverterParaSI(su.spmp_pressure, propval)
+                    Me.m_boilerpressure = Converter.ConvertToSI(su.pressure, propval)
 
             End Select
             Return 1
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SistemasDeUnidades.UnidadesSI
-            Dim cv As New DWSIM.SistemasDeUnidades.Conversor
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = CInt(prop.Split("_")(2))
 
@@ -887,10 +887,10 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                     value = ""
                 Case 3
                     'PROP_SC_3	Condenser Pressure
-                    value = su.spmp_pressure
+                    value = su.pressure
                 Case 4
                     'PROP_SC_4	Reboiler Pressure
-                    value = su.spmp_pressure
+                    value = su.pressure
                 Case 5
                     'PROP_SC_5	Minimun Reflux Ratio
                     value = ""
@@ -902,22 +902,22 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                     value = ""
                 Case 8
                     'PROP_SC_8	Stripping Liquid Molar Flow
-                    value = su.spmp_molarflow
+                    value = su.molarflow
                 Case 9
                     'PROP_SC_9	Rectify Liquid Molar Flow
-                    value = su.spmp_molarflow
+                    value = su.molarflow
                 Case 10
                     'PROP_SC_10	Stripping Vapor Molar Flow
-                    value = su.spmp_molarflow
+                    value = su.molarflow
                 Case 11
                     'PROP_SC_11	Rectify Vapor Molar Flow
-                    value = su.spmp_molarflow
+                    value = su.molarflow
                 Case 12
                     'PROP_SC_12	Condenser Duty
-                    value = su.spmp_heatflow
+                    value = su.heatflow
                 Case 13
                     'PROP_SC_13	Reboiler Duty
-                    value = su.spmp_heatflow
+                    value = su.heatflow
             End Select
 
             Return value

@@ -146,19 +146,19 @@
     <value>226, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
-    <value>Fugacidad del agua en la fase Líquida/Sólida:</value>
+    <value>Fugacidad del agua en la Phase Líquida/Sólida:</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
-    <value>Fases en equilibrio:</value>
+    <value>Phases en equilibrio:</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Coeficiente de actividad del agua en la fase líquida:</value>
+    <value>Coeficiente de actividad del agua en la Phase líquida:</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 13</value>
@@ -173,7 +173,7 @@
     <value>Acuosa</value>
   </data>
   <data name="GroupBox9.Text" xml:space="preserve">
-    <value>Composición de fases individuales, en fracción molar</value>
+    <value>Composición de Phases individuales, en fracción molar</value>
   </data>
   <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
     <value>378, 13</value>

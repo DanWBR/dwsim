@@ -746,7 +746,7 @@ restart:    Do
 
                 Dim Tl, Tv, Te As Double
 
-                Te = PP.AUX_TCM(Fase.Mixture) * 0.8
+                Te = PP.AUX_TCM(Phase.Mixture) * 0.8
 
                 'single phase solution found (liquid only). Obtain T using single phase calculation.
                 Dim x1, fx2, dfdx2 As Double
@@ -1215,7 +1215,7 @@ restart:    Do
 
                 Dim Tl, Tv, Te As Double
 
-                Te = PP.AUX_TCM(Fase.Mixture) * 0.8
+                Te = PP.AUX_TCM(Phase.Mixture) * 0.8
 
                 'single phase solution found (liquid only). Obtain T using single phase calculation.
                 Dim x1, fx2, dfdx2 As Double

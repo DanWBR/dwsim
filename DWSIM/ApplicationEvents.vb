@@ -41,7 +41,7 @@ Namespace My
         Public Property gpumod As CudafyModule
         Public Property prevlang As Integer = 0 '0 = CUDA, 1 = OpenCL
 
-        Public Property UserUnitSystems As Dictionary(Of String, DWSIM.SistemasDeUnidades.Unidades)
+        Public Property UserUnitSystems As Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
 
         Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
 
@@ -53,7 +53,7 @@ Namespace My
             xdoc = New XDocument
             xdoc.Add(New XElement("Units"))
 
-            For Each su2 As DWSIM.SistemasDeUnidades.Unidades In UserUnitSystems.Values
+            For Each su2 As DWSIM.SystemsOfUnits.Units In UserUnitSystems.Values
                 xdoc.Element("Units").Add(New XElement(XmlConvert.EncodeName(su2.nome)))
                 xel = xdoc.Element("Units").Element(XmlConvert.EncodeName(su2.nome))
                 xel.Add(su2.SaveData())

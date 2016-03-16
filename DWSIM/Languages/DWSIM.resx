@@ -469,7 +469,7 @@
     <value>Capacidade Calorífica</value>
   </data>
   <data name="Capacidadecalorficad" xml:space="preserve">
-    <value>Capacidade calorífica da fase à pressão constante</value>
+    <value>Capacidade calorífica da Phase à pressão constante</value>
   </data>
   <data name="CapacidadeCalorficaP" xml:space="preserve">
     <value>Capacidade Calorífica à Pressão Constante</value>
@@ -558,11 +558,11 @@
   <data name="Composiesvolumtrica2" xml:space="preserve">
     <value>2. Composições volumétricas</value>
   </data>
-  <data name="ComposiodaFaseLquida" xml:space="preserve">
-    <value>Composição da Fase Líquida</value>
+  <data name="ComposiodaPhaseLquida" xml:space="preserve">
+    <value>Composição da Phase Líquida</value>
   </data>
-  <data name="ComposiodaFaseVapor" xml:space="preserve">
-    <value>Composição da Fase Vapor</value>
+  <data name="ComposiodaPhaseVapor" xml:space="preserve">
+    <value>Composição da Phase Vapor</value>
   </data>
   <data name="ComposiodaMistura" xml:space="preserve">
     <value>Composição da Mistura</value>
@@ -637,37 +637,37 @@
     <value>Condutividade térmica da mistura</value>
   </data>
   <data name="Condutividadetrmicad1" xml:space="preserve">
-    <value>Condutividade térmica da fase vapor</value>
+    <value>Condutividade térmica da Phase vapor</value>
   </data>
   <data name="Condutividadetrmicad2" xml:space="preserve">
-    <value>Condutividade térmica da fase líquida</value>
+    <value>Condutividade térmica da Phase líquida</value>
   </data>
   <data name="CondutividadeTrmicad3" xml:space="preserve">
-    <value>Condutividade Térmica da Fase Vapor: Método de Ely e Hanley</value>
+    <value>Condutividade Térmica da Phase Vapor: Método de Ely e Hanley</value>
   </data>
   <data name="CondutividadeTrmicad4" xml:space="preserve">
-    <value>Condutividade Térmica da Fase Líquida: Método de Latini et al</value>
+    <value>Condutividade Térmica da Phase Líquida: Método de Latini et al</value>
   </data>
   <data name="CondutividadetrmicaF" xml:space="preserve">
-    <value>Condutividade térmica (Fase Vapor)</value>
+    <value>Condutividade térmica (Phase Vapor)</value>
   </data>
   <data name="CondutividadetrmicaF1" xml:space="preserve">
-    <value>Condutividade térmica (Fase Vapor)</value>
+    <value>Condutividade térmica (Phase Vapor)</value>
   </data>
   <data name="CondutividadetrmicaF2" xml:space="preserve">
-    <value>Condutividade térmica (Fase Líquida)</value>
+    <value>Condutividade térmica (Phase Líquida)</value>
   </data>
   <data name="CondutividadetrmicaF3" xml:space="preserve">
-    <value>Condutividade térmica (Fase Vapor)</value>
+    <value>Condutividade térmica (Phase Vapor)</value>
   </data>
   <data name="CondutividadetrmicaF4" xml:space="preserve">
-    <value>Condutividade térmica (Fase Líquida)</value>
+    <value>Condutividade térmica (Phase Líquida)</value>
   </data>
   <data name="CondutividadetrmicaM" xml:space="preserve">
     <value>Condutividade térmica (Mistura)</value>
   </data>
   <data name="CondutividadetrmicFa" xml:space="preserve">
-    <value>Condutividade térmic (Fase Vapor)a</value>
+    <value>Condutividade térmic (Phase Vapor)a</value>
   </data>
   <data name="Conectadoaentrada" xml:space="preserve">
     <value>Conectado a (entrada)</value>
@@ -810,17 +810,17 @@
   <data name="Corsemgradiente" xml:space="preserve">
     <value>Cor (sem gradiente)</value>
   </data>
-  <data name="CpCvFaseLquida" xml:space="preserve">
-    <value>Cp/Cv (Fase Líquida)</value>
+  <data name="CpCvPhaseLquida" xml:space="preserve">
+    <value>Cp/Cv (Phase Líquida)</value>
   </data>
-  <data name="CpCvFaseVapor" xml:space="preserve">
-    <value>Cp/Cv (Fase Vapor)</value>
+  <data name="CpCvPhaseVapor" xml:space="preserve">
+    <value>Cp/Cv (Phase Vapor)</value>
   </data>
-  <data name="CpFaseLquida" xml:space="preserve">
-    <value>Cp (Fase Líquida)</value>
+  <data name="CpPhaseLquida" xml:space="preserve">
+    <value>Cp (Phase Líquida)</value>
   </data>
-  <data name="CpFaseVapor" xml:space="preserve">
-    <value>Cp (Fase Vapor)</value>
+  <data name="CpPhaseVapor" xml:space="preserve">
+    <value>Cp (Phase Vapor)</value>
   </data>
   <data name="Cpiasdesegurana" xml:space="preserve">
     <value>Cópias de segurança</value>
@@ -881,22 +881,22 @@ Recomendada para uso com misturas binárias ou ternárias de substâncias polare
     <value>1. Descrição</value>
   </data>
   <data name="DescRPP" xml:space="preserve">
-    <value>Pacote de Propriedades de referência, onde o equilíbrio termodinâmico é calculado pela Lei de Raoult. As Entalpias, Entropias e Capacidades Caloríficas residuais são consideradas iguais a zero. A Entalpia da Fase Líquida utiliza os valores de Delta-H de Vaporização experimentais ou calculados no caso dos Pseudo-componentes / Hipotéticos.</value>
+    <value>Pacote de Propriedades de referência, onde o equilíbrio termodinâmico é calculado pela Lei de Raoult. As Entalpias, Entropias e Capacidades Caloríficas residuais são consideradas iguais a zero. A Entalpia da Phase Líquida utiliza os valores de Delta-H de Vaporização experimentais ou calculados no caso dos Pseudo-componentes / Hipotéticos.</value>
   </data>
   <data name="DescSoaveRedlichKwongSRK" xml:space="preserve">
     <value>Pacote de Propriedades que utiliza a EE Redlich-Kwong modificada por Soave. Indicado para uso com hidrocarbonetos e não-condensáveis.
 As propriedades são calculadas diretamente através da equação de estado e/ou de dados experimentais, exceto:
-Massa Específica da Fase Líquida: Método de Rackett
-Condutividade Térmica da Fase Líquida: Método de Latini et al
-Condutividade Térmica da Fase Vapor: Método de Ely e Hanley
-Viscosidade da Fase Vapor: Método Jossi-Stiel-Thodos
-Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
+Massa Específica da Phase Líquida: Método de Rackett
+Condutividade Térmica da Phase Líquida: Método de Latini et al
+Condutividade Térmica da Phase Vapor: Método de Ely e Hanley
+Viscosidade da Phase Vapor: Método Jossi-Stiel-Thodos
+Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
   </data>
   <data name="DescSteamTablesPP" xml:space="preserve">
     <value>Pacote de Propriedades para uso exclusivo com Água (IAPWS-97)</value>
   </data>
   <data name="DescUPP" xml:space="preserve">
-    <value>Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC para a modelagem da fase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A fase vapor é modelada através da EDE Peng-Robinson. Recomendado para uso com os Componentes Hipotéticos.</value>
+    <value>Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC para a modelagem da Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A Phase vapor é modelada através da EDE Peng-Robinson. Recomendado para uso com os Componentes Hipotéticos.</value>
   </data>
   <data name="Desejacontinuaroproc" xml:space="preserve">
     <value>Deseja continuar o processo de ajuste mesmo assim?</value>
@@ -968,10 +968,10 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>DWSIM - Utilitários: Dimensionamento de Vasos Separadores</value>
   </data>
   <data name="DWSIMUtilitriosDiagr" xml:space="preserve">
-    <value>DWSIM - Utilitários: Diagrama de Fases (Binário)</value>
+    <value>DWSIM - Utilitários: Diagrama de Phases (Binário)</value>
   </data>
   <data name="DWSIMUtilitriosDiagr1" xml:space="preserve">
-    <value>DWSIM - Utilitários: Diagrama de Fases</value>
+    <value>DWSIM - Utilitários: Diagrama de Phases</value>
   </data>
   <data name="DWSIMUtilitriosDimen" xml:space="preserve">
     <value>DWSIM - Utilitários: Dimensionamento de PSVs</value>
@@ -1079,19 +1079,19 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Entalpia Específica</value>
   </data>
   <data name="EntalpiaEspecficadaf" xml:space="preserve">
-    <value>Entalpia Específica da fase vapor</value>
+    <value>Entalpia Específica da Phase vapor</value>
   </data>
   <data name="EntalpiaEspecficadaf2" xml:space="preserve">
-    <value>Entalpia Específica da fase líquida</value>
+    <value>Entalpia Específica da Phase líquida</value>
   </data>
   <data name="EntalpiaEspecficadam" xml:space="preserve">
     <value>Entalpia Específica da mistura</value>
   </data>
   <data name="EntalpiaEspecficaFas" xml:space="preserve">
-    <value>Entalpia Específica (Fase Vapor)</value>
+    <value>Entalpia Específica (Phase Vapor)</value>
   </data>
   <data name="EntalpiaEspecficaFas2" xml:space="preserve">
-    <value>Entalpia Específica (Fase Líquida)</value>
+    <value>Entalpia Específica (Phase Líquida)</value>
   </data>
   <data name="EntalpiaEspecficaMis" xml:space="preserve">
     <value>Entalpia Específica (Mistura)</value>
@@ -1106,19 +1106,19 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Entropia Específica</value>
   </data>
   <data name="EntropiaEspecficadaf" xml:space="preserve">
-    <value>Entropia Específica da fase vapor</value>
+    <value>Entropia Específica da Phase vapor</value>
   </data>
   <data name="EntropiaEspecficadaf2" xml:space="preserve">
-    <value>Entropia Específica da fase líquida</value>
+    <value>Entropia Específica da Phase líquida</value>
   </data>
   <data name="EntropiaEspecficadam" xml:space="preserve">
     <value>Entropia Específica da mistura</value>
   </data>
   <data name="EntropiaEspecficaFas" xml:space="preserve">
-    <value>Entropia Específica (Fase Vapor)</value>
+    <value>Entropia Específica (Phase Vapor)</value>
   </data>
   <data name="EntropiaEspecficaFas2" xml:space="preserve">
-    <value>Entropia Específica (Fase Líquida)</value>
+    <value>Entropia Específica (Phase Líquida)</value>
   </data>
   <data name="EntropiaEspecficaMis" xml:space="preserve">
     <value>Entropia Específica (Mistura)</value>
@@ -1297,17 +1297,17 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="Existemsimulaesabert" xml:space="preserve">
     <value>Existem simulações abertas. Tem certeza de que deseja fechar o DWSIM?</value>
   </data>
-  <data name="Existeumafaselquidan" xml:space="preserve">
-    <value>Existe uma fase líquida na sucção do compressor.</value>
+  <data name="ExisteumaPhaselquidan" xml:space="preserve">
+    <value>Existe uma Phase líquida na sucção do compressor.</value>
   </data>
-  <data name="Existeumafaselquidan2" xml:space="preserve">
-    <value>Existe uma fase líquida na sucção da turbina.</value>
+  <data name="ExisteumaPhaselquidan2" xml:space="preserve">
+    <value>Existe uma Phase líquida na sucção da turbina.</value>
   </data>
-  <data name="Existeumafasevaporna" xml:space="preserve">
-    <value>Existe uma fase vapor na sucção da bomba.</value>
+  <data name="ExisteumaPhasevaporna" xml:space="preserve">
+    <value>Existe uma Phase vapor na sucção da bomba.</value>
   </data>
-  <data name="Existeumafasevaporna2" xml:space="preserve">
-    <value>Existe uma fase vapor na corrente de entrada do tanque.</value>
+  <data name="ExisteumaPhasevaporna2" xml:space="preserve">
+    <value>Existe uma Phase vapor na corrente de entrada do tanque.</value>
   </data>
   <data name="Existeumerronaconfig" xml:space="preserve">
     <value>Existe um erro na configuração da Especificação. Verifique os objetos fonte e destino.</value>
@@ -1343,7 +1343,7 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Fator Acêntrico</value>
   </data>
   <data name="Fatordecompressibili" xml:space="preserve">
-    <value>Fator de compressibilidade (Z) da fase nas condições da mistura</value>
+    <value>Fator de compressibilidade (Z) da Phase nas condições da mistura</value>
   </data>
   <data name="Fechando" xml:space="preserve">
     <value>Fechando </value>
@@ -1381,11 +1381,11 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="Fluxograma" xml:space="preserve">
     <value>Fluxograma</value>
   </data>
-  <data name="FMFaseLquida" xml:space="preserve">
-    <value> (FM Fase Líquida)</value>
+  <data name="FMPhaseLquida" xml:space="preserve">
+    <value> (FM Phase Líquida)</value>
   </data>
-  <data name="FMFaseVapor" xml:space="preserve">
-    <value> (FM Fase Vapor)</value>
+  <data name="FMPhaseVapor" xml:space="preserve">
+    <value> (FM Phase Vapor)</value>
   </data>
   <data name="FMMistura" xml:space="preserve">
     <value> (FM Mistura)</value>
@@ -1522,23 +1522,23 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="FraoMolar2" xml:space="preserve">
     <value>Fração Molar Cumulativa</value>
   </data>
-  <data name="Fraomolardafase" xml:space="preserve">
-    <value>Fração molar da fase</value>
+  <data name="FraomolardaPhase" xml:space="preserve">
+    <value>Fração molar da Phase</value>
   </data>
-  <data name="FraomolardafaseFaseL" xml:space="preserve">
-    <value>Fração molar da fase (Fase Líquida)</value>
+  <data name="FraomolardaPhasePhaseL" xml:space="preserve">
+    <value>Fração molar da Phase (Phase Líquida)</value>
   </data>
-  <data name="FraomolardafaseFaseV" xml:space="preserve">
-    <value>Fração molar da fase (Fase Vapor)</value>
+  <data name="FraomolardaPhasePhaseV" xml:space="preserve">
+    <value>Fração molar da Phase (Phase Vapor)</value>
   </data>
-  <data name="Fraomolardafasenamis" xml:space="preserve">
-    <value>Fração molar da fase na mistura</value>
+  <data name="FraomolardaPhasenamis" xml:space="preserve">
+    <value>Fração molar da Phase na mistura</value>
   </data>
-  <data name="FraomolarnaFaseLquid" xml:space="preserve">
-    <value>Fração molar na Fase Líquida</value>
+  <data name="FraomolarnaPhaseLquid" xml:space="preserve">
+    <value>Fração molar na Phase Líquida</value>
   </data>
-  <data name="FraomolarnaFaseVapor" xml:space="preserve">
-    <value>Fração molar na Fase Vapor</value>
+  <data name="FraomolarnaPhaseVapor" xml:space="preserve">
+    <value>Fração molar na Phase Vapor</value>
   </data>
   <data name="FraomolarnaMistura" xml:space="preserve">
     <value>Fração molar na Mistura</value>
@@ -1555,29 +1555,29 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="FraoMssica" xml:space="preserve">
     <value>Fração Mássica</value>
   </data>
-  <data name="Fraomssicadafase" xml:space="preserve">
-    <value>Fração mássica da fase</value>
+  <data name="FraomssicadaPhase" xml:space="preserve">
+    <value>Fração mássica da Phase</value>
   </data>
-  <data name="FraomssicadafaseFase" xml:space="preserve">
-    <value>Fração mássica da fase (Fase Vapor)</value>
+  <data name="FraomssicadaPhasePhase" xml:space="preserve">
+    <value>Fração mássica da Phase (Phase Vapor)</value>
   </data>
-  <data name="FraomssicadafaseFase2" xml:space="preserve">
-    <value>Fração mássica da fase (Fase Líquida)</value>
+  <data name="FraomssicadaPhasePhase2" xml:space="preserve">
+    <value>Fração mássica da Phase (Phase Líquida)</value>
   </data>
-  <data name="FraomssicadafaseFase3" xml:space="preserve">
-    <value>Fração mássica da fase (Fase Vapor)</value>
+  <data name="FraomssicadaPhasePhase3" xml:space="preserve">
+    <value>Fração mássica da Phase (Phase Vapor)</value>
   </data>
-  <data name="FraomssicadafaseFase4" xml:space="preserve">
-    <value>Fração mássica da fase (Fase Líquida)</value>
+  <data name="FraomssicadaPhasePhase4" xml:space="preserve">
+    <value>Fração mássica da Phase (Phase Líquida)</value>
   </data>
-  <data name="Fraomssicadafasenami" xml:space="preserve">
-    <value>Fração mássica da fase na mistura</value>
+  <data name="FraomssicadaPhasenami" xml:space="preserve">
+    <value>Fração mássica da Phase na mistura</value>
   </data>
-  <data name="FraomssicanaFaseLqui" xml:space="preserve">
-    <value>Fração mássica na Fase Líquida</value>
+  <data name="FraomssicanaPhaseLqui" xml:space="preserve">
+    <value>Fração mássica na Phase Líquida</value>
   </data>
-  <data name="FraomssicanaFaseVapo" xml:space="preserve">
-    <value>Fração mássica na Fase Vapor</value>
+  <data name="FraomssicanaPhaseVapo" xml:space="preserve">
+    <value>Fração mássica na Phase Vapor</value>
   </data>
   <data name="FraomssicanaMistura" xml:space="preserve">
     <value>Fração mássica na Mistura</value>
@@ -1747,11 +1747,11 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="LIQEntropiaEspecfica" xml:space="preserve">
     <value>LIQ Entropia Específica</value>
   </data>
-  <data name="LIQFraomolardafase" xml:space="preserve">
-    <value>LIQ Fração molar da fase</value>
+  <data name="LIQFraomolardaPhase" xml:space="preserve">
+    <value>LIQ Fração molar da Phase</value>
   </data>
-  <data name="LIQFraomssicadafase" xml:space="preserve">
-    <value>LIQ Fração mássica da fase</value>
+  <data name="LIQFraomssicadaPhase" xml:space="preserve">
+    <value>LIQ Fração mássica da Phase</value>
   </data>
   <data name="LIQMassaespecfica" xml:space="preserve">
     <value>LIQ Massa específica</value>
@@ -1804,23 +1804,23 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="Massaespecfica" xml:space="preserve">
     <value>Massa específica</value>
   </data>
-  <data name="Massaespecficadafase" xml:space="preserve">
-    <value>Massa específica da fase vapor</value>
+  <data name="MassaespecficadaPhase" xml:space="preserve">
+    <value>Massa específica da Phase vapor</value>
   </data>
-  <data name="Massaespecficadafase2" xml:space="preserve">
-    <value>Massa específica da fase líquida</value>
+  <data name="MassaespecficadaPhase2" xml:space="preserve">
+    <value>Massa específica da Phase líquida</value>
   </data>
-  <data name="MassaEspecficadaFase3" xml:space="preserve">
-    <value>Massa Específica da Fase Líquida: Método de Rackett</value>
+  <data name="MassaEspecficadaPhase3" xml:space="preserve">
+    <value>Massa Específica da Phase Líquida: Método de Rackett</value>
   </data>
   <data name="Massaespecficadamist" xml:space="preserve">
     <value>Massa específica da mistura</value>
   </data>
-  <data name="MassaespecficaFaseLq" xml:space="preserve">
-    <value>Massa específica (Fase Líquida)</value>
+  <data name="MassaespecficaPhaseLq" xml:space="preserve">
+    <value>Massa específica (Phase Líquida)</value>
   </data>
-  <data name="MassaespecficaFaseVa" xml:space="preserve">
-    <value>Massa específica (Fase Vapor)</value>
+  <data name="MassaespecficaPhaseVa" xml:space="preserve">
+    <value>Massa específica (Phase Vapor)</value>
   </data>
   <data name="MassaespecficaMistur" xml:space="preserve">
     <value>Massa específica (Mistura)</value>
@@ -1828,20 +1828,20 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="Massamolar" xml:space="preserve">
     <value>Massa molar</value>
   </data>
-  <data name="Massamolardafaselqui" xml:space="preserve">
-    <value>Massa molar da fase líquida</value>
+  <data name="MassamolardaPhaselqui" xml:space="preserve">
+    <value>Massa molar da Phase líquida</value>
   </data>
-  <data name="Massamolardafasevapo" xml:space="preserve">
-    <value>Massa molar da fase vapor</value>
+  <data name="MassamolardaPhasevapo" xml:space="preserve">
+    <value>Massa molar da Phase vapor</value>
   </data>
   <data name="Massamolardamistura" xml:space="preserve">
     <value>Massa molar da mistura</value>
   </data>
-  <data name="MassamolarFaseLquida" xml:space="preserve">
-    <value>Massa molar (Fase Líquida)</value>
+  <data name="MassamolarPhaseLquida" xml:space="preserve">
+    <value>Massa molar (Phase Líquida)</value>
   </data>
-  <data name="MassamolarFaseVapor" xml:space="preserve">
-    <value>Massa molar (Fase Vapor)</value>
+  <data name="MassamolarPhaseVapor" xml:space="preserve">
+    <value>Massa molar (Phase Vapor)</value>
   </data>
   <data name="MassamolarMistura" xml:space="preserve">
     <value>Massa molar (Mistura)</value>
@@ -1934,34 +1934,34 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>molar</value>
   </data>
   <data name="Mostraacomposiodafas" xml:space="preserve">
-    <value>Mostra a composição da fase vapor, em frações molares</value>
+    <value>Mostra a composição da Phase vapor, em frações molares</value>
   </data>
   <data name="Mostraacomposiodafas10" xml:space="preserve">
-    <value>Mostra a composição da fase líquida, em vazões volumétricas</value>
+    <value>Mostra a composição da Phase líquida, em vazões volumétricas</value>
   </data>
   <data name="Mostraacomposiodafas2" xml:space="preserve">
-    <value>Mostra a composição da fase líquida, em frações molares</value>
+    <value>Mostra a composição da Phase líquida, em frações molares</value>
   </data>
   <data name="Mostraacomposiodafas3" xml:space="preserve">
-    <value>Mostra a composição da fase vapor, em frações mássicas</value>
+    <value>Mostra a composição da Phase vapor, em frações mássicas</value>
   </data>
   <data name="Mostraacomposiodafas4" xml:space="preserve">
-    <value>Mostra a composição da fase líquida, em frações mássicas</value>
+    <value>Mostra a composição da Phase líquida, em frações mássicas</value>
   </data>
   <data name="Mostraacomposiodafas5" xml:space="preserve">
-    <value>Mostra a composição da fase vapor, em vazões mássicas</value>
+    <value>Mostra a composição da Phase vapor, em vazões mássicas</value>
   </data>
   <data name="Mostraacomposiodafas6" xml:space="preserve">
-    <value>Mostra a composição da fase líquida, em vazões mássicas</value>
+    <value>Mostra a composição da Phase líquida, em vazões mássicas</value>
   </data>
   <data name="Mostraacomposiodafas7" xml:space="preserve">
-    <value>Mostra a composição da fase vapor, em vazões molares</value>
+    <value>Mostra a composição da Phase vapor, em vazões molares</value>
   </data>
   <data name="Mostraacomposiodafas8" xml:space="preserve">
-    <value>Mostra a composição da fase líquida, em vazões molares</value>
+    <value>Mostra a composição da Phase líquida, em vazões molares</value>
   </data>
   <data name="Mostraacomposiodafas9" xml:space="preserve">
-    <value>Mostra a composição da fase vapor, em vazões volumétricas</value>
+    <value>Mostra a composição da Phase vapor, em vazões volumétricas</value>
   </data>
   <data name="Motivo" xml:space="preserve">
     <value>Motivo: </value>
@@ -2231,10 +2231,10 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Pacote de Propriedades que utiliza a EE Redlich-Kwong modificada por Soave. Indicado para uso com hidrocarboLiquidos e não-condensáveis.</value>
   </data>
   <data name="PacotedePropriedades4" xml:space="preserve">
-    <value>Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC para a modelagem da fase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A fase vapor é modelada através da EDE Peng-Robinson.</value>
+    <value>Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC para a modelagem da Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A Phase vapor é modelada através da EDE Peng-Robinson.</value>
   </data>
   <data name="PacotedePropriedades5" xml:space="preserve">
-    <value>Pacote de Propriedades de referência, onde o equilíbrio termodinâmico é calculado pela Lei de Raoult. As Entalpias, Entropias e Capacidades Caloríficas residuais são consideradas iguais a zero. A Entalpia da Fase Líquida utiliza os valores de Delta-H de Vaporização experimentais ou calculados no caso dos Pseudo-componentes/Hypotheticals.</value>
+    <value>Pacote de Propriedades de referência, onde o equilíbrio termodinâmico é calculado pela Lei de Raoult. As Entalpias, Entropias e Capacidades Caloríficas residuais são consideradas iguais a zero. A Entalpia da Phase Líquida utiliza os valores de Delta-H de Vaporização experimentais ou calculados no caso dos Pseudo-componentes/Hypotheticals.</value>
   </data>
   <data name="PaineldeControle" xml:space="preserve">
     <value>Painel de Controle</value>
@@ -2482,14 +2482,14 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="Propriedades3" xml:space="preserve">
     <value>3. Propriedades</value>
   </data>
-  <data name="PropriedadesdaFaseLq" xml:space="preserve">
-    <value>Propriedades da Fase Líquida</value>
+  <data name="PropriedadesdaPhaseLq" xml:space="preserve">
+    <value>Propriedades da Phase Líquida</value>
   </data>
-  <data name="Propriedadesdafaseva" xml:space="preserve">
-    <value>Propriedades da fase vapor</value>
+  <data name="PropriedadesdaPhaseva" xml:space="preserve">
+    <value>Propriedades da Phase vapor</value>
   </data>
-  <data name="PropriedadesdaFaseVa2" xml:space="preserve">
-    <value>Propriedades da Fase Vapor</value>
+  <data name="PropriedadesdaPhaseVa2" xml:space="preserve">
+    <value>Propriedades da Phase Vapor</value>
   </data>
   <data name="Propriedadesdamistur" xml:space="preserve">
     <value>Propriedades da mistura</value>
@@ -2866,7 +2866,7 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="StatusOcioso" xml:space="preserve">
     <value>Status: Ocioso</value>
   </data>
-  <data name="Substancia" xml:space="preserve">
+  <data name="Compound" xml:space="preserve">
     <value>Componente</value>
   </data>
   <data name="Substnciaremovida" xml:space="preserve">
@@ -2948,10 +2948,10 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Tensão superficial</value>
   </data>
   <data name="TensoSuperficialdaFa" xml:space="preserve">
-    <value>Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
+    <value>Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
   </data>
   <data name="Tensosuperficialentr" xml:space="preserve">
-    <value>Tensão superficial entre as fases</value>
+    <value>Tensão superficial entre as Phases</value>
   </data>
   <data name="TensosuperficialMist" xml:space="preserve">
     <value>Tensão superficial (Mistura)</value>
@@ -3100,11 +3100,11 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="VAPEntropiaEspecfica" xml:space="preserve">
     <value>VAP Entropia Específica</value>
   </data>
-  <data name="VAPFraomolardafase" xml:space="preserve">
-    <value>VAP Fração molar da fase</value>
+  <data name="VAPFraomolardaPhase" xml:space="preserve">
+    <value>VAP Fração molar da Phase</value>
   </data>
-  <data name="VAPFraomssicadafase" xml:space="preserve">
-    <value>VAP Fração mássica da fase</value>
+  <data name="VAPFraomssicadaPhase" xml:space="preserve">
+    <value>VAP Fração mássica da Phase</value>
   </data>
   <data name="VAPMassaespecfica" xml:space="preserve">
     <value>VAP Massa específica</value>
@@ -3181,20 +3181,20 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="Vazomssicadamistura" xml:space="preserve">
     <value>Vazão mássica da mistura</value>
   </data>
-  <data name="VazomssicaFaseLquida" xml:space="preserve">
-    <value>Vazão mássica (Fase Líquida)</value>
+  <data name="VazomssicaPhaseLquida" xml:space="preserve">
+    <value>Vazão mássica (Phase Líquida)</value>
   </data>
-  <data name="VazomssicaFaseVapor" xml:space="preserve">
-    <value>Vazão mássica (Fase Vapor)</value>
+  <data name="VazomssicaPhaseVapor" xml:space="preserve">
+    <value>Vazão mássica (Phase Vapor)</value>
   </data>
   <data name="VazomssicaMistura" xml:space="preserve">
     <value>Vazão mássica (Mistura)</value>
   </data>
-  <data name="VazomssicanaFaseLqui" xml:space="preserve">
-    <value>Vazão mássica na Fase Líquida</value>
+  <data name="VazomssicanaPhaseLqui" xml:space="preserve">
+    <value>Vazão mássica na Phase Líquida</value>
   </data>
-  <data name="VazomssicanaFaseVapo" xml:space="preserve">
-    <value>Vazão mássica na Fase Vapor</value>
+  <data name="VazomssicanaPhaseVapo" xml:space="preserve">
+    <value>Vazão mássica na Phase Vapor</value>
   </data>
   <data name="VazomssicanaMistura" xml:space="preserve">
     <value>Vazão mássica na Mistura</value>
@@ -3202,11 +3202,11 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="VazoTP" xml:space="preserve">
     <value>Vazão @ T,P</value>
   </data>
-  <data name="VazoTPFaseLquida" xml:space="preserve">
-    <value>Vazão @ T,P (Fase Líquida)</value>
+  <data name="VazoTPPhaseLquida" xml:space="preserve">
+    <value>Vazão @ T,P (Phase Líquida)</value>
   </data>
-  <data name="VazoTPFaseVapor" xml:space="preserve">
-    <value>Vazão @ T,P (Fase Vapor)</value>
+  <data name="VazoTPPhaseVapor" xml:space="preserve">
+    <value>Vazão @ T,P (Phase Vapor)</value>
   </data>
   <data name="Vazovolumtrica" xml:space="preserve">
     <value>Vazão volumétrica</value>
@@ -3217,11 +3217,11 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="Vazovolumtricadamist" xml:space="preserve">
     <value>Vazão volumétrica da mistura</value>
   </data>
-  <data name="VazovolumtricanaFase" xml:space="preserve">
-    <value>Vazão volumétrica na Fase Vapor</value>
+  <data name="VazovolumtricanaPhase" xml:space="preserve">
+    <value>Vazão volumétrica na Phase Vapor</value>
   </data>
-  <data name="VazovolumtricanaFase1" xml:space="preserve">
-    <value>Vazão volumétrica na Fase Líquida</value>
+  <data name="VazovolumtricanaPhase1" xml:space="preserve">
+    <value>Vazão volumétrica na Phase Líquida</value>
   </data>
   <data name="VazovolumtricanaMist" xml:space="preserve">
     <value>Vazão volumétrica na Mistura</value>
@@ -3275,16 +3275,16 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Viscosidade Cinemática</value>
   </data>
   <data name="Viscosidadecinemtica1" xml:space="preserve">
-    <value>Viscosidade cinemática (Fase Vapor)</value>
+    <value>Viscosidade cinemática (Phase Vapor)</value>
   </data>
   <data name="Viscosidadecinemtica2" xml:space="preserve">
-    <value>Viscosidade cinemática da fase</value>
+    <value>Viscosidade cinemática da Phase</value>
   </data>
   <data name="Viscosidadecinemtica3" xml:space="preserve">
-    <value>Viscosidade cinemática (Fase Líquida)</value>
+    <value>Viscosidade cinemática (Phase Líquida)</value>
   </data>
-  <data name="ViscosidadedaFaseVap" xml:space="preserve">
-    <value>Viscosidade da Fase Vapor: Método Jossi-Stiel-Thodos</value>
+  <data name="ViscosidadedaPhaseVap" xml:space="preserve">
+    <value>Viscosidade da Phase Vapor: Método Jossi-Stiel-Thodos</value>
   </data>
   <data name="Viscosidadedinmica" xml:space="preserve">
     <value>Viscosidade dinâmica</value>
@@ -3293,19 +3293,19 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Viscosidade Dinâmica</value>
   </data>
   <data name="Viscosidadedinmicada" xml:space="preserve">
-    <value>Viscosidade dinâmica da fase</value>
+    <value>Viscosidade dinâmica da Phase</value>
   </data>
   <data name="ViscosidadedinmicaFa" xml:space="preserve">
-    <value>Viscosidade dinâmica (Fase Vapor)</value>
+    <value>Viscosidade dinâmica (Phase Vapor)</value>
   </data>
   <data name="ViscosidadedinmicaFa2" xml:space="preserve">
-    <value>Viscosidade dinâmica (Fase Líquida)</value>
+    <value>Viscosidade dinâmica (Phase Líquida)</value>
   </data>
   <data name="ViscosidadedinmicaFa3" xml:space="preserve">
-    <value>Viscosidade dinâmica (Fase Vapor)</value>
+    <value>Viscosidade dinâmica (Phase Vapor)</value>
   </data>
   <data name="ViscosidadedinmicaFa4" xml:space="preserve">
-    <value>Viscosidade dinâmica (Fase Líquida)</value>
+    <value>Viscosidade dinâmica (Phase Líquida)</value>
   </data>
   <data name="ViscosidadeLquido" xml:space="preserve">
     <value>Viscosidade (Líquido)</value>
@@ -3409,11 +3409,11 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
   <data name="Wegstein" xml:space="preserve">
     <value>Wegstein...</value>
   </data>
-  <data name="ZFaseLquida" xml:space="preserve">
-    <value>Z (Fase Líquida)</value>
+  <data name="ZPhaseLquida" xml:space="preserve">
+    <value>Z (Phase Líquida)</value>
   </data>
-  <data name="ZFaseVapor" xml:space="preserve">
-    <value>Z (Fase Vapor)</value>
+  <data name="ZPhaseVapor" xml:space="preserve">
+    <value>Z (Phase Vapor)</value>
   </data>
   <data name="CliqueemOKparalimparamalha" xml:space="preserve">
     <value>Clique em OK para limpar a malha</value>
@@ -3485,13 +3485,13 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Coeficiente global de troca térmica (U)</value>
   </data>
   <data name="BothPhasesNotAllowed" xml:space="preserve">
-    <value>A existência de fases líquido e vapor não é permitida.</value>
+    <value>A existência de Phases líquido e vapor não é permitida.</value>
   </data>
-  <data name="Existeumafasevaporna21" xml:space="preserve">
-    <value>Existe uma fase vapor na corrente de entrada do trocador de calor</value>
+  <data name="ExisteumaPhasevaporna21" xml:space="preserve">
+    <value>Existe uma Phase vapor na corrente de entrada do trocador de calor</value>
   </data>
   <data name="PhaseChangeNotallowed" xml:space="preserve">
-    <value>Mudança de fase não permitida.</value>
+    <value>Mudança de Phase não permitida.</value>
   </data>
   <data name="HeatLoad" xml:space="preserve">
     <value>Carga térmica</value>
@@ -3575,7 +3575,7 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>O cálculo Flash PV não é suportado.</value>
   </data>
   <data name="DescPengRobinsonMP" xml:space="preserve">
-    <value>Pacote de Propriedades com a EDE Peng-Robinson e suporte a mais de uma fase líquida.</value>
+    <value>Pacote de Propriedades com a EDE Peng-Robinson e suporte a mais de uma Phase líquida.</value>
   </data>
   <data name="Liquid1" xml:space="preserve">
     <value>Líquido 1</value>
@@ -3692,10 +3692,10 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Usar estimativas de temperatura</value>
   </data>
   <data name="DescNRTLPP" xml:space="preserve">
-    <value>Neste Pacote de Propriedades, o coeficiente de atividade da fase líquida é calculado através do modelo NRTL (Non-Random Two-Liquid). Opcionalmente, a fugacidade da fase vapor é calculada através da EDE Peng-Robinson. As entalpias de ambas as fases são calculadas pela equação Lee-Kesler. Outras propriedades termodinâmicas são calculadas pela EDE Peng-Robinson. </value>
+    <value>Neste Pacote de Propriedades, o coeficiente de atividade da Phase líquida é calculado através do modelo NRTL (Non-Random Two-Liquid). Opcionalmente, a fugacidade da Phase vapor é calculada através da EDE Peng-Robinson. As entalpias de ambas as Phases são calculadas pela equação Lee-Kesler. Outras propriedades termodinâmicas são calculadas pela EDE Peng-Robinson. </value>
   </data>
   <data name="DescUNIQUACPP" xml:space="preserve">
-    <value>Neste Pacote de Propriedades, o coeficiente de atividade da fase líquida é calculado através do modelo UNIQUAC. Opcionalmente, a fugacidade da fase vapor é calculada através da EDE Peng-Robinson. As entalpias de ambas as fases são calculadas pela equação Lee-Kesler. Outras propriedades termodinâmicas são calculadas pela EDE Peng-Robinson.</value>
+    <value>Neste Pacote de Propriedades, o coeficiente de atividade da Phase líquida é calculado através do modelo UNIQUAC. Opcionalmente, a fugacidade da Phase vapor é calculada através da EDE Peng-Robinson. As entalpias de ambas as Phases são calculadas pela equação Lee-Kesler. Outras propriedades termodinâmicas são calculadas pela EDE Peng-Robinson.</value>
   </data>
   <data name="CompHypo" xml:space="preserve">
     <value>Hipotético</value>
@@ -3917,19 +3917,19 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Tempo de cálculo da última execução</value>
   </data>
   <data name="VolFractionLiqPhase" xml:space="preserve">
-    <value>Fração Volumétrica na Fase Líquida</value>
+    <value>Fração Volumétrica na Phase Líquida</value>
   </data>
   <data name="VolFractionMixture" xml:space="preserve">
     <value>Fração Volumétrica na Mistura</value>
   </data>
   <data name="VolFractionVaporPhase" xml:space="preserve">
-    <value>Fração Volumétrica na Fase Vapor</value>
+    <value>Fração Volumétrica na Phase Vapor</value>
   </data>
   <data name="PP_USE_EOS_LIQDENS" xml:space="preserve">
-    <value>Usar EDE para o Cálculo da Massa Específica da Fase Líquida (0 = Desativar, 1 = Ativar)</value>
+    <value>Usar EDE para o Cálculo da Massa Específica da Phase Líquida (0 = Desativar, 1 = Ativar)</value>
   </data>
   <data name="DescMUPP" xml:space="preserve">
-    <value>Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC Modificado (Dortmund) para a modelagem da fase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler.</value>
+    <value>Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC Modificado (Dortmund) para a modelagem da Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler.</value>
   </data>
   <data name="String1" xml:space="preserve">
     <value />
@@ -3986,10 +3986,10 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Usar Cálculo Rigoroso de Pressões de Bolha e Orvalho para Inicializar o Flash PT (0 = Desativar, 1 = Ativar)</value>
   </data>
   <data name="Aqueous" xml:space="preserve">
-    <value>Fase Aquosa</value>
+    <value>Phase Aquosa</value>
   </data>
   <data name="DescPengRobinsonIWVTPP" xml:space="preserve">
-    <value>Pacote de Propriedades que utiliza a EDE Peng-Robinson e considera água totalmente imiscível com hidrocarbonetos, separando-se em uma fase isolada. Também utiliza translação no cálculo do volume molar para uma melhor predição da densidade de líquidos.</value>
+    <value>Pacote de Propriedades que utiliza a EDE Peng-Robinson e considera água totalmente imiscível com hidrocarbonetos, separando-se em uma Phase isolada. Também utiliza translação no cálculo do volume molar para uma melhor predição da densidade de líquidos.</value>
   </data>
   <data name="PRIWVT" xml:space="preserve">
     <value>Peng-Robinson (Água Imiscível e Translação de Volume)</value>
@@ -4289,7 +4289,7 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Editar Matriz de Elementos</value>
   </data>
   <data name="PP_IDEAL_MIXRULE_LIQDENS" xml:space="preserve">
-    <value>Usar Regra de Mistura Ideal para Densidade da Fase Líquida (0 = Desativar, 1 = Ativar)</value>
+    <value>Usar Regra de Mistura Ideal para Densidade da Phase Líquida (0 = Desativar, 1 = Ativar)</value>
   </data>
   <data name="CalculandoFatordeAjuste" xml:space="preserve">
     <value>Calculando Fator de Ajuste</value>
@@ -4382,10 +4382,10 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Modelo de uma turbina (expansor) adiabática industrial.</value>
   </data>
   <data name="VasoSeparadorGL_Desc" xml:space="preserve">
-    <value>Vaso para separar as fases de uma corrente.</value>
+    <value>Vaso para separar as Phases de uma corrente.</value>
   </data>
   <data name="VasoSeparador_Desc" xml:space="preserve">
-    <value>Vaso para separar as fases de uma corrente.</value>
+    <value>Vaso para separar as Phases de uma corrente.</value>
   </data>
   <data name="Vlvula_Desc" xml:space="preserve">
     <value>Modelo de uma válvula adiabática.</value>
@@ -4421,7 +4421,7 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Script</value>
   </data>
   <data name="DescCSPP" xml:space="preserve">
-    <value>Pacote de Propriedades que utiliza o método COSMO-SAC implementado na biblioteca JCOSMO por Rafael Soares e Renan Gerber para a predição do coeficiente de atividade dos componentes na fase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A fase vapor é modelada através da EDE Peng-Robinson.</value>
+    <value>Pacote de Propriedades que utiliza o método COSMO-SAC implementado na biblioteca JCOSMO por Rafael Soares e Renan Gerber para a predição do coeficiente de atividade dos componentes na Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A Phase vapor é modelada através da EDE Peng-Robinson.</value>
   </data>
   <data name="CorrentedeenergiaE" xml:space="preserve">
     <value>Corrente de Energia (Entrada)</value>
@@ -4469,7 +4469,7 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Operação Unitária CAPE-OPEN</value>
   </data>
   <data name="DescCOPP" xml:space="preserve">
-    <value>Um Pacote de Propriedades CAPE-OPEN é uma coleção completa, consistente e reutilizável de métodos, compostos e parâmetros do modelo de cálculo de qualquer de um conjunto de propriedades físicas conhecidas para as fases de um material. Ele inclui todos os métodos e compostos puros dados, juntamente com as normas pertinentes à mistura e parâmetros de interação. Um Pacote de Propriedades normalmente cobre apenas um pequeno subconjunto dos compostos e métodos acessíveis através de um Sistema de Propriedades Físicas.</value>
+    <value>Um Pacote de Propriedades CAPE-OPEN é uma coleção completa, consistente e reutilizável de métodos, compostos e parâmetros do modelo de cálculo de qualquer de um conjunto de propriedades físicas conhecidas para as Phases de um material. Ele inclui todos os métodos e compostos puros dados, juntamente com as normas pertinentes à mistura e parâmetros de interação. Um Pacote de Propriedades normalmente cobre apenas um pequeno subconjunto dos compostos e métodos acessíveis através de um Sistema de Propriedades Físicas.</value>
   </data>
   <data name="BuildDate" xml:space="preserve">
     <value>Data da Compilação</value>
@@ -4499,7 +4499,7 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Perturbação da temperatura no loop externo (K)</value>
   </data>
   <data name="COWarningMsg1" xml:space="preserve">
-    <value>Lembre-se de remapear as fases e os componentes do Pacote CAPE-OPEN para o DWSIM depois de efetuar mudanças nas suas configurações.</value>
+    <value>Lembre-se de remapear as Phases e os componentes do Pacote CAPE-OPEN para o DWSIM depois de efetuar mudanças nas suas configurações.</value>
   </data>
   <data name="COWarningMsg2" xml:space="preserve">
     <value>O Pacote de Propriedades atual será substituido pelo selecionado. Deseja continuar?</value>
@@ -4526,14 +4526,14 @@ DWSIM's implementation is based on the FORTRAN program which can be downloaded a
 
 A modificação para o termo atrativo na equação Peng-Robinson publicado por Stryjek e Vera em 1986 (PRSV) melhorou significativamente a precisão do modelo através da introdução de um parâmetro ajustável para o componente puro e modificando o ajuste polinomial do fator acêntrico. Uma modificação posterior, publicada em 1986 (PRSV2), melhorou a precisão dos modelos através da introdução de dois novos parâmetros para o componente puro.
 
-A EDE PRSV2 é particularmente vantajosa para os cálculos VLE. Enquanto a PRSV1 oferece uma vantagem sobre o modelo de Peng-Robinson para descrever o comportamento termodinâmico, ainda não é precisa o suficiente, em geral, para os cálculos de equilíbrio de fases.</value>
+A EDE PRSV2 é particularmente vantajosa para os cálculos VLE. Enquanto a PRSV1 oferece uma vantagem sobre o modelo de Peng-Robinson para descrever o comportamento termodinâmico, ainda não é precisa o suficiente, em geral, para os cálculos de equilíbrio de Phases.</value>
   </data>
   <data name="DescPRSV2VLPP" xml:space="preserve">
     <value>PRSV2 EOS com três parâmetros por componente (k1, k2 e k3) e dois parâmetros de interação binária do tipo Margules (kij e kji).
 
 A modificação para o termo atrativo na equação Peng-Robinson publicado por Stryjek e Vera em 1986 (PRSV) melhorou significativamente a precisão do modelo através da introdução de um parâmetro ajustável para o componente puro e modificando o ajuste polinomial do fator acêntrico. Uma modificação posterior, publicada em 1986 (PRSV2), melhorou a precisão dos modelos através da introdução de dois novos parâmetros para o componente puro.
 
-A EDE PRSV2 é particularmente vantajosa para os cálculos VLE. Enquanto a PRSV1 oferece uma vantagem sobre o modelo de Peng-Robinson para descrever o comportamento termodinâmico, ainda não é precisa o suficiente, em geral, para os cálculos de equilíbrio de fases.</value>
+A EDE PRSV2 é particularmente vantajosa para os cálculos VLE. Enquanto a PRSV1 oferece uma vantagem sobre o modelo de Peng-Robinson para descrever o comportamento termodinâmico, ainda não é precisa o suficiente, em geral, para os cálculos de equilíbrio de Phases.</value>
   </data>
   <data name="MasterTable" xml:space="preserve">
     <value>Tabela Mestra</value>
@@ -4739,7 +4739,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>O Filtro não é compatível com correntes de entrada contendo vapor.</value>
   </data>
   <data name="PP_IDEAL_VAPOR_PHASE_FUG" xml:space="preserve">
-    <value>Usar Modelo Ideal para Fugacidade da Fase Vapor (0 = Desativar, 1 = Ativar)</value>
+    <value>Usar Modelo Ideal para Fugacidade da Phase Vapor (0 = Desativar, 1 = Ativar)</value>
   </data>
   <data name="LiquidDensity" xml:space="preserve">
     <value>Massa Específica do Líquido</value>
@@ -4772,7 +4772,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>O resultado do cálculo flash nas condições informadas não é válido. Por favor tente novamente com um algoritmo flash diferente e, se o erro persistir, verifique se o modelo termodinâmico selecionado é adequado para o processo simulado.</value>
   </data>
   <data name="UnsuitableFlashAlgorithmSelected" xml:space="preserve">
-    <value>O Algoritmo Flash selecionado não é capaz de calcular o equilíbrio entre duas fases líquidas. Por favor, selecione um algortimo adequado para esta finalidade.</value>
+    <value>O Algoritmo Flash selecionado não é capaz de calcular o equilíbrio entre duas Phases líquidas. Por favor, selecione um algortimo adequado para esta finalidade.</value>
   </data>
   <data name="XLFileSaved" xml:space="preserve">
     <value>Planilha do Excel salva com sucesso.</value>
@@ -4829,7 +4829,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Curva de Equilíbrio de Hidratos</value>
   </data>
   <data name="PhaseIdentificationParameter" xml:space="preserve">
-    <value>Parâmetro de Identificação da Fase = 1</value>
+    <value>Parâmetro de Identificação da Phase = 1</value>
   </data>
   <data name="PontosdeOrvalhoWF" xml:space="preserve">
     <value>Pontos de Orvalho (Base Seca)</value>
@@ -5066,7 +5066,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>A corrente de entrada do Reciclo não está calculada ou não está em equilíbrio.</value>
   </data>
   <data name="DescNUPP" xml:space="preserve">
-    <value>Novos parâmetros do modelo de previsão de propriedade modificado UNIFAC são relatados para 89 grupos principais e 984 interações de grupo em grupo, utilizando dados de equilíbrio de fases criticamente avaliados incluindo equilíbrio líquido-vapor (ELV), o equilíbrio líquido-líquido (ELL), equilíbrio sólido-líquido (ESL) , excesso de entalpia (HE), coeficiente de atividade infinita de diluição (AINF) e dados de excesso de capacidade de calor (CPE). Os parâmetros obtidos são recomendados principalmente para correlações de dados de ELV.</value>
+    <value>Novos parâmetros do modelo de previsão de propriedade modificado UNIFAC são relatados para 89 grupos principais e 984 interações de grupo em grupo, utilizando dados de equilíbrio de Phases criticamente avaliados incluindo equilíbrio líquido-vapor (ELV), o equilíbrio líquido-líquido (ELL), equilíbrio sólido-líquido (ESL) , excesso de entalpia (HE), coeficiente de atividade infinita de diluição (AINF) e dados de excesso de capacidade de calor (CPE). Os parâmetros obtidos são recomendados principalmente para correlações de dados de ELV.</value>
   </data>
   <data name="ExpData" xml:space="preserve">
     <value>Dados experimentais</value>
@@ -5162,7 +5162,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Número de Reynolds de tubo</value>
   </data>
   <data name="SeparatorVessel_SecondLiquidPhaseFound" xml:space="preserve">
-    <value>Foi encontrada uma segunda fase líquida, por favor conecte uma corrente de matéria à saída correspondente.</value>
+    <value>Foi encontrada uma segunda Phase líquida, por favor conecte uma corrente de matéria à saída correspondente.</value>
   </data>
   <data name="Solving" xml:space="preserve">
     <value>Calculando</value>

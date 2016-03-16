@@ -29,8 +29,8 @@ Public Class FrmCritpt
     Dim cp As DWSIM.Utilities.TCP.Methods
     Dim cps As DWSIM.Utilities.TCP.Methods_SRK
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
 
     Private Sub FrmCritpt_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -54,12 +54,12 @@ Public Class FrmCritpt
             pr = Frm.Options.SelectedPropertyPackage
             pr.CurrentMaterialStream = mat
 
-            Dim n As Integer = mat.Fases(0).Componentes.Count - 1
+            Dim n As Integer = mat.Phases(0).Componentes.Count - 1
 
             Dim Vz(n) As Double
-            Dim comp As DWSIM.ClassesBasicasTermodinamica.Substancia
+            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
-            For Each comp In mat.Fases(0).Componentes.Values
+            For Each comp In mat.Phases(0).Componentes.Values
                 Vz(i) += comp.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
@@ -121,10 +121,10 @@ Public Class FrmCritpt
 
             Dim ppc, ptc, pvc, pzc, tpc, ttc, tvc, tzc As Double
 
-            ppc = Format(Conversor.ConverterDoSI(su.spmp_pressure, pr.AUX_PCM(DWSIM.SimulationObjects.PropertyPackages.Fase.Mixture)), nf)
-            ptc = Format(Conversor.ConverterDoSI(su.spmp_temperature, pr.AUX_TCM(DWSIM.SimulationObjects.PropertyPackages.Fase.Mixture)), nf)
-            pvc = Format(Conversor.ConverterDoSI(su.molar_volume, pr.AUX_VCM(DWSIM.SimulationObjects.PropertyPackages.Fase.Mixture) * 1000), nf)
-            pzc = Format(pr.AUX_ZCM(DWSIM.SimulationObjects.PropertyPackages.Fase.Mixture), nf)
+            ppc = Format(Converter.ConvertFromSI(su.pressure, pr.AUX_PCM(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)), nf)
+            ptc = Format(Converter.ConvertFromSI(su.temperature, pr.AUX_TCM(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)), nf)
+            pvc = Format(Converter.ConvertFromSI(su.molar_volume, pr.AUX_VCM(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture) * 1000), nf)
+            pzc = Format(pr.AUX_ZCM(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture), nf)
 
             Grid1.Rows.Add(New Object() {Grid1.Rows.Count + 1, "PCP", ptc, ppc, pvc, pzc})
 
@@ -134,9 +134,9 @@ Public Class FrmCritpt
                 tmp = pc(0)
 
                 For Each tmp In pc
-                    ttc = Format(Conversor.ConverterDoSI(su.spmp_temperature, tmp(0)), nf)
-                    tpc = Format(Conversor.ConverterDoSI(su.spmp_pressure, tmp(1)), nf)
-                    tvc = Format(Conversor.ConverterDoSI(su.molar_volume, tmp(2) * 1000), nf)
+                    ttc = Format(Converter.ConvertFromSI(su.temperature, tmp(0)), nf)
+                    tpc = Format(Converter.ConvertFromSI(su.pressure, tmp(1)), nf)
+                    tvc = Format(Converter.ConvertFromSI(su.molar_volume, tmp(2) * 1000), nf)
                     tzc = Format(tmp(1) * tmp(2) / (8.314 * tmp(0)), nf)
                     Grid1.Rows.Add(New Object() {Grid1.Rows.Count + 1, "TCP", ttc, tpc, tvc, tzc})
                 Next
@@ -173,8 +173,8 @@ Public Class FrmCritpt
             If Me.ComboBox3.Items.Count > 0 Then Me.ComboBox3.SelectedIndex = 0
 
             With Me.Grid1.Columns
-                .Item(2).HeaderText = "Tc (" & su.spmp_temperature & ")"
-                .Item(3).HeaderText = "Pc (" & su.spmp_pressure & ")"
+                .Item(2).HeaderText = "Tc (" & su.temperature & ")"
+                .Item(3).HeaderText = "Pc (" & su.pressure & ")"
                 .Item(4).HeaderText = "Vc (" & su.molar_volume & ")"
             End With
 

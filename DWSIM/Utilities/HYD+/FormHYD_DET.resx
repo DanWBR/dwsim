@@ -561,7 +561,7 @@
     <value>3</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
-    <value>Fugacidade da água na fase líquida/sólida:</value>
+    <value>Fugacidade da água na Phase líquida/sólida:</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -588,7 +588,7 @@
     <value>2</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
-    <value>Fases em equilíbrio:</value>
+    <value>Phases em equilíbrio:</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
@@ -615,7 +615,7 @@
     <value>1</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Coeficiente de atividade da água na fase líquida:</value>
+    <value>Coeficiente de atividade da água na Phase líquida:</value>
   </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
@@ -748,7 +748,7 @@
     <value>1</value>
   </data>
   <data name="GroupBox9.Text" xml:space="preserve">
-    <value>Composição das fases individuais, em frações molares</value>
+    <value>Composição das Phases individuais, em frações molares</value>
   </data>
   <data name="&gt;&gt;GroupBox9.Name" xml:space="preserve">
     <value>GroupBox9</value>

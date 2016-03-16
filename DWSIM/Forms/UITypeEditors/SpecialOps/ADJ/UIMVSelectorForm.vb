@@ -243,7 +243,7 @@ Public Class UIMVSelectorForm
         With TreeView3.Nodes
             Dim key As String = e.Node.Tag
 
-            Dim properties As String() = formC.Collections.ObjectCollection(key).GetProperties(SimulationObjects_BaseClass.PropertyType.WR)
+            Dim properties As String() = formC.Collections.ObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
 
             For Each prop As String In properties
                 .Add(prop, DWSIM.App.GetPropertyName(prop)).Tag = prop

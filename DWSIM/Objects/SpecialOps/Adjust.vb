@@ -25,11 +25,11 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
     <System.Serializable()> Public Class Adjust
 
-        Inherits SimulationObjects_SpecialOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.SpecialOpBaseClass
 
-        Protected m_ManipulatedObject As SimulationObjects_BaseClass
-        Protected m_ControlledObject As SimulationObjects_BaseClass
-        Protected m_ReferenceObject As SimulationObjects_BaseClass
+        Protected m_ManipulatedObject As DWSIM.SimulationObjects.UnitOperations.BaseClass
+        Protected m_ControlledObject As DWSIM.SimulationObjects.UnitOperations.BaseClass
+        Protected m_ReferenceObject As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
         Protected m_ManipulatedVariable As String = ""
         Protected m_ControlledVariable As String = ""
@@ -148,29 +148,29 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             End Set
         End Property
 
-        <Xml.Serialization.XmlIgnore()> Public Property ManipulatedObject() As SimulationObjects_BaseClass
+        <Xml.Serialization.XmlIgnore()> Public Property ManipulatedObject() As DWSIM.SimulationObjects.UnitOperations.BaseClass
             Get
                 Return Me.m_ManipulatedObject
             End Get
-            Set(ByVal value As SimulationObjects_BaseClass)
+            Set(ByVal value As DWSIM.SimulationObjects.UnitOperations.BaseClass)
                 Me.m_ManipulatedObject = value
             End Set
         End Property
 
-        <Xml.Serialization.XmlIgnore()> Public Property ControlledObject() As SimulationObjects_BaseClass
+        <Xml.Serialization.XmlIgnore()> Public Property ControlledObject() As DWSIM.SimulationObjects.UnitOperations.BaseClass
             Get
                 Return Me.m_ControlledObject
             End Get
-            Set(ByVal value As SimulationObjects_BaseClass)
+            Set(ByVal value As DWSIM.SimulationObjects.UnitOperations.BaseClass)
                 Me.m_ControlledObject = value
             End Set
         End Property
 
-        <Xml.Serialization.XmlIgnore()> Public Property ReferenceObject() As SimulationObjects_BaseClass
+        <Xml.Serialization.XmlIgnore()> Public Property ReferenceObject() As DWSIM.SimulationObjects.UnitOperations.BaseClass
             Get
                 Return Me.m_ReferenceObject
             End Get
-            Set(ByVal value As SimulationObjects_BaseClass)
+            Set(ByVal value As DWSIM.SimulationObjects.UnitOperations.BaseClass)
                 Me.m_ReferenceObject = value
             End Set
         End Property
@@ -333,7 +333,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             MyBase.New()
         End Sub
 
-        Public Sub New(ByVal nome As String, ByVal descricao As String)
+        Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
             m_ManipulatedObjectData = New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ManipulatedObjectInfo
@@ -351,14 +351,14 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SistemasDeUnidades.Unidades)
+        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
             Dim value As Double
-            Dim Conversor As New DWSIM.SistemasDeUnidades.Conversor
+            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
 
             With pgrid
 
@@ -393,9 +393,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 cpc2.Add(DWSIM.App.GetLocalString("Propriedade"), DWSIM.App.GetPropertyName(Me.ManipulatedObjectData.m_Property), True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
 
                 If Me.ManipulatedObject IsNot Nothing Then
-                    value = Format(Conversor.ConverterDoSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MinVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                    value = Format(Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MinVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                     cpc2.Add(FT(DWSIM.App.GetLocalString("Valormnimoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                    value = Format(Conversor.ConverterDoSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MaxVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                    value = Format(Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MaxVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                     cpc2.Add(FT(DWSIM.App.GetLocalString("Valormximoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
                 End If
                 .Item.Add(DWSIM.App.GetLocalString("VarivelManipulada"), cpc2, False, DWSIM.App.GetLocalString("Configuraes1"), DWSIM.App.GetLocalString("Selecioneavarivelase2"))
@@ -424,7 +424,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 End If
 
                 If Me.ControlledObject IsNot Nothing Then
-                    value = Format(Conversor.ConverterDoSI(Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su), Me.AdjustValue), FlowSheet.Options.NumberFormat)
+                    value = Format(Converter.ConvertFromSI(Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su), Me.AdjustValue), FlowSheet.Options.NumberFormat)
                     .Item.Add(FT(DWSIM.App.GetLocalString("ValordeAjusteouOffse"), Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SetpointdoAjusteouov"), True)
                 End If
                 .Item.Add(DWSIM.App.GetLocalString("NmeroMximodeIteraes"), Me, "MaximumIterations", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("Nmeromximodeiteraesa"), True)
@@ -452,22 +452,22 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             Return 0
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As SimulationObjects_BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
             Return 0
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SistemasDeUnidades.Unidades = Nothing) As Object
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             Return 0
         End Function
     End Class

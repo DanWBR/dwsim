@@ -214,7 +214,7 @@
     <value>Numerador</value>
   </data>
   <data name="KryptonLabel6.Text" xml:space="preserve">
-    <value>Fase</value>
+    <value>Phase</value>
   </data>
   <data name="KryptonLabel7.Text" xml:space="preserve">
     <value>Tmin (K)</value>

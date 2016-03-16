@@ -16,7 +16,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports OutlookStyleControls
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports DWSIM.DWSIM.Outros
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
@@ -56,7 +56,7 @@ Public Class FormConfigWizard
 
         FrmChild = My.Application.ActiveSimulation
 
-        Dim comp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+        Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
         If Not loaded Or reset Then
 
             ACSC1 = New AutoCompleteStringCollection
@@ -165,7 +165,7 @@ Public Class FormConfigWizard
 
     End Sub
 
-    Public Function AddCompToGrid(ByRef comp As DWSIM.ClassesBasicasTermodinamica.ConstantProperties) As Integer
+    Public Function AddCompToGrid(ByRef comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties) As Integer
 
         'If Not initialized Then
         '    Me.Visible = False
@@ -261,7 +261,7 @@ Public Class FormConfigWizard
         ' TODO Add code to check that index is within range. If it is out of range, don't do anything.
         If Me.loaded Then
             If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(ogc1.Rows(index).Cells(0).Value) Then
-                Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+                Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
                 tmpcomp = Me.FrmChild.Options.NotSelectedComponents(ogc1.Rows(index).Cells(0).Value)
 
                 If tmpcomp.OriginalDB = "CoolProp" And My.Settings.ShowCoolPropWarning Then
@@ -275,8 +275,8 @@ Public Class FormConfigWizard
 
                 Dim proplist As New ArrayList
                 For Each ms In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
-                    For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
-                        phase.Componentes.Add(tmpcomp.Name, New DWSIM.ClassesBasicasTermodinamica.Substancia(tmpcomp.Name, ""))
+                    For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                        phase.Componentes.Add(tmpcomp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(tmpcomp.Name, ""))
                         phase.Componentes(tmpcomp.Name).ConstantProperties = tmpcomp
                     Next
 
@@ -311,7 +311,7 @@ Public Class FormConfigWizard
 
     Sub RemoveCompFromSimulation(ByVal compid As String)
 
-        Dim tmpcomp As New DWSIM.ClassesBasicasTermodinamica.ConstantProperties
+        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
         Dim nm As String = compid
         tmpcomp = Me.FrmChild.Options.SelectedComponents(nm)
         Me.FrmChild.Options.SelectedComponents.Remove(tmpcomp.Name)
@@ -322,7 +322,7 @@ Public Class FormConfigWizard
         Dim proplist As New ArrayList
 
         For Each ms In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
-            For Each phase As DWSIM.ClassesBasicasTermodinamica.Fase In ms.Fases.Values
+            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                 phase.Componentes.Remove(tmpcomp.Name)
             Next
 
@@ -374,19 +374,19 @@ Public Class FormConfigWizard
     Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
         FrmChild.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
-        Dim su As DWSIM.SistemasDeUnidades.Unidades = FrmChild.Options.SelectedUnitSystem
+        Dim su As DWSIM.SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
 
         With Me.DataGridView1.Rows
             .Clear()
-            .Add(New Object() {DWSIM.App.GetLocalString("Temperatura"), su.spmp_temperature, DWSIM.App.GetLocalString("Presso"), su.spmp_pressure})
-            .Add(New Object() {DWSIM.App.GetLocalString("Vazomssica"), su.spmp_massflow, DWSIM.App.GetLocalString("Vazomolar"), su.spmp_molarflow})
-            .Add(New Object() {DWSIM.App.GetLocalString("Vazovolumtrica"), su.spmp_volumetricFlow, DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.spmp_enthalpy})
-            .Add(New Object() {DWSIM.App.GetLocalString("EntropiaEspecfica"), su.spmp_entropy, DWSIM.App.GetLocalString("Massamolar"), su.spmp_molecularWeight})
-            .Add(New Object() {DWSIM.App.GetLocalString("Massaespecfica"), su.spmp_density, DWSIM.App.GetLocalString("Tensosuperficial"), su.tdp_surfaceTension})
-            .Add(New Object() {DWSIM.App.GetLocalString("CapacidadeCalorfica"), su.spmp_heatCapacityCp, DWSIM.App.GetLocalString("Condutividadetrmica"), su.spmp_thermalConductivity})
-            .Add(New Object() {DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.spmp_cinematic_viscosity, DWSIM.App.GetLocalString("Viscosidadedinmica"), su.spmp_viscosity})
-            .Add(New Object() {DWSIM.App.GetLocalString("DeltaT2"), su.spmp_deltaT, DWSIM.App.GetLocalString("DeltaP"), su.spmp_deltaP})
-            .Add(New Object() {DWSIM.App.GetLocalString("ComprimentoHead"), su.spmp_head, DWSIM.App.GetLocalString("FluxodeEnergia"), su.spmp_heatflow})
+            .Add(New Object() {DWSIM.App.GetLocalString("Temperatura"), su.temperature, DWSIM.App.GetLocalString("Presso"), su.pressure})
+            .Add(New Object() {DWSIM.App.GetLocalString("Vazomssica"), su.massflow, DWSIM.App.GetLocalString("Vazomolar"), su.molarflow})
+            .Add(New Object() {DWSIM.App.GetLocalString("Vazovolumtrica"), su.volumetricFlow, DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy, DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight})
+            .Add(New Object() {DWSIM.App.GetLocalString("Massaespecfica"), su.density, DWSIM.App.GetLocalString("Tensosuperficial"), su.surfaceTension})
+            .Add(New Object() {DWSIM.App.GetLocalString("CapacidadeCalorfica"), su.heatCapacityCp, DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity})
+            .Add(New Object() {DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity, DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity})
+            .Add(New Object() {DWSIM.App.GetLocalString("DeltaT2"), su.deltaT, DWSIM.App.GetLocalString("DeltaP"), su.deltaP})
+            .Add(New Object() {DWSIM.App.GetLocalString("ComprimentoHead"), su.head, DWSIM.App.GetLocalString("FluxodeEnergia"), su.heatflow})
             .Add(New Object() {DWSIM.App.GetLocalString("Tempo"), su.time, DWSIM.App.GetLocalString("Volume"), su.volume})
             .Add(New Object() {DWSIM.App.GetLocalString("VolumeMolar"), su.molar_volume, DWSIM.App.GetLocalString("rea"), su.area})
             .Add(New Object() {DWSIM.App.GetLocalString("DimetroEspessura"), su.diameter, DWSIM.App.GetLocalString("Fora"), su.force})

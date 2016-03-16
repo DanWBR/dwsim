@@ -18,7 +18,7 @@
 
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.DWSIM.SimulationObjects
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports System.IO
@@ -124,7 +124,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Sub
 
-        Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Fase)
+        Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
             'do nothing
         End Sub
 
@@ -188,20 +188,20 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     s22 = "VF"
             End Select
 
-            Me.DW_ZerarPhaseProps(Fase.Vapor)
-            Me.DW_ZerarPhaseProps(Fase.Liquid)
-            Me.DW_ZerarPhaseProps(Fase.Liquid1)
-            Me.DW_ZerarPhaseProps(Fase.Liquid2)
-            Me.DW_ZerarPhaseProps(Fase.Liquid3)
-            Me.DW_ZerarPhaseProps(Fase.Aqueous)
-            Me.DW_ZerarPhaseProps(Fase.Solid)
-            Me.DW_ZerarComposicoes(Fase.Liquid)
-            Me.DW_ZerarComposicoes(Fase.Liquid1)
-            Me.DW_ZerarComposicoes(Fase.Liquid2)
-            Me.DW_ZerarComposicoes(Fase.Liquid3)
-            Me.DW_ZerarComposicoes(Fase.Aqueous)
-            Me.DW_ZerarComposicoes(Fase.Vapor)
-            Me.DW_ZerarComposicoes(Fase.Solid)
+            Me.DW_ZerarPhaseProps(Phase.Vapor)
+            Me.DW_ZerarPhaseProps(Phase.Liquid)
+            Me.DW_ZerarPhaseProps(Phase.Liquid1)
+            Me.DW_ZerarPhaseProps(Phase.Liquid2)
+            Me.DW_ZerarPhaseProps(Phase.Liquid3)
+            Me.DW_ZerarPhaseProps(Phase.Aqueous)
+            Me.DW_ZerarPhaseProps(Phase.Solid)
+            Me.DW_ZerarComposicoes(Phase.Liquid)
+            Me.DW_ZerarComposicoes(Phase.Liquid1)
+            Me.DW_ZerarComposicoes(Phase.Liquid2)
+            Me.DW_ZerarComposicoes(Phase.Liquid3)
+            Me.DW_ZerarComposicoes(Phase.Aqueous)
+            Me.DW_ZerarComposicoes(Phase.Vapor)
+            Me.DW_ZerarComposicoes(Phase.Solid)
 
             If _coversion = "1.0" Then
                 Try
@@ -225,16 +225,16 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim summf As Double = 0.0#, sumwf As Double = 0.0#
             For Each pi As PhaseInfo In Me.PhaseMappings.Values
                 If Not pi.PhaseLabel = "Disabled" Then
-                    summf += Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molarfraction.GetValueOrDefault
-                    sumwf += Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.massfraction.GetValueOrDefault
+                    summf += Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction.GetValueOrDefault
+                    sumwf += Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.massfraction.GetValueOrDefault
                 End If
             Next
             If Abs(summf - 1) > 0.000001 Then
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
                     If Not pi.PhaseLabel = "Disabled" Then
-                        If Not Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molarfraction.HasValue Then
-                            Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molarfraction = 1 - summf
-                            Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.massfraction = 1 - sumwf
+                        If Not Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction.HasValue Then
+                            Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction = 1 - summf
+                            Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.massfraction = 1 - sumwf
                         End If
                     End If
                 Next
@@ -242,9 +242,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             For Each pi As PhaseInfo In Me.PhaseMappings.Values
                 If Not pi.PhaseLabel = "Disabled" Then
-                    Dim subst As DWSIM.ClassesBasicasTermodinamica.Substancia
-                    Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
-                    For Each subst In Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).Componentes.Values
+                    Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
+                    For Each subst In Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Componentes.Values
                         subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, pi.DWPhaseIndex)
                     Next
                 End If
@@ -271,43 +271,43 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Case FlashSpec.T
                     s1 = New String() {"temperature", Nothing, "Overall"}
                     s11 = "T"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = val1
+                    Me.CurrentMaterialStream.Phases(0).Properties.temperature = val1
                 Case FlashSpec.P
                     s1 = New String() {"pressure", Nothing, "Overall"}
                     s11 = "P"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = val1
+                    Me.CurrentMaterialStream.Phases(0).Properties.pressure = val1
             End Select
 
             Select Case spec2
                 Case FlashSpec.T
                     s2 = New String() {"temperature", Nothing, "Overall"}
                     s22 = "T"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = val2
+                    Me.CurrentMaterialStream.Phases(0).Properties.temperature = val2
                 Case FlashSpec.P
                     s2 = New String() {"pressure", Nothing, "Overall"}
                     s22 = "P"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = val2
+                    Me.CurrentMaterialStream.Phases(0).Properties.pressure = val2
                 Case FlashSpec.S
                     s2 = New String() {"entropy", Nothing, "Overall"}
                     s22 = "S"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.entropy = val2
+                    Me.CurrentMaterialStream.Phases(0).Properties.entropy = val2
                 Case FlashSpec.H
                     s2 = New String() {"enthalpy", Nothing, "Overall"}
                     s22 = "H"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.enthalpy = val2
+                    Me.CurrentMaterialStream.Phases(0).Properties.enthalpy = val2
                 Case FlashSpec.VAP
                     s2 = New String() {"phaseFraction", "Mole", "Vapor"}
                     s22 = "VF"
-                    Me.CurrentMaterialStream.Fases(2).SPMProperties.molarfraction = val2
+                    Me.CurrentMaterialStream.Phases(2).Properties.molarfraction = val2
             End Select
 
-            Me.DW_ZerarPhaseProps(Fase.Vapor)
-            Me.DW_ZerarPhaseProps(Fase.Liquid)
-            Me.DW_ZerarPhaseProps(Fase.Liquid1)
-            Me.DW_ZerarPhaseProps(Fase.Liquid2)
-            Me.DW_ZerarPhaseProps(Fase.Liquid3)
-            Me.DW_ZerarPhaseProps(Fase.Aqueous)
-            Me.DW_ZerarPhaseProps(Fase.Solid)
+            Me.DW_ZerarPhaseProps(Phase.Vapor)
+            Me.DW_ZerarPhaseProps(Phase.Liquid)
+            Me.DW_ZerarPhaseProps(Phase.Liquid1)
+            Me.DW_ZerarPhaseProps(Phase.Liquid2)
+            Me.DW_ZerarPhaseProps(Phase.Liquid3)
+            Me.DW_ZerarPhaseProps(Phase.Aqueous)
+            Me.DW_ZerarPhaseProps(Phase.Solid)
 
             If _coversion = "1.0" Then
                 Try
@@ -331,47 +331,47 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim summf As Double = 0.0#, sumwf As Double = 0.0#
             For Each pi As PhaseInfo In Me.PhaseMappings.Values
                 If Not pi.PhaseLabel = "Disabled" Then
-                    summf += Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molarfraction.GetValueOrDefault
-                    sumwf += Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.massfraction.GetValueOrDefault
+                    summf += Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction.GetValueOrDefault
+                    sumwf += Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.massfraction.GetValueOrDefault
                 End If
             Next
             If Abs(summf - 1) > 0.000001 Then
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
-                    If Not pi.PhaseLabel = "Disabled" And Not Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molarfraction.HasValue Then
-                        Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molarfraction = 1 - summf
-                        Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.massfraction = 1 - sumwf
+                    If Not pi.PhaseLabel = "Disabled" And Not Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction.HasValue Then
+                        Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction = 1 - summf
+                        Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.massfraction = 1 - sumwf
                     End If
                 Next
             End If
 
             For Each pi As PhaseInfo In Me.PhaseMappings.Values
                 If Not pi.PhaseLabel = "Disabled" Then
-                    Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
+                    Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
                     DW_CalcPhaseProps(pi.DWPhaseID)
                 End If
             Next
 
-            DW_CalcPhaseProps(Fase.Liquid)
-            DW_CalcPhaseProps(Fase.Mixture)
+            DW_CalcPhaseProps(Phase.Liquid)
+            DW_CalcPhaseProps(Phase.Mixture)
 
             Dim T, P, H, S, xl, xv As Double, i As Integer
-            Dim Vx(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1), Vy(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim Vx(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1), Vy(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             i = 0
-            For Each su As Substancia In Me.CurrentMaterialStream.Fases(1).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(1).Componentes.Values
                 Vx(i) = su.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
             i = 0
-            For Each su As Substancia In Me.CurrentMaterialStream.Fases(2).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
                 Vy(i) = su.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
-            xl = Me.CurrentMaterialStream.Fases(1).SPMProperties.molarfraction.GetValueOrDefault
-            xv = Me.CurrentMaterialStream.Fases(2).SPMProperties.molarfraction.GetValueOrDefault
-            T = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            P = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
-            H = Me.CurrentMaterialStream.Fases(0).SPMProperties.enthalpy.GetValueOrDefault
-            S = Me.CurrentMaterialStream.Fases(0).SPMProperties.entropy.GetValueOrDefault
+            xl = Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault
+            xv = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
+            T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+            H = Me.CurrentMaterialStream.Phases(0).Properties.enthalpy.GetValueOrDefault
+            S = Me.CurrentMaterialStream.Phases(0).Properties.entropy.GetValueOrDefault
 
             Me.CurrentMaterialStream = pstr
             tstr = Nothing
@@ -398,49 +398,49 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Case FlashSpec.T
                     s1 = New String() {"temperature", Nothing, "Overall"}
                     s11 = "T"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = val1
+                    Me.CurrentMaterialStream.Phases(0).Properties.temperature = val1
                 Case FlashSpec.P
                     s1 = New String() {"pressure", Nothing, "Overall"}
                     s11 = "P"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = val1
+                    Me.CurrentMaterialStream.Phases(0).Properties.pressure = val1
             End Select
 
             Select Case spec2
                 Case FlashSpec.T
                     s2 = New String() {"temperature", Nothing, "Overall"}
                     s22 = "T"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = val2
+                    Me.CurrentMaterialStream.Phases(0).Properties.temperature = val2
                 Case FlashSpec.P
                     s2 = New String() {"pressure", Nothing, "Overall"}
                     s22 = "P"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = val2
+                    Me.CurrentMaterialStream.Phases(0).Properties.pressure = val2
                 Case FlashSpec.S
                     s2 = New String() {"entropy", Nothing, "Overall"}
                     s22 = "S"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.entropy = val2
+                    Me.CurrentMaterialStream.Phases(0).Properties.entropy = val2
                 Case FlashSpec.H
                     s2 = New String() {"enthalpy", Nothing, "Overall"}
                     s22 = "H"
-                    Me.CurrentMaterialStream.Fases(0).SPMProperties.enthalpy = val2
+                    Me.CurrentMaterialStream.Phases(0).Properties.enthalpy = val2
                 Case FlashSpec.VAP
                     s2 = New String() {"phaseFraction", "Mole", "Vapor"}
                     s22 = "VF"
-                    Me.CurrentMaterialStream.Fases(2).SPMProperties.molarfraction = val2
+                    Me.CurrentMaterialStream.Phases(2).Properties.molarfraction = val2
             End Select
 
             Dim i As Integer = 0
-            For Each c As Substancia In Me.CurrentMaterialStream.Fases(0).Componentes.Values
+            For Each c As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
                 c.FracaoMolar = Vz(i)
                 i += 1
             Next
 
-            Me.DW_ZerarPhaseProps(Fase.Vapor)
-            Me.DW_ZerarPhaseProps(Fase.Liquid)
-            Me.DW_ZerarPhaseProps(Fase.Liquid1)
-            Me.DW_ZerarPhaseProps(Fase.Liquid2)
-            Me.DW_ZerarPhaseProps(Fase.Liquid3)
-            Me.DW_ZerarPhaseProps(Fase.Aqueous)
-            Me.DW_ZerarPhaseProps(Fase.Solid)
+            Me.DW_ZerarPhaseProps(Phase.Vapor)
+            Me.DW_ZerarPhaseProps(Phase.Liquid)
+            Me.DW_ZerarPhaseProps(Phase.Liquid1)
+            Me.DW_ZerarPhaseProps(Phase.Liquid2)
+            Me.DW_ZerarPhaseProps(Phase.Liquid3)
+            Me.DW_ZerarPhaseProps(Phase.Aqueous)
+            Me.DW_ZerarPhaseProps(Phase.Solid)
 
             If _coversion = "1.0" Then
                 Try
@@ -465,38 +465,38 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim summf As Double = 0, sumwf As Double = 0
             For Each pi As PhaseInfo In Me.PhaseMappings.Values
                 If Not pi.PhaseLabel = "Disabled" Then
-                    summf += Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molarfraction.GetValueOrDefault
-                    sumwf += Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.massfraction.GetValueOrDefault
+                    summf += Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction.GetValueOrDefault
+                    sumwf += Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.massfraction.GetValueOrDefault
                 End If
             Next
             If Abs(summf - 1) > 0.000001 Then
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
-                    If Not pi.PhaseLabel = "Disabled" And Not Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molarfraction.HasValue Then
-                        Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molarfraction = 1 - summf
-                        Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.massfraction = 1 - sumwf
+                    If Not pi.PhaseLabel = "Disabled" And Not Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction.HasValue Then
+                        Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction = 1 - summf
+                        Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.massfraction = 1 - sumwf
                     End If
                 Next
             End If
 
             For Each pi As PhaseInfo In Me.PhaseMappings.Values
                 If Not pi.PhaseLabel = "Disabled" Then
-                    Me.CurrentMaterialStream.Fases(pi.DWPhaseIndex).SPMProperties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
+                    Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
                     DW_CalcPhaseProps(pi.DWPhaseID)
                 End If
             Next
 
-            DW_CalcPhaseProps(Fase.Liquid)
-            DW_CalcPhaseProps(Fase.Mixture)
+            DW_CalcPhaseProps(Phase.Liquid)
+            DW_CalcPhaseProps(Phase.Mixture)
 
             Dim T, P, H, S, xl, xv As Double
-            Dim Ki(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1), Vx(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1), Vy(Me.CurrentMaterialStream.Fases(0).Componentes.Count - 1) As Double
+            Dim Ki(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1), Vx(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1), Vy(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
             i = 0
-            For Each su As Substancia In Me.CurrentMaterialStream.Fases(1).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(1).Componentes.Values
                 Vx(i) = su.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
             i = 0
-            For Each su As Substancia In Me.CurrentMaterialStream.Fases(2).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
                 Vy(i) = su.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
@@ -505,12 +505,12 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Ki(i) = Vy(i) / Vx(i)
             Next
 
-            xl = Me.CurrentMaterialStream.Fases(1).SPMProperties.molarfraction.GetValueOrDefault
-            xv = Me.CurrentMaterialStream.Fases(2).SPMProperties.molarfraction.GetValueOrDefault
-            T = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            P = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
-            H = Me.CurrentMaterialStream.Fases(0).SPMProperties.enthalpy.GetValueOrDefault
-            S = Me.CurrentMaterialStream.Fases(0).SPMProperties.entropy.GetValueOrDefault
+            xl = Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault
+            xv = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
+            T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+            H = Me.CurrentMaterialStream.Phases(0).Properties.enthalpy.GetValueOrDefault
+            S = Me.CurrentMaterialStream.Phases(0).Properties.entropy.GetValueOrDefault
 
             Me.CurrentMaterialStream = pstr
             tstr = Nothing
@@ -519,33 +519,33 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcCp_ISOL(ByVal fase1 As DWSIM.SimulationObjects.PropertyPackages.Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As DWSIM.SimulationObjects.PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
 
-            Dim res As Double = 0.0#, phase As String = "", tant As Double, pant As Double
+            Dim res As Double = 0.0#, myphase As String = "", tant As Double, pant As Double
 
-            Select Case fase1
-                Case Fase.Vapor
-                    phase = "Vapor"
-                Case Fase.Liquid
-                    phase = "Liquid"
+            Select Case Phase1
+                Case Phase.Vapor
+                    myphase = "Vapor"
+                Case Phase.Liquid
+                    myphase = "Liquid"
             End Select
 
-            tant = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            pant = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
+            tant = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            pant = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
-                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"heatCapacity"}, New String() {phase}, "Mixture")
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.heatCapacityCp.GetValueOrDefault
+                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"heatCapacity"}, New String() {myphase}, "Mixture")
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.heatCapacityCp.GetValueOrDefault
             Else
-                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"heatCapacity"}, phase)
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.heatCapacityCp.GetValueOrDefault
+                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"heatCapacity"}, myphase)
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.heatCapacityCp.GetValueOrDefault
             End If
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = tant
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = pant
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = tant
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = pant
 
         End Function
 
@@ -555,121 +555,121 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcK_ISOL(ByVal fase1 As DWSIM.SimulationObjects.PropertyPackages.Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcK_ISOL(ByVal Phase1 As DWSIM.SimulationObjects.PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
 
-            Dim res As Double = 0.0#, phase As String = "", tant As Double, pant As Double
+            Dim res As Double = 0.0#, myphase As String = "", tant As Double, pant As Double
 
-            Select Case fase1
-                Case Fase.Vapor
-                    phase = "Vapor"
-                Case Fase.Liquid
-                    phase = "Liquid"
+            Select Case Phase1
+                Case Phase.Vapor
+                    myphase = "Vapor"
+                Case Phase.Liquid
+                    myphase = "Liquid"
             End Select
 
-            tant = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            pant = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
+            tant = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            pant = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
-                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"thermalConductivity"}, New String() {phase}, "Mixture")
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.thermalConductivity.GetValueOrDefault
+                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"thermalConductivity"}, New String() {myphase}, "Mixture")
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.thermalConductivity.GetValueOrDefault
             Else
-                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"thermalConductivity"}, phase)
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.thermalConductivity.GetValueOrDefault
+                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"thermalConductivity"}, myphase)
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.thermalConductivity.GetValueOrDefault
             End If
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = tant
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = pant
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = tant
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = pant
 
         End Function
 
-        Public Overrides Function DW_CalcMassaEspecifica_ISOL(ByVal fase1 As DWSIM.SimulationObjects.PropertyPackages.Fase, ByVal T As Double, ByVal P As Double, Optional ByVal pvp As Double = 0) As Double
+        Public Overrides Function DW_CalcMassaEspecifica_ISOL(ByVal Phase1 As DWSIM.SimulationObjects.PropertyPackages.Phase, ByVal T As Double, ByVal P As Double, Optional ByVal pvp As Double = 0) As Double
 
-            Dim res As Double = 0.0#, phase As String = "", tant As Double, pant As Double
+            Dim res As Double = 0.0#, myphase As String = "", tant As Double, pant As Double
 
-            Select Case fase1
-                Case Fase.Vapor
-                    phase = "Vapor"
-                Case Fase.Liquid
-                    phase = "Liquid"
+            Select Case Phase1
+                Case Phase.Vapor
+                    myphase = "Vapor"
+                Case Phase.Liquid
+                    myphase = "Liquid"
             End Select
 
-            tant = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            pant = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
+            tant = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            pant = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
-                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"density"}, New String() {phase}, "Mixture")
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.density.GetValueOrDefault
+                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"density"}, New String() {myphase}, "Mixture")
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.density.GetValueOrDefault
             Else
-                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"density"}, phase)
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.density.GetValueOrDefault
+                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"density"}, myphase)
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.density.GetValueOrDefault
             End If
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = tant
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = pant
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = tant
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = pant
 
         End Function
 
-        Public Overrides Function DW_CalcMM_ISOL(ByVal fase1 As DWSIM.SimulationObjects.PropertyPackages.Fase, ByVal T As Double, ByVal P As Double) As Double
-            Return Me.AUX_MMM(fase1)
+        Public Overrides Function DW_CalcMM_ISOL(ByVal Phase1 As DWSIM.SimulationObjects.PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
+            Return Me.AUX_MMM(Phase1)
         End Function
 
         Public Overrides Sub DW_CalcOverallProps()
             MyBase.DW_CalcOverallProps()
         End Sub
 
-        Public Overrides Sub DW_CalcPhaseProps(ByVal fase As DWSIM.SimulationObjects.PropertyPackages.Fase)
+        Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As DWSIM.SimulationObjects.PropertyPackages.Phase)
 
-            Dim phase As String = ""
+            Dim myphase As String = ""
             Dim result As Double
             Dim phasemolarfrac As Double = Nothing
             Dim overallmolarflow As Double = Nothing
             Dim i As Integer
             Dim phaseID As Integer
 
-            Select Case fase
-                Case PropertyPackages.Fase.Aqueous
+            Select Case Phase
+                Case PropertyPackages.Phase.Aqueous
                     phaseID = 6
-                Case PropertyPackages.Fase.Liquid
+                Case PropertyPackages.Phase.Liquid
                     phaseID = 1
-                Case PropertyPackages.Fase.Liquid1
+                Case PropertyPackages.Phase.Liquid1
                     phaseID = 3
-                Case PropertyPackages.Fase.Liquid2
+                Case PropertyPackages.Phase.Liquid2
                     phaseID = 4
-                Case PropertyPackages.Fase.Liquid3
+                Case PropertyPackages.Phase.Liquid3
                     phaseID = 5
-                Case PropertyPackages.Fase.Mixture
+                Case PropertyPackages.Phase.Mixture
                     phaseID = 0
-                Case PropertyPackages.Fase.Solid
+                Case PropertyPackages.Phase.Solid
                     phaseID = 7
-                Case PropertyPackages.Fase.Vapor
+                Case PropertyPackages.Phase.Vapor
                     phaseID = 2
             End Select
 
             If phaseID > 0 Then
-                overallmolarflow = Me.CurrentMaterialStream.Fases(0).SPMProperties.molarflow.GetValueOrDefault
-                phasemolarfrac = Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molarfraction.GetValueOrDefault
+                overallmolarflow = Me.CurrentMaterialStream.Phases(0).Properties.molarflow.GetValueOrDefault
+                phasemolarfrac = Me.CurrentMaterialStream.Phases(phaseID).Properties.molarfraction.GetValueOrDefault
                 result = overallmolarflow * phasemolarfrac
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.molarflow = result
-                result = result * Me.AUX_MMM(fase) / 1000
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.massflow = result
-                result = phasemolarfrac * overallmolarflow * Me.AUX_MMM(fase) / 1000 / Me.CurrentMaterialStream.Fases(0).SPMProperties.massflow.GetValueOrDefault
-                Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.massfraction = result
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = result
+                result = result * Me.AUX_MMM(myphase) / 1000
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow = result
+                result = phasemolarfrac * overallmolarflow * Me.AUX_MMM(myphase) / 1000 / Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.massfraction = result
                 Me.DW_CalcCompVolFlow(phaseID)
             End If
 
-            Select Case fase
-                Case fase.Mixture
-                    phase = "Overall"
+            Select Case Phase
+                Case Phase.Mixture
+                    myphase = "Overall"
                 Case Else
                     For Each pin As PhaseInfo In Me.PhaseMappings.Values
-                        If pin.DWPhaseID = fase Then
-                            phase = pin.PhaseLabel
+                        If pin.DWPhaseID = myphase Then
+                            myphase = pin.PhaseLabel
                             Exit For
                         End If
                     Next
@@ -678,13 +678,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim proplist As String()
 
             If _coversion = "1.0" Then
-                If phase <> "Overall" And phase <> "" Then
-                    If fase <> PropertyPackages.Fase.Liquid Then
+                If myphase <> "Overall" And myphase <> "" Then
+                    If Phase <> PropertyPackages.Phase.Liquid Then
                         proplist = Me.GetPropList
                         For i = 0 To UBound(proplist) - 1
                             If Not proplist(i).ToLower.Contains(".d") Then
                                 Try
-                                    Me.CalcProp(Me.CurrentMaterialStream, New String() {proplist(i)}, New String() {phase}, "Mixture")
+                                    Me.CalcProp(Me.CurrentMaterialStream, New String() {proplist(i)}, New String() {myphase}, "Mixture")
                                 Catch ex As Exception
                                 End Try
                             End If
@@ -694,26 +694,26 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 End If
             Else
-                If phase <> "Overall" And phase <> "" Then
+                If myphase <> "Overall" And myphase <> "" Then
                     proplist = Me.GetSinglePhasePropList
                     For i = 0 To UBound(proplist) - 1
                         If Not proplist(i).Contains(".D") Then
                             Try
-                                Me.CalcSinglePhaseProp(New String() {proplist(i)}, phase)
+                                Me.CalcSinglePhaseProp(New String() {proplist(i)}, myphase)
                             Catch ex As Exception
                             End Try
                         End If
                     Next
-                    result = overallmolarflow * phasemolarfrac * Me.AUX_MMM(fase) / 1000 / Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.density.GetValueOrDefault
-                    Me.CurrentMaterialStream.Fases(phaseID).SPMProperties.volumetric_flow = result
+                    result = overallmolarflow * phasemolarfrac * Me.AUX_MMM(myphase) / 1000 / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.volumetric_flow = result
                 End If
             End If
 
-            If phase = "Overall" Then
+            If myphase = "Overall" Then
 
                 Me.DW_CalcOverallProps()
 
-            ElseIf fase = PropertyPackages.Fase.Liquid Then
+            ElseIf Phase = PropertyPackages.Phase.Liquid Then
 
                 Me.DW_CalcLiqMixtureProps()
 
@@ -722,67 +722,67 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         End Sub
 
         Public Overrides Function DW_CalcPVAP_ISOL(ByVal T As Double) As Double
-            Return Auxiliary.PROPS.Pvp_leekesler(T, Me.RET_VTC(Fase.Liquid), Me.RET_VPC(Fase.Liquid), Me.RET_VW(Fase.Liquid))
+            Return Auxiliary.PROPS.Pvp_leekesler(T, Me.RET_VTC(Phase.Liquid), Me.RET_VPC(Phase.Liquid), Me.RET_VW(Phase.Liquid))
         End Function
 
-        Public Overrides Function DW_CalcTensaoSuperficial_ISOL(ByVal fase1 As DWSIM.SimulationObjects.PropertyPackages.Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcTensaoSuperficial_ISOL(ByVal Phase1 As DWSIM.SimulationObjects.PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
 
             Dim res As Double = 0.0#, phase As String = "", tant As Double, pant As Double
 
-            tant = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            pant = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
+            tant = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            pant = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
                 CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"surfaceTension"}, New String() {phase}, "Mixture")
-                Return Me.CurrentMaterialStream.Fases(fase1).TPMProperties.surfaceTension.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties2.surfaceTension.GetValueOrDefault
             Else
                 CType(_copp, ICapeThermoPropertyRoutine).CalcTwoPhaseProp(New String() {"surfaceTension"}, New String() {"VaporLiquid"})
-                Return Me.CurrentMaterialStream.Fases(fase1).TPMProperties.surfaceTension.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties2.surfaceTension.GetValueOrDefault
             End If
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = tant
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = pant
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = tant
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = pant
 
         End Function
 
-        Public Overrides Sub DW_CalcTwoPhaseProps(ByVal fase1 As DWSIM.SimulationObjects.PropertyPackages.Fase, ByVal fase2 As DWSIM.SimulationObjects.PropertyPackages.Fase)
+        Public Overrides Sub DW_CalcTwoPhaseProps(ByVal Phase1 As DWSIM.SimulationObjects.PropertyPackages.Phase, ByVal Phase2 As DWSIM.SimulationObjects.PropertyPackages.Phase)
 
         End Sub
 
-        Public Overrides Function DW_CalcViscosidadeDinamica_ISOL(ByVal fase1 As DWSIM.SimulationObjects.PropertyPackages.Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcViscosidadeDinamica_ISOL(ByVal Phase1 As DWSIM.SimulationObjects.PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
 
-            Dim res As Double = 0.0#, phase As String = "", tant As Double, pant As Double
+            Dim res As Double = 0.0#, myphase As String = "", tant As Double, pant As Double
 
-            Select Case fase1
-                Case Fase.Vapor
-                    phase = Me.PhaseMappings("Vapor").PhaseLabel
-                Case Fase.Liquid
-                    phase = Me.PhaseMappings("Liquid1").PhaseLabel
+            Select Case Phase1
+                Case Phase.Vapor
+                    myphase = Me.PhaseMappings("Vapor").PhaseLabel
+                Case Phase.Liquid
+                    myphase = Me.PhaseMappings("Liquid1").PhaseLabel
             End Select
 
-            tant = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            pant = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
+            tant = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            pant = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
-                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"viscosity"}, New String() {phase}, "Mixture")
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.viscosity.GetValueOrDefault
+                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"viscosity"}, New String() {myphase}, "Mixture")
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.viscosity.GetValueOrDefault
             Else
-                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"viscosity"}, phase)
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.viscosity.GetValueOrDefault
+                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"viscosity"}, myphase)
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.viscosity.GetValueOrDefault
             End If
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = tant
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = pant
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = tant
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = pant
 
         End Function
 
-        Public Overrides Function SupportsComponent(ByVal comp As ClassesBasicasTermodinamica.ConstantProperties) As Boolean
+        Public Overrides Function SupportsComponent(ByVal comp As Thermodynamics.BaseClasses.ConstantProperties) As Boolean
 
         End Function
 
@@ -807,8 +807,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CurrentMaterialStream.SetPhaseComposition(Vx, Me.PhaseMappings("Liquid1").DWPhaseID)
             End Select
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
                 Try
@@ -817,7 +817,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Return Me.CurrentMaterialStream.Fases(pid).SPMProperties.enthalpy.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(pid).Properties.enthalpy.GetValueOrDefault
             Else
                 Try
                     CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"enthalpy"}, phase)
@@ -825,7 +825,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Return Me.CurrentMaterialStream.Fases(pid).SPMProperties.enthalpy.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(pid).Properties.enthalpy.GetValueOrDefault
             End If
 
             Me.CurrentMaterialStream = pstr
@@ -854,8 +854,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CurrentMaterialStream.SetPhaseComposition(Vx, Me.PhaseMappings("Liquid1").DWPhaseID)
             End Select
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
                 Try
@@ -864,7 +864,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Return Me.CurrentMaterialStream.Fases(pid).SPMProperties.excessEnthalpy.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(pid).Properties.excessEnthalpy.GetValueOrDefault
             Else
                 Try
                     CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"excessEnthalpy"}, phase)
@@ -872,7 +872,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Return Me.CurrentMaterialStream.Fases(pid).SPMProperties.excessEnthalpy.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(pid).Properties.excessEnthalpy.GetValueOrDefault
             End If
 
             Me.CurrentMaterialStream = pstr
@@ -901,8 +901,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CurrentMaterialStream.SetPhaseComposition(Vx, Me.PhaseMappings("Liquid1").DWPhaseID)
             End Select
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
             If _coversion = "1.0" Then
                 Try
                     CType(_copp, ICapeThermoPropertyPackage).CalcProp(Me.CurrentMaterialStream, New String() {"entropy"}, New String() {phase}, "Mixture")
@@ -910,7 +910,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Return Me.CurrentMaterialStream.Fases(pid).SPMProperties.entropy.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(pid).Properties.entropy.GetValueOrDefault
             Else
                 Try
                     CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"entropy"}, phase)
@@ -918,7 +918,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Return Me.CurrentMaterialStream.Fases(pid).SPMProperties.entropy.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(pid).Properties.entropy.GetValueOrDefault
             End If
 
             Me.CurrentMaterialStream = pstr
@@ -947,8 +947,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CurrentMaterialStream.SetPhaseComposition(Vx, Me.PhaseMappings("Liquid1").DWPhaseID)
             End Select
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
                 Try
@@ -957,7 +957,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Return Me.CurrentMaterialStream.Fases(pid).SPMProperties.excessEntropy.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(pid).Properties.excessEntropy.GetValueOrDefault
             Else
                 Try
                     CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"excessEntropy"}, phase)
@@ -965,7 +965,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Return Me.CurrentMaterialStream.Fases(pid).SPMProperties.excessEntropy.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(pid).Properties.excessEntropy.GetValueOrDefault
             End If
 
             Me.CurrentMaterialStream = pstr
@@ -973,37 +973,37 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcCv_ISOL(ByVal fase1 As Fase, ByVal T As Double, ByVal P As Double) As Double
+        Public Overrides Function DW_CalcCv_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
 
-            Dim res As Double = 0.0#, phase As String = "", tant As Double, pant As Double
+            Dim res As Double = 0.0#, myphase As String = "", tant As Double, pant As Double
 
-            Select Case fase1
-                Case Fase.Vapor
-                    phase = "Vapor"
-                Case Fase.Liquid
-                    phase = "Liquid"
+            Select Case Phase1
+                Case Phase.Vapor
+                    myphase = "Vapor"
+                Case Phase.Liquid
+                    myphase = "Liquid"
             End Select
 
-            tant = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            pant = Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure.GetValueOrDefault
+            tant = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            pant = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
-                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"heatCapacityCv"}, New String() {phase}, "Mixture")
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.heatCapacityCp.GetValueOrDefault
+                CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"heatCapacityCv"}, New String() {myphase}, "Mixture")
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.heatCapacityCp.GetValueOrDefault
             Else
-                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"heatCapacityCv"}, phase)
-                Return Me.CurrentMaterialStream.Fases(fase1).SPMProperties.heatCapacityCp.GetValueOrDefault
+                CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"heatCapacityCv"}, myphase)
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.heatCapacityCp.GetValueOrDefault
             End If
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = tant
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = pant
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = tant
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = pant
 
         End Function
 
-        Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Fase, ByVal T As Double, ByVal P As Double)
+        Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
 
 
 
@@ -1015,9 +1015,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Me.GetCompoundList(complist, Nothing, Nothing, Nothing, Nothing, Nothing)
             Dim mw = Me.CurrentMaterialStream.GetCompoundConstant(New String() {"molecularWeight"}, complist)
             Dim val As Double = 0.0#
-            Dim subst As DWSIM.ClassesBasicasTermodinamica.Substancia
+            Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
-            For Each subst In Me.CurrentMaterialStream.Fases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
                 val += Vz(i) * mw(i)
                 i += 1
             Next
@@ -1026,7 +1026,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         End Function
 
-        Public Overrides Function AUX_MMM(fase As Fase) As Double
+        Public Overrides Function AUX_MMM(Phase As Phase) As Double
 
             Dim complist As Object = Nothing
             Dim mw As Object = Nothing
@@ -1034,7 +1034,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim mwt As Double = 0.0#
             Dim i As Integer = 0
-            For Each c As Substancia In Me.CurrentMaterialStream.Fases(Me.RET_PHASEID(fase)).Componentes.Values
+            For Each c As Compound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Componentes.Values
                 mwt += c.FracaoMolar.GetValueOrDefault * mw(i)
                 i += 1
             Next
@@ -1050,16 +1050,16 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Me.GetCompoundList(complist, Nothing, Nothing, Nothing, mw, Nothing)
 
             Dim mol_x_mm As Double
-            Dim sub1 As DWSIM.ClassesBasicasTermodinamica.Substancia
+            Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
             Dim j As Integer = 0
-            For Each sub1 In Me.CurrentMaterialStream.Fases(phasenumber).Componentes.Values
+            For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Componentes.Values
                 mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * mw(i)
                 If subst = sub1.Nome Then j = i
                 i += 1
             Next
 
-            sub1 = Me.CurrentMaterialStream.Fases(phasenumber).Componentes(subst)
+            sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Componentes(subst)
             If mol_x_mm <> 0.0# Then
                 Return sub1.FracaoMolar.GetValueOrDefault * mw(j) / mol_x_mm
             Else
@@ -1075,16 +1075,16 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Me.GetCompoundList(complist, Nothing, Nothing, Nothing, mw, Nothing)
 
             Dim mass_div_mm As Double
-            Dim sub1 As DWSIM.ClassesBasicasTermodinamica.Substancia
+            Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
             Dim j As Integer = 0
-            For Each sub1 In Me.CurrentMaterialStream.Fases(phasenumber).Componentes.Values
+            For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Componentes.Values
                 mass_div_mm += sub1.FracaoMassica.GetValueOrDefault / mw(i)
                 If subst = sub1.Nome Then j = i
                 i += 1
             Next
 
-            sub1 = Me.CurrentMaterialStream.Fases(phasenumber).Componentes(subst)
+            sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Componentes(subst)
             Return sub1.FracaoMassica.GetValueOrDefault / mw(j) / mass_div_mm
 
         End Function
@@ -1139,11 +1139,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim res As Double = 0.0#, phase As String = "Vapor", tant As Double, pant As Double
 
-            tant = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
-            pant = Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature.GetValueOrDefault
+            tant = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            pant = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             If _coversion = "1.0" Then
                 Try
@@ -1151,18 +1151,18 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Catch ex As Exception
                     Me.CalcProp(Me.CurrentMaterialStream, New String() {"volume"}, New String() {"Vapor"}, "Mixture")
                 End Try
-                Return Me.CurrentMaterialStream.Fases(2).SPMProperties.density.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(2).Properties.density.GetValueOrDefault
             Else
                 If CType(_copp, ICapeThermoPropertyRoutine).CheckSinglePhasePropSpec("density", "Vapor") Then
                     Me.CalcSinglePhaseProp(New String() {"density"}, "Vapor")
                 Else
                     Me.CalcSinglePhaseProp(New String() {"volume"}, "Vapor")
                 End If
-                Return Me.CurrentMaterialStream.Fases(2).SPMProperties.density.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(2).Properties.density.GetValueOrDefault
             End If
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = tant
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = pant
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = tant
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = pant
 
         End Function
 
@@ -1185,8 +1185,8 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CurrentMaterialStream.SetPhaseComposition(Vx, Me.PhaseMappings("Liquid1").DWPhaseID)
             End Select
 
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.temperature = T
-            Me.CurrentMaterialStream.Fases(0).SPMProperties.pressure = P
+            Me.CurrentMaterialStream.Phases(0).Properties.temperature = T
+            Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
 
             Dim lnphi As Object = Nothing
             Dim lnphidt As Object = Nothing
@@ -1200,10 +1200,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Dim n As Integer = Me.CurrentMaterialStream.Fases(pid).Componentes.Count - 1
+                Dim n As Integer = Me.CurrentMaterialStream.Phases(pid).Componentes.Count - 1
                 Dim i As Integer = 0
                 Dim fugcoeff(n) As Double
-                For Each c As Substancia In Me.CurrentMaterialStream.Fases(pid).Componentes.Values
+                For Each c As Compound In Me.CurrentMaterialStream.Phases(pid).Componentes.Values
                     fugcoeff(i) = c.FugacityCoeff.GetValueOrDefault
                     i += 1
                 Next
@@ -1426,13 +1426,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Public Overrides Sub CalcEquilibrium1(ByVal specification1 As Object, ByVal specification2 As Object, ByVal solutionType As String)
             'Me.SetMaterial(Me.CurrentMaterialStream)
 
-            Me.DW_ZerarPhaseProps(Fase.Vapor)
-            Me.DW_ZerarPhaseProps(Fase.Liquid)
-            Me.DW_ZerarPhaseProps(Fase.Liquid1)
-            Me.DW_ZerarPhaseProps(Fase.Liquid2)
-            Me.DW_ZerarPhaseProps(Fase.Liquid3)
-            Me.DW_ZerarPhaseProps(Fase.Aqueous)
-            Me.DW_ZerarPhaseProps(Fase.Solid)
+            Me.DW_ZerarPhaseProps(Phase.Vapor)
+            Me.DW_ZerarPhaseProps(Phase.Liquid)
+            Me.DW_ZerarPhaseProps(Phase.Liquid1)
+            Me.DW_ZerarPhaseProps(Phase.Liquid2)
+            Me.DW_ZerarPhaseProps(Phase.Liquid3)
+            Me.DW_ZerarPhaseProps(Phase.Aqueous)
+            Me.DW_ZerarPhaseProps(Phase.Solid)
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 
@@ -1621,7 +1621,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             _phasemappings.Clear()
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "PhaseMappings").Elements
-                _phasemappings.Add(xel2.@From, New PhaseInfo(xel2.@PhaseLabel, xel2.@DWPhaseIndex, [Enum].Parse(Type.GetType("DWSIM.DWSIM.SimulationObjects.PropertyPackages.Fase"), xel2.@DWPhaseID)))
+                _phasemappings.Add(xel2.@From, New PhaseInfo(xel2.@PhaseLabel, xel2.@DWPhaseIndex, [Enum].Parse(Type.GetType("DWSIM.DWSIM.SimulationObjects.PropertyPackages.Phase"), xel2.@DWPhaseID)))
             Next
 
             Dim pdata1 As XElement = (From el As XElement In data Select el Where el.Name = "PersistedData1").SingleOrDefault

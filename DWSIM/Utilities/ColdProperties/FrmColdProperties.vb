@@ -16,7 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Math
 
@@ -27,8 +27,8 @@ Public Class FrmColdProperties
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim frm As FormFlowsheet
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
 
     Private Sub FrmColdProperties_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -61,14 +61,14 @@ Public Class FrmColdProperties
         Me.su = frm.Options.SelectedUnitSystem
         Me.nf = frm.Options.NumberFormat
 
-        Me.LabelU1.Text = su.spmp_pressure
-        Me.LabelU2.Text = su.spmp_pressure
-        Me.LabelU3.Text = su.spmp_viscosity
-        Me.LabelU4.Text = su.spmp_viscosity
-        Me.LabelU5.Text = su.spmp_temperature
-        Me.LabelU6.Text = su.spmp_temperature
-        Me.LabelU7.Text = su.spmp_temperature
-        Me.LabelU8.Text = su.spmp_temperature
+        Me.LabelU1.Text = su.pressure
+        Me.LabelU2.Text = su.pressure
+        Me.LabelU3.Text = su.viscosity
+        Me.LabelU4.Text = su.viscosity
+        Me.LabelU5.Text = su.temperature
+        Me.LabelU6.Text = su.temperature
+        Me.LabelU7.Text = su.temperature
+        Me.LabelU8.Text = su.temperature
 
     End Sub
 
@@ -92,7 +92,7 @@ Public Class FrmColdProperties
 
                 Dim bopp As PropertyPackages.BlackOilPropertyPackage = DirectCast(pp, PropertyPackages.BlackOilPropertyPackage)
 
-                Dim bof = bopp.CalcBOFluid(bopp.RET_VMOL(PropertyPackages.Fase.Mixture), bopp.DW_GetConstantProperties)
+                Dim bof = bopp.CalcBOFluid(bopp.RET_VMOL(PropertyPackages.Phase.Mixture), bopp.DW_GetConstantProperties)
 
                 Dim bop As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.BlackOilProperties
 
@@ -101,11 +101,11 @@ Public Class FrmColdProperties
                 K = (1.8 * MeABP) ^ (1 / 3) / SG
                 API = 141.5 / SG - 131.5
 
-                TVP = bopp.DW_CalcBubP(bopp.RET_VMOL(PropertyPackages.Fase.Mixture), 310.95, 101325)(0)
+                TVP = bopp.DW_CalcBubP(bopp.RET_VMOL(PropertyPackages.Phase.Mixture), 310.95, 101325)(0)
 
-                v1 = bopp.DW_CalcViscosidadeDinamica_ISOL(PropertyPackages.Fase.Liquid, 310.95, 101325)
-                kv1 = v1 / bopp.DW_CalcMassaEspecifica_ISOL(PropertyPackages.Fase.Liquid, 310.95, 101325)
-                v2 = bopp.DW_CalcViscosidadeDinamica_ISOL(PropertyPackages.Fase.Liquid, 372.05, 101325)
+                v1 = bopp.DW_CalcViscosidadeDinamica_ISOL(PropertyPackages.Phase.Liquid, 310.95, 101325)
+                kv1 = v1 / bopp.DW_CalcMassaEspecifica_ISOL(PropertyPackages.Phase.Liquid, 310.95, 101325)
+                v2 = bopp.DW_CalcViscosidadeDinamica_ISOL(PropertyPackages.Phase.Liquid, 372.05, 101325)
 
                 t10ASTM = MeABP * 0.9
 
@@ -118,8 +118,8 @@ Public Class FrmColdProperties
                 CABP = 0
 
                 Dim i As Integer = 0
-                Dim Vx(mat.Fases(0).Componentes.Count - 1) As Double
-                For Each subst As Substancia In mat.Fases(0).Componentes.Values
+                Dim Vx(mat.Phases(0).Componentes.Count - 1) As Double
+                For Each subst As Compound In mat.Phases(0).Componentes.Values
                     MABP += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point
                     CABP += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point ^ (1 / 3)
                     Vx(i) = subst.FracaoMolar
@@ -128,15 +128,15 @@ Public Class FrmColdProperties
                 CABP = CABP ^ 3
                 MeABP = (MABP + CABP) / 2
 
-                SG = pp.DW_CalcMassaEspecifica_ISOL(PropertyPackages.Fase.Liquid, 288.706, 101325) / 999
+                SG = pp.DW_CalcMassaEspecifica_ISOL(PropertyPackages.Phase.Liquid, 288.706, 101325) / 999
                 K = (1.8 * MeABP) ^ (1 / 3) / SG
                 API = 141.5 / SG - 131.5
 
 
                 TVP = pp.DW_CalcBubP(Vx, 310.95, 101325)(4)
-                v1 = pp.DW_CalcViscosidadeDinamica_ISOL(PropertyPackages.Fase.Liquid, 310.95, 101325)
-                kv1 = v1 / pp.DW_CalcMassaEspecifica_ISOL(PropertyPackages.Fase.Liquid, 310.95, 101325)
-                v2 = pp.DW_CalcViscosidadeDinamica_ISOL(PropertyPackages.Fase.Liquid, 372.05, 101325)
+                v1 = pp.DW_CalcViscosidadeDinamica_ISOL(PropertyPackages.Phase.Liquid, 310.95, 101325)
+                kv1 = v1 / pp.DW_CalcMassaEspecifica_ISOL(PropertyPackages.Phase.Liquid, 310.95, 101325)
+                v2 = pp.DW_CalcViscosidadeDinamica_ISOL(PropertyPackages.Phase.Liquid, 372.05, 101325)
 
                 Try
                     bt = pp.DW_CalcBubT(Vx, 101325)(4)
@@ -154,7 +154,7 @@ Public Class FrmColdProperties
                 End If
 
                 Dim tmp, vv, vl, dv, dl, mwv, mwl As Object
-                Dim vwl(mat.Fases(0).Componentes.Count - 1), vwv(mat.Fases(0).Componentes.Count - 1) As Double
+                Dim vwl(mat.Phases(0).Componentes.Count - 1), vwv(mat.Phases(0).Componentes.Count - 1) As Double
 
                 Dim t, t_ant, t_ant2, ft, ft_ant, ft_ant2, v As Double, j As Integer
 
@@ -164,12 +164,12 @@ Public Class FrmColdProperties
                     ft_ant2 = ft_ant
                     ft_ant = ft
                     Try
-                        tmp = pp.FlashBase.Flash_PT(pp.RET_VMOL(PropertyPackages.Fase.Mixture), 101325, t, pp)
+                        tmp = pp.FlashBase.Flash_PT(pp.RET_VMOL(PropertyPackages.Phase.Mixture), 101325, t, pp)
                         v = tmp(1)
                         vv = tmp(3)
                         vl = tmp(2)
                     Catch ex As Exception
-                        tmp = ppi.FlashBase.Flash_PT(pp.RET_VMOL(PropertyPackages.Fase.Mixture), 101325, t, pp)
+                        tmp = ppi.FlashBase.Flash_PT(pp.RET_VMOL(PropertyPackages.Phase.Mixture), 101325, t, pp)
                         v = tmp(1)
                         vv = tmp(3)
                         vl = tmp(2)
@@ -178,22 +178,22 @@ Public Class FrmColdProperties
                     mwv = pp.AUX_MMM(vv)
                     mwl = pp.AUX_MMM(vl)
 
-                    mat.Fases(0).SPMProperties.temperature = t
-                    mat.Fases(0).SPMProperties.pressure = 101325
+                    mat.Phases(0).Properties.temperature = t
+                    mat.Phases(0).Properties.pressure = 101325
                     j = 0
-                    For Each subst As Substancia In mat.Fases(1).Componentes.Values
+                    For Each subst As Compound In mat.Phases(1).Componentes.Values
                         subst.FracaoMolar = vl(j)
                         j += 1
                     Next
-                    pp.DW_CalcProp("density", PropertyPackages.Fase.Liquid)
-                    dl = mat.Fases(1).SPMProperties.density.GetValueOrDefault
+                    pp.DW_CalcProp("density", PropertyPackages.Phase.Liquid)
+                    dl = mat.Phases(1).Properties.density.GetValueOrDefault
                     j = 0
-                    For Each subst As Substancia In mat.Fases(1).Componentes.Values
+                    For Each subst As Compound In mat.Phases(1).Componentes.Values
                         subst.FracaoMolar = vv(j)
                         j += 1
                     Next
-                    pp.DW_CalcProp("density", PropertyPackages.Fase.Liquid)
-                    dv = mat.Fases(1).SPMProperties.density.GetValueOrDefault
+                    pp.DW_CalcProp("density", PropertyPackages.Phase.Liquid)
+                    dv = mat.Phases(1).Properties.density.GetValueOrDefault
 
                     If v = 0 Then v = i * 0.0001
 
@@ -248,14 +248,14 @@ Public Class FrmColdProperties
 
             RVP = (10 ^ ((Log(TVP / 6894.76) + 7261 / (310.95 * 1.8) - 12.82) / (2799 / (310.95 * 1.8) - 2.227)) + 14.6959) * 6894.76
 
-            Me.TextBox1.Text = Format(Conversor.ConverterDoSI(su.spmp_pressure, TVP), nf)
-            Me.TextBox2.Text = Format(Conversor.ConverterDoSI(su.spmp_pressure, RVP), nf)
-            Me.TextBox3.Text = Format(Conversor.ConverterDoSI(su.spmp_viscosity, v1), nf)
-            Me.TextBox4.Text = Format(Conversor.ConverterDoSI(su.spmp_viscosity, v2), nf)
-            Me.TextBox5.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, FlashPoint), nf)
-            Me.TextBox6.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, PourPoint), nf)
-            Me.TextBox7.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, CloudPoint), nf)
-            Me.TextBox8.Text = Format(Conversor.ConverterDoSI(su.spmp_temperature, FreezingPoint), nf)
+            Me.TextBox1.Text = Format(Converter.ConvertFromSI(su.pressure, TVP), nf)
+            Me.TextBox2.Text = Format(Converter.ConvertFromSI(su.pressure, RVP), nf)
+            Me.TextBox3.Text = Format(Converter.ConvertFromSI(su.viscosity, v1), nf)
+            Me.TextBox4.Text = Format(Converter.ConvertFromSI(su.viscosity, v2), nf)
+            Me.TextBox5.Text = Format(Converter.ConvertFromSI(su.temperature, FlashPoint), nf)
+            Me.TextBox6.Text = Format(Converter.ConvertFromSI(su.temperature, PourPoint), nf)
+            Me.TextBox7.Text = Format(Converter.ConvertFromSI(su.temperature, CloudPoint), nf)
+            Me.TextBox8.Text = Format(Converter.ConvertFromSI(su.temperature, FreezingPoint), nf)
             Me.TextBox9.Text = Format(RefractionIndex, nf)
             Me.TextBox10.Text = Format(CetaneIndex, nf)
 

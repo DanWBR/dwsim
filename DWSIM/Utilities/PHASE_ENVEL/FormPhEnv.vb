@@ -26,8 +26,8 @@ Public Class FormPhEnv
 
     Dim cp As DWSIM.Utilities.TCP.Methods
 
-    Public su As New DWSIM.SistemasDeUnidades.Unidades
-    Public cv As New DWSIM.SistemasDeUnidades.Conversor
+    Public su As New DWSIM.SystemsOfUnits.Units
+    Public cv As New DWSIM.SystemsOfUnits.Converter
     Public nf As String
 
     Private loaded As Boolean = False
@@ -168,43 +168,43 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim i As Integer
 
                     For i = 0 To TVB.Count - 1
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVB(i)))
-                        px1.Add(Conversor.ConverterDoSI(su.spmp_pressure, PB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.temperature, TVB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.pressure, PB(i)))
                     Next
                     For i = 0 To TVD.Count - 1
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVD(i)))
-                        px2.Add(Conversor.ConverterDoSI(su.spmp_pressure, PO(i)))
+                        py2.Add(Converter.ConvertFromSI(su.temperature, TVD(i)))
+                        px2.Add(Converter.ConvertFromSI(su.pressure, PO(i)))
                     Next
                     For i = 0 To TE.Count - 1
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_temperature, TE(i)))
-                        px3.Add(Conversor.ConverterDoSI(su.spmp_pressure, PE(i)))
+                        py3.Add(Converter.ConvertFromSI(su.temperature, TE(i)))
+                        px3.Add(Converter.ConvertFromSI(su.pressure, PE(i)))
                     Next
                     For i = 0 To TQ.Count - 1
-                        py4.Add(Conversor.ConverterDoSI(su.spmp_temperature, TQ(i)))
-                        px4.Add(Conversor.ConverterDoSI(su.spmp_pressure, PQ(i)))
+                        py4.Add(Converter.ConvertFromSI(su.temperature, TQ(i)))
+                        px4.Add(Converter.ConvertFromSI(su.pressure, PQ(i)))
                     Next
                     For i = 0 To TI.Count - 1
-                        py5.Add(Conversor.ConverterDoSI(su.spmp_temperature, TI(i)))
-                        px5.Add(Conversor.ConverterDoSI(su.spmp_pressure, PI(i)))
+                        py5.Add(Converter.ConvertFromSI(su.temperature, TI(i)))
+                        px5.Add(Converter.ConvertFromSI(su.pressure, PI(i)))
                     Next
                     For i = 0 To THsI.Count - 1
-                        th1.Add(Conversor.ConverterDoSI(su.spmp_temperature, THsI(i)))
-                        ph1.Add(Conversor.ConverterDoSI(su.spmp_pressure, PHsI(i)))
+                        th1.Add(Converter.ConvertFromSI(su.temperature, THsI(i)))
+                        ph1.Add(Converter.ConvertFromSI(su.pressure, PHsI(i)))
                     Next
                     For i = 0 To THsI.Count - 1
-                        th2.Add(Conversor.ConverterDoSI(su.spmp_temperature, THsII(i)))
-                        ph2.Add(Conversor.ConverterDoSI(su.spmp_pressure, PHsII(i)))
+                        th2.Add(Converter.ConvertFromSI(su.temperature, THsII(i)))
+                        ph2.Add(Converter.ConvertFromSI(su.pressure, PHsII(i)))
                     Next
                     For i = 0 To TOWF.Count - 1
-                        py6.Add(Conversor.ConverterDoSI(su.spmp_temperature, TOWF(i)))
-                        px6.Add(Conversor.ConverterDoSI(su.spmp_pressure, POWF(i)))
+                        py6.Add(Converter.ConvertFromSI(su.temperature, TOWF(i)))
+                        px6.Add(Converter.ConvertFromSI(su.pressure, POWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
                         Dim tmp As Object
                         For Each tmp In PC
-                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Conversor.ConverterDoSI(su.spmp_pressure, tmp(1))}, New Double() {Conversor.ConverterDoSI(su.spmp_temperature, tmp(0))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Converter.ConvertFromSI(su.pressure, tmp(1))}, New Double() {Converter.ConvertFromSI(su.temperature, tmp(0))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
@@ -268,8 +268,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             End With
                         End If
                         .Title.Text = strname
-                        .XAxis.Title.Text = "P / " & su.spmp_pressure
-                        .YAxis.Title.Text = "T / " & su.spmp_temperature
+                        .XAxis.Title.Text = "P / " & su.pressure
+                        .YAxis.Title.Text = "T / " & su.temperature
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.IsAutoScrollRange = True
                         Me.GraphControl.Invalidate()
@@ -280,21 +280,21 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To PB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.spmp_pressure, PB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_enthalpy, HB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.pressure, PB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.enthalpy, HB(i)))
                     Next
                     For i = 0 To PO.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.spmp_pressure, PO(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_enthalpy, HO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.pressure, PO(i)))
+                        py2.Add(Converter.ConvertFromSI(su.enthalpy, HO(i)))
                     Next
                     For i = 0 To POWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.spmp_pressure, POWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_enthalpy, HOWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.pressure, POWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.enthalpy, HOWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
-                        '.AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Conversor.ConverterDoSI(su.spmp_temperature, TC)}, New Double() {Conversor.ConverterDoSI(su.spmp_pressure, PC)}, Color.Black, ZedGraph.SymbolType.Circle)
+                        '.AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Converter.ConvertFromSI(su.temperature, TC)}, New Double() {Converter.ConvertFromSI(su.pressure, PC)}, Color.Black, ZedGraph.SymbolType.Circle)
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
                             .Line.IsSmooth = False
@@ -311,8 +311,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         .Title.Text = strname
-                        .XAxis.Title.Text = "P / " & su.spmp_pressure
-                        .YAxis.Title.Text = "H / " & su.spmp_enthalpy
+                        .XAxis.Title.Text = "P / " & su.pressure
+                        .YAxis.Title.Text = "H / " & su.enthalpy
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
@@ -329,16 +329,16 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To PB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.spmp_pressure, PB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_entropy, SB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.pressure, PB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.entropy, SB(i)))
                     Next
                     For i = 0 To PO.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.spmp_pressure, PO(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_entropy, SO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.pressure, PO(i)))
+                        py2.Add(Converter.ConvertFromSI(su.entropy, SO(i)))
                     Next
                     For i = 0 To POWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.spmp_pressure, POWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_entropy, SOWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.pressure, POWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.entropy, SOWF(i)))
                     Next
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
@@ -358,8 +358,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         .Title.Text = strname
-                        .XAxis.Title.Text = "P / " & su.spmp_pressure
-                        .YAxis.Title.Text = "S / " & su.spmp_entropy
+                        .XAxis.Title.Text = "P / " & su.pressure
+                        .YAxis.Title.Text = "S / " & su.entropy
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
@@ -376,22 +376,22 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To PB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.spmp_pressure, PB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.molar_volume, VB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.pressure, PB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.molar_volume, VB(i)))
                     Next
                     For i = 0 To PO.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.spmp_pressure, PO(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.molar_volume, VO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.pressure, PO(i)))
+                        py2.Add(Converter.ConvertFromSI(su.molar_volume, VO(i)))
                     Next
                     For i = 0 To POWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.spmp_pressure, POWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_entropy, VOWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.pressure, POWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.entropy, VOWF(i)))
                     Next
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
                         Dim tmp As Object
                         For Each tmp In PC
-                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Conversor.ConverterDoSI(su.spmp_pressure, tmp(1))}, New Double() {Conversor.ConverterDoSI(su.molar_volume, tmp(2))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Converter.ConvertFromSI(su.pressure, tmp(1))}, New Double() {Converter.ConvertFromSI(su.molar_volume, tmp(2))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
@@ -409,7 +409,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         .Title.Text = strname
-                        .XAxis.Title.Text = "P / " & su.spmp_pressure
+                        .XAxis.Title.Text = "P / " & su.pressure
                         .YAxis.Title.Text = "V / " & su.molar_volume
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
@@ -429,43 +429,43 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim i As Integer
 
                     For i = 0 To TVB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_pressure, PB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.temperature, TVB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.pressure, PB(i)))
                     Next
                     For i = 0 To TVD.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVD(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_pressure, PO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.temperature, TVD(i)))
+                        py2.Add(Converter.ConvertFromSI(su.pressure, PO(i)))
                     Next
                     For i = 0 To TE.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.spmp_temperature, TE(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_pressure, PE(i)))
+                        px3.Add(Converter.ConvertFromSI(su.temperature, TE(i)))
+                        py3.Add(Converter.ConvertFromSI(su.pressure, PE(i)))
                     Next
                     For i = 0 To TQ.Count - 1
-                        px4.Add(Conversor.ConverterDoSI(su.spmp_temperature, TQ(i)))
-                        py4.Add(Conversor.ConverterDoSI(su.spmp_pressure, PQ(i)))
+                        px4.Add(Converter.ConvertFromSI(su.temperature, TQ(i)))
+                        py4.Add(Converter.ConvertFromSI(su.pressure, PQ(i)))
                     Next
                     For i = 0 To TI.Count - 1
-                        px5.Add(Conversor.ConverterDoSI(su.spmp_temperature, TI(i)))
-                        py5.Add(Conversor.ConverterDoSI(su.spmp_pressure, PI(i)))
+                        px5.Add(Converter.ConvertFromSI(su.temperature, TI(i)))
+                        py5.Add(Converter.ConvertFromSI(su.pressure, PI(i)))
                     Next
                     For i = 0 To THsI.Count - 1
-                        th1.Add(Conversor.ConverterDoSI(su.spmp_temperature, THsI(i)))
-                        ph1.Add(Conversor.ConverterDoSI(su.spmp_pressure, PHsI(i)))
+                        th1.Add(Converter.ConvertFromSI(su.temperature, THsI(i)))
+                        ph1.Add(Converter.ConvertFromSI(su.pressure, PHsI(i)))
                     Next
                     For i = 0 To THsI.Count - 1
-                        th2.Add(Conversor.ConverterDoSI(su.spmp_temperature, THsII(i)))
-                        ph2.Add(Conversor.ConverterDoSI(su.spmp_pressure, PHsII(i)))
+                        th2.Add(Converter.ConvertFromSI(su.temperature, THsII(i)))
+                        ph2.Add(Converter.ConvertFromSI(su.pressure, PHsII(i)))
                     Next
                     For i = 0 To TOWF.Count - 1
-                        px6.Add(Conversor.ConverterDoSI(su.spmp_temperature, TOWF(i)))
-                        py6.Add(Conversor.ConverterDoSI(su.spmp_pressure, POWF(i)))
+                        px6.Add(Converter.ConvertFromSI(su.temperature, TOWF(i)))
+                        py6.Add(Converter.ConvertFromSI(su.pressure, POWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
                         Dim tmp As Object
                         For Each tmp In PC
-                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Conversor.ConverterDoSI(su.spmp_temperature, tmp(0))}, New Double() {Conversor.ConverterDoSI(su.spmp_pressure, tmp(1))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Converter.ConvertFromSI(su.temperature, tmp(0))}, New Double() {Converter.ConvertFromSI(su.pressure, tmp(1))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
@@ -522,8 +522,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             End With
                         End If
                         .Title.Text = strname
-                        .XAxis.Title.Text = "T / " & su.spmp_temperature
-                        .YAxis.Title.Text = "P / " & su.spmp_pressure
+                        .XAxis.Title.Text = "T / " & su.temperature
+                        .YAxis.Title.Text = "P / " & su.pressure
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
@@ -540,16 +540,16 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To TVB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_enthalpy, HB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.temperature, TVB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.enthalpy, HB(i)))
                     Next
                     For i = 0 To TVD.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVD(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_enthalpy, HO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.temperature, TVD(i)))
+                        py2.Add(Converter.ConvertFromSI(su.enthalpy, HO(i)))
                     Next
                     For i = 0 To TOWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.molar_volume, TOWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_entropy, HOWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.molar_volume, TOWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.entropy, HOWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
@@ -570,8 +570,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         .Title.Text = strname
-                        .XAxis.Title.Text = "T / " & su.spmp_temperature
-                        .YAxis.Title.Text = "H / " & su.spmp_enthalpy
+                        .XAxis.Title.Text = "T / " & su.temperature
+                        .YAxis.Title.Text = "H / " & su.enthalpy
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
@@ -588,16 +588,16 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To TVB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_entropy, SB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.temperature, TVB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.entropy, SB(i)))
                     Next
                     For i = 0 To TVD.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVD(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_entropy, SO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.temperature, TVD(i)))
+                        py2.Add(Converter.ConvertFromSI(su.entropy, SO(i)))
                     Next
                     For i = 0 To TOWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.molar_volume, TOWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_entropy, SOWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.molar_volume, TOWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.entropy, SOWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
@@ -618,8 +618,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         .Title.Text = strname
-                        .XAxis.Title.Text = "T / " & su.spmp_temperature
-                        .YAxis.Title.Text = "S / " & su.spmp_entropy
+                        .XAxis.Title.Text = "T / " & su.temperature
+                        .YAxis.Title.Text = "S / " & su.entropy
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
@@ -636,23 +636,23 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To TVB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.molar_volume, VB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.temperature, TVB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.molar_volume, VB(i)))
                     Next
                     For i = 0 To TVB.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVD(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.molar_volume, VO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.temperature, TVD(i)))
+                        py2.Add(Converter.ConvertFromSI(su.molar_volume, VO(i)))
                     Next
                     For i = 0 To TOWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.molar_volume, TOWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_entropy, VOWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.molar_volume, TOWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.entropy, VOWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
                         Dim tmp As Object
                         For Each tmp In PC
-                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Conversor.ConverterDoSI(su.spmp_temperature, tmp(0))}, New Double() {Conversor.ConverterDoSI(su.molar_volume, tmp(2))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Converter.ConvertFromSI(su.temperature, tmp(0))}, New Double() {Converter.ConvertFromSI(su.molar_volume, tmp(2))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
@@ -670,7 +670,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
                         .Title.Text = strname
-                        .XAxis.Title.Text = "T / " & su.spmp_temperature
+                        .XAxis.Title.Text = "T / " & su.temperature
                         .YAxis.Title.Text = "V / " & su.molar_volume
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
@@ -688,23 +688,23 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To PB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.molar_volume, VB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_pressure, PB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.molar_volume, VB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.pressure, PB(i)))
                     Next
                     For i = 0 To PO.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.molar_volume, VO(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_pressure, PO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.molar_volume, VO(i)))
+                        py2.Add(Converter.ConvertFromSI(su.pressure, PO(i)))
                     Next
                     For i = 0 To TOWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.molar_volume, VOWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_entropy, POWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.molar_volume, VOWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.entropy, POWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
                         Dim tmp As Object
                         For Each tmp In PC
-                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Conversor.ConverterDoSI(su.molar_volume, tmp(2))}, New Double() {Conversor.ConverterDoSI(su.spmp_pressure, tmp(1))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Converter.ConvertFromSI(su.molar_volume, tmp(2))}, New Double() {Converter.ConvertFromSI(su.pressure, tmp(1))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
@@ -723,7 +723,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         End With
                         .Title.Text = strname
                         .XAxis.Title.Text = "V / " & su.molar_volume
-                        .YAxis.Title.Text = "P / " & su.spmp_pressure
+                        .YAxis.Title.Text = "P / " & su.pressure
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
@@ -740,23 +740,23 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To TVB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.molar_volume, VB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.molar_volume, VB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.temperature, TVB(i)))
                     Next
                     For i = 0 To TVD.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.molar_volume, VO(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_temperature, TVD(i)))
+                        px2.Add(Converter.ConvertFromSI(su.molar_volume, VO(i)))
+                        py2.Add(Converter.ConvertFromSI(su.temperature, TVD(i)))
                     Next
                     For i = 0 To TOWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.molar_volume, VOWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_entropy, TOWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.molar_volume, VOWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.entropy, TOWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
                         Dim tmp As Object
                         For Each tmp In PC
-                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Conversor.ConverterDoSI(su.molar_volume, tmp(2))}, New Double() {Conversor.ConverterDoSI(su.spmp_temperature, tmp(0))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
+                            .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Converter.ConvertFromSI(su.molar_volume, tmp(2))}, New Double() {Converter.ConvertFromSI(su.temperature, tmp(0))}, Color.Red, ZedGraph.SymbolType.Circle).Symbol.Fill.Type = ZedGraph.FillType.Solid
                         Next
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha"), px1.ToArray(GetType(Double)), py1.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.SteelBlue
@@ -775,7 +775,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         End With
                         .Title.Text = ""
                         .XAxis.Title.Text = "V / " & su.molar_volume
-                        .YAxis.Title.Text = "T / " & su.spmp_temperature
+                        .YAxis.Title.Text = "T / " & su.temperature
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
@@ -792,16 +792,16 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To TVB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.molar_volume, VB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_enthalpy, HB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.molar_volume, VB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.enthalpy, HB(i)))
                     Next
                     For i = 0 To TVD.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.molar_volume, VO(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_enthalpy, HO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.molar_volume, VO(i)))
+                        py2.Add(Converter.ConvertFromSI(su.enthalpy, HO(i)))
                     Next
                     For i = 0 To TOWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.molar_volume, VOWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_entropy, HOWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.molar_volume, VOWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.entropy, HOWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
@@ -823,7 +823,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         End With
                         .Title.Text = ""
                         .XAxis.Title.Text = "V / " & su.molar_volume
-                        .YAxis.Title.Text = "H / " & su.spmp_enthalpy
+                        .YAxis.Title.Text = "H / " & su.enthalpy
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
@@ -840,16 +840,16 @@ exec:       With Me.GraphControl.GraphPane.Legend
                     Dim px1, py1, px2, py2, px3, py3 As New ArrayList
                     Dim i As Integer
                     For i = 0 To TVB.Count - 1
-                        px1.Add(Conversor.ConverterDoSI(su.molar_volume, VB(i)))
-                        py1.Add(Conversor.ConverterDoSI(su.spmp_entropy, SB(i)))
+                        px1.Add(Converter.ConvertFromSI(su.molar_volume, VB(i)))
+                        py1.Add(Converter.ConvertFromSI(su.entropy, SB(i)))
                     Next
                     For i = 0 To TVD.Count - 1
-                        px2.Add(Conversor.ConverterDoSI(su.molar_volume, VO(i)))
-                        py2.Add(Conversor.ConverterDoSI(su.spmp_entropy, SO(i)))
+                        px2.Add(Converter.ConvertFromSI(su.molar_volume, VO(i)))
+                        py2.Add(Converter.ConvertFromSI(su.entropy, SO(i)))
                     Next
                     For i = 0 To TOWF.Count - 1
-                        px3.Add(Conversor.ConverterDoSI(su.molar_volume, VOWF(i)))
-                        py3.Add(Conversor.ConverterDoSI(su.spmp_entropy, SOWF(i)))
+                        px3.Add(Converter.ConvertFromSI(su.molar_volume, VOWF(i)))
+                        py3.Add(Converter.ConvertFromSI(su.entropy, SOWF(i)))
                     Next
 
                     With Me.GraphControl.GraphPane
@@ -871,7 +871,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         End With
                         .Title.Text = strname
                         .XAxis.Title.Text = "V / " & su.molar_volume
-                        .YAxis.Title.Text = "S / " & su.spmp_entropy
+                        .YAxis.Title.Text = "S / " & su.entropy
                         .AxisChange(Me.CreateGraphics)
                         Me.GraphControl.Invalidate()
                         If Me.showoppoint Then
@@ -910,11 +910,11 @@ exec:       With Me.GraphControl.GraphPane.Legend
         Me.strname = gobj.Tag
 
         If Me.showoppoint Then
-            ot = Conversor.ConverterDoSI(su.spmp_temperature, mat.Fases(0).SPMProperties.temperature.GetValueOrDefault)
-            op = Conversor.ConverterDoSI(su.spmp_pressure, mat.Fases(0).SPMProperties.pressure.GetValueOrDefault)
-            ov = mat.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault / mat.Fases(0).SPMProperties.density.GetValueOrDefault / 1000
-            oh = Conversor.ConverterDoSI(su.spmp_enthalpy, mat.Fases(0).SPMProperties.enthalpy.GetValueOrDefault)
-            os = Conversor.ConverterDoSI(su.spmp_entropy, mat.Fases(0).SPMProperties.entropy.GetValueOrDefault)
+            ot = Converter.ConvertFromSI(su.temperature, mat.Phases(0).Properties.temperature.GetValueOrDefault)
+            op = Converter.ConvertFromSI(su.pressure, mat.Phases(0).Properties.pressure.GetValueOrDefault)
+            ov = mat.Phases(0).Properties.molecularWeight.GetValueOrDefault / mat.Phases(0).Properties.density.GetValueOrDefault / 1000
+            oh = Converter.ConvertFromSI(su.enthalpy, mat.Phases(0).Properties.enthalpy.GetValueOrDefault)
+            os = Converter.ConvertFromSI(su.entropy, mat.Phases(0).Properties.entropy.GetValueOrDefault)
         End If
 
         Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Frm.Options.SelectedPropertyPackage
@@ -934,7 +934,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
             Pmin = 101325
             Pmax = PC(0)(1) * 1.3
             Dim i As Integer = 0
-            Vz = pp.RET_VMOL(DWSIM.SimulationObjects.PropertyPackages.Fase.Mixture)
+            Vz = pp.RET_VMOL(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)
             Vn = pp.RET_VNAMES
 
             Dim m_aux As New DWSIM.Utilities.HYD.AuxMethods
@@ -1028,30 +1028,30 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
         With Me.Grid1.Columns
             .Clear()
-            .Add("c1", "Tbol (" & su.spmp_temperature & ")")
-            .Add("c2", DWSIM.App.GetLocalString("Pbol") & su.spmp_pressure & ")")
-            .Add("c3", "Hbol (" & su.spmp_enthalpy & ")")
-            .Add("c4", DWSIM.App.GetLocalString("Sbol") & su.spmp_entropy & ")")
+            .Add("c1", "Tbol (" & su.temperature & ")")
+            .Add("c2", DWSIM.App.GetLocalString("Pbol") & su.pressure & ")")
+            .Add("c3", "Hbol (" & su.enthalpy & ")")
+            .Add("c4", DWSIM.App.GetLocalString("Sbol") & su.entropy & ")")
             .Add("c5", DWSIM.App.GetLocalString("Vbolm3mol"))
-            .Add("c6", "Torv (" & su.spmp_temperature & ")")
-            .Add("c7", DWSIM.App.GetLocalString("Porv") & su.spmp_pressure & ")")
-            .Add("c8", "Horv (" & su.spmp_enthalpy & ")")
-            .Add("c9", "Sorv (" & su.spmp_entropy & ")")
+            .Add("c6", "Torv (" & su.temperature & ")")
+            .Add("c7", DWSIM.App.GetLocalString("Porv") & su.pressure & ")")
+            .Add("c8", "Horv (" & su.enthalpy & ")")
+            .Add("c9", "Sorv (" & su.entropy & ")")
             .Add("c10", DWSIM.App.GetLocalString("Vorvm3mol"))
-            .Add("c11", "Test (" & su.spmp_temperature & ")")
-            .Add("c12", DWSIM.App.GetLocalString("Pest") & su.spmp_pressure & ")")
-            .Add("c13", "TQ (" & su.spmp_temperature & ")")
-            .Add("c14", "PQ (" & su.spmp_pressure & ")")
-            .Add("c15", "TPIP (" & su.spmp_temperature & ")")
-            .Add("c16", "PPIP (" & su.spmp_pressure & ")")
-            .Add("c17", "THsI (" & su.spmp_temperature & ")")
-            .Add("c18", "PHsI (" & su.spmp_pressure & ")")
-            .Add("c19", "THsII (" & su.spmp_temperature & ")")
-            .Add("c20", "PHsII (" & su.spmp_pressure & ")")
-            .Add("c21", "TDWF (" & su.spmp_temperature & ")")
-            .Add("c22", "PDWF (" & su.spmp_pressure & ")")
-            .Add("c23", "HDWF (" & su.spmp_enthalpy & ")")
-            .Add("c24", "SDWF (" & su.spmp_entropy & ")")
+            .Add("c11", "Test (" & su.temperature & ")")
+            .Add("c12", DWSIM.App.GetLocalString("Pest") & su.pressure & ")")
+            .Add("c13", "TQ (" & su.temperature & ")")
+            .Add("c14", "PQ (" & su.pressure & ")")
+            .Add("c15", "TPIP (" & su.temperature & ")")
+            .Add("c16", "PPIP (" & su.pressure & ")")
+            .Add("c17", "THsI (" & su.temperature & ")")
+            .Add("c18", "PHsI (" & su.pressure & ")")
+            .Add("c19", "THsII (" & su.temperature & ")")
+            .Add("c20", "PHsII (" & su.pressure & ")")
+            .Add("c21", "TDWF (" & su.temperature & ")")
+            .Add("c22", "PDWF (" & su.pressure & ")")
+            .Add("c23", "HDWF (" & su.enthalpy & ")")
+            .Add("c24", "SDWF (" & su.entropy & ")")
             .Add("c25", "VDWF (m3/mol)")
         End With
 
@@ -1069,58 +1069,58 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
         j = 0
         For Each d As Double In TVB
-            data(0, j) = Conversor.ConverterDoSI(su.spmp_temperature, d)
-            data(1, j) = Conversor.ConverterDoSI(su.spmp_pressure, PB(j))
-            data(2, j) = Conversor.ConverterDoSI(su.spmp_enthalpy, HB(j))
-            data(3, j) = Conversor.ConverterDoSI(su.spmp_entropy, SB(j))
+            data(0, j) = Converter.ConvertFromSI(su.temperature, d)
+            data(1, j) = Converter.ConvertFromSI(su.pressure, PB(j))
+            data(2, j) = Converter.ConvertFromSI(su.enthalpy, HB(j))
+            data(3, j) = Converter.ConvertFromSI(su.entropy, SB(j))
             data(4, j) = VB(j)
             j = j + 1
         Next
         j = 0
         For Each d As Double In TVD
-            data(5, j) = Conversor.ConverterDoSI(su.spmp_temperature, d)
-            data(6, j) = Conversor.ConverterDoSI(su.spmp_pressure, PO(j))
-            data(7, j) = Conversor.ConverterDoSI(su.spmp_enthalpy, HO(j))
-            data(8, j) = Conversor.ConverterDoSI(su.spmp_entropy, SO(j))
+            data(5, j) = Converter.ConvertFromSI(su.temperature, d)
+            data(6, j) = Converter.ConvertFromSI(su.pressure, PO(j))
+            data(7, j) = Converter.ConvertFromSI(su.enthalpy, HO(j))
+            data(8, j) = Converter.ConvertFromSI(su.entropy, SO(j))
             data(9, j) = VO(j)
             j = j + 1
         Next
         j = 0
         For Each d As Double In TE
-            data(10, j) = Conversor.ConverterDoSI(su.spmp_temperature, d)
-            data(11, j) = Conversor.ConverterDoSI(su.spmp_pressure, PE(j))
+            data(10, j) = Converter.ConvertFromSI(su.temperature, d)
+            data(11, j) = Converter.ConvertFromSI(su.pressure, PE(j))
             j = j + 1
         Next
         j = 0
         For Each d As Double In TQ
-            data(12, j) = Conversor.ConverterDoSI(su.spmp_temperature, d)
-            data(13, j) = Conversor.ConverterDoSI(su.spmp_pressure, PQ(j))
+            data(12, j) = Converter.ConvertFromSI(su.temperature, d)
+            data(13, j) = Converter.ConvertFromSI(su.pressure, PQ(j))
             j = j + 1
         Next
         j = 0
         For Each d As Double In TI
-            data(14, j) = Conversor.ConverterDoSI(su.spmp_temperature, d)
-            data(15, j) = Conversor.ConverterDoSI(su.spmp_pressure, PI(j))
+            data(14, j) = Converter.ConvertFromSI(su.temperature, d)
+            data(15, j) = Converter.ConvertFromSI(su.pressure, PI(j))
             j = j + 1
         Next
         j = 0
         For Each d As Double In THsI
-            data(16, j) = Conversor.ConverterDoSI(su.spmp_temperature, d)
-            data(17, j) = Conversor.ConverterDoSI(su.spmp_pressure, PHsI(j))
+            data(16, j) = Converter.ConvertFromSI(su.temperature, d)
+            data(17, j) = Converter.ConvertFromSI(su.pressure, PHsI(j))
             j = j + 1
         Next
         j = 0
         For Each d As Double In THsII
-            data(18, j) = Conversor.ConverterDoSI(su.spmp_temperature, d)
-            data(19, j) = Conversor.ConverterDoSI(su.spmp_pressure, PHsII(j))
+            data(18, j) = Converter.ConvertFromSI(su.temperature, d)
+            data(19, j) = Converter.ConvertFromSI(su.pressure, PHsII(j))
             j = j + 1
         Next
         j = 0
         For Each d As Double In TOWF
-            data(20, j) = Conversor.ConverterDoSI(su.spmp_temperature, d)
-            data(21, j) = Conversor.ConverterDoSI(su.spmp_pressure, POWF(j))
-            data(22, j) = Conversor.ConverterDoSI(su.spmp_enthalpy, HOWF(j))
-            data(23, j) = Conversor.ConverterDoSI(su.spmp_entropy, SOWF(j))
+            data(20, j) = Converter.ConvertFromSI(su.temperature, d)
+            data(21, j) = Converter.ConvertFromSI(su.pressure, POWF(j))
+            data(22, j) = Converter.ConvertFromSI(su.enthalpy, HOWF(j))
+            data(23, j) = Converter.ConvertFromSI(su.entropy, SOWF(j))
             data(24, j) = VOWF(j)
             j = j + 1
         Next

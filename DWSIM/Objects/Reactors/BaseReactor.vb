@@ -18,7 +18,7 @@
 
 Imports Microsoft.MSDN.Samples.GraphicObjects
 Imports System.Collections.Generic
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Linq
 
 Namespace DWSIM.SimulationObjects.Reactors
@@ -31,7 +31,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
     <System.Serializable()> Public MustInherit Class Reactor
 
-        Inherits SimulationObjects_UnitOpBaseClass
+        Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         Protected m_reactionSequence As SortedList(Of Integer, ArrayList)
         Protected m_reactions As List(Of String)
@@ -97,10 +97,10 @@ Namespace DWSIM.SimulationObjects.Reactors
 
         Function GetConvFactors(rxn As Reaction, ims As SimulationObjects.Streams.MaterialStream) As Dictionary(Of String, Double)
 
-            Dim conv As New SistemasDeUnidades.Conversor
+            Dim conv As New SystemsOfUnits.Converter
 
-            Dim P As Double = ims.Fases(0).SPMProperties.pressure.GetValueOrDefault
-            Dim T As Double = ims.Fases(0).SPMProperties.temperature.GetValueOrDefault
+            Dim P As Double = ims.Phases(0).Properties.pressure.GetValueOrDefault
+            Dim T As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
             Dim amounts As New Dictionary(Of String, Double)
             Dim val1, val2, val3 As Double
 
@@ -110,50 +110,50 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                 Select Case rxn.ReactionBasis
                     Case ReactionBasis.Activity
-                        val1 = ims.Fases(3).Componentes(sb.CompName).ActivityCoeff.GetValueOrDefault
-                        val2 = ims.Fases(3).SPMProperties.molecularWeight.GetValueOrDefault
-                        val3 = ims.Fases(3).SPMProperties.density.GetValueOrDefault
+                        val1 = ims.Phases(3).Componentes(sb.CompName).ActivityCoeff.GetValueOrDefault
+                        val2 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
+                        val3 = ims.Phases(3).Properties.density.GetValueOrDefault
                         amounts(sb.CompName) = val1 * val2 / val3
                     Case ReactionBasis.Fugacity
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Vapor
-                                val1 = ims.Fases(2).Componentes(sb.CompName).FugacityCoeff.GetValueOrDefault
+                                val1 = ims.Phases(2).Componentes(sb.CompName).FugacityCoeff.GetValueOrDefault
                                 amounts(sb.CompName) = val1 * 8.314 * T
                             Case PhaseName.Liquid
-                                val1 = ims.Fases(3).Componentes(sb.CompName).FugacityCoeff.GetValueOrDefault
-                                val2 = ims.Fases(3).SPMProperties.molecularWeight.GetValueOrDefault
-                                val3 = ims.Fases(3).SPMProperties.density.GetValueOrDefault
+                                val1 = ims.Phases(3).Componentes(sb.CompName).FugacityCoeff.GetValueOrDefault
+                                val2 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
+                                val3 = ims.Phases(3).Properties.density.GetValueOrDefault
                                 amounts(sb.CompName) = val1 * val2 / val3 * P
                             Case PhaseName.Mixture
-                                val1 = ims.Fases(0).Componentes(sb.CompName).FugacityCoeff.GetValueOrDefault
-                                val2 = ims.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
-                                val3 = ims.Fases(0).SPMProperties.density.GetValueOrDefault
+                                val1 = ims.Phases(0).Componentes(sb.CompName).FugacityCoeff.GetValueOrDefault
+                                val2 = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
+                                val3 = ims.Phases(0).Properties.density.GetValueOrDefault
                                 amounts(sb.CompName) = val1 * val2 / val3 * P
                         End Select
                     Case ReactionBasis.MassConc
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Vapor
-                                val1 = ims.Fases(2).SPMProperties.molecularWeight.GetValueOrDefault
+                                val1 = ims.Phases(2).Properties.molecularWeight.GetValueOrDefault
                                 amounts(sb.CompName) = 1000 / val1
                             Case PhaseName.Liquid
-                                val1 = ims.Fases(3).SPMProperties.molecularWeight.GetValueOrDefault
+                                val1 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
                                 amounts(sb.CompName) = 1000 / val1
                             Case PhaseName.Mixture
-                                val1 = ims.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
+                                val1 = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
                                 amounts(sb.CompName) = 1000 / val1
                         End Select
                     Case ReactionBasis.MassFrac
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Vapor
-                                val1 = ims.Fases(2).SPMProperties.molecularWeight.GetValueOrDefault
+                                val1 = ims.Phases(2).Properties.molecularWeight.GetValueOrDefault
                                 amounts(sb.CompName) = 8.314 * T / P * 1000 / val1
                             Case PhaseName.Liquid
-                                val1 = ims.Fases(3).SPMProperties.molecularWeight.GetValueOrDefault
-                                val2 = ims.Fases(3).SPMProperties.density.GetValueOrDefault
+                                val1 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
+                                val2 = ims.Phases(3).Properties.density.GetValueOrDefault
                                 amounts(sb.CompName) = val2 * 1000 / val1
                             Case PhaseName.Mixture
-                                val1 = ims.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
-                                val2 = ims.Fases(0).SPMProperties.density.GetValueOrDefault
+                                val1 = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
+                                val2 = ims.Phases(0).Properties.density.GetValueOrDefault
                                 amounts(sb.CompName) = val2 * 1000 / val1
                         End Select
                     Case ReactionBasis.MolarConc
@@ -163,19 +163,19 @@ Namespace DWSIM.SimulationObjects.Reactors
                             Case PhaseName.Vapor
                                 amounts(sb.CompName) = 8.314 * T / P
                             Case PhaseName.Liquid
-                                val1 = ims.Fases(3).SPMProperties.molecularWeight.GetValueOrDefault
-                                val2 = ims.Fases(3).SPMProperties.density.GetValueOrDefault
+                                val1 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
+                                val2 = ims.Phases(3).Properties.density.GetValueOrDefault
                                 amounts(sb.CompName) = val1 / val2
                             Case PhaseName.Mixture
-                                val1 = ims.Fases(0).SPMProperties.molecularWeight.GetValueOrDefault
-                                val2 = ims.Fases(0).SPMProperties.density.GetValueOrDefault
+                                val1 = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
+                                val2 = ims.Phases(0).Properties.density.GetValueOrDefault
                                 amounts(sb.CompName) = val1 / val2
                         End Select
                     Case ReactionBasis.PartialPress
                         amounts(sb.CompName) = 8.314 * T
                 End Select
 
-                amounts(sb.CompName) = Conversor.ConverterDoSI(rxn.ConcUnit, amounts(sb.CompName))
+                amounts(sb.CompName) = Converter.ConvertFromSI(rxn.ConcUnit, amounts(sb.CompName))
 
             Next
 
@@ -283,7 +283,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
         End Sub
 
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SistemasDeUnidades.Unidades, ByVal nf As String)
+        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
         End Sub
 

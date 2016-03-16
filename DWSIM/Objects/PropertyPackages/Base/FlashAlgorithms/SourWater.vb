@@ -22,7 +22,7 @@ Imports DWSIM.DWSIM.MathEx
 Imports DWSIM.DWSIM.MathEx.Common
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Threading.Tasks
-Imports DWSIM.DWSIM.ClassesBasicasTermodinamica
+Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Linq
 Imports System.IO
 

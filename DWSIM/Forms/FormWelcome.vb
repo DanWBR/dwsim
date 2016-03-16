@@ -96,10 +96,10 @@ Public Class FormWelcome
                     Application.DoEvents()
                     FormMain.LoadAndExtractXMLZIP(Me.lvlatest.SelectedItems(0).Tag)
                 Case ".dwsim"
-                    FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
-                    Application.DoEvents()
-                    Application.DoEvents()
-                    FormMain.LoadF(Me.lvlatest.SelectedItems(0).Tag)
+                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
+                    'Application.DoEvents()
+                    'Application.DoEvents()
+                    'FormMain.LoadF(Me.lvlatest.SelectedItems(0).Tag)
                 Case ".dwcsd"
                     Dim NewMDIChild As New FormCompoundCreator()
                     NewMDIChild.MdiParent = FormMain

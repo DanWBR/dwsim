@@ -121,7 +121,7 @@
     <value>Incluir Punto de Operación</value>
   </data>
   <data name="CheckBox3.Text" xml:space="preserve">
-    <value>Incluir curva de estabilidad de fase (sólo PT/TP)</value>
+    <value>Incluir curva de estabilidad de Phase (sólo PT/TP)</value>
   </data>
   <data name="CheckBox1.Text" xml:space="preserve">
     <value>Incluir curva de calidad constante</value>
@@ -175,7 +175,7 @@
     <value>Tabla</value>
   </data>
   <data name="chkpip.Text" xml:space="preserve">
-    <value>Incluir curva de Identificación de Fases</value>
+    <value>Incluir curva de Identificación de Phases</value>
   </data>
   <data name="CheckBoxHYDVAP.Text" xml:space="preserve">
     <value>Solo Vapor</value>

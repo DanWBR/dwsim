@@ -749,7 +749,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fase Aquosa.
+        '''  Looks up a localized string similar to Phase Aquosa.
         '''</summary>
         Friend Shared ReadOnly Property Aqueous() As String
             Get
@@ -1181,7 +1181,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to A existência de fases líquido e vapor não é permitida..
+        '''  Looks up a localized string similar to A existência de Phases líquido e vapor não é permitida..
         '''</summary>
         Friend Shared ReadOnly Property BothPhasesNotAllowed() As String
             Get
@@ -1460,7 +1460,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Capacidade calorífica da fase à pressão constante.
+        '''  Looks up a localized string similar to Capacidade calorífica da Phase à pressão constante.
         '''</summary>
         Friend Shared ReadOnly Property Capacidadecalorficad() As String
             Get
@@ -2000,20 +2000,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Composição da Fase Líquida.
+        '''  Looks up a localized string similar to Composição da Phase Líquida.
         '''</summary>
-        Friend Shared ReadOnly Property ComposiodaFaseLquida() As String
+        Friend Shared ReadOnly Property ComposiodaPhaseLquida() As String
             Get
-                Return ResourceManager.GetString("ComposiodaFaseLquida", resourceCulture)
+                Return ResourceManager.GetString("ComposiodaPhaseLquida", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Composição da Fase Vapor.
+        '''  Looks up a localized string similar to Composição da Phase Vapor.
         '''</summary>
-        Friend Shared ReadOnly Property ComposiodaFaseVapor() As String
+        Friend Shared ReadOnly Property ComposiodaPhaseVapor() As String
             Get
-                Return ResourceManager.GetString("ComposiodaFaseVapor", resourceCulture)
+                Return ResourceManager.GetString("ComposiodaPhaseVapor", resourceCulture)
             End Get
         End Property
         
@@ -2270,7 +2270,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade térmica da fase vapor.
+        '''  Looks up a localized string similar to Condutividade térmica da Phase vapor.
         '''</summary>
         Friend Shared ReadOnly Property Condutividadetrmicad1() As String
             Get
@@ -2279,7 +2279,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade térmica da fase líquida.
+        '''  Looks up a localized string similar to Condutividade térmica da Phase líquida.
         '''</summary>
         Friend Shared ReadOnly Property Condutividadetrmicad2() As String
             Get
@@ -2288,7 +2288,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade Térmica da Fase Vapor: Método de Ely e Hanley.
+        '''  Looks up a localized string similar to Condutividade Térmica da Phase Vapor: Método de Ely e Hanley.
         '''</summary>
         Friend Shared ReadOnly Property CondutividadeTrmicad3() As String
             Get
@@ -2297,7 +2297,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade Térmica da Fase Líquida: Método de Latini et al.
+        '''  Looks up a localized string similar to Condutividade Térmica da Phase Líquida: Método de Latini et al.
         '''</summary>
         Friend Shared ReadOnly Property CondutividadeTrmicad4() As String
             Get
@@ -2306,7 +2306,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade térmica (Fase Vapor).
+        '''  Looks up a localized string similar to Condutividade térmica (Phase Vapor).
         '''</summary>
         Friend Shared ReadOnly Property CondutividadetrmicaF() As String
             Get
@@ -2315,7 +2315,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade térmica (Fase Vapor).
+        '''  Looks up a localized string similar to Condutividade térmica (Phase Vapor).
         '''</summary>
         Friend Shared ReadOnly Property CondutividadetrmicaF1() As String
             Get
@@ -2324,7 +2324,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade térmica (Fase Líquida).
+        '''  Looks up a localized string similar to Condutividade térmica (Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property CondutividadetrmicaF2() As String
             Get
@@ -2333,7 +2333,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade térmica (Fase Vapor).
+        '''  Looks up a localized string similar to Condutividade térmica (Phase Vapor).
         '''</summary>
         Friend Shared ReadOnly Property CondutividadetrmicaF3() As String
             Get
@@ -2342,7 +2342,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade térmica (Fase Líquida).
+        '''  Looks up a localized string similar to Condutividade térmica (Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property CondutividadetrmicaF4() As String
             Get
@@ -2360,7 +2360,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Condutividade térmic (Fase Vapor)a.
+        '''  Looks up a localized string similar to Condutividade térmic (Phase Vapor)a.
         '''</summary>
         Friend Shared ReadOnly Property CondutividadetrmicFa() As String
             Get
@@ -3008,7 +3008,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Lembre-se de remapear as fases e os componentes do Pacote CAPE-OPEN para o DWSIM depois de efetuar mudanças nas suas configurações..
+        '''  Looks up a localized string similar to Lembre-se de remapear as Phases e os componentes do Pacote CAPE-OPEN para o DWSIM depois de efetuar mudanças nas suas configurações..
         '''</summary>
         Friend Shared ReadOnly Property COWarningMsg1() As String
             Get
@@ -3035,38 +3035,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Cp/Cv (Fase Líquida).
+        '''  Looks up a localized string similar to Cp/Cv (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property CpCvFaseLquida() As String
+        Friend Shared ReadOnly Property CpCvPhaseLquida() As String
             Get
-                Return ResourceManager.GetString("CpCvFaseLquida", resourceCulture)
+                Return ResourceManager.GetString("CpCvPhaseLquida", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Cp/Cv (Fase Vapor).
+        '''  Looks up a localized string similar to Cp/Cv (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property CpCvFaseVapor() As String
+        Friend Shared ReadOnly Property CpCvPhaseVapor() As String
             Get
-                Return ResourceManager.GetString("CpCvFaseVapor", resourceCulture)
+                Return ResourceManager.GetString("CpCvPhaseVapor", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Cp (Fase Líquida).
+        '''  Looks up a localized string similar to Cp (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property CpFaseLquida() As String
+        Friend Shared ReadOnly Property CpPhaseLquida() As String
             Get
-                Return ResourceManager.GetString("CpFaseLquida", resourceCulture)
+                Return ResourceManager.GetString("CpPhaseLquida", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Cp (Fase Vapor).
+        '''  Looks up a localized string similar to Cp (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property CpFaseVapor() As String
+        Friend Shared ReadOnly Property CpPhaseVapor() As String
             Get
-                Return ResourceManager.GetString("CpFaseVapor", resourceCulture)
+                Return ResourceManager.GetString("CpPhaseVapor", resourceCulture)
             End Get
         End Property
         
@@ -4088,7 +4088,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Um Pacote de Propriedades CAPE-OPEN é uma coleção completa, consistente e reutilizável de métodos, compostos e parâmetros do modelo de cálculo de qualquer de um conjunto de propriedades físicas conhecidas para as fases de um material. Ele inclui todos os métodos e compostos puros dados, juntamente com as normas pertinentes à mistura e parâmetros de interação. Um Pacote de Propriedades normalmente cobre apenas um pequeno subconjunto dos compostos e métodos acessíveis através de um Sistema de Propriedades Fís [rest of string was truncated]&quot;;.
+        '''  Looks up a localized string similar to Um Pacote de Propriedades CAPE-OPEN é uma coleção completa, consistente e reutilizável de métodos, compostos e parâmetros do modelo de cálculo de qualquer de um conjunto de propriedades físicas conhecidas para as Phases de um material. Ele inclui todos os métodos e compostos puros dados, juntamente com as normas pertinentes à mistura e parâmetros de interação. Um Pacote de Propriedades normalmente cobre apenas um pequeno subconjunto dos compostos e métodos acessíveis através de um Sistema de Propriedades Fís [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescCOPP() As String
             Get
@@ -4115,7 +4115,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza o método COSMO-SAC implementado na biblioteca JCOSMO por Rafael Soares e Renan Gerber para a predição do coeficiente de atividade dos componentes na fase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A fase vapor é modelada através da EDE Peng-Robinson..
+        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza o método COSMO-SAC implementado na biblioteca JCOSMO por Rafael Soares e Renan Gerber para a predição do coeficiente de atividade dos componentes na Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A Phase vapor é modelada através da EDE Peng-Robinson..
         '''</summary>
         Friend Shared ReadOnly Property DescCSPP() As String
             Get
@@ -4162,7 +4162,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC Modificado (Dortmund) para a modelagem da fase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler..
+        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC Modificado (Dortmund) para a modelagem da Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler..
         '''</summary>
         Friend Shared ReadOnly Property DescMUPP() As String
             Get
@@ -4171,7 +4171,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Neste Pacote de Propriedades, o coeficiente de atividade da fase líquida é calculado através do modelo NRTL (Non-Random Two-Liquid). Opcionalmente, a fugacidade da fase vapor é calculada através da EDE Peng-Robinson. As entalpias de ambas as fases são calculadas pela equação Lee-Kesler. Outras propriedades termodinâmicas são calculadas pela EDE Peng-Robinson. .
+        '''  Looks up a localized string similar to Neste Pacote de Propriedades, o coeficiente de atividade da Phase líquida é calculado através do modelo NRTL (Non-Random Two-Liquid). Opcionalmente, a fugacidade da Phase vapor é calculada através da EDE Peng-Robinson. As entalpias de ambas as Phases são calculadas pela equação Lee-Kesler. Outras propriedades termodinâmicas são calculadas pela EDE Peng-Robinson. .
         '''</summary>
         Friend Shared ReadOnly Property DescNRTLPP() As String
             Get
@@ -4180,7 +4180,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Novos parâmetros do modelo de previsão de propriedade modificado UNIFAC são relatados para 89 grupos principais e 984 interações de grupo em grupo, utilizando dados de equilíbrio de fases criticamente avaliados incluindo equilíbrio líquido-vapor (ELV), o equilíbrio líquido-líquido (ELL), equilíbrio sólido-líquido (ESL) , excesso de entalpia (HE), coeficiente de atividade infinita de diluição (AINF) e dados de excesso de capacidade de calor (CPE). Os parâmetros obtidos são recomendados principalmente para co [rest of string was truncated]&quot;;.
+        '''  Looks up a localized string similar to Novos parâmetros do modelo de previsão de propriedade modificado UNIFAC são relatados para 89 grupos principais e 984 interações de grupo em grupo, utilizando dados de equilíbrio de Phases criticamente avaliados incluindo equilíbrio líquido-vapor (ELV), o equilíbrio líquido-líquido (ELL), equilíbrio sólido-líquido (ESL) , excesso de entalpia (HE), coeficiente de atividade infinita de diluição (AINF) e dados de excesso de capacidade de calor (CPE). Os parâmetros obtidos são recomendados principalmente para co [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescNUPP() As String
             Get
@@ -4200,7 +4200,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza a EDE Peng-Robinson e considera água totalmente imiscível com hidrocarbonetos, separando-se em uma fase isolada. Também utiliza translação no cálculo do volume molar para uma melhor predição da densidade de líquidos..
+        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza a EDE Peng-Robinson e considera água totalmente imiscível com hidrocarbonetos, separando-se em uma Phase isolada. Também utiliza translação no cálculo do volume molar para uma melhor predição da densidade de líquidos..
         '''</summary>
         Friend Shared ReadOnly Property DescPengRobinsonIWVTPP() As String
             Get
@@ -4209,7 +4209,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pacote de Propriedades com a EDE Peng-Robinson e suporte a mais de uma fase líquida..
+        '''  Looks up a localized string similar to Pacote de Propriedades com a EDE Peng-Robinson e suporte a mais de uma Phase líquida..
         '''</summary>
         Friend Shared ReadOnly Property DescPengRobinsonMP() As String
             Get
@@ -4277,7 +4277,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pacote de Propriedades de referência, onde o equilíbrio termodinâmico é calculado pela Lei de Raoult. As Entalpias, Entropias e Capacidades Caloríficas residuais são consideradas iguais a zero. A Entalpia da Fase Líquida utiliza os valores de Delta-H de Vaporização experimentais ou calculados no caso dos Pseudo-componentes / Hipotéticos..
+        '''  Looks up a localized string similar to Pacote de Propriedades de referência, onde o equilíbrio termodinâmico é calculado pela Lei de Raoult. As Entalpias, Entropias e Capacidades Caloríficas residuais são consideradas iguais a zero. A Entalpia da Phase Líquida utiliza os valores de Delta-H de Vaporização experimentais ou calculados no caso dos Pseudo-componentes / Hipotéticos..
         '''</summary>
         Friend Shared ReadOnly Property DescRPP() As String
             Get
@@ -4297,11 +4297,11 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Pacote de Propriedades que utiliza a EE Redlich-Kwong modificada por Soave. Indicado para uso com hidrocarbonetos e não-condensáveis.
         '''As propriedades são calculadas diretamente através da equação de estado e/ou de dados experimentais, exceto:
-        '''Massa Específica da Fase Líquida: Método de Rackett
-        '''Condutividade Térmica da Fase Líquida: Método de Latini et al
-        '''Condutividade Térmica da Fase Vapor: Método de Ely e Hanley
-        '''Viscosidade da Fase Vapor: Método Jossi-Stiel-Thodos
-        '''Tensão Superficial da Fase Líquida:  [rest of string was truncated]&quot;;.
+        '''Massa Específica da Phase Líquida: Método de Rackett
+        '''Condutividade Térmica da Phase Líquida: Método de Latini et al
+        '''Condutividade Térmica da Phase Vapor: Método de Ely e Hanley
+        '''Viscosidade da Phase Vapor: Método Jossi-Stiel-Thodos
+        '''Tensão Superficial da Phase Líquida:  [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescSoaveRedlichKwongSRK() As String
             Get
@@ -4339,7 +4339,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Neste Pacote de Propriedades, o coeficiente de atividade da fase líquida é calculado através do modelo UNIQUAC. Opcionalmente, a fugacidade da fase vapor é calculada através da EDE Peng-Robinson. As entalpias de ambas as fases são calculadas pela equação Lee-Kesler. Outras propriedades termodinâmicas são calculadas pela EDE Peng-Robinson..
+        '''  Looks up a localized string similar to Neste Pacote de Propriedades, o coeficiente de atividade da Phase líquida é calculado através do modelo UNIQUAC. Opcionalmente, a fugacidade da Phase vapor é calculada através da EDE Peng-Robinson. As entalpias de ambas as Phases são calculadas pela equação Lee-Kesler. Outras propriedades termodinâmicas são calculadas pela EDE Peng-Robinson..
         '''</summary>
         Friend Shared ReadOnly Property DescUNIQUACPP() As String
             Get
@@ -4348,7 +4348,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC para a modelagem da fase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A fase vapor é modelada através da EDE Peng-Robinson. Recomendado para uso com os Componentes Hipotéticos..
+        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC para a modelagem da Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A Phase vapor é modelada através da EDE Peng-Robinson. Recomendado para uso com os Componentes Hipotéticos..
         '''</summary>
         Friend Shared ReadOnly Property DescUPP() As String
             Get
@@ -4681,7 +4681,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to DWSIM - Utilitários: Diagrama de Fases (Binário).
+        '''  Looks up a localized string similar to DWSIM - Utilitários: Diagrama de Phases (Binário).
         '''</summary>
         Friend Shared ReadOnly Property DWSIMUtilitriosDiagr() As String
             Get
@@ -4690,7 +4690,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to DWSIM - Utilitários: Diagrama de Fases.
+        '''  Looks up a localized string similar to DWSIM - Utilitários: Diagrama de Phases.
         '''</summary>
         Friend Shared ReadOnly Property DWSIMUtilitriosDiagr1() As String
             Get
@@ -5086,7 +5086,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Entalpia Específica da fase vapor.
+        '''  Looks up a localized string similar to Entalpia Específica da Phase vapor.
         '''</summary>
         Friend Shared ReadOnly Property EntalpiaEspecficadaf() As String
             Get
@@ -5095,7 +5095,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Entalpia Específica da fase líquida.
+        '''  Looks up a localized string similar to Entalpia Específica da Phase líquida.
         '''</summary>
         Friend Shared ReadOnly Property EntalpiaEspecficadaf2() As String
             Get
@@ -5113,7 +5113,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Entalpia Específica (Fase Vapor).
+        '''  Looks up a localized string similar to Entalpia Específica (Phase Vapor).
         '''</summary>
         Friend Shared ReadOnly Property EntalpiaEspecficaFas() As String
             Get
@@ -5122,7 +5122,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Entalpia Específica (Fase Líquida).
+        '''  Looks up a localized string similar to Entalpia Específica (Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property EntalpiaEspecficaFas2() As String
             Get
@@ -5176,7 +5176,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Entropia Específica da fase vapor.
+        '''  Looks up a localized string similar to Entropia Específica da Phase vapor.
         '''</summary>
         Friend Shared ReadOnly Property EntropiaEspecficadaf() As String
             Get
@@ -5185,7 +5185,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Entropia Específica da fase líquida.
+        '''  Looks up a localized string similar to Entropia Específica da Phase líquida.
         '''</summary>
         Friend Shared ReadOnly Property EntropiaEspecficadaf2() As String
             Get
@@ -5203,7 +5203,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Entropia Específica (Fase Vapor).
+        '''  Looks up a localized string similar to Entropia Específica (Phase Vapor).
         '''</summary>
         Friend Shared ReadOnly Property EntropiaEspecficaFas() As String
             Get
@@ -5212,7 +5212,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Entropia Específica (Fase Líquida).
+        '''  Looks up a localized string similar to Entropia Específica (Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property EntropiaEspecficaFas2() As String
             Get
@@ -5896,47 +5896,47 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Existe uma fase líquida na sucção do compressor..
+        '''  Looks up a localized string similar to Existe uma Phase líquida na sucção do compressor..
         '''</summary>
-        Friend Shared ReadOnly Property Existeumafaselquidan() As String
+        Friend Shared ReadOnly Property ExisteumaPhaselquidan() As String
             Get
-                Return ResourceManager.GetString("Existeumafaselquidan", resourceCulture)
+                Return ResourceManager.GetString("ExisteumaPhaselquidan", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Existe uma fase líquida na sucção da turbina..
+        '''  Looks up a localized string similar to Existe uma Phase líquida na sucção da turbina..
         '''</summary>
-        Friend Shared ReadOnly Property Existeumafaselquidan2() As String
+        Friend Shared ReadOnly Property ExisteumaPhaselquidan2() As String
             Get
-                Return ResourceManager.GetString("Existeumafaselquidan2", resourceCulture)
+                Return ResourceManager.GetString("ExisteumaPhaselquidan2", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Existe uma fase vapor na sucção da bomba..
+        '''  Looks up a localized string similar to Existe uma Phase vapor na sucção da bomba..
         '''</summary>
-        Friend Shared ReadOnly Property Existeumafasevaporna() As String
+        Friend Shared ReadOnly Property ExisteumaPhasevaporna() As String
             Get
-                Return ResourceManager.GetString("Existeumafasevaporna", resourceCulture)
+                Return ResourceManager.GetString("ExisteumaPhasevaporna", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Existe uma fase vapor na corrente de entrada do tanque..
+        '''  Looks up a localized string similar to Existe uma Phase vapor na corrente de entrada do tanque..
         '''</summary>
-        Friend Shared ReadOnly Property Existeumafasevaporna2() As String
+        Friend Shared ReadOnly Property ExisteumaPhasevaporna2() As String
             Get
-                Return ResourceManager.GetString("Existeumafasevaporna2", resourceCulture)
+                Return ResourceManager.GetString("ExisteumaPhasevaporna2", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Existe uma fase vapor na corrente de entrada do trocador de calor.
+        '''  Looks up a localized string similar to Existe uma Phase vapor na corrente de entrada do trocador de calor.
         '''</summary>
-        Friend Shared ReadOnly Property Existeumafasevaporna21() As String
+        Friend Shared ReadOnly Property ExisteumaPhasevaporna21() As String
             Get
-                Return ResourceManager.GetString("Existeumafasevaporna21", resourceCulture)
+                Return ResourceManager.GetString("ExisteumaPhasevaporna21", resourceCulture)
             End Get
         End Property
         
@@ -6067,7 +6067,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fator de compressibilidade (Z) da fase nas condições da mistura.
+        '''  Looks up a localized string similar to Fator de compressibilidade (Z) da Phase nas condições da mistura.
         '''</summary>
         Friend Shared ReadOnly Property Fatordecompressibili() As String
             Get
@@ -6472,20 +6472,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to  (FM Fase Líquida).
+        '''  Looks up a localized string similar to  (FM Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property FMFaseLquida() As String
+        Friend Shared ReadOnly Property FMPhaseLquida() As String
             Get
-                Return ResourceManager.GetString("FMFaseLquida", resourceCulture)
+                Return ResourceManager.GetString("FMPhaseLquida", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to  (FM Fase Vapor).
+        '''  Looks up a localized string similar to  (FM Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property FMFaseVapor() As String
+        Friend Shared ReadOnly Property FMPhaseVapor() As String
             Get
-                Return ResourceManager.GetString("FMFaseVapor", resourceCulture)
+                Return ResourceManager.GetString("FMPhaseVapor", resourceCulture)
             End Get
         End Property
         
@@ -6922,56 +6922,56 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração molar da fase.
+        '''  Looks up a localized string similar to Fração molar da Phase.
         '''</summary>
-        Friend Shared ReadOnly Property Fraomolardafase() As String
+        Friend Shared ReadOnly Property FraomolardaPhase() As String
             Get
-                Return ResourceManager.GetString("Fraomolardafase", resourceCulture)
+                Return ResourceManager.GetString("FraomolardaPhase", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração molar da fase (Fase Líquida).
+        '''  Looks up a localized string similar to Fração molar da Phase (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property FraomolardafaseFaseL() As String
+        Friend Shared ReadOnly Property FraomolardaPhasePhaseL() As String
             Get
-                Return ResourceManager.GetString("FraomolardafaseFaseL", resourceCulture)
+                Return ResourceManager.GetString("FraomolardaPhasePhaseL", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração molar da fase (Fase Vapor).
+        '''  Looks up a localized string similar to Fração molar da Phase (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property FraomolardafaseFaseV() As String
+        Friend Shared ReadOnly Property FraomolardaPhasePhaseV() As String
             Get
-                Return ResourceManager.GetString("FraomolardafaseFaseV", resourceCulture)
+                Return ResourceManager.GetString("FraomolardaPhasePhaseV", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração molar da fase na mistura.
+        '''  Looks up a localized string similar to Fração molar da Phase na mistura.
         '''</summary>
-        Friend Shared ReadOnly Property Fraomolardafasenamis() As String
+        Friend Shared ReadOnly Property FraomolardaPhasenamis() As String
             Get
-                Return ResourceManager.GetString("Fraomolardafasenamis", resourceCulture)
+                Return ResourceManager.GetString("FraomolardaPhasenamis", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração molar na Fase Líquida.
+        '''  Looks up a localized string similar to Fração molar na Phase Líquida.
         '''</summary>
-        Friend Shared ReadOnly Property FraomolarnaFaseLquid() As String
+        Friend Shared ReadOnly Property FraomolarnaPhaseLquid() As String
             Get
-                Return ResourceManager.GetString("FraomolarnaFaseLquid", resourceCulture)
+                Return ResourceManager.GetString("FraomolarnaPhaseLquid", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração molar na Fase Vapor.
+        '''  Looks up a localized string similar to Fração molar na Phase Vapor.
         '''</summary>
-        Friend Shared ReadOnly Property FraomolarnaFaseVapor() As String
+        Friend Shared ReadOnly Property FraomolarnaPhaseVapor() As String
             Get
-                Return ResourceManager.GetString("FraomolarnaFaseVapor", resourceCulture)
+                Return ResourceManager.GetString("FraomolarnaPhaseVapor", resourceCulture)
             End Get
         End Property
         
@@ -7021,74 +7021,74 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica da fase.
+        '''  Looks up a localized string similar to Fração mássica da Phase.
         '''</summary>
-        Friend Shared ReadOnly Property Fraomssicadafase() As String
+        Friend Shared ReadOnly Property FraomssicadaPhase() As String
             Get
-                Return ResourceManager.GetString("Fraomssicadafase", resourceCulture)
+                Return ResourceManager.GetString("FraomssicadaPhase", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica da fase (Fase Vapor).
+        '''  Looks up a localized string similar to Fração mássica da Phase (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property FraomssicadafaseFase() As String
+        Friend Shared ReadOnly Property FraomssicadaPhasePhase() As String
             Get
-                Return ResourceManager.GetString("FraomssicadafaseFase", resourceCulture)
+                Return ResourceManager.GetString("FraomssicadaPhasePhase", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica da fase (Fase Líquida).
+        '''  Looks up a localized string similar to Fração mássica da Phase (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property FraomssicadafaseFase2() As String
+        Friend Shared ReadOnly Property FraomssicadaPhasePhase2() As String
             Get
-                Return ResourceManager.GetString("FraomssicadafaseFase2", resourceCulture)
+                Return ResourceManager.GetString("FraomssicadaPhasePhase2", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica da fase (Fase Vapor).
+        '''  Looks up a localized string similar to Fração mássica da Phase (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property FraomssicadafaseFase3() As String
+        Friend Shared ReadOnly Property FraomssicadaPhasePhase3() As String
             Get
-                Return ResourceManager.GetString("FraomssicadafaseFase3", resourceCulture)
+                Return ResourceManager.GetString("FraomssicadaPhasePhase3", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica da fase (Fase Líquida).
+        '''  Looks up a localized string similar to Fração mássica da Phase (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property FraomssicadafaseFase4() As String
+        Friend Shared ReadOnly Property FraomssicadaPhasePhase4() As String
             Get
-                Return ResourceManager.GetString("FraomssicadafaseFase4", resourceCulture)
+                Return ResourceManager.GetString("FraomssicadaPhasePhase4", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica da fase na mistura.
+        '''  Looks up a localized string similar to Fração mássica da Phase na mistura.
         '''</summary>
-        Friend Shared ReadOnly Property Fraomssicadafasenami() As String
+        Friend Shared ReadOnly Property FraomssicadaPhasenami() As String
             Get
-                Return ResourceManager.GetString("Fraomssicadafasenami", resourceCulture)
+                Return ResourceManager.GetString("FraomssicadaPhasenami", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica na Fase Líquida.
+        '''  Looks up a localized string similar to Fração mássica na Phase Líquida.
         '''</summary>
-        Friend Shared ReadOnly Property FraomssicanaFaseLqui() As String
+        Friend Shared ReadOnly Property FraomssicanaPhaseLqui() As String
             Get
-                Return ResourceManager.GetString("FraomssicanaFaseLqui", resourceCulture)
+                Return ResourceManager.GetString("FraomssicanaPhaseLqui", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica na Fase Vapor.
+        '''  Looks up a localized string similar to Fração mássica na Phase Vapor.
         '''</summary>
-        Friend Shared ReadOnly Property FraomssicanaFaseVapo() As String
+        Friend Shared ReadOnly Property FraomssicanaPhaseVapo() As String
             Get
-                Return ResourceManager.GetString("FraomssicanaFaseVapo", resourceCulture)
+                Return ResourceManager.GetString("FraomssicanaPhaseVapo", resourceCulture)
             End Get
         End Property
         
@@ -8128,20 +8128,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to LIQ Fração molar da fase.
+        '''  Looks up a localized string similar to LIQ Fração molar da Phase.
         '''</summary>
-        Friend Shared ReadOnly Property LIQFraomolardafase() As String
+        Friend Shared ReadOnly Property LIQFraomolardaPhase() As String
             Get
-                Return ResourceManager.GetString("LIQFraomolardafase", resourceCulture)
+                Return ResourceManager.GetString("LIQFraomolardaPhase", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to LIQ Fração mássica da fase.
+        '''  Looks up a localized string similar to LIQ Fração mássica da Phase.
         '''</summary>
-        Friend Shared ReadOnly Property LIQFraomssicadafase() As String
+        Friend Shared ReadOnly Property LIQFraomssicadaPhase() As String
             Get
-                Return ResourceManager.GetString("LIQFraomssicadafase", resourceCulture)
+                Return ResourceManager.GetString("LIQFraomssicadaPhase", resourceCulture)
             End Get
         End Property
         
@@ -8398,29 +8398,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa específica da fase vapor.
+        '''  Looks up a localized string similar to Massa específica da Phase vapor.
         '''</summary>
-        Friend Shared ReadOnly Property Massaespecficadafase() As String
+        Friend Shared ReadOnly Property MassaespecficadaPhase() As String
             Get
-                Return ResourceManager.GetString("Massaespecficadafase", resourceCulture)
+                Return ResourceManager.GetString("MassaespecficadaPhase", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa específica da fase líquida.
+        '''  Looks up a localized string similar to Massa específica da Phase líquida.
         '''</summary>
-        Friend Shared ReadOnly Property Massaespecficadafase2() As String
+        Friend Shared ReadOnly Property MassaespecficadaPhase2() As String
             Get
-                Return ResourceManager.GetString("Massaespecficadafase2", resourceCulture)
+                Return ResourceManager.GetString("MassaespecficadaPhase2", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa Específica da Fase Líquida: Método de Rackett.
+        '''  Looks up a localized string similar to Massa Específica da Phase Líquida: Método de Rackett.
         '''</summary>
-        Friend Shared ReadOnly Property MassaEspecficadaFase3() As String
+        Friend Shared ReadOnly Property MassaEspecficadaPhase3() As String
             Get
-                Return ResourceManager.GetString("MassaEspecficadaFase3", resourceCulture)
+                Return ResourceManager.GetString("MassaEspecficadaPhase3", resourceCulture)
             End Get
         End Property
         
@@ -8434,20 +8434,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa específica (Fase Líquida).
+        '''  Looks up a localized string similar to Massa específica (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property MassaespecficaFaseLq() As String
+        Friend Shared ReadOnly Property MassaespecficaPhaseLq() As String
             Get
-                Return ResourceManager.GetString("MassaespecficaFaseLq", resourceCulture)
+                Return ResourceManager.GetString("MassaespecficaPhaseLq", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa específica (Fase Vapor).
+        '''  Looks up a localized string similar to Massa específica (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property MassaespecficaFaseVa() As String
+        Friend Shared ReadOnly Property MassaespecficaPhaseVa() As String
             Get
-                Return ResourceManager.GetString("MassaespecficaFaseVa", resourceCulture)
+                Return ResourceManager.GetString("MassaespecficaPhaseVa", resourceCulture)
             End Get
         End Property
         
@@ -8470,20 +8470,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa molar da fase líquida.
+        '''  Looks up a localized string similar to Massa molar da Phase líquida.
         '''</summary>
-        Friend Shared ReadOnly Property Massamolardafaselqui() As String
+        Friend Shared ReadOnly Property MassamolardaPhaselqui() As String
             Get
-                Return ResourceManager.GetString("Massamolardafaselqui", resourceCulture)
+                Return ResourceManager.GetString("MassamolardaPhaselqui", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa molar da fase vapor.
+        '''  Looks up a localized string similar to Massa molar da Phase vapor.
         '''</summary>
-        Friend Shared ReadOnly Property Massamolardafasevapo() As String
+        Friend Shared ReadOnly Property MassamolardaPhasevapo() As String
             Get
-                Return ResourceManager.GetString("Massamolardafasevapo", resourceCulture)
+                Return ResourceManager.GetString("MassamolardaPhasevapo", resourceCulture)
             End Get
         End Property
         
@@ -8497,20 +8497,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa molar (Fase Líquida).
+        '''  Looks up a localized string similar to Massa molar (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property MassamolarFaseLquida() As String
+        Friend Shared ReadOnly Property MassamolarPhaseLquida() As String
             Get
-                Return ResourceManager.GetString("MassamolarFaseLquida", resourceCulture)
+                Return ResourceManager.GetString("MassamolarPhaseLquida", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa molar (Fase Vapor).
+        '''  Looks up a localized string similar to Massa molar (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property MassamolarFaseVapor() As String
+        Friend Shared ReadOnly Property MassamolarPhaseVapor() As String
             Get
-                Return ResourceManager.GetString("MassamolarFaseVapor", resourceCulture)
+                Return ResourceManager.GetString("MassamolarPhaseVapor", resourceCulture)
             End Get
         End Property
         
@@ -8884,7 +8884,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase vapor, em frações molares.
+        '''  Looks up a localized string similar to Mostra a composição da Phase vapor, em frações molares.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas() As String
             Get
@@ -8893,7 +8893,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase líquida, em vazões volumétricas.
+        '''  Looks up a localized string similar to Mostra a composição da Phase líquida, em vazões volumétricas.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas10() As String
             Get
@@ -8902,7 +8902,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase líquida, em frações molares.
+        '''  Looks up a localized string similar to Mostra a composição da Phase líquida, em frações molares.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas2() As String
             Get
@@ -8911,7 +8911,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase vapor, em frações mássicas.
+        '''  Looks up a localized string similar to Mostra a composição da Phase vapor, em frações mássicas.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas3() As String
             Get
@@ -8920,7 +8920,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase líquida, em frações mássicas.
+        '''  Looks up a localized string similar to Mostra a composição da Phase líquida, em frações mássicas.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas4() As String
             Get
@@ -8929,7 +8929,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase vapor, em vazões mássicas.
+        '''  Looks up a localized string similar to Mostra a composição da Phase vapor, em vazões mássicas.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas5() As String
             Get
@@ -8938,7 +8938,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase líquida, em vazões mássicas.
+        '''  Looks up a localized string similar to Mostra a composição da Phase líquida, em vazões mássicas.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas6() As String
             Get
@@ -8947,7 +8947,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase vapor, em vazões molares.
+        '''  Looks up a localized string similar to Mostra a composição da Phase vapor, em vazões molares.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas7() As String
             Get
@@ -8956,7 +8956,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase líquida, em vazões molares.
+        '''  Looks up a localized string similar to Mostra a composição da Phase líquida, em vazões molares.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas8() As String
             Get
@@ -8965,7 +8965,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mostra a composição da fase vapor, em vazões volumétricas.
+        '''  Looks up a localized string similar to Mostra a composição da Phase vapor, em vazões volumétricas.
         '''</summary>
         Friend Shared ReadOnly Property Mostraacomposiodafas9() As String
             Get
@@ -10099,7 +10099,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC para a modelagem da fase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A fase vapor é modelada através da EDE Peng-Robinson..
+        '''  Looks up a localized string similar to Pacote de Propriedades que utiliza o método de Contribuição de Grupos UNIFAC para a modelagem da Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A Phase vapor é modelada através da EDE Peng-Robinson..
         '''</summary>
         Friend Shared ReadOnly Property PacotedePropriedades4() As String
             Get
@@ -10108,7 +10108,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Pacote de Propriedades de referência, onde o equilíbrio termodinâmico é calculado pela Lei de Raoult. As Entalpias, Entropias e Capacidades Caloríficas residuais são consideradas iguais a zero. A Entalpia da Fase Líquida utiliza os valores de Delta-H de Vaporização experimentais ou calculados no caso dos Pseudo-componentes/Hypotheticals..
+        '''  Looks up a localized string similar to Pacote de Propriedades de referência, onde o equilíbrio termodinâmico é calculado pela Lei de Raoult. As Entalpias, Entropias e Capacidades Caloríficas residuais são consideradas iguais a zero. A Entalpia da Phase Líquida utiliza os valores de Delta-H de Vaporização experimentais ou calculados no caso dos Pseudo-componentes/Hypotheticals..
         '''</summary>
         Friend Shared ReadOnly Property PacotedePropriedades5() As String
             Get
@@ -10594,7 +10594,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Mudança de fase não permitida..
+        '''  Looks up a localized string similar to Mudança de Phase não permitida..
         '''</summary>
         Friend Shared ReadOnly Property PhaseChangeNotallowed() As String
             Get
@@ -10603,7 +10603,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Parâmetro de Identificação da Fase = 1.
+        '''  Looks up a localized string similar to Parâmetro de Identificação da Phase = 1.
         '''</summary>
         Friend Shared ReadOnly Property PhaseIdentificationParameter() As String
             Get
@@ -10837,7 +10837,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Usar Regra de Mistura Ideal para Densidade da Fase Líquida (0 = Desativar, 1 = Ativar).
+        '''  Looks up a localized string similar to Usar Regra de Mistura Ideal para Densidade da Phase Líquida (0 = Desativar, 1 = Ativar).
         '''</summary>
         Friend Shared ReadOnly Property PP_IDEAL_MIXRULE_LIQDENS() As String
             Get
@@ -10846,7 +10846,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Usar Modelo Ideal para Fugacidade da Fase Vapor (0 = Desativar, 1 = Ativar).
+        '''  Looks up a localized string similar to Usar Modelo Ideal para Fugacidade da Phase Vapor (0 = Desativar, 1 = Ativar).
         '''</summary>
         Friend Shared ReadOnly Property PP_IDEAL_VAPOR_PHASE_FUG() As String
             Get
@@ -10981,7 +10981,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Usar EDE para o Cálculo da Massa Específica da Fase Líquida (0 = Desativar, 1 = Ativar).
+        '''  Looks up a localized string similar to Usar EDE para o Cálculo da Massa Específica da Phase Líquida (0 = Desativar, 1 = Ativar).
         '''</summary>
         Friend Shared ReadOnly Property PP_USE_EOS_LIQDENS() As String
             Get
@@ -11404,29 +11404,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Propriedades da Fase Líquida.
+        '''  Looks up a localized string similar to Propriedades da Phase Líquida.
         '''</summary>
-        Friend Shared ReadOnly Property PropriedadesdaFaseLq() As String
+        Friend Shared ReadOnly Property PropriedadesdaPhaseLq() As String
             Get
-                Return ResourceManager.GetString("PropriedadesdaFaseLq", resourceCulture)
+                Return ResourceManager.GetString("PropriedadesdaPhaseLq", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Propriedades da fase vapor.
+        '''  Looks up a localized string similar to Propriedades da Phase vapor.
         '''</summary>
-        Friend Shared ReadOnly Property Propriedadesdafaseva() As String
+        Friend Shared ReadOnly Property PropriedadesdaPhaseva() As String
             Get
-                Return ResourceManager.GetString("Propriedadesdafaseva", resourceCulture)
+                Return ResourceManager.GetString("PropriedadesdaPhaseva", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Propriedades da Fase Vapor.
+        '''  Looks up a localized string similar to Propriedades da Phase Vapor.
         '''</summary>
-        Friend Shared ReadOnly Property PropriedadesdaFaseVa2() As String
+        Friend Shared ReadOnly Property PropriedadesdaPhaseVa2() As String
             Get
-                Return ResourceManager.GetString("PropriedadesdaFaseVa2", resourceCulture)
+                Return ResourceManager.GetString("PropriedadesdaPhaseVa2", resourceCulture)
             End Get
         End Property
         
@@ -13150,7 +13150,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Foi encontrada uma segunda fase líquida, por favor conecte uma corrente de matéria à saída correspondente..
+        '''  Looks up a localized string similar to Foi encontrada uma segunda Phase líquida, por favor conecte uma corrente de matéria à saída correspondente..
         '''</summary>
         Friend Shared ReadOnly Property SeparatorVessel_SecondLiquidPhaseFound() As String
             Get
@@ -13575,9 +13575,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Componente.
         '''</summary>
-        Friend Shared ReadOnly Property Substancia() As String
+        Friend Shared ReadOnly Property Compound() As String
             Get
-                Return ResourceManager.GetString("Substancia", resourceCulture)
+                Return ResourceManager.GetString("Compound", resourceCulture)
             End Get
         End Property
         
@@ -13852,7 +13852,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Tensão Superficial da Fase Líquida: Método Brock-Bird.
+        '''  Looks up a localized string similar to Tensão Superficial da Phase Líquida: Método Brock-Bird.
         '''</summary>
         Friend Shared ReadOnly Property TensoSuperficialdaFa() As String
             Get
@@ -13861,7 +13861,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Tensão superficial entre as fases.
+        '''  Looks up a localized string similar to Tensão superficial entre as Phases.
         '''</summary>
         Friend Shared ReadOnly Property Tensosuperficialentr() As String
             Get
@@ -14374,7 +14374,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to O Algoritmo Flash selecionado não é capaz de calcular o equilíbrio entre duas fases líquidas. Por favor, selecione um algortimo adequado para esta finalidade..
+        '''  Looks up a localized string similar to O Algoritmo Flash selecionado não é capaz de calcular o equilíbrio entre duas Phases líquidas. Por favor, selecione um algortimo adequado para esta finalidade..
         '''</summary>
         Friend Shared ReadOnly Property UnsuitableFlashAlgorithmSelected() As String
             Get
@@ -14653,20 +14653,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to VAP Fração molar da fase.
+        '''  Looks up a localized string similar to VAP Fração molar da Phase.
         '''</summary>
-        Friend Shared ReadOnly Property VAPFraomolardafase() As String
+        Friend Shared ReadOnly Property VAPFraomolardaPhase() As String
             Get
-                Return ResourceManager.GetString("VAPFraomolardafase", resourceCulture)
+                Return ResourceManager.GetString("VAPFraomolardaPhase", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to VAP Fração mássica da fase.
+        '''  Looks up a localized string similar to VAP Fração mássica da Phase.
         '''</summary>
-        Friend Shared ReadOnly Property VAPFraomssicadafase() As String
+        Friend Shared ReadOnly Property VAPFraomssicadaPhase() As String
             Get
-                Return ResourceManager.GetString("VAPFraomssicadafase", resourceCulture)
+                Return ResourceManager.GetString("VAPFraomssicadaPhase", resourceCulture)
             End Get
         End Property
         
@@ -14842,7 +14842,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vaso para separar as fases de uma corrente..
+        '''  Looks up a localized string similar to Vaso para separar as Phases de uma corrente..
         '''</summary>
         Friend Shared ReadOnly Property VasoSeparador_Desc() As String
             Get
@@ -14860,7 +14860,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vaso para separar as fases de uma corrente..
+        '''  Looks up a localized string similar to Vaso para separar as Phases de uma corrente..
         '''</summary>
         Friend Shared ReadOnly Property VasoSeparadorGL_Desc() As String
             Get
@@ -14923,20 +14923,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão mássica (Fase Líquida).
+        '''  Looks up a localized string similar to Vazão mássica (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property VazomssicaFaseLquida() As String
+        Friend Shared ReadOnly Property VazomssicaPhaseLquida() As String
             Get
-                Return ResourceManager.GetString("VazomssicaFaseLquida", resourceCulture)
+                Return ResourceManager.GetString("VazomssicaPhaseLquida", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão mássica (Fase Vapor).
+        '''  Looks up a localized string similar to Vazão mássica (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property VazomssicaFaseVapor() As String
+        Friend Shared ReadOnly Property VazomssicaPhaseVapor() As String
             Get
-                Return ResourceManager.GetString("VazomssicaFaseVapor", resourceCulture)
+                Return ResourceManager.GetString("VazomssicaPhaseVapor", resourceCulture)
             End Get
         End Property
         
@@ -14950,20 +14950,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão mássica na Fase Líquida.
+        '''  Looks up a localized string similar to Vazão mássica na Phase Líquida.
         '''</summary>
-        Friend Shared ReadOnly Property VazomssicanaFaseLqui() As String
+        Friend Shared ReadOnly Property VazomssicanaPhaseLqui() As String
             Get
-                Return ResourceManager.GetString("VazomssicanaFaseLqui", resourceCulture)
+                Return ResourceManager.GetString("VazomssicanaPhaseLqui", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão mássica na Fase Vapor.
+        '''  Looks up a localized string similar to Vazão mássica na Phase Vapor.
         '''</summary>
-        Friend Shared ReadOnly Property VazomssicanaFaseVapo() As String
+        Friend Shared ReadOnly Property VazomssicanaPhaseVapo() As String
             Get
-                Return ResourceManager.GetString("VazomssicanaFaseVapo", resourceCulture)
+                Return ResourceManager.GetString("VazomssicanaPhaseVapo", resourceCulture)
             End Get
         End Property
         
@@ -14986,20 +14986,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão @ T,P (Fase Líquida).
+        '''  Looks up a localized string similar to Vazão @ T,P (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property VazoTPFaseLquida() As String
+        Friend Shared ReadOnly Property VazoTPPhaseLquida() As String
             Get
-                Return ResourceManager.GetString("VazoTPFaseLquida", resourceCulture)
+                Return ResourceManager.GetString("VazoTPPhaseLquida", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão @ T,P (Fase Vapor).
+        '''  Looks up a localized string similar to Vazão @ T,P (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property VazoTPFaseVapor() As String
+        Friend Shared ReadOnly Property VazoTPPhaseVapor() As String
             Get
-                Return ResourceManager.GetString("VazoTPFaseVapor", resourceCulture)
+                Return ResourceManager.GetString("VazoTPPhaseVapor", resourceCulture)
             End Get
         End Property
         
@@ -15031,20 +15031,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão volumétrica na Fase Vapor.
+        '''  Looks up a localized string similar to Vazão volumétrica na Phase Vapor.
         '''</summary>
-        Friend Shared ReadOnly Property VazovolumtricanaFase() As String
+        Friend Shared ReadOnly Property VazovolumtricanaPhase() As String
             Get
-                Return ResourceManager.GetString("VazovolumtricanaFase", resourceCulture)
+                Return ResourceManager.GetString("VazovolumtricanaPhase", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão volumétrica na Fase Líquida.
+        '''  Looks up a localized string similar to Vazão volumétrica na Phase Líquida.
         '''</summary>
-        Friend Shared ReadOnly Property VazovolumtricanaFase1() As String
+        Friend Shared ReadOnly Property VazovolumtricanaPhase1() As String
             Get
-                Return ResourceManager.GetString("VazovolumtricanaFase1", resourceCulture)
+                Return ResourceManager.GetString("VazovolumtricanaPhase1", resourceCulture)
             End Get
         End Property
         
@@ -15220,7 +15220,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Viscosidade cinemática (Fase Vapor).
+        '''  Looks up a localized string similar to Viscosidade cinemática (Phase Vapor).
         '''</summary>
         Friend Shared ReadOnly Property Viscosidadecinemtica1() As String
             Get
@@ -15229,7 +15229,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Viscosidade cinemática da fase.
+        '''  Looks up a localized string similar to Viscosidade cinemática da Phase.
         '''</summary>
         Friend Shared ReadOnly Property Viscosidadecinemtica2() As String
             Get
@@ -15238,7 +15238,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Viscosidade cinemática (Fase Líquida).
+        '''  Looks up a localized string similar to Viscosidade cinemática (Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property Viscosidadecinemtica3() As String
             Get
@@ -15247,11 +15247,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Viscosidade da Fase Vapor: Método Jossi-Stiel-Thodos.
+        '''  Looks up a localized string similar to Viscosidade da Phase Vapor: Método Jossi-Stiel-Thodos.
         '''</summary>
-        Friend Shared ReadOnly Property ViscosidadedaFaseVap() As String
+        Friend Shared ReadOnly Property ViscosidadedaPhaseVap() As String
             Get
-                Return ResourceManager.GetString("ViscosidadedaFaseVap", resourceCulture)
+                Return ResourceManager.GetString("ViscosidadedaPhaseVap", resourceCulture)
             End Get
         End Property
         
@@ -15274,7 +15274,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Viscosidade dinâmica da fase.
+        '''  Looks up a localized string similar to Viscosidade dinâmica da Phase.
         '''</summary>
         Friend Shared ReadOnly Property Viscosidadedinmicada() As String
             Get
@@ -15283,7 +15283,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Viscosidade dinâmica (Fase Vapor).
+        '''  Looks up a localized string similar to Viscosidade dinâmica (Phase Vapor).
         '''</summary>
         Friend Shared ReadOnly Property ViscosidadedinmicaFa() As String
             Get
@@ -15292,7 +15292,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Viscosidade dinâmica (Fase Líquida).
+        '''  Looks up a localized string similar to Viscosidade dinâmica (Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property ViscosidadedinmicaFa2() As String
             Get
@@ -15301,7 +15301,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Viscosidade dinâmica (Fase Vapor).
+        '''  Looks up a localized string similar to Viscosidade dinâmica (Phase Vapor).
         '''</summary>
         Friend Shared ReadOnly Property ViscosidadedinmicaFa3() As String
             Get
@@ -15310,7 +15310,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Viscosidade dinâmica (Fase Líquida).
+        '''  Looks up a localized string similar to Viscosidade dinâmica (Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property ViscosidadedinmicaFa4() As String
             Get
@@ -15517,7 +15517,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração Volumétrica na Fase Líquida.
+        '''  Looks up a localized string similar to Fração Volumétrica na Phase Líquida.
         '''</summary>
         Friend Shared ReadOnly Property VolFractionLiqPhase() As String
             Get
@@ -15535,7 +15535,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração Volumétrica na Fase Vapor.
+        '''  Looks up a localized string similar to Fração Volumétrica na Phase Vapor.
         '''</summary>
         Friend Shared ReadOnly Property VolFractionVaporPhase() As String
             Get
@@ -15670,20 +15670,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Z (Fase Líquida).
+        '''  Looks up a localized string similar to Z (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property ZFaseLquida() As String
+        Friend Shared ReadOnly Property ZPhaseLquida() As String
             Get
-                Return ResourceManager.GetString("ZFaseLquida", resourceCulture)
+                Return ResourceManager.GetString("ZPhaseLquida", resourceCulture)
             End Get
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Z (Fase Vapor).
+        '''  Looks up a localized string similar to Z (Phase Vapor).
         '''</summary>
-        Friend Shared ReadOnly Property ZFaseVapor() As String
+        Friend Shared ReadOnly Property ZPhaseVapor() As String
             Get
-                Return ResourceManager.GetString("ZFaseVapor", resourceCulture)
+                Return ResourceManager.GetString("ZPhaseVapor", resourceCulture)
             End Get
         End Property
     End Class

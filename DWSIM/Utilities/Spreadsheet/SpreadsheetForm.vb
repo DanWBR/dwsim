@@ -749,8 +749,8 @@ Public Class SpreadsheetForm
     ''' <remarks></remarks>
     Public Sub WriteAll()
 
-        Dim obj As SimulationObjects_BaseClass = Nothing
-        Dim su As DWSIM.SistemasDeUnidades.Unidades = My.Application.ActiveSimulation.Options.SelectedUnitSystem
+        Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Nothing
+        Dim su As DWSIM.SystemsOfUnits.Units = My.Application.ActiveSimulation.Options.SelectedUnitSystem
         For Each r As DataGridViewRow In Me.DataGridView1.Rows
             For Each ce As DataGridViewCell In r.Cells
                 ccparams = ce.Tag
