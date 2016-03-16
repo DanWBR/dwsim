@@ -54,6 +54,7 @@
     <Compile Include="EditableKeyValuePair.cs" />
     <Compile Include="GenericDictionaryEditor.cs" />
     <Compile Include="GenericDictionaryEditorAttribute.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="KeyValueDescriptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

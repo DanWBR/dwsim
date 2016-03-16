@@ -205,7 +205,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="graphicobjects.snk" />
   </ItemGroup>
   <ItemGroup>

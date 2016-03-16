@@ -440,7 +440,9 @@
     <Compile Include="Forms\UITypeEditors\UIFlowsheetUOViewer\FlowsheetUOViewerForm.Designer.vb">
       <DependentUpon>FlowsheetUOViewerForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UITypeEditors\UIFlowsheetUOViewer\FlowsheetUOViewerForm.vb" />
+    <Compile Include="Forms\UITypeEditors\UIFlowsheetUOViewer\FlowsheetUOViewerForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\UITypeEditors\UIFlowsheetUOViewer\UIFlowsheetUOViewer.vb" />
     <Compile Include="Forms\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.Designer.vb">
       <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
@@ -514,27 +516,39 @@
     <Compile Include="Forms\FormFlowsheet_SubForms\frmCOReports.Designer.vb">
       <DependentUpon>frmCOReports.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmCOReports.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmCOReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmObjListView.Designer.vb">
       <DependentUpon>frmObjListView.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmObjListView.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmObjListView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmOutput.Designer.vb">
       <DependentUpon>frmOutput.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmOutput.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmQueue.Designer.vb">
       <DependentUpon>frmQueue.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmQueue.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmQueue.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmWatch.Designer.vb">
       <DependentUpon>frmWatch.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmWatch.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmWatch.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormOptimization.Designer.vb">
       <DependentUpon>FormOptimization.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormOptimization.vb" />
+    <Compile Include="Forms\FormOptimization.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormReportConfig.designer.vb">
       <DependentUpon>FormReportConfig.vb</DependentUpon>
     </Compile>
@@ -544,7 +558,9 @@
     <Compile Include="Forms\FormSensAnalysis.Designer.vb">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormSensAnalysis.vb" />
+    <Compile Include="Forms\FormSensAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormTemplateSelect.Designer.vb">
       <DependentUpon>FormTemplateSelect.vb</DependentUpon>
     </Compile>
@@ -560,7 +576,9 @@
     <Compile Include="Forms\FormScript.Designer.vb">
       <DependentUpon>FormScript.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormScript.vb" />
+    <Compile Include="Forms\FormScript.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigBase.Designer.vb">
       <DependentUpon>FormConfigBase.vb</DependentUpon>
     </Compile>
@@ -794,7 +812,9 @@
     <Compile Include="Forms\FormFlowsheet_SubForms\frmMatList.Designer.vb">
       <DependentUpon>frmMatList.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmMatList.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmMatList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormOptions.Designer.vb">
       <DependentUpon>FormOptions.vb</DependentUpon>
     </Compile>
@@ -822,7 +842,9 @@
     <Compile Include="Forms\FormSimulSettings.Designer.vb">
       <DependentUpon>FormSimulSettings.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormSimulSettings.vb" />
+    <Compile Include="Forms\FormSimulSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Objects\UnitOps\BaseClasses.vb" />
     <Compile Include="Objects\UnitOps\CapeOpenUO.vb" />
     <Compile Include="Objects\UnitOps\ComponentSeparator.vb" />
@@ -856,19 +878,27 @@
     <Compile Include="Forms\FormFlowsheet_SubForms\frmLog.Designer.vb">
       <DependentUpon>frmLog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmLog.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmObjList.Designer.vb">
       <DependentUpon>frmObjList.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmObjList.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmObjList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmProps.Designer.vb">
       <DependentUpon>frmProps.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmProps.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmProps.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormFlowsheet_SubForms\frmSurface.Designer.vb">
       <DependentUpon>frmSurface.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmSurface.vb" />
+    <Compile Include="Forms\FormFlowsheet_SubForms\frmSurface.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormFlowsheet.Designer.vb">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
     </Compile>
@@ -1068,16 +1098,22 @@
     <Compile Include="Utilities\ColdProperties\FrmColdProperties.Designer.vb">
       <DependentUpon>FrmColdProperties.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\ColdProperties\FrmColdProperties.vb" />
+    <Compile Include="Utilities\ColdProperties\FrmColdProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utilities\LLE_Diagram\FormLLEDiagram.Designer.vb">
       <DependentUpon>FormLLEDiagram.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\LLE_Diagram\FormLLEDiagram.vb" />
+    <Compile Include="Utilities\LLE_Diagram\FormLLEDiagram.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utilities\Spreadsheet\SpreadsheetCell.vb" />
     <Compile Include="Utilities\Spreadsheet\SpreadsheetForm.Designer.vb">
       <DependentUpon>SpreadsheetForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Spreadsheet\SpreadsheetForm.vb" />
+    <Compile Include="Utilities\Spreadsheet\SpreadsheetForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\UITypeEditors\UIThermalProfileEditor\ThermalProfileEditorForm.Designer.vb">
       <DependentUpon>ThermalProfileEditorForm.vb</DependentUpon>
     </Compile>
@@ -1088,7 +1124,9 @@
     <Compile Include="Utilities\BINARY_ENVEL\FormBinEnv.Designer.vb">
       <DependentUpon>FormBinEnv.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\BINARY_ENVEL\FormBinEnv.vb" />
+    <Compile Include="Utilities\BINARY_ENVEL\FormBinEnv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\PetroleumCharacterization\FormPCBulk.designer.vb">
       <DependentUpon>FormPCBulk.vb</DependentUpon>
     </Compile>
@@ -1120,7 +1158,9 @@
     <Compile Include="Utilities\HYD+\FormHYD.Designer.vb">
       <DependentUpon>FormHYD.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\HYD+\FormHYD.vb" />
+    <Compile Include="Utilities\HYD+\FormHYD.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utilities\HYD+\Helper Classes\AUX_FUNC.vb" />
     <Compile Include="Utilities\HYD+\Helper Classes\DWSIM_KS.vb" />
     <Compile Include="Utilities\HYD+\Helper Classes\HYDR_CG.vb" />
@@ -1130,7 +1170,9 @@
     <Compile Include="Utilities\PHASE_ENVEL\FormPhEnv.Designer.vb">
       <DependentUpon>FormPhEnv.vb</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\PHASE_ENVEL\FormPhEnv.vb" />
+    <Compile Include="Utilities\PHASE_ENVEL\FormPhEnv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utilities\PureCompViewer\FormPureComp.Designer.vb">
       <DependentUpon>FormPureComp.vb</DependentUpon>
     </Compile>
@@ -1140,7 +1182,9 @@
     <Compile Include="Tools\Reactions\FormReacManager.Designer.vb">
       <DependentUpon>FormReacManager.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Reactions\FormReacManager.vb" />
+    <Compile Include="Tools\Reactions\FormReacManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\UnitSetCreator\FormUnitGen.Designer.vb">
       <DependentUpon>FormUnitGen.vb</DependentUpon>
     </Compile>
@@ -1527,10 +1571,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
     <None Include="Resources\node_in copy.png" />
   </ItemGroup>
   <ItemGroup>
