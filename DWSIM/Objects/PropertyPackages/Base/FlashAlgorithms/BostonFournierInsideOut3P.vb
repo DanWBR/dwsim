@@ -1026,10 +1026,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim i, j As Integer
 
-            maxit_i = CInt(PP.Parameters("PP_PHFMII"))
-            maxit_e = CInt(PP.Parameters("PP_PHFMEI"))
-            itol = CDbl(PP.Parameters("PP_PHFILT"))
-            etol = CDbl(PP.Parameters("PP_PHFELT"))
+            maxit_i = Convert.ToInt32(PP.Parameters("PP_PHFMII"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PHFMEI"))
+            itol = Convert.ToDouble(PP.Parameters("PP_PHFILT"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PHFELT"))
 
             n = UBound(Vz)
 
@@ -1294,10 +1294,10 @@ restart:    Do
 
             Dim i, j As Integer
 
-            maxit_i = CInt(PP.Parameters("PP_PSFMII"))
-            maxit_e = CInt(PP.Parameters("PP_PSFMEI"))
-            itol = CDbl(PP.Parameters("PP_PSFILT"))
-            etol = CDbl(PP.Parameters("PP_PSFELT"))
+            maxit_i = Convert.ToInt32(PP.Parameters("PP_PSFMII"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PSFMEI"))
+            itol = Convert.ToDouble(PP.Parameters("PP_PSFILT"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PSFELT"))
 
             n = UBound(Vz)
 
@@ -1563,10 +1563,10 @@ restart:    Do
 
             Dim i, j As Integer
 
-            etol = CDbl(PP.Parameters("PP_PTFELT"))
-            maxit_e = CInt(PP.Parameters("PP_PTFMEI"))
-            itol = CDbl(PP.Parameters("PP_PTFILT"))
-            maxit_i = CInt(PP.Parameters("PP_PTFMII"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
+            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
+            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
 
             n = UBound(Vz)
 
@@ -1866,10 +1866,10 @@ out:
 
             Dim i, j As Integer
 
-            etol = CDbl(PP.Parameters("PP_PTFELT"))
-            maxit_e = CInt(PP.Parameters("PP_PTFMEI"))
-            itol = CDbl(PP.Parameters("PP_PTFILT"))
-            maxit_i = CInt(PP.Parameters("PP_PTFMII"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
+            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
+            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
 
             n = UBound(Vz)
 
@@ -2089,8 +2089,8 @@ out:
 
             Dim i, j As Integer
 
-            etol = CDbl(PP.Parameters("PP_PTFELT"))
-            maxit_e = CInt(PP.Parameters("PP_PTFMEI"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
 
             n = UBound(Vz)
 

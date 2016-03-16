@@ -102,10 +102,10 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
             Vn = PP.RET_VNAMES()
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = CInt(PP.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = CInt(PP.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = CDbl(PP.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = CDbl(PP.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = Convert.ToInt32(PP.Parameters("PP_PHFMII"))
+            Dim maxitEXT As Integer = Convert.ToInt32(PP.Parameters("PP_PHFMEI"))
+            Dim tolINT As Double = Convert.ToDouble(PP.Parameters("PP_PHFILT"))
+            Dim tolEXT As Double = Convert.ToDouble(PP.Parameters("PP_PHFELT"))
 
             Dim Tmin, Tmax, epsilon(4), maxDT As Double
 
@@ -223,10 +223,10 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
             Vn = PP.RET_VNAMES()
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = CInt(PP.Parameters("PP_PSFMII"))
-            Dim maxitEXT As Integer = CInt(PP.Parameters("PP_PSFMEI"))
-            Dim tolINT As Double = CDbl(PP.Parameters("PP_PSFILT"))
-            Dim tolEXT As Double = CDbl(PP.Parameters("PP_PSFELT"))
+            Dim maxitINT As Integer = Convert.ToInt32(PP.Parameters("PP_PSFMII"))
+            Dim maxitEXT As Integer = Convert.ToInt32(PP.Parameters("PP_PSFMEI"))
+            Dim tolINT As Double = Convert.ToDouble(PP.Parameters("PP_PSFILT"))
+            Dim tolEXT As Double = Convert.ToDouble(PP.Parameters("PP_PSFELT"))
 
             Dim Tmin, Tmax, epsilon(4) As Double
 
@@ -333,10 +333,10 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
             d1 = Date.Now
 
-            etol = CDbl(PP.Parameters("PP_PTFELT"))
-            maxit_e = CInt(PP.Parameters("PP_PTFMEI"))
-            itol = CDbl(PP.Parameters("PP_PTFILT"))
-            maxit_i = CInt(PP.Parameters("PP_PTFMII"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
+            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
+            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
 
             Dim Pmin, Pmax, epsilon(4), maxDP As Double
 
@@ -423,10 +423,10 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
             d1 = Date.Now
 
-            etol = CDbl(PP.Parameters("PP_PTFELT"))
-            maxit_e = CInt(PP.Parameters("PP_PTFMEI"))
-            itol = CDbl(PP.Parameters("PP_PTFILT"))
-            maxit_i = CInt(PP.Parameters("PP_PTFMII"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
+            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
+            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
 
             Dim Tmin, Tmax, epsilon(4), maxDT As Double
 
@@ -455,7 +455,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
                     fx = Verror("PT", x1, P, Vz, PP)
                     fx2 = Verror("PT", x1 + epsilon(j), P, Vz, PP)
-                   
+
                     If Abs(fx) <= etol Then Exit Do
 
                     dfdx = (fx2 - fx) / epsilon(j)

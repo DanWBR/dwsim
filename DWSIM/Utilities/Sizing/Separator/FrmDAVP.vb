@@ -34,11 +34,11 @@
 
         If e.Type = ScrollEventType.SmallDecrement Then
 
-            TextBox114.Text = Format(CDbl(TextBox114.Text) + 0.1, "#0.0#")
+            TextBox114.Text = Format(Convert.ToDouble(TextBox114.Text) + 0.1, "#0.0#")
 
         ElseIf e.Type = ScrollEventType.SmallIncrement Then
 
-            TextBox114.Text = Format(CDbl(TextBox114.Text) - 0.1, "#0.0#")
+            TextBox114.Text = Format(Convert.ToDouble(TextBox114.Text) - 0.1, "#0.0#")
 
         End If
 
@@ -110,7 +110,7 @@
 
             Dim qv = Me.qv * Me.SURGE
             Dim ql = Me.ql * Me.SURGE
-   
+
             Dim tres = Me.TR
 
             Dim rho_ml = Me.rhol
@@ -121,10 +121,10 @@
             Dim At = qv / vp
 
             Dim dmin = (4 * At / Math.PI) ^ 0.5 * 1000
-            Dim lmin = CDbl(tbRLD.Text) * dmin
+            Dim lmin = Convert.ToDouble(tbRLD.Text) * dmin
 
             'bocal de entrada
-            Dim vmaxbe = CDbl(tbC.Text) / (rho_ns) ^ 0.5
+            Dim vmaxbe = Convert.ToDouble(tbC.Text) / (rho_ns) ^ 0.5
             Dim aminbe = (qv + ql) / (vmaxbe)
             Dim dminbe = (4 * aminbe / Math.PI) ^ 0.5 * 39.37
 
@@ -166,7 +166,7 @@
             Dim vp = Me.VGI / 100 * vk
 
             'bocal de entrada
-            Dim vmaxbe = CDbl(tbC.Text) / (rho_ns) ^ 0.5
+            Dim vmaxbe = Convert.ToDouble(tbC.Text) / (rho_ns) ^ 0.5
             Dim aminbe = (qv + ql) / (vmaxbe)
             Dim dminbe = (4 * aminbe / Math.PI) ^ 0.5 * 39.37
 
@@ -189,7 +189,7 @@
             Do
                 y = (1 / Math.PI) * Math.Acos(1 - 2 * x) - (2 / Math.PI) * (1 - 2 * x) * (x * (1 - x)) ^ 0.5
                 dv = (4 / Math.PI * qv / (vp)) ^ 0.5 * ((x / y) / l_d) ^ 0.5
-                dl = ((4 / (Math.PI * l_d)) * (ql) * CDbl(tr * 60) / (1 - y)) ^ (1 / 3)
+                dl = ((4 / (Math.PI * l_d)) * (ql) * Convert.ToDouble(tr * 60) / (1 - y)) ^ (1 / 3)
                 x += 0.0001
             Loop Until Math.Abs(dv - dl) < 0.0001 Or x >= 0.5
             vl1 = (ql) * tr / (1 / 60)

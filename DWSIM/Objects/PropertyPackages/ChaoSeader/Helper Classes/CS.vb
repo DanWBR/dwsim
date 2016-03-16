@@ -66,7 +66,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary
             Dim Tr, Pr As Double
 
             For i = 0 To n
-                If CInt(VMW(i)) = 2 Then
+                If Convert.ToInt32(VMW(i)) = 2 Then
                     'hydrogen
                     A0 = 1.96718
                     A1 = 1.02972
@@ -78,7 +78,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary
                     A7 = 0
                     A8 = 0
                     A9 = 0
-                ElseIf CInt(VMW(i)) = 16 Then
+                ElseIf Convert.ToInt32(VMW(i)) = 16 Then
                     'methane
                     A0 = 2.4384
                     A1 = -2.2455

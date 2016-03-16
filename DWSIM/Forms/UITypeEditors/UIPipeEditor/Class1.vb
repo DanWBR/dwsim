@@ -1161,7 +1161,7 @@ Imports System.Windows.Forms
                         Return DWSIM.App.GetLocalString("Erro")
                         Exit Function
                     End If
-                    If Not Convert.ToDouble(.Rows(8).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(8).Cells(column.Name).Value) Or CDbl(.Rows(8).Cells(column.Name).Value) > CDbl(.Rows(7).Cells(column.Name).Value) Then
+                    If Not Convert.ToDouble(.Rows(8).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(8).Cells(column.Name).Value) Or Convert.ToDouble(.Rows(8).Cells(column.Name).Value) > Convert.ToDouble(.Rows(7).Cells(column.Name).Value) Then
                         Return DWSIM.App.GetLocalString("Erro")
                         Exit Function
                     End If

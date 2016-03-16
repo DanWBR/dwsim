@@ -277,11 +277,11 @@ Namespace DWSIM.MathEx.LBFGS
                     Me.lbfgsmcstep(stx, fx, dx, sty, fy, dy, stp, f, num3, brackt, stmin, stmax, num)
                 End If
                 If brackt Then
-                    If (Math.Abs(CDbl((sty - stx))) >= (num19 * num25)) Then
+                    If (Math.Abs(Convert.ToDouble((sty - stx))) >= (num19 * num25)) Then
                         stp = (stx + (num18 * (sty - stx)))
                     End If
                     num25 = num24
-                    num24 = Math.Abs(CDbl((sty - stx)))
+                    num24 = Math.Abs(Convert.ToDouble((sty - stx)))
                 End If
             Loop
         End Sub
@@ -315,7 +315,7 @@ Namespace DWSIM.MathEx.LBFGS
                     num4 = (num2 / num3)
                     num7 = (stx + (num4 * (stp - stx)))
                     num9 = (stx + (((dx / (((fx - fp) / (stp - stx)) + dx)) / 2) * (stp - stx)))
-                    If (Math.Abs(CDbl((num7 - stx))) < Math.Abs(CDbl((num9 - stx)))) Then
+                    If (Math.Abs(Convert.ToDouble((num7 - stx))) < Math.Abs(Convert.ToDouble((num9 - stx)))) Then
                         num8 = num7
                     Else
                         num8 = (num7 + ((num9 - num7) / 2))
@@ -335,7 +335,7 @@ Namespace DWSIM.MathEx.LBFGS
                     num4 = (num2 / num3)
                     num7 = (stp + (num4 * (stx - stp)))
                     num9 = (stp + ((dp / (dp - dx)) * (stx - stp)))
-                    If (Math.Abs(CDbl((num7 - stp))) > Math.Abs(CDbl((num9 - stp)))) Then
+                    If (Math.Abs(Convert.ToDouble((num7 - stp))) > Math.Abs(Convert.ToDouble((num9 - stp)))) Then
                         num8 = num7
                     Else
                         num8 = num9
@@ -346,7 +346,7 @@ Namespace DWSIM.MathEx.LBFGS
                     flag = True
                     num10 = ((((3 * (fx - fp)) / (stp - stx)) + dx) + dp)
                     num5 = Math.Max(Math.Abs(num10), Math.Max(Math.Abs(dx), Math.Abs(dp)))
-                    num = (num5 * Math.Sqrt(Math.Max(CDbl(0), CDbl((Math.Sqrt((num10 / num5)) - ((dx / num5) * (dp / num5)))))))
+                    num = (num5 * Math.Sqrt(Math.Max(Convert.ToDouble(0), Convert.ToDouble((Math.Sqrt((num10 / num5)) - ((dx / num5) * (dp / num5)))))))
                     If (stp > stx) Then
                         num = -num
                     End If
@@ -362,12 +362,12 @@ Namespace DWSIM.MathEx.LBFGS
                     End If
                     num9 = (stp + ((dp / (dp - dx)) * (stx - stp)))
                     If brackt Then
-                        If (Math.Abs(CDbl((stp - num7))) < Math.Abs(CDbl((stp - num9)))) Then
+                        If (Math.Abs(Convert.ToDouble((stp - num7))) < Math.Abs(Convert.ToDouble((stp - num9)))) Then
                             num8 = num7
                         Else
                             num8 = num9
                         End If
-                    ElseIf (Math.Abs(CDbl((stp - num7))) > Math.Abs(CDbl((stp - num9)))) Then
+                    ElseIf (Math.Abs(Convert.ToDouble((stp - num7))) > Math.Abs(Convert.ToDouble((stp - num9)))) Then
                         num8 = num7
                     Else
                         num8 = num9

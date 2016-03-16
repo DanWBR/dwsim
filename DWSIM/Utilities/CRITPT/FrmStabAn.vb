@@ -95,7 +95,7 @@ Public Class FrmStabAn
             Try
 
                 pc = Me.cp.CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
-                Dim res As ArrayList = Me.cp.STABILITY_CURVE(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2, , CInt(Me.TextBox2.Text), CDbl(Me.TextBox1.Text))
+                Dim res As ArrayList = Me.cp.STABILITY_CURVE(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2, , Convert.ToInt32(Me.TextBox2.Text), Convert.ToDouble(Me.TextBox1.Text))
 
                 i = 0
                 Do

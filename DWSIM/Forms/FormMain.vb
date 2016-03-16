@@ -389,7 +389,7 @@ Public Class FormMain
 
         Dim j As Integer = 0
         For Each k As String In Me.dropdownlist
-            Dim tsmi As ToolStripItem = Me.FileToolStripMenuItem.DropDownItems(CInt(k - j))
+            Dim tsmi As ToolStripItem = Me.FileToolStripMenuItem.DropDownItems(Convert.ToInt32(k - j))
             If tsmi.DisplayStyle = ToolStripItemDisplayStyle.Text Or TypeOf tsmi Is ToolStripSeparator Then
                 Me.FileToolStripMenuItem.DropDownItems.Remove(tsmi)
                 j = j + 1
@@ -3214,7 +3214,7 @@ ruf:                Application.DoEvents()
                 Dim txt() As String = File.ReadAllLines(myfile)
                 Dim build As Integer
                 build = txt(0)
-                If My.Application.Info.Version.Build < CInt(build) Then
+                If My.Application.Info.Version.Build < Convert.ToInt32(build) Then
                     tslupd.Visible = True
                     tslupd.Text = DWSIM.App.GetLocalString("NewVersionAvailable")
                 End If

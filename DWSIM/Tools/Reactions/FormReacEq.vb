@@ -157,11 +157,11 @@ Public Class FormReacEq
                     If row.Cells(4).Value = -1 Then
                         eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
                     Else
-                        eq += Math.Abs(CDbl(row.Cells(4).Value)) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                        eq += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
                     End If
-                    hr += Math.Abs(CDbl(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                    br += Math.Abs(CDbl(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                    gr += Math.Abs(CDbl(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                    hr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                    br += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                    gr += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
                 End If
             Next
             If eq.Length >= 2 Then eq = eq.Remove(eq.Length - 2, 2)
@@ -172,11 +172,11 @@ Public Class FormReacEq
                     If row.Cells(4).Value = 1 Then
                         eq += fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
                     Else
-                        eq += Math.Abs(CInt(row.Cells(4).Value)) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
+                        eq += Math.Abs(Convert.ToInt32(row.Cells(4).Value)) & fc.Options.SelectedComponents(row.Cells(5).Value).Formula & " + "
                     End If
-                    hp += Math.Abs(CDbl(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                    bp += Math.Abs(CDbl(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
-                    gp += Math.Abs(CDbl(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                    hp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Enthalpy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                    bp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
+                    gp += Math.Abs(Convert.ToDouble(row.Cells(4).Value)) * fc.Options.SelectedComponents(row.Cells(5).Value).IG_Gibbs_Energy_of_Formation_25C * fc.Options.SelectedComponents(row.Cells(5).Value).Molar_Weight
                 End If
             Next
             eq = eq.Remove(eq.Length - 2, 2)
@@ -185,7 +185,7 @@ Public Class FormReacEq
 
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
                 If row.Cells(3).Value = True Then
-                    brsc = Math.Abs(CDbl(row.Cells(4).Value))
+                    brsc = Math.Abs(Convert.ToDouble(row.Cells(4).Value))
                     Exit For
                 End If
             Next
@@ -218,7 +218,7 @@ Public Class FormReacEq
                     .Imports.AddType(GetType(System.Math))
                 End With
                 With rc
-                    .ExpContext.Variables.Add("T", CDbl(300))
+                    .ExpContext.Variables.Add("T", Convert.ToDouble(300))
                     Try
                         .ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                         .Expr = .ExpContext.CompileGeneric(Of Double)(Me.tbExp.Text)
@@ -234,7 +234,7 @@ Public Class FormReacEq
                         End Select
                         Exit Sub
                     End Try
-                  End With
+                End With
             End If
 
             'Components and stoichiometry

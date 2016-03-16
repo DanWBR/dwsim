@@ -57,9 +57,9 @@ Namespace DWSIM.Utilities.HYD
                 If id = 16 Then i = 22
                 If id = 15 Then i = 23
                 If id = 38 Then i = 24
-                epsilon = CDbl(am.MAT_VDWP_PP(i, 1)) '* k
-                sigma = CDbl(am.MAT_VDWP_PP(i, 2)) '* 0.0000000001
-                a = CDbl(am.MAT_VDWP_PP(i, 3)) '* 0.0000000001
+                epsilon = Convert.ToDouble(am.MAT_VDWP_PP(i, 1)) '* k
+                sigma = Convert.ToDouble(am.MAT_VDWP_PP(i, 2)) '* 0.0000000001
+                a = Convert.ToDouble(am.MAT_VDWP_PP(i, 3)) '* 0.0000000001
 
                 If estrutura = "sI" And cela = 1 Then
                     Rcell1 = 7.95 / 2 '* 0.0000000001
@@ -115,7 +115,7 @@ Namespace DWSIM.Utilities.HYD
                 MsgBox(ex.ToString)
             End Try
 
-            Cml_vdWP = CDbl(4 * Math.PI / (k * T) * Int1)
+            Cml_vdWP = Convert.ToDouble(4 * Math.PI / (k * T) * Int1)
 
 
         End Function

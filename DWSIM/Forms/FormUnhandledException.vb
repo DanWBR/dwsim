@@ -119,7 +119,7 @@ Public Class FormUnhandledException
                 Dim txt() As String = File.ReadAllLines(myfile)
                 Dim build As Integer
                 build = txt(0)
-                If My.Application.Info.Version.Build < CInt(build) Then
+                If My.Application.Info.Version.Build < Convert.ToInt32(build) Then
                     Dim bdate As Date, fname As String, dlpath As String, changelog As String = ""
                     bdate = Date.Parse(txt(1), New CultureInfo("en-US"))
                     dlpath = txt(2)

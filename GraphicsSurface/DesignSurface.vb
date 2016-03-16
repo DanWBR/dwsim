@@ -233,10 +233,10 @@ Imports System.Collections.Generic
                     m_Zoom = Value
                     Me.Invalidate()
                     If Not xp * Value * Me.Width < Me.HorizontalScroll.SmallChange And Not xp * Value * Me.Width > Me.HorizontalScroll.Maximum Then
-                        Me.HorizontalScroll.Value = CInt(xp * Value * Me.Width)
+                        Me.HorizontalScroll.Value = Convert.ToInt32(xp * Value * Me.Width)
                     End If
                     If Not yp * Value * Me.Height < Me.HorizontalScroll.SmallChange And Not yp * Value * Me.Height > Me.VerticalScroll.Maximum Then
-                        Me.VerticalScroll.Value = CInt(yp * Value * Me.Height)
+                        Me.VerticalScroll.Value = Convert.ToInt32(yp * Value * Me.Height)
                     End If
                     Me.Invalidate()
                 End If
@@ -657,15 +657,15 @@ Imports System.Collections.Generic
     Public Overloads Function gscTogoc( _
             ByVal gsPT As Point) As Point
         Dim myNewPoint As Point
-        myNewPoint.X = CInt((gsPT.X - Me.AutoScrollPosition.X) / Me.Zoom)
-        myNewPoint.Y = CInt((gsPT.Y - Me.AutoScrollPosition.Y) / Me.Zoom)
+        myNewPoint.X = Convert.ToInt32((gsPT.X - Me.AutoScrollPosition.X) / Me.Zoom)
+        myNewPoint.Y = Convert.ToInt32((gsPT.Y - Me.AutoScrollPosition.Y) / Me.Zoom)
         Return myNewPoint
     End Function
     Public Overloads Function gscTogoc( _
             ByVal X As Integer, ByVal Y As Integer) As Point
         Dim myNewPoint As Point
-        myNewPoint.X = CInt((X - Me.AutoScrollPosition.X) / Me.Zoom)
-        myNewPoint.Y = CInt((Y - Me.AutoScrollPosition.Y) / Me.Zoom)
+        myNewPoint.X = Convert.ToInt32((X - Me.AutoScrollPosition.X) / Me.Zoom)
+        myNewPoint.Y = Convert.ToInt32((Y - Me.AutoScrollPosition.Y) / Me.Zoom)
         Return myNewPoint
     End Function
 
@@ -675,16 +675,16 @@ Imports System.Collections.Generic
         'before I can assign values to X and Y
         'as it is a structure not an object
         Dim myNewPoint As Point
-        myNewPoint.X = CInt((goPT.X) * Me.Zoom)
-        myNewPoint.Y = CInt((goPT.Y) * Me.Zoom)
+        myNewPoint.X = Convert.ToInt32((goPT.X) * Me.Zoom)
+        myNewPoint.Y = Convert.ToInt32((goPT.Y) * Me.Zoom)
 
         Return myNewPoint
     End Function
     Public Overloads Function gocTogsc( _
             ByVal X As Integer, ByVal Y As Integer) As Point
         Dim myNewPoint As Point
-        myNewPoint.X = CInt(X * Me.Zoom)
-        myNewPoint.Y = CInt(Y * Me.Zoom)
+        myNewPoint.X = Convert.ToInt32(X * Me.Zoom)
+        myNewPoint.Y = Convert.ToInt32(Y * Me.Zoom)
         Return myNewPoint
     End Function
 
@@ -785,8 +785,8 @@ Imports System.Collections.Generic
 
         If zoomx > zoomy Then Me.Zoom = zoomy Else Me.Zoom = zoomx
 
-        If newx * Me.Zoom < Me.HorizontalScroll.Maximum Then Me.HorizontalScroll.Value = CInt(newx * Me.Zoom)
-        If newy * Me.Zoom < Me.VerticalScroll.Maximum Then Me.VerticalScroll.Value = CInt(newy * Me.Zoom)
+        If newx * Me.Zoom < Me.HorizontalScroll.Maximum Then Me.HorizontalScroll.Value = Convert.ToInt32(newx * Me.Zoom)
+        If newy * Me.Zoom < Me.VerticalScroll.Maximum Then Me.VerticalScroll.Value = Convert.ToInt32(newy * Me.Zoom)
 
         Me.Invalidate()
 
@@ -917,7 +917,7 @@ Imports System.Collections.Generic
                             currentRotation = _
                                 AngleToPoint(m_SelectedObject.GetPosition, dragPoint)
                             currentRotation = _
-                                CInt((currentRotation - startingRotation + originalRotation) Mod 360)
+                                Convert.ToInt32((currentRotation - startingRotation + originalRotation) Mod 360)
 
                             m_SelectedObject.Rotation = currentRotation
 
@@ -965,13 +965,13 @@ Imports System.Collections.Generic
                         selectionRect.Width = Math.Abs(x1 - x0)
                         selectionRect.Height = Math.Abs(y1 - y0)
 
-                    Cursor.Current = Cursors.Default
+                        Cursor.Current = Cursors.Default
 
                     Else
 
-                    Cursor.Current = Cursors.Default
+                        Cursor.Current = Cursors.Default
 
-                End If
+                    End If
                 End If
 
             Else

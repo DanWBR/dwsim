@@ -132,7 +132,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
         '            Me.KryptonDataGridView1.Rows(e.RowIndex).ErrorText = _
         '                DWSIM.App.GetLocalString("Ovalorinseridoinvlid")
         '            e.Cancel = True
-        '        ElseIf CDbl(e.FormattedValue) < 0 Then
+        '        ElseIf Convert.ToDouble(e.FormattedValue) < 0 Then
         '            Me.KryptonDataGridView1.Rows(e.RowIndex).ErrorText = _
         '                DWSIM.App.GetLocalString("Ovalorinseridoinvlid")
         '            e.Cancel = True

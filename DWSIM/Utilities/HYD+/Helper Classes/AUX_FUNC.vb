@@ -65,7 +65,7 @@ Namespace DWSIM.Utilities.HYD
             STRU = 0
             Dim i = 0
             Do
-                If MAT_INIB(i, 0) = Nome Then STRU = CInt(MAT_INIB(i, 2))
+                If MAT_INIB(i, 0) = Nome Then STRU = Convert.ToInt32(MAT_INIB(i, 2))
                 i = i + 1
             Loop Until i = 47
 
@@ -76,7 +76,7 @@ Namespace DWSIM.Utilities.HYD
             ISINIB = 0
             Dim i = 0
             Do
-                If MAT_INIB(i, 0) = Nome Then ISINIB = CInt(MAT_INIB(i, 1))
+                If MAT_INIB(i, 0) = Nome Then ISINIB = Convert.ToInt32(MAT_INIB(i, 1))
                 i = i + 1
             Loop Until i = 47
 
@@ -236,10 +236,10 @@ Namespace DWSIM.Utilities.HYD
             If id = 15 Then i = 35
             If id = 38 Then i = 36
             Try
-                tmp(0) = CDbl(MAT_KLAUDASANDLER(i, 1))
-                tmp(1) = CDbl(MAT_KLAUDASANDLER(i, 2))
-                tmp(2) = CDbl(MAT_KLAUDASANDLER(i, 3))
-                tmp(3) = CDbl(MAT_KLAUDASANDLER(i, 4))
+                tmp(0) = Convert.ToDouble(MAT_KLAUDASANDLER(i, 1))
+                tmp(1) = Convert.ToDouble(MAT_KLAUDASANDLER(i, 2))
+                tmp(2) = Convert.ToDouble(MAT_KLAUDASANDLER(i, 3))
+                tmp(3) = Convert.ToDouble(MAT_KLAUDASANDLER(i, 4))
             Catch
                 tmp(0) = -1.0E+32
                 tmp(1) = -1.0E+32

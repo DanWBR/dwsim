@@ -65,13 +65,13 @@ Public Class FrmPsvSize
 
         Try
 
-            Kd = CDbl(TextBox10.Text)
-            Kb = CDbl(TextBox9.Text)
-            Kc = CDbl(TextBox6.Text)
+            Kd = Convert.ToDouble(TextBox10.Text)
+            Kb = Convert.ToDouble(TextBox9.Text)
+            Kc = Convert.ToDouble(TextBox6.Text)
 
             T = Me.entmat.Phases(0).Properties.temperature
             P = Me.entmat.Phases(0).Properties.pressure
-            SPP = CDbl(TextBox3.Text)
+            SPP = Convert.ToDouble(TextBox3.Text)
             BP = Me.saimat.Phases(0).Properties.pressure
 
             With Me.entmat
@@ -163,7 +163,7 @@ Public Class FrmPsvSize
             Dim L_API = tmp(1)
             Dim A_API = tmp(2)
 
-            TextBox12.Text = L_API & " / " & Format(CDbl(A_API), "####0.##")
+            TextBox12.Text = L_API & " / " & Format(Convert.ToDouble(A_API), "####0.##")
 
         Else
             TextBox11.Text = DWSIM.App.GetLocalString("Erro")

@@ -739,7 +739,7 @@ Public Class FormSensAnalysis
             econtext.Imports.AddType(GetType(System.Math))
             For Each row As DataGridViewRow In Me.dgVariables.Rows
                 With econtext
-                    .Variables.Add(row.Cells(1).Value, CDbl(row.Cells(4).Value))
+                    .Variables.Add(row.Cells(1).Value, Convert.ToDouble(row.Cells(4).Value))
                 End With
             Next
             Dim exbase As IGenericExpression(Of Double) = econtext.CompileGeneric(Of Double)(Me.tbExpression.Text)

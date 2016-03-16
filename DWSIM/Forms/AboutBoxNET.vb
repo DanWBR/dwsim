@@ -99,8 +99,8 @@ Public Class AboutBoxNET
             .Add(New Object() {"SyntaxBox", "1.4.10.17492", "2010", "Roger Alsing", "https://syntaxbox.codeplex.com", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
             .Add(New Object() {"DockPanel", "2.7", "2013", "DockPanel Project", "https://sourceforge.net/projects/dockpanel", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
             .Add(New Object() {"ZedGraph", "5.1.0.32336", "2005", "John Champion", "https://sourceforge.net/projects/zedgraph", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
-            .Add(New Object() {"ScintillaNET", "3.5.1.0", "2015", "Jacob Slusser", "https://github.com/jacobslusser/ScintillaNET", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
-            .Add(New Object() {"Jolt.NET", "0.4", "2009", "Steve Guidi", "https://github.com/jacobslusser/ScintillaNET", "New BSD License (BSD)", "http://jolt.codeplex.com/license"})
+            .Add(New Object() {"scintillaNET", "3.5.1.0", "2015", "Jacob Slusser", "https://github.com/jacobslusser/scintillaNET", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
+            .Add(New Object() {"Jolt.NET", "0.4", "2009", "Steve Guidi", "https://github.com/jacobslusser/scintillaNET", "New BSD License (BSD)", "http://jolt.codeplex.com/license"})
             .Add(New Object() {"Yeppp!", Yeppp.Library.GetVersion.ToString, "2014", "Marat Dukhan", "http://www.yeppp.info", "Yeppp! License", "http://www.yeppp.info/resources/yeppp-license.txt"})
             .Add(New Object() {"ExcelDNA", "0.33", "2015", "Govert van Drimmelen", "http://excel-dna.net/", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
         End With

@@ -533,7 +533,7 @@ Public Class FormOptimization
 
         Dim curve As LineItem = Me.grProgress.GraphPane.CurveList(0)
         Dim list As IPointListEdit = curve.Points
-        list.Add(CInt(Me.selectedoptcase.results.Count), Me.selectedoptcase.results(Me.selectedoptcase.results.Count - 1))
+        list.Add(Convert.ToInt32(Me.selectedoptcase.results.Count), Me.selectedoptcase.results(Me.selectedoptcase.results.Count - 1))
         Me.grProgress.GraphPane.XAxis.Scale.Min = 0
         Me.grProgress.GraphPane.XAxis.Scale.Max = Me.selectedoptcase.results.Count
         Me.grProgress.AxisChange()
@@ -1398,7 +1398,7 @@ Public Class FormOptimization
             For Each row As DataGridViewRow In Me.dgVariables.Rows
                 If row.Cells(2).Value <> "DEP" Then
                     With econtext
-                        .Variables.Add(row.Cells(1).Value, CDbl(row.Cells(8).Value))
+                        .Variables.Add(row.Cells(1).Value, Convert.ToDouble(row.Cells(8).Value))
                     End With
                 End If
             Next

@@ -530,7 +530,7 @@ Public Class FormBinEnv
                         j = 0
                         Do
                             If Double.TryParse(data(j, k), New Double) Then
-                                .Item(k).Cells(j + (ridx * 14)).Value = Format(CDbl(data(j, k)), nf)
+                                .Item(k).Cells(j + (ridx * 14)).Value = Format(Convert.ToDouble(data(j, k)), nf)
                             Else
                                 .Item(k).Cells(j + (ridx * 14)).Value = data(j, k)
                             End If
@@ -682,7 +682,7 @@ Public Class FormBinEnv
                         j = 0
                         Do
                             If Double.TryParse(data(j, k), New Double) Then
-                                .Item(k).Cells(j + (ridx * 4)).Value = Format(CDbl(data(j, k)), nf)
+                                .Item(k).Cells(j + (ridx * 4)).Value = Format(Convert.ToDouble(data(j, k)), nf)
                             Else
                                 .Item(k).Cells(j + (ridx * 4)).Value = data(j, k)
                             End If
@@ -776,7 +776,7 @@ Public Class FormBinEnv
                         j = 0
                         Do
                             If Double.TryParse(data(j, k), New Double) Then
-                                .Item(k).Cells(j + (ridx * 2)).Value = Format(CDbl(data(j, k)), nf)
+                                .Item(k).Cells(j + (ridx * 2)).Value = Format(Convert.ToDouble(data(j, k)), nf)
                             Else
                                 .Item(k).Cells(j + (ridx * 2)).Value = data(j, k)
                             End If
@@ -859,7 +859,7 @@ Public Class FormBinEnv
                         j = 0
                         Do
                             If Double.TryParse(data(j, k), New Double) Then
-                                .Item(k).Cells(j + (ridx * 2)).Value = Format(CDbl(data(j, k)), nf)
+                                .Item(k).Cells(j + (ridx * 2)).Value = Format(Convert.ToDouble(data(j, k)), nf)
                             Else
                                 .Item(k).Cells(j + (ridx * 2)).Value = data(j, k)
                             End If
@@ -942,7 +942,7 @@ Public Class FormBinEnv
                         j = 0
                         Do
                             If Double.TryParse(data(j, k), New Double) Then
-                                .Item(k).Cells(j + (ridx * 14)).Value = Format(CDbl(data(j, k)), nf)
+                                .Item(k).Cells(j + (ridx * 14)).Value = Format(Convert.ToDouble(data(j, k)), nf)
                             Else
                                 .Item(k).Cells(j + (ridx * 14)).Value = data(j, k)
                             End If

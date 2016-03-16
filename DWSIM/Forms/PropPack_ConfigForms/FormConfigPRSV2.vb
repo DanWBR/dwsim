@@ -235,7 +235,7 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
                 If Not _form Is Nothing Then
                     _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
                                                                        .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
-                                                                       .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
+                                                                       .OldValue = oldvalue, .NewValue = Convert.ToDouble(value), .ObjID = id1, .ObjID2 = id2,
                                                                        .Tag = _pp, .PropertyName = tp})
                 End If
             Else
@@ -256,7 +256,7 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
                 If Not _form Is Nothing Then
                     _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
                                                                        .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
-                                                                       .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
+                                                                       .OldValue = oldvalue, .NewValue = Convert.ToDouble(value), .ObjID = id1, .ObjID2 = id2,
                                                                        .Tag = _pp, .PropertyName = tp})
                 End If
             End If

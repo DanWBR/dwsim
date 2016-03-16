@@ -189,7 +189,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         '            Me.KryptonDataGridView1.Rows(e.RowIndex).ErrorText = _
         '                DWSIM.App.GetLocalString("Ovalorinseridoinvlid")
         '            e.Cancel = True
-        '        ElseIf CDbl(e.FormattedValue) < 0 Then
+        '        ElseIf Convert.ToDouble(e.FormattedValue) < 0 Then
         '            Me.KryptonDataGridView1.Rows(e.RowIndex).ErrorText = _
         '                DWSIM.App.GetLocalString("Ovalorinseridoinvlid")
         '            e.Cancel = True
@@ -294,7 +294,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                 Case 2
                     oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                     newvalue = Convert.ToDouble(value)
-                    ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                    ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
             End Select
             If Not _form Is Nothing Then
                 _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged, .Name = DWSIM.App.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"),

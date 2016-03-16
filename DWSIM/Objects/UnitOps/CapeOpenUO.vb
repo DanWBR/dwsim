@@ -489,7 +489,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 Dim myparms As ICapeCollection = myuo.parameters
                 Dim paramcount As Integer = myparms.Count
                 If paramcount > 0 Then
-                    If CInt(paramcount) <> _params.Count Then
+                    If Convert.ToInt32(paramcount) <> _params.Count Then
                         _params = New List(Of ICapeParameter)
                         GetParams()
                     End If
@@ -1616,7 +1616,7 @@ Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen
 
         Implements IStream
 
-        Private Const STG_E_INVALIDFUNCTION As Integer = CInt(&H80030001)
+        Private Const STG_E_INVALIDFUNCTION As Integer = &H80030001
 
         Public ReadOnly baseStream As Stream
         Private position As Long = -1
@@ -1705,7 +1705,7 @@ Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen
 
             If cb <> 0 Then
                 If cb < 4096 Then
-                    count = CInt(cb)
+                    count = Convert.ToInt32(cb)
                 Else
                     count = 4096
                 End If
@@ -1721,7 +1721,7 @@ Namespace DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen
                         Exit While
                     End If
                     If cb - written < 4096 Then
-                        count = CInt(cb - written)
+                        count = Convert.ToInt32(cb - written)
                     End If
                 End While
             End If

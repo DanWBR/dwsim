@@ -72,7 +72,7 @@ Public Class FormCompoundCreator
                 S = picpath & UNIFAClines(i).Split(",")(7) & ".png"
                 If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
 
-                .Add(New Object() {" ", " ", CInt(0), Image.FromFile(S)})
+                .Add(New Object() {" ", " ", Convert.ToInt32(0), Image.FromFile(S)})
                 .Item(.Count - 1).HeaderCell.Value = "ID " & UNIFAClines(i).Split(",")(1) 'SubGroup
                 .Item(.Count - 1).Cells(0).Value = UNIFAClines(i).Split(",")(2) 'MainGroup
                 .Item(.Count - 1).Cells(1).Value = UNIFAClines(i).Split(",")(3) 'SubGroup
@@ -117,7 +117,7 @@ Public Class FormCompoundCreator
                     S = picpath & fields(6) & ".png"
                     If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
 
-                    .Add(New Object() {CInt(0), CInt(0), CInt(0), Image.FromFile(S)})
+                    .Add(New Object() {Convert.ToInt32(0), Convert.ToInt32(0), Convert.ToInt32(0), Image.FromFile(S)})
                     .Item(.Count - 1).HeaderCell.Value = "ID " & fields(3)
                     .Item(.Count - 1).Cells(0).Value = fields(1)
                     .Item(.Count - 1).Cells(1).Value = fields(2)
@@ -162,7 +162,7 @@ Public Class FormCompoundCreator
                         S = picpath & fields(4) & ".png"
                         If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
 
-                        .Add(New Object() {CInt(0), CInt(0), CInt(0), Image.FromFile(S)})
+                        .Add(New Object() {Convert.ToInt32(0), Convert.ToInt32(0), Convert.ToInt32(0), Image.FromFile(S)})
                         .Item(.Count - 1).HeaderCell.Value = "ID " & fields(0)
                         .Item(.Count - 1).Cells(0).Value = mainname
                         .Item(.Count - 1).Cells(1).Value = fields(1)
@@ -788,17 +788,17 @@ Public Class FormCompoundCreator
 
                 .cp.UNIFACGroups.Collection.Clear()
                 For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
-                    If CInt(r.Cells(2).Value) <> 0 Then .cp.UNIFACGroups.Collection(r.Cells(3).Tag(2)) = r.Cells(2).Value
+                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.UNIFACGroups.Collection(r.Cells(3).Tag(2)) = r.Cells(2).Value
                 Next
 
                 .cp.MODFACGroups.Collection.Clear()
                 For Each r As DataGridViewRow In Me.GridMODFAC.Rows
-                    If CInt(r.Cells(2).Value) <> 0 Then .cp.MODFACGroups.Collection(r.Cells(3).Tag(2)) = r.Cells(2).Value
+                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.MODFACGroups.Collection(r.Cells(3).Tag(2)) = r.Cells(2).Value
                 Next
 
                 .cp.NISTMODFACGroups.Collection.Clear()
                 For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
-                    If CInt(r.Cells(2).Value) <> 0 Then .cp.NISTMODFACGroups.Collection(r.Cells(3).Tag(2)) = r.Cells(2).Value
+                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.NISTMODFACGroups.Collection(r.Cells(3).Tag(2)) = r.Cells(2).Value
                 Next
 
                 Dim JC As Integer
@@ -1165,7 +1165,7 @@ Public Class FormCompoundCreator
             End If
             For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
                 If Not r.Cells(2).Value Is Nothing Then
-                    If CInt(r.Cells(2).Value) <> 0 Then
+                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then
                         If Not populating Then
                             mycase.cp.UNIFACGroups.Collection.Add(r.Cells(3).Tag(2), r.Cells(2).Value)
                             r.Cells(2).Style.BackColor = Color.PaleGreen

@@ -191,7 +191,7 @@ Public Class DCCharacterizationWizard
             T100 = Interpolation.polinterpolation.barycentricinterpolation(pxt.ToArray(GetType(Double)), pyt.ToArray(GetType(Double)), w, pxt.Count, 1.0)
             'tbp
             tbp = DistillationCurveConversion.ASTMD1160ToPEVsub_Wauquier(New Double() {T0, T10, T30, T50, T70, T90, T100})
-            Dim K As Double = CDbl(Me.TextBoxKAPI.Text)
+            Dim K As Double = Convert.ToDouble(Me.TextBoxKAPI.Text)
             tbp(0) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(0), 1333, K)
             tbp(1) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(1), 1333, K)
             tbp(2) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(2), 1333, K)
@@ -265,7 +265,7 @@ Public Class DCCharacterizationWizard
         'create pseudos
 
         If method = 0 Then
-            Dim np As Integer = CInt(Me.TextBoxNumberOfPseudos.Text)
+            Dim np As Integer = Convert.ToInt32(Me.TextBoxNumberOfPseudos.Text)
             Dim deltaT As Double = (Tmax - Tmin) / (np)
             Dim t0, fv0 As Double
             t0 = Tmin
@@ -461,7 +461,7 @@ Public Class DCCharacterizationWizard
             For Each c As Compound In ccol.Values
                 mixtMW += c.FracaoMolar * c.ConstantProperties.Molar_Weight
             Next
-            Dim facm As Double = CDbl(Me.TextBoxBulkMW.Text) / mixtMW
+            Dim facm As Double = Convert.ToDouble(Me.TextBoxBulkMW.Text) / mixtMW
             For Each c As Compound In ccol.Values
                 c.ConstantProperties.Molar_Weight *= facm
             Next
@@ -472,7 +472,7 @@ Public Class DCCharacterizationWizard
             For Each c As Compound In ccol.Values
                 mixtD += c.FracaoMassica * c.ConstantProperties.PF_SG.GetValueOrDefault
             Next
-            Dim facd As Double = 141.5 / (131.5 + CDbl(Me.TextBoxBulkD.Text)) / mixtD
+            Dim facd As Double = 141.5 / (131.5 + Convert.ToDouble(Me.TextBoxBulkD.Text)) / mixtD
             For Each c As Compound In ccol.Values
                 c.ConstantProperties.PF_SG *= facd
             Next
@@ -508,8 +508,8 @@ Public Class DCCharacterizationWizard
                     .PF_v1 = Interpolation.polinterpolation.barycentricinterpolation(pxv1.ToArray(GetType(Double)), pyv1.ToArray(GetType(Double)), w, pxv1.Count, tc.fvm)
                     Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(pxv2.ToArray(GetType(Double)), pxv2.Count, 0.5, w)
                     .PF_v2 = Interpolation.polinterpolation.barycentricinterpolation(pxv2.ToArray(GetType(Double)), pyv2.ToArray(GetType(Double)), w, pxv2.Count, tc.fvm)
-                    .PF_Tv1 = (CDbl(Me.TextBoxVT1.Text) - 32) / 9 * 5 + 273.15
-                    .PF_Tv2 = (CDbl(Me.TextBoxVT2.Text) - 32) / 9 * 5 + 273.15
+                    .PF_Tv1 = (Convert.ToDouble(Me.TextBoxVT1.Text) - 32) / 9 * 5 + 273.15
+                    .PF_Tv2 = (Convert.ToDouble(Me.TextBoxVT2.Text) - 32) / 9 * 5 + 273.15
                 End If
 
                 .PF_vA = PropertyMethods.ViscWaltherASTM_A(.PF_Tv1, .PF_v1, .PF_Tv2, .PF_v2)
@@ -999,32 +999,32 @@ Public Class DCCharacterizationWizard
             If r.Cells("temp").Value <> Nothing Then
                 pxt.Add(r.Cells(0).Value / 100)
                 pyt.Add(Converter.ConvertToSI(su.temperature, r.Cells("temp").Value))
-                gxt.Add(CDbl(r.Cells(0).Value))
-                gyt.Add(CDbl(r.Cells("temp").Value))
+                gxt.Add(Convert.ToDouble(r.Cells(0).Value))
+                gyt.Add(Convert.ToDouble(r.Cells("temp").Value))
             End If
             If r.Cells("mm").Value <> Nothing Then
                 pxm.Add(r.Cells(0).Value / 100)
-                pym.Add(CDbl(r.Cells("mm").Value))
-                gxm.Add(CDbl(r.Cells(0).Value))
-                gym.Add(CDbl(r.Cells("mm").Value))
+                pym.Add(Convert.ToDouble(r.Cells("mm").Value))
+                gxm.Add(Convert.ToDouble(r.Cells(0).Value))
+                gym.Add(Convert.ToDouble(r.Cells("mm").Value))
             End If
             If r.Cells("dens").Value <> Nothing Then
                 pxd.Add(r.Cells(0).Value / 100)
-                pyd.Add(CDbl(r.Cells("dens").Value))
-                gxd.Add(CDbl(r.Cells(0).Value))
-                gyd.Add(CDbl(r.Cells("dens").Value))
+                pyd.Add(Convert.ToDouble(r.Cells("dens").Value))
+                gxd.Add(Convert.ToDouble(r.Cells(0).Value))
+                gyd.Add(Convert.ToDouble(r.Cells("dens").Value))
             End If
             If r.Cells("visc1").Value <> Nothing Then
                 pxv1.Add(r.Cells(0).Value / 100)
                 pyv1.Add(Converter.ConvertToSI(su.cinematic_viscosity, r.Cells("visc1").Value))
-                gxv1.Add(CDbl(r.Cells(0).Value))
-                gyv1.Add(CDbl(r.Cells("visc1").Value))
+                gxv1.Add(Convert.ToDouble(r.Cells(0).Value))
+                gyv1.Add(Convert.ToDouble(r.Cells("visc1").Value))
             End If
             If r.Cells("visc2").Value <> Nothing Then
                 pxv2.Add(r.Cells(0).Value / 100)
                 pyv2.Add(Converter.ConvertToSI(su.cinematic_viscosity, r.Cells("visc2").Value))
-                gxv2.Add(CDbl(r.Cells(0).Value))
-                gyv2.Add(CDbl(r.Cells("visc2").Value))
+                gxv2.Add(Convert.ToDouble(r.Cells(0).Value))
+                gyv2.Add(Convert.ToDouble(r.Cells("visc2").Value))
             End If
         Next
 
@@ -1202,10 +1202,10 @@ Public Class DCCharacterizationWizard
                         End If
                     End If
                     If r.Cells("mm").Value <> Nothing Then
-                        pym.Add(CDbl(r.Cells("mm").Value))
+                        pym.Add(Convert.ToDouble(r.Cells("mm").Value))
                     End If
                     If r.Cells("dens").Value <> Nothing Then
-                        pyd.Add(CDbl(r.Cells("dens").Value))
+                        pyd.Add(Convert.ToDouble(r.Cells("dens").Value))
                     End If
                     If r.Cells("visc1").Value <> Nothing Then
                         If Double.TryParse(r.Cells("visc1").Value, New Double()) Then

@@ -370,7 +370,7 @@
                     pxe.Add(Converter.ConvertFromSI(flowunit, Converter.ConvertToSI(xunit, x(i))))
                     If yunit = "%" Then
                         If effunit = "%" Then
-                            pye.Add(CDbl(y(i)))
+                            pye.Add(Convert.ToDouble(y(i)))
                         Else
                             pye.Add(y(i) / 100)
                         End If
@@ -378,7 +378,7 @@
                         If effunit = "%" Then
                             pye.Add(y(i) * 100)
                         Else
-                            pye.Add(CDbl(y(i)))
+                            pye.Add(Convert.ToDouble(y(i)))
                         End If
                     End If
                 End If

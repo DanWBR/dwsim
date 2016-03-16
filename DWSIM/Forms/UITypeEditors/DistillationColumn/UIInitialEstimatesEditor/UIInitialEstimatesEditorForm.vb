@@ -77,7 +77,7 @@ Public Class UIInitialEstimatesEditorForm
 
 
         i = 0
-        Dim ob(CInt(j.ToString)) As Object
+        Dim ob(Convert.ToInt32(j.ToString)) As Object
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name
@@ -334,7 +334,7 @@ Public Class UIInitialEstimatesEditorForm
         Next
 
         i = 0
-        Dim ob(CInt(j.ToString)) As Object
+        Dim ob(Convert.ToInt32(j.ToString)) As Object
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name

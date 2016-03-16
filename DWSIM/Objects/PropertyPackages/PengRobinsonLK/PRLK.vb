@@ -355,7 +355,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             If phaseID = 3 Or phaseID = 4 Or phaseID = 5 Or phaseID = 6 Then
 
-                If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                     Dim val As Double
                     val = m_pr.Z_PR(T, P, RET_VMOL(Phase), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
                     val = 1 / (8.314 * val * T / P)
@@ -684,7 +684,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Select Case phase
                 Case Phase.Liquid
                     key = "1"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -694,7 +694,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case Phase.Aqueous
                     key = "6"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -704,7 +704,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case Phase.Liquid1
                     key = "3"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -714,7 +714,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case Phase.Liquid2
                     key = "4"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -724,7 +724,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case Phase.Liquid3
                     key = "5"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList

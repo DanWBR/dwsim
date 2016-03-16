@@ -30,7 +30,7 @@ Partial Class ScriptEditorControl
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkLink = New System.Windows.Forms.CheckBox()
         Me.treeViewItems = New System.Windows.Forms.TreeView()
-        Me.txtScript = New ScintillaNET.Scintilla()
+        Me.txtScript = New scintillaNET.scintilla()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -83,13 +83,13 @@ Partial Class ScriptEditorControl
         '
         'txtScript
         '
-        Me.txtScript.AnnotationVisible = ScintillaNET.Annotation.Standard
+        Me.txtScript.AnnotationVisible = scintillaNET.Annotation.Standard
         Me.txtScript.AutoCChooseSingle = True
         Me.txtScript.AutoCMaxHeight = 10
-        Me.txtScript.AutoCOrder = ScintillaNET.Order.PerformSort
+        Me.txtScript.AutoCOrder = scintillaNET.Order.PerformSort
         Me.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         resources.ApplyResources(Me.txtScript, "txtScript")
-        Me.txtScript.Lexer = ScintillaNET.Lexer.Python
+        Me.txtScript.Lexer = scintillaNET.Lexer.Python
         Me.txtScript.Name = "txtScript"
         Me.txtScript.UseTabs = False
         '

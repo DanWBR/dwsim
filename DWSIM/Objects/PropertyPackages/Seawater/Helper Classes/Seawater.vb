@@ -5040,11 +5040,11 @@ ExitFunction:
                         c = gc(j, k) * yj * zk
 
                         For L = 1 To drv_y            'factors from y-derivatives
-                            c = c * CDbl(j - L + 1)
+                            c = c * Convert.ToDouble(j - L + 1)
                         Next L
 
                         For L = 1 To drv_z            'factors from z-derivatives
-                            c = c * CDbl(k - L + 1)
+                            c = c * Convert.ToDouble(k - L + 1)
                         Next L
 
                         g = g + c
@@ -5943,11 +5943,11 @@ ExitFunction:
                         c = gi(term, j, k) * yj * zk
 
                         For L = 1 To drv_y            'factors from y-derivatives
-                            c = c * CDbl(j - L + 1)
+                            c = c * Convert.ToDouble(j - L + 1)
                         Next L
 
                         For L = 1 To drv_z            'factors from z-derivatives
-                            c = c * CDbl(k - L + 1)
+                            c = c * Convert.ToDouble(k - L + 1)
                         Next L
 
                         g = g + c

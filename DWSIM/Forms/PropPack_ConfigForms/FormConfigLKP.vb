@@ -146,11 +146,11 @@ gt1:        If ppu.m_lk.InteractionParameters.ContainsKey(cp.Name) Then
             Select Case e.ColumnIndex
                 Case 2
                     oldvalue = ppu.m_lk.InteractionParameters(id1)(id2).kij
-                    ppu.m_lk.InteractionParameters(id1)(id2).kij = CDbl(value)
+                    ppu.m_lk.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
             End Select
             If Not _form Is Nothing Then
                 _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged, .Name = DWSIM.App.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"),
-                                                                       .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
+                                                                       .OldValue = oldvalue, .NewValue = Convert.ToDouble(value), .ObjID = id1, .ObjID2 = id2,
                                                                        .Tag = _pp, .PropertyName = "LK_IP"})
             End If
         End If

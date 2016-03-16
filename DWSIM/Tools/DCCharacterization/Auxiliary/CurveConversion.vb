@@ -196,7 +196,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
             f(1, 10) = 100
 
             For i = 0 To 6
-                fracv = CInt(fv(i) / 20 + 0.5)
+                fracv = Convert.ToInt32(fv(i) / 20 + 0.5)
                 If fracv >= 3 Then
                     Tpev10(i) = Tastm(i)
                 Else

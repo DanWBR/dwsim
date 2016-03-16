@@ -135,7 +135,7 @@ Public Class SpreadsheetForm
         Dim colLetra As String
 
         colLetra = cell.Substring(0, 1)
-        row = CInt(cell.Substring(1)) - 1
+        row = Convert.ToInt32(cell.Substring(1)) - 1
 
         Select Case colLetra
             Case "A"
@@ -716,7 +716,7 @@ Public Class SpreadsheetForm
                                     'End If
                                     If ccparams.CellType = VarType.Write Then
                                         i += 1
-                                        delta += Math.Abs((CDbl(ccparams.CurrVal) - CDbl(ccparams.PrevVal)) / CDbl(ccparams.PrevVal))
+                                        delta += Math.Abs((Convert.ToDouble(ccparams.CurrVal) - Convert.ToDouble(ccparams.PrevVal)) / Convert.ToDouble(ccparams.PrevVal))
                                         If Double.IsNaN(delta) Or Double.IsInfinity(delta) Then forcestop = True
                                     End If
                                 End If
@@ -724,7 +724,7 @@ Public Class SpreadsheetForm
                         Next
                     Next
 
-                    If delta > i * CDbl(Me.tbTolerance.Text) Then StopWriting = False
+                    If delta > i * Convert.ToDouble(Me.tbTolerance.Text) Then StopWriting = False
 
                     If Me.WriteMode Then
                         If Not StopWriting Then

@@ -322,7 +322,7 @@
     <value>txtScript</value>
   </data>
   <data name="&gt;&gt;txtScript.Type" xml:space="preserve">
-    <value>ScintillaNET.Scintilla, ScintillaNET, Version=3.5.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>scintillaNET.scintilla, scintillaNET, Version=3.5.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtScript.Parent" xml:space="preserve">
     <value>$this</value>

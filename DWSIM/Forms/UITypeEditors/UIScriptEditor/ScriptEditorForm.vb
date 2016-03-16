@@ -19,7 +19,7 @@
 Imports System.IO
 Imports System.Reflection
 Imports System.Drawing.Text
-Imports ScintillaNET
+Imports scintillaNET
 Imports System.Xml.Linq
 Imports System.Linq
 

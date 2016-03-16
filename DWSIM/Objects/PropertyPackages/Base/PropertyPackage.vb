@@ -4775,7 +4775,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     refval = Me.CurrentMaterialStream.Phases(0).Properties.density.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Massaespecficadamist"), True)
-                    'refval = Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault / CDbl(Me.CurrentMaterialStream.Phases(0).Properties.density.GetValueOrDefault)
+                    'refval = Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault / Convert.ToDouble(Me.CurrentMaterialStream.Phases(0).Properties.density.GetValueOrDefault)
                     'If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     'pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     'refval = Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
@@ -4867,7 +4867,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     refval = Me.CurrentMaterialStream.Phases(2).Properties.density.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("MassaespecficadaPhase"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.massflow.GetValueOrDefault / CDbl(Me.CurrentMaterialStream.Phases(2).Properties.density.GetValueOrDefault)
+                    refval = Me.CurrentMaterialStream.Phases(2).Properties.massflow.GetValueOrDefault / Convert.ToDouble(Me.CurrentMaterialStream.Phases(2).Properties.density.GetValueOrDefault)
                     If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     refval = Me.CurrentMaterialStream.Phases(2).Properties.massflow.GetValueOrDefault
@@ -4888,7 +4888,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     refval = Me.CurrentMaterialStream.Phases(2).Properties.heatCapacityCp.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.heatCapacityCp.GetValueOrDefault / CDbl(Me.CurrentMaterialStream.Phases(2).Properties.heatCapacityCv.GetValueOrDefault)
+                    refval = Me.CurrentMaterialStream.Phases(2).Properties.heatCapacityCp.GetValueOrDefault / Convert.ToDouble(Me.CurrentMaterialStream.Phases(2).Properties.heatCapacityCv.GetValueOrDefault)
                     If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
                     pv.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
                     refval = Me.CurrentMaterialStream.Phases(2).Properties.thermalConductivity.GetValueOrDefault
@@ -6782,13 +6782,13 @@ Final3:
                 Else
 
                     If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If CInt(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
+                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If CInt(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
+                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                                             vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                                             vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
@@ -6840,13 +6840,13 @@ Final3:
                 Else
 
                     If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If CInt(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
+                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If CInt(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
+                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                                             vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                                             vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
@@ -6887,13 +6887,13 @@ Final3:
                 Else
 
                     If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If CInt(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
+                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If CInt(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
+                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                                             vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                                             vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
@@ -6932,13 +6932,13 @@ Final3:
                 Else
 
                     If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If CInt(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
+                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If CInt(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
+                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                                             vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                                             vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
@@ -6977,13 +6977,13 @@ Final3:
                 Else
 
                     If Me.Parameters.ContainsKey("PP_IDEAL_MIXRULE_LIQDENS") Then
-                        If CInt(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
+                        If Convert.ToInt32(Me.Parameters("PP_IDEAL_MIXRULE_LIQDENS")) = 1 Then
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
                             For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                                    If CInt(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
+                                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                                             vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                                             vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
@@ -7028,7 +7028,7 @@ Final3:
             i = 0
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
-                    If CInt(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                         If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                             vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                             vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
@@ -11615,7 +11615,7 @@ Final3:
         End Function
 
         Public Overrides Function Seek(ByVal offset As Long, ByVal origin As System.IO.SeekOrigin) As Long
-            mSource.Seek(offset, CInt(origin), mInt64)
+            mSource.Seek(offset, Convert.ToInt32(origin), mInt64)
             Return iop.Marshal.ReadInt64(mInt64)
         End Function
 

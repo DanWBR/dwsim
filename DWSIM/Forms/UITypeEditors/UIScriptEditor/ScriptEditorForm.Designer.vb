@@ -26,7 +26,7 @@ Partial Class ScriptEditorForm
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ScriptEditorForm))
         Me.FaTabStrip2 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
-        Me.txtScript = New ScintillaNET.Scintilla()
+        Me.txtScript = New scintillaNET.scintilla()
         Me.FaTabStripItem4 = New FarsiLibrary.Win.FATabStripItem()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.imageList1 = New System.Windows.Forms.ImageList(Me.components)
@@ -88,12 +88,12 @@ Partial Class ScriptEditorForm
         'txtScript
         '
         resources.ApplyResources(Me.txtScript, "txtScript")
-        Me.txtScript.AnnotationVisible = ScintillaNET.Annotation.Standard
+        Me.txtScript.AnnotationVisible = scintillaNET.Annotation.Standard
         Me.txtScript.AutoCChooseSingle = True
         Me.txtScript.AutoCMaxHeight = 10
-        Me.txtScript.AutoCOrder = ScintillaNET.Order.PerformSort
+        Me.txtScript.AutoCOrder = scintillaNET.Order.PerformSort
         Me.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtScript.Lexer = ScintillaNET.Lexer.Python
+        Me.txtScript.Lexer = scintillaNET.Lexer.Python
         Me.txtScript.Name = "txtScript"
         Me.txtScript.UseTabs = False
         '
@@ -328,15 +328,15 @@ Partial Class ScriptEditorForm
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FaTabStrip2.ResumeLayout(false)
-        Me.FaTabStripItem3.ResumeLayout(false)
-        Me.FaTabStripItem4.ResumeLayout(false)
-        Me.ToolStrip1.ResumeLayout(false)
-        Me.ToolStrip1.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        Me.FaTabStrip2.ResumeLayout(False)
+        Me.FaTabStripItem3.ResumeLayout(False)
+        Me.FaTabStripItem4.ResumeLayout(False)
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
     Public WithEvents FaTabStrip2 As FarsiLibrary.Win.FATabStrip
     Public WithEvents FaTabStripItem3 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents FaTabStripItem4 As FarsiLibrary.Win.FATabStripItem
@@ -367,7 +367,7 @@ End Sub
     Friend WithEvents HelpToolStripButton As System.Windows.Forms.ToolStripButton
     Public WithEvents btnDebug As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents txtScript As ScintillaNET.Scintilla
+    Friend WithEvents txtScript As scintillaNET.scintilla
     Friend WithEvents btnHighlightSpaces As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnUndo As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnRedo As System.Windows.Forms.ToolStripButton

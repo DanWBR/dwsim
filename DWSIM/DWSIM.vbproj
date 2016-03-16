@@ -1490,15 +1490,12 @@
     <None Include="Assets\samples\1-Propanol-Water-NRTL.dwrsd" />
     <None Include="Assets\samples\1-Propanol-Water-UNIQUAC.dwrsd" />
     <None Include="Assets\samples\2,3-Dimethylbutane-Chloroform-PRSV2_VL.dwrsd" />
-    <None Include="Assets\samples\Acetone and Methanol Equilibria using TEA and COSMOTherm %28Windows only%29.dwsim" />
     <None Include="Assets\samples\Acetonitrile-Nitromethane-PRSV2-VL.dwrsd" />
     <None Include="Assets\samples\Ammonia-Water-NRTL.dwrsd" />
     <None Include="Assets\samples\Benzene-Cyclopentane-PR.dwrsd" />
     <None Include="Assets\samples\Benzene-m-Xylene-SLE.dwrsd" />
     <None Include="Assets\samples\Benzene-p-Xylene-SLE.dwrsd" />
     <None Include="Assets\samples\Carbon Combustion.dwxml" />
-    <None Include="Assets\samples\Cavett%27s Problem with TEA 1.0 %28Windows only%29.dwsim" />
-    <None Include="Assets\samples\Cavett%27s Problem with TEA 1.1 %28Windows only%29.dwsim" />
     <None Include="Assets\samples\Cavett%27s Problem.dwxml" />
     <None Include="Assets\samples\Cyclohexane-Aniline-NRTL.dwrsd" />
     <None Include="Assets\samples\DWSIM Add-In Sample.xlsx" />
@@ -1506,7 +1503,6 @@
     <None Include="Assets\samples\Electrolysis.xlsx" />
     <None Include="Assets\samples\Ethanol-Benzene-SLE.dwrsd" />
     <None Include="Assets\samples\Ethanol-Benzene-UNIQUAC.dwrsd" />
-    <None Include="Assets\samples\Extractive Distillation with TEA 1.0 %28Windows only%29.dwsim" />
     <None Include="Assets\samples\Extractive Distillation.dwxml" />
     <None Include="Assets\samples\Flowsheet Unit Operation Sample.dwxml" />
     <None Include="Assets\samples\fstest_in.dwxml" />

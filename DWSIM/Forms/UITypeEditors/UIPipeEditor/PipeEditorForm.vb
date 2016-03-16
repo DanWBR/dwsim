@@ -20,11 +20,11 @@
                     Do
                         If .Sections(i).Tipo = "Tubulaosimples" Then
                             If i >= 2 Then
-                                px.Add(px(px.Count - 1) + CDbl(.Sections(i).Comprimento))
-                                py.Add(py(py.Count - 1) + CDbl(.Sections(i).Elevacao))
+                                px.Add(px(px.Count - 1) + Convert.ToDouble(.Sections(i).Comprimento))
+                                py.Add(py(py.Count - 1) + Convert.ToDouble(.Sections(i).Elevacao))
                             Else
-                                px.Add(CDbl(.Sections(i).Comprimento))
-                                py.Add(CDbl(.Sections(i).Elevacao))
+                                px.Add(Convert.ToDouble(.Sections(i).Comprimento))
+                                py.Add(Convert.ToDouble(.Sections(i).Elevacao))
                             End If
                         Else
                             If i >= 2 Then
@@ -50,11 +50,11 @@
                     Do
                         If .Sections(i).Tipo = "Tubulaosimples" Then
                             If i >= 2 Then
-                                px.Add(px(px.Count - 1) + (CDbl(.Sections(i).Comprimento ^ 2 - .Sections(i).Elevacao ^ 2) ^ 0.5))
-                                py.Add(py(py.Count - 1) + CDbl(.Sections(i).Elevacao))
+                                px.Add(px(px.Count - 1) + (Convert.ToDouble(.Sections(i).Comprimento ^ 2 - .Sections(i).Elevacao ^ 2) ^ 0.5))
+                                py.Add(py(py.Count - 1) + Convert.ToDouble(.Sections(i).Elevacao))
                             Else
-                                px.Add((CDbl(.Sections(i).Comprimento ^ 2 - .Sections(i).Elevacao ^ 2) ^ 0.5))
-                                py.Add(CDbl(.Sections(i).Elevacao))
+                                px.Add((Convert.ToDouble(.Sections(i).Comprimento ^ 2 - .Sections(i).Elevacao ^ 2) ^ 0.5))
+                                py.Add(Convert.ToDouble(.Sections(i).Elevacao))
                             End If
                         Else
                             If i >= 2 Then

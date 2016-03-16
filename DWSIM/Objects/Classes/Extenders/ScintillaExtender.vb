@@ -1,4 +1,4 @@
-﻿'    ScintillaNET Editor extender for code intellisense display
+﻿'    scintillaNET Editor extender for code intellisense display
 '    Copyright 2015 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -16,16 +16,16 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports ScintillaNET
+Imports scintillaNET
 Imports System.Reflection
 Imports System.Xml.Linq
 Imports System.Linq
 
 ''' <summary>
-''' ScintillaNET Editor extender for code intellisense display
+''' scintillaNET Editor extender for code intellisense display
 ''' </summary>
 ''' <remarks>(c) 2015 Daniel Medeiros</remarks>
-Module ScintillaExtender
+Module scintillaExtender
 
     ''' <summary>
     ''' Sets the editor style for Python language.
@@ -35,7 +35,7 @@ Module ScintillaExtender
     ''' <param name="fontsize">Size of the font to be used.</param>
     ''' <param name="viewspaces">Enables or disables whitspace highlighting.</param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub SetEditorStyle(scintilla As ScintillaNET.Scintilla, fontname As String, fontsize As Integer, viewspaces As Boolean)
+    <System.Runtime.CompilerServices.Extension()> Sub SetEditorStyle(scintilla As scintillaNET.scintilla, fontname As String, fontsize As Integer, viewspaces As Boolean)
 
         scintilla.StyleResetDefault()
         scintilla.Styles(Style.[Default]).Font = fontname
@@ -217,7 +217,7 @@ Module ScintillaExtender
     ''' </summary>
     ''' <param name="scintilla"></param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub SetColumnMargins(scintilla As ScintillaNET.Scintilla)
+    <System.Runtime.CompilerServices.Extension()> Sub SetColumnMargins(scintilla As scintillaNET.scintilla)
 
         Dim maxLineNumberCharLength = scintilla.Lines.Count.ToString().Length
 
@@ -231,7 +231,7 @@ Module ScintillaExtender
     ''' </summary>
     ''' <param name="scintilla"></param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub ShowAutoComplete(scintilla As ScintillaNET.Scintilla)
+    <System.Runtime.CompilerServices.Extension()> Sub ShowAutoComplete(scintilla As scintillaNET.scintilla)
 
         Dim suggestions As String = ""
 
@@ -344,7 +344,7 @@ Module ScintillaExtender
     ''' <param name="scintilla"></param>
     ''' <param name="reader">Jolt's XmlDocCommentReader instance, to get and display comments from assembly-generated XML file.</param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub ShowToolTip(scintilla As ScintillaNET.Scintilla, reader As Jolt.XmlDocCommentReader)
+    <System.Runtime.CompilerServices.Extension()> Sub ShowToolTip(scintilla As scintillaNET.scintilla, reader As Jolt.XmlDocCommentReader)
 
         'parses the last keyword (object) (before the ".") and get suggestions for the autocomplete box from its properties and methods
 
@@ -402,7 +402,7 @@ Module ScintillaExtender
     ''' <param name="reader">Jolt's XmlDocCommentReader instance, to get and display comments from assembly-generated XML file.</param>
     ''' <returns>The formatted text to display in the tooltip.</returns>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Private Function FormatHelpTip(scintilla As ScintillaNET.Scintilla, member As MemberInfo, reader As Jolt.XmlDocCommentReader) As String
+    <System.Runtime.CompilerServices.Extension()> Private Function FormatHelpTip(scintilla As scintillaNET.scintilla, member As MemberInfo, reader As Jolt.XmlDocCommentReader) As String
 
         Select Case member.MemberType
 
@@ -507,7 +507,7 @@ Module ScintillaExtender
     ''' <param name="scintilla"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Private Function getLastWord(scintilla As ScintillaNET.Scintilla) As String
+    <System.Runtime.CompilerServices.Extension()> Private Function getLastWord(scintilla As scintillaNET.scintilla) As String
 
         Dim word As String = ""
 

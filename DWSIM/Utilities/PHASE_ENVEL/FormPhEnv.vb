@@ -1133,7 +1133,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                 j = 0
                 Do
                     If Double.TryParse(data(j, k), New Double) Then
-                        .Item(k).Cells(j).Value = Format(CDbl(data(j, k)), nf)
+                        .Item(k).Cells(j).Value = Format(Convert.ToDouble(data(j, k)), nf)
                     Else
                         .Item(k).Cells(j).Value = data(j, k)
                     End If

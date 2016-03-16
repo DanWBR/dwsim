@@ -108,8 +108,8 @@ Namespace GraphicObjects
             If Not Me.TextRenderStyle = -1 Then g.TextRenderingHint = Me.TextRenderStyle
             If Me.AutoSize Then
                 Dim mySize As SizeF = g.MeasureString(m_Text, m_Font)
-                Me.Width = CInt(mySize.Width)
-                Me.Height = CInt(mySize.Height)
+                Me.Width = Convert.ToInt32(mySize.Width)
+                Me.Height = Convert.ToInt32(mySize.Height)
                 g.DrawString(m_Text, m_Font, New SolidBrush(m_Color), X, Y)
             Else
                 Dim rect As New System.Drawing.RectangleF(X, Y, Me.Width, Me.Height)

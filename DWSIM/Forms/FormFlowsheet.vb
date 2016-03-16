@@ -577,8 +577,8 @@ Imports System.Reflection
 
     Public Function gscTogoc(ByVal X As Integer, ByVal Y As Integer) As Point
         Dim myNewPoint As Point
-        myNewPoint.X = CInt((X - Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X) / Me.FormSurface.FlowsheetDesignSurface.Zoom)
-        myNewPoint.Y = CInt((Y - Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y) / Me.FormSurface.FlowsheetDesignSurface.Zoom)
+        myNewPoint.X = Convert.ToInt32((X - Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X) / Me.FormSurface.FlowsheetDesignSurface.Zoom)
+        myNewPoint.Y = Convert.ToInt32((Y - Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y) / Me.FormSurface.FlowsheetDesignSurface.Zoom)
         Return myNewPoint
     End Function
 
@@ -1436,7 +1436,7 @@ Imports System.Reflection
 
     Private Sub TSTBZoom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TSTBZoom.KeyDown
         If e.KeyCode = Keys.Enter Then
-            Me.FormSurface.FlowsheetDesignSurface.Zoom = CInt(Me.TSTBZoom.Text.Replace("%", "")) / 100
+            Me.FormSurface.FlowsheetDesignSurface.Zoom = Convert.ToInt32(Me.TSTBZoom.Text.Replace("%", "")) / 100
             Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
             Me.FormSurface.FlowsheetDesignSurface.Invalidate()
         End If

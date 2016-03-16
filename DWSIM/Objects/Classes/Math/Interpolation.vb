@@ -66,7 +66,7 @@ Namespace DWSIM.MathEx.Interpolation
             Dim i As Integer = 0
             Dim j As Integer = 0
 
-            System.Diagnostics.Debug.Assert(n > 0, "BarycentricInterpolation: N<=0!")
+            System.Diagnostics.Debug.Assert(n > 0, "barycentricinterpolation: N<=0!")
             threshold = Math.Sqrt(AP.MathEx.MinRealNumber)
 
             '
@@ -145,7 +145,7 @@ Namespace DWSIM.MathEx.Interpolation
             Dim w As Double = 0
             Dim x As Double = 0
 
-            System.Diagnostics.Debug.Assert(n > 0, "BarycentricInterpolation: N<=0!")
+            System.Diagnostics.Debug.Assert(n > 0, "barycentricinterpolation: N<=0!")
             threshold = Math.Sqrt(AP.MathEx.MinRealNumber)
 
             '
@@ -163,7 +163,7 @@ Namespace DWSIM.MathEx.Interpolation
             j = 0
             s = t - a
             For i = 1 To n - 1
-                x = a + CDbl((i)) / CDbl((n - 1)) * (b - a)
+                x = a + Convert.ToDouble((i)) / Convert.ToDouble((n - 1)) * (b - a)
                 If Math.Abs(t - x) < Math.Abs(s) Then
                     s = t - x
                     j = i
@@ -190,7 +190,7 @@ Namespace DWSIM.MathEx.Interpolation
             w = 1.0R
             For i = 0 To n - 1
                 If i <> j Then
-                    v = s * w / (t - (a + CDbl((i)) / CDbl((n - 1)) * (b - a)))
+                    v = s * w / (t - (a + Convert.ToDouble((i)) / Convert.ToDouble((n - 1)) * (b - a)))
                     s1 = s1 + v * f(i)
                     s2 = s2 + v
                 Else
@@ -670,7 +670,7 @@ Namespace DWSIM.MathEx.Interpolation
         '
         '    Output parameters:
         '        W   -   array of the barycentric weights which  can  be  used  in  the
-        '                BarycentricInterpolate subroutine. Array[0..N-1]
+        '                BarycentriConvert.ToInt32erpolate subroutine. Array[0..N-1]
         '
         '    Note:
         '        this algorithm always succeeds and calculates the weights  with  close

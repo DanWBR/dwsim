@@ -1186,7 +1186,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             If isolamento = True Then
 
                 esp_isol = Me.m_thermalprofile.Espessura / 1000
-                U_isol = CDbl(Me.m_thermalprofile.Condtermica) / (Math.Log((Dext + esp_isol) / Dext) * Dext)
+                U_isol = Convert.ToDouble(Me.m_thermalprofile.Condtermica) / (Math.Log((Dext + esp_isol) / Dext) * Dext)
 
             End If
 
@@ -1199,7 +1199,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                 If Me.m_thermalprofile.Meio <> 0 And Me.m_thermalprofile.Meio <> 1 Then
 
-                    Dim Zb = CDbl(Me.m_thermalprofile.Velocidade)
+                    Dim Zb = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
 
                     Dim Rs = (Dext + esp_isol) / (2 * k_terreno(Me.m_thermalprofile.Meio)) * Math.Log((2 * Zb + (4 * Zb ^ 2 - (Dext + esp_isol) ^ 2) ^ 0.5) / (Dext + esp_isol))
 
@@ -1212,7 +1212,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 ElseIf Me.m_thermalprofile.Meio = 0 Then
 
                     'Average air properties
-                    vel = CDbl(Me.m_thermalprofile.Velocidade)
+                    vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
                     Dim Tamb = Me.m_thermalprofile.Temp_amb_estimar
                     Dim props = PropsAR(Tamb, 101325)
                     mu2 = props(1)
@@ -1235,7 +1235,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 ElseIf Me.m_thermalprofile.Meio = 1 Then
 
                     'Average water properties
-                    vel = CDbl(Me.m_thermalprofile.Velocidade)
+                    vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
                     Dim Tamb = Me.m_thermalprofile.Temp_amb_estimar
                     Dim props = PropsAGUA(Tamb, 101325)
                     mu2 = props(1)
@@ -1721,7 +1721,7 @@ Final3:     T = bbb
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As Double = 0
-            Dim propidx As Integer = CInt(prop.Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 0
@@ -1757,7 +1757,7 @@ Final3:     T = bbb
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim cv As New DWSIM.SystemsOfUnits.Converter
-            Dim propidx As Integer = CInt(prop.Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 2
@@ -1779,7 +1779,7 @@ Final3:     T = bbb
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim value As String = ""
-            Dim propidx As Integer = CInt(prop.Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 0

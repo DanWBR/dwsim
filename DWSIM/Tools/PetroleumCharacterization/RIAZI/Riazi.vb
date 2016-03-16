@@ -435,9 +435,9 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
                 mat(i, 0) = i + 1
                 mat(i, 1) = Vx_dist(i) / somax
                 If i = 0 Then
-                    mat(i, 2) = CDbl(mat(i, 1))
+                    mat(i, 2) = Convert.ToDouble(mat(i, 1))
                 Else
-                    mat(i, 2) = CDbl(mat(i, 1)) + CDbl(mat(i - 1, 2))
+                    mat(i, 2) = Convert.ToDouble(mat(i, 1)) + Convert.ToDouble(mat(i - 1, 2))
                 End If
                 mat(i, 3) = TB_p(i)
                 mat(i, 4) = MW_p(i)

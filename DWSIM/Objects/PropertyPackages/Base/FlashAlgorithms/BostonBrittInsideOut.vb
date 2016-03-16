@@ -353,10 +353,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
 
             d1 = Date.Now
 
-            maxit_i = CInt(PP.Parameters("PP_PHFMII"))
-            maxit_e = CInt(PP.Parameters("PP_PHFMEI"))
-            itol = CDbl(PP.Parameters("PP_PHFILT"))
-            etol = CDbl(PP.Parameters("PP_PHFELT"))
+            maxit_i = Convert.ToInt32(PP.Parameters("PP_PHFMII"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PHFMEI"))
+            itol = Convert.ToDouble(PP.Parameters("PP_PHFILT"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PHFELT"))
 
             n = UBound(Vz)
 
@@ -826,10 +826,10 @@ restart:    Do
 
             d1 = Date.Now
 
-            maxit_i = CInt(PP.Parameters("PP_PSFMII"))
-            maxit_e = CInt(PP.Parameters("PP_PSFMEI"))
-            itol = CDbl(PP.Parameters("PP_PSFILT"))
-            etol = CDbl(PP.Parameters("PP_PSFELT"))
+            maxit_i = Convert.ToInt32(PP.Parameters("PP_PSFMII"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PSFMEI"))
+            itol = Convert.ToDouble(PP.Parameters("PP_PSFILT"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PSFELT"))
 
             n = UBound(Vz)
 
@@ -1284,10 +1284,10 @@ restart:    Do
 
             d1 = Date.Now
 
-            etol = CDbl(PP.Parameters("PP_PTFELT"))
-            maxit_e = CInt(PP.Parameters("PP_PTFMEI"))
-            itol = CDbl(PP.Parameters("PP_PTFILT"))
-            maxit_i = CInt(PP.Parameters("PP_PTFMII"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
+            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
+            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
 
             n = UBound(Vz)
 
@@ -1576,8 +1576,8 @@ final:      d2 = Date.Now
 
             d1 = Date.Now
 
-            etol = CDbl(PP.Parameters("PP_PTFELT"))
-            maxit_e = CInt(PP.Parameters("PP_PTFMEI"))
+            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
+            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
 
             n = UBound(Vz)
 

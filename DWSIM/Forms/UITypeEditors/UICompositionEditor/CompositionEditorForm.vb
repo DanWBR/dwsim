@@ -32,7 +32,7 @@ Public Class CompositionEditorForm
         Try
             Dim v As Double = 0
             For Each r As DataGridViewRow In Me.GridComp.Rows
-                v += CDbl(r.Cells(0).Value)
+                v += Convert.ToDouble(r.Cells(0).Value)
             Next
             Me.Label3.Text = Format(v, "#0.0000")
             Me.Label3.ForeColor = Color.SlateBlue
@@ -329,7 +329,7 @@ Public Class CompositionEditorForm
                         If DWSIM.App.GetLocalString(r.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
                             v += r.Cells(0).Value / 1000 * liqdens(i) / Me.Compounds(r.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
                         Else
-                            v += CDbl(r.Cells(0).Value)
+                            v += Convert.ToDouble(r.Cells(0).Value)
                         End If
                         i += 1
                     Next
@@ -339,13 +339,13 @@ Public Class CompositionEditorForm
                         If DWSIM.App.GetLocalString(r.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
                             v += r.Cells(0).Value / Me.Compounds(r.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
                         Else
-                            v += CDbl(r.Cells(0).Value)
+                            v += Convert.ToDouble(r.Cells(0).Value)
                         End If
                         i += 1
                     Next
                 Else
                     For Each r As DataGridViewRow In Me.GridComp.Rows
-                        v += CDbl(r.Cells(0).Value)
+                        v += Convert.ToDouble(r.Cells(0).Value)
                     Next
                 End If
                 If Me.RadioButton1.Checked Or Me.RadioButton2.Checked Then

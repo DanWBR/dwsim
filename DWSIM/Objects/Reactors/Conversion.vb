@@ -749,7 +749,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As Double = 0
-            Dim propidx As Integer = CInt(prop.Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
 
@@ -787,7 +787,7 @@ Namespace DWSIM.SimulationObjects.Reactors
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim cv As New DWSIM.SystemsOfUnits.Converter
-            Dim propidx As Integer = CInt(prop.Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
 
@@ -803,7 +803,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As String = ""
-            Dim propidx As Integer = CInt(prop.Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
 

@@ -991,7 +991,7 @@ Namespace DWSIM.GraphicObjects
                     If ni.Level = 0 And ni.ParentNode = "" Or ni.Level > 0 And ni.ParentNode <> "" Then
                         data += DWSIM.App.GetPropertyName(ni.Text) + vbTab
                         If Double.TryParse(ni.Value, New Double) Then
-                            data += Format(CDbl(ni.Value), Me.BaseOwner.FlowSheet.Options.NumberFormat) + vbTab
+                            data += Format(Convert.ToDouble(ni.Value), Me.BaseOwner.FlowSheet.Options.NumberFormat) + vbTab
                         Else
                             data += ni.Value + vbTab
                         End If
@@ -1040,7 +1040,7 @@ Namespace DWSIM.GraphicObjects
                         If size.Width > maxL1 Then maxL1 = size.Width
                         If size.Height > maxH Then maxH = size.Height
                         If Double.TryParse(ni.Value, New Double) Then
-                            size = g.MeasureString(Format(CDbl(ni.Value), Me.BaseOwner.FlowSheet.Options.NumberFormat), Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
+                            size = g.MeasureString(Format(Convert.ToDouble(ni.Value), Me.BaseOwner.FlowSheet.Options.NumberFormat), Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
                         Else
                             size = g.MeasureString(ni.Value, Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
                         End If
@@ -1093,7 +1093,7 @@ Namespace DWSIM.GraphicObjects
                     If ni.Level = 0 And ni.ParentNode = "" Or ni.Level > 0 And ni.ParentNode <> "" Then
                         g.DrawString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
                         If Double.TryParse(ni.Value, New Double) Then
-                            g.DrawString(Format(CDbl(ni.Value), Me.BaseOwner.FlowSheet.Options.NumberFormat), Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2, Y + n * maxH + Padding, format1)
+                            g.DrawString(Format(Convert.ToDouble(ni.Value), Me.BaseOwner.FlowSheet.Options.NumberFormat), Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2, Y + n * maxH + Padding, format1)
                         Else
                             g.DrawString(ni.Value, Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2, Y + n * maxH + Padding, format1)
                         End If

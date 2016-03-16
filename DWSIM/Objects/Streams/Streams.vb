@@ -1159,7 +1159,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
             If prop <> "" Then
 
-                Dim propidx As Integer = CInt(prop.Split(",")(0).Split("_")(2))
+                Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
                 If prop.Split(",").Length = 2 Then
                     sname = prop.Split(",")(1)
                 End If
@@ -1900,7 +1900,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim cv As New DWSIM.SystemsOfUnits.Converter
-            Dim propidx As Integer = CInt(prop.Split(",")(0).Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
             Dim sname As String = ""
             If prop.Split(",").Length = 2 Then
                 sname = prop.Split(",")(1)
@@ -2018,7 +2018,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
             If prop <> "" Then
 
-                Dim propidx As Integer = CInt(prop.Split(",")(0).Split("_")(2))
+                Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
 
                 Select Case propidx
 
@@ -5579,7 +5579,7 @@ Namespace DWSIM.SimulationObjects.Streams
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim value As Double = 0
-            Dim propidx As Integer = CInt(prop.Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
 
@@ -5621,7 +5621,7 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim cv As New DWSIM.SystemsOfUnits.Converter
-            Dim propidx As Integer = CInt(prop.Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 0
@@ -5634,7 +5634,7 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
             Dim value As String = ""
-            Dim propidx As Integer = CInt(prop.Split("_")(2))
+            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
 

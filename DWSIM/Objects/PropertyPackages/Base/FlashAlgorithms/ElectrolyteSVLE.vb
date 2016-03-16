@@ -781,10 +781,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
 
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = CInt(proppack.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = CInt(proppack.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = CDbl(proppack.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = CDbl(proppack.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMII"))
+            Dim maxitEXT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMEI"))
+            Dim tolINT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFILT"))
+            Dim tolEXT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFELT"))
 
             Dim Tmin, Tmax, epsilon(4), maxDT As Double
 
@@ -934,15 +934,15 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            Dim maxitINT As Integer = CInt(proppack.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = CInt(proppack.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = CDbl(proppack.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = CDbl(proppack.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMII"))
+            Dim maxitEXT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMEI"))
+            Dim tolINT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFILT"))
+            Dim tolEXT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFELT"))
 
             n = UBound(Vz)
 
             Dim Vx(n), Vy(n), Vp(n), Vcalc, Vspec, P, x, x0, x00, fx, fx0, fx00, Pmin, Pmax As Double
-         
+
             Dim nl As New DWSIMDefault
             Dim flashresult = nl.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, T, 0.0#, proppack, Vz, Nothing, Pref)
             Pmax = flashresult.CalculatedPressure
@@ -1018,15 +1018,15 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            Dim maxitINT As Integer = CInt(proppack.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = CInt(proppack.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = CDbl(proppack.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = CDbl(proppack.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMII"))
+            Dim maxitEXT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMEI"))
+            Dim tolINT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFILT"))
+            Dim tolEXT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFELT"))
 
             n = UBound(Vz)
 
             Dim Vx(n), Vy(n), Vp(n), Vcalc, Vspec, T, x, x0, x00, fx, fx0, fx00, Tmin, Tmax As Double
-      
+
             Dim nl As New DWSIMDefault
             Dim flashresult = nl.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, P, 0.0#, proppack, Vz, Nothing, Tref)
             Tmin = flashresult.CalculatedTemperature

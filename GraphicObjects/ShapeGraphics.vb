@@ -1800,17 +1800,17 @@ Namespace GraphicObjects
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
             If Me.FlippedH Then
-                gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y))
-                gp.AddLine(CInt(X + Width), CInt(Y), CInt(X + Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
             Else
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X), CInt(Y))
-                gp.AddLine(CInt(X), CInt(Y), CInt(X), CInt(Y + Height))
-                gp.AddLine(CInt(X), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X + Width), CInt(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
             End If
 
             gp.CloseFigure()
@@ -1975,17 +1975,17 @@ Namespace GraphicObjects
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
             If Me.FlippedH Then
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X), CInt(Y))
-                gp.AddLine(CInt(X), CInt(Y), CInt(X), CInt(Y + Height))
-                gp.AddLine(CInt(X), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X + Width), CInt(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
             Else
-                gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y))
-                gp.AddLine(CInt(X + Width), CInt(Y), CInt(X + Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
             End If
 
             gp.CloseFigure()
@@ -2143,17 +2143,17 @@ Namespace GraphicObjects
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
             If Me.FlippedH Then
-                gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y))
-                gp.AddLine(CInt(X + Width), CInt(Y), CInt(X + Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
             Else
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X), CInt(Y))
-                gp.AddLine(CInt(X), CInt(Y), CInt(X), CInt(Y + Height))
-                gp.AddLine(CInt(X), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X + Width), CInt(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
             End If
 
             gp.CloseFigure()
@@ -2577,15 +2577,15 @@ Namespace GraphicObjects
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
             If Me.FlippedH = False Then
-                gp.AddLine(CInt(X), CInt(Y), CInt(X + Width), CInt(Y + 0.3 * Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.3 * Height), CInt(X + Width), CInt(Y + 0.7 * Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.7 * Height), CInt(X), CInt(Y + Height))
-                gp.AddLine(CInt(X), CInt(Y + Height), CInt(X), CInt(Y))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.3 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.7 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.7 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y))
             Else
-                gp.AddLine(CInt(X + Width), CInt(Y), CInt(X), CInt(Y + 0.3 * Height))
-                gp.AddLine(CInt(X), CInt(Y + 0.3 * Height), CInt(X), CInt(Y + 0.7 * Height))
-                gp.AddLine(CInt(X), CInt(Y + 0.7 * Height), CInt(X + Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X + Width), CInt(Y))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
             End If
 
             gp.CloseFigure()
@@ -2777,10 +2777,10 @@ Namespace GraphicObjects
             'g.DrawRectangle(myPen2, rect)
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-            gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y + 0.5 * Height))
-            gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
 
             gp.CloseFigure()
 
@@ -2950,10 +2950,10 @@ Namespace GraphicObjects
             'g.DrawRectangle(myPen, rect)
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-            gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y + 0.5 * Height))
-            gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
 
             gp.CloseFigure()
 
@@ -3115,21 +3115,21 @@ Namespace GraphicObjects
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
             If Me.FlippedH = False Then
-                gp.AddLine(CInt(X), CInt(Y + 0.35 * Height), CInt(X + 0.75 * Width), CInt(Y + 0.35 * Height))
-                gp.AddLine(CInt(X + 0.75 * Width), CInt(Y + 0.35 * Height), CInt(X + 0.75 * Width), CInt(Y + 0.25 * Height))
-                gp.AddLine(CInt(X + 0.75 * Width), CInt(Y + 0.25 * Height), CInt(X + Width), CInt(Y + 0.5 * Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.75 * Width), CInt(Y + 0.75 * Height))
-                gp.AddLine(CInt(X + 0.75 * Width), CInt(Y + 0.75 * Height), CInt(X + 0.75 * Width), CInt(Y + 0.65 * Height))
-                gp.AddLine(CInt(X + 0.75 * Width), CInt(Y + 0.65 * Height), CInt(X), CInt(Y + 0.65 * Height))
-                gp.AddLine(CInt(X), CInt(Y + 0.65 * Height), CInt(X), CInt(Y + 0.35 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height), Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.35 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.35 * Height), Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.25 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.25 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.75 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.75 * Height), Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.65 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.65 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.65 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.65 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height))
             Else
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.35 * Height), CInt(X + 0.25 * Width), CInt(Y + 0.35 * Height))
-                gp.AddLine(CInt(X + 0.25 * Width), CInt(Y + 0.35 * Height), CInt(X + 0.25 * Width), CInt(Y + 0.25 * Height))
-                gp.AddLine(CInt(X + 0.25 * Width), CInt(Y + 0.25 * Height), CInt(X), CInt(Y + 0.5 * Height))
-                gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.25 * Width), CInt(Y + 0.75 * Height))
-                gp.AddLine(CInt(X + 0.25 * Width), CInt(Y + 0.75 * Height), CInt(X + 0.25 * Width), CInt(Y + 0.65 * Height))
-                gp.AddLine(CInt(X + 0.25 * Width), CInt(Y + 0.65 * Height), CInt(X + Width), CInt(Y + 0.65 * Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.65 * Height), CInt(X + Width), CInt(Y + 0.35 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.35 * Height), Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.35 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.35 * Height), Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.25 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.25 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.75 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.75 * Height), Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.65 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.65 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.65 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.65 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.35 * Height))
             End If
 
             gp.CloseFigure()
@@ -3284,21 +3284,21 @@ Namespace GraphicObjects
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
             If Me.FlippedH = False Then
-                gp.AddLine(CInt(X), CInt(Y + 0.35 * Height), CInt(X + 0.75 * Width), CInt(Y + 0.35 * Height))
-                gp.AddLine(CInt(X + 0.75 * Width), CInt(Y + 0.35 * Height), CInt(X + 0.75 * Width), CInt(Y + 0.25 * Height))
-                gp.AddLine(CInt(X + 0.75 * Width), CInt(Y + 0.25 * Height), CInt(X + Width), CInt(Y + 0.5 * Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.75 * Width), CInt(Y + 0.75 * Height))
-                gp.AddLine(CInt(X + 0.75 * Width), CInt(Y + 0.75 * Height), CInt(X + 0.75 * Width), CInt(Y + 0.65 * Height))
-                gp.AddLine(CInt(X + 0.75 * Width), CInt(Y + 0.65 * Height), CInt(X), CInt(Y + 0.65 * Height))
-                gp.AddLine(CInt(X), CInt(Y + 0.65 * Height), CInt(X), CInt(Y + 0.35 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height), Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.35 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.35 * Height), Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.25 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.25 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.75 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.75 * Height), Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.65 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.65 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.65 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.65 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height))
             Else
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.35 * Height), CInt(X + 0.25 * Width), CInt(Y + 0.35 * Height))
-                gp.AddLine(CInt(X + 0.25 * Width), CInt(Y + 0.35 * Height), CInt(X + 0.25 * Width), CInt(Y + 0.25 * Height))
-                gp.AddLine(CInt(X + 0.25 * Width), CInt(Y + 0.25 * Height), CInt(X), CInt(Y + 0.5 * Height))
-                gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.25 * Width), CInt(Y + 0.75 * Height))
-                gp.AddLine(CInt(X + 0.25 * Width), CInt(Y + 0.75 * Height), CInt(X + 0.25 * Width), CInt(Y + 0.65 * Height))
-                gp.AddLine(CInt(X + 0.25 * Width), CInt(Y + 0.65 * Height), CInt(X + Width), CInt(Y + 0.65 * Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.65 * Height), CInt(X + Width), CInt(Y + 0.35 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.35 * Height), Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.35 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.35 * Height), Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.25 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.25 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.75 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.75 * Height), Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.65 * Height))
+                gp.AddLine(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.65 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.65 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.65 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.35 * Height))
             End If
 
             gp.CloseFigure()
@@ -3474,12 +3474,12 @@ Namespace GraphicObjects
             Dim rect As New Rectangle(X, Y, Width, Height)
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-            gp.AddLine(CInt(X), CInt(Y + 0.2 * Height), CInt(X + 0.5 * Width), CInt(Y + 0.5 * Height))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + 0.5 * Height), CInt(X + Width), CInt(Y + 0.2 * Height))
-            gp.AddLine(CInt(X + Width), CInt(Y + 0.2 * Height), CInt(X + Width), CInt(Y + 0.8 * Height))
-            gp.AddLine(CInt(X + Width), CInt(Y + 0.8 * Height), CInt(X + 0.5 * Width), CInt(Y + 0.5 * Height))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + 0.5 * Height), CInt(X), CInt(Y + 0.8 * Height))
-            gp.AddLine(CInt(X), CInt(Y + 0.8 * Height), CInt(X), CInt(Y + 0.2 * Height))
+            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.2 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.2 * Height))
+            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.2 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.8 * Height))
+            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.8 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.8 * Height))
+            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.8 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.2 * Height))
 
             gp.CloseFigure()
 
@@ -3635,15 +3635,15 @@ Namespace GraphicObjects
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
             If Me.FlippedH = False Then
-                gp.AddLine(CInt(X), CInt(Y + 0.3 * Height), CInt(X), CInt(Y + 0.7 * Height))
-                gp.AddLine(CInt(X), CInt(Y + 0.7 * Height), CInt(X + Width), CInt(Y + Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X + Width), CInt(Y))
-                gp.AddLine(CInt(X + Width), CInt(Y), CInt(X), CInt(Y + 0.3 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height))
             Else
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.3 * Height), CInt(X + Width), CInt(Y + 0.7 * Height))
-                gp.AddLine(CInt(X + Width), CInt(Y + 0.7 * Height), CInt(X), CInt(Y + Height))
-                gp.AddLine(CInt(X), CInt(Y + Height), CInt(X), CInt(Y))
-                gp.AddLine(CInt(X), CInt(Y), CInt(X + Width), CInt(Y + 0.3 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.7 * Height))
+                gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.7 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y))
+                gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.3 * Height))
             End If
 
             gp.CloseFigure()
@@ -4095,7 +4095,7 @@ Namespace GraphicObjects
             If SemiTransparent Then
                 alpha = 50
             End If
-         
+
             UpdateStatus(Me)
 
             Dim gContainer As Drawing2D.GraphicsContainer
@@ -4196,7 +4196,7 @@ Namespace GraphicObjects
 
             Dim myPen As New Pen(Color.FromArgb(If(SemiTransparent, 50, 255), Color.Red), 2)
             g.DrawEllipse(myPen, rect)
-      
+
             DrawTag(g, myMatrix)
 
             g.EndContainer(gContainer)
@@ -4646,7 +4646,7 @@ Namespace GraphicObjects
 
             Dim myPen As New Pen(Color.FromArgb(alpha, Color.SteelBlue), 2)
             g.DrawEllipse(myPen, rect)
-         
+
             DrawTag(g, myMatrix)
 
             g.EndContainer(gContainer)
@@ -5728,9 +5728,9 @@ Namespace GraphicObjects
                     g.FillEllipse(pthGrBrush, rect)
                 End If
             End If
-            g.DrawLine(myPen, CInt(X), CInt(Y + Height), CInt(X + (2 / 8) * Width), CInt(Y + (3 / 8) * Height))
-            g.DrawLine(myPen, CInt(X + (2 / 8) * Width), CInt(Y + (3 / 8) * Height), CInt(X + (6 / 8) * Width), CInt(Y + (5 / 8) * Height))
-            g.DrawLine(myPen, CInt(X + (6 / 8) * Width), CInt(Y + (5 / 8) * Height), CInt(X + Width), CInt(Y))
+            g.DrawLine(myPen, Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X + (2 / 8) * Width), Convert.ToInt32(Y + (3 / 8) * Height))
+            g.DrawLine(myPen, Convert.ToInt32(X + (2 / 8) * Width), Convert.ToInt32(Y + (3 / 8) * Height), Convert.ToInt32(X + (6 / 8) * Width), Convert.ToInt32(Y + (5 / 8) * Height))
+            g.DrawLine(myPen, Convert.ToInt32(X + (6 / 8) * Width), Convert.ToInt32(Y + (5 / 8) * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
 
             g.TextRenderingHint = Text.TextRenderingHint.SystemDefault
 
@@ -7555,7 +7555,7 @@ Namespace GraphicObjects
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
             gp.AddEllipse(rect)
-            gp.AddEllipse(CInt(X + 0.3 * Width), CInt(Y + 0.3 * Height), CInt(0.4 * Width), CInt(0.4 * Height))
+            gp.AddEllipse(Convert.ToInt32(X + 0.3 * Width), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(0.4 * Width), Convert.ToInt32(0.4 * Height))
             Dim rect2 As New Rectangle(X + 0.4 * Width, Y - 0.3 * Height, 0.2 * Width, 0.3 * Height)
             gp.AddRectangle(rect2)
 
@@ -7814,10 +7814,10 @@ Namespace GraphicObjects
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
 
-            gp.AddLine(CInt(X), CInt(Y), CInt(X + Width), CInt(Y))
-            gp.AddLine(CInt(X + Width), CInt(Y), CInt(X + Width), CInt(Y + Height))
-            gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X), CInt(Y + Height))
-            gp.AddLine(CInt(X), CInt(Y + Height), CInt(X), CInt(Y))
+            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y))
 
             gp.CloseFigure()
 
@@ -8040,10 +8040,10 @@ Namespace GraphicObjects
             g.DrawRectangle(myPen, rect)
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-            gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y + 0.5 * Height))
-            gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
 
             gp.CloseFigure()
 
@@ -8279,10 +8279,10 @@ Namespace GraphicObjects
             g.DrawRectangle(myPen, rect)
 
             Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-            gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y + 0.5 * Height))
-            gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-            gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+            gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
 
             gp.CloseFigure()
 
@@ -8609,15 +8609,15 @@ Namespace GraphicObjects
                     Dim strx As Single = (Me.Width - strdist.Width) / 2
                     Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
                     If Me.FlippedH = False Then
-                        gp.AddLine(CInt(X), CInt(Y), CInt(X + Width), CInt(Y + 0.3 * Height))
-                        gp.AddLine(CInt(X + Width), CInt(Y + 0.3 * Height), CInt(X + Width), CInt(Y + 0.7 * Height))
-                        gp.AddLine(CInt(X + Width), CInt(Y + 0.7 * Height), CInt(X), CInt(Y + Height))
-                        gp.AddLine(CInt(X), CInt(Y + Height), CInt(X), CInt(Y))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.3 * Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.7 * Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.7 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y))
                     Else
-                        gp.AddLine(CInt(X + Width), CInt(Y), CInt(X), CInt(Y + 0.3 * Height))
-                        gp.AddLine(CInt(X), CInt(Y + 0.3 * Height), CInt(X), CInt(Y + 0.7 * Height))
-                        gp.AddLine(CInt(X), CInt(Y + 0.7 * Height), CInt(X + Width), CInt(Y + Height))
-                        gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X + Width), CInt(Y))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
                     End If
                     gp.CloseFigure()
                     g.DrawPath(myPen, Me.GetRoundedLine(gp.PathPoints, 1))
@@ -8643,10 +8643,10 @@ Namespace GraphicObjects
                     Dim rect As New Rectangle(X, Y, Width, Height)
 
                     Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-                    gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                    gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y + 0.5 * Height))
-                    gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                    gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+                    gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                    gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+                    gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                    gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
                     gp.CloseFigure()
                     g.DrawPath(myPen, gp)
                     Dim strdist As SizeF = g.MeasureString(Me.Tag, New Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Pixel, 0, False), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
@@ -8683,10 +8683,10 @@ Namespace GraphicObjects
                     Dim myPen2 As New Pen(Color.White, 0)
                     Dim rect As New Rectangle(X, Y, Width, Height)
                     Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-                    gp.AddLine(CInt(X), CInt(Y), CInt(X + Width), CInt(Y))
-                    gp.AddLine(CInt(X + Width), CInt(Y), CInt(X + Width), CInt(Y + Height))
-                    gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X), CInt(Y + Height))
-                    gp.AddLine(CInt(X), CInt(Y + Height), CInt(X), CInt(Y))
+                    gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+                    gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                    gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                    gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y))
                     gp.CloseFigure()
 
                     g.DrawPath(myPenE, Me.GetRoundedLine(gp.PathPoints, 5))
@@ -8854,15 +8854,15 @@ Namespace GraphicObjects
                     Dim strx As Single = (Me.Width - strdist.Width) / 2
                     Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
                     If Me.FlippedH = False Then
-                        gp.AddLine(CInt(X), CInt(Y + 0.3 * Height), CInt(X), CInt(Y + 0.7 * Height))
-                        gp.AddLine(CInt(X), CInt(Y + 0.7 * Height), CInt(X + Width), CInt(Y + Height))
-                        gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X + Width), CInt(Y))
-                        gp.AddLine(CInt(X + Width), CInt(Y), CInt(X), CInt(Y + 0.3 * Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height))
                     Else
-                        gp.AddLine(CInt(X + Width), CInt(Y + 0.3 * Height), CInt(X + Width), CInt(Y + 0.7 * Height))
-                        gp.AddLine(CInt(X + Width), CInt(Y + 0.7 * Height), CInt(X), CInt(Y + Height))
-                        gp.AddLine(CInt(X), CInt(Y + Height), CInt(X), CInt(Y))
-                        gp.AddLine(CInt(X), CInt(Y), CInt(X + Width), CInt(Y + 0.3 * Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.7 * Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.7 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.3 * Height))
                     End If
                     gp.CloseFigure()
                     g.DrawPath(myPen, Me.GetRoundedLine(gp.PathPoints, 1))
@@ -8887,10 +8887,10 @@ Namespace GraphicObjects
                     Dim myPen2 As New Pen(Color.White, 0)
                     Dim rect As New Rectangle(X, Y, Width, Height)
                     Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-                    gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                    gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y + 0.5 * Height))
-                    gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                    gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+                    gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                    gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+                    gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                    gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
                     gp.CloseFigure()
 
                     g.DrawPath(myPen, gp)
@@ -8942,9 +8942,9 @@ Namespace GraphicObjects
                             g.FillEllipse(pthGrBrush, rect)
                         End If
                     End If
-                    g.DrawLine(myPen, CInt(X), CInt(Y + Height), CInt(X + (2 / 8) * Width), CInt(Y + (3 / 8) * Height))
-                    g.DrawLine(myPen, CInt(X + (2 / 8) * Width), CInt(Y + (3 / 8) * Height), CInt(X + (6 / 8) * Width), CInt(Y + (5 / 8) * Height))
-                    g.DrawLine(myPen, CInt(X + (6 / 8) * Width), CInt(Y + (5 / 8) * Height), CInt(X + Width), CInt(Y))
+                    g.DrawLine(myPen, Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X + (2 / 8) * Width), Convert.ToInt32(Y + (3 / 8) * Height))
+                    g.DrawLine(myPen, Convert.ToInt32(X + (2 / 8) * Width), Convert.ToInt32(Y + (3 / 8) * Height), Convert.ToInt32(X + (6 / 8) * Width), Convert.ToInt32(Y + (5 / 8) * Height))
+                    g.DrawLine(myPen, Convert.ToInt32(X + (6 / 8) * Width), Convert.ToInt32(Y + (5 / 8) * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
                     g.TextRenderingHint = Text.TextRenderingHint.SystemDefault
                     Dim strdist As SizeF = g.MeasureString(Me.Tag, New Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Pixel, 0, False), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
                     Dim strx As Single = (Me.Width - strdist.Width) / 2
@@ -8961,17 +8961,17 @@ Namespace GraphicObjects
                     Dim rect As New Rectangle(X, Y, Width, Height)
                     Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
                     If Me.FlippedH Then
-                        gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                        gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y))
-                        gp.AddLine(CInt(X + Width), CInt(Y), CInt(X + Width), CInt(Y + Height))
-                        gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                        gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
                     Else
-                        gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                        gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X), CInt(Y))
-                        gp.AddLine(CInt(X), CInt(Y), CInt(X), CInt(Y + Height))
-                        gp.AddLine(CInt(X), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                        gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X + Width), CInt(Y + 0.5 * Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
                     End If
                     gp.CloseFigure()
 
@@ -9002,17 +9002,17 @@ Namespace GraphicObjects
                     Dim rect As New Rectangle(X, Y, Width, Height)
                     Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
                     If Me.FlippedH Then
-                        gp.AddLine(CInt(X + Width), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                        gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X), CInt(Y))
-                        gp.AddLine(CInt(X), CInt(Y), CInt(X), CInt(Y + Height))
-                        gp.AddLine(CInt(X), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                        gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X + Width), CInt(Y + 0.5 * Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
                     Else
-                        gp.AddLine(CInt(X), CInt(Y + 0.5 * Height), CInt(X + 0.5 * Width), CInt(Y))
-                        gp.AddLine(CInt(X + 0.5 * Width), CInt(Y), CInt(X + Width), CInt(Y))
-                        gp.AddLine(CInt(X + Width), CInt(Y), CInt(X + Width), CInt(Y + Height))
-                        gp.AddLine(CInt(X + Width), CInt(Y + Height), CInt(X + 0.5 * Width), CInt(Y + Height))
-                        gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + Height), CInt(X), CInt(Y + 0.5 * Height))
+                        gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+                        gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
                     End If
                     gp.CloseFigure()
 
@@ -9043,7 +9043,7 @@ Namespace GraphicObjects
 
                     Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
                     gp.AddEllipse(rect)
-                    gp.AddEllipse(CInt(X + 0.3 * Width), CInt(Y + 0.3 * Height), CInt(0.4 * Width), CInt(0.4 * Height))
+                    gp.AddEllipse(Convert.ToInt32(X + 0.3 * Width), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(0.4 * Width), Convert.ToInt32(0.4 * Height))
                     Dim rect2 As New Rectangle(X + 0.4 * Width, Y - 0.3 * Height, 0.2 * Width, 0.3 * Height)
                     gp.AddRectangle(rect2)
                     gp.CloseFigure()
@@ -9536,12 +9536,12 @@ Namespace GraphicObjects
                     Dim rect As New Rectangle(X, Y, Width, Height)
 
                     Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-                    gp.AddLine(CInt(X), CInt(Y + 0.2 * Height), CInt(X + 0.5 * Width), CInt(Y + 0.5 * Height))
-                    gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + 0.5 * Height), CInt(X + Width), CInt(Y + 0.2 * Height))
-                    gp.AddLine(CInt(X + Width), CInt(Y + 0.2 * Height), CInt(X + Width), CInt(Y + 0.8 * Height))
-                    gp.AddLine(CInt(X + Width), CInt(Y + 0.8 * Height), CInt(X + 0.5 * Width), CInt(Y + 0.5 * Height))
-                    gp.AddLine(CInt(X + 0.5 * Width), CInt(Y + 0.5 * Height), CInt(X), CInt(Y + 0.8 * Height))
-                    gp.AddLine(CInt(X), CInt(Y + 0.8 * Height), CInt(X), CInt(Y + 0.2 * Height))
+                    gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.2 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + 0.5 * Height))
+                    gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.2 * Height))
+                    gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.2 * Height), Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.8 * Height))
+                    gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.8 * Height), Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + 0.5 * Height))
+                    gp.AddLine(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + 0.5 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.8 * Height))
+                    gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + 0.8 * Height), Convert.ToInt32(X), Convert.ToInt32(Y + 0.2 * Height))
                     gp.CloseFigure()
                     g.DrawPath(myPen, Me.GetRoundedLine(gp.PathPoints, 1))
                     Dim strdist As SizeF = g.MeasureString(Me.Tag, New Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Pixel, 0, False), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))

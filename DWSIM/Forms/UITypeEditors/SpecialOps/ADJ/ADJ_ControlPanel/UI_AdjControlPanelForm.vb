@@ -416,7 +416,7 @@ Final3:
                     j = 0
                     Do
                         If Double.TryParse(data(j, k), New Double) Then
-                            .Item(k).Cells(j).Value = Format(CDbl(data(j, k)), nf)
+                            .Item(k).Cells(j).Value = Format(Convert.ToDouble(data(j, k)), nf)
                         Else
                             .Item(k).Cells(j).Value = data(j, k)
                         End If
@@ -585,12 +585,12 @@ Final3:
                 .XAxis.Scale.MinorStep = 1
                 .XAxis.Scale.MajorStep = 1
                 .CurveList.Clear()
-                With .AddCurve("Set-point" & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, Me.su) & ")", New Double() {1}, New Double() {CDbl(py1(0))}, Color.SteelBlue, ZedGraph.SymbolType.Circle)
+                With .AddCurve("Set-point" & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, Me.su) & ")", New Double() {1}, New Double() {Convert.ToDouble(py1(0))}, Color.SteelBlue, ZedGraph.SymbolType.Circle)
                     .Color = Color.SteelBlue
                     .Line.IsSmooth = False
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
-                With .AddCurve(DWSIM.App.GetLocalString("VarivelControlada") & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, Me.su) & ")", New Double() {1}, New Double() {CDbl(py2(0))}, Color.SpringGreen, ZedGraph.SymbolType.Circle)
+                With .AddCurve(DWSIM.App.GetLocalString("VarivelControlada") & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, Me.su) & ")", New Double() {1}, New Double() {Convert.ToDouble(py2(0))}, Color.SpringGreen, ZedGraph.SymbolType.Circle)
                     .Color = Color.SpringGreen
                     .Line.IsSmooth = False
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid

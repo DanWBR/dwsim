@@ -290,7 +290,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Select Case [property].ToLower
                 Case "compressibilityfactor"
                     result = m_pr.Z_SRK(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC, RET_VPC, RET_VW, state)
-                    If CInt(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
                         result -= Me.AUX_CM(phase) / 8.314 / T * P
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
@@ -418,11 +418,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             If phaseID = 3 Or phaseID = 4 Or phaseID = 5 Or phaseID = 6 Then
 
-                If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                     Dim val As Double
                     val = m_pr.Z_SRK(T, P, RET_VMOL(Phase), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
                     val = (8.314 * val * T / P)
-                    If CInt(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
                         val -= Me.AUX_CM(Phase)
                     End If
                     val = 1 / val * Me.AUX_MMM(dwpl) / 1000
@@ -437,7 +437,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 result = Me.m_pr.S_SRK_MIX("L", T, P, RET_VMOL(dwpl), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, dwpl))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = Me.m_pr.Z_SRK(T, P, RET_VMOL(dwpl), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
-                If CInt(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
+                If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
                     result -= Me.AUX_CM(dwpl) / 8.314 / T * P
                 End If
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
@@ -465,7 +465,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 result = Me.m_pr.S_SRK_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor))
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = Me.m_pr.Z_SRK(T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC, RET_VPC, RET_VW, "V")
-                If CInt(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
+                If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
                     result -= Me.AUX_CM(dwpl) / 8.314 / T * P
                 End If
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
@@ -1737,7 +1737,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Select Case phase
                 Case Phase.Liquid
                     key = "1"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -1747,7 +1747,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case Phase.Aqueous
                     key = "6"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -1757,7 +1757,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case Phase.Liquid1
                     key = "3"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -1767,7 +1767,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case Phase.Liquid2
                     key = "4"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -1777,7 +1777,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case Phase.Liquid3
                     key = "5"
-                    If CInt(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
+                    If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
@@ -1803,7 +1803,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             val = m_pr.Z_SRK(T, P, RET_VMOL(Phase.Vapor), RET_VKij(), RET_VTC, RET_VPC, RET_VW, "V")
             val = (8.314 * val * T / P)
-            If CInt(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
+            If Convert.ToInt32(Me.Parameters("PP_USE_EOS_VOLUME_SHIFT")) = 1 Then
                 val -= Me.AUX_CM(Phase.Vapor)
             End If
             val = 1 / val * Me.AUX_MMM(Phase.Vapor) / 1000

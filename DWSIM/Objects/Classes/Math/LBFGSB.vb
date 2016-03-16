@@ -744,11 +744,11 @@ Label_07E7:
                         Me.lbfgsbdcstep(stx, fx, dx, sty, fy, dy, stp, f, g, brackt, num18, num19)
                     End If
                     If brackt Then
-                        If (Math.Abs(CDbl((sty - stx))) >= (0.66 * num21)) Then
+                        If (Math.Abs(Convert.ToDouble((sty - stx))) >= (0.66 * num21)) Then
                             stp = (stx + (0.5 * (sty - stx)))
                         End If
                         num21 = num20
-                        num20 = Math.Abs(CDbl((sty - stx)))
+                        num20 = Math.Abs(Convert.ToDouble((sty - stx)))
                     End If
                     If brackt Then
                         num18 = Math.Min(stx, sty)
@@ -810,7 +810,7 @@ Label_07E7:
                 num4 = (num2 / num3)
                 num7 = (stx + (num4 * (stp - stx)))
                 num9 = (stx + (((dx / (((fx - fp) / (stp - stx)) + dx)) / 2) * (stp - stx)))
-                If (Math.Abs(CDbl((num7 - stx))) < Math.Abs(CDbl((num9 - stx)))) Then
+                If (Math.Abs(Convert.ToDouble((num7 - stx))) < Math.Abs(Convert.ToDouble((num9 - stx)))) Then
                     num8 = num7
                 Else
                     num8 = (num7 + ((num9 - num7) / 2))
@@ -828,7 +828,7 @@ Label_07E7:
                 num4 = (num2 / num3)
                 num7 = (stp + (num4 * (stx - stp)))
                 num9 = (stp + ((dp / (dp - dx)) * (stx - stp)))
-                If (Math.Abs(CDbl((num7 - stp))) > Math.Abs(CDbl((num9 - stp)))) Then
+                If (Math.Abs(Convert.ToDouble((num7 - stp))) > Math.Abs(Convert.ToDouble((num9 - stp)))) Then
                     num8 = num7
                 Else
                     num8 = num9
@@ -837,7 +837,7 @@ Label_07E7:
             ElseIf (Math.Abs(dp) < Math.Abs(dx)) Then
                 num10 = ((((3 * (fx - fp)) / (stp - stx)) + dx) + dp)
                 num5 = Math.Max(Math.Abs(num10), Math.Max(Math.Abs(dx), Math.Abs(dp)))
-                num = (num5 * Math.Sqrt(Math.Max(CDbl(0), CDbl((Math.Sqrt((num10 / num5)) - ((dx / num5) * (dp / num5)))))))
+                num = (num5 * Math.Sqrt(Math.Max(Convert.ToDouble(0), Convert.ToDouble((Math.Sqrt((num10 / num5)) - ((dx / num5) * (dp / num5)))))))
                 If (stp > stx) Then
                     num = -num
                 End If
@@ -853,7 +853,7 @@ Label_07E7:
                 End If
                 num9 = (stp + ((dp / (dp - dx)) * (stx - stp)))
                 If brackt Then
-                    If (Math.Abs(CDbl((num7 - stp))) < Math.Abs(CDbl((num9 - stp)))) Then
+                    If (Math.Abs(Convert.ToDouble((num7 - stp))) < Math.Abs(Convert.ToDouble((num9 - stp)))) Then
                         num8 = num7
                     Else
                         num8 = num9
@@ -864,7 +864,7 @@ Label_07E7:
                         num8 = Math.Max((stp + (0.66 * (sty - stp))), num8)
                     End If
                 Else
-                    If (Math.Abs(CDbl((num7 - stp))) > Math.Abs(CDbl((num9 - stp)))) Then
+                    If (Math.Abs(Convert.ToDouble((num7 - stp))) > Math.Abs(Convert.ToDouble((num9 - stp)))) Then
                         num8 = num7
                     Else
                         num8 = num9

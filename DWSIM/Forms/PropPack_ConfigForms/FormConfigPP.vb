@@ -549,7 +549,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
                 End Select
             ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
                 Dim ppu As DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage = _pp
@@ -560,7 +560,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
                 End Select
             ElseIf TypeOf _pp Is UNIFACPropertyPackage Then
                 Dim ppu As DWSIM.SimulationObjects.PropertyPackages.UNIFACPropertyPackage = _pp
@@ -571,7 +571,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
                 End Select
             ElseIf TypeOf _pp Is UNIFACLLPropertyPackage Then
                 Dim ppu As DWSIM.SimulationObjects.PropertyPackages.UNIFACLLPropertyPackage = _pp
@@ -582,7 +582,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
                 End Select
             ElseIf TypeOf _pp Is MODFACPropertyPackage Then
                 Dim ppu As DWSIM.SimulationObjects.PropertyPackages.MODFACPropertyPackage = _pp
@@ -593,7 +593,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
                 End Select
             End If
             If Not _form Is Nothing Then

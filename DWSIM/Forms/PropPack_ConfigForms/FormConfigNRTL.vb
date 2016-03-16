@@ -296,7 +296,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                 Case 2
                     oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                     newvalue = Convert.ToDouble(value)
-                    ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                    ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
             End Select
             If Not _form Is Nothing Then
                 _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,

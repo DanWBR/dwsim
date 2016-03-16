@@ -421,8 +421,8 @@ Namespace DWSIM.MathEx.GammaFunctions
             q = Math.Abs(x)
             If q > 33.0R Then
                 If x < 0.0R Then
-                    p = CInt(Math.Floor(q))
-                    i = CInt(Math.Round(p))
+                    p = Convert.ToInt32(Math.Floor(q))
+                    i = Convert.ToInt32(Math.Round(p))
                     If i Mod 2 = 0 Then
                         sgngam = -1
                     End If
@@ -540,8 +540,8 @@ Namespace DWSIM.MathEx.GammaFunctions
             If x < -34.0R Then
                 q = -x
                 w = lngamma(q, tmp)
-                p = CInt(Math.Floor(q))
-                i = CInt(Math.Round(p))
+                p = Convert.ToInt32(Math.Floor(q))
+                i = Convert.ToInt32(Math.Round(p))
                 If i Mod 2 = 0 Then
                     sgngam = -1
                 Else

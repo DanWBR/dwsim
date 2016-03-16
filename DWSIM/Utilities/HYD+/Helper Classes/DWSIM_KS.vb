@@ -54,9 +54,9 @@ Namespace DWSIM.Utilities.HYD
             If id = 16 Then i = 22
             If id = 15 Then i = 23
             If id = 38 Then i = 24
-            epsilon = CDbl(am.MAT_VDWP_PP(i, 1)) * k
-            sigma = CDbl(am.MAT_VDWP_PP(i, 2)) * 0.0000000001
-            a = CDbl(am.MAT_VDWP_PP(i, 3)) * 0.0000000001
+            epsilon = Convert.ToDouble(am.MAT_VDWP_PP(i, 1)) * k
+            sigma = Convert.ToDouble(am.MAT_VDWP_PP(i, 2)) * 0.0000000001
+            a = Convert.ToDouble(am.MAT_VDWP_PP(i, 3)) * 0.0000000001
 
             If estrutura = "sI" And cela = 1 Then
                 Rcell1 = 7.95 / 2 * 0.0000000001
@@ -129,20 +129,20 @@ Namespace DWSIM.Utilities.HYD
             If id = 16 Then i = 22
             If id = 15 Then i = 23
             If id = 38 Then i = 24
-            epsilon = (CDbl(am.MAT_KLAUDASANDLER(i, 1)) * CDbl(am.MAT_KLAUDASANDLER(25, 1))) ^ 0.5 '* k
-            sigma = (CDbl(am.MAT_KLAUDASANDLER(i, 2)) + CDbl(am.MAT_KLAUDASANDLER(25, 2))) / 2 '* 0.0000000001
-            a = (CDbl(am.MAT_KLAUDASANDLER(i, 3)) + CDbl(am.MAT_KLAUDASANDLER(25, 3))) / 2 '* 0.0000000001
+            epsilon = (Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 1)) * Convert.ToDouble(am.MAT_KLAUDASANDLER(25, 1))) ^ 0.5 '* k
+            sigma = (Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 2)) + Convert.ToDouble(am.MAT_KLAUDASANDLER(25, 2))) / 2 '* 0.0000000001
+            a = (Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 3)) + Convert.ToDouble(am.MAT_KLAUDASANDLER(25, 3))) / 2 '* 0.0000000001
 
             If estrutura = "sI" And cela = 1 Then i = 10
             If estrutura = "sI" And cela = 2 Then i = 11
             If estrutura = "sII" And cela = 1 Then i = 12
             If estrutura = "sII" And cela = 2 Then i = 13
-            Rcell1 = CDbl(am.MAT_KLAUDASANDLER(i, 2)) '* 0.0000000001
-            Rcell2 = CDbl(am.MAT_KLAUDASANDLER(i, 3)) '* 0.0000000001
-            Rcell3 = CDbl(am.MAT_KLAUDASANDLER(i, 4)) '* 0.0000000001
-            z1 = CDbl(am.MAT_KLAUDASANDLER(i, 5))
-            z2 = CDbl(am.MAT_KLAUDASANDLER(i, 6))
-            z3 = CDbl(am.MAT_KLAUDASANDLER(i, 7))
+            Rcell1 = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 2)) '* 0.0000000001
+            Rcell2 = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 3)) '* 0.0000000001
+            Rcell3 = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 4)) '* 0.0000000001
+            z1 = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 5))
+            z2 = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 6))
+            z3 = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 7))
 
             delta1 = (Rcell1 - a) / 101
             delta2 = (Rcell2 - a) / 101
@@ -241,10 +241,10 @@ Namespace DWSIM.Utilities.HYD
             If id = 15 Then i = 35
             If id = 38 Then i = 36
             Try
-                tmp(0) = CDbl(am.MAT_KLAUDASANDLER(i, 1))
-                tmp(1) = CDbl(am.MAT_KLAUDASANDLER(i, 2))
-                tmp(2) = CDbl(am.MAT_KLAUDASANDLER(i, 3))
-                tmp(3) = CDbl(am.MAT_KLAUDASANDLER(i, 4))
+                tmp(0) = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 1))
+                tmp(1) = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 2))
+                tmp(2) = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 3))
+                tmp(3) = Convert.ToDouble(am.MAT_KLAUDASANDLER(i, 4))
             Catch
                 tmp(0) = -1.0E+32
                 tmp(1) = -1.0E+32
@@ -319,7 +319,7 @@ Namespace DWSIM.Utilities.HYD
                     i = i + 1
                 Loop Until i = n + 1
             End If
-            
+
 
             'PRSV
 
@@ -630,10 +630,10 @@ Namespace DWSIM.Utilities.HYD
                     If Vids(i) = 4 Then j = 52
                     If Vids(i) = 38 Then j = 53
                     If Vids(i) = 16 Or Vids(i) = 3 Or Vids(i) = 4 Or Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 15 Or Vids(i) = 14 Then
-                        AsI += VsI(i) * CDbl(am.MAT_KLAUDASANDLER(j, 2))
-                        BsI += VsI(i) * CDbl(am.MAT_KLAUDASANDLER(j, 3))
-                        CsI += VsI(i) * CDbl(am.MAT_KLAUDASANDLER(j, 4))
-                        DsI += VsI(i) * CDbl(am.MAT_KLAUDASANDLER(j, 5)) * 0.001
+                        AsI += VsI(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 2))
+                        BsI += VsI(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 3))
+                        CsI += VsI(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 4))
+                        DsI += VsI(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 5)) * 0.001
                     End If
                     i = i + 1
                 Loop Until i = n + 1
@@ -732,10 +732,10 @@ Namespace DWSIM.Utilities.HYD
                     If Vids(i) = 4 Then j = 52
                     If Vids(i) = 38 Then j = 53
                     If Vids(i) = 16 Or Vids(i) = 3 Or Vids(i) = 4 Or Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 15 Or Vids(i) = 14 Then
-                        AsII += VsII(i) * CDbl(am.MAT_KLAUDASANDLER(j, 2))
-                        BsII += VsII(i) * CDbl(am.MAT_KLAUDASANDLER(j, 3))
-                        CsII += VsII(i) * CDbl(am.MAT_KLAUDASANDLER(j, 4))
-                        DsII += VsII(i) * CDbl(am.MAT_KLAUDASANDLER(j, 5)) * 0.001
+                        AsII += VsII(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 2))
+                        BsII += VsII(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 3))
+                        CsII += VsII(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 4))
+                        DsII += VsII(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 5)) * 0.001
                     End If
                     i = i + 1
                 Loop Until i = n + 1
@@ -1274,73 +1274,73 @@ STEP2:
 
             Else
 
-            'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
+                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
-            Dim fresult As Object = unfPP.FlashBase.Flash_PT(Vy, P, T, unfPP)
-            If fresult(0) > 0.0# Then
-                For i = 0 To n
-                    Ki(i) = fresult(3)(i) / fresult(2)(i)
-                    If Double.IsNaN(Ki(i)) Then Ki(i) = Double.PositiveInfinity
-                Next
-            Else
-                For i = 0 To n
-                    Ki(i) = Double.PositiveInfinity
-                Next
-            End If
-            i = 0
-            Do
-                If i <> pos Then Vxaq(i) = PHIV(i) / (H(i) * Math.Exp(ZLinf(i)))
-                If H(i) = 101325.0# Then
-                    Vxaq(i) = 0.0#
+                Dim fresult As Object = unfPP.FlashBase.Flash_PT(Vy, P, T, unfPP)
+                If fresult(0) > 0.0# Then
+                    For i = 0 To n
+                        Ki(i) = fresult(3)(i) / fresult(2)(i)
+                        If Double.IsNaN(Ki(i)) Then Ki(i) = Double.PositiveInfinity
+                    Next
+                Else
+                    For i = 0 To n
+                        Ki(i) = Double.PositiveInfinity
+                    Next
                 End If
-                If Vids(i) <> 100 And Vids(i) <> 13 Then
-                    VxHC(i) = Vy(i) / Ki(i)
-                End If
-                i = i + 1
-            Loop Until i = n + 1
+                i = 0
+                Do
+                    If i <> pos Then Vxaq(i) = PHIV(i) / (H(i) * Math.Exp(ZLinf(i)))
+                    If H(i) = 101325.0# Then
+                        Vxaq(i) = 0.0#
+                    End If
+                    If Vids(i) <> 100 And Vids(i) <> 13 Then
+                        VxHC(i) = Vy(i) / Ki(i)
+                    End If
+                    i = i + 1
+                Loop Until i = n + 1
 
                 Dim sum_vxaq = 0.0#
                 Dim sum_vxhc = 0.0#
-            i = 0
-            Do
-                sum_vxhc += VxHC(i)
-                i = i + 1
-            Loop Until i = n + 1
+                i = 0
+                Do
+                    sum_vxhc += VxHC(i)
+                    i = i + 1
+                Loop Until i = n + 1
 
-            i = 0
-            Do
-                If Vids(i) = 100 Or Vids(i) = 13 Then
-                    Vxaq(i) = Vz(i) / (1 - sum) * (1 - sum_vxaq)
-                End If
-                i = i + 1
-            Loop Until i = n + 1
+                i = 0
+                Do
+                    If Vids(i) = 100 Or Vids(i) = 13 Then
+                        Vxaq(i) = Vz(i) / (1 - sum) * (1 - sum_vxaq)
+                    End If
+                    i = i + 1
+                Loop Until i = n + 1
 
-            i = 0
-            Do
-                If sum_vxhc <> 0.0# Then VxHC(i) = VxHC(i) / sum_vxhc
-                i = i + 1
-            Loop Until i = n + 1
+                i = 0
+                Do
+                    If sum_vxhc <> 0.0# Then VxHC(i) = VxHC(i) / sum_vxhc
+                    i = i + 1
+                Loop Until i = n + 1
 
-            Dim WAC As Double = unf.GAMMA(T, Vxaq, unfPP.RET_VIDS, unfPP.RET_VQ, unfPP.RET_VR, pos)
+                Dim WAC As Double = unf.GAMMA(T, Vxaq, unfPP.RET_VIDS, unfPP.RET_VQ, unfPP.RET_VR, pos)
 
-            'CALCULO DA DEPRESSÃO NO PONTO DE FUSÃO DA ÁGUA
-            Tnfp = 273.15
-            DHm = 6001700.0 / 1000
-            DT = R * Tnfp ^ 2 / DHm * Math.Log(Vxaq(pos) * WAC)
-            Td = DT + Tnfp
+                'CALCULO DA DEPRESSÃO NO PONTO DE FUSÃO DA ÁGUA
+                Tnfp = 273.15
+                DHm = 6001700.0 / 1000
+                DT = R * Tnfp ^ 2 / DHm * Math.Log(Vxaq(pos) * WAC)
+                Td = DT + Tnfp
 
-            'CALCULO DO VOLUME MOLAR DO GELO
-            VMG = 0.00001912 + 0.0000000008387 * T + 0.000000000004016 * T ^ 2
+                'CALCULO DO VOLUME MOLAR DO GELO
+                VMG = 0.00001912 + 0.0000000008387 * T + 0.000000000004016 * T ^ 2
 
-            'CALCULO DA FUGACIDADE DA ÁGUA NO GELO
-            FG = Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T) * Math.Exp((VMG / (R * T) * (P - Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T))))
+                'CALCULO DA FUGACIDADE DA ÁGUA NO GELO
+                FG = Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T) * Math.Exp((VMG / (R * T) * (P - Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T))))
 
-            'CALCULO DA FUGACIDADE DA ÁGUA NA Phase LÍQUIDA
-            act = WAC
-            FL = Vxaq(pos) * act * Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 7.6537 - 0.0161277 * T) * Math.Exp((VLW / (R * T) * (P - Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 2.9446 - 0.0161266 * T))))
+                'CALCULO DA FUGACIDADE DA ÁGUA NA Phase LÍQUIDA
+                act = WAC
+                FL = Vxaq(pos) * act * Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 7.6537 - 0.0161277 * T) * Math.Exp((VLW / (R * T) * (P - Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 2.9446 - 0.0161266 * T))))
 
-            If T < Td Then FGAG = FG
-            If T > Td Then FGAG = FL
+                If T < Td Then FGAG = FG
+                If T > Td Then FGAG = FL
 
             End If
 
@@ -1436,10 +1436,10 @@ STEP2:
                     If Vids(i) = 4 Then j = 52
                     If Vids(i) = 38 Then j = 53
                     If Vids(i) = 16 Or Vids(i) = 3 Or Vids(i) = 4 Or Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 15 Or Vids(i) = 14 Then
-                        AsI += VsI(i) * CDbl(am.MAT_KLAUDASANDLER(j, 2))
-                        BsI += VsI(i) * CDbl(am.MAT_KLAUDASANDLER(j, 3))
-                        CsI += VsI(i) * CDbl(am.MAT_KLAUDASANDLER(j, 4))
-                        DsI += VsI(i) * CDbl(am.MAT_KLAUDASANDLER(j, 5)) * 0.001
+                        AsI += VsI(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 2))
+                        BsI += VsI(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 3))
+                        CsI += VsI(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 4))
+                        DsI += VsI(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 5)) * 0.001
                     End If
                     i = i + 1
                 Loop Until i = n + 1
@@ -1540,10 +1540,10 @@ STEP2:
                     If Vids(i) = 4 Then j = 52
                     If Vids(i) = 38 Then j = 53
                     If Vids(i) = 16 Or Vids(i) = 3 Or Vids(i) = 4 Or Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 15 Or Vids(i) = 14 Then
-                        AsII += VsII(i) * CDbl(am.MAT_KLAUDASANDLER(j, 2))
-                        BsII += VsII(i) * CDbl(am.MAT_KLAUDASANDLER(j, 3))
-                        CsII += VsII(i) * CDbl(am.MAT_KLAUDASANDLER(j, 4))
-                        DsII += VsII(i) * CDbl(am.MAT_KLAUDASANDLER(j, 5)) * 0.001
+                        AsII += VsII(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 2))
+                        BsII += VsII(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 3))
+                        CsII += VsII(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 4))
+                        DsII += VsII(i) * Convert.ToDouble(am.MAT_KLAUDASANDLER(j, 5)) * 0.001
                     End If
                     i = i + 1
                 Loop Until i = n + 1
