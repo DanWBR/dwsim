@@ -1,0 +1,20 @@
+pyeq2	10.1	2013	James R. Phillips	https://code.google.com/p/pyeq2/	BSDv3	http://opensource.org/licenses/BSD-3-Clause
+IPOPT	3.9.2	2011	COIN-OR	https://projects.coin-or.org/Ipopt	Eclipse Public License	http://www.eclipse.org/legal/epl-v10.html
+lp_solve	5.5	2009	ichel Berkelaar, Kjell Eikland, Peter Notebaert	http://lpsolve.sourceforge.net	LGPLv2	http://www.gnu.org/licenses/lgpl.html	
+FPROPS	r4057	2011	ASCEND Project	http://ascend4.org/FPROPS	GPLv3	http://www.gnu.org/licenses/gpl.html
+ChemSep Database	6.96	2013	Harry Kooijman, Ross Taylor	http://www.chemsep.org	Perl Artistic License v2	http://www.perlfoundation.org/artistic_license_2_0
+Flee	0.9.14	2009	Eugene Ciloci	https://flee.codeplex.com	LGPLv2	http://www.gnu.org/licenses/lgpl.html
+CUDAfy	1.25.4963.10126	2013	Hybrid DSP	https://cudafy.codeplex.com	LGPLv2	http://www.gnu.org/licenses/lgpl.html
+DotNumerics	1.0	2009	Jose Antonio De Santiago Castillo	http://www.dotnumerics.com	GPLv3	http://www.gnu.org/licenses/gpl.html 
+CSIPOPT	1.0	2012	Anders Gustafsson, Cureos AB	https://github.com/cureos/csipopt	Eclipse Public License	http://www.eclipse.org/legal/epl-v10.html
+NetOffice	1.6	2011	Sebastian Lange	https://netoffice.codeplex.com/	MIT License	https://netoffice.codeplex.com/license
+FileHelpers	1.6	2007	Marcos Meli	https://sourceforge.net/projects/filehelpers	LGPLv2	http://www.gnu.org/licenses/lgpl.html
+SharpZipLib	0.85.4.369	2010	IC#Code	http://www.icsharpcode.net/OpenSource/SharpZipLib	GPLv2	http://www.gnu.org/licenses/gpl.html
+IKVM	0.44.0.5	2011	Jeroen Frijters	http://www.ikvm.net	IKVM License	http://sourceforge.net/apps/mediawiki/ikvm/index.php?title=License
+JCosmo	1.0	2011	Rafael de Pelegrini Soares, Renan Pereira Gerber	https://code.google.com/p/jcosmo/	LGPLv2	http://www.gnu.org/licenses/lgpl.html
+Indigo	1.1	2013	GGA Software Services LLC	http://www.ggasoftware.com/opensource/indigo	GPLv3	http://www.gnu.org/licenses/gpl.html
+Lua	5.1	2013	Lua.org, PUC-Rio	http://www.lua.org	MIT License	http://www.opensource.org/licenses/mit-license.html)
+Nini	1.1	2010	Brent R. Matzelle	https://sourceforge.net/projects/nini	MIT License	http://www.opensource.org/licenses/mit-license.html
+SyntaxBox	1.4.10.17492	2010	Roger Alsing	https://syntaxbox.codeplex.com	LGPLv2	http://www.gnu.org/licenses/lgpl.html
+DockPanel	2.7	2013	DockPanel Project	https://sourceforge.net/projects/dockpanel	MIT License	http://www.opensource.org/licenses/mit-license.html
+ZedGraph	5.1.0.32336	2005	John Champion	https://sourceforge.net/projects/zedgraph	LGPLv2	http://www.gnu.org/licenses/lgpl.html

@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnDeleteCase.Text" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="btnSaveCase.Text" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="btnCopyCase.Text" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="btnNewCase.Text" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 120</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Fälle</value>
+  </data>
+  <data name="tbCaseDesc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 61</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Beschreib.</value>
+  </data>
+  <data name="tbCaseName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 20</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 120</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Name und Beschreibung</value>
+  </data>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Objekt</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Eigenschaft</value>
+  </data>
+  <data name="Column6.HeaderText" xml:space="preserve">
+    <value>Untergrenze</value>
+  </data>
+  <data name="Column7.HeaderText" xml:space="preserve">
+    <value>Obergrenze</value>
+  </data>
+  <data name="Column10.HeaderText" xml:space="preserve">
+    <value>Startwert</value>
+  </data>
+  <data name="Column5.HeaderText" xml:space="preserve">
+    <value>akt. Wert</value>
+  </data>
+  <data name="Column9.HeaderText" xml:space="preserve">
+    <value>Einheit</value>
+  </data>
+  <data name="dgVariables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>689, 146</value>
+  </data>
+  <data name="tsbAddVar.ToolTipText" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="tsbDelVar.ToolTipText" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>689, 25</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>695, 190</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Variablen</value>
+  </data>
+  <data name="rbVariable.Text" xml:space="preserve">
+    <value>Variable</value>
+  </data>
+  <data name="rbExpression.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 17</value>
+  </data>
+  <data name="rbExpression.Text" xml:space="preserve">
+    <value>Ausdruck</value>
+  </data>
+  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 23</value>
+  </data>
+  <data name="rbMinimize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 17</value>
+  </data>
+  <data name="rbMinimize.Text" xml:space="preserve">
+    <value>Minimierung</value>
+  </data>
+  <data name="rbMaximize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>90, 3</value>
+  </data>
+  <data name="rbMaximize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 17</value>
+  </data>
+  <data name="rbMaximize.Text" xml:space="preserve">
+    <value>Maximierung</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Toleranz</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Maximale Iterationsschritte</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Zielfunktion</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Optimierungstyp</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>695, 72</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 50</value>
+  </data>
+  <data name="btnClear.Text" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="btnVerify.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 18</value>
+  </data>
+  <data name="btnVerify.Text" xml:space="preserve">
+    <value>Prüfen</value>
+  </data>
+  <data name="tbCurrentValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 82</value>
+  </data>
+  <data name="tbCurrentValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 20</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>aktueller Wert</value>
+  </data>
+  <data name="tbExpression.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 18</value>
+  </data>
+  <data name="tbExpression.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 58</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 17</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Ausdruck</value>
+  </data>
+  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 393</value>
+  </data>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 109</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Ausdruck</value>
+  </data>
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 47</value>
+  </data>
+  <data name="tbH.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 44</value>
+  </data>
+  <data name="tbBarrierMultiplier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 67</value>
+  </data>
+  <data name="rb4PointDeriv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 45</value>
+  </data>
+  <data name="rb4PointDeriv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="rb4PointDeriv.Text" xml:space="preserve">
+    <value>4-Punkte</value>
+  </data>
+  <data name="rb2PointDeriv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 45</value>
+  </data>
+  <data name="rb2PointDeriv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="rb2PointDeriv.Text" xml:space="preserve">
+    <value>2-Punkte</value>
+  </data>
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 70</value>
+  </data>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Dämpfung</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 47</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>Numerische Abw.</value>
+  </data>
+  <data name="ComboBox1.Items" xml:space="preserve">
+    <value>Brent (unbeschränkt)</value>
+  </data>
+  <data name="ComboBox1.Items1" xml:space="preserve">
+    <value>Brent (beschränkt)</value>
+  </data>
+  <data name="ComboBox1.Items2" xml:space="preserve">
+    <value>Limited Memory BFGS 1 (unbeschränkt)</value>
+  </data>
+  <data name="ComboBox1.Items3" xml:space="preserve">
+    <value>Limited Memory BFGS 1 (beschränkt)</value>
+  </data>
+  <data name="ComboBox1.Items4" xml:space="preserve">
+    <value>Truncated Newton (unbeschränkt)</value>
+  </data>
+  <data name="ComboBox1.Items5" xml:space="preserve">
+    <value>Nelder-Mead Simplex Downhill (unbeschränkt)</value>
+  </data>
+  <data name="ComboBox1.Items6" xml:space="preserve">
+    <value>Limited Memory BFGS 2 (unbeschränkt)</value>
+  </data>
+  <data name="ComboBox1.Items7" xml:space="preserve">
+    <value>Truncated Newton (beschränkt)</value>
+  </data>
+  <data name="ComboBox1.Items8" xml:space="preserve">
+    <value>Nelder-Mead Simplex Downhill (beschränkt)</value>
+  </data>
+  <data name="ComboBox1.Items9" xml:space="preserve">
+    <value>Limited Memory BFGS 2 (beschränkt)</value>
+  </data>
+  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 21</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Lösungsmethode</value>
+  </data>
+  <data name="btnRun.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 97</value>
+  </data>
+  <data name="btnRun.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 23</value>
+  </data>
+  <data name="btnRun.Text" xml:space="preserve">
+    <value>Optimieren</value>
+  </data>
+  <data name="btnAbort.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 97</value>
+  </data>
+  <data name="btnAbort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 23</value>
+  </data>
+  <data name="btnAbort.Text" xml:space="preserve">
+    <value>Berechnung abbr.</value>
+  </data>
+  <data name="btnRestore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 97</value>
+  </data>
+  <data name="btnRestore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 23</value>
+  </data>
+  <data name="btnRestore.Text" xml:space="preserve">
+    <value>Sim. zurücksetzen</value>
+  </data>
+  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 504</value>
+  </data>
+  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 129</value>
+  </data>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Optimierungssteuerung</value>
+  </data>
+  <data name="grProgress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>319, 221</value>
+  </data>
+  <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>375, 393</value>
+  </data>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>325, 240</value>
+  </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Optimierungsfortschritt</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>710, 641</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>710, 641</value>
+  </data>
+  <data name="$this.TabText" xml:space="preserve">
+    <value>Optimierer</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>DWSIM - Multivariabler Optimierer</value>
+  </data>
+</root>

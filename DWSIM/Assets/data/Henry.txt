@@ -1,0 +1,20 @@
+Data: http://www.atmos-chem-phys-discuss.net/14/29615/2014/acpd-14-29615-2014.pdf
+ID;Name;CAS;KHcp;C
+1;Hydrogen;1333-74-0;7.8e-6;530
+2;Helium;7440-59-7;3.9e-6;15
+3;Nitrogen;7727-37-9;6.4e-6;1600
+4;Oxygen;7782-44-7;1.2e-5;1700
+5;Ozone;10028-15-6;1.0e-4;2800
+6;Neon;7440-01-9;4.5e-6;430
+7;Argon;7440-37-1;1.4e-5;1700
+8;Krypton;7439-90-9;2.5e-5;1700
+9;Xenon;7440-63-3;4.4e-5;2200
+10;Radon;10043-92-2;9.1e-5;2900
+11;Methane;74-82-8;1.4e-5;1900
+12;Ethane;74-84-0;1.9e-5;2400
+13;Propane;74-98-6;1.5e-5;2700
+14;Ammonia;7664-41-7;5.9e-1;4200
+15;Dinitrogen monoxide;10024-97-2;2.4e-7;2700
+16;Nitrogen monoxide;10102-43-9;1.9e-5;1600
+17;Nitrogen dioxide;10102-44-0;1.2e-4;2400
+18;Chlorine;7782-50-5;9.2e-4;2000

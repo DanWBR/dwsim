@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkCompareModels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 17</value>
+  </data>
+  <data name="chkCompareModels.Text" xml:space="preserve">
+    <value>Compare Models</value>
+  </data>
+  <data name="chkSLE.Text" xml:space="preserve">
+    <value>SLE</value>
+  </data>
+  <data name="rbEutectic.Text" xml:space="preserve">
+    <value>Eutectic</value>
+  </data>
+  <data name="rbSolidSolution.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 17</value>
+  </data>
+  <data name="rbSolidSolution.Text" xml:space="preserve">
+    <value>Solid Solution</value>
+  </data>
+  <data name="FlowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 25</value>
+  </data>
+  <data name="chkCritical.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
+  </data>
+  <data name="chkCritical.Text" xml:space="preserve">
+    <value>Critical Line</value>
+  </data>
+  <data name="chkLLE.Text" xml:space="preserve">
+    <value>LLE</value>
+  </data>
+  <data name="chkVLE.Text" xml:space="preserve">
+    <value>VLE</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 13</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Txy Diagram Options</value>
+  </data>
+  <data name="cbPropPack.Items1" xml:space="preserve">
+    <value>Mass Fraction</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Property Package</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Pressure</value>
+  </data>
+  <data name="cbXAxisBasis.Items" xml:space="preserve">
+    <value>Mole Fraction</value>
+  </data>
+  <data name="cbXAxisBasis.Items1" xml:space="preserve">
+    <value>Mass Fraction</value>
+  </data>
+  <data name="cbXAxisBasis.Items2" xml:space="preserve">
+    <value>Mole Percentage</value>
+  </data>
+  <data name="cbXAxisBasis.Items3" xml:space="preserve">
+    <value>Mass Percentage</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>X Axis Basis</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Compound 2</value>
+  </data>
+  <data name="RadioButton4.Text" xml:space="preserve">
+    <value>(P)xy</value>
+  </data>
+  <data name="RadioButton3.Text" xml:space="preserve">
+    <value>(T)xy</value>
+  </data>
+  <data name="RadioButton2.Text" xml:space="preserve">
+    <value>Pxy</value>
+  </data>
+  <data name="RadioButton1.Text" xml:space="preserve">
+    <value>Txy</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Envelope type</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="Label23.Text" xml:space="preserve">
+    <value>Compound 1</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Diagram Settings</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="FaTabStripItem3.Title" xml:space="preserve">
+    <value>Exp. Data</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="TSB_Print.Text" xml:space="preserve">
+    <value>Print </value>
+  </data>
+  <data name="TSB_PrinterSetup.Text" xml:space="preserve">
+    <value>Printer Setup </value>
+  </data>
+  <data name="TSB_PageSetup.Text" xml:space="preserve">
+    <value>Page Setup </value>
+  </data>
+  <data name="TSB_Preview.Text" xml:space="preserve">
+    <value>Print Preview</value>
+  </data>
+  <data name="TSB_Copy.Text" xml:space="preserve">
+    <value>Copy Chart to Clipboard </value>
+  </data>
+</root>

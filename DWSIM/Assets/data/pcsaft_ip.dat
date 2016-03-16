@@ -1,0 +1,34 @@
+comp1	cas1	comp2	cas2	kij
+methane	74-82-8	N-butane	106-97-8	0.022
+methane	74-82-8	N-pentane	109-66-0	0.024
+methane	74-82-8	N-hexane	110-54-3	0.021
+methane	74-82-8	N-heptane	142-82-5	0.016
+methane	74-82-8	N-decane	124-18-5	0.056
+methane	74-82-8	isobutane	75-28-5	0.028
+methane	74-82-8	cyclohexane	110-82-7	0.045
+methane	74-82-8	benzene	71-43-2	0.037
+methane	74-82-8	toluene	108-88-3	0.052
+methane	74-82-8	m-xylene	108-38-3	0.045
+methane	74-82-8	tetralin	119-64-2	0.075
+nitrogen	7727-37-9	ethylene	74-85-1	0.075
+nitrogen	7727-37-9	N-hexane	110-54-3	0.119
+ethylene	74-85-1	N-heptane	142-82-5	0.018
+ethylene	74-85-1	propylene	115-07-1	-0.001
+propane	74-98-6	N-butane	106-97-8	0.003
+propylene	115-07-1	isobutane	75-28-5	-0.006
+N-pentane	109-66-0	N-heptane	142-82-5	0.011
+carbon dioxide	124-38-9	methane	74-82-8	0.065
+carbon dioxide	124-38-9	propane	74-98-6	0.109
+carbon dioxide	124-38-9	N-butane	106-97-8	0.12
+carbon dioxide	124-38-9	N-pentane	109-66-0	0.143
+carbon dioxide	124-38-9	N-heptane	142-82-5	0.129
+carbon dioxide	124-38-9	methylcyclohexane	108-87-2	0.144
+methanol	67-56-1	cyclohexane	110-82-7	0.051
+methanol	67-56-1	1-octanol	111-87-5	0.02
+ethanol	64-17-5	n-butane	106-97-8	0.028
+1-propanol	71-23-8	benzene	71-43-2	0.02
+1-propanol	71-23-8	ethylbenzene	100-41-4	0.023
+2-propanol	67-63-0	benzene	71-43-2	0.021
+1-butanol	71-36-3	n-butane	106-97-8	0.015
+1-pentanol	71-41-0	benzene	71-43-2	0.0135
+water	7732-18-5	1-pentanol	71-41-0	0.016

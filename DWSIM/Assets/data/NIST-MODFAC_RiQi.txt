@@ -1,0 +1,291 @@
+(Main Group No.) Main Group Name							
+No.	Sub-group Name	Ri	Qi	Example		
+(1) CH2							
+1	CH3	0.6325	1.0608	Hexane	2 CH3, 4 CH2	
+2	CH2	0.6325	0.7081	Octane	2 CH3, 6 CH2	
+3	CH	0.6325	0.3554	Isobutane	3 CH3, 1 CH	
+4	C	0.6325	0	Neopentane	4 CH3, 1 C	
+(2)  C=C							
+5	CH2=CH	1.2832	1.6016	1-Hexene	1 CH3, 3 CH2, 1 CH2=CH	
+6	CH=CH	1.2832	1.2489	2-Hexene	2 CH3, 2 CH2, 1 CH=CH	
+7	CH2=C	1.2832	1.2489	2-Methyl-1-Butene	2 CH3, 1 CH2, 1 CH2=C	
+8	CH=C	1.2832	0.8962	2-Methyl-2-Butene	3 CH3, 1 CH=C	
+70	C=C	1.2832	0.4582	2-3-Dimethyl-2-Butene	4 CH3, 1 C=C	
+(3) ACH							
+9	ACH	0.3763	0.4321	Naphthalene	8 ACH, 2 AC	
+10	AC	0.3763	0.2113	styrene	1 CH2=CH, 5 ACH, 1 AC	
+(4) ACCH2							
+11	ACCH3	0.91	0.949	Toluene	5 ACH, 1 ACCH3	
+12	ACCH2	0.91	0.7962	Ethylbenzene	1 CH3, 5 ACH, 1 ACCH2	
+13	ACCH	0.91	0.3769	Cumene	2 CH3, 5 ACH, 1 ACCH	
+195	ACC	0.5847	0.12	Tert-Butylbenzene	3 CH3, 5 ACH, 1 ACC	
+(5) OH							
+14	OH	1.2302	0.8927	1-propanol	1 CH3, 2 CH2, 1 OH(p)	
+81	OH(e)	1.063	0.8663	Isopropylalkohol	2 CH3, 1 CH, 1 OH(e)	
+82	OH(t)	0.6895	0.8345	Tert-Butanol	3 CH3, 1 C , 1 OH(t)	
+(6) CH3OH						
+15	CH3OH	0.8585	0.9938	Methanol	1 CH3OH	
+(7) H2O						
+16	H2O	1.7334	2.4561	Water	1 H2O	
+(8) ACOH							
+17	ACOH	1.08	0.975	Phenol	5 ACH, 1 ACOH	
+(9) CH2CO							
+18	CH3CO	1.7048	1.67	Butanone	1 CH3, 1 CH2, 1 CH3CO	
+19	CH2CO	1.7048	1.5542	3-pentanone	2 CH3, 1 CH2, 1 CH2CO	
+301	CHCO	1.7048	1.5542	Ethyl-Isopropyl-Ketone	1 CHCO, 3 CH3, 1 CH2	
+302	CCO	1.7048	1.5542	Methyl-Tert-Butyl-Ketone	1 CCO, 4 CH3	
+(10) CHO							
+20	CHO	0.7173	0.771	Propanal	1 CH3, 1 CH2, 1 CHO	
+(11) CCOO							
+21	CH3COO	1.27	1.6286	Butylacetate	1 CH3, 3 CH2, 1 CH3COO	
+22	CH2COO	1.27	1.4228	Methylpropionate	2 CH3, 1 CH2COO	
+(12) HCOO							
+23	HCOO	1.9	1.8	Ethylformate	1 CH3, 1 CH2, 1 HCOO	
+(13) CH2O							
+24	CH3O	1.1434	1.6022	Dimethylether	1 CH3, 1 CH3O	
+25	CH2O	1.1434	1.2495	Diethylether	2 CH3, 1 CH2, 1 CH2O	
+26	CHO	1.1434	0.8968	Diisopropylether	4 CH3, 1 CH, 1 CHO	
+(14) CNH2							
+28	CH3NH2	1.6607	1.6904	Methylamine	1 CH3NH2	
+29	CH2NH2	1.6607	1.3377	Ethylamine	1 CH3, 1 CH2NH2	
+30	CHNH2	1.6607	0.985	Isopropylamine	2 CH3, 1 CHNH2	
+85	CNH2	1.6607	0.985	Tert-Butylamine	3 CH3, 1 CNH2	
+(15) CNH							
+31	CH3NH	1.368	1.4332	Dimethylamine	1 CH3, 1 CH3NH	
+32	CH2NH	1.368	1.0805	Diethylamine	2 CH3, 1 CH2, 1 CH2NH	
+33	CHNH	1.368	0.7278	Diisopropylamine	4 CH3, 1 CH, 1 CHNH	
+(16) (C)3N						
+34	CH3N	1.0746	1.176	Trimethylamine	2 CH3, 1 CH3N	
+35	CH2N	1.0746	0.824	Triethylamine	3 CH3, 2 CH2, 1 CH2N	
+(17) ACNH2							
+36	ACNH2	1.1849	0.8067	Aniline	5 ACH, 1 ACNH2	
+306	ACNH	1.1849	0.732	n-Methylaniline	5 ACH, 1 ACNH, 1 CH3	
+307	ACN	1.1849	0.61	Dimethylaniline	5 ACH, 1 ACN, 2 CH3	
+(18) Pyridine							
+37	AC2H2N	1.4578	0.9022	Pyridine	1 AC2H2N, 3 ACH	
+38	AC2HN	1.2393	0.633	2 Methylpyridine	1 AC2HN, 3 ACH, 1 CH3	
+39	AC2N	1.0731	0.353	2-6-Dimethylpyridine	1 AC2N, 3ACH, 2 CH3	
+(94) Pyrrole							
+196	AC2H2NH	1.325	0.752	Pyrrole	1 AC2H2NH, 2 ACH	
+197	AC2HNH	1.0976	0.44	2-Methylpyrrole	1 AC2HNH, 2 ACH, 1 CH3	
+198	AC2NH	0.8701	0.212	2,3-Dimethylpyrrole	1 AC2NH, 2 ACH, 2 CH3	
+(19) Nitrile							
+40	CH3CN	1.5575	1.5193	Acetonitrile	1 CH3CN	
+41	CH2CN	1.5575	1.1666	Propionitrile	1 CH3, 1 CH2CN	
+303	CHCN	1.5575	1.1666	Isobutyronitrile	2 CH3, 1 CHCN	
+304	CCN	1.5575	1.1666	Tert-Butylnitrile	3 CH3, 1 CCN	
+(20) COOH							
+42	COOH	0.8	0.9215	Aceticacid	1 CH3, 1 COOH	
+(21) CCl							
+44	CH2Cl	0.9919	1.3654	1-Chlorobutane	1 CH3, 2 CH2, 1 CH2Cl	
+45	CHCl	0.9919	1.0127	2-Chloropropane	2 CH3, 1 CHCl	
+46	CCl	0.9919	0.66	Tertbutylchloride	3 CH3, 1 CCl	
+(22) CCl2							
+47	CH2Cl2	1.8	2.5	Dichloromethane	1 CH2Cl2	
+48	CHCl2	1.8	2.1473	1-1-Dichloroethane	1 CH3, 1 CHCl2	
+49	CCl2	1.8	1.7946	2-2-Dichloropropane	2 CH3, 1 CCl2	
+(23) CCl3							
+51	CCl3	2.65	2.3778	Trichloroethane	1 CH3, 1 CCl3	
+(24) CCl4						
+52	CCl4	2.618	3.1863	Tetrachloromethane	1 CCl4	
+(25) ACCl							
+53	ACCl	0.5365	0.3177	Chlorobenzene	5 ACH, 1 ACCl	
+(26) Nitro							
+54	CH3NO2	2.644	2.5	Nitromethane	1 CH3NO2	
+55	CH2NO2	2.5	2.304	1-Nitropropane	1 CH3, 1 CH2, 1 CH2NO2	
+56	CHNO2	2.887	2.241	2-Nitropropane	2 CH3, 1 CHNO2	
+305	CNO2	2.887	2.241	2-Methylnitropropane	3 CH3, 1 CNO2	
+(27) Aromatic Nitro							
+57	ACNO2	0.4656	0.3589	Nitrobenzene	5 ACH, 1 ACNO2	
+(28) CS2							
+58	CS2	1.24	1.068	Carbondisulfide	1 CS2	
+(29) CH2SH							
+59	CH3SH	1.289	1.762	Methanethiol	1 CH3SH	
+60	CH2SH	1.535	1.316	Ethanethiol	1 CH2, 1 CH2SH	
+192	CHSH	1.4232	1.21	2-Propanethiol	2 CH3, 1 CHSH	
+193	CSH	1.1958	1.1401	Tert-Butanethiol	3 CH3, 1 CSH	
+194	ACSH	1.2887	1.2	Benzenethiol	5 ACH, 1 ACSH	
+(30) Furfural							
+61	Furfural	1.299	1.289	Furfural	1 furfural	
+(31) DOH							
+62	CH2(OH)-CH2(OH)	3.7374	3.2016	1-2-Ethandiole	1 CH2(OH)-CH2(OH)	
+205	-CH(OH)-CH2(OH)	3.5642	2.8225	1-2-Propyleneglycol	1 CH3, 1 -CH(OH)-CH2(OH)	
+206	-CH(OH)-CH(OH)-	3.3910 	2.4434	2-3-Butanediol	2 CH3, 1-CH(OH)-CH(OH)-	
+207	>C(OH)-CH2(OH)	3.1847	2.1144	2-Methyl-1,2-Propanediol	2 CH3, 1 >C(OH)-CH2(OH)	
+208	>C(OH)-CH(OH)-	3.0175	2.0562	2-Methyl-2,3-Butanediol	3 CH3, 1 >C(OH)-CH(OH)-	
+209	>C(OH)-C(OH)<	2.644	1.669	2,3-Dimethyl-2,3-Butanediol	4 CH3, 1 >C(OH)-C(OH)<	
+(32) I							
+63	I	1.076	0.9169	Iodoethane	1 CH3, 1 CH2, 1 I	
+(33) Br							
+64	Br	1.209	1.4	bromoethane	1 CH3, 1 CH2, 1 Br	
+(34) C#C							
+65	CH#C	0.9214	1.3	1-Hexyne	1 CH3, 3 CH2, 1 CH#C	
+66	C#C	1.303	1.132	2-Hexyne	2 CH3, 2 CH2, 1 C#C	
+(35) DMSO						
+67	DMSO	3.6	2.692	Dimethylsulfoxide	1 DMSO	
+(36) Acrylonitrile							
+68	Acrylonitrile	1	0.92	Acrylonitrile	1 acrylonitrile	
+(37) Cl-[C=C]							
+69	Cl-[C=C]	0.5229	0.7391	Trichloroethylene	1 CH=C, 3 Cl(C=C)	
+(38) ACF							
+71	ACF	0.8814	0.7269	Hexafluorobenzene		6 ACF
+(39) Formamide							
+72	DMF	2	2.093	N-N-Dimethylformamide	1 DMF	
+73	HCON(CH2)2	2.381	1.522	N-N-Diethylformamide	2 CH3, 1 HCON(CH2)2	
+(40) CF2							
+74	CF3	2.7489	2.7769	1-1-1-Trifluoroethane	1 CH3, 1 CF3	
+75	CF2	1.4778	1.4738	Perfluorohexane	2 CF3, 4 CF2	
+76	CF	0.8215	0.5135	Perfluoromethylcyclohexane	1 CF3, 5 CF2, 1 CF	
+(41) COO							
+77	COO	1.6	0.9	Methylacrylate	1 CH3, 1 CH2=CH, 1 COO	
+(42) c-CH2							
+78	c-CH2	0.7136	0.8635	Cyclohexane	6 c-CH2	
+79	c-CH	0.3479	0.1071	Methylcyclohexane	1 CH3, 5 c-CH2, 1 c-CH	
+80	c-C	0.347	0	1-1-Dimethylcyclohexane	2 CH3, 5 c-CH2, 1 c-C	
+(43) c-CH2O							
+27	CH2-O-CH2	1.7023	1.8784	Tetrahydrofuran	2 c-CH2, 1 c-CH2OCH2	
+83	CH2-O-[CH2-O]1/2	1.4046	1.4	1-3-Dioxane	1 c-CH2, 2 c-CH2O[CH2]1/2	
+84	[O-CH2]1/2-O-[CH2-O]1/2	1.0413	1.0116	1-3-5-Trioxane	3 c-[CH2]1/2-O-[CH2]1/2	
+(44) HCOOH							
+43	HCOOH	0.8	1.2742	Formicacid	1 HCOOH	
+(45) CHCl3							
+50	CHCl3	2.45	2.8912	Chloroform	1 CHCl3	
+(46) c-CONC							
+86	c-CON-CH3	3.981	3.2	N-Methylpyrrolidone_	1 c-CON-CH3, 3 c-CH2	
+87	c-CON-CH2	3.7543	2.892	N-Ethylpyrrolidone	1 c-CON-CH2, 3 c-CH2, 1 CH3	
+88	c-CON-CH	3.5268	2.58	N-Isopropylpyrrolidone	1 c-CON-CH, 3 c-CH2, 2 CH3	
+89	c-CON-C	3.2994	2.352	N-Tert-Butylpyrrolidone	1 c-CON-C, 3 c-CH2, 3 CH3	
+(47) CONR							
+92	CONHCH3	1.5	1.08	N-Methylacetamide	1 CH3, 1 CONHCH3	
+100	CONHCH2	1.5	1.08	N-Ethylacetamide	2 CH3, 1 CONHCH2	
+(48) CONR2							
+101	CON(CH3)2	2.4748	1.9643	N.N-Dimethylacetamide	1 CH3, 1 CON(CH3)2	
+102	CON(CH3)CH2	2.2739	1.5754	N-N-Methylethylacetamide	2 CH3, 1 CONCH2(CH3)	
+103	CON(CH2)2	2.0767	1.1866	N-N-Diethylacetamide	3 CH3, 1 CON(CH2)2	
+(49) HCONR							
+93	HCONHCH3	2.4617	2.192	N-Methylformamide	1 HCONHCH3	
+94	HCONHCH2	2.4617	1.842	N-Ethylformamide	1 CH3, 1 HCONHCH2	
+(50) Aromatic Nitrile							
+116	ACCN	1.2815	0.96	Benzonitrile	1 ACCN,  5 ACH	
+(51) Isocyanate							
+117	CH3NCO	1.9578	1.58	Methylisocyanate	1 CH3NCO	
+118	CH2NCO	1.731	1.272	Ethylisocyanate	1 CH2NCO, 1 CH3	
+119	CHNCO	1.5036	0.96	Isopropylisocyanate	1 CHNCO, 2 CH3	
+120	ACNCO	1.4219	0.852	Phenylisocyanate	1 ACNCO, 5 ACH	
+(52) Thiophene							
+104	AC2H2S	1.7943	1.34	Thiophene	2 ACH, 1 AC2H2S	
+105	AC2HS	1.6282	1.06	2-Methylthiophene	1 CH3, 2 ACH, 1 AC2HS	
+106	AC2S	1.4621	0.78	2,5-Dimethylthiophene	2 CH3, 2 ACH, 1 AC2S	
+(53) Epoxy							
+107	H2COCH	1.3601	1.8031	1.2-Propyleneoxide	1 H2COCH, 1 CH3	
+109	HCOCH	0.9104	0.6538	2.3-Epoxybutane	1 HCOCH, 2 CH3	
+(54) Anhydride							
+121	COOCO	1.7732	1.52	Aceticanhydride	1 COOCO, 2 CH3	
+(55) Carbonate							
+112	(CH3O)2CO	3.0613	2.816	Dimethylcarbonate	1 (CH3O)2CO	
+113	(CH2O)2CO	2.6078	2.2	Diethylcarbonate	1 (CH2O)2CO, 2 CH3	
+114	(CH3O)COOCH2	2.8214	2.508	Ethylmethylcarbonate	1 (CH3O)COOCH2, 1 CH3	
+199	(ACO)COOCH2	2.2854	1.78	Ethylphenylcarbonate	1 (ACO)COOCH2, 5 ACH, 1 CH3	
+200	(ACO)CO(OAC)	1.9895	1.36	Diphenylcarbonate	1 (ACO)COOCH2, 10 ACH	
+(56) Sulfone							
+110	CH2SuCH2	2.687	2.12	Sulfolane	1 CH2SuCH2, 2 cy-CH2	
+111	CH2SuCH 	2.46	1.808	2.4-Dimethylsulfolane	1 CH2SuCH, 2 CH3, 1 cy-CH2, 1 cy-CH	
+122	ACSO2	1.7034	1.16	Methylphenylsulfone	1 (AC) SO2, 5 ACH, 1 CH3	
+(57) Benzaldehyde							
+123	ACCHO	1.3632	1.068	Benzaldehyde	1 ACCHO,  5 ACH	
+(58) ACCOOH							
+124	ACCOOH	1.6664	1.344	Benzoicacid	1 ACCOOH, 5 ACH	
+(59) AC-O-CO							
+127	AC-O-CO-CH3 	2.2815	1.848	Phenylacetate	1 ACOOCH3, 5 ACH	
+128	AC-O-CO-CH2	2.0547	1.54	Phenylpropionate	1 ACCOOCH2, 5 ACH, 1 CH3	
+129	AC-O-CO-CH	1.8273	1.228	Phenylisobutyrate	1 ACCOOCH, 5 ACH, 2 CH3	
+130	AC-O-CO-C	1.5999	1	Phenyl-Tert-Pentanoate	1 ACCOOC, 5 ACH, 3 CH3	
+(60) OCCOH							
+131	-O-CH2-CH2-OH	2.1226	1.904	2-Ethoxyethanol	1 -O-CH2-CH2-OH, 1 CH3, 1 CH2 	
+132	-O-CH-CH2-OH	1.8952	1.592	2-Ethoxy-1-Propanol	1 -O-CH-CH2-OH, 2 CH3, 1 CH2 	
+133	-O-CH2-CH-OH	1.8952	1.592	1-Methoxy-2-Propanol	1 -O-CH2-CH-OH, 2 CH3	
+(61) Sulfide							
+134	CH3-S-	1.6131	1.368	Dimethylsulfide	1 CH3-S-, 1 CH3	
+135	-CH2-S-	1.3863 	1.06	Diethylsulfide	1 -CH2-S-, 1 CH2,  2 CH3	
+136	>CH-S-	1.1589	0.748	Diisopropylsulfide 	1 >CH-S-. 1 CH, 4 CH3	
+137	->C-S-	0.9314	0.52	Methyl tert-Butylsulfide	1 ->C-S-, 4 CH3	
+187	ACS	1.0771	0.64	Methyl Phenylsulfide	1 ACS, 5 ACH, 1 CH3	
+(62) Lactam							
+125	c-CO-NH	1.3039	1.036	Propiolactam	1 c-CONH, 2 c-CH2	
+(63) Lactone							
+126	c-CO-O	1.0152	0.88	Propiolactone	1 c-CO-O, 2 c-CH2	
+(64) Peroxide							
+138	CH3O-(O)	1.3889	1.328	Dimethylperoxide	1 CH3-O-(O), 1 CH3	
+139	CH2O-(O)	1.1622	1.02	Diethylperoxide	1 CH2O-(O), 2 CH3, 1 CH2	
+140	CHO-(O)	0.9347	0.708	Diisopropylperoxide	1 CHO-(O), 4 CH3, 1 CH	
+141	CO-(O)	1.0152	0.88	Di-Tert-Butylperoxide	1 CO-(O), 6 CH3, 1 C	
+142	ACO-(O)	0.853	0.6	Acetylbenzoylperoxide	1 ACO-(O), C=O, Ph	
+(65) CFH						
+143	CFH	0.5966	0.44	Fluoromethylene	1 CFH	
+(66) CFCl						
+144	CFCl	1.4034	1.168	Chlorofluoromethylene	1 CFCl	
+(67) CFCl2						
+145	CFCl2	2.2103	1.896	Tetrachloro-1.2-Difluoroethan	2 CFCl2	
+(68) CF2H						
+146	CF2H	0.9736	0.88	Difluoromethyl	1 CF2H	
+(69) CF2ClH						
+147	CF2ClH	1.7396	1.6	Difluorochloromethane	1 CF2ClH	
+(70) CF2Cl2						
+148	CF2Cl2	2.5873	2.336	Dichlorodifluoromethane	1 CF2Cl2	
+(71) CF3H						
+149	CF3H	1.3507	1.32	Fluoroform	1 CHF3	
+(72) CF3Cl						
+150	CF3Cl	2.1575	2.048	Chlorotrifluoromethane	1 CF3Cl 	
+(73) CF4						
+151	CF4	1.7278	1.76	Tetrafluoromethane	1 CF4	
+(74) Acetal						
+152	C(O)2	0.7073	0.48	2,2-Diethoxypropane	2 C(O)2, 4 CH3, 2 CH2	
+186	CH(O)2	0.9347	0.708	2,2-Diethoxyethane	2 CH(O)2, 3 CH3, 2 CH2	
+309	CH2(O)2	0.9347	0.708	2,2-Diethoxymethane	2 CH2(O)2, 2 CH3, 2 CH2
+(75) ACNR2						
+153	ACN(CH3)2	2.4529	1.908	n,n-Dimetylaniline	1 ACN(CH3)2, 5 ACH	
+154	ACN(CH3)CH2	2.2261	1.6	n-Ethyl-n-Methylaniline	1 ACN(CH3)(CH2), 5 ACH, 1 CH3	
+155	ACN(CH2)2	1.9993	1.292	n,n-Diethylaniline	1 ACN(CH2)2, 5 ACH, 2 CH3	
+(76) ACNR						
+156	ACNHCH3	1.7989	1.364	n-Methylaniline_	1 ACNHCH3, 5 5ACH	
+157	ACNHCH2	1.5722	1.056	n-Ethylaniline	1 ACNHCH2, 5 ACH, 1 CH3	
+158	ACNHCH	1.3448	0.744	n-Isopropylaniline	1 ACNCH, 5 ACH, 2 CH3	
+(77) Furan						
+159	AC2H2O	1.3065	1.04	Furan	1 AC2H2O, 2 ACH	
+160	AC2HO	1.1404	0.76	Benzofuran	1 AC2HO, 1 AC, 5 ACH	
+161	AC2O	0.9743	0.48	Dibenzofuran	1 AC2O, 8 ACH, 2 AC	
+(78) c-CNH						
+188	c-CH2-NH	1.207	0.936	Piperazine	2 c-CH2-NH, 2 c-CH2	
+162	c-CH-NH	0.9796	0.624	2,6-Lupetidine	1 c-CH-NH, 2 CH3, 1c-CH, 3 c-CH2	
+163	c-C-NH	0.7521	0.396	2,2-Dimethylpiperidine	1 c-C-NH, 4 c-CH2, 2 CH3	
+(79) c-CNR						
+189	c-CH2-NCH3	1.8609	1.48	n-Methylpiperidine	1 c-CH2-NCH3, 4 c-CH2	
+190	c-CH2-NCH2	1.6341	1.172	n-Ethylpiperidine	1 c-CH2-NCH2, 4 c-CH2, 1 CH3	
+191	c-CH2-NCH	1.4067	0.86	n-Isopropylpiperidine	1 c-CH2-NCH, 4 c-CH2, 2 CH3	
+164	c-CH-NCH3	1.6335	1.168	1,2-Dimethylpiperidine	1 c-CH-NCH3, 4 c-CH2, 1 CH3	
+165	c-CH-NCH2	1.4067	0.86	1-Ethyl-2-Methylpiperidine	1 c-CH-NCH2, 4 c-CH2, 2 CH3	
+166	c-CH-NCH	1.1793	0.548	n-Isopropyl-2-Methylpiperidine	1 c-CH-NCH, 4 c-CH2, 3 CH3	
+(80) SiH							
+170	SiH3-	1.6035	1.263	Methylsilane	1 SiH3-, 1 CH3	
+171	-SiH2-	1.4443	1.006	Diethylsilane	1 -SiH2-. 2 CH2, 2 CH3	
+172	>SiH-	1.2853	0.749	Heptamethyltrisiloxane	1 >SiH-. 7 CH3, 2 ->SiO-	
+173	>Si<	1.047	0.41	Hexamethyldisiloxane	1 >Si<, 6 CH3, 1 ->SiO-	
+(81) SiO						
+174	-SiH2-O-	1.4838 	1.062	1.3-Dimethyldisiloxane	1 -SiH2-O-, 2 CH3, 1 -SiH2-	
+175	>SiH-O-	1.303	0.764	1.1.3.3-Tetramethyldisiloxane	1 >SiH-O-, 4 CH3, 1 >SiH-	
+176	->Si-O-	1.1044	0.466	Octamethylcyclotetrasiloxane	4 ->Si-O-, 8 CH3	
+(82) Oxime						
+310	CH=NOH	1.499	1.46	Propanaloxime	1 CH=NOH, 1 CH3, 1 CH2	
+177	C=NOH	1.499	1.46	2-Propanoneoxime	1 C=NOH, 2 CH3	
+(83) ACCOO						
+178	ACCO	1.1365	0.76	Acetophenone	1 ACCO, 5 ACH, 1 CH3	
+(86) C2Cl4						
+179	C2Cl4	3.381	3.5845	Tetrachloroethene	1 C2Cl4	
+(92) c-CHNH2						
+180	c-CHH2	1.2261	1.096	Cyclohexylamine	1 c-CHNH2, 5 c-CH2	
+(95) c-C=C						
+201	c-CH=CH	1.0897	0.832	Cyclohexene	1 c-CH=CH, 4 c-CH2	
+202	c-CH=C	0.8616	0.644	1-Methylcyclohexene	1 c-CH=C, 1 CH3, 4 c-CH2	
+203	c-C=C	0.5498	0.244	1.2-Dimethylcyclohexene	1 c-C=C, 2 CH3, 4 c-CH2	
+(96) Glycerol						
+204	Glycerol	5.4209	4.4227	Glycerol	1 Glycerol	

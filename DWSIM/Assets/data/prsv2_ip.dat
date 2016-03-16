@@ -1,0 +1,9 @@
+Compound1	Compound2	k12	k21	T_K
+Acetone	Cyclohexane	0.0904	0.1332	308.15
+Acetone	Hexane	0.0808	0.1244	308.15
+Cyclohexane	1-Butanol	0.0932	0.0476	298.15
+Hexane	1-Butanol	0.0868	0.2053	298.15
+Methanol	Water	-0.0836	-0.0961	298.15
+Ethanol	Water	-0.0781	-0.1301	298.15
+1-Propanol	Water	-0.0557	-0.1298	333.15
+2-Propanol	Water	-0.1040	-0.1889	308.15

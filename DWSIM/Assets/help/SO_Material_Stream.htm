@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<script src="ContentScripts.js"></script>
+<head>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+</head>
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ========================================-->
+<!-- ================================================================================== -->
+<body onload="LoadMenue()">
+
+<H2>Material Stream</H2>
+<a href="GO_MasterPropertyTable.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="SO_Energy_Stream.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+<p>The Material Stream is used to represent matter which enters and leaves the limits of the
+simulation, passing through the unit operations.</p>
+
+<table>
+<tr>
+<td>
+<h3>Input Parameters</h3>
+
+<b>Specification:</b>
+<br>
+One of the following flash types may be selected:
+<ul>
+   <li>Temperature and Pressure</li>
+   <li>Pressure and Enthalpy</li>
+   <li>Pressure and Entropy</li>
+   <li>Pressure and Vapor Fraction</li>
+   <li>Temperature and Vapor Fraction</li>
+</ul> 
+
+<br><br>The above selection dictates which variables should be defined in order to enable DWSIM calculate the others:
+<ul>
+   <li><b>Temperature:</b> stream temperature</li>
+   <li><b>Pressure:</b> stream pressure</li>
+   <li><b>Specific Enthalpy:</b> stream’s specific enthalpy</li>
+   <li><b>Specific Entropy:</b> stream’s specific entropy</li>
+   <li><b>Molar Fraction (Vapor Phase):</b> the vapor phase mole fraction of the stream</li>
+</ul> 
+
+</td>
+<td><img src="pictures/SO_Stream1.png"></td>
+</tr>
+<tr><td></td><td></td></tr>
+<tr>
+
+<td>
+<b>Composition:</b><br>
+The stream composition can be entered on basis of:
+<ul>
+   <li>Mole/Mass fraction/flow</li>
+   <li>Standard liquid volumetric fraction</li>
+   <li>Molality or molarity</li>
+</ul> 
+
+<br><br>
+<em>The material stream composition can only be edited if the stream is not connected to any
+unit operation upstream, which means that it doesn’t work as an output of any operation. If that is the
+case, the stream configures itself as "read-only" and the user will not be able to edit any of
+its properties directly. These are written into the stream as a result of calculation from its connected unit operation.</em>
+<br><br>
+
+For the mole/mass fraction basis options, the user must enter the composition in such a way
+that the amounts sum up to 1. Regardless of the input basis option, new values are saved
+only when the "Apply" button is pressed.<br><br>
+
+Molarity and Molality input composition options only make sense in the context of an electrolyte
+simulation. In this case, the solute amounts should be entered in moles and the solvent
+amount in L (molarity) or kg (molality).<br><br>
+
+<b>Flow:</b> One of the three types of flow (mass, molar or volumetric) must be given. 
+The other two are calculated automatically in the case when temperature and pressure are already defined.
+<br>
+If composition is defined by either mole or mass flow of each component, the total flow of the stream is calculated automatically. 
+If a definition of composition is utilised, you will have to define flowrate of the stream on stream level outside of composition dialog.
+<br><br>
+
+</td>
+<td><img src="pictures/SO_Stream2.png"></td>
+</tr>
+
+</table>
+
+<H3>Calculation Method</H3>
+When the four properties described above are defined, the material
+stream is calculated and its properties are shown in the same window. The calculation sequence
+for the material stream is the following:
+
+<ul>
+   <li>1. A flash calculation is done to know the component distribution between phases</li>
+   <li>2. Properties of each phase are calculated individually</li>
+   <li>3. Finally, the mixture properties are calculated</li>
+</ul>
+
+In the first step, a TP Flash is done by default, but it can be replaced by a PH flash if the
+user defines this option in the simulation configuration window. When in "read-only" mode, the
+stream properties are calculated according to parameters given by the upstream unit operation
+(in the majority of cases, a TP flash is done as well).
+
+
+<H3>Output parameters</H3>
+The following items are calculated:<br>
+
+<ol>
+ <li>Component distribution between phases.<br>
+     The compositions can be displayed either as molar or mass fraction by selecting the correspondent 
+     option at <b>Composition basis</b> drop down field.<br><br>
+ </li>
+
+ <li>Phase properties:
+   <ul>
+      <li>specific enthalpy</li>
+      <li>specific entropy</li>
+      <li>molecular weight</li>
+      <li>density</li>
+      <li>volumetric flow rate @ T and P</li>
+      <li>phase molar and mass fraction</li>
+      <li>compressibility factor Z</li>
+      <li>constant-pressure heat capacity (Cp)</li>
+      <li>Cp/Cv</li>
+      <li>thermal conductivity,</li>
+      <li>surface tension (liquid phase only)</li>
+      <li>kinematic viscosity</li>
+      <li>dynamic viscosity</li>
+      <li>Cp/Cv</li>
+      <li>Cp/Cv</li>
+   </ul><br>
+ </li>
+
+ <li>Mixture properties:
+   <ul>
+      <li>specific enthalpy</li>
+      <li>specific entropy</li>
+      <li>molecular weight</li>
+      <li>density</li>
+      <li>thermal conductivity</li>
+      <li> If the global setting ”Calculate bubble and dew points at stream conditions” is activated, these are
+           also shown in the ”Mixture” properties section.</li>
+   </ul>
+   
+ </li>
+</ol>
+
+<br><br>
+
+
+</BODY>
+</HTML>

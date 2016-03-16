@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<title>Excel Addin</title>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+</head>
+<body>
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ======================================= -->
+<!-- ================================================================================== -->
+
+<H2>Excel Addin</H2>
+<a href="EX_Installation_1.htm" ><img src="pictures/arrow-up.gif"></a>
+<a href="EX_Overriding_IPs_3.htm" ><img src="pictures/arrow-down.gif"></a>
+<hr>
+<H3>Usage</H3>
+The functionality of that Add-In is realised by offering special functions which are used for doing calculations 
+for process simulation via an Excel interface. This interface allows access to the original DWSIM thermodynamics engine and 
+component databases.<br><br>
+You start by add a new function to do your calculations by pressing the marked Symbor "<b>fx</b>" left of the edit field:<br>
+<img src="pictures/Excel03b.png"><br><br>
+
+Now the following dialog appears. Functions exposed by this AddIn will be grouped in a category named “DWSIM”. You may click 
+the marked link in this dialog to get further help on that function.<br>
+<img src="pictures/Excel03.png"><br><br>
+
+After selecting the required function and pressing OK the following dialog appears:<br>
+<img src="pictures/Excel03a.png"><br>
+Be aware, that some functions need a lot of parameters which will not fit into this dialog. The picture shows an example of 
+the PTFlash function where the parameters already were defined. You will find the marked slider at the right side which will
+allow you to scroll down to edit the other parameters.<br><br><br><br>
+
+<hr>
+
+All DWSIM functions are one ore two dimensional <b><i>Matrix formulas</i></b> which may be recognised by their curly brackets: <b>{}</b>.<br>
+This kind of formulas is entered in Excel in three steps as depicted in the following picture:<br>
+<ol>
+ <li>Enter a formula into the first top left cell of the result range (A2). The formula doesn't contain the brackets now.</li>
+ <li>Select the required result range (A2:A16) with top left cell highlighted.</li>
+ <li>The formula needs to be modified into a matrix formula now. This is accomplished by editing the formula and finishin editing 
+by using <b><i>Ctrl+Shift+Enter</i></b> keys.</li>
+</ol>
+
+
+Property and Equilibrium calculation functions require parameters that must be one or more values which were 
+returned by functions <b>GetPropPackList, GetCompoundList, GetPropList, GetCompoundPropList and GetPhaseList</b>.<br>
+
+These formulas will return values listed in a single column:<br>
+
+<img src="pictures/Excel04.png"><br><br><br>
+
+
+As an different example, the <b>PTFlash</b> function requires the name of the Property Package to use, the compound names 
+and mole fractions, temperature in K, pressure in Pa.<br>
+
+You may optionally provide new interaction parameters that will override the ones used internally by DWSIM.<br>
+
+The calculation results will be returned as a two dimensional (n+2) x (4) matrix, where n is the number of compounds.<br>
+First row will contain the phase names (Vapor, Liquid, Liquid2 and Solid, in this order), the second will 
+contain the phase mole fractions and the other lines will contain the compound mole fractions in the corresponding phases:<br><br>
+
+<img src="pictures/Excel05.png"><br><br>
+
+For PH, PS, TVF and PVF flash calculation functions, an additional line is returned that will contain the temperature in K or 
+pressure in Pa in the first column.
+</BODY>
+</HTML>

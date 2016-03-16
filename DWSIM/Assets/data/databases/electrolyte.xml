@@ -1,0 +1,1640 @@
+<?xml version="1.0"?>
+<compounds>
+<compound>
+  <Name>Ammonium Peroxydisulfate</Name>
+  <Formula>(NH4)2S2O8</Formula>
+  <MW>228.2</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NH4+</PositiveIon>
+  <NegativeIon>S2O82-</NegativeIon>
+  <HydrationNumber>0</HydrationNumber>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1273.6</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1648.1</DelHf_kJ_mol>
+  <Cp_J_mol_K>569.6</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>1.982</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Ammonium Sulfate</Name>
+  <Formula>(NH4)2SO4</Formula>
+  <MW>132.14</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NH4+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-901.67</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1180.85</DelHf_kJ_mol>
+  <Cp_J_mol_K>187.5</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>1.777</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Ammonium (1)</Name>
+  <Formula>(NH4)2SO4.2NH4NO3</Formula>
+  <MW>292.23</MW>
+  <Ion>False</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NH4+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1270.61</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1914.1</DelHf_kJ_mol>
+  <Cp_J_mol_K>764.42</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Ammonium (2)</Name>
+  <Formula>(NH4)2SO4.3NH4NO3</Formula>
+  <MW>372.27</MW>
+  <Ion>False</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NH4+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1454.53</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-2278.72</DelHf_kJ_mol>
+  <Cp_J_mol_K>987.19</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Nitrate (1)</Name>
+  <Formula>(NaNO3)2.NH4NO3</Formula>
+  <MW>250.03</MW>
+  <Ion>False</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>NO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-920.19</DelGF_kJ_mol>
+  <DelHf_kJ_mol>0</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Nitrate (1)</Name>
+  <Formula>(KNO3)3.NH4NO3</Formula>
+  <MW>383.35</MW>
+  <Ion>False</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>NO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1366.4</DelGF_kJ_mol>
+  <DelHf_kJ_mol>0</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Bromine (ion)</Name>
+  <Formula>Br-</Formula>
+  <MW>79.9</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>-1</Charge>
+  <DelGF_kJ_mol>-104.16</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-119.57</DelHf_kJ_mol>
+  <Cp_J_mol_K>-72.3</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Chloride (ion)</Name>
+  <Formula>Cl-</Formula>
+  <MW>35.45</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>-1</Charge>
+  <DelGF_kJ_mol>-131.228</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-167.159</DelHf_kJ_mol>
+  <Cp_J_mol_K>-136.4</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+  <StandardStateMolarVolume_cm3_mol>17.8</StandardStateMolarVolume_cm3_mol>
+  <MolarVolume_v2i>3.692E-2</MolarVolume_v2i>
+  <MolarVolume_v3i>-7.407E-4</MolarVolume_v3i>
+  <MolarVolume_k1i>0.9454</MolarVolume_k1i>
+  <MolarVolume_k2i>-0.0979E-3</MolarVolume_k2i>
+  <MolarVolume_k3i>0.9162E-4</MolarVolume_k3i>
+  <CpAq_a>400.35</CpAq_a>
+  <CpAq_b>-1.1312</CpAq_b>
+  <CpAq_c>-18574</CpAq_c>
+</compound>
+<compound>
+  <Name>Perchlorate (ion)</Name>
+  <Formula>ClO4-</Formula>
+  <MW>99.45</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>-1</Charge>
+  <DelGF_kJ_mol>-8.52</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-129.33</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Cesium (ion)</Name>
+  <Formula>Cs+</Formula>
+  <MW>132.91</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>1</Charge>
+  <DelGF_kJ_mol>-292.02</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-258.28</DelHf_kJ_mol>
+  <Cp_J_mol_K>-10.5</Cp_J_mol_K>
+  <Tf_C>28.5</Tf_C>
+  <Hfus_at_Tf_kJ_mol>2.09</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>1.93</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Cesium Sulfate</Name>
+  <Formula>Cs2SO4</Formula>
+  <MW>361.87</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Cs+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1323.58</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1443.02</DelHf_kJ_mol>
+  <Cp_J_mol_K>134.9</Cp_J_mol_K>
+  <Tf_C>1005</Tf_C>
+  <Hfus_at_Tf_kJ_mol>35.7</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>4.24</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Cesium Bromide</Name>
+  <Formula>CsBr</Formula>
+  <MW>212.81</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Cs+</PositiveIon>
+  <NegativeIon>Br-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-391.41</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-405.81</DelHf_kJ_mol>
+  <Cp_J_mol_K>52.93</Cp_J_mol_K>
+  <Tf_C>636</Tf_C>
+  <Hfus_at_Tf_kJ_mol>23.6</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Cesium Chloride</Name>
+  <Formula>CsCl</Formula>
+  <MW>168.36</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Cs+</PositiveIon>
+  <NegativeIon>Cl-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-414.53</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-443.04</DelHf_kJ_mol>
+  <Cp_J_mol_K>52.47</Cp_J_mol_K>
+  <Tf_C>645</Tf_C>
+  <Hfus_at_Tf_kJ_mol>15.9</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>3.988</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Cesium Perchlorate</Name>
+  <Formula>CsClO4</Formula>
+  <MW>232.36</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Cs+</PositiveIon>
+  <NegativeIon>ClO4-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-314.26</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-443.09</DelHf_kJ_mol>
+  <Cp_J_mol_K>108.3</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>3.327</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Cesium Iodide</Name>
+  <Formula>CsI</Formula>
+  <MW>259.81</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Cs+</PositiveIon>
+  <NegativeIon>I-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-340.58</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-346.6</DelHf_kJ_mol>
+  <Cp_J_mol_K>52.8</Cp_J_mol_K>
+  <Tf_C>621</Tf_C>
+  <Hfus_at_Tf_kJ_mol>23.9</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>4.51</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Cesium Nitrate</Name>
+  <Formula>CsNO3</Formula>
+  <MW>194.91</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Cs+</PositiveIon>
+  <NegativeIon>NO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-406.5</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-506</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>3090</Tf_C>
+  <Hfus_at_Tf_kJ_mol>67</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>3.66</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Iodine Ion</Name>
+  <Formula>I-</Formula>
+  <MW>126.9</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>-1</Charge>
+  <DelGF_kJ_mol>-51.57</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-55.19</DelHf_kJ_mol>
+  <Cp_J_mol_K>-142.3</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Ion</Name>
+  <Formula>K+</Formula>
+  <MW>39.1</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>1</Charge>
+  <DelGF_kJ_mol>-283.27</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-252.38</DelHf_kJ_mol>
+  <Cp_J_mol_K>21.8</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+  <StandardStateMolarVolume_cm3_mol>-9</StandardStateMolarVolume_cm3_mol>
+  <MolarVolume_v2i>6.331E-2</MolarVolume_v2i>
+  <MolarVolume_v3i>-7.502E-4</MolarVolume_v3i>
+  <MolarVolume_k1i>1.094</MolarVolume_k1i>
+  <MolarVolume_k2i>-2.689E-3</MolarVolume_k2i>
+  <MolarVolume_k3i>3.919E-4</MolarVolume_k3i>
+  <CpAq_a>415.09</CpAq_a>
+  <CpAq_b>-0.8142</CpAq_b>
+  <CpAq_c>-16316</CpAq_c>
+</compound>
+<compound>
+  <Name>Potassium Carbonate (1)</Name>
+  <Formula>K2CO3.11/2H2O</Formula>
+  <MW>174.22</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>1.5</HydrationNumber>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>CO32-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-2865</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-3218.4</DelHf_kJ_mol>
+  <Cp_J_mol_K>1199</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Carbonate (2)</Name>
+  <Formula>K2CO3.2KHCO3.11/2H2O</Formula>
+  <MW>392.47</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>1.5</HydrationNumber>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>CO32-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-6341.55</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-7026.36</DelHf_kJ_mol>
+  <Cp_J_mol_K>193.74</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Carbonate (3)</Name>
+  <Formula>K2CO3.Na2CO3</Formula>
+  <MW>244.19</MW>
+  <Ion>False</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>CO32-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-2121.47</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-2299.1</DelHf_kJ_mol>
+  <Cp_J_mol_K>420.23</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Carbonate (4)</Name>
+  <Formula>K2CO3.NaHCO3.2H2O</Formula>
+  <MW>258.24</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>2</HydrationNumber>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>CO32-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-2410.63</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-2718.66</DelHf_kJ_mol>
+  <Cp_J_mol_K>300</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Sulfate</Name>
+  <Formula>K2SO4</Formula>
+  <MW>174.26</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1321.3</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1431.8</DelHf_kJ_mol>
+  <Cp_J_mol_K>131.5</Cp_J_mol_K>
+  <Tf_C>1069</Tf_C>
+  <Hfus_at_Tf_kJ_mol>36.4</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.66</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Bromide</Name>
+  <Formula>KBr</Formula>
+  <MW>119</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>Br-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-380.47</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-393.8</DelHf_kJ_mol>
+  <Cp_J_mol_K>52.316</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Chloride</Name>
+  <Formula>KCl</Formula>
+  <MW>74.55</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>Cl-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-409.34</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-431.3</DelHf_kJ_mol>
+  <Cp_J_mol_K>51.3</Cp_J_mol_K>
+  <Tf_C>770.85</Tf_C>
+  <Hfus_at_Tf_kJ_mol>26.53</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>1.988</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Perchlorate</Name>
+  <Formula>KClO4</Formula>
+  <MW>138.55</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>ClO4-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-303.1</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-432.8</DelHf_kJ_mol>
+  <Cp_J_mol_K>112.4</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.52</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Hydrogen Carbonate</Name>
+  <Formula>KHCO3</Formula>
+  <MW>100.12</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>HCO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-868.7</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-963.2</DelHf_kJ_mol>
+  <Cp_J_mol_K>85.51</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.17</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Iodide</Name>
+  <Formula>KI</Formula>
+  <MW>166</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>I-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-324.89</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-327.9</DelHf_kJ_mol>
+  <Cp_J_mol_K>52.93</Cp_J_mol_K>
+  <Tf_C>680.85</Tf_C>
+  <Hfus_at_Tf_kJ_mol>24.016</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>26.85</DenS_T_C>
+  <DenS_g_mL>3.119</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Nitrate</Name>
+  <Formula>KNO3</Formula>
+  <MW>101.1</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>K+</PositiveIon>
+  <NegativeIon>NO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-394.86</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-494.63</DelHf_kJ_mol>
+  <Cp_J_mol_K>96.4</Cp_J_mol_K>
+  <Tf_C>337</Tf_C>
+  <Hfus_at_Tf_kJ_mol>10.1</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.11</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Lithium (ion)</Name>
+  <Formula>Li+</Formula>
+  <MW>6.94</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>1</Charge>
+  <DelGF_kJ_mol>-293.31</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-278.49</DelHf_kJ_mol>
+  <Cp_J_mol_K>68.6</Cp_J_mol_K>
+  <Tf_C>180.54</Tf_C>
+  <Hfus_at_Tf_kJ_mol>3</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>20</DenS_T_C>
+  <DenS_g_mL>0.532</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Lithium Sulfate</Name>
+  <Formula>Li2SO4</Formula>
+  <MW>109.94</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Li+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1321.7</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1436.49</DelHf_kJ_mol>
+  <Cp_J_mol_K>117.6</Cp_J_mol_K>
+  <Tf_C>859</Tf_C>
+  <Hfus_at_Tf_kJ_mol>7.5</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.21</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Lithium Bromide</Name>
+  <Formula>LiBr</Formula>
+  <MW>86.85</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Li+</PositiveIon>
+  <NegativeIon>Br-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-341.63</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-350.91</DelHf_kJ_mol>
+  <Cp_J_mol_K>48.94</Cp_J_mol_K>
+  <Tf_C>547</Tf_C>
+  <Hfus_at_Tf_kJ_mol>17.6</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>3.464</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Lithium Chloride</Name>
+  <Formula>LiCl</Formula>
+  <MW>42.39</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Li+</PositiveIon>
+  <NegativeIon>Cl-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-384.01</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-408.26</DelHf_kJ_mol>
+  <Cp_J_mol_K>48.03</Cp_J_mol_K>
+  <Tf_C>610</Tf_C>
+  <Hfus_at_Tf_kJ_mol>19.9</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.07</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Lithium Perchlorate</Name>
+  <Formula>LiClO4</Formula>
+  <MW>106.39</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Li+</PositiveIon>
+  <NegativeIon>ClO4-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>0</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-381</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>236</Tf_C>
+  <Hfus_at_Tf_kJ_mol>29</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.428</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Lithium Iodide</Name>
+  <Formula>LiI</Formula>
+  <MW>133.85</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Li+</PositiveIon>
+  <NegativeIon>I-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-269.67</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-270.08</DelHf_kJ_mol>
+  <Cp_J_mol_K>50.28</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Lithium Nitrate</Name>
+  <Formula>LiNO3</Formula>
+  <MW>195.85</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Li+</PositiveIon>
+  <NegativeIon>NO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-381.1</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-483.13</DelHf_kJ_mol>
+  <Cp_J_mol_K>1</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Magnesium Perchlorate</Name>
+  <Formula>Mg(ClO4)2</Formula>
+  <MW>223.21</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Mg2+</PositiveIon>
+  <NegativeIon>ClO4-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>2</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>0</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-568.9</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.2</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Magnesium Nitrate</Name>
+  <Formula>Mg(NO3)2</Formula>
+  <MW>148.31</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Mg2+</PositiveIon>
+  <NegativeIon>NO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>2</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-589.4</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-790.65</DelHf_kJ_mol>
+  <Cp_J_mol_K>141.9</Cp_J_mol_K>
+  <Tf_C>89.9</Tf_C>
+  <Hfus_at_Tf_kJ_mol>16</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>60</DenS_T_C>
+  <DenS_g_mL>1.464</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Magnesium (ion)</Name>
+  <Formula>Mg2+</Formula>
+  <MW>24.31</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>2</Charge>
+  <DelGF_kJ_mol>-454.8</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-466.85</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>650</Tf_C>
+  <Hfus_at_Tf_kJ_mol>8.48</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>1.74</DenS_g_mL>
+  <StandardStateMolarVolume_cm3_mol>-21.2</StandardStateMolarVolume_cm3_mol>
+  <MolarVolume_v2i>1.096E-2</MolarVolume_v2i>
+  <MolarVolume_v3i>-9.093E-4</MolarVolume_v3i>
+  <MolarVolume_k1i>1.493</MolarVolume_k1i>
+  <MolarVolume_k2i>-2.144E-3</MolarVolume_k2i>
+  <MolarVolume_k3i>4.751E-4</MolarVolume_k3i>
+</compound>
+<compound>
+  <Name>Magnesium Bromide</Name>
+  <Formula>MgBr2</Formula>
+  <MW>184.11</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Mg2+</PositiveIon>
+  <NegativeIon>Br-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>2</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-503.8</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-524.3</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>711</Tf_C>
+  <Hfus_at_Tf_kJ_mol>39.3</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>3.72</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Magnesium Chloride</Name>
+  <Formula>MgCl2</Formula>
+  <MW>95.21</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Mg2+</PositiveIon>
+  <NegativeIon>Cl-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>2</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-592.07</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-641.62</DelHf_kJ_mol>
+  <Cp_J_mol_K>71.38</Cp_J_mol_K>
+  <Tf_C>714</Tf_C>
+  <Hfus_at_Tf_kJ_mol>43.1</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.325</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Magnesium Iodide</Name>
+  <Formula>MgI2</Formula>
+  <MW>278.11</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Mg2+</PositiveIon>
+  <NegativeIon>I-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>2</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-358.2</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-364</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>501</Tf_C>
+  <Hfus_at_Tf_kJ_mol>21.9</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>4.43</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Magnesium Sulfate</Name>
+  <Formula>MgSO4</Formula>
+  <MW>120.37</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Mg2+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1170.6</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1284.9</DelHf_kJ_mol>
+  <Cp_J_mol_K>96.48</Cp_J_mol_K>
+  <Tf_C>1126.85</Tf_C>
+  <Hfus_at_Tf_kJ_mol>14.6</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.793</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium (ion)</Name>
+  <Formula>Na+</Formula>
+  <MW>22.99</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>1</Charge>
+  <DelGF_kJ_mol>-261.905</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-240.12</DelHf_kJ_mol>
+  <Cp_J_mol_K>176.7</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+  <StandardStateMolarVolume_cm3_mol>-1.2</StandardStateMolarVolume_cm3_mol>
+  <MolarVolume_v2i>7.748E-2</MolarVolume_v2i>
+  <MolarVolume_v3i>-13.8E-4</MolarVolume_v3i>
+  <MolarVolume_k1i>0.9758</MolarVolume_k1i>
+  <MolarVolume_k2i>-2.628E-3</MolarVolume_k2i>
+  <MolarVolume_k3i>6.309E-4</MolarVolume_k3i>
+  <CpAq_a>600.62</CpAq_a>
+  <CpAq_b>-1.1006</CpAq_b>
+  <CpAq_c>-23232</CpAq_c>
+</compound>
+<compound>
+  <Name>Sodium Carbonate (1)</Name>
+  <Formula>Na2CO3.2Na2SO4</Formula>
+  <MW>390.07</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>CO32-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-3593.19</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-3921.49</DelHf_kJ_mol>
+  <Cp_J_mol_K>840.07</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Carbonate (2)</Name>
+  <Formula>Na2CO3.3NaHCO3</Formula>
+  <MW>358.01</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>CO32-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-3602.78</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-3982.7</DelHf_kJ_mol>
+  <Cp_J_mol_K>182.03</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Carbonate (3)</Name>
+  <Formula>Na2CO3.NaHCO3.2H2O</Formula>
+  <MW>226.03</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>2</HydrationNumber>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>CO32-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-2380.11</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-2684.9</DelHf_kJ_mol>
+  <Cp_J_mol_K>256.8</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Potassium Molybdate</Name>
+  <Formula>Na2S2O8</Formula>
+  <MW>238.1</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>S2O82-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1638.13</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1893.64</DelHf_kJ_mol>
+  <Cp_J_mol_K>665.38</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.3</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Sulfate</Name>
+  <Formula>Na2SO4</Formula>
+  <MW>142.04</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1269.85</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1387.82</DelHf_kJ_mol>
+  <Cp_J_mol_K>128.2</Cp_J_mol_K>
+  <Tf_C>883.85</Tf_C>
+  <Hfus_at_Tf_kJ_mol>23.6</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>20</DenS_T_C>
+  <DenS_g_mL>2.69</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Sulfate Decahydrate</Name>
+  <Formula>Na2SO4.10H2O</Formula>
+  <MW>322.19</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>10</HydrationNumber>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-3646.85</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-4327.26</DelHf_kJ_mol>
+  <Cp_J_mol_K>-246.6</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>1.46</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Sulfate (1)</Name>
+  <Formula>Na2SO4.(NH4)2SO4.4H2O</Formula>
+  <MW>346.24</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>4</HydrationNumber>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-3127.82</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-3752.02</DelHf_kJ_mol>
+  <Cp_J_mol_K>874.92</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Bromide</Name>
+  <Formula>NaBr</Formula>
+  <MW>102.89</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>Br-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-349.27</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-361.41</DelHf_kJ_mol>
+  <Cp_J_mol_K>51.89</Cp_J_mol_K>
+  <Tf_C>746.85</Tf_C>
+  <Hfus_at_Tf_kJ_mol>26.11</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>3.201</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Bromide Dihydrate</Name>
+  <Formula>NaBr.2H2O</Formula>
+  <MW>138.92</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>2</HydrationNumber>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>Br-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-828.65</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-948.05</DelHf_kJ_mol>
+  <Cp_J_mol_K>-1.5</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Chloride</Name>
+  <Formula>NaCl</Formula>
+  <MW>58.44</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>Cl-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-384.02</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-411.12</DelHf_kJ_mol>
+  <Cp_J_mol_K>50.5</Cp_J_mol_K>
+  <Tf_C>800.85</Tf_C>
+  <Hfus_at_Tf_kJ_mol>28.16</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.17</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Chloride Dihydrate</Name>
+  <Formula>NaCl.2H2O</Formula>
+  <MW>94.47</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>2</HydrationNumber>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>Cl-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-858.2</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-1001.74</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>800.85</Tf_C>
+  <Hfus_at_Tf_kJ_mol>28.16</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Perchlorate</Name>
+  <Formula>NaClO4</Formula>
+  <MW>122.44</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>ClO4-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-254.85</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-383.3</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.52</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Iodide</Name>
+  <Formula>NaI</Formula>
+  <MW>149.89</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>I-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-281.5</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-292</DelHf_kJ_mol>
+  <Cp_J_mol_K>52.2</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Glaserite</Name>
+  <Formula>NaK3(SO4)2</Formula>
+  <MW>332.41</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NaK32+</PositiveIon>
+  <NegativeIon>SO42-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>2</NegativeIonStoichCoeff>
+  <StoichSum>4</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-2622.82</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-2854.62</DelHf_kJ_mol>
+  <Cp_J_mol_K>287.5</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Potassium Carbonate Hexahydrate</Name>
+  <Formula>NaKCO3.6H2O</Formula>
+  <MW>230.19</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>6</HydrationNumber>
+  <PositiveIon>NaK2+</PositiveIon>
+  <NegativeIon>CO32-</NegativeIon>
+  <PositiveIonStoichCoeff>2</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>3</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-2495.69</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-2920.78</DelHf_kJ_mol>
+  <Cp_J_mol_K>300</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Nitrate</Name>
+  <Formula>NaNO3</Formula>
+  <MW>84.99</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>NO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-367.01</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-467.98</DelHf_kJ_mol>
+  <Cp_J_mol_K>93.04</Cp_J_mol_K>
+  <Tf_C>307</Tf_C>
+  <Hfus_at_Tf_kJ_mol>15</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>20</DenS_T_C>
+  <DenS_g_mL>2.261</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Sodium Nitrate (1)</Name>
+  <Formula>NaNO3.Na2SO4.H2O</Formula>
+  <MW>245.05</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>True</HydratedSalt>
+  <HydrationNumber>1</HydrationNumber>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>NO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-1876.74</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-2152.96</DelHf_kJ_mol>
+  <Cp_J_mol_K>300</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Ammonium (ion)</Name>
+  <Formula>NH4+</Formula>
+  <MW>18.04</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>1</Charge>
+  <DelGF_kJ_mol>-79.31</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-132.51</DelHf_kJ_mol>
+  <Cp_J_mol_K>79.9</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+  <StandardStateMolarVolume_cm3_mol>18.2</StandardStateMolarVolume_cm3_mol>
+  <MolarVolume_v2i>1.604E-2</MolarVolume_v2i>
+  <MolarVolume_v3i>-1.957E-4</MolarVolume_v3i>
+  <MolarVolume_k1i>0.4435</MolarVolume_k1i>
+  <MolarVolume_k2i>-0.7984E-3</MolarVolume_k2i>
+  <MolarVolume_k3i>0.5941E-4</MolarVolume_k3i>
+  <CpAq_a>71.008</CpAq_a>
+  <CpAq_b>0</CpAq_b>
+  <CpAq_c>0</CpAq_c>
+</compound>
+<compound>
+  <Name>Ammonium Bromide</Name>
+  <Formula>NH4Br</Formula>
+  <MW>97.94</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NH4+</PositiveIon>
+  <NegativeIon>Br-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-175.2</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-270.83</DelHf_kJ_mol>
+  <Cp_J_mol_K>96</Cp_J_mol_K>
+  <Tf_C>42.36</Tf_C>
+  <Hfus_at_Tf_kJ_mol>13.389</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>42.36</DenS_T_C>
+  <DenS_g_mL>1.856</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Ammonium Chloride</Name>
+  <Formula>NH4Cl</Formula>
+  <MW>53.49</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NH4+</PositiveIon>
+  <NegativeIon>Cl-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-203.6</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-314</DelHf_kJ_mol>
+  <Cp_J_mol_K>84.1</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>20</DenS_T_C>
+  <DenS_g_mL>1.526</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Ammonium Perchlorate</Name>
+  <Formula>NH4ClO4</Formula>
+  <MW>117.49</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NH4+</PositiveIon>
+  <NegativeIon>ClO4-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-88.75</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-295.31</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>1.951</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Ammonium Iodide</Name>
+  <Formula>NH4I</Formula>
+  <MW>144.94</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NH4+</PositiveIon>
+  <NegativeIon>I-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-120.49</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-191.58</DelHf_kJ_mol>
+  <Cp_J_mol_K>-0.364</Cp_J_mol_K>
+  <Tf_C>551</Tf_C>
+  <Hfus_at_Tf_kJ_mol>21</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.514</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Ammonium Nitrate</Name>
+  <Formula>NH4NO3</Formula>
+  <MW>80.04</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>NH4+</PositiveIon>
+  <NegativeIon>NO3-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-183.87</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-365.56</DelHf_kJ_mol>
+  <Cp_J_mol_K>139.3</Cp_J_mol_K>
+  <Tf_C>169.6</Tf_C>
+  <Hfus_at_Tf_kJ_mol>6.402</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>1.725</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Nitrate (ion)</Name>
+  <Formula>NO3-</Formula>
+  <MW>62</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>-1</Charge>
+  <DelGF_kJ_mol>-111.3</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-207.4</DelHf_kJ_mol>
+  <Cp_J_mol_K>-86.6</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+  <StandardStateMolarVolume_cm3_mol>29</StandardStateMolarVolume_cm3_mol>
+  <MolarVolume_v2i>10.78E-2</MolarVolume_v2i>
+  <MolarVolume_v3i>-4.537E-4</MolarVolume_v3i>
+  <MolarVolume_k1i>1.307</MolarVolume_k1i>
+  <MolarVolume_k2i>-2.751E-3</MolarVolume_k2i>
+  <MolarVolume_k3i>0.0439E-4</MolarVolume_k3i>
+  <CpAq_a>2.2926</CpAq_a>
+  <CpAq_b>0.1211</CpAq_b>
+  <CpAq_c>-9753.2</CpAq_c>
+</compound>
+<compound>
+  <Name>Sulfate (ion)</Name>
+  <Formula>SO42-</Formula>
+  <MW>96.06</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon></PositiveIon>
+  <NegativeIon></NegativeIon>
+  <PositiveIonStoichCoeff>0</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>0</NegativeIonStoichCoeff>
+  <StoichSum>0</StoichSum>
+  <Charge>-2</Charge>
+  <DelGF_kJ_mol>-744.53</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-909.27</DelHf_kJ_mol>
+  <Cp_J_mol_K>-293</Cp_J_mol_K>
+  <Tf_C>-273.15</Tf_C>
+  <Hfus_at_Tf_kJ_mol>0</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>-273.15</DenS_T_C>
+  <DenS_g_mL>0</DenS_g_mL>
+  <StandardStateMolarVolume_cm3_mol>14</StandardStateMolarVolume_cm3_mol>
+  <MolarVolume_v2i>13.36E-2</MolarVolume_v2i>
+  <MolarVolume_v3i>-27.39E-4</MolarVolume_v3i>
+  <MolarVolume_k1i>4.837</MolarVolume_k1i>
+  <MolarVolume_k2i>-2.927E-3</MolarVolume_k2i>
+  <MolarVolume_k3i>6.793E-4</MolarVolume_k3i>
+  <CpAq_a>643.3</CpAq_a>
+  <CpAq_b>-1.5857</CpAq_b>
+  <CpAq_c>-17536</CpAq_c>
+</compound>
+<compound>
+  <Name>Hydron</Name>
+  <Formula>H+</Formula>
+  <MW>1.00739</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <Charge>+1</Charge>
+  <DelGF_kJ_mol>0</DelGF_kJ_mol>
+  <DelHf_kJ_mol>0</DelHf_kJ_mol>
+  <Cp_J_mol_K>0</Cp_J_mol_K>
+  <CpAq_a>0</CpAq_a>
+  <CpAq_b>0</CpAq_b>
+  <CpAq_c>0</CpAq_c>
+</compound>
+<compound>
+  <Name>Hydroxide</Name>
+  <Formula>OH-</Formula>
+  <MW>17.008</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <Charge>-1</Charge>
+  <DelGF_kJ_mol>-157.244</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-229.994</DelHf_kJ_mol>
+  <Cp_J_mol_K>-148.8</Cp_J_mol_K>
+  <CpAq_a>1418.2</CpAq_a>
+  <CpAq_b>-3.4446</CpAq_b>
+  <CpAq_c>-51473</CpAq_c>
+</compound>
+<compound>
+  <Name>Salt</Name>
+  <Formula>NaCl</Formula>
+  <MW>58.44</MW>
+  <Ion>False</Ion>
+  <Salt>True</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>Cl-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-384.02</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-411.12</DelHf_kJ_mol>
+  <Cp_J_mol_K>50.5</Cp_J_mol_K>
+  <Tf_C>800.85</Tf_C>
+  <Hfus_at_Tf_kJ_mol>28.16</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.17</DenS_g_mL>
+</compound>
+<compound>
+  <Name>Bisulfide (ion)</Name>
+  <Formula>HS-</Formula>
+  <MW>33.07</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <Charge>-1</Charge>
+</compound>
+<compound>
+  <Name>Bicarbonate (ion)</Name>
+  <Formula>HCO3-</Formula>
+  <MW>61.0168</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <Charge>-1</Charge>
+</compound>
+<compound>
+  <Name>Carbamate (ion)</Name>
+  <Formula>H2NCOO-</Formula>
+  <MW>60.0321</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <Charge>-1</Charge>
+</compound>
+<compound>
+  <Name>Carbonate (ion)</Name>
+  <Formula>CO3-2</Formula>
+  <MW>60.0089</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <Charge>-2</Charge>
+</compound>
+<compound>
+  <Name>Sulfide (ion)</Name>
+  <Formula>S-2</Formula>
+  <MW>32.06</MW>
+  <Ion>True</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <Charge>-2</Charge>
+</compound>
+<compound>
+  <Name>Sodium Hydroxide</Name>
+  <Formula>NaOH</Formula>
+  <MW>39.997</MW>
+  <Ion>False</Ion>
+  <Salt>False</Salt>
+  <HydratedSalt>False</HydratedSalt>
+  <PositiveIon>Na+</PositiveIon>
+  <NegativeIon>OH-</NegativeIon>
+  <PositiveIonStoichCoeff>1</PositiveIonStoichCoeff>
+  <NegativeIonStoichCoeff>1</NegativeIonStoichCoeff>
+  <StoichSum>2</StoichSum>
+  <Charge>0</Charge>
+  <DelGF_kJ_mol>-380.17</DelGF_kJ_mol>
+  <DelHf_kJ_mol>-427</DelHf_kJ_mol>
+  <Cp_J_mol_K>59.66</Cp_J_mol_K>
+  <Tf_C>318</Tf_C>
+  <Hfus_at_Tf_kJ_mol>8.14</Hfus_at_Tf_kJ_mol>
+  <DenS_T_C>25</DenS_T_C>
+  <DenS_g_mL>2.13</DenS_g_mL>
+</compound>
+</compounds>

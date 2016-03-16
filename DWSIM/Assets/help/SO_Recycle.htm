@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<script src="ContentScripts.js"></script>
+<head>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css" >
+</head>
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ======================================= -->
+<!-- ================================================================================== -->
+<body onload="LoadMenue()">
+
+<H2>Recycle</H2>
+<a href="SO_Reactor.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="SO_Adjust.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+<p>The Recycle operation is composed by a block in the flowsheet which does convergence
+verifications in systems were downstream material connects somewhere upstream in the
+diagram. With this tool it is possible to build complex flowsheets, with many recycles, and solve
+them in an efficient way by using the acceleration methods presents in this logical operation.<br><br>
+
+To include this operation the recycled stream is connected to the input of that object. The output is connected
+to an object somewhere earlier in the simulation as input again.
+</p>
+
+<table>
+<tr>
+<td><img src="pictures/SO_Recycle.png"></td>
+
+<td>
+
+
+<h3>Input Parameters</h3>
+<b>Acceleration Method</b><br>
+There are two acceleration methods available: Wegstein and Dominant Eigenvalue. The
+Wegstein method must be used when there isn’t a significant interaction between convergent
+variables, in the contrary the other method can be used. The successive substitution method is
+slow, but convergence is guaranteed.<br><br>
+
+<b>Wegstein parameters</b><br>
+The Wegstein method requires some parameters which can be edited by the user. <br><br>
+
+<b>Eigenvalue parameters</b><br>
+The dominant eigenvalue does not require any additional parameter.<br><br>
+ 
+<b>Convergence parameters</b><br>
+The user can define convergence parameters for temperature, pressure and mass flow in the recycle, 
+that is, the minimum acceptable values for the difference in these values between the inlet and outlet streams, which,
+rigorously, must be identical. The smaller these values are, the more time is used by the calculator
+in order to converge the recycle.<br><br>
+
+
+<h3>Results</h3>
+As a result, the actual error values are shown, together with the necessary convergence iteration steps.
+
+<hr>
+<H2>Energy Recycle</H2>
+The Energy Recycle logical operation works the same way as the normal Recycle, except that it
+is aimed at Energy Streams. Here, instead of defining convergence parameters for temperature,
+pressure and flow rate, you’ll define the convergence error for the energy only.
+<br><br>
+</td>
+
+</tr>
+</table>
+
+<br><br>
+
+</BODY>
+</HTML>

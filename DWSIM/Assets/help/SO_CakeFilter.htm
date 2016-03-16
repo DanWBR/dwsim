@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<script src="ContentScripts.js"></script>
+<head>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+</head>
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ======================================= -->
+<!-- ================================================================================== -->
+<body onload="LoadMenue()">
+
+<H2>Continuous Cake Filter</H2>
+<a href="SO_SolidSeparator.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="SO_Reactor.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+<p>In a continuous filter, the feed, filtrate and cake move at steady constant rates. It is evident
+that the process consists of several steps in series - cake formation, washing, drying and
+discharging - and that each step involves progressive and continual change in conditions. The
+pressure drop across the filter during cake formation is, however, held constant.</p>
+
+<table>
+<tr>
+<td><img src="pictures/SO_CakeFilter1.png"></td>
+
+<td>
+<h3>Input Parameters</h3>
+<ul>
+<li><b>Solids Separation Efficiency: </b>defines the amount of solids in the liquid stream. 100% efficiency means no solids in the liquid stream.</li>
+<li><b>Liquids Separation Efficiency: </b>defines the amount of liquid in the solids stream. 100% efficiency means no liquid in the solids stream.</li>
+</ul>
+
+<h3>Calculation Method</h3>
+For a continuous cake filter, the equation that relates the filter characteristics
+with the rate of solids production is <a href="SO_CakeFilter.htm#Refs">[1]</a>:<br>
+<img src="pictures/SO_CakeFilter2.png"><br><vr>
+
+where
+<table style="margin-left:50px;">
+<tr><td><img src="pictures/SO_CakeFilter3.png"> </td><td>rate of solids production [kg/s]</td></tr>
+<tr><td>A<sub>T</sub>: </td><td>total filter area [m²]</td></tr>
+<tr><td>&#916P: </td><td>total pressure drop [Pa]</td></tr>
+<tr><td>f: </td><td>fraction of filter area available for cake formation</td></tr>
+<tr><td>c: </td><td>solids concentration in the solids stream</td></tr>
+<tr><td>&#945: </td><td>specific cake resistance [m/kg]</td></tr>
+<tr><td>R<sub>m</sub>: </td><td>filter medium resistance, [1/m]</td></tr>
+<tr><td>n: </td><td>drum speed [1/s]</td></tr>
+</table>
+<br>
+
+<h3>Input and Output Parameters</h3>
+<ul>
+<li><b>Filter Medium Resistance: </b>Filter medium flow resistance</li>
+<li><b>Specific Cake Resistance: </b>Specific cake flow resistance</li>
+<li><b>Cycle Time: </b>Filter cycle time</li>
+<li><b>Cake Relative Humidity: </b>Filter cake moisture in % wet basis</li>
+<li><b>Filter Calculation Mode: </b>Design or Simulation<br>
+
+<table style="margin-left:20px;">
+<tr><td>Design mode: </td><td>DWSIM will calculate the filter area given the total pressure drop</td></tr>
+<tr><td>Simulation mode: </td><td>DWSIM will calculate the total pressure drop given the filter area</td></tr>
+</table>
+</li>
+<li><b>Total Filter Area: </b>Filter area measured perpendicularly to the direction of flow</li>
+<li><b>Pressure Drop: </b>Total pressure drop across the filter (cake + medium).</li>
+</ul>
+</td>
+
+</tr>
+</table>
+
+<hr>
+<h3  id="Refs">References</h3>
+<ol>
+<li>
+McCabe W, Smith J, Harriott P.<br>
+<a href="http://books.google.com.br/books?id=u3SvHtIOwj8C" target="extern">Unit Operations of Chemical Engineering.</a>
+ Chemical Engineering Series. McGraw-Hill Education. 2005.<br>
+
+</li></ol>
+</BODY>
+</HTML>

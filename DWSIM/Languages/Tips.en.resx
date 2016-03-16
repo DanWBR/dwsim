@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ADJT001" xml:space="preserve">
+    <value>If you want the Adjust Op to be automatically solved by the calculator, set the "Simultaneous Adjust" property to "True". This way you won't need to open the Control Panel and your variable will be adjusted automatically whenever the flowsheet is calculated.</value>
+  </data>
+  <data name="BENV001" xml:space="preserve">
+    <value>If you want to add some experimental data to the diagram, enter the data in the corresponding table before requesting the calculation.</value>
+  </data>
+  <data name="BENV002" xml:space="preserve">
+    <value>The experimental data "y" column is used only in the xy diagrams. To show both experimental bubble and dew points in a T/P-xy diagram, enter all mole fractions in the "x" column.</value>
+  </data>
+  <data name="BENV003" xml:space="preserve">
+    <value>The experimental data can be copied and pasted directly from Microsoft Excel.</value>
+  </data>
+  <data name="CAPE001" xml:space="preserve">
+    <value>When running simulations containing CAPE-OPEN unit ops in another computer, make sure that these components are installed and registered properly on it.</value>
+  </data>
+  <data name="CSTR001" xml:space="preserve">
+    <value>Only kinetic type reactions will be considered by the CSTR.</value>
+  </data>
+  <data name="CSUO001" xml:space="preserve">
+    <value>To get help with scripts, take a look at the examples of Membrane and Hydrocyclone Unit Operations, located in the samples folder.</value>
+  </data>
+  <data name="DCOL001" xml:space="preserve">
+    <value>It is recommended that the column propertiy editing be carried out with the calculator disabled.</value>
+  </data>
+  <data name="DCOL002" xml:space="preserve">
+    <value>When editing the column connections, remember to click any cell other than the one being edited, so that changes are recognized by DWSIM.</value>
+  </data>
+  <data name="DCOL003" xml:space="preserve">
+    <value>Remember to set the pressure of the intermediate stages of the column.</value>
+  </data>
+  <data name="FLSH001" xml:space="preserve">
+    <value>Press F5 on any area inside the flowsheet to start a full calculation.</value>
+  </data>
+  <data name="FLSH002" xml:space="preserve">
+    <value>Use the quick connection tool on the toolbar to quickly connect objects by pressing the CTRL key and dragging the cursor from the first to the second object.</value>
+  </data>
+  <data name="FLSH003" xml:space="preserve">
+    <value>Hold SHIFT during DWSIM initialization to reset the settings to their default values.</value>
+  </data>
+  <data name="FLSH004" xml:space="preserve">
+    <value>See some specific help for the object being added by selecting it in the flowsheet and pressing the F1 key. This also works for Utilities.</value>
+  </data>
+  <data name="FLSH005" xml:space="preserve">
+    <value>To view detailed results of the calculations in real time, enable console redirection and select a debug mode. You must restart DWSIM for the changes to take effect.</value>
+  </data>
+  <data name="FLSH006" xml:space="preserve">
+    <value>Some object types display their main editing window when you do a double-click on them in the flowsheet.</value>
+  </data>
+  <data name="FLSH007" xml:space="preserve">
+    <value>After finishing updating the object connections, call the flowsheet solver by pressing the F5 key.</value>
+  </data>
+  <data name="FOPT001" xml:space="preserve">
+    <value>The optimizer window can also be freely repositioned just like the flowsheet sub-windows.</value>
+  </data>
+  <data name="FSAN001" xml:space="preserve">
+    <value>The sensitivity analysis tool window can also be freely repositioned.</value>
+  </data>
+  <data name="MSTR001" xml:space="preserve">
+    <value>You can edit the composition of a material stream through a double click with the left mouse button.</value>
+  </data>
+  <data name="MSTR002" xml:space="preserve">
+    <value>The material stream context menu offers some useful tools for managing its data, such as copying data from another stream, restoring original data, exporting the data to the clipboard, etc.</value>
+  </data>
+  <data name="MSTR003" xml:space="preserve">
+    <value>To prevent the composition edit window from showing after adding a material stream, hold the SHIFT key while dropping it in the flowsheet.</value>
+  </data>
+  <data name="PENV001" xml:space="preserve">
+    <value>When you request a calculation, all diagram types are calculated simultaneously. It isn't necessary to request another calculation if you want to see a different diagram on the screen.</value>
+  </data>
+  <data name="PFR001" xml:space="preserve">
+    <value>Only kinetic-type reactions will be taken into account by the PFR.</value>
+  </data>
+  <data name="PURE001" xml:space="preserve">
+    <value>The properties shown on this tool are for DWSIM compounds only. CAPE-OPEN compound properties are not displayed here.</value>
+  </data>
+  <data name="RCON001" xml:space="preserve">
+    <value>Only the conversion reactions will be considered by the conversion reactor.</value>
+  </data>
+  <data name="RECY001" xml:space="preserve">
+    <value>It is important to properly define the location of the Recycle in the flowsheet, to avoid unnecessary calculations. Insert it into the nearest point where the calculation flow returns to an already calculated point.</value>
+  </data>
+  <data name="REQL001" xml:space="preserve">
+    <value>The equilibrium reactor is used wherever the user has knowledge of the reactions that will occur. When that is not the case, use the Gibbs reactor.</value>
+  </data>
+  <data name="RGIB001" xml:space="preserve">
+    <value>The gibbs reactor is useful when there is no information about the reactions that may occur in the system. Remember that the mere fact that the results indicate that some kind of reaction will occur doesn't mean that this reaction will be spontaneous!</value>
+  </data>
+</root>

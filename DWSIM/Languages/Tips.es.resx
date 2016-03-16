@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ADJT001" xml:space="preserve">
+    <value>Si desea que el ajuste sea automáticamente resuelto por la Calculadora de DWSIM, establezca la propiedad "Ajuste Simultáneo" a "True". Así que no es necesario abrir el Panel de control y su variable será ajustada automáticamente cada vez que el diagrama de flujo se calcule por completo.</value>
+  </data>
+  <data name="BENV001" xml:space="preserve">
+    <value>Si desea agregar algún dato experimental al diagrama experimental, introduzca los datos de la tabla correspondiente antes de solicitar el cálculo.</value>
+  </data>
+  <data name="BENV002" xml:space="preserve">
+    <value>La columna de datos experimentales "y" sólo se utiliza en los diagramas x-y. Para mostrar tanto los puntos de burbuja y rocío en un diagrama T / P-xy, introduzca todas las fracciones molares en la columna de datos "x".</value>
+  </data>
+  <data name="BENV003" xml:space="preserve">
+    <value>Los datos experimentales se pueden copiar y pegar directamente desde Microsoft Excel.</value>
+  </data>
+  <data name="CAPE001" xml:space="preserve">
+    <value>Al cargar sus simulaciones que contienen operaciones unitarias CAPE-OPEN en otros equipos, asegúrese de que estos componentes están instalados y debidamente registrados en el mismo.</value>
+  </data>
+  <data name="CSTR001" xml:space="preserve">
+    <value>Sólo reacciones de tipo cinética serán consideradas por el CSTR.</value>
+  </data>
+  <data name="CSUO001" xml:space="preserve">
+    <value>Para obtener ayuda con los Scripts, consulte los ejemplos de Membrana e Hidrociclón, ubicados en la carpeta Samples (Ejemplos) de DWSIM.</value>
+  </data>
+  <data name="DCOL001" xml:space="preserve">
+    <value>Se recomienda que de las propiedades de la columna sean editadas con la Calculadora desactivada.</value>
+  </data>
+  <data name="DCOL002" xml:space="preserve">
+    <value>Al editar las conexiones de la columna, recuerde hacer clic en cualquier celda que no sea la que está editando para que los cambios sean reconocidos por DWSIM.</value>
+  </data>
+  <data name="DCOL003" xml:space="preserve">
+    <value>Recuerde que debe ajustar la presión de las etapas intermedias de la columna.</value>
+  </data>
+  <data name="FLSH001" xml:space="preserve">
+    <value>Para calcular el diagrama de flujo rápidamente, haga clic sobre cualquier espacio libre y presione F5.</value>
+  </data>
+  <data name="FLSH002" xml:space="preserve">
+    <value>Utilice la herramienta de conexión rápida en la barra de herramientas para conectar rápidamente un objeto a otro mientras presiona la tecla CTRL.</value>
+  </data>
+  <data name="FLSH003" xml:space="preserve">
+    <value>Pulse SHIFT durante el arranque DWSIM para hacer que su configuración vuelva a sus valores predeterminados.</value>
+  </data>
+  <data name="FLSH004" xml:space="preserve">
+    <value>Consulte la ayuda específica para el objeto que se está agregando seleccionándolo en el diagrama de flujo y presionando la tecla F1. Las utilidades también ofrecen ayuda específica.</value>
+  </data>
+  <data name="FLSH005" xml:space="preserve">
+    <value>Para ver los resultados detallados de los cálculos en tiempo real, habilite la redirección de consola y seleccione un modo de depuración. Debe reiniciar el DWSIM para que los cambios surtan efecto.</value>
+  </data>
+  <data name="FLSH006" xml:space="preserve">
+    <value>Algunos tipos de objetos muestran su ventana principal de propiedades en respuesta de un doble clic en su icono sobre el diagrama de flujo.</value>
+  </data>
+  <data name="FLSH007" xml:space="preserve">
+    <value>Tras finalizar los cambios en las conexiones, vuelva a calcular el diagrama de flujo completo (F5).</value>
+  </data>
+  <data name="FOPT001" xml:space="preserve">
+    <value>La ventana del optimizador también puede ser reposicionada libremente como las ventanas principales de la simulación.</value>
+  </data>
+  <data name="FSAN001" xml:space="preserve">
+    <value>La ventana de la herramienta para análisis de sensibilidad también puede colocarse libremente como las ventanas principales de la simulación.</value>
+  </data>
+  <data name="MSTR001" xml:space="preserve">
+    <value>Puede editar la composición de una corriente de la materia a través de un doble clic con el botón izquierdo del ratón en el objeto en el diagrama de flujo.</value>
+  </data>
+  <data name="MSTR002" xml:space="preserve">
+    <value>El menú de contexto de la corriente en el diagrama de flujo proporciona algunas herramientas útiles para la gestión de datos en una corriente, como copiar datos desde otra corriente, restaurar los datos originales, exportar los datos en el portapapeles, etc.</value>
+  </data>
+  <data name="MSTR003" xml:space="preserve">
+    <value>Para evitar que el cuadro de edición de composición de corriente de materia aparezca al insertar una en el diagrama de flujo, presione SHIFT mientras realiza esta acción.</value>
+  </data>
+  <data name="PENV001" xml:space="preserve">
+    <value>Al aplicar el método, todo diagrama de clases se calculan simultáneamente. Para cambiar la vista del diagrama no es necesario solicitar el cálculo de nuevo.</value>
+  </data>
+  <data name="PFR001" xml:space="preserve">
+    <value>Sólo reacciones de tipo cinéticas serán consideradas por PFR.</value>
+  </data>
+  <data name="PURE001" xml:space="preserve">
+    <value>Las propiedades que se muestran en esta herramienta corresponde a la información de los componentes DWSIM. No se mostrarán las propiedades de los componentes CAPE-OPEN aquí, en caso de que utilice un Paquete de Propiedades CAPE-OPEN.</value>
+  </data>
+  <data name="RCON001" xml:space="preserve">
+    <value>Sólo las reacciones del tipo "conversión" serán consideradas por el reactor de conversión.</value>
+  </data>
+  <data name="RECY001" xml:space="preserve">
+    <value>Es importante definir bien la ubicación del Reciclo en el diagrama de flujo, para evitar cálculos innecesarios. Insertarlo en el punto más cercano del punto donde los flujos de cálculo retornan a un punto ya calculado.</value>
+  </data>
+  <data name="REQL001" xml:space="preserve">
+    <value>El Reactor de Equilibrio es utilizado se tenga conocimiento de las reacciones que se producirán. Cuando este no es el caso, utilice el reactor Gibbs.</value>
+  </data>
+  <data name="RGIB001" xml:space="preserve">
+    <value>El Reactor de Gibbs es útil cuando no hay información acerca de las reacciones que pueden ocurrir en el sistema. Recuerde que el simple hecho del resultado muestre algún tipo de reacción, no quiere decir que esta reacción será espontánea!</value>
+  </data>
+</root>

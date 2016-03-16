@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DWSIM_Reaction_Data>
+  <Reaction>
+    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <StoichBalance>0</StoichBalance>
+    <ReactionHeatCO>0</ReactionHeatCO>
+    <ReactionHeat>635324</ReactionHeat>
+    <Equation>OCO + HOH &lt;--&gt; H+ + HCO3- </Equation>
+    <Name>CO2 ionization</Name>
+    <ID>2c8ec596-9a56-44ae-ac64-cc18f0d19b93</ID>
+    <Description>Sour Water Reaction #1</Description>
+    <BaseReactant>Carbon dioxide</BaseReactant>
+    <ReactionPhase>Liquid</ReactionPhase>
+    <ReactionType>Equilibrium</ReactionType>
+    <ReactionBasis>MolarConc</ReactionBasis>
+    <Kvalue>0</Kvalue>
+    <ReactionGibbsEnergy>622960</ReactionGibbsEnergy>
+    <ConstantKeqValue>0</ConstantKeqValue>
+    <Tmax>2000</Tmax>
+    <Tmin>0</Tmin>
+    <Approach>0</Approach>
+    <Expression>-241.79+536256/(T*1.8)-4.8123E+8/(T*1.8)^2+1.94E+11/(T*1.8)^3-2.96445E+13/(T*1.8)^4</Expression>
+    <KExprType>Expression</KExprType>
+    <Rate>0</Rate>
+    <VelUnit>mol/[m3.s]</VelUnit>
+    <ConcUnit>mol/m3</ConcUnit>
+    <A_Forward>0</A_Forward>
+    <A_Reverse>0</A_Reverse>
+    <E_Forward>0</E_Forward>
+    <E_Reverse>0</E_Reverse>
+    <RateEquationNumerator></RateEquationNumerator>
+    <RateEquationDenominator></RateEquationDenominator>
+    <Compounds>
+      <Compound Name="Carbon dioxide" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="true" />
+      <Compound Name="Hydron" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Bicarbonate (ion)" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Water" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+    </Compounds>
+  </Reaction>
+  <Reaction>
+    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <StoichBalance>0</StoichBalance>
+    <ReactionHeatCO>0</ReactionHeatCO>
+    <ReactionHeat>0</ReactionHeat>
+    <Equation>HCO3- &lt;--&gt; CO3-2 + H+ </Equation>
+    <Name>Carbonate production</Name>
+    <ID>cbe8429e-f72f-4951-be52-c24af880d537</ID>
+    <Description>Sour Water Reaction #2</Description>
+    <BaseReactant>Bicarbonate (ion)</BaseReactant>
+    <ReactionPhase>Liquid</ReactionPhase>
+    <ReactionType>Equilibrium</ReactionType>
+    <ReactionBasis>MolarConc</ReactionBasis>
+    <Kvalue>0</Kvalue>
+    <ReactionGibbsEnergy>0</ReactionGibbsEnergy>
+    <ConstantKeqValue>0</ConstantKeqValue>
+    <Tmax>2000</Tmax>
+    <Tmin>0</Tmin>
+    <Approach>0</Approach>
+    <Expression>-295.60+655893/(T*1.8)-5.9667E+8/(T*1.8)^2+2.4249E+11/(T*1.8)^3-3.7192E+13/(T*1.8)^4</Expression>
+    <KExprType>Expression</KExprType>
+    <Rate>0</Rate>
+    <VelUnit>mol/[m3.s]</VelUnit>
+    <ConcUnit>mol/m3</ConcUnit>
+    <A_Forward>0</A_Forward>
+    <A_Reverse>0</A_Reverse>
+    <E_Forward>0</E_Forward>
+    <E_Reverse>0</E_Reverse>
+    <RateEquationNumerator></RateEquationNumerator>
+    <RateEquationDenominator></RateEquationDenominator>
+    <Compounds>
+      <Compound Name="Carbonate (ion)" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Hydron" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Bicarbonate (ion)" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="true" />
+    </Compounds>
+  </Reaction>
+  <Reaction>
+    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <StoichBalance>0</StoichBalance>
+    <ReactionHeatCO>0</ReactionHeatCO>
+    <ReactionHeat>-86612</ReactionHeat>
+    <Equation>H+ + NH3 &lt;--&gt; NH4+ </Equation>
+    <Name>Ammonia ionization</Name>
+    <ID>1d3ad64c-3864-46be-9510-af16d56e520d</ID>
+    <Description>Sour Water Reaction #3</Description>
+    <BaseReactant>Ammonia</BaseReactant>
+    <ReactionPhase>Vapor</ReactionPhase>
+    <ReactionType>Equilibrium</ReactionType>
+    <ReactionBasis>MolarConc</ReactionBasis>
+    <Kvalue>0</Kvalue>
+    <ReactionGibbsEnergy>-62910</ReactionGibbsEnergy>
+    <ConstantKeqValue>0</ConstantKeqValue>
+    <Tmax>2000</Tmax>
+    <Tmin>0</Tmin>
+    <Approach>0</Approach>
+    <Expression>1.587+11160/(T*1.8)</Expression>
+    <KExprType>Expression</KExprType>
+    <Rate>0</Rate>
+    <VelUnit>mol/[m3.s]</VelUnit>
+    <ConcUnit>mol/m3</ConcUnit>
+    <A_Forward>0</A_Forward>
+    <A_Reverse>0</A_Reverse>
+    <E_Forward>0</E_Forward>
+    <E_Reverse>0</E_Reverse>
+    <RateEquationNumerator></RateEquationNumerator>
+    <RateEquationDenominator></RateEquationDenominator>
+    <Compounds>
+      <Compound Name="Ammonium (ion)" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Hydron" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Ammonia" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="true" />
+    </Compounds>
+  </Reaction>
+  <Reaction>
+    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <StoichBalance>0</StoichBalance>
+    <ReactionHeatCO>0</ReactionHeatCO>
+    <ReactionHeat>-195916</ReactionHeat>
+    <Equation>HCO3- + NH3 &lt;--&gt; H2NCOO- + HOH </Equation>
+    <Name>Carbamate production</Name>
+    <ID>0a511e54-03ef-4e79-ac88-112aa06505a8</ID>
+    <Description>Sour Water Reaction #4</Description>
+    <BaseReactant>Ammonia</BaseReactant>
+    <ReactionPhase>Vapor</ReactionPhase>
+    <ReactionType>Equilibrium</ReactionType>
+    <ReactionBasis>MolarConc</ReactionBasis>
+    <Kvalue>0</Kvalue>
+    <ReactionGibbsEnergy>-212190</ReactionGibbsEnergy>
+    <ConstantKeqValue>0</ConstantKeqValue>
+    <Tmax>2000</Tmax>
+    <Tmin>0</Tmin>
+    <Approach>0</Approach>
+    <Expression>-5.4+3465/(T*1.8)</Expression>
+    <KExprType>Expression</KExprType>
+    <Rate>0</Rate>
+    <VelUnit>mol/[m3.s]</VelUnit>
+    <ConcUnit>mol/m3</ConcUnit>
+    <A_Forward>0</A_Forward>
+    <A_Reverse>0</A_Reverse>
+    <E_Forward>0</E_Forward>
+    <E_Reverse>0</E_Reverse>
+    <RateEquationNumerator></RateEquationNumerator>
+    <RateEquationDenominator></RateEquationDenominator>
+    <Compounds>
+      <Compound Name="Carbamate (ion)" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Bicarbonate (ion)" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Ammonia" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="true" />
+      <Compound Name="Water" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+    </Compounds>
+  </Reaction>
+  <Reaction>
+    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <StoichBalance>0</StoichBalance>
+    <ReactionHeatCO>0</ReactionHeatCO>
+    <ReactionHeat>20630</ReactionHeat>
+    <Equation>HSH &lt;--&gt; HS- + H+ </Equation>
+    <Name>H2S ionization</Name>
+    <ID>c65101da-ccdf-451f-9f30-7129faab973d</ID>
+    <Description>Sour Water Reaction #5</Description>
+    <BaseReactant>Hydrogen sulfide</BaseReactant>
+    <ReactionPhase>Liquid</ReactionPhase>
+    <ReactionType>Equilibrium</ReactionType>
+    <ReactionBasis>MolarConc</ReactionBasis>
+    <Kvalue>0</Kvalue>
+    <ReactionGibbsEnergy>33440</ReactionGibbsEnergy>
+    <ConstantKeqValue>0</ConstantKeqValue>
+    <Tmax>2000</Tmax>
+    <Tmin>0</Tmin>
+    <Approach>0</Approach>
+    <Expression>-293.88+683858/(T*1.8)-6.27125E+8/(T*1.8)^2+2.555E+11/(T*1.8)^3-3.91757E+13/(T*1.8)^4</Expression>
+    <KExprType>Expression</KExprType>
+    <Rate>0</Rate>
+    <VelUnit>mol/[m3.s]</VelUnit>
+    <ConcUnit>mol/m3</ConcUnit>
+    <A_Forward>0</A_Forward>
+    <A_Reverse>0</A_Reverse>
+    <E_Forward>0</E_Forward>
+    <E_Reverse>0</E_Reverse>
+    <RateEquationNumerator></RateEquationNumerator>
+    <RateEquationDenominator></RateEquationDenominator>
+    <Compounds>
+      <Compound Name="Bisulfide (ion)" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Hydron" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Hydrogen sulfide" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="true" />
+    </Compounds>
+  </Reaction>
+  <Reaction>
+    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <StoichBalance>0</StoichBalance>
+    <ReactionHeatCO>0</ReactionHeatCO>
+    <ReactionHeat>0</ReactionHeat>
+    <Equation>HS- &lt;--&gt; S-2 + H+ </Equation>
+    <Name>Sulfide production</Name>
+    <ID>f04d9ebb-7d20-47fc-826f-5c84e0083e16</ID>
+    <Description>Sour Water Reaction #6</Description>
+    <BaseReactant>Bisulfide (ion)</BaseReactant>
+    <ReactionPhase>Liquid</ReactionPhase>
+    <ReactionType>Equilibrium</ReactionType>
+    <ReactionBasis>MolarConc</ReactionBasis>
+    <Kvalue>0</Kvalue>
+    <ReactionGibbsEnergy>0</ReactionGibbsEnergy>
+    <ConstantKeqValue>0</ConstantKeqValue>
+    <Tmax>2000</Tmax>
+    <Tmin>0</Tmin>
+    <Approach>0</Approach>
+    <Expression>-657.965+1649360/(T*1.8)-15.8964E+8/(T*1.8)^2+6.72472E+11/(T*1.8)^3-10.6043E+13/(T*1.8)^4</Expression>
+    <KExprType>Expression</KExprType>
+    <Rate>0</Rate>
+    <VelUnit>mol/[m3.s]</VelUnit>
+    <ConcUnit>mol/m3</ConcUnit>
+    <A_Forward>0</A_Forward>
+    <A_Reverse>0</A_Reverse>
+    <E_Forward>0</E_Forward>
+    <E_Reverse>0</E_Reverse>
+    <RateEquationNumerator></RateEquationNumerator>
+    <RateEquationDenominator></RateEquationDenominator>
+    <Compounds>
+      <Compound Name="Bisulfide (ion)" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="true" />
+      <Compound Name="Sulfide (ion)" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Hydron" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+    </Compounds>
+  </Reaction>
+  <Reaction>
+    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <StoichBalance>0</StoichBalance>
+    <ReactionHeatCO>0</ReactionHeatCO>
+    <ReactionHeat>11820</ReactionHeat>
+    <Equation>HOH &lt;--&gt; OH- + H+ </Equation>
+    <Name>Water self-ionization</Name>
+    <ID>0c14d480-556a-4c41-9689-49cf923cade8</ID>
+    <Description>Sour Water Reaction #7</Description>
+    <BaseReactant>Water</BaseReactant>
+    <ReactionPhase>Liquid</ReactionPhase>
+    <ReactionType>Equilibrium</ReactionType>
+    <ReactionBasis>MolarConc</ReactionBasis>
+    <Kvalue>0</Kvalue>
+    <ReactionGibbsEnergy>71346</ReactionGibbsEnergy>
+    <ConstantKeqValue>0</ConstantKeqValue>
+    <Tmax>2000</Tmax>
+    <Tmin>0</Tmin>
+    <Approach>0</Approach>
+    <Expression>39.5554-177822/(T*1.8)+1.843E+8/(T*1.8)^2-0.8541E+11/(T*1.8)^3+1.4292E+13/(T*1.8)^4</Expression>
+    <KExprType>Expression</KExprType>
+    <Rate>0</Rate>
+    <VelUnit>mol/[m3.s]</VelUnit>
+    <ConcUnit>mol/m3</ConcUnit>
+    <A_Forward>0</A_Forward>
+    <A_Reverse>0</A_Reverse>
+    <E_Forward>0</E_Forward>
+    <E_Reverse>0</E_Reverse>
+    <RateEquationNumerator></RateEquationNumerator>
+    <RateEquationDenominator></RateEquationDenominator>
+    <Compounds>
+      <Compound Name="Hydroxide" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Hydron" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Water" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="true" />
+    </Compounds>
+  </Reaction>
+  <Reaction>
+    <Type>DWSIM.DWSIM.ClassesBasicasTermodinamica.Reaction</Type>
+    <StoichBalance>0</StoichBalance>
+    <ReactionHeatCO>0</ReactionHeatCO>
+    <ReactionHeat>-177870.348392</ReactionHeat>
+    <Equation>NaOH &lt;--&gt; OH- + Na+ </Equation>
+    <Name>Sodium Hydroxide dissociation</Name>
+    <ID>168d2dd9-9294-4dca-8f4a-0a25efc4f329</ID>
+    <Description>Sour Water Reaction #8</Description>
+    <BaseReactant>Sodium Hydroxide</BaseReactant>
+    <ReactionPhase>Liquid</ReactionPhase>
+    <ReactionType>Equilibrium</ReactionType>
+    <ReactionBasis>MolarConc</ReactionBasis>
+    <Kvalue>0</Kvalue>
+    <ReactionGibbsEnergy>-158956.332478</ReactionGibbsEnergy>
+    <ConstantKeqValue>0</ConstantKeqValue>
+    <Tmax>2000</Tmax>
+    <Tmin>0</Tmin>
+    <Approach>0</Approach>
+    <Expression>15.72</Expression>
+    <KExprType>Expression</KExprType>
+    <Rate>0</Rate>
+    <VelUnit>mol/[m3.s]</VelUnit>
+    <ConcUnit>mol/m3</ConcUnit>
+    <A_Forward>0</A_Forward>
+    <A_Reverse>0</A_Reverse>
+    <E_Forward>0</E_Forward>
+    <E_Reverse>0</E_Reverse>
+    <RateEquationNumerator></RateEquationNumerator>
+    <RateEquationDenominator></RateEquationDenominator>
+    <Compounds>
+      <Compound Name="Hydroxide" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+      <Compound Name="Sodium Hydroxide" StoichCoeff="-1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="true" />
+      <Compound Name="Sodium (ion)" StoichCoeff="1" DirectOrder="0" ReverseOrder="0" IsBaseReactant="false" />
+    </Compounds>
+  </Reaction>
+</DWSIM_Reaction_Data>

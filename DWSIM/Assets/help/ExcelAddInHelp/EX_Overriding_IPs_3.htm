@@ -1,0 +1,524 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<title>Excel Addin</title>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+</head>
+<body>
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ======================================= -->
+<!-- ================================================================================== -->
+
+<H2>Excel Addin</H2>
+<a href="EX_Usage_2.htm" ><img src="pictures/arrow-up.gif"></a>
+<a href="EX_Introduction_0.htm" ><img src="pictures/arrow-down.gif"></a>
+<hr>
+<H3>Overriding Interaction Parameters</H3>
+
+
+You can directly override the interaction parameters used by Property Packages when calling calculations 
+from Excel by providing n x n matrices containing the values, where n is the number of compounds. 
+This feature is optional and should be used only when you know exactly what you are doing.<br><br>
+
+The following table shows the user-definable interaction parameters for each Property Package:<br> 
+
+<table class="GreyBG" cellpadding="4" border=1>
+
+<tr>
+<td>
+<p><b>Property Package</b>
+</p>
+</td>
+<td>
+<center><b>IP Set #1</b></center>
+</td>
+<td>
+<center><b>IP Set #2</b></center>
+</td>
+<td>
+<center><b>IP Set #3</b></center>
+</td>
+<td>
+<center><b>IP Set #4</b></center>
+</td>
+<td>
+<center><b>IP Set #5</b></center>
+</td>
+<td>
+<center><b>IP Set #6</b></center>
+</td>
+<td>
+<center><b>IP Set #7</b></center>
+</td>
+<td>
+<center><b>IP Set #8</b></center>
+</td></tr>
+<tr>
+<td>
+<p><b>PC-SAFT</b>
+</p>
+</td>
+<td>
+<center>PC-SAFT kij</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>Peng-Robinson (PR)</b>
+</p>
+</td>
+<td>
+<center>PR kij</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>Soave-Redlich-Kwong (SRK)</b>
+</p>
+</td>
+<td>
+<center>SRK kij</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>Peng-Robinson-Stryjek-Vera 2 (PRSV2)</b>
+</p>
+</td>
+<td>
+<center>PRSV2-M kij</center>
+</td>
+<td>
+<center>PRSV2-M kji</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>Peng-Robinson / Lee-Kesler (PR/LK)</b>
+</p>
+</td>
+<td>
+<center>PR kij</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>UNIFAC</b>
+</p>
+</td>
+<td>
+<center>PR kij</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>UNIFAC-LL</b>
+</p>
+</td>
+<td>
+<center>PR kij</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>Modified UNIFAC (Dortmund)</b>
+</p>
+</td>
+<td>
+<center>PR kij</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>NRTL</b>
+</p>
+</td>
+<td>
+<center>PR kij</center>
+</td>
+<td>
+<center>NRTL A12 (cal/mol)</center>
+</td>
+<td>
+<center>NRTL A21 (cal/mol)</center>
+</td>
+<td>
+<center>NRTL Alpha</center>
+</td>
+<td>
+<center>NRTL B12 (cal/mol.K)</center>
+</td>
+<td>
+<center>NRTL B21 (cal/mol.K)</center>
+</td>
+<td>
+<center>NRTL C12 (cal/mol.K²)</center>
+</td>
+<td>
+<center>NRTL C21 (cal/mol.K²)</center>
+</td></tr>
+<tr>
+<td>
+<p><b>UNIQUAC</b>
+</p>
+</td>
+<td>
+<center>PR kij</center>
+</td>
+<td>
+<center>UNIQUAC A12 (cal/mol)</center>
+</td>
+<td>
+<center>UNIQUAC A21 (cal/mol)</center>
+</td>
+<td>
+<center>UNIQUAC B12 (cal/mol.K)</center>
+</td>
+<td>
+<center>UNIQUAC B21 (cal/mol.K)</center>
+</td>
+<td>
+<center>UNIQUAC C12 (cal/mol.K²)</center>
+</td>
+<td>
+<center>UNIQUAC C21 (cal/mol.K²)</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>Chao-Seader</b>
+</p>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>Grayson-Streed</b>
+</p>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>Lee-Kesler-Plöcker</b>
+</p>
+</td>
+<td>
+<center>LKP kij</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>Raoult's Law</b>
+</p>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>COSMO-SAC (JCOSMO)</b>
+</p>
+</td>
+<td>
+<center>PR kij</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr>
+<tr>
+<td>
+<p><b>IAPWS-IF97 Steam Tables</b>
+</p>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td>
+<td>
+<center>Not used</center>
+</td></tr></table>
+
+</BODY>
+</HTML>

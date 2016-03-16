@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<script src="ContentScripts.js"></script>
+<head>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+</head>
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ========================================-->
+<!-- ================================================================================== -->
+<body onload="LoadMenue()">
+
+<H2>Database Manager</H2>
+<a href="CONF_GlobalSettings7.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="CONF_GlobalSettings1.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<b>This tool is used to modify user databases</b>
+<hr>
+
+<p>Select from dropdown list the user database which is to be modified. Only databases which are registered in 
+"General Settings" are listed here.
+</p>
+
+<table>
+<tr>
+<td><img src="pictures/CONF_DBManager.png"></td>
+
+<td>
+<h3>Component table</h3>
+This table lists all components included in the selected database. You can see component ID, name and assigned
+definition file ( == Component Creator study file).<br>
+If no definition file is listed here, you need to open this file again and store it into database again.<br><br>
+
+
+<h3>Commands</h3>
+<br>
+<b>Delete Component</b><br>
+This will delete the selected component from database.<br><br>
+
+<b>Edit Component</b><br>
+This will open the associated definition file with Component Creator tool for editing. 
+After saving your modified component to the user database you need to import this modifications into your simulation
+from <a href="UT_PureCompProps.htm" >Pure Component Properties</a> utility again.<br>
+
+</td>
+</tr>
+</table>
+
+<br><br>
+
+
+</BODY>
+</HTML>

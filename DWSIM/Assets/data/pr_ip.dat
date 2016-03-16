@@ -1,0 +1,293 @@
+===  CHEMSEP 3  === Copyright 1992 Harry Kooijman and Ross Taylor / Interaction Parameters Data (IPD) / DECHEMA Peng-Robinson Parameters / This library created by Amy L. Dill / Spring 1996 / Data: ID1. ID2. k12. comments
+913;908;0.5463;Helium-4/CarbonMonoxide p203
+902;905;0.0711;Hydrogen/Nitrogen T=90-113K p210
+902;905;0.1196;Hydrogen/Nitrogen T=90-94.99K p212
+902;905;0.12;Hydrogen/Nitrogen T=77.35K p213
+902;908;0.0919;Hydrogen/CarbonMonoxide T=68.2-88.2K p215
+902;908;0.1;Hydrogen/CarbonMonoxide T=83.3-122.2K p217
+902;1;0.0263;Hydrogen/C1 T=90.3-127K p219
+902;1;0.0151;Hydrogen/C1  T=116.48-172.04K p221
+902;1;0.0596;Hydrogen/C1 T=90.65K p223
+902;1;-0.0044;Hydrogen/C1 T=103.15-173.65K p225
+902;1;-0.0144;Hydrogen/C1 T=103.15-163.15K p227
+902;201;0.0633;Hydrogen/Ethylene T=123.15-248.15K p229
+902;201;-0.0122;Hydrogen/Ethylene T=158.15-255.35K p231
+902;2;-0.0756;Hydrogen/C2 T=149.61-189.57K p233
+902;2;-0.0781;Hydrogen/C2 T=144.25-283.15K p235
+902;2;0.1896;Hydrogen/C2 T=158.15-188.15K p237
+902;2;-0.1104;Hydrogen/C2 T=144.21-199.65K p239
+902;2;-0.0022;Hydrogen/C2 T=148.15-223.15K p240
+902;909;-0.1622;Hydrogen/CarbonDioxide p242
+902;202;-0.1037;Hydrogen/Propylene p244
+902;3;-0.1311;Hydrogen/C3 T=173.15-348.15K p245
+902;3;-0.05;Hydrogen/C3 T=172.05-297.05K p246
+902;5;-0.397;Hydrogen/nC4 T=327.65-394.25K p247
+902;5;-0.3759;Hydrogen/nC4 T=355.37.388.71K p249
+902;11;-0.03;Hydrogen/nC6 p250
+902;17;-0.1167;Hydrogen/nC7 p253
+902;502;-0.51;Hydrogen/Toluene p255
+902;1748;-0.51;Hydrogen/Quinoline p259
+902;155;-0.51;Hydrogen/Bicyclohexyl p261
+902;702;0;Hydrogen/1-Methylnaphthalene p263
+905;908;0.033;Nitrogen//CarbonMonoxide T=83.82K p265
+905;908;0.03;Nitrogen/CarbonMonoxide T=70.00-122.00K p267
+905;914;-0.0026;Nitrogen/Argon T=83.82K p268
+905;914;-0.0004;Nitrogen/Argon T=80.92-115.21K p271
+905;914;-0.0052;Nitrogen/Argon T=90.50-120.00K p272
+905;914;0.0004;Nitrogen/Argon T=84.50K p273
+905;914;0.0056;Nitrogen/Argon T=89.89-113.00K p274
+905;914;-0.01;Nitrogen/Argon T=112.00K p275
+905;901;-0.0159;Nitrogen/Oxygen T=90.53-124.96K P=1.189-29.72bar p277
+905;901;-0.0093;Nitrogen/Oxygen T=81.07-91.00K P=1.218-1.350bar p278
+905;901;-0.0144;Nitrogen/Oxygen T=79-116K P=1.141-8.967bar p279
+905;901;-0.0133;Nitrogen/Oxygen T=75-125K p281
+905;901;-0.01;Nitrogen/Oxygen T=64.83-77.94K P=0.029-0.966bar p284
+905;1;0.0289;Nitrogen/C1 T=88.71-188.71K p285
+905;1;0.033;Nitrogen/C1 T=95-120K p287
+905;1;0.03;Nitrogen/C1 T=112-180K p289
+905;1;0.0363;Nitrogen/C1 T=90.68K p292
+905;1;0.0263;Nitrogen/C1 T=113.71-183.15K p294
+905;1;0.0316;Nitrogen/C1 T=112K p296
+905;201;0.0856;Nitrogen/Ethylene p298
+905;2;0.0344;Nitrogen/C2 T=200-290K p300
+905;2;0.0533;Nitrogen/C2 T=138.71-194.26K p302
+905;899;0.0044;Nitrogen/NitrousOxide p304
+905;909;-0.0222;Nitrogen/CarbonDioxide T=223.15-273.15K p306
+905;909;-0.0119;Nitrogen/CarbonDioxide T=273.15K p308
+905;909;-0.017;Nitrogen/CarbonDioxide T=273.15K p309
+905;909;-0.0193;Nitrogen/CarbonDioxide T=218.15-273.15K p310
+905;909;-0.0122;Nitrogen/CarbonDioxide T=233.15-293.15K p312
+905;909;-0.01;Nitrogen/CarbonDioxide T=270K p314
+905;1922;0.1789;Nitrogen/HydrogenSulfide T=227.98.200.15K p316
+905;1922;0.1652;Nitrogen/HydrogenSulfide T=256.43-344.26K p318
+905;202;0.09;Nitrogen/Propylene p320
+905;3;0.0878;Nitrogen/C3 T=143.15-353.15K p322
+905;3;0.0678;Nitrogen/C3 T=230-290K p324
+905;1911;0.2193;Nitrogen/Ammonia p326
+905;1601;0.0107;Nitrogen/DiChloroDiFlouroMethane p328
+905;4;0.1033;Nitrogen/Iso-C4 p330
+905;910;0.08;Nitrogen/SulfurDioxide p332
+905;5;0.0711;Nitrogen/nC4 T=310.93-422.04K p333
+905;5;0.0867;Nitrogen/nC4 T=310.93-410.93K p334
+905;8;0.0922;Nitrogen/Iso-C5 p336
+905;7;0.1;Nitrogen/nC5 p338
+905;1101;-0.2141;Nitrogen/Methanol p340
+905;11;0.1496;Nitrogen/nC6 p341
+905;501;0.1641;Nitrogen/Benzene p343
+905;17;0.1441;Nitrogen/nC7 p344
+905;27;-0.4;Nitrogen/nC8 p347
+905;56;0.1122;Nitrogen/nC10 T=310.93-410.93K p349
+908;1;0.03;CarbonMonoxide/C1 p353
+908;2;-0.0226;CarbonMonoxide/C2 p354
+908;1922;0.0544;CarbonMonoxide/HydrogenSulfide p356
+908;3;0.0259;CarbonMonoxide/C3 p358
+914;901;0.0107;Argon/Oxygen T=89.95-109.95K P=1.045-6.618bar p360
+914;901;0.0089;Argon/Oxygen T=90.5-120K P=1.043-12.092bar p362
+914;1;0.023;Argon/C1 T=91.6-123.9K p363
+914;1;0.0152;Argon/C1 T=123.4-164K P=10.132-35.434bar p364
+914;1;0.0078;Argon/C1 T=150.72-178K p365
+914;1;0.0241;Argon/C1 T=115.77K p367
+914;1;0.0311;Argon/C1 T=112.55-132.97K p369
+914;1911;-0.18;Argon/Ammonia p371
+901;920;0.0256;Oxygen/Krypton T=90.15-100.15K P=0.688-2.486bar p373
+901;920;0.0185;Oxygen/Krypton T=94.15-150.9K P=1.504-6.893bar p375
+901;899;0.0478;Oxygen/NitrousOxide p376
+1;201;0.0378;C1/Ethylene T=198.15-248.15K p378
+1;201;0.0204;C1/Ethylene T=148-169K p380
+1;201;0.0244;C1/Ethylene T=150-190K p383
+1;2;-0.0033;C1/C2 T=130.37-199.93K p385
+1;2;-0.0037;C1/C2 T=158.15-213.7K p388
+1;2;-0.0059;C1/C2 T=144.26-283.15 p390
+1;2;-0.0004;C1/C2 T=160-180K p392
+1;2;0.007;C1/C2 T=250K p394
+1;899;0.0256;C1/NitrousOxide p396
+1;909;0.0793;C1/CarbonDioxide T=173-220K P=26-66bar p398
+1;909;0.0978;C1/CarbonDioxide T=199.82-271.48K p399
+1;909;0.0889;C1/CarbonDioxide T=230-270K p401
+1;909;0.107;C1/CarbonDioxide T=270K p403
+1;909;0.0885;C1/CarbonDioxide T=153-219K p405
+1;909;0.0889;C1/CarbonDioxide T=153-219 p406
+1;1893;0.0289;C1/CarbonylSulfide p410
+1;202;0.033;C1/Propylene p412
+1;3;0.0119;C1/C3 T=130.37-213.71K p413
+1;3;0.021;C1/C3 T=277.59-360.93K p416
+1;4;0.0256;C1/Iso-C4 p419
+1;910;0.1356;C1/SulfurDioxide p421
+1;5;0.0244;C1/nC4 T=294-394K p422
+1;5;0.0185;C1/nC4 T=178-411K p425
+1;5;0.0148;C1/nC4 T=166-283K p428
+1;5;0.0085;C1/nC4 T=144-278K p430
+1;8;-0.0056;C1/Iso-C5 p436
+1;7;0.023;C1/nC5 T=278-461K p438
+1;7;0.0241;C1/nC5 T=311-444K p445
+1;7;0.026;C1/nC5 T=176-273K p447
+1;7;0.0281;C1/nC5 T=178-283K p449
+1;11;0.04;C1/nC6 T=183-423K p453
+1;11;0.0244;C1/nC6 T=310-410K p456
+1;11;0.0444;C1/nC6 T=182-273K p458
+1;501;0.0807;C1/Benzene T=421-501K p463
+1;501;0.0304;C1/Benzene T=338.71K p465
+1;137;0.0389;C1/CycloHexane p466
+1;17;0.0401;C1/nC7 T=200-255K p469
+1;17;0.03;C1/nC7 T=277-511K p471
+1;502;0.097;C1/Toluene p474
+1;27;0.0496;C1/nC8 p477
+1;506;0.0844;C1/M-Xylene p479
+1;46;0.0474;C1/nC9 p481
+1;56;0.0489;C1/nC10 T=244-277K p485
+1;56;0.0411;C1/nC10 T=311-511K p486
+1;56;0.0644;C1/nC10 T=423-583K p489
+1;1183;0.1285;C1/M-Cresol p492
+1;706;0.1452;C1/Tetralin p494
+1;702;0.1244;C1/1-MethylNaphthalene p497
+1;563;0.0874;C1/DiPhenylMethane p499
+201;2;0.0119;Ethylene/C2 T=200-255K P=2.2-26.7bar p503
+201;2;0.0278;Ethylene/C2 T=277-288K P=32-49bar p505
+201;2;0.0078;Ethylene/C2 T=169-273K P=0.4-41.1bar p507
+201;2;0.0089;Ethylene/C2 T=263-293K P=18.5-48.5bar p510
+201;401;0.0652;Ethylene/Acetylene p512
+201;909;0.0578;Ethylene/CarbonDioxide T=232-252K P=9.5-26.2bar p514
+201;909;0.0541;Ethylene/CarbonDioxide T=223-293K P=6.8-64.9bar p516
+201;5;0.0922;Ethylene/nC4 p518
+201;501;0.0311;Ethylene/Benzene p520
+201;17;0.0144;Ethylene/nC7 p522
+201;56;0.0253;Ethylene/nC10 p524
+909;2;0.1326;CarbonDioxide/C2 T=250K p525
+909;2;0.13;CarbonDioxide/C2 T=223-292K P=5.5-63bar p527
+909;2;0.1344;CarbonDioxide/C2 T=222-289K P=7-57bar p528
+909;2;0;CarbonDioxide/C2 T=283-298K P=30.4-66.3bar p529
+909;2;0.13;CarbonDioxide/C2 T=252.95K p530
+909;2;0.1278;CarbonDioxide/C2 T=241-283K P=10-49.5bar p532
+2;1922;0.0822;C2/HydrogenSulfide T=200-283 P=0.65-30.5bar p533
+2;1922;0.0952;C2/HydrogenSulfide T=251.5-368.5K p535
+2;1922;0.0863;C2/HydrogenSulfide T=283.15K p536
+2;202;0.0089;C2/Propylene p537
+2;3;0.0011;C2/C3 p539
+2;4;-0.0067;C2/Iso-C4 p542
+2;5;0.0089;C2/nC4 T=229-361K P=6.9-57.9bar p544
+2;5;0.0374;C2/nC4 T=338.7-394.3K p546
+2;1402;0.0181;C2/EthylEther p548
+2;7;0.0078;C2/nC5 p550
+2;1051;0.1307;C2/Acetone p552
+2;1312;0.1211;C2/MethylAcetate p554
+2;1101;0.027;C2/Methanol p555
+2;11;-0.04;C2/nC6 T=338.7-449.8K p557
+2;11;0.0041;C2/nC6 T=298.15K p559
+2;501;0.0322;C2/Benzene T=273-553K p561
+2;501;0.0493;C2/Benzene T=298.15K p563
+2;137;0.0178;C2/CycloHexane p565
+2;17;0.0074;C2/nC7 P=6.89-86.186bar p567
+2;17;0.0033;C2/nC7 T=338.71-449.82K p568
+2;27;0.0185;C2/nC8 p570
+2;56;0.0144;C2/nC10 p572
+909;899;0.0048;CarbonDioxide/NitrousOxide p575
+401;202;-0.43;Acetylene/Propylene p576
+1615;1606;0.1;TriFluoroMethane/TriFlouroChloroMethane p577
+1606;1601;0.0337;TriFluoroChloroMethane/DiChloroFluoroMethane p579
+909;1922;0.0978;CarbonDioxide/HydrogenSulfide T=225-363K p581
+909;1922;0.0967;CarbonDioxide/HydrogenSulfide T=254-366K p583
+909;1614;0.017;CarbonDioxide/DiFluoroMethane p585
+909;202;0.0933;CarbonDioxide/Propylene p587
+909;3;0.1315;CarbonDioxide/C3 T=277.59-344.26K p589
+909;3;0.0744;CarbonDioxide/C3 T=233.15-273.15K p591
+909;3;0.0978;CarbonDioxide/C3 T=272-366K P=33.3-53.3bar p593
+909;3;0.1281;CarbonDioxide/C3 T=244.26-266.48K p594
+909;3;0.1241;CarbonDioxide/C3 T=252.95-273.15K p596
+909;1601;0.0474;CarbonDioxide/C3 p598
+909;4;0.13;CarbonDioxide/Iso-C4 T=310.93-394.26K p601
+909;4;0.1174;CarbonDioxide/Iso-C4 P=273.15K p603
+909;204;0.0593;CarbonDioxide/1-Butene p605
+909;5;0.1352;CarbonDioxide/nC4 T=310.93-410.93K p607
+909;5;0.1415;CarbonDioxide/nC4 T=227.98-283.15K p609
+909;5;0.1122;CarbonDioxide/nC4 T=273.15K p610
+909;8;0.1219;CarbonDioxide/Iso-C5 p612
+909;1402;0.047;CarbonDioxide/EthylEther p614
+909;7;-0.01;CarbonDioxide/nC5 P=41.33-82.79bar p616
+909;7;0.1252;CarbonDioxide/nC5 T=277.65-377.59K p617
+909;1312;-0.0493;CarbonDioxide/MethylAcetate p619
+909;1101;0.022;CarbonDioxide/Methanol T=213-247K p621
+909;1101;0.0583;CarbonDioxide/Methanol T=298-313K p623
+909;11;0.11;CarbonDioxide/nC6 p625
+909;501;0.0774;CarbonDioxide/Benzene p627
+909;137;0.1052;CarbonDioxide/CycloHexane p629
+909;17;0.1;CarbonDioxide/nC7 p631
+909;1921;0.0063;CarbonDioxide/Water T=523-623K p633
+909;1921;0.0952;CarbonDioxide/Water T=383-623K p635
+909;502;0.1056;CarbonDioxide/Toluene p636
+909;56;0.1141;CarbonDioxide/nC10 p638
+909;518;0.1144;CarbonDioxide/nButylBenzene p641
+1922;3;0.06;HydrogenSulfide/C3 P=27.58-41.44bar p643
+1922;3;0.0878;HydrogenSulfide/C3 T=217-344K p644
+1922;4;0.0474;HydrogenSulfide/Iso-C4 p645
+1922;7;0.063;HydrogenSulfide/nC5 p647
+1922;1921;0.0394;HydrogenSulfide/Water T=303-443K p648
+1922;1921;0.0096;HydrogenSulfide/Water T=311-444K p650
+1922;56;0.0333;HydrogenSulfide/nC10 p652
+1922;3;-0.0189;HydrogenSulfide/C3 p653
+202;3;0.0096;Propylene/C3 T=223.75-239.35K P=0.724-1.833bar p654
+202;3;0.0078;Propylene/C3 T=269.54-333.93K P=4.385-23.594bar p656
+202;3;0.0074;Propylene/C3 T=260.93-360.93K P=3.416-41.613bar p657
+202;3;0.0063;Propylene/C3 T=310.93-344.26K P=13-31.356bar p658
+202;4;-0.0144;Propylene/Iso-C4 p660
+202;204;0.0004;Propylene/1-C4 p661
+3;4;-0.0078;C3/Iso-C4 p663
+3;5;0.0033;C3/nC4 p666
+3;8;0.0111;C3/Iso-C5 p668
+3;7;0.0267;C3/nC5 p671
+3;11;0.0007;C3/nC6 p674
+3;1102;0.0315;C3/Ethanol p676
+3;501;0.0233;C3/Benzene p679
+3;17;0.0056;C3/nC7 p681
+3;27;0;C3/nC8 p683
+3;56;0;C3/nC10 p686
+2692;1604;0.0874;PentaFlouroChloroEthane/DiFluoroChloroMethane p688
+1604;1601;0.0522;DiFluoroChloroMethane/DiChloroDiFluoroMethane p689
+1911;959;-0.2552;Ammonia/Water T=333.15-420.15K p690
+1911;959;-0.264;Ammonia/WaterT=273.15K p692
+1911;959;-0.2244;Ammonia/Water P=1.015bar p693
+4;5;-0.0004;Iso-C4/nC4 p694
+910;501;0.0015;SulfurDioxide/Benzene p696
+204;303;0.0022;1-Butene/1.3-Butadiene p697
+204;5;0.0007;1-Butene/nC4 T=311-411K P=3.55-34.89bar p699
+204;5;0.0041;1-Butene/nC4 T=311-339K P=3.55-8.69bar p700
+303;5;0.0141;1.3-Butadiene/nC4 p702
+5;7;0.0174;nC4/nC5 p704
+5;11;-0.0056;nC4/nC6 p706
+5;17;0.0033;nC4/nC7 p707
+5;27;0.0074;nC4/nC8 p708
+5;56;0.0078;nC4/nC10 p710
+8;7;0.06;Iso-C5/nC5 p715
+7;501;0.0189;nC5/Benzene T=255-289K P=0.069-0.469bar p716
+7;501;0.0167;nC5/Benzene P=1.014bar p718
+7;137;0.0037;nC5/CycleHexane p719
+7;17;0.0074;nC5/nC7 p720
+7;27;0;nC5/nC8 p721
+14;1109;0.0452;2.2-DiMethylButane/1-Pentanol p722
+15;1109;0.0467;2.3-DiMethylButane/1-Pentanol p724
+12;1109;0.0467;2-MethylPentane/1-Pentanol p726
+1109;13;0.0478;1-Pentanol/3-MethylPentane p728
+1101;1921;-0.0778;Methanol/Water p730
+11;501;0.0089;nC6/Benzene T=298.15K p732
+11;501;0.0096;nC6/Benzene T=333.15K p734
+11;501;0.0122;nC6/Benzene P=980bar p737
+11;501;0.1;nC6/Benzene T=341.75-351.05K P=1.014bar p738
+11;501;0.0078;nC6/Benzene T=341.50-353.30K P=1.014bar p739
+11;501;0.0037;nC6/Benzene T=278-298K P=0.053-0.205bar p740
+11;137;-0.003;nC6/CycloHexane P=1.014bar p742
+11;137;-0.0049;nC6/CycloHexane T=273-298K P=0.041-0.203bar p743
+11;1104;0.0844;nC6/2-Propanol p744
+11;17;-0.0078;nC6/nC7 p745
+11;1123;0.0485;nC6/I-Pentanol p747
+11;1109;0.0456;nC6/1-Pentanol p749
+137;501;0.0126;CycloHexane/Benzene p752
+501;17;0.0011;Benzene/nC7 T=333.15K P=0.316-0.518bar p753
+501;17;0.0022;Benzene/nC7 T=353-371K P=1.014bar p755
+501;17;0.0011;Benzene/nC7 T=353.3-371.6K P=1.014bar p756
+501;41;0.0004;Benzene/I-Octane p757
+501;27;0.003;Benzene/nC8 p758
+270;137;0.0011;CycloHexene/CycloHexane p761
+137;1523;0.073;CycloHexane/1.2-DiChloroEthane p762
+137;1080;0.0659;CycloHexane/CycloHexanone p763
+1523;270;0.043;1.2-DiChloroEthane/CycloHexene p765
+17;41;0.0004;nC7/I-Octane p766
+17;1060;0.0693;nC7/2-Pentanone p767

@@ -1,0 +1,3526 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VBIDEApi</name>
+    </assembly>
+    <members>
+        <member name="T:NetOffice.VBIDEApi.Components">
+            <summary>
+             CoClass Components 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._Components">
+            <summary>
+             DispatchInterface _Components 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Components.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Components.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Components.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Components.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Components.Remove(NetOffice.VBIDEApi.Component)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="component">NetOffice.VBIDEApi.Component Component</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Components.Add(NetOffice.VBIDEApi.Enums.vbext_ComponentType)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="componentType">NetOffice.VBIDEApi.Enums.vbext_ComponentType ComponentType</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Components.Import(System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="fileName">string FileName</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Components.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Components.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Components.Application">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Components.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Components.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Components.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Components.Item(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">object index</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Components.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Components.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Components.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Components.#ctor">
+            <summary>
+            creates a new instance of Components 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Components.#ctor(System.String)">
+            <summary>
+            creates a new instance of Components
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Components.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.Components objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.Components array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Components.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.Components object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.Components object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Components.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.Components object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.Components object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Components.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.AddIn">
+            <summary>
+             DispatchInterface AddIn 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.AddIn.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.AddIn.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.AddIn.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.AddIn.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.AddIn.Description">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.AddIn.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.AddIn.Collection">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.AddIn.ProgId">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.AddIn.Guid">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.AddIn.Connect">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.AddIn.Object">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            Unknown COM Proxy
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._ProjectTemplate">
+            <summary>
+             DispatchInterface _ProjectTemplate 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._ProjectTemplate.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._ProjectTemplate.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._ProjectTemplate.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._ProjectTemplate.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._ProjectTemplate.Application">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._ProjectTemplate.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Properties">
+            <summary>
+             CoClass Properties 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._Properties">
+            <summary>
+             DispatchInterface _Properties 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Properties.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Properties.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Properties.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Properties.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Properties.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Properties.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Properties.Application">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Properties.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            Unknown COM Proxy
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Properties.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Properties.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Properties.Item(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">object index</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Properties.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Properties.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Properties.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Properties.#ctor">
+            <summary>
+            creates a new instance of Properties 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Properties.#ctor(System.String)">
+            <summary>
+            creates a new instance of Properties
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Properties.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.Properties objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.Properties array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Properties.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.Properties object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.Properties object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Properties.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.Properties object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.Properties object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Properties.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._AddIns">
+            <summary>
+             DispatchInterface _AddIns 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._AddIns.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._AddIns.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._AddIns.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._AddIns.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._AddIns.Update">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._AddIns.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._AddIns.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._AddIns.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._AddIns.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            Unknown COM Proxy
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._AddIns.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._AddIns.Item(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">object index</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBProjects">
+            <summary>
+             DispatchInterface _VBProjects 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBProjects_Old">
+            <summary>
+             DispatchInterface _VBProjects_Old 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects_Old.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects_Old.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects_Old.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects_Old.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects_Old.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects_Old.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProjects_Old.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProjects_Old.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProjects_Old.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProjects_Old.Item(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">object index</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects.Add(NetOffice.VBIDEApi.Enums.vbext_ProjectType)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="type">NetOffice.VBIDEApi.Enums.vbext_ProjectType Type</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects.Remove(NetOffice.VBIDEApi.VBProject)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="lpc">NetOffice.VBIDEApi.VBProject lpc</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjects.Open(System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="bstrPath">string bstrPath</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Events">
+            <summary>
+             DispatchInterface Events 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Events.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Events.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Events.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Events.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Events.get_ReferencesEvents(NetOffice.VBIDEApi.VBProject)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+            <param name="vBProject">NetOffice.VBIDEApi.VBProject VBProject</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Events.ReferencesEvents(NetOffice.VBIDEApi.VBProject)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_ReferencesEvents
+            </summary>
+            <param name="vBProject">NetOffice.VBIDEApi.VBProject VBProject</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Events.get_CommandBarEvents(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+            <param name="commandBarControl">object CommandBarControl</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Events.CommandBarEvents(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_CommandBarEvents
+            </summary>
+            <param name="commandBarControl">object CommandBarControl</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._LinkedWindows">
+            <summary>
+             DispatchInterface _LinkedWindows 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._LinkedWindows.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._LinkedWindows.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._LinkedWindows.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._LinkedWindows.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._LinkedWindows.Remove(NetOffice.VBIDEApi.Window)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="window">NetOffice.VBIDEApi.Window Window</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._LinkedWindows.Add(NetOffice.VBIDEApi.Window)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="window">NetOffice.VBIDEApi.Window Window</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._LinkedWindows.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._LinkedWindows.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._LinkedWindows.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._LinkedWindows.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._LinkedWindows.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._LinkedWindows.Item(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">object index</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbext_RefKind">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_RefKind.vbext_rk_TypeLib">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>0</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_RefKind.vbext_rk_Project">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>1</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Windows">
+            <summary>
+             CoClass Windows 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._Windows">
+            <summary>
+             DispatchInterface _Windows 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._Windows_old">
+            <summary>
+             DispatchInterface _Windows_old 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows_old.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows_old.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows_old.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows_old.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows_old.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows_old.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Windows_old.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Windows_old.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Windows_old.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Windows_old.Item(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">object index</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Windows.CreateToolWindow(NetOffice.VBIDEApi.AddIn,System.String,System.String,System.String,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="addInInst">NetOffice.VBIDEApi.AddIn AddInInst</param>
+            <param name="progId">string ProgId</param>
+            <param name="caption">string Caption</param>
+            <param name="guidPosition">string GuidPosition</param>
+            <param name="docObj">object DocObj</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Windows.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Windows.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Windows.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Windows.#ctor">
+            <summary>
+            creates a new instance of Windows 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Windows.#ctor(System.String)">
+            <summary>
+            creates a new instance of Windows
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Windows.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.Windows objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.Windows array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Windows.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.Windows object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.Windows object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Windows.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.Windows object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.Windows object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Windows.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._References">
+            <summary>
+             DispatchInterface _References 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._References.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._References.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._References.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._References.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._References.AddFromGuid(System.String,System.Int32,System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="guid">string Guid</param>
+            <param name="major">Int32 Major</param>
+            <param name="minor">Int32 Minor</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._References.AddFromFile(System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="fileName">string FileName</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._References.Remove(NetOffice.VBIDEApi.Reference)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="reference">NetOffice.VBIDEApi.Reference Reference</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._References.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._References.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._References.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._References.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._References.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._References.Item(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">object index</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbext_ProcKind">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ProcKind.vbext_pk_Proc">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>0</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ProcKind.vbext_pk_Let">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>1</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ProcKind.vbext_pk_Set">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>2</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ProcKind.vbext_pk_Get">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>3</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbext_VBAMode">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_VBAMode.vbext_vm_Run">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>0</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_VBAMode.vbext_vm_Break">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>1</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_VBAMode.vbext_vm_Design">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>2</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.ReferencesEvents">
+            <summary>
+             CoClass ReferencesEvents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._ReferencesEvents">
+            <summary>
+             Interface _ReferencesEvents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._ReferencesEvents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._ReferencesEvents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._ReferencesEvents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._ReferencesEvents.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ReferencesEvents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ReferencesEvents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ReferencesEvents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ReferencesEvents.#ctor">
+            <summary>
+            creates a new instance of ReferencesEvents 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ReferencesEvents.#ctor(System.String)">
+            <summary>
+            creates a new instance of ReferencesEvents
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ReferencesEvents.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.ReferencesEvents objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.ReferencesEvents array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ReferencesEvents.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.ReferencesEvents object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.ReferencesEvents object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ReferencesEvents.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.ReferencesEvents object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.ReferencesEvents object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ReferencesEvents.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.ReferencesEvents._ItemAddedEvent">
+            <summary>
+            SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.ReferencesEvents.ItemAddedEvent">
+            <summary>
+            SupportByVersion VBIDE 12 14 5.3
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.ReferencesEvents._ItemRemovedEvent">
+            <summary>
+            SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.ReferencesEvents.ItemRemovedEvent">
+            <summary>
+            SupportByVersion VBIDE 12 14 5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBComponents_Old">
+            <summary>
+             DispatchInterface _VBComponents_Old 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents_Old.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents_Old.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents_Old.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents_Old.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents_Old.Remove(NetOffice.VBIDEApi.VBComponent)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBComponent">NetOffice.VBIDEApi.VBComponent VBComponent</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents_Old.Add(NetOffice.VBIDEApi.Enums.vbext_ComponentType)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="componentType">NetOffice.VBIDEApi.Enums.vbext_ComponentType ComponentType</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents_Old.Import(System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="fileName">string FileName</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents_Old.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents_Old.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponents_Old.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponents_Old.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponents_Old.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponents_Old.Item(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">object index</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Window">
+            <summary>
+             DispatchInterface Window 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Window.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Window.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Window.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Window.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Window.Close">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Window.SetFocus">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Window.SetKind(NetOffice.VBIDEApi.Enums.vbext_WindowType)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="eKind">NetOffice.VBIDEApi.Enums.vbext_WindowType eKind</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Window.Detach">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Window.Attach(System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="lWindowHandle">Int32 lWindowHandle</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.Collection">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.Caption">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.Visible">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.Left">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.Top">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.Width">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.Height">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.WindowState">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.Type">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.LinkedWindows">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.LinkedWindowFrame">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Window.HWnd">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbext_ProjectProtection">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ProjectProtection.vbext_pp_none">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>0</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ProjectProtection.vbext_pp_locked">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>1</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Addins">
+            <summary>
+             CoClass Addins 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Addins.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Addins.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Addins.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Addins.#ctor">
+            <summary>
+            creates a new instance of Addins 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Addins.#ctor(System.String)">
+            <summary>
+            creates a new instance of Addins
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Addins.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.Addins objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.Addins array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Addins.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.Addins object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.Addins object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Addins.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.Addins object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.Addins object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Addins.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._CodePane">
+            <summary>
+             DispatchInterface _CodePane 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePane.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePane.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePane.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePane.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePane.GetSelection(System.Int32@,System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="startLine">Int32 StartLine</param>
+            <param name="startColumn">Int32 StartColumn</param>
+            <param name="endLine">Int32 EndLine</param>
+            <param name="endColumn">Int32 EndColumn</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePane.SetSelection(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="startLine">Int32 StartLine</param>
+            <param name="startColumn">Int32 StartColumn</param>
+            <param name="endLine">Int32 EndLine</param>
+            <param name="endColumn">Int32 EndColumn</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePane.Show">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePane.Collection">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePane.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePane.Window">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePane.TopLine">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePane.CountOfVisibleLines">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePane.CodeModule">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePane.CodePaneView">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBComponents">
+            <summary>
+             DispatchInterface _VBComponents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents.AddCustom(System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="progId">string ProgId</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents.AddMTDesigner(System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">optional Int32 index = 0</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponents.AddMTDesigner">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Application">
+            <summary>
+             DispatchInterface Application 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Application.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Application.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Application.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Application.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Application.Version">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._CommandBarControlEvents">
+            <summary>
+             Interface _CommandBarControlEvents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CommandBarControlEvents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CommandBarControlEvents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CommandBarControlEvents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CommandBarControlEvents.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbext_CodePaneview">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_CodePaneview.vbext_cv_ProcedureView">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>0</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_CodePaneview.vbext_cv_FullModuleView">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>1</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.CodeModule">
+            <summary>
+             CoClass CodeModule 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._CodeModule">
+            <summary>
+             DispatchInterface _CodeModule 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.get_Lines(System.Int32,System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+            <param name="startLine">Int32 StartLine</param>
+            <param name="count">Int32 Count</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.Lines(System.Int32,System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_Lines
+            </summary>
+            <param name="startLine">Int32 StartLine</param>
+            <param name="count">Int32 Count</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.get_ProcStartLine(System.String,NetOffice.VBIDEApi.Enums.vbext_ProcKind)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+            <param name="procName">string ProcName</param>
+            <param name="procKind">NetOffice.VBIDEApi.Enums.vbext_ProcKind ProcKind</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.ProcStartLine(System.String,NetOffice.VBIDEApi.Enums.vbext_ProcKind)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_ProcStartLine
+            </summary>
+            <param name="procName">string ProcName</param>
+            <param name="procKind">NetOffice.VBIDEApi.Enums.vbext_ProcKind ProcKind</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.get_ProcCountLines(System.String,NetOffice.VBIDEApi.Enums.vbext_ProcKind)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+            <param name="procName">string ProcName</param>
+            <param name="procKind">NetOffice.VBIDEApi.Enums.vbext_ProcKind ProcKind</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.ProcCountLines(System.String,NetOffice.VBIDEApi.Enums.vbext_ProcKind)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_ProcCountLines
+            </summary>
+            <param name="procName">string ProcName</param>
+            <param name="procKind">NetOffice.VBIDEApi.Enums.vbext_ProcKind ProcKind</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.get_ProcBodyLine(System.String,NetOffice.VBIDEApi.Enums.vbext_ProcKind)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+            <param name="procName">string ProcName</param>
+            <param name="procKind">NetOffice.VBIDEApi.Enums.vbext_ProcKind ProcKind</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.ProcBodyLine(System.String,NetOffice.VBIDEApi.Enums.vbext_ProcKind)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_ProcBodyLine
+            </summary>
+            <param name="procName">string ProcName</param>
+            <param name="procKind">NetOffice.VBIDEApi.Enums.vbext_ProcKind ProcKind</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.get_ProcOfLine(System.Int32,NetOffice.VBIDEApi.Enums.vbext_ProcKind@)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+            <param name="line">Int32 Line</param>
+            <param name="procKind">NetOffice.VBIDEApi.Enums.vbext_ProcKind ProcKind</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.ProcOfLine(System.Int32,NetOffice.VBIDEApi.Enums.vbext_ProcKind@)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_ProcOfLine
+            </summary>
+            <param name="line">Int32 Line</param>
+            <param name="procKind">NetOffice.VBIDEApi.Enums.vbext_ProcKind ProcKind</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.AddFromString(System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="_string">string String</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.AddFromFile(System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="fileName">string FileName</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.InsertLines(System.Int32,System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="line">Int32 Line</param>
+            <param name="_string">string String</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.DeleteLines(System.Int32,System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="startLine">Int32 StartLine</param>
+            <param name="count">optional Int32 Count = 1</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.DeleteLines(System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="startLine">Int32 StartLine</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.ReplaceLine(System.Int32,System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="line">Int32 Line</param>
+            <param name="_string">string String</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.CreateEventProc(System.String,System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="eventName">string EventName</param>
+            <param name="objectName">string ObjectName</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.Find(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="target">string Target</param>
+            <param name="startLine">Int32 StartLine</param>
+            <param name="startColumn">Int32 StartColumn</param>
+            <param name="endLine">Int32 EndLine</param>
+            <param name="endColumn">Int32 EndColumn</param>
+            <param name="wholeWord">optional bool WholeWord = false</param>
+            <param name="matchCase">optional bool MatchCase = false</param>
+            <param name="patternSearch">optional bool PatternSearch = false</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.Find(System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="target">string Target</param>
+            <param name="startLine">Int32 StartLine</param>
+            <param name="startColumn">Int32 StartColumn</param>
+            <param name="endLine">Int32 EndLine</param>
+            <param name="endColumn">Int32 EndColumn</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.Find(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="target">string Target</param>
+            <param name="startLine">Int32 StartLine</param>
+            <param name="startColumn">Int32 StartColumn</param>
+            <param name="endLine">Int32 EndLine</param>
+            <param name="endColumn">Int32 EndColumn</param>
+            <param name="wholeWord">optional bool WholeWord = false</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodeModule.Find(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="target">string Target</param>
+            <param name="startLine">Int32 StartLine</param>
+            <param name="startColumn">Int32 StartColumn</param>
+            <param name="endLine">Int32 EndLine</param>
+            <param name="endColumn">Int32 EndColumn</param>
+            <param name="wholeWord">optional bool WholeWord = false</param>
+            <param name="matchCase">optional bool MatchCase = false</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodeModule.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodeModule.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodeModule.Name">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodeModule.CountOfLines">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodeModule.CountOfDeclarationLines">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodeModule.CodePane">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodeModule.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodeModule.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodeModule.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodeModule.#ctor">
+            <summary>
+            creates a new instance of CodeModule 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodeModule.#ctor(System.String)">
+            <summary>
+            creates a new instance of CodeModule
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodeModule.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.CodeModule objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.CodeModule array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodeModule.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.CodeModule object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.CodeModule object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodeModule.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.CodeModule object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.CodeModule object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodeModule.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Component">
+            <summary>
+             CoClass Component 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._Component">
+            <summary>
+             DispatchInterface _Component 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Component.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Component.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Component.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._Component.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Component.Application">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Component.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Component.IsDirty">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._Component.Name">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Component.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Component.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Component.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Component.#ctor">
+            <summary>
+            creates a new instance of Component 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Component.#ctor(System.String)">
+            <summary>
+            creates a new instance of Component
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Component.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.Component objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.Component array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Component.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.Component object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.Component object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Component.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.Component object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.Component object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Component.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBProject_Old">
+            <summary>
+             DispatchInterface _VBProject_Old 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject_Old.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject_Old.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject_Old.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject_Old.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.HelpFile">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.HelpContextID">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.Description">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.Mode">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.References">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.Name">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.Collection">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.Protection">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.Saved">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject_Old.VBComponents">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbext_ComponentType">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ComponentType.vbext_ct_StdModule">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>1</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ComponentType.vbext_ct_ClassModule">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>2</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ComponentType.vbext_ct_MSForm">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>3</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ComponentType.vbext_ct_ActiveXDesigner">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>11</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ComponentType.vbext_ct_Document">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>100</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.VBE">
+            <summary>
+             DispatchInterface VBE 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBE.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBE.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBE.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBE.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.VBProjects">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.CommandBars">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.CodePanes">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.Windows">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.Events">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.ActiveVBProject">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.SelectedVBComponent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.MainWindow">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.ActiveWindow">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.ActiveCodePane">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.VBE.Addins">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbext_WindowType">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_CodeWindow">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>0</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_Designer">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>1</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_Browser">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>2</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_Watch">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>3</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_Locals">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>4</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_Immediate">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>5</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_ProjectWindow">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>6</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_PropertyWindow">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>7</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_Find">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>8</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_FindReplace">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>9</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_Toolbox">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>10</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_LinkedWindowFrame">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>11</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_MainWindow">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>12</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowType.vbext_wt_ToolWindow">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>15</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbextFileTypes">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeForm">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>0</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeModule">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>1</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeClass">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>2</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeProject">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>3</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeExe">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>4</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeFrx">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>5</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeRes">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>6</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeUserControl">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>7</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypePropertyPage">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>8</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeDocObject">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>9</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeBinary">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>10</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeGroupProject">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>11</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbextFileTypes.vbextFileTypeDesigners">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>12</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.VBProjects">
+            <summary>
+             CoClass VBProjects 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProjects.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProjects.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProjects.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProjects.#ctor">
+            <summary>
+            creates a new instance of VBProjects 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProjects.#ctor(System.String)">
+            <summary>
+            creates a new instance of VBProjects
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProjects.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.VBProjects objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.VBProjects array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProjects.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.VBProjects object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.VBProjects object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProjects.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.VBProjects object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.VBProjects object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProjects.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBComponent">
+            <summary>
+             DispatchInterface _VBComponent 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBComponent_Old">
+            <summary>
+             DispatchInterface _VBComponent_Old 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent_Old.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent_Old.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent_Old.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent_Old.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent_Old.Export(System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="fileName">string FileName</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent_Old.DesignerWindow">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent_Old.Activate">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent_Old.Saved">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent_Old.Name">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent_Old.Designer">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            Unknown COM Proxy
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent_Old.CodeModule">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent_Old.Type">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent_Old.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent_Old.Collection">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent_Old.HasOpenDesigner">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent_Old.Properties">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponent.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBComponent.DesignerID">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBProjectsEvents">
+            <summary>
+             Interface _VBProjectsEvents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjectsEvents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjectsEvents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjectsEvents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProjectsEvents.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.References">
+            <summary>
+             CoClass References 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.References.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.References.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.References.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.References.#ctor">
+            <summary>
+            creates a new instance of References 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.References.#ctor(System.String)">
+            <summary>
+            creates a new instance of References
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.References.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.References objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.References array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.References.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.References object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.References object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.References.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.References object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.References object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.References.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.References._ItemAddedEvent">
+            <summary>
+            SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.References.ItemAddedEvent">
+            <summary>
+            SupportByVersion VBIDE 12 14 5.3
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.References._ItemRemovedEvent">
+            <summary>
+            SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.References.ItemRemovedEvent">
+            <summary>
+            SupportByVersion VBIDE 12 14 5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.CommandBarEvents">
+            <summary>
+             CoClass CommandBarEvents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CommandBarEvents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CommandBarEvents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CommandBarEvents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CommandBarEvents.#ctor">
+            <summary>
+            creates a new instance of CommandBarEvents 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CommandBarEvents.#ctor(System.String)">
+            <summary>
+            creates a new instance of CommandBarEvents
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CommandBarEvents.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.CommandBarEvents objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.CommandBarEvents array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CommandBarEvents.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.CommandBarEvents object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.CommandBarEvents object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CommandBarEvents.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.CommandBarEvents object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.CommandBarEvents object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CommandBarEvents.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.CommandBarEvents._ClickEvent">
+            <summary>
+            SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="E:NetOffice.VBIDEApi.CommandBarEvents.ClickEvent">
+            <summary>
+            SupportByVersion VBIDE 12 14 5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.LinkedWindows">
+            <summary>
+             CoClass LinkedWindows 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.LinkedWindows.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.LinkedWindows.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.LinkedWindows.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.LinkedWindows.#ctor">
+            <summary>
+            creates a new instance of LinkedWindows 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.LinkedWindows.#ctor(System.String)">
+            <summary>
+            creates a new instance of LinkedWindows
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.LinkedWindows.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.LinkedWindows objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.LinkedWindows array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.LinkedWindows.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.LinkedWindows object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.LinkedWindows object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.LinkedWindows.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.LinkedWindows object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.LinkedWindows object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.LinkedWindows.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.VBComponent">
+            <summary>
+             CoClass VBComponent 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponent.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponent.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponent.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponent.#ctor">
+            <summary>
+            creates a new instance of VBComponent 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponent.#ctor(System.String)">
+            <summary>
+            creates a new instance of VBComponent
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponent.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.VBComponent objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.VBComponent array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponent.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.VBComponent object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.VBComponent object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponent.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.VBComponent object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.VBComponent object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponent.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.VBComponents">
+            <summary>
+             CoClass VBComponents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponents.#ctor">
+            <summary>
+            creates a new instance of VBComponents 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponents.#ctor(System.String)">
+            <summary>
+            creates a new instance of VBComponents
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponents.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.VBComponents objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.VBComponents array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponents.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.VBComponents object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.VBComponents object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponents.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.VBComponents object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.VBComponents object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBComponents.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.VBProject">
+            <summary>
+             CoClass VBProject 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBProject">
+            <summary>
+             DispatchInterface _VBProject 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject.SaveAs(System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="fileName">string FileName</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBProject.MakeCompiledFile">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject.Application">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject.Type">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject.FileName">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._VBProject.BuildFileName">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProject.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProject.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProject.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProject.#ctor">
+            <summary>
+            creates a new instance of VBProject 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProject.#ctor(System.String)">
+            <summary>
+            creates a new instance of VBProject
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProject.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.VBProject objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.VBProject array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProject.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.VBProject object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.VBProject object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProject.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.VBProject object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.VBProject object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.VBProject.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:VBIDEApi.Utils.ProjectInfo">
+            <summary>
+            necessary factory info, used from NetOffice.Factory while Initialize()
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._VBComponentsEvents">
+            <summary>
+             Interface _VBComponentsEvents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponentsEvents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponentsEvents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponentsEvents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._VBComponentsEvents.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbext_ProjectType">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ProjectType.vbext_pt_HostProject">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>100</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_ProjectType.vbext_pt_StandAlone">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>101</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Property">
+            <summary>
+             DispatchInterface Property 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.get_IndexedValue(System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+            <param name="index1">object Index1</param>
+            <param name="index2">optional object Index2</param>
+            <param name="index3">optional object Index3</param>
+            <param name="index4">optional object Index4</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.set_IndexedValue(System.Object,System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+            <param name="index1">object Index1</param>
+            <param name="index2">optional object Index2</param>
+            <param name="index3">optional object Index3</param>
+            <param name="index4">optional object Index4</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.IndexedValue(System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_IndexedValue
+            </summary>
+            <param name="index1">object Index1</param>
+            <param name="index2">optional object Index2</param>
+            <param name="index3">optional object Index3</param>
+            <param name="index4">optional object Index4</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.get_IndexedValue(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+            <param name="index1">object Index1</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.set_IndexedValue(System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+            <param name="index1">object Index1</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.IndexedValue(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_IndexedValue
+            </summary>
+            <param name="index1">object Index1</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.get_IndexedValue(System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+            <param name="index1">object Index1</param>
+            <param name="index2">optional object Index2</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.set_IndexedValue(System.Object,System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+            <param name="index1">object Index1</param>
+            <param name="index2">optional object Index2</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.IndexedValue(System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_IndexedValue
+            </summary>
+            <param name="index1">object Index1</param>
+            <param name="index2">optional object Index2</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.get_IndexedValue(System.Object,System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+            <param name="index1">object Index1</param>
+            <param name="index2">optional object Index2</param>
+            <param name="index3">optional object Index3</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.set_IndexedValue(System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+            <param name="index1">object Index1</param>
+            <param name="index2">optional object Index2</param>
+            <param name="index3">optional object Index3</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Property.IndexedValue(System.Object,System.Object,System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Alias for get_IndexedValue
+            </summary>
+            <param name="index1">object Index1</param>
+            <param name="index2">optional object Index2</param>
+            <param name="index3">optional object Index3</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Property.Value">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Property.NumIndices">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Property.Application">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Property.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Property.Name">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Property.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Property.Collection">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Property.Object">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            Unknown COM Proxy
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.SelectedComponents">
+            <summary>
+             DispatchInterface SelectedComponents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.SelectedComponents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.SelectedComponents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.SelectedComponents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.SelectedComponents.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.SelectedComponents.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.SelectedComponents.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.SelectedComponents.Application">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.SelectedComponents.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.SelectedComponents.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.SelectedComponents.Item(System.Int32)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">Int32 index</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._dispVBComponentsEvents">
+            <summary>
+             DispatchInterface _dispVBComponentsEvents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.ItemAdded(NetOffice.VBIDEApi.VBComponent)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBComponent">NetOffice.VBIDEApi.VBComponent VBComponent</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.ItemRemoved(NetOffice.VBIDEApi.VBComponent)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBComponent">NetOffice.VBIDEApi.VBComponent VBComponent</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.ItemRenamed(NetOffice.VBIDEApi.VBComponent,System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBComponent">NetOffice.VBIDEApi.VBComponent VBComponent</param>
+            <param name="oldName">string OldName</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.ItemSelected(NetOffice.VBIDEApi.VBComponent)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBComponent">NetOffice.VBIDEApi.VBComponent VBComponent</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.ItemActivated(NetOffice.VBIDEApi.VBComponent)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBComponent">NetOffice.VBIDEApi.VBComponent VBComponent</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBComponentsEvents.ItemReloaded(NetOffice.VBIDEApi.VBComponent)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBComponent">NetOffice.VBIDEApi.VBComponent VBComponent</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.CodePane">
+            <summary>
+             CoClass CodePane 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePane.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePane.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePane.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePane.#ctor">
+            <summary>
+            creates a new instance of CodePane 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePane.#ctor(System.String)">
+            <summary>
+            creates a new instance of CodePane
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePane.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.CodePane objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.CodePane array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePane.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.CodePane object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.CodePane object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePane.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.CodePane object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.CodePane object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePane.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.CodePanes">
+            <summary>
+             CoClass CodePanes 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._CodePanes">
+            <summary>
+             DispatchInterface _CodePanes 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePanes.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePanes.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePanes.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePanes.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePanes.GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._CodePanes.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            SupportByVersionAttribute VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePanes.Parent">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePanes.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePanes.Count">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePanes.Current">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get/Set
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi._CodePanes.Item(System.Object)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="index">object index</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePanes.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePanes.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePanes.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePanes.#ctor">
+            <summary>
+            creates a new instance of CodePanes 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePanes.#ctor(System.String)">
+            <summary>
+            creates a new instance of CodePanes
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePanes.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.CodePanes objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.CodePanes array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePanes.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.CodePanes object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.CodePanes object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePanes.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.CodePanes object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.CodePanes object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.CodePanes.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi._dispVBProjectsEvents">
+            <summary>
+             DispatchInterface _dispVBProjectsEvents 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBProjectsEvents.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBProjectsEvents.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBProjectsEvents.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBProjectsEvents.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBProjectsEvents.ItemAdded(NetOffice.VBIDEApi.VBProject)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBProject">NetOffice.VBIDEApi.VBProject VBProject</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBProjectsEvents.ItemRemoved(NetOffice.VBIDEApi.VBProject)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBProject">NetOffice.VBIDEApi.VBProject VBProject</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBProjectsEvents.ItemRenamed(NetOffice.VBIDEApi.VBProject,System.String)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBProject">NetOffice.VBIDEApi.VBProject VBProject</param>
+            <param name="oldName">string OldName</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi._dispVBProjectsEvents.ItemActivated(NetOffice.VBIDEApi.VBProject)">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <param name="vBProject">NetOffice.VBIDEApi.VBProject VBProject</param>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Reference">
+            <summary>
+             DispatchInterface Reference 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Reference.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Reference.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Reference.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.Reference.#ctor(System.String)">
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.Collection">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.VBE">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.Name">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.Guid">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.Major">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.Minor">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.FullPath">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.BuiltIn">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.IsBroken">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.Type">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="P:NetOffice.VBIDEApi.Reference.Description">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            Get
+            </summary>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.Enums.vbext_WindowState">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowState.vbext_ws_Normal">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>0</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowState.vbext_ws_Minimize">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>1</remarks>
+        </member>
+        <member name="F:NetOffice.VBIDEApi.Enums.vbext_WindowState.vbext_ws_Maximize">
+            <summary>
+            SupportByVersion VBIDE 12, 14, 5.3
+            </summary>
+            <remarks>2</remarks>
+        </member>
+        <member name="T:NetOffice.VBIDEApi.ProjectTemplate">
+            <summary>
+             CoClass ProjectTemplate 
+             SupportByVersion VBIDE, 12,14,5.3
+            </summary>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ProjectTemplate.#ctor(NetOffice.COMObject,System.Object)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ProjectTemplate.#ctor(NetOffice.COMObject,System.Object,System.Type)">
+            <param name="parentObject">object there has created the proxy</param>
+            <param name="comProxy">inner wrapped COM proxy</param>
+            <param name="comProxyType">Type of inner wrapped COM proxy"</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ProjectTemplate.#ctor(NetOffice.COMObject)">
+            <param name="replacedObject">object to replaced. replacedObject are not usable after this action</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ProjectTemplate.#ctor">
+            <summary>
+            creates a new instance of ProjectTemplate 
+            </summary>		
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ProjectTemplate.#ctor(System.String)">
+            <summary>
+            creates a new instance of ProjectTemplate
+            </summary>
+            <param name="progId">registered ProgID</param>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ProjectTemplate.GetActiveInstances">
+            <summary>
+            returns all running VBIDE.ProjectTemplate objects from the running object table(ROT)
+            </summary>
+            <returns>an VBIDE.ProjectTemplate array</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ProjectTemplate.GetActiveInstance">
+            <summary>
+            returns a running VBIDE.ProjectTemplate object from the running object table(ROT). the method takes the first element from the table
+            </summary>
+            <returns>an VBIDE.ProjectTemplate object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ProjectTemplate.GetActiveInstance(System.Boolean)">
+            <summary>
+            returns a running VBIDE.ProjectTemplate object from the running object table(ROT).  the method takes the first element from the table
+            </summary>
+            <param name="throwOnError">throw an exception if no object was found</param>
+            <returns>an VBIDE.ProjectTemplate object or null</returns>
+        </member>
+        <member name="M:NetOffice.VBIDEApi.ProjectTemplate.CreateEventBridge">
+            <summary>
+            creates active sink helper
+            </summary>
+        </member>
+    </members>
+</doc>

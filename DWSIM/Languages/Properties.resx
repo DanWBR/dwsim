@@ -1,0 +1,1247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PROP_AC_0" xml:space="preserve">
+    <value>Pressão do Estágio de Topo</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_AC_1" xml:space="preserve">
+    <value>Pressão do Estágio de Fundo</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_AC_2" xml:space="preserve">
+    <value>Número de Estágios</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_CL_0" xml:space="preserve">
+    <value>Queda de Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_CL_1" xml:space="preserve">
+    <value>Eficiência</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_CL_2" xml:space="preserve">
+    <value>Temperatura da Saída</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_CL_3" xml:space="preserve">
+    <value>Calor Removido</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_CL_4" xml:space="preserve">
+    <value>Fração Molar da Saída</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_CL_5" xml:space="preserve">
+    <value>Delta-T</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_CO_0" xml:space="preserve">
+    <value>Aumento na Pressão (Head)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_CO_1" xml:space="preserve">
+    <value>Eficiência</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_CO_2" xml:space="preserve">
+    <value>Delta-T</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_CO_3" xml:space="preserve">
+    <value>Potência Requerida</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_CO_4" xml:space="preserve">
+    <value>Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_CP_0" xml:space="preserve">
+    <value>Balanço de Energia</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_CR_0" xml:space="preserve">
+    <value>Perda de Carga</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_CS_0" xml:space="preserve">
+    <value>Perda de Carga</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_DC_0" xml:space="preserve">
+    <value>Pressão do Condensador</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_DC_1" xml:space="preserve">
+    <value>Pressão do Refervedor</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_DC_2" xml:space="preserve">
+    <value>Perda de Carga no Condensador</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_DC_3" xml:space="preserve">
+    <value>Razão de Refluxo</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_DC_4" xml:space="preserve">
+    <value>Vazão Molar de Destilado</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_DC_5" xml:space="preserve">
+    <value>Calor Trocado no Condensador</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_DC_6" xml:space="preserve">
+    <value>Calor Trocado no Refervedor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_DC_7" xml:space="preserve">
+    <value>Número de Estágios</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_EQ_0" xml:space="preserve">
+    <value>Perda de Carga</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_ER_0" xml:space="preserve">
+    <value>Número Máximo de Iterações</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_ER_1" xml:space="preserve">
+    <value>Tolerância para Energia/Tempo</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_ER_2" xml:space="preserve">
+    <value>Erro Residual</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_ES_0" xml:space="preserve">
+    <value>Fluxo de Energia</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_FT_0" xml:space="preserve">
+    <value>Balanço de energia</value>
+  </data>
+  <data name="PROP_FT_1" xml:space="preserve">
+    <value>Área Total de Filtragem</value>
+  </data>
+  <data name="PROP_FT_2" xml:space="preserve">
+    <value>Umidade Relativa (%) da Torta</value>
+  </data>
+  <data name="PROP_FT_3" xml:space="preserve">
+    <value>Tempo de Ciclagem</value>
+  </data>
+  <data name="PROP_FT_4" xml:space="preserve">
+    <value>Resistência do Meio Filtrante</value>
+  </data>
+  <data name="PROP_FT_5" xml:space="preserve">
+    <value>Resistência Específica da Torta</value>
+  </data>
+  <data name="PROP_FT_6" xml:space="preserve">
+    <value>Fração de Área Submergida</value>
+  </data>
+  <data name="PROP_FT_7" xml:space="preserve">
+    <value>Perda de Carga Total</value>
+  </data>
+  <data name="PROP_GR_0" xml:space="preserve">
+    <value>Perda de Carga</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_HT_0" xml:space="preserve">
+    <value>Queda de Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_HT_1" xml:space="preserve">
+    <value>Eficiência</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_HT_2" xml:space="preserve">
+    <value>Temperatura da Saída</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_HT_3" xml:space="preserve">
+    <value>Calor Adicionado</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_HT_4" xml:space="preserve">
+    <value>Fração Molar da Saída</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_HT_5" xml:space="preserve">
+    <value>Delta-T</value>
+  </data>
+  <data name="PROP_HX_0" xml:space="preserve">
+    <value>Coeficiente Global de Transferência de Calor (U)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_HX_1" xml:space="preserve">
+    <value>Área de Troca Térmica (A)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_HX_10" xml:space="preserve">
+    <value>[Casco e Tubo] Diâmetro Interno dos Tubos</value>
+  </data>
+  <data name="PROP_HX_11" xml:space="preserve">
+    <value>[Casco e Tubo] Diâmetro Externo dos Tubos</value>
+  </data>
+  <data name="PROP_HX_12" xml:space="preserve">
+    <value>[Casco e Tubo] Comprimento dos Tubos</value>
+  </data>
+  <data name="PROP_HX_13" xml:space="preserve">
+    <value>[Casco e Tubo] Fator de Incrustação dos Tubos</value>
+  </data>
+  <data name="PROP_HX_14" xml:space="preserve">
+    <value>[Casco e Tubo] Passes dos Tubos por Casco</value>
+  </data>
+  <data name="PROP_HX_15" xml:space="preserve">
+    <value>[Casco e Tubo] Número de Tubos</value>
+  </data>
+  <data name="PROP_HX_16" xml:space="preserve">
+    <value>[Casco e Tubo] Espaçamento entre Tubos</value>
+  </data>
+  <data name="PROP_HX_17" xml:space="preserve">
+    <value>[Casco e Tubo] Fator de Incrustação (Dimensionamento)</value>
+  </data>
+  <data name="PROP_HX_18" xml:space="preserve">
+    <value>[Casco e Tubo] Fator de Correção MLDT (F)</value>
+  </data>
+  <data name="PROP_HX_2" xml:space="preserve">
+    <value>Carga Térmica</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_HX_3" xml:space="preserve">
+    <value>Temperatura de saída do fluido frio</value>
+  </data>
+  <data name="PROP_HX_4" xml:space="preserve">
+    <value>Temperatura de saída do fluido quente</value>
+  </data>
+  <data name="PROP_HX_5" xml:space="preserve">
+    <value>[Casco e Tubo] Diâmetro Interno do Casco</value>
+  </data>
+  <data name="PROP_HX_6" xml:space="preserve">
+    <value>[Casco e Tubo] Fator de Incrustação do Casco</value>
+  </data>
+  <data name="PROP_HX_7" xml:space="preserve">
+    <value>[Casco e Tubo] Corte das Chicanas</value>
+  </data>
+  <data name="PROP_HX_8" xml:space="preserve">
+    <value>[Casco e Tubo] Número de Cascos em Série</value>
+  </data>
+  <data name="PROP_HX_9" xml:space="preserve">
+    <value>[Casco e Tubo] Espaçamento entre Chicanas</value>
+  </data>
+  <data name="PROP_MS_0" xml:space="preserve">
+    <value>Temperatura</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_MS_1" xml:space="preserve">
+    <value>Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_MS_10" xml:space="preserve">
+    <value>Entropia Molar da Mistura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_100" xml:space="preserve">
+    <value>Fração Mássica da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_101" xml:space="preserve">
+    <value>Fração Volumétrica da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_102" xml:space="preserve">
+    <value>Fração Molar (Mistura)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_MS_103" xml:space="preserve">
+    <value>Fração Mássica (Mistura)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_MS_104" xml:space="preserve">
+    <value>Fluxo Molar (Mistura)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_MS_105" xml:space="preserve">
+    <value>Fluxo Mássico (Mistura)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_MS_106" xml:space="preserve">
+    <value>Fração Molar (Fase Vapor)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_107" xml:space="preserve">
+    <value>Fração Molar (Fase Líquida - Total)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_108" xml:space="preserve">
+    <value>Fração Molar (Fase Líquida 1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_109" xml:space="preserve">
+    <value>Fração Molar (Fase Líquida 2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_11" xml:space="preserve">
+    <value>Condutividade Térmica da Mistura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_110" xml:space="preserve">
+    <value>Fração Molar (Fase Aquosa)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_111" xml:space="preserve">
+    <value>Fração Mássica (Fase Vapor)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_112" xml:space="preserve">
+    <value>Fração Mássica (Fase Líquida - Total)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_113" xml:space="preserve">
+    <value>Fração Mássica (Fase Líquida 1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_114" xml:space="preserve">
+    <value>Fração Mássica (Fase Líquida 2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_115" xml:space="preserve">
+    <value>Fração Mássica (Fase Aquosa)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_116" xml:space="preserve">
+    <value>Fluxo Molar (Fase Vapor)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_117" xml:space="preserve">
+    <value>Fluxo Molar (Fase Líquida - Total)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_118" xml:space="preserve">
+    <value>Fluxo Molar (Fase Líquida 1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_119" xml:space="preserve">
+    <value>Fluxo Molar (Fase Líquida 2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_12" xml:space="preserve">
+    <value>Massa Específica da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_120" xml:space="preserve">
+    <value>Fluxo Molar (Fase Aquosa)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_121" xml:space="preserve">
+    <value>Fluxo Mássico (Fase Vapor)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_122" xml:space="preserve">
+    <value>Fluxo Mássico (Fase Líquida - Total)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_123" xml:space="preserve">
+    <value>Fluxo Mássico (Fase Líquida 1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_124" xml:space="preserve">
+    <value>Fluxo Mássico (Fase Líquida 2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_125" xml:space="preserve">
+    <value>Fluxo Mássico (Fase Aquosa)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_126" xml:space="preserve">
+    <value>Pressão de Bolha na Temperatura da Corrente</value>
+  </data>
+  <data name="PROP_MS_127" xml:space="preserve">
+    <value>Pressão de Orvalho na Temperatura da Corrente</value>
+  </data>
+  <data name="PROP_MS_128" xml:space="preserve">
+    <value>Temperatura de Bolha na Pressão da Corrente</value>
+  </data>
+  <data name="PROP_MS_129" xml:space="preserve">
+    <value>Temperatura de Orvalho na Pressão da Corrente</value>
+  </data>
+  <data name="PROP_MS_13" xml:space="preserve">
+    <value>Massa Molar da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_130" xml:space="preserve">
+    <value>Fase(s)</value>
+  </data>
+  <data name="PROP_MS_131" xml:space="preserve">
+    <value>Massa Específica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_132" xml:space="preserve">
+    <value>Massa Molar da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_133" xml:space="preserve">
+    <value>Entalpia Específica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_134" xml:space="preserve">
+    <value>Entropia Especifica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_135" xml:space="preserve">
+    <value>Entalpia Molar da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_136" xml:space="preserve">
+    <value>Entropia Molar da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_137" xml:space="preserve">
+    <value>Condutividade Térmica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_138" xml:space="preserve">
+    <value>Viscosidade Cinemática da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_139" xml:space="preserve">
+    <value>Viscosidade Dinâmica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_14" xml:space="preserve">
+    <value>Entalpia Específica da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_140" xml:space="preserve">
+    <value>Capacidade Calorífica (Cp) da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_141" xml:space="preserve">
+    <value>Razão entre as Capacidades Caloríficas da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_142" xml:space="preserve">
+    <value>Vazão Mássica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_143" xml:space="preserve">
+    <value>Vazão Molar da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_144" xml:space="preserve">
+    <value>Vazão Volumétrica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_145" xml:space="preserve">
+    <value>Fator de Compressibilidade da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_146" xml:space="preserve">
+    <value>Fração Molar da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_147" xml:space="preserve">
+    <value>Fração Mássica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_148" xml:space="preserve">
+    <value>Fração Volumétrica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_149" xml:space="preserve">
+    <value>Fração Molar (Fase Sólida)</value>
+  </data>
+  <data name="PROP_MS_15" xml:space="preserve">
+    <value>Entropia Especifica da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_150" xml:space="preserve">
+    <value>Fração Mássica (Fase Sólida)</value>
+  </data>
+  <data name="PROP_MS_151" xml:space="preserve">
+    <value>Fluxo Molar (Fase Sólida)</value>
+  </data>
+  <data name="PROP_MS_152" xml:space="preserve">
+    <value>Fluxo Mássico (Fase Sólida)</value>
+  </data>
+  <data name="PROP_MS_16" xml:space="preserve">
+    <value>Entalpia Molar da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_17" xml:space="preserve">
+    <value>Entropia Molar da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_18" xml:space="preserve">
+    <value>Condutividade Térmica da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_19" xml:space="preserve">
+    <value>Viscosidade Cinemática da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_2" xml:space="preserve">
+    <value>Vazão Mássica</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_MS_20" xml:space="preserve">
+    <value>Viscosidade Dinâmica da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_21" xml:space="preserve">
+    <value>Capacidade Calorífica (Cp) da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_22" xml:space="preserve">
+    <value>Razão entre as Capacidades Caloríficas da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_23" xml:space="preserve">
+    <value>Vazão Mássica da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_24" xml:space="preserve">
+    <value>Vazão Molar da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_25" xml:space="preserve">
+    <value>Vazão Volumétrica da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_26" xml:space="preserve">
+    <value>Fator de Compressibilidade da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_27" xml:space="preserve">
+    <value>Fração Molar da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_28" xml:space="preserve">
+    <value>Fração Mássica da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_29" xml:space="preserve">
+    <value>Fração Volumétrica da Fase Vapor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_3" xml:space="preserve">
+    <value>Vazão Molar</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_MS_30" xml:space="preserve">
+    <value>Massa Específica da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_31" xml:space="preserve">
+    <value>Massa Molar da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_32" xml:space="preserve">
+    <value>Entalpia Específica da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_33" xml:space="preserve">
+    <value>Entropia Especifica da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_34" xml:space="preserve">
+    <value>Entalpia Molar da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_35" xml:space="preserve">
+    <value>Entropia Molar da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_36" xml:space="preserve">
+    <value>Condutividade Térmica da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_37" xml:space="preserve">
+    <value>Viscosidade Cinemática da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_38" xml:space="preserve">
+    <value>Viscosidade Dinâmica da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_39" xml:space="preserve">
+    <value>Capacidade Calorífica (Cp) da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_4" xml:space="preserve">
+    <value>Vazão Volumétrica</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_MS_40" xml:space="preserve">
+    <value>Razão entre as Capacidades Caloríficas da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_41" xml:space="preserve">
+    <value>Vazão Mássica da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_42" xml:space="preserve">
+    <value>Vazão Molar da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_43" xml:space="preserve">
+    <value>Vazão Volumétrica da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_44" xml:space="preserve">
+    <value>Fator de Compressibilidade da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_45" xml:space="preserve">
+    <value>Fração Molar da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_46" xml:space="preserve">
+    <value>Fração Mássica da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_47" xml:space="preserve">
+    <value>Fração Volumétrica da Fase Líquida (Mistura)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_48" xml:space="preserve">
+    <value>Massa Específica da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_49" xml:space="preserve">
+    <value>Massa Molar da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_5" xml:space="preserve">
+    <value>Massa Específica da Mistura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_50" xml:space="preserve">
+    <value>Entalpia Específica da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_51" xml:space="preserve">
+    <value>Entropia Especifica da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_52" xml:space="preserve">
+    <value>Entalpia Molar da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_53" xml:space="preserve">
+    <value>Entropia Molar da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_54" xml:space="preserve">
+    <value>Condutividade Térmica da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_55" xml:space="preserve">
+    <value>Viscosidade Cinemática da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_56" xml:space="preserve">
+    <value>Viscosidade Dinâmica da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_57" xml:space="preserve">
+    <value>Capacidade Calorífica (Cp) da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_58" xml:space="preserve">
+    <value>Razão entre as Capacidades Caloríficas da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_59" xml:space="preserve">
+    <value>Vazão Mássica da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_6" xml:space="preserve">
+    <value>Massa Molar da Mistura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_60" xml:space="preserve">
+    <value>Vazão Molar da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_61" xml:space="preserve">
+    <value>Vazão Volumétrica da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_62" xml:space="preserve">
+    <value>Fator de Compressibilidade da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_63" xml:space="preserve">
+    <value>Fração Molar da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_64" xml:space="preserve">
+    <value>Fração Mássica da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_65" xml:space="preserve">
+    <value>Fração Volumétrica da Fase Líquida (1)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_66" xml:space="preserve">
+    <value>Massa Específica da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_67" xml:space="preserve">
+    <value>Massa Molar da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_68" xml:space="preserve">
+    <value>Entalpia Específica da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_69" xml:space="preserve">
+    <value>Entropia Especifica da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_7" xml:space="preserve">
+    <value>Entalpia Específica da Mistura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_70" xml:space="preserve">
+    <value>Entalpia Molar da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_71" xml:space="preserve">
+    <value>Entropia Molar da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_72" xml:space="preserve">
+    <value>Condutividade Térmica da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_73" xml:space="preserve">
+    <value>Viscosidade Cinemática da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_74" xml:space="preserve">
+    <value>Viscosidade Dinâmica da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_75" xml:space="preserve">
+    <value>Capacidade Calorífica (Cp) da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_76" xml:space="preserve">
+    <value>Razão entre as Capacidades Caloríficas da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_77" xml:space="preserve">
+    <value>Vazão Mássica da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_78" xml:space="preserve">
+    <value>Vazão Molar da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_79" xml:space="preserve">
+    <value>Vazão Volumétrica da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_8" xml:space="preserve">
+    <value>Entropia Específica da Mistura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_80" xml:space="preserve">
+    <value>Fator de Compressibilidade da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_81" xml:space="preserve">
+    <value>Fração Molar da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_82" xml:space="preserve">
+    <value>Fração Mássica da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_83" xml:space="preserve">
+    <value>Fração Volumétrica da Fase Líquida (2)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_84" xml:space="preserve">
+    <value>Massa Específica da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_85" xml:space="preserve">
+    <value>Massa Molar da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_86" xml:space="preserve">
+    <value>Entalpia Específica da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_87" xml:space="preserve">
+    <value>Entropia Especifica da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_88" xml:space="preserve">
+    <value>Entalpia Molar da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_89" xml:space="preserve">
+    <value>Entropia Molar da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_9" xml:space="preserve">
+    <value>Entalpia Molar da Mistura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_90" xml:space="preserve">
+    <value>Condutividade Térmica da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_91" xml:space="preserve">
+    <value>Viscosidade Cinemática da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_92" xml:space="preserve">
+    <value>Viscosidade Dinâmica da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_93" xml:space="preserve">
+    <value>Capacidade Calorífica (Cp) da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_94" xml:space="preserve">
+    <value>Razão entre as Capacidades Caloríficas da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_95" xml:space="preserve">
+    <value>Vazão Mássica da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_96" xml:space="preserve">
+    <value>Vazão Molar da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_97" xml:space="preserve">
+    <value>Vazão Volumétrica da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_98" xml:space="preserve">
+    <value>Fator de Compressibilidade da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_99" xml:space="preserve">
+    <value>Fração Molar da Fase Aquosa</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_OP_0" xml:space="preserve">
+    <value>Conectores de Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_OP_1" xml:space="preserve">
+    <value>Diâmetro do Orifício</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_OP_2" xml:space="preserve">
+    <value>Beta (d/D)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_OP_3" xml:space="preserve">
+    <value>Fator de Correção</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_OP_4" xml:space="preserve">
+    <value>Perda de Carga Total</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_OP_5" xml:space="preserve">
+    <value>Perda de Carga no Orifício</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_OP_6" xml:space="preserve">
+    <value>Delta T</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_PF_0" xml:space="preserve">
+    <value>Perda de Carga</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_PS_0" xml:space="preserve">
+    <value>Queda de Pressão</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_PS_1" xml:space="preserve">
+    <value>Queda de Temperatura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_PS_2" xml:space="preserve">
+    <value>Calor Trocado</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_PU_0" xml:space="preserve">
+    <value>Aumento na Pressão (Head)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_PU_1" xml:space="preserve">
+    <value>Eficiência</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_PU_2" xml:space="preserve">
+    <value>Delta-T</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_PU_3" xml:space="preserve">
+    <value>Potência Requerida</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_RA_0" xml:space="preserve">
+    <value>Pressão do Estágio de Topo</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RA_1" xml:space="preserve">
+    <value>Pressão do Refervedor</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RA_2" xml:space="preserve">
+    <value>Razão de Ebulição</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RA_3" xml:space="preserve">
+    <value>Calor Trocado no Refervedor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_RA_4" xml:space="preserve">
+    <value>Número de Estágios</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_RF_0" xml:space="preserve">
+    <value>Pressão do Condensador</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RF_1" xml:space="preserve">
+    <value>Pressão do Estágio de Fundo</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RF_2" xml:space="preserve">
+    <value>Perda de Carga no Condensador</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RF_3" xml:space="preserve">
+    <value>Razão de Refluxo</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RF_4" xml:space="preserve">
+    <value>Vazão Molar de Destilado</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RF_5" xml:space="preserve">
+    <value>Calor Trocado no Condensador</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_RF_6" xml:space="preserve">
+    <value>Número de Estágios</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_RY_0" xml:space="preserve">
+    <value>Número Máximo de Iterações</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RY_1" xml:space="preserve">
+    <value>Tolerância para Vazão Mássica</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RY_2" xml:space="preserve">
+    <value>Tolerância para Temperatura</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RY_3" xml:space="preserve">
+    <value>Tolerância para Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_RY_4" xml:space="preserve">
+    <value>Erro Residual da Vazão Mássica</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_RY_5" xml:space="preserve">
+    <value>Erro Residual da Temperatura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_RY_6" xml:space="preserve">
+    <value>Erro Residual da Pressão</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SC_0" xml:space="preserve">
+    <value>Razão de Refluxo</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_SC_1" xml:space="preserve">
+    <value>Fração Molar do Comp. Chave Pesado</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_SC_10" xml:space="preserve">
+    <value>Vazão Molar do Vapor de Esgotamento</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SC_11" xml:space="preserve">
+    <value>Vazão Molar do Vapor de Retificação</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SC_12" xml:space="preserve">
+    <value>Calor Trocado no Condensador</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SC_13" xml:space="preserve">
+    <value>Calor Trocado no Refervedor</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SC_2" xml:space="preserve">
+    <value>Fração Molar do Comp. Chave Leve</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_SC_3" xml:space="preserve">
+    <value>Pressão do Condensador</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_SC_4" xml:space="preserve">
+    <value>Pressão do Refervedor</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_SC_5" xml:space="preserve">
+    <value>Razão Mínima de Refluxo</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SC_6" xml:space="preserve">
+    <value>Número Mínimo de Estágios</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SC_7" xml:space="preserve">
+    <value>Estágio Ótimo de Alimentação</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SC_8" xml:space="preserve">
+    <value>Vazão Molar do Líquido de Esgotamento</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SC_9" xml:space="preserve">
+    <value>Vazão Molar do Líquido de Retificação</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SP_1" xml:space="preserve">
+    <value>Especificação de Vazão</value>
+  </data>
+  <data name="PROP_SP_2" xml:space="preserve">
+    <value>Especificação de Vazão (2)</value>
+  </data>
+  <data name="PROP_SS_0" xml:space="preserve">
+    <value>Balanço de Energia</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_SS_1" xml:space="preserve">
+    <value>Eficiência de Separação de Sólidos</value>
+  </data>
+  <data name="PROP_SS_2" xml:space="preserve">
+    <value>Eficiência de Separação de Líquidos</value>
+  </data>
+  <data name="PROP_SV_0" xml:space="preserve">
+    <value>Temperatura de Separação</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_SV_1" xml:space="preserve">
+    <value>Pressão de Separação</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_TK_0" xml:space="preserve">
+    <value>Queda de Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_TK_1" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="PROP_TK_2" xml:space="preserve">
+    <value>Tempo de Residência</value>
+  </data>
+  <data name="PROP_TU_0" xml:space="preserve">
+    <value>Queda de Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_TU_1" xml:space="preserve">
+    <value>Eficiência</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_TU_2" xml:space="preserve">
+    <value>Delta-T</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_TU_3" xml:space="preserve">
+    <value>Potência Gerada</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_TU_4" xml:space="preserve">
+    <value>Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_VA_0" xml:space="preserve">
+    <value>Modo de Cálculo</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_VA_1" xml:space="preserve">
+    <value>Queda de Pressão</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_VA_2" xml:space="preserve">
+    <value>Pressão na Saída</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_VA_3" xml:space="preserve">
+    <value>Queda de Temperatura</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_CS_01" xml:space="preserve">
+    <value>Perda de Carga</value>
+  </data>
+  <data name="PROP_HX_19" xml:space="preserve">
+    <value>Logarithmic temperatura difference MLDT</value>
+  </data>
+  <data name="PROP_HX_20" xml:space="preserve">
+    <value>[Casco e Tubo] Resistência ao fluido de tubo</value>
+  </data>
+  <data name="PROP_HX_21" xml:space="preserve">
+    <value>[Casco e Tubo] Resistência à condutividade térmica</value>
+  </data>
+  <data name="PROP_HX_22" xml:space="preserve">
+    <value>[Casco e Tubo] Resistência ao fluido de casco</value>
+  </data>
+  <data name="PROP_HX_23" xml:space="preserve">
+    <value>[Casco e Tubo] Número de Reynolds de casco</value>
+  </data>
+  <data name="PROP_HX_24" xml:space="preserve">
+    <value>[Casco e Tubo] Número de Reynolds de tubo</value>
+  </data>
+  <data name="PROP_GR_1" xml:space="preserve">
+    <value>Temperatura da Saída</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_PS_3" xml:space="preserve">
+    <value>Pressão na Saída (Especif.)</value>
+  </data>
+  <data name="PROP_PS_4" xml:space="preserve">
+    <value>Temperatura na Saída (Especif.)</value>
+  </data>
+  <data name="PROP_PS_5" xml:space="preserve">
+    <value>Coeficiente Global de Troca Térmica (Especif.)</value>
+  </data>
+  <data name="PROP_PS_6" xml:space="preserve">
+    <value>Temperatura Ambiente (Especif.)</value>
+  </data>
+  <data name="PROP_HX_25" xml:space="preserve">
+    <value>Eficiência Térmica</value>
+  </data>
+  <data name="PROP_HX_26" xml:space="preserve">
+    <value>Valor máximo de troca térmica</value>
+  </data>
+  <data name="PROP_MS_153" xml:space="preserve">
+    <value>pH da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_154" xml:space="preserve">
+    <value>Fluxo de Energia</value>
+  </data>
+</root>

@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="Window Styles" value="0x800025">
+	<param name="ImageType" value="Folder">
+<param name="Font" value="Arial,10,0">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="General Help">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Introduction">
+			<param name="Local" value="EX_Introduction_0.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Installation">
+			<param name="Local" value="EX_Installation_1.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Usage">
+			<param name="Local" value="EX_Usage_2.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Overriding IPs">
+			<param name="Local" value="EX_Overriding_IPs_3.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Information Functions">
+		<param name="Local" value="GetCompoundConstants.htm">
+		<param name="Local" value="GetCompoundList.htm">
+		<param name="Local" value="GetCompoundProp.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetCompoundConstants">
+			<param name="Local" value="GetCompoundConstants.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetCompoundProp">
+			<param name="Local" value="GetCompoundProp.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetCompoundPropList">
+			<param name="Local" value="GetCompoundPropList.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetPropPackList">
+			<param name="Local" value="GetPropPackList.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetModelList">
+			<param name="Local" value="GetModelList.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetInteractionParameterSet">
+			<param name="Local" value="GetInteractionParameterSet.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetUserInteractionParameterSet">
+			<param name="Local" value="GetUserInteractionParameterSet.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetPropList">
+			<param name="Local" value="GetPropList.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetPhaseList">
+			<param name="Local" value="GetPhaseList.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="GetCompoundList">
+			<param name="Local" value="GetCompoundList.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Property Calculation Functions">
+		<param name="Local" value="CalcProp.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="CalcProp">
+			<param name="Local" value="CalcProp.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Flash Calculations">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="PTFlash">
+			<param name="Local" value="PTFlash.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="PHFlash">
+			<param name="Local" value="PHFlash.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="PHFlash2">
+			<param name="Local" value="PHFlash2.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="PSFlash">
+			<param name="Local" value="PSFlash.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="PSFlash2">
+			<param name="Local" value="PSFlash2.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="PVFFlash">
+			<param name="Local" value="PVFFlash.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="PVFFlash2">
+			<param name="Local" value="PVFFlash2.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="TVFFlash">
+			<param name="Local" value="TVFFlash.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="TVFFlash2">
+			<param name="Local" value="TVFFlash2.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

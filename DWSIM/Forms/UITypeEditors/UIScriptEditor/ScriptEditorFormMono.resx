@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="&gt;&gt;PrintToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator.Name" xml:space="preserve">
+    <value>toolStripSeparator</value>
+  </data>
+  <data name="&gt;&gt;FaTabStrip2.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.5916.15116, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="ToolStripButton4.Text" xml:space="preserve">
+    <value>Aumentar Opacidade</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtScript.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ofd1.Title" xml:space="preserve">
+    <value>Incluir Arquivos de Script</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 17</value>
+  </data>
+  <data name="&gt;&gt;tscb2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CutToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CutToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAYNJREFUOE+tkU1LAlEYhf01gZsWhSUUSVjUQlAoRiEImyItpWwRGdEXmIJpJkk7
+        W2gINUYWSCgWlZBZZFHZoi9TGbUEo3XBKccIXDhM4LO5772c83Dh5VWdq/gjPNtB/F4ZnlNZrFP+sreK
+        vOYLsKy6y8LUbgiRs0tugiIOJ4XgYZQp5N4KUOmmkXx54S7Y8h/B+vOLNJ3DceQScqUWmQzNXbAfvsCi
+        w4VNXwD6+SX0KIe4l4sk01mMzy1hYHQWRO8wDCbL/wRFNHoLCOUYCLUJx6dx7oLU2xfM3g8ojEksuB4g
+        nYyhe+YWto0Eord5dlEi94k++zsUhieISRdkQ050T4YhnYqjXRPAsru0mYqYvQUQRhqtgz40ye3QLWxD
+        OnH+VxISdnaBwpj+CzR2WZm5a+aOOanADWrFWnYBYUgwAX84AYHMyMwjtmu0kJvgN/ejhl/HLtCt3ENE
+        UqiXmSGSlHYfiqYg7NRA0EbCuxdjFxyc05Co1tDQoYZn54Q9XB14vG+qqt/jAaFM0AAAAABJRU5ErkJg
+        gg==
+</value>
+  </data>
+  <data name="&gt;&gt;tscb2.Name" xml:space="preserve">
+    <value>tscb2</value>
+  </data>
+  <data name="&gt;&gt;CopyToolStripButton.Name" xml:space="preserve">
+    <value>CopyToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip1.Name" xml:space="preserve">
+    <value>StatusStrip1</value>
+  </data>
+  <data name="tscb2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 23</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sfd1.Name" xml:space="preserve">
+    <value>sfd1</value>
+  </data>
+  <data name="ListBox1.HorizontalScrollbar" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;CopyToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CutToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Recortar</value>
+  </data>
+  <data name="CopyToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAeRJREFUOE+9kd9LU2Ech/enlDKkuvYPiCgzCgwKL+oi6Add7UKvuooMgyRmLHA2
+        F9YsZZue6SLSRcrMtTTbcq5sE08mttF07Ohybp7Z0847bWYxL4Ie+Ny85/08X77v0f0z7tFPaJFGwiL2
+        wQBd7jfIC9/YulIerbwb24CfK01PiMwt7C1xDYe3akXymz9o636BxxfmXEPr3hL7UFAUPVGQ3kNIVrhn
+        e440puAcTeHwpng4lMLUnxSJLOZ+F3a5/UKgkdvIo6xmiSXSQrCb5p4lqi/7CM6ulCRWp1d87PRtYBxU
+        uCF9pfGRTPfLZXG+kwZLAve4wqH6Ad7NJIsSc2Ffbe+1jMpSKsN8bIWP8jLWZ3FRapHyIqHC1AvGOAfr
+        n3LgTC9VdY+LAm3f9az6a7LBGuWq+QN3HfNCsI3yXWV2cR3f9CoWaRL9qQclgZLOMvM5QTASwx/6wsjb
+        OZo6i7/3ek8agznO+TtRTt+cErFIE+hPtJcE1bUX/0ijaUoI1MJ6iZTKtLzGcEDB9SrJ/V4/lTWm0kP+
+        jUvN40Kwc/J22p2vqThqLC84e81LJreJtT9Ah2sSS9+EmKyVzfYx9h+5XV5QY/AUXtshUlVnQ3+yg8rj
+        bVQcay2UW9h3+FZ5wX9Cp/sJHQDnDCBJADYAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="CutToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="&gt;&gt;ToolStripButton2.Name" xml:space="preserve">
+    <value>ToolStripButton2</value>
+  </data>
+  <data name="PasteToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="StatusStrip1.Text" xml:space="preserve">
+    <value>StatusStrip1</value>
+  </data>
+  <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HelpToolStripButton.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Script Editor</value>
+  </data>
+  <data name="HelpToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="ToolStrip1.Text" xml:space="preserve">
+    <value>ToolStrip1</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5916.15116, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtScript.Name" xml:space="preserve">
+    <value>txtScript</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PrintToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAilJREFUOE+1kv9PUlEYxvmnWK2tVlttGmpltrCcEQ1XUjSMaUHJNLIlNcnCragp
+        lBvUoC/okJhZLG8GuSRlSrgJ5ASJEAEV4svTvZdrTNGtrfVs7y/nvM/nOec9h/Vf5PGFYXo7tW0ZhyfB
+        tJaKMo84vNis9K8s/AtLeG4ZQyVPuj3AYP2CtVQGP6Jx2J3TdL20OaA3E3BOBVAn6sDxc21bAz665kBM
+        zDGZBVHJy4kU3LMhGK0OVJy6ArONKAVEYklojASyuTwCwciGdIv9KxyTftQ2KlAjkOO25hXu6SxFiGva
+        R5uHHZ4/qevJwUgSHl8ED/U2+u7yrn48No6i8rSsAHB/C6BbNwSt+TMeGOx48voTurVWtN01QNyuAa9J
+        iUNkc3ldM06cvwFV7wAkCg0O1l8uAO70vUE8maKTNyuTzWGVHCh1knB0FfOLCcg6tWho6SJPwLyEoscE
+        87sJvLA5oTWN4L5uEB3qZ5B29kLUqgb/khLcxnYc5stQdlKCC+RarfA69taICoBWlZ7JK1V8JQ1/cBnj
+        M2F8cIUwQMyDJ76FivoWsMvPFABS5VOmvShyfviZyGDm+wpG3VFwenZC/36RnvxRwTXsqRYWAc03+5DO
+        AGQYosk8FmJ5zIZyGPOuYXA8gX77ElRsNtRDMRpwgCsumilJFI/gJQ3U5t/UBvO6qhvkqOJfBYf8ZWXk
+        c+3nNmHfsYvYfUSIXVVnsYMjoI1bmv9NLNZvAdgvSYonlzMAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="&gt;&gt;PasteToolStripButton.Name" xml:space="preserve">
+    <value>PasteToolStripButton</value>
+  </data>
+  <data name="PasteToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="ofd2.Filter" xml:space="preserve">
+    <value>Todos os arquivos|*.*</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
+    <value>ToolStrip1</value>
+  </data>
+  <data name="ofd1.Filter" xml:space="preserve">
+    <value>Todos os arquivos|*.*</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ListBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>608, 22</value>
+  </data>
+  <data name="OpenToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtScript.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="txtScript.Size" type="System.Drawing.Size, System.Drawing">
+    <value>608, 318</value>
+  </data>
+  <data name="ToolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem4.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5916.15116, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="ToolStripButton5.Text" xml:space="preserve">
+    <value>Diminuir Opacidade</value>
+  </data>
+  <data name="StatusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 318</value>
+  </data>
+  <data name="btnDebug.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="&gt;&gt;ToolStripButton3.Name" xml:space="preserve">
+    <value>ToolStripButton3</value>
+  </data>
+  <data name="&gt;&gt;txtScript.Parent" xml:space="preserve">
+    <value>FaTabStripItem3</value>
+  </data>
+  <data name="OpenToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAkdJREFUOE/FkF1I02EUxv8XXXRlkRWFUGB54c0gKKK6CCmiUBTLLEjShJofVBgL
+        c360qenm5ubUlS5rm66p00ozCvuQCkUi1NSRZmpWFJViZqjk16+/LtShhHcdeHjhcJ7fec4rLLeUBjuX
+        1FYyjQ7+tpZfETKjmylVhM284bJ8hE99b6m06Repo+XpPzeFxGYTFJ2DMDPc1WZhbKhiVr8H7Uz0m3FY
+        s+lofbYk5EiMjqAoAwHSPISKYh2jg6Vu5qmvBUw44yi9qaakMANzfiqmnBSuaeXkqeLdoWUWDaPfLXPm
+        adFMlxyc0iW1CHCrSMWvL6Y5c22lZlYPHVnU2FXcLcnAYU7DblJiNV7mhiGJQp0coybBBSsxZTD8IXc2
+        dm+9gqpSHVO9SuhLd9d7sdeTCJ0yeBNLa3kotut6BLMxjZ/daviopbosm8ZHWtfQwuivw6EphMkGf8Ye
+        +/GuWIJMGuw6pcig4EeHkr6GZKrsWqZ7FNAe5TK2RorG40w2BjJWd4DhB3sYqNyGMtpHPEfuAhTokhlo
+        S+C2TUPzCzFJZ5wIOA3NYUy/DGb8+SFGavcyWLWdb2W+NF1ZzQl/7/mPNGbJaa9L4Y4tC7pToEWM++oo
+        4/UBjDzxY6hmJ/0OCZ8tW3FqPVFIt3A2+uQ8IDczngqrGue9GJr0wpwatSuoU63kfuoqypPWYY734uqF
+        zYQt3D5T+vSL6BVnyEyIIPHcMc5HBnIqdD+HD+5i324JOyQ++Hp7sWnjWtav8WCDp4c74D+XIPwBF8be
+        aT1+/VgAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>610, 25</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ToolStripButton3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="OpenToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Abrir</value>
+  </data>
+  <data name="&gt;&gt;ofd2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SaveToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAjJJREFUOE+tkt9Lk1EYx99/oftugi66rakxnIvV4C3XUJYNw4qwH2+kWZou00TF
+        yjRq/oJshUsnrVaTcFKRP8AUKRFlKlmauaIlDjXFJoLB1/OcvXlcRRfRF56bl/fzOed5ziP9lzx/FgaV
+        r3UJLd5FPHTPo6kxhLuOadTVfoH9VgDXyydRWjKOwoK3yMsdwflzfqi4JBHY1QnU1qzgb1leWYUptQuH
+        Up/yUnFJ8j5Z4ILKim/qr7+H4ND8MnZZXkCjUWA96BEC94M5Ligt+ar+Hp2f8MfgAmLMPhRcmsIBS7MQ
+        OBtmuOCi7YOKiGyEhydC2CZ7kZM9huQkpxDU3w5yQdbZERWL5Fe4zx/EZoMbijIAs9khBDXVn7lAOTWg
+        on+GO/s/YVN8Iw4feYXExDohuFE5hY52sKcEjh1/A+vRXj5tGhj1TNemkyNwN1KsLyHLdiG4UjaBNh/Y
+        DgDNrh/s3b+j/NosHyoNjHrOzPCvw/uTW2E0VgjB5cIxeB4B952rbHHCMKVlR5Ul3Ya0M0UROInB+zww
+        GMqEwJY3ymCguirMTyaIfUaMTsbg+xmMTs5Cyb2KPaYWDut2u6DXFwkBraXjDtavTQKCT+ffxLvAHALT
+        i7hQbEeswcXgJsQm3IMuPl8IMjOGWN9LHN5q9GDLDhmP23rga+9DR3c/el8PYq/ZCo2+AXEM3q6th1ab
+        IwSUkyd6+HrShtGS0DvTU9G0aWDUM51KRfDOuKxowb9FktYATrQ4xbl82G8AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="btnDebug.Text" xml:space="preserve">
+    <value>Testar Script (F5)</value>
+  </data>
+  <data name="FaTabStripItem3.Title" xml:space="preserve">
+    <value>Script</value>
+  </data>
+  <data name="&gt;&gt;ListBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="StatusStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="APIHelptsbutton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;SaveToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ScriptEditorFormMono</value>
+  </data>
+  <data name="tscb1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 25</value>
+  </data>
+  <data name="ToolStripButton3.Text" xml:space="preserve">
+    <value>Selecionar Arquivo de Inclusão Selecionado</value>
+  </data>
+  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="FaTabStrip2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 25</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem3.Parent" xml:space="preserve">
+    <value>FaTabStrip2</value>
+  </data>
+  <data name="&gt;&gt;ToolStripButton4.Name" xml:space="preserve">
+    <value>ToolStripButton4</value>
+  </data>
+  <data name="FaTabStripItem4.Title" xml:space="preserve">
+    <value>Inclusões</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ListBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="CopyToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Copiar</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CutToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="PrintToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Imprimir</value>
+  </data>
+  <data name="HelpToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="OpenToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;APIHelptsbutton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip1.Parent" xml:space="preserve">
+    <value>FaTabStripItem3</value>
+  </data>
+  <data name="&gt;&gt;SaveToolStripButton.Name" xml:space="preserve">
+    <value>SaveToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;btnDebug.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FaTabStrip2.Text" xml:space="preserve">
+    <value>FaTabStrip2</value>
+  </data>
+  <data name="&gt;&gt;tsl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem4.Parent" xml:space="preserve">
+    <value>FaTabStrip2</value>
+  </data>
+  <data name="&gt;&gt;ofd2.Name" xml:space="preserve">
+    <value>ofd2</value>
+  </data>
+  <data name="&gt;&gt;txtScript.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="APIHelptsbutton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="ToolStripButton5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem4.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="sfd1.Title" xml:space="preserve">
+    <value>Salvar script</value>
+  </data>
+  <data name="&gt;&gt;ListBox1.Name" xml:space="preserve">
+    <value>ListBox1</value>
+  </data>
+  <data name="btnDebug.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="SaveToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="FaTabStrip2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
+  </data>
+  <data name="&gt;&gt;OpenToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ListBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;ToolStripButton4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ofd1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtScript.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="&gt;&gt;OpenToolStripButton.Name" xml:space="preserve">
+    <value>OpenToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator4.Name" xml:space="preserve">
+    <value>ToolStripSeparator4</value>
+  </data>
+  <data name="ofd2.Title" xml:space="preserve">
+    <value>Abrir arquivo de script</value>
+  </data>
+  <data name="ToolStripButton2.Text" xml:space="preserve">
+    <value>Selecionar Arquivo para Inclusão</value>
+  </data>
+  <data name="&gt;&gt;sfd1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ListBox1.Parent" xml:space="preserve">
+    <value>FaTabStripItem4</value>
+  </data>
+  <data name="&gt;&gt;HelpToolStripButton.Name" xml:space="preserve">
+    <value>HelpToolStripButton</value>
+  </data>
+  <data name="ToolStripButton4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="PasteToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Colar</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PasteToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem3.Name" xml:space="preserve">
+    <value>FaTabStripItem3</value>
+  </data>
+  <data name="&gt;&gt;FaTabStrip2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtScript.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pd1.Name" xml:space="preserve">
+    <value>pd1</value>
+  </data>
+  <data name="&gt;&gt;APIHelptsbutton.Name" xml:space="preserve">
+    <value>APIHelptsbutton</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="APIHelptsbutton.Text" xml:space="preserve">
+    <value>API Help</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CopyToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="&gt;&gt;ofd1.Name" xml:space="preserve">
+    <value>ofd1</value>
+  </data>
+  <data name="FaTabStripItem4.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ToolStripButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem4.Name" xml:space="preserve">
+    <value>FaTabStripItem4</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="FaTabStrip2.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="&gt;&gt;PrintToolStripButton.Name" xml:space="preserve">
+    <value>PrintToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator3.Name" xml:space="preserve">
+    <value>ToolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;ToolStripButton2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sfd1.Filter" xml:space="preserve">
+    <value>Todos os arquivos|*.*</value>
+  </data>
+  <data name="PasteToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAlJJREFUOE+1kmtIk1EYx1/og30pulCf+lQQfYkigupDRmEWphlGYkbWIqZSorIs
+        HampKbq8LU2bkZeh5q0SxUnREBJHd43N6CKRGrmWtXfznsWv93112UgKgv7w58A55/97nvNwhP+iztYs
+        zDfTaa5IYnbrz2qqLsDjirwjOO01jNqvMdCby1m1PwWZGq7otOgzE34HyqEJsZEpVwMTzlqMpRrGhqvI
+        S4vhRVci508HkqjajL3zGMOm1cRG7PeGyAA5POWqoyTrKN2WXMT3RQz1anlrOUFLWTCR4b7UJK/iaYFA
+        9OF93oCGqrwZgHgDXXIEqZowtDGhnIsOQaMOJk4VSFS4H4WxaxRAWICvN6C2XMekWM+kw8DYYDaO5zHY
+        qpYrtlYuo7t0EY/0PkpYtt+2jd4AoyGLcUcF4/0ZjL08xeizg4iti8mvNJFtaObC5XoSdUbi0suITNIT
+        EZ/jDSgvTmdkQM9or5qRx4G472/i4+0VStijqelvOF0T9A85CY1KI+i4dg5Slp+C+CoD90N/3B3rcbWv
+        ZKBSUCrLKr/VqdhQZ8baZ1fCd7ts7AlRzUCKc5L43HMGl3kdYttSHI0+9F0XlLa/Tn/ni1uq/MGJ9Y0d
+        S887AsLj8JfCu/YewHf7DoTCiwk4HkRJ4SV8alrIYPUCbCUCsdKb5bY9HVyVOigyttPSYVNW2Vs3rEW4
+        lBqvfBDPlD1WSwP7tfI9y2sl3HinmzrTkzmArPyUk9IPC0YVspugnVuUA3na8ps91ebzT8B8OiRNW77w
+        N89e/1cJwg9O+O8tDxihqQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="HelpToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAhVJREFUOE+1Uk1rE1EUzU/IT5ifUBRcuMrS5aANZBnBRRcqwYUEQRwKQjCoESka
+        LJ2xKjaS6mxqx2jtiLa2iHSwVmMbkmmJmjbT9OlU6YfmeO+bwFhqERceOLz73rxz7nmXifwXTMz6uFVa
+        QeZ2Db0D8+grVjDy4iM6n/fGm+oGCuMt6KVluM0tfFnfhvC3qN7ExUIZGd1B6eXSn41YfM9eg/etDdsB
+        tCFAzQTk2nYEqmttnOubxMizym4T7rz6vQ3DBmJpwLAAsQEJVwCp63wmUCOTU9knOw0m3q7j4UxLdmYx
+        X2aYU0AyF6xsFksLqgV06x3yhVehyZ3HTXwSP2TUWCqInTOBLqqVHoFUjiIQVE0gmXEwX/Vx9MxwaJC9
+        uyQHpmqBqKsnoEJMkpi722UBRbWhJGw0PB8H4ldDg/M3qzTtbRk/ENLlpKAkQWfTpj0Jo6pJq4lG8yv2
+        qZdDg/z9Gha9TXp7IFQSrmRuKDCIqg4xMFDTNsqVOrpPGKHB6ORnWI4nB8TCaIIFDj3JpbnQnsWHTEnD
+        cjFszeHCjbHQgJEdnMWC95O6dgRErmWCjlgzHHxY8XDkuL5TzBibrqM3P41qi/4F6qJqjnw3k2s+W6iv
+        Ik7RB4pTuw0Yo89rOH1pHMaj95iZW8QyTbvR9OWbOXY3ddb3Ev+O/uJrHDv7AAcT17D/8BXETw4i2//0
+        78J/RyTyC53a8qzC7E1mAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="&gt;&gt;btnDebug.Name" xml:space="preserve">
+    <value>btnDebug</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;tsl1.Name" xml:space="preserve">
+    <value>tsl1</value>
+  </data>
+  <data name="&gt;&gt;HelpToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ListBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>608, 340</value>
+  </data>
+  <data name="&gt;&gt;tscb1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtScript.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="CopyToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;FaTabStrip2.Name" xml:space="preserve">
+    <value>FaTabStrip2</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>610, 386</value>
+  </data>
+  <data name="txtScript.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Courier New, 9.75pt</value>
+  </data>
+  <data name="FaTabStrip2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ToolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;ToolStripButton5.Name" xml:space="preserve">
+    <value>ToolStripButton5</value>
+  </data>
+  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>608, 340</value>
+  </data>
+  <data name="&gt;&gt;ToolStripButton5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tscb1.Name" xml:space="preserve">
+    <value>tscb1</value>
+  </data>
+  <data name="ToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="&gt;&gt;FaTabStrip2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txtScript.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;pd1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PrintDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PrintToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="FaTabStripItem3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="SaveToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="ToolStripButton4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="ListBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tscb2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="FaTabStripItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>608, 340</value>
+  </data>
+  <data name="SaveToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Salvar</value>
+  </data>
+  <data name="&gt;&gt;CutToolStripButton.Name" xml:space="preserve">
+    <value>CutToolStripButton</value>
+  </data>
+  <data name="PrintToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator2.Name" xml:space="preserve">
+    <value>ToolStripSeparator2</value>
+  </data>
+  <data name="FaTabStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>610, 361</value>
+  </data>
+  <metadata name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 0</value>
+  </metadata>
+  <metadata name="ofd2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>562, 17</value>
+  </metadata>
+  <metadata name="ofd1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>410, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="StatusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>946, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
+  <metadata name="sfd1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>487, 17</value>
+  </metadata>
+  <metadata name="pd1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>639, 17</value>
+  </metadata>
+</root>

@@ -1,0 +1,209 @@
+===  CHEMSEP 2  === Copyright 1992 Harry Kooijman and Ross Taylor / Interaction Parameters Data (IPD) / UNIQUAC parameters from "Computer Calculations for Multicomponent Vapor-Liquid and Liquid-Liquid Equilibria". J.M. Prausnitz. T. Anderson. E. Grens. C. Eckert. R. Hsieh. J. O'Connell. Prentice-Hall (1980). Data: ID1. ID2. A12. A21 comments Comment=DECHEMA Prausnitz et al. Units=K
+1;1051;-0.26;471;Methane/Acetone
+1;3;-2.01;604;Methane/Propane
+1;5;-2.05;731;Methane/n-Butane
+1;7;-1.32;509;Methane/n-Pentane
+1;501;-0.38;473;Methane/Benzene
+1;11;-0.06;94;Methane/n-Hexane
+1;56;-0.24;150;Methane/n-Decane
+2;17;264.89;-112.61;Ethane/n-Heptane
+5;4;1;1;i-Butane/n-Butane
+7;1051;266.31;-22.83;n-Pentane/Acetone
+11;1761;230.64;-5.86;n-Hexane/Nitro-Ethane
+11;1792;283.76;34.82;n-Hexane/Aniline
+11;105;-138.84;162.13;n-Hexane/Methylcyclop
+11;502;34.27;4.3;n-Hexane/Toluene
+17;501;245.42;-135.93;n-Heptane/Benzene
+17;501;122.21;-55.81;n-Heptane/Benzene
+17;502;108.24;-72.96;n-Heptane/Toluene
+27;1761;333.48;-30.98;n-Octane/Nitro-Ethane
+27;1104;1107.44;-166.18;n-Octane/i-Propanol
+41;1761;236.48;10.66;224-Trimethylpentane/Nitro-Ethane
+41;1889;410.08;-4.98;224-Trimethylpentane/Furfural
+41;501;80.91;-27.13;224-Trimethylpentane/Benzene
+41;137;141.01;-112.66;224-Trimethylpentane/Cyclohexane
+41;502;141.11;-94.6;224-Trimethylpentane/Toluene
+56;1103;1137.2;-201.82;n-Decane/n-Propanol
+56;1105;1430.77;-259.67;n-Decane/n-Butanol
+56;1104;1074.76;-207.27;n-Decane/i-Propanol
+104;501;15.19;33.15;Cyclopentane/Benzene
+105;501;56.47;-6.47;Methylcyclopentane/Benzene
+105;502;89.77;-48.05;Methylcyclopentane/Toluene
+137;1760;517.19;105.01;Cyclohexane/Nitro-Methan
+137;1103;1284.75;-173.42;Cyclohexane/n-Propanol
+137;1105;1393.11;-196.9;Cyclohexane/n-Butanol
+137;501;-32.57;88.26;Cyclohexane/Benzene
+137;105;144.37;-118.82;Cyclohexane/Methylcyclop
+137;11;172.73;-145.56;Cyclohexane/n-Hexane
+137;502;83.67;-44.04;Cyclohexane/Toluene
+137;17;-76.36;98.22;Cyclohexane/Heptane
+138;502;210.35;-134.19;Methyl Cyclohexane/Toluene
+204;4;-23.03;35.11;Butene-1/i-Butane
+204;3;126.71;-98.63;Butene-1/Propane
+204;5;-23.03;35.11;Butene-1/n-Butane
+216;1102;1222.95;-107.26;Hexend-1/Ethanol
+501;1052;350.47;-226.16;Benzene/2-Butanone
+501;1105;928.9;-181.24;Benzene/n-Butanol
+501;11;-77.13;132.43;Benzene/n-Hexane
+501;502;-220.57;330.69;Benzene/Toluene
+501;1921;2057.42;115.13;Benzene/Water
+502;1889;74.87;244.12;Toluene/Furfural
+902;1101;3.94;218;Hydrogen/Methanol
+902;1051;3.23;218;Hydrogen/Acetone
+902;501;1.97;810;Hydrogen/Benzene
+902;11;2.99;-4;Hydrogen/n-Hexane
+902;506;2.09;765;Hydrogen/m-Xylene
+902;27;-0.05;1646;Hydrogen/n-Octane
+902;1921;9.97;-880;Hydrogen/Water
+902;1911;0.68;1344;Hydrogen/Ammonia
+905;5;-1.67;814;Nitrogen/n-Butane
+905;11;0.07;336;Nitrogen/n-Hexane
+905;1921;3.76;913;Nitrogen/Water
+905;1911;-3.35;2098;Nitrogen/Ammonia
+908;1101;0.83;552;Carbon monoxide/Methanol
+908;1051;0.48;408;Carbon monoxide/Acetone
+908;501;-1.04;1062;Carbon monoxide/Benzene
+908;27;-3.38;1878;Carbon monoxide/n-Octane
+1002;1252;458.43;-212.77;Acetaldehyde/Acetic Acid
+1002;1321;-117.74;243.51;Acetaldehyde/Vinyl Acetat
+1051;1501;-92.32;246.68;Acetone/Carbon Tetra
+1051;1521;-171.71;93.96;Acetone/Chloroform
+1051;1772;-176.38;261.53;Acetone/Acetonitrile
+1051;1101;359.1;-96.9;Acetone/Methanol
+1051;1252;461.81;-262.3;Acetone/Acetic Acid
+1051;1102;404.49;-131.25;Acetone/Ethanol
+1051;1889;-101.3;195.63;Acetone/Furfural
+1051;501;-180.58;304.02;Acetone/Benzene
+1051;11;-33.08;261.51;Acetone/n-Hexane
+1051;1921;530.99;-100.71;Acetone/Water
+1051;1321;-82.48;110.6;Acetone/Vinyl Acetat
+1052;502;-82.85;123.57;2-Butanone/Toluene
+1052;17;-75.13;242.53;2-Butanone/n-Heptane
+1052;1921;509.67;-11.75;2-Butanone/Water
+1101;1501;-29.64;1127.95;Methanol/Carbon Tetra
+1101;1102;660.19;-292.39;Methanol/Ethanol
+1101;1104;-24.85;31.22;Methanol/i-Propanol
+1101;1052;-164.22;803.49;Methanol/2-Butanone
+1101;1313;-107.54;579.61;Methanol/Ethyl Acetat
+1101;1710;-374.88;676.42;Methanol/Diethyl Amin
+1101;501;-86.89;1284.21;Methanol/Benzene
+1101;137;6.02;1364.12;Methanol/Cyclohexane
+1101;1054;-105.94;688.03;Methanol/Methylisobut
+1101;11;-2.66;1636.05;Methanol/n-Hexane
+1101;15;-7.18;1463.9;Methanol/2.3-Dimethyl
+1101;0;-186.66;664.29;Methanol/Triethylamin
+1101;502;-43.91;951.82;Methanol/Toluene
+1101;17;2.49;1419.32;Methanol/n-Heptane
+1101;1921;-51.8;96.32;Methanol/Water
+1101;1461;-48.39;782.28;Methanol/Anisole
+1102;1772;68.72;430.51;Ethanol/Acetonitrile
+1102;1523;-105.66;929.71;Ethanol/1.2-Dichloro
+1102;1252;-210.53;244.67;Ethanol/Acetic Acid
+1102;1103;210.95;-67.7;Ethanol/n-Propanol
+1102;1108;-2.62;9.24;Ethanol/Tert-Butanol
+1102;501;-128.88;997.41;Ethanol/Benzene
+1102;137;-113.7;1269.49;Ethanol/Cyclohexane
+1102;105;-118.27;1383.93;Ethanol/Methylcyclop
+1102;11;-108.93;1441.57;Ethanol/n-Hexane
+1102;502;-132.12;1083.75;Ethanol/Toluene
+1102;138;-117.57;1340.56;Ethanol/Methyl Cyclo
+1102;17;-117.6;1224.27;Ethanol/n-Heptane
+1102;27;-109.08;1385.91;Ethanol/n-Octane
+1102;41;-120.42;1449.61;Ethanol/224-Trimethyl
+1102;56;-127.48;1254.65;Ethanol/n-Decane
+1102;1921;57.8;77.05;Ethanol/Water
+1103;1501;-166.93;1336.03;n-Propanol/Carbon Tetra
+1103;1252;299.33;445.77;n-Propanol/Acetic Acid
+1103;501;-155.1;928.5;n-Propanol/Benzene
+1103;11;-144.11;1326.05;n-Propanol/n-Hexane
+1103;502;-195.4;818.34;n-Propanol/Toluene
+1103;17;-160.43;1306.22;n-Propanol/n-Heptane
+1103;1921;78.37;583.03;n-Propanol/Water
+1104;1313;-190.57;522.07;i-Propanol/Ethyl Acetat
+1104;501;-145.52;854.75;i-Propanol/Benzene
+1104;17;-162.54;1295.6;i-Propanol/n-Heptane
+1104;1921;217.23;11.59;i-Propanol/Water
+1104;41;-198.06;994;i-Propanol/224-Trimethyl
+1105;1501;-188.77;1248.17;n-Butanol/Carbon Tetra
+1105;1252;-296.3;546.68;n-Butanol/Acetic Acid
+1105;11;-159.24;1370.74;n-Butanol/n-Hexane
+1105;17;-251.11;1291.98;n-Butanol/n-Heptane
+1105;27;-236.21;1098.91;n-Butanol/n-Octane
+1106;501;-162.39;861.06;i-Butanol/Benzene
+1107;501;784.99;-168.83;Sec-Butanol/Benzene
+1108;501;744.89;-165.4;Tert-Butanol/Benzene
+1108;1921;204.54;54.77;Tert-Butanol/Water
+1251;1252;-144.58;241.64;Formic Acid/Acetic Acid
+1252;502;-67.91;298.09;Acetic Acid/Toluene
+1252;17;-8.49;342.57;Acetic Acid/n-Heptane
+1253;1054;-78.49;136.46;Propionic Acid/Methylisobut
+1253;27;-183.2;556.12;Propionic Acid/n-Octane
+1312;1521;-187.87;121.17;Methyl Acetate/Chloroform
+1312;1101;516.12;-95.31;Methyl Acetate/Methanol
+1312;1102;506.85;-120.6;Methyl Acetate/Ethanol
+1312;501;203.46;-143.88;Methyl Acetate/Benzene
+1313;1252;-214.39;63.04;Ethyl Acetate/Acetic Acid
+1313;1102;571.73;-167.61;Ethyl Acetate/Ethanol
+1313;1103;539.64;-190.31;Ethyl Acetate/n-Propanol
+1313;1889;-19.15;48.52;Ethyl Acetate/Furfural
+1313;501;233.81;-181.49;Ethyl Acetate/Benzene
+1313;502;309.41;-214.26;Ethyl Acetate/Toluene
+1313;504;137.11;-105.5;Ethyl Acetate/Ethyl Benzen
+1313;1921;1000.87;-174.08;Ethyl Acetate/Water
+1321;1252;330.03;-124.12;Vinyl Acetate/Acetic Acid
+1321;1921;1557.23;131.36;Vinyl Acetate/Water
+1402;1102;733.67;-179.02;Di-Ethyl Ether/Ethanol
+1421;501;363.78;-197.65;Dioxane/Benzene
+1501;1772;458.86;-40.18;Carbon Tetrachloride/Acetonitrile
+1501;1102;1192.49;-135.27;Carbon Tetrachloride/Ethanol
+1501;1889;476.85;-100.42;Carbon Tetrachloride/Furfural
+1501;501;-37.52;43.39;Carbon Tetrachloride/Benzene
+1501;137;98.18;-84.82;Carbon Tetrachloride/Cyclohexane
+1501;105;161.96;-129.21;Carbon Tetrachloride/Methylcyclop
+1501;502;-168.53;203.67;Carbon Tetrachloride/Toluene
+1501;17;88.3;-59.13;Carbon Tetrachloride/n-Heptane
+1511;1523;1;1;Dichloromethane/Dichloroetan
+1521;1501;-14.74;38.19;Chloroform/Carbon Tetra
+1521;1251;461.38;90.36;Chloroform/Formic Acid
+1521;1101;926.31;-143.5;Chloroform/Methanol
+1521;1252;346.43;-98.44;Chloroform/Acetic Acid
+1521;1102;888.68;-203.03;Chloroform/Ethanol
+1521;1313;24.16;-119.49;Chloroform/Ethyl Acetat
+1521;501;4.98;-50.53;Chloroform/Benzene
+1760;1501;0.59;398.4;Nitro-Methane/Carbon Tetra
+1760;501;73.79;82.2;Nitro-Methane/Benzene
+1761;1501;73.06;295.06;Nitro-Ethane/Carbon Tetra
+1761;1103;574.22;-94.39;Nitro-Ethane/n-Propanol
+1761;501;16.61;46.05;Nitro-Ethane/Benzene
+1762;1501;-95.68;267.13;1-Nitropropane/Carbon Tetra
+1762;501;535.16;-246.81;1-Nitropropane/Benzene
+1763;1501;-134.32;307.25;2-Nitropropane/Carbon Tetra
+1763;501;794.91;-344.15;2-Nitropropane/Benzene
+1763;11;-32.95;252.2;2-Nitropropane/n-Hexane
+1772;501;60.28;89.57;Acetonitrile/Benzene
+1772;17;23.71;545.79;Acetonitrile/n-Heptane
+1774;1772;183.65;-142.35;Acrylonitrile/Acetonitrile
+1792;105;54.36;228.71;Aniline/Methylcyclop
+1889;204;49.12;242.1;Furfural/Butene-1
+1889;5;88.87;257.71;Furfural/n-Butane
+1889;4;97.14;268;Furfural/i-Butane
+1889;501;71;12;Furfural/Benzene
+1889;137;41.17;354.83;Furfural/Cyclohexane
+1921;1251;-508.85;1019.29;Water/Formic Acid
+1921;1772;122.02;122.07;Water/Acetonitrile
+1921;1252;-299.9;530.94;Water/Acetic Acid
+1921;1761;138.44;920.08;Water/Nitro-Ethane
+1921;1253;-188.72;540.1;Water/Propionic Acid
+1921;1421;-328.7;927.26;Water/Dioxane
+1921;204;590.17;777.95;Water/Butene-1
+1921;4;646.79;1173.23;Water/i-Butane
+1921;1105;1097.59;38.69;Water/n-Butanol
+1921;1889;-263.37;193.29;Water/Furfural
+1921;502;305.71;1371.36;Water/Toluene
+1921;1774;155.78;471.21;Water/Acrylonitril
+1921;205;356.45;-18.31;Water/Cisbutene-2
+1921;206;356.45;-18.31;Water/Transbutene-
+1921;207;346.74;657.5;Water/Isobutene
+1921;303;496.1;270.6;Water/Butadiene
+1938;1101;1166.49;138.15;Carbon Disulfide/Methanol
+1938;1051;157.31;103.91;Carbon Disulfide/Acetone

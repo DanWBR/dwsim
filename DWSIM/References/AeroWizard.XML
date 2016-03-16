@@ -1,0 +1,2055 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AeroWizard</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider">
+            <summary>
+            GlassExtenderProvider extends a <see cref="T:System.Windows.Forms.Form"/> and provides glass margins.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.GetGlassEnabled(System.Windows.Forms.Form)">
+            <summary>
+            Gets whether glass should be extended into the client space.
+            </summary>
+            <param name="form">The <see cref="T:System.Windows.Forms.Form"/> to be extended.</param>
+            <returns><c>true</c> if the glass is enabled; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.GetGlassMarginMovesForm(System.Windows.Forms.Form)">
+            <summary>
+            Gets a value indicating whether clicking and dragging within the top margin will move the form.
+            </summary>
+            <param name="form">The <see cref="T:System.Windows.Forms.Form"/> to be extended.</param>
+            <returns><c>true</c> if clicking and dragging on the top margin moves the form; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.GetGlassMargins(System.Windows.Forms.Form)">
+            <summary>
+            Gets the glass margins.
+            </summary>
+            <param name="form">The <see cref="T:System.Windows.Forms.Form"/> to be extended.</param>
+            <returns>The margins where the glass will be extended.</returns>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.System#ComponentModel#IExtenderProvider#CanExtend(System.Object)">
+            <summary>
+            Specifies whether this object can provide its extender properties to the specified object.
+            </summary>
+            <param name="form">The <see cref="T:System.Object"/> to receive the extender properties.</param>
+            <returns>
+            true if this object can provide extender properties to the specified object; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.SetGlassEnabled(System.Windows.Forms.Form,System.Boolean)">
+            <summary>
+            Set whether the glass should be extended into the client space.
+            </summary>
+            <param name="form">The <see cref="T:System.Windows.Forms.Form"/> to be extended.</param>
+            <param name="value">The enabled value.</param>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.SetGlassMarginMovesForm(System.Windows.Forms.Form,System.Boolean)">
+            <summary>
+            Sets a value indicating whether clicking and dragging within the margin will move the form.
+            </summary>
+            <param name="form">The <see cref="T:System.Windows.Forms.Form"/> to be extended.</param>
+            <param name="value"><c>true</c> if clicking and dragging within the margin moves the form; otherwise, <c>false</c>.</param>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.SetGlassMargins(System.Windows.Forms.Form,System.Windows.Forms.Padding)">
+            <summary>
+            Sets the glass margins.
+            </summary>
+            <param name="form">The <see cref="T:System.Windows.Forms.Form"/> to be extended.</param>
+            <param name="value">The margins where the glass will be extended.</param>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Microsoft.Win32.DesktopWindowManager.GlassExtenderProvider.GlassFormProperties">
+            <summary>
+            Properties for each form that is extended.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Win32.NativeMethods.Margins">
+            <summary>Margins structure for theme related functions.</summary>
+        </member>
+        <member name="F:Microsoft.Win32.NativeMethods.WindowThemeNonClientAttributes.NoDrawCaption">
+            <summary>Do Not Draw The Caption (Text)</summary>
+        </member>
+        <member name="F:Microsoft.Win32.NativeMethods.WindowThemeNonClientAttributes.NoDrawIcon">
+            <summary>Do Not Draw the Icon</summary>
+        </member>
+        <member name="F:Microsoft.Win32.NativeMethods.WindowThemeNonClientAttributes.NoSysMenu">
+            <summary>Do Not Show the System Menu</summary>
+        </member>
+        <member name="F:Microsoft.Win32.NativeMethods.WindowThemeNonClientAttributes.NoMirrorHelp">
+            <summary>Do Not Mirror the Question mark Symbol</summary>
+        </member>
+        <member name="T:Microsoft.Win32.NativeMethods.WTA_OPTIONS">
+            <summary>
+            The Options of What Attributes to Add/Remove
+            </summary>
+        </member>
+        <member name="T:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager">
+            <summary>Main DWM class, provides glass sheet effect and blur behind.</summary>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.EnableBlurBehind(System.Windows.Forms.IWin32Window,System.Boolean)">
+            <summary>
+            Enable the Aero "Blur Behind" effect on the whole client area. Background must be black.
+            </summary>
+            <param name="window">The window.</param>
+            <param name="enabled"><c>true</c> to enable blur behind for this window, <c>false</c> to disable it.</param>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.EnableBlurBehind(System.Windows.Forms.IWin32Window,System.Drawing.Graphics,System.Drawing.Region,System.Boolean,System.Boolean)">
+            <summary>
+            Enable the Aero "Blur Behind" effect on a specific region of a drawing area. Background must be black.
+            </summary>
+            <param name="window">The window.</param>
+            <param name="graphics">The graphics area on which the region resides.</param>
+            <param name="region">The region within the client area to apply the blur behind.</param>
+            <param name="enabled"><c>true</c> to enable blur behind for this region, <c>false</c> to disable it.</param>
+            <param name="transitionOnMaximized"><c>true</c> if the window's colorization should transition to match the maximized windows; otherwise, <c>false</c>.</param>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.EnableComposition(System.Boolean)">
+            <summary>
+            Enables or disables Desktop Window Manager (DWM) composition.
+            </summary>
+            <param name="value"><c>true</c> to enable DWM composition; <c>false</c> to disable composition.</param>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.ExcludeChildFromGlass(System.Windows.Forms.Control,System.Windows.Forms.Control)">
+            <summary>
+            Excludes the specified child control from the glass effect.
+            </summary>
+            <param name="parent">The parent control.</param>
+            <param name="control">The control to exclude.</param>
+            <exception cref="T:System.ArgumentNullException">Occurs if control is null.</exception>
+            <exception cref="T:System.ArgumentException">Occurs if control is not a child control.</exception>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.ExtendFrameIntoClientArea(System.Windows.Forms.IWin32Window,System.Windows.Forms.Padding)">
+            <summary>
+            Extends the window frame beyond the client area.
+            </summary>
+            <param name="window">The window.</param>
+            <param name="padding">The padding to use as the area into which the frame is extended.</param>
+        </member>
+        <member name="M:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.IsCompositionEnabled">
+            <summary>
+            Indicates whether Desktop Window Manager (DWM) composition is enabled.
+            </summary>
+            <returns><c>true</c> if is composition enabled; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="E:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.ColorizationColorChanged">
+            <summary>
+            Occurs when the colorization color has changed.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.CompositionChanged">
+            <summary>
+            Occurs when the desktop window composition has been enabled or disabled.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.NonClientRenderingChanged">
+            <summary>
+            Occurs when the non-client area rendering policy has changed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.CompositionColor">
+            <summary>
+            Gets or sets the current color used for Desktop Window Manager (DWM) glass composition. This value is based on the current color scheme and can be modified by the user.
+            </summary>
+            <value>The color of the glass composition.</value>
+        </member>
+        <member name="P:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.CompositionEnabled">
+            <summary>
+            Gets or sets a value indicating whether composition (Windows Aero) is enabled.
+            </summary>
+            <value><c>true</c> if composition is enabled; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.CompositionSupported">
+            <summary>
+            Gets or sets a value indicating whether composition (Windows Aero) is supported.
+            </summary>
+            <value><c>true</c> if composition is supported; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.TransparencyEnabled">
+            <summary>
+            Gets or sets a value that indicates whether the <see cref="P:Microsoft.Win32.DesktopWindowManager.DesktopWindowManager.CompositionColor"/> is transparent.
+            </summary>
+            <value><c>true</c> if transparent; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:System.Windows.Forms.VisualStyles.VisualStyleRendererExtension.SetWindowThemeAttribute(System.Windows.Forms.IWin32Window,Microsoft.Win32.NativeMethods.WindowThemeNonClientAttributes,System.Boolean)">
+            <summary>
+            Sets attributes to control how visual styles are applied to a specified window.
+            </summary>
+            <param name="window">The window.</param>
+            <param name="attr">The attributes to apply or disable.</param>
+            <param name="enable">if set to <c>true</c> enable the attribute, otherwise disable it.</param>
+        </member>
+        <member name="T:AeroWizard.StepList">
+            <summary>
+            Shows a list of all the pages in the WizardControl
+            </summary>
+        </member>
+        <member name="M:AeroWizard.StepList.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AeroWizard.StepList"/> class.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.StepList.OnParentChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.ParentChanged" /> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.StepList.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.Paint" /> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.StepList.GetStepText(AeroWizard.WizardPage)">
+            <summary>
+            Gets the step text.
+            </summary>
+            <param name="page">The page.</param>
+            <returns>Step text for the specified wizard page.</returns>
+        </member>
+        <member name="M:AeroWizard.StepList.SetStepText(AeroWizard.WizardPage,System.String)">
+            <summary>
+            Sets the step text.
+            </summary>
+            <param name="page">The page.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:AeroWizard.StepList.GetStepTextIndentLevel(AeroWizard.WizardPage)">
+            <summary>
+            Gets the step text indent level.
+            </summary>
+            <param name="page">The page.</param>
+            <returns>Step text indent level for the specified wizard page.</returns>
+        </member>
+        <member name="M:AeroWizard.StepList.SetStepTextIndentLevel(AeroWizard.WizardPage,System.Int32)">
+            <summary>
+            Sets the step text indent level.
+            </summary>
+            <param name="page">The page.</param>
+            <param name="value">The indent level.</param>
+        </member>
+        <member name="P:AeroWizard.StepList.DefaultSize">
+            <summary>
+            Gets the default size of the control.
+            </summary>
+            <returns>The default <see cref="T:System.Drawing.Size" /> of the control.</returns>
+        </member>
+        <member name="T:AeroWizard.StepWizardControl">
+            <summary>
+            Wizard control that shows a step summary on the left of the wizard page area.
+            </summary>
+        </member>
+        <member name="T:AeroWizard.WizardControl">
+            <summary>
+            Control providing an "Aero Wizard" style interface.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AeroWizard.WizardControl"/> class.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.BeginInit">
+            <summary>
+            Signals the object that initialization is starting.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.EndInit">
+            <summary>
+            Signals the object that initialization is complete.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.NextPage">
+            <summary>
+            Advances to the next page in the sequence.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.NextPage(AeroWizard.WizardPage,System.Boolean)">
+            <summary>
+            Advances to the specified page.
+            </summary>
+            <param name="nextPage">The wizard page to go to next.</param>
+            <param name="skipCommit">if set to <c>true</c> skip <see cref="E:AeroWizard.WizardPage.Commit"/> event.</param>
+            <exception cref="T:System.ArgumentException">When specifying a value for nextPage, it must already be in the Pages collection.</exception>
+        </member>
+        <member name="M:AeroWizard.WizardControl.PreviousPage">
+            <summary>
+            Returns to the previous page.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.RestartPages">
+            <summary>
+            Restarts the wizard pages from the first page.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.OnCancelling">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardControl.Cancelling"/> event.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.OnControlAdded(System.Windows.Forms.ControlEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.ControlAdded"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.ControlEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.WizardControl.OnFinished">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardControl.Finished"/> event.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.OnGotFocus(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.GotFocus"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.WizardControl.OnHandleCreated(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.WizardControl.OnHandleDestroyed(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.WizardControl.OnParentChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.ParentChanged"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.WizardControl.OnRightToLeftChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.WizardControl.OnSelectedPageChanged">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardControl.SelectedPageChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.GetContentAreaRectangle(System.Boolean)">
+            <summary>
+            Gets the content area rectangle.
+            </summary>
+            <param name="parentRelative">if set to <c>true</c> rectangle is relative to parent.</param>
+            <returns>Coordinates of content area.</returns>
+        </member>
+        <member name="F:AeroWizard.WizardControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:AeroWizard.WizardControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardControl.Cancelling">
+            <summary>
+            Occurs when the user clicks the Cancel button and allows for programmatic cancellation.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardControl.Finished">
+            <summary>
+            Occurs when the user clicks the Next/Finish button and the page is set to <see cref="P:AeroWizard.WizardPage.IsFinishPage"/> or this is the last page in the <see cref="P:AeroWizard.WizardControl.Pages"/> collection.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardControl.SelectedPageChanged">
+            <summary>
+            Occurs when the <see cref="P:AeroWizard.WizardControl.SelectedPage"/> property has changed.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.WizardControl.BackButtonState">
+            <summary>
+            Gets or sets the state of the back button.
+            </summary>
+            <value>The state of the back button.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.BackButtonToolTipText">
+            <summary>
+            Gets or sets the back button tool tip text.
+            </summary>
+            <value>The back button tool tip text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.CancelButtonState">
+            <summary>
+            Gets the state of the cancel button.
+            </summary>
+            <value>The state of the cancel button.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.CancelButtonText">
+            <summary>
+            Gets or sets the cancel button text.
+            </summary>
+            <value>The cancel button text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.ClassicStyle">
+            <summary>
+            Gets or sets the style applied to the body of a <see cref="T:AeroWizard.WizardControl"/> when on XP or earlier or when a Basic theme is applied.
+            </summary>
+            <value>A <see cref="T:AeroWizard.WizardClassicStyle"/> value which determines the style.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.FinishButtonText">
+            <summary>
+            Gets or sets the finish button text.
+            </summary>
+            <value>The finish button text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.HeaderText">
+            <summary>
+            Gets or sets the page header text.
+            </summary>
+            <value>The page header text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.NextButtonShieldEnabled">
+            <summary>
+            Gets or sets the shield icon on the next button.
+            </summary>
+            <value><c>true</c> if Next button should display a shield; otherwise, <c>false</c>.</value>
+            <exception cref="T:System.PlatformNotSupportedException">Setting a UAF shield on a button only works on Vista and later versions of Windows.</exception>
+        </member>
+        <member name="P:AeroWizard.WizardControl.NextButtonState">
+            <summary>
+            Gets the state of the next button.
+            </summary>
+            <value>The state of the next button.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.NextButtonText">
+            <summary>
+            Gets or sets the next button text.
+            </summary>
+            <value>The next button text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.Pages">
+            <summary>
+            Gets the collection of wizard pages in this wizard control.
+            </summary>
+            <value>The <see cref="T:AeroWizard.WizardPageCollection"/> that contains the <see cref="T:AeroWizard.WizardPage"/> objects in this <see cref="T:AeroWizard.WizardControl"/>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.PercentComplete">
+            <summary>
+            Gets how far the wizard has progressed, as a percentage.
+            </summary>
+            <value>A value between 0 and 100.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.SelectedPage">
+            <summary>
+            Gets the currently selected wizard page.
+            </summary>
+            <value>The selected wizard page. <c>null</c> if no page is active.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.ShowProgressInTaskbarIcon">
+            <summary>
+            Gets or sets a value indicating whether to show progress in form's taskbar icon.
+            </summary>
+            <remarks>
+            This will only work on Windows 7 or later and the parent form must be showing its icon in the taskbar. No exception is thrown on failure.
+            </remarks>
+            <value>
+            <c>true</c> to show progress in taskbar icon; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.SuppressParentFormIconSync">
+            <summary>
+            Gets or sets a value indicating whether to suppress changing the parent form's icon to match the wizard's <see cref="P:AeroWizard.WizardControl.TitleIcon"/>.
+            </summary>
+            <value><c>true</c> to not change the parent form's icon to match this wizard's icon; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.SuppressParentFormCaptionSync">
+            <summary>
+            Gets or sets a value indicating whether to spupress changing the parent form's caption to match the wizard's <see cref="P:AeroWizard.WizardControl.Title"/>.
+            </summary>
+            <value><c>true</c> to not change the parent form's caption (Text) to match this wizard's title; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.Title">
+            <summary>
+            Gets or sets the title for the wizard.
+            </summary>
+            <value>The title text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardControl.TitleIcon">
+            <summary>
+            Gets or sets the optionally displayed icon next to the wizard title.
+            </summary>
+            <value>The title icon.</value>
+        </member>
+        <member name="M:AeroWizard.StepWizardControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AeroWizard.StepWizardControl"/> class.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.StepWizardControl.StepListWidth">
+            <summary>
+            Gets or sets the width of the step list.
+            </summary>
+            <value>
+            The width of the step list.
+            </value>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx">
+            <summary>
+            Identifies a control or user interface (UI) element that is drawn with visual styles.
+            </summary>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation">
+            <summary>
+            Contains classes that provide <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> objects for navigation-related controls. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.BackButton">
+            <summary>
+            Provides <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> objects for the different states of the Back Button control. This class cannot be inherited. 
+            </summary>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.BackButton.Normal">
+            <summary>Gets a visual style element that represents a back button in the normal state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a back button in the normal state.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.BackButton.Hot">
+            <summary>Gets a visual style element that represents a back button in the hot state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a back button in the hot state.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.BackButton.Pressed">
+            <summary>Gets a visual style element that represents a back button in the pressed state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a back button in the pressed state.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.BackButton.Disabled">
+            <summary>Gets a visual style element that represents a back button in the disabled state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a back button in the disabled state.</value>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.ForwardButton">
+            <summary>
+            Provides <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> objects for the different states of the Forward Button control. This class cannot be inherited. 
+            </summary>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.ForwardButton.Normal">
+            <summary>Gets a visual style element that represents a forward button in the normal state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a forward button in the normal state.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.ForwardButton.Hot">
+            <summary>Gets a visual style element that represents a forward button in the hot state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a forward button in the hot state.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.ForwardButton.Pressed">
+            <summary>Gets a visual style element that represents a forward button in the pressed state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a forward button in the pressed state.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.ForwardButton.Disabled">
+            <summary>Gets a visual style element that represents a forward button in the disabled state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a forward button in the disabled state.</value>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.MenuButton">
+            <summary>
+            Provides <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> objects for the different states of the Menu Button control. This class cannot be inherited. 
+            </summary>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.MenuButton.Normal">
+            <summary>Gets a visual style element that represents a menu button in the normal state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a menu button in the normal state.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.MenuButton.Hot">
+            <summary>Gets a visual style element that represents a menu button in the hot state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a menu button in the hot state.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.MenuButton.Pressed">
+            <summary>Gets a visual style element that represents a menu button in the pressed state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a menu button in the pressed state.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.Navigation.MenuButton.Disabled">
+            <summary>Gets a visual style element that represents a menu button in the disabled state.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a menu button in the disabled state.</value>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard">
+            <summary>
+            Contains classes that provide <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> objects for AeroWizard-related controls. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.Button">
+            <summary>
+            Provides a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> for the button of a wizard. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.Button.Normal">
+            <summary>Gets a visual style element that represents a button in a wizard.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents a button in a wizard.</value>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.CommandArea">
+            <summary>
+            Provides a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> for the command area of a wizard. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.CommandArea.Normal">
+            <summary>Gets a visual style element that represents the command area of a wizard.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents the command area of a wizard.</value>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.ContentArea">
+            <summary>
+            Provides a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> for the content area of a wizard. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.ContentArea.Normal">
+            <summary>Gets a visual style element that represents the content area of a wizard.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents the content area of a wizard.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.ContentArea.NoMargin">
+            <summary>Gets a visual style element that represents the content area of a wizard without a margin.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents the content area of a wizard without a margin.</value>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.HeaderArea">
+            <summary>
+            Provides a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> for the header area of a wizard. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.HeaderArea.Normal">
+            <summary>Gets a visual style element that represents the header area of a wizard.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents the header area of a wizard.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.HeaderArea.NoMargin">
+            <summary>Gets a visual style element that represents the header area of a wizard without a margin.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents the header area of a wizard without a margin.</value>
+        </member>
+        <member name="T:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.TitleBar">
+            <summary>
+            Provides a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> for each state of the titlebar of a wizard. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.TitleBar.Active">
+            <summary>Gets a visual style element that represents the titlebar of an active wizard.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents the titlebar of an active wizard.</value>
+        </member>
+        <member name="P:AeroWizard.VisualStyles.VisualStyleElementEx.AeroWizard.TitleBar.Inactive">
+            <summary>Gets a visual style element that represents the titlebar of an inactive wizard.</summary>
+            <value>A <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement"/> that represents the titlebar of an inactive wizard.</value>
+        </member>
+        <member name="M:System.Windows.Forms.ControlExtension.CallWhenHandleValid(System.Windows.Forms.Control,System.Action{System.Windows.Forms.Control})">
+            <summary>
+            Performs an action on a control after its handle has been created. If the control's handle has already been created, the action is executed immediately.
+            </summary>
+            <param name="ctrl">This control.</param>
+            <param name="action">The action to execute.</param>
+        </member>
+        <member name="M:System.Windows.Forms.ControlExtension.GetParent``1(System.Windows.Forms.Control)">
+            <summary>
+            Gets the control in the list of parents of type <c>T</c>.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Windows.Forms.Control"/> based <see cref="T:System.Type"/> of the parent control to retrieve.</typeparam>
+            <param name="ctrl">This control.</param>
+            <returns>The parent control matching T or null if not found.</returns>
+        </member>
+        <member name="M:System.Windows.Forms.ControlExtension.GetTopMostParent``1(System.Windows.Forms.Control)">
+            <summary>
+            Gets the top-most control in the list of parents of type <c>T</c>.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Windows.Forms.Control"/> based <see cref="T:System.Type"/> of the parent control to retrieve.</typeparam>
+            <param name="ctrl">This control.</param>
+            <returns>The top-most parent control matching T or null if not found.</returns>
+        </member>
+        <member name="M:System.Windows.Forms.ControlExtension.GetRightToLeftProperty(System.Windows.Forms.Control)">
+            <summary>
+            Gets the right to left property.
+            </summary>
+            <param name="ctrl">This control.</param>
+            <returns>Culture defined direction of text for this control.</returns>
+        </member>
+        <member name="M:System.Windows.Forms.ControlExtension.IsDesignMode(System.Windows.Forms.Control)">
+            <summary>
+            Determines whether this control is in design mode.
+            </summary>
+            <param name="ctrl">This control.</param>
+            <returns><c>true</c> if in design mode; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:AeroWizard.ThemedImageButton">
+            <summary>
+            A button that displays an image and no text.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AeroWizard.ThemedImageButton"/> class.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.GetPreferredSize(System.Drawing.Size)">
+            <summary>
+            Retrieves the size of a rectangular area into which a control can be fitted.
+            </summary>
+            <param name="proposedSize">The custom-sized area for a control.</param>
+            <returns>
+            An ordered pair of type <see cref="T:System.Drawing.Size"/> representing the width and height of a rectangle.
+            </returns>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.PerformClicked">
+            <summary>
+            For button user use to simulate a click operate.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.SetImageListImageStrip(System.Drawing.Image,System.Windows.Forms.Orientation)">
+            <summary>
+            Sets the image list images using an image strip.
+            </summary>
+            <param name="imageStrip">The image strip.</param>
+            <param name="orientation">The orientation of the strip.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.OnEnabledChanged(System.EventArgs)">
+            <summary>
+            Process Enabled property changed 
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.OnGotFocus(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:GotFocus"/> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.OnLostFocus(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:LostFocus"/> event.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseDown"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.OnMouseEnter(System.EventArgs)">
+            <summary>
+            Raises the <see cref="M:System.Windows.Forms.Control.OnMouseEnter(System.EventArgs)"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.OnMouseLeave(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.MouseUp"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.Paint"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Paints the background of the control.
+            </summary>
+            <param name="pevent">A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the control to paint.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedImageButton.PaintButton(System.Drawing.Graphics,System.Drawing.Rectangle)">
+            <summary>
+            Primary function for painting the button. This method should be overridden instead of OnPaint.
+            </summary>
+            <param name="graphics">The graphics.</param>
+            <param name="bounds">The bounds.</param>
+        </member>
+        <member name="P:AeroWizard.ThemedImageButton.BackColor">
+            <summary>
+            Gets or sets the background color of the control.
+            </summary>
+            <returns>A <see cref="T:System.Drawing.Color" /> value representing the background color.</returns>
+        </member>
+        <member name="P:AeroWizard.ThemedImageButton.Image">
+            <summary>
+            Gets or sets the image that is displayed on a button control.
+            </summary>
+            <returns>The <see cref="T:System.Drawing.Image" /> displayed on the button control. The default value is null.</returns>
+        </member>
+        <member name="P:AeroWizard.ThemedImageButton.StyleClass">
+            <summary>
+            Gets or sets the style class.
+            </summary>
+            <value>The style class.</value>
+        </member>
+        <member name="P:AeroWizard.ThemedImageButton.StylePart">
+            <summary>
+            Gets or sets the style part.
+            </summary>
+            <value>The style part.</value>
+        </member>
+        <member name="P:AeroWizard.ThemedImageButton.Text">
+            <summary>
+            Gets or sets the text associated with this control.
+            </summary>
+            <returns>
+            The text associated with this control.
+              </returns>
+        </member>
+        <member name="P:AeroWizard.ThemedImageButton.ToolTipText">
+            <summary>
+            Gets or sets the tool tip text.
+            </summary>
+            <value>The tool tip text.</value>
+        </member>
+        <member name="P:AeroWizard.ThemedImageButton.ButtonState">
+            <summary>
+            Gets or sets the state of the button.
+            </summary>
+            <value>The state of the button.</value>
+        </member>
+        <member name="P:AeroWizard.ThemedImageButton.OnGlass">
+            <summary>
+            Gets a value indicating whether on glass.
+            </summary>
+            <value><c>true</c> if on glass; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.ThemedImageButton.DefaultSize">
+            <summary>
+            </summary>
+            <value></value>
+            <returns>
+            The default <see cref="T:System.Drawing.Size"/> of the control.
+            </returns>
+        </member>
+        <member name="T:System.Collections.Generic.EventedList`1">
+            <summary>
+            A generic list that provides event for changes to the list.
+            </summary>
+            <typeparam name="T">Type for the list.</typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.EventedList`1"/> class.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.EventedList`1"/> class.
+            </summary>
+            <param name="collection">The collection.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.EventedList`1"/> class.
+            </summary>
+            <param name="capacity">The capacity.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Add(`0)">
+            <summary>
+            Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the range.
+            </summary>
+            <param name="collection">The collection.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.AsReadOnly">
+            <summary>
+            Ases the read only.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.BinarySearch(`0)">
+            <summary>
+            Binaries the search.
+            </summary>
+            <param name="item">The item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.BinarySearch(`0,System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Binaries the search.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="comparer">The comparer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.BinarySearch(System.Int32,System.Int32,`0,System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Binaries the search.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="count">The count.</param>
+            <param name="item">The item.</param>
+            <param name="comparer">The comparer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Clear">
+            <summary>
+            Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only. </exception>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Contains(`0)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <returns>
+            true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.ConvertAll``1(System.Converter{`0,``0})">
+            <summary>
+            Converts all.
+            </summary>
+            <typeparam name="TOutput">The type of the output.</typeparam>
+            <param name="converter">The converter.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.CopyTo(`0[])">
+            <summary>
+            Copies to.
+            </summary>
+            <param name="array">The array.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="array"/> is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="arrayIndex"/> is less than 0.</exception>
+            <exception cref="T:System.ArgumentException">
+            	<paramref name="array"/> is multidimensional.-or-<paramref name="arrayIndex"/> is equal to or greater than the length of <paramref name="array"/>.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.-or-Type <c>T</c> cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.CopyTo(System.Int32,`0[],System.Int32,System.Int32)">
+            <summary>
+            Copies to.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="array">The array.</param>
+            <param name="arrayIndex">Index of the array.</param>
+            <param name="count">The count.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Exists(System.Predicate{`0})">
+            <summary>
+            Existses the specified match.
+            </summary>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Find(System.Predicate{`0})">
+            <summary>
+            Finds the specified match.
+            </summary>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.FindAll(System.Predicate{`0})">
+            <summary>
+            Finds all.
+            </summary>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.FindIndex(System.Predicate{`0})">
+            <summary>
+            Finds the index.
+            </summary>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.FindIndex(System.Int32,System.Predicate{`0})">
+            <summary>
+            Finds the index.
+            </summary>
+            <param name="startIndex">The start index.</param>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.FindIndex(System.Int32,System.Int32,System.Predicate{`0})">
+            <summary>
+            Finds the index.
+            </summary>
+            <param name="startIndex">The start index.</param>
+            <param name="count">The count.</param>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.FindLast(System.Predicate{`0})">
+            <summary>
+            Finds the last.
+            </summary>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.FindLastIndex(System.Predicate{`0})">
+            <summary>
+            Finds the last index.
+            </summary>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.FindLastIndex(System.Int32,System.Predicate{`0})">
+            <summary>
+            Finds the last index.
+            </summary>
+            <param name="startIndex">The start index.</param>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.FindLastIndex(System.Int32,System.Int32,System.Predicate{`0})">
+            <summary>
+            Finds the last index.
+            </summary>
+            <param name="startIndex">The start index.</param>
+            <param name="count">The count.</param>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.ForEach(System.Action{`0})">
+            <summary>
+            Fors the each.
+            </summary>
+            <param name="action">The action.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.GetEnumerator">
+            <summary>
+            Gets the enumerator.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.GetRange(System.Int32,System.Int32)">
+            <summary>
+            Gets the range of items and returns then in another list.
+            </summary>
+            <param name="index">The starting index.</param>
+            <param name="count">The count of items to place in the list.</param>
+            <returns>An <see cref="T:System.Collections.Generic.EventedList`1"/> with the requested items.</returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies to.
+            </summary>
+            <param name="array">The array.</param>
+            <param name="arrayIndex">Index of the array.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.System#Collections#IList#Add(System.Object)">
+            <summary>
+            Adds the specified item.
+            </summary>
+            <param name="item">The item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.System#Collections#IList#Contains(System.Object)">
+            <summary>
+            Determines whether [contains] [the specified item].
+            </summary>
+            <param name="item">The item.</param>
+            <returns>
+            	<c>true</c> if [contains] [the specified item]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.System#Collections#IList#IndexOf(System.Object)">
+            <summary>
+            Indexes the of.
+            </summary>
+            <param name="item">The item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.System#Collections#IList#Insert(System.Int32,System.Object)">
+            <summary>
+            Inserts the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.System#Collections#IList#Remove(System.Object)">
+            <summary>
+            Removes the specified item.
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.IndexOf(`0)">
+            <summary>
+            Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"/>.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1"/>.</param>
+            <returns>
+            The index of <paramref name="item"/> if found in the list; otherwise, -1.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.IndexOf(`0,System.Int32)">
+            <summary>
+            Indexes the of.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.IndexOf(`0,System.Int32,System.Int32)">
+            <summary>
+            Indexes the of.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="index">The index.</param>
+            <param name="count">The count.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Insert(System.Int32,`0)">
+            <summary>
+            Inserts an item to the <see cref="T:System.Collections.Generic.IList`1"/> at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+            <param name="item">The object to insert into the <see cref="T:System.Collections.Generic.IList`1"/>.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.</exception>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Inserts the range.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="collection">The collection.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.LastIndexOf(`0)">
+            <summary>
+            Lasts the index of.
+            </summary>
+            <param name="item">The item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.LastIndexOf(`0,System.Int32)">
+            <summary>
+            Lasts the index of.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.LastIndexOf(`0,System.Int32,System.Int32)">
+            <summary>
+            Lasts the index of.
+            </summary>
+            <param name="item">The item.</param>
+            <param name="index">The index.</param>
+            <param name="count">The count.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Remove(`0)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <returns>
+            true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </returns>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.RemoveAll(System.Predicate{`0})">
+            <summary>
+            Removes all.
+            </summary>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.RemoveAt(System.Int32)">
+            <summary>
+            Removes the <see cref="T:System.Collections.Generic.IList`1"/> item at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the item to remove.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"/>.</exception>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.IList`1"/> is read-only.</exception>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.RemoveRange(System.Int32,System.Int32)">
+            <summary>
+            Removes the range.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="count">The count.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Reverse">
+            <summary>
+            Reverses this instance.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Reverse(System.Int32,System.Int32)">
+            <summary>
+            Reverses the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="count">The count.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Sort">
+            <summary>
+            Sorts this instance.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Sort(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Sorts the specified comparer.
+            </summary>
+            <param name="comparer">The comparer.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Sort(System.Int32,System.Int32,System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Sorts the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="count">The count.</param>
+            <param name="comparer">The comparer.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.ToArray">
+            <summary>
+            Toes the array.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.TrimExcess">
+            <summary>
+            Trims the excess.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.TrueForAll(System.Predicate{`0})">
+            <summary>
+            Trues for all.
+            </summary>
+            <param name="match">The match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.OnItemAdded(System.Int32,`0)">
+            <summary>
+            Called when [insert].
+            </summary>
+            <param name="index">The index.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.OnItemChanged(System.Int32,`0,`0)">
+            <summary>
+            Called when [set].
+            </summary>
+            <param name="index">The index.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.OnItemDeleted(System.Int32,`0)">
+            <summary>
+            Called when [remove].
+            </summary>
+            <param name="index">The index.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.OnReset">
+            <summary>
+            Called when [clear].
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.IsCompatibleObject(System.Object)">
+            <summary>
+            Determines whether [is compatible object] [the specified value].
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            	<c>true</c> if [is compatible object] [the specified value]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.VerifyValueType(System.Object)">
+            <summary>
+            Verifies the type of the value.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.EnsureCapacity(System.Int32)">
+            <summary>
+            Ensures the capacity.
+            </summary>
+            <param name="min">The min.</param>
+        </member>
+        <member name="E:System.Collections.Generic.EventedList`1.ItemAdded">
+            <summary>
+            Occurs when an item has been added.
+            </summary>
+        </member>
+        <member name="E:System.Collections.Generic.EventedList`1.ItemChanged">
+            <summary>
+            Occurs when an item has changed.
+            </summary>
+        </member>
+        <member name="E:System.Collections.Generic.EventedList`1.ItemDeleted">
+            <summary>
+            Occurs when an item has been deleted.
+            </summary>
+        </member>
+        <member name="E:System.Collections.Generic.EventedList`1.Reset">
+            <summary>
+            Occurs when the list has been reset.
+            </summary>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.Capacity">
+            <summary>
+            Gets or sets the capacity.
+            </summary>
+            <value>The capacity.</value>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <value>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</value>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.System#Collections#ICollection#IsSynchronized">
+            <summary>
+            Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
+            </summary>
+            <value></value>
+            <returns>true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.System#Collections#ICollection#SyncRoot">
+            <summary>
+            Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+            </summary>
+            <value></value>
+            <returns>An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.</returns>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </summary>
+            <value></value>
+            <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.</returns>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.System#Collections#IList#IsFixedSize">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.IList"/> has a fixed size.
+            </summary>
+            <value></value>
+            <returns>true if the <see cref="T:System.Collections.IList"/> has a fixed size; otherwise, false.</returns>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.System#Collections#IList#IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </summary>
+            <value></value>
+            <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.</returns>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.System#Collections#IList#Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:System.Object"/> at the specified index.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.Item(System.Int32)">
+            <summary>
+            Gets or sets the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to get or set.</param>
+            <value>The element at the specified index.</value>
+        </member>
+        <member name="T:System.Collections.Generic.EventedList`1.Enumerator">
+            <summary>
+            Enumerates over the <see cref="T:System.Collections.Generic.EventedList`1"/>.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Enumerator.#ctor(System.Collections.Generic.EventedList{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.EventedList`1.Enumerator"/> struct.
+            </summary>
+            <param name="list">The list.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Enumerator.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Enumerator.System#Collections#IEnumerator#Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created. </exception>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.Enumerator.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+            true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created. </exception>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.Enumerator.Current">
+            <summary>
+            Gets the current.
+            </summary>
+            <value>The current.</value>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.Enumerator.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets the current.
+            </summary>
+            <value>The current.</value>
+        </member>
+        <member name="T:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1">
+            <summary>
+            An <see cref="T:System.EventArgs"/> structure passed to events generated by an <see cref="T:System.Collections.Generic.EventedList`1"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1.#ctor(System.ComponentModel.ListChangedType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1"/> class.
+            </summary>
+            <param name="type">The type of change.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1.#ctor(System.ComponentModel.ListChangedType,`1,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1"/> class.
+            </summary>
+            <param name="type">The type of change.</param>
+            <param name="item">The item that has changed.</param>
+            <param name="itemIndex">Index of the changed item.</param>
+        </member>
+        <member name="M:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1.#ctor(System.ComponentModel.ListChangedType,`1,System.Int32,`1)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1"/> class.
+            </summary>
+            <param name="type">The type of change.</param>
+            <param name="item">The item that has changed.</param>
+            <param name="itemIndex">Index of the changed item.</param>
+            <param name="oldItem">The old item when an item has changed.</param>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1.Item">
+            <summary>
+            Gets the item that has changed.
+            </summary>
+            <value>The item.</value>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1.ItemIndex">
+            <summary>
+            Gets the index of the item.
+            </summary>
+            <value>The index of the item.</value>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1.ListChangedType">
+            <summary>
+            Gets the type of change for the list.
+            </summary>
+            <value>The type of change for the list.</value>
+        </member>
+        <member name="P:System.Collections.Generic.EventedList`1.ListChangedEventArgs`1.OldItem">
+            <summary>
+            Gets the item's previous value.
+            </summary>
+            <value>The old item.</value>
+        </member>
+        <member name="T:AeroWizard.WizardCommandButtonState">
+            <summary>
+            Button state for buttons controlling the wizard.
+            </summary>
+        </member>
+        <member name="F:AeroWizard.WizardCommandButtonState.Enabled">
+            <summary>Button is enabled and can be clicked.</summary>
+        </member>
+        <member name="F:AeroWizard.WizardCommandButtonState.Disabled">
+            <summary>Button is disabled and cannot be clicked.</summary>
+        </member>
+        <member name="F:AeroWizard.WizardCommandButtonState.Hidden">
+            <summary>Button is hidden from the user.</summary>
+        </member>
+        <member name="T:AeroWizard.WizardPageContainer">
+            <summary>
+            Control providing a collection of wizard style navigatable pages.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AeroWizard.WizardPageContainer"/> class.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.BeginInit">
+            <summary>
+            Signals the object that initialization is starting.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.EndInit">
+            <summary>
+            Signals the object that initialization is complete.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.NextPage">
+            <summary>
+            Advances to the next page in the sequence.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.NextPage(AeroWizard.WizardPage,System.Boolean)">
+            <summary>
+            Advances to the specified page.
+            </summary>
+            <param name="nextPage">The wizard page to go to next.</param>
+            <param name="skipCommit">if set to <c>true</c> skip <see cref="E:AeroWizard.WizardPage.Commit"/> event.</param>
+            <exception cref="T:System.ArgumentException">When specifying a value for nextPage, it must already be in the Pages collection.</exception>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.PreviousPage">
+            <summary>
+            Returns to the previous page.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.RestartPages">
+            <summary>
+            Restarts the wizard pages from the first page.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.OnCancelling">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardControl.Cancelling"/> event.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.OnFinished">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardControl.Finished"/> event.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.OnGotFocus(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.GotFocus"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.OnHandleCreated(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.OnSelectedPageChanged">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardControl.SelectedPageChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageContainer.UpdateUIDependencies">
+            <summary>
+            Updates the buttons and taskbar according to current sequence and history.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardPageContainer.ButtonStateChanged">
+            <summary>
+            Occurs when the button's state has changed.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardPageContainer.Cancelling">
+            <summary>
+            Occurs when the user clicks the Cancel button and allows for programmatic cancellation.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardPageContainer.Finished">
+            <summary>
+            Occurs when the user clicks the Next/Finish button and the page is set to <see cref="P:AeroWizard.WizardPage.IsFinishPage"/> or this is the last page in the <see cref="P:AeroWizard.WizardPageContainer.Pages"/> collection.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardPageContainer.SelectedPageChanged">
+            <summary>
+            Occurs when the <see cref="P:AeroWizard.WizardControl.SelectedPage"/> property has changed.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.BackButton">
+            <summary>
+            Gets or sets the button assigned to control backing up through the pages.
+            </summary>
+            <value>The back button control.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.BackButtonState">
+            <summary>
+            Gets or sets the state of the back button.
+            </summary>
+            <value>The state of the back button.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.BackButtonText">
+            <summary>
+            Gets or sets the back button text.
+            </summary>
+            <value>The cancel button text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.CancelButton">
+            <summary>
+            Gets or sets the button assigned to cancelling the page flow.
+            </summary>
+            <value>The cancel button control.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.CancelButtonState">
+            <summary>
+            Gets the state of the cancel button.
+            </summary>
+            <value>The state of the cancel button.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.CancelButtonText">
+            <summary>
+            Gets or sets the cancel button text.
+            </summary>
+            <value>The cancel button text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.FinishButtonText">
+            <summary>
+            Gets or sets the finish button text.
+            </summary>
+            <value>The finish button text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.NextButton">
+            <summary>
+            Gets or sets the button assigned to control moving forward through the pages.
+            </summary>
+            <value>The next button control.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.NextButtonShieldEnabled">
+            <summary>
+            Gets or sets the shield icon on the next button.
+            </summary>
+            <value><c>true</c> if Next button should display a shield; otherwise, <c>false</c>.</value>
+            <exception cref="T:System.PlatformNotSupportedException">Setting a UAF shield on a button only works on Vista and later versions of Windows.</exception>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.NextButtonState">
+            <summary>
+            Gets the state of the next button.
+            </summary>
+            <value>The state of the next button.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.NextButtonText">
+            <summary>
+            Gets or sets the next button text.
+            </summary>
+            <value>The next button text.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.Pages">
+            <summary>
+            Gets the collection of wizard pages in this wizard control.
+            </summary>
+            <value>The <see cref="T:AeroWizard.WizardPageCollection"/> that contains the <see cref="T:AeroWizard.WizardPage"/> objects in this <see cref="T:AeroWizard.WizardControl"/>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.PercentComplete">
+            <summary>
+            Gets how far the wizard has progressed, as a percentage.
+            </summary>
+            <value>A value between 0 and 100.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.SelectedPage">
+            <summary>
+            Gets the currently selected wizard page.
+            </summary>
+            <value>The selected wizard page. <c>null</c> if no page is active.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.ShowProgressInTaskbarIcon">
+            <summary>
+            Gets or sets a value indicating whether to show progress in form's taskbar icon.
+            </summary>
+            <remarks>
+            This will only work on Windows 7 or later and the parent form must be showing its icon in the taskbar. No exception is thrown on failure.
+            </remarks>
+            <value>
+            <c>true</c> to show progress in taskbar icon; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.RunningOnWin7">
+            <summary>
+            Gets a value indicating whether running on win7.
+            </summary>
+            <value><c>true</c> if [running on win7]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.TaskBar">
+            <summary>
+            Gets the task bar interface for the current form.
+            </summary>
+            <value>The task bar.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageContainer.SelectedPageIndex">
+            <summary>
+            Gets the index of the currently selected page.
+            </summary>
+            <value>The index of the selected page.</value>
+        </member>
+        <member name="T:AeroWizard.WizardPageCollection">
+            <summary>
+            A collection of <see cref="T:AeroWizard.WizardPage"/> controls.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPageCollection.#ctor(AeroWizard.WizardPageContainer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AeroWizard.WizardPageCollection"/> class.
+            </summary>
+            <param name="owner">The <see cref="T:AeroWizard.WizardControl"/> that this collection belongs to.</param>
+        </member>
+        <member name="P:AeroWizard.WizardPageCollection.Owner">
+            <summary>
+            Gets the <see cref="T:AeroWizard.WizardControl"/> to which this collection belongs.
+            </summary>
+            <value>The <see cref="T:AeroWizard.WizardControl"/>.</value>
+        </member>
+        <member name="T:AeroWizard.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.BackBtnStrip">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardBackButtonToolTip">
+            <summary>
+              Looks up a localized string similar to Returns to a previous page.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardBackText">
+            <summary>
+              Looks up a localized string similar to &amp;Back.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardCancelText">
+            <summary>
+              Looks up a localized string similar to &amp;Cancel.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardControlIcon">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardFinishText">
+            <summary>
+              Looks up a localized string similar to &amp;Finish.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardHeader">
+            <summary>
+              Looks up a localized string similar to Page Title.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardHelpText">
+            <summary>
+              Looks up a localized string similar to &amp;Help.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardNextText">
+            <summary>
+              Looks up a localized string similar to &amp;Next.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardNoPagesNotice">
+            <summary>
+              Looks up a localized string similar to No wizard pages have been added..
+            </summary>
+        </member>
+        <member name="P:AeroWizard.Properties.Resources.WizardTitle">
+            <summary>
+              Looks up a localized string similar to Wizard Title.
+            </summary>
+        </member>
+        <member name="T:AeroWizard.ThemedLabel">
+            <summary>
+            A Label containing some text that will be drawn with glowing border on top of the Glass Sheet effect.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.ThemedLabel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AeroWizard.ThemedLabel"/> class.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.ThemedLabel.GetPreferredSize(System.Drawing.Size)">
+            <summary>
+            </summary>
+            <param name="proposedSize">The custom-sized area for a control.</param>
+            <returns>
+            An ordered pair of type <see cref="T:System.Drawing.Size"/> representing the width and height of a rectangle.
+            </returns>
+        </member>
+        <member name="M:AeroWizard.ThemedLabel.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.ThemedLabel.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            </summary>
+            <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
+        </member>
+        <member name="P:AeroWizard.ThemedLabel.BackColor">
+            <summary>
+            Gets or sets the background color for the control.
+            </summary>
+            <value></value>
+            <returns>
+            A <see cref="T:System.Drawing.Color"/> that represents the background color of the control. The default is the value of the <see cref="P:System.Windows.Forms.Control.DefaultBackColor"/> property.
+            </returns>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="P:AeroWizard.ThemedLabel.Image">
+            <summary>
+            Gets or sets the image that is displayed on a <see cref="T:System.Windows.Forms.Label"/>.
+            </summary>
+            <value></value>
+            <returns>
+            An <see cref="T:System.Drawing.Image"/> displayed on the <see cref="T:System.Windows.Forms.Label"/>. The default is null.
+            </returns>
+            <PermissionSet>
+            	<IPermission class="System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            	<IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="UnmanagedCode, ControlEvidence"/>
+            	<IPermission class="System.Diagnostics.PerformanceCounterPermission, System, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true"/>
+            </PermissionSet>
+        </member>
+        <member name="T:AeroWizard.WizardClassicStyle">
+            <summary>
+            Styles that can be applied to the body of a <see cref="T:AeroWizard.WizardControl"/> when on XP or earlier or when a Basic theme is applied.
+            </summary>
+        </member>
+        <member name="F:AeroWizard.WizardClassicStyle.AeroStyle">
+            <summary>Windows Vista style theme with large fonts and white background.</summary>
+        </member>
+        <member name="F:AeroWizard.WizardClassicStyle.BasicStyle">
+            <summary>Windows XP style theme with control color background.</summary>
+        </member>
+        <member name="F:AeroWizard.WizardClassicStyle.Automatic">
+            <summary>Use <see cref="F:AeroWizard.WizardClassicStyle.BasicStyle"/> on Windows XP and <see cref="F:AeroWizard.WizardClassicStyle.AeroStyle"/> for later versions.</summary>
+        </member>
+        <member name="T:AeroWizard.WizardPage">
+            <summary>
+            Represents a single page in a <see cref="T:AeroWizard.WizardControl"/>.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AeroWizard.WizardPage"/> class.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPage.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this wizard page.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents this wizard page.
+            </returns>
+        </member>
+        <member name="M:AeroWizard.WizardPage.OnCommit">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardPage.Commit"/> event.
+            </summary>
+            <returns><c>true</c> if handler does not set the <see cref="P:AeroWizard.WizardPageConfirmEventArgs.Cancel"/> to <c>true</c>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:AeroWizard.WizardPage.OnGotFocus(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.GotFocus"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:AeroWizard.WizardPage.OnHelpClicked">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardPage.HelpClicked"/> event.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPage.OnInitialize(AeroWizard.WizardPage)">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardPage.Initialize"/> event.
+            </summary>
+            <param name="prevPage">The page that was previously selected.</param>
+        </member>
+        <member name="M:AeroWizard.WizardPage.OnRollback">
+            <summary>
+            Raises the <see cref="E:AeroWizard.WizardPage.Rollback"/> event.
+            </summary>
+            <returns><c>true</c> if handler does not set the <see cref="P:AeroWizard.WizardPageConfirmEventArgs.Cancel"/> to <c>true</c>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="F:AeroWizard.WizardPage.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:AeroWizard.WizardPage.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:AeroWizard.WizardPage.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardPage.Commit">
+            <summary>
+            Occurs when the user has clicked the Next/Finish button but before the page is changed.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardPage.HelpClicked">
+            <summary>
+            Occurs when <see cref="P:AeroWizard.WizardPage.HelpText"/> is set and the user has clicked the link at bottom of the content area.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardPage.Initialize">
+            <summary>
+            Occurs when this page is entered.
+            </summary>
+        </member>
+        <member name="E:AeroWizard.WizardPage.Rollback">
+            <summary>
+            Occurs when the user has clicked the Back button but before the page is changed.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.WizardPage.AllowBack">
+            <summary>
+            Gets or sets a value indicating whether to enable the Back button.
+            </summary>
+            <value><c>true</c> if Back button is enabled; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.AllowCancel">
+            <summary>
+            Gets or sets a value indicating whether to enable the Cancel button.
+            </summary>
+            <value><c>true</c> if Cancel button is enabled; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.AllowNext">
+            <summary>
+            Gets or sets a value indicating whether to enable the Next/Finish button.
+            </summary>
+            <value><c>true</c> if Next/Finish button is enabled; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.HelpText">
+            <summary>
+            Gets or sets the help text. When value is not <c>null</c>, a help link will be displayed at the bottom left of the content area. When clicked, the <see cref="M:AeroWizard.WizardPage.OnHelpClicked"/> method will call the <see cref="E:AeroWizard.WizardPage.HelpClicked"/> event.
+            </summary>
+            <value>
+            The help text to display.
+            </value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.IsFinishPage">
+            <summary>
+            Gets or sets a value indicating whether this page is the last page in the sequence and should display the Finish text instead of the Next text on the Next/Finish button.
+            </summary>
+            <value><c>true</c> if this page is a finish page; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.NextPage">
+            <summary>
+            Gets or sets the next page that should be used when the user clicks the Next button or when the <see cref="M:AeroWizard.WizardControl.NextPage"/> method is called. This is used to override the default behavior of going to the next page in the sequence defined within the <see cref="P:AeroWizard.WizardControl.Pages"/> collection.
+            </summary>
+            <value>The wizard page to go to.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.Owner">
+            <summary>
+            Gets the <see cref="T:AeroWizard.WizardControl"/> for this page.
+            </summary>
+            <value>The <see cref="T:AeroWizard.WizardControl"/> for this page.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.ShowCancel">
+            <summary>
+            Gets or sets a value indicating whether to show the Cancel button. If both <see cref="P:AeroWizard.WizardPage.ShowCancel"/> and <see cref="P:AeroWizard.WizardPage.ShowNext"/> are <c>false</c>, then the bottom command area will not be shown.
+            </summary>
+            <value><c>true</c> if Cancel button should be shown; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.ShowNext">
+            <summary>
+            Gets or sets a value indicating whether to show the Next/Finish button. If both <see cref="P:AeroWizard.WizardPage.ShowCancel"/> and <see cref="P:AeroWizard.WizardPage.ShowNext"/> are <c>false</c>, then the bottom command area will not be shown.
+            </summary>
+            <value><c>true</c> if Next/Finish button should be shown; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.Size">
+            <summary>
+            Gets or sets the height and width of the control.
+            </summary>
+            <value></value>
+            <returns>
+            The <see cref="T:System.Drawing.Size"/> that represents the height and width of the control in pixels.
+            </returns>
+        </member>
+        <member name="P:AeroWizard.WizardPage.Suppress">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:AeroWizard.WizardPage"/> is suppressed and not shown in the normal flow.
+            </summary>
+            <value>
+              <c>true</c> if suppressed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:AeroWizard.WizardPage.CreateParams">
+            <summary>
+            Gets the required creation parameters when the control handle is created.
+            </summary>
+            <returns>A <see cref="T:System.Windows.Forms.CreateParams" /> that contains the required creation parameters when the handle to the control is created.</returns>
+        </member>
+        <member name="T:AeroWizard.WizardPageConfirmEventArgs">
+            <summary>
+            Arguments supplied to the <see cref="T:AeroWizard.WizardPage"/> events.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.WizardPageConfirmEventArgs.Cancel">
+            <summary>
+            Gets or sets a value indicating whether this action is to be cancelled or allowed.
+            </summary>
+            <value><c>true</c> if cancel; otherwise, <c>false</c> to allow. Default is <c>false</c>.</value>
+        </member>
+        <member name="P:AeroWizard.WizardPageConfirmEventArgs.Page">
+            <summary>
+            Gets the <see cref="T:AeroWizard.WizardPage"/> that has raised the event.
+            </summary>
+            <value>The wizard page.</value>
+        </member>
+        <member name="T:AeroWizard.WizardPageInitEventArgs">
+            <summary>
+            Arguments supplied to the <see cref="E:AeroWizard.WizardPage.Initialize"/> event.
+            </summary>
+        </member>
+        <member name="P:AeroWizard.WizardPageInitEventArgs.PreviousPage">
+            <summary>
+            Gets the <see cref="T:AeroWizard.WizardPage"/> that was previously selected when the event was raised.
+            </summary>
+            <value>The previous wizard page.</value>
+        </member>
+    </members>
+</doc>

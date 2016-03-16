@@ -1,0 +1,220 @@
+CHEMSEP 2 component IDs;CHEMSEP 2 Names;DWSIM Names
+1;Methane;Metano
+2;Ethane;Etano
+3;Propane;Propano
+4;Isobutane;iButano
+5;N-butane;nButano
+7;N-pentane;nPentano
+8;Isopentane;iPentano
+9;Neopentane;
+11;N-hexane;nHexano
+12;2-methylpentane;
+13;3-methylpentane;
+14;2,2-dimethylbutane;
+15;2,3-dimethylbutane;
+17;N-heptane;nHeptano
+27;N-octane;nOctano
+40;2,2,3-trimethylpentane;
+41;2,2,4-trimethylpentane;
+42;2,3,3-trimethylpentane;
+43;2,3,4-trimethylpentane;
+46;N-nonane;nNonano
+56;N-decane;nDecano
+63;N-undecane;
+64;N-dodecane;
+65;N-tridecane;
+66;N-tetradecane;
+67;N-pentadecane;
+68;N-hexadecane;
+104;Cyclopentane;
+105;Methylcyclopentane;
+107;Ethylcyclopentane;
+114;N-propylcyclopentane;
+137;Cyclohexane;
+138;Methylcyclohexane;
+140;Ethylcyclohexane;
+149;N-propylcyclohexane;
+152;N-butylcyclohexane;
+153;Cis-decahydronaphthalene;
+154;Trans-decahydronaphthalene;
+201;Ethylene;
+202;Propylene;
+204;1-butene;
+205;Cis-2-butene;
+206;Trans-2-butene;
+207;Isobutene;
+209;1-pentene;
+210;Cis-2-pentene;
+211;Trans-2-pentene;
+212;2-methyl-1-butene;
+213;3-methyl-1-butene;
+214;2-methyl-2-butene;
+216;1-hexene;
+234;1-heptene;
+250;1-octene;
+270;Cyclohexene;
+301;Propadiene;
+302;1,2-butadiene;
+303;1,3-butadiene;
+309;Isoprene;
+316;Dicyclopentadiene;
+401;Acetylene;
+402;Methylacetylene;
+403;Ethylacetylene;
+404;Dimethylacetylene;
+418;Vinylacetylene;
+501;Benzene;Benzeno
+502;Toluene;Tolueno
+504;Ethylbenzene;Etilbenzeno
+505;O-xylene;Oxileno
+506;M-xylene;Mxileno
+507;P-xylene;Pxileno
+509;N-propylbenzene;
+510;Cumene;
+514;1,2,3-trimethylbenzene;
+515;1,2,4-trimethylbenzene;
+518;N-butylbenzene;
+524;P-cymene;
+558;Biphenyl;
+601;Styrene;
+701;Naphthalene;
+702;1-methylnaphthalene;
+703;2-methylnaphthalene;
+710;1-phenylnaphthalene;
+717;Fluoranthene;
+723;1-methylindene;
+724;2-methylindene;
+738;Fluorene;
+803;Indene;
+805;Phenanthrene;
+806;Chrysene;
+807;Pyrene;
+808;Acenaphthene;
+820;Indane;
+899;Nitrous oxide;
+900;Nitrogen dioxide;
+901;Oxygen;Oxigenio
+902;Hydrogen;
+905;Nitrogen;Nitrogenio
+908;Carbon monoxide;
+909;Carbon dioxide;DioxidoDeCarbono
+910;Sulfur dioxide;
+911;Sulfur trioxide;
+912;Nitric oxide;
+914;Argon;
+915;Air;
+918;Chlorine;
+919;Neon;
+922;Bromine;
+1001;Formaldehyde;
+1002;Acetaldehyde;
+1003;Propanal;
+1006;2-methylpropanal;
+1051;Acetone;
+1052;Methyl ethyl ketone;MetilEtilCetona
+1053;3-pentanone;
+1054;Methyl isobutyl ketone;
+1061;Methyl isopropyl ketone;
+1080;Cyclohexanone;
+1101;Methanol;Metanol
+1102;Ethanol;Etanol
+1103;1-propanol;
+1104;Isopropanol;Isopropanol
+1105;1-butanol;
+1106;2-methyl-1-propanol;
+1107;2-butanol;
+1108;2-methyl-2-propanol;
+1111;2-methyl-2-butanol;
+1114;1-hexanol;
+1151;Cyclohexanol;
+1181;Phenol;Fenol
+1182;O-cresol;
+1183;M-cresol;
+1184;P-cresol;
+1201;Ethylene glycol;
+1202;Diethylene glycol;
+1203;Triethylene glycol;
+1204;Tetraethylene glycol;
+1241;1,4-butanediol;
+1252;Acetic acid;
+1253;Propionic acid;
+1256;N-butyric acid;
+1277;Acrylic acid;
+1278;Methacrylic acid;
+1301;Methyl formate;
+1302;Ethyl formate;
+1303;N-propyl formate;
+1312;Methyl acetate;
+1313;Ethyl acetate;
+1314;N-propyl acetate;
+1315;N-butyl acetate;
+1321;Vinyl acetate;
+1322;Methyl propionate;
+1351;Methyl methacrylate;
+1401;Dimethyl ether;
+1402;Diethyl ether;
+1403;Diisopropyl ether;
+1405;Methyl tert-butyl ether;
+1421;1,4-dioxane;
+1427;Methyl tert-pentyl ether;
+1431;Methylal;
+1441;Ethylene oxide;
+1442;1,2-propylene oxide;
+1461;Anisole;
+1479;Tetrahydrofuran;
+1501;Carbon tetrachloride;
+1502;Methyl chloride;
+1503;Ethyl chloride;
+1504;Vinyl chloride;
+1521;Chloroform;
+1522;1,1-dichloroethane;
+1523;1,2-dichloroethane;
+1524;1,1,2-trichloroethane;
+1541;Trichloroethylene;
+1571;Monochlorobenzene;
+1572;O-dichlorobenzene;
+1573;M-dichlorobenzene;
+1574;P-dichlorobenzene;
+1592;1,2,4-trichlorobenzene;
+1680;Bromobenzene;
+1681;Methyl iodide;
+1691;Iodobenzene;
+1701;Methylamine;
+1703;Trimethylamine;
+1704;Ethylamine;
+1706;Triethylamine;
+1710;Diethylamine;
+1741;Ethylenediamine;
+1760;Nitromethane;
+1761;Nitroethane;
+1762;1-nitropropane;
+1763;2-nitropropane;
+1771;Hydrogen cyanide;
+1772;Acetonitrile;
+1773;Propionitrile;
+1774;Acrylonitrile;
+1775;Methacrylonitrile;
+1791;Pyridine;
+1792;Aniline;
+1802;Ethyl mercaptan;
+1820;Dimethyl sulfide;
+1821;Thiophene;
+1844;Dimethyl sulfoxide;
+1845;Sulfolane;
+1851;Acetyl chloride;
+1854;Dichloroacetyl chloride;
+1855;Trichloroacetyl chloride;
+1876;N,n-dimethylformamide;
+1886;Nitrobenzene;
+1889;Furfural;
+1894;Phosgene;
+1903;Nitric acid;
+1904;Hydrogen chloride;
+1907;Hydrogen iodide;
+1911;Ammonia;
+1921;Water;Agua
+1922;Hydrogen sulfide;SulfetoDeHidrogenio
+1938;Carbon disulfide;
+2856;N,n-dimethylacetamide;
+4865;Trichloroacetaldehyde;
+4868;Dichloroacetaldehyde;

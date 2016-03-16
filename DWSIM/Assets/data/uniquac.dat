@@ -1,0 +1,377 @@
+===  CHEMSEP 2  === Copyright 1992 Harry Kooijman and Ross Taylor / Interaction Parameters Data (IPD) / DECHEMA UNIQUAC at P=1atm. Data: ID1. ID2. A12. A21 Comment=DECHEMA UNIQUAC data @ 1atm. Units=cal/mol
+5;1101;1289.4881;6.7114;Butane/Methanol p126 1/2c
+7;1102;938.0838;-112.7209;Pentane/Ethanol p376 1/2c
+8;1102;849.013;-56.7699;2-Methylbutane/Ethanol p373 1/2c
+11;1102;1056.8977;-135.5484;Hexane/Ethanol p437 1/2c
+11;1103;743.1034;-127.2476;Hexane/1-Propanol p550 1/2c
+137;1103;1251.6417;-391.9511;Cyclohexane/1-Propanol p542 1/2c
+138;1181;1525.5351;-516.0584;MethylCycloHexane/Phenol p482 1/2d
+207;1101;1403.5125;-70.3003;Isobutylene/Methanol p105 1/2c
+214;1101;1499.6766;-66.3796;2-Methyl-2-Butene/Methanol p154 1/2c
+214;1102;983.1208;-123.8651;2-Methyl-2-Butene/Ethanol p365 1/2c
+216;1101;1329.9294;-21.5842;1-Hexene/Methanol p212 1/2c
+216;1102;970.6914;-128.7022;1-Hexene/Ethanol p420 1/2c
+302;1101;1300.2481;-72.9715;1.3-Butadiene/Methanol p103 1/2c
+305;1101;1489.1438;-97.747;1.3-Pentadiene(CIS)/Methanol p147 1/2c
+306;1101;1477.5985;-92.9294;Trans-1.3-Pentadiene/Methanol p148 1/2c
+309;1101;1514.3534;-144.3088;Isoprene/Methanol p145 1/2c
+309;1102;912.9208;-118.3758;Isoprene/Ethanol p358 1/2c
+315;1101;1410.4509;-61.3753;Cyclopentadiene/Methanol p144 1/2c
+501;1521;-119.7224;-29.4499;Benzene/Chloroform 1/7
+501;1181;72.2429;197.453;Benzene/Phenol p482 1/2d
+501;502;70.7224;-58.3017;Benzene/Toluene p282 1/7
+501;507;5.7397;0.5699;Benzene/pXylene p310 1/7
+501;1103;378.6125;20.5261;Benzene/1-Propanol p537 1/2c
+502;1521;860.8206;-554.8868;Toluene/Chloroform p352 1/7
+502;507;121.3912;-119.706;Toluene/pXylene p444 1/7
+1002;1921;-1132.16;-231.7521;Acetaldehyde/Water p86 1/1a
+1003;1921;735.9692;208.343;Propionicaldehyde/Water p209 1/1a
+1003;1101;416.3831;-377.9488;PropionicAldehyde/Methanol p79 1/2c
+1006;1921;1263.005;-81.883;Isobutyraldehyde/Water p280 1/1a
+1051;1521;1566.0069;-781.5877;Acetone/Chloroform p92 1/3+4
+1051;501;-358.9226;604.28;Acetone/Benzene p195 1/3+4
+1051;1181;-468.3882;27.3851;Acetone/Phenol
+1051;137;-77.5361;543.595;Acetone/CycloHexane p213 1/3+4
+1051;502;-315.279;555.7418;Acetone/Toluene p236 1/3+4
+1051;1102;94.5536;117.867;Acetone/Ethanol p312 1/2c
+1052;501;-300.8429;385.863;2-Butanone/Benzene p291 1/3+4
+1052;137;146.0313;100.2596;2-Butanone/CycloHexane p297 1/3+4
+1052;502;366.3689;-250.2784;2-Butanone/Toluene p308 1/3+4
+1052;17;-184.485;559.8999;2-Butanone/n-Heptane p311 1/3+4
+1052;1921;775.153;30.4806;2-Butanone/Water p279 1/1a
+1052;1103;147.6576;-8.2705;2-Butanone/1-Propanol p496 1/2c
+1101;1921;-337.1298;549.2958;Methanol/Water (Kojima+Kato)
+1101;1521;-271.0633;1304.9835;Methanol/Chloroform p23 1/2a
+1101;1102;-474.7791;762.8153;Methanol/Ethanol p55 1/2a
+1101;1051;-84.2364;403.8524;Methanol/Acetone
+1101;501;-67.7213;1117.8797;Methanol/Benzene p232 1/2a
+1101;137;-32.2887;1703.2055;Methanol/CycloHexane p243 1/2a
+1101;502;-58.1103;1190.6454;Methanol/Toluene p269 1/2a
+1101;17;17.9144;1360.0217;Methanol/n-Heptane
+1101;1501;-95.2921;1463.4548;Methanol/Tetrachloromethane p18 1/2c
+1101;1698;-92.0642;984.2538;Methanol/Tribromomethane p19 1/2c
+1101;1772;101.9628;334.9587;Methanol/Acetonitrile p42 1/2c
+1101;1523;-80.7067;1094.1304;Methanol/1.2-Dichloroethane p44 1/2c
+1101;1252;-40.7254;-51.0491;Methanol/AceticAcid p46 1/2c
+1101;1102;-202.1377;258.6928;Methanol/Ethanol p60 1/2c
+1101;1844;-366.7607;84.4189;Methanol/Dimethylsulfoxide p61 1/2c
+1101;1253;7.1816;0.3295;Methanol/PropionicAcid p87 1/2c
+1101;1876;-156.3839;103.9406;Methanol/N.N-Dimethylformamide p88 1/2c
+1101;1103;-26.2861;113.5565;Methanol/Propanol p96 1/2c
+1101;1821;-265.3781;1099.9741;Methanol/Thiophene p101 1/2c
+1101;1341;-25.1614;600.3028;Methanol/Methylacrylate p104 1/2c
+1101;1052;-136.0158;584.0634;Methanol/2-Butanone p106 1/2c
+1101;1479;-153.2518;629.7314;Methanol/Tetrahyrofuran p111 1/2c
+1101;1421;-19.0988;451.089;Methanol/1.4-Dioxane p116 1/2c
+1101;1313;-138.9829;770.3047;Methanol/Ethylacetate p117 1/2c
+1101;1845;-28.6882;675.1045;Methanol/Sulfolane p120 1/2c
+1101;1105;40.3898;121.5049;Methanol/1-Butanol p127 1/2c
+1101;1106;471.807;-279.7321;Methanol/2-Butanol p128 1/2c
+1101;1108;-291.983;403.6892;Methanol/Tert-Butanol p131 1/2c
+1101;1241;-286.6527;490.8909;Methanol/1.4-Butanediol p138 1/2c
+1101;1791;425.4563;-393.3415;Methanol/Pyridine p141 1/2c
+1101;1351;-98.6602;843.2593;Methanol/MethylMethacrylate p152 1/2c
+1101;1061;-100.1669;594.2312;Methanol/MethylisopropylKetone p155 1/2c
+1101;1053;-83.8392;609.2057;Methanol/3-Pentanone p156 1/2c
+1101;1745;-383.9791;153.8253;Methanol/Piperidine p157 1/2c
+1101;1864;-90.0876;1245.166;Methanol/Hexafluorobenzene p170 1/2c
+1101;1571;-118.0717;1402.7818;Methanol/Chlorobenzene p174 1/2c
+1101;501;-76.6223;1166.9276;Methanol/Benzene p191 1/2c
+1101;1792;-144.7753;517.8626;Methanol/Aniline p192 1/2c
+1101;1797;-603.5633;950.103;Methanol/2-Methylpyridine p195 1/2c
+1101;2797;-206.2407;81.4664;Methanol/3-Methylpyridine p196 1/2c
+1101;2799;-78.8509;-53.173;Methanol/4-Methylpyridine p198 1/2c
+1101;270;-38.5257;1529.9926;Methanol/Cyclohexene p204 1/2c
+1101;137;48.3262;1388.9672;Methanol/Cyclohexane p211 1/2c
+1101;1315;-174.2617;892.9417;Methanol/n-ButylAcetate p217 1/2c
+1101;11;38.3254;1391.4917;Methanol/Hexane p224 1/2c
+1101;1706;-318.8007;905.0708;Methanol/Triethylamine p226 1/2c
+1101;502;-65.2736;1201.3122;Methanol/Toluene p237 1/2c
+1101;1182;-502.2428;548.3889;Methanol/2-Methylphenol p238 1/2c
+1101;2796;-272.5909;272.4921;Methanol/2.6-Dimethylpyridine p239 1/2c
+1101;17;-12.605;1363.9261;Methanol/1-Heptane p241 1/2c
+1101;138;1.0023;1552.7297;Methanol/Methylcyclohexane p242 1/2c
+1101;17;-27.9877;1578.6097;Methanol/Heptane p243 1/2c
+1101;504;-57.095;1259.4286;Methanol/Ethylbenzene p245 1/2c
+1101;506;-41.7377;1208.1529;Methanol/M-xylene p246 1/2c
+1101;507;-47.6694;1231.2086;Methanol/P-xylene p247 1/2c
+1101;250;-32.2567;1396.3019;Methanol/1-Octene p248 1/2c
+1101;27;-32.7911;1561.8955;Methanol/Octane p249 1/2c
+1101;41;-59.6929;1577.3145;Methanol/2.2.4-Trimethylpentane p250 1/2c
+1101;1140;18.9334;484.2757;Methanol/1-Dodecanol p252 1/2c
+1101;1279;-149.1808;952.0283;Methanol/Oleic Acid p253 1/2c
+1102;1921;173.801;109.8687;Ethanol/Water
+1102;1521;-305.3246;881.3549;Ethanol/Chloroform p285 1/2a
+1102;1051;94.2417;98.7523;Ethanol/Acetone p323 1/2a
+1102;1052;-25.7234;250.3958;Ethanol/2-Butanone p342 1/2a
+1102;501;-127.9893;744.8826;Ethanol/Benzene p405 1/2a
+1102;137;-153.0128;1100.3231;Ethanol/CycloHexane p441 1/2a
+1102;502;-97.5633;698.6183;Ethanol/Toluene p470 1/2a
+1102;17;-150.277;1127.5232;Ethanol/n-Heptane p489 1/2a
+1102;507;-63.9673;664.259;Ethanol/p-Xylene p500 1/2a
+1102;1542;-61.6485;783.4873;Ethanol/Tetrachloroethylene p285 1/2c
+1102;1772;392.2083;91.3933;Ethanol/Acetonitrile p289 1/2c
+1102;1523;-39.1051;669.688;Ethanol/1.2-Dichloroethane p292 1/2c
+1102;1252;-25.2901;-86.9343;Ethanol/Acetic Acid p293 1/2c
+1102;1201;818.093;-200.1567;Ethanol/1.2-Ethanediol p297 1/2c
+1102;1104;437.5184;-324.6275;Ethanol/2-Propanol p317 1/2c
+1102;1211;181.0206;-57.8238;Ethanol/1.2-Propanediol p319 1/2c
+1102;1821;-77.9585;662.4746;Ethanol/Thiophene p320 1/2c
+1102;1052;-169.9082;480.2791;Ethanol/2-Butanone p327 1/2c
+1102;1421;50.8172;212.2982;Ethanol/1.4-Dioxane p331 1/2c
+1102;1845;177.7675;306.35;Ethanol/Sulfolane p341 1/2c
+1102;1765;-712.473;1116.7138;Ethanol/Morpholine p345 1/2c
+1102;1106;-311.9029;474.5511;Ethanol/2-Butanol p346 1/2c
+1102;1106;-117.4292;220.9133;Ethanol/2-Methyl-1-Propanol p349 1/2c
+1102;1791;378.8209;-378.8991;Ethanol/Pyridine p356 1/2c
+1102;1351;-105.4041;544.4089;Ethanol/MethylMethacrylate p363 1/2c
+1102;1061;-260.5944;652.4019;Ethanol/Methylisopropyl p366 1/2c
+1102;1314;-13.0186;405.1733;Ethanol/PropylAcetate p367 1/2c
+1102;1123;82.3751;-18.3336;Ethanol/3-Methyl-1-butanol p377 1/2c
+1102;1680;-169.9204;998.8196;Ethanol/Bromobenzene p378 1/2c
+1102;1571;-205.6039;1032.724;Ethanol/Chlorobezene p380 1/2c
+1102;501;-105.3291;766.4564;Ethanol/Benzene p406 1/2c
+1102;1792;1262.584;-446.4834;Ethanol/Aniline p410 1/2c
+1102;1797;139.4905;-225.4203;Ethanol/2-Methylpyridine p411 1/2c
+1102;2797;-578.9542;942.9023;Ethanol/3-Methylpyridine p412 1/2c
+1102;137;-85.691;925.1697;Ethanol/Cyclohexane p419 1/2c
+1102;1151;634.1484;-339.732;Ethanol/Cyclohexanol p421 1/2c
+1102;1315;-38.4912;384.6715;Ethanol/ButylAcetate p424 1/2c
+1102;1446;-177.4837;780.0513;Ethanol/Dipropylether p438 1/2c
+1102;1706;-305.4069;674.3341;Ethanol/Triethylamine p440 1/2c
+1102;502;-147.1104;878.1135;Ethanol/Toluene p444 1/2c
+1102;1461;928.9185;-379.9781;Ethanol/Anisole p445 1/2c
+1102;2797;-432.4206;583.2958;Ethanol/2.6-Dimethylpyridine p447 1/2c
+1102;138;-161.4264;631.1662;Ethanol/Pentylacetate p449 1/2c
+1102;17;-115.7807;1040.2891;Ethanol/Heptane p459 1/2c
+1102;504;-127.6343;841.5199;Ethanol/Ethylbezene p460 1/2c
+1102;507;-100.7193;794.4242;Ethanol/P-xylene p461 1/2c
+1102;27;-152.8323;1156.688;Ethanol/Octane p466 1/2c
+1102;22;-165.9382;1120.4853;Ethanol/2.2.4-Trimethylpentane p468 1/2c
+1102;68;-401.4408;1783.7857;Ethanol/Hexadecane p470 1/2c
+1102;1279;-180.7604;627.9668;Ethanol/Oleicacid p471 1/2c
+1103;1921;190.5947;290.554;1-propanol/Water p240 1/1a
+1103;1542;-13.5513;473.6899;1-Propanol/Tetrachloroethylene p473 1/2c
+1103;1252;-729.0848;1660.0903;1-Propanol/Aceticacid p479 1/2c
+1103;1253;-83.3064;-4.418;1-Propanol/Propionicacid p486 1/2c
+1103;2860;-300.7498;511.0851;1-Propanol/2-Methoxy-ethanol p490 1/2c
+1103;1711;-274.4208;15.9476;Propylamine/1-Propanol p492 1/2c
+1103;1278;114.789;-169.5098;1-Propanol/Methacrylicacid p495 1/2c
+1103;1106;47.0059;-46.6524;1-Propanol/2-Methyl-1-Propanol p505 1/2c
+1103;1791;423.4439;-423.9207;1-Propanol/Pyridine p513 1/2c
+1103;1351;-27.435;256.1456;1-Propanol/Methylmethacrylate p514 1/2c
+1103;1314;-91.8942;278.7259;1-Propnaol/Propylacetate p517 1/2c
+1103;1123;-19.2402;27.9161;1-Propanol/3-Methylbutanol p521 1/2c
+1103;1571;1.3035;311.4544;1-Propnaol/Chlorobenzene p527 1/2c
+1103;1797;163.7157;-281.9383;1-Propanol/2-Methylpyridine p538 1/2c
+1103;2797;199.1862;-290.3666;1-Propanol/3-Methylpyridine p539 1/2c
+1103;2799;180.7309;-293.8268;1-Propanol/4-Methylpyridine p540 1/2c
+1103;1324;-585.5214;1186.3162;1-Propanol/Propylpropionate p545 1/2c
+1103;1707;-1.1304;48.1557;1-Propanol/Dipropylamine p551 1/2c
+1103;1965;-218.4928;677.0367;1-Propanol/Hexamethyldisiloxane p555 1/2c
+1103;502;-1.7464;340.4905;1-Propanol/Toluene p556 1/2c
+1103;2796;-595.2165;936.7248;1-Propnaol/2.6-Dimethylpyridine p557 1/2c
+1103;17;-91.2018;743.266;1-Propanol/Heptane p573 1/2c
+1103;504;-74.7475;427.6292;1-Propanol/P-xylene p574 1/2c
+1103;27;-48.752;525.9933;1-Propanol/Octane p576 1/2c
+1103;56;-175.9432;744.763;1-Propanol/Decane p577 1/2c
+1103;1136;89.4506;31.0832;1-Propanol/1-Decanol 579 1/2c
+1104;1921;327.443;64.4408;2-propanol/Water p251 1/1a
+1104;1103;103.5993;-103.7179;2-Propanol/1-Propanol p488 1/2c
+1106;1921;350.1707;309.5428;isobutanol/Water p339 1/1a
+1108;1921;230.5098;271.3048;Tert-butanol/Water p343 1/1a
+1167;1921;281.7442;47.6526;Allylalcohol/Water p208 1/1a
+1301;1101;623.2636;-2.0107;MethylFormate/Methanol p51 1/2c
+1312;1921;830.7943;47.5023;Methylacetate/Water p214 1/1a
+1312;1101;611.2312;-70.982;MethylAcetate/Methanol p86 1/2c
+1312;1102;267.0169;-79.2922;MethylAcetate/Ethanol p315 1/2c
+1313;1921;1441.5619;-205.7336;Ethylacetate/Water p304 1/1a
+1313;1102;436.0416;-98.562;EthylAcetate/Ethanol p338 1/2c
+1321;1102;483.9533;-67.6116;VinylAcetate/Ethanol p324 1/2c
+1402;1921;1198.9207;102.271;Diethylether/Water p344 1/1a
+1402;1101;906.3646;-157.3556;DiethylEther/Methanol p133 1/2c
+1402;1102;642.6982;-171.8091;DiethylEther/Ethanol p347 1/2c
+1403;1921;1415.2748;81.2811;Diisopropylether/Water p421 1/1a
+1405;1101;1024.985;-203.711;MethylTert-ButylEther/Methanol p160 1/2c
+1431;1921;1098.9416;-44.1418;Dimethoxymethane/Water p252 1/1a
+1431;1101;657.2765;-4.6934;Dimethoxymethane/Methanol p97 1/2c
+1441;1921;10542.2026;-344.1682;Ethyleneoxide/Water p88 1/1a
+1442;1101;791.0185;-210.2403;PropyleneOxide/Methanol p80 1/2c
+1479;1921;835.2626;10.5163;Tetrahydrofuran/Water p286 1/1a
+1479;1102;559.1539;-260.1951;Tetrahydrofuran/Ethanol p328 1/2c
+1479;1103;381.8256;-244.669;Tetrahydrofuran/1-Propanol p497 1/2c
+1501;1101;1029.3332;-171.0842;Tetrachloromethane/Methanol p279 1/2c
+1501;1103;957.274;-252.3762;Tertachloromethane/1-Propanol p472 1/2c
+1504;1101;7661.2894;-187.7083;VinylCloride/Methanol p36 1/2c
+1511;1101;1516.5558;-229.3734;Dichloromethane/Methanol p26 1/2c
+1511;1102;796.2935;-172.0713;Dichloromethane/Ethanol p284 1/2c
+1521;1101;1295.4282;-271.461;Chloroform/Methanol p25 1/2c
+1521;1102;981.7658;-335.4504;Chloroform/Ethanol p282 1/2c
+1523;1103;272.4952;107.634;1.2-Dichloroethane/1-Propanol p478 1/2c
+1541;1103;538.1802;-90.5235;Trichloroethylene/1-Propanol p474 1/2c
+1544;1921;1260.1312;81.3308;3-chloro-1-propene/Water p188 1/1a
+1586;1103;748.22;-172.7007;Butylchloride/1-Propanol p502 1/2c
+1702;1921;-1070.3252;1057.3916;Dimethylamine/Water p174 1/1a
+1702;1101;-520.5358;-200.8021;Dimethylamine/Methanol p64 1/2c
+1702;1102;-1071.4286;1018.5371;Dimethylamine/Ethanol p299 1/2c
+1702;1103;-71.2521;-231.1124;Dimethylamine/1-Propanol p484 1/2c
+1704;1921;149.3345;-412.065;Ethylamine/Water p177 1/1a
+1706;1921;242.4137;2458.766;Triethylamine/Water p444 1/1a
+1706;1103;701.924;-371.1197;Triethylamine/1-Propanol p552 1/2c
+1710;1921;721.1889;-312.3228;Diethylamine/Water p355 1/1a
+1710;1102;-613.4553;1006.1474;Diethylamine/Ethanol p353 1/2c
+1711;1921;426.0894;-302.8076;Propylamine/Water p267 1/1a
+1712;1921;-379.6694;874.815;n-Butylamine/Water p354 1/1a
+1712;1102;-17.1391;-220.6087;Butylamine/Ethanol p351 1/2c
+1712;1103;-188.4751;-68.9772;Butylamine/1-Propanol p510 1/2c
+1719;1921;-553.685;1001.0323;Isopropylamine/Water p266 1/1a
+1772;1921;266.3109;332.5988;Acetonitrile/Water p76 1/1a
+1773;1921;367.0686;510.5582;Propionitrile/Water p189 1/1a
+1774;1921;395.4004;537.1531;Acrylonitrile/Water p182 1/1a
+1864;1103;535.7543;-38.2344;Hexafluorobenzene/1-Propnaol p526 1/2c
+1921;1051;-110.3829;698.7989;Water/Acetone (Kato et al.)
+1921;1052;752.9217;39.6746;Water/2-Butanone p277 1/1a
+1921;1181;934.8834;-501.3763;Water/Phenol p394 1/1a
+1921;1252;-251.6868;407.0073;Water/Aceticacid p100 1/1a
+1921;2852;-867.7066;2091.772;Water/n-Methylformamide p115 1/1a
+1921;1844;-292.3021;-523.6271;Water/Dimethylsulfoxide p165 1/1a
+1921;1741;-175.0216;-724.876;Water/Ethylenediamine p179 1/1a
+1921;1277;-417.4722;1189.9025;Water/Acrylicacid p186 1/1a
+1921;1253;486.4688;-146.6582;Water/Propionicacid p215 1/1a
+1921;1422;-210.5536;915.1339;Water/1.3.5-trioxane p225 1/1a
+1921;1876;639.5742;-556.8715;Water/N.n-dimethylformamide p234 1/1a
+1921;1421;-444.013;1302.0378;Water/1.4-dioxane p303 1/1a
+1921;1845;-397.8616;997.3999;Water/Sulfolane p307 1/1a
+1921;2856;453.4841;-463.0383;Water/N.n-dimethylacetamide p325 1/1a
+1921;1765;933.6195;-802.5279;Water/Morpholine p327 1/1a
+1921;1105;548.2453;89.0444;Water/n-butanol p336 1/1a
+1921;1241;-370.3689;1635.7568;Water/1.4-butanediol p346 1/1a
+1921;1238;489.1312;-286.7611;Water/2.3-butanediol p351 1/1a
+1921;1202;-346.2827;900.5916;Water/diethylenegylcol p352 1/1a
+1921;1889;537.7334;-36.221;Water/Furfural p361 1/1a
+1921;1791;-56.5403;-97.5005;Water/Pyridine p374 1/1a
+1921;1767;-801.2765;1402.6755;Water/n-Methylpyrrolidone p380 1/1a
+1921;1123;819.6231;-223.7898;Water/3-methylbutanol p382 1/1a
+1921;1111;-178.9352;1021.7979;Water/2-methyl-2-butanol p384 1/1a
+1921;1181;712.2793;-382.5734;Water/Phenol p399 1/1a
+1921;1792;-91.7122;485.3384;Water/Aniline p401 1/1a
+1921;1797;-657.2675;1253.468;Water/2-methylpyridine p402 1/1a
+1921;2797;1280.6209;-655.1387;Water/3-methylpyridine p406 1/1a
+1921;2799;-358.5748;333.911;Water/4-methylpyridine p408 1/1a
+1921;1757;-334.1695;857.6208;Water/Phenylhydrazine p409 1/1a
+1921;1080;316.6082;95.0342;Water/Cyclohexanone p410 1/1a
+1921;1065;-56.9399;1043.7692;Water/Mesityloxide p411 1/1a
+1921;1151;-286.8493;1023.7144;Water/Cyclohexanol p415 1/1a
+1921;1315;394.2396;756.4163;Water/n-Butylacetate p418 1/1a
+1921;2854;-351.0861;1188.5242;Water/Diacetonealcohol p419 1/1a
+1921;1114;-9.7248;802.6348;Water/1-hexanol p426 1/1a
+1921;1115;-172.0599;1138.3704;Water/2-hexanol p427 1/1a
+1921;2862;-178.571;670.1422;Water/2-butoxy-ethanol p433 1/1a
+1921;1180;83.4921;304.0167;Water/Benzylalcohol p450 1/1a
+1921;2796;-497.9465;893.7955;Water/2.6-dimethylpyridinr p457 1/1a
+1921;1317;-250.5667;1438.236;Water/Isopentylacetate p459 1/1a
+1921;1090;234.4706;641.1422;Water/Acetophenone p460 1/1a
+1921;1748;-847.2235;663.5428;Water/Quinoline p464 1/1a
+1921;510;-310.5637;1655.4649;Water/Isopropylbenzene p465 1/1a
+2640;1101;1653.8373;-379.2679;Halothane/Methanol p33 1/2c
+2851;1101;319.3243;-34.2606;Methanol/Formamide p30 1/2c
+1921;1921;0;0;Water/Water
+1;1921;-1.67124361;11.6847948;Methane/Water
+2;1921;-8.1873052;-3.2590244;Ethane/Water
+3;1921;6.3988162;14.7252261;Propane/Water
+4;1921;-4.9878971;15.0233076;Isobutane/Water
+5;1921;1.08104224;16.096401;N-butane/Water
+909;1921;2.4641404;1.51226681;Carbon dioxide/Water
+1922;1921;-0.1589768;17.8451458;Hydrogen sulfide/Water
+900;1921;5.365467;-4.769304;Nitrogen/Water
+1101;1921;-1.192326;-6.359072;Methanol/Water
+1921;1;11.6847948;-1.67124361;Water/Methane
+1;1;0;0;Methane/Methane
+2;1;10.6514456;0.020070821;Ethane/Methane
+3;1;2.8615824;-0.8942445;Propane/Methane
+4;1;13.711749;-0.7551398;Isobutane/Methane
+5;1;1.39899584;0.82071773;N-butane/Methane
+909;1;2.2455473;0.040936526;Carbon dioxide/Methane
+1922;1;-1.2121981;17.487448;Hydrogen sulfide/Methane
+900;1;-1.0333492;8.2866657;Nitrogen/Methane
+1101;1;8.942445;-15.89768;Methanol/Methane
+1921;2;-3.2590244;-8.1873052;Water/Ethane
+1;2;0.020070821;10.6514456;Methane/Ethane
+2;2;0;0;Ethane/Ethane
+3;2;5.0673855;-1.6295122;Propane/Ethane
+4;2;12.718144;9.141166;Isobutane/Ethane
+5;2;0;0;N-butane/Ethane
+909;2;0.9339887;17.3284712;Carbon dioxide/Ethane
+1922;2;0;0;Hydrogen sulfide/Ethane
+900;2;13.91047;-7.94884;Nitrogen/Ethane
+1101;2;-10.929655;-17.090006;Methanol/Ethane
+1921;3;14.7252261;6.3988162;Water/Propane
+1;3;-0.8942445;2.8615824;Methane/Propane
+2;3;-1.6295122;5.0673855;Ethane/Propane
+3;3;0;0;Propane/Propane
+4;3;16.295122;13.91047;Isobutane/Propane
+5;3;-2.185931;-38.353153;N-butane/Propane
+909;3;7.2135723;1.21021089;Carbon dioxide/Propane
+1922;3;-4.0936526;17.686169;Hydrogen sulfide/Propane
+900;3;-3.3583849;12.320702;Nitrogen/Propane
+1101;3;13.314307;-20.070821;Methanol/Propane
+1921;4;15.0233076;-4.9878971;Water/Isobutane
+1;4;-0.7551398;13.711749;Methane/Isobutane
+2;4;9.141166;12.718144;Ethane/Isobutane
+3;4;13.91047;16.295122;Propane/Isobutane
+4;4;0;0;Isobutane/Isobutane
+5;4;22.455473;11.6053064;N-butane/Isobutane
+909;4;2.384652;8.1674331;Carbon dioxide/Isobutane
+1922;4;0;0;Hydrogen sulfide/Isobutane
+900;4;-13.91047;-9.93605;Nitrogen/Isobutane
+1101;4;0;0;Methanol/Isobutane
+1921;5;16.096401;1.08104224;Water/N-butane
+1;5;0.82071773;1.39899584;Methane/N-butane
+2;5;0;0;Ethane/N-butane
+3;5;-38.353153;-2.185931;Propane/N-butane
+4;5;11.6053064;22.455473;Isobutane/N-butane
+5;5;0;0;N-butane/N-butane
+909;5;-22.455473;-6.3391999;Carbon dioxide/N-butane
+1922;5;0;0;Hydrogen sulfide/N-butane
+900;5;0;0;Nitrogen/N-butane
+1101;5;0;0;Methanol/N-butane
+1921;909;1.51226681;2.4641404;Water/Carbon dioxide
+1;909;0.040936526;2.2455473;Methane/Carbon dioxide
+2;909;17.3284712;0.9339887;Ethane/Carbon dioxide
+3;909;1.21021089;7.2135723;Propane/Carbon dioxide
+4;909;8.1674331;2.384652;Isobutane/Carbon dioxide
+5;909;-6.3391999;-22.455473;N-butane/Carbon dioxide
+909;909;0;0;Carbon dioxide/Carbon dioxide
+1922;909;12.718144;15.301517;Hydrogen sulfide/Carbon dioxide
+900;909;-9.3200149;-28.218382;Nitrogen/Carbon dioxide
+1101;909;16.295122;2.583373;Methanol/Carbon dioxide
+1921;1922;17.8451458;-0.1589768;Water/Hydrogen sulfide
+1;1922;17.487448;-1.2121981;Methane/Hydrogen sulfide
+2;1922;0;0;Ethane/Hydrogen sulfide
+3;1922;17.686169;-4.0936526;Propane/Hydrogen sulfide
+4;1922;0;0;Isobutane/Hydrogen sulfide
+5;1922;0;0;N-butane/Hydrogen sulfide
+909;1922;15.301517;12.718144;Carbon dioxide/Hydrogen sulfide
+1922;1922;0;0;Hydrogen sulfide/Hydrogen sulfide
+900;1922;0;0;Nitrogen/Hydrogen sulfide
+1101;1922;12.320702;-0.198721;Methanol/Hydrogen sulfide
+1921;900;-4.769304;5.365467;Water/Nitrogen
+1;900;8.2866657;-1.0333492;Methane/Nitrogen
+2;900;-7.94884;13.91047;Ethane/Nitrogen
+3;900;12.320702;-3.3583849;Propane/Nitrogen
+4;900;-9.93605;-13.91047;Isobutane/Nitrogen
+5;900;0;0;N-butane/Nitrogen
+909;900;-28.218382;-9.3200149;Carbon dioxide/Nitrogen
+1922;900;0;0;Hydrogen sulfide/Nitrogen
+900;900;0;0;Nitrogen/Nitrogen
+1101;900;0;0;Methanol/Nitrogen
+1921;1101;-6.359072;-1.192326;Water/Methanol
+1;1101;-15.89768;8.942445;Methane/Methanol
+2;1101;-17.090006;-10.929655;Ethane/Methanol
+3;1101;-20.070821;13.314307;Propane/Methanol
+4;1101;0;0;Isobutane/Methanol
+5;1101;0;0;N-butane/Methanol
+909;1101;2.583373;16.295122;Carbon dioxide/Methanol
+1922;1101;-0.198721;12.320702;Hydrogen sulfide/Methanol
+900;1101;0;0;Nitrogen/Methanol
+1101;1101;0;0;Methanol/Methanol

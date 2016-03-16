@@ -1,0 +1,4 @@
+Always check if DWSIM has binary interaction parameters for the components in your simulation! Adequate binary interaction parameters are required by some thermodynamic models in order to obtain reliable results. 
+Activation of DWSIM's Calculator doesn't mean that the streams will be automatically recalculated. For this to happen, you must perturb a modifiable variable in a material stream, i.e. modifying a stream's pressure from 200 to 200,01 kPa. 
+Run the simulation more than once to ensure the correctness of the results obtained.
+If the simulation's file already exists on your hard disk, a backup is made with the ".dwbak" extension. To use it again as a DWSIM simulation file, rename its extension to ".dwsim".

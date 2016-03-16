@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<script src="ContentScripts.js"></script>
+<head>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+<style>
+  
+table,th,td
+
+  {
+border:1px solid black;
+border-collapse:collapse; padding:2px;
+}
+
+</style>
+
+</head>
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ========================================-->
+<!-- ================================================================================== -->
+<body onload="LoadMenue()">
+
+<H2>Rigorous Column (Distillation / Absorption)</H2>
+<a href="SO_Shortcut_Column.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="SO_Heatexchanger.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+<p>The rigorous column is an unit operation that represents the fractionating towers, where
+components in a mixture are separated in various equilibrium stages (or not). It is called rigorous
+because of the thermodynamic models used in the solution of the mass and energy balances
+throughout the column.</p>
+
+<img src="pictures/SO_Rigorous_Column1.png"><br><br><br>
+
+In DWSIM, four types of rigorous columns are available:<br>
+<ul>
+<li>Distillation Column,</li>
+<li>Absorption Column,</li>
+<li>Refluxed Absorber</li>
+<li>Reboiled Absorber</li>
+</ul>
+
+<br><br>
+All of them share the same basic interface, with the following characteristics:
+<ul>
+<li>Supports multiple feed streams</li>
+<li>Supports multiple side draws</li>
+<li>Supports energy streams representing heat exchangers on each stage</li>
+<li>Definition of pressure and efficiency by stage</li>
+</ul>
+
+<br>
+<h3>Configuration options</h3>
+The following table describes the configuration options for each solving method.
+<table>
+<tr>
+ <td><b>Method</b></td>
+ <td><b>Parameter</b></td>
+ <td><b>Options</b></td>
+ <td><b>Default Value</b></td>
+ <td><b>Description</b></td>
+</tr>
+<tr>
+ <td>BP</td>
+ <td>Stop at iteration number</td>
+ <td>0 to 1000 (-1 to disable)</td>
+ <td>-1 (disabled)</td>
+ <td>You can use this option to generate initial estimates for the IO and SC methods.</td>
+</tr>
+<tr>
+ <td>IO/SC</td>
+ <td>Step for numerical derivatives</td>
+ <td>1E-3 to 1E-12</td>
+ <td>1E-5</td>
+ <td>Controls the value of change in variables in order to calculate the numerical derivatives.</td>
+</tr>
+<tr>
+ <td>IO/SC</td>
+ <td>Maximum variable change factor</td>
+ <td>1</td>
+ <td>10</td>
+ <td>Limits the changes in variables so the maximum variable change will be (newvalue/oldvalue) = factor.</td>
+</tr>
+<tr>
+ <td>IO</td>
+ <td>Adjust Sb scaling factor</td>
+ <td>True/False</td>
+ <td>False</td>
+ <td>Use the Sb scaling factor to adjust the initial material balance estimation. Helps to stabilize the algorithm when poor initial estimates are used.</td>
+</tr>
+<tr>
+ <td>IO</td>
+ <td>Calculate Kbj by weighted average</td>
+ <td>True/False</td>
+ <td>False</td>
+ <td>Calculates the Kb (reference K) factor for each stage by using the weighted average method as suggested by Russell. If this option is set to false, the highest K-value is used for the relative volatility calculation for each component on each stage.</td>
+</tr>
+<tr>
+ <td>IO</td>
+ <td>Use identity matrix as the first jacobian inverse</td>
+ <td>True/False</td>
+ <td>False</td>
+ <td>If True, tells DWSIM to use an identity matrix as the first estimate of the Jacobian inverse, which by its turn is used to update each independent variable. If set to False, the first Jacobian is calculated using numerical derivatives.</td>
+</tr>
+<tr>
+ <td>IO</td>
+ <td>Use damping factor</td>
+ <td>True/False</td>
+ <td>True</td>
+ <td>Set this option to True to use a damping factor, which helps to minimize the error on each inner loop iteration.</td>
+</tr>
+<tr>
+ <td>SC/IO</td>
+ <td>Use Newton’s method to update variables</td>
+ <td>True/False</td>
+ <td>False</td>
+ <td>The variables are normally updated by Broyden’s method, but setting this option to True helps to stabilize the algorithm on hard-to-converge situations.</td>
+</tr>
+<tr>
+ <td>SC/IO</td>
+ <td>Store and reuse jacobian matrix</td>
+ <td>True/False</td>
+ <td>True</td>
+ <td>This option is useful when the column must be solved multiple times without significant changes in variables, i. e. when using recycled streams as column feeds.</td>
+</tr>
+<tr>
+ <td>SC</td>
+ <td>Damping factor</td>
+ <td>0 to 2</td>
+ <td>0.5</td>
+ <td>Set the damping factor which limits the changes to variables as predicted by the Newton (or Broyden) step.</td>
+</tr>
+<tr>
+ <td>SC</td>
+ <td>Maximum allowed stage temperature change</td>
+ <td>0</td>
+ <td>10 K</td>
+ <td>Sets the maximum allowable stage temperature change between iterations. Changes higher than this value will not be considered.</td>
+</tr>
+</table>
+
+<br>
+<h3>Solving methods</h3>
+<ul>
+<li>Bubble-Point method of Wang and Henke (distillation column only) [1]</li>
+<li>Sum-Rates method of Burningham and Otto (absorption column only)[1]</li>
+<li>Russell’s Inside-Out method (all column types)[1]</li>
+<li>Simultaneous Correction method of Naphtali and Sandholm (all column types)[1]</li>
+</ul>
+
+<br>
+<h3>Results</h3>
+After the solution of mass and energy balances for the entire column, the output
+streams are calculated and the following results are shown in the properties window of the column:<br>
+<ul>
+<li>Heat exchanged in the condenser (where applicable)</li>
+<li>Heat exchanged in the reboiler (where applicable)</li>
+<li>Temperature profiles and flow of liquid / vapor entering at each stage</li>
+<li>Distribution profiles of components on each stage</li>
+</ul>
+
+
+
+
+<h3>References</h3>
+[1] Seader JD, Henley EJ. Separation Process Principles. Wiley. 2005.
+
+
+</BODY>
+</HTML>

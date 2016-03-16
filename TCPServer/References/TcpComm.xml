@@ -1,0 +1,121 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+TcpComm
+</name>
+</assembly>
+<members>
+<member name="M:TcpComm.Server.GetSessionCollection">
+	<summary>
+ Returns a current copy of the server's internal list of sessions as a List(Of SessionCommunications). It is possible that some sessions may be inactive, 
+ or disconnected. Care should be taken to check the session.isRunning before using one,
+  because inactive or disconnected sessions may be overwritten by new connections at any moment. 
+ </summary>
+	<returns>List(Of SessionCommunications)</returns>
+	<remarks></remarks>
+</member><member name="M:TcpComm.Server.GetSession(System.Int32)">
+	<summary>
+ Gets the session object associated with the sessionId. Returns Nothing for sessions where session.isRunning = False.
+ </summary>
+	<param name="sessionId"></param>
+	<returns>A TcpComm.Server.SessionCommunications object</returns>
+	<remarks></remarks>
+</member><member name="M:TcpComm.Server.GetSession(System.String)">
+	<summary>
+ Gets the first session object associated with the MachineID. Returns Nothing for sessions where session.isRunning = False.
+ </summary>
+	<param name="aMachineID"></param>
+	<returns>A TcpComm.Server.SessionCommunications object</returns>
+	<remarks></remarks>
+</member><member name="M:TcpComm.Server.SendText(System.String,System.Byte,System.Int32,System.String@)">
+	<summary>
+ This is a convienience function that handles the work of converting the text you would like to send to a byte array. 
+ Passes back the return value and errMsg of SendBytes(). Returns True on success and False on falure. Check the errMsg 
+ string for send failure explanations.
+ </summary>
+	<param name="textMessage"></param>
+	<param name="channel"></param>
+	<param name="sessionid"></param>
+	<param name="errMsg"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:TcpComm.Server.GetSendQueueSize(System.Int32)">
+	<summary>
+ Returns the size of the selected session's sendqueue. Returns -1 if the session is nothing, or session.isRunning = False. 
+ CAUTION: Calling this function too often will result in decreased performance, and failing to call it at all may result
+ in an out of memory error. You can continue to add messages to a session's send queue for as long as the session is active 
+ (isRunning = True), but that doesn't mean they are being sent as fast as you are adding them to the queue (or at all, for that matter). 
+ </summary>
+	<param name="sessionId"></param>
+	<returns>An Int32</returns>
+	<remarks></remarks>
+</member><member name="M:TcpComm.Client.#ctor(TcpComm.Client.ClientCallbackDelegate,System.Boolean,System.Int32)">
+	<summary>
+ Starting a new client requires a callback sub, and optional reconnection cryteria. 
+ </summary>
+	<param name="callbackMethod"></param>
+	<param name="ReconnectOnDisconnection">Clients started whith ReconnectOnDisconnection = True will continue to attempt to reconnect for the time specifyed in ReconnectionDurationSeconds.</param>
+	<param name="ReconnectionDurationSeconds">The number of seconds to attempt to reconnect to the server in the event that connection is lost.</param>
+	<remarks></remarks>
+</member><member name="M:TcpComm.Client.Close(System.Boolean)">
+	<summary>
+ Closes the TCP connection. 
+ </summary>
+	<param name="shutDownSilently">Prevents all system messages from being passed to your callback
+ (including the disconnected notification) and retruns control quickly while the client shuts 
+ down in the background.</param>
+	<remarks></remarks>
+</member><member name="M:TcpComm.Client.GetSendQueueSize">
+	<summary>
+ Returns the size of the sendqueue. Returns -1 if isRunning = False. 
+ CAUTION: Calling this function too often will result in decreased performance, and failing to call it at all may result
+ in an out of memory error. You can continue to add messages to the send queue for as long as the connection is active 
+ (isRunning = True), but that doesn't mean they are being sent as fast as you are adding them to the queue (or at all, for that matter). 
+ </summary>
+	<returns>An Int32</returns>
+	<remarks></remarks>
+</member><member name="M:TcpComm.Client.SendText(System.String,System.Byte,System.String@)">
+	<summary>
+ This is a convienience function that handles the work of converting the text you would like to send to a byte array. 
+ Passes back the return value and errMsg of SendBytes(). Returns True on success and False on falure. Check the errMsg 
+ string for send failure explanations.
+ </summary>
+	<param name="textMessage"></param>
+	<param name="channel"></param>
+	<param name="errMsg"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:TcpComm.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:TcpComm.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:TcpComm.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:TcpComm.Utilities.LargeArrayTransferHelper.HandleIncomingBytes(System.Byte[],System.Byte,System.Int32,System.Byte[])">
+	<summary>
+ Put this at the top of your callback, in a if statement. If it eveluates to true, then call return (the bytes were handled by this method). This method will
+ eveluate all incoming packets within the channelrange, and assemble any large arrays sent. When one is complete, it will call the callback itself for you,
+ and hand you the completed large array.
+ Ie:
+ 
+ If lat.HandleIncomingBytes(bytes, dataChannel) then Return
+ 
+ </summary>
+	<param name="bytes">The bytes supplied by your callback.</param>
+	<param name="channel">The channel supplied by your callback.</param>
+	<param name="sessionId">The sessionId supplied by your callback - obviously just for servers.</param>
+	<param name="channelRange">This byte array should contain two elements. The first is the lowest chanel this function should evaluate, the second is the highest. 
+ Leave it blank to eveluate all valid channels. However, not specifying a channelRange may slow down comunications.</param>
+	<returns>A boolean value indication weather or not this incoming packet was handled by this function.</returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

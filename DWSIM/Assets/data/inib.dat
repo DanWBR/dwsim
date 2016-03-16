@@ -1,0 +1,47 @@
+Metano (C1);0;1
+Etano (C2);0;1
+Propano (C3);0;2
+Isobutano (iC4);0;2
+n-Butano (nC4);0;0
+Isopentano (iC5);0;0
+n-Pentano (nC5);0;0
+n-Hexano (nC6);0;0
+n-Heptano (nC7);0;0
+n-Octano (nC8);0;0
+n-Nonano (nC9);0;0
+n-Decano (nC10);0;0
+Água (H2O);0;0
+Ácido Sulfídrico (H2S);0;1
+Gás carbônico (CO2);0;1
+Nitrogênio (N2);0;2
+Oxigênio (O2);0;0
+Benzeno (C6H6);0;0
+Tolueno (C7H8);0;0
+O-Xileno (C8H10);0;0
+M-Xileno (C8H10);0;0
+P-Xileno (C8H10);0;0
+Etilbenzeno (C8H10);0;0
+Fenol (C6H6O);1;0
+Glicerol (C3H8O3);1;0
+Metanol (CH3OH);1;0
+Etanol (C2H5OH);1;0
+Isopropanol (C3H7OH);1;0
+1-Pentanol (C5H11OH);1;0
+1-Hexanol (C6H13OH);1;0
+1-Heptanol (C7H15OH);1;0
+1-Octanol (C8H17OH);1;0
+1-Decanol (C10H21OH);1;0
+3-Metil-1-Butanol (C5H11OH);1;0
+1.2-Propanodiol (C3H8O2);1;0
+Metil-Etil-Cetona (C3H8CO);1;0
+Etileno-Glicol (EG);1;0
+Ciclopropano (C3H6);0;3
+Cloreto de Sódio (NaCl);1;0
+Cloreto de Cálcio (CaCl2);1;0
+Cloreto de Potássio (KCl);1;0
+Brometo de Sódio (NaBr);1;0
+Brometo de Cálcio (CaBr2);1;0
+Brometo de Potássio (KBr);1;0
+Hidróxido de Sódio (NaOH);1;0
+Hidróxido de Cálcio (Ca(OH)2);1;0
+Hidróxido de Potássio (KOH);1;0
