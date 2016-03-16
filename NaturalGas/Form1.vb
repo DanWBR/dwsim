@@ -150,10 +150,10 @@ Public Class Form1
                 'get the current composition, check if there is water and create a new, "dry" composition
                 'vx = current composition
                 'vxnw = dry composition
-                Dim vx(dobj.Phases(0).Componentes.Count - 1), vxnw(dobj.Phases(0).Componentes.Count - 1), vxw(dobj.Phases(0).Componentes.Count - 1) As Double
+                Dim vx(dobj.Phases(0).Compounds.Count - 1), vxnw(dobj.Phases(0).Compounds.Count - 1), vxw(dobj.Phases(0).Compounds.Count - 1) As Double
                 Dim i As Integer = 0
                 Dim iw As Integer = -1
-                For Each c As Compound In dobj.Phases(0).Componentes.Values
+                For Each c As Compound In dobj.Phases(0).Compounds.Values
                     vx(i) = c.FracaoMolar
                     If c.ConstantProperties.CAS_Number = "7732-18-5" Then
                         iw = i
@@ -165,7 +165,7 @@ Public Class Form1
                     If vx(iw) <> 0.0# Then
                         'water is present
                         i = 0
-                        For Each c As Compound In dobj.Phases(0).Componentes.Values
+                        For Each c As Compound In dobj.Phases(0).Compounds.Values
                             If i <> iw Then
                                 vxnw(i) = vx(i) / (1 - vx(iw))
                                 vxw(i) = 0.0#
@@ -270,10 +270,10 @@ Public Class Form1
                 If iw <> -1 Then
                     If vx(iw) <> 0.0# Then
                         'water content in mg/m3
-                        If tmpms.Phases(0).Componentes.ContainsKey("Agua") Then
-                            wcb = vx(iw) * tmpms.Phases(0).Componentes("Agua").ConstantProperties.Molar_Weight * 1000 * 1000
-                        ElseIf tmpms.Phases(0).Componentes.ContainsKey("Water") Then
-                            wcb = vx(iw) * tmpms.Phases(0).Componentes("Water").ConstantProperties.Molar_Weight * 1000 * 1000
+                        If tmpms.Phases(0).Compounds.ContainsKey("Agua") Then
+                            wcb = vx(iw) * tmpms.Phases(0).Compounds("Agua").ConstantProperties.Molar_Weight * 1000 * 1000
+                        ElseIf tmpms.Phases(0).Compounds.ContainsKey("Water") Then
+                            wcb = vx(iw) * tmpms.Phases(0).Compounds("Water").ConstantProperties.Molar_Weight * 1000 * 1000
                         End If
                         wc0 = wcb / (1 * z0 * 8314.47 * (273.15 + 0) / 101325)
                         wc15 = wcb / (1 * z15 * 8314.47 * (273.15 + 15.56) / 101325)
@@ -282,7 +282,7 @@ Public Class Form1
                 End If
 
                 'calculation of heating values at various conditions
-                For Each c As Compound In dobj.Phases(0).Componentes.Values
+                For Each c As Compound In dobj.Phases(0).Compounds.Values
                     If dmc.ContainsKey(c.ConstantProperties.CAS_Number) Then
                         hhv25m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup25 * 1000
                         hhv20m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup20 * 1000
@@ -322,13 +322,13 @@ Public Class Form1
                 iw20r = hhv2020vr / d20 ^ 0.5
 
                 'methane number
-                c1 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "74-82-8").FirstOrDefault
-                c2 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "74-84-0").FirstOrDefault
-                c3 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "74-98-6").FirstOrDefault
-                nc4 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "106-97-8").FirstOrDefault
-                ic4 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "75-28-5").FirstOrDefault
-                co2 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "124-38-9").FirstOrDefault
-                n2 = (From c As Compound In dobj.Phases(0).Componentes.Values Select c Where c.ConstantProperties.CAS_Number = "7727-37-9").FirstOrDefault
+                c1 = (From c As Compound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "74-82-8").FirstOrDefault
+                c2 = (From c As Compound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "74-84-0").FirstOrDefault
+                c3 = (From c As Compound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "74-98-6").FirstOrDefault
+                nc4 = (From c As Compound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "106-97-8").FirstOrDefault
+                ic4 = (From c As Compound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "75-28-5").FirstOrDefault
+                co2 = (From c As Compound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "124-38-9").FirstOrDefault
+                n2 = (From c As Compound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "7727-37-9").FirstOrDefault
 
                 If Not c1 Is Nothing Then xc1 = c1.FracaoMolar.GetValueOrDefault
                 If Not c2 Is Nothing Then xc2 = c2.FracaoMolar.GetValueOrDefault

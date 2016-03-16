@@ -62,21 +62,21 @@ Public Class GibbsInitialEstimatesEditorForm
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
         For Each r As DataGridViewRow In grid.Rows
             Dim s As String = gr.ComponentIDs(r.Index)
-            r.Cells(1).Value = Format(Converter.ConvertFromSI(su.molarflow, inlet.Phases(0).Componentes(s).MolarFlow.GetValueOrDefault), nf)
+            r.Cells(1).Value = Format(Converter.ConvertFromSI(su.molarflow, inlet.Phases(0).Compounds(s).MolarFlow.GetValueOrDefault), nf)
         Next
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         For Each r As DataGridViewRow In grid.Rows
             Dim s As String = gr.ComponentIDs(r.Index)
-            r.Cells(1).Value = Format(Converter.ConvertFromSI(su.molarflow, outletv.Phases(0).Componentes(s).MolarFlow.GetValueOrDefault), nf)
+            r.Cells(1).Value = Format(Converter.ConvertFromSI(su.molarflow, outletv.Phases(0).Compounds(s).MolarFlow.GetValueOrDefault), nf)
         Next
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         For Each r As DataGridViewRow In grid.Rows
             Dim s As String = gr.ComponentIDs(r.Index)
-            r.Cells(1).Value = Format(Converter.ConvertFromSI(su.molarflow, outletl.Phases(0).Componentes(s).MolarFlow.GetValueOrDefault), nf)
+            r.Cells(1).Value = Format(Converter.ConvertFromSI(su.molarflow, outletl.Phases(0).Compounds(s).MolarFlow.GetValueOrDefault), nf)
         Next
     End Sub
 

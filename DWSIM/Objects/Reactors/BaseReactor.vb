@@ -110,22 +110,22 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                 Select Case rxn.ReactionBasis
                     Case ReactionBasis.Activity
-                        val1 = ims.Phases(3).Componentes(sb.CompName).ActivityCoeff.GetValueOrDefault
+                        val1 = ims.Phases(3).Compounds(sb.CompName).ActivityCoeff.GetValueOrDefault
                         val2 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
                         val3 = ims.Phases(3).Properties.density.GetValueOrDefault
                         amounts(sb.CompName) = val1 * val2 / val3
                     Case ReactionBasis.Fugacity
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Vapor
-                                val1 = ims.Phases(2).Componentes(sb.CompName).FugacityCoeff.GetValueOrDefault
+                                val1 = ims.Phases(2).Compounds(sb.CompName).FugacityCoeff.GetValueOrDefault
                                 amounts(sb.CompName) = val1 * 8.314 * T
                             Case PhaseName.Liquid
-                                val1 = ims.Phases(3).Componentes(sb.CompName).FugacityCoeff.GetValueOrDefault
+                                val1 = ims.Phases(3).Compounds(sb.CompName).FugacityCoeff.GetValueOrDefault
                                 val2 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
                                 val3 = ims.Phases(3).Properties.density.GetValueOrDefault
                                 amounts(sb.CompName) = val1 * val2 / val3 * P
                             Case PhaseName.Mixture
-                                val1 = ims.Phases(0).Componentes(sb.CompName).FugacityCoeff.GetValueOrDefault
+                                val1 = ims.Phases(0).Compounds(sb.CompName).FugacityCoeff.GetValueOrDefault
                                 val2 = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
                                 val3 = ims.Phases(0).Properties.density.GetValueOrDefault
                                 amounts(sb.CompName) = val1 * val2 / val3 * P

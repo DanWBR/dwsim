@@ -99,7 +99,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
 
-            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 subst.PartialVolume = 0.0#
             Next
 
@@ -546,7 +546,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Select Case compname
                 Case "Ammonia", "Nitrogen", "Hydrogen", "Water", "Carbon dioxide", "Methane", "Carbon monoxide", "Ethanol", "Acetone", "Carbonyl sulfide", "N-decane",
                     "Hydrogen sulfide", "Isopentane", "Krypton", "Neopentane", "Nitrous oxide", "N-nonane", "Sulfur dioxide", "Toluene", "Xenon", "1-butene", "Cis-2-butene",
-                    "Isobutene","Trans-2-butene","Dimethyl ether","Ethane","Isobutane"
+                    "Isobutene", "Trans-2-butene", "Dimethyl ether", "Ethane", "Isobutane"
                     Return True
                 Case Else
                     Return False
@@ -632,7 +632,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         '    Dim maxZ As Double = Vz(0)
         '    Dim name As String = ""
 
-        '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+        '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
         '        If s.FracaoMolar.GetValueOrDefault >= maxZ Then
         '            name = s.Nome
         '            maxZ = Vz(i)
@@ -650,7 +650,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         '    Dim maxZ As Double = 0.0#
         '    Dim name As String = ""
 
-        '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+        '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
         '        If s.FracaoMolar.GetValueOrDefault >= maxZ Then
         '            name = s.Nome
         '            maxZ = s.FracaoMolar.GetValueOrDefault
@@ -841,10 +841,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Function RET_VQ() As Object
 
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-            Dim VQ(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim VQ(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 VQ(i) = subst.ConstantProperties.UNIQUAC_Q
                 i += 1
             Next
@@ -856,10 +856,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Function RET_VR() As Object
 
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-            Dim VR(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim VR(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 VR(i) = subst.ConstantProperties.UNIQUAC_R
                 i += 1
             Next

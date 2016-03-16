@@ -3,7 +3,7 @@ Imports DWSIM.DWSIM.SimulationObjects.Streams
 
 Public Class CompositionEditorForm
     Inherits System.Windows.Forms.Form
-    Public Componentes As Dictionary(Of String, Compound)
+    Public Compounds As Dictionary(Of String, Compound)
     Public InitialComposition As Dictionary(Of String, Double)
     Public Stream As MaterialStream
     Public Solvent As String = ""
@@ -21,7 +21,7 @@ Public Class CompositionEditorForm
         ComboBox1.Items.Clear()
         If Solvent Is Nothing Then Solvent = ""
         If InitialComposition Is Nothing Then InitialComposition = New Dictionary(Of String, Double)()
-        For Each comp In Me.Componentes.Values
+        For Each comp In Me.Compounds.Values
             If Not InitialComposition.ContainsKey(comp.Nome) Then InitialComposition.Add(comp.Nome, comp.FracaoMolar)
             GridComp.Rows.Add(New Object() {comp.FracaoMolar, InitialComposition(comp.Nome)})
             GridComp.Rows(GridComp.Rows.Count - 1).HeaderCell.Value = DWSIM.App.GetComponentName(comp.Nome) & " (" & comp.ConstantProperties.OriginalDB & ")"
@@ -85,12 +85,12 @@ Public Class CompositionEditorForm
 
                 Call Me.Button23_Click(sender, e)
                 For Each row In Me.GridComp.Rows
-                    Me.Componentes(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value
+                    Me.Compounds(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value
                 Next
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     mtotal += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 Next
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     comp.FracaoMassica = comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
                 Next
 
@@ -98,12 +98,12 @@ Public Class CompositionEditorForm
 
                 Call Me.Button23_Click(sender, e)
                 For Each row In Me.GridComp.Rows
-                    Me.Componentes(row.HeaderCell.Tag).FracaoMassica = row.Cells(0).Value
+                    Me.Compounds(row.HeaderCell.Tag).FracaoMassica = row.Cells(0).Value
                 Next
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     mmtotal += comp.FracaoMassica.GetValueOrDefault / comp.ConstantProperties.Molar_Weight
                 Next
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     comp.FracaoMolar = comp.FracaoMassica.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / mmtotal
                 Next
 
@@ -116,13 +116,13 @@ Public Class CompositionEditorForm
                 Dim cv As New DWSIM.SystemsOfUnits.Converter
                 Q = Converter.ConvertToSI(SU.molarflow, total)
                 For Each row In Me.GridComp.Rows
-                    Me.Componentes(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / total
+                    Me.Compounds(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / total
                 Next
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     mtotal += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 Next
                 W = 0
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     comp.FracaoMassica = comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
                     W += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / 1000 * Q
                 Next
@@ -136,13 +136,13 @@ Public Class CompositionEditorForm
                 Dim cv As New DWSIM.SystemsOfUnits.Converter
                 W = Converter.ConvertToSI(SU.massflow, total)
                 For Each row In Me.GridComp.Rows
-                    Me.Componentes(row.HeaderCell.Tag).FracaoMassica = row.Cells(0).Value / total
+                    Me.Compounds(row.HeaderCell.Tag).FracaoMassica = row.Cells(0).Value / total
                 Next
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     mmtotal += comp.FracaoMassica.GetValueOrDefault / comp.ConstantProperties.Molar_Weight
                 Next
                 Q = 0
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     comp.FracaoMolar = comp.FracaoMassica.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / mmtotal
                     Q += comp.FracaoMassica.GetValueOrDefault * W / comp.ConstantProperties.Molar_Weight * 1000
                 Next
@@ -150,12 +150,12 @@ Public Class CompositionEditorForm
             ElseIf Me.RadioButton5.Checked Then
 
                 'molarity = mol solute per liter solution
-                Dim n As Integer = Me.Componentes.Count
+                Dim n As Integer = Me.Compounds.Count
                 Dim liqdens(n - 1), nbp(n - 1) As Double
                 Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
                 ipp.CurrentMaterialStream = Stream
                 Dim i As Integer = 0
-                For Each s As Compound In Me.Componentes.Values
+                For Each s As Compound In Me.Compounds.Values
                     nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                     If T > nbp(i) Then
                         liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -170,7 +170,7 @@ Public Class CompositionEditorForm
                 i = 0
                 For Each row In Me.GridComp.Rows
                     If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
-                        total += row.Cells(0).Value / 1000 * liqdens(i) / Me.Componentes(row.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
+                        total += row.Cells(0).Value / 1000 * liqdens(i) / Me.Compounds(row.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
                     Else
                         total += row.Cells(0).Value
                     End If
@@ -182,19 +182,19 @@ Public Class CompositionEditorForm
                 i = 0
                 For Each row In Me.GridComp.Rows
                     If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
-                        Me.Componentes(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / 1000 * liqdens(i) / Me.Componentes(row.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000 / total
+                        Me.Compounds(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / 1000 * liqdens(i) / Me.Compounds(row.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000 / total
                     Else
-                        Me.Componentes(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / total
+                        Me.Compounds(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / total
                     End If
                     i += 1
                 Next
 
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     mtotal += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 Next
 
                 W = 0
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     comp.FracaoMassica = comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
                     W += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / 1000 * Q
                 Next
@@ -209,7 +209,7 @@ Public Class CompositionEditorForm
                 Dim val As Double = 0
                 For Each row In Me.GridComp.Rows
                     If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
-                        total += row.Cells(0).Value / Me.Componentes(row.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
+                        total += row.Cells(0).Value / Me.Compounds(row.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
                     Else
                         total += row.Cells(0).Value
                     End If
@@ -219,18 +219,18 @@ Public Class CompositionEditorForm
 
                 For Each row In Me.GridComp.Rows
                     If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
-                        Me.Componentes(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / Me.Componentes(row.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000 / total
+                        Me.Compounds(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / Me.Compounds(row.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000 / total
                     Else
-                        Me.Componentes(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / total
+                        Me.Compounds(row.HeaderCell.Tag).FracaoMolar = row.Cells(0).Value / total
                     End If
                 Next
 
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     mtotal += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 Next
 
                 W = 0
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     comp.FracaoMassica = comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
                     W += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / 1000 * Q
                 Next
@@ -238,14 +238,14 @@ Public Class CompositionEditorForm
             ElseIf Me.RadioButton7.Checked Then
 
                 'liquid vol. frac
-                Dim n As Integer = Me.Componentes.Count
+                Dim n As Integer = Me.Compounds.Count
                 Dim liqdens(n - 1), nbp(n - 1), volfrac(n - 1), totalvol As Double
                 Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
                 ipp.CurrentMaterialStream = Stream
                 Dim T As Double = 273.15 + 15.56 'standard temperature
                 Dim i As Integer = 0
                 totalvol = 0.0#
-                For Each s As Compound In Me.Componentes.Values
+                For Each s As Compound In Me.Compounds.Values
                     nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                     If T > nbp(i) Then
                         liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -262,14 +262,14 @@ Public Class CompositionEditorForm
                 Next
                 i = 0
                 For Each row In Me.GridComp.Rows
-                    Me.Componentes(row.HeaderCell.Tag).FracaoMassica = row.Cells(0).Value * liqdens(i) / mtotal
+                    Me.Compounds(row.HeaderCell.Tag).FracaoMassica = row.Cells(0).Value * liqdens(i) / mtotal
                     i += 1
                 Next
                 mmtotal = 0.0#
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     mmtotal += comp.FracaoMassica.GetValueOrDefault / comp.ConstantProperties.Molar_Weight
                 Next
-                For Each comp In Me.Componentes.Values
+                For Each comp In Me.Compounds.Values
                     comp.FracaoMolar = comp.FracaoMassica.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / mmtotal
                 Next
                 ipp = Nothing
@@ -279,7 +279,7 @@ Public Class CompositionEditorForm
             If Not Me.ComboBox1.SelectedItem Is Nothing Then Me.Solvent = Me.ComboBox1.SelectedItem.ToString
 
             Me.InitialComposition.Clear()
-            For Each comp In Me.Componentes.Values
+            For Each comp In Me.Compounds.Values
                 Me.InitialComposition.Add(comp.Nome, comp.FracaoMolar.GetValueOrDefault)
             Next
 
@@ -308,13 +308,13 @@ Public Class CompositionEditorForm
             Try
                 Dim v As Double = 0
                 If RadioButton5.Checked Then
-                    Dim n As Integer = Me.Componentes.Count
+                    Dim n As Integer = Me.Compounds.Count
                     Dim liqdens(n - 1), nbp(n - 1), volfrac(n - 1), totalvol As Double
                     Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
                     ipp.CurrentMaterialStream = Stream
                     Dim i As Integer = 0
                     totalvol = 0.0#
-                    For Each s As Compound In Me.Componentes.Values
+                    For Each s As Compound In Me.Compounds.Values
                         nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                         If T > nbp(i) Then
                             liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -327,7 +327,7 @@ Public Class CompositionEditorForm
                     i = 0
                     For Each r As DataGridViewRow In Me.GridComp.Rows
                         If DWSIM.App.GetLocalString(r.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
-                            v += r.Cells(0).Value / 1000 * liqdens(i) / Me.Componentes(r.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
+                            v += r.Cells(0).Value / 1000 * liqdens(i) / Me.Compounds(r.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
                         Else
                             v += CDbl(r.Cells(0).Value)
                         End If
@@ -337,7 +337,7 @@ Public Class CompositionEditorForm
                     Dim i As Integer = 0
                     For Each r As DataGridViewRow In Me.GridComp.Rows
                         If DWSIM.App.GetLocalString(r.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
-                            v += r.Cells(0).Value / Me.Componentes(r.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
+                            v += r.Cells(0).Value / Me.Compounds(r.HeaderCell.Tag).ConstantProperties.Molar_Weight * 1000
                         Else
                             v += CDbl(r.Cells(0).Value)
                         End If
@@ -407,30 +407,30 @@ Public Class CompositionEditorForm
                 Dim row As DataGridViewRow
                 If Me.RadioButton1.Checked Then
                     For Each row In Me.GridComp.Rows
-                        row.Cells(0).Value = Me.Componentes(row.HeaderCell.Tag).FracaoMolar
+                        row.Cells(0).Value = Me.Compounds(row.HeaderCell.Tag).FracaoMolar
                     Next
                 ElseIf Me.RadioButton2.Checked Then
                     For Each row In Me.GridComp.Rows
-                        row.Cells(0).Value = Me.Componentes(row.HeaderCell.Tag).FracaoMassica
+                        row.Cells(0).Value = Me.Compounds(row.HeaderCell.Tag).FracaoMassica
                     Next
                 ElseIf Me.RadioButton3.Checked Then
                     Dim cv As New DWSIM.SystemsOfUnits.Converter
                     For Each row In Me.GridComp.Rows
-                        row.Cells(0).Value = Converter.ConvertFromSI(SU.molarflow, Me.Componentes(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q)
+                        row.Cells(0).Value = Converter.ConvertFromSI(SU.molarflow, Me.Compounds(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q)
                     Next
                 ElseIf Me.RadioButton4.Checked Then
                     Dim cv As New DWSIM.SystemsOfUnits.Converter
                     For Each row In Me.GridComp.Rows
-                        row.Cells(0).Value = Converter.ConvertFromSI(SU.massflow, Me.Componentes(row.HeaderCell.Tag).FracaoMassica.GetValueOrDefault * W)
+                        row.Cells(0).Value = Converter.ConvertFromSI(SU.massflow, Me.Compounds(row.HeaderCell.Tag).FracaoMassica.GetValueOrDefault * W)
                     Next
                 ElseIf Me.RadioButton5.Checked Then
                     'molarity = mol solute per liter solution
-                    Dim n As Integer = Me.Componentes.Count
+                    Dim n As Integer = Me.Compounds.Count
                     Dim liqdens(n - 1), nbp(n - 1) As Double
                     Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
                     ipp.CurrentMaterialStream = Stream
                     Dim i As Integer = 0
-                    For Each s As Compound In Me.Componentes.Values
+                    For Each s As Compound In Me.Compounds.Values
                         nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                         If T > nbp(i) Then
                             liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -443,9 +443,9 @@ Public Class CompositionEditorForm
                     i = 0
                     For Each row In Me.GridComp.Rows
                         If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
-                            row.Cells(0).Value = Me.Componentes(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q * Me.Componentes(row.HeaderCell.Tag).ConstantProperties.Molar_Weight / 1000 / liqdens(i) * 1000
+                            row.Cells(0).Value = Me.Compounds(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q * Me.Compounds(row.HeaderCell.Tag).ConstantProperties.Molar_Weight / 1000 / liqdens(i) * 1000
                         Else
-                            row.Cells(0).Value = Me.Componentes(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q
+                            row.Cells(0).Value = Me.Compounds(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q
                         End If
                         i += 1
                     Next
@@ -454,20 +454,20 @@ Public Class CompositionEditorForm
                     Dim cv As New DWSIM.SystemsOfUnits.Converter
                     For Each row In Me.GridComp.Rows
                         If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
-                            row.Cells(0).Value = Me.Componentes(row.HeaderCell.Tag).FracaoMassica.GetValueOrDefault * W
+                            row.Cells(0).Value = Me.Compounds(row.HeaderCell.Tag).FracaoMassica.GetValueOrDefault * W
                         Else
-                            row.Cells(0).Value = Me.Componentes(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q
+                            row.Cells(0).Value = Me.Compounds(row.HeaderCell.Tag).FracaoMolar.GetValueOrDefault * Q
                         End If
                     Next
                 ElseIf Me.RadioButton7.Checked Then
                     'liquid vol. frac
-                    Dim n As Integer = Me.Componentes.Count
+                    Dim n As Integer = Me.Compounds.Count
                     Dim liqdens(n - 1), nbp(n - 1), volfrac(n - 1), totalvol As Double
                     Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
                     ipp.CurrentMaterialStream = Stream
                     Dim i As Integer = 0
                     totalvol = 0.0#
-                    For Each s As Compound In Me.Componentes.Values
+                    For Each s As Compound In Me.Compounds.Values
                         nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                         If T > nbp(i) Then
                             liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -479,7 +479,7 @@ Public Class CompositionEditorForm
                     Next
                     i = 0
                     For Each row In Me.GridComp.Rows
-                        row.Cells(0).Value = Me.Componentes(row.HeaderCell.Tag).FracaoMolar * Me.Componentes(row.HeaderCell.Tag).ConstantProperties.Molar_Weight / liqdens(i) / totalvol
+                        row.Cells(0).Value = Me.Compounds(row.HeaderCell.Tag).FracaoMolar * Me.Compounds(row.HeaderCell.Tag).ConstantProperties.Molar_Weight / liqdens(i) / totalvol
                         i += 1
                     Next
                     ipp = Nothing

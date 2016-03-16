@@ -148,9 +148,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 .Phases(0).Properties.enthalpy = Hi
                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                 Dim i As Integer = 0
-                For Each comp In .Phases(0).Componentes.Values
-                    comp.FracaoMolar = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Componentes(comp.Nome).FracaoMolar
-                    comp.FracaoMassica = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Componentes(comp.Nome).FracaoMassica
+                For Each comp In .Phases(0).Compounds.Values
+                    comp.FracaoMolar = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Nome).FracaoMolar
+                    comp.FracaoMassica = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Nome).FracaoMassica
                     i += 1
                 Next
                 .Phases(0).Properties.massflow = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
@@ -184,7 +184,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .Phases(0).Properties.enthalpy = Nothing
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     Dim i As Integer = 0
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         comp.FracaoMolar = 0
                         comp.FracaoMassica = 0
                         i += 1

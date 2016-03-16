@@ -275,8 +275,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     .Phases(0).Properties.massflow = Values("MassFlow")
                     .Phases(0).Properties.enthalpy = Values("Enthalpy")
 
-                    For Each comp In .Phases(0).Componentes.Values
-                        comp.FracaoMolar = msfrom.Phases(0).Componentes(comp.Nome).FracaoMolar
+                    For Each comp In .Phases(0).Compounds.Values
+                        comp.FracaoMolar = msfrom.Phases(0).Compounds(comp.Nome).FracaoMolar
                     Next
 
                     .CalcOverallCompMassFractions()
@@ -487,7 +487,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     Case Helpers.Recycle.FlashType.FlashPH, Helpers.Recycle.FlashType.FlashPS, Helpers.Recycle.FlashType.FlashTP
 
                         Dim xl, xv, T, P, H, S, wtotalx, wtotaly As Double
-                        Dim Vx(ems.Phases(0).Componentes.Count - 1), Vy(ems.Phases(0).Componentes.Count - 1), Vwx(ems.Phases(0).Componentes.Count - 1), Vwy(ems.Phases(0).Componentes.Count - 1) As Double
+                        Dim Vx(ems.Phases(0).Compounds.Count - 1), Vy(ems.Phases(0).Compounds.Count - 1), Vwx(ems.Phases(0).Compounds.Count - 1), Vwy(ems.Phases(0).Compounds.Count - 1) As Double
                         xl = tmp(0)
                         xv = tmp(1)
                         T = tmp(2)
@@ -507,13 +507,13 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                             ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedFrom.Name)
                             Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                             i = 0
-                            For Each comp In ms.Phases(0).Componentes.Values
+                            For Each comp In ms.Phases(0).Compounds.Values
                                 wtotalx += Vx(i) * comp.ConstantProperties.Molar_Weight
                                 wtotaly += Vy(i) * comp.ConstantProperties.Molar_Weight
                                 i += 1
                             Next
                             i = 0
-                            For Each comp In ms.Phases(0).Componentes.Values
+                            For Each comp In ms.Phases(0).Compounds.Values
                                 Vwx(i) = Vx(i) * comp.ConstantProperties.Molar_Weight / wtotalx
                                 Vwy(i) = Vy(i) * comp.ConstantProperties.Molar_Weight / wtotaly
                                 i += 1
@@ -531,20 +531,20 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                                 .Phases(0).Properties.enthalpy = H
                                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                                 j = 0
-                                For Each comp In .Phases(0).Componentes.Values
-                                    comp.FracaoMolar = ems.Phases(0).Componentes(comp.Nome).FracaoMolar
-                                    comp.FracaoMassica = ems.Phases(0).Componentes(comp.Nome).FracaoMassica
+                                For Each comp In .Phases(0).Compounds.Values
+                                    comp.FracaoMolar = ems.Phases(0).Compounds(comp.Nome).FracaoMolar
+                                    comp.FracaoMassica = ems.Phases(0).Compounds(comp.Nome).FracaoMassica
                                     j += 1
                                 Next
                                 ms.PropertyPackage.DW_CalcVazaoMolar()
                                 j = 0
-                                For Each comp In .Phases(1).Componentes.Values
+                                For Each comp In .Phases(1).Compounds.Values
                                     comp.FracaoMolar = Vx(j)
                                     comp.FracaoMassica = Vwx(j)
                                     j += 1
                                 Next
                                 j = 0
-                                For Each comp In .Phases(2).Componentes.Values
+                                For Each comp In .Phases(2).Compounds.Values
                                     comp.FracaoMolar = Vy(j)
                                     comp.FracaoMassica = Vwy(j)
                                     j += 1

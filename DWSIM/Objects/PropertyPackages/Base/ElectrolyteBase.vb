@@ -81,7 +81,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             End Select
 
             Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -95,14 +95,14 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1, Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
             Dim l As Integer = 0
 
             i = 0
-            For Each cp As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each cp As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 l = 0
-                For Each cp2 As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                For Each cp2 As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     val(i, l) = Me.RET_KIJ(cp.Nome, cp2.Nome)
                     l = l + 1
                 Next
@@ -172,7 +172,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     fc = Me.DW_CalcFugCoeff(vmol, T, P, State.Liquid)
             End Select
             Dim i As Integer = 0
-            For Each subs As Compound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(f)).Componentes.Values
+            For Each subs As Compound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(f)).Compounds.Values
                 subs.FugacityCoeff = fc(i)
                 i += 1
             Next
@@ -289,27 +289,27 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Select Case phase
                 Case Phase.Liquid
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(1).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Aqueous
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(6).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(6).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Liquid1
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(3).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Liquid2
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(4).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(4).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Liquid3
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(5).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(5).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Vapor
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                         subst.PartialVolume = subst.FracaoMolar.GetValueOrDefault * 8.314 * T / P
                     Next
             End Select
@@ -342,10 +342,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Function RET_VQ() As Object
 
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-            Dim VQ(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim VQ(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 VQ(i) = subst.ConstantProperties.UNIQUAC_Q
                 i += 1
             Next
@@ -357,10 +357,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Function RET_VR() As Object
 
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-            Dim VR(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim VR(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 VR(i) = subst.ConstantProperties.UNIQUAC_R
                 i += 1
             Next
@@ -377,7 +377,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim P, T, H, S, xv, xl, xs, M, W As Double
             Dim result As Dictionary(Of String, Object)
-            Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Componentes.Count
+            Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count
             Dim Vx(n - 1), Vy(n - 1) As Double
             Dim i As Integer = 0
 
@@ -387,7 +387,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             S = Me.CurrentMaterialStream.Phases(0).Properties.entropy.GetValueOrDefault
 
             Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -559,7 +559,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim P, T, H, S, xv, xl, xs, M, W, MW As Double
             Dim result As Dictionary(Of String, Object)
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-            Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Componentes.Count
+            Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count
             Dim i As Integer = 0
 
             'for TVF/PVF/PH/PS flashes
@@ -583,7 +583,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Me.DW_ZerarComposicoes(Phase.Solid)
 
             Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -624,11 +624,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             Me.CurrentMaterialStream.Phases(0).Properties.molarflow *= M '* W / MW * 1000
 
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                 subst.FracaoMolar = Vnf(i) / M
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 0)
                             Next
 
@@ -639,7 +639,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             Dim ACL = result("LiquidPhaseActivityCoefficients")
 
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(3).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                                 subst.FracaoMolar = Vx(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = ACL(i)
@@ -647,11 +647,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 subst.PartialPressure = 0
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(3).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 3)
                             Next
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(7).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.FracaoMolar = Vs(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = 0
@@ -659,11 +659,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 subst.PartialPressure = 0
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(7).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 7)
                             Next
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                                 subst.FracaoMolar = Vy(i)
                                 subst.FugacityCoeff = 1.0#
                                 subst.ActivityCoeff = 0
@@ -671,7 +671,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 subst.PartialPressure = 0
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 2)
                             Next
 
@@ -745,11 +745,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             Me.CurrentMaterialStream.Phases(0).Properties.molarflow = M * W / MW * 1000
 
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                 subst.FracaoMolar = Vnf(i) / M
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(7).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 0)
                             Next
 
@@ -760,7 +760,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             Dim ACL = result("LiquidPhaseActivityCoefficients")
 
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(3).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                                 subst.FracaoMolar = Vx(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = ACL(i)
@@ -768,11 +768,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 subst.PartialPressure = 0
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(3).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 3)
                             Next
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(7).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.FracaoMolar = Vs(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = 0
@@ -780,11 +780,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 subst.PartialPressure = 0
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(7).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 7)
                             Next
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                                 subst.FracaoMolar = Vy(i)
                                 subst.FugacityCoeff = 1.0#
                                 subst.ActivityCoeff = 0
@@ -792,7 +792,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 subst.PartialPressure = 0
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 2)
                             Next
 
@@ -839,11 +839,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             Me.CurrentMaterialStream.Phases(0).Properties.molarflow = M * W / MW * 1000
 
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                 subst.FracaoMolar = Vnf(i) / M
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(7).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 0)
                             Next
 
@@ -854,7 +854,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             Dim ACL = result("LiquidPhaseActivityCoefficients")
 
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(3).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                                 subst.FracaoMolar = Vx(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = ACL(i)
@@ -862,11 +862,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 subst.PartialPressure = 0
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(3).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 3)
                             Next
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(7).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.FracaoMolar = Vs(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = 0
@@ -874,11 +874,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 subst.PartialPressure = 0
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(7).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 7)
                             Next
                             i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                                 subst.FracaoMolar = Vy(i)
                                 subst.FugacityCoeff = 1.0#
                                 subst.ActivityCoeff = 0
@@ -886,7 +886,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 subst.PartialPressure = 0
                                 i += 1
                             Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+                            For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                                 subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 2)
                             Next
 

@@ -557,14 +557,14 @@ Public Class FormUNIFACRegression
         mat.Phases(0).Properties.pressure = P
         mat.Phases(0).Properties.temperature = T
         For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Componentes.Clear() 'delete old assignment
+            phase.Compounds.Clear() 'delete old assignment
         Next
         For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Componentes.Add(Comp1, New DWSIM.Thermodynamics.BaseClasses.Compound(Comp1, ""))
-            phase.Componentes(Comp1).ConstantProperties = _comps.Values(0)
+            phase.Compounds.Add(Comp1, New DWSIM.Thermodynamics.BaseClasses.Compound(Comp1, ""))
+            phase.Compounds(Comp1).ConstantProperties = _comps.Values(0)
 
-            phase.Componentes.Add(Comp2, New DWSIM.Thermodynamics.BaseClasses.Compound(Comp2, ""))
-            phase.Componentes(Comp2).ConstantProperties = _comps.Values(1)
+            phase.Compounds.Add(Comp2, New DWSIM.Thermodynamics.BaseClasses.Compound(Comp2, ""))
+            phase.Compounds(Comp2).ConstantProperties = _comps.Values(1)
         Next
         _pp.CurrentMaterialStream = mat
 

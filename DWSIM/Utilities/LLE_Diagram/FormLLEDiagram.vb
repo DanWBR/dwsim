@@ -319,9 +319,9 @@ Public Class FormLLEDiagram
         Dim Ko As New Konode
 
         'calculate compositions
-        mat.Phases(0).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar = Pt.X
-        mat.Phases(0).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar = Pt.Y
-        mat.Phases(0).Componentes(Names(cbComp3.SelectedIndex)).FracaoMolar = 1 - Pt.X - Pt.Y
+        mat.Phases(0).Compounds(Names(cbComp1.SelectedIndex)).FracaoMolar = Pt.X
+        mat.Phases(0).Compounds(Names(cbComp2.SelectedIndex)).FracaoMolar = Pt.Y
+        mat.Phases(0).Compounds(Names(cbComp3.SelectedIndex)).FracaoMolar = 1 - Pt.X - Pt.Y
 
         If My.Settings.EnableGPUProcessing Then
             DWSIM.App.InitComputeDevice()
@@ -342,15 +342,15 @@ Public Class FormLLEDiagram
 
         'added .GetValueOrDefault to avoid null object errors
 
-        Ko.X11 = mat.Phases(3).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
-        Ko.X12 = mat.Phases(3).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
+        Ko.X11 = mat.Phases(3).Compounds(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
+        Ko.X12 = mat.Phases(3).Compounds(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
 
         If mat.Phases(4).Properties.molarfraction > 0 Then
-            Ko.X21 = mat.Phases(4).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
-            Ko.X22 = mat.Phases(4).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
+            Ko.X21 = mat.Phases(4).Compounds(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
+            Ko.X22 = mat.Phases(4).Compounds(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
         Else
-            Ko.X21 = mat.Phases(3).Componentes(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
-            Ko.X22 = mat.Phases(3).Componentes(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
+            Ko.X21 = mat.Phases(3).Compounds(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
+            Ko.X22 = mat.Phases(3).Compounds(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
         End If
 
         Return Ko
@@ -392,24 +392,24 @@ Public Class FormLLEDiagram
         '=============================
 
         For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Componentes.Clear() 'delete old assignment
+            phase.Compounds.Clear() 'delete old assignment
         Next
 
         Dim N As String
         N = Names(cbComp1.SelectedIndex)
         For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Componentes.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
-            phase.Componentes(N).ConstantProperties = Frm.Options.SelectedComponents(N)
+            phase.Compounds.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
+            phase.Compounds(N).ConstantProperties = Frm.Options.SelectedComponents(N)
         Next
         N = Names(cbComp2.SelectedIndex)
         For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Componentes.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
-            phase.Componentes(N).ConstantProperties = Frm.Options.SelectedComponents(N)
+            phase.Compounds.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
+            phase.Compounds(N).ConstantProperties = Frm.Options.SelectedComponents(N)
         Next
         N = Names(cbComp3.SelectedIndex)
         For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Componentes.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
-            phase.Componentes(N).ConstantProperties = Frm.Options.SelectedComponents(N)
+            phase.Compounds.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
+            phase.Compounds(N).ConstantProperties = Frm.Options.SelectedComponents(N)
         Next
 
         '==========================================================

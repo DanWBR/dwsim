@@ -74,11 +74,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Public Function RET_VQ() As Object
 
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-            Dim VQ(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim VQ(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
             Dim sum As Double = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 VQ(i) = Me.m_uni.RET_Qi(Me.RET_VN(subst))
                 i += 1
             Next
@@ -90,11 +90,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Public Function RET_VR() As Object
 
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-            Dim VR(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim VR(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
             Dim sum As Double = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 VR(i) = Me.m_uni.RET_Ri(Me.RET_VN(subst))
                 i += 1
             Next
@@ -109,7 +109,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim VEKI As New List(Of Dictionary(Of Integer, Double))
             Dim i As Integer = 0
             Dim sum As Double
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 sum = 0
                 If subst.ConstantProperties.NISTMODFACGroups.Collection.Count > 0 Then
                     For Each s As String In subst.ConstantProperties.NISTMODFACGroups.Collection.Keys

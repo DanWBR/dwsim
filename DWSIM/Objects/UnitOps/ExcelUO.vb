@@ -225,7 +225,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             mysheetIn.Cells(8, 2 + k).Value = Hi
 
                             Dim dy As Integer = 0
-                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Componentes.Values
+                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Compounds.Values
                                 mysheetIn.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetOut.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetIn.Cells(12 + dy, 2 + k).Value = comp.MolarFlow
@@ -236,7 +236,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             mysheetIn.Cells(7, 2 + k).Value = ""
                             mysheetIn.Cells(8, 2 + k).Value = ""
                             Dim dy As Integer = 0
-                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Componentes.Values
+                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
                                 mysheetIn.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetOut.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetIn.Cells(12 + dy, 2 + k).Value = ""
@@ -270,14 +270,14 @@ Namespace DWSIM.SimulationObjects.UnitOps
                                 SMole = 0
                                 SMass = 0
                                 Vmol.Clear()
-                                For Each comp In .Phases(0).Componentes.Values
+                                For Each comp In .Phases(0).Compounds.Values
                                     v = mysheetOut.Cells(12 + i, 2 + k).Value
                                     Vmol.Add(comp.Nome, v)
                                     SMole += Vmol(comp.Nome)
                                     SMass += Vmol(comp.Nome) * comp.ConstantProperties.Molar_Weight / 1000
                                     i += 1
                                 Next
-                                For Each comp In .Phases(0).Componentes.Values
+                                For Each comp In .Phases(0).Compounds.Values
                                     comp.FracaoMolar = Vmol(comp.Nome) / SMole
                                     comp.FracaoMassica = Vmol(comp.Nome) * comp.ConstantProperties.Molar_Weight / SMass / 1000
                                 Next
@@ -445,7 +445,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         mysheetIn.Cells(7, 1 + k).Value = Hi
 
                         Dim dy As Integer = 0
-                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Componentes.Values
+                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Compounds.Values
                             mysheetIn.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetOut.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetIn.Cells(11 + dy, 1 + k).Value = comp.MolarFlow.GetValueOrDefault
@@ -456,7 +456,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         mysheetIn.Cells(6, 1 + k).Value = ""
                         mysheetIn.Cells(7, 1 + k).Value = ""
                         Dim dy As Integer = 0
-                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Componentes.Values
+                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
                             mysheetIn.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetOut.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetIn.Cells(11 + dy, 1 + k).Value = ""
@@ -512,14 +512,14 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             SMole = 0
                             SMass = 0
                             Vmol.Clear()
-                            For Each comp In .Phases(0).Componentes.Values
+                            For Each comp In .Phases(0).Compounds.Values
                                 v = mysheetOut.Cells(11 + i, 1 + k).Value
                                 Vmol.Add(comp.Nome, v)
                                 SMole += Vmol(comp.Nome)
                                 SMass += Vmol(comp.Nome) * comp.ConstantProperties.Molar_Weight / 1000
                                 i += 1
                             Next
-                            For Each comp In .Phases(0).Componentes.Values
+                            For Each comp In .Phases(0).Compounds.Values
                                 comp.FracaoMolar = Vmol(comp.Nome) / SMole
                                 comp.FracaoMassica = Vmol(comp.Nome) * comp.ConstantProperties.Molar_Weight / SMass / 1000
                             Next
@@ -605,7 +605,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         .Phases(0).Properties.massfraction = 1
                         Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                         Dim i As Integer = 0
-                        For Each comp In .Phases(0).Componentes.Values
+                        For Each comp In .Phases(0).Compounds.Values
                             comp.FracaoMolar = 0
                             comp.FracaoMassica = 0
                             i += 1

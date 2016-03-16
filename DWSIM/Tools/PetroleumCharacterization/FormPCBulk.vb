@@ -417,7 +417,7 @@ Public Class FormPCBulk
         End If
 
         For Each c As Compound In ccol.Values
-            tms.Phases(0).Componentes.Add(c.Nome, c)
+            tms.Phases(0).Compounds.Add(c.Nome, c)
         Next
 
         Dim recalcVc As Boolean = False
@@ -756,13 +756,13 @@ Public Class FormPCBulk
             subst.FracaoMassica = subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight / wtotal
         Next
         For Each subst In ccol.Values
-            With myCOMS.Phases(0).Componentes
+            With myCOMS.Phases(0).Compounds
                 .Item(subst.Nome).ConstantProperties = subst.ConstantProperties
                 .Item(subst.Nome).FracaoMassica = subst.FracaoMassica
                 .Item(subst.Nome).FracaoMolar = subst.FracaoMolar
             End With
-            myCOMS.Phases(1).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
-            myCOMS.Phases(2).Componentes.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
+            myCOMS.Phases(1).Compounds.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
+            myCOMS.Phases(2).Compounds.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
         Next
         frm.Collections.ObjectCollection.Add(myCOMS.Nome, myCOMS)
         frm.Collections.CLCS_MaterialStreamCollection.Add(myCOMS.Nome, myCOMS)

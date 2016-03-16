@@ -859,7 +859,7 @@ Public Class FormPureComp
 
         For Each mat As DWSIM.SimulationObjects.Streams.MaterialStream In Me.Flowsheet.Collections.CLCS_MaterialStreamCollection.Values
             For Each p As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In p.Componentes.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In p.Compounds.Values
                     If subst.ConstantProperties.Name = constprop.Name Then
                         subst.ConstantProperties = constprop
                         Exit For
@@ -979,7 +979,7 @@ Public Class FormPureComp
 
         For Each mat As DWSIM.SimulationObjects.Streams.MaterialStream In Me.Flowsheet.Collections.CLCS_MaterialStreamCollection.Values
             For Each p As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In p.Componentes.Values
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In p.Compounds.Values
                     subst.ConstantProperties = constprop
                 Next
             Next

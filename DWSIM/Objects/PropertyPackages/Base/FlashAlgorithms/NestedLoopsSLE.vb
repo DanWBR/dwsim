@@ -310,7 +310,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             Vn = PP.RET_VNAMES()
             For i = 0 To n
-                constprop = PP.CurrentMaterialStream.Phases(0).Componentes(Vn(i)).ConstantProperties
+                constprop = PP.CurrentMaterialStream.Phases(0).Compounds(Vn(i)).ConstantProperties
                 cpl(i) = PP.AUX_LIQ_Cpi(constprop, Tf(i))
                 cps(i) = PP.AUX_SolidHeatCapacity(constprop, Tf(i))
                 dCp(i) = (cpl(i) - cps(i)) * constprop.Molar_Weight

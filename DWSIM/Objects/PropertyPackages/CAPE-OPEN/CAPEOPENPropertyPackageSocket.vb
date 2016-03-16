@@ -244,7 +244,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 If Not pi.PhaseLabel = "Disabled" Then
                     Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
                     Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
-                    For Each subst In Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Componentes.Values
+                    For Each subst In Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Compounds.Values
                         subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Nome, pi.DWPhaseIndex)
                     Next
                 End If
@@ -355,14 +355,14 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             DW_CalcPhaseProps(Phase.Mixture)
 
             Dim T, P, H, S, xl, xv As Double, i As Integer
-            Dim Vx(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1), Vy(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim Vx(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1), Vy(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(1).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 Vx(i) = su.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
             i = 0
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 Vy(i) = su.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
@@ -429,7 +429,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             End Select
 
             Dim i As Integer = 0
-            For Each c As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each c As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 c.FracaoMolar = Vz(i)
                 i += 1
             Next
@@ -489,14 +489,14 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             DW_CalcPhaseProps(Phase.Mixture)
 
             Dim T, P, H, S, xl, xv As Double
-            Dim Ki(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1), Vx(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1), Vy(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim Ki(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1), Vx(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1), Vy(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(1).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 Vx(i) = su.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
             i = 0
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 Vy(i) = su.FracaoMolar.GetValueOrDefault
                 i += 1
             Next
@@ -1017,7 +1017,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double = 0.0#
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val += Vz(i) * mw(i)
                 i += 1
             Next
@@ -1034,7 +1034,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim mwt As Double = 0.0#
             Dim i As Integer = 0
-            For Each c As Compound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Componentes.Values
+            For Each c As Compound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 mwt += c.FracaoMolar.GetValueOrDefault * mw(i)
                 i += 1
             Next
@@ -1053,13 +1053,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
             Dim j As Integer = 0
-            For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Componentes.Values
+            For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
                 mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * mw(i)
                 If subst = sub1.Nome Then j = i
                 i += 1
             Next
 
-            sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Componentes(subst)
+            sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Compounds(subst)
             If mol_x_mm <> 0.0# Then
                 Return sub1.FracaoMolar.GetValueOrDefault * mw(j) / mol_x_mm
             Else
@@ -1078,13 +1078,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
             Dim j As Integer = 0
-            For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Componentes.Values
+            For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
                 mass_div_mm += sub1.FracaoMassica.GetValueOrDefault / mw(i)
                 If subst = sub1.Nome Then j = i
                 i += 1
             Next
 
-            sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Componentes(subst)
+            sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Compounds(subst)
             Return sub1.FracaoMassica.GetValueOrDefault / mw(j) / mass_div_mm
 
         End Function
@@ -1200,10 +1200,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim ecu As CapeOpen.ECapeUser = _copp
                     Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
                 End Try
-                Dim n As Integer = Me.CurrentMaterialStream.Phases(pid).Componentes.Count - 1
+                Dim n As Integer = Me.CurrentMaterialStream.Phases(pid).Compounds.Count - 1
                 Dim i As Integer = 0
                 Dim fugcoeff(n) As Double
-                For Each c As Compound In Me.CurrentMaterialStream.Phases(pid).Componentes.Values
+                For Each c As Compound In Me.CurrentMaterialStream.Phases(pid).Compounds.Values
                     fugcoeff(i) = c.FugacityCoeff.GetValueOrDefault
                     i += 1
                 Next

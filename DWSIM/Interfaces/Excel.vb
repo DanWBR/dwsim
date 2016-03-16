@@ -45,8 +45,8 @@ Namespace Interfaces
                 Dim ms As New Streams.MaterialStream("", "")
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
-                    phase.Componentes.Add(compound, New DWSIM.Thermodynamics.BaseClasses.Compound(compound, ""))
-                    phase.Componentes(compound).ConstantProperties = pp._availablecomps(compound)
+                    phase.Compounds.Add(compound, New DWSIM.Thermodynamics.BaseClasses.Compound(compound, ""))
+                    phase.Compounds(compound).ConstantProperties = pp._availablecomps(compound)
                 Next
 
                 Dim tmpcomp As ConstantProperties = pp._availablecomps(compound)
@@ -94,8 +94,8 @@ Namespace Interfaces
                 Dim ms As New Streams.MaterialStream("", "")
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
-                    phase.Componentes.Add(compound, New DWSIM.Thermodynamics.BaseClasses.Compound(compound, ""))
-                    phase.Componentes(compound).ConstantProperties = pp._availablecomps(compound)
+                    phase.Compounds.Add(compound, New DWSIM.Thermodynamics.BaseClasses.Compound(compound, ""))
+                    phase.Compounds(compound).ConstantProperties = pp._availablecomps(compound)
                 Next
 
                 Dim tmpcomp As ConstantProperties = pp._availablecomps(compound)
@@ -616,8 +616,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -732,8 +732,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -940,8 +940,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -1064,8 +1064,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -1188,8 +1188,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -1312,8 +1312,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -1712,8 +1712,8 @@ Namespace Interfaces
 
             For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                 For Each c As String In compounds
-                    phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                    phase.Componentes(c).ConstantProperties = proppack._availablecomps(c)
+                    phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                    phase.Compounds(c).ConstantProperties = proppack._availablecomps(c)
                 Next
             Next
 
@@ -1766,8 +1766,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -1879,8 +1879,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -1994,8 +1994,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -2109,8 +2109,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 
@@ -2224,8 +2224,8 @@ Namespace Interfaces
 
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Componentes.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
-                        phase.Componentes(c).ConstantProperties = pp._availablecomps(c)
+                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
 

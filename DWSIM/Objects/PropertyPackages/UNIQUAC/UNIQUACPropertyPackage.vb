@@ -93,10 +93,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Function RET_VQ() As Object
 
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-            Dim VQ(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim VQ(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 VQ(i) = subst.ConstantProperties.UNIQUAC_Q
                 i += 1
             Next
@@ -108,10 +108,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         Function RET_VR() As Object
 
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-            Dim VR(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim VR(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 VR(i) = subst.ConstantProperties.UNIQUAC_R
                 i += 1
             Next

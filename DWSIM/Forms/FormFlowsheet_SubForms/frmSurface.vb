@@ -1312,7 +1312,7 @@ Public Class frmSurface
                     .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     .X = mpx
                     .Y = mpy
-                     For Each con As ConnectionPoint In .InputConnectors
+                    For Each con As ConnectionPoint In .InputConnectors
                         con.AttachedConnector = Nothing
                         con.IsAttached = False
                     Next
@@ -1582,7 +1582,7 @@ Public Class frmSurface
                     .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     .X = mpx
                     .Y = mpy
-                     For Each con As ConnectionPoint In .InputConnectors
+                    For Each con As ConnectionPoint In .InputConnectors
                         con.AttachedConnector = Nothing
                         con.IsAttached = False
                     Next
@@ -1672,7 +1672,7 @@ Public Class frmSurface
                     .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     .X = mpx
                     .Y = mpy
-                     For Each con As ConnectionPoint In .InputConnectors
+                    For Each con As ConnectionPoint In .InputConnectors
                         con.AttachedConnector = Nothing
                         con.IsAttached = False
                     Next
@@ -1882,7 +1882,7 @@ Public Class frmSurface
                     .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     .X = mpx
                     .Y = mpy
-                   For Each con As ConnectionPoint In .InputConnectors
+                    For Each con As ConnectionPoint In .InputConnectors
                         con.AttachedConnector = Nothing
                         con.IsAttached = False
                     Next
@@ -1912,7 +1912,7 @@ Public Class frmSurface
                     .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     .X = mpx
                     .Y = mpy
-                   For Each con As ConnectionPoint In .InputConnectors
+                    For Each con As ConnectionPoint In .InputConnectors
                         con.AttachedConnector = Nothing
                         con.IsAttached = False
                     Next
@@ -2002,7 +2002,7 @@ Public Class frmSurface
                     .Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     .X = mpx
                     .Y = mpy
-                     For Each con As ConnectionPoint In .InputConnectors
+                    For Each con As ConnectionPoint In .InputConnectors
                         con.AttachedConnector = Nothing
                         con.IsAttached = False
                     Next
@@ -2395,7 +2395,7 @@ Public Class frmSurface
                 gObj.Name = "MIST-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.MixerCollection.Add(gObj.Name, myNode)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOMIX As DWSIM.SimulationObjects.UnitOps.Mixer = New DWSIM.SimulationObjects.UnitOps.Mixer(myNode.Name, "Misturador")
                 myCOMIX.GraphicObject = myNode
                 Flowsheet.Collections.ObjectCollection.Add(myNode.Name, myCOMIX)
@@ -2436,7 +2436,7 @@ Public Class frmSurface
                 gObj.Name = "DIV-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.SplitterCollection.Add(gObj.Name, myNodeo)
-                  'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOSP As DWSIM.SimulationObjects.UnitOps.Splitter = New DWSIM.SimulationObjects.UnitOps.Splitter(myNodeo.Name, "Divisor")
                 myCOSP.GraphicObject = myNodeo
                 Flowsheet.Collections.ObjectCollection.Add(myNodeo.Name, myCOSP)
@@ -2456,7 +2456,7 @@ Public Class frmSurface
                 gObj.Name = "BB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.PumpCollection.Add(gObj.Name, myPump)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOSP As DWSIM.SimulationObjects.UnitOps.Pump = New DWSIM.SimulationObjects.UnitOps.Pump(myPump.Name, "Bomba")
                 myCOSP.GraphicObject = myPump
                 Flowsheet.Collections.ObjectCollection.Add(myPump.Name, myCOSP)
@@ -2496,7 +2496,7 @@ Public Class frmSurface
                 gObj.Name = "SEP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.SeparatorCollection.Add(gObj.Name, myVessel)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOVESSEL As DWSIM.SimulationObjects.UnitOps.Vessel = New DWSIM.SimulationObjects.UnitOps.Vessel(myVessel.Name, "VasoSeparadorGL")
                 myCOVESSEL.GraphicObject = myVessel
                 Flowsheet.Collections.ObjectCollection.Add(myVessel.Name, myCOVESSEL)
@@ -2516,7 +2516,7 @@ Public Class frmSurface
                 gObj.Name = "SEPTF-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.TPSeparatorCollection.Add(gObj.Name, myVessel)
-            
+
             Case TipoObjeto.MaterialStream
 
                 Dim myMStr As New MaterialStreamGraphic(mpx, mpy, 20, 20, 0)
@@ -2576,7 +2576,7 @@ Public Class frmSurface
                 gObj.Name = "COMP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.CompressorCollection.Add(gObj.Name, myComp)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOCP As DWSIM.SimulationObjects.UnitOps.Compressor = New DWSIM.SimulationObjects.UnitOps.Compressor(myComp.Name, "CompressorAdiabtico")
                 myCOCP.GraphicObject = myComp
                 Flowsheet.Collections.ObjectCollection.Add(myComp.Name, myCOCP)
@@ -2616,7 +2616,7 @@ Public Class frmSurface
                 gObj.Name = "RESF-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.CoolerCollection.Add(gObj.Name, myCool)
-               'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOCL As DWSIM.SimulationObjects.UnitOps.Cooler = New DWSIM.SimulationObjects.UnitOps.Cooler(myCool.Name, "Resfriador")
                 myCOCL.GraphicObject = myCool
                 Flowsheet.Collections.ObjectCollection.Add(myCool.Name, myCOCL)
@@ -2636,7 +2636,7 @@ Public Class frmSurface
                 gObj.Name = "AQ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.HeaterCollection.Add(gObj.Name, myHeat)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOCL As DWSIM.SimulationObjects.UnitOps.Heater = New DWSIM.SimulationObjects.UnitOps.Heater(myHeat.Name, "Aquecedor")
                 myCOCL.GraphicObject = myHeat
                 Flowsheet.Collections.ObjectCollection.Add(myHeat.Name, myCOCL)
@@ -2656,7 +2656,7 @@ Public Class frmSurface
                 gObj.Name = "TUB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.PipeCollection.Add(gObj.Name, myPipe)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOPIPE As DWSIM.SimulationObjects.UnitOps.Pipe = New DWSIM.SimulationObjects.UnitOps.Pipe(myPipe.Name, "Tubulao")
                 myCOPIPE.GraphicObject = myPipe
                 Flowsheet.Collections.ObjectCollection.Add(myPipe.Name, myCOPIPE)
@@ -2676,7 +2676,7 @@ Public Class frmSurface
                 gObj.Name = "VALV-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.ValveCollection.Add(gObj.Name, myValve)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOVALVE As DWSIM.SimulationObjects.UnitOps.Valve = New DWSIM.SimulationObjects.UnitOps.Valve(myValve.Name, "Vlvula")
                 myCOVALVE.GraphicObject = myValve
                 Flowsheet.Collections.ObjectCollection.Add(myValve.Name, myCOVALVE)
@@ -2696,7 +2696,7 @@ Public Class frmSurface
                 gObj.Name = "RC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.ReactorConversionCollection.Add(gObj.Name, myRconv)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCORCONV As DWSIM.SimulationObjects.Reactors.Reactor_Conversion = New DWSIM.SimulationObjects.Reactors.Reactor_Conversion(myRconv.Name, "ReatorConversao")
                 myCORCONV.GraphicObject = myRconv
                 Flowsheet.Collections.ObjectCollection.Add(myRconv.Name, myCORCONV)
@@ -2718,7 +2718,7 @@ Public Class frmSurface
                 gObj.Name = "RE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.ReactorEquilibriumCollection.Add(gObj.Name, myReq)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOREQ As DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium = New DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium(myReq.Name, "ReatorEquilibrio")
                 myCOREQ.GraphicObject = myReq
                 Flowsheet.Collections.ObjectCollection.Add(myReq.Name, myCOREQ)
@@ -2762,7 +2762,7 @@ Public Class frmSurface
                 gObj.Name = "CSTR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.ReactorCSTRCollection.Add(gObj.Name, myRcstr)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCORCSTR As DWSIM.SimulationObjects.Reactors.Reactor_CSTR = New DWSIM.SimulationObjects.Reactors.Reactor_CSTR(myRcstr.Name, "ReatorCSTR")
                 myCORCSTR.GraphicObject = myRcstr
                 Flowsheet.Collections.ObjectCollection.Add(myRcstr.Name, myCORCSTR)
@@ -2806,7 +2806,7 @@ Public Class frmSurface
                 gObj.Name = "HE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.HeatExchangerCollection.Add(gObj.Name, myHeatExchanger)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOHE As DWSIM.SimulationObjects.UnitOps.HeatExchanger = New DWSIM.SimulationObjects.UnitOps.HeatExchanger(myHeatExchanger.Name, "HeatExchanger")
                 myCOHE.GraphicObject = myHeatExchanger
                 Flowsheet.Collections.ObjectCollection.Add(myHeatExchanger.Name, myCOHE)
@@ -2826,7 +2826,7 @@ Public Class frmSurface
                 gObj.Name = "SC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.ShortcutColumnCollection.Add(gObj.Name, mySC)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOSC As DWSIM.SimulationObjects.UnitOps.ShortcutColumn = New DWSIM.SimulationObjects.UnitOps.ShortcutColumn(mySC.Name, "ShortcutColumn")
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.ObjectCollection.Add(mySC.Name, myCOSC)
@@ -2846,7 +2846,7 @@ Public Class frmSurface
                 gObj.Name = "DC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.DistillationColumnCollection.Add(gObj.Name, mySC)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOSC As DWSIM.SimulationObjects.UnitOps.DistillationColumn = New DWSIM.SimulationObjects.UnitOps.DistillationColumn(mySC.Name, "DistillationColumn")
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.ObjectCollection.Add(mySC.Name, myCOSC)
@@ -2918,7 +2918,7 @@ Public Class frmSurface
                 gObj.Name = "RFA-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.RefluxedAbsorberCollection.Add(gObj.Name, mySC)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOSC As DWSIM.SimulationObjects.UnitOps.RefluxedAbsorber = New DWSIM.SimulationObjects.UnitOps.RefluxedAbsorber(mySC.Name, "RefluxedAbsorber")
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.ObjectCollection.Add(mySC.Name, myCOSC)
@@ -2945,7 +2945,7 @@ Public Class frmSurface
                 gObj.Name = "CS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.ComponentSeparatorCollection.Add(gObj.Name, myCSep)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOCSEP As DWSIM.SimulationObjects.UnitOps.ComponentSeparator = New DWSIM.SimulationObjects.UnitOps.ComponentSeparator(myCSep.Name, "ComponentSeparator")
                 myCOCSEP.GraphicObject = myCSep
                 Flowsheet.Collections.ObjectCollection.Add(myCSep.Name, myCOCSEP)
@@ -3014,7 +3014,7 @@ Public Class frmSurface
                 gObj.Name = "OP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.OrificePlateCollection.Add(gObj.Name, myOPL)
-                 'OBJETO DWSIM
+                'OBJETO DWSIM
                 Dim myCOOPL As DWSIM.SimulationObjects.UnitOps.OrificePlate = New DWSIM.SimulationObjects.UnitOps.OrificePlate(myOPL.Name, "OrificePlate")
                 myCOOPL.GraphicObject = myOPL
                 Flowsheet.Collections.ObjectCollection.Add(myOPL.Name, myCOOPL)
@@ -3117,7 +3117,7 @@ Public Class frmSurface
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CAPE001"), Color.Black, DWSIM.FormClasses.TipoAviso.Dica)
 
         End Select
-     
+
         If Not gObj Is Nothing Then
             Me.FlowsheetDesignSurface.drawingObjects.Add(gObj)
             gObj.Draw(Me.FlowsheetDesignSurface.CreateGraphics)
@@ -3279,7 +3279,7 @@ Public Class frmSurface
 
                     Dim selectionControl As New CompositionEditorForm
                     selectionControl.Text = mystr.GraphicObject.Tag & DWSIM.App.GetLocalString("EditComp")
-                    selectionControl.Componentes = mystr.Phases(0).Componentes
+                    selectionControl.Compounds = mystr.Phases(0).Compounds
                     selectionControl.NF = My.Application.ActiveSimulation.Options.NumberFormat
                     selectionControl.SU = My.Application.ActiveSimulation.Options.SelectedUnitSystem
                     selectionControl.Q = mystr.Phases(0).Properties.molarflow.GetValueOrDefault
@@ -3291,7 +3291,7 @@ Public Class frmSurface
 
                     selectionControl.ShowDialog()
 
-                    mystr.Phases(0).Componentes = selectionControl.Componentes
+                    mystr.Phases(0).Compounds = selectionControl.Compounds
                     mystr.Phases(0).Properties.molarflow = selectionControl.Q
                     mystr.Phases(0).Properties.massflow = selectionControl.W
                     mystr.ReferenceSolvent = selectionControl.Solvent

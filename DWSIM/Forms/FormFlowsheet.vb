@@ -503,8 +503,8 @@ Imports System.Reflection
             For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In MaterialStream.Phases.Values
                 For Each comp In Me.Options.SelectedComponents.Values
                     With phase
-                        .Componentes.Add(comp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp.Name, ""))
-                        .Componentes(comp.Name).ConstantProperties = comp
+                        .Compounds.Add(comp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp.Name, ""))
+                        .Compounds(comp.Name).ConstantProperties = comp
                     End With
                 Next
             Next
@@ -1798,7 +1798,7 @@ Imports System.Reflection
                                     Me.Collections.ObjectCollection.Remove(namesel)
                                 Case TipoObjeto.HeatExchanger
                                     Me.Collections.HeatExchangerCollection.Remove(namesel)
-                                     'DWSIM
+                                    'DWSIM
                                     Me.Collections.CLCS_HeatExchangerCollection.Remove(namesel)
                                     Me.Collections.ObjectCollection.Remove(namesel)
                                 Case TipoObjeto.ShortcutColumn
@@ -2917,14 +2917,14 @@ Imports System.Reflection
                 obj.LoadData(xel.Elements.ToList)
                 If TypeOf obj Is Streams.MaterialStream Then
                     If My.Settings.ClipboardCopyMode_Compounds = 0 Then
-                        For Each subst As Compound In DirectCast(obj, Streams.MaterialStream).Phases(0).Componentes.Values
+                        For Each subst As Compound In DirectCast(obj, Streams.MaterialStream).Phases(0).Compounds.Values
                             If Not Options.SelectedComponents.ContainsKey(subst.Nome) And Not compoundstoremove.Contains(subst.Nome) Then compoundstoremove.Add(subst.Nome)
                         Next
                     End If
                     For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                         For Each c As ConstantProperties In Options.SelectedComponents.Values
-                            If Not phase.Componentes.ContainsKey(c.Name) Then phase.Componentes.Add(c.Name, New Compound(c.Name, "") With {.ConstantProperties = c})
-                            phase.Componentes(c.Name).ConstantProperties = c
+                            If Not phase.Compounds.ContainsKey(c.Name) Then phase.Compounds.Add(c.Name, New Compound(c.Name, "") With {.ConstantProperties = c})
+                            phase.Compounds(c.Name).ConstantProperties = c
                         Next
                     Next
                 End If
@@ -2947,7 +2947,7 @@ Imports System.Reflection
                 If TypeOf obj Is Streams.MaterialStream Then
                     For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                         For Each comp In compoundstoremove
-                            phase.Componentes.Remove(comp)
+                            phase.Compounds.Remove(comp)
                         Next
                     Next
                 End If
@@ -3050,7 +3050,7 @@ Imports System.Reflection
                         If gobj1.TipoObjeto = TipoObjeto.MaterialStream Then
                             For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(Collections.ObjectCollection(gobj1.Name), Streams.MaterialStream).Phases.Values
                                 For Each c As ConstantProperties In Options.SelectedComponents.Values
-                                    phase.Componentes(c.Name).ConstantProperties = c
+                                    phase.Compounds(c.Name).ConstantProperties = c
                                 Next
                             Next
                         End If

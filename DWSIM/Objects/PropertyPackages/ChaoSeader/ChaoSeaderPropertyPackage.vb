@@ -91,11 +91,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Function RET_VVL() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val(i) = subst.ConstantProperties.Chao_Seader_Liquid_Molar_Volume
                 i += 1
             Next
@@ -106,11 +106,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Function RET_VCSAc() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val(i) = subst.ConstantProperties.Chao_Seader_Acentricity
                 i += 1
             Next
@@ -121,11 +121,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Function RET_VCSS() As Double()
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim i As Integer = 0
 
-            For Each subst In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val(i) = subst.ConstantProperties.Chao_Seader_Solubility_Parameter
                 i += 1
             Next
@@ -156,14 +156,14 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1, Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
             Dim l As Integer = 0
 
             i = 0
-            For Each cp As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each cp As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 l = 0
-                For Each cp2 As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                For Each cp2 As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     val(i, l) = Me.RET_KIJ(cp.Nome, cp2.Nome)
                     l = l + 1
                 Next
@@ -714,7 +714,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Componentes.Values
+                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T)))
                         Next
                     End If
@@ -724,7 +724,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Componentes.Values
+                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T)))
                         Next
                     End If
@@ -734,7 +734,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Componentes.Values
+                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T)))
                         Next
                     End If
@@ -744,7 +744,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Componentes.Values
+                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T)))
                         Next
                     End If
@@ -754,7 +754,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Componentes.Values
+                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T)))
                         Next
                     End If
@@ -764,7 +764,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             End Select
 
             i = 0
-            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Componentes.Values
+            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                 subst.PartialVolume = partvol(i)
                 i += 1
             Next

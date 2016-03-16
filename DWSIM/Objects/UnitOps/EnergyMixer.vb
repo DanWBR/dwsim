@@ -92,14 +92,14 @@ Namespace DWSIM.SimulationObjects.UnitOps
             Next
             Hs = (H + DQ) / W
 
-            Dim n As Integer = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name).Phases(0).Componentes.Count
+            Dim n As Integer = form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name).Phases(0).Compounds.Count
             Dim Vw(n - 1) As Double
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached And Not cp.AttachedConnector.AttachedFrom.TipoObjeto = TipoObjeto.EnergyStream Then
                     ms = form.Collections.CLCS_MaterialStreamCollection(cp.AttachedConnector.AttachedFrom.Name)
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     Dim i As Integer = 0
-                    For Each comp In ms.Phases(0).Componentes.Values
+                    For Each comp In ms.Phases(0).Compounds.Values
                         Vw(i) += comp.FracaoMassica.GetValueOrDefault * ms.Phases(0).Properties.massflow.GetValueOrDefault
                         i += 1
                     Next
@@ -109,18 +109,18 @@ Namespace DWSIM.SimulationObjects.UnitOps
             With form.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 Dim i As Integer = 0
                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
-                For Each comp In .Phases(0).Componentes.Values
+                For Each comp In .Phases(0).Compounds.Values
                     comp.FracaoMassica = Vw(i) / W
                     i += 1
                 Next
                 Dim mass_div_mm As Double = 0
                 Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
-                For Each sub1 In .Phases(0).Componentes.Values
+                For Each sub1 In .Phases(0).Compounds.Values
                     mass_div_mm += sub1.FracaoMassica.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
                     i += 1
                 Next
                 i = 0
-                For Each sub1 In .Phases(0).Componentes.Values
+                For Each sub1 In .Phases(0).Compounds.Values
                     sub1.FracaoMolar = sub1.FracaoMassica.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
                     i += 1
                 Next
@@ -162,7 +162,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .Phases(0).Properties.molarfraction = 1
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     Dim i As Integer = 0
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         comp.FracaoMolar = 0
                         i += 1
                     Next

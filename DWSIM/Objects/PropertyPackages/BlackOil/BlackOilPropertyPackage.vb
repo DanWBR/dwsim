@@ -533,7 +533,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcDewT(ByVal Vx As System.Array, ByVal P As Double, Optional ByVal Tref As Double = 0, Optional ByVal K As System.Array = Nothing, Optional ByVal ReuseK As Boolean = False) As Object
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
             Return New Object() {0.0#}
         End Function
 
@@ -565,7 +565,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             DWSIM.App.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
             Dim constprops As New List(Of ConstantProperties)
-            For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(s.ConstantProperties)
             Next
 
@@ -597,7 +597,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
 
-            Dim comp As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values Select subst Where subst.ConstantProperties.Name = sub1).SingleOrDefault
+            Dim comp As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = sub1).SingleOrDefault
 
             Return bop.VaporPressure(T, comp.ConstantProperties.BO_SGO, comp.ConstantProperties.BO_BSW)
 
@@ -754,7 +754,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 Case PropertyPackages.Phase.Mixture
                     Dim val As Double = 0.0#
                     Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-                    For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Componentes.Values
+                    For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                         val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
                     Next
                     Return val
@@ -769,7 +769,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim mol_x_mm As Double
             Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
 
-            For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Componentes.Values
+            For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
                 If phasenumber = 2 Then
                     mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * bop.VaporMolecularWeight(sub1.ConstantProperties.BO_SGG)
                 ElseIf phasenumber = 3 Then
@@ -779,7 +779,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 End If
             Next
 
-            sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Componentes(subst)
+            sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Compounds(subst)
 
             If mol_x_mm <> 0.0# Then
                 If phasenumber = 2 Then

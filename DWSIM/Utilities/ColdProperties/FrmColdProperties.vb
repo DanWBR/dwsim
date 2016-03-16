@@ -118,8 +118,8 @@ Public Class FrmColdProperties
                 CABP = 0
 
                 Dim i As Integer = 0
-                Dim Vx(mat.Phases(0).Componentes.Count - 1) As Double
-                For Each subst As Compound In mat.Phases(0).Componentes.Values
+                Dim Vx(mat.Phases(0).Compounds.Count - 1) As Double
+                For Each subst As Compound In mat.Phases(0).Compounds.Values
                     MABP += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point
                     CABP += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point ^ (1 / 3)
                     Vx(i) = subst.FracaoMolar
@@ -154,7 +154,7 @@ Public Class FrmColdProperties
                 End If
 
                 Dim tmp, vv, vl, dv, dl, mwv, mwl As Object
-                Dim vwl(mat.Phases(0).Componentes.Count - 1), vwv(mat.Phases(0).Componentes.Count - 1) As Double
+                Dim vwl(mat.Phases(0).Compounds.Count - 1), vwv(mat.Phases(0).Compounds.Count - 1) As Double
 
                 Dim t, t_ant, t_ant2, ft, ft_ant, ft_ant2, v As Double, j As Integer
 
@@ -181,14 +181,14 @@ Public Class FrmColdProperties
                     mat.Phases(0).Properties.temperature = t
                     mat.Phases(0).Properties.pressure = 101325
                     j = 0
-                    For Each subst As Compound In mat.Phases(1).Componentes.Values
+                    For Each subst As Compound In mat.Phases(1).Compounds.Values
                         subst.FracaoMolar = vl(j)
                         j += 1
                     Next
                     pp.DW_CalcProp("density", PropertyPackages.Phase.Liquid)
                     dl = mat.Phases(1).Properties.density.GetValueOrDefault
                     j = 0
-                    For Each subst As Compound In mat.Phases(1).Componentes.Values
+                    For Each subst As Compound In mat.Phases(1).Compounds.Values
                         subst.FracaoMolar = vv(j)
                         j += 1
                     Next

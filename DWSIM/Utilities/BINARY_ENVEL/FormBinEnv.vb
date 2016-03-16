@@ -139,8 +139,8 @@ Public Class FormBinEnv
                 For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
                     If DWSIM.App.GetComponentName(cp.Name) = cbComp1.SelectedItem.ToString Then
                         With phase
-                            .Componentes.Add(cp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(cp.Name, ""))
-                            .Componentes(cp.Name).ConstantProperties = cp
+                            .Compounds.Add(cp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(cp.Name, ""))
+                            .Compounds(cp.Name).ConstantProperties = cp
                             mw1 = cp.Molar_Weight
                         End With
                         Exit For
@@ -152,8 +152,8 @@ Public Class FormBinEnv
                 For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
                     If DWSIM.App.GetComponentName(cp.Name) = cbComp2.SelectedItem.ToString Then
                         With phase
-                            .Componentes.Add(cp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(cp.Name, ""))
-                            .Componentes(cp.Name).ConstantProperties = cp
+                            .Compounds.Add(cp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(cp.Name, ""))
+                            .Compounds(cp.Name).ConstantProperties = cp
                             mw2 = cp.Molar_Weight
                         End With
                         Exit For

@@ -150,7 +150,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             'classify components by relative volatility
 
-            Dim n As Integer = feed.Phases(0).Componentes.Count - 1
+            Dim n As Integer = feed.Phases(0).Compounds.Count - 1
             Dim i As Integer = 0
 
             Dim lnk, dnk, hnk As New ArrayList
@@ -164,9 +164,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
             P = feed.Phases(0).Properties.pressure.GetValueOrDefault
 
             i = 0
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In feed.Phases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In feed.Phases(0).Compounds.Values
                 z(i) = comp.FracaoMolar.GetValueOrDefault
-                'K(i) = feed.Phases(2).Componentes(comp.Nome).FracaoMolar.GetValueOrDefault / feed.Phases(1).Componentes(comp.Nome).FracaoMolar.GetValueOrDefault
+                'K(i) = feed.Phases(2).Compounds(comp.Nome).FracaoMolar.GetValueOrDefault / feed.Phases(1).Compounds(comp.Nome).FracaoMolar.GetValueOrDefault
                 id(i) = comp.Nome
                 'If Double.IsInfinity(K(i)) Then K(i) = 1.0E+20
                 If Me.m_lightkey = comp.Nome Then lki = i
@@ -357,7 +357,7 @@ restart:    B = F - D
 
             i = 0
             Dmw = 0
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Compounds.Values
                 If Double.IsNaN(xd(i)) = False Then comp.FracaoMolar = xd(i) Else comp.FracaoMolar = 0
                 Dmw += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 i = i + 1
@@ -370,7 +370,7 @@ restart:    B = F - D
 
             i = 0
             Bmw = 0
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Compounds.Values
                 If Double.IsNaN(xb(i)) = False Then comp.FracaoMolar = xb(i) Else comp.FracaoMolar = 0
                 Bmw += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 i = i + 1
@@ -390,7 +390,7 @@ restart:    B = F - D
 
             pp.CurrentMaterialStream = distillate
 
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Compounds.Values
                 comp.FracaoMassica = pp.AUX_CONVERT_MOL_TO_MASS(comp.Nome, 0)
             Next
 
@@ -410,7 +410,7 @@ restart:    B = F - D
 
             pp.CurrentMaterialStream = bottoms
 
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Componentes.Values
+            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Compounds.Values
                 comp.FracaoMassica = pp.AUX_CONVERT_MOL_TO_MASS(comp.Nome, 0)
             Next
 
@@ -443,8 +443,8 @@ restart:    B = F - D
             Dim NminS, Ss, Ns As Double
 
             Ss = z(lki) / z(hki) * xb(hki) / xb(lki)
-            'alpha_s = bottoms.Phases(2).Componentes(m_lightkey).FracaoMolar.GetValueOrDefault / bottoms.Phases(1).Componentes(m_lightkey).FracaoMolar.GetValueOrDefault
-            'alpha_s = alpha_s / (bottoms.Phases(2).Componentes(m_heavykey).FracaoMolar.GetValueOrDefault / bottoms.Phases(1).Componentes(m_heavykey).FracaoMolar.GetValueOrDefault)
+            'alpha_s = bottoms.Phases(2).Compounds(m_lightkey).FracaoMolar.GetValueOrDefault / bottoms.Phases(1).Compounds(m_lightkey).FracaoMolar.GetValueOrDefault
+            'alpha_s = alpha_s / (bottoms.Phases(2).Compounds(m_heavykey).FracaoMolar.GetValueOrDefault / bottoms.Phases(1).Compounds(m_heavykey).FracaoMolar.GetValueOrDefault)
             NminS = Log(Ss) / Log(alpha(lki))
             Ns = NminS * m_N / m_Nmin
             ofs = Ns

@@ -256,9 +256,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -329,10 +329,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -386,9 +386,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(1).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -528,7 +528,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim val As Double = 0
-            For Each subst In Me.CurrentMaterialStream.Phases(1).Componentes.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_SURFTi(subst.ConstantProperties, T)
             Next
             Return val
@@ -617,10 +617,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -679,9 +679,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim val As Double
             Dim i As Integer
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 vk(i) = subst.FracaoMassica / Me.AUX_LIQDENSi(subst.ConstantProperties, T)
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
                 i = i + 1
@@ -697,9 +697,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If IsCompoundSupported(subst.Nome) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -757,7 +757,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
 
-            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 subst.PartialVolume = 0.0#
             Next
 
@@ -788,11 +788,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Select Case Phase1
                 Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     i = 0
-                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Componentes.Values
+                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Nome) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -833,7 +833,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Next
                 Case Phase.Vapor
                     i = 0
-                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Componentes.Values
+                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Nome) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -904,11 +904,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim val As Double
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Select Case Phase1
                 Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     i = 0
-                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Componentes.Values
+                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Nome) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -949,7 +949,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Next
                 Case Phase.Vapor
                     i = 0
-                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Componentes.Values
+                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Nome) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -1001,7 +1001,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim val As Double
             Dim i As Integer
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             Dim vn As String() = Me.RET_VNAMES
             Dim Vxw As Double() = AUX_CONVERT_MOL_TO_MASS(Vx)
@@ -1104,7 +1104,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim val As Double
             Dim i As Integer
-            Dim vk(Me.CurrentMaterialStream.Phases(0).Componentes.Count - 1) As Double
+            Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             Dim vn As String() = Me.RET_VNAMES
             Dim Vxw As Double() = AUX_CONVERT_MOL_TO_MASS(Vx)

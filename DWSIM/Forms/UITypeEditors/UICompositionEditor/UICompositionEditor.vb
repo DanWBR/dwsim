@@ -46,7 +46,7 @@ Namespace DWSIM.Editors.Composition
 
                 Dim selectionControl As New CompositionEditorForm
                 selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & DWSIM.App.GetLocalString("EditComp")
-                selectionControl.Componentes = value
+                selectionControl.Compounds = value
                 selectionControl.NF = form.Options.NumberFormat
                 selectionControl.SU = form.Options.SelectedUnitSystem
                 selectionControl.Q = form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.molarflow.GetValueOrDefault
@@ -63,7 +63,7 @@ Namespace DWSIM.Editors.Composition
                 form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ReferenceSolvent = selectionControl.Solvent
                 form.Collections.CLCS_MaterialStreamCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InputComposition = selectionControl.InitialComposition
 
-                value = selectionControl.Componentes
+                value = selectionControl.Compounds
 
             End If
 

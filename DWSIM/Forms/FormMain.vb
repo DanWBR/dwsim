@@ -1706,7 +1706,7 @@ Public Class FormMain
                                                If TypeOf obj Is Streams.MaterialStream Then
                                                    For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                                                        For Each c As ConstantProperties In form.Options.SelectedComponents.Values
-                                                           phase.Componentes(c.Name).ConstantProperties = c
+                                                           phase.Compounds(c.Name).ConstantProperties = c
                                                        Next
                                                    Next
                                                End If
@@ -1737,7 +1737,7 @@ Public Class FormMain
                         If TypeOf obj Is Streams.MaterialStream Then
                             For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                                 For Each c As ConstantProperties In form.Options.SelectedComponents.Values
-                                    phase.Componentes(c.Name).ConstantProperties = c
+                                    phase.Compounds(c.Name).ConstantProperties = c
                                 Next
                             Next
                         End If
@@ -1756,10 +1756,10 @@ Public Class FormMain
             If TypeOf obj Is Streams.MaterialStream Then
                 Dim mstr As Streams.MaterialStream = DirectCast(obj, Streams.MaterialStream)
                 For Each p In mstr.Phases.Values
-                    Dim clist = p.Componentes.Values.ToList().OrderBy(Function(o) o.ConstantProperties.Normal_Boiling_Point)
-                    p.Componentes.Clear()
+                    Dim clist = p.Compounds.Values.ToList().OrderBy(Function(o) o.ConstantProperties.Normal_Boiling_Point)
+                    p.Compounds.Clear()
                     For Each c In clist
-                        p.Componentes.Add(c.Nome, c)
+                        p.Compounds.Add(c.Nome, c)
                     Next
                 Next
             End If

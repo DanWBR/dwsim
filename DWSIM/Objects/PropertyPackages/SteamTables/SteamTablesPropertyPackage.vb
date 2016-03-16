@@ -54,7 +54,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Overrides Sub DW_CalcEquilibrium(ByVal spec1 As DWSIM.SimulationObjects.PropertyPackages.FlashSpec, ByVal spec2 As DWSIM.SimulationObjects.PropertyPackages.FlashSpec)
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
 
             If water Is Nothing Then
                 Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
@@ -288,20 +288,20 @@ FINAL:
                 .Phases(0).Properties.massfraction = 1
                 .Phases(3).Properties.massfraction = lf
                 .Phases(2).Properties.massfraction = vf
-                .Phases(0).Componentes(wkey).FracaoMolar = 1
-                If lf > 0 Then .Phases(3).Componentes(wkey).FracaoMolar = 1
-                If lf > 0 Then .Phases(3).Componentes(wkey).FugacityCoeff = 1
-                If lf = 0 Then .Phases(3).Componentes(wkey).FracaoMolar = 0
-                If vf > 0 Then .Phases(2).Componentes(wkey).FracaoMolar = 1
-                If vf > 0 Then .Phases(2).Componentes(wkey).FugacityCoeff = 1
-                If vf = 0 Then .Phases(2).Componentes(wkey).FracaoMolar = 0
-                .Phases(0).Componentes(wkey).FracaoMassica = 1
-                If lf > 0 Then .Phases(3).Componentes(wkey).FracaoMassica = 1
-                If lf > 0 Then .Phases(3).Componentes(wkey).FugacityCoeff = 1
-                If lf = 0 Then .Phases(3).Componentes(wkey).FracaoMassica = 0
-                If vf > 0 Then .Phases(2).Componentes(wkey).FracaoMassica = 1
-                If vf > 0 Then .Phases(2).Componentes(wkey).FugacityCoeff = 1
-                If vf = 0 Then .Phases(2).Componentes(wkey).FracaoMassica = 0
+                .Phases(0).Compounds(wkey).FracaoMolar = 1
+                If lf > 0 Then .Phases(3).Compounds(wkey).FracaoMolar = 1
+                If lf > 0 Then .Phases(3).Compounds(wkey).FugacityCoeff = 1
+                If lf = 0 Then .Phases(3).Compounds(wkey).FracaoMolar = 0
+                If vf > 0 Then .Phases(2).Compounds(wkey).FracaoMolar = 1
+                If vf > 0 Then .Phases(2).Compounds(wkey).FugacityCoeff = 1
+                If vf = 0 Then .Phases(2).Compounds(wkey).FracaoMolar = 0
+                .Phases(0).Compounds(wkey).FracaoMassica = 1
+                If lf > 0 Then .Phases(3).Compounds(wkey).FracaoMassica = 1
+                If lf > 0 Then .Phases(3).Compounds(wkey).FugacityCoeff = 1
+                If lf = 0 Then .Phases(3).Compounds(wkey).FracaoMassica = 0
+                If vf > 0 Then .Phases(2).Compounds(wkey).FracaoMassica = 1
+                If vf > 0 Then .Phases(2).Compounds(wkey).FugacityCoeff = 1
+                If vf = 0 Then .Phases(2).Compounds(wkey).FracaoMassica = 0
 
                 If lf = 0 Then
                     With .Phases(3).Properties
@@ -373,7 +373,7 @@ FINAL:
 
         Public Overrides Function DW_CalcEquilibrio_ISOL(spec1 As FlashSpec, spec2 As FlashSpec, val1 As Double, val2 As Double, estimate As Double) As Object
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
 
             If water Is Nothing Then
                 Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
@@ -595,7 +595,7 @@ FINAL:
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
 
             If water Is Nothing Then
                 Throw New Exception("Water compound not found. Please setup your simulation accordingly.")

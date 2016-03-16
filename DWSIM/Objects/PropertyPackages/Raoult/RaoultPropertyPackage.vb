@@ -328,7 +328,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 result = Me.AUX_SOLIDDENS
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Dim constprops As New List(Of ConstantProperties)
-                For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     constprops.Add(su.ConstantProperties)
                 Next
                 result = Me.DW_CalcSolidEnthalpy(T, RET_VMOL(PropertyPackages.Phase.Solid), constprops)
@@ -591,27 +591,27 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Select Case phase
                 Case Phase.Liquid
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(1).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Aqueous
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(6).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(6).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Liquid1
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(3).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Liquid2
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(4).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(4).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Liquid3
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(5).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(5).Compounds.Values
                         subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Nome, T))
                     Next
                 Case Phase.Vapor
-                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(2).Componentes.Values
+                    For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                         subst.PartialVolume = subst.FracaoMolar.GetValueOrDefault * 8.314 * T / P
                     Next
             End Select

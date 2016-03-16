@@ -181,18 +181,18 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wlout
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
-                    For Each comp In .Phases(0).Componentes.Values
-                        comp.MassFlow = instr.Phases(1).Componentes(comp.Nome).MassFlow * Wlout / Wlin
+                    For Each comp In .Phases(0).Compounds.Values
+                        comp.MassFlow = instr.Phases(1).Compounds(comp.Nome).MassFlow * Wlout / Wlin
                         comp.FracaoMassica = comp.MassFlow / Wlout
                     Next
                     mw = 0.0#
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         mw += comp.FracaoMassica / comp.ConstantProperties.Molar_Weight
                     Next
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         comp.FracaoMolar = comp.FracaoMassica / comp.ConstantProperties.Molar_Weight / mw
                     Next
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight / 1000
                     Next
                 End With
@@ -205,18 +205,18 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wsout
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
-                    For Each comp In .Phases(0).Componentes.Values
-                        comp.MassFlow = instr.Phases(1).Componentes(comp.Nome).MassFlow * (Wlin - Wlout) / Wlin + instr.Phases(7).Componentes(comp.Nome).MassFlow
+                    For Each comp In .Phases(0).Compounds.Values
+                        comp.MassFlow = instr.Phases(1).Compounds(comp.Nome).MassFlow * (Wlin - Wlout) / Wlin + instr.Phases(7).Compounds(comp.Nome).MassFlow
                         comp.FracaoMassica = comp.MassFlow / Wsout
                     Next
                     mw = 0.0#
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         mw += comp.FracaoMassica / comp.ConstantProperties.Molar_Weight
                     Next
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         comp.FracaoMolar = comp.FracaoMassica / comp.ConstantProperties.Molar_Weight / mw
                     Next
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight / 1000
                     Next
                 End With
@@ -287,7 +287,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .Phases(0).Properties.enthalpy = Nothing
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         comp.FracaoMolar = 0
                         comp.FracaoMassica = 0
                         j += 1
@@ -308,7 +308,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .Phases(0).Properties.enthalpy = Nothing
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
-                    For Each comp In .Phases(0).Componentes.Values
+                    For Each comp In .Phases(0).Compounds.Values
                         comp.FracaoMolar = 0
                         comp.FracaoMassica = 0
                         j += 1

@@ -400,10 +400,10 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         With ms
             For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                 With phase
-                    .Componentes.Add(comp1.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp1.Name, ""))
-                    .Componentes(comp1.Name).ConstantProperties = comp1
-                    .Componentes.Add(comp2.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp2.Name, ""))
-                    .Componentes(comp2.Name).ConstantProperties = comp2
+                    .Compounds.Add(comp1.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp1.Name, ""))
+                    .Compounds(comp1.Name).ConstantProperties = comp1
+                    .Compounds.Add(comp2.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp2.Name, ""))
+                    .Compounds(comp2.Name).ConstantProperties = comp2
                 End With
             Next
         End With

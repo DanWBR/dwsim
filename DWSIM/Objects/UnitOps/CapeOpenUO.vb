@@ -1071,7 +1071,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             If c.IsAttached And c.Type = ConType.ConOut Then
                                 Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedTo.Name)
                                 mat.PropertyPackage.CurrentMaterialStream = mat
-                                For Each subst As Compound In mat.Phases(0).Componentes.Values
+                                For Each subst As Compound In mat.Phases(0).Compounds.Values
                                     subst.FracaoMassica = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 0)
                                 Next
                             End If

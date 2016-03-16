@@ -276,8 +276,8 @@ Public Class FormConfigWizard
                 Dim proplist As New ArrayList
                 For Each ms In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
                     For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
-                        phase.Componentes.Add(tmpcomp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(tmpcomp.Name, ""))
-                        phase.Componentes(tmpcomp.Name).ConstantProperties = tmpcomp
+                        phase.Compounds.Add(tmpcomp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(tmpcomp.Name, ""))
+                        phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
                     Next
 
                     proplist.Clear()
@@ -323,7 +323,7 @@ Public Class FormConfigWizard
 
         For Each ms In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
             For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
-                phase.Componentes.Remove(tmpcomp.Name)
+                phase.Compounds.Remove(tmpcomp.Name)
             Next
 
             proplist.Clear()

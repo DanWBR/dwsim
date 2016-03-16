@@ -401,7 +401,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                                                If TypeOf obj Is Streams.MaterialStream Then
                                                    For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                                                        For Each c As ConstantProperties In form.Options.SelectedComponents.Values
-                                                           phase.Componentes(c.Name).ConstantProperties = c
+                                                           phase.Compounds(c.Name).ConstantProperties = c
                                                        Next
                                                    Next
                                                End If
@@ -685,7 +685,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     If TypeOf obj Is Streams.MaterialStream Then
                         For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                             For Each c As ConstantProperties In form.Options.SelectedComponents.Values
-                                phase.Componentes(c.Name).ConstantProperties = c
+                                phase.Compounds(c.Name).ConstantProperties = c
                             Next
                         Next
                     End If
@@ -807,17 +807,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                             wt = 0.0#
                             For Each s In CompoundMappings
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
-                                    wt += msfrom.Phases(0).Componentes(s.Key).MassFlow.GetValueOrDefault
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
+                                    wt += msfrom.Phases(0).Compounds(s.Key).MassFlow.GetValueOrDefault
                                 End If
                             Next
 
                             msto.Phases(0).Properties.massflow = wt
 
                             For Each s In CompoundMappings
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
-                                    If Not msto.Phases(0).Componentes(s.Value).FracaoMassica.HasValue Then msto.Phases(0).Componentes(s.Value).FracaoMassica = 0.0#
-                                    msto.Phases(0).Componentes(s.Value).FracaoMassica += msfrom.Phases(0).Componentes(s.Key).MassFlow.GetValueOrDefault / wt
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
+                                    If Not msto.Phases(0).Compounds(s.Value).FracaoMassica.HasValue Then msto.Phases(0).Compounds(s.Value).FracaoMassica = 0.0#
+                                    msto.Phases(0).Compounds(s.Value).FracaoMassica += msfrom.Phases(0).Compounds(s.Key).MassFlow.GetValueOrDefault / wt
                                 End If
                             Next
 
@@ -828,9 +828,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             msto.Phases(0).Properties.massflow = msfrom.Phases(0).Properties.massflow.GetValueOrDefault
 
                             For Each s In CompoundMappings
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
-                                    If Not msto.Phases(0).Componentes(s.Value).FracaoMassica.HasValue Then msto.Phases(0).Componentes(s.Value).FracaoMassica = 0.0#
-                                    msto.Phases(0).Componentes(s.Value).FracaoMassica += msfrom.Phases(0).Componentes(s.Key).FracaoMassica.GetValueOrDefault
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
+                                    If Not msto.Phases(0).Compounds(s.Value).FracaoMassica.HasValue Then msto.Phases(0).Compounds(s.Value).FracaoMassica = 0.0#
+                                    msto.Phases(0).Compounds(s.Value).FracaoMassica += msfrom.Phases(0).Compounds(s.Key).FracaoMassica.GetValueOrDefault
                                 End If
                             Next
 
@@ -842,17 +842,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                             mt = 0.0#
                             For Each s In CompoundMappings
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
-                                    mt += msfrom.Phases(0).Componentes(s.Key).MolarFlow.GetValueOrDefault
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
+                                    mt += msfrom.Phases(0).Compounds(s.Key).MolarFlow.GetValueOrDefault
                                 End If
                             Next
 
                             msto.Phases(0).Properties.molarflow = mt
 
                             For Each s In CompoundMappings
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
-                                    If Not msto.Phases(0).Componentes(s.Value).FracaoMolar.HasValue Then msto.Phases(0).Componentes(s.Value).FracaoMolar = 0.0#
-                                    msto.Phases(0).Componentes(s.Value).FracaoMolar += msfrom.Phases(0).Componentes(s.Key).MolarFlow.GetValueOrDefault / mt
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
+                                    If Not msto.Phases(0).Compounds(s.Value).FracaoMolar.HasValue Then msto.Phases(0).Compounds(s.Value).FracaoMolar = 0.0#
+                                    msto.Phases(0).Compounds(s.Value).FracaoMolar += msfrom.Phases(0).Compounds(s.Key).MolarFlow.GetValueOrDefault / mt
                                 End If
                             Next
 
@@ -863,9 +863,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             msto.Phases(0).Properties.molarflow = msfrom.Phases(0).Properties.molarflow.GetValueOrDefault
 
                             For Each s In CompoundMappings
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Key) And msto.Phases(0).Componentes.ContainsKey(s.Value) Then
-                                    If Not msto.Phases(0).Componentes(s.Value).FracaoMolar.HasValue Then msto.Phases(0).Componentes(s.Value).FracaoMolar = 0.0#
-                                    msto.Phases(0).Componentes(s.Value).FracaoMolar += msfrom.Phases(0).Componentes(s.Key).FracaoMolar.GetValueOrDefault
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
+                                    If Not msto.Phases(0).Compounds(s.Value).FracaoMolar.HasValue Then msto.Phases(0).Compounds(s.Value).FracaoMolar = 0.0#
+                                    msto.Phases(0).Compounds(s.Value).FracaoMolar += msfrom.Phases(0).Compounds(s.Key).FracaoMolar.GetValueOrDefault
                                 End If
                             Next
 
@@ -920,17 +920,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         Case FlowsheetUOMassTransferMode.CompoundMassFlows
 
                             wt = 0.0#
-                            For Each s In msto.Phases(0).Componentes.Values
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
-                                    wt += msfrom.Phases(0).Componentes(s.Nome).MassFlow.GetValueOrDefault
+                            For Each s In msto.Phases(0).Compounds.Values
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Nome) And msto.Phases(0).Compounds.ContainsKey(s.Nome) Then
+                                    wt += msfrom.Phases(0).Compounds(s.Nome).MassFlow.GetValueOrDefault
                                 End If
                             Next
 
                             msto.Phases(0).Properties.massflow = wt
 
-                            For Each s In msto.Phases(0).Componentes.Values
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
-                                    msto.Phases(0).Componentes(s.Nome).FracaoMassica = msfrom.Phases(0).Componentes(s.Nome).MassFlow.GetValueOrDefault / wt
+                            For Each s In msto.Phases(0).Compounds.Values
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Nome) And msto.Phases(0).Compounds.ContainsKey(s.Nome) Then
+                                    msto.Phases(0).Compounds(s.Nome).FracaoMassica = msfrom.Phases(0).Compounds(s.Nome).MassFlow.GetValueOrDefault / wt
                                 End If
                             Next
 
@@ -940,9 +940,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                             msto.Phases(0).Properties.massflow = msfrom.Phases(0).Properties.massflow.GetValueOrDefault
 
-                            For Each s In msto.Phases(0).Componentes.Values
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
-                                    msto.Phases(0).Componentes(s.Nome).FracaoMassica = msfrom.Phases(0).Componentes(s.Nome).FracaoMassica.GetValueOrDefault
+                            For Each s In msto.Phases(0).Compounds.Values
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Nome) And msto.Phases(0).Compounds.ContainsKey(s.Nome) Then
+                                    msto.Phases(0).Compounds(s.Nome).FracaoMassica = msfrom.Phases(0).Compounds(s.Nome).FracaoMassica.GetValueOrDefault
                                 End If
                             Next
 
@@ -953,17 +953,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         Case FlowsheetUOMassTransferMode.CompoundMoleFlows
 
                             mt = 0.0#
-                            For Each s In msto.Phases(0).Componentes.Values
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
-                                    mt += msfrom.Phases(0).Componentes(s.Nome).MolarFlow.GetValueOrDefault
+                            For Each s In msto.Phases(0).Compounds.Values
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Nome) And msto.Phases(0).Compounds.ContainsKey(s.Nome) Then
+                                    mt += msfrom.Phases(0).Compounds(s.Nome).MolarFlow.GetValueOrDefault
                                 End If
                             Next
 
                             msto.Phases(0).Properties.molarflow = mt
 
-                            For Each s In msto.Phases(0).Componentes.Values
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
-                                    msto.Phases(0).Componentes(s.Nome).FracaoMolar = msfrom.Phases(0).Componentes(s.Nome).MolarFlow.GetValueOrDefault / mt
+                            For Each s In msto.Phases(0).Compounds.Values
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Nome) And msto.Phases(0).Compounds.ContainsKey(s.Nome) Then
+                                    msto.Phases(0).Compounds(s.Nome).FracaoMolar = msfrom.Phases(0).Compounds(s.Nome).MolarFlow.GetValueOrDefault / mt
                                 End If
                             Next
 
@@ -973,9 +973,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                             msto.Phases(0).Properties.molarflow = msfrom.Phases(0).Properties.molarflow.GetValueOrDefault
 
-                            For Each s In msto.Phases(0).Componentes.Values
-                                If msfrom.Phases(0).Componentes.ContainsKey(s.Nome) And msto.Phases(0).Componentes.ContainsKey(s.Nome) Then
-                                    msto.Phases(0).Componentes(s.Nome).FracaoMolar = msfrom.Phases(0).Componentes(s.Nome).FracaoMolar.GetValueOrDefault
+                            For Each s In msto.Phases(0).Compounds.Values
+                                If msfrom.Phases(0).Compounds.ContainsKey(s.Nome) And msto.Phases(0).Compounds.ContainsKey(s.Nome) Then
+                                    msto.Phases(0).Compounds(s.Nome).FracaoMolar = msfrom.Phases(0).Compounds(s.Nome).FracaoMolar.GetValueOrDefault
                                 End If
                             Next
 

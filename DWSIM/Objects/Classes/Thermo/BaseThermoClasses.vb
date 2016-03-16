@@ -233,22 +233,16 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             End Set
         End Property
 
-        Public Property Componentes As Dictionary(Of String, Compound)
+        Public Property Compounds As Dictionary(Of String, Compound)
 
         Public Property Properties As New SinglePhaseMixtureProperties
         Public Property Properties2 As New TwoPhaseMixtureProperties
-
-        Public ReadOnly Property Compounds As Dictionary(Of String, Compound)
-            Get
-                Return Componentes
-            End Get
-        End Property
 
         Public Sub New(ByVal name As String, ByVal description As String)
 
             Me.ComponentName = name
             Me.ComponentDescription = description
-            Me.Componentes = New Dictionary(Of String, Compound)
+            Me.Compounds = New Dictionary(Of String, Compound)
 
         End Sub
 
@@ -256,7 +250,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
             Me.ComponentName = name
             Me.ComponentDescription = description
-            Me.Componentes = Compounds
+            Me.Compounds = Compounds
 
         End Sub
 
@@ -269,7 +263,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             For Each xel As XElement In datac
                 Dim s As New Compound("", "")
                 s.LoadData(xel.Elements.ToList)
-                Me.Componentes.Add(s.Nome, s)
+                Me.Compounds.Add(s.Nome, s)
             Next
 
             XMLSerializer.XMLSerializer.Deserialize(Me.Properties, (From xel As XElement In data Select xel Where xel.Name = "Properties").Elements.ToList)
@@ -286,7 +280,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
                 .Add(New XElement("Compounds"))
 
-                For Each kvp As KeyValuePair(Of String, Compound) In Me.Componentes
+                For Each kvp As KeyValuePair(Of String, Compound) In Me.Compounds
                     elements(elements.Count - 1).Add(New XElement("Compound", kvp.Value.SaveData().ToArray()))
                 Next
 
@@ -1266,11 +1260,11 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
                                     Select Case ro.ReactionPhase
                                         Case PhaseName.Liquid
-                                            co.Add(sb.CompName, ims.Phases(1).Componentes(sb.CompName).MolarFlow.GetValueOrDefault / ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault)
+                                            co.Add(sb.CompName, ims.Phases(1).Compounds(sb.CompName).MolarFlow.GetValueOrDefault / ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault)
                                         Case PhaseName.Vapor
-                                            co.Add(sb.CompName, ims.Phases(2).Componentes(sb.CompName).MolarFlow.GetValueOrDefault / ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault)
+                                            co.Add(sb.CompName, ims.Phases(2).Compounds(sb.CompName).MolarFlow.GetValueOrDefault / ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault)
                                         Case PhaseName.Mixture
-                                            co.Add(sb.CompName, ims.Phases(0).Componentes(sb.CompName).MolarFlow.GetValueOrDefault / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault)
+                                            co.Add(sb.CompName, ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault)
                                     End Select
 
                                 Next

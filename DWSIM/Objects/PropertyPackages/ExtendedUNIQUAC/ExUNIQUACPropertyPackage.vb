@@ -108,7 +108,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
                 Case "heatcapacity", "heatcapacitycp"
                     Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     If phase = Phase.Solid Then
@@ -122,7 +122,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case "heatcapacitycv"
                     Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     If phase = Phase.Solid Then
@@ -134,7 +134,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case "enthalpy", "enthalpynf"
                     Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     If phase = Phase.Solid Then
@@ -154,7 +154,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                 Case "entropy", "entropynf"
                     Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     If phase = Phase.Solid Then
@@ -215,25 +215,25 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
                 Case "osmoticcoefficient"
                     Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.osmoticCoefficient = Me.m_elec.OsmoticCoeff(RET_VMOL(phase), Me.m_uni.GAMMA_MR(T, RET_VMOL(phase), constprops), constprops)
                 Case "freezingpoint"
                     Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.freezingPoint = Me.m_elec.FreezingPointDepression(RET_VMOL(phase), Me.m_uni.GAMMA_MR(T, RET_VMOL(phase), constprops), constprops)(0)
                 Case "freezingpointdepression"
                     Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.freezingPointDepression = Me.m_elec.FreezingPointDepression(RET_VMOL(phase), Me.m_uni.GAMMA_MR(T, RET_VMOL(phase), constprops), constprops)(1)
                 Case "ph"
                     Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.pH = Me.m_elec.pH(RET_VMOL(phase), T, Me.m_uni.GAMMA_MR(T, RET_VMOL(phase), constprops), constprops)
@@ -308,7 +308,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             End If
 
             Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -412,7 +412,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim H As Double
 
             Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -435,7 +435,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim H As Double
 
             Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -480,7 +480,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim Tc As Object = Me.RET_VTC()
 
             Dim constprops As New List(Of ConstantProperties)
-            For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Componentes.Values
+            For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(s.ConstantProperties)
             Next
 

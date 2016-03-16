@@ -77,7 +77,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
         Public Function FunctionValue(ByVal t As Double) As Double
             Dim result As Double = 0
             Dim i As Integer = 0
-            For Each c As Compound In _ms.Phases(0).Componentes.Values
+            For Each c As Compound In _ms.Phases(0).Compounds.Values
                 If i = _idx Then
                     c.ConstantProperties.Acentric_Factor *= t
                     result = CalcNBPDiff(i, 101325, t, c) ^ 2
@@ -85,7 +85,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
                 i += 1
             Next
             i = 0
-            For Each c As Compound In _ms.Phases(0).Componentes.Values
+            For Each c As Compound In _ms.Phases(0).Compounds.Values
                 If i = _idx Then
                     c.ConstantProperties.Acentric_Factor /= t
                 End If
@@ -111,7 +111,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
             Dim NBP1, NBP2 As Double
 
-            Dim Vx(_ms.Phases(0).Componentes.Count - 1) As Double
+            Dim Vx(_ms.Phases(0).Compounds.Count - 1) As Double
 
             Vx(index) = 1.0#
 

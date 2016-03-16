@@ -84,13 +84,13 @@ Public Class FormHYD
 
                 unif.CurrentMaterialStream = mat
 
-                Dim n As Integer = mat.Phases(0).Componentes.Count - 1
+                Dim n As Integer = mat.Phases(0).Compounds.Count - 1
 
                 Dim Vz(n), T, P As Double
-                Dim nomes(mat.Phases(0).Componentes.Count - 1) As String
+                Dim nomes(mat.Phases(0).Compounds.Count - 1) As String
                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                 Dim i As Integer = 0
-                For Each comp In mat.Phases(0).Componentes.Values
+                For Each comp In mat.Phases(0).Compounds.Values
                     Vz(i) = comp.FracaoMolar.GetValueOrDefault
                     nomes(i) = comp.Nome
                     i += 1
