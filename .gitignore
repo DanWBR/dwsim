@@ -155,7 +155,6 @@ obj
 /DWSIM/bin/x86/Release/TCPServer.exe.config
 /DWSIM/bin/x86/Release/TCPServer.pdb
 /DWSIM/bin/x86/Release/TCPServer.xml
-/PropertyGridEx
 /NaturalGas/NaturalGas.sln.cache
 /DWSIM/bin/x86/Release/GemBox.Spreadsheet.xml
 /DWSIM/version.txt
@@ -183,3 +182,6 @@ TCPServer/bin/Debug/*
 /GenericDictionaryEditor/bin/Debug
 /GenericDictionaryEditor/bin/Release/GenericDictionaryEditor.dll
 /RunAsx86/bin/Debug/RunAsx86.exe
+/DWSIM.Thermodynamics/bin/Debug
+/DWSIM.UnitOperations/bin/Debug
+/SkiaSharpWrapper/bin/Debug
