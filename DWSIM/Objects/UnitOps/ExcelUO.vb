@@ -337,7 +337,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                     MassBal = 100 * (Wout - Win) / (Win)
                     If Math.Abs(MassBal) > 0.001 Then
-                        form.WriteToLog(Me.GraphicObject.Tag & ": " & "Mass balance error: " & MassBal & "%", Color.Red, FormClasses.TipoAviso.Erro)
+                        form.WriteToLog(Me.GraphicObject.Tag & ": " & "Mass balance error: " & MassBal & "%", Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                     End If
 
                     'Call function to calculate flowsheet
@@ -570,7 +570,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                 MassBal = 100 * (Wout - Win) / (Win)
                 If Math.Abs(MassBal) > 0.001 Then
-                    form.WriteToLog(Me.GraphicObject.Tag & ": " & "Mass balance error: " & MassBal & "%", Color.Red, FormClasses.TipoAviso.Erro)
+                    form.WriteToLog(Me.GraphicObject.Tag & ": " & "Mass balance error: " & MassBal & "%", Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End If
 
                 'Call function to calculate flowsheet

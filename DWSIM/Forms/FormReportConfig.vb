@@ -71,7 +71,7 @@ Public Class FormReportConfig
         inclaq = Me.CheckBox8.Checked
 
         For Each lvi As ListViewItem In Me.ListView1.Items
-            baseobj = frm.Collections.ObjectCollection(lvi.Tag)
+            baseobj = frm.Collections.FlowsheetObjectCollection(lvi.Tag)
             properties = baseobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
             objtype = baseobj.GraphicObject.TipoObjeto
             description = DWSIM.App.GetLocalString(baseobj.GraphicObject.Description)

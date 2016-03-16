@@ -1958,7 +1958,7 @@ restart:            fx = Me.FunctionValue(xvar)
             Loop Until Abs(el_err) < tol(1) * el
 
             If Abs(il_err) > tol(0) * ns Then
-                My.Application.ActiveSimulation.WriteToLog("The sum of squared absolute errors (internal loop) isn't changing anymore. Final value is " & il_err & ".", Color.Green, FormClasses.TipoAviso.Aviso)
+                My.Application.ActiveSimulation.WriteToLog("The sum of squared absolute errors (internal loop) isn't changing anymore. Final value is " & il_err & ".", Color.Green, DWSIM.Flowsheet.MessageType.Warning)
             End If
 
             ' finished, de-normalize and return arrays
@@ -3870,7 +3870,7 @@ restart:            fx = Me.FunctionValue(xvar)
             ec = ic
 
             If Abs(il_err) > tol(1) Then
-                My.Application.ActiveSimulation.WriteToLog("The sum of squared absolute errors (internal loop) isn't changing anymore. Final value is " & il_err & ".", Color.Green, FormClasses.TipoAviso.Aviso)
+                My.Application.ActiveSimulation.WriteToLog("The sum of squared absolute errors (internal loop) isn't changing anymore. Final value is " & il_err & ".", Color.Green, DWSIM.Flowsheet.MessageType.Warning)
             End If
 
             For i = 0 To ns

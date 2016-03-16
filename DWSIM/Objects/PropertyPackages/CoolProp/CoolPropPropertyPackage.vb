@@ -70,9 +70,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     If Not Me.CurrentMaterialStream Is Nothing Then
                         If Not Me.CurrentMaterialStream.FlowSheet Is Nothing Then
                             If Not Me.CurrentMaterialStream.GraphicObject Is Nothing Then
-                                Me.CurrentMaterialStream.FlowSheet.WriteToLog(Me.CurrentMaterialStream.GraphicObject.Tag & ": [CoolProp] " & message, Color.DarkSlateBlue, FormClasses.TipoAviso.Aviso)
+                                Me.CurrentMaterialStream.FlowSheet.WriteToLog(Me.CurrentMaterialStream.GraphicObject.Tag & ": [CoolProp] " & message, Color.DarkSlateBlue, DWSIM.Flowsheet.MessageType.Warning)
                             Else
-                                Me.CurrentMaterialStream.FlowSheet.WriteToLog("[CoolProp] " & message, Color.DarkSlateBlue, FormClasses.TipoAviso.Aviso)
+                                Me.CurrentMaterialStream.FlowSheet.WriteToLog("[CoolProp] " & message, Color.DarkSlateBlue, DWSIM.Flowsheet.MessageType.Warning)
                             End If
                         End If
                     End If

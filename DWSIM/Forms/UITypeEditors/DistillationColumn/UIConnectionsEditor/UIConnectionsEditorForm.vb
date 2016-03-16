@@ -57,7 +57,7 @@ Public Class UIConnectionsEditorForm
         Dim i As Integer = 0
 
         form = My.Application.ActiveSimulation
-        dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
         tpl = New DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors.Templates(form, dc)
 
@@ -476,7 +476,7 @@ Public Class UIConnectionsEditorForm
                         If Not id = "" Then
                             Try
                                 Dim sid As String = dc.MaterialStreams(id).StreamID
-                                If form.Collections.ObjectCollection.ContainsKey(sid) Then
+                                If form.Collections.FlowsheetObjectCollection.ContainsKey(sid) Then
                                     Dim idx As Integer = FormFlowsheet.SearchSurfaceObjectsByName(id, form.FormSurface.FlowsheetDesignSurface).OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
                                     form.DisconnectObject(FormFlowsheet.SearchSurfaceObjectsByName(id, form.FormSurface.FlowsheetDesignSurface), dc.GraphicObject)
                                     dc.GraphicObject.InputConnectors(idx).AttachedConnector = Nothing
@@ -533,7 +533,7 @@ Public Class UIConnectionsEditorForm
                         If Not id = "" Then
                             Try
                                 Dim sid As String = dc.MaterialStreams(id).StreamID
-                                If form.Collections.ObjectCollection.ContainsKey(sid) Then
+                                If form.Collections.FlowsheetObjectCollection.ContainsKey(sid) Then
                                     Dim idx As Integer = FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface).InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
                                     form.DisconnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface))
                                     dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
@@ -625,7 +625,7 @@ Public Class UIConnectionsEditorForm
                         If Not id = "" Then
                             Try
                                 Dim sid As String = dc.MaterialStreams(id).StreamID
-                                If form.Collections.ObjectCollection.ContainsKey(sid) Then
+                                If form.Collections.FlowsheetObjectCollection.ContainsKey(sid) Then
                                     Dim idx As Integer = FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface).InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
                                     form.DisconnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface))
                                     dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
@@ -676,7 +676,7 @@ Public Class UIConnectionsEditorForm
                                     Try
                                         form.ConnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface), fidx, tidx)
                                     Catch ex As Exception
-                                        form.WriteToLog(ex.Message.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Erro)
+                                        form.WriteToLog(ex.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                                         dgv4.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
                                         Exit Sub
                                     End Try
@@ -693,7 +693,7 @@ Public Class UIConnectionsEditorForm
                                     Try
                                         form.ConnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface), fidx, tidx)
                                     Catch ex As Exception
-                                        form.WriteToLog(ex.Message.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Erro)
+                                        form.WriteToLog(ex.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                                         dgv4.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
                                         Exit Sub
                                     End Try
@@ -710,7 +710,7 @@ Public Class UIConnectionsEditorForm
                                     Try
                                         form.ConnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface), fidx, tidx)
                                     Catch ex As Exception
-                                        form.WriteToLog(ex.Message.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Erro)
+                                        form.WriteToLog(ex.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                                         dgv4.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
                                         Exit Sub
                                     End Try
@@ -730,7 +730,7 @@ Public Class UIConnectionsEditorForm
                         If Not id = "" Then
                             Try
                                 Dim sid As String = dc.EnergyStreams(id).StreamID
-                                If form.Collections.ObjectCollection.ContainsKey(sid) Then
+                                If form.Collections.FlowsheetObjectCollection.ContainsKey(sid) Then
                                     Dim idx As Integer = FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface).InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
                                     form.DisconnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface))
                                     dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
@@ -813,8 +813,8 @@ Public Class UIConnectionsEditorForm
 
     Function ReturnObjTag(ByVal Id As String) As String
 
-        If form.Collections.ObjectCollection.ContainsKey(Id) Then
-            Return form.Collections.ObjectCollection(Id).GraphicObject.Tag
+        If form.Collections.FlowsheetObjectCollection.ContainsKey(Id) Then
+            Return form.Collections.FlowsheetObjectCollection(Id).GraphicObject.Tag
         Else
             Return ""
         End If

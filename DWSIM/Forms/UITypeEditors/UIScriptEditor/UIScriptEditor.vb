@@ -47,7 +47,7 @@ Namespace DWSIM.Editors.CustomUO
                 If Not DWSIM.App.IsRunningOnMono Then
                     Dim selectionControl As New ScriptEditorForm
                     Dim ctx As PropertyGridEx.CustomProperty.CustomPropertyDescriptor = context.PropertyDescriptor
-                    Dim obj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    Dim obj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                     If ctx.CustomProperty.Tag Is Nothing Then
                         With form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                             selectionControl.scripttext = .ScriptText
@@ -84,7 +84,7 @@ Namespace DWSIM.Editors.CustomUO
                 Else
                     Dim selectionControl As New ScriptEditorFormMono
                     Dim ctx As PropertyGridEx.CustomProperty.CustomPropertyDescriptor = context.PropertyDescriptor
-                    Dim obj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    Dim obj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                     If ctx.CustomProperty.Tag Is Nothing Then
                         selectionControl.scripttext = form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ScriptText
                         selectionControl.language = form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Language

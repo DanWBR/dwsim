@@ -7,7 +7,7 @@
     <SavedOn>2015-02-08T21:49:25.6450731-04:00</SavedOn>
   </GeneralInfo>
   <Settings>
-    <Type>DWSIM.DWSIM.FormClasses.ClsFormOptions</Type>
+    <Type>DWSIM.DWSIM.Flowsheet.ClsFormOptions</Type>
     <SimulationMode></SimulationMode>
     <SelectedUnitSystem>
       <Type>DWSIM.DWSIM.SystemsOfUnits.SI</Type>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DWSIM_Simulation_Data>
   <Settings>
-    <Type>DWSIM.DWSIM.FormClasses.ClsFormOptions</Type>
+    <Type>DWSIM.DWSIM.Flowsheet.ClsFormOptions</Type>
     <SimulationMode></SimulationMode>
     <NumberFormat>#0.0####</NumberFormat>
     <FractionNumberFormat>#0.0######</FractionNumberFormat>

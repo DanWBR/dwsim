@@ -219,7 +219,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                         Dim pkey As String = CType(e.ChangedItem.PropertyDescriptor, CustomProperty.CustomPropertyDescriptor).CustomProperty.Tag
 
-                        fs.Fsheet.Collections.ObjectCollection(fs.InputParams(pkey).ObjectID).SetPropertyValue(fs.InputParams(pkey).ObjectProperty, e.ChangedItem.Value, FlowSheet.Options.SelectedUnitSystem)
+                        fs.Fsheet.Collections.FlowsheetObjectCollection(fs.InputParams(pkey).ObjectID).SetPropertyValue(fs.InputParams(pkey).ObjectProperty, e.ChangedItem.Value, FlowSheet.Options.SelectedUnitSystem)
 
                         If FlowSheet.Options.CalculatorActivated Then
 
@@ -884,7 +884,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     With adj
                         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelControlada")) Then
-                            .ControlledObject = FlowSheet.Collections.ObjectCollection(.ControlledObjectData.m_ID)
+                            .ControlledObject = FlowSheet.Collections.FlowsheetObjectCollection(.ControlledObjectData.m_ID)
                             .ControlledVariable = .ControlledObjectData.m_Property
                             CType(FlowSheet.Collections.AdjustCollection(adj.Nome), AdjustGraphic).ConnectedToCv = .ControlledObject.GraphicObject
                             .ReferenceObject = Nothing
@@ -896,12 +896,12 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 .m_Type = ""
                             End With
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelManipulada")) Then
-                            .ManipulatedObject = FlowSheet.Collections.ObjectCollection(.ManipulatedObjectData.m_ID)
+                            .ManipulatedObject = FlowSheet.Collections.FlowsheetObjectCollection(.ManipulatedObjectData.m_ID)
                             Dim gr As AdjustGraphic = FlowSheet.Collections.AdjustCollection(adj.Nome)
                             gr.ConnectedToMv = .ManipulatedObject.GraphicObject
                             .ManipulatedVariable = .ManipulatedObjectData.m_Property
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("ObjetoVariveldeRefer")) Then
-                            .ReferenceObject = FlowSheet.Collections.ObjectCollection(.ReferencedObjectData.m_ID)
+                            .ReferenceObject = FlowSheet.Collections.FlowsheetObjectCollection(.ReferencedObjectData.m_ID)
                             .ReferenceVariable = .ReferencedObjectData.m_Property
                             Dim gr As AdjustGraphic = FlowSheet.Collections.AdjustCollection(adj.Nome)
                             gr.ConnectedToRv = .ReferenceObject.GraphicObject
@@ -920,11 +920,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     With spec
                         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelDestino")) Then
-                            .TargetObject = FlowSheet.Collections.ObjectCollection(.TargetObjectData.m_ID)
+                            .TargetObject = FlowSheet.Collections.FlowsheetObjectCollection(.TargetObjectData.m_ID)
                             .TargetVariable = .TargetObjectData.m_Property
                             CType(FlowSheet.Collections.SpecCollection(spec.Nome), SpecGraphic).ConnectedToTv = .TargetObject.GraphicObject
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelFonte")) Then
-                            .SourceObject = FlowSheet.Collections.ObjectCollection(.SourceObjectData.m_ID)
+                            .SourceObject = FlowSheet.Collections.FlowsheetObjectCollection(.SourceObjectData.m_ID)
                             Dim gr As SpecGraphic = FlowSheet.Collections.SpecCollection(spec.Nome)
                             gr.ConnectedToSv = .SourceObject.GraphicObject
                             .SourceVariable = .SourceObjectData.m_Property
@@ -1454,7 +1454,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Emissor = "PropertyGrid"
                         End With
 
-                        Dim obj = FlowSheet.Collections.ObjectCollection.Item(sobj.Name)
+                        Dim obj = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                         If obj.IsSpecAttached = True And obj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(obj.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
@@ -4043,7 +4043,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Item.Add(DWSIM.App.GetLocalString("Ativo"), Me.GraphicObject, "Active", False, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
                 End If
                 If Me.IsSpecAttached = True Then
-                    .Item.Add(DWSIM.App.GetLocalString("ObjetoUtilizadopor"), FlowSheet.Collections.ObjectCollection(Me.AttachedSpecId).GraphicObject.Tag, True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
+                    .Item.Add(DWSIM.App.GetLocalString("ObjetoUtilizadopor"), FlowSheet.Collections.FlowsheetObjectCollection(Me.AttachedSpecId).GraphicObject.Tag, True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
                     Select Case Me.SpecVarType
                         Case SpecialOps.Helpers.Spec.TipoVar.Destino
                             .Item.Add(DWSIM.App.GetLocalString("Utilizadocomo"), DWSIM.App.GetLocalString(Me.SpecVarType.ToString), True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
@@ -4205,7 +4205,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 _ports.Add(New UnitPort(c.ConnectorName, "", CapePortDirection.CAPE_INLET, CapePortType.CAPE_ENERGY))
                             End If
                             With _ports(_ports.Count - 1)
-                                If c.IsAttached And Not c.AttachedConnector Is Nothing Then .Connect(Me.FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedFrom.Name))
+                                If c.IsAttached And Not c.AttachedConnector Is Nothing Then .Connect(Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedFrom.Name))
                             End With
                         Next
                         For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
@@ -4215,7 +4215,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 _ports.Add(New UnitPort(c.ConnectorName, "", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_ENERGY))
                             End If
                             With _ports(_ports.Count - 1)
-                                If c.IsAttached And Not c.AttachedConnector Is Nothing Then .Connect(Me.FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedTo.Name))
+                                If c.IsAttached And Not c.AttachedConnector Is Nothing Then .Connect(Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name))
                             End With
                         Next
                     End If

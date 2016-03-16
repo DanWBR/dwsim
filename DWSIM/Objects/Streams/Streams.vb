@@ -1119,7 +1119,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
 
                 If Me.IsSpecAttached = True Then
-                    .Item.Add(DWSIM.App.GetLocalString("ObjetoUtilizadopor"), FlowSheet.Collections.ObjectCollection(Me.AttachedSpecId).GraphicObject.Tag, True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
+                    .Item.Add(DWSIM.App.GetLocalString("ObjetoUtilizadopor"), FlowSheet.Collections.FlowsheetObjectCollection(Me.AttachedSpecId).GraphicObject.Tag, True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
                     Select Case Me.SpecVarType
                         Case SpecialOps.Helpers.Spec.TipoVar.Destino
                             .Item.Add(DWSIM.App.GetLocalString("Utilizadocomo"), DWSIM.App.GetLocalString(Me.SpecVarType.ToString), True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
@@ -3704,7 +3704,7 @@ Namespace DWSIM.SimulationObjects.Streams
             Else
                 'get ID
                 Dim id As String = CType(source, ICapeIdentification).ComponentDescription
-                Dim myms As MaterialStream = Me.FlowSheet.Collections.ObjectCollection(id)
+                Dim myms As MaterialStream = Me.FlowSheet.Collections.FlowsheetObjectCollection(id)
                 'proceed with copy
                 Me.Assign(myms)
                 Me.AssignProps(myms)
@@ -5560,7 +5560,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     .Item(2).IsReadOnly = False
                 End If
                 If Me.IsSpecAttached = True Then
-                    .Item.Add(DWSIM.App.GetLocalString("ObjetoUtilizadopor"), FlowSheet.Collections.ObjectCollection(Me.AttachedSpecId).GraphicObject.Tag, True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
+                    .Item.Add(DWSIM.App.GetLocalString("ObjetoUtilizadopor"), FlowSheet.Collections.FlowsheetObjectCollection(Me.AttachedSpecId).GraphicObject.Tag, True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
                     Select Case Me.SpecVarType
                         Case SpecialOps.Helpers.Spec.TipoVar.Destino
                             .Item.Add(DWSIM.App.GetLocalString("Utilizadocomo"), DWSIM.App.GetLocalString(Me.SpecVarType.ToString), True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)

@@ -455,12 +455,12 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                     Loop Until Abs((Qi - Q_old) / Q_old) < 0.001 Or count > 100
                     Q = Qi
-                    If count > 100 Then FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": Reached maximum number of iterations! Final Q change: " & Qi - Q_old & " KW ; " & Abs((Qi - Q_old) / Q_old * 100) & " % ", Color.DarkOrange, FormClasses.TipoAviso.Aviso)
+                    If count > 100 Then FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": Reached maximum number of iterations! Final Q change: " & Qi - Q_old & " KW ; " & Abs((Qi - Q_old) / Q_old * 100) & " % ", Color.DarkOrange, DWSIM.Flowsheet.MessageType.Warning)
                     PIc1 = (1 + StInCold.Phases("1").Properties.molarfraction.GetValueOrDefault) * (1 + StInCold.Phases("2").Properties.molarfraction.GetValueOrDefault) * (1 + StInCold.Phases("7").Properties.molarfraction.GetValueOrDefault)
                     PIh1 = (1 + StInHot.Phases("1").Properties.molarfraction.GetValueOrDefault) * (1 + StInHot.Phases("2").Properties.molarfraction.GetValueOrDefault) * (1 + StInHot.Phases("7").Properties.molarfraction.GetValueOrDefault)
-                  
-                    If (PIc1 = 2 And PIc2 > 2) Or (PIc1 > 2 And PIc2 = 2) Then FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": Phase change in cold stream detected! Heat exchange result is an aproximation.", Color.DarkOrange, FormClasses.TipoAviso.Aviso)
-                    If (PIh1 = 2 And PIh2 > 2) Or (PIh1 > 2 And PIh2 = 2) Then FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": Phase change in hot stream detected! Heat exchange result is an aproximation.", Color.DarkOrange, FormClasses.TipoAviso.Aviso)
+
+                    If (PIc1 = 2 And PIc2 > 2) Or (PIc1 > 2 And PIc2 = 2) Then FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": Phase change in cold stream detected! Heat exchange result is an aproximation.", Color.DarkOrange, DWSIM.Flowsheet.MessageType.Warning)
+                    If (PIh1 = 2 And PIh2 > 2) Or (PIh1 > 2 And PIh2 = 2) Then FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": Phase change in hot stream detected! Heat exchange result is an aproximation.", Color.DarkOrange, DWSIM.Flowsheet.MessageType.Warning)
 
                 Case HeatExchangerCalcMode.CalcBothTemp
 
@@ -1064,32 +1064,32 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Loop Until fx < 0.01 Or icnt > 100
             End Select
 
-                    CheckSpec(Tc2, True, "cold stream outlet temperature")
-                    CheckSpec(Th2, True, "hot stream outlet temperature")
-                    CheckSpec(Ph2, True, "hot stream outlet pressure")
-                    CheckSpec(Pc2, True, "cold stream outlet pressure")
+            CheckSpec(Tc2, True, "cold stream outlet temperature")
+            CheckSpec(Th2, True, "hot stream outlet temperature")
+            CheckSpec(Ph2, True, "hot stream outlet pressure")
+            CheckSpec(Pc2, True, "cold stream outlet pressure")
 
-                    ThermalEfficiency = Q / MaxHeatExchange * 100
+            ThermalEfficiency = Q / MaxHeatExchange * 100
 
-                    If Not DebugMode Then
+            If Not DebugMode Then
 
-                        Me.ColdSideOutletTemperature = Tc2
-                        Me.HotSideOutletTemperature = Th2
-                        Me.ColdSidePressureDrop = Pc1 - Pc2
-                        Me.HotSidePressureDrop = Ph1 - Ph2
-                        Me.OverallCoefficient = U
-                        Me.Area = A
+                Me.ColdSideOutletTemperature = Tc2
+                Me.HotSideOutletTemperature = Th2
+                Me.ColdSidePressureDrop = Pc1 - Pc2
+                Me.HotSidePressureDrop = Ph1 - Ph2
+                Me.OverallCoefficient = U
+                Me.Area = A
 
-                        'Define new calculated properties.
-                        StOutHot.Phases(0).Properties.temperature = Th2
-                        StOutCold.Phases(0).Properties.temperature = Tc2
-                        StOutHot.Phases(0).Properties.pressure = Ph2
-                        StOutCold.Phases(0).Properties.pressure = Pc2
-                        StOutHot.Phases(0).Properties.enthalpy = Hh2
-                        StOutCold.Phases(0).Properties.enthalpy = Hc2
+                'Define new calculated properties.
+                StOutHot.Phases(0).Properties.temperature = Th2
+                StOutCold.Phases(0).Properties.temperature = Tc2
+                StOutHot.Phases(0).Properties.pressure = Ph2
+                StOutCold.Phases(0).Properties.pressure = Pc2
+                StOutHot.Phases(0).Properties.enthalpy = Hh2
+                StOutCold.Phases(0).Properties.enthalpy = Hc2
 
-                        If Th2 < Tc1 Or Tc2 > Th1 Then
-                            FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": Temperature Cross", Color.DarkOrange, FormClasses.TipoAviso.Aviso)
+                If Th2 < Tc1 Or Tc2 > Th1 Then
+                    FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": Temperature Cross", Color.DarkOrange, DWSIM.Flowsheet.MessageType.Warning)
                         End If
 
                         'Call the flowsheet calculation routine

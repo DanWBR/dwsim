@@ -1362,7 +1362,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Else
                 'get ID
                 Dim id As String = CType(materialObject, CapeOpen.ICapeIdentification).ComponentDescription
-                Dim myms As MaterialStream = Me.m_pme.Collections.ObjectCollection(id)
+                Dim myms As MaterialStream = Me.m_pme.Collections.FlowsheetObjectCollection(id)
                 'proceed with copy
                 Me.m_str = myms
             End If
@@ -1392,7 +1392,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Else
                 'get ID
                 Dim id As String = CType(material, CapeOpen.ICapeIdentification).ComponentDescription
-                Dim myms As MaterialStream = Me.m_pme.Collections.ObjectCollection(id)
+                Dim myms As MaterialStream = Me.m_pme.Collections.FlowsheetObjectCollection(id)
                 'proceed with copy
                 Me.m_str = myms
             End If

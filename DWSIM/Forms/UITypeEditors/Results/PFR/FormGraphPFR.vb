@@ -27,7 +27,7 @@
         vya = New ArrayList
         ReDim vx(Me.Points.Count - 1)
         ReDim vy(Me.Points.Count - 1)
-        Me.m_conv = CType(form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.Reactors.Reactor).ComponentConversions
+        Me.m_conv = CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.Reactors.Reactor).ComponentConversions
 
         Me.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & DWSIM.App.GetLocalString("VisualizarResultados")
 

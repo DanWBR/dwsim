@@ -24,7 +24,7 @@ Imports System.IO
 Imports DWSIM.DWSIM.Outros
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Linq
-Imports DWSIM.DWSIM.FormClasses
+Imports DWSIM.DWSIM.Flowsheet
 
 Public Class FormSimulSettings
 
@@ -797,7 +797,7 @@ Public Class FormSimulSettings
 
             Me.FrmChild.FormSurface.UpdateSelectedObject()
 
-            For Each o In Me.FrmChild.Collections.ObjectCollection.Values
+            For Each o In Me.FrmChild.Collections.FlowsheetObjectCollection.Values
                 o.UpdatePropertyNodes(Me.FrmChild.Options.SelectedUnitSystem, Me.FrmChild.Options.NumberFormat)
             Next
 

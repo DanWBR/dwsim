@@ -57,7 +57,7 @@ Public Class FormConfigureTable
 
         Dim Flowsheet As FormFlowsheet = My.Application.ActiveSimulation
 
-        Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Flowsheet.Collections.ObjectCollection(Me.objname)
+        Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Me.objname)
 
         Dim ni As DWSIM.Outros.NodeItem
         For Each ni In obj.NodeTableItems.Values

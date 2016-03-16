@@ -32,7 +32,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports Microsoft.Msdn.Samples
 Imports Infralution.Localization
 Imports System.Globalization
-Imports DWSIM.DWSIM.FormClasses
+Imports DWSIM.DWSIM.Flowsheet
 Imports System.Threading.Tasks
 Imports System.Xml.Serialization
 Imports System.Xml
@@ -953,11 +953,11 @@ Public Class FormMain
 
                 flowsheet.UpdateStateList()
 
-                flowsheet.WriteToLog(DWSIM.App.GetLocalString("SaveStateOK"), Color.Blue, TipoAviso.Informacao)
+                flowsheet.WriteToLog(DWSIM.App.GetLocalString("SaveStateOK"), Color.Blue, MessageType.Information)
 
             Catch ex As Exception
 
-                flowsheet.WriteToLog(DWSIM.App.GetLocalString("SaveStateError") & " " & ex.ToString, Color.Red, TipoAviso.Erro)
+                flowsheet.WriteToLog(DWSIM.App.GetLocalString("SaveStateError") & " " & ex.ToString, Color.Red, MessageType.GeneralError)
 
                 st = Nothing
 
@@ -1005,14 +1005,14 @@ Public Class FormMain
 
                 Using stream As New MemoryStream(st.Collections)
                     flowsheet.Collections = Nothing
-                    flowsheet.Collections = DirectCast(mySerializer.Deserialize(stream), DWSIM.FormClasses.ClsObjectCollections)
+                    flowsheet.Collections = DirectCast(mySerializer.Deserialize(stream), DWSIM.Flowsheet.ObjectCollection)
                 End Using
 
                 Application.DoEvents()
 
                 Using stream As New MemoryStream(st.Options)
                     flowsheet.Options = Nothing
-                    flowsheet.Options = DirectCast(mySerializer.Deserialize(stream), DWSIM.FormClasses.ClsFormOptions)
+                    flowsheet.Options = DirectCast(mySerializer.Deserialize(stream), DWSIM.Flowsheet.FlowsheetVariables)
                 End Using
 
                 Application.DoEvents()
@@ -1047,124 +1047,10 @@ Public Class FormMain
                 With flowsheet.Collections
                     Dim gObj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject
                     For Each gObj In flowsheet.FormSurface.FlowsheetDesignSurface.drawingObjects
-                        Select Case gObj.TipoObjeto
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Compressor
-                                .CLCS_CompressorCollection(gObj.Name).GraphicObject = gObj
-                                .CompressorCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Cooler
-                                .CLCS_CoolerCollection(gObj.Name).GraphicObject = gObj
-                                .CoolerCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.EnergyStream
-                                .CLCS_EnergyStreamCollection(gObj.Name).GraphicObject = gObj
-                                .EnergyStreamCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Heater
-                                .CLCS_HeaterCollection(gObj.Name).GraphicObject = gObj
-                                .HeaterCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.MaterialStream
-                                .CLCS_MaterialStreamCollection(gObj.Name).GraphicObject = gObj
-                                .MaterialStreamCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.NodeEn
-                                .CLCS_EnergyMixerCollection(gObj.Name).GraphicObject = gObj
-                                .MixerENCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.NodeIn
-                                .CLCS_MixerCollection(gObj.Name).GraphicObject = gObj
-                                .MixerCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.NodeOut
-                                .CLCS_SplitterCollection(gObj.Name).GraphicObject = gObj
-                                .SplitterCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Pipe
-                                .CLCS_PipeCollection(gObj.Name).GraphicObject = gObj
-                                .PipeCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Pump
-                                .CLCS_PumpCollection(gObj.Name).GraphicObject = gObj
-                                .PumpCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Tank
-                                .CLCS_TankCollection(gObj.Name).GraphicObject = gObj
-                                .TankCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Expander
-                                .CLCS_TurbineCollection(gObj.Name).GraphicObject = gObj
-                                .TurbineCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Valve
-                                .CLCS_ValveCollection(gObj.Name).GraphicObject = gObj
-                                .ValveCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Vessel
-                                .CLCS_VesselCollection(gObj.Name).GraphicObject = gObj
-                                .SeparatorCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.GO_Tabela
-                                .ObjectCollection(gObj.Tag).Tabela = gObj
-                                CType(gObj, DWSIM.GraphicObjects.TableGraphic).BaseOwner = .ObjectCollection(gObj.Tag)
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Expander
-                                .CLCS_TurbineCollection(gObj.Name).GraphicObject = gObj
-                                .TurbineCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OT_Ajuste
-                                .CLCS_AdjustCollection(gObj.Name).GraphicObject = gObj
-                                .AdjustCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OT_Reciclo
-                                .CLCS_RecycleCollection(gObj.Name).GraphicObject = gObj
-                                .RecycleCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OT_Especificacao
-                                .CLCS_SpecCollection(gObj.Name).GraphicObject = gObj
-                                .SpecCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_Conversion
-                                .CLCS_ReactorConversionCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorConversionCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_Equilibrium
-                                .CLCS_ReactorEquilibriumCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorEquilibriumCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_Gibbs
-                                .CLCS_ReactorGibbsCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorGibbsCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_CSTR
-                                .CLCS_ReactorCSTRCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorCSTRCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_PFR
-                                .CLCS_ReactorPFRCollection(gObj.Name).GraphicObject = gObj
-                                .ReactorPFRCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.HeatExchanger
-                                .CLCS_HeatExchangerCollection(gObj.Name).GraphicObject = gObj
-                                .HeatExchangerCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.ShortcutColumn
-                                .CLCS_ShortcutColumnCollection(gObj.Name).GraphicObject = gObj
-                                .ShortcutColumnCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.DistillationColumn
-                                .CLCS_DistillationColumnCollection(gObj.Name).GraphicObject = gObj
-                                .DistillationColumnCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.AbsorptionColumn
-                                .CLCS_AbsorptionColumnCollection(gObj.Name).GraphicObject = gObj
-                                .AbsorptionColumnCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RefluxedAbsorber
-                                .CLCS_RefluxedAbsorberCollection(gObj.Name).GraphicObject = gObj
-                                .RefluxedAbsorberCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.ReboiledAbsorber
-                                .CLCS_ReboiledAbsorberCollection(gObj.Name).GraphicObject = gObj
-                                .ReboiledAbsorberCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OT_EnergyRecycle
-                                .CLCS_EnergyRecycleCollection(gObj.Name).GraphicObject = gObj
-                                .EnergyRecycleCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.GO_TabelaRapida
-                                .ObjectCollection(CType(gObj, DWSIM.GraphicObjects.QuickTableGraphic).BaseOwner.Nome).TabelaRapida = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.ComponentSeparator
-                                .CLCS_ComponentSeparatorCollection(gObj.Name).GraphicObject = gObj
-                                .ComponentSeparatorCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OrificePlate
-                                .CLCS_OrificePlateCollection(gObj.Name).GraphicObject = gObj
-                                .OrificePlateCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.CustomUO
-                                .CLCS_CustomUOCollection(gObj.Name).GraphicObject = gObj
-                                .CustomUOCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.ExcelUO
-                                .CLCS_ExcelUOCollection(gObj.Name).GraphicObject = gObj
-                                .ExcelUOCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.CapeOpenUO
-                                .CLCS_CapeOpenUOCollection(gObj.Name).GraphicObject = gObj
-                                .CapeOpenUOCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.SolidSeparator
-                                .CLCS_SolidsSeparatorCollection(gObj.Name).GraphicObject = gObj
-                                .SolidsSeparatorCollection(gObj.Name) = gObj
-                            Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Filter
-                                .CLCS_FilterCollection(gObj.Name).GraphicObject = gObj
-                                .FilterCollection(gObj.Name) = gObj
-                        End Select
+                        If .FlowsheetObjectCollection.ContainsKey(gObj.Name) Then
+                            .GraphicObjectCollection.Add(gObj.Name, gObj)
+                            .FlowsheetObjectCollection(gObj.Name).GraphicObject = gObj
+                        End If
                     Next
                 End With
 
@@ -1173,7 +1059,7 @@ Public Class FormMain
                 Dim refill As Boolean = False
 
                 'refill (quick)table items for backwards compatibility
-                For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In flowsheet.Collections.ObjectCollection.Values
+                For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In flowsheet.Collections.FlowsheetObjectCollection.Values
                     With obj
                         If .NodeTableItems.Count > 0 Then
                             For Each nvi As DWSIM.Outros.NodeItem In .NodeTableItems.Values
@@ -1206,11 +1092,11 @@ Public Class FormMain
 
                 flowsheet.FormSurface.FlowsheetDesignSurface.Invalidate()
 
-                flowsheet.WriteToLog(DWSIM.App.GetLocalString("RestoreStateOK"), Color.Blue, TipoAviso.Informacao)
+                flowsheet.WriteToLog(DWSIM.App.GetLocalString("RestoreStateOK"), Color.Blue, MessageType.Information)
 
             Catch ex As Exception
 
-                flowsheet.WriteToLog(DWSIM.App.GetLocalString("RestoreStateError") & " " & ex.Message.ToString, Color.Red, TipoAviso.Erro)
+                flowsheet.WriteToLog(DWSIM.App.GetLocalString("RestoreStateError") & " " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
 
                 st = Nothing
 
@@ -1282,91 +1168,6 @@ Public Class FormMain
                 If Not TypeOf obj Is DWSIM.GraphicObjects.TableGraphic Then
                     form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
                     obj.CreateConnectors(0, 0)
-                    With form.Collections
-                        Select Case obj.TipoObjeto
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Compressor
-                                .CompressorCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Cooler
-                                .CoolerCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.EnergyStream
-                                .EnergyStreamCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Heater
-                                .HeaterCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.MaterialStream
-                                .MaterialStreamCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.NodeEn
-                                .MixerENCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.NodeIn
-                                .MixerCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.NodeOut
-                                .SplitterCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Pipe
-                                .PipeCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Pump
-                                .PumpCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Tank
-                                .TankCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Expander
-                                .TurbineCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Valve
-                                .ValveCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Vessel
-                                .SeparatorCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Expander
-                                .TurbineCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_Ajuste
-                                .AdjustCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_Reciclo
-                                .RecycleCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_Especificacao
-                                .SpecCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_Conversion
-                                .ReactorConversionCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_Equilibrium
-                                .ReactorEquilibriumCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_Gibbs
-                                .ReactorGibbsCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_CSTR
-                                .ReactorCSTRCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RCT_PFR
-                                .ReactorPFRCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.HeatExchanger
-                                .HeatExchangerCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ShortcutColumn
-                                .ShortcutColumnCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.DistillationColumn
-                                obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
-                                .DistillationColumnCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.AbsorptionColumn
-                                obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
-                                .AbsorptionColumnCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.RefluxedAbsorber
-                                obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
-                                .RefluxedAbsorberCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ReboiledAbsorber
-                                obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
-                                .ReboiledAbsorberCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OT_EnergyRecycle
-                                .EnergyRecycleCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ComponentSeparator
-                                .ComponentSeparatorCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.OrificePlate
-                                .OrificePlateCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.CustomUO
-                                .CustomUOCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.ExcelUO
-                                .ExcelUOCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.FlowsheetUO
-                                .FlowsheetUOCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.CapeOpenUO
-                                obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
-                                .CapeOpenUOCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.SolidSeparator
-                                .SolidsSeparatorCollection.Add(obj.Name, obj)
-                            Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Filter
-                                .FilterCollection.Add(obj.Name, obj)
-                        End Select
-                    End With
                 End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Flowsheet Graphic Objects", ex))
@@ -1459,123 +1260,38 @@ Public Class FormMain
                 obj.Nome = pkey & obj.Nome
                 Dim id = obj.Nome
                 Dim gobj = obj.GraphicObject
-                form.Collections.ObjectCollection.Add(id, obj)
-                With form.Collections
-                    Select Case obj.GraphicObject.TipoObjeto
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Compressor
-                            .CLCS_CompressorCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Cooler
-                            .CLCS_CoolerCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.EnergyStream
-                            .CLCS_EnergyStreamCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Heater
-                            .CLCS_HeaterCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.MaterialStream
-                            .CLCS_MaterialStreamCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.NodeEn
-                            .CLCS_EnergyMixerCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.NodeIn
-                            .CLCS_MixerCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.NodeOut
-                            .CLCS_SplitterCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Pipe
-                            .CLCS_PipeCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Pump
-                            .CLCS_PumpCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Tank
-                            .CLCS_TankCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Expander
-                            .CLCS_TurbineCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Valve
-                            .CLCS_ValveCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Vessel
-                            .CLCS_VesselCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.GO_Tabela
-                            .ObjectCollection(gobj.Tag).Tabela = gobj
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Expander
-                            .CLCS_TurbineCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OT_Ajuste
-                            .CLCS_AdjustCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OT_Reciclo
-                            .CLCS_RecycleCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OT_Especificacao
-                            .CLCS_SpecCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_Conversion
-                            .CLCS_ReactorConversionCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_Equilibrium
-                            .CLCS_ReactorEquilibriumCollection.Add(id, obj)
-                            .ReactorEquilibriumCollection(gobj.Name) = gobj
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_Gibbs
-                            .CLCS_ReactorGibbsCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_CSTR
-                            .CLCS_ReactorCSTRCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RCT_PFR
-                            .CLCS_ReactorPFRCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.HeatExchanger
-                            .CLCS_HeatExchangerCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.ShortcutColumn
-                            .CLCS_ShortcutColumnCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.DistillationColumn
-                            .CLCS_DistillationColumnCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.AbsorptionColumn
-                            .CLCS_AbsorptionColumnCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.RefluxedAbsorber
-                            .CLCS_RefluxedAbsorberCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.ReboiledAbsorber
-                            .CLCS_ReboiledAbsorberCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OT_EnergyRecycle
-                            .CLCS_EnergyRecycleCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.GO_TabelaRapida
-                            .ObjectCollection(CType(gobj, DWSIM.GraphicObjects.QuickTableGraphic).BaseOwner.Nome).TabelaRapida = gobj
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.ComponentSeparator
-                            .CLCS_ComponentSeparatorCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.OrificePlate
-                            .CLCS_OrificePlateCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.CustomUO
-                            .CLCS_CustomUOCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.ExcelUO
-                            .CLCS_ExcelUOCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.CapeOpenUO
-                            .CLCS_CapeOpenUOCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.SolidSeparator
-                            .CLCS_SolidsSeparatorCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.Filter
-                            .CLCS_FilterCollection.Add(id, obj)
-                        Case Microsoft.MSDN.Samples.GraphicObjects.TipoObjeto.FlowsheetUO
-                            .CLCS_FlowsheetUOCollection.Add(id, obj)
-                    End Select
-                End With
+                form.Collections.FlowsheetObjectCollection.Add(id, obj)
                 obj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Unit Operation Information", ex))
             End Try
         Next
 
-        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
+        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             Try
                 If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Adjust) IsNot Nothing Then
                     Dim so2 As DWSIM.SimulationObjects.SpecialOps.Adjust = so
-                    If form.Collections.ObjectCollection.ContainsKey(so2.ManipulatedObjectData.m_ID) Then
-                        so2.ManipulatedObject = form.Collections.ObjectCollection(so2.ManipulatedObjectData.m_ID)
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ManipulatedObjectData.m_ID) Then
+                        so2.ManipulatedObject = form.Collections.FlowsheetObjectCollection(so2.ManipulatedObjectData.m_ID)
                         DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToMv = so2.ManipulatedObject.GraphicObject
                     End If
-                    If form.Collections.ObjectCollection.ContainsKey(so2.ControlledObjectData.m_ID) Then
-                        so2.ControlledObject = form.Collections.ObjectCollection(so2.ControlledObjectData.m_ID)
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ControlledObjectData.m_ID) Then
+                        so2.ControlledObject = form.Collections.FlowsheetObjectCollection(so2.ControlledObjectData.m_ID)
                         DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToCv = so2.ControlledObject.GraphicObject
                     End If
-                    If form.Collections.ObjectCollection.ContainsKey(so2.ReferencedObjectData.m_ID) Then
-                        so2.ReferenceObject = form.Collections.ObjectCollection(so2.ReferencedObjectData.m_ID)
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ReferencedObjectData.m_ID) Then
+                        so2.ReferenceObject = form.Collections.FlowsheetObjectCollection(so2.ReferencedObjectData.m_ID)
                         DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
                     End If
                 End If
                 If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Spec) IsNot Nothing Then
                     Dim so2 As DWSIM.SimulationObjects.SpecialOps.Spec = so
-                    If form.Collections.ObjectCollection.ContainsKey(so2.TargetObjectData.m_ID) Then
-                        so2.TargetObject = form.Collections.ObjectCollection(so2.TargetObjectData.m_ID)
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.TargetObjectData.m_ID) Then
+                        so2.TargetObject = form.Collections.FlowsheetObjectCollection(so2.TargetObjectData.m_ID)
                         DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
                     End If
-                    If form.Collections.ObjectCollection.ContainsKey(so2.SourceObjectData.m_ID) Then
-                        so2.SourceObject = form.Collections.ObjectCollection(so2.SourceObjectData.m_ID)
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.SourceObjectData.m_ID) Then
+                        so2.SourceObject = form.Collections.FlowsheetObjectCollection(so2.SourceObjectData.m_ID)
                         DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
                     End If
                 End If
@@ -1780,8 +1496,8 @@ Public Class FormMain
                         obj = GraphicObjects.GraphicObject.ReturnInstance(xel2.Element("Type").Value)
                     End If
                     obj.LoadData(xel2.Elements.ToList)
-                    DirectCast(obj, DWSIM.GraphicObjects.TableGraphic).BaseOwner = form.Collections.ObjectCollection(xel2.<Owner>.Value)
-                    form.Collections.ObjectCollection(xel2.<Owner>.Value).Tabela = obj
+                    DirectCast(obj, DWSIM.GraphicObjects.TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
+                    form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value).Tabela = obj
                     form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Flowsheet Table Information", ex))
@@ -2033,12 +1749,12 @@ Public Class FormMain
         form.FormSurface.FlowsheetDesignSurface.Invalidate()
 
         If excs.Count > 0 Then
-            form.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, TipoAviso.Erro)
+            form.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, MessageType.GeneralError)
             For Each ex As Exception In excs
-                form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, TipoAviso.Erro)
+                form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
         End If
 
         form.UpdateFormText()
@@ -2081,7 +1797,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
+        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             so.SetFlowsheet(form)
             xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
         Next
@@ -2228,7 +1944,7 @@ Public Class FormMain
                                        End If
                                        form.Options.FilePath = Me.filename
                                        form.UpdateFormText()
-                                       form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+                                       form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
                                        Me.ToolStripStatusLabel1.Text = ""
                                    End Sub))
         End If
@@ -2475,12 +2191,12 @@ ruf:                Application.DoEvents()
                     If Path.GetExtension(Me.filename).ToLower = ".dwxml" Then
                         Task.Factory.StartNew(Sub() SaveXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
                                                                                                               Me.ToolStripStatusLabel1.Text = ""
-                                                                                                              If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                              If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                           End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
                         Task.Factory.StartNew(Sub() SaveXMLZIP(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
                                                                                                                  Me.ToolStripStatusLabel1.Text = ""
-                                                                                                                 If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                                 If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                              End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     Else
                         Me.bgSaveFile.RunWorkerAsync()
@@ -2748,11 +2464,11 @@ ruf:                Application.DoEvents()
                                 'End Try
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".dwxml" Then
                                 Task.Factory.StartNew(Sub() SaveXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                     form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                                     form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                                  End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".dwxmz" Then
                                 Task.Factory.StartNew(Sub() SaveXMLZIP(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                        form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                                        form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                                     End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
                             End If
                         Else
@@ -2773,11 +2489,11 @@ ruf:                Application.DoEvents()
                                         'End Try
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxml" Then
                                         Task.Factory.StartNew(Sub() SaveXML(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                    form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                                    form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                                 End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxmz" Then
                                         Task.Factory.StartNew(Sub() SaveXMLZIP(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                       form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                                       form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                                    End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
                                     End If
                                 End If
@@ -2851,7 +2567,7 @@ ruf:                Application.DoEvents()
                         If saveasync Then
                             Task.Factory.StartNew(Sub() SaveXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
                                                                                                                  Me.ToolStripStatusLabel1.Text = ""
-                                                                                                                 If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                                 If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                              End Sub, TaskContinuationOptions.ExecuteSynchronously)
                         Else
                             SaveXML(form2.Options.FilePath, form2)
@@ -2861,7 +2577,7 @@ ruf:                Application.DoEvents()
                         If saveasync Then
                             Task.Factory.StartNew(Sub() SaveXMLZIP(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
                                                                                                                     Me.ToolStripStatusLabel1.Text = ""
-                                                                                                                    If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                                    If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                                 End Sub, TaskContinuationOptions.ExecuteSynchronously)
                         Else
                             SaveXMLZIP(form2.Options.FilePath, form2)
@@ -2889,7 +2605,7 @@ ruf:                Application.DoEvents()
                             ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxml" Then
                                 If saveasync Then
                                     Task.Factory.StartNew(Sub() SaveXML(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                                form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                             End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
                                 Else
                                     SaveXML(myStream.Name, form2)
@@ -2898,7 +2614,7 @@ ruf:                Application.DoEvents()
                             ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
                                 If saveasync Then
                                     Task.Factory.StartNew(Sub() SaveXMLZIP(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                   form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, TipoAviso.Erro)
+                                                                                                                   form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                                End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
                                 Else
                                     SaveXMLZIP(myStream.Name, form2)

@@ -106,9 +106,9 @@ Public Class FormBinEnv
 
             End Try
 
-            Frm.WriteToLog(DWSIM.App.GetLocalTipString("BENV001"), Color.Black, DWSIM.FormClasses.TipoAviso.Dica)
-            Frm.WriteToLog(DWSIM.App.GetLocalTipString("BENV002"), Color.Black, DWSIM.FormClasses.TipoAviso.Dica)
-            Frm.WriteToLog(DWSIM.App.GetLocalTipString("BENV003"), Color.Black, DWSIM.FormClasses.TipoAviso.Dica)
+            Frm.WriteToLog(DWSIM.App.GetLocalTipString("BENV001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
+            Frm.WriteToLog(DWSIM.App.GetLocalTipString("BENV002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
+            Frm.WriteToLog(DWSIM.App.GetLocalTipString("BENV003"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
             If DWSIM.App.IsRunningOnMono Then GroupBox2.Width -= 80
 

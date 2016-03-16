@@ -28,11 +28,11 @@
 
         For Each kvp As KeyValuePair(Of Integer, WatchItem) In items
             Dim newitem As WatchItem = kvp.Value
-            If My.Application.ActiveSimulation.Collections.ObjectCollection.ContainsKey(newitem.ObjID) Then
-                Dim myobjname As String = My.Application.ActiveSimulation.Collections.ObjectCollection(newitem.ObjID).GraphicObject.Tag
+            If My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection.ContainsKey(newitem.ObjID) Then
+                Dim myobjname As String = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(newitem.ObjID).GraphicObject.Tag
                 Dim propname As String = DWSIM.App.GetPropertyName(newitem.PropID)
-                Dim propvalue As Object = My.Application.ActiveSimulation.Collections.ObjectCollection(newitem.ObjID).GetPropertyValue(newitem.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
-                Dim propunit As String = My.Application.ActiveSimulation.Collections.ObjectCollection(newitem.ObjID).GetPropertyUnit(newitem.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
+                Dim propvalue As Object = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(newitem.ObjID).GetPropertyValue(newitem.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
+                Dim propunit As String = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(newitem.ObjID).GetPropertyUnit(newitem.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
                 Me.dgv.Rows.Add(New Object() {kvp.Key, newitem.ObjID, newitem.PropID, newitem.ROnly, myobjname, propname & " (" & propunit & ")", propvalue})
                 If kvp.Value.ROnly Then
                     Me.dgv.Rows(Me.dgv.Rows.Count - 1).ReadOnly = True
@@ -53,11 +53,11 @@
 
         For Each r As DataGridViewRow In dgv.Rows
             Dim wi As WatchItem = items(r.Cells(0).Value)
-            If My.Application.ActiveSimulation.Collections.ObjectCollection.ContainsKey(wi.ObjID) Then
-                Dim myobjname As String = My.Application.ActiveSimulation.Collections.ObjectCollection(wi.ObjID).GraphicObject.Tag
+            If My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection.ContainsKey(wi.ObjID) Then
+                Dim myobjname As String = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(wi.ObjID).GraphicObject.Tag
                 Dim propname As String = DWSIM.App.GetPropertyName(wi.PropID)
-                Dim propvalue As Object = My.Application.ActiveSimulation.Collections.ObjectCollection(wi.ObjID).GetPropertyValue(wi.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
-                Dim propunit As String = My.Application.ActiveSimulation.Collections.ObjectCollection(wi.ObjID).GetPropertyUnit(wi.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
+                Dim propvalue As Object = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(wi.ObjID).GetPropertyValue(wi.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
+                Dim propunit As String = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(wi.ObjID).GetPropertyUnit(wi.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
                 With r
                     .Cells(4).Value = myobjname
                     .Cells(5).Value = propname & " (" & propunit & ")"
@@ -100,11 +100,11 @@
             If e.ColumnIndex = 6 Then
 
                 Dim wi As WatchItem = items(Me.dgv.Rows(e.RowIndex).Cells(0).Value)
-                If My.Application.ActiveSimulation.Collections.ObjectCollection.ContainsKey(wi.ObjID) Then
-                    Dim myobjname As String = My.Application.ActiveSimulation.Collections.ObjectCollection(wi.ObjID).GraphicObject.Tag
+                If My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection.ContainsKey(wi.ObjID) Then
+                    Dim myobjname As String = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(wi.ObjID).GraphicObject.Tag
                     Dim propname As String = DWSIM.App.GetPropertyName(wi.PropID)
                     Dim propvalue As Object = Me.dgv.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                    My.Application.ActiveSimulation.Collections.ObjectCollection(wi.ObjID).SetPropertyValue(wi.PropID, propvalue, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
+                    My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(wi.ObjID).SetPropertyValue(wi.PropID, propvalue, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
                     DWSIM.Flowsheet.FlowsheetSolver.CalculateObject(My.Application.ActiveSimulation, wi.ObjID)
                     Me.dgv.Focus()
                 End If

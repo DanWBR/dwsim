@@ -90,7 +90,7 @@ Public Class FormOptimization
         cbc2.Sorted = True
         cbc2.MaxDropDownItems = 10
         cbc2.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             cbc2.Items.Add(obj.GraphicObject.Tag)
         Next
         cbc3 = New DataGridViewComboBoxCell
@@ -126,7 +126,7 @@ Public Class FormOptimization
 
         If Me.lbCases.Items.Count > 0 Then Me.lbCases.SelectedIndex = 0
 
-        form.WriteToLog(DWSIM.App.GetLocalTipString("FOPT001"), Color.Black, DWSIM.FormClasses.TipoAviso.Dica)
+        form.WriteToLog(DWSIM.App.GetLocalTipString("FOPT001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
     End Sub
 
@@ -267,7 +267,7 @@ Public Class FormOptimization
 
     Private Function ReturnProperties(ByVal objectTAG As String, ByVal dependent As Boolean) As String()
 
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 If dependent Then
                     Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
@@ -284,20 +284,20 @@ Public Class FormOptimization
 
     Private Function ReturnObject(ByVal objectTAG As String) As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 Return obj
                 Exit Function
             End If
         Next
-        
+
         Return Nothing
 
     End Function
 
     Private Function ReturnPropertyID(ByVal objectID As String, ByVal propTAG As String) As String
 
-        Dim props As String() = form.Collections.ObjectCollection(objectID).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+        Dim props As String() = form.Collections.FlowsheetObjectCollection(objectID).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
         For Each prop As String In props
             If DWSIM.App.GetPropertyName(prop) = propTAG Then
                 Return prop
@@ -379,7 +379,7 @@ Public Class FormOptimization
             Dim xmin As Double
 
             With selectedoptcase
-                form.WriteToLog("Optimization started with method " & Me.ComboBox1.SelectedItem.ToString, Color.SeaGreen, DWSIM.FormClasses.TipoAviso.Informacao)
+                form.WriteToLog("Optimization started with method " & Me.ComboBox1.SelectedItem.ToString, Color.SeaGreen, DWSIM.Flowsheet.MessageType.Information)
                 Select Case .solvm
                     Case OptimizationCase.SolvingMethod.AL_BRENT
                         Dim brentsolver As New BrentOpt.BrentMinimize
@@ -456,9 +456,9 @@ Public Class FormOptimization
                         End Using
                 End Select
             End With
-            form.WriteToLog("Optimization finished successfully.", Color.SeaGreen, DWSIM.FormClasses.TipoAviso.Informacao)
+            form.WriteToLog("Optimization finished successfully.", Color.SeaGreen, DWSIM.Flowsheet.MessageType.Information)
         Catch ex As Exception
-            form.WriteToLog("Optimization error: " & ex.Message, Color.Red, DWSIM.FormClasses.TipoAviso.Erro)
+            form.WriteToLog("Optimization error: " & ex.Message, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, DWSIM.App.GetLocalString("Erro"))
         Finally
             Me.btnRun.Enabled = True
@@ -479,7 +479,7 @@ Public Class FormOptimization
         objName = Me.selectedoptcase.variables(Me.keysind(0)).name
 
         If objID <> "SpreadsheetCell" Then
-            form.Collections.ObjectCollection(objID).SetPropertyValue(objProp, t)
+            form.Collections.FlowsheetObjectCollection(objID).SetPropertyValue(objProp, t)
             CalculateObject(form, objID)
         Else
             form.FormSpreadsheet.SetCellValue(objProp, t)
@@ -504,7 +504,7 @@ Public Class FormOptimization
                 .Imports.AddType(GetType(System.Math))
                 .Variables.Add(objName, Converter.ConvertFromSI(Me.selectedoptcase.variables(Me.keysind(0)).unit, t))
                 For i = 1 To Me.keysaux.Count
-                    .Variables.Add(AobjName(i), Converter.ConvertFromSI(Me.selectedoptcase.variables(Me.keysaux(i - 1)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i - 1)).objectID).GetPropertyValue(AobjProp(i))))
+                    .Variables.Add(AobjName(i), Converter.ConvertFromSI(Me.selectedoptcase.variables(Me.keysaux(i - 1)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i - 1)).objectID).GetPropertyValue(AobjProp(i))))
                 Next
                 Me.selectedoptcase.exbase = .CompileGeneric(Of Double)(Me.selectedoptcase.expression)
             End With
@@ -513,7 +513,7 @@ Public Class FormOptimization
             objID = Me.selectedoptcase.variables(Me.keydep).objectID
             objProp = Me.selectedoptcase.variables(Me.keydep).propID
             If objID <> "SpreadsheetCell" Then
-                value = form.Collections.ObjectCollection(objID).GetPropertyValue(objProp)
+                value = form.Collections.FlowsheetObjectCollection(objID).GetPropertyValue(objProp)
             Else
                 value = form.FormSpreadsheet.GetCellValue(objProp).Value
             End If
@@ -523,7 +523,7 @@ Public Class FormOptimization
         For Each row As DataGridViewRow In Me.dgVariables.Rows
             var = Me.selectedoptcase.variables(row.Cells(0).Value)
             If var.objectID <> "SpreadsheetCell" Then
-                row.Cells(8).Value = Format(Converter.ConvertFromSI(Me.selectedoptcase.variables(row.Cells(0).Value).unit, form.Collections.ObjectCollection(var.objectID).GetPropertyValue(var.propID)), nf)
+                row.Cells(8).Value = Format(Converter.ConvertFromSI(Me.selectedoptcase.variables(row.Cells(0).Value).unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)), nf)
             Else
                 row.Cells(8).Value = form.FormSpreadsheet.GetCellValue(var.propID).Value
             End If
@@ -581,7 +581,7 @@ Public Class FormOptimization
                     .Variables.Add(objName(i), Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x(i)))
                 Next
                 For i = 1 To Me.keysaux.Count
-                    .Variables.Add(AobjName(i), Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i - 1)).objectID).GetPropertyValue(AobjProp(i))))
+                    .Variables.Add(AobjName(i), Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i - 1)).objectID).GetPropertyValue(AobjProp(i))))
                 Next
             End With
 
@@ -595,7 +595,7 @@ Public Class FormOptimization
                 x4 = x(i) * (1 + 2 * h)
                 If Me.selectedoptcase.numdevscheme = 2 Then
                     If objID(i) <> "SpreadsheetCell" Then
-                        form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
+                        form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
                         CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x0)
@@ -608,7 +608,7 @@ Public Class FormOptimization
                             .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x0)
                             For j = 1 To Me.keysaux.Count
                                 If AobjID(i) <> "SpreadsheetCell" Then
-                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
                                 Else
                                     .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                                 End If
@@ -620,7 +620,7 @@ Public Class FormOptimization
                         FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                         FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                         If FobjID <> "SpreadsheetCell" Then
-                            f0 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                            f0 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                         Else
                             f0 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                         End If
@@ -628,7 +628,7 @@ Public Class FormOptimization
                 End If
                 If Me.selectedoptcase.numdevscheme = 4 Then
                     If objID(i) <> "SpreadsheetCell" Then
-                        form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x1)
+                        form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x1)
                         CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x1)
@@ -641,7 +641,7 @@ Public Class FormOptimization
                             .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x1)
                             For j = 1 To Me.keysaux.Count
                                 If AobjID(i) <> "SpreadsheetCell" Then
-                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
                                 Else
                                     .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                                 End If
@@ -653,13 +653,13 @@ Public Class FormOptimization
                         FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                         FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                         If FobjID <> "SpreadsheetCell" Then
-                            f1 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                            f1 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                         Else
                             f1 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                         End If
                     End If
                     If objID(i) <> "SpreadsheetCell" Then
-                        form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x2)
+                        form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x2)
                         CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x2)
@@ -672,7 +672,7 @@ Public Class FormOptimization
                             .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x2)
                             For j = 1 To Me.keysaux.Count
                                 If AobjID(i) <> "SpreadsheetCell" Then
-                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
                                 Else
                                     .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                                 End If
@@ -684,14 +684,14 @@ Public Class FormOptimization
                         FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                         FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                         If FobjID <> "SpreadsheetCell" Then
-                            f2 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                            f2 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                         Else
                             f2 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                         End If
                     End If
                 End If
                 If objID(i) <> "SpreadsheetCell" Then
-                    form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x3)
+                    form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x3)
                     CalculateObject(form, objID(i))
                 Else
                     form.FormSpreadsheet.SetCellValue(objProp(i), x3)
@@ -706,7 +706,7 @@ Public Class FormOptimization
                         .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x3)
                         For j = 1 To Me.keysaux.Count
                             If AobjID(i) <> "SpreadsheetCell" Then
-                                .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
                             Else
                                 .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                             End If
@@ -718,14 +718,14 @@ Public Class FormOptimization
                     FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                     FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                     If FobjID <> "SpreadsheetCell" Then
-                        f3 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                        f3 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                     Else
                         f3 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                     End If
                 End If
                 If Me.selectedoptcase.numdevscheme = 4 Then
                     If objID(i) <> "SpreadsheetCell" Then
-                        form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x4)
+                        form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x4)
                         CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x4)
@@ -738,7 +738,7 @@ Public Class FormOptimization
                             .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x4)
                             For j = 1 To Me.keysaux.Count
                                 If AobjID(i) <> "SpreadsheetCell" Then
-                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
                                 Else
                                     .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                                 End If
@@ -750,7 +750,7 @@ Public Class FormOptimization
                         FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                         FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                         If FobjID <> "SpreadsheetCell" Then
-                            f4 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                            f4 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                         Else
                             f4 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                         End If
@@ -762,7 +762,7 @@ Public Class FormOptimization
                     g(i) = 1 / (12 * h * x(i)) * (f1 - 8 * f2 + 8 * f3 - f4)
                 End If
                 If objID(i) <> "SpreadsheetCell" Then
-                    form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
+                    form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
                     CalculateObject(form, objID(i))
                 Else
                     form.FormSpreadsheet.SetCellValue(objProp(i), x0)
@@ -780,7 +780,7 @@ Public Class FormOptimization
                     Next
                     For j = 1 To Me.keysaux.Count
                         If AobjID(i) <> "SpreadsheetCell" Then
-                            .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                            .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
                         Else
                             .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                         End If
@@ -795,7 +795,7 @@ Public Class FormOptimization
                 FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                 Dim value As Double = 0.0#
                 If FobjID <> "SpreadsheetCell" Then
-                    value = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp)
+                    value = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp)
                 Else
                     value = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                 End If
@@ -844,7 +844,7 @@ Public Class FormOptimization
             Next
             For i = 0 To Me.keysaux.Count - 1
                 .Variables.DefineVariable(AobjName(i), GetType(Double))
-                .Variables(AobjName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i)).objectID).GetPropertyValue(AobjProp(i)))
+                .Variables(AobjName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i)).objectID).GetPropertyValue(AobjProp(i)))
             Next
         End With
 
@@ -855,7 +855,7 @@ Public Class FormOptimization
         pen_val = ReturnPenaltyValue()
         For i = 0 To Me.keysind.Count - 1
             If objID(i) <> "SpreadsheetCell" Then
-                form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x(i))
+                form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x(i))
                 CalculateObject(form, objID(i))
             Else
                 form.FormSpreadsheet.SetCellValue(objProp(i), x(i))
@@ -872,7 +872,7 @@ Public Class FormOptimization
             FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
             FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
             If FobjID <> "SpreadsheetCell" Then
-                value = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp)
+                value = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp)
             Else
                 value = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
             End If
@@ -946,7 +946,7 @@ Public Class FormOptimization
                     .Variables.Add(objName(i), Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x(i)))
                 Next
                 For i = 0 To Me.keysaux.Count - 1
-                    .Variables.Add(AobjName(i), Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i)).objectID).GetPropertyValue(AobjProp(i))))
+                    .Variables.Add(AobjName(i), Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i)).objectID).GetPropertyValue(AobjProp(i))))
                 Next
             End With
 
@@ -964,7 +964,7 @@ Public Class FormOptimization
                 x4 = x(i) * (1 + 2 * h)
                 If Me.selectedoptcase.numdevscheme = 2 Then
                     If objID(i) <> "SpreadsheetCell" Then
-                        form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
+                        form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
                         CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x0)
@@ -977,7 +977,7 @@ Public Class FormOptimization
                             .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x0)
                             For j = 0 To Me.keysaux.Count - 1
                                 If AobjID(i) <> "SpreadsheetCell" Then
-                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                                 Else
                                     .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                                 End If
@@ -989,7 +989,7 @@ Public Class FormOptimization
                         FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                         FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                         If FobjID <> "SpreadsheetCell" Then
-                            f0 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                            f0 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                         Else
                             f0 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                         End If
@@ -997,7 +997,7 @@ Public Class FormOptimization
                 End If
                 If Me.selectedoptcase.numdevscheme = 4 Then
                     If objID(i) <> "SpreadsheetCell" Then
-                        form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x1)
+                        form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x1)
                         CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x1)
@@ -1010,7 +1010,7 @@ Public Class FormOptimization
                             .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x1)
                             For j = 0 To Me.keysaux.Count - 1
                                 If AobjID(i) <> "SpreadsheetCell" Then
-                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                                 Else
                                     .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                                 End If
@@ -1022,13 +1022,13 @@ Public Class FormOptimization
                         FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                         FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                         If FobjID <> "SpreadsheetCell" Then
-                            f1 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                            f1 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                         Else
                             f1 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                         End If
                     End If
                     If objID(i) <> "SpreadsheetCell" Then
-                        form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x2)
+                        form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x2)
                         CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x2)
@@ -1041,7 +1041,7 @@ Public Class FormOptimization
                             .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x2)
                             For j = 0 To Me.keysaux.Count - 1
                                 If AobjID(i) <> "SpreadsheetCell" Then
-                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                                 Else
                                     .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                                 End If
@@ -1053,14 +1053,14 @@ Public Class FormOptimization
                         FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                         FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                         If FobjID <> "SpreadsheetCell" Then
-                            f2 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                            f2 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                         Else
                             f2 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                         End If
                     End If
                 End If
                 If objID(i) <> "SpreadsheetCell" Then
-                    form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x3)
+                    form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x3)
                     CalculateObject(form, objID(i))
                 Else
                     form.FormSpreadsheet.SetCellValue(objProp(i), x3)
@@ -1073,7 +1073,7 @@ Public Class FormOptimization
                         .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x3)
                         For j = 0 To Me.keysaux.Count - 1
                             If AobjID(i) <> "SpreadsheetCell" Then
-                                .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
+                                .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                             Else
                                 .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                             End If
@@ -1085,14 +1085,14 @@ Public Class FormOptimization
                     FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                     FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                     If FobjID <> "SpreadsheetCell" Then
-                        f3 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                        f3 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                     Else
                         f3 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                     End If
                 End If
                 If Me.selectedoptcase.numdevscheme = 4 Then
                     If objID(i) <> "SpreadsheetCell" Then
-                        form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x4)
+                        form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x4)
                         CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x4)
@@ -1105,7 +1105,7 @@ Public Class FormOptimization
                             .Variables(objName(i)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x4)
                             For j = 0 To Me.keysaux.Count - 1
                                 If AobjID(i) <> "SpreadsheetCell" Then
-                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.ObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                                 Else
                                     .Variables(AobjName(j)) = form.FormSpreadsheet.GetCellValue(AobjProp(j)).Value
                                 End If
@@ -1117,7 +1117,7 @@ Public Class FormOptimization
                         FobjID = Me.selectedoptcase.variables(Me.keydep).objectID
                         FobjProp = Me.selectedoptcase.variables(Me.keydep).propID
                         If FobjID <> "SpreadsheetCell" Then
-                            f4 = form.Collections.ObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
+                            f4 = form.Collections.FlowsheetObjectCollection(FobjID).GetPropertyValue(FobjProp) + pen_val
                         Else
                             f4 = form.FormSpreadsheet.GetCellValue(FobjProp).Value + pen_val
                         End If
@@ -1129,7 +1129,7 @@ Public Class FormOptimization
                     g(i) = 1 / (12 * h * x(i)) * (f1 - 8 * f2 + 8 * f3 - f4)
                 End If
                 If objID(i) <> "SpreadsheetCell" Then
-                    form.Collections.ObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
+                    form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
                     CalculateObject(form, objID(i))
                 Else
                     form.FormSpreadsheet.SetCellValue(objProp(i), x0)
@@ -1151,7 +1151,7 @@ Public Class FormOptimization
 
         For Each var In selectedoptcase.variables.Values
             If var.objectID <> "SpreadsheetCell" Then
-                var.currentvalue = form.Collections.ObjectCollection(var.objectID).GetPropertyValue(var.propID)
+                var.currentvalue = form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)
             Else
                 var.currentvalue = form.FormSpreadsheet.GetCellValue(var.propID).Value
             End If
@@ -1347,8 +1347,8 @@ Public Class FormOptimization
                     If .objectID = "SpreadsheetCell" Then
                         dgrow.Cells(3).Value = DWSIM.App.GetLocalString(.objectID)
                     Else
-                        If form.Collections.ObjectCollection.ContainsKey(.objectID) Then
-                            dgrow.Cells(3).Value = form.Collections.ObjectCollection(.objectID).GraphicObject.Tag
+                        If form.Collections.FlowsheetObjectCollection.ContainsKey(.objectID) Then
+                            dgrow.Cells(3).Value = form.Collections.FlowsheetObjectCollection(.objectID).GraphicObject.Tag
                             dgrow.Cells(4).Value = DWSIM.App.GetPropertyName(.propID)
                         End If
                     End If
@@ -1437,7 +1437,7 @@ Public Class FormOptimization
             End If
         End If
 
-        form.WriteToLog("Optimization iteration #" & Me.selectedoptcase.results.Count & ", objective function value = " & Me.selectedoptcase.results(Me.selectedoptcase.results.Count - 1), Color.SeaGreen, DWSIM.FormClasses.TipoAviso.Informacao)
+        form.WriteToLog("Optimization iteration #" & Me.selectedoptcase.results.Count & ", objective function value = " & Me.selectedoptcase.results(Me.selectedoptcase.results.Count - 1), Color.SeaGreen, DWSIM.Flowsheet.MessageType.Information)
 
         Dim curve As LineItem = Me.grProgress.GraphPane.CurveList(0)
         Dim list As IPointListEdit = curve.Points
@@ -1454,7 +1454,7 @@ Public Class FormOptimization
 
         Dim var As OPTVariable
         For Each var In Me.selectedoptcase.variables.Values
-            form.Collections.ObjectCollection(var.objectID).SetPropertyValue(var.propID, var.initialvalue)
+            form.Collections.FlowsheetObjectCollection(var.objectID).SetPropertyValue(var.propID, var.initialvalue)
         Next
         CalculateAll(form)
 
@@ -1489,7 +1489,7 @@ Public Class FormOptimization
     End Sub
 
     Private Sub dgVariables_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles dgVariables.DataError
-        My.Application.ActiveSimulation.WriteToLog(e.Exception.Message.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Erro)
+        My.Application.ActiveSimulation.WriteToLog(e.Exception.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
     End Sub
 
     'IPOPT

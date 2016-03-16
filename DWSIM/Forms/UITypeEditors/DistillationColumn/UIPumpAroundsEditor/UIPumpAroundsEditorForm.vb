@@ -33,7 +33,7 @@ Public Class UIPumpAroundsEditorForm
         cvt = New DWSIM.SystemsOfUnits.Converter()
 
         form = My.Application.ActiveSimulation
-        dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
         Dim i As Integer = 0
 

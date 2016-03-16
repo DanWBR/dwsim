@@ -513,9 +513,9 @@ Public Class SpreadsheetForm
                 ccparams = cell.Tag
                 ccparams.Expression = expression
                 If ccparams.CellType = VarType.Write Then
-                    If formc.Collections.ObjectCollection.ContainsKey(ccparams.ObjectID) Then
+                    If formc.Collections.FlowsheetObjectCollection.ContainsKey(ccparams.ObjectID) Then
                         ccparams.ToolTipText = DWSIM.App.GetLocalString("CellWillWrite") & vbCrLf & _
-                        DWSIM.App.GetLocalString("Objeto") & ": " & formc.Collections.ObjectCollection(ccparams.ObjectID).GraphicObject.Tag & vbCrLf & _
+                        DWSIM.App.GetLocalString("Objeto") & ": " & formc.Collections.FlowsheetObjectCollection(ccparams.ObjectID).GraphicObject.Tag & vbCrLf & _
                         DWSIM.App.GetLocalString("Propriedade") & ": " & DWSIM.App.GetPropertyName(ccparams.PropID)
                         cell.Style.BackColor = Color.LightBlue
                     Else
@@ -544,12 +544,12 @@ Public Class SpreadsheetForm
                             prop = str(1) & "," & str(2)
                         End If
                         ccparams.PropID = prop
-                        cell.Value = formc.Collections.ObjectCollection(obj).GetPropertyValue(prop, formc.Options.SelectedUnitSystem)
+                        cell.Value = formc.Collections.FlowsheetObjectCollection(obj).GetPropertyValue(prop, formc.Options.SelectedUnitSystem)
                         ccparams.ToolTipText = DWSIM.App.GetLocalString("CellIsReading") & vbCrLf & _
-                        DWSIM.App.GetLocalString("Objeto") & ": " & formc.Collections.ObjectCollection(ccparams.ObjectID).GraphicObject.Tag & vbCrLf & _
+                        DWSIM.App.GetLocalString("Objeto") & ": " & formc.Collections.FlowsheetObjectCollection(ccparams.ObjectID).GraphicObject.Tag & vbCrLf & _
                         DWSIM.App.GetLocalString("Propriedade") & ": " & DWSIM.App.GetPropertyName(prop) & vbCrLf & _
                         DWSIM.App.GetLocalString("CurrentValue") & ": " & cell.Value & _
-                        " " & formc.Collections.ObjectCollection(obj).GetPropertyUnit(prop, formc.Options.SelectedUnitSystem)
+                        " " & formc.Collections.FlowsheetObjectCollection(obj).GetPropertyUnit(prop, formc.Options.SelectedUnitSystem)
                         cell.ToolTipText = ccparams.ToolTipText
                         cell.Style.BackColor = Color.LightGreen
                     Else
@@ -572,7 +572,7 @@ Public Class SpreadsheetForm
                 cell.Tag = ccparams.Clone
                 cell.ToolTipText = ccparams.ToolTipText
                 cell.Style.BackColor = cell.OwningColumn.DefaultCellStyle.BackColor
-                My.Application.ActiveSimulation.WriteToLog(Me.Text & ": " & DWSIM.App.GetLocalString("Invalidexpressiononcell") & " " & GetCellString(cell) & " - " & ex.Message, Color.Brown, DWSIM.FormClasses.TipoAviso.Informacao)
+                My.Application.ActiveSimulation.WriteToLog(Me.Text & ": " & DWSIM.App.GetLocalString("Invalidexpressiononcell") & " " & GetCellString(cell) & " - " & ex.Message, Color.Brown, DWSIM.Flowsheet.MessageType.Information)
             End Try
 
         End If
@@ -756,7 +756,7 @@ Public Class SpreadsheetForm
                 ccparams = ce.Tag
                 If Not ccparams Is Nothing Then
                     If ccparams.CellType = VarType.Write And Not ce.Value Is Nothing Then
-                        obj = formc.Collections.ObjectCollection(ccparams.ObjectID)
+                        obj = formc.Collections.FlowsheetObjectCollection(ccparams.ObjectID)
                         obj.SetPropertyValue(ccparams.PropID, ce.Value, su)
                         'Call function to calculate flowsheet
                         Dim objargs As New DWSIM.Outros.StatusChangeEventArgs

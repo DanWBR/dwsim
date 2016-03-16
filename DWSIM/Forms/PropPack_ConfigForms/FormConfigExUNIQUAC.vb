@@ -20,7 +20,7 @@ Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
 Imports System.IO
 Imports System.Linq
-Imports DWSIM.DWSIM.FormClasses
+Imports DWSIM.DWSIM.Flowsheet
 
 Public Class FormConfigExUNIQUAC
 

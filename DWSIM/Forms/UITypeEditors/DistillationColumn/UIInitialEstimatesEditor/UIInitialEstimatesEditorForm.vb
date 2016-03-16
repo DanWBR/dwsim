@@ -43,7 +43,7 @@ Public Class UIInitialEstimatesEditorForm
 
         cvt = New DWSIM.SystemsOfUnits.Converter()
         form = My.Application.ActiveSimulation
-        dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
         nf = form.Options.NumberFormat
         su = form.Options.SelectedUnitSystem
 
@@ -307,7 +307,7 @@ Public Class UIInitialEstimatesEditorForm
 
         cvt = New DWSIM.SystemsOfUnits.Converter()
         form = My.Application.ActiveSimulation
-        dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
         nf = form.Options.NumberFormat
         su = form.Options.SelectedUnitSystem
 

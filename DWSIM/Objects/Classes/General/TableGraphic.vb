@@ -491,7 +491,7 @@ Namespace DWSIM.GraphicObjects
 
                 .Item.Add(DWSIM.App.GetLocalString("MT_ObjectFamily"), Me, "ObjectFamily", False, "1. " & DWSIM.App.GetLocalString("MT_ObjectFamily"), "", True)
 
-                For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
+                For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
                     If obj.GraphicObject.TipoObjeto = Me.ObjectFamily Then
                         If m_objectlist.ContainsKey(obj.GraphicObject.Tag) Then
                             .Item.Add(obj.GraphicObject.Tag, m_objectlist(obj.GraphicObject.Tag), False, "2. " & DWSIM.App.GetLocalString("MT_ObjectsToShow"), "", True)

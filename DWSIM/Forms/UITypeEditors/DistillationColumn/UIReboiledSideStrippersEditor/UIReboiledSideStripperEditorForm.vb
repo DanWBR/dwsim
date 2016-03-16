@@ -17,7 +17,7 @@ Public Class UIReboiledSideStripperEditorForm
         cvt = New DWSIM.SystemsOfUnits.Converter()
 
         form = My.Application.ActiveSimulation
-        dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
         tpl = New DWSIM.SimulationObjects.UnitOps.Auxiliary.DGVCBSelectors.Templates(form, dc)
 
         Dim i As Integer = 0

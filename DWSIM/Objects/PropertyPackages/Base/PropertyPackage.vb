@@ -1121,13 +1121,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             Me.CurrentMaterialStream.Phases(0).Properties.bubbleTemperature = myres(4)
                         End If
                     Catch ex As Exception
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Bubble Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, FormClasses.TipoAviso.Erro)
+                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Bubble Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                     Try
                         result = Me.DW_CalcEquilibrio_ISOL(FlashSpec.P, FlashSpec.VAP, P, 1, 0)(2)
                         Me.CurrentMaterialStream.Phases(0).Properties.dewTemperature = result
                     Catch ex As Exception
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Dew Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, FormClasses.TipoAviso.Erro)
+                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Dew Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                     Try
                         Dim Vz As Double() = Me.RET_VMOL(Phase.Mixture)
@@ -1142,13 +1142,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             Me.CurrentMaterialStream.Phases(0).Properties.bubblePressure = myres(4)
                         End If
                     Catch ex As Exception
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Bubble Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, FormClasses.TipoAviso.Erro)
+                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Bubble Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                     Try
                         result = Me.DW_CalcEquilibrio_ISOL(FlashSpec.T, FlashSpec.VAP, T, 1, 0)(3)
                         Me.CurrentMaterialStream.Phases(0).Properties.dewPressure = result
                     Catch ex As Exception
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Dew Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, FormClasses.TipoAviso.Erro)
+                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Dew Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                 End If
             End If

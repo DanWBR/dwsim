@@ -5,7 +5,7 @@ Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.DWSIM
 Imports System.Text
 Imports PropertyGridEx
-Imports DWSIM.DWSIM.FormClasses
+Imports DWSIM.DWSIM.Flowsheet
 Imports System.Linq
 
 Public Class frmProps
@@ -61,7 +61,7 @@ Public Class frmProps
 
             If sobj.TipoObjeto <> TipoObjeto.GO_Tabela And sobj.TipoObjeto <> TipoObjeto.GO_MasterTable And sobj.TipoObjeto <> TipoObjeto.GO_SpreadsheetTable Then
 
-                Flowsheet.Collections.ObjectCollection(sobj.Name).HandlePropertyChange(s, e)
+                Flowsheet.Collections.FlowsheetObjectCollection(sobj.Name).HandlePropertyChange(s, e)
 
             ElseIf sobj.TipoObjeto = TipoObjeto.GO_MasterTable Then
 
@@ -131,11 +131,11 @@ Public Class frmProps
 
         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Nome")) Then
             Try
-                If Not Flowsheet.Collections.ObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela Is Nothing Then
-                    Flowsheet.Collections.ObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela.HeaderText = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
+                If Not Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela Is Nothing Then
+                    Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela.HeaderText = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
                 End If
             Catch ex As Exception
-                'Flowsheet.WriteToLog(ex.ToString, Color.Red, FormClasses.TipoAviso.Erro)
+                'Flowsheet.WriteToLog(ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
             Finally
                 'CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.OldValue, Flowsheet.FormSurface.FlowsheetDesignSurface), GraphicObject).Tag = e.ChangedItem.Value
                 For Each g As GraphicObject In Flowsheet.FormSurface.FlowsheetDesignSurface.drawingObjects

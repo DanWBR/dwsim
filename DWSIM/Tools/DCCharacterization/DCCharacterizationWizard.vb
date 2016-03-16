@@ -762,7 +762,7 @@ Public Class DCCharacterizationWizard
             myCOMS.Phases(1).Compounds.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
             myCOMS.Phases(2).Compounds.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
         Next
-        form.Collections.ObjectCollection.Add(myCOMS.Nome, myCOMS)
+        form.Collections.FlowsheetObjectCollection.Add(myCOMS.Nome, myCOMS)
         form.Collections.CLCS_MaterialStreamCollection.Add(myCOMS.Nome, myCOMS)
         form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
         form.FormSurface.FlowsheetDesignSurface.Invalidate()

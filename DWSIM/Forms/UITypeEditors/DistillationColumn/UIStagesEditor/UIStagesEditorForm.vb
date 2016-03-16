@@ -40,7 +40,7 @@ Public Class UIStagesEditorForm
         Dim i As Integer = 0
 
         form = My.Application.ActiveSimulation
-        dc = form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
         With Me.dgv1.Rows
             .Clear()

@@ -41,8 +41,8 @@ Public Class FlowsheetUOEditorForm
             fsuo.Fsheet = DWSIM.SimulationObjects.UnitOps.Flowsheet.InitializeFlowsheet(fsuo.SimulationFile)
             fsuo.Initialized = True
         Catch ex As AggregateException
-            fsuo.FlowSheet.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, DWSIM.FormClasses.TipoAviso.Erro)
-            fsuo.FlowSheet.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.DarkRed, DWSIM.FormClasses.TipoAviso.Erro)
+            fsuo.FlowSheet.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, DWSIM.Flowsheet.MessageType.GeneralError)
+            fsuo.FlowSheet.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.DarkRed, DWSIM.Flowsheet.MessageType.GeneralError)
             fsuo.Fsheet.Dispose()
             fsuo.Fsheet = Nothing
             fsuo.Initialized = False
@@ -157,7 +157,7 @@ Public Class FlowsheetUOEditorForm
         cbc2.Sorted = True
         cbc2.MaxDropDownItems = 10
         cbc2.Items.Add("")
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.FlowsheetObjectCollection.Values
             cbc2.Items.Add(obj.GraphicObject.Tag)
         Next
 
@@ -167,8 +167,8 @@ Public Class FlowsheetUOEditorForm
         With dgvInputPars.Rows
             .Clear()
             For Each ip In fsuo.InputParams.Values
-                If fsuo.Fsheet.Collections.ObjectCollection.ContainsKey(ip.ObjectID) Then
-                    .Add(New Object() {ip.ID, fsuo.Fsheet.Collections.ObjectCollection(ip.ObjectID).GraphicObject.Tag, DWSIM.App.GetPropertyName(ip.ObjectProperty)})
+                If fsuo.Fsheet.Collections.FlowsheetObjectCollection.ContainsKey(ip.ObjectID) Then
+                    .Add(New Object() {ip.ID, fsuo.Fsheet.Collections.FlowsheetObjectCollection(ip.ObjectID).GraphicObject.Tag, DWSIM.App.GetPropertyName(ip.ObjectProperty)})
                     Dim cbc As DataGridViewComboBoxCell = .Item(.Count - 1).Cells(2)
                     cbc.Items.Clear()
                     Dim props As String()
@@ -184,8 +184,8 @@ Public Class FlowsheetUOEditorForm
         With dgvOutputPars.Rows
             .Clear()
             For Each ip In fsuo.OutputParams.Values
-                If fsuo.Fsheet.Collections.ObjectCollection.ContainsKey(ip.ObjectID) Then
-                    .Add(New Object() {ip.ID, fsuo.Fsheet.Collections.ObjectCollection(ip.ObjectID).GraphicObject.Tag, DWSIM.App.GetPropertyName(ip.ObjectProperty)})
+                If fsuo.Fsheet.Collections.FlowsheetObjectCollection.ContainsKey(ip.ObjectID) Then
+                    .Add(New Object() {ip.ID, fsuo.Fsheet.Collections.FlowsheetObjectCollection(ip.ObjectID).GraphicObject.Tag, DWSIM.App.GetPropertyName(ip.ObjectProperty)})
                     Dim cbc As DataGridViewComboBoxCell = .Item(.Count - 1).Cells(2)
                     cbc.Items.Clear()
                     Dim props As String()
@@ -202,7 +202,7 @@ Public Class FlowsheetUOEditorForm
 
     Private Function ReturnProperties(ByVal objectTAG As String, ByVal dependent As Boolean) As String()
 
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.FlowsheetObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 If dependent Then
                     Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
@@ -219,7 +219,7 @@ Public Class FlowsheetUOEditorForm
 
     Private Function ReturnObject(ByVal objectTAG As String) As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.FlowsheetObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 Return obj
                 Exit Function
@@ -232,7 +232,7 @@ Public Class FlowsheetUOEditorForm
 
     Private Function ReturnPropertyID(ByVal objectID As String, ByVal propTAG As String) As String
 
-        Dim props As String() = fsuo.Fsheet.Collections.ObjectCollection(objectID).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+        Dim props As String() = fsuo.Fsheet.Collections.FlowsheetObjectCollection(objectID).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
         For Each prop As String In props
             If DWSIM.App.GetPropertyName(prop) = propTAG Then
                 Return prop

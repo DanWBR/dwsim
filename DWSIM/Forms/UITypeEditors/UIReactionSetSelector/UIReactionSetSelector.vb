@@ -91,10 +91,10 @@ Namespace DWSIM.Editors.Reactors
                 Next
                 Me.ListView2.SelectedItems.Clear()
 
-                If form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.TipoObjeto = Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.CapeOpenUO Then
-                    Me.selectedRSID = CType(form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.UnitOps.CapeOpenUO).ReactionSetID
+                If form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.TipoObjeto = Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.CapeOpenUO Then
+                    Me.selectedRSID = CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.UnitOps.CapeOpenUO).ReactionSetID
                 Else
-                    Me.selectedRSID = CType(form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.Reactors.Reactor).ReactionSetID
+                    Me.selectedRSID = CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.Reactors.Reactor).ReactionSetID
                 End If
 
                 'Me.ListView2.Items(selectedRSID).Selected = True
@@ -116,10 +116,10 @@ Namespace DWSIM.Editors.Reactors
                 If Me.ListView2.SelectedItems.Count > 0 Then
                     Me.selectedRSID = Me.ListView2.SelectedItems(0).Name
                     Me.selectedRSName = Me.ListView2.SelectedItems(0).Text
-                    If form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.TipoObjeto = Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.CapeOpenUO Then
-                        CType(form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.UnitOps.CapeOpenUO).ReactionSetID = Me.selectedRSID
+                    If form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.TipoObjeto = Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.CapeOpenUO Then
+                        CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.UnitOps.CapeOpenUO).ReactionSetID = Me.selectedRSID
                     Else
-                        CType(form.Collections.ObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.Reactors.Reactor).ReactionSetID = Me.selectedRSID
+                        CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.Reactors.Reactor).ReactionSetID = Me.selectedRSID
                     End If
                     Me.editorService.CloseDropDown()
                 End If

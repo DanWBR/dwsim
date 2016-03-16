@@ -21,7 +21,7 @@ Imports System.IO
 Imports System.Text
 Imports DotNumerics
 Imports System.Threading.Tasks
-Imports DWSIM.DWSIM.FormClasses
+Imports DWSIM.DWSIM.Flowsheet
 
 Public Class FormConfigUNIQUAC
 
@@ -504,13 +504,13 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                 Next
 
                 If sender.Name = "Button1" Then
-                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
                 ElseIf sender.Name = "Button5" Then
-                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
                 ElseIf sender.Name = "Button6" Then
-                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using NIST-MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using NIST-MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
                 Else
-                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
                 End If
 
                 dgvu1.Rows(row).Cells(3).Value = finalval2(0)
@@ -522,7 +522,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
             Catch ex As Exception
 
-                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation finished with an error: " & ex.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Informacao)
+                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation finished with an error: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.Information)
 
             Finally
 
@@ -672,11 +672,11 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         If e.Error Is Nothing Then
 
             If e.Result(9) = "Button1" Then
-                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
             ElseIf e.Result(9) = "Button5" Then
-                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
             Else
-                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
             End If
 
             Dim row As Integer = dgvu1.SelectedCells(0).RowIndex
@@ -690,7 +690,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         Else
 
-            ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished with an error: " & e.Error.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Informacao)
+            ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished with an error: " & e.Error.ToString, Color.Red, DWSIM.Flowsheet.MessageType.Information)
 
         End If
 

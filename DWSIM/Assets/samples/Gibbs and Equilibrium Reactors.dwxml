@@ -5164,7 +5164,7 @@
     </SimulationObject>
   </SimulationObjects>
   <Settings>
-    <Type>DWSIM.DWSIM.FormClasses.ClsFormOptions</Type>
+    <Type>DWSIM.DWSIM.Flowsheet.ClsFormOptions</Type>
     <SimulationMode></SimulationMode>
     <SelectedUnitSystem>
       <Type>DWSIM.DWSIM.SystemsOfUnits.SI</Type>

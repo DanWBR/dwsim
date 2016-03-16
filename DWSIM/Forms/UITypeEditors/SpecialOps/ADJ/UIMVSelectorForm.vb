@@ -52,7 +52,7 @@ Public Class UIMVSelectorForm
             .Add(DWSIM.App.GetLocalString("Filter"), DWSIM.App.GetLocalString("Filter"))
         End With
 
-        If formC.Collections.ObjectCollection.ContainsKey(Me.selectionData.m_ID) Then
+        If formC.Collections.FlowsheetObjectCollection.ContainsKey(Me.selectionData.m_ID) Then
             If Not Me.selectionData Is Nothing Then
                 If Not Me.selectionData.m_Name = "" Then
                     Me.TreeView1.SelectedNode = Me.TreeView1.Nodes.Find(Me.selectionData.m_Type, True)(0)
@@ -243,7 +243,7 @@ Public Class UIMVSelectorForm
         With TreeView3.Nodes
             Dim key As String = e.Node.Tag
 
-            Dim properties As String() = formC.Collections.ObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
+            Dim properties As String() = formC.Collections.FlowsheetObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
 
             For Each prop As String In properties
                 .Add(prop, DWSIM.App.GetPropertyName(prop)).Tag = prop

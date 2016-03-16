@@ -52,11 +52,11 @@ Namespace DWSIM.Flowsheet
 
             If client.Connect(My.Settings.ServerIPAddress, My.Settings.ServerPort, user & "@" & computer, errMsg) Then
 
-                fs.WriteToLog(DWSIM.App.GetLocalString("ClientConnected"), Color.Brown, FormClasses.TipoAviso.Informacao)
+                fs.WriteToLog(DWSIM.App.GetLocalString("ClientConnected"), Color.Brown, DWSIM.Flowsheet.MessageType.Information)
 
                 Dim tmpfile As String = My.Computer.FileSystem.GetTempFileName
 
-                fs.WriteToLog(DWSIM.App.GetLocalString("ClientSavingTempFile"), Color.Brown, FormClasses.TipoAviso.Informacao)
+                fs.WriteToLog(DWSIM.App.GetLocalString("ClientSavingTempFile"), Color.Brown, DWSIM.Flowsheet.MessageType.Information)
 
                 FormMain.SaveXML(tmpfile, fs)
 
@@ -73,14 +73,14 @@ Namespace DWSIM.Flowsheet
                         compressedstream.Position = 0
                         gzs.Write(uncompressedbytes, 0, uncompressedbytes.Length)
                         gzs.Close()
-                        fs.WriteToLog(DWSIM.App.GetLocalString("ClientSendingData") & " " & Math.Round(compressedstream.Length / 1024).ToString & " KB", Color.Brown, FormClasses.TipoAviso.Informacao)
+                        fs.WriteToLog(DWSIM.App.GetLocalString("ClientSendingData") & " " & Math.Round(compressedstream.Length / 1024).ToString & " KB", Color.Brown, DWSIM.Flowsheet.MessageType.Information)
                         If Not lat.SendArray(compressedstream.ToArray, 100, errMsg) Then
-                            If errMsg.Trim <> "" Then fs.WriteToLog(DWSIM.App.GetLocalString("ClientSendDataError") & ": " & errMsg, Color.Red, FormClasses.TipoAviso.Erro)
+                            If errMsg.Trim <> "" Then fs.WriteToLog(DWSIM.App.GetLocalString("ClientSendDataError") & ": " & errMsg, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                         End If
                     End Using
                 End Using
 
-                fs.WriteToLog(DWSIM.App.GetLocalString("ClientSentDataOK"), Color.Brown, FormClasses.TipoAviso.Informacao)
+                fs.WriteToLog(DWSIM.App.GetLocalString("ClientSentDataOK"), Color.Brown, DWSIM.Flowsheet.MessageType.Information)
 
                 Dim time As Integer = 0
                 Dim sleeptime As Integer = 1
@@ -94,7 +94,7 @@ Namespace DWSIM.Flowsheet
                     End If
                     If Abort Then Throw New Exception(ErrorMsg)
                     If time >= My.Settings.SolverTimeoutSeconds Then Throw New TimeoutException(DWSIM.App.GetLocalString("SolverTimeout"))
-                    fs.WriteToLog(DWSIM.App.GetLocalString("ClientWaitingForResults"), Color.Brown, FormClasses.TipoAviso.Informacao)
+                    fs.WriteToLog(DWSIM.App.GetLocalString("ClientWaitingForResults"), Color.Brown, DWSIM.Flowsheet.MessageType.Information)
                 End While
 
                 Try
@@ -103,16 +103,16 @@ Namespace DWSIM.Flowsheet
                             Using gzs As New IO.BufferedStream(New Compression.GZipStream(ms, Compression.CompressionMode.Decompress, True), 64 * 1024)
                                 gzs.CopyTo(decompressedstream)
                                 gzs.Close()
-                                fs.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatingData") & " " & Math.Round(decompressedstream.Length / 1024).ToString & " KB", Color.Brown, FormClasses.TipoAviso.Informacao)
+                                fs.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatingData") & " " & Math.Round(decompressedstream.Length / 1024).ToString & " KB", Color.Brown, DWSIM.Flowsheet.MessageType.Information)
                                 decompressedstream.Position = 0
                                 Dim xdoc As XDocument = XDocument.Load(decompressedstream)
                                 DWSIM.SimulationObjects.UnitOps.Flowsheet.UpdateProcessData(fs, xdoc)
-                                fs.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatedDataOK"), Color.Brown, FormClasses.TipoAviso.Informacao)
+                                fs.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatedDataOK"), Color.Brown, DWSIM.Flowsheet.MessageType.Information)
                             End Using
                         End Using
                     End Using
                 Catch ex As Exception
-                    fs.WriteToLog(DWSIM.App.GetLocalString("ClientDataProcessingError") & ": " & ex.Message.ToString, Color.Red, FormClasses.TipoAviso.Erro)
+                    fs.WriteToLog(DWSIM.App.GetLocalString("ClientDataProcessingError") & ": " & ex.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
 
             Else
@@ -144,12 +144,12 @@ Namespace DWSIM.Flowsheet
             ElseIf dataChannel = 255 Then
 
                 Dim msg As String = TcpComm.Utilities.BytesToString(bytes)
-                If Not fsheet Is Nothing Then fsheet.WriteToLog(DWSIM.App.GetLocalString("ClientMessageFromServer") & ": " & msg, Color.Brown, FormClasses.TipoAviso.Informacao)
+                If Not fsheet Is Nothing Then fsheet.WriteToLog(DWSIM.App.GetLocalString("ClientMessageFromServer") & ": " & msg, Color.Brown, DWSIM.Flowsheet.MessageType.Information)
 
             ElseIf dataChannel = 2 Then
 
                 Dim msg As String = TcpComm.Utilities.BytesToString(bytes)
-                If Not fsheet Is Nothing Then fsheet.WriteToLog(DWSIM.App.GetLocalString("ClientMessageFromServer") & ": " & msg, Color.Brown, FormClasses.TipoAviso.Informacao)
+                If Not fsheet Is Nothing Then fsheet.WriteToLog(DWSIM.App.GetLocalString("ClientMessageFromServer") & ": " & msg, Color.Brown, DWSIM.Flowsheet.MessageType.Information)
 
             ElseIf dataChannel = 3 Then
 

@@ -17,7 +17,7 @@
 
 
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.FormClasses
+Imports DWSIM.DWSIM.Flowsheet
 
 Public Class FormConfigLKP
 

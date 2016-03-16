@@ -18,7 +18,7 @@
 
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
-Imports DWSIM.DWSIM.FormClasses
+Imports DWSIM.DWSIM.Flowsheet
 
 Public Class FormConfigPCSAFT
 

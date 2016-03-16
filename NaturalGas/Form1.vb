@@ -234,7 +234,7 @@ Public Class Form1
                         iwdp = -1.0E+20
                     End If
                 Catch ex As Exception
-                    fsheet.WriteToLog(ex.ToString, Drawing.Color.Red, DWSIM.DWSIM.FormClasses.TipoAviso.Erro)
+                    fsheet.WriteToLog(ex.ToString, Drawing.Color.Red, DWSIM.DWSIM.Flowsheet.MessageType.GeneralError)
                 Finally
                     fa = Nothing
                     fa2 = Nothing

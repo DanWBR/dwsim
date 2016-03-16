@@ -166,7 +166,7 @@
             End Select
         End With
 
-        If formC.Collections.ObjectCollection.ContainsKey(Me.selectionDataRV.m_ID) Then
+        If formC.Collections.FlowsheetObjectCollection.ContainsKey(Me.selectionDataRV.m_ID) Then
             If Not Me.selectionDataRV.m_ID = "" Then
                 If Me.TreeView1.Nodes.ContainsKey(Me.selectionDataRV.m_ID) Then
                     Me.TreeView1.SelectedNode = Me.TreeView1.Nodes.Find(Me.selectionDataRV.m_ID, True)(0)

@@ -105,7 +105,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         GetParams()
                         CreateConnectors()
                     Catch ex As Exception
-                        Me.FlowSheet.WriteToLog("Error creating CAPE-OPEN Unit Operation: " & ex.ToString, Color.Red, FormClasses.TipoAviso.Erro)
+                        Me.FlowSheet.WriteToLog("Error creating CAPE-OPEN Unit Operation: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                 End If
 
@@ -145,7 +145,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     CreateConnectors()
 
                     'Catch ex As Exception
-                    '    Me.FlowSheet.WriteToLog("Error creating CAPE-OPEN Unit Operation: " & ex.ToString, Color.Red, FormClasses.TipoAviso.Erro)
+                    '    Me.FlowSheet.WriteToLog("Error creating CAPE-OPEN Unit Operation: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                     'End Try
 
                 End If
@@ -259,8 +259,8 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             End Using
                         Catch ex As Exception
                             Dim ecu As CapeOpen.ECapeUser = _couo
-                            Me.FlowSheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
-                            Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag + ": Error saving data from CAPE-OPEN Object - " + ex.Message.ToString(), Color.Red, FormClasses.TipoAviso.Erro)
+                            Me.FlowSheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+                            Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag + ": Error saving data from CAPE-OPEN Object - " + ex.Message.ToString(), Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                         End Try
                     End If
                 Else
@@ -277,8 +277,8 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             End Using
                         Catch ex As Exception
                             Dim ecu As CapeOpen.ECapeUser = _couo
-                            Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
-                            Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag + ": Error saving data from CAPE-OPEN Object - " + ex.Message.ToString(), Color.Red, FormClasses.TipoAviso.Erro)
+                            Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+                            Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag + ": Error saving data from CAPE-OPEN Object - " + ex.Message.ToString(), Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                         End Try
                     End If
                 End If
@@ -444,7 +444,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                                 End Try
                                 If cnobj IsNot Nothing Then
                                     If Not Me.FlowSheet Is Nothing Then
-                                        Dim mystr As DWSIM.SimulationObjects.UnitOperations.BaseClass = Me.FlowSheet.Collections.ObjectCollection(CType(cnobj, ICapeIdentification).ComponentDescription)
+                                        Dim mystr As DWSIM.SimulationObjects.UnitOperations.BaseClass = Me.FlowSheet.Collections.FlowsheetObjectCollection(CType(cnobj, ICapeIdentification).ComponentDescription)
                                         Try
                                             cnobj = myport.connectedObject
                                         Catch ex As Exception
@@ -476,7 +476,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         Catch ex As Exception
                             'Console.WriteLine(ex.ToString)
                             'Dim ecu As CapeOpen.ECapeUser = myuo
-                            'Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception: " & ecu.code & " at " & ecu.interfaceName & ". Reason: " & ecu.description, Color.DarkGray, FormClasses.TipoAviso.Aviso)
+                            'Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception: " & ecu.code & " at " & ecu.interfaceName & ". Reason: " & ecu.description, Color.DarkGray, DWSIM.Flowsheet.MessageType.Warning)
                         End Try
                     Next
                 End If
@@ -763,11 +763,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         End Try
                         Try
                             If Not cnobj Is Nothing Then
-                                _ports(_ports.Count - 1).Connect(Me.FlowSheet.Collections.ObjectCollection(CType(cnobj, ICapeIdentification).ComponentDescription))
+                                _ports(_ports.Count - 1).Connect(Me.FlowSheet.Collections.FlowsheetObjectCollection(CType(cnobj, ICapeIdentification).ComponentDescription))
                             End If
                         Catch ex As Exception
                             Dim ecu As CapeOpen.ECapeUser = myuo
-                            Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception: " & ecu.code & " at " & ecu.interfaceName & ". Reason: " & ecu.description, Color.DarkGray, FormClasses.TipoAviso.Aviso)
+                            Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception: " & ecu.code & " at " & ecu.interfaceName & ". Reason: " & ecu.description, Color.DarkGray, DWSIM.Flowsheet.MessageType.Warning)
                         End Try
                     Next
                 End If
@@ -788,7 +788,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         If Not c.IsAttached Then
                             p.Disconnect()
                         ElseIf c.IsAttached And cnobj Is Nothing Then
-                            p.Connect(Me.FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedFrom.Name))
+                            p.Connect(Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedFrom.Name))
                         End If
                     End If
                 Next
@@ -805,7 +805,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         If Not c.IsAttached Then
                             p.Disconnect()
                         ElseIf c.IsAttached And cnobj Is Nothing Then
-                            p.Connect(Me.FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedTo.Name))
+                            p.Connect(Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name))
                         End If
                     End If
                 Next
@@ -830,7 +830,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     myuo.Edit()
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = myuo
-                    Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception: " & ecu.code & " at " & ecu.interfaceName & ". Reason: " & ecu.description, Color.DarkGray, FormClasses.TipoAviso.Aviso)
+                    Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception: " & ecu.code & " at " & ecu.interfaceName & ". Reason: " & ecu.description, Color.DarkGray, DWSIM.Flowsheet.MessageType.Warning)
                     Throw
                 End Try
                 UpdateParams()
@@ -880,7 +880,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                     Catch ex As Exception
 
-                        Me.FlowSheet.WriteToLog("Error creating CAPE-OPEN Unit Operation: " & ex.ToString, Color.Red, FormClasses.TipoAviso.Erro)
+                        Me.FlowSheet.WriteToLog("Error creating CAPE-OPEN Unit Operation: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
 
                     End Try
                 End If
@@ -1025,7 +1025,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             If Not _couo Is Nothing Then
                 For Each c As ConnectionPoint In Me.GraphicObject.InputConnectors
                     If c.IsAttached And c.Type = ConType.ConIn Then
-                        Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedFrom.Name)
+                        Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedFrom.Name)
                         mat.SetFlowsheet(Me.FlowSheet)
                     End If
                 Next
@@ -1052,7 +1052,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         End If
                     Next
                     Dim ecu As CapeOpen.ECapeUser = myuo
-                    Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 'My.Application.ActiveSimulation = Me.FlowSheet
                 myuo.Validate(msg)
@@ -1060,7 +1060,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Try
                         For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.IsAttached And c.Type = ConType.ConOut Then
-                                Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedTo.Name)
+                                Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name)
                                 mat.ClearAllProps()
                             End If
                         Next
@@ -1069,7 +1069,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         UpdateParams()
                         For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.IsAttached And c.Type = ConType.ConOut Then
-                                Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedTo.Name)
+                                Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name)
                                 mat.PropertyPackage.CurrentMaterialStream = mat
                                 For Each subst As Compound In mat.Phases(0).Compounds.Values
                                     subst.FracaoMassica = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Nome, 0)
@@ -1115,10 +1115,10 @@ Namespace DWSIM.SimulationObjects.UnitOps
                             End If
                         Next
                         Dim ecu As CapeOpen.ECapeUser = myuo
-                        Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                        Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                 Else
-                    Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag + ": CO Unit not validated. Reason: " + msg, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.FlowSheet.WriteToLog(Me.GraphicObject.Tag + ": CO Unit not validated. Reason: " + msg, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                     'Call function to calculate flowsheet
                     With objargs
                         .Calculado = False

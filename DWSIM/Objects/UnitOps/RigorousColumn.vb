@@ -3811,7 +3811,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             Dim sinf As StreamInformation
 
             For Each sinf In Me.MaterialStreams.Values
-                If FlowSheet.Collections.ObjectCollection.ContainsKey(sinf.StreamID) Then
+                If FlowSheet.Collections.FlowsheetObjectCollection.ContainsKey(sinf.StreamID) Then
                     Select Case sinf.StreamBehavior
                         Case StreamInformation.Behavior.Distillate
                             msm = FlowSheet.Collections.CLCS_MaterialStreamCollection(sinf.StreamID)
@@ -3884,7 +3884,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             Dim esm As New Streams.EnergyStream("", "")
 
             For Each sinf In Me.EnergyStreams.Values
-                If FlowSheet.Collections.ObjectCollection.ContainsKey(sinf.StreamID) Then
+                If FlowSheet.Collections.FlowsheetObjectCollection.ContainsKey(sinf.StreamID) Then
                     If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
                         'condenser
                         esm = FlowSheet.Collections.CLCS_EnergyStreamCollection(sinf.StreamID)

@@ -51,7 +51,7 @@ Public Class UISVSelectorForm
             .Add(DWSIM.App.GetLocalString("Filter"), DWSIM.App.GetLocalString("Filter"))
         End With
 
-        If formC.Collections.ObjectCollection.ContainsKey(Me.selectionData.m_ID) Then
+        If formC.Collections.FlowsheetObjectCollection.ContainsKey(Me.selectionData.m_ID) Then
             If Not Me.selectionData Is Nothing Then
                 If Not Me.selectionData.m_Name = "" Then
                     Me.TreeView1.SelectedNode = Me.TreeView1.Nodes.Find(Me.selectionData.m_Type, True)(0)
@@ -237,7 +237,7 @@ Public Class UISVSelectorForm
         With TreeView3.Nodes
             Dim key As String = e.Node.Tag
 
-            Dim properties As String() = formC.Collections.ObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+            Dim properties As String() = formC.Collections.FlowsheetObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
 
             For Each prop As String In properties
                 .Add(prop, DWSIM.App.GetPropertyName(prop)).Tag = prop
@@ -254,8 +254,8 @@ Public Class UISVSelectorForm
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
 
         'se o spec já tinha uma variavel como fonte, marcá-la como desconectada do mesmo
-        If formC.Collections.ObjectCollection.ContainsKey(Me.selectionData.m_ID) Then
-            With formC.Collections.ObjectCollection(Me.selectionData.m_ID)
+        If formC.Collections.FlowsheetObjectCollection.ContainsKey(Me.selectionData.m_ID) Then
+            With formC.Collections.FlowsheetObjectCollection(Me.selectionData.m_ID)
                 .IsSpecAttached = False
                 .AttachedSpecId = ""
                 .SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Nenhum
@@ -267,8 +267,8 @@ Public Class UISVSelectorForm
         Me.selectionData.m_ID = TreeView2.SelectedNode.Tag.ToString
         Me.selectionData.m_Property = TreeView3.SelectedNode.Tag.ToString
 
-        If formC.Collections.ObjectCollection.ContainsKey(Me.selectionData.m_ID) Then
-            With formC.Collections.ObjectCollection(Me.selectionData.m_ID)
+        If formC.Collections.FlowsheetObjectCollection.ContainsKey(Me.selectionData.m_ID) Then
+            With formC.Collections.FlowsheetObjectCollection(Me.selectionData.m_ID)
                 .IsSpecAttached = True
                 .AttachedSpecId = formC.FormSurface.FlowsheetDesignSurface.SelectedObject.Name
                 .SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte

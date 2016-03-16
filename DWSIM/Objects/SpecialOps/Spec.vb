@@ -208,13 +208,13 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             End If
 
             Try
-                Me.SourceObject = Me.FlowSheet.Collections.ObjectCollection(Me.SourceObjectData.m_ID)
+                Me.SourceObject = Me.FlowSheet.Collections.FlowsheetObjectCollection(Me.SourceObjectData.m_ID)
                 If Not Me.SourceObject Is Nothing Then Me.SourceObject.IsSpecAttached = True
             Catch ex As Exception
 
             End Try
             Try
-                Me.TargetObject = Me.FlowSheet.Collections.ObjectCollection(Me.TargetObjectData.m_ID)
+                Me.TargetObject = Me.FlowSheet.Collections.FlowsheetObjectCollection(Me.TargetObjectData.m_ID)
                 If Not Me.TargetObject Is Nothing Then Me.TargetObject.IsSpecAttached = True
             Catch ex As Exception
 
@@ -304,10 +304,10 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
             If Not Me.TargetObjectData Is Nothing Then
 
-                If formC.Collections.ObjectCollection.ContainsKey(Me.TargetObjectData.m_ID) Then
+                If formC.Collections.FlowsheetObjectCollection.ContainsKey(Me.TargetObjectData.m_ID) Then
 
                     With Me.TargetObjectData
-                        Return Me.formC.Collections.ObjectCollection(.m_ID).GetPropertyValue(.m_Property, su)
+                        Return Me.formC.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Property, su)
                     End With
 
                 Else
@@ -334,10 +334,10 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
             If Not Me.SourceObjectData Is Nothing Then
 
-                If formC.Collections.ObjectCollection.ContainsKey(Me.SourceObjectData.m_ID) Then
+                If formC.Collections.FlowsheetObjectCollection.ContainsKey(Me.SourceObjectData.m_ID) Then
 
                     With Me.SourceObjectData
-                        Return Me.formC.Collections.ObjectCollection(.m_ID).GetPropertyValue(.m_Property, su)
+                        Return Me.formC.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Property, su)
                     End With
 
                 Else
@@ -362,10 +362,10 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
             If Not Me.TargetObjectData Is Nothing Then
 
-                If formC.Collections.ObjectCollection.ContainsKey(Me.TargetObjectData.m_ID) Then
+                If formC.Collections.FlowsheetObjectCollection.ContainsKey(Me.TargetObjectData.m_ID) Then
 
                     With Me.TargetObjectData
-                        Return Me.formC.Collections.ObjectCollection(.m_ID).SetPropertyValue(.m_Property, val, su)
+                        Return Me.formC.Collections.FlowsheetObjectCollection(.m_ID).SetPropertyValue(.m_Property, val, su)
                     End With
 
                 Else
@@ -386,13 +386,13 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         Public Function GetTargetVarUnit()
 
-            Return Me.FlowSheet.Collections.ObjectCollection(Me.TargetObjectData.m_ID).GetPropertyUnit(Me.TargetObjectData.m_Property, Me.FlowSheet.Options.SelectedUnitSystem)
+            Return Me.FlowSheet.Collections.FlowsheetObjectCollection(Me.TargetObjectData.m_ID).GetPropertyUnit(Me.TargetObjectData.m_Property, Me.FlowSheet.Options.SelectedUnitSystem)
 
         End Function
 
         Public Function GetSourceVarUnit()
 
-            Return Me.FlowSheet.Collections.ObjectCollection(Me.SourceObjectData.m_ID).GetPropertyUnit(Me.SourceObjectData.m_Property, Me.FlowSheet.Options.SelectedUnitSystem)
+            Return Me.FlowSheet.Collections.FlowsheetObjectCollection(Me.SourceObjectData.m_ID).GetPropertyUnit(Me.SourceObjectData.m_Property, Me.FlowSheet.Options.SelectedUnitSystem)
 
         End Function
 
@@ -432,7 +432,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
                     Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
 
-                    Me.TargetObject = form.Collections.ObjectCollection(Me.TargetObjectData.m_ID)
+                    Me.TargetObject = form.Collections.FlowsheetObjectCollection(Me.TargetObjectData.m_ID)
                     Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
                     'Call function to calculate flowsheet
                     With objargs

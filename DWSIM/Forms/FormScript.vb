@@ -131,7 +131,7 @@ Imports System.Threading
         scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
         Dim Solver As New DWSIM.Flowsheet.FlowsheetSolver
         scope.SetVariable("Solver", Solver)
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsheet.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsheet.Collections.FlowsheetObjectCollection.Values
             scope.SetVariable(obj.GraphicObject.Tag.Replace("-", "_"), obj)
         Next
         Dim txtcode As String = scripttext
@@ -145,7 +145,7 @@ Imports System.Threading
                 Console.WriteLine("Error running script: " & ops.FormatException(ex).ToString)
                 Console.WriteLine()
             Else
-                fsheet.WriteToLog("Error running script: " & ops.FormatException(ex).ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Erro)
+                fsheet.WriteToLog("Error running script: " & ops.FormatException(ex).ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
             End If
         Finally
             engine.Runtime.Shutdown()
@@ -331,7 +331,7 @@ Imports System.Threading
             End If
         Next
 
-        fc.WriteToLog("Script Data updated sucessfully.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
+        fc.WriteToLog("Script Data updated sucessfully.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
 
     End Sub
 
@@ -397,7 +397,7 @@ Imports System.Threading
                 Me.Invalidate()
 
                 If scriptdata.LinkedObjectName <> "" Then
-                    .cbLinkedObject.SelectedItem = fc.Collections.ObjectCollection(scriptdata.LinkedObjectName).GraphicObject.Tag
+                    .cbLinkedObject.SelectedItem = fc.Collections.FlowsheetObjectCollection(scriptdata.LinkedObjectName).GraphicObject.Tag
                 Else
                     Select Case scriptdata.LinkedObjectType
                         Case Script.ObjectType.Simulation
@@ -472,7 +472,7 @@ Imports System.Threading
                 Me.Invalidate()
 
                 If scriptdata.LinkedObjectName <> "" Then
-                    .cbLinkedObject.SelectedItem = fc.Collections.ObjectCollection(scriptdata.LinkedObjectName).GraphicObject.Tag
+                    .cbLinkedObject.SelectedItem = fc.Collections.FlowsheetObjectCollection(scriptdata.LinkedObjectName).GraphicObject.Tag
                 Else
                     Select Case scriptdata.LinkedObjectType
                         Case Script.ObjectType.Simulation
@@ -664,7 +664,7 @@ Public Class DataGridViewTextStream
 
     Public Overrides Sub Write(ByVal buffer As Byte(), ByVal offset As Integer, ByVal count As Integer)
         Dim output As String = Encoding.UTF8.GetString(buffer, offset, count)
-        target.WriteToLog(output, Color.DarkGray, DWSIM.FormClasses.TipoAviso.Informacao)
+        target.WriteToLog(output, Color.DarkGray, DWSIM.Flowsheet.MessageType.Information)
     End Sub
 
 End Class

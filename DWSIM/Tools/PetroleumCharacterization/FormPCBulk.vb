@@ -764,7 +764,7 @@ Public Class FormPCBulk
             myCOMS.Phases(1).Compounds.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
             myCOMS.Phases(2).Compounds.Item(subst.Nome).ConstantProperties = subst.ConstantProperties
         Next
-        frm.Collections.ObjectCollection.Add(myCOMS.Nome, myCOMS)
+        frm.Collections.FlowsheetObjectCollection.Add(myCOMS.Nome, myCOMS)
         frm.Collections.CLCS_MaterialStreamCollection.Add(myCOMS.Nome, myCOMS)
         frm.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
         frm.FormSurface.FlowsheetDesignSurface.Invalidate()

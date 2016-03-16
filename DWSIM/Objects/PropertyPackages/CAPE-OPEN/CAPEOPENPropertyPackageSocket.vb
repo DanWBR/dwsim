@@ -208,7 +208,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CalcEquilibrium(Me.CurrentMaterialStream, s11 + s22, Nothing)
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
             Else
                 Try
@@ -216,7 +216,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CalcEquilibrium1(s1, s2, "Unspecified")
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
             End If
 
@@ -314,7 +314,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CalcEquilibrium(Me.CurrentMaterialStream, s11 + s22, Nothing)
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
             Else
                 Try
@@ -322,7 +322,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CalcEquilibrium1(s1, s2, "Unspecified")
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
             End If
 
@@ -447,7 +447,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyPackage).CalcEquilibrium(Me.CurrentMaterialStream, s11 + s22, Nothing)
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
             Else
                 Try
@@ -456,7 +456,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoEquilibriumRoutine).CalcEquilibrium(s1, s2, "Unspecified")
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
             End If
 
@@ -815,7 +815,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyPackage).CalcProp(Me.CurrentMaterialStream, New String() {"enthalpy"}, New String() {phase}, "Mixture")
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Return Me.CurrentMaterialStream.Phases(pid).Properties.enthalpy.GetValueOrDefault
             Else
@@ -823,7 +823,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"enthalpy"}, phase)
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Return Me.CurrentMaterialStream.Phases(pid).Properties.enthalpy.GetValueOrDefault
             End If
@@ -862,7 +862,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyPackage).CalcProp(Me.CurrentMaterialStream, New String() {"excessEnthalpy"}, New String() {phase}, "Mixture")
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Return Me.CurrentMaterialStream.Phases(pid).Properties.excessEnthalpy.GetValueOrDefault
             Else
@@ -870,7 +870,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"excessEnthalpy"}, phase)
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Return Me.CurrentMaterialStream.Phases(pid).Properties.excessEnthalpy.GetValueOrDefault
             End If
@@ -908,7 +908,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyPackage).CalcProp(Me.CurrentMaterialStream, New String() {"entropy"}, New String() {phase}, "Mixture")
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Return Me.CurrentMaterialStream.Phases(pid).Properties.entropy.GetValueOrDefault
             Else
@@ -916,7 +916,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"entropy"}, phase)
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Return Me.CurrentMaterialStream.Phases(pid).Properties.entropy.GetValueOrDefault
             End If
@@ -955,7 +955,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyPackage).CalcProp(Me.CurrentMaterialStream, New String() {"excessEntropy"}, New String() {phase}, "Mixture")
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Return Me.CurrentMaterialStream.Phases(pid).Properties.excessEntropy.GetValueOrDefault
             Else
@@ -963,7 +963,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyRoutine).CalcSinglePhaseProp(New String() {"excessEntropy"}, phase)
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Return Me.CurrentMaterialStream.Phases(pid).Properties.excessEntropy.GetValueOrDefault
             End If
@@ -1198,7 +1198,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     CType(_copp, ICapeThermoPropertyPackage).CalcProp(Me.CurrentMaterialStream, New String() {"fugacityCoefficient"}, New String() {phase}, "Mixture")
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Dim n As Integer = Me.CurrentMaterialStream.Phases(pid).Compounds.Count - 1
                 Dim i As Integer = 0
@@ -1213,7 +1213,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Me.CalcAndGetLnPhi(phase, T, P, Vx, 1, lnphi, lnphidt, lnphidp, lnphidn)
                 Catch ex As Exception
                     Dim ecu As CapeOpen.ECapeUser = _copp
-                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, FormClasses.TipoAviso.Erro)
+                    Me.CurrentMaterialStream.Flowsheet.WriteToLog(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
                 End Try
                 Dim n As Integer = UBound(lnphi)
                 Dim i As Integer

@@ -81,16 +81,16 @@ Public Class UI_AdjControlPanelForm
 
         Dim mvVal, cvVal, rfVal, maxval, minval As Double
 
-        If formC.Collections.ObjectCollection(myADJ.ControlledObjectData.m_ID).GraphicObject.Calculated Then
+        If formC.Collections.FlowsheetObjectCollection(myADJ.ControlledObjectData.m_ID).GraphicObject.Calculated Then
             cvVal = Me.GetCtlVarValue()
         End If
-        If formC.Collections.ObjectCollection(myADJ.ManipulatedObjectData.m_ID).GraphicObject.Calculated Then
+        If formC.Collections.FlowsheetObjectCollection(myADJ.ManipulatedObjectData.m_ID).GraphicObject.Calculated Then
             mvVal = Me.GetMnpVarValue()
             maxval = myADJ.MaxVal.GetValueOrDefault
             minval = myADJ.MinVal.GetValueOrDefault
         End If
         If myADJ.Referenced Then
-            If formC.Collections.ObjectCollection(myADJ.ReferencedObjectData.m_ID).GraphicObject.Calculated Then
+            If formC.Collections.FlowsheetObjectCollection(myADJ.ReferencedObjectData.m_ID).GraphicObject.Calculated Then
                 rfVal = Me.GetMnpVarValue()
             End If
         End If
@@ -529,7 +529,7 @@ Final3:
     Private Function GetCtlVarValue()
 
         With Me.myADJ.ControlledObjectData
-            Return formC.Collections.ObjectCollection(.m_ID).GetPropertyValue(.m_Property)
+            Return formC.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Property)
         End With
 
     End Function
@@ -537,7 +537,7 @@ Final3:
     Private Function GetMnpVarValue()
 
         With Me.myADJ.ManipulatedObjectData
-            Return formC.Collections.ObjectCollection(.m_ID).GetPropertyValue(.m_Property)
+            Return formC.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Property)
         End With
 
     End Function
@@ -545,7 +545,7 @@ Final3:
     Private Function SetMnpVarValue(ByVal val As Nullable(Of Double))
 
         With Me.myADJ.ManipulatedObjectData
-            formC.Collections.ObjectCollection(.m_ID).SetPropertyValue(.m_Property, val)
+            formC.Collections.FlowsheetObjectCollection(.m_ID).SetPropertyValue(.m_Property, val)
         End With
 
         Return 1
@@ -556,7 +556,7 @@ Final3:
 
         With Me.myADJ.ManipulatedObjectData
             With Me.myADJ.ControlledObjectData
-                Return formC.Collections.ObjectCollection(.m_ID).GetPropertyValue(.m_Name, su)
+                Return formC.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Name, su)
             End With
         End With
 

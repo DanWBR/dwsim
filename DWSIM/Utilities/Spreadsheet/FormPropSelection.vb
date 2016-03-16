@@ -228,9 +228,9 @@ Public Class FormPropSelection
 
             Dim properties As String()
             If mode = 0 Then
-                properties = formC.Collections.ObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+                properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
             Else
-                properties = formC.Collections.ObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
+                properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
             End If
 
             For Each prop As String In properties

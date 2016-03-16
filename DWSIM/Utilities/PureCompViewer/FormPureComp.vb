@@ -57,7 +57,7 @@ Public Class FormPureComp
             Me.Close()
         Else
             If Not DWSIM.App.IsRunningOnMono Then Me.ComboBox1.SelectedIndex = 0
-            Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("PURE001"), Color.Black, DWSIM.FormClasses.TipoAviso.Dica)
+            Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("PURE001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
         End If
 
     End Sub

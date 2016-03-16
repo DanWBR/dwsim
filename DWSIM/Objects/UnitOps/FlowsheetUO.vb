@@ -416,7 +416,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 Try
                     Dim id = obj.Nome
                     Dim gobj = obj.GraphicObject
-                    form.Collections.ObjectCollection.Add(id, obj)
+                    form.Collections.FlowsheetObjectCollection.Add(id, obj)
                     With form.Collections
                         Select Case obj.GraphicObject.TipoObjeto
                             Case Microsoft.Msdn.Samples.GraphicObjects.TipoObjeto.Compressor
@@ -508,31 +508,31 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 End Try
             Next
 
-            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.ObjectCollection.Values
+            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
                 Try
                     If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Adjust) IsNot Nothing Then
                         Dim so2 As DWSIM.SimulationObjects.SpecialOps.Adjust = so
-                        If form.Collections.ObjectCollection.ContainsKey(so2.ManipulatedObjectData.m_ID) Then
-                            so2.ManipulatedObject = form.Collections.ObjectCollection(so2.ManipulatedObjectData.m_ID)
+                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ManipulatedObjectData.m_ID) Then
+                            so2.ManipulatedObject = form.Collections.FlowsheetObjectCollection(so2.ManipulatedObjectData.m_ID)
                             DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToMv = so2.ManipulatedObject.GraphicObject
                         End If
-                        If form.Collections.ObjectCollection.ContainsKey(so2.ControlledObjectData.m_ID) Then
-                            so2.ControlledObject = form.Collections.ObjectCollection(so2.ControlledObjectData.m_ID)
+                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ControlledObjectData.m_ID) Then
+                            so2.ControlledObject = form.Collections.FlowsheetObjectCollection(so2.ControlledObjectData.m_ID)
                             DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToCv = so2.ControlledObject.GraphicObject
                         End If
-                        If form.Collections.ObjectCollection.ContainsKey(so2.ReferencedObjectData.m_ID) Then
-                            so2.ReferenceObject = form.Collections.ObjectCollection(so2.ReferencedObjectData.m_ID)
+                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ReferencedObjectData.m_ID) Then
+                            so2.ReferenceObject = form.Collections.FlowsheetObjectCollection(so2.ReferencedObjectData.m_ID)
                             DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
                         End If
                     End If
                     If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Spec) IsNot Nothing Then
                         Dim so2 As DWSIM.SimulationObjects.SpecialOps.Spec = so
-                        If form.Collections.ObjectCollection.ContainsKey(so2.TargetObjectData.m_ID) Then
-                            so2.TargetObject = form.Collections.ObjectCollection(so2.TargetObjectData.m_ID)
+                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.TargetObjectData.m_ID) Then
+                            so2.TargetObject = form.Collections.FlowsheetObjectCollection(so2.TargetObjectData.m_ID)
                             DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
                         End If
-                        If form.Collections.ObjectCollection.ContainsKey(so2.SourceObjectData.m_ID) Then
-                            so2.SourceObject = form.Collections.ObjectCollection(so2.SourceObjectData.m_ID)
+                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.SourceObjectData.m_ID) Then
+                            so2.SourceObject = form.Collections.FlowsheetObjectCollection(so2.SourceObjectData.m_ID)
                             DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
                         End If
                     End If
@@ -556,8 +556,8 @@ Namespace DWSIM.SimulationObjects.UnitOps
                         obj = GraphicObject.ReturnInstance(xel2.Element("Type").Value)
                     End If
                     obj.LoadData(xel2.Elements.ToList)
-                    DirectCast(obj, DWSIM.GraphicObjects.TableGraphic).BaseOwner = form.Collections.ObjectCollection(xel2.<Owner>.Value)
-                    form.Collections.ObjectCollection(xel2.<Owner>.Value).Tabela = obj
+                    DirectCast(obj, DWSIM.GraphicObjects.TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
+                    form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value).Tabela = obj
                     form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Flowsheet Table Information", ex))
@@ -666,8 +666,8 @@ Namespace DWSIM.SimulationObjects.UnitOps
             'For Each xel As XElement In data
             '    Try
             '        Dim id As String = xel.<Name>.Value
-            '        If form.Collections.ObjectCollection.ContainsKey(id) Then
-            '            Dim obj = form.Collections.ObjectCollection(id).GraphicObject
+            '        If form.Collections.FlowsheetObjectCollection.ContainsKey(id) Then
+            '            Dim obj = form.Collections.FlowsheetObjectCollection(id).GraphicObject
             '            obj.LoadData(xel.Elements.ToList)
             '        End If
             '    Catch ex As Exception
@@ -680,7 +680,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             For Each xel As XElement In data
                 Try
                     Dim id As String = xel.<Nome>.Value
-                    Dim obj = form.Collections.ObjectCollection(id)
+                    Dim obj = form.Collections.FlowsheetObjectCollection(id)
                     obj.LoadData(xel.Elements.ToList)
                     If TypeOf obj Is Streams.MaterialStream Then
                         For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
@@ -711,7 +711,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
             xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Form.Collections.ObjectCollection.Values
+            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Form.Collections.FlowsheetObjectCollection.Values
                 xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
             Next
 
@@ -750,17 +750,17 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
                     xel.RemoveAll()
 
-                    For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Fsheet.Collections.ObjectCollection.Values
+                    For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Fsheet.Collections.FlowsheetObjectCollection.Values
                         xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
                     Next
 
                     xdoc.Save(path)
 
-                    FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": " & DWSIM.App.GetLocalString("SubFSUpdateSuccess"), Color.Blue, FormClasses.TipoAviso.Informacao)
+                    FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": " & DWSIM.App.GetLocalString("SubFSUpdateSuccess"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
 
                 Catch ex As Exception
 
-                    FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": " & DWSIM.App.GetLocalString("SubFSUpdateFailed") & " " & ex.ToString, Color.Red, FormClasses.TipoAviso.Erro)
+                    FlowSheet.WriteToLog(Me.GraphicObject.Tag & ": " & DWSIM.App.GetLocalString("SubFSUpdateFailed") & " " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
 
                 End Try
 
@@ -787,8 +787,8 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                 If c.IsAttached Then
 
-                    msfrom = FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedFrom.Name)
-                    msto = Fsheet.Collections.ObjectCollection(InputConnections(Me.GraphicObject.InputConnectors.IndexOf(c)))
+                    msfrom = FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedFrom.Name)
+                    msto = Fsheet.Collections.FlowsheetObjectCollection(InputConnections(Me.GraphicObject.InputConnectors.IndexOf(c)))
 
                     win += msfrom.Phases(0).Properties.massflow.GetValueOrDefault
 
@@ -901,8 +901,8 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
                 If c.IsAttached Then
 
-                    msto = FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedTo.Name)
-                    msfrom = Fsheet.Collections.ObjectCollection(OutputConnections(Me.GraphicObject.OutputConnectors.IndexOf(c)))
+                    msto = FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name)
+                    msfrom = Fsheet.Collections.FlowsheetObjectCollection(OutputConnections(Me.GraphicObject.OutputConnectors.IndexOf(c)))
 
                     wout += msfrom.Phases(0).Properties.massflow.GetValueOrDefault
 
@@ -1011,7 +1011,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             For Each c In Me.GraphicObject.InputConnectors
                 If c.IsAttached Then
-                    Dim mstr = FlowSheet.Collections.ObjectCollection(c.AttachedConnector.AttachedFrom.Name)
+                    Dim mstr = FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedFrom.Name)
                     If Not mstr.GraphicObject.Calculated Then
                         Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
                         'Call function to calculate flowsheet
@@ -1035,9 +1035,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             Try
                 If prop.Contains("[I]") Then
-                    Return Fsheet.Collections.ObjectCollection(InputParams(pkey).ObjectID).GetPropertyValue(InputParams(pkey).ObjectProperty, su)
+                    Return Fsheet.Collections.FlowsheetObjectCollection(InputParams(pkey).ObjectID).GetPropertyValue(InputParams(pkey).ObjectProperty, su)
                 Else
-                    Return Fsheet.Collections.ObjectCollection(OutputParams(pkey).ObjectID).GetPropertyValue(OutputParams(pkey).ObjectProperty, su)
+                    Return Fsheet.Collections.FlowsheetObjectCollection(OutputParams(pkey).ObjectID).GetPropertyValue(OutputParams(pkey).ObjectProperty, su)
                 End If
             Catch ex As Exception
                 Return ex.ToString
@@ -1051,18 +1051,18 @@ Namespace DWSIM.SimulationObjects.UnitOps
                 Select Case proptype
                     Case PropertyType.ALL
                         For Each p In InputParams.Values
-                            proplist.Add(Fsheet.Collections.ObjectCollection(p.ObjectID).GraphicObject.Tag & " / " & DWSIM.App.GetPropertyName(p.ObjectProperty) & " / [I][" & p.ID & "]")
+                            proplist.Add(Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GraphicObject.Tag & " / " & DWSIM.App.GetPropertyName(p.ObjectProperty) & " / [I][" & p.ID & "]")
                         Next
                         For Each p In OutputParams.Values
-                            proplist.Add(Fsheet.Collections.ObjectCollection(p.ObjectID).GraphicObject.Tag & " / " & DWSIM.App.GetPropertyName(p.ObjectProperty) & " / [O][" & p.ID & "]")
+                            proplist.Add(Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GraphicObject.Tag & " / " & DWSIM.App.GetPropertyName(p.ObjectProperty) & " / [O][" & p.ID & "]")
                         Next
                     Case PropertyType.WR
                         For Each p In InputParams.Values
-                            proplist.Add(Fsheet.Collections.ObjectCollection(p.ObjectID).GraphicObject.Tag & " / " & DWSIM.App.GetPropertyName(p.ObjectProperty) & " / [I][" & p.ID & "]")
+                            proplist.Add(Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GraphicObject.Tag & " / " & DWSIM.App.GetPropertyName(p.ObjectProperty) & " / [I][" & p.ID & "]")
                         Next
                     Case PropertyType.RO
                         For Each p In OutputParams.Values
-                            proplist.Add(Fsheet.Collections.ObjectCollection(p.ObjectID).GraphicObject.Tag & " / " & DWSIM.App.GetPropertyName(p.ObjectProperty) & " / [O][" & p.ID & "]")
+                            proplist.Add(Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GraphicObject.Tag & " / " & DWSIM.App.GetPropertyName(p.ObjectProperty) & " / [O][" & p.ID & "]")
                         Next
                 End Select
             End If
@@ -1075,7 +1075,7 @@ Namespace DWSIM.SimulationObjects.UnitOps
             Dim cv As New DWSIM.SystemsOfUnits.Converter
             Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
 
-            Fsheet.Collections.ObjectCollection(InputParams(pkey).ObjectID).SetPropertyValue(InputParams(pkey).ObjectProperty, propval, su)
+            Fsheet.Collections.FlowsheetObjectCollection(InputParams(pkey).ObjectID).SetPropertyValue(InputParams(pkey).ObjectProperty, propval, su)
 
             Return 1
 
@@ -1087,9 +1087,9 @@ Namespace DWSIM.SimulationObjects.UnitOps
 
             Try
                 If prop.Contains("[I]") Then
-                    Return Fsheet.Collections.ObjectCollection(InputParams(pkey).ObjectID).GetPropertyUnit(InputParams(pkey).ObjectProperty, su)
+                    Return Fsheet.Collections.FlowsheetObjectCollection(InputParams(pkey).ObjectID).GetPropertyUnit(InputParams(pkey).ObjectProperty, su)
                 Else
-                    Return Fsheet.Collections.ObjectCollection(OutputParams(pkey).ObjectID).GetPropertyUnit(OutputParams(pkey).ObjectProperty, su)
+                    Return Fsheet.Collections.FlowsheetObjectCollection(OutputParams(pkey).ObjectID).GetPropertyUnit(OutputParams(pkey).ObjectProperty, su)
                 End If
             Catch ex As Exception
                 Return ex.ToString
@@ -1296,11 +1296,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.FlowsheetUO.UIFlowsheetUOViewer
 
                     For Each p In InputParams.Values
-                        If Fsheet.Collections.ObjectCollection.ContainsKey(p.ObjectID) Then
-                            .Item.Add(Fsheet.Collections.ObjectCollection(p.ObjectID).GraphicObject.Tag & ", " &
+                        If Fsheet.Collections.FlowsheetObjectCollection.ContainsKey(p.ObjectID) Then
+                            .Item.Add(Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GraphicObject.Tag & ", " &
                                       DWSIM.App.GetPropertyName(p.ObjectProperty) &
-                                      " (" & Fsheet.Collections.ObjectCollection(p.ObjectID).GetPropertyUnit(p.ObjectProperty, Me.FlowSheet.Options.SelectedUnitSystem) & ")",
-                                      Fsheet.Collections.ObjectCollection(p.ObjectID).GetPropertyValue(p.ObjectProperty, Me.FlowSheet.Options.SelectedUnitSystem), False,
+                                      " (" & Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GetPropertyUnit(p.ObjectProperty, Me.FlowSheet.Options.SelectedUnitSystem) & ")",
+                                      Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GetPropertyValue(p.ObjectProperty, Me.FlowSheet.Options.SelectedUnitSystem), False,
                                       DWSIM.App.GetLocalString("LinkedInputParms"), DWSIM.App.GetLocalString(""), True)
                             .Item(.Item.Count - 1).Tag = p.ID
                             .Item(.Item.Count - 1).Tag2 = "[I][" & p.ID & "]"
@@ -1308,11 +1308,11 @@ Namespace DWSIM.SimulationObjects.UnitOps
                     Next
 
                     For Each p In OutputParams.Values
-                        If Fsheet.Collections.ObjectCollection.ContainsKey(p.ObjectID) Then
-                            .Item.Add(Fsheet.Collections.ObjectCollection(p.ObjectID).GraphicObject.Tag & ", " &
+                        If Fsheet.Collections.FlowsheetObjectCollection.ContainsKey(p.ObjectID) Then
+                            .Item.Add(Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GraphicObject.Tag & ", " &
                                       DWSIM.App.GetPropertyName(p.ObjectProperty) &
-                                      " (" & Fsheet.Collections.ObjectCollection(p.ObjectID).GetPropertyUnit(p.ObjectProperty, Me.FlowSheet.Options.SelectedUnitSystem) & ")",
-                                      Fsheet.Collections.ObjectCollection(p.ObjectID).GetPropertyValue(p.ObjectProperty, Me.FlowSheet.Options.SelectedUnitSystem), True,
+                                      " (" & Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GetPropertyUnit(p.ObjectProperty, Me.FlowSheet.Options.SelectedUnitSystem) & ")",
+                                      Fsheet.Collections.FlowsheetObjectCollection(p.ObjectID).GetPropertyValue(p.ObjectProperty, Me.FlowSheet.Options.SelectedUnitSystem), True,
                                       DWSIM.App.GetLocalString("LinkedOutputParms"), DWSIM.App.GetLocalString(""), True)
                             .Item(.Item.Count - 1).Tag = p.ID
                         End If

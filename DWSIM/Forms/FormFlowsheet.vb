@@ -29,7 +29,7 @@ Imports Microsoft.Win32
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
-Imports DWSIM.DWSIM.FormClasses
+Imports DWSIM.DWSIM.Flowsheet
 Imports DWSIM.DWSIM.GraphicObjects
 Imports DWSIM.DWSIM.Outros
 Imports WeifenLuo.WinFormsUI.Docking
@@ -85,7 +85,7 @@ Imports System.Reflection
 
     Public FormCL As FormCLM
 
-    Public WithEvents Options As New DWSIM.FormClasses.ClsFormOptions
+    Public WithEvents Options As New DWSIM.Flowsheet.FlowsheetVariables
 
     Public Conversor As New DWSIM.SystemsOfUnits.Converter
 
@@ -103,7 +103,7 @@ Imports System.Reflection
 
     Public prevcolor1, prevcolor2 As Color
 
-    Public Collections As New DWSIM.FormClasses.ClsObjectCollections
+    Public Collections As New DWSIM.Flowsheet.ObjectCollection
 
     Public ID As String
 
@@ -221,7 +221,7 @@ Imports System.Reflection
             FormSpreadsheet.Show(dckPanel)
             FormMatList.Show(FormSpreadsheet.Pane, FormSpreadsheet)
             FormSurface.Show(FormSpreadsheet.Pane, Nothing)
-             FormLog.Show(FormSurface.Pane, DockAlignment.Bottom, 0.2)
+            FormLog.Show(FormSurface.Pane, DockAlignment.Bottom, 0.2)
             FormProps.Show(dckPanel)
 
             dckPanel.BringToFront()
@@ -345,10 +345,10 @@ Imports System.Reflection
 
         Me.ProcessScripts(Script.EventType.SimulationOpened, Script.ObjectType.Simulation)
 
-        WriteToLog(DWSIM.App.GetLocalTipString("FLSH003"), Color.Black, TipoAviso.Dica)
-        WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, TipoAviso.Dica)
-        WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, TipoAviso.Dica)
-        WriteToLog(DWSIM.App.GetLocalTipString("FLSH005"), Color.Black, TipoAviso.Dica)
+        WriteToLog(DWSIM.App.GetLocalTipString("FLSH003"), Color.Black, MessageType.Tip)
+        WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, MessageType.Tip)
+        WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, MessageType.Tip)
+        WriteToLog(DWSIM.App.GetLocalTipString("FLSH005"), Color.Black, MessageType.Tip)
 
         If My.Settings.ShowWhatsNew Then
             If Not DWSIM.App.IsRunningOnMono Then
@@ -368,7 +368,7 @@ Imports System.Reflection
         End If
 
         'dispose objects
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
             If obj.disposedValue = False Then obj.Dispose()
         Next
 
@@ -463,13 +463,13 @@ Imports System.Reflection
                                 If scr.Linked And scr.LinkedEventType = sourceevent And scr.LinkedObjectType = sourceobj And scr.LinkedObjectName = sourceobjname Then
                                     If My.Application.CommandLineMode Then
                                         Console.WriteLine()
-                                        Console.WriteLine("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.ObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...")
+                                        Console.WriteLine("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.FlowsheetObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...")
                                         Console.WriteLine()
                                     Else
                                         If scr.LinkedObjectName <> "" Then
-                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.ObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...", Color.Blue, TipoAviso.Informacao)
+                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.FlowsheetObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...", Color.Blue, MessageType.Information)
                                         Else
-                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", Color.Blue, TipoAviso.Informacao)
+                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", Color.Blue, MessageType.Information)
                                         End If
                                     End If
                                     FormScript.RunScript(scr.ScriptText, Me)
@@ -565,7 +565,7 @@ Imports System.Reflection
 
     Public Function GetFlowsheetSimulationObject(ByVal tag As String) As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.ObjectCollection.Values
+        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
             If obj.GraphicObject.Tag = tag Then
                 Return obj
             End If
@@ -582,7 +582,7 @@ Imports System.Reflection
         Return myNewPoint
     End Function
 
-    Public Sub WriteToLog(ByVal texto As String, ByVal cor As Color, ByVal tipo As DWSIM.FormClasses.TipoAviso)
+    Public Sub WriteToLog(ByVal texto As String, ByVal cor As Color, ByVal tipo As DWSIM.Flowsheet.TipoAviso)
 
         If texto.Trim <> "" Then
 
@@ -605,13 +605,13 @@ Imports System.Reflection
                                                          Dim img As Bitmap
                                                          Dim strtipo As String
                                                          Select Case tipo
-                                                             Case DWSIM.FormClasses.TipoAviso.Aviso
+                                                             Case DWSIM.Flowsheet.MessageType.Warning
                                                                  img = My.Resources._error
                                                                  strtipo = DWSIM.App.GetLocalString("Aviso")
-                                                             Case DWSIM.FormClasses.TipoAviso.Erro
+                                                             Case DWSIM.Flowsheet.MessageType.GeneralError
                                                                  img = My.Resources.exclamation
                                                                  strtipo = DWSIM.App.GetLocalString("Erro")
-                                                             Case DWSIM.FormClasses.TipoAviso.Dica
+                                                             Case DWSIM.Flowsheet.MessageType.Tip
                                                                  If Not My.Settings.ShowTips Then Exit Sub
                                                                  img = My.Resources.lightbulb
                                                                  strtipo = DWSIM.App.GetLocalString("Dica")
@@ -664,7 +664,7 @@ Imports System.Reflection
     End Sub
 
     Public Sub WriteMessage(ByVal message As String)
-        WriteToLog(message, Color.Black, DWSIM.FormClasses.TipoAviso.Informacao)
+        WriteToLog(message, Color.Black, DWSIM.Flowsheet.MessageType.Information)
     End Sub
 
     Public Sub UpdateStatusLabel(ByVal message As String)
@@ -713,7 +713,7 @@ Imports System.Reflection
         If Collections.SolidsSeparatorCollection Is Nothing Then Collections.SolidsSeparatorCollection = New Dictionary(Of String, SolidSeparatorGraphic)
         If Collections.FilterCollection Is Nothing Then Collections.FilterCollection = New Dictionary(Of String, FilterGraphic)
 
-        If Collections.ObjectCollection Is Nothing Then Collections.ObjectCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
+        If Collections.FlowsheetObjectCollection Is Nothing Then Collections.FlowsheetObjectCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
 
         'Creates all the actual unit operations collections.
         If Collections.CLCS_MaterialStreamCollection Is Nothing Then Collections.CLCS_MaterialStreamCollection = New Dictionary(Of String, DWSIM.SimulationObjects.Streams.MaterialStream)
@@ -922,7 +922,7 @@ Imports System.Reflection
 
         If Not Me.FormSurface.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
-            Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Collections.ObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+            Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
             'Call function to calculate flowsheet
             Dim objargs As New DWSIM.Outros.StatusChangeEventArgs
@@ -953,10 +953,10 @@ Imports System.Reflection
                 Case TipoObjeto.GO_Tabela
                     DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.TableGraphic).CopyToClipboard()
                 Case Else
-                    Collections.ObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).CopyDataToClipboard(Options.SelectedUnitSystem, Options.NumberFormat)
+                    Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).CopyDataToClipboard(Options.SelectedUnitSystem, Options.NumberFormat)
             End Select
         Catch ex As Exception
-            WriteToLog("Error copying data to clipboard: " & ex.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Erro)
+            WriteToLog("Error copying data to clipboard: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
         End Try
     End Sub
     Private Sub tsbCutObj_Click(sender As Object, e As EventArgs) Handles tsbCutObj.Click
@@ -1160,7 +1160,7 @@ Imports System.Reflection
         Me.tsbAtivar.Checked = True
         Me.Options.CalculatorActivated = True
         Me.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorOcioso")
-        Me.WriteToLog(DWSIM.App.GetLocalString("Calculadorativado"), Color.DimGray, DWSIM.FormClasses.TipoAviso.Informacao)
+        Me.WriteToLog(DWSIM.App.GetLocalString("Calculadorativado"), Color.DimGray, DWSIM.Flowsheet.MessageType.Information)
         If Not Me.CalculationQueue Is Nothing Then Me.CalculationQueue.Clear()
     End Sub
 
@@ -1276,7 +1276,7 @@ Imports System.Reflection
 
             Me.FormSurface.UpdateSelectedObject()
 
-            For Each o In Collections.ObjectCollection.Values
+            For Each o In Collections.FlowsheetObjectCollection.Values
                 o.UpdatePropertyNodes(Me.Options.SelectedUnitSystem, Me.Options.NumberFormat)
             Next
 
@@ -1488,12 +1488,12 @@ Imports System.Reflection
                 Using gzs As New IO.BufferedStream(New Compression.GZipStream(ms, Compression.CompressionMode.Decompress, True), 64 * 1024)
                     gzs.CopyTo(decompressedstream)
                     gzs.Close()
-                    Me.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatingData") & " " & Math.Round(decompressedstream.Length / 1024).ToString & " KB", Color.Brown, TipoAviso.Informacao)
+                    Me.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatingData") & " " & Math.Round(decompressedstream.Length / 1024).ToString & " KB", Color.Brown, MessageType.Information)
                     decompressedstream.Position = 0
                     Dim xdoc As XDocument = XDocument.Load(decompressedstream)
                     DWSIM.SimulationObjects.UnitOps.Flowsheet.UpdateProcessData(Me, xdoc)
                     DWSIM.Flowsheet.FlowsheetSolver.UpdateDisplayStatus(Me)
-                    Me.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatedDataOK"), Color.Brown, TipoAviso.Informacao)
+                    Me.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatedDataOK"), Color.Brown, MessageType.Information)
                 End Using
             End Using
         End Using
@@ -1639,15 +1639,15 @@ Imports System.Reflection
 
                         If My.Application.PushUndoRedoAction Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.ObjectRemoved,
                                              .NewValue = gobj,
-                                             .OldValue = Me.Collections.ObjectCollection(namesel).SaveData(),
+                                             .OldValue = Me.Collections.FlowsheetObjectCollection(namesel).SaveData(),
                                              .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectRemoved"), gobj.Tag)})
 
                         Me.Collections.EnergyStreamCollection.Remove(namesel)
                         'DWSIM
                         Me.Collections.CLCS_EnergyStreamCollection(namesel).Dispose()
                         Me.Collections.CLCS_EnergyStreamCollection.Remove(namesel)
-                        Me.Collections.ObjectCollection.Remove(namesel)
-                        Me.Collections.ObjectCollection.Remove(namesel)
+                        Me.Collections.FlowsheetObjectCollection.Remove(namesel)
+                        Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                         Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
 
                     Else
@@ -1666,7 +1666,7 @@ Imports System.Reflection
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
                         Else
 
-                            Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Me.Collections.ObjectCollection(SelectedObj.Name)
+                            Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Me.Collections.FlowsheetObjectCollection(SelectedObj.Name)
                             DeCalculateDisconnectedObject(Me, SelectedObj, "Out")
 
                             gobj = SelectedObj
@@ -1694,204 +1694,204 @@ Imports System.Reflection
 
                             If My.Application.PushUndoRedoAction Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.ObjectRemoved,
                                                                          .NewValue = gobj,
-                                                                         .OldValue = Me.Collections.ObjectCollection(namesel).SaveData(),
+                                                                         .OldValue = Me.Collections.FlowsheetObjectCollection(namesel).SaveData(),
                                                                          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectRemoved"), gobj.Tag)})
 
                             'dispose object
-                            Me.Collections.ObjectCollection(namesel).Dispose()
+                            Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
 
                             Select Case SelectedObj.TipoObjeto
                                 Case TipoObjeto.NodeIn
                                     Me.Collections.MixerCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_MixerCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.NodeOut
                                     Me.Collections.SplitterCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_SplitterCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.NodeEn
                                     Me.Collections.MixerENCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_EnergyMixerCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.Pump
                                     Me.Collections.PumpCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_PumpCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.Tank
                                     Me.Collections.TankCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_TankCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.Vessel
                                     Me.Collections.SeparatorCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_VesselCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.MaterialStream
                                     Me.Collections.MaterialStreamCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_MaterialStreamCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.Compressor
                                     Me.Collections.CompressorCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_CompressorCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.Expander
                                     Me.Collections.TurbineCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_TurbineCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.TPVessel
                                     Me.Collections.TPSeparatorCollection.Remove(namesel)
                                 Case TipoObjeto.Cooler
                                     Me.Collections.CoolerCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_CoolerCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.Heater
                                     Me.Collections.HeaterCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_HeaterCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.Pipe
                                     Me.Collections.CLCS_PipeCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.PipeCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.Valve
                                     Me.Collections.ValveCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_ValveCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.OT_Ajuste
                                     Me.Collections.AdjustCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_AdjustCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.OT_Especificacao
-                                    If Me.Collections.ObjectCollection.ContainsKey(Me.Collections.CLCS_SpecCollection(namesel).TargetObjectData.m_ID) Then
-                                        Me.Collections.ObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).TargetObjectData.m_ID).IsSpecAttached = False
-                                        Me.Collections.ObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).TargetObjectData.m_ID).AttachedSpecId = ""
+                                    If Me.Collections.FlowsheetObjectCollection.ContainsKey(Me.Collections.CLCS_SpecCollection(namesel).TargetObjectData.m_ID) Then
+                                        Me.Collections.FlowsheetObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).TargetObjectData.m_ID).IsSpecAttached = False
+                                        Me.Collections.FlowsheetObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).TargetObjectData.m_ID).AttachedSpecId = ""
                                     End If
-                                    If Me.Collections.ObjectCollection.ContainsKey(Me.Collections.CLCS_SpecCollection(namesel).SourceObjectData.m_ID) Then
-                                        Me.Collections.ObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).SourceObjectData.m_ID).IsSpecAttached = False
-                                        Me.Collections.ObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).SourceObjectData.m_ID).AttachedSpecId = ""
+                                    If Me.Collections.FlowsheetObjectCollection.ContainsKey(Me.Collections.CLCS_SpecCollection(namesel).SourceObjectData.m_ID) Then
+                                        Me.Collections.FlowsheetObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).SourceObjectData.m_ID).IsSpecAttached = False
+                                        Me.Collections.FlowsheetObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).SourceObjectData.m_ID).AttachedSpecId = ""
                                     End If
                                     Me.Collections.SpecCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_SpecCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.OT_Reciclo
                                     Me.Collections.RecycleCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_RecycleCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.OT_EnergyRecycle
                                     Me.Collections.EnergyRecycleCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_EnergyRecycleCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.HeatExchanger
                                     Me.Collections.HeatExchangerCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_HeatExchangerCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.ShortcutColumn
                                     Me.Collections.HeatExchangerCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_HeatExchangerCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.OrificePlate
                                     Me.Collections.OrificePlateCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_OrificePlateCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.ComponentSeparator
                                     Me.Collections.ComponentSeparatorCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_ComponentSeparatorCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.CustomUO
                                     Me.Collections.CustomUOCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_CustomUOCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.ExcelUO
                                     Me.Collections.ExcelUOCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_ExcelUOCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.FlowsheetUO
                                     Me.Collections.FlowsheetUOCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_FlowsheetUOCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.CapeOpenUO
                                     Me.Collections.CapeOpenUOCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_CapeOpenUOCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.SolidSeparator
                                     Me.Collections.SolidsSeparatorCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_SolidsSeparatorCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.Filter
                                     Me.Collections.FilterCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_FilterCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.RCT_Conversion
                                     Me.Collections.ReactorConversionCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_ReactorConversionCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.RCT_CSTR
                                     Me.Collections.ReactorCSTRCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_ReactorCSTRCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.RCT_Equilibrium
                                     Me.Collections.ReactorEquilibriumCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_ReactorEquilibriumCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.RCT_Gibbs
                                     Me.Collections.ReactorGibbsCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_ReactorGibbsCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.RCT_PFR
                                     Me.Collections.ReactorPFRCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_ReactorPFRCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.DistillationColumn
                                     Me.Collections.DistillationColumnCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_DistillationColumnCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.AbsorptionColumn
                                     Me.Collections.AbsorptionColumnCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_AbsorptionColumnCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.RefluxedAbsorber
                                     Me.Collections.RefluxedAbsorberCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_RefluxedAbsorberCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                                 Case TipoObjeto.ReboiledAbsorber
                                     Me.Collections.ReboiledAbsorberCollection.Remove(namesel)
                                     'DWSIM
                                     Me.Collections.CLCS_ReboiledAbsorberCollection.Remove(namesel)
-                                    Me.Collections.ObjectCollection.Remove(namesel)
+                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                             End Select
 
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
@@ -1920,7 +1920,7 @@ Imports System.Reflection
 
     Public Sub DisconnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal triggercalc As Boolean = False)
 
-        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, DWSIM.FormClasses.TipoAviso.Dica)
+        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
         Dim conObj As ConnectorGraphic = Nothing
         Dim SelObj As GraphicObject = gObjFrom
@@ -1994,7 +1994,7 @@ Imports System.Reflection
 
     Public Sub ConnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal fidx As Integer = -1, Optional ByVal tidx As Integer = -1)
 
-        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, DWSIM.FormClasses.TipoAviso.Dica)
+        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
         If gObjFrom.TipoObjeto <> TipoObjeto.GO_Figura And gObjFrom.TipoObjeto <> TipoObjeto.GO_Tabela And _
         gObjFrom.TipoObjeto <> TipoObjeto.GO_Tabela And gObjFrom.TipoObjeto <> TipoObjeto.GO_TabelaRapida And _
@@ -2143,11 +2143,11 @@ Imports System.Reflection
                         End If
                     End If
                 Else
-                    Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, TipoAviso.Informacao)
+                    Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, MessageType.Information)
                     Exit Sub
                 End If
             Else
-                Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, TipoAviso.Informacao)
+                Me.WriteToLog(DWSIM.App.GetLocalString("Nohobjetosaseremcone"), Color.Blue, MessageType.Information)
                 Exit Sub
             End If
             If con1OK = True And con2OK = True Then
@@ -2540,7 +2540,7 @@ Imports System.Reflection
                 End With
             End If
         Catch ex As Exception
-            Me.WriteToLog("Error creating CAPE-OPEN Flowsheet Monitoring Object: " & ex.ToString, Color.Red, DWSIM.FormClasses.TipoAviso.Erro)
+            Me.WriteToLog("Error creating CAPE-OPEN Flowsheet Monitoring Object: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
         Finally
             If TryCast(_como, CapeOpen.ICapeUtilities) IsNot Nothing Then
                 With CType(_como, CapeOpen.ICapeUtilities)
@@ -2603,7 +2603,7 @@ Imports System.Reflection
 
     Public Function GetStreamCollection() As Object Implements CapeOpen.ICapeFlowsheetMonitoring.GetStreamCollection
         Dim _col As New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CCapeCollection
-        For Each o As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.ObjectCollection.Values
+        For Each o As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
             If TryCast(o, CapeOpen.ICapeThermoMaterialObject) IsNot Nothing Then
                 'object is a CAPE-OPEN Material Object
                 _col._icol.Add(o)
@@ -2617,7 +2617,7 @@ Imports System.Reflection
 
     Public Function GetUnitOperationCollection() As Object Implements CapeOpen.ICapeFlowsheetMonitoring.GetUnitOperationCollection
         Dim _col As New DWSIM.SimulationObjects.UnitOps.Auxiliary.CapeOpen.CCapeCollection
-        For Each o As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.ObjectCollection.Values
+        For Each o As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
             If TryCast(o, CapeOpen.ICapeUnit) IsNot Nothing Then
                 'object is a CAPE-OPEN Unit Operation
                 _col._icol.Add(o)
@@ -2774,7 +2774,7 @@ Imports System.Reflection
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Collections.ObjectCollection.Values
+        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Collections.FlowsheetObjectCollection.Values
             If so.GraphicObject.Selected Then
                 xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
                 If TypeOf so Is Streams.MaterialStream Then
@@ -2987,7 +2987,7 @@ Imports System.Reflection
 
                 Case UndoRedoActionType.SimulationObjectPropertyChanged
 
-                    Dim fobj = Me.Collections.ObjectCollection(act.ObjID)
+                    Dim fobj = Me.Collections.FlowsheetObjectCollection(act.ObjID)
 
                     If fobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL).Contains(act.PropertyName) Then
                         'Property is listed, set using SetProperty
@@ -3045,10 +3045,10 @@ Imports System.Reflection
                     Dim gobj1 = DirectCast(act.NewValue, GraphicObject)
 
                     If undo Then
-                        Collections.ObjectCollection(FormSurface.AddObjectToSurface(gobj1.TipoObjeto, gobj1.X, gobj1.Y, gobj1.Tag, gobj1.Name)).LoadData(act.OldValue)
+                        Collections.FlowsheetObjectCollection(FormSurface.AddObjectToSurface(gobj1.TipoObjeto, gobj1.X, gobj1.Y, gobj1.Tag, gobj1.Name)).LoadData(act.OldValue)
                         FormSurface.FlowsheetDesignSurface.drawingObjects.FindObjectWithName(gobj1.Name).LoadData(gobj1.SaveData)
                         If gobj1.TipoObjeto = TipoObjeto.MaterialStream Then
-                            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(Collections.ObjectCollection(gobj1.Name), Streams.MaterialStream).Phases.Values
+                            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(Collections.FlowsheetObjectCollection(gobj1.Name), Streams.MaterialStream).Phases.Values
                                 For Each c As ConstantProperties In Options.SelectedComponents.Values
                                     phase.Compounds(c.Name).ConstantProperties = c
                                 Next
@@ -3224,7 +3224,7 @@ Imports System.Reflection
 
         Catch ex As Exception
 
-            WriteToLog(ex.ToString(), Color.Red, TipoAviso.Erro)
+            WriteToLog(ex.ToString(), Color.Red, MessageType.GeneralError)
 
         End Try
 
