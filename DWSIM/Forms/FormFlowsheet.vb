@@ -2632,7 +2632,7 @@ Imports System.Reflection
         Dim compoundstoremove As New List(Of String)
 
         For Each xel As XElement In data
-            Dim id As String = pkey & xel.<Nome>.Value
+            Dim id As String = pkey & xel.<Name>.Value
             Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
             Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
             Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In

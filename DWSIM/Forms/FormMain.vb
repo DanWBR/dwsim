@@ -1167,6 +1167,7 @@ Public Class FormMain
                 End If
                 If Not TypeOf obj Is DWSIM.GraphicObjects.TableGraphic Then
                     form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
+                    form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
                     obj.CreateConnectors(0, 0)
                 End If
             Catch ex As Exception
@@ -1306,6 +1307,15 @@ Public Class FormMain
 
     End Sub
 
+    Sub UpdateElement(xel As XElement)
+
+        If xel.Name = "TipoObjeto" Then xel.Name = "ObjectType"
+        If xel.Name = "Nome" Then xel.Name = "Name"
+        If xel.Name = "Descricao" Then xel.Name = "Description"
+        If xel.Name = "Tipo" Then xel.Name = "Type"
+
+    End Sub
+
     Sub LoadXML(ByVal path As String, Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False)
 
         My.Application.PushUndoRedoAction = False
@@ -1315,6 +1325,10 @@ Public Class FormMain
         Dim excs As New Concurrent.ConcurrentBag(Of Exception)
 
         Dim xdoc As XDocument = XDocument.Load(path)
+
+        For Each xel1 As XElement In xdoc.Descendants
+            UpdateElement(xel1)
+        Next
 
         Dim form As FormFlowsheet = New FormFlowsheet()
         My.Application.CAPEOPENMode = False
@@ -1361,26 +1375,6 @@ Public Class FormMain
         complist = Nothing
         orderedlist = Nothing
 
-        'For Each xel As XElement In data
-        '    Try
-        '        Dim obj As New ConstantProperties
-        '        obj.LoadData(xel.Elements.ToList)
-        '        'If Not My.Settings.ReplaceCompoundConstantProperties Then
-        '        '    If Me.AvailableComponents.ContainsKey(obj.Name) Then
-        '        '        obj = Me.AvailableComponents(obj.Name)
-        '        '    End If
-        '        'End If
-        '        form.Options.SelectedComponents.Add(obj.Name, obj)
-        '    Catch ex As Exception
-        '        excs.Add(New Exception("Error Loading Compound Information", ex))
-        '    End Try
-        'Next
-
-        'If Not forcommandline Then
-        '    fls.Label2.Text = "Loading Property Packages..."
-        '    Application.DoEvents()
-        'End If
-
         data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
 
         For Each xel As XElement In data
@@ -1408,7 +1402,7 @@ Public Class FormMain
 
             Parallel.ForEach(data, Sub(xel)
                                        Try
-                                           Dim id As String = xel.<Nome>.Value
+                                           Dim id As String = xel.<Name>.Value
                                            Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                                            Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
                                            Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
@@ -1439,7 +1433,7 @@ Public Class FormMain
 
             For Each xel In data
                 Try
-                    Dim id As String = xel.<Nome>.Value
+                    Dim id As String = xel.<Name>.Value
                     Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                     Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
                     Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In

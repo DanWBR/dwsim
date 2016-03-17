@@ -51,52 +51,52 @@ Public Class XMLSerializer
                     If Not skip Then
                         If obj.GetType.GetProperty(prop.Name) IsNot Nothing Then
                             If TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Interfaces.ICustomXMLSerialization Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As List(Of XElement) = xel.Descendants.ToList()
                                     DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), Interfaces.ICustomXMLSerialization).LoadData(val)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Single Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 Dim val As Single = Single.Parse(xel.Value, ci)
                                 obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Double Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As Double = Double.Parse(xel.Value, ci)
                                     obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
                             ElseIf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Nothing Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As Nullable(Of Double)
                                     If xel.Value <> "" Then val = Double.Parse(xel.Value, ci)
                                     If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Integer Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 Dim val As Integer = xel.Value
                                 obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Boolean Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As Boolean = xel.Value
                                     obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is String Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As Object = xel.Value
                                     If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is [Enum] Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As String = xel.Value
                                     If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, [Enum].Parse(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing).GetType, val), Nothing)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Font Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 Try
                                     Dim val As Font = New FontConverter().ConvertFromInvariantString(xel.Value)
                                     obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
@@ -104,21 +104,21 @@ Public Class XMLSerializer
                                     obj.GetType.GetProperty(prop.Name).SetValue(obj, New Font("Arial", 8), Nothing)
                                 End Try
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Color Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 Dim val As Color = ColorTranslator.FromHtml(xel.Value)
                                 obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ArrayList Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 Dim val As ArrayList = StringToArray(xel.Value, ci)
                                 If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Byte Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As Byte = xel.Value
                                     obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Date Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As Date = Date.Parse(xel.Value, CultureInfo.InvariantCulture)
                                     obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
@@ -143,54 +143,54 @@ Public Class XMLSerializer
                 If Not skip Then
                     If obj.GetType.GetField(prop.Name) IsNot Nothing Then
                         If TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Interfaces.ICustomXMLSerialization Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As List(Of XElement) = xel.Descendants.ToList()
                                 DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), Interfaces.ICustomXMLSerialization).LoadData(val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Single Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             Dim val As Single = Single.Parse(xel.Value, ci)
                             obj.GetType.GetField(prop.Name).SetValue(obj, val)
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Double Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As Double = Double.Parse(xel.Value, ci)
                                 obj.GetType.GetField(prop.Name).SetValue(obj, val)
                             End If
                         ElseIf obj.GetType.GetField(prop.Name).GetValue(obj) Is Nothing Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As Nullable(Of Double)
                                 If xel.Value <> "" Then val = Double.Parse(xel.Value, ci)
                                 If Not val Is Nothing Then obj.GetType.GetField(prop.Name).SetValue(obj, val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Integer Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As Integer = xel.Value
                                 obj.GetType.GetField(prop.Name).SetValue(obj, val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Boolean Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As Boolean = xel.Value
                                 obj.GetType.GetField(prop.Name).SetValue(obj, val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is String Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As String = xel.Value
                                 obj.GetType.GetField(prop.Name).SetValue(obj, val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is [Enum] Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As String = xel.Value
                                 If Not val Is Nothing Then obj.GetType.GetField(prop.Name).SetValue(obj, [Enum].Parse(obj.GetType.GetField(prop.Name).GetValue(obj).GetType, val))
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Font Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Try
                                     Dim val As Font = New FontConverter().ConvertFromInvariantString(xel.Value)
@@ -200,21 +200,21 @@ Public Class XMLSerializer
                                 End Try
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Color Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             Dim val As Color = ColorTranslator.FromHtml(xel.Value)
                             obj.GetType.GetField(prop.Name).SetValue(obj, val)
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is ArrayList Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             Dim val As ArrayList = StringToArray(xel.Value, ci)
                             If Not val Is Nothing Then obj.GetType.GetField(prop.Name).SetValue(obj, val)
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Byte Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As Byte = xel.Value
                                 obj.GetType.GetField(prop.Name).SetValue(obj, val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Date Then
-                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).SingleOrDefault
+                            Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As Date = Date.Parse(xel.Value, CultureInfo.InvariantCulture)
                                 obj.GetType.GetField(prop.Name).SetValue(obj, val)

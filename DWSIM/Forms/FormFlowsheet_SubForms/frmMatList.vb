@@ -1,4 +1,5 @@
 ﻿Imports DWSIM.DWSIM.SimulationObjects
+Imports System.Linq
 
 Public Class frmMatList
 
@@ -30,7 +31,7 @@ Public Class frmMatList
             Dim i, n As Integer
             n = Flowsheet.Collections.FlowsheetObjectCollection.Values.Count
             i = 1
-            For Each ms In Flowsheet.Collections.FlowsheetObjectCollection.Values
+            For Each ms In Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is MaterialStream)
                 ToolStripLabel1.Text = i & "/" & n & "..."
                 AddColumn(ms)
                 i += 1

@@ -301,7 +301,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             Parallel.ForEach(data, Sub(xel)
                                        Try
-                                           Dim id As String = xel.<Nome>.Value
+                                           Dim id As String = xel.<Name>.Value
                                            Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                                            Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
                                            Dim gobj As GraphicObject = (From go As GraphicObject In
@@ -511,7 +511,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             For Each xel As XElement In data
                 Try
-                    Dim id As String = xel.<Nome>.Value
+                    Dim id As String = xel.<Name>.Value
                     Dim obj = form.Collections.FlowsheetObjectCollection(id)
                     obj.LoadData(xel.Elements.ToList)
                     If TypeOf obj Is Streams.MaterialStream Then

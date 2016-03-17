@@ -62,7 +62,7 @@ Namespace DWSIM.SimulationObjects.Streams
             Me.Phases.Clear()
 
             For Each xel As XElement In dataPhases
-                Dim p As New DWSIM.Thermodynamics.BaseClasses.Phase(xel.<Nome>.Value, "")
+                Dim p As New DWSIM.Thermodynamics.BaseClasses.Phase(xel.<Name>.Value, "")
                 p.LoadData(xel.Elements.ToList)
                 Me.Phases.Add(xel.<ID>.Value, p)
             Next
