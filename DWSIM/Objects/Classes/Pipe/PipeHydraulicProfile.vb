@@ -61,7 +61,7 @@ Imports System.Linq
         For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Sections").Elements.ToList
             Dim pr As New PipeSection()
             pr.LoadData(xel.Elements.ToList)
-            pr.ObjectType = pr.Tipo.Replace("°", " dg")
+            pr.Tipo = pr.Tipo.Replace("°", " dg")
             m_collection.Add(xel.@ID, pr)
         Next
 

@@ -147,7 +147,8 @@ Namespace DWSIM.SimulationObjects.Streams
             Return DebugText
 
         End Function
-        Public Sub Validate()
+
+        Public Overrides Sub Validate()
 
             Dim mytag As String = ""
             If Not Me.GraphicObject Is Nothing Then mytag = Me.GraphicObject.Tag
@@ -307,7 +308,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public ReadOnly Property Phases() As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Phase)
+        Public Overrides ReadOnly Property Phases() As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Phase)
             Get
                 Return m_Phases
             End Get
@@ -342,7 +343,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <param name="equilibrium"></param>
         ''' <param name="properties"></param>
         ''' <remarks></remarks>
-        Public Sub Calculate(equilibrium As Boolean, properties As Boolean)
+        Public Shadows Sub Calculate(equilibrium As Boolean, properties As Boolean)
 
             Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
 
@@ -526,7 +527,7 @@ Namespace DWSIM.SimulationObjects.Streams
                                                       My.Application.AppTaskScheduler)
                             Task.WaitAll(task1, task2, task3, task4, task5, task6)
                         Catch ae As AggregateException
-                            Me.FlowSheet.ProcessScripts(Outros.Script.EventType.ObjectCalculationError, Outros.Script.ObjectType.FlowsheetObject, Me.Name)
+                            Me.FlowSheet.ProcessScripts(Extras.Script.EventType.ObjectCalculationError, Extras.Script.ObjectType.FlowsheetObject, Me.Name)
                             Throw ae.Flatten().InnerException
                         End Try
                         My.Application.IsRunningParallelTasks = False
@@ -874,12 +875,12 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Sub NormalizeOverallMoleComposition()
 
             Dim mt As Double = 0.0#
-            For Each s In Phases(0).Compounds.Values
-                mt += s.FracaoMolar.GetValueOrDefault
+            For Each S In Phases(0).Compounds.Values
+                mt += S.FracaoMolar.GetValueOrDefault
             Next
 
-            For Each s In Phases(0).Compounds.Values
-                s.FracaoMolar /= mt
+            For Each S In Phases(0).Compounds.Values
+                S.FracaoMolar /= mt
             Next
 
         End Sub
@@ -887,12 +888,12 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Sub NormalizeOverallMassComposition()
 
             Dim mt As Double = 0.0#
-            For Each s In Phases(0).Compounds.Values
-                mt += s.FracaoMassica.GetValueOrDefault
+            For Each S In Phases(0).Compounds.Values
+                mt += S.FracaoMassica.GetValueOrDefault
             Next
 
-            For Each s In Phases(0).Compounds.Values
-                s.FracaoMassica /= mt
+            For Each S In Phases(0).Compounds.Values
+                S.FracaoMassica /= mt
             Next
 
         End Sub
@@ -5341,7 +5342,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Private _description, _interfacename, _moreinfo, _operation, _scope As String, _code As Integer
 
-        Public ReadOnly Property Name() As String Implements CapeOpen.ECapeRoot.Name
+        Public ReadOnly Property Name2() As String Implements CapeOpen.ECapeRoot.Name
             Get
                 Return Me.Name
             End Get
@@ -5441,7 +5442,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property EnergyFlow() As Nullable(Of Double)
+        Public Overrides Property EnergyFlow() As Nullable(Of Double)
             Get
                 Return Me.m_energy
             End Get

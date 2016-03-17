@@ -24,7 +24,7 @@ Public Class UI_AdjControlPanelForm
         Me.su = formC.Options.SelectedUnitSystem
         Me.nf = formC.Options.NumberFormat
 
-        myADJ = formC.Collections.CLCS_AdjustCollection(formC.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        myADJ = formC.Collections.FlowsheetObjectCollection(formC.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
         With myADJ
             Me.tbAjuste.Text = Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), .AdjustValue)
@@ -436,20 +436,20 @@ Final3:
     '            Case DWSIM.App.GetLocalString("CorrentedeMatria")
     '                Select Case .m_Property
     '                    Case DWSIM.App.GetLocalString("Temperatura")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.m_ID).Phases(0).Properties.temperature = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).Phases(0).Properties.temperature = val
     '                    Case DWSIM.App.GetLocalString("Presso")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.m_ID).Phases(0).Properties.pressure = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).Phases(0).Properties.pressure = val
     '                    Case DWSIM.App.GetLocalString("Vazomssica")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.m_ID).Phases(0).Properties.massflow = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).Phases(0).Properties.massflow = val
     '                    Case DWSIM.App.GetLocalString("Vazovolumtrica")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.m_ID).Phases(0).Properties.volumetric_flow = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).Phases(0).Properties.volumetric_flow = val
     '                    Case DWSIM.App.GetLocalString("Vazomolar")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.m_ID).Phases(0).Properties.molarflow = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).Phases(0).Properties.molarflow = val
     '                    Case Else
     '                        Return Nothing
     '                End Select
     '            Case "Corrente de EnergyFlow"
-    '                Return Me.formC.Collections.CLCS_EnergyStreamCollection(.m_ID).EnergyFlow.GetValueOrDefault
+    '                Return Me.formC.Collections.FlowsheetObjectCollection(.m_ID).EnergyFlow.GetValueOrDefault
     '            Case DWSIM.App.GetLocalString("Misturadores")
     '                Return Nothing
     '            Case DWSIM.App.GetLocalString("MisturadoresMatEn")
@@ -459,27 +459,27 @@ Final3:
     '            Case DWSIM.App.GetLocalString("Tubulaes")
     '                Select Case .m_Property
     '                    Case DWSIM.App.GetLocalString("DeltaP")
-    '                        Me.formC.Collections.CLCS_PipeCollection(.m_ID).DeltaP = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaP = val
     '                    Case DWSIM.App.GetLocalString("DeltaT")
-    '                        Me.formC.Collections.CLCS_PipeCollection(.m_ID).DeltaT = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case DWSIM.App.GetLocalString("Calortrocado")
-    '                        Me.formC.Collections.CLCS_PipeCollection(.m_ID).DeltaQ = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaQ = val
     '                    Case Else
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Vlvulas")
     '                Select Case .m_Property
     '                    Case DWSIM.App.GetLocalString("DeltaT")
-    '                        Me.formC.Collections.CLCS_ValveCollection(.m_ID).DeltaT = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case Else
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Bombas")
     '                Select Case .m_Property
     '                    Case DWSIM.App.GetLocalString("DeltaT")
-    '                        Me.formC.Collections.CLCS_PumpCollection(.m_ID).DeltaT = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case DWSIM.App.GetLocalString("Potnciarequerida")
-    '                        Me.formC.Collections.CLCS_PumpCollection(.m_ID).DeltaQ = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaQ = val
     '                    Case Else
     '                        Return Nothing
     '                End Select
@@ -490,32 +490,32 @@ Final3:
     '            Case DWSIM.App.GetLocalString("Compressores"))
     '                Select Case .m_Property
     '                    Case DWSIM.App.GetLocalString("DeltaT")
-    '                        Me.formC.Collections.CLCS_CompressorCollection(.m_ID).DeltaT = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case DWSIM.App.GetLocalString("Potnciarequerida")
-    '                        Me.formC.Collections.CLCS_CompressorCollection(.m_ID).DeltaQ = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaQ = val
     '                    Case Else
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Turbinas")
     '                Select Case .m_Property
     '                    Case DWSIM.App.GetLocalString("DeltaT")
-    '                        Me.formC.Collections.CLCS_TurbineCollection(.m_ID).DeltaT = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case DWSIM.App.GetLocalString("Potnciagerada")
-    '                        Me.formC.Collections.CLCS_TurbineCollection(.m_ID).DeltaQ = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaQ = val
     '                    Case Else
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Aquecedores")
     '                Select Case .m_Property
     '                    Case DWSIM.App.GetLocalString("DeltaT")
-    '                        Me.formC.Collections.CLCS_HeaterCollection(.m_ID).DeltaT = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case Else
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Resfriadores")
     '                Select Case .m_Property
     '                    Case DWSIM.App.GetLocalString("DeltaT")
-    '                        Me.formC.Collections.CLCS_CoolerCollection(.m_ID).DeltaT = val
+    '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case Else
     '                        Return Nothing
     '                End Select

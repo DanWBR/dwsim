@@ -61,7 +61,7 @@ Public Class FormHYD
         Me.nf = Frm.Options.NumberFormat
 
         Me.ComboBox3.Items.Clear()
-        For Each mat2 In Me.Frm.Collections.CLCS_MaterialStreamCollection.Values
+        For Each mat2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
             If mat2.GraphicObject.Calculated Then Me.ComboBox3.Items.Add(mat2.GraphicObject.Tag.ToString)
         Next
 
@@ -74,7 +74,7 @@ Public Class FormHYD
         If Not Me.ComboBox3.SelectedItem Is Nothing Then
 
             Dim gobj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
-            Me.mat = Frm.Collections.CLCS_MaterialStreamCollection(gobj.Name)
+            Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
 
             mat.PropertyPackage.CurrentMaterialStream = mat
 
@@ -95,7 +95,7 @@ Public Class FormHYD
                     nomes(i) = comp.Name
                     i += 1
                 Next
-                nomesglobal = names
+                nomesglobal = nomes
                 T = mat.Phases(0).Properties.temperature
                 P = mat.Phases(0).Properties.pressure
 
@@ -306,7 +306,7 @@ Public Class FormHYD
             .T = Converter.ConvertToSI(su.temperature, Label9.Text)
             If Label10.ToString.Contains("sII") Then .sI = False
             .model = ComboBox1.SelectedIndex
-            .Names = namesglobal
+            .nomes = nomesglobal
             .ShowDialog(Me)
         End With
 
@@ -322,7 +322,7 @@ Public Class FormHYD
             .T = Converter.ConvertToSI(su.temperature, Label14.Text)
             If Label12.ToString.Contains("sII") Then .sI = False
             .model = ComboBox1.SelectedIndex
-            .Names = namesglobal
+            .nomes = nomesglobal
             .ShowDialog(Me)
         End With
     End Sub

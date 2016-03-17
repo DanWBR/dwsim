@@ -99,7 +99,7 @@ Public Class Form1
                 End If
 
                 'get a reference to the material stream base class.
-                Dim dobj As DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream = fsheet.Collections.CLCS_MaterialStreamCollection(gobj.Name)
+                Dim dobj As DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream = fsheet.Collections.FlowsheetObjectCollection(gobj.Name)
 
                 'check if the stream is vapor only.
                 If dobj.Phases(2).Properties.molarfraction = 1 Then

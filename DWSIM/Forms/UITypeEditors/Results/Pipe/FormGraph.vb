@@ -57,7 +57,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vx(i) = Converter.ConvertFromSI(su.distance, comp_ant)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -80,7 +80,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vx(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -102,7 +102,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vx(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -124,7 +124,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vx(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -146,7 +146,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vx(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -168,7 +168,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vx(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -208,7 +208,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vy(i) = res.HoldupDeLiquido
                                 i += 1
@@ -229,7 +229,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vy(i) = Converter.ConvertFromSI(su.distance, comp_ant)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -251,7 +251,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vy(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -273,7 +273,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vy(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -295,7 +295,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vy(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -317,7 +317,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vy(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
@@ -339,7 +339,7 @@ Public Class FormGraph
                     Dim comp_ant As Double = 0
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
-                        If ps.ObjectType = "Tubulaosimples" Then
+                        If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
                                 vy(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 comp_ant += ps.Comprimento / ps.Incrementos

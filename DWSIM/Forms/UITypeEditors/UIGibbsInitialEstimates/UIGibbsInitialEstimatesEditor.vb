@@ -45,8 +45,8 @@ Namespace DWSIM.Editors.Reactors
 
                 Dim selectionControl As New GibbsInitialEstimatesEditorForm
 
-                selectionControl.ie = form.Collections.CLCS_ReactorGibbsCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InitialEstimates
-                selectionControl.gr = form.Collections.CLCS_ReactorGibbsCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                selectionControl.ie = DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), Reactor_Gibbs).InitialEstimates
+                selectionControl.gr = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                 selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & selectionControl.Text
                 selectionControl.form = form
                 If selectionControl.gr.GraphicObject.InputConnectors(0).IsAttached Then

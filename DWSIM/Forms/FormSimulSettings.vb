@@ -1133,7 +1133,7 @@ Public Class FormSimulSettings
                 Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
 
                 Dim proplist As New ArrayList
-                For Each ms In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
+                For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
                     For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                         phase.Compounds.Add(tmpcomp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(tmpcomp.Name, ""))
                         phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
@@ -1195,7 +1195,7 @@ Public Class FormSimulSettings
         Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
         Dim proplist As New ArrayList
 
-        For Each ms In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
+        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
             For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                 phase.Compounds.Remove(tmpcomp.Name)
             Next
@@ -1465,7 +1465,7 @@ Public Class FormSimulSettings
                 End If
 
                 Dim proplist As New ArrayList
-                For Each mstr In FrmChild.Collections.CLCS_MaterialStreamCollection.Values
+                For Each mstr In FrmChild.Collections.FlowsheetObjectCollection.Values
                     For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mstr.Phases.Values
                         tmpsubst = phase.Compounds(Me.ListViewA.SelectedItems(0).Tag)
                         phase.Compounds.Remove(Me.ListViewA.SelectedItems(0).Tag)

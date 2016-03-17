@@ -1,4 +1,5 @@
 ﻿Imports DWSIM.DWSIM.SimulationObjects
+Imports Microsoft.Msdn.Samples.GraphicObjects.ObjectType
 
 Public Class UISVSelectorForm
 
@@ -14,7 +15,7 @@ Public Class UISVSelectorForm
         With TreeView1.Nodes
             .Clear()
             .Add(DWSIM.App.GetLocalString("CorrentedeMatria"), DWSIM.App.GetLocalString("CorrentedeMatria"))
-            .Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlow"), DWSIM.App.GetLocalString("CorrentedeEnergyFlow"))
+            .Add(DWSIM.App.GetLocalString("CorrentedeEnergia"), DWSIM.App.GetLocalString("CorrentedeEnergia"))
             .Add(DWSIM.App.GetLocalString("Misturador"), DWSIM.App.GetLocalString("Misturador"))
             .Add(DWSIM.App.GetLocalString("Divisor"), DWSIM.App.GetLocalString("Divisor"))
             .Add(DWSIM.App.GetLocalString("Tubulao"), DWSIM.App.GetLocalString("Tubulao"))
@@ -82,148 +83,148 @@ Public Class UISVSelectorForm
         With TreeView2.Nodes
             Select Case TreeView1.SelectedNode.Index
                 Case 0
-                    For Each obj In formC.Collections.MaterialStreamCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = MaterialStream And obj.InputConnectors(0).IsAttached = False Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 1
-                    For Each obj In formC.Collections.EnergyStreamCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = EnergyStream And obj.InputConnectors(0).IsAttached = False Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 2
-                    For Each obj In formC.Collections.MixerCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = NodeIn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 3
-                    For Each obj In formC.Collections.SplitterCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = NodeIn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 4
-                    For Each obj In formC.Collections.PipeCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = NodeIn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 5
-                    For Each obj In formC.Collections.ValveCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = NodeIn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 6
-                    For Each obj In formC.Collections.PumpCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = Pump Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 7
-                    For Each obj In formC.Collections.TankCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = Tank Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 8
-                    For Each obj In formC.Collections.SeparatorCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = Vessel Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 9
-                    For Each obj In formC.Collections.CompressorCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = Compressor Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 10
-                    For Each obj In formC.Collections.TurbineCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = Expander Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 11
-                    For Each obj In formC.Collections.HeaterCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = Heater Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 12
-                    For Each obj In formC.Collections.CoolerCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = Cooler Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 13
-                    For Each obj In formC.Collections.ReactorConversionCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = RCT_Conversion Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 14
-                    For Each obj In formC.Collections.ReactorEquilibriumCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = RCT_Equilibrium Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 15
-                    For Each obj In formC.Collections.ReactorGibbsCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = RCT_Gibbs Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 16
-                    For Each obj In formC.Collections.ReactorCSTRCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = RCT_CSTR Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 17
-                    For Each obj In formC.Collections.ReactorPFRCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = RCT_PFR Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 18
-                    For Each obj In formC.Collections.HeatExchangerCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = HeatExchanger Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 19
-                    For Each obj In formC.Collections.ShortcutColumnCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = ShortcutColumn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 20
-                    For Each obj In formC.Collections.DistillationColumnCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = DistillationColumn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 21
-                    For Each obj In formC.Collections.AbsorptionColumnCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = AbsorptionColumn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 22
-                    For Each obj In formC.Collections.ReboiledAbsorberCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = ReboiledAbsorber Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 23
-                    For Each obj In formC.Collections.RefluxedAbsorberCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = RefluxedAbsorber Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 24
-                    For Each obj In formC.Collections.RecycleCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = OT_Recycle Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 25
-                    For Each obj In formC.Collections.EnergyRecycleCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = OT_EnergyRecycle Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 26
-                    For Each obj In formC.Collections.SpecCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = OT_Spec Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 27
-                    For Each obj In formC.Collections.AdjustCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = OT_Adjust Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 28
-                    For Each obj In formC.Collections.ComponentSeparatorCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = ComponentSeparator Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 29
-                    For Each obj In formC.Collections.OrificePlateCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = OrificePlate Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 30
-                    For Each obj In formC.Collections.CapeOpenUOCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = CapeOpenUO Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 31
-                    For Each obj In formC.Collections.CustomUOCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = CustomUO Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 32
-                    For Each obj In formC.Collections.ExcelUOCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = ExcelUO Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 33
-                    For Each obj In formC.Collections.FlowsheetUOCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = FlowsheetUO Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 34
-                    For Each obj In formC.Collections.SolidsSeparatorCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = SolidSeparator Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 35
-                    For Each obj In formC.Collections.FilterCollection.Values
-                        .Add(obj.Name, obj.Tag).Tag = obj.Name
+                    For Each obj In formC.Collections.GraphicObjectCollection.Values
+                        If obj.ObjectType = Filter Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
             End Select
         End With

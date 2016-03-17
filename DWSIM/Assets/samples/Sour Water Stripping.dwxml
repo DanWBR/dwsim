@@ -4041,7 +4041,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>CorrentedeEnergyFlow</Descricao>
+      <Descricao>CorrentedeEnergia</Descricao>
       <Nome>EN-5bed16f0-c577-4046-90ae-25f0dd1d06f2</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -6010,7 +6010,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>CorrentedeEnergyFlow</Descricao>
+      <Descricao>CorrentedeEnergia</Descricao>
       <Nome>EN-9ed0a3e2-5ec4-4cd0-8010-a6153c4f45f3</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -8897,7 +8897,7 @@ Calculated OK.</DebugText>
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -9547,7 +9547,7 @@ Calculated OK.</DebugText>
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>

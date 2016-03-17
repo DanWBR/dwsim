@@ -743,7 +743,7 @@ Public Class FormPCBulk
         myMStr.Tag = corr
         gObj = myMStr
         gObj.Name = "MAT-" & Guid.NewGuid.ToString
-        frm.Collections.MaterialStreamCollection.Add(gObj.Name, myMStr)
+        frm.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
         'OBJETO DWSIM
         Dim myCOMS As DWSIM.SimulationObjects.Streams.MaterialStream = New DWSIM.SimulationObjects.Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr
@@ -765,7 +765,7 @@ Public Class FormPCBulk
             myCOMS.Phases(2).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
         Next
         frm.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
-        frm.Collections.CLCS_MaterialStreamCollection.Add(myCOMS.Name, myCOMS)
+        frm.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
         frm.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
         frm.FormSurface.FlowsheetDesignSurface.Invalidate()
 

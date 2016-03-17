@@ -2704,9 +2704,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Corrente de EnergyFlow.
         '''</summary>
-        Friend Shared ReadOnly Property CorrentedeEnergyFlow() As String
+        Friend Shared ReadOnly Property CorrentedeEnergia() As String
             Get
-                Return ResourceManager.GetString("CorrentedeEnergyFlow", resourceCulture)
+                Return ResourceManager.GetString("CorrentedeEnergia", resourceCulture)
             End Get
         End Property
         

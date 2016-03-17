@@ -49,7 +49,7 @@ Namespace DWSIM.Editors.CustomUO
                     Dim ctx As PropertyGridEx.CustomProperty.CustomPropertyDescriptor = context.PropertyDescriptor
                     Dim obj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                     If ctx.CustomProperty.Tag Is Nothing Then
-                        With form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                        With DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), UnitOperations.CustomUO)
                             selectionControl.scripttext = .ScriptText
                             selectionControl.language = .Language
                             selectionControl.fontname = .FontName
@@ -68,7 +68,7 @@ Namespace DWSIM.Editors.CustomUO
                     selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
                     editorService.ShowDialog(selectionControl)
                     If ctx.CustomProperty.Tag Is Nothing Then
-                        With form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                        With DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), UnitOperations.CustomUO)
                             .FontName = selectionControl.tscb1.SelectedItem
                             .FontSize = selectionControl.tscb2.SelectedItem
                             .Includes = selectionControl.includes
@@ -86,11 +86,12 @@ Namespace DWSIM.Editors.CustomUO
                     Dim ctx As PropertyGridEx.CustomProperty.CustomPropertyDescriptor = context.PropertyDescriptor
                     Dim obj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                     If ctx.CustomProperty.Tag Is Nothing Then
-                        selectionControl.scripttext = form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ScriptText
-                        selectionControl.language = form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Language
-                        selectionControl.fontname = form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).FontName
-                        selectionControl.fontsize = form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).FontSize
-                        selectionControl.includes = form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Includes
+                        Dim cuo As UnitOperations.CustomUO = DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), UnitOperations.CustomUO)
+                        selectionControl.scripttext = cuo.ScriptText
+                        selectionControl.language = cuo.Language
+                        selectionControl.fontname = cuo.FontName
+                        selectionControl.fontsize = cuo.FontSize
+                        selectionControl.includes = cuo.Includes
                     Else
                         If ctx.CustomProperty.Tag = "B" Then selectionControl.scripttext = obj.ScriptExt_ScriptTextB
                         If ctx.CustomProperty.Tag = "A" Then selectionControl.scripttext = obj.ScriptExt_ScriptTextA
@@ -102,9 +103,10 @@ Namespace DWSIM.Editors.CustomUO
                     selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
                     editorService.ShowDialog(selectionControl)
                     If ctx.CustomProperty.Tag Is Nothing Then
-                        form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).FontName = selectionControl.tscb1.SelectedItem
-                        form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).FontSize = selectionControl.tscb2.SelectedItem
-                        form.Collections.CLCS_CustomUOCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Includes = selectionControl.includes
+                        Dim cuo As UnitOperations.CustomUO = DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), UnitOperations.CustomUO)
+                        cuo.FontName = selectionControl.tscb1.SelectedItem
+                        cuo.FontSize = selectionControl.tscb2.SelectedItem
+                        cuo.Includes = selectionControl.includes
                     Else
                         obj.ScriptExt_FontName = selectionControl.tscb1.SelectedItem
                         obj.ScriptExt_FontSize = selectionControl.tscb2.SelectedItem

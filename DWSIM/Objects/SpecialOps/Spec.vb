@@ -396,7 +396,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Function
 
-        Public Overrides Function Calculate() As Integer
+        Public Shadows Function Calculate() As Integer
 
             If Me.GraphicObject.Active Then
 

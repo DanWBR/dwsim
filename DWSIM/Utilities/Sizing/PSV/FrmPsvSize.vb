@@ -28,7 +28,7 @@ Public Class FrmPsvSize
         Me.nf = Frm.Options.NumberFormat
 
         Me.ComboBox3.Items.Clear()
-        For Each valve2 In Me.Frm.Collections.CLCS_ValveCollection.Values
+        For Each valve2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
             Me.ComboBox3.Items.Add(valve2.GraphicObject.Tag.ToString)
         Next
 
@@ -179,10 +179,10 @@ Public Class FrmPsvSize
         If Not Me.ComboBox3.SelectedItem Is Nothing Then
 
             Dim gobj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
-            Me.valve = Frm.Collections.CLCS_ValveCollection(gobj.Name)
+            Me.valve = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
             Me.LblSelected.Text = Me.valve.GraphicObject.Tag
-            Me.entmat = Frm.Collections.CLCS_MaterialStreamCollection(Me.valve.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            Me.saimat = Frm.Collections.CLCS_MaterialStreamCollection(Me.valve.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            Me.entmat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            Me.saimat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 
 
             Me.TextBox1.Text = Format(Converter.ConvertFromSI(su.temperature, entmat.Phases(0).Properties.temperature), nf)

@@ -58,8 +58,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             m_ComponentDescription = descricao
             FillNodeItems()
             QTFillNodeItems()
-            'Define the unitop type for later use.
-            ObjectType = ObjectType.ShortcutColumn
 
         End Sub
 
@@ -140,11 +138,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Dim feed, distillate, bottoms As Streams.MaterialStream
             Dim cduty, rduty As Streams.EnergyStream
 
-            feed = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            distillate = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            bottoms = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
-            cduty = FlowSheet.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
-            rduty = FlowSheet.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+            feed = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            distillate = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            bottoms = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+            cduty = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+            rduty = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
 
             feed.Validate()
 
@@ -500,20 +498,20 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name).Clear()
+                DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If
 
             If Me.GraphicObject.OutputConnectors(1).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name).Clear()
+                DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If
 
             If Me.GraphicObject.EnergyConnector.IsAttached Then
 
-                Dim cduty As SimulationObjects.Streams.EnergyStream = FlowSheet.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                Dim cduty As SimulationObjects.Streams.EnergyStream = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
 
                 With cduty
                     .EnergyFlow = Nothing

@@ -8,6 +8,9 @@ namespace Wexman.Design
     [AttributeUsage(AttributeTargets.Property, AllowMultiple=false)]
     public sealed class GenericDictionaryEditorAttribute: Attribute
     {
+        /// <summary>
+        /// Null
+        /// </summary>
         public GenericDictionaryEditorAttribute()
         {
             this.KeyDisplayName = "Variable Name";

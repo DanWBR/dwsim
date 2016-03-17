@@ -9,7 +9,7 @@
     Private Sub RadioButton9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton9.CheckedChanged
         If RadioButton9.Checked = True Then
 
-            Me.ThermalProfile.ObjectType = DWSIM.Editors.PipeEditor.ThermalProfileType.Definir_CGTC
+            Me.ThermalProfile.Tipo = DWSIM.Editors.PipeEditor.ThermalProfileType.Definir_CGTC
             TextBoxCGTC.Enabled = True
             TextBoxTA.Enabled = True
             'TextBoxCT.Enabled = False
@@ -45,7 +45,7 @@
 
     Private Sub RadioButton8_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton8.CheckedChanged
         If RadioButton8.Checked = True Then
-            Me.ThermalProfile.ObjectType = DWSIM.Editors.PipeEditor.ThermalProfileType.Definir_Q
+            Me.ThermalProfile.Tipo = DWSIM.Editors.PipeEditor.ThermalProfileType.Definir_Q
             'TextBoxCGTC.Enabled = False
             'TextBoxTA.Enabled = False
             TextBoxCT.Enabled = True
@@ -82,7 +82,7 @@
     Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
 
         If RadioButton7.Checked = True Then
-            Me.ThermalProfile.ObjectType = DWSIM.Editors.PipeEditor.ThermalProfileType.Estimar_CGTC
+            Me.ThermalProfile.Tipo = DWSIM.Editors.PipeEditor.ThermalProfileType.Estimar_CGTC
             'TextBoxCGTC.Enabled = False
             'TextBoxTA.Enabled = False
             'TextBoxCT.Enabled = False
@@ -189,9 +189,9 @@
             Me.ComboBoxMAT.SelectedIndex = 0
         Else
             With Me.ThermalProfile
-                If Me.ThermalProfile.ObjectType = DWSIM.Editors.PipeEditor.ThermalProfileType.Definir_CGTC Then Me.RadioButton9.Checked = True
-                If Me.ThermalProfile.ObjectType = DWSIM.Editors.PipeEditor.ThermalProfileType.Definir_Q Then Me.RadioButton8.Checked = True
-                If Me.ThermalProfile.ObjectType = DWSIM.Editors.PipeEditor.ThermalProfileType.Estimar_CGTC Then Me.RadioButton7.Checked = True
+                If Me.ThermalProfile.Tipo = DWSIM.Editors.PipeEditor.ThermalProfileType.Definir_CGTC Then Me.RadioButton9.Checked = True
+                If Me.ThermalProfile.Tipo = DWSIM.Editors.PipeEditor.ThermalProfileType.Definir_Q Then Me.RadioButton8.Checked = True
+                If Me.ThermalProfile.Tipo = DWSIM.Editors.PipeEditor.ThermalProfileType.Estimar_CGTC Then Me.RadioButton7.Checked = True
                 Me.ComboBoxMAMB.SelectedIndex = .Meio
                 Me.ComboBoxMAT.SelectedIndex = .Material
                 Me.TextBoxCGTC.Text = Converter.ConvertFromSI(su.heat_transf_coeff, .CGTC_Definido).ToString()

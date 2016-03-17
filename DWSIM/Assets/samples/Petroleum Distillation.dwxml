@@ -28915,7 +28915,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>CorrentedeEnergyFlow</Descricao>
+      <Descricao>CorrentedeEnergia</Descricao>
       <Nome>EN-8ca8df4d-4e76-4295-b1d5-66a5b300b88c</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <Annotation></Annotation>
@@ -28933,7 +28933,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>CorrentedeEnergyFlow</Descricao>
+      <Descricao>CorrentedeEnergia</Descricao>
       <Nome>EN-d1c569fa-e4f1-4ce9-8db0-50a1b58ed9ca</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <Annotation></Annotation>
@@ -29301,7 +29301,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -29347,7 +29347,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>

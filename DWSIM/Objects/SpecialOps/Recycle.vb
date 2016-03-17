@@ -260,13 +260,13 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             Dim msfrom, msto As DWSIM.SimulationObjects.Streams.MaterialStream
 
             If Me.GraphicObject.InputConnectors(0).IsAttached Then
-                msfrom = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                msfrom = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             Else
                 msfrom = Nothing
             End If
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                msto = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                msto = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 With msto
 
                     .PropertyPackage.CurrentMaterialStream = msto

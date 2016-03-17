@@ -1283,7 +1283,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>CorrentedeEnergyFlow</Descricao>
+      <Descricao>CorrentedeEnergia</Descricao>
       <Nome>EN-3e8c2aa8-9aa6-4623-9eb5-02b342109550</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -1564,7 +1564,7 @@ absolute moisture
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>

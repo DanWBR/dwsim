@@ -3330,7 +3330,7 @@ Las propiedades se calculan directamente desde la Ecuación de Estado o datos ex
   <data name="DCMaxIt" xml:space="preserve">
     <value>Número máximo de iteraciones </value>
   </data>
-  <data name="CorrentedeEnergyFlow" xml:space="preserve">
+  <data name="CorrentedeEnergia" xml:space="preserve">
     <value>Corriente de EnergyFlow </value>
   </data>
   <data name="DCEnthBalTol" xml:space="preserve">

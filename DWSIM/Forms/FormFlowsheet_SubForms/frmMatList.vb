@@ -28,9 +28,9 @@ Public Class frmMatList
             DataGridView1.Columns.Clear()
             RowsCreated = False
             Dim i, n As Integer
-            n = Flowsheet.Collections.CLCS_MaterialStreamCollection.Values.Count
+            n = Flowsheet.Collections.FlowsheetObjectCollection.Values.Count
             i = 1
-            For Each ms In Flowsheet.Collections.CLCS_MaterialStreamCollection.Values
+            For Each ms In Flowsheet.Collections.FlowsheetObjectCollection.Values
                 ToolStripLabel1.Text = i & "/" & n & "..."
                 AddColumn(ms)
                 i += 1

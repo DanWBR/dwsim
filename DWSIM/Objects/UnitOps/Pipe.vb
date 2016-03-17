@@ -270,11 +270,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Dim cntP, cntT As Integer
 
             If Me.Specification = specmode.OutletTemperature Then
-                Me.ThermalProfile.ObjectType = Editors.PipeEditor.ThermalProfileType.Definir_Q
+                Me.ThermalProfile.Tipo = Editors.PipeEditor.ThermalProfileType.Definir_Q
                 Me.ThermalProfile.Calor_trocado = 0.0#
             End If
 
-            If Me.ThermalProfile.ObjectType = Editors.PipeEditor.ThermalProfileType.Definir_CGTC Then
+            If Me.ThermalProfile.Tipo = Editors.PipeEditor.ThermalProfileType.Definir_CGTC Then
                 Text = Me.ThermalProfile.Temp_amb_definir
             Else
                 Text = Me.ThermalProfile.Temp_amb_estimar
@@ -335,7 +335,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     segmento.Resultados.Clear()
 
-                    If segmento.ObjectType = "Tubulaosimples" Then
+                    If segmento.Tipo = "Tubulaosimples" Then
 
                         j = 0
                         nseg = segmento.Incrementos
@@ -448,11 +448,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                     Tout_ant2 = Tout_ant
                                     Tout_ant = Tout
 
-                                    If Not Me.ThermalProfile.ObjectType = Editors.PipeEditor.ThermalProfileType.Definir_Q Then
-                                        If Me.ThermalProfile.ObjectType = Editors.PipeEditor.ThermalProfileType.Definir_CGTC Then
+                                    If Not Me.ThermalProfile.Tipo = Editors.PipeEditor.ThermalProfileType.Definir_Q Then
+                                        If Me.ThermalProfile.Tipo = Editors.PipeEditor.ThermalProfileType.Definir_CGTC Then
                                             U = Me.ThermalProfile.CGTC_Definido
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
-                                        ElseIf Me.ThermalProfile.ObjectType = Editors.PipeEditor.ThermalProfileType.Estimar_CGTC Then
+                                        ElseIf Me.ThermalProfile.Tipo = Editors.PipeEditor.ThermalProfileType.Estimar_CGTC Then
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
                                             Dim resultU As Double() = CalcOverallHeatTransferCoefficient(.Material, holdup, .Comprimento / .Incrementos, _
                                                                                 .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material), Tpe, results.VapVel, results.LiqVel, _
@@ -532,7 +532,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 End If
 
                                 Hout = Hout - eta * Cp_m * (Pout - Pin) / w
-                          
+
                                 Toutj = Tout + eta * (Pin - Pout) / 1000
 
                                 Tout_ant = Tout
@@ -1620,7 +1620,7 @@ Final3:     T = bbb
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
                 End With
 
-                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlow"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector

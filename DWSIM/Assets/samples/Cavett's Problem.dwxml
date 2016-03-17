@@ -25,7 +25,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>CorrentedeEnergyFlow</Descricao>
+      <Descricao>CorrentedeEnergia</Descricao>
       <Nome>EN-7edb4dab-3bcd-44a3-9d5c-e92afc7f32c2</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -14906,7 +14906,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>CorrentedeEnergyFlow</Descricao>
+      <Descricao>CorrentedeEnergia</Descricao>
       <Nome>EN-3cdfadda-3538-4087-8212-90deaf0b736c</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -19992,7 +19992,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>CorrentedeEnergyFlow</Descricao>
+      <Descricao>CorrentedeEnergia</Descricao>
       <Nome>EN-ef41adac-db74-448d-8770-b96d925fd712</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -42387,7 +42387,7 @@
       <IsSpecAttached>false</IsSpecAttached>
       <AttachedSpecId></AttachedSpecId>
       <SpecVarType>Nenhum</SpecVarType>
-      <Descricao>CorrentedeEnergyFlow</Descricao>
+      <Descricao>CorrentedeEnergia</Descricao>
       <Nome>EN-ddfaf51b-d8a4-47dd-8068-1619df2cfcf1</Nome>
       <ShowQuickTable>true</ShowQuickTable>
       <NodeItems />
@@ -50236,7 +50236,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -50955,7 +50955,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51374,7 +51374,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51415,7 +51415,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51456,7 +51456,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51497,7 +51497,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>
@@ -51538,7 +51538,7 @@
       <SplitPoint>false</SplitPoint>
       <ShapeOverride>DefaultShape</ShapeOverride>
       <Status>Calculated</Status>
-      <Description>CorrentedeEnergyFlow</Description>
+      <Description>CorrentedeEnergia</Description>
       <Shape>0</Shape>
       <FlippedH>false</FlippedH>
       <FlippedV>false</FlippedV>

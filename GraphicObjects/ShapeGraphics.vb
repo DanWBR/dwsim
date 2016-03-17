@@ -3164,7 +3164,7 @@ Namespace GraphicObjects
         Public Sub New()
             Me.ObjectType = GraphicObjects.ObjectType.EnergyStream
             Me.IsEnergyStream = True
-            Me.Description = "CorrentedeEnergyFlow"
+            Me.Description = "CorrentedeEnergia"
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)

@@ -45,7 +45,7 @@ Namespace DWSIM.Editors.Reactors
 
                 Dim selectionControl As New ElementMatrixEditorForm
 
-                selectionControl.elmat = form.Collections.CLCS_ReactorGibbsCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ElementMatrix
+                selectionControl.elmat = DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), Reactor_Gibbs).ElementMatrix
 
                 selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("RGEditElementMatrix")
 

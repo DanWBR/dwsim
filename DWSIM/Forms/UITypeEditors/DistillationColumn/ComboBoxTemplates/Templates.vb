@@ -39,7 +39,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.DGVCBSelectors
             With dgcbc.Items
                 .Clear()
                 .Add("")
-                For Each mstr As MaterialStream In fc.Collections.CLCS_MaterialStreamCollection.Values
+                For Each mstr As MaterialStream In fc.Collections.FlowsheetObjectCollection.Values
                     'If Not mstr.GraphicObject.OutputConnectors(0).IsAttached Then
                     .Add(mstr.GraphicObject.Tag.ToString)
                     'End If
@@ -58,7 +58,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.DGVCBSelectors
             With dgcbc.Items
                 .Clear()
                 .Add("")
-                For Each mstr As MaterialStream In fc.Collections.CLCS_MaterialStreamCollection.Values
+                For Each mstr As MaterialStream In fc.Collections.FlowsheetObjectCollection.Values
                     'If Not mstr.GraphicObject.InputConnectors(0).IsAttached Then
                     .Add(mstr.GraphicObject.Tag.ToString)
                     'End If
@@ -82,7 +82,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.DGVCBSelectors
             With dgcbc.Items
                 .Clear()
                 .Add("")
-                For Each estr As EnergyStream In fc.Collections.CLCS_EnergyStreamCollection.Values
+                For Each estr As EnergyStream In fc.Collections.FlowsheetObjectCollection.Values
                     'If Not estr.GraphicObject.InputConnectors(0).IsAttached Then
                     .Add(estr.GraphicObject.Tag.ToString)
                     'End If
@@ -104,7 +104,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.DGVCBSelectors
             With dgcbc.Items
                 .Clear()
                 .Add("")
-                For Each estr As EnergyStream In fc.Collections.CLCS_EnergyStreamCollection.Values
+                For Each estr As EnergyStream In fc.Collections.FlowsheetObjectCollection.Values
                     'If Not estr.GraphicObject.OutputConnectors(0).IsAttached Then
                     .Add(estr.GraphicObject.Tag.ToString)
                     'End If

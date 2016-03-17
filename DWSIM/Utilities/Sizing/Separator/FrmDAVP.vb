@@ -19,7 +19,7 @@
 
         Me.ComboBox1.Items.Clear()
 
-        For Each vessel2 In Me.Frm.Collections.CLCS_VesselCollection.Values
+        For Each vessel2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
             Me.ComboBox1.Items.Add(vessel2.GraphicObject.Tag.ToString)
         Next
 
@@ -49,14 +49,14 @@
         If Not Me.ComboBox1.SelectedItem Is Nothing Then
 
             Dim gobj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox1.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
-            Me.vessel = Frm.Collections.CLCS_VesselCollection(gobj.Name)
+            Me.vessel = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
 
             Dim msv, msl As DWSIM.SimulationObjects.Streams.MaterialStream
 
-            msv = Frm.Collections.CLCS_MaterialStreamCollection(Me.vessel.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            msl = Frm.Collections.CLCS_MaterialStreamCollection(Me.vessel.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+            msv = Frm.Collections.FlowsheetObjectCollection(Me.vessel.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            msl = Frm.Collections.FlowsheetObjectCollection(Me.vessel.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
 
-            Me.entmat = Frm.Collections.CLCS_MaterialStreamCollection(Me.vessel.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            Me.entmat = Frm.Collections.FlowsheetObjectCollection(Me.vessel.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
 
             Me.rhol = msl.Phases(0).Properties.density.GetValueOrDefault
             Me.rhov = msv.Phases(0).Properties.density.GetValueOrDefault

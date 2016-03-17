@@ -61,7 +61,7 @@ Public Class FormPhEnv
         Me.nf = Frm.Options.NumberFormat
 
         Me.ComboBox3.Items.Clear()
-        For Each mat2 In Me.Frm.Collections.CLCS_MaterialStreamCollection.Values
+        For Each mat2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
             If mat2.GraphicObject.Calculated Then Me.ComboBox3.Items.Add(mat2.GraphicObject.Tag.ToString)
         Next
 
@@ -906,7 +906,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
         Dim gobj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject = Nothing
         gobj = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
-        Me.mat = Frm.Collections.CLCS_MaterialStreamCollection(gobj.Name)
+        Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
         Me.strname = gobj.Tag
 
         If Me.showoppoint Then

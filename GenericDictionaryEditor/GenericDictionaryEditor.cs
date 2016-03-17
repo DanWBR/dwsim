@@ -18,6 +18,9 @@ namespace Wexman.Design
     public class GenericDictionaryEditor<TKey, TValue>: CollectionEditor
     {
 
+        /// <summary>
+        /// Null
+        /// </summary>
         public String Title;
                 
         /// <summary>

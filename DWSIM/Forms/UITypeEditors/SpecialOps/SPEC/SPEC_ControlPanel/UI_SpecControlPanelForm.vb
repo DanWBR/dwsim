@@ -21,7 +21,7 @@ Public Class UI_SpecControlPanelForm
         Me.su = formC.Options.SelectedUnitSystem
         Me.nf = formC.Options.NumberFormat
 
-        mySPEC = formC.Collections.CLCS_SpecCollection(formC.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+        mySPEC = formC.Collections.FlowsheetObjectCollection(formC.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
         With mySPEC
             Me.tbSVID.Text = .SourceObjectData.m_Name & " (" & .SourceObjectData.m_Type & ") / " & DWSIM.App.GetPropertyName(.SourceObjectData.m_Property)

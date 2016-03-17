@@ -1057,10 +1057,10 @@ Namespace DWSIM.Flowsheet
                     Dim robj = form.Collections.FlowsheetObjectCollection(r)
                     If robj.GraphicObject.ObjectType = ObjectType.OT_Recycle Then
                         recycles.Add(robj.Name)
-                        Dim rec = form.Collections.CLCS_RecycleCollection(robj.Name)
+                        Dim rec As Recycle = form.Collections.FlowsheetObjectCollection(robj.Name)
                         If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
                             If rec.Values.Count = 0 Then rec.Calculate()
-                            totalv += form.Collections.CLCS_RecycleCollection(robj.Name).Values.Count
+                            totalv += rec.Values.Count
                         End If
                     End If
                 Next
@@ -1176,7 +1176,7 @@ Namespace DWSIM.Flowsheet
 
                                                          converged = True
                                                          For Each r As String In recycles
-                                                             obj = form.Collections.CLCS_RecycleCollection(r)
+                                                             obj = form.Collections.FlowsheetObjectCollection(r)
                                                              converged = DirectCast(obj, SpecialOps.Recycle).Converged
                                                              If Not converged Then Exit For
                                                          Next
@@ -1187,7 +1187,7 @@ Namespace DWSIM.Flowsheet
                                                              Dim rcount As Integer = 0
 
                                                              For Each r As String In recycles
-                                                                 obj = form.Collections.CLCS_RecycleCollection(r)
+                                                                 obj = form.Collections.FlowsheetObjectCollection(r)
                                                                  With DirectCast(obj, SpecialOps.Recycle)
                                                                      avgerr += 0.33 * .ConvergenceHistory.TemperaturaE / .ConvergenceHistory.Temperatura
                                                                      avgerr += 0.33 * .ConvergenceHistory.PressaoE / .ConvergenceHistory.Pressao
@@ -1221,7 +1221,7 @@ Namespace DWSIM.Flowsheet
 
                                                                  Dim i As Integer = 0
                                                                  For Each r As String In recycles
-                                                                     Dim rec = DirectCast(form.Collections.CLCS_RecycleCollection(r), SpecialOps.Recycle)
+                                                                     Dim rec = DirectCast(form.Collections.FlowsheetObjectCollection(r), SpecialOps.Recycle)
                                                                      If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
                                                                          For Each kvp In rec.Values
                                                                              recvars(i) = kvp.Value
@@ -1235,7 +1235,7 @@ Namespace DWSIM.Flowsheet
 
                                                                  i = 0
                                                                  For Each r As String In recycles
-                                                                     Dim rec = DirectCast(form.Collections.CLCS_RecycleCollection(r), SpecialOps.Recycle)
+                                                                     Dim rec = DirectCast(form.Collections.FlowsheetObjectCollection(r), SpecialOps.Recycle)
                                                                      If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
                                                                          For Each kvp In rec.Errors
                                                                              rec.Values(kvp.Key) = recvars(i) + recdvars(i)
@@ -1269,7 +1269,7 @@ Namespace DWSIM.Flowsheet
                         For Each s In objstack
                             If TypeOf form.Collections.FlowsheetObjectCollection(s) Is SimulationObjects.UnitOperations.CapeOpenUO Then
                                 'saves UO data to a temporary list so it can be loaded correctly by other threads
-                                form.Collections.CLCS_CapeOpenUOCollection(s).SaveTempData()
+                                DirectCast(form.Collections.FlowsheetObjectCollection(s), CapeOpenUO).SaveTempData()
                             End If
                         Next
 
@@ -1692,7 +1692,7 @@ Namespace DWSIM.Flowsheet
 
                     Dim n As Integer = 0
 
-                    For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.CLCS_AdjustCollection.Values
+                    For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
                         If adj.SimultaneousAdjust Then n += 1
                     Next
 
@@ -1707,7 +1707,7 @@ Namespace DWSIM.Flowsheet
                         Dim ic As Integer
 
                         i = 0
-                        For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.CLCS_AdjustCollection.Values
+                        For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
                             If adj.SimultaneousAdjust Then
                                 x(i) = GetMnpVarValue(form, adj)
                                 i += 1
@@ -1779,7 +1779,7 @@ Namespace DWSIM.Flowsheet
 
                 Dim n As Integer = 0
 
-                For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.CLCS_AdjustCollection.Values
+                For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
                     If adj.SimultaneousAdjust Then n += 1
                 Next
 
@@ -1802,7 +1802,7 @@ Namespace DWSIM.Flowsheet
                     Dim ic As Integer
 
                     i = 0
-                    For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.CLCS_AdjustCollection.Values
+                    For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
                         If adj.SimultaneousAdjust Then
                             x(i) = GetMnpVarValue(form, adj)
                             i += 1
@@ -1866,7 +1866,7 @@ Namespace DWSIM.Flowsheet
         Private Shared Function FunctionValueSync(ByVal form As FormFlowsheet, ByVal x() As Double) As Double()
 
             Dim i As Integer = 0
-            For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.CLCS_AdjustCollection.Values
+            For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
                 If adj.SimultaneousAdjust Then
                     SetMnpVarValue(x(i), form, adj)
                     i += 1
@@ -1877,7 +1877,7 @@ Namespace DWSIM.Flowsheet
 
             Dim fx(x.Length - 1) As Double
             i = 0
-            For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.CLCS_AdjustCollection.Values
+            For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
                 If adj.SimultaneousAdjust Then
                     If adj.Referenced Then
                         fx(i) = adj.AdjustValue + GetRefVarValue(form, adj) - GetCtlVarValue(form, adj)
@@ -1944,7 +1944,7 @@ Namespace DWSIM.Flowsheet
         Private Shared Function FunctionValueAsync(ByVal form As FormFlowsheet, ByVal x() As Double, ct As CancellationToken) As Double()
 
             Dim i As Integer = 0
-            For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.CLCS_AdjustCollection.Values
+            For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
                 If adj.SimultaneousAdjust Then
                     SetMnpVarValue(x(i), form, adj)
                     i += 1
@@ -1955,7 +1955,7 @@ Namespace DWSIM.Flowsheet
 
             Dim fx(x.Length - 1) As Double
             i = 0
-            For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.CLCS_AdjustCollection.Values
+            For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
                 If adj.SimultaneousAdjust Then
                     If adj.Referenced Then
                         fx(i) = adj.AdjustValue + GetRefVarValue(form, adj) - GetCtlVarValue(form, adj)

@@ -762,7 +762,7 @@
   <data name="Corrente1" xml:space="preserve">
     <value>Corrente</value>
   </data>
-  <data name="CorrentedeEnergyFlow" xml:space="preserve">
+  <data name="CorrentedeEnergia" xml:space="preserve">
     <value>Corrente de EnergyFlow</value>
   </data>
   <data name="Correntedeentrada" xml:space="preserve">

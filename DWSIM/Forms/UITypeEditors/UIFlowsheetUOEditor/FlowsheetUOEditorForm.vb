@@ -72,8 +72,8 @@ Public Class FlowsheetUOEditorForm
         Dim cb As New DataGridViewComboBoxCell
 
         cb.Items.Add("")
-        For Each ms As GraphicObject In fsuo.Fsheet.Collections.MaterialStreamCollection.Values
-            cb.Items.Add(ms.Tag)
+        For Each ms As GraphicObject In fsuo.Fsheet.Collections.GraphicObjectCollection.Values
+            If ms.ObjectType = ObjectType.MaterialStream Then cb.Items.Add(ms.Tag)
         Next
 
         dgvInputLinks.Columns(1).CellTemplate = cb
@@ -88,7 +88,7 @@ Public Class FlowsheetUOEditorForm
                     connectedfrom = ""
                 End If
                 If fsuo.InputConnections(i) <> "" Then
-                    Dim obj As GraphicObject = fsuo.Fsheet.Collections.MaterialStreamCollection(fsuo.InputConnections(i))
+                    Dim obj As GraphicObject = fsuo.Fsheet.Collections.GraphicObjectCollection(fsuo.InputConnections(i))
                     If Not obj Is Nothing Then connectedto = obj.Tag Else connectedto = ""
                 Else
                     connectedto = ""
@@ -106,7 +106,7 @@ Public Class FlowsheetUOEditorForm
                     connectedto = ""
                 End If
                 If fsuo.OutputConnections(i) <> "" Then
-                    Dim obj As GraphicObject = fsuo.Fsheet.Collections.MaterialStreamCollection(fsuo.OutputConnections(i))
+                    Dim obj As GraphicObject = fsuo.Fsheet.Collections.GraphicObjectCollection(fsuo.OutputConnections(i))
                     If Not obj Is Nothing Then connectedfrom = obj.Tag Else connectedfrom = ""
                 Else
                     connectedfrom = ""

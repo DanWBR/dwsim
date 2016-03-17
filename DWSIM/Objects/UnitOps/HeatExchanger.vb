@@ -142,8 +142,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             m_ComponentDescription = descricao
             FillNodeItems()
             QTFillNodeItems()
-            'Define the unitop type for later use.
-            ObjectType = ObjectType.HeatExchanger
             Type = HeatExchangerType.DoublePipe
 
         End Sub
@@ -259,11 +257,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             'Validate unitop status.
             Me.Validate()
 
-            StIn0 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            StIn1 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+            StIn0 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            StIn1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
 
-            StOut0 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            StOut1 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+            StOut0 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            StOut1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
 
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)
             If DebugMode Then AppendDebugLine("Validating inlet stream 1...")
@@ -1096,7 +1094,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 With objargs
                     .Calculated = True
                     .Name = Me.Name
-                    .ObjectType = Me.ObjectType
+                    .ObjectType = Me.GraphicObject.ObjectType
                 End With
 
                 FlowSheet.CalculationQueue.Enqueue(objargs)
@@ -1116,14 +1114,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name).Clear()
+                DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If
 
             If Me.GraphicObject.OutputConnectors(1).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name).Clear()
+                DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If
 
@@ -1133,7 +1131,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 .Calculated = False
                 .Name = Me.Name
                 .Tag = Me.GraphicObject.Tag
-                .ObjectType = Me.ObjectType
+                .ObjectType = Me.GraphicObject.ObjectType
             End With
 
             FlowSheet.CalculationQueue.Enqueue(objargs)

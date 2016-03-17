@@ -115,74 +115,74 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             Dim ims1, ims2, ims3, ims4, ims5, ims6, oms1, oms2, oms3, oms4, oms5, oms6 As SimulationObjects.Streams.MaterialStream
             If Me.GraphicObject.InputConnectors(0).IsAttached Then
-                ims1 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                ims1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             Else
                 ims1 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(1).IsAttached Then
-                ims2 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                ims2 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
             Else
                 ims2 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(2).IsAttached Then
-                ims3 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(2).AttachedConnector.AttachedFrom.Name)
+                ims3 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(2).AttachedConnector.AttachedFrom.Name)
             Else
                 ims3 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(4).IsAttached Then
-                ims4 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
+                ims4 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
             Else
                 ims4 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(5).IsAttached Then
-                ims5 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(5).AttachedConnector.AttachedFrom.Name)
+                ims5 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(5).AttachedConnector.AttachedFrom.Name)
             Else
                 ims5 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(6).IsAttached Then
-                ims6 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Name)
+                ims6 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Name)
             Else
                 ims6 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                oms1 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                oms1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
             Else
                 oms1 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(1).IsAttached Then
-                oms2 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+                oms2 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
             Else
                 oms2 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(2).IsAttached Then
-                oms3 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Name)
+                oms3 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Name)
             Else
                 oms3 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(4).IsAttached Then
-                oms4 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(4).AttachedConnector.AttachedTo.Name)
+                oms4 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(4).AttachedConnector.AttachedTo.Name)
             Else
                 oms4 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(5).IsAttached Then
-                oms5 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(5).AttachedConnector.AttachedTo.Name)
+                oms5 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(5).AttachedConnector.AttachedTo.Name)
             Else
                 oms5 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(6).IsAttached Then
-                oms6 = FlowSheet.Collections.CLCS_MaterialStreamCollection(Me.GraphicObject.OutputConnectors(6).AttachedConnector.AttachedTo.Name)
+                oms6 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(6).AttachedConnector.AttachedTo.Name)
             Else
                 oms6 = Nothing
             End If
 
             Dim ies1, oes1 As SimulationObjects.Streams.EnergyStream
             If Me.GraphicObject.InputConnectors(3).IsAttached Then
-                ies1 = FlowSheet.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Name)
+                ies1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Name)
             Else
                 ies1 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(3).IsAttached Then
-                oes1 = FlowSheet.Collections.CLCS_EnergyStreamCollection(Me.GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Name)
+                oes1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Name)
             Else
                 oes1 = Nothing
             End If

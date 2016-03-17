@@ -50,7 +50,7 @@ Public Class FormHYD_DET
         Label16.Text = uT
         Label18.Text = uT
 
-        Dim n As Integer = names.Length
+        Dim n As Integer = nomes.Length
 
         Dim xwH As Double
 
@@ -93,8 +93,8 @@ Public Class FormHYD_DET
 
         i = 0
         Do
-            Vn(i) = names(i)
-            Vzprel(i) = names(i)
+            Vn(i) = nomes(i)
+            Vzprel(i) = nomes(i)
             i += 1
         Loop Until i = Grid1.Rows.Count
         Vids = m_aux.RetornarIDsParaCalculoDeHidratos(nomes)

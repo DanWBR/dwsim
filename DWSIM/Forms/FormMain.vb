@@ -1402,7 +1402,9 @@ Public Class FormMain
 
         Dim objlist As New Concurrent.ConcurrentBag(Of DWSIM.SimulationObjects.UnitOperations.BaseClass)
 
-        If form.Collections.FlowsheetUOCollection.Count = 0 Then
+        Dim fsuocount = (From go As GraphicObjects.GraphicObject In form.Collections.GraphicObjectCollection.Values Where go.ObjectType = ObjectType.FlowsheetUO).Count
+
+        If fsuocount = 0 Then
 
             Parallel.ForEach(data, Sub(xel)
                                        Try

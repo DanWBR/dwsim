@@ -229,7 +229,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
                 Return ComponentName
             End Get
             Set(value As String)
-                ComponentName = name
+                ComponentName = value
             End Set
         End Property
 

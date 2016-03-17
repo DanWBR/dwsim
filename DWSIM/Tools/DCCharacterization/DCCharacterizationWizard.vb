@@ -741,7 +741,7 @@ Public Class DCCharacterizationWizard
         myMStr.Tag = corr
         gObj = myMStr
         gObj.Name = "MAT-" & Guid.NewGuid.ToString
-        form.Collections.MaterialStreamCollection.Add(gObj.Name, myMStr)
+        form.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
         'OBJETO DWSIM
         Dim myCOMS As DWSIM.SimulationObjects.Streams.MaterialStream = New DWSIM.SimulationObjects.Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr

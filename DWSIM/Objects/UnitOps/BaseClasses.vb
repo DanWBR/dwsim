@@ -77,6 +77,77 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Sub
 
+        ''' <summary>
+        ''' Calculates the object.
+        ''' </summary>
+        ''' <param name="args"></param>
+        ''' <returns></returns>
+        ''' <remarks>Use 'Solve()' to calculate the object instead.</remarks>
+        Public Overridable Function Calculate(Optional ByVal args As Object = Nothing) As Integer
+            Return Nothing
+        End Function
+
+        ''' <summary>
+        ''' Energy Flow property. Only implemented for Energy Streams.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Overridable Property EnergyFlow() As Nullable(Of Double)
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(ByVal value As Nullable(Of Double))
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        ''' <summary>
+        ''' Phase collection, only implemented for Material Streams.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Overridable ReadOnly Property Phases() As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Phase)
+            Get
+                Throw New NotImplementedException
+            End Get
+        End Property
+
+        ''' <summary>
+        ''' Validates the object, checking its connections and other parameters.
+        ''' </summary>
+        ''' <remarks></remarks>
+        Public Overridable Sub Validate()
+
+            Dim vForm As Global.DWSIM.FormFlowsheet = FlowSheet
+            Dim vEventArgs As New DWSIM.Extras.StatusChangeEventArgs
+            Dim vCon As ConnectionPoint
+
+            With vEventArgs
+                .Calculated = False
+                .Name = Me.Name
+                .ObjectType = Me.GraphicObject.ObjectType
+            End With
+
+            'Validate input connections.
+            For Each vCon In Me.GraphicObject.InputConnectors
+                If Not vCon.IsAttached Then
+                    CalculateFlowsheet(FlowSheet, vEventArgs, Nothing)
+                    Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
+                End If
+            Next
+
+            'Validate output connections.
+            For Each vCon In Me.GraphicObject.OutputConnectors
+                If Not vCon.IsAttached Then
+                    CalculateFlowsheet(vForm, vEventArgs, Nothing)
+                    Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
+                End If
+            Next
+
+        End Sub
+
         Public Overridable Function GetDebugReport() As String
             Return "Error - function not implemented"
         End Function
@@ -213,7 +284,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 If sobj.ObjectType = ObjectType.FlowsheetUO Then
 
-                    Dim fs As DWSIM.SimulationObjects.UnitOperations.Flowsheet = FlowSheet.Collections.CLCS_FlowsheetUOCollection.Item(sobj.Name)
+                    Dim fs As DWSIM.SimulationObjects.UnitOperations.Flowsheet = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.PropertyDescriptor.Category.Equals(DWSIM.App.GetLocalString("LinkedInputParms")) Then
 
@@ -236,7 +307,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 .Sender = "PropertyGrid"
                             End With
 
-                            If fs.IsSpecAttached = True And fs.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(fs.AttachedSpecId).Calculate()
+                            If fs.IsSpecAttached = True And fs.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(fs.AttachedSpecId).Calculate()
                             FlowSheet.CalculationQueue.Enqueue(objargs)
 
                         End If
@@ -245,7 +316,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 ElseIf sobj.ObjectType = ObjectType.MaterialStream Then
 
-                    Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream = FlowSheet.Collections.CLCS_MaterialStreamCollection.Item(sobj.Name)
+                    Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If Not e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Base")) Then
 
@@ -327,7 +398,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 ElseIf sobj.ObjectType = ObjectType.EnergyStream Then
 
-                    Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = FlowSheet.Collections.CLCS_EnergyStreamCollection.Item(sobj.Name)
+                    Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("EnergyFlow")) Then
 
@@ -354,7 +425,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If es.IsSpecAttached = True And es.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(es.AttachedSpecId).Calculate()
+                        If es.IsSpecAttached = True And es.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(es.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -362,7 +433,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 ElseIf sobj.ObjectType = ObjectType.NodeOut Then
 
-                    Dim sp As DWSIM.SimulationObjects.UnitOperations.Splitter = FlowSheet.Collections.CLCS_SplitterCollection.Item(sobj.Name)
+                    Dim sp As DWSIM.SimulationObjects.UnitOperations.Splitter = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
                     sp.OutCount = 0
                     For Each cp In sp.GraphicObject.OutputConnectors
                         If cp.IsAttached Then sp.OutCount += 1
@@ -447,14 +518,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If sp.IsSpecAttached = True And sp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(sp.AttachedSpecId).Calculate()
+                        If sp.IsSpecAttached = True And sp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(sp.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.Pump Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Pump = FlowSheet.Collections.CLCS_PumpCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Pump = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains("Delta P") Then
 
@@ -492,14 +563,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.Valve Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Valve = FlowSheet.Collections.CLCS_ValveCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Valve = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Quedadepresso")) Then
 
@@ -533,14 +604,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.Filter Then
 
-                    Dim ft As DWSIM.SimulationObjects.UnitOperations.Filter = FlowSheet.Collections.CLCS_FilterCollection.Item(sobj.Name)
+                    Dim ft As DWSIM.SimulationObjects.UnitOperations.Filter = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("FilterMediumResistance")) Then
                         If units <> "" Then
@@ -586,14 +657,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If ft.IsSpecAttached = True And ft.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(ft.AttachedSpecId).Calculate()
+                        If ft.IsSpecAttached = True And ft.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(ft.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.Compressor Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Compressor = FlowSheet.Collections.CLCS_CompressorCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Compressor = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains("Delta P") Then
 
@@ -629,14 +700,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.Expander Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Expander = FlowSheet.Collections.CLCS_TurbineCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Expander = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains("Delta P") Then
 
@@ -673,14 +744,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.Pipe Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Pipe = FlowSheet.Collections.CLCS_PipeCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Pipe = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature")) Then
 
@@ -712,14 +783,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.Heater Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Heater = FlowSheet.Collections.CLCS_HeaterCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Heater = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Eficincia")) Then
 
@@ -768,14 +839,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.Cooler Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Cooler = FlowSheet.Collections.CLCS_CoolerCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Cooler = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Eficincia")) Then
 
@@ -824,14 +895,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.Tank Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Tank = FlowSheet.Collections.CLCS_TankCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.Tank = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Quedadepresso")) Then
 
@@ -873,20 +944,20 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.OT_Adjust Then
 
-                    Dim adj As DWSIM.SimulationObjects.SpecialOps.Adjust = FlowSheet.Collections.CLCS_AdjustCollection.Item(sobj.Name)
+                    Dim adj As DWSIM.SimulationObjects.SpecialOps.Adjust = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     With adj
                         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelControlada")) Then
                             .ControlledObject = FlowSheet.Collections.FlowsheetObjectCollection(.ControlledObjectData.m_ID)
                             .ControlledVariable = .ControlledObjectData.m_Property
-                            CType(FlowSheet.Collections.AdjustCollection(adj.Name), AdjustGraphic).ConnectedToCv = .ControlledObject.GraphicObject
+                            CType(FlowSheet.Collections.GraphicObjectCollection(adj.Name), AdjustGraphic).ConnectedToCv = .ControlledObject.GraphicObject
                             .ReferenceObject = Nothing
                             .ReferenceVariable = Nothing
                             With .ReferencedObjectData
@@ -897,13 +968,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End With
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelManipulada")) Then
                             .ManipulatedObject = FlowSheet.Collections.FlowsheetObjectCollection(.ManipulatedObjectData.m_ID)
-                            Dim gr As AdjustGraphic = FlowSheet.Collections.AdjustCollection(adj.Name)
+                            Dim gr As AdjustGraphic = FlowSheet.Collections.GraphicObjectCollection(adj.Name)
                             gr.ConnectedToMv = .ManipulatedObject.GraphicObject
                             .ManipulatedVariable = .ManipulatedObjectData.m_Property
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("ObjetoVariveldeRefer")) Then
                             .ReferenceObject = FlowSheet.Collections.FlowsheetObjectCollection(.ReferencedObjectData.m_ID)
                             .ReferenceVariable = .ReferencedObjectData.m_Property
-                            Dim gr As AdjustGraphic = FlowSheet.Collections.AdjustCollection(adj.Name)
+                            Dim gr As AdjustGraphic = FlowSheet.Collections.GraphicObjectCollection(adj.Name)
                             gr.ConnectedToRv = .ReferenceObject.GraphicObject
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Valormnimoopcional")) Then
                             adj.MinVal = Converter.ConvertToSI(adj.ManipulatedObject.GetPropertyUnit(adj.ManipulatedObjectData.m_Property, FlowSheet.Options.SelectedUnitSystem), e.ChangedItem.Value)
@@ -916,16 +987,16 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 ElseIf sobj.ObjectType = ObjectType.OT_Spec Then
 
-                    Dim spec As DWSIM.SimulationObjects.SpecialOps.Spec = FlowSheet.Collections.CLCS_SpecCollection.Item(sobj.Name)
+                    Dim spec As DWSIM.SimulationObjects.SpecialOps.Spec = FlowSheet.Collections.FlowsheetObjectCollection(sobj.Name)
 
                     With spec
                         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelDestino")) Then
                             .TargetObject = FlowSheet.Collections.FlowsheetObjectCollection(.TargetObjectData.m_ID)
                             .TargetVariable = .TargetObjectData.m_Property
-                            CType(FlowSheet.Collections.SpecCollection(spec.Name), SpecGraphic).ConnectedToTv = .TargetObject.GraphicObject
+                            CType(FlowSheet.Collections.GraphicObjectCollection(spec.Name), SpecGraphic).ConnectedToTv = .TargetObject.GraphicObject
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelFonte")) Then
                             .SourceObject = FlowSheet.Collections.FlowsheetObjectCollection(.SourceObjectData.m_ID)
-                            Dim gr As SpecGraphic = FlowSheet.Collections.SpecCollection(spec.Name)
+                            Dim gr As SpecGraphic = FlowSheet.Collections.GraphicObjectCollection(spec.Name)
                             gr.ConnectedToSv = .SourceObject.GraphicObject
                             .SourceVariable = .SourceObjectData.m_Property
                         End If
@@ -933,7 +1004,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 ElseIf sobj.ObjectType = ObjectType.Vessel Then
 
-                    Dim vessel As DWSIM.SimulationObjects.UnitOperations.Vessel = FlowSheet.Collections.CLCS_VesselCollection.Item(sobj.Name)
+                    Dim vessel As DWSIM.SimulationObjects.UnitOperations.Vessel = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     Dim T, P As Double
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Temperatura")) Then
@@ -964,14 +1035,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If vessel.IsSpecAttached = True And vessel.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(vessel.AttachedSpecId).Calculate()
+                        If vessel.IsSpecAttached = True And vessel.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(vessel.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.OT_Recycle Then
 
-                    Dim rec As DWSIM.SimulationObjects.SpecialOps.Recycle = FlowSheet.Collections.CLCS_RecycleCollection.Item(sobj.Name)
+                    Dim rec As DWSIM.SimulationObjects.SpecialOps.Recycle = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     Dim T, P, W As Double
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Temperatura")) Then
@@ -987,7 +1058,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 ElseIf sobj.ObjectType = ObjectType.RCT_Conversion Then
 
-                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_Conversion = FlowSheet.Collections.CLCS_ReactorConversionCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_Conversion = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Quedadepresso")) Then
 
@@ -1020,14 +1091,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.RCT_Equilibrium Then
 
-                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium = FlowSheet.Collections.CLCS_ReactorEquilibriumCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Quedadepresso")) Then
 
@@ -1060,14 +1131,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.RCT_Gibbs Then
 
-                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_Gibbs = FlowSheet.Collections.CLCS_ReactorGibbsCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_Gibbs = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Quedadepresso")) Then
 
@@ -1100,14 +1171,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.RCT_CSTR Then
 
-                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_CSTR = FlowSheet.Collections.CLCS_ReactorCSTRCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_CSTR = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("RSCTRIsothermalTemperature")) Then
 
@@ -1166,14 +1237,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.RCT_PFR Then
 
-                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_PFR = FlowSheet.Collections.CLCS_ReactorPFRCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.Reactors.Reactor_PFR = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Quedadepresso")) Then
 
@@ -1242,14 +1313,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.HeatExchanger Then
 
-                    Dim bb As DWSIM.SimulationObjects.UnitOperations.HeatExchanger = FlowSheet.Collections.CLCS_HeatExchangerCollection.Item(sobj.Name)
+                    Dim bb As DWSIM.SimulationObjects.UnitOperations.HeatExchanger = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("OverallHeatTranferCoefficient")) Then
 
@@ -1322,14 +1393,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.ShortcutColumn Then
 
-                    Dim sc As DWSIM.SimulationObjects.UnitOperations.ShortcutColumn = FlowSheet.Collections.CLCS_ShortcutColumnCollection.Item(sobj.Name)
+                    Dim sc As DWSIM.SimulationObjects.UnitOperations.ShortcutColumn = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
                     Dim Pr, Pc As Double
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("SCCondenserType")) Then
@@ -1366,14 +1437,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If sc.IsSpecAttached = True And sc.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(sc.AttachedSpecId).Calculate()
+                        If sc.IsSpecAttached = True And sc.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(sc.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
 
                 ElseIf sobj.ObjectType = ObjectType.OrificePlate Then
 
-                    Dim op As DWSIM.SimulationObjects.UnitOperations.OrificePlate = FlowSheet.Collections.CLCS_OrificePlateCollection.Item(sobj.Name)
+                    Dim op As DWSIM.SimulationObjects.UnitOperations.OrificePlate = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
                     If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("OPOrificeDiameter")) Then
                         If units <> "" Then
@@ -1399,7 +1470,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If op.IsSpecAttached = True And op.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(op.AttachedSpecId).Calculate()
+                        If op.IsSpecAttached = True And op.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(op.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1407,7 +1478,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 ElseIf sobj.ObjectType = ObjectType.ExcelUO Then
 
-                    Dim eo As DWSIM.SimulationObjects.UnitOperations.ExcelUO = FlowSheet.Collections.CLCS_ExcelUOCollection.Item(sobj.Name)
+                    Dim eo As DWSIM.SimulationObjects.UnitOperations.ExcelUO = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
                     Dim P1 As Integer
                     Dim L As String
                     P1 = InStr(1, e.ChangedItem.Label, "(") - 2
@@ -1430,7 +1501,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If eo.IsSpecAttached = True And eo.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(eo.AttachedSpecId).Calculate()
+                        If eo.IsSpecAttached = True And eo.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(eo.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1456,7 +1527,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                         Dim obj = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
-                        If obj.IsSpecAttached = True And obj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.CLCS_SpecCollection(obj.AttachedSpecId).Calculate()
+                        If obj.IsSpecAttached = True And obj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(obj.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1518,7 +1589,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergia")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
                                 Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height + 30, e.ChangedItem.Value)
@@ -1691,7 +1762,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(3).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergia")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
                                 Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + 75, e.ChangedItem.Value)
@@ -1751,7 +1822,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergia")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
                                 Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
@@ -1983,7 +2054,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(2).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergia")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
                                 Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + 130, e.ChangedItem.Value)
@@ -2443,7 +2514,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergia")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
                                 Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X - 60, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
@@ -2949,7 +3020,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 FlowSheet.DisconnectObject(sobj, sobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                             End If
                         End If
-                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergyFlow")) Then
+                    ElseIf e.ChangedItem.Label.Equals(DWSIM.App.GetLocalString("CorrentedeEnergia")) Then
                         If e.ChangedItem.Value <> "" Then
                             If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
                                 Dim oguid As String = FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, sobj.X + sobj.Width + 40, sobj.Y + sobj.Height + 20, e.ChangedItem.Value)
@@ -3935,16 +4006,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' Calculates the object.
         ''' </summary>
         ''' <param name="args"></param>
-        ''' <returns></returns>
-        ''' <remarks>Use 'Solve()' to calculate the object instead.</remarks>
-        Public Overridable Function Calculate(Optional ByVal args As Object = Nothing) As Integer
-            Return Nothing
-        End Function
-
-        ''' <summary>
-        ''' Calculates the object.
-        ''' </summary>
-        ''' <param name="args"></param>
         ''' <remarks></remarks>
         Public Sub Solve(Optional ByVal args As Object = Nothing)
 
@@ -3975,40 +4036,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             DeCalculate()
 
             Calculated = False
-
-        End Sub
-
-        ''' <summary>
-        ''' Validates the object, checking its connections and other parameters.
-        ''' </summary>
-        ''' <remarks></remarks>
-        Public Overridable Sub Validate()
-
-            Dim vForm As Global.DWSIM.FormFlowsheet = FlowSheet
-            Dim vEventArgs As New DWSIM.Extras.StatusChangeEventArgs
-            Dim vCon As ConnectionPoint
-
-            With vEventArgs
-                .Calculated = False
-                .Name = Me.Name
-                .ObjectType = Me.ObjectType
-            End With
-
-            'Validate input connections.
-            For Each vCon In Me.GraphicObject.InputConnectors
-                If Not vCon.IsAttached Then
-                    CalculateFlowsheet(FlowSheet, vEventArgs, Nothing)
-                    Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
-                End If
-            Next
-
-            'Validate output connections.
-            For Each vCon In Me.GraphicObject.OutputConnectors
-                If Not vCon.IsAttached Then
-                    CalculateFlowsheet(vForm, vEventArgs, Nothing)
-                    Throw New Exception(DWSIM.App.GetLocalString("Verifiqueasconexesdo"))
-                End If
-            Next
 
         End Sub
 
@@ -4486,7 +4513,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Private _name, _description, _interfacename, _moreinfo, _operation, _scope As String, _code As Integer
 
-        Public ReadOnly Property Name() As String Implements CapeOpen.ECapeRoot.Name
+        Public ReadOnly Property Name2() As String Implements CapeOpen.ECapeRoot.Name
             Get
                 Return Me.Name
             End Get
@@ -4571,14 +4598,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
     <System.Serializable()> Public MustInherit Class SpecialOpBaseClass
 
         Inherits DWSIM.SimulationObjects.UnitOperations.BaseClass
-
-        Public Overridable Function Calculate() As Integer
-            Return Nothing
-        End Function
-
-        Public Overridable Function DeCalculate() As Integer
-            Return Nothing
-        End Function
 
         Public Sub New()
             MyBase.CreateNew()

@@ -77,7 +77,7 @@ Namespace DWSIM.Flowsheet
 
             'Creates all the graphic collections.
 
-            GraphicObjectCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
+            GraphicObjectCollection = New Dictionary(Of String, GraphicObject)
 
             FlowsheetObjectCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
 

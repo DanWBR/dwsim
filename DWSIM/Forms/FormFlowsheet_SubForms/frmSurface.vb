@@ -911,7 +911,7 @@ Public Class frmSurface
 
                     If cancopy Then
                         Me.CopyFromTSMI.Visible = True
-                        For Each mstr As Streams.MaterialStream In Flowsheet.Collections.CLCS_MaterialStreamCollection.Values
+                        For Each mstr As Streams.MaterialStream In Flowsheet.Collections.FlowsheetObjectCollection.Values
                             If mstr.GraphicObject.Tag <> obj.GraphicObject.Tag Then
                                 Dim newtsmi As New ToolStripMenuItem(mstr.GraphicObject.Tag)
                                 If mstr.GraphicObject.Calculated Then CopyFromTSMI.DropDownItems.Add(newtsmi)
@@ -1090,9 +1090,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.AdjustCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_AdjustCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OT_Spec
                 Dim myDWOBJ As DWSIM.SimulationObjects.SpecialOps.Spec = CType(newobj, DWSIM.SimulationObjects.SpecialOps.Spec)
@@ -1120,9 +1119,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.SpecCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_SpecCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OT_Recycle
                 Dim myDWOBJ As DWSIM.SimulationObjects.SpecialOps.Recycle = CType(newobj, DWSIM.SimulationObjects.SpecialOps.Recycle)
@@ -1150,9 +1148,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.RecycleCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_RecycleCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OT_EnergyRecycle
                 Dim myDWOBJ As DWSIM.SimulationObjects.SpecialOps.EnergyRecycle = CType(newobj, DWSIM.SimulationObjects.SpecialOps.EnergyRecycle)
@@ -1180,9 +1177,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.EnergyRecycleCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_EnergyRecycleCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.NodeIn
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Mixer = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Mixer)
@@ -1210,9 +1206,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.MixerCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_MixerCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.NodeEn
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.EnergyMixer = CType(newobj, DWSIM.SimulationObjects.UnitOperations.EnergyMixer)
@@ -1240,9 +1235,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.MixerENCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_EnergyMixerCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.NodeOut
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Splitter = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Splitter)
@@ -1270,9 +1264,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.SplitterCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_SplitterCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Pump
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Pump = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Pump)
@@ -1300,9 +1293,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.PumpCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_PumpCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Tank
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Tank = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Tank)
@@ -1330,9 +1322,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.TankCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_TankCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Vessel
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Vessel = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Vessel)
@@ -1360,9 +1351,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.SeparatorCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_VesselCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.MaterialStream
                 Dim myDWOBJ As DWSIM.SimulationObjects.Streams.MaterialStream = CType(newobj, DWSIM.SimulationObjects.Streams.MaterialStream)
@@ -1390,9 +1380,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.MaterialStreamCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_MaterialStreamCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.EnergyStream
                 Dim myDWOBJ As DWSIM.SimulationObjects.Streams.EnergyStream = CType(newobj, DWSIM.SimulationObjects.Streams.EnergyStream)
@@ -1420,9 +1409,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.EnergyStreamCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_EnergyStreamCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Compressor
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Compressor = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Compressor)
@@ -1450,9 +1438,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.CompressorCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_CompressorCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Expander
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Expander = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Expander)
@@ -1480,9 +1467,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.TurbineCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_TurbineCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Cooler
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Cooler = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Cooler)
@@ -1510,9 +1496,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.CoolerCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_CoolerCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Heater
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Heater = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Heater)
@@ -1540,9 +1525,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.HeaterCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_HeaterCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Pipe
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Pipe = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Pipe)
@@ -1570,9 +1554,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.PipeCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_PipeCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Valve
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Valve = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Valve)
@@ -1600,9 +1583,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.ValveCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_ValveCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_Conversion
                 Dim myDWOBJ As DWSIM.SimulationObjects.Reactors.Reactor_Conversion = CType(newobj, DWSIM.SimulationObjects.Reactors.Reactor_Conversion)
@@ -1630,9 +1612,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.ReactorConversionCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_ReactorConversionCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_Equilibrium
                 Dim myDWOBJ As DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium = CType(newobj, DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium)
@@ -1660,9 +1641,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.ReactorEquilibriumCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_ReactorEquilibriumCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_Gibbs
                 Dim myDWOBJ As DWSIM.SimulationObjects.Reactors.Reactor_Gibbs = CType(newobj, DWSIM.SimulationObjects.Reactors.Reactor_Gibbs)
@@ -1690,9 +1670,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.ReactorGibbsCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_ReactorGibbsCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_CSTR
                 Dim myDWOBJ As DWSIM.SimulationObjects.Reactors.Reactor_CSTR = CType(newobj, DWSIM.SimulationObjects.Reactors.Reactor_CSTR)
@@ -1720,9 +1699,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.ReactorCSTRCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_ReactorCSTRCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_PFR
                 Dim myDWOBJ As DWSIM.SimulationObjects.Reactors.Reactor_PFR = CType(newobj, DWSIM.SimulationObjects.Reactors.Reactor_PFR)
@@ -1750,9 +1728,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.ReactorPFRCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_ReactorPFRCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.HeatExchanger
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.HeatExchanger = CType(newobj, DWSIM.SimulationObjects.UnitOperations.HeatExchanger)
@@ -1780,9 +1757,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.HeatExchangerCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_HeatExchangerCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ShortcutColumn
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.ShortcutColumn = CType(newobj, DWSIM.SimulationObjects.UnitOperations.ShortcutColumn)
@@ -1810,9 +1786,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.ShortcutColumnCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_ShortcutColumnCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.DistillationColumn
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.DistillationColumn = CType(newobj, DWSIM.SimulationObjects.UnitOperations.DistillationColumn)
@@ -1840,9 +1815,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.DistillationColumnCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_DistillationColumnCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.AbsorptionColumn
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.AbsorptionColumn = CType(newobj, DWSIM.SimulationObjects.UnitOperations.AbsorptionColumn)
@@ -1870,9 +1844,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.AbsorptionColumnCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_AbsorptionColumnCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ReboiledAbsorber
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.ReboiledAbsorber = CType(newobj, DWSIM.SimulationObjects.UnitOperations.ReboiledAbsorber)
@@ -1900,9 +1873,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.ReboiledAbsorberCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_ReboiledAbsorberCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RefluxedAbsorber
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.RefluxedAbsorber = CType(newobj, DWSIM.SimulationObjects.UnitOperations.RefluxedAbsorber)
@@ -1930,9 +1902,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.RefluxedAbsorberCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_RefluxedAbsorberCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ComponentSeparator
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.ComponentSeparator = CType(newobj, DWSIM.SimulationObjects.UnitOperations.ComponentSeparator)
@@ -1960,9 +1931,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.ComponentSeparatorCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_ComponentSeparatorCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.SolidSeparator
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.SolidsSeparator = CType(newobj, DWSIM.SimulationObjects.UnitOperations.SolidsSeparator)
@@ -1990,9 +1960,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.SolidsSeparatorCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_SolidsSeparatorCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Filter
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.Filter = CType(newobj, DWSIM.SimulationObjects.UnitOperations.Filter)
@@ -2020,9 +1989,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.FilterCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_FilterCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OrificePlate
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.OrificePlate = CType(newobj, DWSIM.SimulationObjects.UnitOperations.OrificePlate)
@@ -2050,9 +2018,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.OrificePlateCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_OrificePlateCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.CustomUO
                 Dim myDWOBJ As DWSIM.SimulationObjects.UnitOperations.CustomUO = CType(newobj, DWSIM.SimulationObjects.UnitOperations.CustomUO)
@@ -2080,9 +2047,8 @@ Public Class frmSurface
                     .EnergyConnector.IsAttached = False
                 End With
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
-                Flowsheet.Collections.CustomUOCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
+                Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Flowsheet.Collections.CLCS_CustomUOCollection.Add(myDWOBJ.Name, myDWOBJ)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.CapeOpenUO, ObjectType.FlowsheetUO
                 MessageBox.Show("Cloning is not supported by CAPE-OPEN/Flowsheet Unit Operations.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -2273,8 +2239,6 @@ Public Class frmSurface
 
         Flowsheet = My.Application.ActiveSimulation
 
-        If Flowsheet.Collections.ObjectCounter Is Nothing Then Flowsheet.Collections.InitializeCounter()
-
         Dim gObj As GraphicObject = Nothing
         Dim fillclr As Color = Color.WhiteSmoke
         Dim lineclr As Color = Color.Red
@@ -2293,20 +2257,15 @@ Public Class frmSurface
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "ADJ-" & Format(Flowsheet.Collections.ObjectCounter("ADJU"), "00#")
-                Flowsheet.Collections.UpdateCounter("ADJU")
+                myNode.Tag = "ADJ-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = DWSIM.App.GetLocalString("AJ") & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.AdjustCollection.Add(gObj.Name, myNode)
-                'If Not DWSIM.App.IsRunningOnMono Then Flowsheet.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes.Add(gObj.Name, gObj.Tag).Name = gObj.Name
-                'If Not DWSIM.App.IsRunningOnMono Then Flowsheet.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes(gObj.Name).ContextMenuStrip = Flowsheet.FormObjList.ContextMenuStrip1
-                'OBJETO DWSIM
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
                 Dim myADJ As DWSIM.SimulationObjects.SpecialOps.Adjust = New DWSIM.SimulationObjects.SpecialOps.Adjust(myNode.Name, "Ajuste")
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
-                Flowsheet.Collections.CLCS_AdjustCollection.Add(myNode.Name, myADJ)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("ADJT001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
@@ -2317,20 +2276,15 @@ Public Class frmSurface
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "SPEC-" & Format(Flowsheet.Collections.ObjectCounter("SPEC"), "00#")
-                Flowsheet.Collections.UpdateCounter("SPEC")
+                myNode.Tag = "SPEC-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = "ES-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.SpecCollection.Add(gObj.Name, myNode)
-                'If Not DWSIM.App.IsRunningOnMono Then Flowsheet.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes.Add(gObj.Name, gObj.Tag).Name = gObj.Name
-                'If Not DWSIM.App.IsRunningOnMono Then Flowsheet.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes(gObj.Name).ContextMenuStrip = Flowsheet.FormObjList.ContextMenuStrip1
-                'OBJETO DWSIM
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
                 Dim myADJ As DWSIM.SimulationObjects.SpecialOps.Spec = New DWSIM.SimulationObjects.SpecialOps.Spec(myNode.Name, "Especificao")
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
-                Flowsheet.Collections.CLCS_SpecCollection.Add(myNode.Name, myADJ)
 
             Case ObjectType.OT_Recycle
 
@@ -2339,20 +2293,15 @@ Public Class frmSurface
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "REC-" & Format(Flowsheet.Collections.ObjectCounter("RECY"), "00#")
-                Flowsheet.Collections.UpdateCounter("RECY")
+                myNode.Tag = "REC-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = "REC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.RecycleCollection.Add(gObj.Name, myNode)
-                'If Not DWSIM.App.IsRunningOnMono Then Flowsheet.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes.Add(gObj.Name, gObj.Tag).Name = gObj.Name
-                'If Not DWSIM.App.IsRunningOnMono Then Flowsheet.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes(gObj.Name).ContextMenuStrip = Flowsheet.FormObjList.ContextMenuStrip1
-                'OBJETO DWSIM
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
                 Dim myADJ As DWSIM.SimulationObjects.SpecialOps.Recycle = New DWSIM.SimulationObjects.SpecialOps.Recycle(myNode.Name, "Reciclo")
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
-                Flowsheet.Collections.CLCS_RecycleCollection.Add(myNode.Name, myADJ)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("RECY001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
@@ -2363,23 +2312,15 @@ Public Class frmSurface
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                If Not Flowsheet.Collections.ObjectCounter.ContainsKey("EREC") Then
-                    Flowsheet.Collections.ObjectCounter.Add("EREC", 0)
-                End If
-                myNode.Tag = "EREC-" & Format(Flowsheet.Collections.ObjectCounter("EREC"), "00#")
-                Flowsheet.Collections.UpdateCounter("EREC")
+                myNode.Tag = "EREC-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = "EREC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.EnergyRecycleCollection.Add(gObj.Name, myNode)
-                'If Not DWSIM.App.IsRunningOnMono Then Flowsheet.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes.Add(gObj.Name, gObj.Tag).Name = gObj.Name
-                'If Not DWSIM.App.IsRunningOnMono Then Flowsheet.FormObjList.TreeViewObj.Nodes("NodeMX").Nodes(gObj.Name).ContextMenuStrip = Flowsheet.FormObjList.ContextMenuStrip1
-                'OBJETO DWSIM
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
                 Dim myADJ As DWSIM.SimulationObjects.SpecialOps.EnergyRecycle = New DWSIM.SimulationObjects.SpecialOps.EnergyRecycle(myNode.Name, "EnergyRecycle")
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
-                Flowsheet.Collections.CLCS_EnergyRecycleCollection.Add(myNode.Name, myADJ)
 
             Case ObjectType.NodeIn
 
@@ -2388,18 +2329,15 @@ Public Class frmSurface
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "MIX-" & Format(Flowsheet.Collections.ObjectCounter("MIXR"), "00#")
-                Flowsheet.Collections.UpdateCounter("MIXR")
+                myNode.Tag = "MIX-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = "MIST-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.MixerCollection.Add(gObj.Name, myNode)
-                'OBJETO DWSIM
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
                 Dim myCOMIX As DWSIM.SimulationObjects.UnitOperations.Mixer = New DWSIM.SimulationObjects.UnitOperations.Mixer(myNode.Name, "Misturador")
                 myCOMIX.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myCOMIX)
-                Flowsheet.Collections.CLCS_MixerCollection.Add(myNode.Name, myCOMIX)
 
             Case ObjectType.NodeEn
 
@@ -2409,18 +2347,16 @@ Public Class frmSurface
                 myNode.GradientMode = False
                 myNode.FillColor = Color.LightYellow
                 myNode.LineColor = lineclr
-                myNode.Tag = "MIX-ME-" & Format(Flowsheet.Collections.ObjectCounter("MXEN"), "00#")
-                Flowsheet.Collections.UpdateCounter("MXEN")
+                myNode.Tag = "MIX-ME-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = "MIST_ME-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.MixerENCollection.Add(gObj.Name, myNode)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
                 'OBJETO DWSIM
                 Dim myCOMIX As DWSIM.SimulationObjects.UnitOperations.EnergyMixer = New DWSIM.SimulationObjects.UnitOperations.EnergyMixer(myNode.Name, "MisturadorMATEN")
                 myCOMIX.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myCOMIX)
-                Flowsheet.Collections.CLCS_EnergyMixerCollection.Add(myNode.Name, myCOMIX)
 
             Case ObjectType.NodeOut
 
@@ -2429,18 +2365,16 @@ Public Class frmSurface
                 myNodeo.Fill = True
                 myNodeo.FillColor = fillclr
                 myNodeo.LineColor = lineclr
-                myNodeo.Tag = "SPLT-" & Format(Flowsheet.Collections.ObjectCounter("SPLI"), "00#")
-                Flowsheet.Collections.UpdateCounter("SPLI")
+                myNodeo.Tag = "SPLT-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myNodeo.Tag = tag
                 gObj = myNodeo
                 gObj.Name = "DIV-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.SplitterCollection.Add(gObj.Name, myNodeo)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNodeo)
                 'OBJETO DWSIM
                 Dim myCOSP As DWSIM.SimulationObjects.UnitOperations.Splitter = New DWSIM.SimulationObjects.UnitOperations.Splitter(myNodeo.Name, "Divisor")
                 myCOSP.GraphicObject = myNodeo
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNodeo.Name, myCOSP)
-                Flowsheet.Collections.CLCS_SplitterCollection.Add(myNodeo.Name, myCOSP)
 
             Case ObjectType.Pump
 
@@ -2449,18 +2383,16 @@ Public Class frmSurface
                 myPump.Fill = True
                 myPump.FillColor = fillclr
                 myPump.LineColor = lineclr
-                myPump.Tag = "PUMP-" & Format(Flowsheet.Collections.ObjectCounter("PUMP"), "00#")
-                Flowsheet.Collections.UpdateCounter("PUMP")
+                myPump.Tag = "PUMP-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myPump.Tag = tag
                 gObj = myPump
                 gObj.Name = "BB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.PumpCollection.Add(gObj.Name, myPump)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myPump)
                 'OBJETO DWSIM
                 Dim myCOSP As DWSIM.SimulationObjects.UnitOperations.Pump = New DWSIM.SimulationObjects.UnitOperations.Pump(myPump.Name, "Bomba")
                 myCOSP.GraphicObject = myPump
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myPump.Name, myCOSP)
-                Flowsheet.Collections.CLCS_PumpCollection.Add(myPump.Name, myCOSP)
 
             Case ObjectType.Tank
 
@@ -2469,18 +2401,16 @@ Public Class frmSurface
                 myTank.Fill = True
                 myTank.FillColor = fillclr
                 myTank.LineColor = lineclr
-                myTank.Tag = "TANK-" & Format(Flowsheet.Collections.ObjectCounter("TANK"), "00#")
-                Flowsheet.Collections.UpdateCounter("TANK")
+                myTank.Tag = "TANK-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myTank.Tag = tag
                 gObj = myTank
                 gObj.Name = "TQ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.TankCollection.Add(gObj.Name, myTank)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myTank)
                 'OBJETO DWSIM
                 Dim myCOTK As DWSIM.SimulationObjects.UnitOperations.Tank = New DWSIM.SimulationObjects.UnitOperations.Tank(myTank.Name, "Tanque")
                 myCOTK.GraphicObject = myTank
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myTank.Name, myCOTK)
-                Flowsheet.Collections.CLCS_TankCollection.Add(myTank.Name, myCOTK)
 
             Case ObjectType.Vessel
 
@@ -2489,18 +2419,16 @@ Public Class frmSurface
                 myVessel.Fill = True
                 myVessel.FillColor = fillclr
                 myVessel.LineColor = lineclr
-                myVessel.Tag = "SEP-" & Format(Flowsheet.Collections.ObjectCounter("VESS"), "00#")
-                Flowsheet.Collections.UpdateCounter("VESS")
+                myVessel.Tag = "SEP-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myVessel.Tag = tag
                 gObj = myVessel
                 gObj.Name = "SEP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.SeparatorCollection.Add(gObj.Name, myVessel)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myVessel)
                 'OBJETO DWSIM
                 Dim myCOVESSEL As DWSIM.SimulationObjects.UnitOperations.Vessel = New DWSIM.SimulationObjects.UnitOperations.Vessel(myVessel.Name, "VasoSeparadorGL")
                 myCOVESSEL.GraphicObject = myVessel
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myVessel.Name, myCOVESSEL)
-                Flowsheet.Collections.CLCS_VesselCollection.Add(myVessel.Name, myCOVESSEL)
 
             Case ObjectType.TPVessel
 
@@ -2509,13 +2437,12 @@ Public Class frmSurface
                 myVessel.Fill = True
                 myVessel.FillColor = fillclr
                 myVessel.LineColor = lineclr
-                myVessel.Tag = "SEPTF-" & Format(Flowsheet.Collections.ObjectCounter("VES3"), "00#")
-                Flowsheet.Collections.UpdateCounter("VES3")
+                myVessel.Tag = "SEPTF-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myVessel.Tag = tag
                 gObj = myVessel
                 gObj.Name = "SEPTF-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.TPSeparatorCollection.Add(gObj.Name, myVessel)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myVessel)
 
             Case ObjectType.MaterialStream
 
@@ -2524,19 +2451,17 @@ Public Class frmSurface
                 myMStr.Fill = True
                 myMStr.FillColor = fillclr
                 myMStr.LineColor = lineclr
-                myMStr.Tag = "MSTR-" & Format(Flowsheet.Collections.ObjectCounter("MSTR"), "00#")
-                Flowsheet.Collections.UpdateCounter("MSTR")
+                myMStr.Tag = "MSTR-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 gObj.Name = "MAT-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.MaterialStreamCollection.Add(gObj.Name, myMStr)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
                 Dim myCOMS As DWSIM.SimulationObjects.Streams.MaterialStream = New DWSIM.SimulationObjects.Streams.MaterialStream(myMStr.Name, "CorrentedeMatria", Flowsheet, Nothing)
                 myCOMS.GraphicObject = myMStr
                 Flowsheet.AddComponentsRows(myCOMS)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
-                Flowsheet.Collections.CLCS_MaterialStreamCollection.Add(myCOMS.Name, myCOMS)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("MSTR001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("MSTR002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
@@ -2549,18 +2474,16 @@ Public Class frmSurface
                 myMStr.Fill = True
                 myMStr.FillColor = Color.LightYellow
                 myMStr.LineColor = lineclr
-                myMStr.Tag = "ESTR-" & Format(Flowsheet.Collections.ObjectCounter("ESTR"), "00#")
-                Flowsheet.Collections.UpdateCounter("ESTR")
+                myMStr.Tag = "ESTR-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 gObj.Name = "EN-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.EnergyStreamCollection.Add(gObj.Name, myMStr)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
-                Dim myCOES As DWSIM.SimulationObjects.Streams.EnergyStream = New DWSIM.SimulationObjects.Streams.EnergyStream(myMStr.Name, "CorrentedeEnergyFlow")
+                Dim myCOES As DWSIM.SimulationObjects.Streams.EnergyStream = New DWSIM.SimulationObjects.Streams.EnergyStream(myMStr.Name, "CorrentedeEnergia")
                 myCOES.GraphicObject = myMStr
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCOES.Name, myCOES)
-                Flowsheet.Collections.CLCS_EnergyStreamCollection.Add(myCOES.Name, myCOES)
 
             Case ObjectType.Compressor
 
@@ -2569,18 +2492,16 @@ Public Class frmSurface
                 myComp.Fill = True
                 myComp.FillColor = fillclr
                 myComp.LineColor = lineclr
-                myComp.Tag = "COMP-" & Format(Flowsheet.Collections.ObjectCounter("COMP"), "00#")
-                Flowsheet.Collections.UpdateCounter("COMP")
+                myComp.Tag = "COMP-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
                 gObj.Name = "COMP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.CompressorCollection.Add(gObj.Name, myComp)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myComp)
                 'OBJETO DWSIM
                 Dim myCOCP As DWSIM.SimulationObjects.UnitOperations.Compressor = New DWSIM.SimulationObjects.UnitOperations.Compressor(myComp.Name, "CompressorAdiabtico")
                 myCOCP.GraphicObject = myComp
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myComp.Name, myCOCP)
-                Flowsheet.Collections.CLCS_CompressorCollection.Add(myComp.Name, myCOCP)
 
             Case ObjectType.Expander
 
@@ -2589,18 +2510,16 @@ Public Class frmSurface
                 myComp.Fill = True
                 myComp.FillColor = fillclr
                 myComp.LineColor = lineclr
-                myComp.Tag = "EXP-" & Format(Flowsheet.Collections.ObjectCounter("EXPN"), "00#")
-                Flowsheet.Collections.UpdateCounter("EXPN")
+                myComp.Tag = "EXP-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
                 gObj.Name = "TURB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.TurbineCollection.Add(gObj.Name, myComp)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myComp)
                 'OBJETO DWSIM
                 Dim myCOCP As DWSIM.SimulationObjects.UnitOperations.Expander = New DWSIM.SimulationObjects.UnitOperations.Expander(myComp.Name, "TurbinaAdiabtica")
                 myCOCP.GraphicObject = myComp
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myComp.Name, myCOCP)
-                Flowsheet.Collections.CLCS_TurbineCollection.Add(myComp.Name, myCOCP)
 
             Case ObjectType.Cooler
 
@@ -2609,18 +2528,16 @@ Public Class frmSurface
                 myCool.Fill = True
                 myCool.FillColor = fillclr
                 myCool.LineColor = lineclr
-                myCool.Tag = "COOL-" & Format(Flowsheet.Collections.ObjectCounter("COOL"), "00#")
-                Flowsheet.Collections.UpdateCounter("COOL")
+                myCool.Tag = "COOL-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
                 gObj.Name = "RESF-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.CoolerCollection.Add(gObj.Name, myCool)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCool)
                 'OBJETO DWSIM
                 Dim myCOCL As DWSIM.SimulationObjects.UnitOperations.Cooler = New DWSIM.SimulationObjects.UnitOperations.Cooler(myCool.Name, "Resfriador")
                 myCOCL.GraphicObject = myCool
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCool.Name, myCOCL)
-                Flowsheet.Collections.CLCS_CoolerCollection.Add(myCool.Name, myCOCL)
 
             Case ObjectType.Heater
 
@@ -2629,18 +2546,16 @@ Public Class frmSurface
                 myHeat.Fill = True
                 myHeat.FillColor = fillclr
                 myHeat.LineColor = lineclr
-                myHeat.Tag = "HEAT-" & Format(Flowsheet.Collections.ObjectCounter("HEAT"), "00#")
-                Flowsheet.Collections.UpdateCounter("HEAT")
+                myHeat.Tag = "HEAT-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myHeat.Tag = tag
                 gObj = myHeat
                 gObj.Name = "AQ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.HeaterCollection.Add(gObj.Name, myHeat)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myHeat)
                 'OBJETO DWSIM
                 Dim myCOCL As DWSIM.SimulationObjects.UnitOperations.Heater = New DWSIM.SimulationObjects.UnitOperations.Heater(myHeat.Name, "Aquecedor")
                 myCOCL.GraphicObject = myHeat
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myHeat.Name, myCOCL)
-                Flowsheet.Collections.CLCS_HeaterCollection.Add(myHeat.Name, myCOCL)
 
             Case ObjectType.Pipe
 
@@ -2649,18 +2564,16 @@ Public Class frmSurface
                 myPipe.Fill = True
                 myPipe.FillColor = fillclr
                 myPipe.LineColor = lineclr
-                myPipe.Tag = "PIPE-" & Format(Flowsheet.Collections.ObjectCounter("PIPE"), "00#")
-                Flowsheet.Collections.UpdateCounter("PIPE")
+                myPipe.Tag = "PIPE-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myPipe.Tag = tag
                 gObj = myPipe
                 gObj.Name = "TUB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.PipeCollection.Add(gObj.Name, myPipe)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myPipe)
                 'OBJETO DWSIM
                 Dim myCOPIPE As DWSIM.SimulationObjects.UnitOperations.Pipe = New DWSIM.SimulationObjects.UnitOperations.Pipe(myPipe.Name, "Tubulao")
                 myCOPIPE.GraphicObject = myPipe
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myPipe.Name, myCOPIPE)
-                Flowsheet.Collections.CLCS_PipeCollection.Add(myPipe.Name, myCOPIPE)
 
             Case ObjectType.Valve
 
@@ -2669,18 +2582,16 @@ Public Class frmSurface
                 myValve.Fill = True
                 myValve.FillColor = fillclr
                 myValve.LineColor = lineclr
-                myValve.Tag = "VALV-" & Format(Flowsheet.Collections.ObjectCounter("VALV"), "00#")
-                Flowsheet.Collections.UpdateCounter("VALV")
+                myValve.Tag = "VALV-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myValve.Tag = tag
                 gObj = myValve
                 gObj.Name = "VALV-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ValveCollection.Add(gObj.Name, myValve)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myValve)
                 'OBJETO DWSIM
                 Dim myCOVALVE As DWSIM.SimulationObjects.UnitOperations.Valve = New DWSIM.SimulationObjects.UnitOperations.Valve(myValve.Name, "Vlvula")
                 myCOVALVE.GraphicObject = myValve
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myValve.Name, myCOVALVE)
-                Flowsheet.Collections.CLCS_ValveCollection.Add(myValve.Name, myCOVALVE)
 
             Case ObjectType.RCT_Conversion
 
@@ -2689,18 +2600,16 @@ Public Class frmSurface
                 myRconv.Fill = True
                 myRconv.FillColor = fillclr
                 myRconv.LineColor = lineclr
-                myRconv.Tag = "RC-" & Format(Flowsheet.Collections.ObjectCounter("RCON"), "00#")
-                Flowsheet.Collections.UpdateCounter("RCON")
+                myRconv.Tag = "RC-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myRconv.Tag = tag
                 gObj = myRconv
                 gObj.Name = "RC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ReactorConversionCollection.Add(gObj.Name, myRconv)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myRconv)
                 'OBJETO DWSIM
                 Dim myCORCONV As DWSIM.SimulationObjects.Reactors.Reactor_Conversion = New DWSIM.SimulationObjects.Reactors.Reactor_Conversion(myRconv.Name, "ReatorConversao")
                 myCORCONV.GraphicObject = myRconv
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myRconv.Name, myCORCONV)
-                Flowsheet.Collections.CLCS_ReactorConversionCollection.Add(myRconv.Name, myCORCONV)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("RCON001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
@@ -2711,18 +2620,16 @@ Public Class frmSurface
                 myReq.Fill = True
                 myReq.FillColor = fillclr
                 myReq.LineColor = lineclr
-                myReq.Tag = "RE-" & Format(Flowsheet.Collections.ObjectCounter("REQL"), "00#")
-                Flowsheet.Collections.UpdateCounter("REQL")
+                myReq.Tag = "RE-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myReq.Tag = tag
                 gObj = myReq
                 gObj.Name = "RE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ReactorEquilibriumCollection.Add(gObj.Name, myReq)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myReq)
                 'OBJETO DWSIM
                 Dim myCOREQ As DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium = New DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium(myReq.Name, "ReatorEquilibrio")
                 myCOREQ.GraphicObject = myReq
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myReq.Name, myCOREQ)
-                Flowsheet.Collections.CLCS_ReactorEquilibriumCollection.Add(myReq.Name, myCOREQ)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("REQL001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
@@ -2733,18 +2640,16 @@ Public Class frmSurface
                 myRgibbs.Fill = True
                 myRgibbs.FillColor = fillclr
                 myRgibbs.LineColor = lineclr
-                myRgibbs.Tag = "RG-" & Format(Flowsheet.Collections.ObjectCounter("RGIB"), "00#")
-                Flowsheet.Collections.UpdateCounter("RGIB")
+                myRgibbs.Tag = "RG-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myRgibbs.Tag = tag
                 gObj = myRgibbs
                 gObj.Name = "RG-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ReactorGibbsCollection.Add(gObj.Name, myRgibbs)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myRgibbs)
                 'OBJETO DWSIM
                 Dim myCORGIBBS As DWSIM.SimulationObjects.Reactors.Reactor_Gibbs = New DWSIM.SimulationObjects.Reactors.Reactor_Gibbs(myRgibbs.Name, "ReatorGibbs")
                 myCORGIBBS.GraphicObject = myRgibbs
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myRgibbs.Name, myCORGIBBS)
-                Flowsheet.Collections.CLCS_ReactorGibbsCollection.Add(myRgibbs.Name, myCORGIBBS)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("RGIB001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
@@ -2755,18 +2660,16 @@ Public Class frmSurface
                 myRcstr.Fill = True
                 myRcstr.FillColor = fillclr
                 myRcstr.LineColor = lineclr
-                myRcstr.Tag = "CSTR-" & Format(Flowsheet.Collections.ObjectCounter("CSTR"), "00#")
-                Flowsheet.Collections.UpdateCounter("CSTR")
+                myRcstr.Tag = "CSTR-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myRcstr.Tag = tag
                 gObj = myRcstr
                 gObj.Name = "CSTR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ReactorCSTRCollection.Add(gObj.Name, myRcstr)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myRcstr)
                 'OBJETO DWSIM
                 Dim myCORCSTR As DWSIM.SimulationObjects.Reactors.Reactor_CSTR = New DWSIM.SimulationObjects.Reactors.Reactor_CSTR(myRcstr.Name, "ReatorCSTR")
                 myCORCSTR.GraphicObject = myRcstr
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myRcstr.Name, myCORCSTR)
-                Flowsheet.Collections.CLCS_ReactorCSTRCollection.Add(myRcstr.Name, myCORCSTR)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CSTR001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
@@ -2777,18 +2680,16 @@ Public Class frmSurface
                 myRpfr.Fill = True
                 myRpfr.FillColor = fillclr
                 myRpfr.LineColor = lineclr
-                myRpfr.Tag = "PFR-" & Format(Flowsheet.Collections.ObjectCounter("PFR_"), "00#")
-                Flowsheet.Collections.UpdateCounter("PFR_")
+                myRpfr.Tag = "PFR-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myRpfr.Tag = tag
                 gObj = myRpfr
                 gObj.Name = "PFR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ReactorPFRCollection.Add(gObj.Name, myRpfr)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myRpfr)
                 'OBJETO DWSIM
                 Dim myCOPFR As DWSIM.SimulationObjects.Reactors.Reactor_PFR = New DWSIM.SimulationObjects.Reactors.Reactor_PFR(myRpfr.Name, "ReatorPFR")
                 myCOPFR.GraphicObject = myRpfr
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myRpfr.Name, myCOPFR)
-                Flowsheet.Collections.CLCS_ReactorPFRCollection.Add(myRpfr.Name, myCOPFR)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("PFR001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
@@ -2799,18 +2700,16 @@ Public Class frmSurface
                 myHeatExchanger.Fill = True
                 myHeatExchanger.FillColor = fillclr
                 myHeatExchanger.LineColor = lineclr
-                myHeatExchanger.Tag = "HE-" & Format(Flowsheet.Collections.ObjectCounter("HXCG"), "00#")
-                Flowsheet.Collections.UpdateCounter("HXCG")
+                myHeatExchanger.Tag = "HE-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myHeatExchanger.Tag = tag
                 gObj = myHeatExchanger
                 gObj.Name = "HE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.HeatExchangerCollection.Add(gObj.Name, myHeatExchanger)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myHeatExchanger)
                 'OBJETO DWSIM
                 Dim myCOHE As DWSIM.SimulationObjects.UnitOperations.HeatExchanger = New DWSIM.SimulationObjects.UnitOperations.HeatExchanger(myHeatExchanger.Name, "HeatExchanger")
                 myCOHE.GraphicObject = myHeatExchanger
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myHeatExchanger.Name, myCOHE)
-                Flowsheet.Collections.CLCS_HeatExchangerCollection.Add(myHeatExchanger.Name, myCOHE)
 
             Case ObjectType.ShortcutColumn
 
@@ -2819,18 +2718,16 @@ Public Class frmSurface
                 mySC.Fill = True
                 mySC.FillColor = fillclr
                 mySC.LineColor = lineclr
-                mySC.Tag = "SC-" & Format(Flowsheet.Collections.ObjectCounter("SCOL"), "00#")
-                Flowsheet.Collections.UpdateCounter("SCOL")
+                mySC.Tag = "SC-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
                 gObj.Name = "SC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ShortcutColumnCollection.Add(gObj.Name, mySC)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
                 Dim myCOSC As DWSIM.SimulationObjects.UnitOperations.ShortcutColumn = New DWSIM.SimulationObjects.UnitOperations.ShortcutColumn(mySC.Name, "ShortcutColumn")
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
-                Flowsheet.Collections.CLCS_ShortcutColumnCollection.Add(mySC.Name, myCOSC)
 
             Case ObjectType.DistillationColumn
 
@@ -2839,18 +2736,16 @@ Public Class frmSurface
                 mySC.Fill = True
                 mySC.FillColor = fillclr
                 mySC.LineColor = lineclr
-                mySC.Tag = "DC-" & Format(Flowsheet.Collections.ObjectCounter("DCOL"), "00#")
-                Flowsheet.Collections.UpdateCounter("DCOL")
+                mySC.Tag = "DC-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
                 gObj.Name = "DC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.DistillationColumnCollection.Add(gObj.Name, mySC)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
                 Dim myCOSC As DWSIM.SimulationObjects.UnitOperations.DistillationColumn = New DWSIM.SimulationObjects.UnitOperations.DistillationColumn(mySC.Name, "DistillationColumn")
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
-                Flowsheet.Collections.CLCS_DistillationColumnCollection.Add(mySC.Name, myCOSC)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
@@ -2863,18 +2758,16 @@ Public Class frmSurface
                 mySC.Fill = True
                 mySC.FillColor = fillclr
                 mySC.LineColor = lineclr
-                mySC.Tag = "ABS-" & Format(Flowsheet.Collections.ObjectCounter("ACOL"), "00#")
-                Flowsheet.Collections.UpdateCounter("ACOL")
+                mySC.Tag = "ABS-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
                 gObj.Name = "ABS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.AbsorptionColumnCollection.Add(gObj.Name, mySC)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
                 Dim myCOSC As DWSIM.SimulationObjects.UnitOperations.AbsorptionColumn = New DWSIM.SimulationObjects.UnitOperations.AbsorptionColumn(mySC.Name, "AbsorptionColumn")
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
-                Flowsheet.Collections.CLCS_AbsorptionColumnCollection.Add(mySC.Name, myCOSC)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
@@ -2887,18 +2780,16 @@ Public Class frmSurface
                 mySC.Fill = True
                 mySC.FillColor = fillclr
                 mySC.LineColor = lineclr
-                mySC.Tag = "RBA-" & Format(Flowsheet.Collections.ObjectCounter("RBAB"), "00#")
-                Flowsheet.Collections.UpdateCounter("RBAB")
+                mySC.Tag = "RBA-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
                 gObj.Name = "RBA-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ReboiledAbsorberCollection.Add(gObj.Name, mySC)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
                 Dim myCOSC As DWSIM.SimulationObjects.UnitOperations.ReboiledAbsorber = New DWSIM.SimulationObjects.UnitOperations.ReboiledAbsorber(mySC.Name, "ReboiledAbsorber")
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
-                Flowsheet.Collections.CLCS_ReboiledAbsorberCollection.Add(mySC.Name, myCOSC)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
@@ -2911,18 +2802,16 @@ Public Class frmSurface
                 mySC.Fill = True
                 mySC.FillColor = fillclr
                 mySC.LineColor = lineclr
-                mySC.Tag = "RFA-" & Format(Flowsheet.Collections.ObjectCounter("RFAB"), "00#")
-                Flowsheet.Collections.UpdateCounter("RFAB")
+                mySC.Tag = "RFA-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
                 gObj.Name = "RFA-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.RefluxedAbsorberCollection.Add(gObj.Name, mySC)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
                 Dim myCOSC As DWSIM.SimulationObjects.UnitOperations.RefluxedAbsorber = New DWSIM.SimulationObjects.UnitOperations.RefluxedAbsorber(mySC.Name, "RefluxedAbsorber")
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
-                Flowsheet.Collections.CLCS_RefluxedAbsorberCollection.Add(mySC.Name, myCOSC)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
@@ -2935,21 +2824,16 @@ Public Class frmSurface
                 myCSep.Fill = True
                 myCSep.FillColor = fillclr
                 myCSep.LineColor = lineclr
-                If Not Flowsheet.Collections.ObjectCounter.ContainsKey("CSEP") Then
-                    Flowsheet.Collections.ObjectCounter.Add("CSEP", 0)
-                End If
-                myCSep.Tag = "CS-" & Format(Flowsheet.Collections.ObjectCounter("CSEP"), "00#")
-                Flowsheet.Collections.UpdateCounter("CSEP")
+                myCSep.Tag = "CS-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 gObj.Name = "CS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ComponentSeparatorCollection.Add(gObj.Name, myCSep)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCSep)
                 'OBJETO DWSIM
                 Dim myCOCSEP As DWSIM.SimulationObjects.UnitOperations.ComponentSeparator = New DWSIM.SimulationObjects.UnitOperations.ComponentSeparator(myCSep.Name, "ComponentSeparator")
                 myCOCSEP.GraphicObject = myCSep
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCSep.Name, myCOCSEP)
-                Flowsheet.Collections.CLCS_ComponentSeparatorCollection.Add(myCSep.Name, myCOCSEP)
 
             Case ObjectType.SolidSeparator
 
@@ -2958,21 +2842,16 @@ Public Class frmSurface
                 myCSep.Fill = True
                 myCSep.FillColor = fillclr
                 myCSep.LineColor = lineclr
-                If Not Flowsheet.Collections.ObjectCounter.ContainsKey("SOLS") Then
-                    Flowsheet.Collections.ObjectCounter.Add("SOLS", 0)
-                End If
-                myCSep.Tag = "SS-" & Format(Flowsheet.Collections.ObjectCounter("SOLS"), "00#")
-                Flowsheet.Collections.UpdateCounter("SOLS")
+                myCSep.Tag = "SS-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 gObj.Name = "SS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.SolidsSeparatorCollection.Add(gObj.Name, myCSep)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCSep)
                 'OBJETO DWSIM
                 Dim myCOCSEP As DWSIM.SimulationObjects.UnitOperations.SolidsSeparator = New DWSIM.SimulationObjects.UnitOperations.SolidsSeparator(myCSep.Name, "SolidsSeparator")
                 myCOCSEP.GraphicObject = myCSep
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCSep.Name, myCOCSEP)
-                Flowsheet.Collections.CLCS_SolidsSeparatorCollection.Add(myCSep.Name, myCOCSEP)
 
             Case ObjectType.Filter
 
@@ -2981,21 +2860,16 @@ Public Class frmSurface
                 myCSep.Fill = True
                 myCSep.FillColor = fillclr
                 myCSep.LineColor = lineclr
-                If Not Flowsheet.Collections.ObjectCounter.ContainsKey("FILT") Then
-                    Flowsheet.Collections.ObjectCounter.Add("FILT", 0)
-                End If
-                myCSep.Tag = "FT-" & Format(Flowsheet.Collections.ObjectCounter("FILT"), "00#")
-                Flowsheet.Collections.UpdateCounter("FILT")
+                myCSep.Tag = "FT-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 gObj.Name = "FT-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.FilterCollection.Add(gObj.Name, myCSep)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCSep)
                 'OBJETO DWSIM
                 Dim myCOCSEP As DWSIM.SimulationObjects.UnitOperations.Filter = New DWSIM.SimulationObjects.UnitOperations.Filter(myCSep.Name, "Filter")
                 myCOCSEP.GraphicObject = myCSep
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCSep.Name, myCOCSEP)
-                Flowsheet.Collections.CLCS_FilterCollection.Add(myCSep.Name, myCOCSEP)
 
             Case ObjectType.OrificePlate
 
@@ -3004,21 +2878,16 @@ Public Class frmSurface
                 myOPL.Fill = True
                 myOPL.FillColor = fillclr
                 myOPL.LineColor = lineclr
-                If Not Flowsheet.Collections.ObjectCounter.ContainsKey("ORIF") Then
-                    Flowsheet.Collections.ObjectCounter.Add("ORIF", 0)
-                End If
-                myOPL.Tag = "OP-" & Format(Flowsheet.Collections.ObjectCounter("ORIF"), "00#")
-                Flowsheet.Collections.UpdateCounter("ORIF")
+                myOPL.Tag = "OP-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myOPL.Tag = tag
                 gObj = myOPL
                 gObj.Name = "OP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.OrificePlateCollection.Add(gObj.Name, myOPL)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myOPL)
                 'OBJETO DWSIM
                 Dim myCOOPL As DWSIM.SimulationObjects.UnitOperations.OrificePlate = New DWSIM.SimulationObjects.UnitOperations.OrificePlate(myOPL.Name, "OrificePlate")
                 myCOOPL.GraphicObject = myOPL
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myOPL.Name, myCOOPL)
-                Flowsheet.Collections.CLCS_OrificePlateCollection.Add(myOPL.Name, myCOOPL)
 
             Case ObjectType.CustomUO
 
@@ -3027,21 +2896,16 @@ Public Class frmSurface
                 myCUO.Fill = True
                 myCUO.FillColor = fillclr
                 myCUO.LineColor = lineclr
-                If Not Flowsheet.Collections.ObjectCounter.ContainsKey("CUOP") Then
-                    Flowsheet.Collections.ObjectCounter.Add("CUOP", 0)
-                End If
-                myCUO.Tag = "UO-" & Format(Flowsheet.Collections.ObjectCounter("CUOP"), "00#")
-                Flowsheet.Collections.UpdateCounter("CUOP")
+                myCUO.Tag = "UO-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 gObj.Name = "UO-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.CustomUOCollection.Add(gObj.Name, myCUO)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCUO)
                 'OBJETO DWSIM
                 Dim myCOCUO As DWSIM.SimulationObjects.UnitOperations.CustomUO = New DWSIM.SimulationObjects.UnitOperations.CustomUO(myCUO.Name, "CustomUnitOp")
                 myCOCUO.GraphicObject = myCUO
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCUO.Name, myCOCUO)
-                Flowsheet.Collections.CLCS_CustomUOCollection.Add(myCUO.Name, myCOCUO)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CSUO001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
@@ -3052,21 +2916,16 @@ Public Class frmSurface
                 myEUO.Fill = True
                 myEUO.FillColor = fillclr
                 myEUO.LineColor = lineclr
-                If Not Flowsheet.Collections.ObjectCounter.ContainsKey("CEOP") Then
-                    Flowsheet.Collections.ObjectCounter.Add("CEOP", 0)
-                End If
-                myEUO.Tag = "EXL-" & Format(Flowsheet.Collections.ObjectCounter("CEOP"), "00#")
-                Flowsheet.Collections.UpdateCounter("CEOP")
+                myEUO.Tag = "EXL-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 gObj.Name = "EXL-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.ExcelUOCollection.Add(gObj.Name, myEUO)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myEUO)
                 'OBJETO DWSIM
                 Dim myCOEUO As DWSIM.SimulationObjects.UnitOperations.ExcelUO = New DWSIM.SimulationObjects.UnitOperations.ExcelUO(myEUO.Name, "ExcelUnitOp")
                 myCOEUO.GraphicObject = myEUO
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myEUO.Name, myCOEUO)
-                Flowsheet.Collections.CLCS_ExcelUOCollection.Add(myEUO.Name, myCOEUO)
 
             Case ObjectType.FlowsheetUO
 
@@ -3075,21 +2934,16 @@ Public Class frmSurface
                 myEUO.Fill = True
                 myEUO.FillColor = fillclr
                 myEUO.LineColor = lineclr
-                If Not Flowsheet.Collections.ObjectCounter.ContainsKey("FLST") Then
-                    Flowsheet.Collections.ObjectCounter.Add("FLST", 0)
-                End If
-                myEUO.Tag = "FS-" & Format(Flowsheet.Collections.ObjectCounter("FLST"), "00#")
-                Flowsheet.Collections.UpdateCounter("FLST")
+                myEUO.Tag = "FS-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 gObj.Name = "FS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.FlowsheetUOCollection.Add(gObj.Name, myEUO)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myEUO)
                 'OBJETO DWSIM
                 Dim myCOEUO As DWSIM.SimulationObjects.UnitOperations.Flowsheet = New DWSIM.SimulationObjects.UnitOperations.Flowsheet(myEUO.Name, "FlowsheetUnitOp")
                 myCOEUO.GraphicObject = myEUO
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myEUO.Name, myCOEUO)
-                Flowsheet.Collections.CLCS_FlowsheetUOCollection.Add(myEUO.Name, myCOEUO)
 
             Case ObjectType.CapeOpenUO
 
@@ -3098,21 +2952,16 @@ Public Class frmSurface
                 myCUO.Fill = True
                 myCUO.FillColor = fillclr
                 myCUO.LineColor = lineclr
-                If Not Flowsheet.Collections.ObjectCounter.ContainsKey("COOP") Then
-                    Flowsheet.Collections.ObjectCounter.Add("COOP", 0)
-                End If
-                myCUO.Tag = "COUO-" & Format(Flowsheet.Collections.ObjectCounter("COOP"), "00#")
-                Flowsheet.Collections.UpdateCounter("COOP")
+                myCUO.Tag = "COUO-" & Format(Flowsheet.Collections.FlowsheetObjectCollection.Count, "00#")
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 gObj.Name = "COUO-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
-                Flowsheet.Collections.CapeOpenUOCollection.Add(gObj.Name, myCUO)
+                Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCUO)
                 'OBJETO DWSIM
                 Dim myCOCUO As DWSIM.SimulationObjects.UnitOperations.CapeOpenUO = New DWSIM.SimulationObjects.UnitOperations.CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj)
                 myCOCUO.GraphicObject = myCUO
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCUO.Name, myCOCUO)
-                Flowsheet.Collections.CLCS_CapeOpenUOCollection.Add(myCUO.Name, myCOCUO)
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CAPE001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
@@ -3178,7 +3027,7 @@ Public Class frmSurface
                     tobj = ObjectType.Vessel
                 Case "CorrentedeMatria"
                     tobj = ObjectType.MaterialStream
-                Case "CorrentedeEnergyFlow"
+                Case "CorrentedeEnergia"
                     tobj = ObjectType.EnergyStream
                 Case "CompressorAdiabtico"
                     tobj = ObjectType.Compressor
@@ -3263,7 +3112,7 @@ Public Class frmSurface
         If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
             If Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
 
-                Dim mystr As DWSIM.SimulationObjects.Streams.MaterialStream = Flowsheet.Collections.CLCS_MaterialStreamCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                Dim mystr As DWSIM.SimulationObjects.Streams.MaterialStream = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
                 Dim editable As Boolean = False
 
@@ -3435,7 +3284,7 @@ Public Class frmSurface
                 Case ObjectType.MaterialStream
                     EditCompTSMI_Click(sender, e)
                 Case ObjectType.FlowsheetUO
-                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.Flowsheet = Flowsheet.Collections.CLCS_FlowsheetUOCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.Flowsheet = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                     If My.Computer.Keyboard.ShiftKeyDown Then
                         Dim viewform As New FlowsheetUOEditorForm
                         With viewform
@@ -3465,10 +3314,10 @@ Public Class frmSurface
                         End If
                     End If
                 Case ObjectType.CapeOpenUO
-                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.CapeOpenUO = Flowsheet.Collections.CLCS_CapeOpenUOCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.CapeOpenUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                     myobj.Edit(Me, New EventArgs)
                 Case ObjectType.ExcelUO
-                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.ExcelUO = Flowsheet.Collections.CLCS_ExcelUOCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.ExcelUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                     If My.Computer.Keyboard.ShiftKeyDown Then
                         Dim selectionControl As New ExcelUOEditorForm
                         selectionControl.Text = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & "Excel UO Specification"
@@ -3496,7 +3345,7 @@ Public Class frmSurface
                         End If
                     End If
                 Case ObjectType.CustomUO
-                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.CustomUO = Flowsheet.Collections.CLCS_CustomUOCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.CustomUO = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                     If Not DWSIM.App.IsRunningOnMono Then
                         Dim selectionControl As New ScriptEditorForm
                         selectionControl.scripttext = myobj.ScriptText
@@ -3628,16 +3477,16 @@ Public Class frmSurface
                         selectionControl.Text = myobj.GraphicObject.Tag & " - " & selectionControl.Text
                         selectionControl.form = myobj.FlowSheet
                         If selectionControl.gr.GraphicObject.InputConnectors(0).IsAttached Then
-                            selectionControl.inlet = myobj.FlowSheet.Collections.CLCS_MaterialStreamCollection(selectionControl.gr.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                            selectionControl.inlet = myobj.FlowSheet.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
                         End If
                         If selectionControl.gr.GraphicObject.InputConnectors(0).IsAttached Then
-                            selectionControl.inlet = myobj.FlowSheet.Collections.CLCS_MaterialStreamCollection(selectionControl.gr.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                            selectionControl.inlet = myobj.FlowSheet.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
                         End If
                         If selectionControl.gr.GraphicObject.OutputConnectors(0).IsAttached Then
-                            selectionControl.outletv = myobj.FlowSheet.Collections.CLCS_MaterialStreamCollection(selectionControl.gr.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                            selectionControl.outletv = myobj.FlowSheet.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                         End If
                         If selectionControl.gr.GraphicObject.OutputConnectors(1).IsAttached Then
-                            selectionControl.outletl = myobj.FlowSheet.Collections.CLCS_MaterialStreamCollection(selectionControl.gr.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+                            selectionControl.outletl = myobj.FlowSheet.Collections.FlowsheetObjectCollection(selectionControl.gr.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
                         End If
                         selectionControl.ShowDialog()
                         myobj.InitialEstimates = selectionControl.ie
@@ -3661,7 +3510,7 @@ Public Class frmSurface
 
             If Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
 
-                Dim mystr As DWSIM.SimulationObjects.Streams.MaterialStream = Flowsheet.Collections.CLCS_MaterialStreamCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                Dim mystr As DWSIM.SimulationObjects.Streams.MaterialStream = Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
                 If Not mystr.GraphicObject.InputConnectors(0).IsAttached Then
 

@@ -186,7 +186,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Protected m_FixOnDeltaP As Boolean = True
         Protected m_cmode As CalculationMode = CalculationMode.Delta_P
 
-        Protected m_curves As New Dictionary(Of String, UnitOps.Auxiliary.PipingOps.Curve)
+        Protected m_curves As New Dictionary(Of String, UnitOperations.Auxiliary.PipingOps.Curve)
 
         Protected _curvehead As Double
         Protected _curveeff As Double
@@ -199,7 +199,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             MyBase.LoadData(data)
 
-            m_curves = New Dictionary(Of String, UnitOps.Auxiliary.PipingOps.Curve)
+            m_curves = New Dictionary(Of String, UnitOperations.Auxiliary.PipingOps.Curve)
 
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Curves").Elements.ToList
                 Dim cv As New Curve()
@@ -281,15 +281,15 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End Set
         End Property
 
-        Public Property Curves() As Dictionary(Of String, UnitOps.Auxiliary.PipingOps.Curve)
+        Public Property Curves() As Dictionary(Of String, UnitOperations.Auxiliary.PipingOps.Curve)
             Get
                 If m_curves Is Nothing Then
-                    m_curves = New Dictionary(Of String, UnitOps.Auxiliary.PipingOps.Curve)
+                    m_curves = New Dictionary(Of String, UnitOperations.Auxiliary.PipingOps.Curve)
                     CreateCurves()
                 End If
                 Return m_curves
             End Get
-            Set(ByVal value As Dictionary(Of String, UnitOps.Auxiliary.PipingOps.Curve))
+            Set(ByVal value As Dictionary(Of String, UnitOperations.Auxiliary.PipingOps.Curve))
                 m_curves = value
             End Set
         End Property
@@ -799,7 +799,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             If Not DebugMode Then
 
                 'Atribuir valores à corrente de matéria conectada à jusante
-                With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                Dim omstr As MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                With omstr
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2
@@ -984,7 +985,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
                 End With
 
-                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlow"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector

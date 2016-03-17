@@ -33,7 +33,7 @@ Public Class FrmStabAn
         If Not Me.ComboBox3.SelectedItem Is Nothing Then
 
             Dim gobj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
-            Me.mat = Frm.Collections.CLCS_MaterialStreamCollection(gobj.Name)
+            Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
 
             Dim pr As New DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage
 
@@ -145,7 +145,7 @@ Public Class FrmStabAn
         Me.nf = Frm.Options.NumberFormat
 
         Me.ComboBox3.Items.Clear()
-        For Each mat2 In Me.Frm.Collections.CLCS_MaterialStreamCollection.Values
+        For Each mat2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
             Me.ComboBox3.Items.Add(mat2.GraphicObject.Tag.ToString)
         Next
 

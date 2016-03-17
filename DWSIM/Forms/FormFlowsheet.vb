@@ -48,7 +48,7 @@ Imports System.Reflection
 #Region "    Variable Declarations "
 
     Public Property MasterFlowsheet As FormFlowsheet = Nothing
-    Public Property MasterUnitOp As UnitOps.Flowsheet = Nothing
+    Public Property MasterUnitOp As UnitOperations.Flowsheet = Nothing
     Public Property RedirectMessages As Boolean = False
 
     Public FrmStSim1 As New FormSimulSettings
@@ -238,17 +238,6 @@ Imports System.Reflection
                 Me.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value = 5000
             Catch ex As Exception
             End Try
-
-        Else
-
-            If Me.Collections.AdjustCollection Is Nothing Then
-                Me.Collections.AdjustCollection = New Dictionary(Of String, AdjustGraphic)
-                Me.Collections.CLCS_AdjustCollection = New Dictionary(Of String, DWSIM.SimulationObjects.SpecialOps.Adjust)
-                Me.Collections.SpecCollection = New Dictionary(Of String, SpecGraphic)
-                Me.Collections.CLCS_SpecCollection = New Dictionary(Of String, DWSIM.SimulationObjects.SpecialOps.Spec)
-                Me.Collections.RecycleCollection = New Dictionary(Of String, RecycleGraphic)
-                Me.Collections.CLCS_RecycleCollection = New Dictionary(Of String, DWSIM.SimulationObjects.SpecialOps.Recycle)
-            End If
 
         End If
 
@@ -673,87 +662,12 @@ Imports System.Reflection
 
     Public Sub CheckCollections()
 
-        'Creates all the graphic collections.
-        If Collections.MixerCollection Is Nothing Then Collections.MixerCollection = New Dictionary(Of String, NodeInGraphic)
-        If Collections.SplitterCollection Is Nothing Then Collections.SplitterCollection = New Dictionary(Of String, NodeOutGraphic)
-        If Collections.MaterialStreamCollection Is Nothing Then Collections.MaterialStreamCollection = New Dictionary(Of String, MaterialStreamGraphic)
-        If Collections.EnergyStreamCollection Is Nothing Then Collections.EnergyStreamCollection = New Dictionary(Of String, EnergyStreamGraphic)
-        If Collections.PumpCollection Is Nothing Then Collections.PumpCollection = New Dictionary(Of String, PumpGraphic)
-        If Collections.SeparatorCollection Is Nothing Then Collections.SeparatorCollection = New Dictionary(Of String, VesselGraphic)
-        If Collections.CompressorCollection Is Nothing Then Collections.CompressorCollection = New Dictionary(Of String, CompressorGraphic)
-        If Collections.PipeCollection Is Nothing Then Collections.PipeCollection = New Dictionary(Of String, PipeGraphic)
-        If Collections.ValveCollection Is Nothing Then Collections.ValveCollection = New Dictionary(Of String, ValveGraphic)
-        If Collections.CoolerCollection Is Nothing Then Collections.CoolerCollection = New Dictionary(Of String, CoolerGraphic)
-        If Collections.HeaterCollection Is Nothing Then Collections.HeaterCollection = New Dictionary(Of String, HeaterGraphic)
-        If Collections.TankCollection Is Nothing Then Collections.TankCollection = New Dictionary(Of String, TankGraphic)
-        If Collections.ConnectorCollection Is Nothing Then Collections.ConnectorCollection = New Dictionary(Of String, ConnectorGraphic)
-        If Collections.TPSeparatorCollection Is Nothing Then Collections.TPSeparatorCollection = New Dictionary(Of String, TPVesselGraphic)
-        If Collections.TurbineCollection Is Nothing Then Collections.TurbineCollection = New Dictionary(Of String, TurbineGraphic)
-        If Collections.MixerENCollection Is Nothing Then Collections.MixerENCollection = New Dictionary(Of String, NodeEnGraphic)
-        If Collections.AdjustCollection Is Nothing Then Collections.AdjustCollection = New Dictionary(Of String, AdjustGraphic)
-        If Collections.SpecCollection Is Nothing Then Collections.SpecCollection = New Dictionary(Of String, SpecGraphic)
-        If Collections.RecycleCollection Is Nothing Then Collections.RecycleCollection = New Dictionary(Of String, RecycleGraphic)
-        If Collections.ReactorConversionCollection Is Nothing Then Collections.ReactorConversionCollection = New Dictionary(Of String, ReactorConversionGraphic)
-        If Collections.ReactorEquilibriumCollection Is Nothing Then Collections.ReactorEquilibriumCollection = New Dictionary(Of String, ReactorEquilibriumGraphic)
-        If Collections.ReactorGibbsCollection Is Nothing Then Collections.ReactorGibbsCollection = New Dictionary(Of String, ReactorGibbsGraphic)
-        If Collections.ReactorCSTRCollection Is Nothing Then Collections.ReactorCSTRCollection = New Dictionary(Of String, ReactorCSTRGraphic)
-        If Collections.ReactorPFRCollection Is Nothing Then Collections.ReactorPFRCollection = New Dictionary(Of String, ReactorPFRGraphic)
-        If Collections.HeatExchangerCollection Is Nothing Then Collections.HeatExchangerCollection = New Dictionary(Of String, HeatExchangerGraphic)
-        If Collections.ShortcutColumnCollection Is Nothing Then Collections.ShortcutColumnCollection = New Dictionary(Of String, ShorcutColumnGraphic)
-        If Collections.DistillationColumnCollection Is Nothing Then Collections.DistillationColumnCollection = New Dictionary(Of String, DistillationColumnGraphic)
-        If Collections.AbsorptionColumnCollection Is Nothing Then Collections.AbsorptionColumnCollection = New Dictionary(Of String, AbsorptionColumnGraphic)
-        If Collections.RefluxedAbsorberCollection Is Nothing Then Collections.RefluxedAbsorberCollection = New Dictionary(Of String, RefluxedAbsorberGraphic)
-        If Collections.ReboiledAbsorberCollection Is Nothing Then Collections.ReboiledAbsorberCollection = New Dictionary(Of String, ReboiledAbsorberGraphic)
-        If Collections.EnergyRecycleCollection Is Nothing Then Collections.EnergyRecycleCollection = New Dictionary(Of String, EnergyRecycleGraphic)
-        If Collections.ComponentSeparatorCollection Is Nothing Then Collections.ComponentSeparatorCollection = New Dictionary(Of String, ComponentSeparatorGraphic)
-        If Collections.OrificePlateCollection Is Nothing Then Collections.OrificePlateCollection = New Dictionary(Of String, OrificePlateGraphic)
-        If Collections.CustomUOCollection Is Nothing Then Collections.CustomUOCollection = New Dictionary(Of String, CustomUOGraphic)
-        If Collections.ExcelUOCollection Is Nothing Then Collections.ExcelUOCollection = New Dictionary(Of String, ExcelUOGraphic)
-        If Collections.FlowsheetUOCollection Is Nothing Then Collections.FlowsheetUOCollection = New Dictionary(Of String, FlowsheetUOGraphic)
-        If Collections.SolidsSeparatorCollection Is Nothing Then Collections.SolidsSeparatorCollection = New Dictionary(Of String, SolidSeparatorGraphic)
-        If Collections.FilterCollection Is Nothing Then Collections.FilterCollection = New Dictionary(Of String, FilterGraphic)
+        If Collections.GraphicObjectCollection Is Nothing Then Collections.GraphicObjectCollection = New Dictionary(Of String, GraphicObject)
 
         If Collections.FlowsheetObjectCollection Is Nothing Then Collections.FlowsheetObjectCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
 
-        'Creates all the actual unit operations collections.
-        If Collections.CLCS_MaterialStreamCollection Is Nothing Then Collections.CLCS_MaterialStreamCollection = New Dictionary(Of String, DWSIM.SimulationObjects.Streams.MaterialStream)
-        If Collections.CLCS_EnergyStreamCollection Is Nothing Then Collections.CLCS_EnergyStreamCollection = New Dictionary(Of String, DWSIM.SimulationObjects.Streams.EnergyStream)
-        If Collections.CLCS_PipeCollection Is Nothing Then Collections.CLCS_PipeCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Pipe)
-        If Collections.CLCS_MixerCollection Is Nothing Then Collections.CLCS_MixerCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Mixer)
-        If Collections.CLCS_SplitterCollection Is Nothing Then Collections.CLCS_SplitterCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Splitter)
-        If Collections.CLCS_PumpCollection Is Nothing Then Collections.CLCS_PumpCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Pump)
-        If Collections.CLCS_CompressorCollection Is Nothing Then Collections.CLCS_CompressorCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Compressor)
-        If Collections.CLCS_ValveCollection Is Nothing Then Collections.CLCS_ValveCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Valve)
-        If Collections.CLCS_VesselCollection Is Nothing Then Collections.CLCS_VesselCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Vessel)
-        If Collections.CLCS_TurbineCollection Is Nothing Then Collections.CLCS_TurbineCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Expander)
-        If Collections.CLCS_EnergyMixerCollection Is Nothing Then Collections.CLCS_EnergyMixerCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.EnergyMixer)
-        If Collections.CLCS_HeaterCollection Is Nothing Then Collections.CLCS_HeaterCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Heater)
-        If Collections.CLCS_CoolerCollection Is Nothing Then Collections.CLCS_CoolerCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Cooler)
-        If Collections.CLCS_TankCollection Is Nothing Then Collections.CLCS_TankCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Tank)
-        If Collections.CLCS_AdjustCollection Is Nothing Then Collections.CLCS_AdjustCollection = New Dictionary(Of String, DWSIM.SimulationObjects.SpecialOps.Adjust)
-        If Collections.CLCS_SpecCollection Is Nothing Then Collections.CLCS_SpecCollection = New Dictionary(Of String, DWSIM.SimulationObjects.SpecialOps.Spec)
-        If Collections.CLCS_RecycleCollection Is Nothing Then Collections.CLCS_RecycleCollection = New Dictionary(Of String, DWSIM.SimulationObjects.SpecialOps.Recycle)
-        If Collections.CLCS_ReactorConversionCollection Is Nothing Then Collections.CLCS_ReactorConversionCollection = New Dictionary(Of String, DWSIM.SimulationObjects.Reactors.Reactor_Conversion)
-        If Collections.CLCS_ReactorEquilibriumCollection Is Nothing Then Collections.CLCS_ReactorEquilibriumCollection = New Dictionary(Of String, DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium)
-        If Collections.CLCS_ReactorGibbsCollection Is Nothing Then Collections.CLCS_ReactorGibbsCollection = New Dictionary(Of String, DWSIM.SimulationObjects.Reactors.Reactor_Gibbs)
-        If Collections.CLCS_ReactorCSTRCollection Is Nothing Then Collections.CLCS_ReactorCSTRCollection = New Dictionary(Of String, DWSIM.SimulationObjects.Reactors.Reactor_CSTR)
-        If Collections.CLCS_ReactorPFRCollection Is Nothing Then Collections.CLCS_ReactorPFRCollection = New Dictionary(Of String, DWSIM.SimulationObjects.Reactors.Reactor_PFR)
-        If Collections.CLCS_HeatExchangerCollection Is Nothing Then Collections.CLCS_HeatExchangerCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.HeatExchanger)
-        If Collections.CLCS_ShortcutColumnCollection Is Nothing Then Collections.CLCS_ShortcutColumnCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.ShortcutColumn)
-        If Collections.CLCS_DistillationColumnCollection Is Nothing Then Collections.CLCS_DistillationColumnCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.DistillationColumn)
-        If Collections.CLCS_AbsorptionColumnCollection Is Nothing Then Collections.CLCS_AbsorptionColumnCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.AbsorptionColumn)
-        If Collections.CLCS_ReboiledAbsorberCollection Is Nothing Then Collections.CLCS_ReboiledAbsorberCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.ReboiledAbsorber)
-        If Collections.CLCS_RefluxedAbsorberCollection Is Nothing Then Collections.CLCS_RefluxedAbsorberCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.RefluxedAbsorber)
-        If Collections.CLCS_EnergyRecycleCollection Is Nothing Then Collections.CLCS_EnergyRecycleCollection = New Dictionary(Of String, DWSIM.SimulationObjects.SpecialOps.EnergyRecycle)
-        If Collections.CLCS_ComponentSeparatorCollection Is Nothing Then Collections.CLCS_ComponentSeparatorCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.ComponentSeparator)
-        If Collections.CLCS_OrificePlateCollection Is Nothing Then Collections.CLCS_OrificePlateCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.OrificePlate)
-        If Collections.CLCS_CustomUOCollection Is Nothing Then Collections.CLCS_CustomUOCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.CustomUO)
-        If Collections.CLCS_ExcelUOCollection Is Nothing Then Collections.CLCS_ExcelUOCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.ExcelUO)
-        If Collections.CLCS_SolidsSeparatorCollection Is Nothing Then Collections.CLCS_SolidsSeparatorCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.SolidsSeparator)
-        If Collections.CLCS_FilterCollection Is Nothing Then Collections.CLCS_FilterCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Filter)
-        If Collections.CLCS_FlowsheetUOCollection Is Nothing Then Collections.CLCS_FlowsheetUOCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Flowsheet)
-
         If Collections.OPT_SensAnalysisCollection Is Nothing Then Collections.OPT_SensAnalysisCollection = New List(Of DWSIM.Optimization.SensitivityAnalysisCase)
+
         If Collections.OPT_OptimizationCollection Is Nothing Then Collections.OPT_OptimizationCollection = New List(Of DWSIM.Optimization.OptimizationCase)
 
     End Sub
@@ -1641,12 +1555,8 @@ Imports System.Reflection
                                              .NewValue = gobj,
                                              .OldValue = Me.Collections.FlowsheetObjectCollection(namesel).SaveData(),
                                              .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectRemoved"), gobj.Tag)})
-
-                        Me.Collections.EnergyStreamCollection.Remove(namesel)
                         'DWSIM
-                        Me.Collections.CLCS_EnergyStreamCollection(namesel).Dispose()
-                        Me.Collections.CLCS_EnergyStreamCollection.Remove(namesel)
-                        Me.Collections.FlowsheetObjectCollection.Remove(namesel)
+                        Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
                         Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                         Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
 
@@ -1700,199 +1610,19 @@ Imports System.Reflection
                             'dispose object
                             Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
 
-                            Select Case SelectedObj.ObjectType
-                                Case ObjectType.NodeIn
-                                    Me.Collections.MixerCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_MixerCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.NodeOut
-                                    Me.Collections.SplitterCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_SplitterCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.NodeEn
-                                    Me.Collections.MixerENCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_EnergyMixerCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.Pump
-                                    Me.Collections.PumpCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_PumpCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.Tank
-                                    Me.Collections.TankCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_TankCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.Vessel
-                                    Me.Collections.SeparatorCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_VesselCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.MaterialStream
-                                    Me.Collections.MaterialStreamCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_MaterialStreamCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.Compressor
-                                    Me.Collections.CompressorCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_CompressorCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.Expander
-                                    Me.Collections.TurbineCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_TurbineCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.TPVessel
-                                    Me.Collections.TPSeparatorCollection.Remove(namesel)
-                                Case ObjectType.Cooler
-                                    Me.Collections.CoolerCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_CoolerCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.Heater
-                                    Me.Collections.HeaterCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_HeaterCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.Pipe
-                                    Me.Collections.CLCS_PipeCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.PipeCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.Valve
-                                    Me.Collections.ValveCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_ValveCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.OT_Adjust
-                                    Me.Collections.AdjustCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_AdjustCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.OT_Spec
-                                    If Me.Collections.FlowsheetObjectCollection.ContainsKey(Me.Collections.CLCS_SpecCollection(namesel).TargetObjectData.m_ID) Then
-                                        Me.Collections.FlowsheetObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).TargetObjectData.m_ID).IsSpecAttached = False
-                                        Me.Collections.FlowsheetObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).TargetObjectData.m_ID).AttachedSpecId = ""
-                                    End If
-                                    If Me.Collections.FlowsheetObjectCollection.ContainsKey(Me.Collections.CLCS_SpecCollection(namesel).SourceObjectData.m_ID) Then
-                                        Me.Collections.FlowsheetObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).SourceObjectData.m_ID).IsSpecAttached = False
-                                        Me.Collections.FlowsheetObjectCollection(Me.Collections.CLCS_SpecCollection(namesel).SourceObjectData.m_ID).AttachedSpecId = ""
-                                    End If
-                                    Me.Collections.SpecCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_SpecCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.OT_Recycle
-                                    Me.Collections.RecycleCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_RecycleCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.OT_EnergyRecycle
-                                    Me.Collections.EnergyRecycleCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_EnergyRecycleCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.HeatExchanger
-                                    Me.Collections.HeatExchangerCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_HeatExchangerCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.ShortcutColumn
-                                    Me.Collections.HeatExchangerCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_HeatExchangerCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.OrificePlate
-                                    Me.Collections.OrificePlateCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_OrificePlateCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.ComponentSeparator
-                                    Me.Collections.ComponentSeparatorCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_ComponentSeparatorCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.CustomUO
-                                    Me.Collections.CustomUOCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_CustomUOCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.ExcelUO
-                                    Me.Collections.ExcelUOCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_ExcelUOCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.FlowsheetUO
-                                    Me.Collections.FlowsheetUOCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_FlowsheetUOCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.CapeOpenUO
-                                    Me.Collections.CapeOpenUOCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_CapeOpenUOCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.SolidSeparator
-                                    Me.Collections.SolidsSeparatorCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_SolidsSeparatorCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.Filter
-                                    Me.Collections.FilterCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_FilterCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.RCT_Conversion
-                                    Me.Collections.ReactorConversionCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_ReactorConversionCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.RCT_CSTR
-                                    Me.Collections.ReactorCSTRCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_ReactorCSTRCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.RCT_Equilibrium
-                                    Me.Collections.ReactorEquilibriumCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_ReactorEquilibriumCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.RCT_Gibbs
-                                    Me.Collections.ReactorGibbsCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_ReactorGibbsCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.RCT_PFR
-                                    Me.Collections.ReactorPFRCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_ReactorPFRCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.DistillationColumn
-                                    Me.Collections.DistillationColumnCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_DistillationColumnCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.AbsorptionColumn
-                                    Me.Collections.AbsorptionColumnCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_AbsorptionColumnCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.RefluxedAbsorber
-                                    Me.Collections.RefluxedAbsorberCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_RefluxedAbsorberCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                                Case ObjectType.ReboiledAbsorber
-                                    Me.Collections.ReboiledAbsorberCollection.Remove(namesel)
-                                    'DWSIM
-                                    Me.Collections.CLCS_ReboiledAbsorberCollection.Remove(namesel)
-                                    Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                            End Select
+                            Me.Collections.FlowsheetObjectCollection.Remove(namesel)
+
+                            If gobj.ObjectType = ObjectType.OT_Spec Then
+                                Dim specobj As Spec = Me.Collections.FlowsheetObjectCollection(namesel)
+                                If Me.Collections.FlowsheetObjectCollection.ContainsKey(specobj.TargetObjectData.m_ID) Then
+                                    Me.Collections.FlowsheetObjectCollection(specobj.TargetObjectData.m_ID).IsSpecAttached = False
+                                    Me.Collections.FlowsheetObjectCollection(specobj.TargetObjectData.m_ID).AttachedSpecId = ""
+                                End If
+                                If Me.Collections.FlowsheetObjectCollection.ContainsKey(specobj.SourceObjectData.m_ID) Then
+                                    Me.Collections.FlowsheetObjectCollection(specobj.SourceObjectData.m_ID).IsSpecAttached = False
+                                    Me.Collections.FlowsheetObjectCollection(specobj.SourceObjectData.m_ID).AttachedSpecId = ""
+                                End If
+                            End If
 
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
 

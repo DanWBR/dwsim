@@ -49,7 +49,7 @@ Namespace DWSIM.Utilities.HYD
 
         End Sub
 
-        Function INDICE(ByVal Nome As String)
+        Function INDICE(ByVal name As String)
 
             INDICE = -1
             Dim i = 0
@@ -60,7 +60,7 @@ Namespace DWSIM.Utilities.HYD
 
         End Function
 
-        Function STRU(ByVal Nome As String)
+        Function STRU(ByVal name As String)
 
             STRU = 0
             Dim i = 0
@@ -71,7 +71,7 @@ Namespace DWSIM.Utilities.HYD
 
         End Function
 
-        Function ISINIB(ByVal Nome As String)
+        Function ISINIB(ByVal name As String)
 
             ISINIB = 0
             Dim i = 0

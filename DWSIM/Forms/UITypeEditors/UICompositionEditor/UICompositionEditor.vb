@@ -51,8 +51,8 @@ Namespace DWSIM.Editors.Composition
                 selectionControl.SU = form.Options.SelectedUnitSystem
                 selectionControl.Q = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.molarflow.GetValueOrDefault
                 selectionControl.W = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.massflow.GetValueOrDefault
-                selectionControl.Solvent = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ReferenceSolvent
-                selectionControl.InitialComposition = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InputComposition
+                selectionControl.Solvent = DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), MaterialStream).ReferenceSolvent
+                selectionControl.InitialComposition = DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), MaterialStream).InputComposition
                 selectionControl.Stream = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                 selectionControl.tbTag.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
 
@@ -60,8 +60,8 @@ Namespace DWSIM.Editors.Composition
 
                 form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.molarflow = selectionControl.Q
                 form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Phases(0).Properties.massflow = selectionControl.W
-                form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ReferenceSolvent = selectionControl.Solvent
-                form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).InputComposition = selectionControl.InitialComposition
+                DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), MaterialStream).ReferenceSolvent = selectionControl.Solvent
+                DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), MaterialStream).InputComposition = selectionControl.InitialComposition
 
                 value = selectionControl.Compounds
 

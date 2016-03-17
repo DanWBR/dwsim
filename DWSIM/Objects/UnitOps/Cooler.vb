@@ -245,7 +245,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             If Not DebugMode Then
 
                 'Atribuir valores à corrente de matéria conectada à jusante
-                With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                With DirectCast(form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream)
                     .SpecType = FlashSpec
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
@@ -427,7 +427,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
                 End With
 
-                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergyFlow"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
+                .Item.Add(DWSIM.App.GetLocalString("CorrentedeEnergia"), energ, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector

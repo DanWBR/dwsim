@@ -45,7 +45,7 @@ Namespace DWSIM.Editors.ComponentSeparator
 
                 Dim selectionControl As New CSepSpecEditorForm
 
-                selectionControl.compspecs = form.Collections.CLCS_ComponentSeparatorCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).ComponentSepSpecs
+                selectionControl.compspecs = DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.UnitOperations.ComponentSeparator).ComponentSepSpecs
 
                 selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("EditCompSpecs")
 
