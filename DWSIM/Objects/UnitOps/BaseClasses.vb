@@ -93,7 +93,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Overridable Property EnergyFlow() As Nullable(Of Double)
+        <Xml.Serialization.XmlIgnore()> Overridable Property EnergyFlow() As Nullable(Of Double)
             Get
                 Throw New NotImplementedException()
             End Get
@@ -108,7 +108,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Overridable ReadOnly Property Phases() As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Phase)
+        <Xml.Serialization.XmlIgnore()> Public Overridable ReadOnly Property Phases() As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Phase)
             Get
                 Throw New NotImplementedException
             End Get

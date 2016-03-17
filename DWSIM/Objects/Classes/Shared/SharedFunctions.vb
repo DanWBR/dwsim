@@ -467,16 +467,6 @@ Namespace DWSIM
 
         End Sub
 
-        Shared Function GetGitHash() As String
-            Dim gitVersion As String = [String].Empty
-            Using stream As Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DWSIM." + "version.txt")
-                Using reader As New StreamReader(stream)
-                    gitVersion = reader.ReadToEnd()
-                End Using
-            End Using
-            Return gitVersion.Trim
-        End Function
-
     End Class
 
 End Namespace

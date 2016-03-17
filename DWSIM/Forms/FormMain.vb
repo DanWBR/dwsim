@@ -2068,7 +2068,7 @@ simx:               Dim myStream As System.IO.FileStream
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
                         myStream.Close()
-                        Me.filename = name
+                        Me.filename = nome
                         Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                         Application.DoEvents()
                         Application.DoEvents()
@@ -2080,7 +2080,7 @@ simx2:              Dim myStream As System.IO.FileStream
                     If Not (myStream Is Nothing) Then
                         Dim nome = myStream.Name
                         myStream.Close()
-                        Me.filename = name
+                        Me.filename = nome
                         Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                         Application.DoEvents()
                         Application.DoEvents()

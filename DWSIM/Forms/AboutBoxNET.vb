@@ -19,7 +19,7 @@ Public Class AboutBoxNET
 
         Dim dt As DateTime = CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)
         Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & _
-        ", Build " & My.Application.Info.Version.Build & " [git-" & DWSIM.App.GetGitHash() & "] (" & Format(dt, "dd/MM/yyyy HH:mm:ss") & ")"
+        ", Build " & My.Application.Info.Version.Build & " (" & Format(dt, "dd/MM/yyyy HH:mm:ss") & ")"
 
         Copyright.Text = My.Application.Info.Copyright
 

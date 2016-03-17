@@ -200,4 +200,14 @@ Public Class FormWelcome
         Process.Start("https://sourceforge.net/p/dwsim/donate/?source=navbar")
     End Sub
 
+    Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
+        ' Do nothing here!
+    End Sub
+
+    Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
+
+        pevent.Graphics.DrawImage(My.Resources.splashWelcome_Background, New Rectangle(0, 0, Me.Width, Me.Height))
+
+    End Sub
+
 End Class
