@@ -141,23 +141,24 @@
     <None Include="Resources\pc_massico.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\WinFormsUI.csproj">
+    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DockPanel.WinFormsUI.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
-      <Name>WinFormsUI</Name>
+      <Name>DockPanel.WinFormsUI</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
       <Name>DWSIM.DrawingTools</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
       <Project>{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}</Project>
       <Name>DWSIM</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\PropertyGridEx.vbproj">
+    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\Controls.PropertyGridEx.vbproj">
       <Project>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</Project>
-      <Name>PropertyGridEx</Name>
+      <Name>Controls.PropertyGridEx</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

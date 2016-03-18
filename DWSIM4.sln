@@ -4,30 +4,30 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM", "DWSIM\DWSIM.vbproj", "{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PropertyGridEx", "PropertyGridEx\PropertyGridEx\PropertyGridEx.vbproj", "{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Controls.PropertyGridEx", "PropertyGridEx\PropertyGridEx\Controls.PropertyGridEx.vbproj", "{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Plugins.NaturalGas", "NaturalGas\DWSIM.Plugins.NaturalGas.vbproj", "{B8715C47-862B-46CF-8784-573B40407E4D}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.CustomXMLSerializer", "CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj", "{6C232866-A87B-409A-8A02-39F2FF218561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolPropInterface", "CoolPropInterface\CoolPropInterface.csproj", "{A5F6E7CC-0710-4129-9FAA-9FBE9BC4FFCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extras.CoolPropInterface", "CoolPropInterface\Extras.CoolPropInterface.csproj", "{A5F6E7CC-0710-4129-9FAA-9FBE9BC4FFCF}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.AzureServer", "AzureServer\DWSIM.AzureServer.vbproj", "{A7FB4DBF-4EBF-4004-9819-F26E791AAA60}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.TCPServer", "TCPServer\DWSIM.TCPServer.vbproj", "{DBB0E704-7E7B-4DDA-AAC2-A00F7168FDC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsUI", "DockPanelSuite\WinFormsUI\WinFormsUI.csproj", "{C75532C4-765B-418E-B09B-46D36B2ABDB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockPanel.WinFormsUI", "DockPanelSuite\WinFormsUI\DockPanel.WinFormsUI.csproj", "{C75532C4-765B-418E-B09B-46D36B2ABDB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeVS2012Light", "DockPanelSuite\WinFormsUI\ThemeVS2012Light.csproj", "{4ED4FDB5-9FD0-49E6-876D-1635F727C755}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockPanel.ThemeVS2012Light", "DockPanelSuite\WinFormsUI\DockPanel.ThemeVS2012Light.csproj", "{4ED4FDB5-9FD0-49E6-876D-1635F727C755}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1} = {C75532C4-765B-418E-B09B-46D36B2ABDB1}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabStrip", "TabStrip\TabStrip.csproj", "{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controls.TabStrip", "TabStrip\Controls.TabStrip.csproj", "{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunAsx86", "RunAsx86\RunAsx86.csproj", "{CAA85A70-4427-4075-A894-8EDDCA42DDD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extras.RunAsx86", "RunAsx86\Extras.RunAsx86.csproj", "{CAA85A70-4427-4075-A894-8EDDCA42DDD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDictionaryEditor", "GenericDictionaryEditor\GenericDictionaryEditor.csproj", "{A541272D-0C07-40BC-B03C-73D95E072B99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controls.GenericDictionaryEditor", "GenericDictionaryEditor\Controls.GenericDictionaryEditor.csproj", "{A541272D-0C07-40BC-B03C-73D95E072B99}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Interfaces", "DWSIM.Interfaces\DWSIM.Interfaces.vbproj", "{50BFD69A-487E-4B38-86EA-48ACD85A0EB1}"
 EndProject
