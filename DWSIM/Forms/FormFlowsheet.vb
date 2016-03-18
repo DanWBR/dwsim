@@ -3188,6 +3188,18 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
         End Get
     End Property
 
+    Public Function GetTranslatedString(text As String, locale As String) As String Implements Interfaces.IFlowsheet.GetTranslatedString
+
+        Return DWSIM.App.GetLocalString(text)
+
+    End Function
+
+    Public Sub ShowDebugInfo(text As String, level As Integer) Implements Interfaces.IFlowsheet.ShowDebugInfo
+
+        DWSIM.App.WriteToConsole(text, level)
+
+    End Sub
+
 #End Region
 
 End Class

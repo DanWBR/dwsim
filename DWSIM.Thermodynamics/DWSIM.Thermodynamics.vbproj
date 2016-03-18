@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{369BC7AF-836B-4DE1-93E3-B051BC148B23}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DWSIM.Thermodynamics</RootNamespace>
+    <AssemblyName>DWSIM.Thermodynamics</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>DWSIM.Thermodynamics.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>DWSIM.Thermodynamics.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CapeOpen">
+      <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
+    </Reference>
+    <Reference Include="Ciloci.Flee">
+      <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Cudafy.NET">
+      <HintPath>..\DWSIM\References\Cudafy.NET.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FileHelpers">
+      <HintPath>..\DWSIM\References\FileHelpers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Interop.CAPEOPEN110">
+      <HintPath>..\DWSIM\References\Interop.CAPEOPEN110.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Mapack">
+      <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Yeppp.CLR.Bundle">
+      <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
+    <Compile Include="Base Classes\BaseThermoClasses.vb" />
+    <Compile Include="Base Classes\CRITPT.vb" />
+    <Compile Include="Base Classes\PropertyMethods.vb" />
+    <Compile Include="Extensions\ExtensionMethods.vb" />
+    <Compile Include="Extensions\SIMDExtenders.vb" />
+    <Compile Include="Helper Classes\App.vb" />
+    <Compile Include="Helper Classes\SharedFunctions.vb" />
+    <Compile Include="Math Classes\AP.vb" />
+    <Compile Include="Math Classes\Brent.vb" />
+    <Compile Include="Math Classes\BrentMinimize.vb" />
+    <Compile Include="Math Classes\Broyden.vb" />
+    <Compile Include="Math Classes\BS.vb" />
+    <Compile Include="Math Classes\cMatLib.vb" />
+    <Compile Include="Math Classes\GammaF.vb" />
+    <Compile Include="Math Classes\GDEM.vb" />
+    <Compile Include="Math Classes\General.vb" />
+    <Compile Include="Math Classes\Interpolation.vb" />
+    <Compile Include="Math Classes\LBFGS.vb" />
+    <Compile Include="Math Classes\LBFGSB.vb" />
+    <Compile Include="Math Classes\LM.vb" />
+    <Compile Include="Math Classes\LP_Solve.vb" />
+    <Compile Include="Math Classes\MATRIX2.vb" />
+    <Compile Include="Math Classes\MatrixOps.vb" />
+    <Compile Include="Math Classes\SysLin.vb" />
+    <Compile Include="Property Packages\ActivityCoefficientPropertyPackage.vb" />
+    <Compile Include="Base Classes\Electrolyte.vb" />
+    <Compile Include="Base Classes\ElectrolyteBase.vb" />
+    <Compile Include="Base Classes\HYP.vb" />
+    <Compile Include="Base Classes\MichelsenBase.vb" />
+    <Compile Include="Base Classes\PropertyPackage.vb" />
+    <Compile Include="Base Classes\PROPS.vb" />
+    <Compile Include="Flash Algorithms\Base.vb" />
+    <Compile Include="Flash Algorithms\BlackOil.vb" />
+    <Compile Include="Flash Algorithms\BostonBrittInsideOut.vb" />
+    <Compile Include="Flash Algorithms\BostonFournierInsideOut3P.vb" />
+    <Compile Include="Flash Algorithms\ElectrolyteSVLE.vb" />
+    <Compile Include="Flash Algorithms\GibbsMinimization3P.vb" />
+    <Compile Include="Flash Algorithms\NestedLoops.vb" />
+    <Compile Include="Flash Algorithms\NestedLoops3P.vb" />
+    <Compile Include="Flash Algorithms\NestedLoops3PV2.vb" />
+    <Compile Include="Flash Algorithms\NestedLoops3PV3.vb" />
+    <Compile Include="Flash Algorithms\NestedLoopsImmiscible.vb" />
+    <Compile Include="Flash Algorithms\NestedLoopsSLE.vb" />
+    <Compile Include="Flash Algorithms\Seawater.vb" />
+    <Compile Include="Flash Algorithms\SimpleLLE.vb" />
+    <Compile Include="Flash Algorithms\SourWater.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Models\BlackOilProperties.vb" />
+    <Compile Include="Property Packages\BlackOilPropertyPackage.vb" />
+    <Compile Include="Property Packages\CAPEOPENPropertyPackageManager.vb" />
+    <Compile Include="Property Packages\CAPEOPENPropertyPackageSocket.vb" />
+    <Compile Include="Property Packages\ChaoSeaderPropertyPackage.vb" />
+    <Compile Include="Property Packages\CoolPropPropertyPackage.vb" />
+    <Compile Include="Models\CS.vb" />
+    <Compile Include="Property Packages\ElectrolyteBase.vb" />
+    <Compile Include="Models\ExUNIQUAC.vb" />
+    <Compile Include="Property Packages\ExUNIQUACPropertyPackage.vb" />
+    <Compile Include="Property Packages\FPROPSPropertyPackage.vb" />
+    <Compile Include="Models\FPROPS_NativeCalls.vb" />
+    <Compile Include="Property Packages\GraysonStreedPropertyPackage.vb" />
+    <Compile Include="Models\GS.vb" />
+    <Compile Include="Models\IAPWS_IF97.vb" />
+    <Compile Include="Models\Ideal.vb" />
+    <Compile Include="Models\LIQUAC2.vb" />
+    <Compile Include="Property Packages\LIQUAC2PropertyPackage.vb" />
+    <Compile Include="Models\LK.vb" />
+    <Compile Include="Models\LKP.vb" />
+    <Compile Include="Property Packages\LKPPropertyPackage.vb" />
+    <Compile Include="Models\MODFAC.vb" />
+    <Compile Include="Property Packages\MODFACPropertyPackage.vb" />
+    <Compile Include="Models\NISTMFAC.vb" />
+    <Compile Include="Property Packages\NISTMFACPropertyPackage.vb" />
+    <Compile Include="Models\NRTL.vb" />
+    <Compile Include="Property Packages\NRTLPropertyPackage.vb" />
+    <Compile Include="Models\PCSAFT.vb" />
+    <Compile Include="Property Packages\PCSAFTPropertyPackage.vb" />
+    <Compile Include="Models\PENGROB.vb" />
+    <Compile Include="Property Packages\PengRobinsonPropertyPackage.vb" />
+    <Compile Include="Models\PR.vb" />
+    <Compile Include="Models\PRLK.vb" />
+    <Compile Include="Property Packages\PropertyPackage.vb" />
+    <Compile Include="Models\PRSV2-VL.vb" />
+    <Compile Include="Models\PRSV2.vb" />
+    <Compile Include="Property Packages\PRSV2PropertyPackage.vb" />
+    <Compile Include="Property Packages\PRSV2VLPropertyPackage.vb" />
+    <Compile Include="Property Packages\RaoultPropertyPackage.vb" />
+    <Compile Include="Models\Seawater.vb" />
+    <Compile Include="Property Packages\SeawaterPropertyPackage.vb" />
+    <Compile Include="Property Packages\SourWaterPropertyPackage.vb" />
+    <Compile Include="Models\SRK.vb" />
+    <Compile Include="Models\SRK2.vb" />
+    <Compile Include="Property Packages\SRKPropertyPackage.vb" />
+    <Compile Include="Models\STEAM67.vb" />
+    <Compile Include="Property Packages\SteamTablesPropertyPackage.vb" />
+    <Compile Include="Models\UNIFAC.vb" />
+    <Compile Include="Property Packages\UNIFACLLPropertyPackage.vb" />
+    <Compile Include="Property Packages\UNIFACPropertyPackage.vb" />
+    <Compile Include="Models\UNIQUAC.vb" />
+    <Compile Include="Property Packages\UNIQUACPropertyPackage.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoolPropInterface\Extras.CoolPropInterface.csproj">
+      <Project>{a5f6e7cc-0710-4129-9faa-9fbe9bc4ffcf}</Project>
+      <Name>Extras.CoolPropInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
+      <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
+      <Name>DWSIM.CustomXMLSerializer</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

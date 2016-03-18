@@ -33,6 +33,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Interfaces", "DWSIM.I
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.DrawingTools", "DWSIM.Drawing\DWSIM.DrawingTools.vbproj", "{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics", "DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj", "{369BC7AF-836B-4DE1-93E3-B051BC148B23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +199,16 @@ Global
 		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Release|x86.ActiveCfg = Release|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{369BC7AF-836B-4DE1-93E3-B051BC148B23}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
