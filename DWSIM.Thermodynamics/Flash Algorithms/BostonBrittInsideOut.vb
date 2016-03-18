@@ -515,9 +515,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
                                                       C = DHv2
                                                       D = (DHv1 - C) / (T - Tref)
                                                   End Sub,
-                                                      My.Application.TaskCancellationTokenSource.Token,
+                                                      App.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      My.Application.AppTaskScheduler)
+                                                      App.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       If T < MathEx.Common.Max(VTc, Vz) Then
                                                           DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
@@ -529,9 +529,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
                                                           F = 0
                                                       End If
                                                   End Sub,
-                                                  My.Application.TaskCancellationTokenSource.Token,
+                                                  App.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  My.Application.AppTaskScheduler)
+                                                  App.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
                 
             Else
@@ -633,9 +633,9 @@ restart:    Do
                                                           Cc = DHv2
                                                           Dc = (DHv1 - Cc) / (T - T0)
                                                       End Sub,
-                                                      My.Application.TaskCancellationTokenSource.Token,
+                                                      App.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      My.Application.AppTaskScheduler)
+                                                      App.AppTaskScheduler)
                     Dim task2 = Task.Factory.StartNew(Sub()
                                                           If T < MathEx.Common.Max(VTc, Vz) Then
                                                               DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
@@ -647,9 +647,9 @@ restart:    Do
                                                               Fc = 0
                                                           End If
                                                       End Sub,
-                                                  My.Application.TaskCancellationTokenSource.Token,
+                                                  App.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  My.Application.AppTaskScheduler)
+                                                  App.AppTaskScheduler)
                     Task.WaitAll(task1, task2)
                     
                 Else

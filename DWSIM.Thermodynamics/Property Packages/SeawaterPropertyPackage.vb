@@ -700,8 +700,8 @@ Namespace PropertyPackages
 
             If Parameters("PP_IGNORE_SALINITY_LIMIT") = 0 Then
                 If salinity > Seawater.sal_smax Then
-                    If Me.CurrentMaterialStream.FlowSheet IsNot Nothing Then
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Color.DarkOrange, DWSIM.Flowsheet.MessageType.Warning)
+                    If App.Flowsheet IsNot Nothing Then
+                        App.Flowsheet.ShowMessage(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Interfaces.IFlowsheet.MessageType.Warning)
                     End If
                     salinity = Seawater.sal_smax
                 End If
@@ -726,8 +726,8 @@ Namespace PropertyPackages
 
             If Parameters("PP_IGNORE_SALINITY_LIMIT") = 0 Then
                 If salinity > Seawater.sal_smax Then
-                    If Me.CurrentMaterialStream.FlowSheet IsNot Nothing Then
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Color.DarkOrange, DWSIM.Flowsheet.MessageType.Warning)
+                    If App.Flowsheet IsNot Nothing Then
+                        App.Flowsheet.ShowMessage(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Interfaces.IFlowsheet.MessageType.Warning)
                     End If
                     salinity = Seawater.sal_smax
                 End If

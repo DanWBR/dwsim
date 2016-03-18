@@ -22,6 +22,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Math
 Imports System.Threading.Tasks
 Imports System.Linq
+Imports DWSIM.Thermodynamics.DWSIM
 
 Namespace PropertyPackages
 
@@ -260,11 +261,11 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case Phase.Vapor
+                Case phase.Vapor
                     state = "V"
-                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
+                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3, phase.Aqueous
                     state = "L"
-                Case Phase.Solid
+                Case phase.Solid
                     state = "S"
             End Select
 
@@ -565,7 +566,7 @@ Namespace PropertyPackages
 
         Public Function DW_ReturnPhaseEnvelopeSequential(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            Dim cpc As New Utilities.TCP.Methods_SRK
+            Dim cpc As New DWSIM.Utilities.TCP.Methods_SRK
 
             Dim i As Integer
 
@@ -1555,11 +1556,11 @@ Namespace PropertyPackages
             If SB.Count > 1 Then SB.RemoveAt(SB.Count - 1)
             If VB.Count > 1 Then VB.RemoveAt(VB.Count - 1)
 
-            If ToWF.Count > 1 Then ToWF.RemoveAt(ToWF.Count - 1)
-            If PoWF.Count > 1 Then PoWF.RemoveAt(PoWF.Count - 1)
-            If HoWF.Count > 1 Then HoWF.RemoveAt(HoWF.Count - 1)
-            If SoWF.Count > 1 Then SoWF.RemoveAt(SoWF.Count - 1)
-            If VoWF.Count > 1 Then VoWF.RemoveAt(VoWF.Count - 1)
+            If TOWF.Count > 1 Then TOWF.RemoveAt(TOWF.Count - 1)
+            If POWF.Count > 1 Then POWF.RemoveAt(POWF.Count - 1)
+            If HOWF.Count > 1 Then HOWF.RemoveAt(HOWF.Count - 1)
+            If SOWF.Count > 1 Then SOWF.RemoveAt(SOWF.Count - 1)
+            If VOWF.Count > 1 Then VOWF.RemoveAt(VOWF.Count - 1)
 
             If TVD.Count > 1 Then TVD.RemoveAt(TVD.Count - 1)
             If PO.Count > 1 Then PO.RemoveAt(PO.Count - 1)
@@ -1578,7 +1579,7 @@ Namespace PropertyPackages
             If TI.Count > 1 Then TI.RemoveAt(TI.Count - 1)
             If PI.Count > 1 Then PI.RemoveAt(PI.Count - 1)
 
-            Return New Object() {TVB, PB, HB, SB, VB, TVD, PO, HO, SO, VO, TE, PE, TH, PHsI, PHsII, CP, TQ, PQ, TI, PI, ToWF, PoWF, HoWF, SoWF, VoWF}
+            Return New Object() {TVB, PB, HB, SB, VB, TVD, PO, HO, SO, VO, TE, PE, TH, PHsI, PHsII, CP, TQ, PQ, TI, PI, TOWF, POWF, HOWF, SOWF, VOWF}
 
         End Function
 
@@ -1739,7 +1740,7 @@ Namespace PropertyPackages
             If Not Me.Parameters.ContainsKey("PP_USE_EOS_LIQDENS") Then Me.Parameters.Add("PP_USE_EOS_LIQDENS", 0)
 
             Select Case phase
-                Case Phase.Liquid
+                Case phase.Liquid
                     key = "1"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -1749,7 +1750,7 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case Phase.Aqueous
+                Case phase.Aqueous
                     key = "6"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -1759,7 +1760,7 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case Phase.Liquid1
+                Case phase.Liquid1
                     key = "3"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -1769,7 +1770,7 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case Phase.Liquid2
+                Case phase.Liquid2
                     key = "4"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -1779,7 +1780,7 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case Phase.Liquid3
+                Case phase.Liquid3
                     key = "5"
                     If Convert.ToInt32(Me.Parameters("PP_USE_EOS_LIQDENS")) = 1 Then
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
@@ -1789,7 +1790,7 @@ Namespace PropertyPackages
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
-                Case Phase.Vapor
+                Case phase.Vapor
                     partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.01)
                     key = "2"
             End Select

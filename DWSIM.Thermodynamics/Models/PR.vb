@@ -39,7 +39,7 @@ Namespace PropertyPackages.ThermoPlugs
             aux1 = -8.314 / 2 * (0.45724 / T) ^ 0.5
 
             If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = My.Application.AppTaskScheduler}
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(k)
                                                      For l As Integer = 0 To n
                                                          auxtmp(k) += Vz(k) * Vz(l) * (1 - VKij(k, l)) * (ci(l) * (ai(k) * Tc(l) / Pc(l)) ^ 0.5 + ci(k) * (ai(l) * Tc(k) / Pc(k)) ^ 0.5)
@@ -68,7 +68,7 @@ Namespace PropertyPackages.ThermoPlugs
             Dim a(n, n) As Double
 
             If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = My.Application.AppTaskScheduler}
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(k)
                                                      For j As Integer = 0 To n
                                                          a(k, j) = (ai(k) * ai(j)) ^ 0.5 * (1 - vkij(k, j))
@@ -96,7 +96,7 @@ Namespace PropertyPackages.ThermoPlugs
             Dim saml, aml(n), aml2(n) As Double
 
             If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = My.Application.AppTaskScheduler}
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(k)
                                                      For j As Integer = 0 To n
                                                          aml(k) += Vx(k) * Vx(j) * a(k, j)
@@ -245,7 +245,7 @@ Namespace PropertyPackages.ThermoPlugs
             Loop Until i = n + 1
 
             If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = My.Application.AppTaskScheduler}
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(ii)
                                                      alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
                                                      ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
@@ -360,7 +360,7 @@ Namespace PropertyPackages.ThermoPlugs
 
 
             If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = My.Application.AppTaskScheduler}
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(ii)
                                                      alpha(ii) = (1 + (0.37464 + 1.54226 * W(ii) - 0.26992 * W(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
                                                      ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
@@ -405,7 +405,7 @@ Namespace PropertyPackages.ThermoPlugs
             Dim Pcorr As Double = P
 
             If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = My.Application.AppTaskScheduler}
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(ii)
                                                      Dim t1, t2, t3, t4, t5 As Double
                                                      t1 = bi(ii) * (Z - 1) / bml
@@ -509,7 +509,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         Public Shared Sub pr_gpu_func(n As Integer, Vx As Double(), VKij As Double(,), Tc As Double(), Pc As Double(), w As Double(), T As Double, alpha As Double(), ai As Double(), bi As Double(), a As Double(,), aml_temp As Double(), bml_temp As Double(), aml2_temp As Double())
 
-            Dim gpu As GPGPU = My.Application.gpu
+            Dim gpu As GPGPU = App.gpu
 
             'gpu.Lock()
             gpu.SetCurrentContext()
@@ -657,7 +657,7 @@ Namespace PropertyPackages.ThermoPlugs
             Loop Until i = n + 1
 
             If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = My.Application.AppTaskScheduler}
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(ii)
                                                      alpha(ii) = (1 + (0.37464 + 1.54226 * W(ii) - 0.26992 * W(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
                                                      ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)

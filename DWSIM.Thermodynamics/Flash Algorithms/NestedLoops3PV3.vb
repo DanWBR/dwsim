@@ -597,8 +597,8 @@ out:
                 If My.Settings.EnableParallelProcessing Then
                     
                     If My.Settings.EnableGPUProcessing Then
-                        'If Not My.Application.gpu.IsMultithreadingEnabled Then
-                        '    My.Application.gpu.EnableMultithreading()
+                        'If Not App.gpu.IsMultithreadingEnabled Then
+                        '    App.gpu.EnableMultithreading()
                         'Else
                         '    alreadymt = True
                         'End If

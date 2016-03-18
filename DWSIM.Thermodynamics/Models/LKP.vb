@@ -912,7 +912,7 @@ Final3:
             Dim vcjk(n, n), tcjk(n, n) As Double
             Dim sum1(n, n), sum2(n, n) As Double
 
-            Dim gpu As GPGPU = My.Application.gpu
+            Dim gpu As GPGPU = App.gpu
 
             If gpu.IsMultithreadingEnabled Then gpu.SetCurrentContext()
 

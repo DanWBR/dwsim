@@ -456,15 +456,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       fcv = pp.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
                                                   End Sub,
-                                                      My.Application.TaskCancellationTokenSource.Token,
+                                                      App.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      My.Application.AppTaskScheduler)
+                                                      App.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       fcl = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
                                                   End Sub,
-                                                  My.Application.TaskCancellationTokenSource.Token,
+                                                  App.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  My.Application.AppTaskScheduler)
+                                                  App.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
                 
             Else
@@ -583,15 +583,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   fcv = pp.DW_CalcFugCoeff(currcomp, T, P, State.Vapor)
                                                               End Sub,
-                                                                  My.Application.TaskCancellationTokenSource.Token,
+                                                                  App.TaskCancellationTokenSource.Token,
                                                                   TaskCreationOptions.None,
-                                                                  My.Application.AppTaskScheduler)
+                                                                  App.AppTaskScheduler)
                             Dim task2 = Task.Factory.StartNew(Sub()
                                                                   fcl = pp.DW_CalcFugCoeff(currcomp, T, P, State.Liquid)
                                                               End Sub,
-                                                              My.Application.TaskCancellationTokenSource.Token,
+                                                              App.TaskCancellationTokenSource.Token,
                                                               TaskCreationOptions.None,
-                                                              My.Application.AppTaskScheduler)
+                                                              App.AppTaskScheduler)
                             Task.WaitAll(task1, task2)
                             
                         Else

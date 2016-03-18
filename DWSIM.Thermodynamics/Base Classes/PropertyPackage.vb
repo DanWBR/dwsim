@@ -200,7 +200,7 @@ Namespace PropertyPackages
 
         Sub New(ByVal capeopenmode As Boolean)
 
-            My.Application.CAPEOPENMode = capeopenmode
+            App.CAPEOPENMode = capeopenmode
 
             If capeopenmode Then
 
@@ -359,14 +359,14 @@ Namespace PropertyPackages
         ''' <remarks></remarks>
         Public Property FlashAlgorithm() As FlashMethod
             Get
-                If My.Application.CAPEOPENMode Then
+                If App.CAPEOPENMode Then
                     Return _flashalgorithm
                 Else
                     If _flashalgorithm = FlashMethod.GlobalSetting Then
-                        If Me.CurrentMaterialStream.Flowsheet Is Nothing Then
+                        If Flowsheet Is Nothing Then
                             Return FlashMethod.DWSIMDefault
                         Else
-                            Return Me.CurrentMaterialStream.Flowsheet.Options.PropertyPackageFlashAlgorithm
+                            Return Flowsheet.Options.PropertyPackageFlashAlgorithm
                         End If
                     Else
                         Return _flashalgorithm
@@ -386,7 +386,7 @@ Namespace PropertyPackages
         ''' <remarks></remarks>
         Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
-                If Not My.Application.CAPEOPENMode And Not My.Application.IsRunningParallelTasks Then
+                If Not App.CAPEOPENMode And Not App.IsRunningParallelTasks Then
                     If Not Me.Parameters.ContainsKey("PP_FLASHALGORITHM") Then
                         Me.Parameters.Add("PP_FLASHALGORITHM", 2)
                     End If
@@ -394,21 +394,21 @@ Namespace PropertyPackages
                 End If
                 Select Case FlashAlgorithm
                     Case FlashMethod.DWSIMDefault
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.DWSIMDefault
                         'Else
                         '    If _dwdf Is Nothing Then _dwdf = New Auxiliary.FlashAlgorithms.DWSIMDefault
                         '    Return _dwdf
                         'End If
                     Case FlashMethod.InsideOut
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
                         'Else
                         '    If _bbio Is Nothing Then _bbio = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
                         '    Return _bbio
                         'End If
                     Case FlashMethod.InsideOut3P
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P With
                                                     {.StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
                         'Else
@@ -418,7 +418,7 @@ Namespace PropertyPackages
                         'Return _brio3
                         'End If
                     Case FlashMethod.GibbsMin2P
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.GibbsMinimization3P With
                                                     {.ForceTwoPhaseOnly = True}
                         'Else
@@ -426,7 +426,7 @@ Namespace PropertyPackages
                         'Return _gm3
                         'End If
                     Case FlashMethod.GibbsMin3P
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.GibbsMinimization3P With
                                                     {.ForceTwoPhaseOnly = False, .StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
                         'Else
@@ -437,7 +437,7 @@ Namespace PropertyPackages
                         'Return _gm3
                         'End If
                     Case FlashMethod.NestedLoops3P, FlashMethod.NestedLoops3PV2, FlashMethod.NestedLoops3PV3
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.NestedLoops3PV3 With
                                                     {.StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
                         'Else
@@ -451,7 +451,7 @@ Namespace PropertyPackages
                         For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.CompoundProperties = constprops}
                         'Else
                         'If _nlsle Is Nothing Then _nlsle = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
@@ -463,7 +463,7 @@ Namespace PropertyPackages
                         For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.CompoundProperties = constprops, .SolidSolution = True}
                         'Else
                         'If _nlsle Is Nothing Then _nlsle = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
@@ -476,7 +476,7 @@ Namespace PropertyPackages
                         For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible With
                                                     {.CompoundProperties = constprops, .StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
                         'Else
@@ -487,14 +487,14 @@ Namespace PropertyPackages
                         'Return _nli
                         'End If
                     Case FlashMethod.SimpleLLE
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.SimpleLLE
                         'Else
                         'If _simplelle Is Nothing Then _simplelle = New Auxiliary.FlashAlgorithms.SimpleLLE
                         'Return _simplelle
                         'End If
                     Case Else
-                        'If My.Application.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.DWSIMDefault
                         'Else
                         'If _dwdf Is Nothing Then _dwdf = New Auxiliary.FlashAlgorithms.DWSIMDefault
@@ -732,9 +732,9 @@ Namespace PropertyPackages
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
                                                   End Sub,
-                                                        My.Application.TaskCancellationTokenSource.Token,
+                                                        App.TaskCancellationTokenSource.Token,
                                                         TaskCreationOptions.None,
-                                                        My.Application.AppTaskScheduler)
+                                                        App.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       If type = "LV" Then
                                                           fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
@@ -742,9 +742,9 @@ Namespace PropertyPackages
                                                           fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
                                                       End If
                                                   End Sub,
-                                                    My.Application.TaskCancellationTokenSource.Token,
+                                                    App.TaskCancellationTokenSource.Token,
                                                     TaskCreationOptions.None,
-                                                    My.Application.AppTaskScheduler)
+                                                    App.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
                 
             Else
@@ -1104,8 +1104,8 @@ Namespace PropertyPackages
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             Dim T As Double = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
 
-            If Not My.Application.CAPEOPENMode And Not My.Application.ActiveSimulation Is Nothing Then
-                If Me.CurrentMaterialStream.FlowSheet.Options.CalculateBubbleAndDewPoints _
+            If Not App.CAPEOPENMode And Not App.ActiveSimulation Is Nothing Then
+                If Flowsheet.Options.CalculateBubbleAndDewPoints _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
                     Try
@@ -1121,13 +1121,13 @@ Namespace PropertyPackages
                             Me.CurrentMaterialStream.Phases(0).Properties.bubbleTemperature = myres(4)
                         End If
                     Catch ex As Exception
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Bubble Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
+                        Flowsheet.WriteToLog("Bubble Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                     Try
                         result = Me.DW_CalcEquilibrio_ISOL(FlashSpec.P, FlashSpec.VAP, P, 1, 0)(2)
                         Me.CurrentMaterialStream.Phases(0).Properties.dewTemperature = result
                     Catch ex As Exception
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Dew Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
+                        Flowsheet.WriteToLog("Dew Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                     Try
                         Dim Vz As Double() = Me.RET_VMOL(Phase.Mixture)
@@ -1142,13 +1142,13 @@ Namespace PropertyPackages
                             Me.CurrentMaterialStream.Phases(0).Properties.bubblePressure = myres(4)
                         End If
                     Catch ex As Exception
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Bubble Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
+                        Flowsheet.WriteToLog("Bubble Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                     Try
                         result = Me.DW_CalcEquilibrio_ISOL(FlashSpec.T, FlashSpec.VAP, T, 1, 0)(3)
                         Me.CurrentMaterialStream.Phases(0).Properties.dewPressure = result
                     Catch ex As Exception
-                        Me.CurrentMaterialStream.FlowSheet.WriteToLog("Dew Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
+                        Flowsheet.WriteToLog("Dew Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
                     End Try
                 End If
             End If
@@ -1446,10 +1446,10 @@ Namespace PropertyPackages
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 
-            If Not My.Application.CAPEOPENMode Then
+            If Not App.CAPEOPENMode Then
                 Try
-                    Me._tpseverity = Me.CurrentMaterialStream.Flowsheet.Options.ThreePhaseFlashStabTestSeverity
-                    Me._tpcompids = Me.CurrentMaterialStream.Flowsheet.Options.ThreePhaseFlashStabTestCompIds
+                    Me._tpseverity = Flowsheet.Options.ThreePhaseFlashStabTestSeverity
+                    Me._tpcompids = Flowsheet.Options.ThreePhaseFlashStabTestCompIds
                 Catch ex As Exception
                     Me._tpseverity = 0
                     Me._tpcompids = New String() {}
@@ -1501,8 +1501,8 @@ Namespace PropertyPackages
                             Dim fge As Double = 0
                             Dim dge As Double = 0
 
-                            If Not My.Application.CAPEOPENMode Then
-                                If Me.CurrentMaterialStream.Flowsheet.Options.ValidateEquilibriumCalc _
+                            If Not App.CAPEOPENMode Then
+                                If Flowsheet.Options.ValidateEquilibriumCalc _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -1530,10 +1530,10 @@ Namespace PropertyPackages
                             Dim Vx2 As Double() = result(6)
                             Dim Vs As Double() = result(8)
 
-                            If Not My.Application.CAPEOPENMode Then
+                            If Not App.CAPEOPENMode Then
 
                                 'identify phase
-                                If Me.CurrentMaterialStream.Flowsheet.Options.UsePhaseIdentificationAlgorithm Then
+                                If Flowsheet.Options.UsePhaseIdentificationAlgorithm Then
                                     If Me.ComponentName.Contains("SRK") Or Me.ComponentName.Contains("PR") Then
                                         If Not Me.AUX_IS_SINGLECOMP(Phase.Mixture) Then
                                             Dim newphase, eos As String
@@ -1582,7 +1582,7 @@ Namespace PropertyPackages
                                     End If
                                 End If
 
-                                If Me.CurrentMaterialStream.Flowsheet.Options.ValidateEquilibriumCalc _
+                                If Flowsheet.Options.ValidateEquilibriumCalc _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -1592,7 +1592,7 @@ Namespace PropertyPackages
 
                                     dge = fge - ige
 
-                                    Dim dgtol As Double = Me.CurrentMaterialStream.Flowsheet.Options.FlashValidationDGETolerancePct
+                                    Dim dgtol As Double = Flowsheet.Options.FlashValidationDGETolerancePct
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
                                         Throw New Exception(App.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
@@ -2443,7 +2443,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             End Select
 
-            If My.Application.CAPEOPENMode Then
+            If App.CAPEOPENMode Then
                 Dim summf As Double = 0, sumwf As Double = 0
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
                     If Not pi.PhaseLabel = "Disabled" Then
@@ -2549,8 +2549,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Overridable Function DW_CalcEquilibrio_ISOL(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec, ByVal val1 As Double, ByVal val2 As Double, ByVal estimate As Double) As Object
 
             Try
-                Me._tpseverity = Me.CurrentMaterialStream.Flowsheet.Options.ThreePhaseFlashStabTestSeverity
-                Me._tpcompids = Me.CurrentMaterialStream.Flowsheet.Options.ThreePhaseFlashStabTestCompIds
+                Me._tpseverity = Flowsheet.Options.ThreePhaseFlashStabTestSeverity
+                Me._tpcompids = Flowsheet.Options.ThreePhaseFlashStabTestCompIds
             Catch ex As Exception
                 Me._tpseverity = 0
                 Me._tpcompids = New String() {}
@@ -2582,7 +2582,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Dim fge As Double = 0.0#
                             Dim dge As Double = 0.0#
 
-                            If Me.CurrentMaterialStream.Flowsheet.Options.ValidateEquilibriumCalc Then
+                            If Flowsheet.Options.ValidateEquilibriumCalc Then
 
                                 ige = Me.DW_CalcGibbsEnergy(RET_VMOL(Phase.Mixture), T, P)
 
@@ -2600,8 +2600,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Vx2 = result(6)
                             Vs = result(8)
 
-                            If Not My.Application.CAPEOPENMode Then
-                                If Me.CurrentMaterialStream.Flowsheet.Options.ValidateEquilibriumCalc _
+                            If Not App.CAPEOPENMode Then
+                                If Flowsheet.Options.ValidateEquilibriumCalc _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -2611,7 +2611,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                                     dge = fge - ige
 
-                                    Dim dgtol As Double = Me.CurrentMaterialStream.Flowsheet.Options.FlashValidationDGETolerancePct
+                                    Dim dgtol As Double = Flowsheet.Options.FlashValidationDGETolerancePct
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
                                         Throw New Exception(App.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
@@ -3398,10 +3398,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         ''' <remarks></remarks>
         Public Overridable Function DW_ReturnBinaryEnvelope(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            If Not My.Application.CAPEOPENMode Then
+            If Not App.CAPEOPENMode Then
                 Try
-                    Me._tpseverity = Me.CurrentMaterialStream.Flowsheet.Options.ThreePhaseFlashStabTestSeverity
-                    Me._tpcompids = Me.CurrentMaterialStream.Flowsheet.Options.ThreePhaseFlashStabTestCompIds
+                    Me._tpseverity = Flowsheet.Options.ThreePhaseFlashStabTestSeverity
+                    Me._tpcompids = Flowsheet.Options.ThreePhaseFlashStabTestCompIds
                 Catch ex As Exception
                     Me._tpseverity = 0
                     Me._tpcompids = New String() {}
@@ -8491,7 +8491,7 @@ Final3:
 
             Dim ids, formulas, nms, bts, casnos, molws As New ArrayList
 
-            If My.Application.CAPEOPENMode Then
+            If App.CAPEOPENMode Then
                 For Each c As ConstantProperties In _selectedcomps.Values
                     ids.Add(c.Name)
                     formulas.Add(c.Formula)
@@ -8897,7 +8897,7 @@ Final3:
         ''' Compound identifiers that are returned by the GetCompoundList method of this interface. It
         ''' must be zero or a positive number.</remarks>
         Public Overridable Function GetNumCompounds() As Integer Implements ICapeThermoCompounds.GetNumCompounds
-            If My.Application.CAPEOPENMode Then
+            If App.CAPEOPENMode Then
                 Return Me._selectedcomps.Count
             Else
                 Return Me.CurrentMaterialStream.Phases(0).Compounds.Count
@@ -9351,7 +9351,7 @@ Final3:
         ''' It is responsibility of the implementer to decide how to handle this circumstance.</remarks>
         Public Overridable Sub CalcSinglePhaseProp(ByVal props As Object, ByVal phaseLabel As String) Implements ICapeThermoPropertyRoutine.CalcSinglePhaseProp
 
-            If Not My.Application.CAPEOPENMode Then
+            If Not App.CAPEOPENMode Then
 
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
                     If phaseLabel = pi.PhaseLabel Then
@@ -9686,7 +9686,7 @@ Final3:
 
             Me.DW_CalcTwoPhaseProps(Phase.Liquid, Phase.Vapor)
 
-            If My.Application.CAPEOPENMode Then
+            If App.CAPEOPENMode Then
 
                 Dim res As New ArrayList
                 Dim comps As New ArrayList
@@ -10023,7 +10023,7 @@ Final3:
 
             Dim T, P, Hm, Sm As Double
 
-            If My.Application.CAPEOPENMode Then
+            If App.CAPEOPENMode Then
 
                 Dim res As Object = Nothing
 
@@ -10072,7 +10072,7 @@ Final3:
                 ThrowCAPEException(ex, ex.GetType.ToString, ex.ToString, "ICapeThermoEquilibriumRoutine", ex.ToString, "CalcEquilibrium", "", 0)
             End Try
 
-            If My.Application.CAPEOPENMode Then
+            If App.CAPEOPENMode Then
 
                 Dim ms As MaterialStream = Me.CurrentMaterialStream
                 Dim mo As ICapeThermoMaterial = _como
@@ -10286,7 +10286,7 @@ Final3:
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(_como)
                 End If
             End If
-            If My.Application.CAPEOPENMode Then
+            If App.CAPEOPENMode Then
                 _como = material
                 If TryCast(material, MaterialStream) Is Nothing Then
                     Me.CurrentMaterialStream = COMaterialtoDWMaterial(material)
@@ -10311,7 +10311,7 @@ Final3:
         ''' should be raised.</remarks>
         Public Overridable Sub UnsetMaterial() Implements ICapeThermoMaterialContext.UnsetMaterial
             Me.CurrentMaterialStream = Nothing
-            If My.Application.CAPEOPENMode Then
+            If App.CAPEOPENMode Then
                 If _como IsNot Nothing Then
                     If System.Runtime.InteropServices.Marshal.IsComObject(_como) Then
                         System.Runtime.InteropServices.Marshal.ReleaseComObject(_como)

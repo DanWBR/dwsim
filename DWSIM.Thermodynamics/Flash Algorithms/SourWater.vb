@@ -576,15 +576,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Dim task1 = Task.Factory.StartNew(Sub()
                                                               fx = Herror("PT", x1, P, Vz, PP)(0)
                                                           End Sub,
-                                                            My.Application.TaskCancellationTokenSource.Token,
+                                                            App.TaskCancellationTokenSource.Token,
                                                             TaskCreationOptions.None,
-                                                            My.Application.AppTaskScheduler)
+                                                            App.AppTaskScheduler)
                         Dim task2 = Task.Factory.StartNew(Sub()
                                                               fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                           End Sub,
-                                                            My.Application.TaskCancellationTokenSource.Token,
+                                                            App.TaskCancellationTokenSource.Token,
                                                             TaskCreationOptions.None,
-                                                            My.Application.AppTaskScheduler)
+                                                            App.AppTaskScheduler)
                         Task.WaitAll(task1, task2)
                         
                     Else
@@ -689,15 +689,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Dim task1 = Task.Factory.StartNew(Sub()
                                                               fx = Serror("PT", x1, P, Vz, PP)(0)
                                                           End Sub,
-                                                          My.Application.TaskCancellationTokenSource.Token,
+                                                          App.TaskCancellationTokenSource.Token,
                                                           TaskCreationOptions.None,
-                                                          My.Application.AppTaskScheduler)
+                                                          App.AppTaskScheduler)
                         Dim task2 = Task.Factory.StartNew(Sub()
                                                               fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                           End Sub,
-                                                          My.Application.TaskCancellationTokenSource.Token,
+                                                          App.TaskCancellationTokenSource.Token,
                                                           TaskCreationOptions.None,
-                                                          My.Application.AppTaskScheduler)
+                                                          App.AppTaskScheduler)
                         Task.WaitAll(task1, task2)
                         
                     Else

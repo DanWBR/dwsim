@@ -882,8 +882,8 @@ alt:
             If My.Settings.EnableParallelProcessing Then
                 
                 If My.Settings.EnableGPUProcessing Then
-                    'If Not My.Application.gpu.IsMultithreadingEnabled Then
-                    '    My.Application.gpu.EnableMultithreading()
+                    'If Not App.gpu.IsMultithreadingEnabled Then
+                    '    App.gpu.EnableMultithreading()
                     'Else
                     '    alreadymt = True
                     'End If
@@ -1927,7 +1927,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         If My.Settings.EnableParallelProcessing Then
                             
                             If My.Settings.EnableGPUProcessing Then
-                                'My.Application.gpu.EnableMultithreading()
+                                'App.gpu.EnableMultithreading()
                             End If
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2017,7 +2017,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                     If My.Settings.EnableParallelProcessing Then
                         
                         If My.Settings.EnableGPUProcessing Then
-                            'My.Application.gpu.EnableMultithreading()
+                            'App.gpu.EnableMultithreading()
                         End If
                         Dim task1 As Task = New Task(Sub()
                                                          fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2217,7 +2217,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                     If My.Settings.EnableParallelProcessing Then
                         
                         If My.Settings.EnableGPUProcessing Then
-                            'My.Application.gpu.EnableMultithreading()
+                            'App.gpu.EnableMultithreading()
                         End If
                         Dim task1 As Task = New Task(Sub()
                                                          fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)

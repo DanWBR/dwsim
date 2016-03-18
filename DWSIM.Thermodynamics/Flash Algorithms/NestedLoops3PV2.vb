@@ -803,7 +803,7 @@ out:
                     If My.Settings.EnableParallelProcessing Then
                         
                         If My.Settings.EnableGPUProcessing Then
-                            My.Application.gpu.EnableMultithreading()
+                            App.gpu.EnableMultithreading()
                         End If
                         Try
                             Dim task1 As Task = New Task(Sub()
@@ -819,8 +819,8 @@ out:
                             Throw ae.Flatten().InnerException
                         Finally
                             If My.Settings.EnableGPUProcessing Then
-                                My.Application.gpu.DisableMultithreading()
-                                My.Application.gpu.FreeAll()
+                                App.gpu.DisableMultithreading()
+                                App.gpu.FreeAll()
                             End If
                         End Try
                         
@@ -936,7 +936,7 @@ alt:
                     If My.Settings.EnableParallelProcessing Then
                         
                         If My.Settings.EnableGPUProcessing Then
-                            My.Application.gpu.EnableMultithreading()
+                            App.gpu.EnableMultithreading()
                         End If
                         Try
                             Dim task1 As Task = New Task(Sub()
@@ -952,8 +952,8 @@ alt:
                             Throw ae.Flatten().InnerException
                         Finally
                             If My.Settings.EnableGPUProcessing Then
-                                My.Application.gpu.DisableMultithreading()
-                                My.Application.gpu.FreeAll()
+                                App.gpu.DisableMultithreading()
+                                App.gpu.FreeAll()
                             End If
                         End Try
                         
