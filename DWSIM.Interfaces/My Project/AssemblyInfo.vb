@@ -1,6 +1,6 @@
 ﻿Imports System
-Imports System.Resources
 Imports System.Reflection
+Imports System.Runtime.InteropServices
 
 ' General Information about an assembly is controlled through the following 
 ' set of attributes. Change these attribute values to modify the information
@@ -8,13 +8,17 @@ Imports System.Reflection
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM.Thermodynamics")> 
+<Assembly: AssemblyTitle("DWSIM.Interfaces")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("DWSIM.Thermodynamics")> 
+<Assembly: AssemblyProduct("DWSIM.Interfaces")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016")> 
 <Assembly: AssemblyTrademark("")> 
-<Assembly: NeutralResourcesLanguage("en")>
+
+<Assembly: ComVisible(False)>
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("4c12d670-a4c6-4a4a-8f92-0859684c1e3c")> 
 
 ' Version information for an assembly consists of the following four values:
 '

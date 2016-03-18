@@ -1084,7 +1084,7 @@ Namespace DWSIM.SimulationObjects.Streams
                             .IsReadOnly = True
                     End Select
                 End With
-                .Item.Add("[A] " & DWSIM.App.GetLocalString("EditordeComposies"), Me.Phases(0), "Componentes", False, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("UtilizeoEditordeComp"), True)
+                .Item.Add("[A] " & DWSIM.App.GetLocalString("EditordeComposies"), Me.Phases(0), "Compounds", False, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("UtilizeoEditordeComp"), True)
                 If Me.GraphicObject.InputConnectors(0).IsAttached Then
                     If Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle Then
                         .Item(.Item.Count - 1).IsReadOnly = True

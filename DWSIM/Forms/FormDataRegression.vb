@@ -448,8 +448,8 @@ Public Class FormDataRegression
                         Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"
                             If PVF Then
                                 proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-                                Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
                                     My.Application.IsRunningParallelTasks = True
                                     Try
@@ -467,15 +467,15 @@ Public Class FormDataRegression
                                     My.Application.IsRunningParallelTasks = False
                                 Else
                                     For i = 0 To np - 1
-                                        result = Interfaces.ExcelIntegration.PVFFlash(proppack, 2, VP(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                        result = ExcelAddIn.ExcelIntegration.PVFFlash(proppack, 2, VP(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                         VTc(i) = result(4, 0)
                                         Vyc(i) = result(2, 0)
                                     Next
                                 End If
                             Else
                                 proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-                                Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
                                     My.Application.IsRunningParallelTasks = True
                                     Try
@@ -493,7 +493,7 @@ Public Class FormDataRegression
                                     My.Application.IsRunningParallelTasks = False
                                 Else
                                     For i = 0 To np - 1
-                                        result = Interfaces.ExcelIntegration.TVFFlash(proppack, 2, VT(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                        result = ExcelAddIn.ExcelIntegration.TVFFlash(proppack, 2, VT(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                         VPc(i) = result(4, 0)
                                         Vyc(i) = result(2, 0)
                                     Next
@@ -506,8 +506,8 @@ Public Class FormDataRegression
                         Case "UNIQUAC"
                             If PVF Then
                                 proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-                                Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
                                     My.Application.IsRunningParallelTasks = True
                                     Try
@@ -525,15 +525,15 @@ Public Class FormDataRegression
                                     My.Application.IsRunningParallelTasks = False
                                 Else
                                     For i = 0 To np - 1
-                                        result = Interfaces.ExcelIntegration.PVFFlash(proppack, 2, VP(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                        result = ExcelAddIn.ExcelIntegration.PVFFlash(proppack, 2, VP(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                         VTc(i) = result(4, 0)
                                         Vyc(i) = result(2, 0)
                                     Next
                                 End If
                             Else
                                 proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-                                Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
                                     My.Application.IsRunningParallelTasks = True
                                     Try
@@ -551,7 +551,7 @@ Public Class FormDataRegression
                                     My.Application.IsRunningParallelTasks = False
                                 Else
                                     For i = 0 To np - 1
-                                        result = Interfaces.ExcelIntegration.TVFFlash(proppack, 1, VT(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                        result = ExcelAddIn.ExcelIntegration.TVFFlash(proppack, 1, VT(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                         VPc(i) = result(4, 0)
                                         Vyc(i) = result(2, 0)
                                     Next
@@ -565,8 +565,8 @@ Public Class FormDataRegression
                             regressedparameters.Add("A21", x(1))
                         Case "PRSV2-M", "PRSV2-VL"
                             proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-                            Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                            Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                            ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             If PVF Then
                                 If doparallel Then
                                     My.Application.IsRunningParallelTasks = True
@@ -585,15 +585,15 @@ Public Class FormDataRegression
                                     My.Application.IsRunningParallelTasks = False
                                 Else
                                     For i = 0 To np - 1
-                                        result = Interfaces.ExcelIntegration.PVFFlash(proppack, 2, VP(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                        result = ExcelAddIn.ExcelIntegration.PVFFlash(proppack, 2, VP(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                         VTc(i) = result(4, 0)
                                         Vyc(i) = result(2, 0)
                                     Next
                                 End If
                             Else
                                 proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-                                Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
                                     My.Application.IsRunningParallelTasks = True
                                     Try
@@ -611,7 +611,7 @@ Public Class FormDataRegression
                                     My.Application.IsRunningParallelTasks = False
                                 Else
                                     For i = 0 To np - 1
-                                        result = Interfaces.ExcelIntegration.TVFFlash(proppack, 2, VT(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                        result = ExcelAddIn.ExcelIntegration.TVFFlash(proppack, 2, VT(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                         VPc(i) = result(4, 0)
                                         Vyc(i) = result(2, 0)
                                     Next
@@ -625,8 +625,8 @@ Public Class FormDataRegression
                             regressedparameters.Add("kji", x(1))
                         Case "NRTL"
                             proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-                            Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                            Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
+                            ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                            ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                             If PVF Then
                                 If doparallel Then
                                     My.Application.IsRunningParallelTasks = True
@@ -645,15 +645,15 @@ Public Class FormDataRegression
                                     My.Application.IsRunningParallelTasks = False
                                 Else
                                     For i = 0 To np - 1
-                                        result = Interfaces.ExcelIntegration.PVFFlash(proppack, 2, VP(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
+                                        result = ExcelAddIn.ExcelIntegration.PVFFlash(proppack, 2, VP(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                                         VTc(i) = result(4, 0)
                                         Vyc(i) = result(2, 0)
                                     Next
                                 End If
                             Else
                                 proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-                                Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
+                                ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
                                     My.Application.IsRunningParallelTasks = True
                                     Try
@@ -671,7 +671,7 @@ Public Class FormDataRegression
                                     My.Application.IsRunningParallelTasks = False
                                 Else
                                     For i = 0 To np - 1
-                                        result = Interfaces.ExcelIntegration.TVFFlash(proppack, 2, VT(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
+                                        result = ExcelAddIn.ExcelIntegration.TVFFlash(proppack, 2, VT(0), 0.0#, New Object() {currcase.comp1, currcase.comp2}, New Double() {Vx1(i), 1 - Vx1(i)}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                                         VPc(i) = result(4, 0)
                                         Vyc(i) = result(2, 0)
                                     Next
@@ -747,8 +747,8 @@ Public Class FormDataRegression
                     End If
                     Select Case currcase.model
                         Case "PRSV2-M", "PRSV2-VL"
-                            Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                            Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                            ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             For i = 0 To np - 1
                                 With flashinstance
                                     .InitialEstimatesForPhase1 = New Double() {Vx1(i), 1 - Vx1(i)}
@@ -765,11 +765,11 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                             regressedparameters.Add("kji", x(1))
                         Case "UNIQUAC"
-                            Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                            ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                             If drawtdep Then
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, A12}, {A21, 0.0#}}, New Double(,) {{0.0#, A21}, {A12, 0.0#}}, New Double(,) {{0.0#, B12}, {B21, 0.0#}}, New Double(,) {{0.0#, B21}, {B12, 0.0#}}, New Double(,) {{0.0#, C12}, {C21, 0.0#}}, New Double(,) {{0.0#, C21}, {C12, 0.0#}}, Nothing)
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, A12}, {A21, 0.0#}}, New Double(,) {{0.0#, A21}, {A12, 0.0#}}, New Double(,) {{0.0#, B12}, {B21, 0.0#}}, New Double(,) {{0.0#, B21}, {B12, 0.0#}}, New Double(,) {{0.0#, C12}, {C21, 0.0#}}, New Double(,) {{0.0#, C21}, {C12, 0.0#}}, Nothing)
                             Else
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                             End If
                             For i = 0 To np - 1
                                 With flashinstance
@@ -787,11 +787,11 @@ Public Class FormDataRegression
                             regressedparameters.Add("A12", x(0))
                             regressedparameters.Add("A21", x(1))
                         Case "NRTL"
-                            Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                            ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                             If drawtdep Then
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, A12}, {A21, 0.0#}}, New Double(,) {{0.0#, A21}, {A12, 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, New Double(,) {{0.0#, B12}, {B21, 0.0#}}, New Double(,) {{0.0#, B21}, {B12, 0.0#}}, New Double(,) {{0.0#, C12}, {C21, 0.0#}}, New Double(,) {{0.0#, C21}, {C12, 0.0#}})
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, A12}, {A21, 0.0#}}, New Double(,) {{0.0#, A21}, {A12, 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, New Double(,) {{0.0#, B12}, {B21, 0.0#}}, New Double(,) {{0.0#, B21}, {B12, 0.0#}}, New Double(,) {{0.0#, C12}, {C21, 0.0#}}, New Double(,) {{0.0#, C21}, {C12, 0.0#}})
                             Else
-                                Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
+                                ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                             End If
                             For i = 0 To np - 1
                                 With flashinstance
@@ -811,8 +811,8 @@ Public Class FormDataRegression
                             regressedparameters.Add("A21", x(1))
                             regressedparameters.Add("alpha12", x(2))
                         Case "Lee-Kesler-Plöcker", "Peng-Robinson", "Soave-Redlich-Kwong", "PC-SAFT"
-                            Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
-                            Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                            ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             For i = 0 To np - 1
                                 With flashinstance
                                     .InitialEstimatesForPhase1 = New Double() {Vx1(i), 1 - Vx1(i)}
@@ -890,7 +890,7 @@ Public Class FormDataRegression
                     Select Case currcase.model
                         Case "PRSV2-M"
                             For i = 0 To np - 1
-                                result = Interfaces.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                result = ExcelAddIn.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
@@ -902,7 +902,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kji", x(1))
                         Case "PRSV2-VL"
                             For i = 0 To np - 1
-                                result = Interfaces.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                result = ExcelAddIn.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
@@ -914,7 +914,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kji", x(1))
                         Case "UNIQUAC"
                             For i = 0 To np - 1
-                                result = Interfaces.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                result = ExcelAddIn.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
@@ -926,7 +926,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("A21", x(1))
                         Case "NRTL"
                             For i = 0 To np - 1
-                                result = Interfaces.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
+                                result = ExcelAddIn.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
@@ -940,7 +940,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("alpha12", x(2))
                         Case "Lee-Kesler-Plöcker"
                             For i = 0 To np - 1
-                                result = Interfaces.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                result = ExcelAddIn.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
@@ -952,7 +952,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                         Case "Peng-Robinson"
                             For i = 0 To np - 1
-                                result = Interfaces.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                result = ExcelAddIn.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
@@ -964,7 +964,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                         Case "Soave-Redlich-Kwong"
                             For i = 0 To np - 1
-                                result = Interfaces.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                result = ExcelAddIn.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
@@ -976,7 +976,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                         Case "PC-SAFT"
                             For i = 0 To np - 1
-                                result = Interfaces.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                                result = ExcelAddIn.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
@@ -1026,10 +1026,10 @@ Public Class FormDataRegression
                     End If
                     proppack.Parameters("PP_PTFELT") = 0.001
                     proppack.Parameters("PP_PTFMEI") = 1000
-                    Interfaces.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
+                    ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                     Select Case currcase.model
                         Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"
-                            Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             If doparallel Then
                                 My.Application.IsRunningParallelTasks = True
                                 Try
@@ -1076,7 +1076,7 @@ Public Class FormDataRegression
                             vartext += "}"
                             regressedparameters.Add("kij", x(0))
                         Case "UNIQUAC"
-                            Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                             If doparallel Then
                                 My.Application.IsRunningParallelTasks = True
                                 Try
@@ -1125,7 +1125,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("A12", x(0))
                             regressedparameters.Add("A21", x(1))
                         Case "PRSV2-M", "PRSV2-VL"
-                            Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             If doparallel Then
                                 My.Application.IsRunningParallelTasks = True
                                 Try
@@ -1174,7 +1174,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                             regressedparameters.Add("kji", x(1))
                         Case "NRTL"
-                            Interfaces.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
+                            ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                             If doparallel Then
                                 My.Application.IsRunningParallelTasks = True
                                 Try
@@ -3277,14 +3277,14 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                     Case 0
                         If P = 0.0# Then
                             'T-y => x, P
-                            result = Interfaces.ExcelIntegration.TVFFlash(model, 1, T, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            result = ExcelAddIn.ExcelIntegration.TVFFlash(model, 1, T, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             x11 = result(2, 1)
                             Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Converter.ConvertFromSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("colx1").Value = Format(x11, "N4")
                         ElseIf T = 0.0# Then
                             'P-y => x, T
-                            result = Interfaces.ExcelIntegration.PVFFlash(model, 1, P, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            result = ExcelAddIn.ExcelIntegration.PVFFlash(model, 1, P, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             T = result(4, 0)
                             x11 = result(2, 1)
                             Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Converter.ConvertFromSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
@@ -3293,14 +3293,14 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                     Case 2
                         If P = 0.0# Then
                             'T-x => y, P
-                            result = Interfaces.ExcelIntegration.TVFFlash(model, 1, T, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            result = ExcelAddIn.ExcelIntegration.TVFFlash(model, 1, T, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             y1 = result(2, 0)
                             Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Converter.ConvertFromSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("coly1").Value = Format(y1, "N4")
                         ElseIf T = 0.0# Then
                             'P-x => y, T
-                            result = Interfaces.ExcelIntegration.PVFFlash(model, 1, P, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            result = ExcelAddIn.ExcelIntegration.PVFFlash(model, 1, P, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             T = result(4, 0)
                             y1 = result(2, 0)
                             Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Converter.ConvertFromSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
@@ -3309,14 +3309,14 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                     Case 3
                         If y1 = -1 Then
                             'P-x => y, T
-                            result = Interfaces.ExcelIntegration.PVFFlash(model, 1, P, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            result = ExcelAddIn.ExcelIntegration.PVFFlash(model, 1, P, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             T = result(4, 0)
                             y1 = result(2, 0)
                             Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Converter.ConvertFromSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("coly1").Value = Format(y1, "N4")
                         ElseIf x11 = -1 Then
                             'P-y => x, T
-                            result = Interfaces.ExcelIntegration.PVFFlash(model, 1, P, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            result = ExcelAddIn.ExcelIntegration.PVFFlash(model, 1, P, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             x11 = result(2, 1)
                             Me.GridExpData.Rows(c.RowIndex).Cells("colT").Value = Format(Converter.ConvertFromSI(Me.cbTunit.SelectedItem.ToString, T), "N4")
@@ -3325,14 +3325,14 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                     Case 4
                         If y1 = -1 Then
                             'T-x => y, P
-                            result = Interfaces.ExcelIntegration.TVFFlash(model, 1, T, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            result = ExcelAddIn.ExcelIntegration.TVFFlash(model, 1, T, 0, New Object() {comp1, comp2}, New Double() {x11, 1 - x11}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             y1 = result(2, 0)
                             Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Converter.ConvertFromSI(Me.cbPunit.SelectedItem.ToString, P), "N4")
                             Me.GridExpData.Rows(c.RowIndex).Cells("coly1").Value = Format(y1, "N4")
                         ElseIf x11 = -1 Then
                             'T-y => x, P
-                            result = Interfaces.ExcelIntegration.TVFFlash(model, 1, T, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+                            result = ExcelAddIn.ExcelIntegration.TVFFlash(model, 1, T, 1, New Object() {comp1, comp2}, New Double() {y1, 1 - y1}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             P = result(4, 0)
                             x11 = result(2, 1)
                             Me.GridExpData.Rows(c.RowIndex).Cells("colP").Value = Format(Converter.ConvertFromSI(Me.cbPunit.SelectedItem.ToString, P), "N4")

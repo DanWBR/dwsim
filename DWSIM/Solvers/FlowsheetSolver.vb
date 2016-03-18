@@ -1779,7 +1779,7 @@ Namespace DWSIM.Flowsheet
 
                 Dim n As Integer = 0
 
-                For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
+                For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values.Where(Function(a) TypeOf a Is Adjust)
                     If adj.SimultaneousAdjust Then n += 1
                 Next
 
@@ -1802,7 +1802,7 @@ Namespace DWSIM.Flowsheet
                     Dim ic As Integer
 
                     i = 0
-                    For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values
+                    For Each adj As SimulationObjects.SpecialOps.Adjust In form.Collections.FlowsheetObjectCollection.Values.Where(Function(a) TypeOf a Is Adjust)
                         If adj.SimultaneousAdjust Then
                             x(i) = GetMnpVarValue(form, adj)
                             i += 1

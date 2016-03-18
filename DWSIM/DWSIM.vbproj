@@ -1600,6 +1600,10 @@
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>WinFormsUI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GenericDictionaryEditor\GenericDictionaryEditor.csproj">
       <Project>{a541272d-0c07-40bc-b03c-73d95e072b99}</Project>
       <Name>GenericDictionaryEditor</Name>

@@ -45,6 +45,9 @@ Imports System.Reflection
     Implements CapeOpen.ICapeCOSEUtilities, CapeOpen.ICapeMaterialTemplateSystem, CapeOpen.ICapeDiagnostic,  _
                 CapeOpen.ICapeFlowsheetMonitoring, CapeOpen.ICapeSimulationContext, CapeOpen.ICapeIdentification
 
+    'DWSIM IFlowsheet interface
+    Implements Interfaces.IFlowsheet
+
 #Region "    Variable Declarations "
 
     Public Property MasterFlowsheet As FormFlowsheet = Nothing
@@ -86,8 +89,6 @@ Imports System.Reflection
     Public FormCL As FormCLM
 
     Public WithEvents Options As New DWSIM.Flowsheet.FlowsheetVariables
-
-    Public Conversor As New DWSIM.SystemsOfUnits.Converter
 
     Public CalculationQueue As Generic.Queue(Of DWSIM.Extras.StatusChangeEventArgs)
 
@@ -509,7 +510,7 @@ Imports System.Reflection
         Tag
     End Enum
 
-    Public Shared Function SearchSurfaceObjectsByName(ByVal Name As String, ByVal Surface As Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface) As GraphicObject
+    Public Shared Function SearchSurfaceObjectsByName(ByVal Name As String, ByVal Surface As Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface) As GraphicObject
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
@@ -523,7 +524,7 @@ Imports System.Reflection
 
     End Function
 
-    Public Shared Function SearchSurfaceObjectsByTag(ByVal Name As String, ByVal Surface As Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface) As GraphicObject
+    Public Shared Function SearchSurfaceObjectsByTag(ByVal Name As String, ByVal Surface As Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface) As GraphicObject
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
@@ -908,24 +909,24 @@ Imports System.Reflection
 
         Dim tsb As ToolStripButton = DirectCast(sender, ToolStripButton)
 
-        Dim direction As Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface.AlignDirection
+        Dim direction As Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection
 
         If tsb.Name.Contains("Lefts") Then
-            direction = Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface.AlignDirection.Lefts
+            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Lefts
         ElseIf tsb.Name.Contains("Centers") Then
-            direction = Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface.AlignDirection.Centers
+            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Centers
         ElseIf tsb.Name.Contains("Rights") Then
-            direction = Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface.AlignDirection.Rights
+            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Rights
         ElseIf tsb.Name.Contains("Tops") Then
-            direction = Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface.AlignDirection.Tops
+            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Tops
         ElseIf tsb.Name.Contains("Middles") Then
-            direction = Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface.AlignDirection.Middles
+            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Middles
         ElseIf tsb.Name.Contains("Bottoms") Then
-            direction = Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface.AlignDirection.Bottoms
+            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Bottoms
         ElseIf tsb.Name.Contains("Vertical") Then
-            direction = Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface.AlignDirection.EqualizeVertical
+            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.EqualizeVertical
         ElseIf tsb.Name.Contains("Horizontal") Then
-            direction = Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface.AlignDirection.EqualizeHorizontal
+            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.EqualizeHorizontal
         End If
 
         Me.FormSurface.FlowsheetDesignSurface.AlignSelectedObjects(direction)
@@ -2522,7 +2523,7 @@ Imports System.Reflection
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
-        For Each go As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject In FormSurface.FlowsheetDesignSurface.drawingObjects
+        For Each go As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject In FormSurface.FlowsheetDesignSurface.drawingObjects
             If Not go.IsConnector And go.Selected Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
         Next
 
@@ -3132,6 +3133,60 @@ Imports System.Reflection
         Next
 
     End Sub
+
+#End Region
+
+#Region "    IFlowsheet Implementation"
+
+    Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects
+        Get
+            Dim dict As New Dictionary(Of String, Interfaces.IGraphicObject)
+            For Each kvp In Collections.GraphicObjectCollection
+                dict.Add(kvp.Key, kvp.Value)
+            Next
+            Return dict
+        End Get
+    End Property
+
+    Public ReadOnly Property SimulationObjects As Dictionary(Of String, Interfaces.ISimulationObject) Implements Interfaces.IFlowsheet.SimulationObjects
+        Get
+            Dim dict As New Dictionary(Of String, Interfaces.ISimulationObject)
+            For Each kvp In Collections.FlowsheetObjectCollection
+                dict.Add(kvp.Key, kvp.Value)
+            Next
+            Return dict
+        End Get
+    End Property
+
+    Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType) Implements Interfaces.IFlowsheet.ShowMessage
+        Select Case mtype
+            Case Interfaces.IFlowsheet.MessageType.Information
+                WriteToLog(text, Color.Blue, MessageType.Information)
+            Case Interfaces.IFlowsheet.MessageType.GeneralError
+                WriteToLog(text, Color.Red, MessageType.GeneralError)
+            Case Interfaces.IFlowsheet.MessageType.Warning
+                WriteToLog(text, Color.OrangeRed, MessageType.Warning)
+            Case Interfaces.IFlowsheet.MessageType.Tip
+                WriteToLog(text, Color.Blue, MessageType.Tip)
+            Case Interfaces.IFlowsheet.MessageType.Other
+                WriteToLog(text, Color.Black, MessageType.Information)
+        End Select
+    End Sub
+
+    Public Sub CheckStatus() Implements Interfaces.IFlowsheet.CheckStatus
+        CheckCalculatorStatus()
+    End Sub
+
+    Public ReadOnly Property Settings As Dictionary(Of String, Object) Implements Interfaces.IFlowsheet.Settings
+        Get
+            Dim dict As New Dictionary(Of String, Object)
+            Dim props = My.Settings.GetType().GetProperties()
+            For Each p In props
+                dict.Add(p.Name, p.GetValue(My.Settings))
+            Next
+            Return dict
+        End Get
+    End Property
 
 #End Region
 

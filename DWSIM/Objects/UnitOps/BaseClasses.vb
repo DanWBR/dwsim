@@ -40,6 +40,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Implements ICloneable, IDisposable, XMLSerializer.Interfaces.ICustomXMLSerialization
 
+        Implements Interfaces.ISimulationObject
+
         Protected m_ComponentDescription As String = ""
         Protected m_ComponentName As String = ""
 
@@ -3811,7 +3813,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             DT = Nothing
 
         End Sub
-
 
     End Class
 

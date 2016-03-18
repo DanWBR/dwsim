@@ -216,6 +216,10 @@
       <Name>CustomXMLSerializer</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

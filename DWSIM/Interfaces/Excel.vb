@@ -26,7 +26,7 @@ Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Reflection
 Imports System.IO
 
-Namespace Interfaces
+Namespace ExcelAddIn
 
     Public Class ExcelIntegration
 

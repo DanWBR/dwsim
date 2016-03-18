@@ -13,6 +13,7 @@
 Imports System.Drawing
 Imports System.Collections.Generic
 Imports System.Linq
+Imports DWSIM.Interfaces
 
 Namespace GraphicObjects
 
@@ -104,6 +105,8 @@ Namespace GraphicObjects
     End Enum
 
     <System.Serializable()> Public MustInherit Class GraphicObject
+
+        Implements IGraphicObject
 
         Protected m_Position As New Point(0, 0)
         Protected m_Size As New Size(0, 0)
