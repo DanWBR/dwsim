@@ -16,7 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports Microsoft.Msdn.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Collections.Generic
 Imports System.ComponentModel
 Imports PropertyGridEx
@@ -29,6 +29,7 @@ Imports System.Threading.Tasks
 Imports DWSIM.DWSIM.Extras
 Imports Microsoft.Scripting.Hosting
 Imports System.Linq
+Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
 Namespace DWSIM.Flowsheet
 
@@ -545,7 +546,7 @@ Namespace DWSIM.Flowsheet
 
                     For Each g As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects
                         If g.ObjectType = ObjectType.GO_MasterTable Then
-                            CType(g, DWSIM.GraphicObjects.MasterTableGraphic).Update(form)
+                            CType(g, MasterTableGraphic).Update(form)
                         End If
                     Next
 
@@ -1479,7 +1480,7 @@ Namespace DWSIM.Flowsheet
 
                     For Each g As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects
                         If g.ObjectType = ObjectType.GO_MasterTable Then
-                            CType(g, DWSIM.GraphicObjects.MasterTableGraphic).Update(form)
+                            CType(g, MasterTableGraphic).Update(form)
                         End If
                     Next
 

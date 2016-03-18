@@ -49800,7 +49800,7 @@
   </Settings>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.NodeInGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.NodeInGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -49846,7 +49846,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -49887,7 +49887,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -49928,7 +49928,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -49969,7 +49969,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50010,7 +50010,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.VesselGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.VesselGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50059,7 +50059,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50100,7 +50100,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50141,7 +50141,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.CompressorGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.CompressorGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50183,7 +50183,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50224,7 +50224,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50265,7 +50265,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.VesselGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.VesselGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50314,7 +50314,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50355,7 +50355,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50396,7 +50396,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.ValveGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.ValveGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50437,7 +50437,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50478,7 +50478,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.RecycleGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.RecycleGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50519,7 +50519,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.ValveGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.ValveGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50560,7 +50560,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50601,7 +50601,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.NodeInGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.NodeInGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50647,7 +50647,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50688,7 +50688,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50729,7 +50729,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.VesselGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.VesselGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50778,7 +50778,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50819,7 +50819,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50860,7 +50860,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.CompressorGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.CompressorGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50902,7 +50902,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50943,7 +50943,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -50984,7 +50984,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.RecycleGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.RecycleGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51025,7 +51025,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.ValveGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.ValveGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51066,7 +51066,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51107,7 +51107,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.VesselGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.VesselGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51156,7 +51156,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51197,7 +51197,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51238,7 +51238,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.CompressorGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.CompressorGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51280,7 +51280,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51321,7 +51321,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.RecycleGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.RecycleGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51362,7 +51362,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51403,7 +51403,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51444,7 +51444,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51485,7 +51485,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -51526,7 +51526,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>

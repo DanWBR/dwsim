@@ -6483,7 +6483,7 @@
   </SimulationObjects>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -6524,7 +6524,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -6565,7 +6565,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.AbsorptionColumnGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.AbsorptionColumnGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -6614,7 +6614,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -6655,7 +6655,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -6696,7 +6696,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>[Font: Name=Microsoft Sans Serif, Size=8.25, Units=3, GdiCharSet=0, GdiVerticalFont=False]</Font>
       <Text>This is an example of the Rigorous Absorber Column, used to extract Ethane and Propane 
 from a gas stream by using heavy hydrocarbons in a countercurrent flow column with 12 stages.

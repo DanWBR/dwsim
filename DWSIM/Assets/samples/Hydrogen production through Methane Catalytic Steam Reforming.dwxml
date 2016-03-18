@@ -1939,7 +1939,7 @@
   </Settings>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -1980,7 +1980,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.ReactorPFRGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.ReactorPFRGraphic</Type>
       <Tag>PFR-000</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -2022,7 +2022,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -2063,7 +2063,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -2104,7 +2104,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>[Font: Name=Microsoft Sans Serif, Size=8.25, Units=3, GdiCharSet=0, GdiVerticalFont=False]</Font>
       <Text>STEAM REFORMING REACTOR SAMPLE
 

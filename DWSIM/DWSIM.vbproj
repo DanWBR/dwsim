@@ -289,6 +289,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Import Include="DWSIM.DrawingTools" />
+    <Import Include="DWSIM.DrawingTools.GraphicObjects" />
     <Import Include="DWSIM.DWSIM.Flowsheet" />
     <Import Include="DWSIM.DWSIM.SimulationObjects.PropertyPackages" />
     <Import Include="DWSIM.DWSIM.SimulationObjects.Reactors" />
@@ -1588,9 +1590,9 @@
       <Project>{a5f6e7cc-0710-4129-9faa-9fbe9bc4ffcf}</Project>
       <Name>CoolPropInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CustomXMLSerializer\CustomXMLSerializer.vbproj">
-      <Project>{6C232866-A87B-409A-8A02-39F2FF218561}</Project>
-      <Name>CustomXMLSerializer</Name>
+    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
+      <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
+      <Name>DWSIM.CustomXMLSerializer</Name>
     </ProjectReference>
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\ThemeVS2012Light.csproj">
       <Project>{4ed4fdb5-9fd0-49e6-876d-1635f727c755}</Project>
@@ -1600,6 +1602,10 @@
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>WinFormsUI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
+      <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
+      <Name>DWSIM.DrawingTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
@@ -1607,14 +1613,6 @@
     <ProjectReference Include="..\GenericDictionaryEditor\GenericDictionaryEditor.csproj">
       <Project>{a541272d-0c07-40bc-b03c-73d95e072b99}</Project>
       <Name>GenericDictionaryEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphicObjects\GraphicObjects.vbproj">
-      <Project>{0C3364C4-717C-4A8B-A94D-8DDEEFC6AB43}</Project>
-      <Name>GraphicObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphicsSurface\DesignSurface.vbproj">
-      <Project>{9912BB73-AA07-44DE-873E-54483B1B40F0}</Project>
-      <Name>DesignSurface</Name>
     </ProjectReference>
     <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\PropertyGridEx.vbproj">
       <Project>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</Project>

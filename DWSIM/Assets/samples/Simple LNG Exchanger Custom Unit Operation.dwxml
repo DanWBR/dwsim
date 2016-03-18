@@ -10663,7 +10663,7 @@ else:
   </Settings>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -10706,7 +10706,7 @@ else:
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -10749,7 +10749,7 @@ else:
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -10792,7 +10792,7 @@ else:
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -10835,7 +10835,7 @@ else:
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -10878,7 +10878,7 @@ else:
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -10921,7 +10921,7 @@ else:
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.CustomUOGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.CustomUOGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -10976,7 +10976,7 @@ else:
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>Arial, 8pt</Font>
       <Text>SIMPLE LNG EXCHANGER MODEL
 

@@ -2050,7 +2050,7 @@
   </SimulationObjects>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -2091,7 +2091,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.FlowsheetUOGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.FlowsheetUOGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -2150,7 +2150,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -2191,7 +2191,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -2285,7 +2285,7 @@
       <Owner>FS-6efaae99-c8e6-4401-a542-9255d00d8d65</Owner>
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>[Font: Name=Microsoft Sans Serif, Size=8.25, Units=3, GdiCharSet=0, GdiVerticalFont=False]</Font>
       <Text>This is an example of the Flowsheet UO, used to separate a mixed stream into gas and liquid.
 Actual separation is done in a separate flowsheet, loaded in the Flowsheet UO block.

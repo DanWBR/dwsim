@@ -1,5 +1,5 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports Microsoft.Msdn.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.DWSIM
@@ -7,6 +7,7 @@ Imports System.Text
 Imports PropertyGridEx
 Imports DWSIM.DWSIM.Flowsheet
 Imports System.Linq
+Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
 Public Class frmProps
     Inherits DockContent
@@ -37,7 +38,7 @@ Public Class frmProps
             Flowsheet = My.Application.ActiveSimulation
         End If
 
-        Dim sobj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject
+        Dim sobj As GraphicObject = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject
 
         Dim cprop As CustomProperty = (From pd As CustomProperty In PGEx1.Item Select pd Where pd.Name = e.ChangedItem.Label).SingleOrDefault
 
@@ -65,7 +66,7 @@ Public Class frmProps
 
             ElseIf sobj.ObjectType = ObjectType.GO_MasterTable Then
 
-                Dim mt As DWSIM.GraphicObjects.MasterTableGraphic = sobj
+                Dim mt As MasterTableGraphic = sobj
 
                 If e.ChangedItem.PropertyDescriptor.Category.Contains(DWSIM.App.GetLocalString("MT_PropertiesToShow")) Then
                     Dim pkey As String = CType(e.ChangedItem.PropertyDescriptor, CustomProperty.CustomPropertyDescriptor).CustomProperty.Tag
@@ -90,7 +91,7 @@ Public Class frmProps
 
     End Sub
 
-    Public Sub HandleObjectStatusChanged(ByVal obj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject)
+    Public Sub HandleObjectStatusChanged(ByVal obj As GraphicObject)
 
         If obj.Active = False Then
             LblStatusObj.Text = DWSIM.App.GetLocalString("Inativo")
@@ -116,7 +117,7 @@ Public Class frmProps
 
         Dim cprop As CustomProperty = (From pd As CustomProperty In PGEx2.Item Select pd Where pd.Name = e.ChangedItem.Label).SingleOrDefault
 
-        Dim sobj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject
+        Dim sobj As GraphicObject = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject
 
         If Not cprop Is Nothing Then
             If cprop.Tag2 <> Nothing Then
@@ -140,7 +141,7 @@ Public Class frmProps
                 'CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.OldValue, Flowsheet.FormSurface.FlowsheetDesignSurface), GraphicObject).Tag = e.ChangedItem.Value
                 For Each g As GraphicObject In Flowsheet.FormSurface.FlowsheetDesignSurface.drawingObjects
                     If g.ObjectType = ObjectType.GO_MasterTable Then
-                        CType(g, DWSIM.GraphicObjects.MasterTableGraphic).Update(Flowsheet)
+                        CType(g, MasterTableGraphic).Update(Flowsheet)
                     End If
                 Next
             End Try

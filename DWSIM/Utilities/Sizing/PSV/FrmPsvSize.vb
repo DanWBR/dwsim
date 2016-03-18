@@ -178,7 +178,7 @@ Public Class FrmPsvSize
 
         If Not Me.ComboBox3.SelectedItem Is Nothing Then
 
-            Dim gobj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
+            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
             Me.valve = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
             Me.LblSelected.Text = Me.valve.GraphicObject.Tag
             Me.entmat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)

@@ -15,6 +15,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports DWSIM.DrawingTools.GraphicObjects
+
 Public Class FrmStabAn
 
     Inherits System.Windows.Forms.Form
@@ -32,7 +34,7 @@ Public Class FrmStabAn
 
         If Not Me.ComboBox3.SelectedItem Is Nothing Then
 
-            Dim gobj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
+            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
             Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
 
             Dim pr As New DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage

@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
-Imports Microsoft.Msdn.Samples
+Imports DWSIM.DrawingTools
 Imports DWSIM.DWSIM.MathEx
 Imports System.Math
 Imports ZedGraph

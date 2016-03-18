@@ -2,7 +2,6 @@
 'Copyright 2010-2014 Daniel Medeiros
 
 Imports FileHelpers
-Imports Microsoft.Msdn.Samples.GraphicObjects
 Imports DWSIM
 Imports System.Windows.Forms
 Imports System.Linq
@@ -10,6 +9,7 @@ Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Threading.Tasks
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 Imports DWSIM.DWSIM.SystemsOfUnits
+Imports DWSIM.DrawingTools.GraphicObjects
 
 Public Class Form1
 
@@ -86,7 +86,7 @@ Public Class Form1
         If Not fsheet.FormSurface.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
             'check if the selected object is a material stream.
-            If fsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.ObjectType = Microsoft.Msdn.Samples.GraphicObjects.ObjectType.MaterialStream Then
+            If fsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.ObjectType = DWSIM.DrawingTools.GraphicObjects.ObjectType.MaterialStream Then
 
                 'get a reference to the material stream graphic object.
                 Dim gobj As GraphicObject = fsheet.FormSurface.FlowsheetDesignSurface.SelectedObject

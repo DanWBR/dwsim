@@ -1,4 +1,4 @@
-Imports Microsoft.Msdn.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Collections.Generic
 Imports System.ComponentModel
 Imports PropertyGridEx
@@ -10,6 +10,7 @@ Imports System.Drawing.Drawing2D
 Imports System.Linq
 Imports System.Threading.Tasks
 Imports DWSIM.DWSIM.Flowsheet
+Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
 Public Class frmSurface
     Inherits DockContent
@@ -23,7 +24,7 @@ Public Class frmSurface
 
     Public m_startobj, m_endobj As GraphicObject
 
-    Public m_qt As DWSIM.GraphicObjects.QuickTableGraphic
+    Public m_qt As QuickTableGraphic
 
     Public ticks As Integer
 
@@ -145,11 +146,11 @@ Public Class frmSurface
             Flowsheet.PopulatePGEx2(Me.FlowsheetDesignSurface.SelectedObject)
             Try
                 If Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Table Then
-                    CType(Me.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.TableGraphic).PopulateGrid(PGEx1)
+                    CType(Me.FlowsheetDesignSurface.SelectedObject, TableGraphic).PopulateGrid(PGEx1)
                 ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_MasterTable Then
-                    CType(Me.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.MasterTableGraphic).PopulateGrid(PGEx1, Flowsheet)
+                    CType(Me.FlowsheetDesignSurface.SelectedObject, MasterTableGraphic).PopulateGrid(PGEx1, Flowsheet)
                 ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_SpreadsheetTable Then
-                    CType(Me.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.SpreadsheetTableGraphic).PopulateGrid(PGEx1)
+                    CType(Me.FlowsheetDesignSurface.SelectedObject, SpreadsheetTableGraphic).PopulateGrid(PGEx1)
                 Else
                     Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.SelectedObject.Name).PopulatePropertyGrid(PGEx1, Flowsheet.Options.SelectedUnitSystem)
                 End If
@@ -259,7 +260,7 @@ Public Class frmSurface
     End Sub
 
     Private Sub FlowsheetDesignSurface_SelectionChanged(ByVal sender As Object, _
-            ByVal e As Microsoft.Msdn.Samples.DesignSurface.SelectionChangedEventArgs) Handles FlowsheetDesignSurface.SelectionChanged
+            ByVal e As SelectionChangedEventArgs) Handles FlowsheetDesignSurface.SelectionChanged
 
         If Not e.SelectedObject Is Nothing Then
 
@@ -320,11 +321,11 @@ Public Class frmSurface
                         Flowsheet.PopulatePGEx2(Me.FlowsheetDesignSurface.SelectedObject)
                         Try
                             If Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_Table Then
-                                CType(Me.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.TableGraphic).PopulateGrid(PGEx1)
+                                CType(Me.FlowsheetDesignSurface.SelectedObject, TableGraphic).PopulateGrid(PGEx1)
                             ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_MasterTable Then
-                                CType(Me.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.MasterTableGraphic).PopulateGrid(PGEx1, Flowsheet)
+                                CType(Me.FlowsheetDesignSurface.SelectedObject, MasterTableGraphic).PopulateGrid(PGEx1, Flowsheet)
                             ElseIf Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.GO_SpreadsheetTable Then
-                                CType(Me.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.SpreadsheetTableGraphic).PopulateGrid(PGEx1)
+                                CType(Me.FlowsheetDesignSurface.SelectedObject, SpreadsheetTableGraphic).PopulateGrid(PGEx1)
                             Else
                                 Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.SelectedObject.Name).PopulatePropertyGrid(PGEx1, Flowsheet.Options.SelectedUnitSystem)
                             End If
@@ -411,7 +412,7 @@ Public Class frmSurface
         End If
     End Sub
 
-    Private Sub FlowsheetDesignSurface_StatusUpdate(ByVal sender As Object, ByVal e As Microsoft.Msdn.Samples.DesignSurface.StatusUpdateEventArgs) Handles FlowsheetDesignSurface.StatusUpdate
+    Private Sub FlowsheetDesignSurface_StatusUpdate(ByVal sender As Object, ByVal e As StatusUpdateEventArgs) Handles FlowsheetDesignSurface.StatusUpdate
         Flowsheet.TSTBZoom.Text = Format(FlowsheetDesignSurface.Zoom, "#%")
     End Sub
 
@@ -656,7 +657,7 @@ Public Class frmSurface
 
                                 If Not obj.QTNodeTableItems Is Nothing Then
 
-                                    Dim tabela As New DWSIM.GraphicObjects.QuickTableGraphic(obj, px2.X + 5, px2.Y + 5)
+                                    Dim tabela As New QuickTableGraphic(obj, px2.X + 5, px2.Y + 5)
                                     obj.TabelaRapida = tabela
                                     obj.TabelaRapida.BaseOwner = obj
                                     tabela.Tag = obj.Name
@@ -782,7 +783,7 @@ Public Class frmSurface
         If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
             If Me.MostrarToolStripMenuItem.Checked = True Then
                 Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.SelectedObject.Name)
-                Dim tabela As New DWSIM.GraphicObjects.TableGraphic(obj, Me.FlowsheetDesignSurface.SelectedObject.X + Me.FlowsheetDesignSurface.SelectedObject.Width, Me.FlowsheetDesignSurface.SelectedObject.Y + Me.FlowsheetDesignSurface.SelectedObject.Height)
+                Dim tabela As New TableGraphic(obj, Me.FlowsheetDesignSurface.SelectedObject.X + Me.FlowsheetDesignSurface.SelectedObject.Width, Me.FlowsheetDesignSurface.SelectedObject.Y + Me.FlowsheetDesignSurface.SelectedObject.Height)
                 obj.Tabela = tabela
                 tabela.Tag = obj.Name
                 tabela.Name = "TAB-" & Guid.NewGuid.ToString
@@ -1055,7 +1056,7 @@ Public Class frmSurface
         newobj.Tabela = Nothing
         newobj.TabelaRapida = Nothing
 
-        Dim searchtext As String = gObj.Tag.Split("(")(0).Trim()
+        Dim searchtext As String = gobj.Tag.Split("(")(0).Trim()
 
         Dim objcount As Integer = (From go As GraphicObject In Me.FlowsheetDesignSurface.drawingObjects Select go Where go.Tag.Contains(searchtext)).Count
 
@@ -3006,7 +3007,7 @@ Public Class frmSurface
             Dim mpx = mousePT.X
             Dim mpy = mousePT.Y
             'Dim text As String = Flowsheet.FormObjListView.DataGridView1.Rows(obj.Index).Cells(0).Value.ToString.TrimEnd(" ")
-            Select Case text
+            Select Case Text
                 Case "Ajuste"
                     tobj = ObjectType.OT_Adjust
                 Case "Especificao"

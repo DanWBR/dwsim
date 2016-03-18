@@ -146,19 +146,13 @@
       <Name>WinFormsUI</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
+      <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
+      <Name>DWSIM.DrawingTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
       <Project>{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}</Project>
       <Name>DWSIM</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphicObjects\GraphicObjects.vbproj">
-      <Project>{0C3364C4-717C-4A8B-A94D-8DDEEFC6AB43}</Project>
-      <Name>GraphicObjects</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphicsSurface\DesignSurface.vbproj">
-      <Project>{9912BB73-AA07-44DE-873E-54483B1B40F0}</Project>
-      <Name>DesignSurface</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\PropertyGridEx.vbproj">

@@ -11081,7 +11081,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
   </Settings>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -11122,7 +11122,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.DistillationColumnGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.DistillationColumnGraphic</Type>
       <Active>true</Active>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -11173,7 +11173,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -11214,7 +11214,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -11255,7 +11255,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -11296,7 +11296,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -11337,7 +11337,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -11378,7 +11378,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.PumpGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.PumpGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -11420,7 +11420,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -11461,7 +11461,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -11502,7 +11502,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.DistillationColumnGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.DistillationColumnGraphic</Type>
       <Active>true</Active>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -11552,7 +11552,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -11593,7 +11593,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -11634,7 +11634,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -11675,7 +11675,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -11716,7 +11716,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.RecycleGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.RecycleGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -11757,7 +11757,7 @@ This simulation uses 'Methanol' and 'Acetone' components from the ChemSep databa
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>[Font: Name=Microsoft Sans Serif, Size=8.25, Units=3, GdiCharSet=1, GdiVerticalFont=False]</Font>
       <Text>This is an example of Pressure Swing Azeotropic Distillation.
 Test case from COCO Simulator: http://www.cocosimulator.org/down.php?dl=CScasebook_MA.fsd (original author: Harry Kooijman - www.chemsep.org)
@@ -11796,7 +11796,7 @@ More information on how to load a ChemSep database in DWSIM can be found at http
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.AdjustGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.AdjustGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>DarkRed</LineColor>

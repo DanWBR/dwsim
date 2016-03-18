@@ -1383,7 +1383,7 @@
   </Settings>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Active>true</Active>
       <Tag>Air</Tag>
       <GradientMode>true</GradientMode>
@@ -1426,7 +1426,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Text>Humid Air with 
 10 g Water / 1 Kg of Air
 absolute moisture
@@ -1464,7 +1464,7 @@ absolute moisture
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.CoolerGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.CoolerGraphic</Type>
       <Tag>COOL-000</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -1507,7 +1507,7 @@ absolute moisture
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Active>true</Active>
       <Tag>Dew</Tag>
       <GradientMode>true</GradientMode>
@@ -1550,7 +1550,7 @@ absolute moisture
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -1593,7 +1593,7 @@ absolute moisture
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Text>Calculate 
 Dew Temperature</Text>
       <TextRenderStyle>Default</TextRenderStyle>

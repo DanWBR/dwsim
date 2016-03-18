@@ -91,7 +91,7 @@ Namespace DWSIM.Editors.Reactors
                 Next
                 Me.ListView2.SelectedItems.Clear()
 
-                If form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.ObjectType = Microsoft.Msdn.Samples.GraphicObjects.ObjectType.CapeOpenUO Then
+                If form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.ObjectType = GraphicObjects.ObjectType.CapeOpenUO Then
                     Me.selectedRSID = CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.UnitOperations.CapeOpenUO).ReactionSetID
                 Else
                     Me.selectedRSID = CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.Reactors.Reactor).ReactionSetID
@@ -116,7 +116,7 @@ Namespace DWSIM.Editors.Reactors
                 If Me.ListView2.SelectedItems.Count > 0 Then
                     Me.selectedRSID = Me.ListView2.SelectedItems(0).Name
                     Me.selectedRSName = Me.ListView2.SelectedItems(0).Text
-                    If form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.ObjectType = Microsoft.Msdn.Samples.GraphicObjects.ObjectType.CapeOpenUO Then
+                    If form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.ObjectType = GraphicObjects.ObjectType.CapeOpenUO Then
                         CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.UnitOperations.CapeOpenUO).ReactionSetID = Me.selectedRSID
                     Else
                         CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.Reactors.Reactor).ReactionSetID = Me.selectedRSID

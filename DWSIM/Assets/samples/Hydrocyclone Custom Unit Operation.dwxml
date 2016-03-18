@@ -2862,7 +2862,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
   </SimulationObjects>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -2903,7 +2903,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.CustomUOGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.CustomUOGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -2950,7 +2950,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -2991,7 +2991,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -3032,7 +3032,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>[Font: Name=Consolas, Size=8.25, Units=3, GdiCharSet=1, GdiVerticalFont=False]</Font>
       <Text># Simple Hydrocyclone Unit Operation
 # Calculates separation between water and oil using a simple separation efficiency factor

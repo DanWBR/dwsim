@@ -19,7 +19,7 @@
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Optimization
 Imports DWSIM.DWSIM.SimulationObjects
-Imports Microsoft.MSDN.Samples
+Imports DWSIM.DrawingTools
 Imports Ciloci.Flee
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Linq

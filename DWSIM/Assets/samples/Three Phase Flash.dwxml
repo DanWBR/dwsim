@@ -1662,7 +1662,7 @@
   </SimulationObjects>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -1703,7 +1703,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.ValveGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.ValveGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -1744,7 +1744,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -1785,7 +1785,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>[Font: Name=Arial, Size=10, Units=2, GdiCharSet=1, GdiVerticalFont=False]</Font>
       <Text>Just a test case to show the VLLE algorithm calculating isenthalpic flash of a liquid-liquid mixture on a valve.</Text>
       <Color>Black</Color>

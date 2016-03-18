@@ -117,8 +117,8 @@ Imports System.Threading
         End Try
         engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
         engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
-        engine.Runtime.LoadAssembly(GetType(Microsoft.Msdn.Samples.GraphicObjects.GraphicObject).Assembly)
-        engine.Runtime.LoadAssembly(GetType(Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface).Assembly)
+        engine.Runtime.LoadAssembly(GetType(GraphicObjects.GraphicObject).Assembly)
+        engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
         If My.Application.CommandLineMode Then
             engine.Runtime.IO.SetOutput(Console.OpenStandardOutput, Console.OutputEncoding)
         Else

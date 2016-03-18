@@ -5066,7 +5066,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
   </Settings>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -5107,7 +5107,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -5148,7 +5148,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -5189,7 +5189,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.CustomUOGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.CustomUOGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -5236,7 +5236,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>[Font: Name=Consolas, Size=8.25, Units=3, GdiCharSet=1, GdiVerticalFont=False]</Font>
       <Text># Simple Membrane Unit Operation
 # Calculates the Permeate stream mole fractions and total mole flow

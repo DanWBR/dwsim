@@ -18,7 +18,7 @@
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations
 Imports DWSIM.DWSIM.SimulationObjects
-Imports Microsoft.Msdn.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Linq
 Public Class UIConnectionsEditorForm
 

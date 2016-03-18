@@ -17,13 +17,13 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Drawing
-Imports Microsoft.MSDN.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Drawing.Drawing2D
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.Extras
 Imports System.Linq
 
-Namespace DWSIM.GraphicObjects
+Namespace DWSIM.DrawingTools.GraphicObjects2
 
     <Serializable()> Public Class MasterTableGraphic
 
@@ -52,7 +52,7 @@ Namespace DWSIM.GraphicObjects
         Protected m_BorderColor As Color = Color.Black
 
         Protected m_TextRenderStyle As Drawing2D.SmoothingMode = Drawing2D.SmoothingMode.Default
-        Protected m_objectfamily As ObjectType = Microsoft.Msdn.Samples.GraphicObjects.ObjectType.MaterialStream
+        Protected m_objectfamily As ObjectType = ObjectType.MaterialStream
 
         Protected m_objectlist As Dictionary(Of String, Boolean)
         Protected m_propertylist As Dictionary(Of String, Boolean)
@@ -1617,13 +1617,13 @@ Namespace DWSIM.GraphicObjects
             Dim data As String = ""
 
             Dim firstcolumn, firstrow, lastcolumn, lastrow As Integer
-       
+
             'find number of rows and columns by range
 
             If SpreadsheetCellRange <> "" And Not Spreadsheet Is Nothing Then
 
                 Dim nf As String = Spreadsheet.formc.Options.NumberFormat
-     
+
                 Dim firstcell, lastcell As String
 
                 firstcell = Me.SpreadsheetCellRange.Split(":")(0)

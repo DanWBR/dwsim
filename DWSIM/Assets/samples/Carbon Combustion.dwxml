@@ -4637,7 +4637,7 @@
   </Settings>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.ReactorConversionGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.ReactorConversionGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -4682,7 +4682,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>Gas</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -4725,7 +4725,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>Liquid / Solid</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -4768,7 +4768,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -4811,7 +4811,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>Arial, 8pt</Font>
       <Text>SOLID CARBON COMBUSTION SAMPLE</Text>
       <Color>Black</Color>
@@ -4846,7 +4846,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>Air</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -4889,7 +4889,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>Carbon</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -4932,7 +4932,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.NodeInGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.NodeInGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -4980,7 +4980,7 @@
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>Feed</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>

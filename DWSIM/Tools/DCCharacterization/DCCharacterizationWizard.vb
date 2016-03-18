@@ -723,7 +723,7 @@ Public Class DCCharacterizationWizard
         Dim corr As String = Me.TextBoxStreamName.Text
         Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
         Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
-        Dim gObj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject = Nothing
+        Dim gObj As GraphicObjects.GraphicObject = Nothing
         Dim idx As Integer = 0
 
         For Each subst In ccol.Values
@@ -733,7 +733,7 @@ Public Class DCCharacterizationWizard
             form.FrmStSim1.AddCompToSimulation(idx)
         Next
 
-        Dim myMStr As New Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic(form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value + 100, form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value + 100, 20, 20, 0)
+        Dim myMStr As New GraphicObjects.MaterialStreamGraphic(form.FormSurface.FlowsheetDesignSurface.HorizontalScroll.Value + 100, form.FormSurface.FlowsheetDesignSurface.VerticalScroll.Value + 100, 20, 20, 0)
         myMStr.LineWidth = 2
         myMStr.Fill = True
         myMStr.FillColor = Color.WhiteSmoke

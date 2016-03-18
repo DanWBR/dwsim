@@ -1,5 +1,5 @@
 ﻿Imports DWSIM.DWSIM.SimulationObjects
-Imports Microsoft.Msdn.Samples.GraphicObjects.ObjectType
+Imports DWSIM.DrawingTools.GraphicObjects.ObjectType
 
 Public Class UISVSelectorForm
 
@@ -75,7 +75,7 @@ Public Class UISVSelectorForm
 
     Private Sub ListBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles TreeView1.AfterSelect
 
-        Dim obj As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject
+        Dim obj As GraphicObject
 
         TreeView2.Nodes.Clear()
         TreeView3.Nodes.Clear()

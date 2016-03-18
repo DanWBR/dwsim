@@ -52,7 +52,7 @@ Public Class FormReportConfig
         Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass
         Dim properties() As String
         Dim description As String
-        Dim objtype As Microsoft.Msdn.Samples.GraphicObjects.ObjectType
+        Dim objtype As GraphicObjects.ObjectType
         Dim propidx, r1, r2, r3, r4, r5, r6 As Integer
         Dim inclcond, inclcomp, inclmist, inclvap, inclliqm, inclliq1, inclliq2, inclaq As Boolean
         r1 = 5
@@ -75,7 +75,7 @@ Public Class FormReportConfig
             properties = baseobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
             objtype = baseobj.GraphicObject.ObjectType
             description = DWSIM.App.GetLocalString(baseobj.GraphicObject.Description)
-            If objtype = Microsoft.Msdn.Samples.GraphicObjects.ObjectType.MaterialStream Then
+            If objtype = ObjectType.MaterialStream Then
                 Dim value As String
                 If inclcond Then
                     For propidx = 0 To r1 - 1

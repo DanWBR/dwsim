@@ -29032,7 +29032,7 @@ The column was first converged with the Bubble-Point method and then optimized w
   </Settings>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -29073,7 +29073,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.DistillationColumnGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.DistillationColumnGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -29125,7 +29125,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -29166,7 +29166,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -29207,7 +29207,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -29248,7 +29248,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -29289,7 +29289,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
       <LineColor>SteelBlue</LineColor>
@@ -29330,7 +29330,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
       <GradientColor2>White</GradientColor2>
@@ -29371,7 +29371,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>[Font: Name=Verdana, Size=8.25, Units=3, GdiCharSet=1, GdiVerticalFont=False]</Font>
       <Text>PETROLEUM DISTILLATION</Text>
       <Color>SteelBlue</Color>
@@ -29405,7 +29405,7 @@ The column was first converged with the Bubble-Point method and then optimized w
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.TextGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.TextGraphic</Type>
       <Font>[Font: Name=Verdana, Size=8.25, Units=3, GdiCharSet=1, GdiVerticalFont=False]</Font>
       <Text>This is a simulation of an oil distillation with four column products (top, bottom and two liquid sidedraws).
 The oil was characterized using the Bulk Characterization utility.

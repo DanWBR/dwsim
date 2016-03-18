@@ -8753,7 +8753,7 @@ Calculated OK.</DebugText>
   </Settings>
   <GraphicObjects>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -8796,7 +8796,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.PumpGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.PumpGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -8840,7 +8840,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>MSTR-001</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -8883,7 +8883,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -8926,7 +8926,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>MSTR-011-0</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -8969,7 +8969,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.HeatExchangerGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.HeatExchangerGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -9014,7 +9014,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>Purified water</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9057,7 +9057,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>MSTR-004</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9100,7 +9100,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.HeatExchangerGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.HeatExchangerGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -9145,7 +9145,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>MSTR-005</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9188,7 +9188,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>MSTR-006</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9231,7 +9231,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>MSTR-007</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9274,7 +9274,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>H2S product</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9317,7 +9317,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>NH3 product</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9360,7 +9360,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>MSTR-010</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9403,7 +9403,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>MSTR-011</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9446,7 +9446,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.RecycleGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.RecycleGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -9489,7 +9489,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.PumpGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.PumpGraphic</Type>
       <Tag>PUMP-001</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9533,7 +9533,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.EnergyStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.EnergyStreamGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -9576,7 +9576,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.MaterialStreamGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.MaterialStreamGraphic</Type>
       <Tag>MSTR-012</Tag>
       <GradientMode>true</GradientMode>
       <GradientColor1>LightGrey</GradientColor1>
@@ -9619,7 +9619,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.RecycleGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.RecycleGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -9662,7 +9662,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.CapeOpenUOGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.CapeOpenUOGraphic</Type>
       <SemiTransparent>false</SemiTransparent>
       <LineWidth>2</LineWidth>
       <GradientMode>true</GradientMode>
@@ -9712,7 +9712,7 @@ Calculated OK.</DebugText>
       <SpecialConnectors />
     </GraphicObject>
     <GraphicObject>
-      <Type>Microsoft.MSDN.Samples.GraphicObjects.CapeOpenUOGraphic</Type>
+      <Type>DWSIM.DrawingTools.GraphicObjects.CapeOpenUOGraphic</Type>
       <Tag>NH3 Stripper Column</Tag>
       <GradientMode>true</GradientMode>
       <Width>130</Width>

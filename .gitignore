@@ -185,3 +185,5 @@ TCPServer/bin/Debug/*
 /DWSIM.Thermodynamics/bin/Debug
 /DWSIM.UnitOperations/bin/Debug
 /SkiaSharpWrapper/bin/Debug
+/DWSIM.Drawing/bin/Debug
+/DWSIM.Interfaces/bin/Debug

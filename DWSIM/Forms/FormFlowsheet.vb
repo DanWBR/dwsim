@@ -15,7 +15,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports Microsoft.Msdn.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Collections.Generic
 Imports System.ComponentModel
 Imports PropertyGridEx
@@ -30,12 +30,12 @@ Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports DWSIM.DWSIM.Flowsheet
-Imports DWSIM.DWSIM.GraphicObjects
 Imports DWSIM.DWSIM.Extras
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Globalization
-Imports Microsoft.Msdn.Samples
+Imports DWSIM.DrawingTools
 Imports System.Reflection
+Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
 <System.Serializable()> Public Class FormFlowsheet
 
@@ -510,7 +510,7 @@ Imports System.Reflection
         Tag
     End Enum
 
-    Public Shared Function SearchSurfaceObjectsByName(ByVal Name As String, ByVal Surface As Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface) As GraphicObject
+    Public Shared Function SearchSurfaceObjectsByName(ByVal Name As String, ByVal Surface As GraphicsSurface) As GraphicObject
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
@@ -524,7 +524,7 @@ Imports System.Reflection
 
     End Function
 
-    Public Shared Function SearchSurfaceObjectsByTag(ByVal Name As String, ByVal Surface As Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface) As GraphicObject
+    Public Shared Function SearchSurfaceObjectsByTag(ByVal Name As String, ByVal Surface As GraphicsSurface) As GraphicObject
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
@@ -862,11 +862,11 @@ Imports System.Reflection
         Try
             Select Case Me.FormSurface.FlowsheetDesignSurface.SelectedObject.ObjectType
                 Case ObjectType.GO_MasterTable
-                    DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.MasterTableGraphic).CopyToClipboard()
+                    DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, MasterTableGraphic).CopyToClipboard()
                 Case ObjectType.GO_SpreadsheetTable
-                    DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.SpreadsheetTableGraphic).CopyToClipboard()
+                    DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, SpreadsheetTableGraphic).CopyToClipboard()
                 Case ObjectType.GO_Table
-                    DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, DWSIM.GraphicObjects.TableGraphic).CopyToClipboard()
+                    DirectCast(Me.FormSurface.FlowsheetDesignSurface.SelectedObject, TableGraphic).CopyToClipboard()
                 Case Else
                     Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).CopyDataToClipboard(Options.SelectedUnitSystem, Options.NumberFormat)
             End Select
@@ -909,24 +909,24 @@ Imports System.Reflection
 
         Dim tsb As ToolStripButton = DirectCast(sender, ToolStripButton)
 
-        Dim direction As Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection
+        Dim direction As GraphicsSurface.AlignDirection
 
         If tsb.Name.Contains("Lefts") Then
-            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Lefts
+            direction = GraphicsSurface.AlignDirection.Lefts
         ElseIf tsb.Name.Contains("Centers") Then
-            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Centers
+            direction = GraphicsSurface.AlignDirection.Centers
         ElseIf tsb.Name.Contains("Rights") Then
-            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Rights
+            direction = GraphicsSurface.AlignDirection.Rights
         ElseIf tsb.Name.Contains("Tops") Then
-            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Tops
+            direction = GraphicsSurface.AlignDirection.Tops
         ElseIf tsb.Name.Contains("Middles") Then
-            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Middles
+            direction = GraphicsSurface.AlignDirection.Middles
         ElseIf tsb.Name.Contains("Bottoms") Then
-            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.Bottoms
+            direction = GraphicsSurface.AlignDirection.Bottoms
         ElseIf tsb.Name.Contains("Vertical") Then
-            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.EqualizeVertical
+            direction = GraphicsSurface.AlignDirection.EqualizeVertical
         ElseIf tsb.Name.Contains("Horizontal") Then
-            direction = Microsoft.MSDN.Samples.DesignSurface.GraphicsSurface.AlignDirection.EqualizeHorizontal
+            direction = GraphicsSurface.AlignDirection.EqualizeHorizontal
         End If
 
         Me.FormSurface.FlowsheetDesignSurface.AlignSelectedObjects(direction)
@@ -1005,7 +1005,7 @@ Imports System.Reflection
     End Sub
 
     Private Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton19.Click
-        Dim myMasterTable As New DWSIM.GraphicObjects.MasterTableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
+        Dim myMasterTable As New MasterTableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
         Dim gObj As GraphicObject = Nothing
         gObj = myMasterTable
@@ -1017,7 +1017,7 @@ Imports System.Reflection
     End Sub
 
     Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
-        Dim mySpreadsheetTable As New DWSIM.GraphicObjects.SpreadsheetTableGraphic(
+        Dim mySpreadsheetTable As New SpreadsheetTableGraphic(
             Me.FormSpreadsheet,
             -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
             -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
@@ -1928,7 +1928,7 @@ Imports System.Reflection
 
         If gobj.ObjectType = ObjectType.GO_Table Then
 
-            Dim gobj2 As DWSIM.GraphicObjects.TableGraphic = CType(gobj, DWSIM.GraphicObjects.TableGraphic)
+            Dim gobj2 As TableGraphic = CType(gobj, TableGraphic)
 
             With Me.FormProps.PGEx2
 
@@ -1975,7 +1975,7 @@ Imports System.Reflection
 
         ElseIf gobj.ObjectType = ObjectType.GO_MasterTable Then
 
-            Dim gobj2 As DWSIM.GraphicObjects.MasterTableGraphic = CType(gobj, DWSIM.GraphicObjects.MasterTableGraphic)
+            Dim gobj2 As MasterTableGraphic = CType(gobj, MasterTableGraphic)
 
             With Me.FormProps.PGEx2
 
@@ -2024,7 +2024,7 @@ Imports System.Reflection
 
         ElseIf gobj.ObjectType = ObjectType.GO_SpreadsheetTable Then
 
-            Dim gobj2 As DWSIM.GraphicObjects.SpreadsheetTableGraphic = CType(gobj, DWSIM.GraphicObjects.SpreadsheetTableGraphic)
+            Dim gobj2 As SpreadsheetTableGraphic = CType(gobj, SpreadsheetTableGraphic)
 
             With Me.FormProps.PGEx2
 
@@ -2523,7 +2523,7 @@ Imports System.Reflection
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
-        For Each go As Microsoft.MSDN.Samples.GraphicObjects.GraphicObject In FormSurface.FlowsheetDesignSurface.drawingObjects
+        For Each go As GraphicObject In FormSurface.FlowsheetDesignSurface.drawingObjects
             If Not go.IsConnector And go.Selected Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
         Next
 

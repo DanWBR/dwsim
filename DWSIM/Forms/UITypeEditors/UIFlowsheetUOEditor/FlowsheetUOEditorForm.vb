@@ -1,5 +1,5 @@
 ﻿Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary
-Imports Microsoft.MSDN.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Linq
 Public Class FlowsheetUOEditorForm
 

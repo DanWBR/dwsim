@@ -16,7 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports Microsoft.MSDN.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Collections.Generic
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Linq

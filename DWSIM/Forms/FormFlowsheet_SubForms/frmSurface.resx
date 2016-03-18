@@ -1203,7 +1203,7 @@
     <value>DockTopToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;FlowsheetDesignSurface.Type" xml:space="preserve">
-    <value>Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface, GraphicsSurface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Graphics.DesignSurface.GraphicsSurface, GraphicsSurface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator7.Name" xml:space="preserve">
     <value>ToolStripSeparator7</value>

@@ -18,7 +18,7 @@
 '
 
 Imports System.Collections.Generic
-Imports Microsoft.MSDN.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.MathEx
 Imports System.Math

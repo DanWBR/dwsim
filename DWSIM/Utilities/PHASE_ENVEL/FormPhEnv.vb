@@ -904,7 +904,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
 
-        Dim gobj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject = Nothing
+        Dim gobj As GraphicObjects.GraphicObject = Nothing
         gobj = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
         Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
         Me.strname = gobj.Tag

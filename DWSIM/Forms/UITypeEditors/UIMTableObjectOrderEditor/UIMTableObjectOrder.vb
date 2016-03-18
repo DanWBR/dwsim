@@ -19,7 +19,8 @@
 Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
 Imports System.ComponentModel
-Imports DWSIM.DWSIM.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
+Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
 Namespace DWSIM.Editors.MasterTable
 

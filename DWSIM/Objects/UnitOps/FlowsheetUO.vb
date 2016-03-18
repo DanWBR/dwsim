@@ -16,18 +16,19 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports Microsoft.Msdn.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary
 Imports System.Globalization
 Imports System.Linq
 Imports System.Xml.Linq
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
-Imports Microsoft.Msdn.Samples
+Imports DWSIM.DrawingTools
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Extras
 Imports System.IO
 Imports System.Threading.Tasks
+Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
 Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary
 
@@ -78,7 +79,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             MyBase.CreateNew()
             Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
+            Me.m_ComponentDescription = Descricao
 
             CompoundMappings = New Dictionary(Of String, String)
 
@@ -186,7 +187,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         obj = GraphicObject.ReturnInstance(xel.Element("Type").Value)
                     End If
                     obj.LoadData(xel.Elements.ToList)
-                    If Not TypeOf obj Is DWSIM.GraphicObjects.TableGraphic Then
+                    If Not TypeOf obj Is TableGraphic Then
                         form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
                         obj.CreateConnectors(0, 0)
                         form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
@@ -388,7 +389,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         obj = GraphicObject.ReturnInstance(xel2.Element("Type").Value)
                     End If
                     obj.LoadData(xel2.Elements.ToList)
-                    DirectCast(obj, DWSIM.GraphicObjects.TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
+                    DirectCast(obj, TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
                     form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value).Tabela = obj
                     form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
                 Catch ex As Exception
@@ -550,7 +551,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             'xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
             'xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
-            'For Each go As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject In Form.FormSurface.FlowsheetDesignSurface.drawingObjects
+            'For Each go As DWSIM.DrawingTools.GraphicObjects.GraphicObject In Form.FormSurface.FlowsheetDesignSurface.drawingObjects
             '    If Not go.IsConnector Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
             'Next
 

@@ -1,3 +1,5 @@
+Imports DWSIM.DrawingTools
+
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmSurface
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
@@ -21,7 +23,7 @@ Partial Class frmSurface
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSurface))
-        Me.FlowsheetDesignSurface = New Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface()
+        Me.FlowsheetDesignSurface = New GraphicsSurface()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.LabelCalculator = New System.Windows.Forms.Label()
         Me.LabelTime = New System.Windows.Forms.Label()
@@ -537,7 +539,7 @@ Partial Class frmSurface
         Me.PerformLayout()
 
     End Sub
-    Public WithEvents FlowsheetDesignSurface As Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface
+    Public WithEvents FlowsheetDesignSurface As GraphicsSurface
     Public WithEvents CMS_NoSel As System.Windows.Forms.ContextMenuStrip
     Public WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBB0E704-7E7B-4DDA-AAC2-A00F7168FDC3}</ProjectGuid>
+    <ProjectGuid>{A7FB4DBF-4EBF-4004-9819-F26E791AAA60}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>TCPServer.TCPServer</StartupObject>
-    <RootNamespace>TCPServer</RootNamespace>
-    <AssemblyName>TCPServer</AssemblyName>
+    <StartupObject>AzureServer.AzureServer</StartupObject>
+    <RootNamespace>AzureServer</RootNamespace>
+    <AssemblyName>AzureServer</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>TCPServer.xml</DocumentationFile>
+    <DocumentationFile>AzureServer.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -32,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>..\DWSIM\bin\Release\</OutputPath>
-    <DocumentationFile>TCPServer.xml</DocumentationFile>
+    <DocumentationFile>AzureServer.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -48,14 +48,18 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ServiceBus">
+      <HintPath>References\Microsoft.ServiceBus.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TcpComm">
-      <HintPath>References\TcpComm.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -67,7 +71,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TCPServer.vb" />
+    <Compile Include="AzureServer.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -93,6 +97,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -104,24 +109,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomXMLSerializer\CustomXMLSerializer.vbproj">
+    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
-      <Name>CustomXMLSerializer</Name>
+      <Name>DWSIM.CustomXMLSerializer</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
       <Project>{34be2d2d-9b3c-4c12-8c90-732e21cd7cb1}</Project>
       <Name>DWSIM</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphicObjects\GraphicObjects.vbproj">
-      <Project>{0c3364c4-717c-4a8b-a94d-8ddeefc6ab43}</Project>
-      <Name>GraphicObjects</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphicsSurface\DesignSurface.vbproj">
-      <Project>{9912bb73-aa07-44de-873e-54483b1b40f0}</Project>
-      <Name>DesignSurface</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

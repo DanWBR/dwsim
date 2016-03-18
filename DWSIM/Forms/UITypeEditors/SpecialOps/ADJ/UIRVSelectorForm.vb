@@ -1,4 +1,5 @@
-﻿Imports Microsoft.Msdn.Samples.GraphicObjects.ObjectType
+﻿Imports DWSIM.DrawingTools.GraphicObjects.ObjectType
+Imports DWSIM.DrawingTools.GraphicObjects
 
 Public Class UIRVSelectorForm
 
@@ -15,7 +16,7 @@ Public Class UIRVSelectorForm
 
         Label3.Text = Me.selectionDataCV.m_Name & " / " & DWSIM.App.GetPropertyName(Me.selectionDataCV.m_Property)
 
-        Dim obj As Microsoft.Msdn.Samples.GraphicObjects.GraphicObject
+        Dim obj As GraphicObject
 
         TreeView1.Nodes.Clear()
 

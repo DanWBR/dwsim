@@ -16,7 +16,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports Microsoft.Msdn.Samples.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicObjects
+Imports DWSIM.DrawingTools.GraphicsSurface
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports Microsoft.Scripting.Hosting
 Imports System.IO
@@ -198,8 +199,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     End Try
                     engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
                     engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
-                    engine.Runtime.LoadAssembly(GetType(Microsoft.Msdn.Samples.GraphicObjects.GraphicObject).Assembly)
-                    engine.Runtime.LoadAssembly(GetType(Microsoft.Msdn.Samples.DesignSurface.GraphicsSurface).Assembly)
+                    engine.Runtime.LoadAssembly(GetType(GraphicObject).Assembly)
+                    engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
                     scope = engine.CreateScope()
                     scope.SetVariable("Flowsheet", FlowSheet)
                     scope.SetVariable("Spreadsheet", FlowSheet.FormSpreadsheet)
