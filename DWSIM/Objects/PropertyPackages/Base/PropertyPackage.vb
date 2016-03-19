@@ -3841,7 +3841,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             With pg
 
                 Select Case Me.CurrentMaterialStream.CompositionBasis
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Molar_Fractions
+                    Case Interfaces.Enums.CompositionBasis.Molar_Fractions
                         'PropertyGridEx.CustomPropertyCollection - Mistura
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
@@ -3985,7 +3985,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 .CustomEditor = New System.Drawing.Design.UITypeEditor
                             End With
                         End If
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Mass_Fractions
+                    Case Interfaces.Enums.CompositionBasis.Mass_Fractions
                         'PropertyGridEx.CustomPropertyCollection - Mistura
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
@@ -4130,7 +4130,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             End With
                         End If
 
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Volumetric_Fractions
+                    Case Interfaces.Enums.CompositionBasis.Volumetric_Fractions
                         'PropertyGridEx.CustomPropertyCollection - Mistura
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
@@ -4274,7 +4274,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 .CustomEditor = New System.Drawing.Design.UITypeEditor
                             End With
                         End If
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Mass_Flows
+                    Case Interfaces.Enums.CompositionBasis.Mass_Flows
                         'PropertyGridEx.CustomPropertyCollection - Mistura
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
@@ -4418,7 +4418,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 .CustomEditor = New System.Drawing.Design.UITypeEditor
                             End With
                         End If
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Molar_Flows
+                    Case Interfaces.Enums.CompositionBasis.Molar_Flows
                         'PropertyGridEx.CustomPropertyCollection - Mistura
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
@@ -4562,7 +4562,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 .CustomEditor = New System.Drawing.Design.UITypeEditor
                             End With
                         End If
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Volumetric_Flows
+                    Case Interfaces.Enums.CompositionBasis.Volumetric_Flows
                         'PropertyGridEx.CustomPropertyCollection - Mistura
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties

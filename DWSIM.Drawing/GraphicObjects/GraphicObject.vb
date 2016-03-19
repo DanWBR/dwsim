@@ -142,7 +142,8 @@ Namespace GraphicObjects
         End Function
 
         Public Shared Function ReturnInstance(typename As String) As GraphicObject
-            Return Activator.CreateInstance(Type.GetType(typename))
+            Dim t As Type = Type.GetType(typename, False)
+            If Not t Is Nothing Then Return Activator.CreateInstance(t) Else Return Nothing
         End Function
 
         Public ReadOnly Property MixPoint() As Boolean

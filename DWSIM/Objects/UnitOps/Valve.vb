@@ -179,7 +179,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         comp.FracaoMassica = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).FracaoMassica
                         i += 1
                     Next
-                    .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                    .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.massflow = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
                 End With
 

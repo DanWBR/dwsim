@@ -153,7 +153,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 .Phases(0).Properties.massflow = W * Me.Ratios(i)
                                 .Phases(0).Properties.massfraction = 1
                                 .Phases(0).Properties.molarfraction = 1
-                                .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                                .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                             End With
                         End If
                         i += 1
@@ -208,7 +208,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 .Phases(0).Properties.massflow = wn(i)
                                 .Phases(0).Properties.massfraction = 1
                                 .Phases(0).Properties.molarfraction = 1
-                                .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                                .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                             End With
                         End If
                         i += 1
@@ -265,7 +265,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 .Phases(0).Properties.molarflow = mn(i)
                                 .Phases(0).Properties.massfraction = 1
                                 .Phases(0).Properties.molarfraction = 1
-                                .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                                .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                             End With
                         End If
                         i += 1

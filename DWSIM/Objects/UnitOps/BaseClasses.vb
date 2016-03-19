@@ -71,7 +71,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Sub
 
-        Public Property ComponentDescription() As String Implements CapeOpen.ICapeIdentification.ComponentDescription
+        Public Property ComponentDescription() As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription
 
         ''' <summary>
         ''' Gets the name of the component.
@@ -79,7 +79,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns>CapeString</returns>
         ''' <remarks>Implements CapeOpen.ICapeIdentification.ComponentDescription</remarks>
-        Public Property ComponentName() As String Implements CapeOpen.ICapeIdentification.ComponentName
+        Public Property ComponentName() As String = "" Implements CapeOpen.ICapeIdentification.ComponentName
 
         ''' <summary>
         ''' Calculates the object.
@@ -3341,7 +3341,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property IsAdjustAttached() As Boolean
+        Public Property IsAdjustAttached() As Boolean = False
 
         ''' <summary>
         ''' If an Adjust object is attached to this object, returns its ID.
@@ -3349,7 +3349,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property AttachedAdjustId() As String
+        Public Property AttachedAdjustId() As String = ""
 
         ''' <summary>
         ''' If an Adjust object is attached to this object, returns a variable describing how this object is used by it (manipulated, controlled or reference).
@@ -3365,7 +3365,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property IsSpecAttached() As Boolean
+        Public Property IsSpecAttached() As Boolean = False
 
         ''' <summary>
         ''' If an Specification object is attached to this object, returns its ID.
@@ -3373,7 +3373,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property AttachedSpecId() As String
+        Public Property AttachedSpecId() As String = ""
 
         ''' <summary>
         ''' If an Specification object is attached to this object, returns a variable describing how this object is used by it (target or source).
@@ -3397,7 +3397,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks>This property is the same as the graphic object 'Name' property.</remarks>
-        Public Property Name() As String
+        Public Property Name() As String = ""
 
         ''' <summary>
         ''' Gets or sets the flowsheet table object associated with this object.

@@ -410,7 +410,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .ClearAllProps()
-                    .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                    .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = mix.Phases(2).Properties.enthalpy
@@ -428,7 +428,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .ClearAllProps()
-                    .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                    .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
@@ -449,7 +449,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
                     With ms
                         .ClearAllProps()
-                        .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                         .Phases(0).Properties.temperature = T
                         .Phases(0).Properties.pressure = P
                         If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#

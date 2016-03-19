@@ -812,7 +812,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         i += 1
                     Next
                     .Phases(0).Properties.massflow = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
-                    .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                    .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                 End With
 
                 'Call function to calculate flowsheet

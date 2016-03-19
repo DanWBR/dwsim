@@ -1126,22 +1126,22 @@ Public Class FormMain
                 Dim obj As GraphicObjects.GraphicObject = Nothing
                 Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                 If Not t Is Nothing Then obj = Activator.CreateInstance(t)
-                If obj Is Nothing Then
-                    obj = GraphicObjects.GraphicObject.ReturnInstance(xel.Element("Type").Value)
-                End If
-                obj.LoadData(xel.Elements.ToList)
-                obj.Name = pkey & obj.Name
-                obj.X += shift
-                obj.Y += shift
-                If pkey <> "" Then
-                    searchtext = obj.Tag.Split("(")(0).Trim()
-                    objcount = (From go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects Select go Where go.Tag.Equals(obj.Tag)).Count
-                    If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
-                End If
-                If Not TypeOf obj Is TableGraphic Then
-                    form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
-                    form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
-                    obj.CreateConnectors(0, 0)
+                If obj Is Nothing Then obj = GraphicObjects.GraphicObject.ReturnInstance(xel.Element("Type").Value)
+                If Not obj Is Nothing Then
+                    obj.LoadData(xel.Elements.ToList)
+                    obj.Name = pkey & obj.Name
+                    obj.X += shift
+                    obj.Y += shift
+                    If pkey <> "" Then
+                        searchtext = obj.Tag.Split("(")(0).Trim()
+                        objcount = (From go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects Select go Where go.Tag.Equals(obj.Tag)).Count
+                        If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
+                    End If
+                    If Not TypeOf obj Is TableGraphic Then
+                        form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
+                        form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
+                        obj.CreateConnectors(0, 0)
+                    End If
                 End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Flowsheet Graphic Objects", ex))
@@ -1447,21 +1447,21 @@ Public Class FormMain
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.<Type>.Value.Equals("DWSIM.DWSIM.GraphicObjects.TableGraphic")).ToList
-                Try
-                    Dim obj As GraphicObjects.GraphicObject = Nothing
-                    Dim t As Type = Type.GetType(xel2.Element("Type").Value, False)
-                    If Not t Is Nothing Then obj = Activator.CreateInstance(t)
-                    If obj Is Nothing Then
-                        obj = GraphicObjects.GraphicObject.ReturnInstance(xel2.Element("Type").Value)
-                    End If
-                    obj.LoadData(xel2.Elements.ToList)
-                    DirectCast(obj, TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
-                    form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Loading Flowsheet Table Information", ex))
-                End Try
-            Next
+            'For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.<Type>.Value.Equals("DWSIM.DWSIM.GraphicObjects.TableGraphic")).ToList
+            '    Try
+            '        Dim obj As GraphicObjects.GraphicObject = Nothing
+            '        Dim t As Type = Type.GetType(xel2.Element("Type").Value, False)
+            '        If Not t Is Nothing Then obj = Activator.CreateInstance(t)
+            '        If obj Is Nothing Then
+            '            obj = GraphicObjects.GraphicObject.ReturnInstance(xel2.Element("Type").Value)
+            '        End If
+            '        obj.LoadData(xel2.Elements.ToList)
+            '        DirectCast(obj, TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
+            '        form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
+            '    Catch ex As Exception
+            '        excs.Add(New Exception("Error Loading Flowsheet Table Information", ex))
+            '    End Try
+            'Next
 
         End If
 

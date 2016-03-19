@@ -17,7 +17,8 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
+Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.SimulationObjects.UnitOperations
 
@@ -119,8 +120,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-            Dim FlashSpec As Integer = Streams.MaterialStream.Flashspec.Temperature_and_Pressure
-
+        
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
@@ -176,8 +176,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case CalculationMode.HeatRemoved
 
-                    FlashSpec = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
-
                     H2 = -Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi + Hi
                     CheckSpec(H2, False, "outlet enthalpy")
 
@@ -198,8 +196,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case CalculationMode.OutletTemperature
 
-                    FlashSpec = Streams.MaterialStream.Flashspec.Temperature_and_Pressure
-
                     T2 = Me.OutletTemperature.GetValueOrDefault
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate outlet enthalpy... P = {0} Pa, T = {1} K", P2, T2))
@@ -218,7 +214,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case CalculationMode.OutletVaporFraction
 
-                    FlashSpec = Streams.MaterialStream.Flashspec.Pressure_and_VaporFraction
                     V2 = m_VFout.GetValueOrDefault
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PVF flash to calculate outlet temperature... P = {0} Pa, VF = {1}", P2, V2))
@@ -246,7 +241,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 'Atribuir valores à corrente de matéria conectada à jusante
                 With DirectCast(form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream)
-                    .SpecType = FlashSpec
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2

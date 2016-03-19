@@ -623,7 +623,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     msto.Phases(0).Properties.temperature = msfrom.Phases(0).Properties.temperature.GetValueOrDefault
                     msto.Phases(0).Properties.pressure = msfrom.Phases(0).Properties.pressure.GetValueOrDefault
                     msto.Phases(0).Properties.enthalpy = msfrom.Phases(0).Properties.enthalpy.GetValueOrDefault
-                    msto.SpecType = Streams.MaterialStream.Flashspec.Temperature_and_Pressure
+                    msto.SpecType = Interfaces.Enums.StreamSpec.Temperature_and_Pressure
 
                     Dim wt, mt As Double
 
@@ -737,7 +737,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     msto.Phases(0).Properties.temperature = msfrom.Phases(0).Properties.temperature.GetValueOrDefault
                     msto.Phases(0).Properties.pressure = msfrom.Phases(0).Properties.pressure.GetValueOrDefault
                     msto.Phases(0).Properties.enthalpy = msfrom.Phases(0).Properties.enthalpy.GetValueOrDefault
-                    msto.SpecType = Streams.MaterialStream.Flashspec.Temperature_and_Pressure
+                    msto.SpecType = Interfaces.Enums.StreamSpec.Temperature_and_Pressure
 
                     Dim wt, mt As Double
 

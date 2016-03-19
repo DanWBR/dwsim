@@ -124,7 +124,7 @@ Public Class frmSurface
                 Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
             Else
                 Flowsheet.FormProps.LblNomeObj.Text = Me.FlowsheetDesignSurface.SelectedObject.Tag
-                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString(Flowsheet.Collections.FlowsheetObjectCollection.Item(Me.FlowsheetDesignSurface.SelectedObject.Name).ComponentDescription)
+                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString(Flowsheet.Collections.FlowsheetObjectCollection.Item(Me.FlowsheetDesignSurface.SelectedObject.Name).GraphicObject.Description)
                 Select Case Me.FlowsheetDesignSurface.SelectedObject.Status
                     Case Status.Calculated
                         Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Calculado")

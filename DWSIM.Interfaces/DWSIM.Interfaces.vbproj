@@ -62,9 +62,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.vb" />
+    <Compile Include="ICompound.vb" />
     <Compile Include="IFlowsheet.vb" />
     <Compile Include="IGraphicObject.vb" />
     <Compile Include="IMaterialStream.vb" />
+    <Compile Include="IPhase.vb" />
+    <Compile Include="IPhaseProperties.vb" />
+    <Compile Include="IPropertyPackage.vb" />
     <Compile Include="ISimulationObject.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

@@ -132,7 +132,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-            Dim FlashSpec As Integer = Streams.MaterialStream.Flashspec.Temperature_and_Pressure
 
             If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
                 'Call function to calculate flowsheet
@@ -189,7 +188,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case CalculationMode.HeatAdded
 
-                    FlashSpec = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
                     H2 = Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi + Hi
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
@@ -208,8 +206,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case CalculationMode.OutletTemperature
 
-                    FlashSpec = Streams.MaterialStream.Flashspec.Temperature_and_Pressure
-                    T2 = Me.OutletTemperature.GetValueOrDefault
+                   T2 = Me.OutletTemperature.GetValueOrDefault
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate outlet enthalpy... P = {0} Pa, T = {1} K", P2, T2))
 
@@ -227,7 +224,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case CalculationMode.EnergyStream
 
-                    FlashSpec = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
                     Me.DeltaQ = es.EnergyFlow.GetValueOrDefault
                     H2 = Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi + Hi
 
@@ -242,7 +238,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case CalculationMode.OutletVaporFraction
 
-                    FlashSpec = Streams.MaterialStream.Flashspec.Pressure_and_VaporFraction
                     V2 = m_VFout.GetValueOrDefault
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PVF flash to calculate outlet temperature... P = {0} Pa, VF = {1}", P2, V2))
@@ -270,7 +265,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 'Atribuir valores à corrente de matéria conectada à jusante
                 Dim omstr As MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 With omstr
-                    .SpecType = FlashSpec
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2

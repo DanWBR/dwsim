@@ -67,11 +67,22 @@ Public Class XMLSerializer
                                     obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
                             ElseIf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Nothing Then
-                                Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
-                                If Not xel Is Nothing Then
-                                    Dim val As Nullable(Of Double)
-                                    If xel.Value <> "" Then val = Double.Parse(xel.Value, ci)
-                                    If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
+                                'nullable type
+                                If prop.PropertyType.FullName.Contains("Nullable") Then
+                                    Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                    If prop.PropertyType.FullName.Contains("Double") Then
+                                        If Not xel Is Nothing Then
+                                            Dim val As Nullable(Of Double)
+                                            If xel.Value <> "" Then val = Double.Parse(xel.Value, ci)
+                                            If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
+                                        End If
+                                    ElseIf prop.PropertyType.FullName.Contains("Integer") Then
+                                        If Not xel Is Nothing Then
+                                            Dim val As Nullable(Of Integer)
+                                            If xel.Value <> "" Then val = Integer.Parse(xel.Value, ci)
+                                            If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
+                                        End If
+                                    End If
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Integer Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault

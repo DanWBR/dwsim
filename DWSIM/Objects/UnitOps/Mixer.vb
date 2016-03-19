@@ -166,7 +166,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     T = tmp(2)
                 End If
                 .Phases(0).Properties.temperature = T
-                .SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
             End With
 
             'Call function to calculate flowsheet

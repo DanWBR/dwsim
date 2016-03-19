@@ -547,7 +547,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             oms.Phases(0).Properties.enthalpy = Hout
 
                             If oms.PropertyPackage.AUX_IS_SINGLECOMP(PropertyPackages.Phase.Mixture) Then
-                                oms.SpecType = Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                                oms.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                             End If
 
                             oms.Calculate(True, True)

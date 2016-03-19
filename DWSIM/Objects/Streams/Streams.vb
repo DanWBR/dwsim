@@ -25,6 +25,8 @@ Imports System.Runtime.InteropServices
 Imports System.Threading.Tasks
 Imports System.Runtime.Serialization
 Imports System.Reflection
+Imports DWSIM.Interfaces
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.SimulationObjects.Streams
 
@@ -41,15 +43,16 @@ Namespace DWSIM.SimulationObjects.Streams
         'CAPE-OPEN Error Interfaces
         Implements ECapeUser, ECapeUnknown, ECapeRoot
 
+        Implements Interfaces.IMaterialStream
+
         Friend _pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
         Friend _ppid As String = ""
 
-        Protected m_compositionbasis As CompBasis = CompBasis.Molar_Fractions
         Protected m_Phases As New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Phase)
 
-        Private _inequilibrium As Boolean = False
-
         <System.NonSerialized()> Private _flowsheet As FormFlowsheet
+
+#Region "    XML serialization"
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
@@ -93,30 +96,9 @@ Namespace DWSIM.SimulationObjects.Streams
 
         End Function
 
+#End Region
+
 #Region "    DWSIM Specific"
-
-        Public Enum Flashspec
-            Temperature_and_Pressure = 0
-            Pressure_and_Enthalpy = 1
-            Pressure_and_Entropy = 2
-            Pressure_and_VaporFraction = 3
-            Temperature_and_VaporFraction = 4
-        End Enum
-
-        Private _flashspec As Flashspec = Flashspec.Temperature_and_Pressure
-
-        Public Property SpecType() As Flashspec
-            Get
-                Return _flashspec
-            End Get
-            Set(ByVal value As Flashspec)
-                _flashspec = value
-            End Set
-        End Property
-
-        Public Property IsElectrolyteStream As Boolean = False
-        Public Property ReferenceSolvent As String = ""
-        Public Property InputComposition As Dictionary(Of String, Double) = New Dictionary(Of String, Double)
 
         Public Overrides Function GetDebugReport() As String
 
@@ -163,20 +145,15 @@ Namespace DWSIM.SimulationObjects.Streams
             If Not Me.Phases(0).Properties.entropy.IsValid Then Throw New ArgumentException(DWSIM.App.GetLocalString("ErrorInvalidMSSpecValue") & " (stream: " & mytag & ", name: entropy, value: " & Me.Phases(0).Properties.entropy.GetValueOrDefault & ")")
 
         End Sub
+
         ''' <summary>
         ''' Gets or sets if this stream is at thermodynamic equilbirium or not.
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
+
         Public Property AtEquilibrium() As Boolean
-            Get
-                Return _inequilibrium
-            End Get
-            Set(ByVal value As Boolean)
-                _inequilibrium = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' Gets or sets the associated Property Package for this stream.
@@ -225,24 +202,6 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
             End If
         End Sub
-
-        Public Enum CompBasis
-            Molar_Fractions
-            Mass_Fractions
-            Volumetric_Fractions
-            Molar_Flows
-            Mass_Flows
-            Volumetric_Flows
-        End Enum
-
-        Public Property CompositionBasis() As CompBasis
-            Get
-                Return m_compositionbasis
-            End Get
-            Set(ByVal value As CompBasis)
-                m_compositionbasis = value
-            End Set
-        End Property
 
         Public Sub New()
             MyBase.New()
@@ -358,15 +317,15 @@ Namespace DWSIM.SimulationObjects.Streams
             If DebugMode Then AppendDebugLine(String.Format("Calculation spec: {0}", SpecType.ToString))
 
             Select Case SpecType
-                Case Flashspec.Pressure_and_Enthalpy
+                Case StreamSpec.Pressure_and_Enthalpy
                     If DebugMode Then AppendDebugLine(String.Format("Input variables: P = {0} Pa, H = {1} kJ/kg", P, H))
-                Case Flashspec.Pressure_and_Entropy
+                Case StreamSpec.Pressure_and_Entropy
                     If DebugMode Then AppendDebugLine(String.Format("Input variables: P = {0} Pa, S = {1} kJ/kg.K", P, S))
-                Case Flashspec.Pressure_and_VaporFraction
+                Case StreamSpec.Pressure_and_VaporFraction
                     If DebugMode Then AppendDebugLine(String.Format("Input variables: P = {0} Pa, VF = {1}", P, Me.Phases(2).Properties.molarfraction.GetValueOrDefault))
-                Case Flashspec.Temperature_and_Pressure
+                Case StreamSpec.Temperature_and_Pressure
                     If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa", T, P))
-                Case Flashspec.Temperature_and_VaporFraction
+                Case StreamSpec.Temperature_and_VaporFraction
                     If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, VF = {1}", T, Me.Phases(2).Properties.molarfraction.GetValueOrDefault))
             End Select
 
@@ -413,29 +372,29 @@ Namespace DWSIM.SimulationObjects.Streams
                             .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.H)
                         Else
                             Select Case Me.SpecType
-                                Case SimulationObjects.Streams.MaterialStream.Flashspec.Temperature_and_Pressure
+                                Case StreamSpec.Temperature_and_Pressure
                                     .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
-                                Case SimulationObjects.Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                                Case StreamSpec.Pressure_and_Enthalpy
                                     .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.H)
-                                Case SimulationObjects.Streams.MaterialStream.Flashspec.Pressure_and_Entropy
+                                Case StreamSpec.Pressure_and_Entropy
                                     .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.S)
-                                Case SimulationObjects.Streams.MaterialStream.Flashspec.Pressure_and_VaporFraction
+                                Case StreamSpec.Pressure_and_VaporFraction
                                     .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.VAP)
-                                Case SimulationObjects.Streams.MaterialStream.Flashspec.Temperature_and_VaporFraction
+                                Case StreamSpec.Temperature_and_VaporFraction
                                     .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.VAP)
                             End Select
                         End If
                     Else
                         Select Case Me.SpecType
-                            Case SimulationObjects.Streams.MaterialStream.Flashspec.Temperature_and_Pressure
+                            Case StreamSpec.Temperature_and_Pressure
                                 .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
-                            Case SimulationObjects.Streams.MaterialStream.Flashspec.Pressure_and_Enthalpy
+                            Case StreamSpec.Pressure_and_Enthalpy
                                 .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.H)
-                            Case SimulationObjects.Streams.MaterialStream.Flashspec.Pressure_and_Entropy
+                            Case StreamSpec.Pressure_and_Entropy
                                 .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.S)
-                            Case SimulationObjects.Streams.MaterialStream.Flashspec.Pressure_and_VaporFraction
+                            Case StreamSpec.Pressure_and_VaporFraction
                                 .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.VAP)
-                            Case SimulationObjects.Streams.MaterialStream.Flashspec.Temperature_and_VaporFraction
+                            Case StreamSpec.Temperature_and_VaporFraction
                                 .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.VAP)
                         End Select
                     End If
@@ -872,7 +831,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
                     .Tag2 = "PROP_MS_0"
                     Select Case Me.SpecType
-                        Case Flashspec.Pressure_and_Enthalpy, Flashspec.Pressure_and_Entropy, Flashspec.Pressure_and_VaporFraction
+                        Case StreamSpec.Pressure_and_Enthalpy, StreamSpec.Pressure_and_Entropy, StreamSpec.Pressure_and_VaporFraction
                             .IsReadOnly = True
                         Case Else
                             .IsReadOnly = False
@@ -886,7 +845,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
                     .Tag2 = "PROP_MS_1"
                     Select Case Me.SpecType
-                        Case Flashspec.Temperature_and_VaporFraction
+                        Case StreamSpec.Temperature_and_VaporFraction
                             .IsReadOnly = True
                         Case Else
                             .IsReadOnly = False
@@ -932,7 +891,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 f.Item(2).Tag2 = "PROP_MS_27"
 
                 If Not Me.GraphicObject.InputConnectors(0).IsAttached And _
-                    (Me.SpecType = Flashspec.Pressure_and_VaporFraction Or Me.SpecType = Flashspec.Temperature_and_VaporFraction) _
+                    (Me.SpecType = StreamSpec.Pressure_and_VaporFraction Or Me.SpecType = StreamSpec.Temperature_and_VaporFraction) _
                     Then f.Item(f.Count - 1).IsReadOnly = False
 
                 .Item.Add("[7] " & DWSIM.App.GetLocalString("FraomolardaPhase"), f, True, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("FraomolardaPhase"), True)
@@ -949,7 +908,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
                     .Tag2 = "PROP_MS_7"
                     Select Case Me.SpecType
-                        Case Flashspec.Pressure_and_Enthalpy
+                        Case StreamSpec.Pressure_and_Enthalpy
                             .IsReadOnly = False
                         Case Else
                             .IsReadOnly = True
@@ -961,7 +920,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
                     .Tag2 = "PROP_MS_8"
                     Select Case Me.SpecType
-                        Case Flashspec.Pressure_and_Entropy
+                        Case StreamSpec.Pressure_and_Entropy
                             .IsReadOnly = False
                         Case Else
                             .IsReadOnly = True
@@ -5239,6 +5198,15 @@ Namespace DWSIM.SimulationObjects.Streams
 
 #End Region
 
+        Public Property InputComposition As Dictionary(Of String, Double) = New Dictionary(Of String, Double) Implements IMaterialStream.InputComposition
+
+        Public Property IsElectrolyteStream As Boolean = False Implements IMaterialStream.IsElectrolyteStream
+
+        Public Property ReferenceSolvent As String = "" Implements IMaterialStream.ReferenceSolvent
+
+        Public Property SpecType As Enums.StreamSpec = Enums.StreamSpec.Temperature_and_Pressure Implements IMaterialStream.SpecType
+
+        Public Property CompositionBasis As CompositionBasis Implements IMaterialStream.CompositionBasis
     End Class
 
     <System.Serializable()> Public Class EnergyStream
