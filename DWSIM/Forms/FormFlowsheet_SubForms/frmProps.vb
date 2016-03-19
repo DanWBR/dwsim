@@ -132,9 +132,9 @@ Public Class frmProps
 
         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Nome")) Then
             Try
-                If Not Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela Is Nothing Then
-                    Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela.HeaderText = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
-                End If
+                'If Not Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela Is Nothing Then
+                '    Flowsheet.Collections.FlowsheetObjectCollection(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Tabela.HeaderText = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
+                'End If
             Catch ex As Exception
                 'Flowsheet.WriteToLog(ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
             Finally

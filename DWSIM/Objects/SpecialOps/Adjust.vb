@@ -339,19 +339,11 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             m_ManipulatedObjectData = New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ManipulatedObjectInfo
             m_ControlledObjectData = New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ControlledObjectInfo
             m_ReferencedObjectData = New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ReferenceObjectInfo
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
-            Me.ShowQuickTable = False
+            Me.ComponentName = name
+            Me.ComponentDescription = description
 
-        End Sub
 
-        Public Overrides Sub QTFillNodeItems()
 
-        End Sub
-
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
         End Sub
 

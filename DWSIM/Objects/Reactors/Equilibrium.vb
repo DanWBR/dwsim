@@ -560,11 +560,9 @@ Namespace DWSIM.SimulationObjects.Reactors
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.new()
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
-            Me.ShowQuickTable = False
+            Me.ComponentName = name
+            Me.ComponentDescription = description
+
             Me._rex_iest = New ArrayList()
             Me._components = New List(Of String)
 
@@ -1235,14 +1233,6 @@ Namespace DWSIM.SimulationObjects.Reactors
             form.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overrides Sub QTFillNodeItems()
-
-        End Sub
-
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-        End Sub
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 

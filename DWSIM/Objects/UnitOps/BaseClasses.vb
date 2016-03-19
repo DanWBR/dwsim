@@ -16,7 +16,6 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports System.IO
@@ -33,7 +32,6 @@ Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Text
 Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
 Imports PropertyGridEx
-Imports DWSIM.DrawingTools
 Imports DWSIM.DWSIM.DrawingTools
 Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
@@ -43,17 +41,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Implements ICloneable, IDisposable, XMLSerializer.Interfaces.ICustomXMLSerialization
 
+        Implements ICapeIdentification
+
         Implements Interfaces.ISimulationObject
 
-        Protected m_ComponentDescription As String = ""
-        Protected m_ComponentName As String = ""
-
         Public Const ClassId As String = ""
-
-        Protected m_nodeitems As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-        Protected m_qtnodeitems As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-        Protected m_table As GraphicObjects2.TableGraphic
-        Protected m_qtable As GraphicObjects2.QuickTableGraphic
 
         Protected m_IsAdjustAttached As Boolean = False
         Protected m_AdjustId As String = ""
@@ -65,22 +57,29 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         <System.NonSerialized()> Protected Friend m_flowsheet As FormFlowsheet
 
-        Protected m_showqtable As Boolean = True
-        Protected m_errormessage As String = ""
-
         Public Property Calculated As Boolean = False
+
         Public Property DebugMode As Boolean = False
         Public Property DebugText As String = ""
+
         <Xml.Serialization.XmlIgnore> Public Property CreatedWithThreadID As Integer = 0
         <Xml.Serialization.XmlIgnore> Public Property LastUpdated As New Date
-
-        Public MustOverride Sub UpdatePropertyNodes(ByVal su As DWSIM.SystemsOfUnits.Units, ByVal nf As String)
 
         Public MustOverride Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As DWSIM.SystemsOfUnits.Units)
 
         Public Sub New()
 
         End Sub
+
+        Public Property ComponentDescription() As String Implements CapeOpen.ICapeIdentification.ComponentDescription
+
+        ''' <summary>
+        ''' Gets the name of the component.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns>CapeString</returns>
+        ''' <remarks>Implements CapeOpen.ICapeIdentification.ComponentDescription</remarks>
+        Public Property ComponentName() As String Implements CapeOpen.ICapeIdentification.ComponentName
 
         ''' <summary>
         ''' Calculates the object.
@@ -168,13 +167,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property ErrorMessage() As String
-            Get
-                Return m_errormessage
-            End Get
-            Set(ByVal value As String)
-                m_errormessage = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' Checks if a value is valid.
@@ -190,45 +182,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Sub
 
-        ''' <summary>
-        ''' Updates the property selection list to display tables in the flowsheet.
-        ''' </summary>
-        ''' <param name="NoPropVals"></param>
-        ''' <remarks></remarks>
-        Public Overridable Sub FillNodeItems(Optional ByVal NoPropVals As Boolean = False)
-
-            If Me.NodeTableItems Is Nothing Then Me.NodeTableItems = New Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-
-            With Me.NodeTableItems
-
-                .Clear()
-
-                Dim props As String() = Me.GetProperties(PropertyType.ALL)
-
-                Dim key As Integer = 0
-                For Each prop As String In props
-                    If Not NoPropVals Then
-                        .Add(key, New DWSIM.Extras.NodeItem(prop, GetPropertyValue(prop, FlowSheet.Options.SelectedUnitSystem), GetPropertyUnit(prop, FlowSheet.Options.SelectedUnitSystem), key, 0, ""))
-                    Else
-                        .Add(key, New DWSIM.Extras.NodeItem(prop, "", "", key, 0, ""))
-                    End If
-                    key += 1
-                Next
-
-            End With
-
-        End Sub
-
-        ''' <summary>
-        ''' Updates the values of the variables displayed in the object's tooltip in the flowsheet.
-        ''' </summary>
-        ''' <remarks></remarks>
-        Public MustOverride Sub QTFillNodeItems()
-
-        Protected m_graphicobject As GraphicObject = Nothing
-
-        Protected m_annotation As DWSIM.Extras.Annotation
-
         Public Enum PropertyType
             RO = 0
             RW = 1
@@ -243,6 +196,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns>A list of property identifiers.</returns>
         ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
         Public MustOverride Function GetProperties(ByVal proptype As PropertyType) As String()
+
         ''' <summary>
         ''' Gets the value of a property.
         ''' </summary>
@@ -251,6 +205,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns>Property value.</returns>
         ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
         Public MustOverride Function GetPropertyValue(ByVal prop As String, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing)
+
         ''' <summary>
         ''' Gets the units of a property.
         ''' </summary>
@@ -259,6 +214,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns>Property units.</returns>
         ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
         Public MustOverride Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing)
+
         ''' <summary>
         ''' Sets the value of a property.
         ''' </summary>
@@ -3378,14 +3334,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Property
 
         Public Property Annotation() As DWSIM.Extras.Annotation
-            Get
-                If Me.m_annotation Is Nothing Then Me.m_annotation = New DWSIM.Extras.Annotation
-                Return Me.m_annotation
-            End Get
-            Set(ByVal value As DWSIM.Extras.Annotation)
-                Me.m_annotation = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' Checks if an Adjust operation is attached to this object.
@@ -3394,13 +3342,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property IsAdjustAttached() As Boolean
-            Get
-                Return Me.m_IsAdjustAttached
-            End Get
-            Set(ByVal value As Boolean)
-                Me.m_IsAdjustAttached = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' If an Adjust object is attached to this object, returns its ID.
@@ -3409,13 +3350,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property AttachedAdjustId() As String
-            Get
-                Return Me.m_AdjustId
-            End Get
-            Set(ByVal value As String)
-                Me.m_AdjustId = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' If an Adjust object is attached to this object, returns a variable describing how this object is used by it (manipulated, controlled or reference).
@@ -3424,13 +3358,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property AdjustVarType() As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.TipoVar
-            Get
-                Return Me.m_AdjustVarType
-            End Get
-            Set(ByVal value As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.TipoVar)
-                Me.m_AdjustVarType = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' Checks if an Specification operation is attached to this object.
@@ -3439,13 +3366,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property IsSpecAttached() As Boolean
-            Get
-                Return Me.m_IsSpecAttached
-            End Get
-            Set(ByVal value As Boolean)
-                Me.m_IsSpecAttached = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' If an Specification object is attached to this object, returns its ID.
@@ -3454,13 +3374,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property AttachedSpecId() As String
-            Get
-                Return Me.m_SpecId
-            End Get
-            Set(ByVal value As String)
-                Me.m_SpecId = value
-            End Set
-        End Property
+
         ''' <summary>
         ''' If an Specification object is attached to this object, returns a variable describing how this object is used by it (target or source).
         ''' </summary>
@@ -3468,13 +3382,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property SpecVarType() As DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar
-            Get
-                Return Me.m_SpecVarType
-            End Get
-            Set(ByVal value As DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar)
-                Me.m_SpecVarType = value
-            End Set
-        End Property
+     
         ''' <summary>
         ''' Gets or sets the graphic object representation of this object in the flowsheet.
         ''' </summary>
@@ -3482,47 +3390,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks></remarks>
         <Xml.Serialization.XmlIgnore> Public Property GraphicObject() As GraphicObject
-            Get
-                Return m_graphicobject
-            End Get
-            Set(ByVal gObj As GraphicObject)
-                m_graphicobject = gObj
-            End Set
-        End Property
-
-        Public Property NodeTableItems() As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            Get
-                If m_nodeitems Is Nothing Then m_nodeitems = New Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)()
-                Return m_nodeitems
-            End Get
-            Set(ByVal value As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem))
-                m_nodeitems = value
-            End Set
-        End Property
-
-        Public Property QTNodeTableItems() As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            Get
-                If m_qtnodeitems Is Nothing Then m_qtnodeitems = New Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)()
-                Return m_qtnodeitems
-            End Get
-            Set(ByVal value As System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem))
-                m_qtnodeitems = value
-            End Set
-        End Property
-        ''' <summary>
-        ''' Object's description
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property Descricao() As String
-            Get
-                Return m_ComponentDescription
-            End Get
-            Set(ByVal value As String)
-                m_ComponentDescription = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' Object's Unique ID (Name)
@@ -3531,13 +3398,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks>This property is the same as the graphic object 'Name' property.</remarks>
         Public Property Name() As String
-            Get
-                Return m_ComponentName
-            End Get
-            Set(ByVal value As String)
-                m_ComponentName = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' Gets or sets the flowsheet table object associated with this object.
@@ -3545,44 +3405,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property Tabela() As TableGraphic
-            Get
-                Return m_table
-            End Get
-            Set(ByVal value As TableGraphic)
-                m_table = value
-            End Set
-        End Property
-
-        ''' <summary>
-        ''' Gets or sets the tooltip (quick table) object associated with this object.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property TabelaRapida() As QuickTableGraphic
-            Get
-                Return m_qtable
-            End Get
-            Set(ByVal value As QuickTableGraphic)
-                m_qtable = value
-            End Set
-        End Property
-
-        Public Property ShowQuickTable() As Boolean
-            Get
-                Return Me.m_showqtable
-            End Get
-            Set(ByVal value As Boolean)
-                Me.m_showqtable = value
-            End Set
-        End Property
+        Public Property PropertyTable() As TableGraphic
 
         Sub CreateNew()
             CreatedWithThreadID = Threading.Thread.CurrentThread.ManagedThreadId
-            Me.m_annotation = New DWSIM.Extras.Annotation
-            Me.m_nodeitems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            Me.m_qtnodeitems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
         End Sub
 
         ''' <summary>
@@ -3611,27 +3437,21 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Function
 
+#Region "   IDisposable Support "
+
         Public disposedValue As Boolean = False        ' To detect redundant calls
 
-        ' IDisposable
         Protected Overridable Sub Dispose(ByVal disposing As Boolean)
-            If Not Me.disposedValue Then
-                If disposing Then
-                    ' TODO: free other state (managed objects).
-                End If
-
-                ' TODO: free your own state (unmanaged objects).
-                ' TODO: set large fields to null.
-            End If
             Me.disposedValue = True
         End Sub
 
-#Region "   IDisposable Support "
         ' This code added by Visual Basic to correctly implement the disposable pattern.
         Public Sub Dispose() Implements IDisposable.Dispose
+
             ' Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) above.
             Dispose(True)
             GC.SuppressFinalize(Me)
+
         End Sub
 #End Region
 
@@ -3645,14 +3465,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "NodeItems").Elements
-                Dim text As String = xel2.@Text
-                Dim ni2 As DWSIM.Extras.NodeItem = (From ni As DWSIM.Extras.NodeItem In m_nodeitems.Values Select ni Where ni.Text = text).SingleOrDefault
-                If Not ni2 Is Nothing Then
-                    ni2.Checked = True
-                End If
-            Next
-
         End Function
 
         ''' <summary>
@@ -3663,24 +3475,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
-            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
-
-            With elements
-
-                .Add(New XElement("NodeItems"))
-                For Each kvp As KeyValuePair(Of Integer, DWSIM.Extras.NodeItem) In m_nodeitems
-                    If kvp.Value.Checked Then .Item(.Count - 1).Add(New XElement("NodeItem", New XAttribute("ID", kvp.Key),
-                                                                    New XAttribute("Checked", kvp.Value.Checked),
-                                                                    New XAttribute("Text", kvp.Value.Text),
-                                                                    New XAttribute("Value", kvp.Value.Value),
-                                                                    New XAttribute("Unit", kvp.Value.Unit)))
-                Next
-
-            End With
-
+            
             Return elements
 
         End Function
+
         ''' <summary>
         ''' Copies the object properties to the Clipboard.
         ''' </summary>
@@ -3800,7 +3599,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
             End If
 
-            Dim st As New StringBuilder(DWSIM.App.GetLocalString(Me.Descricao) & ": " & Me.GraphicObject.Tag & vbCrLf)
+            Dim st As New StringBuilder(DWSIM.App.GetLocalString(Me.ComponentDescription) & ": " & Me.GraphicObject.Tag & vbCrLf)
             For Each r As DataRow In DT.Rows
                 Dim l As String = ""
                 For Each o As Object In r.ItemArray
@@ -3836,16 +3635,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Friend _ppid As String = ""
 
         Friend _capeopenmode As Boolean = False
-
-        Private _scripttextEB As String = ""
-        Private _scripttextEA As String = ""
-        Private _scriptlanguageE As scriptlanguage = scriptlanguage.IronPython
-        Private _includesE() As String
-        Private _fontnameE As String = "Courier New"
-        Private _fontsizeE As Integer = 10
-
-        <System.NonSerialized()> Public scope As Microsoft.Scripting.Hosting.ScriptScope
-        <System.NonSerialized()> Public engine As Microsoft.Scripting.Hosting.ScriptEngine
 
         Public Sub New()
             MyBase.CreateNew()
@@ -3916,64 +3705,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Return DebugText
 
         End Function
-
-        Public Enum scriptlanguage
-            IronPython = 2
-        End Enum
-
-        Public Property ScriptExt_FontName() As String
-            Get
-                Return _fontnameE
-            End Get
-            Set(ByVal value As String)
-                _fontnameE = value
-            End Set
-        End Property
-
-        Public Property ScriptExt_FontSize() As Integer
-            Get
-                Return _fontsizeE
-            End Get
-            Set(ByVal value As Integer)
-                _fontsizeE = value
-            End Set
-        End Property
-
-        Public Property ScriptExt_Includes() As String()
-            Get
-                Return _includesE
-            End Get
-            Set(ByVal value As String())
-                _includesE = value
-            End Set
-        End Property
-
-        Public Property ScriptExt_ScriptTextB() As String
-            Get
-                If _scripttextEB IsNot Nothing Then Return _scripttextEB Else Return ""
-            End Get
-            Set(ByVal value As String)
-                _scripttextEB = value
-            End Set
-        End Property
-
-        Public Property ScriptExt_ScriptTextA() As String
-            Get
-                If _scripttextEA IsNot Nothing Then Return _scripttextEA Else Return ""
-            End Get
-            Set(ByVal value As String)
-                _scripttextEA = value
-            End Set
-        End Property
-
-        Public Property ScriptExt_Language() As scriptlanguage
-            Get
-                Return _scriptlanguageE
-            End Get
-            Set(ByVal value As scriptlanguage)
-                _scriptlanguageE = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' Gets or sets the property package associated with this object.
@@ -4052,18 +3783,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As DWSIM.SystemsOfUnits.Units)
 
             With pgrid
-
-                '.Item.Add(DWSIM.App.GetLocalString("UO_ScriptLanguage"), Me, "ScriptExt_Language", False, DWSIM.App.GetLocalString("UO_ScriptExtension"), "", True)
-                '.Item.Add(DWSIM.App.GetLocalString("UO_ScriptText_Before"), Me, "ScriptExt_ScriptTextB", False, DWSIM.App.GetLocalString("UO_ScriptExtension"), DWSIM.App.GetLocalString("Cliquenobotocomretic"), True)
-                'With .Item(.Item.Count - 1)
-                '    .CustomEditor = New DWSIM.Editors.CustomUO.UIScriptEditor
-                '    .Tag = "B"
-                'End With
-                '.Item.Add(DWSIM.App.GetLocalString("UO_ScriptText_After"), Me, "ScriptExt_ScriptTextA", False, DWSIM.App.GetLocalString("UO_ScriptExtension"), DWSIM.App.GetLocalString("Cliquenobotocomretic"), True)
-                'With .Item(.Item.Count - 1)
-                '    .CustomEditor = New DWSIM.Editors.CustomUO.UIScriptEditor
-                '    .Tag = "A"
-                'End With
 
                 .Item.Add(DWSIM.App.GetLocalString("UOPropertyPackage"), Me.PropertyPackage.Tag, False, DWSIM.App.GetLocalString("Outros"), "", True)
                 With .Item(.Item.Count - 1)
@@ -4166,37 +3885,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Friend _ports As CapeOpen.PortCollection
         Friend _parameters As CapeOpen.ParameterCollection
         Friend _simcontext As Object = Nothing
-
-        ''' <summary>
-        ''' Gets the description of the component.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns>CapeString</returns>
-        ''' <remarks>Implements CapeOpen.ICapeIdentification.ComponentName</remarks>
-        Public Property ComponentDescription() As String Implements CapeOpen.ICapeIdentification.ComponentDescription
-            Get
-                Return Me.m_ComponentDescription
-            End Get
-            Set(ByVal value As String)
-                Me.m_ComponentDescription = value
-            End Set
-        End Property
-
-        ''' <summary>
-        ''' Gets the name of the component.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns>CapeString</returns>
-        ''' <remarks>Implements CapeOpen.ICapeIdentification.ComponentDescription</remarks>
-        Public Property ComponentName() As String Implements CapeOpen.ICapeIdentification.ComponentName
-            Get
-                Return Me.m_ComponentName
-            End Get
-            Set(ByVal value As String)
-                Me.m_ComponentName = value
-            End Set
-        End Property
-
+        
         ''' <summary>
         ''' Calculates the Unit Operation.
         ''' </summary>

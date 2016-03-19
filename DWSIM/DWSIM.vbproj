@@ -822,12 +822,6 @@
     <Compile Include="Forms\FormLoadSave.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormConfigureTable.Designer.vb">
-      <DependentUpon>FormConfigureTable.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormConfigureTable.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\FormSimulSettings.Designer.vb">
       <DependentUpon>FormSimulSettings.vb</DependentUpon>
     </Compile>
@@ -1438,7 +1432,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Assets\data\bd.dat" />
     <None Include="Assets\data\biod_intparm_nrtl.dat" />
     <None Include="Assets\data\csid.dat" />
@@ -1691,10 +1684,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmMatList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormConfigureTable.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormConfigureTable.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLoadSave.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormLoadSave.vb</DependentUpon>
@@ -1706,10 +1695,6 @@
     <EmbeddedResource Include="Forms\FormRecoverFiles.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormRecoverFiles.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormConfigureTable.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormConfigureTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLoadSave.resx">
       <SubType>Designer</SubType>
@@ -3020,12 +3005,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmSurface.es.resx">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormConfigureTable.de.resx">
-      <DependentUpon>FormConfigureTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormConfigureTable.es.resx">
-      <DependentUpon>FormConfigureTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLoadSave.de.resx">
       <DependentUpon>FormLoadSave.vb</DependentUpon>

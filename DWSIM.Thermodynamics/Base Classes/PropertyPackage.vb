@@ -3798,9 +3798,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Overridable Sub PopulatePropertyGrid(ByRef pg As PropertyGridEx.PropertyGridEx, ByRef Flowsheet As FormFlowsheet, ByVal su As SystemsOfUnits.Units)
 
             If Me.CurrentMaterialStream.Phases.Count <= 3 Then
-                Me.CurrentMaterialStream.Phases.Add("3", New DWSIM.Thermodynamics.BaseClasses.Phase(App.GetLocalString("Liquid1"), ""))
-                Me.CurrentMaterialStream.Phases.Add("4", New DWSIM.Thermodynamics.BaseClasses.Phase(App.GetLocalString("Liquid2"), ""))
-                Me.CurrentMaterialStream.Phases.Add("5", New DWSIM.Thermodynamics.BaseClasses.Phase(App.GetLocalString("Liquid3"), ""))
+                Me.CurrentMaterialStream.Phases.Add("3", New BaseClasses.Phase(App.GetLocalString("Liquid1"), ""))
+                Me.CurrentMaterialStream.Phases.Add("4", New BaseClasses.Phase(App.GetLocalString("Liquid2"), ""))
+                Me.CurrentMaterialStream.Phases.Add("5", New BaseClasses.Phase(App.GetLocalString("Liquid3"), ""))
                 If Flowsheet.Options.SelectedComponents.Count = 0 Then
                 Else
                     Dim comp2 As BaseClasses.ConstantProperties
@@ -3814,7 +3814,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Next
                 End If
             ElseIf Me.CurrentMaterialStream.Phases.Count <= 6 Then
-                Me.CurrentMaterialStream.Phases.Add("6", New DWSIM.Thermodynamics.BaseClasses.Phase(App.GetLocalString("Aqueous"), ""))
+                Me.CurrentMaterialStream.Phases.Add("6", New BaseClasses.Phase(App.GetLocalString("Aqueous"), ""))
                 If Flowsheet.Options.SelectedComponents.Count = 0 Then
                 Else
                     Dim comp2 As BaseClasses.ConstantProperties
@@ -3824,7 +3824,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Next
                 End If
             ElseIf Me.CurrentMaterialStream.Phases.Count <= 7 Then
-                Me.CurrentMaterialStream.Phases.Add("7", New DWSIM.Thermodynamics.BaseClasses.Phase(App.GetLocalString("Solid"), ""))
+                Me.CurrentMaterialStream.Phases.Add("7", New BaseClasses.Phase(App.GetLocalString("Solid"), ""))
                 If Flowsheet.Options.SelectedComponents.Count = 0 Then
                 Else
                     Dim comp2 As BaseClasses.ConstantProperties

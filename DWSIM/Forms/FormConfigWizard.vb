@@ -279,19 +279,6 @@ Public Class FormConfigWizard
                         phase.Compounds.Add(tmpcomp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(tmpcomp.Name, ""))
                         phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
                     Next
-
-                    proplist.Clear()
-                    For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
-                        If pi.Checked Then
-                            proplist.Add(pi.Text)
-                        End If
-                    Next
-                    ms.FillNodeItems()
-                    For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
-                        If proplist.Contains(pi.Text) Then
-                            pi.Checked = True
-                        End If
-                    Next
                 Next
 
                 Me.ListViewA.Items.Add(tmpcomp.Name, DWSIM.App.GetComponentName(tmpcomp.Name) & " (" & tmpcomp.OriginalDB & ")", 0).Tag = tmpcomp.Name
@@ -324,19 +311,6 @@ Public Class FormConfigWizard
         For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
             For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
                 phase.Compounds.Remove(tmpcomp.Name)
-            Next
-
-            proplist.Clear()
-            For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
-                If pi.Checked Then
-                    proplist.Add(pi.Text)
-                End If
-            Next
-            ms.FillNodeItems()
-            For Each pi As DWSIM.Extras.NodeItem In ms.NodeTableItems.Values
-                If proplist.Contains(pi.Text) Then
-                    pi.Checked = True
-                End If
             Next
         Next
         UpdateKeyCompounds()

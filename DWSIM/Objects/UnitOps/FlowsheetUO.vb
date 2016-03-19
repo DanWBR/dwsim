@@ -78,8 +78,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = Descricao
+            Me.ComponentName = name
+            Me.ComponentDescription = description
 
             CompoundMappings = New Dictionary(Of String, String)
 
@@ -89,8 +89,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             InputConnections = New List(Of String) From {"", "", "", "", "", "", "", "", "", ""}
             OutputConnections = New List(Of String) From {"", "", "", "", "", "", "", "", "", ""}
 
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
+
+
 
         End Sub
 
@@ -309,10 +309,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                                                form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                                            obj.GraphicObject = gobj
                                            obj.SetFlowsheet(form)
-                                           If Not obj.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
-                                               obj.FillNodeItems(True)
-                                               obj.QTFillNodeItems()
-                                           End If
                                            If Not gobj Is Nothing Then
                                                obj.LoadData(xel.Elements.ToList)
                                                If TypeOf obj Is Streams.MaterialStream Then
@@ -335,7 +331,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim gobj = obj.GraphicObject
                     form.Collections.FlowsheetObjectCollection.Add(id, obj)
                     form.Collections.GraphicObjectCollection.Add(id, gobj)
-                    obj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Unit Operation Information", ex))
                 End Try
@@ -390,7 +385,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     End If
                     obj.LoadData(xel2.Elements.ToList)
                     DirectCast(obj, TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
-                    form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value).Tabela = obj
                     form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Flowsheet Table Information", ex))
@@ -522,7 +516,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             Next
                         Next
                     End If
-                    obj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Unit Operation Information", ex))
                 End Try
@@ -930,41 +923,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Function
 
-        Public Overrides Sub QTFillNodeItems()
-            If Me.QTNodeTableItems Is Nothing Then Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            With Me.QTNodeTableItems
-                .Clear()
-                .Add(0, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("MassBalanceError"), "", "%", 0, 0, ""))
-            End With
-        End Sub
-
-        Public Overrides Sub UpdatePropertyNodes(su As SystemsOfUnits.Units, nf As String)
-
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-            If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.FillNodeItems()
-            End If
-
-            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
-                nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-                nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-            Next
-
-            If Me.QTNodeTableItems Is Nothing Then
-                Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.QTFillNodeItems()
-            End If
-
-            With Me.QTNodeTableItems
-
-                .Item(0).Value = Me.MassBalanceError
-                .Item(0).Unit = "%"
-
-            End With
-
-        End Sub
-
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter
@@ -1206,18 +1164,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "CompoundMappings").Elements.ToList
                 Me.CompoundMappings.Add(xel.Attribute("From").Value, xel.Attribute("To").Value)
-            Next
-
-            m_nodeitems = Nothing
-            FillNodeItems(True)
-            QTFillNodeItems()
-
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "NodeItems").Elements
-                Dim text As String = xel2.@Text
-                Dim ni2 As DWSIM.Extras.NodeItem = (From ni As DWSIM.Extras.NodeItem In m_nodeitems.Values Select ni Where ni.Text = text).SingleOrDefault
-                If Not ni2 Is Nothing Then
-                    ni2.Checked = True
-                End If
             Next
 
         End Function

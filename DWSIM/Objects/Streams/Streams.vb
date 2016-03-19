@@ -255,8 +255,8 @@ Namespace DWSIM.SimulationObjects.Streams
             Me.SetFlowsheet(flowsheet)
             If Me.PropertyPackage Is Nothing Then Me.PropertyPackage = proppack
 
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
+            Me.ComponentName = name
+            Me.ComponentDescription = description
 
             Me.Phases.Add(0, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Mistura"), ""))
             Me.Phases.Add(1, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("OverallLiquid"), ""))
@@ -274,8 +274,8 @@ Namespace DWSIM.SimulationObjects.Streams
             Me.Phases(0).Properties.pressure = 101325
             Me.Phases(0).Properties.massflow = 1
 
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
+
+
 
         End Sub
 
@@ -283,8 +283,8 @@ Namespace DWSIM.SimulationObjects.Streams
 
             MyBase.CreateNew()
 
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
+            Me.ComponentName = name
+            Me.ComponentDescription = description
 
             Me.Phases.Add(0, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Mistura"), ""))
             Me.Phases.Add(1, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("OverallLiquid"), ""))
@@ -296,8 +296,8 @@ Namespace DWSIM.SimulationObjects.Streams
             Me.Phases.Add(7, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Solid"), ""))
 
             If Not My.Application.CAPEOPENMode And Not Me.FlowSheet Is Nothing Then
-                Me.FillNodeItems()
-                Me.QTFillNodeItems()
+
+
             End If
 
         End Sub
@@ -596,123 +596,6 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
 
                 .CurrentMaterialStream = Nothing
-
-            End With
-
-        End Sub
-
-        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-            If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.FillNodeItems()
-            End If
-
-            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
-                nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-                nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-            Next
-
-            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            Me.QTFillNodeItems()
-
-            With Me.QTNodeTableItems
-
-                Dim valor As String
-                If Me.Phases(0).Properties.temperature.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.temperature), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(0).Value = valor
-                .Item(0).Unit = su.temperature
-
-                If Me.Phases(0).Properties.pressure.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.pressure.GetValueOrDefault), nf)
-
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(1).Value = valor
-                .Item(1).Unit = su.pressure
-
-                If Me.Phases(0).Properties.massflow.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(0).Properties.massflow.GetValueOrDefault), nf)
-
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(2).Value = valor
-                .Item(2).Unit = su.massflow
-
-                If Me.Phases(0).Properties.molarflow.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Properties.molarflow.GetValueOrDefault), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(3).Value = valor
-                .Item(3).Unit = su.molarflow
-
-                If Me.Phases(0).Properties.molarflow.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(4).Value = valor
-                .Item(4).Unit = su.volumetricFlow
-
-                valor = Format(Me.Phases(2).Properties.molarfraction.GetValueOrDefault, nf)
-                .Item(5).Value = valor
-                .Item(5).Unit = ""
-
-                valor = Format(Me.Phases(7).Properties.molarfraction.GetValueOrDefault, nf)
-                .Item(6).Value = valor
-                .Item(6).Unit = ""
-
-                If Me.Phases(0).Properties.molar_enthalpy.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(0).Properties.molar_enthalpy.GetValueOrDefault), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(7).Value = valor
-                .Item(7).Unit = su.molar_enthalpy
-
-                If Me.Phases(0).Properties.molar_entropy.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.molar_entropy, Me.Phases(0).Properties.molar_entropy.GetValueOrDefault), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(8).Value = valor
-                .Item(8).Unit = su.molar_entropy
-
-                If Me.Phases(0).Properties.enthalpy.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.Phases(0).Properties.enthalpy.GetValueOrDefault * Me.Phases(0).Properties.massflow.GetValueOrDefault), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(9).Value = valor
-                .Item(9).Unit = su.heatflow
-
-            End With
-
-        End Sub
-
-        Public Overrides Sub QTFillNodeItems()
-
-            With Me.QTNodeTableItems
-
-                .Clear()
-
-                .Add(0, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Temperatura"), "", "", 0, 1, ""))
-                .Add(1, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Presso"), "", "", 1, 1, ""))
-                .Add(2, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Vazomssica"), "", "", 2, 1, ""))
-                .Add(3, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Vazomolar"), "", "", 3, 1, ""))
-                .Add(4, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Vazovolumtrica"), "", "", 4, 1, ""))
-                .Add(5, New DWSIM.Extras.NodeItem(DWSIM.App.GetPropertyName("PROP_MS_106"), "", "", 5, 1, ""))
-                .Add(6, New DWSIM.Extras.NodeItem(DWSIM.App.GetPropertyName("PROP_MS_146"), "", "", 6, 1, ""))
-                .Add(7, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("MolarEnthalpy"), "", "", 7, 1, ""))
-                .Add(8, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("MolarEntropy"), "", "", 8, 1, ""))
-                .Add(9, New DWSIM.Extras.NodeItem(DWSIM.App.GetPropertyName("PROP_MS_154"), "", "", 9, 1, ""))
 
             End With
 
@@ -2377,36 +2260,6 @@ Namespace DWSIM.SimulationObjects.Streams
 #End Region
 
 #Region "    CAPE-OPEN 1.0 Methods and Properties"
-
-        ''' <summary>
-        ''' Gets the name of the component.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns>CapeString</returns>
-        ''' <remarks>Implements CapeOpen.ICapeIdentification.ComponentDescription</remarks>
-        Public Overridable Property ComponentDescription() As String Implements CapeOpen.ICapeIdentification.ComponentDescription
-            Get
-                Return Me.m_ComponentName
-            End Get
-            Set(ByVal value As String)
-                Me.m_ComponentName = value
-            End Set
-        End Property
-
-        ''' <summary>
-        ''' Gets the description of the component.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns>CapeString</returns>
-        ''' <remarks>Implements CapeOpen.ICapeIdentification.ComponentName</remarks>
-        Public Property ComponentName() As String Implements CapeOpen.ICapeIdentification.ComponentName
-            Get
-                If Not Me.GraphicObject Is Nothing Then Return Me.GraphicObject.Tag Else Return "temporary stream"
-            End Get
-            Set(ByVal value As String)
-                Me.Name = value
-            End Set
-        End Property
 
         ''' <summary>
         ''' Gets a list of properties that have been calculated.
@@ -5394,12 +5247,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Implements ICapeIdentification, ICapeCollection
 
-        Protected m_energy As Nullable(Of Double)
-        'Protected m_params As List(Of CapeOpen.ICapeParameter)
         Protected WithEvents m_work As CapeOpen.RealParameter
-        'Protected WithEvents m_tlo As CapeOpen.RealParameter
-        'Protected WithEvents m_thi As CapeOpen.RealParameter
-        'Protected WithEvents m_af As CapeOpen.RealParameter
 
 #Region "   DWSIM Specific"
 
@@ -5410,30 +5258,22 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
+            Me.ComponentName = name
+            Me.ComponentDescription = description
             Init()
 
         End Sub
 
         Sub Init()
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
+
+
             If Not DWSIM.App.IsRunningOnMono Then CreateParamCol()
         End Sub
 
         Sub CreateParamCol()
-            ' If m_params Is Nothing Then
+
             m_work = New CapeOpen.RealParameter("work", Me.EnergyFlow.GetValueOrDefault, 0.0#, "J/s")
-            'm_af = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.RealParameter("axisFrequency", 0.0#, 0.0#, "s-1")
-            'm_tlo = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.RealParameter("temperatureLow", 0.0#, 0.0#, "K")
-            'm_thi = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.RealParameter("temperatureHigh", 0.0#, 0.0#, "K")
-            ' m_params = New List(Of CapeOpen.ICapeParameter)
-            ' m_params.Add(m_work)
-            'm_params.Add(m_af)
-            'm_params.Add(m_tlo)
-            'm_params.Add(m_thi)
-            '  End If
+       
         End Sub
 
         ''' <summary>
@@ -5443,69 +5283,12 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Overrides Property EnergyFlow() As Nullable(Of Double)
-            Get
-                Return Me.m_energy
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                Me.m_energy = value
-                If Not FlowSheet Is Nothing Then
-                    UpdatePropertyNodes(FlowSheet.Options.SelectedUnitSystem, FlowSheet.Options.NumberFormat)
-                    Me.ShowQuickTable = True
-                End If
-            End Set
-        End Property
 
         Public Sub Assign(ByVal ASource As EnergyStream)
 
             'Copy properties from the ASource stream.
 
             Me.EnergyFlow = ASource.EnergyFlow
-
-        End Sub
-
-        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-            If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.FillNodeItems()
-            End If
-
-            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
-                nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-                nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-            Next
-
-            'If Me.QTNodeTableItems Is Nothing Then
-            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            Me.QTFillNodeItems()
-            'End If
-
-            With Me.QTNodeTableItems
-
-                Dim valor As String
-
-                If Me.EnergyFlow.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(0).Value = valor
-                .Item(0).Unit = su.heatflow
-
-            End With
-
-        End Sub
-
-        Public Overrides Sub QTFillNodeItems()
-
-            With Me.QTNodeTableItems
-
-                .Clear()
-
-                .Add(0, New DWSIM.Extras.NodeItem(DWSIM.App.GetPropertyName("PROP_ES_0"), "", "", 0, 1, ""))
-
-            End With
 
         End Sub
 
@@ -5653,48 +5436,16 @@ Namespace DWSIM.SimulationObjects.Streams
 
 #Region "   CAPE-OPEN"
 
-        Public Property ComponentDescription() As String Implements CapeOpen.ICapeIdentification.ComponentDescription
-            Get
-                If Not Me.GraphicObject Is Nothing Then Return Me.GraphicObject.Name Else Return Me.m_ComponentDescription
-            End Get
-            Set(ByVal value As String)
-                Me.m_ComponentDescription = value
-            End Set
-        End Property
-
-        Public Property ComponentName() As String Implements CapeOpen.ICapeIdentification.ComponentName
-            Get
-                If Not Me.GraphicObject Is Nothing Then Return Me.GraphicObject.Tag Else Return Me.m_ComponentName
-            End Get
-            Set(ByVal value As String)
-                Me.m_ComponentName = value
-            End Set
-        End Property
-
         Private Sub m_work_OnParameterValueChanged(ByVal sender As Object, ByVal args As System.EventArgs) Handles m_work.ParameterValueChanged
             Me.EnergyFlow = m_work.SIValue / 1000
         End Sub
 
         Public Function Count() As Integer Implements CapeOpen.ICapeCollection.Count
-            'If m_params Is Nothing Then CreateParamCol()
-            Return 1 'Me.m_params.Count
+            Return 1
         End Function
 
         Public Function Item(ByVal index As Object) As Object Implements CapeOpen.ICapeCollection.Item
-            '    If m_params Is Nothing Then CreateParamCol()
-            '    Dim mypar As Object = Nothing
-            '    If IsNumeric(index) Then
-            '        mypar = m_params(index - 1)
-            '        Return mypar
-            '    Else
-            '        For Each p As ICapeIdentification In m_params
-            '            If p.ComponentName = index Then
-            '                mypar = p
-            '                Exit For
-            '            End If
-            '        Next
-            '        Return mypar
-            '    End If
+   
             Return m_work
         End Function
 

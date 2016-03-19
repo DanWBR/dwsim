@@ -1191,10 +1191,6 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
             Me.FormSurface.UpdateSelectedObject()
 
-            For Each o In Collections.FlowsheetObjectCollection.Values
-                o.UpdatePropertyNodes(Me.Options.SelectedUnitSystem, Me.Options.NumberFormat)
-            Next
-
         Catch ex As Exception
 
         End Try
@@ -2640,10 +2636,6 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
                                 FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
             obj.GraphicObject = gobj
             obj.SetFlowsheet(Me)
-            If Not obj.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
-                obj.FillNodeItems(True)
-                obj.QTFillNodeItems()
-            End If
             If Not gobj Is Nothing Then
                 obj.LoadData(xel.Elements.ToList)
                 If TypeOf obj Is Streams.MaterialStream Then

@@ -167,62 +167,10 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             m_ConvHist = New ConvergenceHistoryE
             m_WegPars = New WegsteinParameters
 
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
+            Me.ComponentName = name
+            Me.ComponentDescription = description
 
-        End Sub
 
-        Public Overrides Sub QTFillNodeItems()
-
-            With Me.QTNodeTableItems
-
-                .Clear()
-
-                .Add(0, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("Iteraes"), "", "", 0, 0, ""))
-                .Add(1, New DWSIM.Extras.NodeItem(DWSIM.App.GetLocalString("ErroE"), "", "", 1, 0, ""))
-
-            End With
-
-        End Sub
-
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-            If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.FillNodeItems()
-            End If
-
-            Try
-
-                For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
-                    nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-                    nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-                Next
-
-                If Me.QTNodeTableItems Is Nothing Then
-                    Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                    Me.QTFillNodeItems()
-                End If
-
-                With Me.QTNodeTableItems
-
-                    Dim valor As String
-
-                    .Item(0).Value = Me.IterationsTaken
-                    .Item(0).Unit = ""
-
-                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.ConvergenceHistory.EnergyE), nf)
-                    .Item(1).Value = valor
-                    .Item(1).Unit = su.heatflow
-
-                End With
-
-            Catch ex As Exception
-
-            End Try
 
         End Sub
 
@@ -340,8 +288,6 @@ SS:             Enew = Me.ConvergenceHistory.Energy
 final:          Me.IterationsTaken = Me.IterationCount.ToString
                 Me.IterationCount = 0
             End If
-
-            Me.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
 
         End Function
 

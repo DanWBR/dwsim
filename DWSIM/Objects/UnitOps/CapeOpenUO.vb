@@ -88,8 +88,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             Me.ComponentName = name
             Me.ComponentDescription = description
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
+
+
 
             If Not DWSIM.App.IsRunningOnMono Then
 
@@ -1493,17 +1493,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End If
         End Function
 
-        Public Overrides Sub QTFillNodeItems()
-            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            If Not _seluo Is Nothing Then
-                With _seluo
-                    Me.QTNodeTableItems.Add(0, New Extras.NodeItem("Name", .Name, "", 0, 0, Nothing))
-                    Me.QTNodeTableItems.Add(1, New Extras.NodeItem("Type Name", .TypeName, "", 1, 0, Nothing))
-                    Me.QTNodeTableItems.Add(2, New Extras.NodeItem("Version", .Version, "", 2, 0, Nothing))
-                End With
-            End If
-        End Sub
-
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             For Each p As ICapeIdentification In Me._params
                 If p.ComponentName = prop Then
@@ -1514,12 +1503,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Next
             Return 0
         End Function
-
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-            Me.QTFillNodeItems()
-
-        End Sub
 
 #End Region
 

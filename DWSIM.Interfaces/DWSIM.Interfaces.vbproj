@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="IFlowsheet.vb" />
     <Compile Include="IGraphicObject.vb" />
+    <Compile Include="IMaterialStream.vb" />
     <Compile Include="ISimulationObject.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

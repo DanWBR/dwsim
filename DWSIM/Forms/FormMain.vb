@@ -1057,34 +1057,6 @@ Public Class FormMain
 
                 Application.DoEvents()
 
-                Dim refill As Boolean = False
-
-                'refill (quick)table items for backwards compatibility
-                For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In flowsheet.Collections.FlowsheetObjectCollection.Values
-                    With obj
-                        If .NodeTableItems.Count > 0 Then
-                            For Each nvi As DWSIM.Extras.NodeItem In .NodeTableItems.Values
-                                Try
-                                    If Not nvi.Text.Contains("PROP_") Then
-                                        refill = True
-                                        Exit For
-                                    End If
-                                Catch ex As Exception
-
-                                End Try
-                            Next
-                        End If
-                        If refill Then
-                            .NodeTableItems.Clear()
-                            .QTNodeTableItems.Clear()
-                            .FillNodeItems()
-                            .QTFillNodeItems()
-                        End If
-                    End With
-                Next
-
-                Application.DoEvents()
-
                 flowsheet.FrmStSim1.Init(True)
 
                 Application.DoEvents()
@@ -1263,7 +1235,6 @@ Public Class FormMain
                 Dim id = obj.Name
                 Dim gobj = obj.GraphicObject
                 form.Collections.FlowsheetObjectCollection.Add(id, obj)
-                obj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Unit Operation Information", ex))
             End Try
@@ -1410,10 +1381,6 @@ Public Class FormMain
                                                                form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                                            obj.GraphicObject = gobj
                                            obj.SetFlowsheet(form)
-                                           If Not obj.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
-                                               obj.FillNodeItems(True)
-                                               obj.QTFillNodeItems()
-                                           End If
                                            If Not gobj Is Nothing Then
                                                obj.LoadData(xel.Elements.ToList)
                                                If TypeOf obj Is Streams.MaterialStream Then
@@ -1441,10 +1408,6 @@ Public Class FormMain
                                         form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                     obj.GraphicObject = gobj
                     obj.SetFlowsheet(form)
-                    If Not obj.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
-                        obj.FillNodeItems(True)
-                        obj.QTFillNodeItems()
-                    End If
                     If Not gobj Is Nothing Then
                         obj.LoadData(xel.Elements.ToList)
                         If TypeOf obj Is Streams.MaterialStream Then
@@ -1494,7 +1457,6 @@ Public Class FormMain
                     End If
                     obj.LoadData(xel2.Elements.ToList)
                     DirectCast(obj, TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
-                    form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value).Tabela = obj
                     form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Flowsheet Table Information", ex))

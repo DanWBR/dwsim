@@ -277,18 +277,6 @@ Namespace DWSIM.SimulationObjects.Reactors
             End Set
         End Property
 
-#Region "    Table Functions"
-
-        Public Overrides Sub QTFillNodeItems()
-
-        End Sub
-
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-        End Sub
-
-#End Region
-
     End Class
 
 End Namespace

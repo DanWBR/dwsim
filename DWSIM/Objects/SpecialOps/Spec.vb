@@ -258,10 +258,10 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 .Imports.AddType(GetType(System.Math))
             End With
 
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
+            Me.ComponentName = name
+            Me.ComponentDescription = description
+
+
 
             '// Define the context of our expression
             'ExpressionContext context = new ExpressionContext();
@@ -285,14 +285,6 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             'context.Variables.SetVariableValue(DWSIM.App.GetLocalString("a"), 144);
             '// Evaluate again to get the updated result
             'result = eGeneric.Evaluate();
-
-        End Sub
-
-        Public Overrides Sub QTFillNodeItems()
-
-        End Sub
-
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
 
         End Sub
 

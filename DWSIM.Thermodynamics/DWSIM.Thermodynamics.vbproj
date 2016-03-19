@@ -199,6 +199,8 @@
     <Compile Include="Property Packages\UNIFACPropertyPackage.vb" />
     <Compile Include="Models\UNIQUAC.vb" />
     <Compile Include="Property Packages\UNIQUACPropertyPackage.vb" />
+    <Compile Include="Databases\Databases.vb" />
+    <Compile Include="Systems of Units\SystemsOfUnits.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -209,7 +211,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -235,6 +236,9 @@
       <Name>DWSIM.Interfaces</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Streams\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

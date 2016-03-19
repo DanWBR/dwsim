@@ -54,10 +54,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
-            m_ComponentName = name
-            m_ComponentDescription = descricao
-            FillNodeItems()
-            QTFillNodeItems()
+            ComponentName = name
+            ComponentDescription = description
 
         End Sub
 
@@ -532,61 +530,6 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             FlowSheet.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-            If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.FillNodeItems()
-            End If
-
-            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
-                nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-                nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-            Next
-
-            If Me.QTNodeTableItems Is Nothing Then
-                Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.QTFillNodeItems()
-            End If
-
-            With Me.QTNodeTableItems
-
-                Dim valor As String
-
-                If Me.m_Qc Then
-                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.m_Qc), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(0).Value = valor
-                .Item(0).Unit = su.heatflow
-
-                If Me.m_Qb Then
-                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.m_Qb), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(1).Value = valor
-                .Item(1).Unit = su.heatflow
-
-            End With
-
-        End Sub
-
-        Public Overrides Sub QTFillNodeItems()
-
-            With Me.QTNodeTableItems
-
-                .Clear()
-
-                .Add(0, New DWSIM.Extras.NodeItem("QC", "", "", 0, 0, ""))
-                .Add(1, New DWSIM.Extras.NodeItem("QR", "", "", 1, 0, ""))
-
-            End With
-
-        End Sub
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter

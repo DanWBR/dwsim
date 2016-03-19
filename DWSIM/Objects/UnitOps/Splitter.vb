@@ -83,13 +83,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Sub New(ByVal Name As String, ByVal Description As String)
 
             MyBase.CreateNew()
-            Me.m_ComponentName = Name
-            Me.m_ComponentDescription = Description
+            Me.ComponentName = Name
+            Me.ComponentDescription = Description
             Me.m_ratios.Add(1.0#)
             Me.m_ratios.Add(0.0#)
             Me.m_ratios.Add(0.0#)
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
+
+
         End Sub
 
         Public Sub New()
@@ -329,56 +329,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             form.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-            If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.FillNodeItems()
-            End If
-
-            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
-                nti.Value = GetPropertyValue(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-                nti.Unit = GetPropertyUnit(nti.Text, FlowSheet.Options.SelectedUnitSystem)
-            Next
-
-            'If Me.QTNodeTableItems Is Nothing Then
-            Me.QTNodeTableItems = Nothing
-            Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            Me.QTFillNodeItems()
-            'End If
-
-            With Me.QTNodeTableItems
-                .Item(0).Value = Me.Ratios(0)
-                .Item(0).Unit = ""
-                .Item(1).Value = Me.Ratios(1)
-                .Item(1).Unit = ""
-                If OutCount = 3 Then
-                    .Item(2).Value = Me.Ratios(2)
-                    .Item(2).Unit = ""
-                End If
-            End With
-
-        End Sub
-
-        Public Overrides Sub QTFillNodeItems()
-            With Me.QTNodeTableItems
-
-                .Clear()
-
-                .Add(0, New DWSIM.Extras.NodeItem("S1", "", "", 0, 0, ""))
-                .Add(1, New DWSIM.Extras.NodeItem("S2", "", "", 1, 0, ""))
-
-                If Not Me.GraphicObject Is Nothing Then
-                    If Me.GraphicObject.OutputConnectors(2).IsAttached Then
-                        .Add(2, New DWSIM.Extras.NodeItem("S2", "", "", 2, 0, ""))
-                    End If
-                End If
-
-            End With
-
-        End Sub
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
             Dim Conversor As New DWSIM.SystemsOfUnits.Converter

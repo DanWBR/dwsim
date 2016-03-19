@@ -124,7 +124,7 @@ Public Class frmSurface
                 Flowsheet.FormProps.LblStatusObj.ForeColor = Color.FromKnownColor(KnownColor.ControlText)
             Else
                 Flowsheet.FormProps.LblNomeObj.Text = Me.FlowsheetDesignSurface.SelectedObject.Tag
-                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString(Flowsheet.Collections.FlowsheetObjectCollection.Item(Me.FlowsheetDesignSurface.SelectedObject.Name).Descricao)
+                Flowsheet.FormProps.LblTipoObj.Text = DWSIM.App.GetLocalString(Flowsheet.Collections.FlowsheetObjectCollection.Item(Me.FlowsheetDesignSurface.SelectedObject.Name).ComponentDescription)
                 Select Case Me.FlowsheetDesignSurface.SelectedObject.Status
                     Case Status.Calculated
                         Flowsheet.FormProps.LblStatusObj.Text = DWSIM.App.GetLocalString("Calculado")
@@ -653,54 +653,6 @@ Public Class frmSurface
 
                             Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(gobj.Name)
 
-                            If obj.TabelaRapida Is Nothing Then
-
-                                If Not obj.QTNodeTableItems Is Nothing Then
-
-                                    Dim tabela As New QuickTableGraphic(obj, px2.X + 5, px2.Y + 5)
-                                    obj.TabelaRapida = tabela
-                                    obj.TabelaRapida.BaseOwner = obj
-                                    tabela.Tag = obj.Name
-                                    tabela.Name = "QTAB-" & Guid.NewGuid.ToString
-                                    tabela.HeaderText = gobj.Tag
-                                    tabela.AdditionalInfo = Me.FlowsheetDesignSurface.Zoom
-                                    Me.m_qt = tabela
-                                    If Not Me.m_qt Is Nothing Then
-                                        If FlowsheetDesignSurface.AutoScrollPosition.X + px2.X * FlowsheetDesignSurface.Zoom + m_qt.Width * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Width Then
-                                            px2.X -= 50 + m_qt.Width / FlowsheetDesignSurface.Zoom
-                                        End If
-                                        If FlowsheetDesignSurface.AutoScrollPosition.Y + px2.Y * FlowsheetDesignSurface.Zoom + m_qt.Height * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Height Then
-                                            px2.Y -= 50 + m_qt.Height / FlowsheetDesignSurface.Zoom
-                                        End If
-                                        Me.m_qt.SetPosition(px2)
-                                    End If
-                                    Me.FlowsheetDesignSurface.drawingObjects.Add(tabela)
-                                    Me.ticks = 0
-
-                                End If
-
-                            Else
-
-                                Me.m_qt = obj.TabelaRapida
-                                Me.m_qt.AdditionalInfo = Me.FlowsheetDesignSurface.Zoom
-
-                                If Not Me.m_qt Is Nothing Then
-                                    If FlowsheetDesignSurface.AutoScrollPosition.X + px2.X * FlowsheetDesignSurface.Zoom + m_qt.Width * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Width Then
-                                        px2.X -= 50 + m_qt.Width / FlowsheetDesignSurface.Zoom
-                                    End If
-                                    If FlowsheetDesignSurface.AutoScrollPosition.Y + px2.Y * FlowsheetDesignSurface.Zoom + m_qt.Height * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Height Then
-                                        px2.Y -= 50 + m_qt.Height / FlowsheetDesignSurface.Zoom
-                                    End If
-                                    Me.m_qt.SetPosition(px2)
-                                End If
-
-                                If Not Me.FlowsheetDesignSurface.drawingObjects.Contains(obj.TabelaRapida) Then
-                                    obj.TabelaRapida.BaseOwner = obj
-                                    Me.FlowsheetDesignSurface.drawingObjects.Add(obj.TabelaRapida)
-                                End If
-
-                            End If
-
                         End If
 
                     End If
@@ -748,52 +700,13 @@ Public Class frmSurface
 
     End Sub
 
-    Private Sub ConfigurarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConfigurarToolStripMenuItem.Click
-
-        Dim fct As New FormConfigureTable
-
-        Flowsheet = My.Application.ActiveSimulation
-
-        Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.SelectedObject.Name)
-        'obj.FillNodeItems()
-        Dim ni As DWSIM.Extras.NodeItem
-        If obj.NodeTableItems.Count > 0 Then
-            For Each nti As DWSIM.Extras.NodeItem In obj.NodeTableItems.Values
-                If DWSIM.App.GetPropertyName(nti.Text) = nti.Text Then
-                    obj.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                    obj.FillNodeItems()
-                    Exit For
-                End If
-            Next
-        End If
-        If obj.NodeTableItems Is Nothing Then
-            obj.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            obj.FillNodeItems()
-        End If
-        For Each ni In obj.NodeTableItems.Values
-            fct.NodeItems.Add(ni.Key, New DWSIM.Extras.NodeItem(ni.Text, ni.Value, ni.Unit, ni.Key, ni.Level, ni.ParentNode))
-            fct.NodeItems(ni.Key).Checked = ni.Checked
-        Next
-        fct.objname = obj.Name
-        fct.ShowDialog(Me)
-
-    End Sub
-
     Private Sub MostrarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MostrarToolStripMenuItem.Click
         If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
             If Me.MostrarToolStripMenuItem.Checked = True Then
                 Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.SelectedObject.Name)
-                Dim tabela As New TableGraphic(obj, Me.FlowsheetDesignSurface.SelectedObject.X + Me.FlowsheetDesignSurface.SelectedObject.Width, Me.FlowsheetDesignSurface.SelectedObject.Y + Me.FlowsheetDesignSurface.SelectedObject.Height)
-                obj.Tabela = tabela
-                tabela.Tag = obj.Name
-                tabela.Name = "TAB-" & Guid.NewGuid.ToString
-                tabela.HeaderText = Me.FlowsheetDesignSurface.SelectedObject.Tag
-                Me.FlowsheetDesignSurface.drawingObjects.Add(tabela)
                 Me.FlowsheetDesignSurface.Invalidate()
             Else
                 Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.SelectedObject.Name)
-                Me.FlowsheetDesignSurface.drawingObjects.Remove(obj.Tabela)
-                obj.Tabela = Nothing
                 Me.FlowsheetDesignSurface.Invalidate()
             End If
         End If
@@ -887,12 +800,6 @@ Public Class frmSurface
                     Me.HorizontalmenteToolStripMenuItem.Checked = False
                 End If
 
-                If obj.Tabela Is Nothing Then
-                    Me.MostrarToolStripMenuItem.Checked = False
-                Else
-                    Me.MostrarToolStripMenuItem.Checked = True
-                End If
-
                 If Me.FlowsheetDesignSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
 
                     EditCompTSMI.Visible = True
@@ -953,11 +860,6 @@ Public Class frmSurface
                 Me.HorizontalmenteToolStripMenuItem.Checked = True
             Else
                 Me.HorizontalmenteToolStripMenuItem.Checked = False
-            End If
-            If obj.Tabela Is Nothing Then
-                Me.MostrarToolStripMenuItem.Checked = False
-            Else
-                Me.MostrarToolStripMenuItem.Checked = True
             End If
 
         Else
@@ -1053,8 +955,6 @@ Public Class frmSurface
 
         Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(gobj.Name)
         Dim newobj As DWSIM.SimulationObjects.UnitOperations.BaseClass = obj.Clone
-        newobj.Tabela = Nothing
-        newobj.TabelaRapida = Nothing
 
         Dim searchtext As String = gobj.Tag.Split("(")(0).Trim()
 
@@ -3350,7 +3250,6 @@ Public Class frmSurface
                     If Not DWSIM.App.IsRunningOnMono Then
                         Dim selectionControl As New ScriptEditorForm
                         selectionControl.scripttext = myobj.ScriptText
-                        selectionControl.language = myobj.Language
                         selectionControl.fontname = myobj.FontName
                         selectionControl.fontsize = myobj.FontSize
                         selectionControl.includes = myobj.Includes
@@ -3367,7 +3266,6 @@ Public Class frmSurface
                     Else
                         Dim selectionControl As New ScriptEditorFormMono
                         selectionControl.scripttext = myobj.ScriptText
-                        selectionControl.language = myobj.Language
                         selectionControl.fontname = myobj.FontName
                         selectionControl.fontsize = myobj.FontSize
                         selectionControl.includes = myobj.Includes

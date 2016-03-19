@@ -70,7 +70,6 @@ Namespace DWSIM.Flowsheet
                                 myUnitOp = form.Collections.FlowsheetObjectCollection(myObj.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                                 If objArgs.Sender = "Spec" Or objArgs.Sender = "FlowsheetSolver" Then
                                     CalculateMaterialStream(form, myObj, , OnlyMe)
-                                    myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                                 Else
                                     If objArgs.Calculated = True Then
                                         gobj = myUnitOp.GraphicObject
@@ -105,7 +104,6 @@ Namespace DWSIM.Flowsheet
                                     myUnitOp.GraphicObject.Calculated = False
                                     form.UpdateStatusLabel(String.Format(DWSIM.App.GetLocalString("CalculatingWith"), gobj.Tag, "'" & myUnitOp.PropertyPackage.Tag & "' (" & myUnitOp.PropertyPackage.ComponentName & ")"))
                                     myUnitOp.Solve()
-                                    myUnitOp.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                                     form.WriteToLog(gobj.Tag & ": " & DWSIM.App.GetLocalString("Calculadocomsucesso"), Color.DarkGreen, DWSIM.Flowsheet.MessageType.Information)
                                     myUnitOp.GraphicObject.Calculated = True
                                     If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myUnitOp.AttachedSpecId), Spec).Calculate()
@@ -116,7 +114,6 @@ Namespace DWSIM.Flowsheet
                                     myUnitOp.Unsolve()
                                     myUnitOp.GraphicObject.Calculated = False
                                 End If
-                                myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                                 form.FormSurface.Refresh()
                             End If
                             If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
@@ -131,7 +128,6 @@ Namespace DWSIM.Flowsheet
                             myObj.GraphicObject.Calculated = True
                             If myObj.IsSpecAttached = True And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                             form.FormProps.PGEx1.Refresh()
-                            myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                         Else
                             Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                             Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByName(objArgs.Name, form.FormSurface.FlowsheetDesignSurface)
@@ -150,7 +146,6 @@ Namespace DWSIM.Flowsheet
                                 Next
                             End If
                             If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
-                            myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                         End If
                 End Select
 
@@ -185,19 +180,16 @@ Namespace DWSIM.Flowsheet
                         RaiseEvent MaterialStreamCalculationStarted(form, New System.EventArgs(), myObj)
                         CalculateMaterialStreamAsync(form, myObj, ct)
                         If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
-                        myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                         RaiseEvent MaterialStreamCalculationFinished(form, New System.EventArgs(), myObj)
                     Case ObjectType.EnergyStream
                         Dim myObj As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                         If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
-                        myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
-                        myObj.Calculated = True
+                         myObj.Calculated = True
                     Case Else
                         Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                         RaiseEvent UnitOpCalculationStarted(form, New System.EventArgs(), objArgs)
                         myObj.Solve()
                         If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
-                        myObj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                         RaiseEvent UnitOpCalculationFinished(form, New System.EventArgs(), objArgs)
                 End Select
                 form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, objArgs.Name)
@@ -498,7 +490,7 @@ Namespace DWSIM.Flowsheet
                 Try
                     form.FormQueue.TextBox1.Clear()
                     For Each c As DWSIM.Extras.StatusChangeEventArgs In form.CalculationQueue
-                        form.FormQueue.TextBox1.AppendText(form.Collections.FlowsheetObjectCollection(c.Name).GraphicObject.Tag & vbTab & vbTab & vbTab & "[" & DWSIM.App.GetLocalString(form.Collections.FlowsheetObjectCollection(c.Name).Descricao) & "]" & vbCrLf)
+                        form.FormQueue.TextBox1.AppendText(form.Collections.FlowsheetObjectCollection(c.Name).GraphicObject.Tag & vbTab & vbTab & vbTab & "[" & DWSIM.App.GetLocalString(form.Collections.FlowsheetObjectCollection(c.Name).ComponentDescription) & "]" & vbCrLf)
                     Next
                 Catch ex As Exception
 
@@ -764,7 +756,7 @@ Namespace DWSIM.Flowsheet
                                 baseobj.GraphicObject.Status = Status.Inactive
                             Else
                                 baseobj.GraphicObject.Calculated = baseobj.Calculated
-                                If baseobj.Calculated Then baseobj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
+                                'If baseobj.Calculated Then baseobj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                             End If
                         End If
                     Next
@@ -780,7 +772,7 @@ Namespace DWSIM.Flowsheet
                                         baseobj.GraphicObject.Status = Status.Inactive
                                     Else
                                         baseobj.GraphicObject.Calculated = baseobj.Calculated
-                                        If baseobj.Calculated Then baseobj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
+                                        'If baseobj.Calculated Then baseobj.UpdatePropertyNodes(form.Options.SelectedUnitSystem, form.Options.NumberFormat)
                                     End If
                                 End If
                             End If

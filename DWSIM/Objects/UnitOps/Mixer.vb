@@ -49,11 +49,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
-            Me.ShowQuickTable = False
+            Me.ComponentName = name
+            Me.ComponentDescription = description
+
+
+
 
         End Sub
 
@@ -215,14 +215,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             CalculateFlowsheet(FlowSheet, objargs, Nothing)
 
         End Function
-
-        Public Overloads Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-        End Sub
-
-        Public Overrides Sub QTFillNodeItems()
-
-        End Sub
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 

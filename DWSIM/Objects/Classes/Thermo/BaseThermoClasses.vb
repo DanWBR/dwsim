@@ -34,8 +34,6 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
 
-        Protected m_ComponentDescription As String = ""
-        Protected m_ComponentName As String = ""
         Protected m_molarfraction As Nullable(Of Double) = 0.0#
         Protected m_massfraction As Nullable(Of Double) = 0.0#
         Protected m_molarflow As Nullable(Of Double) = 0.0#
@@ -168,29 +166,16 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         End Property
 
         Public Property ComponentDescription() As String
-            Get
-                Return m_ComponentDescription
-            End Get
-            Set(ByVal value As String)
-                m_ComponentDescription = value
-            End Set
-        End Property
 
         Public Property ComponentName() As String
-            Get
-                Return m_ComponentName
-            End Get
-            Set(ByVal value As String)
-                m_ComponentName = value
-            End Set
-        End Property
+       
 
         Public Property Name() As String
             Get
-                Return m_ComponentName
+                Return ComponentName
             End Get
             Set(ByVal value As String)
-                m_ComponentName = value
+                ComponentName = value
             End Set
         End Property
 
@@ -200,8 +185,8 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Public Sub New(ByVal name As String, ByVal description As String)
 
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = description
+            Me.ComponentName = name
+            Me.ComponentDescription = description
 
         End Sub
 

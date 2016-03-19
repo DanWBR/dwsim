@@ -73,8 +73,8 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             MyBase.New()
 
-            'Me.FillNodeItems()
-            'Me.QTFillNodeItems()
+            '
+            '
 
             'N00 = New Dictionary(Of String, Double)
             'DN = New Dictionary(Of String, Double)
@@ -91,11 +91,11 @@ Namespace DWSIM.SimulationObjects.Reactors
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.new()
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
-   
+            Me.ComponentName = name
+            Me.ComponentDescription = description
+
+
+
             N00 = New Dictionary(Of String, Double)
             DN = New Dictionary(Of String, Double)
             C0 = New Dictionary(Of String, Double)
@@ -826,63 +826,6 @@ Namespace DWSIM.SimulationObjects.Reactors
             form.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overrides Sub QTFillNodeItems()
-
-            With Me.QTNodeTableItems
-
-                .Clear()
-
-                .Add(0, New DWSIM.Extras.NodeItem("Delta-P", "", "", 0, 0, ""))
-                .Add(1, New DWSIM.Extras.NodeItem("Delta-T", "", "", 1, 0, ""))
-                .Add(2, New DWSIM.Extras.NodeItem("Delta-Q", "", "", 2, 0, ""))
-
-            End With
-
-        End Sub
-
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-            Me.ShowQuickTable = True
-
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-
-            If Me.QTNodeTableItems Is Nothing Then
-                Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.QTFillNodeItems()
-            End If
-
-            With Me.QTNodeTableItems
-
-                Dim valor As String
-
-                If Me.DeltaP.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(0).Value = valor
-                .Item(0).Unit = su.deltaP
-
-                If Me.DeltaT.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(1).Value = valor
-                .Item(1).Unit = su.deltaT
-
-                If Me.DeltaQ.HasValue Then
-                    valor = Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ), nf)
-                Else
-                    valor = DWSIM.App.GetLocalString("NC")
-                End If
-                .Item(2).Value = valor
-                .Item(2).Unit = su.heatflow
-
-            End With
-
-        End Sub
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 

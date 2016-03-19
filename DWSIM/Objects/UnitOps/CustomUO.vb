@@ -36,7 +36,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
         Private _scripttext As String = ""
-        Private _scriptlanguage As scriptlanguage = scriptlanguage.IronPython
         Private _includes() As String
         Private _fontname As String = "Courier New"
         Private _fontsize As Integer = 10
@@ -87,15 +86,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End Set
         End Property
 
-        Public Property Language() As scriptlanguage
-            Get
-                Return _scriptlanguage
-            End Get
-            Set(ByVal value As scriptlanguage)
-                _scriptlanguage = value
-            End Set
-        End Property
-
         Public Sub New()
             MyBase.New()
             InputVariables = New Dictionary(Of String, Double)
@@ -106,11 +96,15 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             MyBase.CreateNew()
             InputVariables = New Dictionary(Of String, Double)
             OutputVariables = New Dictionary(Of String, Double)
-            Me.m_ComponentName = name
-            Me.m_ComponentDescription = descricao
-            Me.FillNodeItems()
-            Me.QTFillNodeItems()
+            Me.ComponentName = name
+            Me.ComponentDescription = description
+
+
         End Sub
+
+        Private Property engine As ScriptEngine
+
+        Private Property scope As Object
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
@@ -188,73 +182,70 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 oes1 = Nothing
             End If
 
-            Select Case Language
-                Case 2
-                    engine = IronPython.Hosting.Python.CreateEngine()
-                    Dim paths(My.Settings.ScriptPaths.Count - 1) As String
-                    My.Settings.ScriptPaths.CopyTo(paths, 0)
-                    Try
-                        engine.SetSearchPaths(paths)
-                    Catch ex As Exception
-                    End Try
-                    engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-                    engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
-                    engine.Runtime.LoadAssembly(GetType(GraphicObject).Assembly)
-                    engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
-                    scope = engine.CreateScope()
-                    scope.SetVariable("Flowsheet", FlowSheet)
-                    scope.SetVariable("Spreadsheet", FlowSheet.FormSpreadsheet)
-                    scope.SetVariable("Plugins", My.Application.UtilityPlugins)
-                    scope.SetVariable("Me", Me)
-                    scope.SetVariable("AbortScript", My.Application.CalculatorStopRequested)
-                    For Each variable In InputVariables
-                        scope.SetVariable(variable.Key, variable.Value)
-                    Next
-                    scope.SetVariable("ims1", ims1)
-                    scope.SetVariable("ims2", ims2)
-                    scope.SetVariable("ims3", ims3)
-                    scope.SetVariable("ims4", ims4)
-                    scope.SetVariable("ims5", ims5)
-                    scope.SetVariable("ims6", ims6)
-                    scope.SetVariable("oms1", oms1)
-                    scope.SetVariable("oms2", oms2)
-                    scope.SetVariable("oms3", oms3)
-                    scope.SetVariable("oms4", oms4)
-                    scope.SetVariable("oms5", oms5)
-                    scope.SetVariable("oms6", oms6)
-                    scope.SetVariable("ies1", ies1)
-                    scope.SetVariable("oes1", oes1)
-                    Dim Solver As New DWSIM.Flowsheet.FlowsheetSolver
-                    scope.SetVariable("Solver", Solver)
-                    Dim txtcode As String = ""
-                    If Not Includes Is Nothing Then
-                        For Each fname As String In Me.Includes
-                            txtcode += File.ReadAllText(fname) + vbCrLf
-                        Next
-                    End If
-                    txtcode += Me.ScriptText
-                    Dim source As Microsoft.Scripting.Hosting.ScriptSource = Me.engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
-                    Try
-                        Me.ErrorMessage = ""
-                        source.Execute(Me.scope)
-                        OutputVariables.Clear()
-                        For Each variable In scope.GetVariableNames
-                            If TypeOf scope.GetVariable(variable) Is Double Or TypeOf scope.GetVariable(variable) Is Integer Then OutputVariables.Add(variable, scope.GetVariable(variable))
-                        Next
-                    Catch ex As Exception
-                        Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
-                        Me.ErrorMessage = ops.FormatException(ex).ToString
-                        Me.DeCalculate()
-                        engine = Nothing
-                        scope = Nothing
-                        source = Nothing
-                        Throw New Exception(Me.ErrorMessage, ex)
-                    Finally
-                        engine = Nothing
-                        scope = Nothing
-                        source = Nothing
-                    End Try
-            End Select
+            engine = IronPython.Hosting.Python.CreateEngine()
+            Dim paths(My.Settings.ScriptPaths.Count - 1) As String
+            My.Settings.ScriptPaths.CopyTo(paths, 0)
+            Try
+                engine.SetSearchPaths(paths)
+            Catch ex As Exception
+            End Try
+            engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
+            engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
+            engine.Runtime.LoadAssembly(GetType(GraphicObject).Assembly)
+            engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
+            scope = engine.CreateScope()
+            scope.SetVariable("Flowsheet", FlowSheet)
+            scope.SetVariable("Spreadsheet", FlowSheet.FormSpreadsheet)
+            scope.SetVariable("Plugins", My.Application.UtilityPlugins)
+            scope.SetVariable("Me", Me)
+            scope.SetVariable("AbortScript", My.Application.CalculatorStopRequested)
+            For Each variable In InputVariables
+                scope.SetVariable(variable.Key, variable.Value)
+            Next
+            scope.SetVariable("ims1", ims1)
+            scope.SetVariable("ims2", ims2)
+            scope.SetVariable("ims3", ims3)
+            scope.SetVariable("ims4", ims4)
+            scope.SetVariable("ims5", ims5)
+            scope.SetVariable("ims6", ims6)
+            scope.SetVariable("oms1", oms1)
+            scope.SetVariable("oms2", oms2)
+            scope.SetVariable("oms3", oms3)
+            scope.SetVariable("oms4", oms4)
+            scope.SetVariable("oms5", oms5)
+            scope.SetVariable("oms6", oms6)
+            scope.SetVariable("ies1", ies1)
+            scope.SetVariable("oes1", oes1)
+            Dim Solver As New DWSIM.Flowsheet.FlowsheetSolver
+            scope.SetVariable("Solver", Solver)
+            Dim txtcode As String = ""
+            If Not Includes Is Nothing Then
+                For Each fname As String In Me.Includes
+                    txtcode += File.ReadAllText(fname) + vbCrLf
+                Next
+            End If
+            txtcode += Me.ScriptText
+            Dim source As Microsoft.Scripting.Hosting.ScriptSource = Me.engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
+            Try
+                Me.ErrorMessage = ""
+                source.Execute(Me.scope)
+                OutputVariables.Clear()
+                For Each variable In scope.GetVariableNames
+                    If TypeOf scope.GetVariable(variable) Is Double Or TypeOf scope.GetVariable(variable) Is Integer Then OutputVariables.Add(variable, scope.GetVariable(variable))
+                Next
+            Catch ex As Exception
+                Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
+                Me.ErrorMessage = ops.FormatException(ex).ToString
+                Me.DeCalculate()
+                engine = Nothing
+                scope = Nothing
+                source = Nothing
+                Throw New Exception(Me.ErrorMessage, ex)
+            Finally
+                engine = Nothing
+                scope = Nothing
+                source = Nothing
+            End Try
 
             If Not oes1 Is Nothing Then
                 oes1.GraphicObject.Calculated = True
@@ -271,7 +262,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             FlowSheet.CalculationQueue.Enqueue(objargs)
 
-            Me.QTFillNodeItems()
+
 
         End Function
 
@@ -510,47 +501,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Return Nothing
         End Function
 
-        Public Overrides Sub QTFillNodeItems()
-            If Me.QTNodeTableItems Is Nothing Then Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-            With Me.QTNodeTableItems
-                .Clear()
-                Dim i As Integer = 0
-                For Each item In Me.OutputVariables
-                    .Add(i, New DWSIM.Extras.NodeItem(item.Key, Format(item.Value, FlowSheet.Options.NumberFormat), "", i, 0, ""))
-                    i += 1
-                Next
-            End With
-        End Sub
-
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             If Me.InputVariables.ContainsKey(prop) Then Me.InputVariables(prop) = propval
             Return Nothing
         End Function
-
-        Public Overrides Sub UpdatePropertyNodes(ByVal su As SystemsOfUnits.Units, ByVal nf As String)
-
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-            If Me.NodeTableItems Is Nothing Then
-                Me.NodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.FillNodeItems()
-            End If
-
-            For Each nti As Extras.NodeItem In Me.NodeTableItems.Values
-                If Me.OutputVariables.ContainsKey(nti.Text) Then nti.Value = Me.OutputVariables(nti.Text)
-                nti.Unit = ""
-            Next
-
-            If Me.QTNodeTableItems Is Nothing Then
-                Me.QTNodeTableItems = New System.Collections.Generic.Dictionary(Of Integer, DWSIM.Extras.NodeItem)
-                Me.QTFillNodeItems()
-            End If
-
-            For Each nti As Extras.NodeItem In Me.QTNodeTableItems.Values
-                If Me.OutputVariables.ContainsKey(nti.Text) Then nti.Value = Format(Me.OutputVariables(nti.Text), Me.FlowSheet.Options.NumberFormat)
-                nti.Unit = ""
-            Next
-
-        End Sub
 
         Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
 
@@ -569,18 +523,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Me.OutputVariables.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "OutputVariables").Elements.ToList
                 Me.OutputVariables.Add(xel.@Key, Double.Parse(xel.@Value, ci))
-            Next
-
-            m_nodeitems = Nothing
-            FillNodeItems(True)
-            QTFillNodeItems()
-
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "NodeItems").Elements
-                Dim text As String = xel2.@Text
-                Dim ni2 As DWSIM.Extras.NodeItem = (From ni As DWSIM.Extras.NodeItem In m_nodeitems.Values Select ni Where ni.Text = text).SingleOrDefault
-                If Not ni2 Is Nothing Then
-                    ni2.Checked = True
-                End If
             Next
 
         End Function
@@ -611,18 +553,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Protected WithEvents m_sl As OptionParameter
 
-        Private Sub m_sl_OnParameterValueChanged(ByVal sender As Object, ByVal args As System.EventArgs) Handles m_sl.ParameterValueChanged
-            Select Case m_sl.Value
-                Case "IronPython"
-                    Me._scriptlanguage = scriptlanguage.IronPython
-            End Select
-        End Sub
-
         Public Overrides Sub Initialize()
 
             My.Application.ChangeUICulture("en-US")
-
-            m_sl = New OptionParameter("Script Language", "Select the scripting language for this Unit Operation.", Me.Language.ToString, "IronPython", New String() {"IronPython", "Lua"}, True, CapeParamMode.CAPE_INPUT)
 
             'set CAPE-OPEN Mode 
             _capeopenmode = True
@@ -658,18 +591,12 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             _parameters = New ParameterCollection()
 
-            ' create parameters
-            With _parameters
-                .Add(m_sl)
-            End With
-
         End Sub
 
         Public Overrides Sub Edit1()
 
             Dim edform As New ScriptEditorForm
             With edform
-                .language = Me.Language
                 .fontname = Me.FontName
                 .fontsize = Me.FontSize
                 .includes = Me.Includes
@@ -723,55 +650,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             ies1 = TryCast(Me._ports(20).connectedObject, ICapeCollection)
             oes1 = TryCast(Me._ports(21).connectedObject, ICapeCollection)
 
-            Select Case Language
-                Case 4
-                    'Dim lscript As New Lua
-                    'Try
-                    '    lscript("pme") = Me._simcontext
-                    '    lscript("dwsim") = GetType(DWSIM.Thermodynamics.BaseClasses.Phase).Assembly
-                    '    lscript("capeopen") = GetType(ICapeIdentification).Assembly
-                    '    lscript("ims1") = ims1
-                    '    lscript("ims2") = ims2
-                    '    lscript("ims3") = ims3
-                    '    lscript("ims4") = ims4
-                    '    lscript("ims5") = ims5
-                    '    lscript("ims6") = ims6
-                    '    lscript("ims7") = ims7
-                    '    lscript("ims8") = ims8
-                    '    lscript("ims9") = ims9
-                    '    lscript("ims10") = ims10
-                    '    lscript("oms1") = oms1
-                    '    lscript("oms2") = oms2
-                    '    lscript("oms3") = oms3
-                    '    lscript("oms4") = oms4
-                    '    lscript("oms5") = oms5
-                    '    lscript("oms6") = oms6
-                    '    lscript("oms7") = oms7
-                    '    lscript("oms8") = oms8
-                    '    lscript("oms9") = oms9
-                    '    lscript("oms10") = oms10
-                    '    lscript("ies1") = ies1
-                    '    lscript("oes1") = oes1
-                    '    Dim txtcode As String = ""
-                    '    If Not Includes Is Nothing Then
-                    '        For Each fname As String In Me.Includes
-                    '            txtcode += File.ReadAllText(fname) + vbCrLf
-                    '        Next
-                    '    End If
-                    '    txtcode += Me.ScriptText
-                    '    lscript.DoString(txtcode)
-                    '    _lastrun = "script executed succesfully."
-                    'Catch ex As Exception
-                    '    Me.ErrorMessage = ex.ToString
-                    '    CType(Me._simcontext, ICapeDiagnostic).LogMessage(Me.ErrorMessage)
-                    '    Throw ex
-                    'Finally
-                    '    Me._calclog = Me.ErrorMessage
-                    '    _lastrun = "error executing script: " & _calclog
-                    '    lscript = Nothing
-                    'End Try
-                Case 2
-                    Dim source As Microsoft.Scripting.Hosting.ScriptSource
+            Dim source As Microsoft.Scripting.Hosting.ScriptSource
                     Try
                         engine = IronPython.Hosting.Python.CreateEngine()
                         engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
@@ -829,8 +708,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         Me._calclog = Me.ErrorMessage
                         _lastrun = "error executing script: " & _calclog
                     End Try
-            End Select
-
+         
         End Sub
 
         Public Overrides Sub Terminate1()
@@ -868,11 +746,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                 myarr = mySerializer.Deserialize(memoryStream)
 
-                Me.Language = myarr(0)
-                'Me._ports = myarr(1)
-                Me.ScriptText = myarr(1)
-                Me.FontName = myarr(2)
-                Me.FontSize = myarr(3)
+                Me.ScriptText = myarr(0)
+                Me.FontName = myarr(1)
+                Me.FontSize = myarr(2)
 
                 myarr = Nothing
                 mySerializer = Nothing
@@ -895,7 +771,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             With props
 
-                .Add(Me.Language)
                 .Add(Me.ScriptText)
                 .Add(Me.FontName)
                 .Add(Me.FontSize)
