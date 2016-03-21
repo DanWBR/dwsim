@@ -50,7 +50,6 @@ Namespace PropertyPackages
             'DirectCast(m_act, NRTL).InteractionParameters("Water").Add("Ammonia", New NRTL_IPData() With {.A21 = 1453.9636, .A12 = -1712.3278, .alpha12 = 0.2})
 
             Me.IsConfigurable = False
-            Me.ConfigForm = Nothing
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
 
         End Sub
@@ -64,7 +63,6 @@ Namespace PropertyPackages
             'DirectCast(m_act, NRTL).InteractionParameters("Water").Add("Ammonia", New NRTL_IPData() With {.A21 = 1453.9636, .A12 = -1712.3278, .alpha12 = 0.2})
 
             Me.IsConfigurable = False
-            Me.ConfigForm = Nothing
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
 
         End Sub
@@ -72,14 +70,13 @@ Namespace PropertyPackages
         Public Overrides Sub ReconfigureConfigForm()
 
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = Nothing
-
+         
         End Sub
 
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
-                Dim constprops As New List(Of ConstantProperties)
-                For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     constprops.Add(su.ConstantProperties)
                 Next
                 Return New Auxiliary.FlashAlgorithms.SourWater With {.CompoundProperties = constprops}
@@ -198,22 +195,22 @@ Namespace PropertyPackages
 
         End Function
 
-        Sub Setup(conc As Dictionary(Of String, Double), Vx As Double(), CompoundProperties As List(Of ConstantProperties))
+        Sub Setup(conc As Dictionary(Of String, Double), Vx As Double(), CompoundProperties As List(Of Interfaces.ICompoundConstantProperties))
 
-            Dim wid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").FirstOrDefault)
-            Dim co2id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Name = "Carbon dioxide").FirstOrDefault)
-            Dim nh3id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Name = "Ammonia").FirstOrDefault)
-            Dim h2sid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Name = "Hydrogen sulfide").FirstOrDefault)
-            Dim naohid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "NaOH").FirstOrDefault)
-            Dim naid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "Na+").FirstOrDefault)
-            Dim ohid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "OH-").FirstOrDefault)
-            Dim hid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "H+").FirstOrDefault)
-            Dim nh4id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "NH4+").FirstOrDefault)
-            Dim hcoid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "HCO3-").FirstOrDefault)
-            Dim co3id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "CO3-2").FirstOrDefault)
-            Dim h2nid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "H2NCOO-").FirstOrDefault)
-            Dim hsid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "HS-").FirstOrDefault)
-            Dim s2id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "S-2").FirstOrDefault)
+            Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").FirstOrDefault)
+            Dim co2id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Name = "Carbon dioxide").FirstOrDefault)
+            Dim nh3id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Name = "Ammonia").FirstOrDefault)
+            Dim h2sid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Name = "Hydrogen sulfide").FirstOrDefault)
+            Dim naohid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "NaOH").FirstOrDefault)
+            Dim naid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "Na+").FirstOrDefault)
+            Dim ohid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "OH-").FirstOrDefault)
+            Dim hid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "H+").FirstOrDefault)
+            Dim nh4id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "NH4+").FirstOrDefault)
+            Dim hcoid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "HCO3-").FirstOrDefault)
+            Dim co3id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "CO3-2").FirstOrDefault)
+            Dim h2nid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "H2NCOO-").FirstOrDefault)
+            Dim hsid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "HS-").FirstOrDefault)
+            Dim s2id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "S-2").FirstOrDefault)
 
             'calculate solution amounts
 

@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 Imports System.Threading.Tasks
 Imports System.Linq
 
@@ -534,7 +534,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
             WriteDebugInfo("PH Flash [NL]: Current T = " & T & ", Current H Error = " & herr)
 
-            CheckCalculatorStatus()
+            App.Flowsheet.CheckStatus()
 
         End Function
 
@@ -573,7 +573,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
             WriteDebugInfo("PS Flash [NL]: Current T = " & T & ", Current S Error = " & serr)
 
-            CheckCalculatorStatus()
+            App.Flowsheet.CheckStatus()
 
         End Function
         Function OBJ_FUNC_PV_FLASH(ByVal Type As String, ByVal T As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
@@ -589,7 +589,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
             Return Vf - V
 
-            CheckCalculatorStatus()
+            App.Flowsheet.CheckStatus()
 
         End Function
         Function Herror(ByVal type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object

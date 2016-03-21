@@ -200,7 +200,7 @@ Public Class FormReportConfig
     Private Sub FormReportConfig_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         frm = My.Application.ActiveSimulation
-        Me.Text = frm.Options.SimNome & " - " & DWSIM.App.GetLocalString("RelatoriodaSimulacao")
+        Me.Text = frm.Options.SimulationName & " - " & DWSIM.App.GetLocalString("RelatoriodaSimulacao")
 
         Me.ListView1.Items.Clear()
 
@@ -316,8 +316,8 @@ Public Class FormReportConfig
 
         verlbl.Text = "DWSIM " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
 
-        If Not frm.Options.SimNome Is Nothing Then titlbl.Text = frm.Options.SimNome
-        If Not frm.Options.SimComentario Is Nothing Then comlbl.Text = frm.Options.SimComentario
+        If Not frm.Options.SimulationName Is Nothing Then titlbl.Text = frm.Options.SimulationName
+        If Not frm.Options.SimulationComments Is Nothing Then comlbl.Text = frm.Options.SimulationComments
 
         Dim nlbl As NeoDataType.MyNeoReport.Label = MyReport.Page.PageFooter.Items("Label")
         nlbl.Text = ""
@@ -352,8 +352,8 @@ Public Class FormReportConfig
 
         Dim titlbl As NeoDataType.MyNeoReport.Label = MyReport.Page.PageHeader.Items("Label5")
         Dim comlbl As NeoDataType.MyNeoReport.Label = MyReport.Page.PageHeader.Items("Label6")
-        If Not frm.Options.SimNome Is Nothing Then titlbl.Text = frm.Options.SimNome
-        If Not frm.Options.SimComentario Is Nothing Then comlbl.Text = frm.Options.SimComentario
+        If Not frm.Options.SimulationName Is Nothing Then titlbl.Text = frm.Options.SimulationName
+        If Not frm.Options.SimulationComments Is Nothing Then comlbl.Text = frm.Options.SimulationComments
 
         MyReport.Print()
 

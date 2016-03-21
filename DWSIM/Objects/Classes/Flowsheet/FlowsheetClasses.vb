@@ -93,6 +93,8 @@ Namespace DWSIM.Flowsheet
 
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
 
+        Implements Interfaces.IFlowsheetOptions
+
         Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
 
         Public PropertyPackages As Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
@@ -114,54 +116,15 @@ Namespace DWSIM.Flowsheet
         Public Databases As Dictionary(Of String, String())
 
         Public Reactions As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Reaction)
+
         Public ReactionSets As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ReactionSet)
+
         Public SimulationMode As String = ""
 
         Public PetroleumAssays As Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)
 
         Public SelectedUnitSystem As DWSIM.SystemsOfUnits.Units
 
-        Public NumberFormat As String = "#0.0####"
-        Public FractionNumberFormat As String = "#0.0######"
-
-        Public SempreCalcularFlashPH As Boolean = False
-
-        Public CalculateBubbleAndDewPoints As Boolean = False
-
-        Public ValidateEquilibriumCalc As Boolean = False
-        Public UsePhaseIdentificationAlgorithm As Boolean = False
-
-        Public SimNome As String = "simulation"
-        Public SimAutor As String = "user"
-        Public SimComentario As String = "comments"
-
-        Public FilePath As String = ""
-
-        Public BackupFileName As String = ""
-
-        Public CalculatorActivated As Boolean = True
-
-        Public PropertyPackageFlashAlgorithm As SimulationObjects.PropertyPackages.FlashMethod = SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-        Public PropertyPackageIOFlashQuickMode As Boolean = True
-
-        Public ThreePhaseFlashStabTestSeverity As Integer = 0
-        Public ThreePhaseFlashStabTestCompIds As String() = New String() {}
-
-        Public FlashValidationDGETolerancePct As Double = 0.01
-
-        <Xml.Serialization.XmlIgnore> Public Password As String = ""
-        <Xml.Serialization.XmlIgnore> Public UsePassword As Boolean = False
-
-        Public FlowsheetSnapToGrid As Boolean = False
-        Public FlowsheetQuickConnect As Boolean = False
-        Public FlowsheetShowConsoleWindow As Boolean = False
-        Public FlowsheetShowCOReportsWindow As Boolean = False
-        Public FlowsheetShowCalculationQueue As Boolean = False
-        Public FlowsheetShowWatchWindow As Boolean = False
-
-        Public BinaryEnvelopeExpData As String = ""
-
-        Public Key As String = ""
 
         Sub New()
 
@@ -204,6 +167,58 @@ Namespace DWSIM.Flowsheet
             Return elements
 
         End Function
+
+        Public Property BackupFileName As String = "" Implements Interfaces.IFlowsheetOptions.BackupFileName
+
+        Public Property BinaryEnvelopeExpData As String = "" Implements Interfaces.IFlowsheetOptions.BinaryEnvelopeExpData
+
+        Public Property CalculateBubbleAndDewPoints As Boolean = False Implements Interfaces.IFlowsheetOptions.CalculateBubbleAndDewPoints
+
+        Public Property CalculatorActivated As Boolean = False Implements Interfaces.IFlowsheetOptions.CalculatorActivated
+
+        Public Property FilePath As String = "" Implements Interfaces.IFlowsheetOptions.FilePath
+
+        Public Property FlashValidationDGETolerancePct As Double = 0.01 Implements Interfaces.IFlowsheetOptions.FlashValidationDGETolerancePct
+
+        Public Property FlowsheetQuickConnect As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetQuickConnect
+
+        Public Property FlowsheetShowCalculationQueue As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetShowCalculationQueue
+
+        Public Property FlowsheetShowConsoleWindow As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetShowConsoleWindow
+
+        Public Property FlowsheetShowCOReportsWindow As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetShowCOReportsWindow
+
+        Public Property FlowsheetShowWatchWindow As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetShowWatchWindow
+
+        Public Property FlowsheetSnapToGrid As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetSnapToGrid
+
+        Public Property FractionNumberFormat As String = "N4" Implements Interfaces.IFlowsheetOptions.FractionNumberFormat
+
+        Public Property Key As String = "" Implements Interfaces.IFlowsheetOptions.Key
+
+        Public Property NumberFormat As String = "N" Implements Interfaces.IFlowsheetOptions.NumberFormat
+
+        Public Property Password As String = "" Implements Interfaces.IFlowsheetOptions.Password
+
+        Public Property PropertyPackageFlashAlgorithm As Integer = 0 Implements Interfaces.IFlowsheetOptions.PropertyPackageFlashAlgorithm
+
+        Public Property SempreCalcularFlashPH As Boolean = False Implements Interfaces.IFlowsheetOptions.SempreCalcularFlashPH
+
+        Public Property SimulationAuthor As String = "" Implements Interfaces.IFlowsheetOptions.SimulationAuthor
+
+        Public Property SimulationComments As String = "" Implements Interfaces.IFlowsheetOptions.SimulationComments
+
+        Public Property SimulationName As String = "" Implements Interfaces.IFlowsheetOptions.SimulationName
+
+        Public Property ThreePhaseFlashStabTestCompIds As String() = New String() {} Implements Interfaces.IFlowsheetOptions.ThreePhaseFlashStabTestCompIds
+
+        Public Property ThreePhaseFlashStabTestSeverity As Integer = 0 Implements Interfaces.IFlowsheetOptions.ThreePhaseFlashStabTestSeverity
+
+        Public Property UsePassword As Boolean = False Implements Interfaces.IFlowsheetOptions.UsePassword
+
+        Public Property UsePhaseIdentificationAlgorithm As Boolean = False Implements Interfaces.IFlowsheetOptions.UsePhaseIdentificationAlgorithm
+
+        Public Property ValidateEquilibriumCalc As Boolean = False Implements Interfaces.IFlowsheetOptions.ValidateEquilibriumCalc
 
     End Class
 

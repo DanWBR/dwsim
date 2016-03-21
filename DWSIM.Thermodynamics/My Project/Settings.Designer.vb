@@ -30,7 +30,7 @@ Namespace My
 
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
     Private Shared Sub AutoSaveSettings(ByVal sender As Global.System.Object, ByVal e As Global.System.EventArgs)
-        If App.SaveMySettingsOnExit Then
+        If My.Application.SaveMySettingsOnExit Then
             My.Settings.Save()
         End If
     End Sub
@@ -44,7 +44,7 @@ Namespace My
                If Not addedHandler Then
                     SyncLock addedHandlerLockObject
                         If Not addedHandler Then
-                            AddHandler App.Shutdown, AddressOf AutoSaveSettings
+                            AddHandler My.Application.Shutdown, AddressOf AutoSaveSettings
                             addedHandler = True
                         End If
                     End SyncLock
@@ -147,6 +147,29 @@ Namespace My
             End Get
             Set
                 Me("CudafyDeviceID") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property ChemSepDatabasePath() As String
+            Get
+                Return CType(Me("ChemSepDatabasePath"),String)
+            End Get
+            Set
+                Me("ChemSepDatabasePath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property UserDatabases() As Global.System.Collections.Specialized.StringCollection
+            Get
+                Return CType(Me("UserDatabases"),Global.System.Collections.Specialized.StringCollection)
+            End Get
+            Set
+                Me("UserDatabases") = value
             End Set
         End Property
     End Class

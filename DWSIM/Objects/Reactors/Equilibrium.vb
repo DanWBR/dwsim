@@ -24,6 +24,7 @@ Imports DWSIM.DWSIM.MathEx.Common
 Imports DotNumerics.Optimization
 Imports DWSIM.DWSIM.MathEx
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.SimulationObjects.Reactors
 
@@ -559,7 +560,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
         Public Sub New(ByVal name As String, ByVal description As String)
 
-            MyBase.new()
+            MyBase.New()
             Me.ComponentName = name
             Me.ComponentDescription = description
 
@@ -685,9 +686,9 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                     'equilibrium constant calculation
                     Select Case rxn.KExprType
-                        Case Reaction.KOpt.Constant
+                        Case KOpt.Constant
                             'rxn.ConstantKeqValue = rxn.ConstantKeqValue
-                        Case Reaction.KOpt.Expression
+                        Case KOpt.Expression
                             rxn.ExpContext = New Ciloci.Flee.ExpressionContext
                             rxn.ExpContext.Imports.AddType(GetType(System.Math))
                             rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
@@ -698,7 +699,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                             Catch ex As Exception
                                 Throw New Exception("Error evaluating equilibrium constant expression for reaction '" & rxn.Name & "': " & ex.Message.ToString)
                             End Try
-                        Case Reaction.KOpt.Gibbs
+                        Case KOpt.Gibbs
                             Dim id(rxn.Components.Count - 1) As String
                             Dim stcoef(rxn.Components.Count - 1) As Double
                             Dim bcidx As Integer = 0
@@ -1171,7 +1172,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             'If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac11"))
             'If Not Me.GraphicObject.OutputConnectors(1).IsAttached Then Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac11"))
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
 
             'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             'Dim W As Double = ems.Phases(0).Properties.massflow.GetValueOrDefault

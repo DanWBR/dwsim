@@ -48,14 +48,12 @@ Namespace PropertyPackages
             End With
 
             Me.IsConfigurable = True
-            Me.ConfigForm = New FormConfigPP
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
         End Sub
 
         Public Overrides Sub ReconfigureConfigForm()
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = New FormConfigPP
         End Sub
 
 #Region "    DWSIM Functions"
@@ -194,7 +192,7 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQDENSi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_LIQDENSi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -219,7 +217,7 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQ_Cpi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_LIQ_Cpi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -250,7 +248,7 @@ Namespace PropertyPackages
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -324,7 +322,7 @@ Namespace PropertyPackages
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -380,7 +378,7 @@ Namespace PropertyPackages
             Dim Tmin, Tmax, Tc As Double
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -413,7 +411,7 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQDENSi(subst As Thermodynamics.BaseClasses.Compound, T As Double) As Double
+        Public Overrides Function AUX_LIQDENSi(subst As Interfaces.ICompound, T As Double) As Double
             Dim sub1 = subst.ConstantProperties.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -438,7 +436,7 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQTHERMCONDi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_LIQTHERMCONDi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -487,7 +485,7 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_SURFTi(constprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_SURFTi(constprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
             Dim sub1 = constprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -518,7 +516,7 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_SURFTM(T As Double) As Double
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim val As Double = 0
             For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * Me.AUX_SURFTi(subst.ConstantProperties, T)
@@ -527,7 +525,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function AUX_VAPTHERMCONDi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double, P As Double) As Double
+        Public Overrides Function AUX_VAPTHERMCONDi(cprop As Interfaces.ICompoundConstantProperties, T As Double, P As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -580,7 +578,7 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_VAPVISCi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_VAPVISCi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, val As Double
             Dim P = Me.CurrentMaterialStream.Phases(2).Properties.pressure.GetValueOrDefault
@@ -612,7 +610,7 @@ Namespace PropertyPackages
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -673,7 +671,7 @@ Namespace PropertyPackages
             Dim i As Integer
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 vk(i) = subst.MassFraction / Me.AUX_LIQDENSi(subst.ConstantProperties, T)
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
                 i = i + 1
@@ -691,7 +689,7 @@ Namespace PropertyPackages
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
                     Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                     Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -749,7 +747,7 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
 
-            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 subst.PartialVolume = 0.0#
             Next
 
@@ -784,7 +782,7 @@ Namespace PropertyPackages
             Select Case Phase1
                 Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     i = 0
-                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
+                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Name) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -825,7 +823,7 @@ Namespace PropertyPackages
                     Next
                 Case Phase.Vapor
                     i = 0
-                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
+                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Name) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -900,7 +898,7 @@ Namespace PropertyPackages
             Select Case Phase1
                 Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
                     i = 0
-                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
+                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Name) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -941,7 +939,7 @@ Namespace PropertyPackages
                     Next
                 Case Phase.Vapor
                     i = 0
-                    For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
+                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Name) Then
                             Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
                             Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
@@ -1536,7 +1534,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function SupportsComponent(ByVal comp As Thermodynamics.BaseClasses.ConstantProperties) As Boolean
+        Public Overrides Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
             CheckIfCompoundIsSupported(comp.Name)
 

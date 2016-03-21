@@ -23,6 +23,7 @@ Imports System.Math
 Imports DWSIM.DWSIM.MathEx
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Linq
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.SimulationObjects.Reactors
 
@@ -90,7 +91,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
         Public Sub New(ByVal name As String, ByVal description As String)
 
-            MyBase.new()
+            MyBase.New()
             Me.ComponentName = name
             Me.ComponentDescription = description
 

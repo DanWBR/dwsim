@@ -78,7 +78,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                             initialKval As Double(),
                                             initialestimate As Double) As FlashCalculationResult
 
-            Dim constprops As List(Of ConstantProperties) = pp.DW_GetConstantProperties()
+            Dim constprops As List(Of Interfaces.ICompoundConstantProperties) = pp.DW_GetConstantProperties()
 
             Dim d1, d2 As Date
 
@@ -990,7 +990,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property CalculatedPressure As Nullable(Of Double)
         Public Property CalculatedEnthalpy As Nullable(Of Double)
         Public Property CalculatedEntropy As Nullable(Of Double)
-        Public Property CompoundProperties As List(Of ConstantProperties)
+        Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
         Public Property FlashAlgorithmType As String = ""
         Public Property FlashSpecification1 As PropertyPackages.FlashSpec
         Public Property FlashSpecification2 As PropertyPackages.FlashSpec
@@ -1002,7 +1002,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Sub
 
-        Sub New(constprop As List(Of ConstantProperties))
+        Sub New(constprop As List(Of Interfaces.ICompoundConstantProperties))
 
             CompoundProperties = constprop
 
@@ -1141,7 +1141,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim Vwe(UBound(Vz)) As Double
             Dim mol_x_mm As Double = 0
             Dim i As Integer = 0
-            For Each sub1 As ConstantProperties In CompoundProperties
+            For Each sub1 As Interfaces.ICompoundConstantProperties In CompoundProperties
                 mol_x_mm += Vz(i) * sub1.Molar_Weight
                 i += 1
             Next
@@ -1149,7 +1149,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If mol_x_mm = 0.0# Then mol_x_mm = 1.0#
 
             i = 0
-            For Each sub1 As ConstantProperties In CompoundProperties
+            For Each sub1 As Interfaces.ICompoundConstantProperties In CompoundProperties
                 If mol_x_mm <> 0 Then
                     Vwe(i) = Vz(i) * sub1.Molar_Weight / mol_x_mm
                 Else
@@ -1168,7 +1168,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim i As Integer = 0
 
-            For Each subst As ConstantProperties In CompoundProperties
+            For Each subst As Interfaces.ICompoundConstantProperties In CompoundProperties
                 val += Vz(i) * subst.Molar_Weight
                 i += 1
             Next

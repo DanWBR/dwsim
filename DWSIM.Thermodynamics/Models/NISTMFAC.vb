@@ -290,7 +290,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function RET_VN(ByVal cp As BaseClasses.ConstantProperties) As Dictionary(Of Integer, Double)
+        Function RET_VN(ByVal cp As Interfaces.ICompoundConstantProperties) As Dictionary(Of Integer, Double)
 
             Dim i As Integer = 0
             Dim res As New Dictionary(Of Integer, Double)
@@ -299,17 +299,17 @@ Namespace PropertyPackages.Auxiliary
             res.Clear()
 
             For Each group As ModfacGroup In Me.ModfGroups.Groups.Values
-                If cp.NISTMODFACGroups.Collection.Count > 0 Then
-                    For Each s As String In cp.NISTMODFACGroups.Collection.Keys
+                If cp.NISTMODFACGroups.Count > 0 Then
+                    For Each s As String In cp.NISTMODFACGroups.Keys
                         If s = group.Secondary_Group Then
-                            res.Add(group.Secondary_Group, cp.NISTMODFACGroups.Collection(s))
+                            res.Add(group.Secondary_Group, cp.NISTMODFACGroups(s))
                             Exit For
                         End If
                     Next
                 Else
-                    For Each s As String In cp.MODFACGroups.Collection.Keys
+                    For Each s As String In cp.MODFACGroups.Keys
                         If s = group.Secondary_Group Then
-                            res.Add(group.Secondary_Group, cp.MODFACGroups.Collection(s))
+                            res.Add(group.Secondary_Group, cp.MODFACGroups(s))
                             Exit For
                         End If
                     Next

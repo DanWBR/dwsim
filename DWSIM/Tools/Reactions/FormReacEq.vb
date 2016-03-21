@@ -18,6 +18,7 @@
 
 Imports Ciloci.Flee
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Interfaces.Enums
 
 Public Class FormReacEq
 
@@ -102,11 +103,11 @@ Public Class FormReacEq
         End Select
 
         Select Case rc.KExprType
-            Case Reaction.KOpt.Expression
+            Case KOpt.Expression
                 Me.rbKeqfT.Checked = True
-            Case Reaction.KOpt.Gibbs
+            Case KOpt.Gibbs
                 Me.rbKeqGibbs.Checked = True
-            Case Reaction.KOpt.Constant
+            Case KOpt.Constant
                 Me.rbKeqConstant.Checked = True
         End Select
 
@@ -246,9 +247,9 @@ Public Class FormReacEq
             Next
 
             'Keq option
-            If Me.rbKeqConstant.Checked Then rc.KExprType = Reaction.KOpt.Constant
-            If Me.rbKeqfT.Checked Then rc.KExprType = Reaction.KOpt.Expression
-            If Me.rbKeqGibbs.Checked Then rc.KExprType = Reaction.KOpt.Gibbs
+            If Me.rbKeqConstant.Checked Then rc.KExprType = KOpt.Constant
+            If Me.rbKeqfT.Checked Then rc.KExprType = KOpt.Expression
+            If Me.rbKeqGibbs.Checked Then rc.KExprType = KOpt.Gibbs
 
             'phase and other settings
             Select Case Me.tbPhase.SelectedIndex

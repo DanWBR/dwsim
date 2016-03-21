@@ -51,7 +51,6 @@ Namespace PropertyPackages
             Me.m_act = New Auxiliary.NRTL
 
             Me.IsConfigurable = True
-            Me.ConfigForm = New FormConfigNRTL
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
 
         End Sub
@@ -59,7 +58,6 @@ Namespace PropertyPackages
         Public Overrides Sub ReconfigureConfigForm()
 
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = New FormConfigNRTL
 
         End Sub
 

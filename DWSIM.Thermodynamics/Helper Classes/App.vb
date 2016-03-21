@@ -15,6 +15,12 @@ Public Class App
 
     End Sub
 
+    Shared Property TaskCancellationTokenSource As Object
+
+    Shared Property IsRunningParallelTasks As Boolean
+
+    Shared Property CAPEOPENMode As Boolean
+
     Shared Sub WriteToConsole(text As String, level As Integer)
 
     End Sub
@@ -121,4 +127,9 @@ Public Class App
         End If
 
     End Sub
+
+    Shared Function GetComponentName(Name As String) As Object
+        Throw New NotImplementedException
+    End Function
+
 End Class

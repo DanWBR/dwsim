@@ -21,7 +21,8 @@ Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports Ciloci.Flee
 Imports System.Math
 Imports System.Linq
-Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
+Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.SimulationObjects.Reactors
 
@@ -87,7 +88,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             If Me.Conversions Is Nothing Then Me.m_conversions = New Dictionary(Of String, Double)
 
             Dim ConversionLimiter As New Dictionary(Of String, Double)
-         
+
             Me.Reactions.Clear()
             Me.ReactionsSequence.Clear()
             Me.Conversions.Clear()
@@ -138,7 +139,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             Dim X, scBC, nBC, DHr, Hid_r, Hid_p, Hr, Hp, Tin, Pin, Pout, W As Double
             Dim BC As String = ""
             Dim tmp As Object
-         
+
             Tin = ims.Phases(0).Properties.temperature.GetValueOrDefault
             Pin = ims.Phases(0).Properties.pressure.GetValueOrDefault
             W = ims.Phases(0).Properties.massflow.GetValueOrDefault
@@ -546,7 +547,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             'If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac11"))
             'If Not Me.GraphicObject.OutputConnectors(1).IsAttached Then Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac11"))
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
 
             'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             'Dim W As Double = ems.Phases(0).Properties.massflow.GetValueOrDefault

@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Linq
@@ -38,7 +38,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl, Hs As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl, Ss As Double
 
-        Public Property CompoundProperties As List(Of ConstantProperties)
+        Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
@@ -79,7 +79,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Vnf = Vz.Clone
 
-            Dim wid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
+            Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
 
             'calculate SLE.
 
@@ -190,7 +190,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ecount += 1
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop
 
@@ -263,7 +263,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
 
             Dim Hs, Hl, Hv, xl, xv, xs As Double
 
-            Dim wid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
+            Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
 
             Hs = PP.DW_CalcSolidEnthalpy(T, Vz, CompoundProperties)
             Hl = PP.DW_CalcEnthalpy(Vz, T, P, State.Liquid)
@@ -407,7 +407,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
             Dim Ss1, Sl, Sv, xl, xv, xs As Double
 
-            Dim wid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
+            Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
 
             Ss1 = PP.DW_CalcSolidEnthalpy(T, Vz, CompoundProperties) / T
             Sl = PP.DW_CalcEntropy(Vz, T, P, State.Liquid)
@@ -578,7 +578,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             n = UBound(Vz)
 
             Dim Vx(n), Vy(n), Vs(n), xv, xl, L, S, P As Double
-            Dim wid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
+            Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
 
             xv = V
             xl = 1 - V
@@ -636,7 +636,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             n = UBound(Vz)
 
             Dim Vx(n), Vy(n), Vs(n), xv, xl, L, S, T As Double
-            Dim wid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
+            Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").SingleOrDefault)
 
             xv = V
             xl = 1 - V

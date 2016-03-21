@@ -20,6 +20,7 @@ Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Collections.Generic
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Linq
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.SimulationObjects.Reactors
 

@@ -8,9 +8,9 @@
     <SempreCalcularFlashPH>false</SempreCalcularFlashPH>
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
-    <SimNome>Natural Gas Processing Unit</SimNome>
-    <SimAutor>Daniel Wagner</SimAutor>
-    <SimComentario>This is a simulation of a Natural Gas Processing Unit, with the main streams/unit ops only. The plant produces Methane, Ethane, LPG and C5+ from natural gas which enters at ambient temperature and high pressure (40 bar). A turbine simulates the turbo-expander, which provides some of the necessary cooling for separation of methane from the rest of the components in the demethanizer column.</SimComentario>
+    <SimulationName>Natural Gas Processing Unit</SimulationName>
+    <SimulationAuthor>Daniel Wagner</SimulationAuthor>
+    <SimulationComments>This is a simulation of a Natural Gas Processing Unit, with the main streams/unit ops only. The plant produces Methane, Ethane, LPG and C5+ from natural gas which enters at ambient temperature and high pressure (40 bar). A turbine simulates the turbo-expander, which provides some of the necessary cooling for separation of methane from the rest of the components in the demethanizer column.</SimulationComments>
     <FilePath>C:\Users\Daniel\Documents\Visual Studio 2010\Projects\DWSIM\DWSIM3\DWSIM\bin\x86\Release\samples\Natural Gas Processing Unit.dwxml</FilePath>
     <BackupFileName>27560350.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

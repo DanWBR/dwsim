@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -300,7 +300,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 WriteDebugInfo("PT Flash [NL]: Iteration #" & ecount & ", VF = " & V)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until convergiu = 1
 
@@ -330,7 +330,7 @@ out:
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -674,7 +674,7 @@ out:
 
                 WriteDebugInfo("PT Flash [IO]: Iteration #" & ecount & ", VF = " & V)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -763,7 +763,7 @@ out:
 
             Dim err1 As Double = Kb - 1
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Return err1
 
@@ -1036,12 +1036,12 @@ alt:            Tf = bo.BrentOpt(Tinf, Tsup, 4, tolEXT, maxitEXT, Nothing)
         End Function
 
         Function Herror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PH_FLASH(Tt, Sf, Pf, fi)
         End Function
 
         Function Serror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PS_FLASH(Tt, Sf, Pf, fi)
         End Function
 
@@ -1253,7 +1253,7 @@ alt:            Tf = bo.BrentOpt(Tinf, Tsup, 4, tolEXT, maxitEXT, Nothing)
 
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(P - Pant) < 1 Or Double.IsNaN(P) = True Or ecount > maxit_e Or Double.IsNaN(P) Or Double.IsInfinity(P)
 
@@ -1357,7 +1357,7 @@ alt:            Tf = bo.BrentOpt(Tinf, Tsup, 4, tolEXT, maxitEXT, Nothing)
 
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -1578,7 +1578,7 @@ alt:            Tf = bo.BrentOpt(Tinf, Tsup, 4, tolEXT, maxitEXT, Nothing)
 
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(T - Tant) < 0.1 Or Double.IsNaN(T) = True Or ecount > maxit_e Or Double.IsNaN(T) Or Double.IsInfinity(T)
 
@@ -1680,7 +1680,7 @@ alt:            Tf = bo.BrentOpt(Tinf, Tsup, 4, tolEXT, maxitEXT, Nothing)
 
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 

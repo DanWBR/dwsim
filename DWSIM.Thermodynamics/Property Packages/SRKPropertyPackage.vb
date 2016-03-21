@@ -56,14 +56,12 @@ Namespace PropertyPackages
             'End With
 
             Me.IsConfigurable = True
-            Me.ConfigForm = New FormConfigPP
             Me._packagetype = PropertyPackages.PackageType.EOS
 
         End Sub
 
         Public Overrides Sub ReconfigureConfigForm()
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = New FormConfigPP
         End Sub
 
         Public Overrides Sub ConfigParameters()
@@ -96,7 +94,7 @@ Namespace PropertyPackages
         Public Function AUX_CM(ByVal Vx As Object) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -111,7 +109,7 @@ Namespace PropertyPackages
         Public Function AUX_CM(ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.SRK_Volume_Translation_Coefficient * Me.m_pr.bi(0.08664, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
@@ -124,7 +122,7 @@ Namespace PropertyPackages
         Public Function RET_VS() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -139,7 +137,7 @@ Namespace PropertyPackages
         Public Function RET_VC() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -536,7 +534,7 @@ Namespace PropertyPackages
             Return 0.0#
         End Function
 
-        Public Overrides Function SupportsComponent(ByVal comp As Thermodynamics.BaseClasses.ConstantProperties) As Boolean
+        Public Overrides Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
             Return True
 
@@ -573,7 +571,7 @@ Namespace PropertyPackages
             Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
 
             Dim Vz(n) As Double
-            Dim comp As BaseClasses.Compound
+            Dim comp As Interfaces.ICompound
 
             i = 0
             For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -1076,7 +1074,7 @@ Namespace PropertyPackages
             Dim i, j, k, l As Integer
             Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
             Dim Vz(n) As Double
-            Dim comp As BaseClasses.Compound
+            Dim comp As Interfaces.ICompound
             i = 0
             For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 Vz(i) += comp.MoleFraction.GetValueOrDefault
@@ -1746,7 +1744,7 @@ Namespace PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
@@ -1756,7 +1754,7 @@ Namespace PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
@@ -1766,7 +1764,7 @@ Namespace PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
@@ -1776,7 +1774,7 @@ Namespace PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
@@ -1786,7 +1784,7 @@ Namespace PropertyPackages
                         partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
                     Else
                         partvol = New ArrayList
-                        For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                             partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
                         Next
                     End If
@@ -1796,7 +1794,7 @@ Namespace PropertyPackages
             End Select
 
             i = 0
-            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
                 subst.PartialVolume = partvol(i)
                 i += 1
             Next

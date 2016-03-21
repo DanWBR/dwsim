@@ -1924,9 +1924,9 @@
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
     <UsePhaseIdentificationAlgorithm>false</UsePhaseIdentificationAlgorithm>
-    <SimNome>simulation_title</SimNome>
-    <SimAutor>Daniel-PC\Daniel</SimAutor>
-    <SimComentario>simulation_details</SimComentario>
+    <SimulationName>simulation_title</SimulationName>
+    <SimulationAuthor>Daniel-PC\Daniel</SimulationAuthor>
+    <SimulationComments>simulation_details</SimulationComments>
     <FilePath>C:\Users\Daniel\Documents\Visual Studio 2013\Projects\DWSIM3\DWSIM\bin\x86\Release\samples\Hydrogen production though Methane Catalytic Steam Reforming.dwxml</FilePath>
     <BackupFileName>62142339.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

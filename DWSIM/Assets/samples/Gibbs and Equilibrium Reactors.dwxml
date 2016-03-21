@@ -5241,9 +5241,9 @@
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
     <UsePhaseIdentificationAlgorithm>false</UsePhaseIdentificationAlgorithm>
-    <SimNome>Gibbs and Equilibrium Reactors</SimNome>
-    <SimAutor>Daniel Wagner</SimAutor>
-    <SimComentario>Example simulation to solve a chemically reacting system at 1000 K and 1 bar.</SimComentario>
+    <SimulationName>Gibbs and Equilibrium Reactors</SimulationName>
+    <SimulationAuthor>Daniel Wagner</SimulationAuthor>
+    <SimulationComments>Example simulation to solve a chemically reacting system at 1000 K and 1 bar.</SimulationComments>
     <FilePath>C:\Users\Daniel\Documents\Visual Studio 2013\Projects\DWSIM3\DWSIM\bin\x86\Release\samples\Gibbs and Equilibrium Reactors.dwxml</FilePath>
     <BackupFileName>89971174.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

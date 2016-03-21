@@ -5052,9 +5052,9 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
     <UsePhaseIdentificationAlgorithm>false</UsePhaseIdentificationAlgorithm>
-    <SimNome>simulation_title</SimNome>
-    <SimAutor>PETROBRAS\ptc0</SimAutor>
-    <SimComentario>simulation_details</SimComentario>
+    <SimulationName>simulation_title</SimulationName>
+    <SimulationAuthor>PETROBRAS\ptc0</SimulationAuthor>
+    <SimulationComments>simulation_details</SimulationComments>
     <FilePath>C:\Users\ptc0\Source\Repos\dwsim3\DWSIM\bin\x86\Release\samples\Membrane Custom Unit Operation.dwxml</FilePath>
     <BackupFileName>99220589.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

@@ -72,14 +72,12 @@ Namespace PropertyPackages
             End With
 
             Me.IsConfigurable = True
-            Me.ConfigForm = New FormConfigFPROPS
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
         End Sub
 
         Public Overrides Sub ReconfigureConfigForm()
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = New FormConfigFPROPS
         End Sub
 
 
@@ -99,7 +97,7 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
 
-            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 subst.PartialVolume = 0.0#
             Next
 
@@ -531,7 +529,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function SupportsComponent(ByVal comp As Thermodynamics.BaseClasses.ConstantProperties) As Boolean
+        Public Overrides Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
             Return True
 
@@ -632,7 +630,7 @@ Namespace PropertyPackages
         '    Dim maxZ As Double = Vz(0)
         '    Dim name As String = ""
 
-        '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+        '    For Each s As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
         '        If s.MoleFraction.GetValueOrDefault >= maxZ Then
         '            name = s.Name
         '            maxZ = Vz(i)
@@ -650,7 +648,7 @@ Namespace PropertyPackages
         '    Dim maxZ As Double = 0.0#
         '    Dim name As String = ""
 
-        '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+        '    For Each s As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
         '        If s.MoleFraction.GetValueOrDefault >= maxZ Then
         '            name = s.Name
         '            maxZ = s.MoleFraction.GetValueOrDefault
@@ -840,7 +838,7 @@ Namespace PropertyPackages
 
         Function RET_VQ() As Object
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim VQ(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 
@@ -855,7 +853,7 @@ Namespace PropertyPackages
 
         Function RET_VR() As Object
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim VR(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 

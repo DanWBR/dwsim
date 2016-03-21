@@ -48,7 +48,6 @@ Namespace PropertyPackages
             MyBase.New(False)
 
             Me.IsConfigurable = True
-            Me.ConfigForm = New FormConfigUNIQUAC
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
 
             Me.m_act = New Auxiliary.UNIQUAC
@@ -57,7 +56,6 @@ Namespace PropertyPackages
 
         Public Overrides Sub ReconfigureConfigForm()
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = New FormConfigUNIQUAC
         End Sub
 
         Public Overrides Sub ConfigParameters()
@@ -92,7 +90,7 @@ Namespace PropertyPackages
 
         Function RET_VQ() As Object
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim VQ(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 
@@ -107,7 +105,7 @@ Namespace PropertyPackages
 
         Function RET_VR() As Object
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim VR(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
 

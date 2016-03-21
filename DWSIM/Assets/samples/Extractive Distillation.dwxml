@@ -11061,15 +11061,15 @@
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
     <UsePhaseIdentificationAlgorithm>false</UsePhaseIdentificationAlgorithm>
-    <SimNome>Pressure Swing Azeotropic Distillation</SimNome>
-    <SimAutor>Daniel Wagner</SimAutor>
-    <SimComentario>This is an example of Pressure Swing Azeotropic Distillation.
+    <SimulationName>Pressure Swing Azeotropic Distillation</SimulationName>
+    <SimulationAuthor>Daniel Wagner</SimulationAuthor>
+    <SimulationComments>This is an example of Pressure Swing Azeotropic Distillation.
 
 Test case from COCO Simulator: http://www.cocosimulator.org/down.php?dl=CScasebook_MA.fsd (original author: Harry Kooijman - www.chemsep.org)
 
 Description taken from COCO file download: Methanol and acetone form a minimum temperature azeotrope but the composition of this azeotrope is sensitive to the pressure. We can make use of this to separate the two components into pure products by operating two columns at different pressures. 
 
-This simulation uses 'Methanol' and 'Acetone' components from the ChemSep database. NRTL interaction parameters were taken from the ChemSep IPD file. More information on how to load a ChemSep database in DWSIM can be found at http://apps.sourceforge.net/mediawiki/dwsim/index.php?title=Loading_a_ChemSep%28TM%29_database.</SimComentario>
+This simulation uses 'Methanol' and 'Acetone' components from the ChemSep database. NRTL interaction parameters were taken from the ChemSep IPD file. More information on how to load a ChemSep database in DWSIM can be found at http://apps.sourceforge.net/mediawiki/dwsim/index.php?title=Loading_a_ChemSep%28TM%29_database.</SimulationComments>
     <FilePath>C:\Users\ptc0\Source\Repos\dwsim3\DWSIM\bin\x86\Release\samples\Extractive Distillation.dwxml</FilePath>
     <BackupFileName>25809541.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

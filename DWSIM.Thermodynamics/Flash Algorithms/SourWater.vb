@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Linq
@@ -39,20 +39,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl, Hs As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl, Ss As Double
 
-        Public Property CompoundProperties As List(Of ConstantProperties)
+        Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
 
-        Public Property Reactions As List(Of Reaction)
+        Public Property Reactions As List(Of Interfaces.IReaction)
 
         Sub New()
 
-            Reactions = New List(Of Reaction)
+            Reactions = New List(Of Interfaces.IReaction)
 
             Dim rfile As String = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "reactions" & Path.DirectorySeparatorChar & "Sour Water Reaction Set.dwrxm"
 
             Dim xdoc As XDocument = XDocument.Load(rfile)
             Dim data As List(Of XElement) = xdoc.Element("DWSIM_Reaction_Data").Elements.ToList
             For Each xel As XElement In data
-                Dim obj As New Reaction()
+                Dim obj As Interfaces.IReaction
                 obj.LoadData(xel.Elements.ToList)
                 Reactions.Add(obj)
             Next
@@ -123,20 +123,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             conc0.Add("NaOH", 0.0#)
             conc0.Add("Na+", 0.0#)
 
-            Dim wid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").FirstOrDefault)
-            Dim co2id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Name = "Carbon dioxide").FirstOrDefault)
-            Dim nh3id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Name = "Ammonia").FirstOrDefault)
-            Dim h2sid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Name = "Hydrogen sulfide").FirstOrDefault)
-            Dim naohid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "NaOH").FirstOrDefault)
-            Dim naid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "Na+").FirstOrDefault)
-            Dim ohid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "OH-").FirstOrDefault)
-            Dim hid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "H+").FirstOrDefault)
-            Dim nh4id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "NH4+").FirstOrDefault)
-            Dim hcoid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "HCO3-").FirstOrDefault)
-            Dim co3id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "CO3-2").FirstOrDefault)
-            Dim h2nid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "H2NCOO-").FirstOrDefault)
-            Dim hsid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "HS-").FirstOrDefault)
-            Dim s2id As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Formula = "S-2").FirstOrDefault)
+            Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").FirstOrDefault)
+            Dim co2id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Name = "Carbon dioxide").FirstOrDefault)
+            Dim nh3id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Name = "Ammonia").FirstOrDefault)
+            Dim h2sid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Name = "Hydrogen sulfide").FirstOrDefault)
+            Dim naohid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "NaOH").FirstOrDefault)
+            Dim naid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "Na+").FirstOrDefault)
+            Dim ohid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "OH-").FirstOrDefault)
+            Dim hid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "H+").FirstOrDefault)
+            Dim nh4id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "NH4+").FirstOrDefault)
+            Dim hcoid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "HCO3-").FirstOrDefault)
+            Dim co3id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "CO3-2").FirstOrDefault)
+            Dim h2nid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "H2NCOO-").FirstOrDefault)
+            Dim hsid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "HS-").FirstOrDefault)
+            Dim s2id As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Formula = "S-2").FirstOrDefault)
 
             id.Clear()
 
@@ -491,7 +491,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         End If
                     End If
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                     icount += 1
 
@@ -603,7 +603,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     maxDT *= 0.95
                     cnt += 1
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until cnt > maxitEXT Or Double.IsNaN(x1) Or x1 < 0.0#
 
@@ -714,7 +714,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     cnt += 1
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until cnt > maxitEXT Or Double.IsNaN(x1)
 
@@ -785,7 +785,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             WriteDebugInfo("PH Flash [Sour Water]: Current T = " & T & ", Current H Error = " & herr)
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
         End Function
 
@@ -824,7 +824,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             WriteDebugInfo("PS Flash [Sour Water]: Current T = " & T & ", Current S Error = " & serr)
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
         End Function
 
@@ -912,7 +912,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop
 
@@ -1085,7 +1085,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
                         End If
 
-                        CheckCalculatorStatus()
+                       App.Flowsheet.CheckStatus()
 
                     Loop
 
@@ -1126,7 +1126,7 @@ fallback:           Vx = Vz.Clone
                             Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
                         End If
 
-                        CheckCalculatorStatus()
+                       App.Flowsheet.CheckStatus()
 
                     Loop
 
@@ -1171,7 +1171,7 @@ fallback:           Vx = Vz.Clone
 
                     If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop
 

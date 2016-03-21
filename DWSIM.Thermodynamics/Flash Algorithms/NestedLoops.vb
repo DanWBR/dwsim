@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 Imports System.Threading.Tasks
 Imports System.Linq
 
@@ -263,7 +263,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 WriteDebugInfo("PT Flash [NL]: Iteration #" & ecount & ", VF = " & V)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until converged = 1
 
@@ -1136,7 +1136,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -1251,7 +1251,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -1455,7 +1455,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1528,7 +1528,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until (Math.Abs(fval) < etol And e1 < etol) Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1583,7 +1583,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             WriteDebugInfo("PH Flash [NL]: Current T = " & T & ", Current H Error = " & herr)
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
         End Function
 
@@ -1622,7 +1622,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             WriteDebugInfo("PS Flash [NL]: Current T = " & T & ", Current S Error = " & serr)
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
         End Function
 

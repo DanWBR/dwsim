@@ -66,11 +66,17 @@
     <Compile Include="ICompound.vb" />
     <Compile Include="ICompoundConstantProperties.vb" />
     <Compile Include="IFlowsheet.vb" />
+    <Compile Include="IFlowsheetOptions.vb" />
     <Compile Include="IGraphicObject.vb" />
     <Compile Include="IMaterialStream.vb" />
+    <Compile Include="IPersistStream.vb" />
     <Compile Include="IPhase.vb" />
     <Compile Include="IPhaseProperties.vb" />
     <Compile Include="IPropertyPackage.vb" />
+    <Compile Include="IReaction.vb" />
+    <Compile Include="IReactionSet.vb" />
+    <Compile Include="IReactionSetBase.vb" />
+    <Compile Include="IReactionStoichBase.vb" />
     <Compile Include="ISimulationObject.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

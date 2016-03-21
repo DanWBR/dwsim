@@ -18,7 +18,7 @@
 
 Imports System.Math
 Imports DWSIM.Thermodynamics.MathEx
-Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
+
 
 Namespace PropertyPackages
 
@@ -566,7 +566,7 @@ restart:        i = 0
                 ci = ci + 1
                 cit = cit + 1
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
                 If ci >= m_miti Then
                     Throw New Exception(ErrorCode.MaximumIterationsReached)
@@ -899,7 +899,7 @@ out2:               Dim order(m) As Integer, hasvp As Boolean = False
 
                 ci += 1
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop
 
@@ -1114,7 +1114,7 @@ out2:               Dim order(m) As Integer, hasvp As Boolean = False
                     i = i + 1
                 Loop Until i = n + 1
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
                 If sum1 <= m_tolerance Then Exit Do
                 If ci >= m_mite Then Throw New Exception(ErrorCode.MaximumIterationsReached)

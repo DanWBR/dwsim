@@ -71,7 +71,6 @@ Namespace PropertyPackages
 
         Public Overrides Sub ReconfigureConfigForm()
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = New FormConfigPP
         End Sub
 
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
@@ -80,7 +79,7 @@ Namespace PropertyPackages
             End Get
         End Property
 
-        Public Function CalcBOFluid(Vxw As Double(), constprops As List(Of ConstantProperties)) As BlackOilFluid
+        Public Function CalcBOFluid(Vxw As Double(), constprops As List(Of Interfaces.ICompoundConstantProperties)) As BlackOilFluid
             Dim bof As New BlackOilFluid
             Dim i As Integer = 0
             For Each c In constprops
@@ -483,7 +482,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function SupportsComponent(ByVal comp As Thermodynamics.BaseClasses.ConstantProperties) As Boolean
+        Public Overrides Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
             If Me.SupportedComponents.Contains(comp.ID) Then
                 Return True
@@ -533,7 +532,7 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcDewT(ByVal Vx As System.Array, ByVal P As Double, Optional ByVal Tref As Double = 0, Optional ByVal K As System.Array = Nothing, Optional ByVal ReuseK As Boolean = False) As Object
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
             Return New Object() {0.0#}
         End Function
 
@@ -564,8 +563,8 @@ Namespace PropertyPackages
             App.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
             App.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
-            Dim constprops As New List(Of ConstantProperties)
-            For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+            For Each s As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(s.ConstantProperties)
             Next
 
@@ -597,7 +596,7 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
 
-            Dim comp As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = sub1).SingleOrDefault
+            Dim comp As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = sub1).SingleOrDefault
 
             Return bop.VaporPressure(T, comp.ConstantProperties.BO_SGO, comp.ConstantProperties.BO_BSW)
 
@@ -753,7 +752,7 @@ Namespace PropertyPackages
                     Return bop.LiquidMolecularWeight(bof.SGO, bof.BSW)
                 Case PropertyPackages.Phase.Mixture
                     Dim val As Double = 0.0#
-                    Dim subst As BaseClasses.Compound
+                    Dim subst As Interfaces.ICompound
                     For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                         val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
                     Next
@@ -767,7 +766,7 @@ Namespace PropertyPackages
         Public Overrides Function AUX_CONVERT_MOL_TO_MASS(subst As String, phasenumber As Integer) As Double
 
             Dim mol_x_mm As Double
-            Dim sub1 As BaseClasses.Compound
+            Dim sub1 As Interfaces.ICompound
 
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
                 If phasenumber = 2 Then

@@ -22,9 +22,10 @@ Imports System.Xml.Linq
 Imports System.Linq
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
+Imports DWSIM.Thermodynamics.MathEx.Common
 Imports Ciloci.Flee
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Interfaces.Enums
+
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -44,7 +45,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property Reactions As List(Of String)
         Public Property ReactionExtents As Dictionary(Of String, Double)
         Public Property ComponentIDs As List(Of String)
-        Public Property CompoundProperties As List(Of ConstantProperties)
+        Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
         Public Property ComponentConversions As Dictionary(Of String, Double)
 
         Public Property MaximumIterations As Integer = 1000
@@ -93,7 +94,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Vnf = Vx.Clone
 
-            Dim wid As Integer = CompoundProperties.IndexOf((From c As ConstantProperties In CompoundProperties Select c Where c.Name = "Water").SingleOrDefault)
+            Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Name = "Water").SingleOrDefault)
 
             'calculate water vapor pressure.
 
@@ -239,7 +240,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 int_count += 1
 
-                CheckCalculatorStatus()
+                App.Flowsheet.CheckStatus()
 
                 'Loop Until int_count > MaximumIterations
 
@@ -300,41 +301,37 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If Me.ComponentConversions Is Nothing Then Me.ComponentConversions = New Dictionary(Of String, Double)
             If Me.ComponentIDs Is Nothing Then Me.ComponentIDs = New List(Of String)
 
-            Dim form As FormFlowsheet = proppack.CurrentMaterialStream.Flowsheet
-
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-
             Me.Reactions.Clear()
             Me.ReactionExtents.Clear()
 
-            Dim rx As Reaction
+            Dim rx As Interfaces.IReaction
 
             P0 = 101325
 
-            Dim rxn As Reaction
+            Dim rxn As Interfaces.IReaction
 
             'check active reactions (equilibrium only) in the reaction set
-            For Each rxnsb As ReactionSetBase In form.Options.ReactionSets(Me.ReactionSet).Reactions.Values
-                If form.Options.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
+            For Each rxnsb As Interfaces.IReactionSetBase In App.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
+                If App.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
                     Me.Reactions.Add(rxnsb.ReactionID)
                     Me.ReactionExtents.Add(rxnsb.ReactionID, 0)
-                    rxn = form.Options.Reactions(rxnsb.ReactionID)
+                    rxn = App.Flowsheet.Reactions(rxnsb.ReactionID)
                     'equilibrium constant calculation
                     Select Case rxn.KExprType
-                        Case Reaction.KOpt.Constant
+                        Case KOpt.Constant
                             'rxn.ConstantKeqValue = rxn.ConstantKeqValue
-                        Case Reaction.KOpt.Expression
+                        Case KOpt.Expression
                             rxn.ExpContext = New Ciloci.Flee.ExpressionContext
                             rxn.ExpContext.Imports.AddType(GetType(System.Math))
                             rxn.ExpContext.Variables.Add("T", T)
                             rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.Expression)
                             rxn.ConstantKeqValue = Exp(rxn.Expr.Evaluate)
-                        Case Reaction.KOpt.Gibbs
+                        Case KOpt.Gibbs
                             Dim id(rxn.Components.Count - 1) As String
                             Dim stcoef(rxn.Components.Count - 1) As Double
                             Dim bcidx As Integer = 0
                             j = 0
-                            For Each sb As ReactionStoichBase In rxn.Components.Values
+                            For Each sb As Interfaces.IReactionStoichBase In rxn.Components.Values
                                 id(j) = sb.CompName
                                 stcoef(j) = sb.StoichCoeff
                                 If sb.IsBaseReactant Then bcidx = j
@@ -357,7 +354,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 i = 0
                 For Each rxid As String In Me.Reactions
-                    rx = form.Options.Reactions(rxid)
+                    rx = App.Flowsheet.Reactions(rxid)
                     j = 0
                     For Each comp As ReactionStoichBase In rx.Components.Values
                         If Not Me.ComponentIDs.Contains(comp.CompName) Then
@@ -377,7 +374,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 'E: matrix of stoichometric coefficients
                 i = 0
                 For Each rxid As String In Me.Reactions
-                    rx = form.Options.Reactions(rxid)
+                    rx = App.Flowsheet.Reactions(rxid)
                     j = 0
                     For Each cname As String In Me.ComponentIDs
                         If rx.Components.ContainsKey(cname) Then
@@ -415,7 +412,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 i = 0
                 For Each rxid As String In Me.Reactions
-                    rx = form.Options.Reactions(rxid)
+                    rx = App.Flowsheet.Reactions(rxid)
                     j = 0
                     For Each comp As ReactionStoichBase In rx.Components.Values
                         var1 = -N0(comp.CompName) / comp.StoichCoeff
@@ -441,9 +438,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Next
                 Else
                     i = 0
-                    For Each rxnsb As ReactionSetBase In form.Options.ReactionSets(Me.ReactionSet).Reactions.Values
-                        If form.Options.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
-                            rxn = form.Options.Reactions(rxnsb.ReactionID)
+                    For Each rxnsb As Interfaces.IReactionSetBase In App.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
+                        If App.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
+                            rxn = App.Flowsheet.Reactions(rxnsb.ReactionID)
                             If rxn.ConstantKeqValue < 1 Then
                                 REx(i) = 0.01#
                             ElseIf rxn.ConstantKeqValue > 70 Then
@@ -516,7 +513,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
                     End If
 
-                    CheckCalculatorStatus()
+                    App.Flowsheet.CheckStatus()
 
                 Loop
 
@@ -649,7 +646,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To Me.Reactions.Count - 1
                 prod(i) = 1
                 For Each s As String In Me.ComponentIDs
-                    With proppack.CurrentMaterialStream.Flowsheet.Options.Reactions(Me.Reactions(i))
+                    With proppack.CurrentMaterialStream.App.Flowsheet.FlowsheetOptions.Reactions(Me.Reactions(i))
                         If .Components.ContainsKey(s) Then
                             If .Components(s).StoichCoeff > 0 Then
                                 For j = 0 To nc
@@ -667,7 +664,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim pen_val As Double = ReturnPenaltyValue()
 
             For i = 0 To Me.Reactions.Count - 1
-                With proppack.CurrentMaterialStream.Flowsheet.Options.Reactions(Me.Reactions(i))
+                With proppack.CurrentMaterialStream.App.Flowsheet.FlowsheetOptions.Reactions(Me.Reactions(i))
                     f(i) = Log(prod(i)) - Log(.ConstantKeqValue)
                     If Double.IsNaN(f(i)) Or Double.IsInfinity(f(i)) Or pen_val <> 0.0# Then
                         f(i) = pen_val ^ 2

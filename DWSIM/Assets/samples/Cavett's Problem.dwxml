@@ -49786,9 +49786,9 @@
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
     <UsePhaseIdentificationAlgorithm>false</UsePhaseIdentificationAlgorithm>
-    <SimNome>Cavett</SimNome>
-    <SimAutor>DV6880SE\Daniel</SimAutor>
-    <SimComentario>Solution for the Cavett Problem in DWSIM</SimComentario>
+    <SimulationName>Cavett</SimulationName>
+    <SimulationAuthor>DV6880SE\Daniel</SimulationAuthor>
+    <SimulationComments>Solution for the Cavett Problem in DWSIM</SimulationComments>
     <FilePath>C:\Users\ptc0\Source\Repos\dwsim3\DWSIM\bin\x86\Release\samples\Cavett's Problem.dwxml</FilePath>
     <BackupFileName>49356378.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

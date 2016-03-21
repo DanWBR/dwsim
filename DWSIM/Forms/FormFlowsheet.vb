@@ -188,9 +188,9 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
         If Not Me.m_IsLoadedFromFile Then
 
             If Not DWSIM.App.IsRunningOnMono Then
-                Me.Options.SimAutor = My.User.Name
+                Me.Options.SimulationAuthor = My.User.Name
             Else
-                Me.Options.SimAutor = "user"
+                Me.Options.SimulationAuthor = "user"
             End If
 
             For Each pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In Me.Options.PropertyPackages.Values
@@ -409,7 +409,7 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
         If Me.m_overrideCloseQuestion = False Then
 
-            Dim x = MessageBox.Show(DWSIM.App.GetLocalString("Desejasalvarasaltera"), DWSIM.App.GetLocalString("Fechando") & " " & Me.Options.SimNome & " (" & System.IO.Path.GetFileName(Me.Options.FilePath) & ") ...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+            Dim x = MessageBox.Show(DWSIM.App.GetLocalString("Desejasalvarasaltera"), DWSIM.App.GetLocalString("Fechando") & " " & Me.Options.SimulationName & " (" & System.IO.Path.GetFileName(Me.Options.FilePath) & ") ...", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
 
             If x = MsgBoxResult.Yes Then
 
@@ -441,7 +441,7 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
         If File.Exists(Me.Options.FilePath) Then
             Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
         Else
-            Me.Text = Me.Options.SimNome
+            Me.Text = Me.Options.SimulationName
         End If
     End Sub
 
@@ -2367,19 +2367,19 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
     Public Property ComponentDescription() As String Implements CapeOpen.ICapeIdentification.ComponentDescription
         Get
-            Return Me.Options.SimComentario
+            Return Me.Options.SimulationComments
         End Get
         Set(ByVal value As String)
-            Me.Options.SimComentario = value
+            Me.Options.SimulationComments = value
         End Set
     End Property
 
     Public Property ComponentName() As String Implements CapeOpen.ICapeIdentification.ComponentName
         Get
-            Return Me.Options.SimNome
+            Return Me.Options.SimulationName
         End Get
         Set(ByVal value As String)
-            Me.Options.SimNome = value
+            Me.Options.SimulationName = value
         End Set
     End Property
 
@@ -3150,6 +3150,26 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
         End Get
     End Property
 
+    Public ReadOnly Property Reactions As Dictionary(Of String, Interfaces.IReaction) Implements Interfaces.IFlowsheet.Reactions
+        Get
+            Dim dict As New Dictionary(Of String, Interfaces.IReaction)
+            For Each kvp In Options.Reactions
+                dict.Add(kvp.Key, kvp.Value)
+            Next
+            Return dict
+        End Get
+    End Property
+
+    Public ReadOnly Property ReactionSets As Dictionary(Of String, Interfaces.IReactionSet) Implements Interfaces.IFlowsheet.ReactionSets
+        Get
+            Dim dict As New Dictionary(Of String, Interfaces.IReactionSet)
+            For Each kvp In Options.ReactionSets
+                dict.Add(kvp.Key, kvp.Value)
+            Next
+            Return dict
+        End Get
+    End Property
+
     Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType) Implements Interfaces.IFlowsheet.ShowMessage
         Select Case mtype
             Case Interfaces.IFlowsheet.MessageType.Information
@@ -3191,6 +3211,12 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
         DWSIM.App.WriteToConsole(text, level)
 
     End Sub
+
+    Public ReadOnly Property FlowsheetOptions As Interfaces.IFlowsheetOptions Implements Interfaces.IFlowsheet.FlowsheetOptions
+        Get
+            Return Options
+        End Get
+    End Property
 
 #End Region
 

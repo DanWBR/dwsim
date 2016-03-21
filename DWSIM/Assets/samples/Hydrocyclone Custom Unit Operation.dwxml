@@ -8,9 +8,9 @@
     <SempreCalcularFlashPH>false</SempreCalcularFlashPH>
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
-    <SimNome>simulation_title</SimNome>
-    <SimAutor>PETROBRAS\ptc0</SimAutor>
-    <SimComentario>simulation_details</SimComentario>
+    <SimulationName>simulation_title</SimulationName>
+    <SimulationAuthor>PETROBRAS\ptc0</SimulationAuthor>
+    <SimulationComments>simulation_details</SimulationComments>
     <FilePath>C:\Users\Daniel\Documents\Visual Studio 2010\Projects\DWSIM\DWSIM3\DWSIM\bin\x86\Release\samples\Hydrocyclone Custom Unit Operation.dwxml</FilePath>
     <BackupFileName>41227774.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

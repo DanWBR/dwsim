@@ -10,9 +10,9 @@
     Property ValidateEquilibriumCalc As Boolean
     Property UsePhaseIdentificationAlgorithm As Boolean
 
-    Property SimNome As String
-    Property SimAutor As String
-    Property SimComentario As String
+    Property SimulationName As String
+    Property SimulationAuthor As String
+    Property SimulationComments As String
 
     Property FilePath As String
 

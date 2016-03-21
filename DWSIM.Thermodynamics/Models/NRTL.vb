@@ -103,7 +103,7 @@ Namespace PropertyPackages.Auxiliary
                 nrtlipc = .ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "nrtl.dat")
             End With
 
-            Dim csdb As New DWSIM.Databases.ChemSep
+            Dim csdb As New Databases.ChemSep
 
             'load ChemSep database interactions
             For Each nrtlip In nrtlipc

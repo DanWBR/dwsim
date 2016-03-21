@@ -23,6 +23,7 @@ Imports System.Math
 Imports DWSIM.DWSIM.MathEx
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Linq
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.SimulationObjects.Reactors
 
@@ -98,7 +99,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
         Public Sub New(ByVal name As String, ByVal description As String)
 
-            MyBase.new()
+            MyBase.New()
             Me.ComponentName = name
             Me.ComponentDescription = description
 
@@ -901,7 +902,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             'If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac11"))
             'If Not Me.GraphicObject.OutputConnectors(1).IsAttached Then Throw New Exception(DWSIM.App.GetLocalString("Nohcorrentedematriac11"))
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
 
             'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             'Dim W As Double = ems.Phases(0).Properties.massflow.GetValueOrDefault

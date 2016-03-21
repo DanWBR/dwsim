@@ -10641,9 +10641,9 @@ else:
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
     <UsePhaseIdentificationAlgorithm>false</UsePhaseIdentificationAlgorithm>
-    <SimNome>simulation_title</SimNome>
-    <SimAutor>Daniel-PC\Daniel</SimAutor>
-    <SimComentario>simulation_details</SimComentario>
+    <SimulationName>simulation_title</SimulationName>
+    <SimulationAuthor>Daniel-PC\Daniel</SimulationAuthor>
+    <SimulationComments>simulation_details</SimulationComments>
     <FilePath>C:\Users\ptc0\Source\Repos\dwsim3\DWSIM\Assets\samples\Simple LNG Exchanger Custom Unit Operation.dwxml</FilePath>
     <BackupFileName>29876630.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

@@ -49,8 +49,7 @@ Namespace PropertyPackages
             Me.SupportedComponents.Add(15)
 
             Me.IsConfigurable = True
-            Me.ConfigForm = New FormConfigPP
-
+      
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
         End Sub
@@ -77,13 +76,12 @@ Namespace PropertyPackages
 
         Public Overrides Sub ReconfigureConfigForm()
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = New FormConfigPP
         End Sub
 
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
-                Dim constprops As New List(Of ConstantProperties)
-                For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     constprops.Add(su.ConstantProperties)
                 Next
                 Return New Auxiliary.FlashAlgorithms.Seawater With {.CompoundProperties = constprops}
@@ -98,8 +96,8 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-            Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim salt As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
 
             If water Is Nothing Then Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             If salt Is Nothing Then Throw New Exception("Salt compound not found. Please setup your simulation accordingly.")
@@ -265,8 +263,8 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-            Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim salt As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
 
             If water Is Nothing Then Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             If salt Is Nothing Then Throw New Exception("Salt compound not found. Please setup your simulation accordingly.")
@@ -444,8 +442,8 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcViscosidadeDinamica_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-            Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim salt As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
 
             If water Is Nothing Then Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             If salt Is Nothing Then Throw New Exception("Salt compound not found. Please setup your simulation accordingly.")
@@ -491,8 +489,8 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcPVAP_ISOL(ByVal T As Double) As Double
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-            Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim salt As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
 
             If water Is Nothing Then Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             If salt Is Nothing Then Throw New Exception("Salt compound not found. Please setup your simulation accordingly.")
@@ -503,7 +501,7 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function SupportsComponent(ByVal comp As Thermodynamics.BaseClasses.ConstantProperties) As Boolean
+        Public Overrides Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
             If Me.SupportedComponents.Contains(comp.ID) Then
                 Return True
@@ -541,7 +539,7 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcBubT(ByVal Vx As System.Array, ByVal P As Double, Optional ByVal Tref As Double = 0, Optional ByVal K As System.Array = Nothing, Optional ByVal ReuseK As Boolean = False) As Object
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
             Return New Object() {Me.AUX_TSATi(P, water.Name)}
         End Function
 
@@ -550,7 +548,7 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcDewT(ByVal Vx As System.Array, ByVal P As Double, Optional ByVal Tref As Double = 0, Optional ByVal K As System.Array = Nothing, Optional ByVal ReuseK As Boolean = False) As Object
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
             Return New Object() {Me.AUX_TSATi(P, water.Name)}
         End Function
 
@@ -587,8 +585,8 @@ Namespace PropertyPackages
             App.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
             App.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
-            Dim constprops As New List(Of ConstantProperties)
-            For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+            For Each s As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(s.ConstantProperties)
             Next
 
@@ -645,8 +643,8 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-            Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim salt As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
 
             If water.Name = sub1 Then
 
@@ -676,8 +674,8 @@ Namespace PropertyPackages
 
         Public Function CalcSalinity(Vx As Double()) As Double
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-            Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim salt As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
 
             If water Is Nothing Then Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             If salt Is Nothing Then Throw New Exception("Salt compound not found. Please setup your simulation accordingly.")
@@ -686,7 +684,7 @@ Namespace PropertyPackages
             Dim ids As Integer = 0
 
             Dim i As Integer = 0
-            For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            For Each s As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 If s.Name = water.Name Then idw = i
                 If s.Name = salt.Name Then ids = i
                 i += 1
@@ -714,8 +712,8 @@ Namespace PropertyPackages
 
         Public Function CalcSalinity() As Double
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-            Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim salt As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
 
             If water Is Nothing Then Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             If salt Is Nothing Then Throw New Exception("Salt compound not found. Please setup your simulation accordingly.")
@@ -741,7 +739,7 @@ Namespace PropertyPackages
 
             Dim Tnfp, DHm, DT, Td As Double
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
 
             Tnfp = 273.15
             DHm = 6.00174
@@ -749,7 +747,7 @@ Namespace PropertyPackages
             Dim idw As Integer = 0
 
             Dim i As Integer = 0
-            For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            For Each s As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 If s.Name = water.Name Then idw = i
                 i += 1
             Next

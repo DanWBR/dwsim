@@ -82,9 +82,9 @@
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
     <UsePhaseIdentificationAlgorithm>true</UsePhaseIdentificationAlgorithm>
-    <SimNome>simulation_title</SimNome>
-    <SimAutor>PETROBRAS\ptc0</SimAutor>
-    <SimComentario>simulation_details</SimComentario>
+    <SimulationName>simulation_title</SimulationName>
+    <SimulationAuthor>PETROBRAS\ptc0</SimulationAuthor>
+    <SimulationComments>simulation_details</SimulationComments>
     <FilePath>C:\Users\Daniel\Documents\Visual Studio 2010\Projects\DWSIM\DWSIM3\DWSIM\bin\x86\Release\samples\Three Phase Flash.dwxml</FilePath>
     <BackupFileName>14668589.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

@@ -218,9 +218,9 @@ Public Class FormSimulSettings
 
         CheckBox3.Checked = FrmChild.Options.SempreCalcularFlashPH
 
-        Me.TBaut.Text = Me.FrmChild.Options.SimAutor
-        Me.TBdesc.Text = Me.FrmChild.Options.SimComentario
-        Me.TBtit.Text = Me.FrmChild.Options.SimNome
+        Me.TBaut.Text = Me.FrmChild.Options.SimulationAuthor
+        Me.TBdesc.Text = Me.FrmChild.Options.SimulationComments
+        Me.TBtit.Text = Me.FrmChild.Options.SimulationName
 
         SetupKeyCompounds()
 
@@ -288,17 +288,17 @@ Public Class FormSimulSettings
 
     Private Sub TBtit_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBtit.TextChanged
         If Me.loaded Then
-            Me.FrmChild.Options.SimNome = Me.TBtit.Text
+            Me.FrmChild.Options.SimulationName = Me.TBtit.Text
             Me.FrmChild.Text = Me.TBtit.Text + " (" + Me.FrmChild.Options.FilePath + ")"
         End If
     End Sub
 
     Private Sub TBaut_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBaut.TextChanged
-        If Me.loaded Then Me.FrmChild.Options.SimAutor = Me.TBaut.Text
+        If Me.loaded Then Me.FrmChild.Options.SimulationAuthor = Me.TBaut.Text
     End Sub
 
     Private Sub TBdesc_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBdesc.TextChanged
-        If Me.loaded Then Me.FrmChild.Options.SimComentario = Me.TBdesc.Text
+        If Me.loaded Then Me.FrmChild.Options.SimulationComments = Me.TBdesc.Text
     End Sub
 
     Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click

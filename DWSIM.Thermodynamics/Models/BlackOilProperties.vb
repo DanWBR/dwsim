@@ -73,7 +73,7 @@ Namespace PropertyPackages.Auxiliary
         End Function
         Public Function LiquidEnthalpy(T As Double, P As Double, SGO As Double, SGG As Double, BSW As Double) As Double
 
-            Dim methods As New DWSIM.Utilities.Hypos.Methods.HYP
+            Dim methods As New Utilities.Hypos.Methods.HYP
             Dim Tc, Pc, MW As Double
             Dim NBP As Double = LiquidNormalBoilingPoint(SGO, 0)
 

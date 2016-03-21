@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Linq
@@ -42,7 +42,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl, Hs As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl, Ss As Double
 
-        Public Property CompoundProperties As List(Of ConstantProperties)
+        Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
 
         Public Property SolidSolution As Boolean = False
 
@@ -246,7 +246,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 WriteDebugInfo("PT Flash [NL-SLE]: Iteration #" & ecount & ", LF = " & L)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until convergiu = 1
 
@@ -278,7 +278,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Dim L, L_old, SF, SLP As Double
             Dim cpl(n), cps(n), dCp(n) As Double
             Dim Vn(n) As String
-            Dim constprop As ConstantProperties
+            Dim constprop As Interfaces.ICompoundConstantProperties
 
             Vx = Vz.Clone 'assuming initially only liquids exist
             Tf = PP.RET_VTF 'Fusion temperature
@@ -681,7 +681,7 @@ out:        d2 = Date.Now
 
                     WriteDebugInfo("PT Flash [NL-SLE]: Iteration #" & ecount & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until convergiu = 1
 
@@ -824,7 +824,7 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
 
                 ecount += 1
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop
 
@@ -1332,7 +1332,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("PV Flash [SLE]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1442,7 +1442,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                         WriteDebugInfo("PV Flash [SLE]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                        CheckCalculatorStatus()
+                       App.Flowsheet.CheckStatus()
 
                     Loop Until (Math.Abs(fval) < etol And e1 < etol) Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1734,7 +1734,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                 WriteDebugInfo("PV Flash [NL-SLE]: Iteration #" & ecount & ", T = " & T & ", LF = " & L)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until Math.Abs(T - Tant) < 0.01 Or Double.IsNaN(T) = True Or ecount > maxit_e Or Double.IsNaN(T) Or Double.IsInfinity(T)
 

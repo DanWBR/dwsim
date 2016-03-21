@@ -1368,9 +1368,9 @@
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
     <UsePhaseIdentificationAlgorithm>false</UsePhaseIdentificationAlgorithm>
-    <SimNome>simulation</SimNome>
-    <SimAutor>ALZCHEM\G90020</SimAutor>
-    <SimComentario>comments</SimComentario>
+    <SimulationName>simulation</SimulationName>
+    <SimulationAuthor>ALZCHEM\G90020</SimulationAuthor>
+    <SimulationComments>comments</SimulationComments>
     <FilePath>C:\Users\g90020\GitHub\dwsim3\DWSIM\bin\x86\Release\samples\Humid Air.dwxml</FilePath>
     <BackupFileName>15320340.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

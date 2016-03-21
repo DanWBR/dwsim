@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Linq
@@ -44,7 +44,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Private _nl As New DWSIMDefault
 
-        Public Property CompoundProperties As List(Of ConstantProperties)
+        Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
 
            Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
@@ -564,7 +564,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("TV Flash [NL-I]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(P - Pant) < 1 Or Double.IsNaN(P) = True Or ecount > maxit_e Or Double.IsNaN(P) Or Double.IsInfinity(P)
 
@@ -668,7 +668,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("TV Flash [NL-I]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -889,7 +889,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("PV Flash [NL-I]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(T - Tant) < 0.1 Or Double.IsNaN(T) = True Or ecount > maxit_e Or Double.IsNaN(T) Or Double.IsInfinity(T)
 
@@ -991,7 +991,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("PV Flash [NL-I]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    CheckCalculatorStatus()
+                   App.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 

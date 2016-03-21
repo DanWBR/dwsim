@@ -20,6 +20,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization.Formatters
 Imports System.Globalization
 Imports System.Linq
+Imports DWSIM.Interfaces.Enums
 
 Public Class FormReacManager
 

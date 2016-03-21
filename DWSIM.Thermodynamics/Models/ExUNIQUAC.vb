@@ -121,7 +121,7 @@ Namespace PropertyPackages.Auxiliary
             exuniquacrqc = fh3.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "ExUNIQUAC_RiQi.txt")
             exuniquacdcc = fh4.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "DielectricConstants.txt")
 
-            Dim csdb As New DWSIM.Databases.ChemSep
+            Dim csdb As New Databases.ChemSep
 
             For Each exuniquac In exuniquacc
                 If Me.InteractionParameters.ContainsKey(exuniquac.Group1) Then
@@ -154,7 +154,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Sub
 
-        Function GAMMA_MR(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of ConstantProperties)) As Array
+        Function GAMMA_MR(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Array
 
             Dim n As Integer = UBound(Vx)
 

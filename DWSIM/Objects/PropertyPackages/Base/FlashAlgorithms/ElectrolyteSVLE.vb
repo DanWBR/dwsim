@@ -25,6 +25,7 @@ Imports DWSIM.DWSIM.MathEx
 Imports DWSIM.DWSIM.MathEx.Common
 Imports Ciloci.Flee
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -300,7 +301,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
             If Me.ComponentConversions Is Nothing Then Me.ComponentConversions = New Dictionary(Of String, Double)
             If Me.ComponentIDs Is Nothing Then Me.ComponentIDs = New List(Of String)
 
-            Dim form As FormFlowsheet = proppack.CurrentMaterialStream.Flowsheet
+            Dim form As FormFlowsheet = proppack.CurrentMaterialStream.FlowSheet
 
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
@@ -321,15 +322,15 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
                     rxn = form.Options.Reactions(rxnsb.ReactionID)
                     'equilibrium constant calculation
                     Select Case rxn.KExprType
-                        Case Reaction.KOpt.Constant
+                        Case KOpt.Constant
                             'rxn.ConstantKeqValue = rxn.ConstantKeqValue
-                        Case Reaction.KOpt.Expression
+                        Case KOpt.Expression
                             rxn.ExpContext = New Ciloci.Flee.ExpressionContext
                             rxn.ExpContext.Imports.AddType(GetType(System.Math))
                             rxn.ExpContext.Variables.Add("T", T)
                             rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.Expression)
                             rxn.ConstantKeqValue = Exp(rxn.Expr.Evaluate)
-                        Case Reaction.KOpt.Gibbs
+                        Case KOpt.Gibbs
                             Dim id(rxn.Components.Count - 1) As String
                             Dim stcoef(rxn.Components.Count - 1) As Double
                             Dim bcidx As Integer = 0
@@ -649,7 +650,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To Me.Reactions.Count - 1
                 prod(i) = 1
                 For Each s As String In Me.ComponentIDs
-                    With proppack.CurrentMaterialStream.Flowsheet.Options.Reactions(Me.Reactions(i))
+                    With proppack.CurrentMaterialStream.FlowSheet.Options.Reactions(Me.Reactions(i))
                         If .Components.ContainsKey(s) Then
                             If .Components(s).StoichCoeff > 0 Then
                                 For j = 0 To nc
@@ -667,7 +668,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms
             Dim pen_val As Double = ReturnPenaltyValue()
 
             For i = 0 To Me.Reactions.Count - 1
-                With proppack.CurrentMaterialStream.Flowsheet.Options.Reactions(Me.Reactions(i))
+                With proppack.CurrentMaterialStream.FlowSheet.Options.Reactions(Me.Reactions(i))
                     f(i) = Log(prod(i)) - Log(.ConstantKeqValue)
                     If Double.IsNaN(f(i)) Or Double.IsInfinity(f(i)) Or pen_val <> 0.0# Then
                         f(i) = pen_val ^ 2

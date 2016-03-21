@@ -3,6 +3,6 @@
     Property ComponentDescription As String
     Property ComponentName As String
     Property Name As String
-    Property Compounds As Dictionary(Of String, Interfaces.ICompound)
+    Property Compounds As Dictionary(Of String, ICompound)
 
 End Interface

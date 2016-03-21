@@ -71,9 +71,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base Classes\BaseThermoClasses.vb" />
-    <Compile Include="Base Classes\MODFACHelpers.vb" />
-    <Compile Include="Base Classes\UNIFACHelpers.vb" />
     <Compile Include="Misc\CapeOpenObjInfo.vb" />
     <Compile Include="Misc\CCapeCollection.vb" />
     <Compile Include="Misc\ComIStreamWrapper.vb" />

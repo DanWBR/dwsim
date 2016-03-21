@@ -42,21 +42,17 @@ Namespace PropertyPackages
 
             MyBase.New(comode)
 
-            Me.ConfigForm = New FormConfigLIQUAC
-
         End Sub
 
         Public Sub New()
 
             MyBase.New()
 
-            Me.ConfigForm = New FormConfigLIQUAC
-
+  
         End Sub
 
         Public Overrides Sub ReconfigureConfigForm()
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = New FormConfigLIQUAC
         End Sub
 
 #Region "    DWSIM Functions"
@@ -107,8 +103,8 @@ Namespace PropertyPackages
                     result = 0.0#
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
                 Case "heatcapacity", "heatcapacitycp"
-                    Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     If phase = Phase.Solid Then
@@ -121,8 +117,8 @@ Namespace PropertyPackages
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = Me.m_elec.HeatCapacityCp(T, RET_VMOL(phase), constprops)
                     End If
                 Case "heatcapacitycv"
-                    Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     If phase = Phase.Solid Then
@@ -133,8 +129,8 @@ Namespace PropertyPackages
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = Me.m_elec.HeatCapacityCp(T, RET_VMOL(phase), constprops)
                     End If
                 Case "enthalpy", "enthalpynf"
-                    Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     If phase = Phase.Solid Then
@@ -153,8 +149,8 @@ Namespace PropertyPackages
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                     End If
                 Case "entropy", "entropynf"
-                    Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     If phase = Phase.Solid Then
@@ -214,26 +210,26 @@ Namespace PropertyPackages
                 Case "surfacetension"
                     Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
                 Case "osmoticcoefficient"
-                    Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.osmoticCoefficient = Me.m_elec.OsmoticCoeff(RET_VMOL(phase), Me.m_uni.GAMMA_MR(T, RET_VMOL(phase), constprops), constprops)
                 Case "freezingpoint"
-                    Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.freezingPoint = Me.m_elec.FreezingPointDepression(RET_VMOL(phase), Me.m_uni.GAMMA_MR(T, RET_VMOL(phase), constprops), constprops)(0)
                 Case "freezingpointdepression"
-                    Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.freezingPointDepression = Me.m_elec.FreezingPointDepression(RET_VMOL(phase), Me.m_uni.GAMMA_MR(T, RET_VMOL(phase), constprops), constprops)(1)
                 Case "ph"
-                    Dim constprops As New List(Of ConstantProperties)
-                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         constprops.Add(su.ConstantProperties)
                     Next
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.pH = Me.m_elec.pH(RET_VMOL(phase), T, Me.m_uni.GAMMA_MR(T, RET_VMOL(phase), constprops), constprops)
@@ -307,8 +303,8 @@ Namespace PropertyPackages
 
             End If
 
-            Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -408,8 +404,8 @@ Namespace PropertyPackages
 
             Dim H As Double
 
-            Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -430,8 +426,8 @@ Namespace PropertyPackages
 
             Dim H As Double
 
-            Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -475,8 +471,8 @@ Namespace PropertyPackages
 
             Dim Tc As Object = Me.RET_VTC()
 
-            Dim constprops As New List(Of ConstantProperties)
-            For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+            For Each s As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(s.ConstantProperties)
             Next
 

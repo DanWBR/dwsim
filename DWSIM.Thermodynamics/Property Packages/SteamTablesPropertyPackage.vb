@@ -54,7 +54,7 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcEquilibrium(ByVal spec1 As PropertyPackages.FlashSpec, ByVal spec2 As PropertyPackages.FlashSpec)
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
 
             If water Is Nothing Then
                 Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
@@ -373,7 +373,7 @@ FINAL:
 
         Public Overrides Function DW_CalcEquilibrio_ISOL(spec1 As FlashSpec, spec2 As FlashSpec, val1 As Double, val2 As Double, estimate As Double) As Object
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
 
             If water Is Nothing Then
                 Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
@@ -595,7 +595,7 @@ FINAL:
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
 
-            Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+            Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
 
             If water Is Nothing Then
                 Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
@@ -935,7 +935,7 @@ FINAL:
             Return Me.m_iapws97.pSatW(T) * 100000
         End Function
 
-        Public Overrides Function SupportsComponent(ByVal comp As Thermodynamics.BaseClasses.ConstantProperties) As Boolean
+        Public Overrides Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
             If Me.SupportedComponents.Contains(comp.ID) Then
                 Return True

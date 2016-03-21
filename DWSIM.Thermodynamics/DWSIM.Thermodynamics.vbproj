@@ -54,6 +54,12 @@
       <HintPath>..\DWSIM\References\Cudafy.NET.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Cureos.Numerics">
+      <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNumerics">
+      <HintPath>..\DWSIM\References\DotNumerics.dll</HintPath>
+    </Reference>
     <Reference Include="FileHelpers">
       <HintPath>..\DWSIM\References\FileHelpers.dll</HintPath>
       <Private>False</Private>
@@ -89,11 +95,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
-    <Compile Include="Base Classes\BaseThermoClasses.vb" />
     <Compile Include="Base Classes\CRITPT.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Extensions\ExtensionMethods.vb" />
     <Compile Include="Extensions\SIMDExtenders.vb" />
+    <Compile Include="Flash Algorithms\PointF.vb" />
     <Compile Include="Helper Classes\App.vb" />
     <Compile Include="Math Classes\AP.vb" />
     <Compile Include="Math Classes\Brent.vb" />
@@ -199,7 +205,6 @@
     <Compile Include="Property Packages\UNIFACPropertyPackage.vb" />
     <Compile Include="Models\UNIQUAC.vb" />
     <Compile Include="Property Packages\UNIQUACPropertyPackage.vb" />
-    <Compile Include="Databases\Databases.vb" />
     <Compile Include="Systems of Units\SystemsOfUnits.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +216,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -235,6 +241,10 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

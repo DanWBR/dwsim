@@ -33,6 +33,7 @@ Imports System.Runtime.Serialization.Formatters
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
+Imports DWSIM.Interfaces.Interfaces
 
 Namespace PropertyPackages
 
@@ -146,7 +147,7 @@ Namespace PropertyPackages
 
         Public Const ClassId As String = ""
 
-        <System.NonSerialized()> Private m_ms As DWSIM.SimulationObjects.Streams.MaterialStream = Nothing
+        <System.NonSerialized()> Private m_ms As Interfaces.IMaterialStream = Nothing
         Private m_ss As New System.Collections.Generic.List(Of String)
         Private m_configurable As Boolean = False
 
@@ -184,7 +185,7 @@ Namespace PropertyPackages
 
         <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
 
-        <System.NonSerialized()> Public ConfigForm As FormConfigBase 'System.Windows.Forms.Form
+        '<System.NonSerialized()> Public ConfigForm As FormConfigBase 'System.Windows.Forms.Form
 
 #Region "   Constructor"
 
@@ -206,8 +207,8 @@ Namespace PropertyPackages
 
                 'initialize collections
 
-                _selectedcomps = New Dictionary(Of String, ConstantProperties)
-                _availablecomps = New Dictionary(Of String, ConstantProperties)
+                _selectedcomps = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+                _availablecomps = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
                 'load databases
 
@@ -259,11 +260,11 @@ Namespace PropertyPackages
                 If Not My.Settings.UserDatabases Is Nothing Then
                     For Each fpath As String In My.Settings.UserDatabases
                         Try
-                            Dim componentes As ConstantProperties()
+                            Dim componentes As Interfaces.ICompoundConstantProperties()
                             componentes = DWSIM.Databases.UserDB.ReadComps(fpath)
                             If componentes.Length > 0 Then
                                 If My.Settings.ReplaceComps Then
-                                    For Each c As ConstantProperties In componentes
+                                    For Each c As Interfaces.ICompoundConstantProperties In componentes
                                         If Not _availablecomps.ContainsKey(c.Name) Then
                                             _availablecomps.Add(c.Name, c)
                                         Else
@@ -271,7 +272,7 @@ Namespace PropertyPackages
                                         End If
                                     Next
                                 Else
-                                    For Each c As ConstantProperties In componentes
+                                    For Each c As Interfaces.ICompoundConstantProperties In componentes
                                         If Not _availablecomps.ContainsKey(c.Name) Then
                                             _availablecomps.Add(c.Name, c)
                                         End If
@@ -366,7 +367,7 @@ Namespace PropertyPackages
                         If Flowsheet Is Nothing Then
                             Return FlashMethod.DWSIMDefault
                         Else
-                            Return Flowsheet.Options.PropertyPackageFlashAlgorithm
+                            Return App.Flowsheet.FlowsheetOptions.PropertyPackageFlashAlgorithm
                         End If
                     Else
                         Return _flashalgorithm
@@ -447,8 +448,8 @@ Namespace PropertyPackages
                         'Return _nl3
                         'End If
                     Case FlashMethod.NestedLoopsSLE
-                        Dim constprops As New List(Of ConstantProperties)
-                        For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                        Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                        For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
                         'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
@@ -459,8 +460,8 @@ Namespace PropertyPackages
                         'Return _nlsle
                         'End If
                     Case FlashMethod.NestedLoopsSLE_SS
-                        Dim constprops As New List(Of ConstantProperties)
-                        For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                        Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                        For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
                         'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
@@ -472,8 +473,8 @@ Namespace PropertyPackages
                         'Return _nlsle
                         'End If
                     Case FlashMethod.NestedLoopsImmiscible
-                        Dim constprops As New List(Of ConstantProperties)
-                        For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                        Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                        For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
                         'If App.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
@@ -600,10 +601,6 @@ Namespace PropertyPackages
 
 #Region "   Must Override or Overridable Functions"
 
-        Public Overridable Sub ShowConfigForm(Optional ByVal owner As IWin32Window = Nothing)
-            If Not owner Is Nothing Then Me.ConfigForm.Show(owner) Else Me.ConfigForm.Show()
-        End Sub
-
         Public Overridable Sub ReconfigureConfigForm()
 
         End Sub
@@ -644,8 +641,8 @@ Namespace PropertyPackages
 
             result = Me.AUX_SOLIDDENS
             Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
-            Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
             result = Me.DW_CalcSolidEnthalpy(T, RET_VMOL(PropertyPackages.Phase.Solid), constprops)
@@ -728,7 +725,7 @@ Namespace PropertyPackages
             Dim alreadymt As Boolean = False
 
             If My.Settings.EnableParallelProcessing Then
-                
+
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
                                                   End Sub,
@@ -746,7 +743,7 @@ Namespace PropertyPackages
                                                     TaskCreationOptions.None,
                                                     App.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
-                
+
             Else
                 fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
                 If type = "LV" Then
@@ -762,7 +759,7 @@ Namespace PropertyPackages
 
             K = fugliq.DivideY(fugvap)
 
-            Dim cprops As List(Of ConstantProperties) = Nothing
+            Dim cprops As List(Of Interfaces.ICompoundConstantProperties) = Nothing
 
             If cprops Is Nothing Then cprops = DW_GetConstantProperties()
 
@@ -835,13 +832,13 @@ Namespace PropertyPackages
             Dim K(n) As Double
 
             i = 0
-            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 K(i) = (result(3)(i) / result(2)(i))
                 i += 1
             Next
 
             i = 0
-            For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 If K(i) = 0 Then K(i) = Me.AUX_PVAPi(subst.Name, T) / P
                 If Double.IsInfinity(K(i)) Or Double.IsNaN(K(i)) Then
                     Dim Pc, Tc, w As Double
@@ -943,7 +940,7 @@ Namespace PropertyPackages
         ''' <remarks>The composition vector must follow the same sequence as the components which were added in the material stream.</remarks>
         Public MustOverride Function DW_CalcFugCoeff(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
-        Public MustOverride Function SupportsComponent(ByVal comp As BaseClasses.ConstantProperties) As Boolean
+        Public MustOverride Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
         Public MustOverride Sub DW_CalcPhaseProps(ByVal Phase As Phase)
 
@@ -962,7 +959,7 @@ Namespace PropertyPackages
             Dim fugliq As Object = Nothing
 
             If My.Settings.EnableParallelProcessing Then
-                
+
                 Dim task1 As Task = New Task(Sub()
                                                  fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
                                              End Sub)
@@ -972,7 +969,7 @@ Namespace PropertyPackages
                 task1.Start()
                 task2.Start()
                 Task.WaitAll(task1, task2)
-                
+
             Else
                 fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
                 fugvap = Me.DW_CalcFugCoeff(Vx, T, P, State.Vapor)
@@ -1104,8 +1101,8 @@ Namespace PropertyPackages
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             Dim T As Double = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
 
-            If Not App.CAPEOPENMode And Not App.ActiveSimulation Is Nothing Then
-                If Flowsheet.Options.CalculateBubbleAndDewPoints _
+            If Not App.CAPEOPENMode Then
+                If App.Flowsheet.FlowsheetOptions.CalculateBubbleAndDewPoints _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
                     Try
@@ -1121,13 +1118,13 @@ Namespace PropertyPackages
                             Me.CurrentMaterialStream.Phases(0).Properties.bubbleTemperature = myres(4)
                         End If
                     Catch ex As Exception
-                        Flowsheet.WriteToLog("Bubble Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
+                        App.Flowsheet.ShowMessage("Bubble Temperature calculation error: " & ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
                     End Try
                     Try
                         result = Me.DW_CalcEquilibrio_ISOL(FlashSpec.P, FlashSpec.VAP, P, 1, 0)(2)
                         Me.CurrentMaterialStream.Phases(0).Properties.dewTemperature = result
                     Catch ex As Exception
-                        Flowsheet.WriteToLog("Dew Temperature calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
+                        App.Flowsheet.ShowMessage("Dew Temperature calculation error: " & ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
                     End Try
                     Try
                         Dim Vz As Double() = Me.RET_VMOL(Phase.Mixture)
@@ -1142,13 +1139,13 @@ Namespace PropertyPackages
                             Me.CurrentMaterialStream.Phases(0).Properties.bubblePressure = myres(4)
                         End If
                     Catch ex As Exception
-                        Flowsheet.WriteToLog("Bubble Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
+                        App.Flowsheet.ShowMessage("Bubble Pressure calculation error: " & ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
                     End Try
                     Try
                         result = Me.DW_CalcEquilibrio_ISOL(FlashSpec.T, FlashSpec.VAP, T, 1, 0)(3)
                         Me.CurrentMaterialStream.Phases(0).Properties.dewPressure = result
                     Catch ex As Exception
-                        Flowsheet.WriteToLog("Dew Pressure calculation error: " & ex.Message.ToString, Color.OrangeRed, DWSIM.Flowsheet.MessageType.GeneralError)
+                        App.Flowsheet.ShowMessage("Dew Pressure calculation error: " & ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
                     End Try
                 End If
             End If
@@ -1325,7 +1322,7 @@ Namespace PropertyPackages
             wlf = wlf1 + wlf2 + wlf3 + wwf
             Me.CurrentMaterialStream.Phases(1).Properties.massflow = wlf
 
-            For Each c As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
+            For Each c As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
 
                 cml1 = Me.CurrentMaterialStream.Phases(3).Compounds(c.Name).MoleFraction.GetValueOrDefault
                 cml2 = Me.CurrentMaterialStream.Phases(4).Compounds(c.Name).MoleFraction.GetValueOrDefault
@@ -1448,8 +1445,8 @@ Namespace PropertyPackages
 
             If Not App.CAPEOPENMode Then
                 Try
-                    Me._tpseverity = Flowsheet.Options.ThreePhaseFlashStabTestSeverity
-                    Me._tpcompids = Flowsheet.Options.ThreePhaseFlashStabTestCompIds
+                    Me._tpseverity = App.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestSeverity
+                    Me._tpcompids = App.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestCompIds
                 Catch ex As Exception
                     Me._tpseverity = 0
                     Me._tpcompids = New String() {}
@@ -1459,7 +1456,7 @@ Namespace PropertyPackages
 
             Dim P, T, H, S, xv, xl, xl2, xs As Double
             Dim result As Object = Nothing
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count
             Dim i As Integer = 0
 
@@ -1502,7 +1499,7 @@ Namespace PropertyPackages
                             Dim dge As Double = 0
 
                             If Not App.CAPEOPENMode Then
-                                If Flowsheet.Options.ValidateEquilibriumCalc _
+                                If App.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -1533,7 +1530,7 @@ Namespace PropertyPackages
                             If Not App.CAPEOPENMode Then
 
                                 'identify phase
-                                If Flowsheet.Options.UsePhaseIdentificationAlgorithm Then
+                                If App.Flowsheet.FlowsheetOptions.UsePhaseIdentificationAlgorithm Then
                                     If Me.ComponentName.Contains("SRK") Or Me.ComponentName.Contains("PR") Then
                                         If Not Me.AUX_IS_SINGLECOMP(Phase.Mixture) Then
                                             Dim newphase, eos As String
@@ -1582,7 +1579,7 @@ Namespace PropertyPackages
                                     End If
                                 End If
 
-                                If Flowsheet.Options.ValidateEquilibriumCalc _
+                                If App.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -1592,7 +1589,7 @@ Namespace PropertyPackages
 
                                     dge = fge - ige
 
-                                    Dim dgtol As Double = Flowsheet.Options.FlashValidationDGETolerancePct
+                                    Dim dgtol As Double = App.Flowsheet.FlowsheetOptions.FlashValidationDGETolerancePct
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
                                         Throw New Exception(App.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
@@ -1689,8 +1686,8 @@ Namespace PropertyPackages
                             Me.CurrentMaterialStream.Phases(2).Properties.massfraction = xv * Me.AUX_MMM(Phase.Vapor) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
                             Me.CurrentMaterialStream.Phases(7).Properties.massfraction = xs * Me.AUX_MMM(Phase.Solid) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
 
-                            Dim constprops As New List(Of ConstantProperties)
-                            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                 constprops.Add(su.ConstantProperties)
                             Next
 
@@ -1850,8 +1847,8 @@ Namespace PropertyPackages
                             Me.CurrentMaterialStream.Phases(2).Properties.massfraction = xv * Me.AUX_MMM(Phase.Vapor) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
                             Me.CurrentMaterialStream.Phases(7).Properties.massfraction = xs * Me.AUX_MMM(Phase.Solid) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
 
-                            Dim constprops As New List(Of ConstantProperties)
-                            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                 constprops.Add(su.ConstantProperties)
                             Next
 
@@ -1942,8 +1939,8 @@ Namespace PropertyPackages
                                     xl = 0.0#
                                     xs = 1.0#
 
-                                    Dim constprops As New List(Of ConstantProperties)
-                                    For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                                    Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                         constprops.Add(su.ConstantProperties)
                                     Next
 
@@ -2085,8 +2082,8 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
                                 Me.CurrentMaterialStream.Phases(2).Properties.massfraction = xv * Me.AUX_MMM(Phase.Vapor) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
                                 Me.CurrentMaterialStream.Phases(7).Properties.massfraction = xs * Me.AUX_MMM(Phase.Solid) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
 
-                                Dim constprops As New List(Of ConstantProperties)
-                                For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                                Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                                For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                     constprops.Add(su.ConstantProperties)
                                 Next
 
@@ -2273,8 +2270,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 Me.CurrentMaterialStream.Phases(2).Properties.massfraction = xv * Me.AUX_MMM(Phase.Vapor) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
                                 Me.CurrentMaterialStream.Phases(7).Properties.massfraction = xs * Me.AUX_MMM(Phase.Solid) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
 
-                                Dim constprops As New List(Of ConstantProperties)
-                                For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                                Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                                For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                     constprops.Add(su.ConstantProperties)
                                 Next
 
@@ -2417,8 +2414,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Me.CurrentMaterialStream.Phases(2).Properties.massfraction = xv * Me.AUX_MMM(Phase.Vapor) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
                             Me.CurrentMaterialStream.Phases(7).Properties.massfraction = xs * Me.AUX_MMM(Phase.Solid) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
 
-                            Dim constprops As New List(Of ConstantProperties)
-                            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                 constprops.Add(su.ConstantProperties)
                             Next
 
@@ -2549,8 +2546,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Overridable Function DW_CalcEquilibrio_ISOL(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec, ByVal val1 As Double, ByVal val2 As Double, ByVal estimate As Double) As Object
 
             Try
-                Me._tpseverity = Flowsheet.Options.ThreePhaseFlashStabTestSeverity
-                Me._tpcompids = Flowsheet.Options.ThreePhaseFlashStabTestCompIds
+                Me._tpseverity = App.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestSeverity
+                Me._tpcompids = App.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestCompIds
             Catch ex As Exception
                 Me._tpseverity = 0
                 Me._tpcompids = New String() {}
@@ -2562,8 +2559,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim Vx2(n), Vx(n), Vy(n), Vs(n) As Double
             Dim i As Integer = 0
 
-            Dim constprops As New List(Of ConstantProperties)
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -2582,7 +2579,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Dim fge As Double = 0.0#
                             Dim dge As Double = 0.0#
 
-                            If Flowsheet.Options.ValidateEquilibriumCalc Then
+                            If App.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc Then
 
                                 ige = Me.DW_CalcGibbsEnergy(RET_VMOL(Phase.Mixture), T, P)
 
@@ -2601,7 +2598,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Vs = result(8)
 
                             If Not App.CAPEOPENMode Then
-                                If Flowsheet.Options.ValidateEquilibriumCalc _
+                                If App.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -2611,7 +2608,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                                     dge = fge - ige
 
-                                    Dim dgtol As Double = Flowsheet.Options.FlashValidationDGETolerancePct
+                                    Dim dgtol As Double = App.Flowsheet.FlowsheetOptions.FlashValidationDGETolerancePct
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
                                         Throw New Exception(App.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
@@ -3000,7 +2997,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
 
             Dim Vz(n) As Double
-            Dim comp As BaseClasses.Compound
+            Dim comp As Interfaces.ICompound
 
             i = 0
             For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -3400,8 +3397,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             If Not App.CAPEOPENMode Then
                 Try
-                    Me._tpseverity = Flowsheet.Options.ThreePhaseFlashStabTestSeverity
-                    Me._tpcompids = Flowsheet.Options.ThreePhaseFlashStabTestCompIds
+                    Me._tpseverity = App.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestSeverity
+                    Me._tpcompids = App.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestCompIds
                 Catch ex As Exception
                     Me._tpseverity = 0
                     Me._tpcompids = New String() {}
@@ -3540,8 +3537,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         nlsle.SolidSolution = SolidSolution
 
-                        Dim constprops As New List(Of ConstantProperties)
-                        For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                        Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
+                        For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
                         nlsle.CompoundProperties = constprops
@@ -3788,1630 +3785,15 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         Public MustOverride Sub DW_CalcCompPartialVolume(ByVal phase As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double)
 
-        ''' <summary>
-        ''' This procedure fills the property grid with property package specific information (phase compositions, distributions and properties).
-        ''' </summary>
-        ''' <param name="pg">Reference to the Property Grid which will be filled.</param>
-        ''' <param name="Flowsheet">Reference to the active Flowsheet.</param>
-        ''' <param name="su">Unit system to convert variables to.</param>
-        ''' <remarks>This function is overridable, so newly developed property packages can give different information to the user, not necessarily the ones provided by this default implementation.</remarks>
-        Public Overridable Sub PopulatePropertyGrid(ByRef pg As PropertyGridEx.PropertyGridEx, ByRef Flowsheet As FormFlowsheet, ByVal su As SystemsOfUnits.Units)
-
-            If Me.CurrentMaterialStream.Phases.Count <= 3 Then
-                Me.CurrentMaterialStream.Phases.Add("3", New BaseClasses.Phase(App.GetLocalString("Liquid1"), ""))
-                Me.CurrentMaterialStream.Phases.Add("4", New BaseClasses.Phase(App.GetLocalString("Liquid2"), ""))
-                Me.CurrentMaterialStream.Phases.Add("5", New BaseClasses.Phase(App.GetLocalString("Liquid3"), ""))
-                If Flowsheet.Options.SelectedComponents.Count = 0 Then
-                Else
-                    Dim comp2 As BaseClasses.ConstantProperties
-                    For Each comp2 In Flowsheet.Options.SelectedComponents.Values
-                        Me.CurrentMaterialStream.Phases(3).Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
-                        Me.CurrentMaterialStream.Phases(3).Compounds(comp2.Name).ConstantProperties = comp2
-                        Me.CurrentMaterialStream.Phases(4).Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
-                        Me.CurrentMaterialStream.Phases(4).Compounds(comp2.Name).ConstantProperties = comp2
-                        Me.CurrentMaterialStream.Phases(5).Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
-                        Me.CurrentMaterialStream.Phases(5).Compounds(comp2.Name).ConstantProperties = comp2
-                    Next
-                End If
-            ElseIf Me.CurrentMaterialStream.Phases.Count <= 6 Then
-                Me.CurrentMaterialStream.Phases.Add("6", New BaseClasses.Phase(App.GetLocalString("Aqueous"), ""))
-                If Flowsheet.Options.SelectedComponents.Count = 0 Then
-                Else
-                    Dim comp2 As BaseClasses.ConstantProperties
-                    For Each comp2 In Flowsheet.Options.SelectedComponents.Values
-                        Me.CurrentMaterialStream.Phases(6).Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
-                        Me.CurrentMaterialStream.Phases(6).Compounds(comp2.Name).ConstantProperties = comp2
-                    Next
-                End If
-            ElseIf Me.CurrentMaterialStream.Phases.Count <= 7 Then
-                Me.CurrentMaterialStream.Phases.Add("7", New BaseClasses.Phase(App.GetLocalString("Solid"), ""))
-                If Flowsheet.Options.SelectedComponents.Count = 0 Then
-                Else
-                    Dim comp2 As BaseClasses.ConstantProperties
-                    For Each comp2 In Flowsheet.Options.SelectedComponents.Values
-                        Me.CurrentMaterialStream.Phases(7).Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
-                        Me.CurrentMaterialStream.Phases(7).Compounds(comp2.Name).ConstantProperties = comp2
-                    Next
-                End If
-            End If
-
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-            Dim valor As Double = 0.0#
-
-            With pg
-
-                Select Case Me.CurrentMaterialStream.CompositionBasis
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Molar_Fractions
-                        'PropertyGridEx.CustomPropertyCollection - Mistura
-                        Dim m As New PropertyGridEx.CustomPropertyCollection()
-                        Dim comp As BaseClasses.ConstantProperties
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            m.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaMistura"), True)
-                            m.Item(m.Count - 1).IsReadOnly = True
-                            m.Item(m.Count - 1).DefaultValue = Nothing
-                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Vapor
-                        Dim v As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            v.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseVapor"), True)
-                            v.Item(v.Count - 1).IsReadOnly = True
-                            v.Item(v.Count - 1).DefaultValue = Nothing
-                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l.Item(l.Count - 1).IsReadOnly = True
-                            l.Item(l.Count - 1).DefaultValue = Nothing
-                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l1.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l1.Item(l1.Count - 1).IsReadOnly = True
-                            l1.Item(l1.Count - 1).DefaultValue = Nothing
-                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l2.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l2.Item(l2.Count - 1).IsReadOnly = True
-                            l2.Item(l2.Count - 1).DefaultValue = Nothing
-                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l3.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l3.Item(l3.Count - 1).IsReadOnly = True
-                            l3.Item(l3.Count - 1).DefaultValue = Nothing
-                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l4.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l4.Item(l4.Count - 1).IsReadOnly = True
-                            l4.Item(l4.Count - 1).DefaultValue = Nothing
-                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim s As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            s.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseSolida"), True)
-                            s.Item(s.Count - 1).IsReadOnly = True
-                            s.Item(s.Count - 1).DefaultValue = Nothing
-                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        .Item.Add("[1] " & App.GetLocalString("Mistura"), m, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Composiomolardamistu"), True)
-                        With .Item(.Item.Count - 1)
-                            If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-                        If Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[2] " & App.GetLocalString("Vapor"), v, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[3] " & App.GetLocalString("OverallLiquid"), l, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas2"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[4] " & App.GetLocalString("Liquid1"), l1, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas2"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[5] " & App.GetLocalString("Liquid2"), l2, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas2"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[6] " & App.GetLocalString("Liquid3"), l3, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas2"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[7] " & App.GetLocalString("Aqueous"), l4, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas2"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[8] " & App.GetLocalString("Solid"), s, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas2"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Mass_Fractions
-                        'PropertyGridEx.CustomPropertyCollection - Mistura
-                        Dim m As New PropertyGridEx.CustomPropertyCollection()
-                        Dim comp As BaseClasses.ConstantProperties
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            m.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaMistura"), True)
-                            m.Item(m.Count - 1).IsReadOnly = True
-                            m.Item(m.Count - 1).DefaultValue = Nothing
-                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Vapor
-                        Dim v As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            v.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseVapo"), True)
-                            v.Item(v.Count - 1).IsReadOnly = True
-                            v.Item(v.Count - 1).DefaultValue = Nothing
-                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
-                            l.Item(l.Count - 1).IsReadOnly = True
-                            l.Item(l.Count - 1).DefaultValue = Nothing
-                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l1.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
-                            l1.Item(l1.Count - 1).IsReadOnly = True
-                            l1.Item(l1.Count - 1).DefaultValue = Nothing
-                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l2.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
-                            l2.Item(l2.Count - 1).IsReadOnly = True
-                            l2.Item(l2.Count - 1).DefaultValue = Nothing
-                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l3.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
-                            l3.Item(l3.Count - 1).IsReadOnly = True
-                            l3.Item(l3.Count - 1).DefaultValue = Nothing
-                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l4.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
-                            l4.Item(l4.Count - 1).IsReadOnly = True
-                            l4.Item(l4.Count - 1).DefaultValue = Nothing
-                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Solido
-                        Dim s As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            s.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
-                            s.Item(s.Count - 1).IsReadOnly = True
-                            s.Item(s.Count - 1).DefaultValue = Nothing
-                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        .Item.Add("[1] " & App.GetLocalString("Mistura"), m, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Composiomssicadamist"), True)
-                        With .Item(.Item.Count - 1)
-                            If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-                        If Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[2] " & App.GetLocalString("Vapor"), v, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas3"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[3] " & App.GetLocalString("OverallLiquid"), l, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[4] " & App.GetLocalString("Liquid1"), l1, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[5] " & App.GetLocalString("Liquid2"), l2, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[6] " & App.GetLocalString("Liquid3"), l3, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[7] " & App.GetLocalString("Aqueous"), l4, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[8] " & App.GetLocalString("Solid"), s, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Volumetric_Fractions
-                        'PropertyGridEx.CustomPropertyCollection - Mistura
-                        Dim m As New PropertyGridEx.CustomPropertyCollection()
-                        Dim comp As BaseClasses.ConstantProperties
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            m.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("VolFractionMixture"), True)
-                            m.Item(m.Count - 1).IsReadOnly = True
-                            m.Item(m.Count - 1).DefaultValue = Nothing
-                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Vapor
-                        Dim v As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            v.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("VolFractionVaporPhase"), True)
-                            v.Item(v.Count - 1).IsReadOnly = True
-                            v.Item(v.Count - 1).DefaultValue = Nothing
-                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("VolFractionLiqPhase"), True)
-                            l.Item(l.Count - 1).IsReadOnly = True
-                            l.Item(l.Count - 1).DefaultValue = Nothing
-                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l1.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("VolFractionLiqPhase"), True)
-                            l1.Item(l1.Count - 1).IsReadOnly = True
-                            l1.Item(l1.Count - 1).DefaultValue = Nothing
-                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l2.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("VolFractionLiqPhase"), True)
-                            l2.Item(l2.Count - 1).IsReadOnly = True
-                            l2.Item(l2.Count - 1).DefaultValue = Nothing
-                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l3.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("VolFractionLiqPhase"), True)
-                            l3.Item(l3.Count - 1).IsReadOnly = True
-                            l3.Item(l3.Count - 1).DefaultValue = Nothing
-                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            l4.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("VolFractionLiqPhase"), True)
-                            l4.Item(l4.Count - 1).IsReadOnly = True
-                            l4.Item(l4.Count - 1).DefaultValue = Nothing
-                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Solid
-                        Dim s As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
-                            s.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("VolFractionSolPhase"), True)
-                            s.Item(s.Count - 1).IsReadOnly = True
-                            s.Item(s.Count - 1).DefaultValue = Nothing
-                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        .Item.Add("[1] " & App.GetLocalString("Mistura"), m, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Composiomssicadamist"), True)
-                        With .Item(.Item.Count - 1)
-                            If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-                        If Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[2] " & App.GetLocalString("Vapor"), v, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas3"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[3] " & App.GetLocalString("OverallLiquid"), l, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[4] " & App.GetLocalString("Liquid1"), l1, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[5] " & App.GetLocalString("Liquid2"), l2, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[6] " & App.GetLocalString("Liquid3"), l3, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[7] " & App.GetLocalString("Aqueous"), l4, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[8] " & App.GetLocalString("Solid"), s, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas4"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Mass_Flows
-                        'PropertyGridEx.CustomPropertyCollection - Mistura
-                        Dim m As New PropertyGridEx.CustomPropertyCollection()
-                        Dim comp As BaseClasses.ConstantProperties
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            m.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazomssicanaMistura"), True)
-                            m.Item(m.Count - 1).IsReadOnly = True
-                            m.Item(m.Count - 1).DefaultValue = Nothing
-                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Vapor
-                        Dim v As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            v.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazomssicanaPhaseVapo"), True)
-                            v.Item(v.Count - 1).IsReadOnly = True
-                            v.Item(v.Count - 1).DefaultValue = Nothing
-                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazomssicanaPhaseLqui"), True)
-                            l.Item(l.Count - 1).IsReadOnly = True
-                            l.Item(l.Count - 1).DefaultValue = Nothing
-                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l1.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazomssicanaPhaseLqui"), True)
-                            l1.Item(l1.Count - 1).IsReadOnly = True
-                            l1.Item(l1.Count - 1).DefaultValue = Nothing
-                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l2.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazomssicanaPhaseLqui"), True)
-                            l2.Item(l2.Count - 1).IsReadOnly = True
-                            l2.Item(l2.Count - 1).DefaultValue = Nothing
-                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l3.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazomssicanaPhaseLqui"), True)
-                            l3.Item(l3.Count - 1).IsReadOnly = True
-                            l3.Item(l3.Count - 1).DefaultValue = Nothing
-                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l4.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazomssicanaPhaseLqui"), True)
-                            l4.Item(l4.Count - 1).IsReadOnly = True
-                            l4.Item(l4.Count - 1).DefaultValue = Nothing
-                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Solid
-                        Dim s As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            s.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazomssicanaPhaseSolida"), True)
-                            s.Item(s.Count - 1).IsReadOnly = True
-                            s.Item(s.Count - 1).DefaultValue = Nothing
-                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        .Item.Add("[1] " & App.GetLocalString("Mistura"), m, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Vazomssicadamistura"), True)
-                        With .Item(.Item.Count - 1)
-                            If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-                        If Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[2] " & App.GetLocalString("Vapor"), v, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas5"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[3] " & App.GetLocalString("OverallLiquid"), l, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas6"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[4] " & App.GetLocalString("Liquid1"), l1, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas6"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[5] " & App.GetLocalString("Liquid2"), l2, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas6"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[6] " & App.GetLocalString("Liquid3"), l3, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas6"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[7] " & App.GetLocalString("Aqueous"), l4, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas6"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[8] " & App.GetLocalString("Solid"), s, True, App.GetLocalString("Composiesmssicas2"), App.GetLocalString("Mostraacomposiodafas7"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Molar_Flows
-                        'PropertyGridEx.CustomPropertyCollection - Mistura
-                        Dim m As New PropertyGridEx.CustomPropertyCollection()
-                        Dim comp As BaseClasses.ConstantProperties
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            m.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaMistura"), True)
-                            m.Item(m.Count - 1).IsReadOnly = True
-                            m.Item(m.Count - 1).DefaultValue = Nothing
-                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Vapor
-                        Dim v As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            v.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseVapor"), True)
-                            v.Item(v.Count - 1).IsReadOnly = True
-                            v.Item(v.Count - 1).DefaultValue = Nothing
-                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l.Item(l.Count - 1).IsReadOnly = True
-                            l.Item(l.Count - 1).DefaultValue = Nothing
-                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l1.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l1.Item(l1.Count - 1).IsReadOnly = True
-                            l1.Item(l1.Count - 1).DefaultValue = Nothing
-                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l2.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l2.Item(l2.Count - 1).IsReadOnly = True
-                            l2.Item(l2.Count - 1).DefaultValue = Nothing
-                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l3.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l3.Item(l3.Count - 1).IsReadOnly = True
-                            l3.Item(l3.Count - 1).DefaultValue = Nothing
-                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l4.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
-                            l4.Item(l4.Count - 1).IsReadOnly = True
-                            l4.Item(l4.Count - 1).DefaultValue = Nothing
-                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Solid
-                        Dim s As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            s.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseSolida"), True)
-                            s.Item(s.Count - 1).IsReadOnly = True
-                            s.Item(s.Count - 1).DefaultValue = Nothing
-                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        .Item.Add("[1] " & App.GetLocalString("Mistura"), m, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Composiomolardamistu"), True)
-                        With .Item(.Item.Count - 1)
-                            If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-                        If Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[2] " & App.GetLocalString("Vapor"), v, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas7"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[3] " & App.GetLocalString("OverallLiquid"), l, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas8"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[4] " & App.GetLocalString("Liquid1"), l1, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas8"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[5] " & App.GetLocalString("Liquid2"), l2, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas8"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[6] " & App.GetLocalString("Liquid3"), l3, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas8"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[7] " & App.GetLocalString("Aqueous"), l4, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas8"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[8] " & App.GetLocalString("Solid"), s, True, App.GetLocalString("Composiesmolares2"), App.GetLocalString("Mostraacomposiodafas8"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                    Case DWSIM.SimulationObjects.Streams.MaterialStream.CompBasis.Volumetric_Flows
-                        'PropertyGridEx.CustomPropertyCollection - Mistura
-                        Dim m As New PropertyGridEx.CustomPropertyCollection()
-                        Dim comp As BaseClasses.ConstantProperties
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            m.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazovolumtricanaMist"), True)
-                            m.Item(m.Count - 1).IsReadOnly = True
-                            m.Item(m.Count - 1).DefaultValue = Nothing
-                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Vapor
-                        Dim v As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            v.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazovolumtricanaPhase"), True)
-                            v.Item(v.Count - 1).IsReadOnly = True
-                            v.Item(v.Count - 1).DefaultValue = Nothing
-                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazovolumtricanaPhase"), True)
-                            l.Item(l.Count - 1).IsReadOnly = True
-                            l.Item(l.Count - 1).DefaultValue = Nothing
-                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l1.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazovolumtricanaPhase"), True)
-                            l1.Item(l1.Count - 1).IsReadOnly = True
-                            l1.Item(l1.Count - 1).DefaultValue = Nothing
-                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l2.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazovolumtricanaPhase"), True)
-                            l2.Item(l2.Count - 1).IsReadOnly = True
-                            l2.Item(l2.Count - 1).DefaultValue = Nothing
-                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l3.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazovolumtricanaPhase"), True)
-                            l3.Item(l3.Count - 1).IsReadOnly = True
-                            l3.Item(l3.Count - 1).DefaultValue = Nothing
-                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Liquido
-                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            l4.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazovolumtricanaPhase"), True)
-                            l4.Item(l4.Count - 1).IsReadOnly = True
-                            l4.Item(l4.Count - 1).DefaultValue = Nothing
-                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        'PropertyGridEx.CustomPropertyCollection - Solid
-                        Dim s As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
-                            s.Add(Flowsheet.FT(App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, App.GetLocalString("Mistura"), App.GetLocalString("VazovolumtricanaPhaseSolida"), True)
-                            s.Item(s.Count - 1).IsReadOnly = True
-                            s.Item(s.Count - 1).DefaultValue = Nothing
-                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        .Item.Add("[1] " & App.GetLocalString("Mistura"), m, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Vazovolumtricadamist"), True)
-                        With .Item(.Item.Count - 1)
-                            If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-                        If Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[2] " & App.GetLocalString("Vapor"), v, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas9"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[3] " & App.GetLocalString("OverallLiquid"), l, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas10"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[4] " & App.GetLocalString("Liquid1"), l1, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas10"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[5] " & App.GetLocalString("Liquid2"), l2, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas10"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[6] " & App.GetLocalString("Liquid3"), l3, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas10"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[7] " & App.GetLocalString("Aqueous"), l4, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas10"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                        If Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .Item.Add("[8] " & App.GetLocalString("Solid"), s, True, App.GetLocalString("Composiesvolumtrica2"), App.GetLocalString("Mostraacomposiodafas10"), True)
-                            With .Item(.Item.Count - 1)
-                                If Me.CurrentMaterialStream.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                    Case Else
-
-                End Select
-
-                If Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 And _
-                    Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                    'Kvalues
-                    Dim comp As BaseClasses.ConstantProperties
-                    Dim k0 As New PropertyGridEx.CustomPropertyCollection()
-                    For Each comp In Flowsheet.Options.SelectedComponents.Values
-                        valor = Format(Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).Kvalue, Flowsheet.Options.NumberFormat)
-                        k0.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Kvalues"), App.GetLocalString("Kvalues"), True)
-                        k0.Item(k0.Count - 1).IsReadOnly = True
-                        k0.Item(k0.Count - 1).DefaultValue = Nothing
-                        k0.Item(k0.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                    Next
-                    .Item.Add(App.GetLocalString("Kvalues"), k0, True, App.GetLocalString("ComponentDistribution"), App.GetLocalString("ComponentDistribution"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsReadOnly = True
-                        .IsBrowsable = True
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                    End With
-                    Dim k1 As New PropertyGridEx.CustomPropertyCollection()
-                    For Each comp In Flowsheet.Options.SelectedComponents.Values
-                        valor = Format(Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).lnKvalue, Flowsheet.Options.NumberFormat)
-                        k1.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("LnKvalues"), App.GetLocalString("LnKvalues"), True)
-                        k1.Item(k1.Count - 1).IsReadOnly = True
-                        k1.Item(k1.Count - 1).DefaultValue = Nothing
-                        k1.Item(k1.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                    Next
-                    .Item.Add(App.GetLocalString("LnKvalues"), k1, True, App.GetLocalString("ComponentDistribution"), App.GetLocalString("ComponentDistribution"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsReadOnly = True
-                        .IsBrowsable = True
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                    End With
-                End If
-
-                Dim val, refval As Nullable(Of Double)
-
-                Dim tmp As Nullable(Of Double)
-                Dim it As PropertyGridEx.CustomProperty = Nothing
-
-                If Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 And _
-                    (Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Or _
-                     Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault > 0) Then
-
-                    Dim pm As New PropertyGridEx.CustomPropertyCollection()
-                    'PropertyGridEx.CustomPropertyCollection - Mistura
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, App.GetLocalString("Mistura"), App.GetLocalString("EntalpiaEspecficadam"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, App.GetLocalString("Mistura"), App.GetLocalString("EntropiaEspecficadam"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, App.GetLocalString("Mistura"), App.GetLocalString("MolarEnthalpy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, App.GetLocalString("Mistura"), App.GetLocalString("MolarEntropy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("Massamolar"), su.molecularWeight), val, True, App.GetLocalString("Mistura"), App.GetLocalString("Massamolardamistura"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("Massaespecfica"), su.density), val, True, App.GetLocalString("Mistura"), App.GetLocalString("Massaespecficadamist"), True)
-                    'refval = Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault / Convert.ToDouble(Me.CurrentMaterialStream.Phases(0).Properties.density.GetValueOrDefault)
-                    'If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
-                    'pm.Add(Flowsheet.FT(App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, App.GetLocalString("Mistura"), App.GetLocalString("Vazovolumtricanascon"), True)
-                    'refval = Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
-                    'If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
-                    'pm.Add(Flowsheet.FT(App.GetLocalString("Vazomssica"), su.massflow), val, True, App.GetLocalString("Mistura"), App.GetLocalString("Vazomssicadacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, App.GetLocalString("Mistura"), App.GetLocalString("Condutividadetrmicad"), True)
-
-                    If Flowsheet.Options.CalculateBubbleAndDewPoints Then
-                        refval = Me.CurrentMaterialStream.Phases(0).Properties.bubblePressure.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
-                        pm.Add(Flowsheet.FT(App.GetLocalString("BubblePress"), su.pressure), val, True, App.GetLocalString("Mistura"), App.GetLocalString("BubblePress"), True)
-                        refval = Me.CurrentMaterialStream.Phases(0).Properties.dewPressure.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
-                        pm.Add(Flowsheet.FT(App.GetLocalString("DewPress"), su.pressure), val, True, App.GetLocalString("Mistura"), App.GetLocalString("DewPress"), True)
-                        refval = Me.CurrentMaterialStream.Phases(0).Properties.bubbleTemperature.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
-                        pm.Add(Flowsheet.FT(App.GetLocalString("BubbleTemp"), su.temperature), val, True, App.GetLocalString("Mistura"), App.GetLocalString("BubbleTemp"), True)
-                        refval = Me.CurrentMaterialStream.Phases(0).Properties.dewTemperature.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
-                        pm.Add(Flowsheet.FT(App.GetLocalString("DewTemp"), su.temperature), val, True, App.GetLocalString("Mistura"), App.GetLocalString("DewTemp"), True)
-                    End If
-
-                    For Each it In pm
-                        it.DefaultValue = Nothing
-                        it.DefaultType = GetType(Nullable(Of Double))
-                    Next
-
-                    .Item.Add("[P1] " & App.GetLocalString("Mistura"), pm, True, App.GetLocalString("Propriedades3"), App.GetLocalString("Propriedadesdamistur"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-
-                ElseIf Flowsheet.Options.CalculateBubbleAndDewPoints Then
-
-                    Dim pm As New PropertyGridEx.CustomPropertyCollection()
-
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.bubblePressure.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("BubblePress"), su.pressure), val, True, App.GetLocalString("Mistura"), App.GetLocalString("BubblePress"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.dewPressure.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("DewPress"), su.pressure), val, True, App.GetLocalString("Mistura"), App.GetLocalString("DewPress"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.bubbleTemperature.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("BubbleTemp"), su.temperature), val, True, App.GetLocalString("Mistura"), App.GetLocalString("BubbleTemp"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties.dewTemperature.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
-                    pm.Add(Flowsheet.FT(App.GetLocalString("DewTemp"), su.temperature), val, True, App.GetLocalString("Mistura"), App.GetLocalString("DewTemp"), True)
-
-                    For Each it In pm
-                        it.DefaultValue = Nothing
-                        it.DefaultType = GetType(Nullable(Of Double))
-                    Next
-
-                    .Item.Add("[P1] " & App.GetLocalString("Mistura"), pm, True, App.GetLocalString("Propriedades3"), App.GetLocalString("Propriedadesdamistur"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-
-                End If
-
-                val = Nothing
-
-                If Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-
-                    Dim pv As New PropertyGridEx.CustomPropertyCollection()
-                    'PropertyGridEx.CustomPropertyCollection - Vapor
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, App.GetLocalString("Vapor"), App.GetLocalString("EntalpiaEspecficadaf"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, App.GetLocalString("Vapor"), App.GetLocalString("EntropiaEspecficadaf"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, App.GetLocalString("Vapor"), App.GetLocalString("MolarEnthalpy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, App.GetLocalString("Vapor"), App.GetLocalString("MolarEntropy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("Massamolar"), su.molecularWeight), val, True, App.GetLocalString("Vapor"), App.GetLocalString("MassamolardaPhasevapo"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("Massaespecfica"), su.density), val, True, App.GetLocalString("Vapor"), App.GetLocalString("MassaespecficadaPhase"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.massflow.GetValueOrDefault / Convert.ToDouble(Me.CurrentMaterialStream.Phases(2).Properties.density.GetValueOrDefault)
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, App.GetLocalString("Vapor"), App.GetLocalString("Vazovolumtricanascon"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("Vazomssica"), su.massflow), val, True, App.GetLocalString("Vapor"), App.GetLocalString("Vazomssicadacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("Vazomolar"), su.molarflow), val, True, App.GetLocalString("Vapor"), App.GetLocalString("Vazomolardacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pv.Add(App.GetLocalString("FraomolardaPhase"), val, True, App.GetLocalString("Vapor"), App.GetLocalString("FraomolardaPhasenamis"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.massfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pv.Add(App.GetLocalString("FraomssicadaPhase"), val, True, App.GetLocalString("Vapor"), App.GetLocalString("FraomssicadaPhasenami"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pv.Add("Z", val, True, App.GetLocalString("Vapor"), App.GetLocalString("Fatordecompressibili"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, App.GetLocalString("Vapor"), App.GetLocalString("Capacidadecalorficad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.heatCapacityCp.GetValueOrDefault / Convert.ToDouble(Me.CurrentMaterialStream.Phases(2).Properties.heatCapacityCv.GetValueOrDefault)
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
-                    pv.Add("Cp/Cv", tmp, True, App.GetLocalString("lquida"), App.GetLocalString("Razoentreascapacidad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
-                    pv.Add(Flowsheet.FT(App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, App.GetLocalString("Vapor"), App.GetLocalString("Condutividadetrmicad1"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
-                    pv.Add(Flowsheet.FT(App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, App.GetLocalString("Vapor"), App.GetLocalString("Viscosidadecinemtica2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(2).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), "E")
-                    pv.Add(Flowsheet.FT(App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, App.GetLocalString("Vapor"), App.GetLocalString("Viscosidadedinmicada"), True)
-
-                    For Each it In pv
-                        it.DefaultValue = Nothing
-                        it.DefaultType = GetType(Nullable(Of Double))
-                    Next
-
-                    .Item.Add("[P2] " & App.GetLocalString("Vapor"), pv, True, App.GetLocalString("Propriedades3"), App.GetLocalString("PropriedadesdaPhaseva"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-
-                End If
-
-                val = Nothing
-
-                If Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-
-                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
-                    'PropertyGridEx.CustomPropertyCollection - Liquido
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntalpiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntropiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEnthalpy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEntropy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massamolar"), su.molecularWeight), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassamolardaPhaselqui"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massaespecfica"), su.density), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassaespecficadaPhase2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.massflow.GetValueOrDefault / Me.CurrentMaterialStream.Phases(1).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazovolumtricanascon"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomssica"), su.massflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomssicadacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomolar"), su.molarflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomolardacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomolardaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomolardaPhasenamis"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.massfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomssicadaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomssicadaPhasenami"), True)
-                    'refval = Me.CurrentMaterialStream.Phases(1).Properties.compressibilityFactor.GetValueOrDefault
-                    'If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    'pl.Add("Z", val, True, App.GetLocalString("Lquido"), App.GetLocalString("Fatordecompressibili"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Capacidadecalorficad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.heatCapacityCp.GetValueOrDefault / Me.CurrentMaterialStream.Phases(1).Properties.heatCapacityCv.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
-                    pl.Add("Cp/Cv", tmp, True, App.GetLocalString("lquida"), App.GetLocalString("Razoentreascapacidad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.surfaceTension, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Tensosuperficial"), su.surfaceTension), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Tensosuperficialentr"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Condutividadetrmicad2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadecinemtica2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(1).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), "E")
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadedinmicada"), True)
-
-                    For Each it In pl
-                        it.DefaultValue = Nothing
-                        it.DefaultType = GetType(Nullable(Of Double))
-                    Next
-
-                    .Item.Add("[P3] " & App.GetLocalString("OverallLiquid"), pl, True, App.GetLocalString("Propriedades3"), App.GetLocalString("PropriedadesdaPhaseLq"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-
-                End If
-
-                If Me.CurrentMaterialStream.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-
-                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
-                    'PropertyGridEx.CustomPropertyCollection - Liquido
-
-                    If TypeOf Me Is SeawaterPropertyPackage Then
-
-                        Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(3).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
-                        Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(3).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
-
-                        Dim salinity As Double = salt.MassFraction.GetValueOrDefault / water.MassFraction.GetValueOrDefault
-
-                        val = Format(salinity, Flowsheet.Options.NumberFormat)
-                        pl.Add(App.GetLocalString("Salinity"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Salinity"), True)
-
-                    End If
-
-                    If TypeOf Me Is SourWaterPropertyPackage Then
-
-                        refval = Me.CurrentMaterialStream.Phases(3).Properties.pH.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                        pl.Add(App.GetLocalString("pH"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("pH"), True)
-
-                    End If
-
-                    If Me.IsElectrolytePP Then
-
-                        'Liquid Phase Activity Coefficients
-                        Dim comp As BaseClasses.ConstantProperties
-                        Dim k0 As New PropertyGridEx.CustomPropertyCollection()
-                        For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).ActivityCoeff, Flowsheet.Options.NumberFormat)
-                            k0.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("ActivityCoefficients"), App.GetLocalString("ActivityCoefficients"), True)
-                            k0.Item(k0.Count - 1).IsReadOnly = True
-                            k0.Item(k0.Count - 1).DefaultValue = Nothing
-                            k0.Item(k0.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-                        pl.Add(App.GetLocalString("ActivityCoefficients"), k0, True, App.GetLocalString("ActivityCoefficients"), App.GetLocalString("LiquidPhaseActivityCoefficients"), True)
-                        With pl.Item(pl.Count - 1)
-                            .IsReadOnly = True
-                            .IsBrowsable = True
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        End With
-
-                        refval = Me.CurrentMaterialStream.Phases(3).Properties.pH.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                        pl.Add(App.GetLocalString("pH"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("pH"), True)
-
-                        refval = Me.CurrentMaterialStream.Phases(3).Properties.osmoticCoefficient.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                        pl.Add(App.GetLocalString("OsmoticCoefficient"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("OsmoticCoefficient"), True)
-
-                        refval = Me.CurrentMaterialStream.Phases(3).Properties.freezingPoint.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
-                        pl.Add(Flowsheet.FT(App.GetLocalString("FreezingPoint"), su.temperature), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FreezingPoint"), True)
-
-                        refval = Me.CurrentMaterialStream.Phases(3).Properties.freezingPointDepression.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.deltaT, refval), Flowsheet.Options.NumberFormat)
-                        pl.Add(Flowsheet.FT(App.GetLocalString("FreezingPointDepression"), su.deltaT), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FreezingPointDepression"), True)
-
-                    End If
-
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntalpiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntropiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEnthalpy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEntropy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massamolar"), su.molecularWeight), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassamolardaPhaselqui"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massaespecfica"), su.density), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassaespecficadaPhase2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.massflow.GetValueOrDefault / Me.CurrentMaterialStream.Phases(3).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazovolumtricanascon"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomssica"), su.massflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomssicadacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomolar"), su.molarflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomolardacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.molarfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomolardaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomolardaPhasenamis"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.massfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomssicadaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomssicadaPhasenami"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.compressibilityFactor.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add("Z", val, True, App.GetLocalString("Lquido"), App.GetLocalString("Fatordecompressibili"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Capacidadecalorficad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.heatCapacityCp.GetValueOrDefault / Me.CurrentMaterialStream.Phases(3).Properties.heatCapacityCv.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
-                    pl.Add("Cp/Cv", tmp, True, App.GetLocalString("lquida"), App.GetLocalString("Razoentreascapacidad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Condutividadetrmicad2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadecinemtica2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(3).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), "E")
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadedinmicada"), True)
-
-                    For Each it In pl
-                        it.DefaultValue = Nothing
-                        it.DefaultType = GetType(Nullable(Of Double))
-                    Next
-
-                    .Item.Add("[P4] " & App.GetLocalString("Liquid1"), pl, True, App.GetLocalString("Propriedades3"), App.GetLocalString("PropriedadesdaPhaseLq"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-
-                End If
-
-                If Me.CurrentMaterialStream.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-
-                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
-                    'PropertyGridEx.CustomPropertyCollection - Liquido
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntalpiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntropiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEnthalpy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEntropy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massamolar"), su.molecularWeight), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassamolardaPhaselqui"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massaespecfica"), su.density), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassaespecficadaPhase2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.massflow.GetValueOrDefault / Me.CurrentMaterialStream.Phases(4).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazovolumtricanascon"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomssica"), su.massflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomssicadacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomolar"), su.molarflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomolardacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.molarfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomolardaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomolardaPhasenamis"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.massfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomssicadaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomssicadaPhasenami"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.compressibilityFactor.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add("Z", val, True, App.GetLocalString("Lquido"), App.GetLocalString("Fatordecompressibili"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Capacidadecalorficad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.heatCapacityCp.GetValueOrDefault / Me.CurrentMaterialStream.Phases(4).Properties.heatCapacityCv.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
-                    pl.Add("Cp/Cv", tmp, True, App.GetLocalString("lquida"), App.GetLocalString("Razoentreascapacidad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Condutividadetrmicad2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadecinemtica2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(4).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadedinmicada"), True)
-
-                    For Each it In pl
-                        it.DefaultValue = Nothing
-                        it.DefaultType = GetType(Nullable(Of Double))
-                    Next
-
-                    .Item.Add("[P5] " & App.GetLocalString("Liquid2"), pl, True, App.GetLocalString("Propriedades3"), App.GetLocalString("PropriedadesdaPhaseLq"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-
-                End If
-
-                If Me.CurrentMaterialStream.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-
-                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
-                    'PropertyGridEx.CustomPropertyCollection - Liquido
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntalpiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntropiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEnthalpy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEntropy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massamolar"), su.molecularWeight), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassamolardaPhaselqui"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massaespecfica"), su.density), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassaespecficadaPhase2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.massflow.GetValueOrDefault / Me.CurrentMaterialStream.Phases(5).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazovolumtricanascon"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomssica"), su.massflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomssicadacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomolar"), su.molarflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomolardacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.molarfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomolardaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomolardaPhasenamis"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.massfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomssicadaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomssicadaPhasenami"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.compressibilityFactor.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add("Z", val, True, App.GetLocalString("Lquido"), App.GetLocalString("Fatordecompressibili"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Capacidadecalorficad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.heatCapacityCp.GetValueOrDefault / Me.CurrentMaterialStream.Phases(5).Properties.heatCapacityCv.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
-                    pl.Add("Cp/Cv", tmp, True, App.GetLocalString("lquida"), App.GetLocalString("Razoentreascapacidad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Condutividadetrmicad2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadecinemtica2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(5).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadedinmicada"), True)
-
-                    For Each it In pl
-                        it.DefaultValue = Nothing
-                        it.DefaultType = GetType(Nullable(Of Double))
-                    Next
-
-                    .Item.Add("[P6] " & App.GetLocalString("Liquid3"), pl, True, App.GetLocalString("Propriedades3"), App.GetLocalString("PropriedadesdaPhaseLq"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-
-                End If
-
-                If Me.CurrentMaterialStream.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-
-                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
-                    'PropertyGridEx.CustomPropertyCollection - Liquido
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntalpiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("EntropiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEnthalpy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MolarEntropy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massamolar"), su.molecularWeight), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassamolardaPhaselqui"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massaespecfica"), su.density), val, True, App.GetLocalString("Lquido"), App.GetLocalString("MassaespecficadaPhase2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.massflow.GetValueOrDefault / Me.CurrentMaterialStream.Phases(6).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazovolumtricanascon"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomssica"), su.massflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomssicadacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomolar"), su.molarflow), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Vazomolardacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.molarfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomolardaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomolardaPhasenamis"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.massfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomssicadaPhase"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("FraomssicadaPhasenami"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.compressibilityFactor.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add("Z", val, True, App.GetLocalString("Lquido"), App.GetLocalString("Fatordecompressibili"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Capacidadecalorficad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.heatCapacityCp.GetValueOrDefault / Me.CurrentMaterialStream.Phases(6).Properties.heatCapacityCv.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
-                    pl.Add("Cp/Cv", tmp, True, App.GetLocalString("lquida"), App.GetLocalString("Razoentreascapacidad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Condutividadetrmicad2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadecinemtica2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(6).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Viscosidadedinmicada"), True)
-
-                    For Each it In pl
-                        it.DefaultValue = Nothing
-                        it.DefaultType = GetType(Nullable(Of Double))
-                    Next
-
-                    .Item.Add("[P7] " & App.GetLocalString("Aqueous"), pl, True, App.GetLocalString("Propriedades3"), App.GetLocalString("PropriedadesdaPhaseLq"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-
-                End If
-
-                If Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-
-                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
-                    'PropertyGridEx.CustomPropertyCollection - Solid
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, App.GetLocalString("Solid"), App.GetLocalString("EntalpiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, App.GetLocalString("Solid"), App.GetLocalString("EntropiaEspecficadaf2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, App.GetLocalString("Solid"), App.GetLocalString("MolarEnthalpy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, App.GetLocalString("Solid"), App.GetLocalString("MolarEntropy"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massamolar"), su.molecularWeight), val, True, App.GetLocalString("Solid"), App.GetLocalString("MassamolardaPhaselqui"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Massaespecfica"), su.density), val, True, App.GetLocalString("Solid"), App.GetLocalString("MassaespecficadaPhase2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.massflow.GetValueOrDefault / Me.CurrentMaterialStream.Phases(7).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, App.GetLocalString("Solid"), App.GetLocalString("Vazovolumtricanascon"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomssica"), su.massflow), val, True, App.GetLocalString("Solid"), App.GetLocalString("Vazomssicadacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Vazomolar"), su.molarflow), val, True, App.GetLocalString("Solid"), App.GetLocalString("Vazomolardacorrente"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.molarfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomolardaPhase"), val, True, App.GetLocalString("Solid"), App.GetLocalString("FraomolardaPhasenamis"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.massfraction.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add(App.GetLocalString("FraomssicadaPhase"), val, True, App.GetLocalString("Solid"), App.GetLocalString("FraomssicadaPhasenami"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.compressibilityFactor.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
-                    pl.Add("Z", val, True, App.GetLocalString("Solid"), App.GetLocalString("Fatordecompressibili"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, App.GetLocalString("Solid"), App.GetLocalString("Capacidadecalorficad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.heatCapacityCp.GetValueOrDefault / Me.CurrentMaterialStream.Phases(7).Properties.heatCapacityCv.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
-                    pl.Add("Cp/Cv", tmp, True, App.GetLocalString("lquida"), App.GetLocalString("Razoentreascapacidad"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, App.GetLocalString("Solid"), App.GetLocalString("Condutividadetrmicad2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, App.GetLocalString("Solid"), App.GetLocalString("Viscosidadecinemtica2"), True)
-                    refval = Me.CurrentMaterialStream.Phases(7).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
-                    pl.Add(Flowsheet.FT(App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, App.GetLocalString("Solid"), App.GetLocalString("Viscosidadedinmicada"), True)
-
-                    For Each it In pl
-                        it.DefaultValue = Nothing
-                        it.DefaultType = GetType(Nullable(Of Double))
-                    Next
-
-                    .Item.Add("[P8] " & App.GetLocalString("Solid"), pl, True, App.GetLocalString("Propriedades3"), App.GetLocalString("PropriedadesdaPhaseSolida"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-
-                End If
-
-            End With
-
-        End Sub
-
 #End Region
 
 #Region "   Commmon Functions"
 
-        Public Function DW_GetConstantProperties() As List(Of ConstantProperties)
+        Public Function DW_GetConstantProperties() As List(Of Interfaces.ICompoundConstantProperties)
 
-            Dim constprops As New List(Of ConstantProperties)
+            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
 
-            For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
 
@@ -5421,7 +3803,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         Public Overloads Sub DW_CalcKvalue()
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 subst.Kvalue = Me.CurrentMaterialStream.Phases(2).Compounds(subst.Name).MoleFraction.GetValueOrDefault / Me.CurrentMaterialStream.Phases(1).Compounds(subst.Name).MoleFraction.GetValueOrDefault
@@ -5434,14 +3816,14 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             If Not phaseID = -1 Then
                 With Me.CurrentMaterialStream.Phases(phaseID)
-                    For Each subs As Compound In .Compounds.Values
+                    For Each subs As Interfaces.ICompound In .Compounds.Values
                         subs.MolarFlow = .Properties.molarflow.GetValueOrDefault * subs.MoleFraction.GetValueOrDefault
                     Next
                 End With
             Else
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In Me.CurrentMaterialStream.Phases.Values
+                For Each phase In Me.CurrentMaterialStream.Phases.Values
                     With phase
-                        For Each subs As Compound In .Compounds.Values
+                        For Each subs As Interfaces.ICompound In .Compounds.Values
                             subs.MolarFlow = .Properties.molarflow.GetValueOrDefault * subs.MoleFraction.GetValueOrDefault
                         Next
                     End With
@@ -5464,7 +3846,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     fc = Me.DW_CalcFugCoeff(vmol, T, P, State.Liquid)
             End Select
             Dim i As Integer = 0
-            For Each subs As Compound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(f)).Compounds.Values
+            For Each subs As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(f)).Compounds.Values
                 subs.FugacityCoeff = fc(i)
                 subs.ActivityCoeff = fc(i) * P / Me.AUX_PVAPi(i, T)
                 i += 1
@@ -5476,14 +3858,14 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             If Not phaseID = -1 Then
                 With Me.CurrentMaterialStream.Phases(phaseID)
-                    For Each subs As Compound In .Compounds.Values
+                    For Each subs As Interfaces.ICompound In .Compounds.Values
                         subs.MassFlow = .Properties.massflow.GetValueOrDefault * subs.MassFraction.GetValueOrDefault
                     Next
                 End With
             Else
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In Me.CurrentMaterialStream.Phases.Values
+                For Each phase In Me.CurrentMaterialStream.Phases.Values
                     With phase
-                        For Each subs As Compound In .Compounds.Values
+                        For Each subs As Interfaces.ICompound In .Compounds.Values
                             subs.MassFlow = .Properties.massflow.GetValueOrDefault * subs.MassFraction.GetValueOrDefault
                         Next
                     End With
@@ -5506,7 +3888,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     Sum = 0
 
-                    For Each subs As Compound In .Compounds.Values
+                    For Each subs As Interfaces.ICompound In .Compounds.Values
                         TotalMolarFlow = .Properties.molarflow.GetValueOrDefault
                         TotalVolFlow = .Properties.volumetric_flow.GetValueOrDefault
                         MolarFrac = subs.MoleFraction.GetValueOrDefault
@@ -5523,7 +3905,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     'Normalization is still needed due to minor deviations in the partial molar volume estimation. Summation of partial flow rates
                     'should match phase flow rate.
-                    For Each subs As Compound In .Compounds.Values
+                    For Each subs As Interfaces.ICompound In .Compounds.Values
                         If Sum > 0 Then
                             subs.VolumetricFraction = subs.VolumetricFraction.GetValueOrDefault / Sum
                         Else
@@ -5535,12 +3917,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                 End With
             Else
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In Me.CurrentMaterialStream.Phases.Values
+                For Each phase In Me.CurrentMaterialStream.Phases.Values
                     With phase
 
                         Sum = 0
 
-                        For Each subs As Compound In .Compounds.Values
+                        For Each subs As Interfaces.ICompound In .Compounds.Values
                             TotalMolarFlow = .Properties.molarflow.GetValueOrDefault
                             TotalVolFlow = .Properties.volumetric_flow.GetValueOrDefault
                             MolarFrac = subs.MoleFraction.GetValueOrDefault
@@ -5557,7 +3939,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         'Normalization is still needed due to minor deviations in the partial molar volume estimation. Summation of partial flow rates
                         'should match phase flow rate.
-                        For Each subs As Compound In .Compounds.Values
+                        For Each subs As Interfaces.ICompound In .Compounds.Values
                             If Sum > 0 Then
                                 subs.VolumetricFraction = subs.VolumetricFraction.GetValueOrDefault / Sum
                             Else
@@ -5572,7 +3954,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             End If
 
             'Totalization for the mixture "phase" should be made separatly, since the concept o partial molar volume is non sense for the whole mixture.
-            For Each Subs As Compound In CurrentMaterialStream.Phases(0).Compounds.Values
+            For Each Subs As Interfaces.ICompound In CurrentMaterialStream.Phases(0).Compounds.Values
                 Subs.VolumetricFraction = 0
                 Subs.VolumetricFlow = 0
             Next
@@ -5586,7 +3968,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             'Calculate volumetric fractions for the mixture.
 
-            For Each Subs As Compound In CurrentMaterialStream.Phases(0).Compounds.Values
+            For Each Subs As Interfaces.ICompound In CurrentMaterialStream.Phases(0).Compounds.Values
                 If CurrentMaterialStream.Phases(0).Properties.volumetric_flow.GetValueOrDefault > 0 Then
                     Subs.VolumetricFraction = Subs.VolumetricFlow.GetValueOrDefault / CurrentMaterialStream.Phases(0).Properties.volumetric_flow.GetValueOrDefault
                 Else
@@ -5710,7 +4092,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim phaseID As Integer
             phaseID = Me.RET_PHASEID(Phase)
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                 subst.MoleFraction = Nothing
@@ -5724,7 +4106,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_TCM(ByVal Phase As Phase) As Double
 
             Dim Tc As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 Tc += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Critical_Temperature
@@ -5737,7 +4119,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_TBM(ByVal Phase As Phase) As Double
 
             Dim Tb As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 Tb += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point
@@ -5750,7 +4132,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_TFM(ByVal Phase As Phase) As Double
 
             Dim Tf As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 Tf += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.TemperatureOfFusion
@@ -5763,7 +4145,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_WM(ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Acentric_Factor
@@ -5776,7 +4158,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_ZCM(ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Critical_Compressibility
@@ -5789,7 +4171,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_ZRAM(ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 If subst.ConstantProperties.Z_Rackett <> 0 Then
@@ -5806,7 +4188,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_VCM(ByVal Phase As Phase) As Double
 
             Dim val, vc As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 vc = subst.ConstantProperties.Critical_Volume
@@ -5823,7 +4205,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_PCM(ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Critical_Pressure
@@ -5857,7 +4239,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_PVAPM(ByVal T) As Double
 
             Dim val As Double = 0
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim Tc As Double
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -5889,7 +4271,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Overridable Function AUX_MMM(ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
@@ -5941,7 +4323,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Private Function AUX_Rackett_Tcm(ByVal Phase As Phase) As Double
 
             Dim Tc As Double
-            Dim subst1, subst2 As BaseClasses.Compound
+            Dim subst1, subst2 As Interfaces.ICompound
 
             For Each subst1 In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 For Each subst2 In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
@@ -6020,7 +4402,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Function AUX_CPm(ByVal Phase As Phase, ByVal T As Double) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 val += subst.MassFraction.GetValueOrDefault * Me.AUX_CPi(subst.Name, T)
@@ -6033,7 +4415,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Overridable Function AUX_HFm25(ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.IG_Enthalpy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
@@ -6048,7 +4430,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Overridable Function AUX_SFm25(ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.IG_Entropy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
@@ -6131,7 +4513,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         Public Overridable Function AUX_PVAPi(ByVal index As Integer, ByVal T As Double) As Double
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim nome As String = ""
             Dim i As Integer = 0
 
@@ -6360,7 +4742,7 @@ Final3:
             Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
 
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val += Vxw(i) * Me.AUX_HVAPi(subst.Name, T)
                 i += 1
             Next
@@ -6399,7 +4781,7 @@ Final3:
                 Dim tr1 As Double
                 tr1 = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
                 If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A = 0.0# Then
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A = New DWSIM.Utilities.Hypos.Methods.HYP().DHvb_Vetere(Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature, Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure, Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point)
+                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A = New Utilities.Hypos.Methods.HYP().DHvb_Vetere(Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature, Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure, Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point)
                     Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A /= Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
                 End If
                 result = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A * ((1 - Tr) / (1 - tr1)) ^ 0.375
@@ -6491,7 +4873,7 @@ Final3:
         Public Function AUX_LIQVISCm(ByVal T As Double, Optional ByVal phaseid As Integer = 3) As Double
 
             Dim val, val2, logvisc, result As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             val = 0
             val2 = 0
@@ -6514,7 +4896,7 @@ Final3:
 
             Dim val As Double = 0
             Dim nbp As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim ftotal As Double = 1
 
             For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
@@ -6541,7 +4923,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_SURFTi(ByVal constprop As ConstantProperties, ByVal T As Double) As Double
+        Public Overridable Function AUX_SURFTi(ByVal constprop As Interfaces.ICompoundConstantProperties, ByVal T As Double) As Double
 
 
 
@@ -6571,7 +4953,7 @@ Final3:
         Public Overridable Function AUX_CONDTL(ByVal T As Double, Optional ByVal phaseid As Integer = 3) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim vcl(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1)
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
@@ -6593,7 +4975,7 @@ Final3:
         Public Overridable Function AUX_CONDTG(ByVal T As Double, ByVal P As Double) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If subst.ConstantProperties.VaporThermalConductivityEquation <> "" Then
@@ -6608,7 +4990,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_LIQTHERMCONDi(ByVal cprop As ConstantProperties, ByVal T As Double) As Double
+        Public Overridable Function AUX_LIQTHERMCONDi(ByVal cprop As Interfaces.ICompoundConstantProperties, ByVal T As Double) As Double
 
             Dim val As Double
 
@@ -6624,7 +5006,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_VAPTHERMCONDi(ByVal cprop As ConstantProperties, ByVal T As Double, ByVal P As Double) As Double
+        Public Overridable Function AUX_VAPTHERMCONDi(ByVal cprop As Interfaces.ICompoundConstantProperties, ByVal T As Double, ByVal P As Double) As Double
 
             Dim val As Double
 
@@ -6644,7 +5026,7 @@ Final3:
 
             Dim val As Double = 0.0#
 
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * Me.AUX_VAPVISCi(subst.ConstantProperties, T)
             Next
 
@@ -6654,7 +5036,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_VAPVISCi(ByVal cprop As ConstantProperties, ByVal T As Double) As Double
+        Public Overridable Function AUX_VAPVISCi(ByVal cprop As Interfaces.ICompoundConstantProperties, ByVal T As Double) As Double
 
             Dim val As Double
 
@@ -6673,7 +5055,7 @@ Final3:
         Public Overridable Function AUX_SOLIDDENS() As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim zerodens As Double = 0
             Dim db As String
             Dim T As Double = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
@@ -6704,7 +5086,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_SOLIDDENSi(cprop As ConstantProperties, T As Double) As Double
+        Public Overridable Function AUX_SOLIDDENSi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
 
             Dim val As Double
             Dim zerodens As Double = 0
@@ -6732,7 +5114,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_SolidHeatCapacity(ByVal cprop As ConstantProperties, ByVal T As Double) As Double
+        Public Overridable Function AUX_SolidHeatCapacity(ByVal cprop As Interfaces.ICompoundConstantProperties, ByVal T As Double) As Double
 
             Dim val As Double
 
@@ -6755,7 +5137,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_SOLIDCP(ByVal Vxm As Array, ByVal cprops As List(Of ConstantProperties), ByVal T As Double) As Double
+        Public Function AUX_SOLIDCP(ByVal Vxm As Array, ByVal cprops As List(Of Interfaces.ICompoundConstantProperties), ByVal T As Double) As Double
 
             Dim n As Integer = UBound(Vxm)
             Dim val As Double = 0
@@ -6786,7 +5168,7 @@ Final3:
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
-                            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
@@ -6844,7 +5226,7 @@ Final3:
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
-                            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
@@ -6891,7 +5273,7 @@ Final3:
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
-                            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
@@ -6936,7 +5318,7 @@ Final3:
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
-                            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
@@ -6981,7 +5363,7 @@ Final3:
                             Dim i As Integer
                             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                             i = 0
-                            For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
+                            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
@@ -7026,7 +5408,7 @@ Final3:
             Dim i As Integer
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
-            For Each subst As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                         If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
@@ -7055,7 +5437,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_LIQDENSi(ByVal subst As Compound, ByVal T As Double) As Double
+        Public Overridable Function AUX_LIQDENSi(ByVal subst As Interfaces.ICompound, ByVal T As Double) As Double
 
 
 
@@ -7072,7 +5454,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_LIQDENSi(ByVal cprop As ConstantProperties, ByVal T As Double) As Double
+        Public Overridable Function AUX_LIQDENSi(ByVal cprop As Interfaces.ICompoundConstantProperties, ByVal T As Double) As Double
 
             Dim val As Double
 
@@ -7090,7 +5472,7 @@ Final3:
         Public Function AUX_LIQCPm(ByVal T As Double, ByVal phaseid As Integer) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             val = 0
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
@@ -7101,7 +5483,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function AUX_LIQ_Cpi(ByVal cprop As ConstantProperties, ByVal T As Double) As Double
+        Public Overridable Function AUX_LIQ_Cpi(ByVal cprop As Interfaces.ICompoundConstantProperties, ByVal T As Double) As Double
 
             Dim val As Double
             If T >= cprop.Critical_Temperature Then
@@ -7202,7 +5584,7 @@ Final3:
         Public Function AUX_INT_CPDTm(ByVal T1 As Double, ByVal T2 As Double, ByVal Phase As Phase) As Double
 
             Dim val As Double = 0
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             Select Case Phase
 
@@ -7269,7 +5651,7 @@ Final3:
         Public Function AUX_INT_CPDT_Tm(ByVal T1 As Double, ByVal T2 As Double, ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
@@ -7402,7 +5784,7 @@ Final3:
         Public Overridable Function AUX_CONVERT_MOL_TO_MASS(ByVal subst As String, ByVal phasenumber As Integer) As Double
 
             Dim mol_x_mm As Double
-            Dim sub1 As BaseClasses.Compound
+            Dim sub1 As Interfaces.ICompound
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
                 mol_x_mm += sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight
             Next
@@ -7419,7 +5801,7 @@ Final3:
         Public Overridable Function AUX_CONVERT_MASS_TO_MOL(ByVal subst As String, ByVal phasenumber As Integer) As Double
 
             Dim mass_div_mm As Double
-            Dim sub1 As BaseClasses.Compound
+            Dim sub1 As Interfaces.ICompound
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
                 mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
             Next
@@ -7429,7 +5811,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function DW_CalcSolidEnthalpy(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of ConstantProperties)) As Double
+        Public Overridable Function DW_CalcSolidEnthalpy(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
             Dim n As Integer = UBound(Vx)
             Dim i As Integer
@@ -7472,7 +5854,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function DW_CalcSolidHeatCapacityCp(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of ConstantProperties)) As Double
+        Public Overridable Function DW_CalcSolidHeatCapacityCp(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
             Dim n As Integer = UBound(Vx)
             Dim i As Integer
@@ -7507,7 +5889,7 @@ Final3:
         Public Function RET_VMOL(ByVal Phase As Phase) As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
@@ -7522,7 +5904,7 @@ Final3:
         Public Function RET_VMM() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7537,7 +5919,7 @@ Final3:
         Public Function RET_VMAS(ByVal Phase As Phase) As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
             Dim sum As Double = 0.0#
 
@@ -7558,7 +5940,7 @@ Final3:
         Public Function RET_VTC()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7573,7 +5955,7 @@ Final3:
         Public Function RET_VTF() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7588,7 +5970,7 @@ Final3:
         Public Function RET_VHF() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7603,7 +5985,7 @@ Final3:
         Public Function RET_VTB() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7618,7 +6000,7 @@ Final3:
         Public Function RET_VPC() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7632,7 +6014,7 @@ Final3:
         Public Function RET_VZC() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7647,7 +6029,7 @@ Final3:
         Public Function RET_VZRa() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7661,7 +6043,7 @@ Final3:
         Public Function RET_VVC() As Double()
 
             Dim vc, val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7680,7 +6062,7 @@ Final3:
         Public Function RET_VW() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7695,7 +6077,7 @@ Final3:
         Public Function RET_VCP(ByVal T As Double) As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7710,7 +6092,7 @@ Final3:
         Public Function RET_VHVAP(ByVal T As Double) As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7725,7 +6107,7 @@ Final3:
         Public Function RET_Hid(ByVal T1 As Double, ByVal T2 As Double, ByVal Phase As Phase) As Double
 
             Dim val As Double
-            'Dim subst As BaseClasses.Compound
+            'Dim subst As Interfaces.ICompound
 
             Dim phaseID As Integer
 
@@ -7777,7 +6159,7 @@ Final3:
         Public Function RET_Sid(ByVal T1 As Double, ByVal T2 As Double, ByVal P2 As Double, ByVal Phase As Phase) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             Dim phaseID As Integer
 
@@ -7801,7 +6183,7 @@ Final3:
         Public Function RET_Sid(ByVal T1 As Double, ByVal T2 As Double, ByVal P2 As Double, ByVal Vz As Double()) As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim Vw = Me.AUX_CONVERT_MOL_TO_MASS(Vz)
 
             Dim i As Integer = 0
@@ -7860,13 +6242,13 @@ Final3:
             If Me.ParametrosDeInteracao Is Nothing Then
                 Me.ParametrosDeInteracao = New DataTable
                 With Me.ParametrosDeInteracao.Columns
-                    For Each subst As BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         .Add(subst.ConstantProperties.ID, GetType(System.Double))
                     Next
                 End With
 
                 With Me.ParametrosDeInteracao.Rows
-                    For Each subst As BaseClasses.Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         .Add()
                     Next
                 End With
@@ -7900,7 +6282,7 @@ Final3:
         Public Function RET_VCSACIDS()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As String
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7916,7 +6298,7 @@ Final3:
         Public Function RET_VIDS()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As String
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7931,7 +6313,7 @@ Final3:
         Public Function RET_VCAS() As String()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As String
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7946,7 +6328,7 @@ Final3:
         Public Function RET_VNAMES() As String()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As String
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -7961,7 +6343,7 @@ Final3:
         Public Function RET_NullVector() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val(i) = 0.0#
@@ -8018,7 +6400,7 @@ Final3:
         Public Overridable Function AUX_MMM(ByVal Vz() As Double, Optional ByVal state As String = "") As Double
 
             Dim val As Double
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             Dim i As Integer = 0
 
@@ -8087,7 +6469,7 @@ Final3:
 
             Dim i As Integer
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             i = 0
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
@@ -8119,7 +6501,7 @@ Final3:
 
             Dim c As Integer, bo As Boolean
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             bo = False
             c = 0
@@ -8136,7 +6518,7 @@ Final3:
 
             Dim val As Double
             Dim i As Integer = 0
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
 
             val = 0.0#
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -8152,7 +6534,7 @@ Final3:
 
             Dim val As Double
             Dim i As Integer = 0
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val += Vw(i) * Me.AUX_INT_CPDTi_L(T1, T2, subst.Name)
                 i += 1
@@ -8166,7 +6548,7 @@ Final3:
 
             Dim val As Double
             Dim i As Integer = 0
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val += Vw(i) * Me.AUX_INT_CPDT_Ti(T1, T2, subst.Name)
                 i += 1
@@ -8181,7 +6563,7 @@ Final3:
             Dim Vwe(UBound(Vz)) As Double
             Dim mol_x_mm As Double = 0
             Dim i As Integer = 0
-            Dim sub1 As BaseClasses.Compound
+            Dim sub1 As Interfaces.ICompound
             For Each sub1 In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 mol_x_mm += Vz(i) * sub1.ConstantProperties.Molar_Weight
                 i += 1
@@ -8206,7 +6588,7 @@ Final3:
             Dim Vw(UBound(Vz)) As Double
             Dim mass_div_mm As Double
             Dim i As Integer = 0
-            Dim sub1 As BaseClasses.Compound
+            Dim sub1 As Interfaces.ICompound
             For Each sub1 In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 mass_div_mm += Vz(i) / sub1.ConstantProperties.Molar_Weight
                 i += 1
@@ -8438,7 +6820,7 @@ Final3:
         Public Overridable Function GetComponentConstant(ByVal materialObject As Object, ByVal props As Object) As Object Implements CapeOpen.ICapeThermoPropertyPackage.GetComponentConstant
             Dim vals As New ArrayList
             Dim mymat As MaterialStream = materialObject
-            For Each c As Compound In mymat.Phases(0).Compounds.Values
+            For Each c As Interfaces.ICompound In mymat.Phases(0).Compounds.Values
                 For Each p As String In props
                     Select Case p.ToLower
                         Case "molecularweight"
@@ -8492,7 +6874,7 @@ Final3:
             Dim ids, formulas, nms, bts, casnos, molws As New ArrayList
 
             If App.CAPEOPENMode Then
-                For Each c As ConstantProperties In _selectedcomps.Values
+                For Each c As Interfaces.ICompoundConstantProperties In _selectedcomps.Values
                     ids.Add(c.Name)
                     formulas.Add(c.Formula)
                     nms.Add(App.GetComponentName(c.Name))
@@ -8501,7 +6883,7 @@ Final3:
                     molws.Add(c.Molar_Weight)
                 Next
             Else
-                For Each c As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                For Each c As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     ids.Add(c.ConstantProperties.Name)
                     formulas.Add(c.ConstantProperties.Formula)
                     nms.Add(App.GetComponentName(c.ConstantProperties.Name))
@@ -8782,7 +7164,7 @@ Final3:
         Public Overridable Function GetCompoundConstant(ByVal props As Object, ByVal compIds As Object) As Object Implements ICapeThermoCompounds.GetCompoundConstant
             Dim vals As New ArrayList
             For Each s As String In compIds
-                Dim c As Compound = Me.CurrentMaterialStream.Phases(0).Compounds(s)
+                Dim c As Interfaces.ICompound = Me.CurrentMaterialStream.Phases(0).Compounds(s)
                 For Each p As String In props
                     Select Case p.ToLower
                         Case "molecularweight"
@@ -9380,7 +7762,7 @@ Final3:
                         Next
                     Next
                 Else
-                    For Each c As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                    For Each c As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                         comps.Add(c.Name)
                     Next
                 End If
@@ -9690,7 +8072,7 @@ Final3:
 
                 Dim res As New ArrayList
                 Dim comps As New ArrayList
-                For Each c As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                For Each c As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     comps.Add(c.Name)
                 Next
 
@@ -10139,7 +8521,7 @@ Final3:
                 If vok Then
 
                     i = 0
-                    For Each s As Compound In ms.Phases(2).Compounds.Values
+                    For Each s As Interfaces.ICompound In ms.Phases(2).Compounds.Values
                         vz(i) = s.MoleFraction.GetValueOrDefault
                         i += 1
                     Next
@@ -10155,7 +8537,7 @@ Final3:
                 If l1ok Then
 
                     i = 0
-                    For Each s As Compound In ms.Phases(3).Compounds.Values
+                    For Each s As Interfaces.ICompound In ms.Phases(3).Compounds.Values
                         vz(i) = s.MoleFraction.GetValueOrDefault
                         i += 1
                     Next
@@ -10171,7 +8553,7 @@ Final3:
                 If l2ok Then
 
                     i = 0
-                    For Each s As Compound In ms.Phases(4).Compounds.Values
+                    For Each s As Interfaces.ICompound In ms.Phases(4).Compounds.Values
                         vz(i) = s.MoleFraction.GetValueOrDefault
                         i += 1
                     Next
@@ -10187,7 +8569,7 @@ Final3:
                 If sok Then
 
                     i = 0
-                    For Each s As Compound In ms.Phases(7).Compounds.Values
+                    For Each s As Interfaces.ICompound In ms.Phases(7).Compounds.Values
                         vz(i) = s.MoleFraction.GetValueOrDefault
                         i += 1
                     Next
@@ -10329,9 +8711,9 @@ Final3:
         Public Function COMaterialtoDWMaterial(ByVal material As Object) As MaterialStream
 
             Dim ms As New MaterialStream(CType(material, ICapeIdentification).ComponentName, "")
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
-                For Each tmpcomp As ConstantProperties In _selectedcomps.Values
-                    phase.Compounds.Add(tmpcomp.Name, New BaseClasses.Compound(tmpcomp.Name, ""))
+            For Each phase In ms.Phases.Values
+                For Each tmpcomp As Interfaces.ICompoundConstantProperties In _selectedcomps.Values
+                    phase.Compounds.Add(tmpcomp.Name, New Interfaces.ICompound(tmpcomp.Name, ""))
                     phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
                 Next
             Next
@@ -10414,30 +8796,30 @@ Final3:
 
             With ms
                 i = 0
-                For Each s As Compound In .Phases(0).Compounds.Values
+                For Each s As Interfaces.ICompound In .Phases(0).Compounds.Values
                     s.MoleFraction = Vz(i)
                     i += 1
                 Next
                 If Vy IsNot Nothing Then
                     i = 0
-                    For Each s As Compound In .Phases(2).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
                         s.MoleFraction = Vy(i)
                         i += 1
                     Next
                     Vwy = Me.AUX_CONVERT_MOL_TO_MASS(Vy)
                     i = 0
-                    For Each s As Compound In .Phases(2).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
                         s.MassFraction = Vwy(i)
                         i += 1
                     Next
                 Else
                     i = 0
-                    For Each s As Compound In .Phases(2).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
                         s.MoleFraction = 0.0#
                         i += 1
                     Next
                     i = 0
-                    For Each s As Compound In .Phases(2).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
                         s.MassFraction = 0.0#
                         i += 1
                     Next
@@ -10445,24 +8827,24 @@ Final3:
                 .Phases(2).Properties.molarfraction = xv
                 If Vx1 IsNot Nothing Then
                     i = 0
-                    For Each s As Compound In .Phases(3).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
                         s.MoleFraction = Vx1(i)
                         i += 1
                     Next
                     Vwx1 = Me.AUX_CONVERT_MOL_TO_MASS(Vx1)
                     i = 0
-                    For Each s As Compound In .Phases(3).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
                         s.MassFraction = Vwx1(i)
                         i += 1
                     Next
                 Else
                     i = 0
-                    For Each s As Compound In .Phases(3).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
                         s.MoleFraction = 0.0#
                         i += 1
                     Next
                     i = 0
-                    For Each s As Compound In .Phases(3).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
                         s.MassFraction = 0.0#
                         i += 1
                     Next
@@ -10470,24 +8852,24 @@ Final3:
                 .Phases(3).Properties.molarfraction = xl1
                 If Vx2 IsNot Nothing Then
                     i = 0
-                    For Each s As Compound In .Phases(4).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
                         s.MoleFraction = Vx2(i)
                         i += 1
                     Next
                     Vwx2 = Me.AUX_CONVERT_MOL_TO_MASS(Vx2)
                     i = 0
-                    For Each s As Compound In .Phases(4).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
                         s.MassFraction = Vwx2(i)
                         i += 1
                     Next
                 Else
                     i = 0
-                    For Each s As Compound In .Phases(4).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
                         s.MoleFraction = 0.0#
                         i += 1
                     Next
                     i = 0
-                    For Each s As Compound In .Phases(4).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
                         s.MassFraction = 0.0#
                         i += 1
                     Next
@@ -10495,24 +8877,24 @@ Final3:
                 .Phases(4).Properties.molarfraction = xl2
                 If Vs IsNot Nothing Then
                     i = 0
-                    For Each s As Compound In .Phases(7).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
                         s.MoleFraction = Vs(i)
                         i += 1
                     Next
                     Vws = Me.AUX_CONVERT_MOL_TO_MASS(Vs)
                     i = 0
-                    For Each s As Compound In .Phases(7).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
                         s.MassFraction = Vws(i)
                         i += 1
                     Next
                 Else
                     i = 0
-                    For Each s As Compound In .Phases(7).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
                         s.MoleFraction = 0.0#
                         i += 1
                     Next
                     i = 0
-                    For Each s As Compound In .Phases(7).Compounds.Values
+                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
                         s.MassFraction = 0.0#
                         i += 1
                     Next
@@ -10528,8 +8910,8 @@ Final3:
 
 #Region "   CAPE-OPEN ICapeUtilities Implementation"
 
-        Friend _availablecomps As Dictionary(Of String, ConstantProperties)
-        Friend _selectedcomps As Dictionary(Of String, ConstantProperties)
+        Friend _availablecomps As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+        Friend _selectedcomps As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
         <System.NonSerialized()> Friend _pme As Object
 
@@ -10538,15 +8920,15 @@ Final3:
         ''' available it returns an error.</summary>
         ''' <remarks></remarks>
         Public Overridable Sub Edit() Implements CapeOpen.ICapeUtilities.Edit
-            Dim cf As New FormConfigCAPEOPEN2
-            With cf
-                ._pp = Me
-                ._selcomps = _selectedcomps
-                ._availcomps = _availablecomps
-                .Show()
-                _selectedcomps = ._selcomps
-                _availablecomps = ._availcomps
-            End With
+            'Dim cf As New FormConfigCAPEOPEN2
+            'With cf
+            '    ._pp = Me
+            '    ._selcomps = _selectedcomps
+            '    ._availcomps = _availablecomps
+            '    .Show()
+            '    _selectedcomps = ._selcomps
+            '    _availablecomps = ._availcomps
+            'End With
         End Sub
 
         ''' <summary>
@@ -10644,31 +9026,6 @@ Final3:
             Me.CurrentMaterialStream = Nothing
             If _como IsNot Nothing Then System.Runtime.InteropServices.Marshal.ReleaseComObject(_como)
             Me.Dispose()
-        End Sub
-
-        Public Sub LoadCSDB(ByVal filename As String)
-            If File.Exists(filename) Then
-                Dim csdb As New DWSIM.Databases.ChemSep
-                Dim cpa() As BaseClasses.ConstantProperties
-                'Try
-                csdb.Load(filename)
-                cpa = csdb.Transfer()
-                For Each cp As BaseClasses.ConstantProperties In cpa
-                    If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
-                Next
-            End If
-        End Sub
-
-        Public Sub LoadDWSIMDB(ByVal filename As String)
-            If File.Exists(filename) Then
-                Dim dwdb As New DWSIM.Databases.DWSIM
-                Dim cpa() As BaseClasses.ConstantProperties
-                dwdb.Load(filename)
-                cpa = dwdb.Transfer()
-                For Each cp As BaseClasses.ConstantProperties In cpa
-                    If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
-                Next
-            End If
         End Sub
 
 #End Region
@@ -10777,7 +9134,7 @@ Final3:
 
             Catch p_Ex As System.Exception
 
-                System.Windows.Forms.MessageBox.Show(p_Ex.ToString())
+                Throw p_Ex
 
             End Try
 
@@ -10859,7 +9216,7 @@ Final3:
 
             Catch p_Ex As System.Exception
 
-                System.Windows.Forms.MessageBox.Show(p_Ex.ToString())
+                Throw p_Ex
 
             End Try
 

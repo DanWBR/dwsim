@@ -17,6 +17,36 @@
         Volumetric_Flows
     End Enum
 
+    Public Enum PhaseName
+        Liquid
+        Vapor
+        Mixture
+        Solid
+    End Enum
+
+    Public Enum ReactionType
+        Equilibrium
+        Kinetic
+        Heterogeneous_Catalytic
+        Conversion
+    End Enum
+
+    Public Enum ReactionBasis
+        Activity
+        Fugacity
+        MolarConc
+        MassConc
+        MolarFrac
+        MassFrac
+        PartialPress
+    End Enum
+
+    Enum KOpt
+        Gibbs
+        Expression
+        Constant
+    End Enum
+
 End Class
 
 

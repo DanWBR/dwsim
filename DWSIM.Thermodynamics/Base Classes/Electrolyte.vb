@@ -26,10 +26,10 @@ Namespace PropertyPackages.Auxiliary
 
     <System.Serializable()> Public Class Electrolyte
 
-        Function FreezingPointDepression(ByVal Vx As Double(), activcoeff As Double(), cprops As List(Of ConstantProperties)) As Double()
+        Function FreezingPointDepression(ByVal Vx As Double(), activcoeff As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double()
 
             Dim n As Integer = UBound(Vx)
-            Dim wid As Integer = cprops.IndexOf((From c As ConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
+            Dim wid As Integer = cprops.IndexOf((From c As Interfaces.ICompoundConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
             Dim Tnfp, DHm, DT, Td As Double
 
             Tnfp = cprops(wid).TemperatureOfFusion
@@ -42,13 +42,13 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function OsmoticCoeff(Vx As Double(), activcoeff As Double(), cprops As List(Of ConstantProperties)) As Double
+        Function OsmoticCoeff(Vx As Double(), activcoeff As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
             Dim n As Integer = UBound(Vx)
             Dim i As Integer
             Dim molality(n), summ As Double
 
-            Dim wid As Integer = cprops.IndexOf((From c As ConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
+            Dim wid As Integer = cprops.IndexOf((From c As Interfaces.ICompoundConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
 
             'calculate molality considering 1 mol of mixture.
 
@@ -77,14 +77,14 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function pH(Vx As Double(), T As Double, activcoeff As Double(), cprops As List(Of ConstantProperties)) As Double
+        Function pH(Vx As Double(), T As Double, activcoeff As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
             Dim n As Integer = UBound(Vx)
             Dim i As Integer
             Dim molality(n), summ As Double
 
-            Dim wid As Integer = cprops.IndexOf((From c As ConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
-            Dim hid As Integer = cprops.IndexOf((From c As ConstantProperties In cprops Select c Where c.Name = "Hydron").SingleOrDefault)
+            Dim wid As Integer = cprops.IndexOf((From c As Interfaces.ICompoundConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
+            Dim hid As Integer = cprops.IndexOf((From c As Interfaces.ICompoundConstantProperties In cprops Select c Where c.Name = "Hydron").SingleOrDefault)
 
             'calculate molality considering 1 mol of mixture.
 
@@ -115,14 +115,14 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function pH(Vx As Double(), T As Double, cprops As List(Of ConstantProperties)) As Double
+        Function pH(Vx As Double(), T As Double, cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
             Dim n As Integer = UBound(Vx)
             Dim i As Integer
             Dim molality(n), summ As Double
 
-            Dim wid As Integer = cprops.IndexOf((From c As ConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
-            Dim hid As Integer = cprops.IndexOf((From c As ConstantProperties In cprops Select c Where c.Name = "Hydron").SingleOrDefault)
+            Dim wid As Integer = cprops.IndexOf((From c As Interfaces.ICompoundConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
+            Dim hid As Integer = cprops.IndexOf((From c As Interfaces.ICompoundConstantProperties In cprops Select c Where c.Name = "Hydron").SingleOrDefault)
 
             'calculate molality considering 1 mol of mixture.
 
@@ -153,7 +153,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function SolidEnthalpy(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of ConstantProperties)) As Double
+        Function SolidEnthalpy(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
             Dim n As Integer = UBound(Vx)
             Dim i As Integer
@@ -169,7 +169,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function LiquidEnthalpy(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of ConstantProperties), activcoeffT2 As Double(), activcoeffT1 As Double(), ExcessOnly As Boolean) As Double
+        Function LiquidEnthalpy(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties), activcoeffT2 As Double(), activcoeffT1 As Double(), ExcessOnly As Boolean) As Double
 
             Dim T0, Cp0, CpT As Double
 
@@ -184,7 +184,7 @@ Namespace PropertyPackages.Auxiliary
 
             H = (CpT + Cp0) / 2 * (T - T0)
 
-            Dim wid As Integer = cprops.IndexOf((From c2 As ConstantProperties In cprops Select c2 Where c2.Name = "Water").SingleOrDefault)
+            Dim wid As Integer = cprops.IndexOf((From c2 As Interfaces.ICompoundConstantProperties In cprops Select c2 Where c2.Name = "Water").SingleOrDefault)
 
             Hex = 0.0#
             MW = 1.0#
@@ -203,9 +203,9 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function HeatCapacityCp(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of ConstantProperties)) As Double
+        Function HeatCapacityCp(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
-            Dim wid As Integer = cprops.IndexOf((From c2 As ConstantProperties In cprops Select c2 Where c2.Name = "Water").SingleOrDefault)
+            Dim wid As Integer = cprops.IndexOf((From c2 As Interfaces.ICompoundConstantProperties In cprops Select c2 Where c2.Name = "Water").SingleOrDefault)
 
             Dim n As Integer = UBound(Vx)
             Dim i As Integer
@@ -234,9 +234,9 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function LiquidDensity(Vx As Double(), T As Double, cprops As List(Of ConstantProperties)) As Double
+        Function LiquidDensity(Vx As Double(), T As Double, cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
-            Dim wid As Integer = cprops.IndexOf((From c As ConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
+            Dim wid As Integer = cprops.IndexOf((From c As Interfaces.ICompoundConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
 
             Dim n As Integer = UBound(Vx)
             Dim molality(n) As Double

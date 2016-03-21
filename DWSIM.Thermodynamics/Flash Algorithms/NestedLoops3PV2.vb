@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 Imports System.Threading.Tasks
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
@@ -305,7 +305,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 WriteDebugInfo("PT Flash [NL]: Iteration #" & ecount & ", VF = " & V)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until convergiu = 1
 
@@ -335,7 +335,7 @@ out:
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -1094,12 +1094,12 @@ alt:
         End Function
 
         Function Herror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PH_FLASH(Tt, Sf, Pf, fi)
         End Function
 
         Function Serror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PS_FLASH(Tt, Sf, Pf, fi)
         End Function
 
@@ -1132,7 +1132,7 @@ alt:
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -1252,7 +1252,7 @@ alt:
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For

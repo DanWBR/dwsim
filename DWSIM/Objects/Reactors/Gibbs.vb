@@ -24,7 +24,8 @@ Imports System.Linq
 Imports DWSIM.DWSIM.MathEx.Common
 Imports DotNumerics.Optimization
 Imports DWSIM.DWSIM.MathEx
-Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
+Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.SimulationObjects.Reactors
 

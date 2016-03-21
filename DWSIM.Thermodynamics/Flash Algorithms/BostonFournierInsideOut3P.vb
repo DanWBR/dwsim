@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 Imports System.Linq
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
@@ -79,7 +79,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -228,7 +228,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -365,7 +365,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -504,7 +504,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -623,7 +623,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -810,7 +810,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Hl2 = proppack.DW_CalcEnthalpy(Vx2, T, Pf, State.Liquid) * proppack.AUX_MMM(Vx2)
             eberror = Hf - V * Hv - L1 * Hl1 - L2 * Hl2
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -880,7 +880,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Hl2 = proppack.DW_CalcEnthalpy(Vx2, T, Pf, State.Liquid) * proppack.AUX_MMM(Vx2)
             eberror = Hf - V * Hv - L1 * Hl1 - L2 * Hl2
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Return Abs(eberror)
 
@@ -948,7 +948,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim eberror As Double = Sf - V * Sv - L1 * Sl1 - L2 * Sl2
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -1016,7 +1016,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim eberror As Double = Sf - V * Sv - L1 * Sl1 - L2 * Sl2
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Return Abs(eberror)
 
@@ -1213,7 +1213,7 @@ restart:    Do
                 WriteDebugInfo("PH Flash 3P [IO]: Iteration #" & ecount & ", L2F = " & L2)
                 WriteDebugInfo("PH Flash 3P [IO]: Iteration #" & ecount & ", H error = " & fr)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1254,7 +1254,7 @@ restart:    Do
 
         Private Function EnergyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Dim Hl1, Hl2, balerror As Double
 
@@ -1273,7 +1273,7 @@ restart:    Do
 
         Private Function EnergyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Dim HV, balerror As Double
 
@@ -1475,7 +1475,7 @@ restart:    Do
                 WriteDebugInfo("PS Flash 3P [IO]: Iteration #" & ecount & ", VF = " & V)
                 WriteDebugInfo("PS Flash 3P [IO]: Iteration #" & ecount & ", S error = " & fr)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1523,7 +1523,7 @@ restart:    Do
 
         Private Function EntropyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Dim Sl1, Sl2, balerror As Double
 
@@ -1542,7 +1542,7 @@ restart:    Do
 
         Private Function EntropyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Dim SV, balerror As Double
 
@@ -1747,7 +1747,7 @@ restart:    Do
 
                 WriteDebugInfo("PT Flash [IO]: Iteration #" & ecount & ", VF = " & V)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1832,7 +1832,7 @@ out:
 
             Dim err1 As Double = Kb - 1
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Return err1 ^ 2
 
@@ -2077,7 +2077,7 @@ out:
 
                 WriteDebugInfo("PV Flash 3P [IO]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol * (n + 2)
 
@@ -2278,7 +2278,7 @@ out:
 
                 WriteDebugInfo("TV Flash 3P [IO]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                CheckCalculatorStatus()
+               App.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -2340,7 +2340,7 @@ out:
 
             Dim eberror As Double = (L1 + L2) - Lf
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -2396,7 +2396,7 @@ out:
 
             Dim eberror As Double = (L1 + L2) - Lf
 
-            CheckCalculatorStatus()
+           App.Flowsheet.CheckStatus()
 
             Return eberror
 

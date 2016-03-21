@@ -53,19 +53,17 @@ Namespace PropertyPackages
             Me.m_act = New Auxiliary.NISTMFAC
 
             Me.IsConfigurable = True
-            Me.ConfigForm = New FormConfigPP
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
 
         End Sub
 
         Public Overrides Sub ReconfigureConfigForm()
             MyBase.ReconfigureConfigForm()
-            Me.ConfigForm = New FormConfigPP
         End Sub
 
 #Region "    Auxiliary Functions"
 
-        Public Function RET_VN(ByVal subst As BaseClasses.Compound) As Object
+        Public Function RET_VN(ByVal subst As Interfaces.ICompound) As Object
 
             Return Me.m_uni.RET_VN(subst.ConstantProperties)
 
@@ -73,7 +71,7 @@ Namespace PropertyPackages
 
         Public Function RET_VQ() As Object
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim VQ(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
             Dim sum As Double = 0
@@ -89,7 +87,7 @@ Namespace PropertyPackages
 
         Public Function RET_VR() As Object
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim VR(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim i As Integer = 0
             Dim sum As Double = 0
@@ -105,7 +103,7 @@ Namespace PropertyPackages
 
         Public Function RET_VEKI() As List(Of Dictionary(Of Integer, Double))
 
-            Dim subst As BaseClasses.Compound
+            Dim subst As Interfaces.ICompound
             Dim VEKI As New List(Of Dictionary(Of Integer, Double))
             Dim i As Integer = 0
             Dim sum As Double

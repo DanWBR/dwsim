@@ -254,11 +254,11 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function RET_VN(ByVal cp As BaseClasses.ConstantProperties) As Dictionary(Of Integer, Double)
+        Function RET_VN(ByVal cp As Interfaces.ICompoundConstantProperties) As Dictionary(Of Integer, Double)
 
             Dim res As New Dictionary(Of Integer, Double)
-            For Each s As String In cp.UNIFACGroups.Collection.Keys
-                res.Add(s, cp.UNIFACGroups.Collection(s))
+            For Each s As String In cp.UNIFACGroups.Keys
+                res.Add(s, cp.UNIFACGroups(s))
             Next
 
             Return res
@@ -649,7 +649,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function RET_VN(ByVal cp As BaseClasses.ConstantProperties) As Dictionary(Of Integer, Double)
+        Function RET_VN(ByVal cp As Interfaces.ICompoundConstantProperties) As Dictionary(Of Integer, Double)
 
             Dim i As Integer = 0
             Dim res As New Dictionary(Of Integer, Double)
@@ -658,9 +658,9 @@ Namespace PropertyPackages.Auxiliary
             res.Clear()
 
             For Each group As UnifacGroup In Me.UnifGroups.Groups.Values
-                For Each s As String In cp.MODFACGroups.Collection.Keys
+                For Each s As String In cp.MODFACGroups.Keys
                     If s = group.Secondary_Group Then
-                        res.Add(group.Secondary_Group, cp.MODFACGroups.Collection(s))
+                        res.Add(group.Secondary_Group, cp.MODFACGroups(s))
                         Exit For
                     End If
                 Next

@@ -27,6 +27,7 @@ Imports System.Linq
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports System.Reflection
 Imports System.Globalization
+Imports DWSIM.Interfaces.Enums
 
 Namespace DWSIM.Thermodynamics.BaseClasses
 
@@ -126,7 +127,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Next
 
             XMLSerializer.XMLSerializer.Deserialize(Me.Properties, (From xel As XElement In data Select xel Where xel.Name = "Properties").Elements.ToList)
-       
+
         End Function
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
@@ -170,167 +171,31 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
     End Class
 
-    Public Enum PhaseName
-        Liquid
-        Vapor
-        Mixture
-        Solid
-    End Enum
-
-    Public Enum ReactionType
-        Equilibrium
-        Kinetic
-        Heterogeneous_Catalytic
-        Conversion
-    End Enum
-
-    Public Enum ReactionBasis
-        Activity
-        Fugacity
-        MolarConc
-        MassConc
-        MolarFrac
-        MassFrac
-        PartialPress
-    End Enum
 
     <System.Serializable()> <XmlRoot(ElementName:="Reaction")> _
     Public Class Reaction
 
         Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization
 
+        Implements Interfaces.IReaction
+
         Protected m_Components_and_stoichcoeffs As Dictionary(Of String, ReactionStoichBase)
 
-        Protected m_name As String = ""
-        Protected m_id As String = ""
-        Protected m_description As String = ""
-        Protected m_equation As String = ""
-
-        Protected m_base_reactant As String = ""
-        Protected m_phase As PhaseName = PhaseName.Vapor
-        Protected m_reactiontype As ReactionType = ReactionType.Conversion
-        Protected m_reactionbasis As ReactionBasis = ReactionBasis.MolarConc
-        Protected m_reactionheat As Double = 0.0#
-        Protected m_reactionheatCO As Double = 0.0#
-        Protected m_stoichbalance As Double = 0.0#
+        <XmlIgnore> Public Property ExpContext As Ciloci.Flee.ExpressionContext = New Ciloci.Flee.ExpressionContext
+        <XmlIgnore> Public Property Expr As Ciloci.Flee.IGenericExpression(Of Double)
 
 #Region "    DWSIM Specific"
-
-        Public Property StoichBalance() As Double
-            Get
-                Return Me.m_stoichbalance
-            End Get
-            Set(ByVal value As Double)
-                Me.m_stoichbalance = value
-            End Set
-        End Property
-
-        Public Property ReactionHeatCO() As Double
-            Get
-                Return Me.m_reactionheatCO
-            End Get
-            Set(ByVal value As Double)
-                Me.m_reactionheatCO = value
-            End Set
-        End Property
-
-        Public Property ReactionHeat() As Double
-            Get
-                Return Me.m_reactionheat
-            End Get
-            Set(ByVal value As Double)
-                Me.m_reactionheat = value
-            End Set
-        End Property
-
-        Public Property Equation() As String
-            Get
-                Return Me.m_equation
-            End Get
-            Set(ByVal value As String)
-                Me.m_equation = value
-            End Set
-        End Property
-
-        Public ReadOnly Property Components() As Dictionary(Of String, ReactionStoichBase)
-            Get
-                Return m_Components_and_stoichcoeffs
-            End Get
-        End Property
-
-        Public Property Name() As String
-            Get
-                Return m_name
-            End Get
-            Set(ByVal value As String)
-                m_name = value
-            End Set
-        End Property
-
-        Public Property ID() As String
-            Get
-                Return m_id
-            End Get
-            Set(ByVal value As String)
-                m_id = value
-            End Set
-        End Property
-
-        Public Property Description() As String
-            Get
-                Return m_description
-            End Get
-            Set(ByVal value As String)
-                m_description = value
-            End Set
-        End Property
-
-        Public Property BaseReactant() As String
-            Get
-                Return m_base_reactant
-            End Get
-            Set(ByVal value As String)
-                m_base_reactant = value
-            End Set
-        End Property
-
-        Public Property ReactionPhase() As PhaseName
-            Get
-                Return m_phase
-            End Get
-            Set(ByVal value As PhaseName)
-                m_phase = value
-            End Set
-        End Property
-
-        Public Property ReactionType() As ReactionType
-            Get
-                Return m_reactiontype
-            End Get
-            Set(ByVal value As ReactionType)
-                m_reactiontype = value
-            End Set
-        End Property
-
-        Public Property ReactionBasis() As ReactionBasis
-            Get
-                Return m_reactionbasis
-            End Get
-            Set(ByVal value As ReactionBasis)
-                m_reactionbasis = value
-            End Set
-        End Property
 
         Public Function EvaluateK(ByVal T As Double, ByVal pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage) As Double
 
             'equilibrium constant calculation
 
             Select Case KExprType
-                Case Reaction.KOpt.Constant
+                Case KOpt.Constant
 
                     Return ConstantKeqValue
 
-                Case Reaction.KOpt.Expression
+                Case KOpt.Expression
 
                     ExpContext.Variables("T") = T
                     ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
@@ -338,7 +203,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
                     Return Math.Exp(Expr.Evaluate)
 
-                Case Reaction.KOpt.Gibbs
+                Case KOpt.Gibbs
 
                     Dim id(Components.Count - 1) As String
                     Dim stcoef(Components.Count - 1) As Double
@@ -358,191 +223,6 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             End Select
 
         End Function
-
-        'Equilibrium
-
-        Enum KOpt
-            Gibbs
-            Expression
-            Constant
-        End Enum
-
-        <System.NonSerialized()> <XmlIgnore()> Protected m_e As IGenericExpression(Of Double)
-        <System.NonSerialized()> <XmlIgnore()> Protected m_eopt As ExpressionContext
-        Protected m_Expression As String = ""
-        Protected m_OptionForK As KOpt = KOpt.Gibbs
-        Protected m_approach As Double
-        Protected m_tmin As Double = 0
-        Protected m_tmax As Double = 2000
-        Protected m_constantkeq As Double
-        Protected m_reactiongibbs As Double
-        Protected m_kval As Double
-
-        Public Property Kvalue() As Double
-            Get
-                Return m_kval
-            End Get
-            Set(ByVal value As Double)
-                m_kval = value
-            End Set
-        End Property
-
-        Public Property ReactionGibbsEnergy() As Double
-            Get
-                Return m_reactiongibbs
-            End Get
-            Set(ByVal value As Double)
-                m_reactiongibbs = value
-            End Set
-        End Property
-
-        Public Property ConstantKeqValue() As Double
-            Get
-                Return Me.m_constantkeq
-            End Get
-            Set(ByVal value As Double)
-                Me.m_constantkeq = value
-            End Set
-        End Property
-
-        Public Property Tmax() As Double
-            Get
-                Return m_tmax
-            End Get
-            Set(ByVal value As Double)
-                m_tmax = value
-            End Set
-        End Property
-
-        Public Property Tmin() As Double
-            Get
-                Return m_tmin
-            End Get
-            Set(ByVal value As Double)
-                m_tmin = value
-            End Set
-        End Property
-
-        Public Property Approach() As Double
-            Get
-                Return m_approach
-            End Get
-            Set(ByVal value As Double)
-                m_approach = value
-            End Set
-        End Property
-
-        Public Property Expr() As IGenericExpression(Of Double)
-            Get
-                Return m_e
-            End Get
-            Set(ByVal value As IGenericExpression(Of Double))
-                m_e = value
-            End Set
-        End Property
-
-        Public Property ExpContext() As ExpressionContext
-            Get
-                Return m_eopt
-            End Get
-            Set(ByVal value As ExpressionContext)
-                m_eopt = value
-            End Set
-        End Property
-
-        Public Property Expression() As String
-            Get
-                Return Me.m_Expression
-            End Get
-            Set(ByVal value As String)
-                Me.m_Expression = value
-            End Set
-        End Property
-
-        Public Property KExprType() As KOpt
-            Get
-                Return m_OptionForK
-            End Get
-            Set(ByVal value As KOpt)
-                m_OptionForK = value
-            End Set
-        End Property
-
-        'Kinetic
-
-        Protected m_A_fwd, m_E_fwd, m_A_rev, m_E_rev As Double
-        Protected m_concunit As String = "mol/m3"
-        Protected m_velunit As String = "mol/[m3.s]"
-        Protected m_rate As Double = 0.0#
-
-        Public Property Rate() As Double
-            Get
-                Return m_rate
-            End Get
-            Set(ByVal value As Double)
-                m_rate = value
-            End Set
-        End Property
-
-        Public Property VelUnit() As String
-            Get
-                Return m_velunit
-            End Get
-            Set(ByVal value As String)
-                m_velunit = value
-            End Set
-        End Property
-
-        Public Property ConcUnit() As String
-            Get
-                Return m_concunit
-            End Get
-            Set(ByVal value As String)
-                m_concunit = value
-            End Set
-        End Property
-
-        Public Property A_Forward() As Double
-            Get
-                Return m_A_fwd
-            End Get
-            Set(ByVal value As Double)
-                m_A_fwd = value
-            End Set
-        End Property
-
-        Public Property A_Reverse() As Double
-            Get
-                Return m_A_rev
-            End Get
-            Set(ByVal value As Double)
-                m_A_rev = value
-            End Set
-        End Property
-
-        Public Property E_Forward() As Double
-            Get
-                Return m_E_fwd
-            End Get
-            Set(ByVal value As Double)
-                m_E_fwd = value
-            End Set
-        End Property
-
-        Public Property E_Reverse() As Double
-            Get
-                Return m_E_rev
-            End Get
-            Set(ByVal value As Double)
-                m_E_rev = value
-            End Set
-        End Property
-
-        'Heterogeneous
-
-        Public Property RateEquationNumerator As String = ""
-
-        Public Property RateEquationDenominator As String = ""
 
         'Initializers
 
@@ -585,6 +265,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             ObjectCopy = objBinaryFormatter.Deserialize(objMemStream)
 
             objMemStream.Close()
+
         End Function
 
 #End Region
@@ -622,6 +303,72 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         End Function
 
+        Public Property BaseReactant As String Implements Interfaces.IReaction.BaseReactant
+
+        Public ReadOnly Property Components As Dictionary(Of String, Interfaces.IReactionStoichBase) Implements Interfaces.IReaction.Components
+            Get
+                Dim dict As New Dictionary(Of String, Interfaces.IReactionStoichBase)
+                For Each item In m_Components_and_stoichcoeffs
+                    dict.Add(item.Key, item.Value)
+                Next
+                Return dict
+            End Get
+        End Property
+
+        Public Property Description As String Implements Interfaces.IReaction.Description
+
+        Public Property Equation As String Implements Interfaces.IReaction.Equation
+
+        Public Property ID As String Implements Interfaces.IReaction.ID
+
+        Public Property Name As String Implements Interfaces.IReaction.Name
+
+        Public Property ReactionBasis As Interfaces.Enums.ReactionBasis Implements Interfaces.IReaction.ReactionBasis
+
+        Public Property ReactionHeat As Double Implements Interfaces.IReaction.ReactionHeat
+
+        Public Property ReactionHeatCO As Double Implements Interfaces.IReaction.ReactionHeatCO
+
+        Public Property ReactionPhase As Interfaces.Enums.PhaseName Implements Interfaces.IReaction.ReactionPhase
+
+        Public Property ReactionType As Interfaces.Enums.ReactionType Implements Interfaces.IReaction.ReactionType
+
+        Public Property StoichBalance As Double Implements Interfaces.IReaction.StoichBalance
+
+        Public Property A_Forward As Double Implements Interfaces.IReaction.A_Forward
+
+        Public Property A_Reverse As Double Implements Interfaces.IReaction.A_Reverse
+
+        Public Property Approach As Double Implements Interfaces.IReaction.Approach
+
+        Public Property ConcUnit As String Implements Interfaces.IReaction.ConcUnit
+
+        Public Property ConstantKeqValue As Double Implements Interfaces.IReaction.ConstantKeqValue
+
+        Public Property E_Forward As Double Implements Interfaces.IReaction.E_Forward
+
+        Public Property E_Reverse As Double Implements Interfaces.IReaction.E_Reverse
+
+        Public Property Expression As String Implements Interfaces.IReaction.Expression
+
+        Public Property KExprType As Interfaces.Enums.KOpt Implements Interfaces.IReaction.KExprType
+
+        Public Property Kvalue As Double Implements Interfaces.IReaction.Kvalue
+
+        Public Property Rate As Double Implements Interfaces.IReaction.Rate
+
+        Public Property RateEquationDenominator As String Implements Interfaces.IReaction.RateEquationDenominator
+
+        Public Property RateEquationNumerator As String Implements Interfaces.IReaction.RateEquationNumerator
+
+        Public Property ReactionGibbsEnergy As Double Implements Interfaces.IReaction.ReactionGibbsEnergy
+
+        Public Property Tmax As Double Implements Interfaces.IReaction.Tmax
+
+        Public Property Tmin As Double Implements Interfaces.IReaction.Tmin
+
+        Public Property VelUnit As String Implements Interfaces.IReaction.VelUnit
+
     End Class
 
     <System.Serializable()> Public Class ReactionSet
@@ -634,12 +381,9 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         Implements CapeOpen.ICapeThermoContext, CapeOpen.ICapeKineticReactionContext, CapeOpen.ICapeReactionProperties
         Implements CAPEOPEN110.ICapeThermoMaterialContext
 
-        Protected m_reactionset As Dictionary(Of String, ReactionSetBase)
-        Protected m_attachedToGUID As List(Of String)
+        Implements Interfaces.IReactionSet
 
-        Protected m_ID As String = ""
-        Protected m_name As String = ""
-        Protected m_description As String = ""
+        Protected m_reactionset As Dictionary(Of String, ReactionSetBase)
 
 #Region "    DWSIM Specific"
 
@@ -654,44 +398,21 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Return ID
         End Function
 
-        Public ReadOnly Property Reactions() As Dictionary(Of String, ReactionSetBase)
+        Public ReadOnly Property Reactions() As Dictionary(Of String, Interfaces.IReactionSetBase) Implements Interfaces.IReactionSet.Reactions
             Get
-                Return Me.m_reactionset
+                Dim dict As New Dictionary(Of String, Interfaces.IReactionSetBase)
+                For Each it In m_reactionset
+                    dict.Add(it.Key, it.Value)
+                Next
+                Return dict
             End Get
         End Property
 
-        Public ReadOnly Property AttachedTo() As List(Of String)
-            Get
-                Return Me.m_attachedToGUID
-            End Get
-        End Property
+        Public Property ID() As String Implements Interfaces.IReactionSet.ID
 
-        Public Property ID() As String
-            Get
-                Return Me.m_ID
-            End Get
-            Set(ByVal value As String)
-                Me.m_ID = value
-            End Set
-        End Property
+        Public Property Name() As String Implements Interfaces.IReactionSet.Name
 
-        Public Property Name() As String
-            Get
-                Return Me.m_name
-            End Get
-            Set(ByVal value As String)
-                Me.m_name = value
-            End Set
-        End Property
-
-        Public Property Description() As String
-            Get
-                Return Me.m_description
-            End Get
-            Set(ByVal value As String)
-                Me.m_description = value
-            End Set
-        End Property
+        Public Property Description() As String Implements Interfaces.IReactionSet.Description
 
         Sub New()
             MyBase.New()
@@ -1159,9 +880,9 @@ Namespace DWSIM.Thermodynamics.BaseClasses
                                 'equilibrium constant calculation
 
                                 Select Case .KExprType
-                                    Case Reaction.KOpt.Constant
+                                    Case KOpt.Constant
                                         .Kvalue = .ConstantKeqValue
-                                    Case Reaction.KOpt.Expression
+                                    Case KOpt.Expression
                                         If .ExpContext Is Nothing Then
                                             .ExpContext = New Ciloci.Flee.ExpressionContext
                                             With .ExpContext
@@ -1171,7 +892,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
                                         .ExpContext.Variables.Add("T", T)
                                         .Expr = .ExpContext.CompileGeneric(Of Double)(.Expression)
                                         .Kvalue = Math.Exp(.Expr.Evaluate)
-                                    Case Reaction.KOpt.Gibbs
+                                    Case KOpt.Gibbs
                                         Dim id(.Components.Count - 1) As String
                                         Dim stcoef(.Components.Count - 1) As Double
                                         Dim bcidx As Integer = 0
@@ -1232,22 +953,8 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         End Sub
 
         Public Property ComponentDescription() As String Implements CapeOpen.ICapeIdentification.ComponentDescription
-            Get
-                Return m_description
-            End Get
-            Set(ByVal value As String)
-                m_description = value
-            End Set
-        End Property
 
         Public Property ComponentName() As String Implements CapeOpen.ICapeIdentification.ComponentName
-            Get
-                Return m_name
-            End Get
-            Set(ByVal value As String)
-                m_name = value
-            End Set
-        End Property
 
         Public Sub SetMaterial1(ByVal material As Object) Implements CAPEOPEN110.ICapeThermoMaterialContext.SetMaterial
             If Not System.Runtime.InteropServices.Marshal.IsComObject(material) Then
@@ -1287,13 +994,13 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
             With elements
 
-                .Add(New XElement("ID", m_ID))
-                .Add(New XElement("Name", m_name))
-                .Add(New XElement("Description", m_description))
+                .Add(New XElement("ID", ID))
+                .Add(New XElement("Name", Name))
+                .Add(New XElement("Description", Description))
 
                 .Add(New XElement("Reactions"))
 
-                For Each kvp As KeyValuePair(Of String, ReactionSetBase) In Reactions
+                For Each kvp As KeyValuePair(Of String, Interfaces.IReactionSetBase) In Reactions
                     .Item(.Count - 1).Add(New XElement("Reaction", New XAttribute("Key", kvp.Key),
                                                                     New XAttribute("ReactionID", kvp.Value.ReactionID),
                                                                     New XAttribute("Rank", kvp.Value.Rank),
@@ -1310,36 +1017,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
     <System.Serializable()> Public Class ReactionSetBase
 
-        Protected m_reactionID As String = ""
-        Protected m_rank As Integer = 0
-        Protected m_isActive As Boolean = True
-
-        Public Property ReactionID() As String
-            Get
-                Return Me.m_reactionID
-            End Get
-            Set(ByVal value As String)
-                Me.m_reactionID = value
-            End Set
-        End Property
-
-        Public Property Rank() As Integer
-            Get
-                Return Me.m_rank
-            End Get
-            Set(ByVal value As Integer)
-                Me.m_rank = value
-            End Set
-        End Property
-
-        Public Property IsActive() As Boolean
-            Get
-                Return Me.m_isActive
-            End Get
-            Set(ByVal value As Boolean)
-                Me.m_isActive = value
-            End Set
-        End Property
+        Implements Interfaces.IReactionSetBase
 
         Sub New()
 
@@ -1351,68 +1029,35 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Me.ReactionID = id
         End Sub
 
+        Public Property IsActive As Boolean Implements Interfaces.IReactionSetBase.IsActive
+
+        Public Property Rank As Integer Implements Interfaces.IReactionSetBase.Rank
+
+        Public Property ReactionID As String Implements Interfaces.IReactionSetBase.ReactionID
+
     End Class
 
     <System.Serializable()> Public Class ReactionStoichBase
 
-        Protected m_compname As String = ""
-        Protected m_stoichcoeff As Double = 0.0#
-        Protected m_directorder As Double = 0.0#
-        Protected m_reverseorder As Double = 0.0#
-        Protected m_basecomp As Boolean = False
-
-        Public Property CompName() As String
-            Get
-                Return m_compname
-            End Get
-            Set(ByVal value As String)
-                m_compname = value
-            End Set
-        End Property
-
-        Public Property StoichCoeff() As Double
-            Get
-                Return Me.m_stoichcoeff
-            End Get
-            Set(ByVal value As Double)
-                Me.m_stoichcoeff = value
-            End Set
-        End Property
-
-        Public Property DirectOrder() As Double
-            Get
-                Return Me.m_directorder
-            End Get
-            Set(ByVal value As Double)
-                Me.m_directorder = value
-            End Set
-        End Property
-
-        Public Property ReverseOrder() As Double
-            Get
-                Return Me.m_reverseorder
-            End Get
-            Set(ByVal value As Double)
-                Me.m_reverseorder = value
-            End Set
-        End Property
-
-        Public Property IsBaseReactant() As Boolean
-            Get
-                Return Me.m_basecomp
-            End Get
-            Set(ByVal value As Boolean)
-                Me.m_basecomp = value
-            End Set
-        End Property
+        Implements Interfaces.IReactionStoichBase
 
         Public Sub New(ByVal name As String, ByVal stoichcoeff As Double, ByVal isbasereactant As Boolean, ByVal directorder As Double, ByVal reversorder As Double)
-            Me.m_compname = name
-            Me.m_stoichcoeff = stoichcoeff
-            Me.m_basecomp = isbasereactant
-            Me.m_directorder = directorder
-            Me.m_reverseorder = reversorder
+            Me.CompName = name
+            Me.StoichCoeff = stoichcoeff
+            Me.IsBaseReactant = isbasereactant
+            Me.DirectOrder = directorder
+            Me.ReverseOrder = reversorder
         End Sub
+
+        Public Property CompName As String Implements Interfaces.IReactionStoichBase.CompName
+
+        Public Property DirectOrder As Double Implements Interfaces.IReactionStoichBase.DirectOrder
+
+        Public Property IsBaseReactant As Boolean Implements Interfaces.IReactionStoichBase.IsBaseReactant
+
+        Public Property ReverseOrder As Double Implements Interfaces.IReactionStoichBase.ReverseOrder
+
+        Public Property StoichCoeff As Double Implements Interfaces.IReactionStoichBase.StoichCoeff
 
     End Class
 

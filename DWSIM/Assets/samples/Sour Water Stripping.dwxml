@@ -8731,9 +8731,9 @@ Calculated OK.</DebugText>
     <CalculateBubbleAndDewPoints>false</CalculateBubbleAndDewPoints>
     <ValidateEquilibriumCalc>false</ValidateEquilibriumCalc>
     <UsePhaseIdentificationAlgorithm>false</UsePhaseIdentificationAlgorithm>
-    <SimNome>simulation</SimNome>
-    <SimAutor>PETROBRAS\ptc0</SimAutor>
-    <SimComentario>comments</SimComentario>
+    <SimulationName>simulation</SimulationName>
+    <SimulationAuthor>PETROBRAS\ptc0</SimulationAuthor>
+    <SimulationComments>comments</SimulationComments>
     <FilePath>C:\Users\danie\Documents\Visual Studio 2013\Projects\DWSIM3\DWSIM\Assets\samples\Sour Water Stripping.dwxml</FilePath>
     <BackupFileName>41726169.dwbcs</BackupFileName>
     <CalculatorActivated>true</CalculatorActivated>

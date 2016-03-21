@@ -19,8 +19,8 @@
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
-Imports MathEx.Common
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.MathEx.Common
+
 Imports Cureos.Numerics
 Imports DotNumerics.Optimization
 Imports System.Threading.Tasks
@@ -316,7 +316,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             idx(i) = i
                         Else
                             j = 0
-                            For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                            For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                                 If subst.Name = Me.StabSearchCompIDs(i) Then
                                     idx(i) = j
                                     Exit For
@@ -575,7 +575,7 @@ out:        Return result
             Dim alreadymt As Boolean = False
 
             If My.Settings.EnableParallelProcessing Then
-                
+
                 Dim task1 As Task = New Task(Sub()
                                                  Dim ErrRes1 = Herror("PV", 0, P, Vz, PP)
                                                  Span(0).X = 0
@@ -591,7 +591,7 @@ out:        Return result
                 task1.Start()
                 task2.Start()
                 Task.WaitAll(task1, task2)
-                
+
             Else
                 ErrRes = Herror("PV", 0, P, Vz, PP)
                 Tb = ErrRes(1)
@@ -773,7 +773,7 @@ out:        Return result
                 Do
 
                     If My.Settings.EnableParallelProcessing Then
-                        
+
                         Dim task1 As Task = New Task(Sub()
                                                          fx = Serror(x1, {P, Vz, PP})
                                                      End Sub)
@@ -783,7 +783,7 @@ out:        Return result
                         task1.Start()
                         task2.Start()
                         Task.WaitAll(task1, task2)
-                        
+
                     Else
                         fx = Serror(x1, {P, Vz, PP})
                         fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
@@ -880,7 +880,7 @@ alt:
             Dim alreadymt As Boolean = False
 
             If My.Settings.EnableParallelProcessing Then
-                
+
                 If My.Settings.EnableGPUProcessing Then
                     'If Not App.gpu.IsMultithreadingEnabled Then
                     '    App.gpu.EnableMultithreading()
@@ -901,7 +901,7 @@ alt:
                 task2.Start()
                 task3.Start()
                 Task.WaitAll(task1, task2, task3)
-                
+
             Else
                 If V > 0 Then _Hv = proppack.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
                 If L1 > 0 Then _Hl1 = proppack.DW_CalcEnthalpy(Vx1, T, P, State.Liquid)
@@ -958,12 +958,12 @@ alt:
         End Function
 
         Function Herror(ByVal type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
-            CheckCalculatorStatus()
+            App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PH_FLASH(type, X, P, Vz, PP)
         End Function
 
         Function Serror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            CheckCalculatorStatus()
+            App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PS_FLASH(Tt, Sf, Pf, fi)
         End Function
 
@@ -1075,7 +1075,7 @@ alt:
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -1196,7 +1196,7 @@ alt:
                         idx(i) = i
                     Else
                         j = 0
-                        For Each subst As BaseClasses.Compound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
                             If subst.Name = Me.StabSearchCompIDs(i) Then
                                 idx(i) = j
                                 Exit For
@@ -1843,7 +1843,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
         Private Function FunctionValue(ByVal x() As Double) As Double
 
-            CheckCalculatorStatus()
+            App.Flowsheet.CheckStatus()
 
             Dim pval As Double = 0.0#
             Dim fcv(n), fcl(n), fcl2(n) As Double
@@ -1864,7 +1864,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         Next
 
                         If My.Settings.EnableParallelProcessing Then
-                            
+
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                                                          End Sub)
@@ -1874,7 +1874,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             task1.Start()
                             task2.Start()
                             Task.WaitAll(task1, task2)
-                            
+
                         Else
                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
@@ -1925,7 +1925,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         Next
 
                         If My.Settings.EnableParallelProcessing Then
-                            
+
                             If My.Settings.EnableGPUProcessing Then
                                 'App.gpu.EnableMultithreading()
                             End If
@@ -1942,7 +1942,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             task2.Start()
                             task3.Start()
                             Task.WaitAll(task1, task2, task3)
-                            
+
                         Else
                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
@@ -2015,7 +2015,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                     Next
 
                     If My.Settings.EnableParallelProcessing Then
-                        
+
                         If My.Settings.EnableGPUProcessing Then
                             'App.gpu.EnableMultithreading()
                         End If
@@ -2032,7 +2032,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         task2.Start()
                         task3.Start()
                         Task.WaitAll(task1, task2, task3)
-                        
+
                     Else
                         fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                         fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
