@@ -17,12 +17,12 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
-Imports DWSIM.DWSIM.SimulationObjects
+
 Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.Thermodynamics.MathEx.Common
 
 Imports System.Threading.Tasks
-Imports DWSIM.Thermodynamics.BaseClasses
+
 Imports System.Linq
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms

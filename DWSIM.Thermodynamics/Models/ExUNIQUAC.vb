@@ -20,7 +20,7 @@ Imports System.Collections.Generic
 Imports FileHelpers
 Imports System.Math
 Imports System.Linq
-Imports DWSIM.Thermodynamics.BaseClasses
+
 
 Namespace PropertyPackages.Auxiliary
 
@@ -121,7 +121,7 @@ Namespace PropertyPackages.Auxiliary
             exuniquacrqc = fh3.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "ExUNIQUAC_RiQi.txt")
             exuniquacdcc = fh4.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "DielectricConstants.txt")
 
-            Dim csdb As New Databases.ChemSep
+            Dim csdb As New ChemSepHelper.ChemSepIDConverter
 
             For Each exuniquac In exuniquacc
                 If Me.InteractionParameters.ContainsKey(exuniquac.Group1) Then

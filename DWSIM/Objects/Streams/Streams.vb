@@ -48,7 +48,7 @@ Namespace DWSIM.SimulationObjects.Streams
         Friend _pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
         Friend _ppid As String = ""
 
-        Protected m_Phases As New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Phase)
+        Protected m_Phases As New Dictionary(Of Integer, DWSIM.Thermodynamics.BaseClasses.Phase)
 
         <System.NonSerialized()> Private _flowsheet As FormFlowsheet
 
@@ -87,7 +87,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
                 .Add(New XElement("PropertyPackage", ppid))
                 .Add(New XElement("Phases"))
-                For Each kvp As KeyValuePair(Of String, DWSIM.Thermodynamics.BaseClasses.Phase) In m_Phases
+                For Each kvp As KeyValuePair(Of Integer, DWSIM.Thermodynamics.BaseClasses.Phase) In m_Phases
                     .Item(.Count - 1).Add(New XElement("Phase", {New XElement("ID", kvp.Key), kvp.Value.SaveData().ToArray()}))
                 Next
             End With
@@ -153,7 +153,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <returns></returns>
         ''' <remarks></remarks>
 
-        Public Property AtEquilibrium() As Boolean
+        Public Property AtEquilibrium() As Boolean = False Implements IMaterialStream.AtEquilibrium
 
         ''' <summary>
         ''' Gets or sets the associated Property Package for this stream.
@@ -267,7 +267,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Overrides ReadOnly Property Phases() As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Phase)
+        Public Overrides ReadOnly Property Phases() As Dictionary(Of Integer, DWSIM.Thermodynamics.BaseClasses.Phase)
             Get
                 Return m_Phases
             End Get
@@ -696,7 +696,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' </summary>
         ''' <param name="Vx"></param>
         ''' <remarks></remarks>
-        Public Sub SetOverallComposition(ByVal Vx As Array)
+        Public Sub SetOverallComposition(ByVal Vx As Array) Implements Interfaces.IMaterialStream.SetOverallComposition
 
             Dim i As Integer = 0
             For Each c As Compound In Me.Phases(0).Compounds.Values
@@ -764,6 +764,10 @@ Namespace DWSIM.SimulationObjects.Streams
                 sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mol_x_mm
             Next
 
+        End Sub
+
+        Public Sub SetPhaseComposition1(ByVal Vx As Array, ByVal phase As Integer) Implements Interfaces.IMaterialStream.SetPhaseComposition
+            SetPhaseComposition(Vx, phase)
         End Sub
 
         ''' <summary>
@@ -5207,6 +5211,21 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Property SpecType As Enums.StreamSpec = Enums.StreamSpec.Temperature_and_Pressure Implements IMaterialStream.SpecType
 
         Public Property CompositionBasis As CompositionBasis Implements IMaterialStream.CompositionBasis
+
+        Public ReadOnly Property Phases1 As Dictionary(Of Integer, IPhase) Implements IMaterialStream.Phases
+            Get
+                Dim dict As New Dictionary(Of Integer, IPhase)
+                For Each item In Phases
+                    dict.Add(item.Key, item.Value)
+                Next
+                Return dict
+            End Get
+        End Property
+
+        Public Function Clone1() As IMaterialStream Implements IMaterialStream.Clone
+            Return Me.Clone()
+        End Function
+
     End Class
 
     <System.Serializable()> Public Class EnergyStream

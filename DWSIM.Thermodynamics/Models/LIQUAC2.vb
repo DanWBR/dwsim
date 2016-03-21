@@ -20,7 +20,7 @@ Imports System.Collections.Generic
 Imports FileHelpers
 Imports System.Math
 Imports System.Linq
-Imports DWSIM.Thermodynamics.BaseClasses
+
 
 Namespace PropertyPackages.Auxiliary
 
@@ -161,7 +161,7 @@ Namespace PropertyPackages.Auxiliary
             liquac2rqc = fh3.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "LIQUAC2_RiQi.txt")
             liquac2dcc = fh4.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "DielectricConstants.txt")
 
-            Dim csdb As New Databases.ChemSep
+            Dim csdb As New ChemSepHelper.ChemSepIDConverter
 
             For Each uniquacip In uniquacipc
                 If Me.InteractionParameters.ContainsKey(csdb.GetDWSIMName(uniquacip.ID1)) Then

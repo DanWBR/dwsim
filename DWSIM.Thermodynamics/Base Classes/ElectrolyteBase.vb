@@ -20,7 +20,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Math
 Imports System.Xml.Linq
 Imports System.Linq
-Imports DWSIM.Thermodynamics.BaseClasses
+
 Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.Thermodynamics.MathEx.Common
 Imports Ciloci.Flee
@@ -196,7 +196,7 @@ Namespace PropertyPackages
             Dim T As Double
 
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
         End Sub
 

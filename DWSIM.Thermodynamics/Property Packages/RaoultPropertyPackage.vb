@@ -19,7 +19,7 @@
 'Imports CAPEOPEN_PD.CAPEOPEN
 'Imports DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.PropertyPackages
-Imports DWSIM.Thermodynamics.BaseClasses
+
 Imports System.Math
 
 Namespace PropertyPackages
@@ -210,7 +210,7 @@ Namespace PropertyPackages
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Case "surfacetension"
-                    Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                    Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                 Case Else
                     Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                     ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -381,7 +381,7 @@ Namespace PropertyPackages
             Dim T As Double
 
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
         End Sub
 

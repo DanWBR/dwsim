@@ -16,9 +16,6 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.SimulationObjects.Streams
-Imports DWSIM.DWSIM.SimulationObjects
-Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports System.IO
@@ -27,7 +24,7 @@ Imports System.Math
 Imports CapeOpen
 Imports System.Runtime.InteropServices.ComTypes
 Imports iop = System.Runtime.InteropServices
-Imports DWSIM.Interfaces2
+
 Imports System.Xml.Serialization
 Imports System.Runtime.Serialization.Formatters
 Imports System.Threading.Tasks
@@ -191,10 +188,6 @@ Namespace PropertyPackages
 
         Sub New()
 
-            'Me.New(False)
-
-            'MyBase.New()
-
             Initialize()
 
         End Sub
@@ -211,79 +204,6 @@ Namespace PropertyPackages
                 _availablecomps = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
                 'load databases
-
-                Dim pathsep = IO.Path.DirectorySeparatorChar
-
-                'try to find chemsep xml database
-
-                Dim cspath As String = ""
-                Try
-                    If My.Computer.Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("ChemSepL6v96") IsNot Nothing Then
-                        cspath = My.Computer.Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("ChemSepL6v96").GetValue("")
-                    ElseIf My.Computer.Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("ChemSepL6v95") IsNot Nothing Then
-                        cspath = My.Computer.Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("ChemSepL6v95").GetValue("")
-                    ElseIf My.Computer.Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("ChemSepL6v94") IsNot Nothing Then
-                        cspath = My.Computer.Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("ChemSepL6v94").GetValue("")
-                    ElseIf My.Computer.Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("ChemSepL6v93") IsNot Nothing Then
-                        cspath = My.Computer.Registry.LocalMachine.OpenSubKey("Software").OpenSubKey("ChemSepL6v93").GetValue("")
-                    End If
-                    cspath += Path.DirectorySeparatorChar + "pcd" + pathsep + "chemsep1.xml"
-                Catch ex As Exception
-                    App.WriteToConsole(ex.ToString, 1)
-                Finally
-                    If Not File.Exists(cspath) Then
-                        cspath = My.Application.Info.DirectoryPath & pathsep & "chemsepdb" & pathsep & "chemsep1.xml"
-                        If File.Exists(cspath) Then My.Settings.ChemSepDatabasePath = cspath
-                    Else
-                        My.Settings.ChemSepDatabasePath = cspath
-                    End If
-                End Try
-
-                'load chempsep database if existent
-
-                Try
-                    If File.Exists(My.Settings.ChemSepDatabasePath) Then Me.LoadCSDB(My.Settings.ChemSepDatabasePath)
-                Catch ex As Exception
-                    App.WriteToConsole(ex.ToString, 1)
-                End Try
-
-                'load DWSIM XML database
-
-                Try
-                    Me.LoadDWSIMDB(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "databases" & pathsep & "dwsim.xml")
-                Catch ex As Exception
-                    App.WriteToConsole(ex.ToString, 1)
-                End Try
-
-                'load user databases
-
-                If Not My.Settings.UserDatabases Is Nothing Then
-                    For Each fpath As String In My.Settings.UserDatabases
-                        Try
-                            Dim componentes As Interfaces.ICompoundConstantProperties()
-                            componentes = DWSIM.Databases.UserDB.ReadComps(fpath)
-                            If componentes.Length > 0 Then
-                                If My.Settings.ReplaceComps Then
-                                    For Each c As Interfaces.ICompoundConstantProperties In componentes
-                                        If Not _availablecomps.ContainsKey(c.Name) Then
-                                            _availablecomps.Add(c.Name, c)
-                                        Else
-                                            _availablecomps(c.Name) = c
-                                        End If
-                                    Next
-                                Else
-                                    For Each c As Interfaces.ICompoundConstantProperties In componentes
-                                        If Not _availablecomps.ContainsKey(c.Name) Then
-                                            _availablecomps.Add(c.Name, c)
-                                        End If
-                                    Next
-                                End If
-                            End If
-                        Catch ex As Exception
-                            MsgBox(ex.ToString)
-                        End Try
-                    Next
-                End If
 
             End If
 
@@ -364,7 +284,7 @@ Namespace PropertyPackages
                     Return _flashalgorithm
                 Else
                     If _flashalgorithm = FlashMethod.GlobalSetting Then
-                        If Flowsheet Is Nothing Then
+                        If App.Flowsheet Is Nothing Then
                             Return FlashMethod.DWSIMDefault
                         Else
                             Return App.Flowsheet.FlowsheetOptions.PropertyPackageFlashAlgorithm
@@ -560,11 +480,11 @@ Namespace PropertyPackages
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property CurrentMaterialStream() As MaterialStream
+        Public Property CurrentMaterialStream() As Interfaces.IMaterialStream
             Get
                 Return m_ms
             End Get
-            Set(ByVal MatStr As MaterialStream)
+            Set(ByVal MatStr As Interfaces.IMaterialStream)
                 m_ms = MatStr
             End Set
         End Property
@@ -949,7 +869,7 @@ Namespace PropertyPackages
             Dim T As Double
 
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
         End Sub
 
@@ -4059,9 +3979,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         Public Sub DW_ZerarTwoPhaseProps(ByVal Phase1 As Phase, ByVal Phase2 As Phase)
 
-            Me.CurrentMaterialStream.Phases(0).Properties2.kvalue = Nothing
-            Me.CurrentMaterialStream.Phases(0).Properties2.logKvalue = Nothing
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Nothing
+            Me.CurrentMaterialStream.Phases(0).Properties.kvalue = Nothing
+            Me.CurrentMaterialStream.Phases(0).Properties.logKvalue = Nothing
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Nothing
 
         End Sub
 
@@ -4895,6 +4815,7 @@ Final3:
         Public Overridable Function AUX_SURFTM(ByVal T As Double) As Double
 
             Dim val As Double = 0
+            Dim tmpval As Double = 0.0#
             Dim nbp As Double
             Dim subst As Interfaces.ICompound
             Dim ftotal As Double = 1
@@ -4903,20 +4824,20 @@ Final3:
                 If T / subst.ConstantProperties.Critical_Temperature < 1 Then
                     With subst.ConstantProperties
                         If .SurfaceTensionEquation <> "" And .SurfaceTensionEquation <> "0" And Not .IsIon And Not .IsSalt Then
-                            subst.TDProperties.surfaceTension = Me.CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
+                            tmpval = Me.CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
                         ElseIf .IsIon Or .IsSalt Then
-                            subst.TDProperties.surfaceTension = 0.0#
+                            tmpval = 0.0#
                         Else
                             nbp = subst.ConstantProperties.Normal_Boiling_Point
                             If nbp = 0 Then nbp = 0.7 * subst.ConstantProperties.Critical_Temperature
-                            subst.TDProperties.surfaceTension = Auxiliary.PROPS.sigma_bb(T, nbp, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
+                            tmpval = Auxiliary.PROPS.sigma_bb(T, nbp, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
                         End If
                     End With
                 Else
-                    subst.TDProperties.surfaceTension = 0
+                    tmpval = 0
                     ftotal -= subst.MoleFraction.GetValueOrDefault
                 End If
-                val += subst.MoleFraction.GetValueOrDefault * subst.TDProperties.surfaceTension.GetValueOrDefault / ftotal
+                val += subst.MoleFraction.GetValueOrDefault * tmpval / ftotal
             Next
 
             Return val
@@ -6791,7 +6712,7 @@ Final3:
         ''' coefficients, use “Pure” CalcType.</param>
         ''' <remarks></remarks>
         Public Overridable Sub CalcProp(ByVal materialObject As Object, ByVal props As Object, ByVal phases As Object, ByVal calcType As String) Implements CapeOpen.ICapeThermoPropertyPackage.CalcProp
-            Dim mymat As MaterialStream = materialObject
+            Dim mymat As Interfaces.IMaterialStream = materialObject
             Me.CurrentMaterialStream = mymat
             Dim ph As String() = phases
             For Each f As String In ph
@@ -6819,7 +6740,7 @@ Final3:
         ''' <remarks></remarks>
         Public Overridable Function GetComponentConstant(ByVal materialObject As Object, ByVal props As Object) As Object Implements CapeOpen.ICapeThermoPropertyPackage.GetComponentConstant
             Dim vals As New ArrayList
-            Dim mymat As MaterialStream = materialObject
+            Dim mymat As Interfaces.IMaterialStream = materialObject
             For Each c As Interfaces.ICompound In mymat.Phases(0).Compounds.Values
                 For Each p As String In props
                     Select Case p.ToLower
@@ -7832,19 +7753,19 @@ Final3:
                             End Select
                         Case "idealgasheatcapacity"
                             If f = 1 Then
-                                res.Add(Me.CurrentMaterialStream.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Liquid, Me.CurrentMaterialStream.Phases(0).Properties.temperature * 1000))
+                                res.Add(Me.AUX_CPm(PropertyPackages.Phase.Liquid, Me.CurrentMaterialStream.Phases(0).Properties.temperature * 1000))
                             ElseIf f = 2 Then
-                                res.Add(Me.CurrentMaterialStream.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Me.CurrentMaterialStream.Phases(0).Properties.temperature * 1000))
+                                res.Add(Me.AUX_CPm(PropertyPackages.Phase.Vapor, Me.CurrentMaterialStream.Phases(0).Properties.temperature * 1000))
                             Else
-                                res.Add(Me.CurrentMaterialStream.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Solid, Me.CurrentMaterialStream.Phases(0).Properties.temperature * 1000))
+                                res.Add(Me.AUX_CPm(PropertyPackages.Phase.Solid, Me.CurrentMaterialStream.Phases(0).Properties.temperature * 1000))
                             End If
                         Case "idealgasenthalpy"
                             If f = 1 Then
-                                res.Add(Me.CurrentMaterialStream.PropertyPackage.RET_Hid(298.15, Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault * 1000, PropertyPackages.Phase.Liquid))
+                                res.Add(Me.RET_Hid(298.15, Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault * 1000, PropertyPackages.Phase.Liquid))
                             ElseIf f = 2 Then
-                                res.Add(Me.CurrentMaterialStream.PropertyPackage.RET_Hid(298.15, Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault * 1000, PropertyPackages.Phase.Vapor))
+                                res.Add(Me.RET_Hid(298.15, Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault * 1000, PropertyPackages.Phase.Vapor))
                             Else
-                                res.Add(Me.CurrentMaterialStream.PropertyPackage.RET_Hid(298.15, Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault * 1000, PropertyPackages.Phase.Solid))
+                                res.Add(Me.RET_Hid(298.15, Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault * 1000, PropertyPackages.Phase.Solid))
                             End If
                         Case "excessenthalpy"
                             Select Case basis
@@ -8089,7 +8010,7 @@ Final3:
                                 res.Add(Me.CurrentMaterialStream.Phases(0).Compounds(c).lnKvalue)
                             Next
                         Case "surfacetension"
-                            res.Add(Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension.GetValueOrDefault)
+                            res.Add(Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension.GetValueOrDefault)
                         Case Else
                             Dim ex = New CapeOpen.CapeThrmPropertyNotAvailableException
                             Dim hcode As Integer = 0
@@ -8456,7 +8377,7 @@ Final3:
 
             If App.CAPEOPENMode Then
 
-                Dim ms As MaterialStream = Me.CurrentMaterialStream
+                Dim ms As Interfaces.IMaterialStream = Me.CurrentMaterialStream
                 Dim mo As ICapeThermoMaterial = _como
 
                 Dim vok As Boolean = False
@@ -8670,7 +8591,7 @@ Final3:
             End If
             If App.CAPEOPENMode Then
                 _como = material
-                If TryCast(material, MaterialStream) Is Nothing Then
+                If TryCast(material, Interfaces.IMaterialStream) Is Nothing Then
                     Me.CurrentMaterialStream = COMaterialtoDWMaterial(material)
                 Else
                     Me.CurrentMaterialStream = material
@@ -8708,15 +8629,9 @@ Final3:
         ''' <param name="material">The Material Object to convert from</param>
         ''' <returns>A DWSIM Material Stream</returns>
         ''' <remarks>This function is called by SetMaterial when DWSIM Property Packages are working in outside environments (CAPE-OPEN COSEs) like COCO/COFE.</remarks>
-        Public Function COMaterialtoDWMaterial(ByVal material As Object) As MaterialStream
+        Public Function COMaterialtoDWMaterial(ByVal material As Object) As Interfaces.IMaterialStream
 
-            Dim ms As New MaterialStream(CType(material, ICapeIdentification).ComponentName, "")
-            For Each phase In ms.Phases.Values
-                For Each tmpcomp As Interfaces.ICompoundConstantProperties In _selectedcomps.Values
-                    phase.Compounds.Add(tmpcomp.Name, New Interfaces.ICompound(tmpcomp.Name, ""))
-                    phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
-                Next
-            Next
+            Dim ms As Interfaces.IMaterialStream = DirectCast(App.Flowsheet, CapeOpen.ICapeMaterialTemplateSystem).CreateMaterialTemplate(CType(material, ICapeIdentification).ComponentName)
 
             'transfer values
 

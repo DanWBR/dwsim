@@ -20,7 +20,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Math
 Imports System.Xml.Linq
 Imports System.Linq
-Imports DWSIM.Thermodynamics.BaseClasses
+
 Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.Thermodynamics.MathEx.Common
 Imports Ciloci.Flee
@@ -356,7 +356,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 For Each rxid As String In Me.Reactions
                     rx = App.Flowsheet.Reactions(rxid)
                     j = 0
-                    For Each comp As ReactionStoichBase In rx.Components.Values
+                    For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
                         If Not Me.ComponentIDs.Contains(comp.CompName) Then
                             Me.ComponentIDs.Add(comp.CompName)
                             Me.ComponentConversions.Add(comp.CompName, 0)
@@ -414,7 +414,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 For Each rxid As String In Me.Reactions
                     rx = App.Flowsheet.Reactions(rxid)
                     j = 0
-                    For Each comp As ReactionStoichBase In rx.Components.Values
+                    For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
                         var1 = -N0(comp.CompName) / comp.StoichCoeff
                         If j = 0 Then
                             lbound(i) = 0.0#
@@ -646,7 +646,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To Me.Reactions.Count - 1
                 prod(i) = 1
                 For Each s As String In Me.ComponentIDs
-                    With proppack.CurrentMaterialStream.App.Flowsheet.FlowsheetOptions.Reactions(Me.Reactions(i))
+                    With App.Flowsheet.Reactions(Me.Reactions(i))
                         If .Components.ContainsKey(s) Then
                             If .Components(s).StoichCoeff > 0 Then
                                 For j = 0 To nc
@@ -664,7 +664,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim pen_val As Double = ReturnPenaltyValue()
 
             For i = 0 To Me.Reactions.Count - 1
-                With proppack.CurrentMaterialStream.App.Flowsheet.FlowsheetOptions.Reactions(Me.Reactions(i))
+                With App.Flowsheet.Reactions(Me.Reactions(i))
                     f(i) = Log(prod(i)) - Log(.ConstantKeqValue)
                     If Double.IsNaN(f(i)) Or Double.IsInfinity(f(i)) Or pen_val <> 0.0# Then
                         f(i) = pen_val ^ 2

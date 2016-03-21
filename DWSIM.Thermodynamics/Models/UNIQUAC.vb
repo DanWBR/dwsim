@@ -95,7 +95,7 @@ Namespace PropertyPackages.Auxiliary
             uniquacipc = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "uniquac.dat")
             uniquacipc2 = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "uniquacip.dat")
 
-            Dim csdb As New Databases.ChemSep
+            Dim csdb As New ChemSepHelper.ChemSepIDConverter
 
             'load UNIQUAC.DAT database interactions
             For Each uniquacip In uniquacipc

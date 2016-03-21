@@ -42,7 +42,7 @@ Namespace PropertyPackages.Auxiliary
             Dim fh1 As New FileHelperEngine(Of PR_IPData)
             srkipc = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "srk_ip.dat")
 
-            Dim csdb As New Databases.ChemSep
+            Dim csdb As New ChemSepHelper.ChemSepIDConverter
             For Each srkip In srkipc
                 If Me.InteractionParameters.ContainsKey(csdb.GetDWSIMName(srkip.ID1)) Then
                     If Me.InteractionParameters(csdb.GetDWSIMName(srkip.ID1)).ContainsKey(csdb.GetDWSIMName(srkip.ID2)) Then

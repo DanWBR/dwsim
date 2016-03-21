@@ -19,7 +19,7 @@
 Imports System.Math
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.PropertyPackages.ThermoPlugs
-Imports DWSIM.Thermodynamics.BaseClasses
+
 Imports System.Linq
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms

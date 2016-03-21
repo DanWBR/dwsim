@@ -21,7 +21,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.Thermodynamics.MathEx
 Imports System.Linq
-Imports DWSIM.Thermodynamics.BaseClasses
+
 
 Namespace PropertyPackages
 
@@ -203,7 +203,7 @@ Namespace PropertyPackages
                             result = bop.VaporDensity(T, P, bof.SGG)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                         Case "surfacetension"
-                            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                         Case Else
                             Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                             ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -255,7 +255,7 @@ Namespace PropertyPackages
                             result = bop.LiquidDensity(T, P, bof.SGO, bof.SGG, bof.GOR, bof.BSW)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                         Case "surfacetension"
-                            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                         Case Else
                             Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                             ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -414,11 +414,11 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             result = 1
-            Me.CurrentMaterialStream.Phases(0).Properties2.kvalue = result
+            Me.CurrentMaterialStream.Phases(0).Properties.kvalue = result
             result = 0
-            Me.CurrentMaterialStream.Phases(0).Properties2.logKvalue = result
+            Me.CurrentMaterialStream.Phases(0).Properties.logKvalue = result
 
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = DW_CalcTensaoSuperficial_ISOL(Phase.Liquid1, T, P)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = DW_CalcTensaoSuperficial_ISOL(Phase.Liquid1, T, P)
 
         End Sub
 

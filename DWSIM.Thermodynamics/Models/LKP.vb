@@ -69,7 +69,7 @@ Namespace PropertyPackages.Auxiliary
             Dim fh1 As New FileHelperEngine(Of LKP_IPData)
             lkpipc = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "lkp_ip.dat")
 
-            Dim csdb As New Databases.ChemSep
+            Dim csdb As New ChemSepHelper.ChemSepIDConverter
             For Each lkpip In lkpipc
                 If Me.InteractionParameters.ContainsKey((lkpip.ID1)) Then
                     If Me.InteractionParameters((lkpip.ID1)).ContainsKey((lkpip.ID2)) Then

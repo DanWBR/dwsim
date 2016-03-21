@@ -20,7 +20,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Math
 Imports System.Xml.Linq
 Imports System.Linq
-Imports DWSIM.Thermodynamics.BaseClasses
+
 Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.Thermodynamics.MathEx.Common
 Imports Ciloci.Flee
@@ -209,7 +209,7 @@ Namespace PropertyPackages
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Case "surfacetension"
-                    Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                    Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                 Case "osmoticcoefficient"
                     Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
                     For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values

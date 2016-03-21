@@ -68,7 +68,7 @@ Namespace PropertyPackages.Auxiliary
             Dim fh1 As New FileHelperEngine(Of PR_IPData)
             pripc = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "pr_ip.dat")
 
-            Dim csdb As New Databases.ChemSep
+            Dim csdb As New ChemSepHelper.ChemSepIDConverter
             For Each prip In pripc
                 If Me.InteractionParameters.ContainsKey(csdb.GetCSName(prip.ID1)) Then
                     If Me.InteractionParameters(csdb.GetCSName(prip.ID1)).ContainsKey(csdb.GetCSName(prip.ID2)) Then

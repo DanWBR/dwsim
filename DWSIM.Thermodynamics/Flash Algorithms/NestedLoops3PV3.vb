@@ -18,7 +18,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
-Imports DWSIM.DWSIM.SimulationObjects
+
 Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.Thermodynamics.MathEx.Common
 

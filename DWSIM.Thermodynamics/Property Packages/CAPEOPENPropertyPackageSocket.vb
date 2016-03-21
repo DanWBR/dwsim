@@ -16,7 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.Thermodynamics.BaseClasses
+
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports System.IO
@@ -734,10 +734,10 @@ Namespace PropertyPackages
 
             If _coversion = "1.0" Then
                 CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"surfaceTension"}, New String() {phase}, "Mixture")
-                Return Me.CurrentMaterialStream.Phases(Phase1).Properties2.surfaceTension.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.surfaceTension.GetValueOrDefault
             Else
                 CType(_copp, ICapeThermoPropertyRoutine).CalcTwoPhaseProp(New String() {"surfaceTension"}, New String() {"VaporLiquid"})
-                Return Me.CurrentMaterialStream.Phases(Phase1).Properties2.surfaceTension.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.surfaceTension.GetValueOrDefault
             End If
 
             Me.CurrentMaterialStream.Phases(0).Properties.temperature = tant
@@ -1010,7 +1010,7 @@ Namespace PropertyPackages
 
             Dim complist As Object = Nothing
             Me.GetCompoundList(complist, Nothing, Nothing, Nothing, Nothing, Nothing)
-            Dim mw = Me.CurrentMaterialStream.GetCompoundConstant(New String() {"molecularWeight"}, complist)
+            Dim mw = DirectCast(Me.CurrentMaterialStream, ICapeThermoCompounds).GetCompoundConstant(New String() {"molecularWeight"}, complist)
             Dim val As Double = 0.0#
             Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
@@ -1115,7 +1115,7 @@ Namespace PropertyPackages
 
             Dim complist As Object = Nothing
             Me.GetCompoundList(complist, Nothing, Nothing, Nothing, Nothing, Nothing)
-            Dim mw = Me.CurrentMaterialStream.GetCompoundConstant(New String() {"molecularWeight"}, complist)
+            Dim mw = DirectCast(Me.CurrentMaterialStream, ICapeThermoCompounds).GetCompoundConstant(New String() {"molecularWeight"}, complist)
 
             Dim Vw(UBound(Vz)) As Double
             Dim mass_div_mm As Double

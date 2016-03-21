@@ -17,12 +17,12 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
-Imports DWSIM.DWSIM.SimulationObjects
+
 Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.Thermodynamics.MathEx.Common
 
 Imports System.Threading.Tasks
-Imports DWSIM.Thermodynamics.BaseClasses
+
 Imports System.Linq
 Imports System.IO
 
@@ -43,19 +43,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Property Reactions As List(Of Interfaces.IReaction)
 
-        Sub New()
+        Sub New(rx As List(Of Interfaces.IReaction))
 
-            Reactions = New List(Of Interfaces.IReaction)
 
-            Dim rfile As String = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "reactions" & Path.DirectorySeparatorChar & "Sour Water Reaction Set.dwrxm"
+            'Dim rfile As String = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "reactions" & Path.DirectorySeparatorChar & "Sour Water Reaction Set.dwrxm"
 
-            Dim xdoc As XDocument = XDocument.Load(rfile)
-            Dim data As List(Of XElement) = xdoc.Element("DWSIM_Reaction_Data").Elements.ToList
-            For Each xel As XElement In data
-                Dim obj As Interfaces.IReaction
-                obj.LoadData(xel.Elements.ToList)
-                Reactions.Add(obj)
-            Next
+            'Dim xdoc As XDocument = XDocument.Load(rfile)
+            'Dim data As List(Of XElement) = xdoc.Element("DWSIM_Reaction_Data").Elements.ToList
+            'For Each xel As XElement In data
+            '    Dim obj As Interfaces.IReaction
+            '    DirectCast(obj, XMLSerializer.Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
+            '    Reactions.Add(obj)
+            'Next
+
+            Reactions = rx
 
             '   i   Name                            Equation
             '

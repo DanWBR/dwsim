@@ -112,7 +112,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore()> Public Overridable ReadOnly Property Phases() As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Phase)
+        <Xml.Serialization.XmlIgnore()> Public Overridable ReadOnly Property Phases() As Dictionary(Of Integer, DWSIM.Thermodynamics.BaseClasses.Phase)
             Get
                 Throw New NotImplementedException
             End Get
