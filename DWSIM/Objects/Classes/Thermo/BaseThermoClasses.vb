@@ -34,11 +34,9 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization, CapeOpen.ICapeIdentification, Interfaces.ICompound
 
-        Public TDProperties As New TemperatureDependentProperties
-        Public PDProperties As New PressureDependentProperties
-
         Public Sub New(ByVal name As String, ByVal description As String)
 
+            Me.Name = name
             Me.ComponentName = name
             Me.ComponentDescription = description
 
@@ -54,39 +52,48 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         End Function
 
-        Public Property ComponentDescription As String Implements CapeOpen.ICapeIdentification.ComponentDescription
+        Public Property ComponentDescription As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription
 
-        Public Property ComponentName As String Implements CapeOpen.ICapeIdentification.ComponentName
+        Public Property ComponentName As String = "" Implements CapeOpen.ICapeIdentification.ComponentName
 
-        Public Property ActivityCoeff As Double? Implements Interfaces.ICompound.ActivityCoeff
+        Public Property ActivityCoeff As Double? = 0.0# Implements Interfaces.ICompound.ActivityCoeff
 
         Public Property PetroleumFraction As Boolean Implements Interfaces.ICompound.PetroleumFraction
 
-        Public Property MassFraction As Double? Implements Interfaces.ICompound.MassFraction
+        Public Property MassFraction As Double? = 0.0# Implements Interfaces.ICompound.MassFraction
 
-        Public Property MoleFraction As Double? Implements Interfaces.ICompound.MoleFraction
+        Public Property MoleFraction As Double? = 0.0# Implements Interfaces.ICompound.MoleFraction
 
-        Public Property FugacityCoeff As Double? Implements Interfaces.ICompound.FugacityCoeff
+        Public Property FugacityCoeff As Double? = 0.0# Implements Interfaces.ICompound.FugacityCoeff
 
-        Public Property Kvalue As Double Implements Interfaces.ICompound.Kvalue
+        Public Property Kvalue As Double = 0.0# Implements Interfaces.ICompound.Kvalue
 
-        Public Property lnKvalue As Double Implements Interfaces.ICompound.lnKvalue
+        Public Property lnKvalue As Double = 0.0# Implements Interfaces.ICompound.lnKvalue
 
-        Public Property MassFlow As Double? Implements Interfaces.ICompound.MassFlow
+        Public Property MassFlow As Double? = 0.0# Implements Interfaces.ICompound.MassFlow
 
-        Public Property MolarFlow As Double? Implements Interfaces.ICompound.MolarFlow
+        Public Property MolarFlow As Double? = 0.0# Implements Interfaces.ICompound.MolarFlow
 
-        Public Property Name As String Implements Interfaces.ICompound.Name
+        Public Property Name As String = "" Implements Interfaces.ICompound.Name
 
-        Public Property PartialPressure As Double? Implements Interfaces.ICompound.PartialPressure
+        Public Property PartialPressure As Double? = 0.0# Implements Interfaces.ICompound.PartialPressure
 
-        Public Property PartialVolume As Double? Implements Interfaces.ICompound.PartialVolume
+        Public Property PartialVolume As Double? = 0.0# Implements Interfaces.ICompound.PartialVolume
 
-        Public Property VolumetricFlow As Double? Implements Interfaces.ICompound.VolumetricFlow
+        Public Property VolumetricFlow As Double? = 0.0# Implements Interfaces.ICompound.VolumetricFlow
 
-        Public Property VolumetricFraction As Double? Implements Interfaces.ICompound.VolumetricFraction
+        Public Property VolumetricFraction As Double? = 0.0# Implements Interfaces.ICompound.VolumetricFraction
 
-        Public Property ConstantProperties As Interfaces.ICompoundConstantProperties Implements Interfaces.ICompound.ConstantProperties
+        Public Property ConstantProperties As New ConstantProperties
+
+        Public Property ConstantProperties1 As Interfaces.ICompoundConstantProperties Implements Interfaces.ICompound.ConstantProperties
+            Get
+                Return ConstantProperties
+            End Get
+            Set(value As Interfaces.ICompoundConstantProperties)
+                ConstantProperties = value
+            End Set
+        End Property
 
     End Class
 
@@ -103,16 +110,6 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Me.Name = name
             Me.ComponentName = name
             Me.ComponentDescription = description
-            Me.Compounds = New Dictionary(Of String, Interfaces.ICompound)
-
-        End Sub
-
-        Public Sub New(ByVal name As String, ByVal description As String, ByVal Compounds As Dictionary(Of String, Interfaces.ICompound))
-
-            Me.Name = name
-            Me.ComponentName = name
-            Me.ComponentDescription = description
-            Me.Compounds = Compounds
 
         End Sub
 
@@ -167,7 +164,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Public Property ComponentName As String = "" Implements Interfaces.IPhase.ComponentName
 
-        Public Property Compounds As Dictionary(Of String, Interfaces.ICompound) Implements Interfaces.IPhase.Compounds
+        Public Property Compounds As Dictionary(Of String, Interfaces.ICompound) = New Dictionary(Of String, Interfaces.ICompound) Implements Interfaces.IPhase.Compounds
 
         Public Property Name As String = "" Implements Interfaces.IPhase.Name
 
@@ -1428,98 +1425,6 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
 #Region "Subclasses"
 
-    <System.Serializable()> Public Class TemperatureDependentProperties
-
-        Protected tdp_idealGasHeatCapacity As Nullable(Of Double) = Nothing
-        Protected tdp_surfaceTension As Nullable(Of Double) = Nothing
-        Protected tdp_thermalConductivityOfLiquid As Nullable(Of Double) = Nothing
-        Protected tdp_thermalConductivityOfVapor As Nullable(Of Double) = Nothing
-        Protected tdp_vaporPressure As Nullable(Of Double) = Nothing
-        Protected tdp_viscosityOfLiquid As Nullable(Of Double) = Nothing
-        Protected tdp_viscosityOfVapor As Nullable(Of Double) = Nothing
-
-        Public Property idealGasHeatCapacity() As Nullable(Of Double)
-            Get
-                Return tdp_idealGasHeatCapacity
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                tdp_idealGasHeatCapacity = value
-            End Set
-        End Property
-        Public Property thermalConductivityOfLiquid() As Nullable(Of Double)
-            Get
-                Return tdp_thermalConductivityOfLiquid
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                tdp_thermalConductivityOfLiquid = value
-            End Set
-        End Property
-        Public Property thermalConductivityOfVapor() As Nullable(Of Double)
-            Get
-                Return tdp_thermalConductivityOfVapor
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                tdp_thermalConductivityOfVapor = value
-            End Set
-        End Property
-        Public Property vaporPressure() As Nullable(Of Double)
-            Get
-                Return tdp_vaporPressure
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                tdp_vaporPressure = value
-            End Set
-        End Property
-        Public Property viscosityOfLiquid() As Nullable(Of Double)
-            Get
-                Return tdp_viscosityOfLiquid
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                tdp_viscosityOfLiquid = value
-            End Set
-        End Property
-        Public Property viscosityOfVapor() As Nullable(Of Double)
-            Get
-                Return tdp_viscosityOfVapor
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                tdp_viscosityOfVapor = value
-            End Set
-        End Property
-        Public Property surfaceTension() As Nullable(Of Double)
-            Get
-                Return tdp_surfaceTension
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                tdp_surfaceTension = value
-            End Set
-        End Property
-
-    End Class
-
-    <System.Serializable()> Public Class PressureDependentProperties
-
-        Protected pdp_boilingPointTemperature As Nullable(Of Double) = Nothing
-        Public Property boilingPointTemperature() As Nullable(Of Double)
-            Get
-                Return pdp_boilingPointTemperature
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                pdp_boilingPointTemperature = value
-            End Set
-        End Property
-        Protected pdp_meltingTemperature As Nullable(Of Double) = Nothing
-        Public Property meltingTemperature() As Nullable(Of Double)
-            Get
-                Return pdp_meltingTemperature
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                pdp_meltingTemperature = value
-            End Set
-        End Property
-
-    End Class
-
     <System.Serializable()> Public Class PhaseProperties
 
         Implements Interfaces.IPhaseProperties
@@ -1702,7 +1607,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
 
-            XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
             Dim unif As New SimulationObjects.PropertyPackages.Auxiliary.Unifac
             Dim modf As New SimulationObjects.PropertyPackages.Auxiliary.Modfac
@@ -1742,7 +1647,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
 
-            Dim xelements As List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me, True)
+            Dim xelements As List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
             With xelements

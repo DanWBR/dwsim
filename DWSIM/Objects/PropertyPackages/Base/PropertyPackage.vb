@@ -6512,8 +6512,9 @@ Final3:
 
         Public Overridable Function AUX_SURFTM(ByVal T As Double) As Double
 
-            Dim val As Double = 0
+            Dim val As Double = 0.0#
             Dim nbp As Double
+            Dim tmpval As Double = 0.0#
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim ftotal As Double = 1
 
@@ -6521,20 +6522,20 @@ Final3:
                 If T / subst.ConstantProperties.Critical_Temperature < 1 Then
                     With subst.ConstantProperties
                         If .SurfaceTensionEquation <> "" And .SurfaceTensionEquation <> "0" And Not .IsIon And Not .IsSalt Then
-                            subst.TDProperties.surfaceTension = Me.CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
+                            tmpval = Me.CalcCSTDepProp(.SurfaceTensionEquation, .Surface_Tension_Const_A, .Surface_Tension_Const_B, .Surface_Tension_Const_C, .Surface_Tension_Const_D, .Surface_Tension_Const_E, T, .Critical_Temperature)
                         ElseIf .IsIon Or .IsSalt Then
-                            subst.TDProperties.surfaceTension = 0.0#
+                            tmpval = 0.0#
                         Else
                             nbp = subst.ConstantProperties.Normal_Boiling_Point
                             If nbp = 0 Then nbp = 0.7 * subst.ConstantProperties.Critical_Temperature
-                            subst.TDProperties.surfaceTension = Auxiliary.PROPS.sigma_bb(T, nbp, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
+                            tmpval = Auxiliary.PROPS.sigma_bb(T, nbp, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
                         End If
                     End With
                 Else
-                    subst.TDProperties.surfaceTension = 0
+                    tmpval = 0.0#
                     ftotal -= subst.MoleFraction.GetValueOrDefault
                 End If
-                val += subst.MoleFraction.GetValueOrDefault * subst.TDProperties.surfaceTension.GetValueOrDefault / ftotal
+                val += subst.MoleFraction.GetValueOrDefault * tmpval / ftotal
             Next
 
             Return val

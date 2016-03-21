@@ -1285,6 +1285,9 @@ Public Class FormMain
         If xel.Name = "Nome" Then xel.Name = "Name"
         If xel.Name = "Descricao" Then xel.Name = "Description"
         If xel.Name = "Tipo" Then xel.Name = "Type"
+        If xel.Name = "FracaoMolar" Then xel.Name = "MoleFraction"
+        If xel.Name = "FracaoMassica" Then xel.Name = "MassFraction"
+        If xel.Name = "FracaoDePetroleo" Then xel.Name = "PetroleumFraction"
 
     End Sub
 
