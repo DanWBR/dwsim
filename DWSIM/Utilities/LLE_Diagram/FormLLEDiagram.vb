@@ -319,9 +319,9 @@ Public Class FormLLEDiagram
         Dim Ko As New Konode
 
         'calculate compositions
-        mat.Phases(0).Compounds(Names(cbComp1.SelectedIndex)).FracaoMolar = Pt.X
-        mat.Phases(0).Compounds(Names(cbComp2.SelectedIndex)).FracaoMolar = Pt.Y
-        mat.Phases(0).Compounds(Names(cbComp3.SelectedIndex)).FracaoMolar = 1 - Pt.X - Pt.Y
+        mat.Phases(0).Compounds(Names(cbComp1.SelectedIndex)).MoleFraction = Pt.X
+        mat.Phases(0).Compounds(Names(cbComp2.SelectedIndex)).MoleFraction = Pt.Y
+        mat.Phases(0).Compounds(Names(cbComp3.SelectedIndex)).MoleFraction = 1 - Pt.X - Pt.Y
 
         If My.Settings.EnableGPUProcessing Then
             DWSIM.App.InitComputeDevice()
@@ -342,15 +342,15 @@ Public Class FormLLEDiagram
 
         'added .GetValueOrDefault to avoid null object errors
 
-        Ko.X11 = mat.Phases(3).Compounds(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
-        Ko.X12 = mat.Phases(3).Compounds(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
+        Ko.X11 = mat.Phases(3).Compounds(Names(cbComp1.SelectedIndex)).MoleFraction.GetValueOrDefault
+        Ko.X12 = mat.Phases(3).Compounds(Names(cbComp2.SelectedIndex)).MoleFraction.GetValueOrDefault
 
         If mat.Phases(4).Properties.molarfraction > 0 Then
-            Ko.X21 = mat.Phases(4).Compounds(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
-            Ko.X22 = mat.Phases(4).Compounds(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
+            Ko.X21 = mat.Phases(4).Compounds(Names(cbComp1.SelectedIndex)).MoleFraction.GetValueOrDefault
+            Ko.X22 = mat.Phases(4).Compounds(Names(cbComp2.SelectedIndex)).MoleFraction.GetValueOrDefault
         Else
-            Ko.X21 = mat.Phases(3).Compounds(Names(cbComp1.SelectedIndex)).FracaoMolar.GetValueOrDefault
-            Ko.X22 = mat.Phases(3).Compounds(Names(cbComp2.SelectedIndex)).FracaoMolar.GetValueOrDefault
+            Ko.X21 = mat.Phases(3).Compounds(Names(cbComp1.SelectedIndex)).MoleFraction.GetValueOrDefault
+            Ko.X22 = mat.Phases(3).Compounds(Names(cbComp2.SelectedIndex)).MoleFraction.GetValueOrDefault
         End If
 
         Return Ko

@@ -158,7 +158,7 @@ Public Class Form1
                 Dim i As Integer = 0
                 Dim iw As Integer = -1
                 For Each c As Compound In dobj.Phases(0).Compounds.Values
-                    vx(i) = c.FracaoMolar
+                    vx(i) = c.MoleFraction
                     If c.ConstantProperties.CAS_Number = "7732-18-5" Then
                         iw = i
                     End If
@@ -288,22 +288,22 @@ Public Class Form1
                 'calculation of heating values at various conditions
                 For Each c As Compound In dobj.Phases(0).Compounds.Values
                     If dmc.ContainsKey(c.ConstantProperties.CAS_Number) Then
-                        hhv25m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup25 * 1000
-                        hhv20m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup20 * 1000
-                        hhv15m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup15 * 1000
-                        hhv0m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup0 * 1000
-                        lhv25m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).inf25 * 1000
-                        lhv20m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).inf20 * 1000
-                        lhv15m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).inf15 * 1000
-                        lhv0m += c.FracaoMolar * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).inf0 * 1000
+                        hhv25m += c.MoleFraction * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup25 * 1000
+                        hhv20m += c.MoleFraction * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup20 * 1000
+                        hhv15m += c.MoleFraction * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup15 * 1000
+                        hhv0m += c.MoleFraction * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).sup0 * 1000
+                        lhv25m += c.MoleFraction * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).inf25 * 1000
+                        lhv20m += c.MoleFraction * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).inf20 * 1000
+                        lhv15m += c.MoleFraction * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).inf15 * 1000
+                        lhv0m += c.MoleFraction * c.ConstantProperties.Molar_Weight / mw * dmc(c.ConstantProperties.CAS_Number).inf0 * 1000
                     End If
                     If dvc.ContainsKey(c.ConstantProperties.CAS_Number) Then
-                        hhv1515v += c.FracaoMolar * dvc(c.ConstantProperties.CAS_Number).sup1515 * 1000
-                        hhv00v += c.FracaoMolar * dvc(c.ConstantProperties.CAS_Number).sup00 * 1000
-                        hhv2020v += c.FracaoMolar * dvc(c.ConstantProperties.CAS_Number).sup2020 * 1000
-                        lhv1515v += c.FracaoMolar * dvc(c.ConstantProperties.CAS_Number).inf1515 * 1000
-                        lhv00v += c.FracaoMolar * dvc(c.ConstantProperties.CAS_Number).inf00 * 1000
-                        lhv2020v += c.FracaoMolar * dvc(c.ConstantProperties.CAS_Number).inf2020 * 1000
+                        hhv1515v += c.MoleFraction * dvc(c.ConstantProperties.CAS_Number).sup1515 * 1000
+                        hhv00v += c.MoleFraction * dvc(c.ConstantProperties.CAS_Number).sup00 * 1000
+                        hhv2020v += c.MoleFraction * dvc(c.ConstantProperties.CAS_Number).sup2020 * 1000
+                        lhv1515v += c.MoleFraction * dvc(c.ConstantProperties.CAS_Number).inf1515 * 1000
+                        lhv00v += c.MoleFraction * dvc(c.ConstantProperties.CAS_Number).inf00 * 1000
+                        lhv2020v += c.MoleFraction * dvc(c.ConstantProperties.CAS_Number).inf2020 * 1000
                     End If
                 Next
 
@@ -334,13 +334,13 @@ Public Class Form1
                 co2 = (From c As Compound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "124-38-9").FirstOrDefault
                 n2 = (From c As Compound In dobj.Phases(0).Compounds.Values Select c Where c.ConstantProperties.CAS_Number = "7727-37-9").FirstOrDefault
 
-                If Not c1 Is Nothing Then xc1 = c1.FracaoMolar.GetValueOrDefault
-                If Not c2 Is Nothing Then xc2 = c2.FracaoMolar.GetValueOrDefault
-                If Not c3 Is Nothing Then xc3 = c3.FracaoMolar.GetValueOrDefault
-                If Not nc4 Is Nothing Then xc4 = nc4.FracaoMolar.GetValueOrDefault
-                If Not ic4 Is Nothing Then xc4 += ic4.FracaoMolar.GetValueOrDefault
-                If Not co2 Is Nothing Then xco2 = co2.FracaoMolar.GetValueOrDefault
-                If Not n2 Is Nothing Then xn2 = n2.FracaoMolar.GetValueOrDefault
+                If Not c1 Is Nothing Then xc1 = c1.MoleFraction.GetValueOrDefault
+                If Not c2 Is Nothing Then xc2 = c2.MoleFraction.GetValueOrDefault
+                If Not c3 Is Nothing Then xc3 = c3.MoleFraction.GetValueOrDefault
+                If Not nc4 Is Nothing Then xc4 = nc4.MoleFraction.GetValueOrDefault
+                If Not ic4 Is Nothing Then xc4 += ic4.MoleFraction.GetValueOrDefault
+                If Not co2 Is Nothing Then xco2 = co2.MoleFraction.GetValueOrDefault
+                If Not n2 Is Nothing Then xn2 = n2.MoleFraction.GetValueOrDefault
 
                 mon = 137.78 * xc1 + 29.948 * xc2 - 18.193 * xc3 - 167.062 * xc4 + 181.233 * xco2 + 26.994 * xn2
                 mn = 1.445 * mon - 103.42

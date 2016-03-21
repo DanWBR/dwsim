@@ -54,17 +54,17 @@ Public Class FormConfigPP
         PrimaryGroups.Clear()
         For Each cp As ConstantProperties In _comps.Values
             If type = "UNIFAC" Or type = "UNIFACLL" Then
-                For Each ufg In cp.UNIFACGroups.Collection.Keys
+                For Each ufg In cp.UNIFACGroups.Keys
                     pg = uni.UnifGroups.Groups(Integer.Parse(ufg)).PrimGroupName
                     If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.UnifGroups.Groups(ufg).PrimaryGroup)
                 Next
             ElseIf type = "NIST-MODFAC" Then
-                For Each ufg In cp.NISTMODFACGroups.Collection.Keys
+                For Each ufg In cp.NISTMODFACGroups.Keys
                     pg = uni.ModfGroups.Groups(Integer.Parse(ufg)).MainGroupName
                     If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.ModfGroups.Groups(ufg).PrimaryGroup)
                 Next
             Else
-                For Each ufg In cp.MODFACGroups.Collection.Keys
+                For Each ufg In cp.MODFACGroups.Keys
                     pg = uni.ModfGroups.Groups(Integer.Parse(ufg)).MainGroupName
                     If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.ModfGroups.Groups(ufg).PrimaryGroup)
                 Next
@@ -167,25 +167,25 @@ Public Class FormConfigPP
             IPGrid.Item(0, k).Style.ForeColor = Color.White
             IPGrid.Item(0, k).Style.Alignment = DataGridViewContentAlignment.MiddleRight
             If type = "UNIFAC" Or type = "UNIFACLL" Then
-                If cp.UNIFACGroups.Collection.Count > 0 Then
-                    For Each ufg As String In cp.UNIFACGroups.Collection.Keys
+                If cp.UNIFACGroups.Count > 0 Then
+                    For Each ufg As String In cp.UNIFACGroups.Keys
                         l = Integer.Parse(ufg)
                         pg = uni.UnifGroups.Groups(l).PrimGroupName
                         l = PrimaryGroups.IndexOfKey(pg)
-                        IPGrid.Item(l + 1, k).Value = IPGrid.Item(l + 1, k).Value + cp.UNIFACGroups.Collection.Item(ufg)
+                        IPGrid.Item(l + 1, k).Value = IPGrid.Item(l + 1, k).Value + cp.UNIFACGroups.Item(ufg)
                     Next
                 Else
                     IPGrid.Item(0, k).Style.BackColor = Color.Yellow
                     IPGrid.Item(0, k).Style.ForeColor = Color.Black
                 End If
             ElseIf type = "MODFAC" Then
-                If cp.MODFACGroups.Collection.Count > 0 Then
-                    For Each ufg As String In cp.MODFACGroups.Collection.Keys
+                If cp.MODFACGroups.Count > 0 Then
+                    For Each ufg As String In cp.MODFACGroups.Keys
                         l = Integer.Parse(ufg)
                         pg = uni.ModfGroups.Groups(l).MainGroupName
                         l = PrimaryGroups.IndexOfKey(pg)
                         g1 = IPGrid.Item(l + 1, k).Value
-                        g2 = cp.MODFACGroups.Collection.Item(ufg)
+                        g2 = cp.MODFACGroups.Item(ufg)
                         IPGrid.Item(l + 1, k).Value = g1 + g2
                     Next
                 Else
@@ -193,13 +193,13 @@ Public Class FormConfigPP
                     IPGrid.Item(0, k).Style.ForeColor = Color.Black
                 End If
             Else 'NIST-MODFAC
-                If cp.NISTMODFACGroups.Collection.Count > 0 Then
-                    For Each ufg As String In cp.NISTMODFACGroups.Collection.Keys
+                If cp.NISTMODFACGroups.Count > 0 Then
+                    For Each ufg As String In cp.NISTMODFACGroups.Keys
                         l = Integer.Parse(ufg)
                         pg = uni.ModfGroups.Groups(l).MainGroupName
                         l = PrimaryGroups.IndexOfKey(pg)
                         g1 = IPGrid.Item(l + 1, k).Value
-                        g2 = cp.NISTMODFACGroups.Collection.Item(ufg)
+                        g2 = cp.NISTMODFACGroups.Item(ufg)
                         IPGrid.Item(l + 1, k).Value = g1 + g2
                     Next
                 Else

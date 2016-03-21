@@ -278,8 +278,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                     i += 1
                                 Next
                                 For Each comp In .Phases(0).Compounds.Values
-                                    comp.FracaoMolar = Vmol(comp.Name) / SMole
-                                    comp.FracaoMassica = Vmol(comp.Name) * comp.ConstantProperties.Molar_Weight / SMass / 1000
+                                    comp.MoleFraction = Vmol(comp.Name) / SMole
+                                    comp.MassFraction = Vmol(comp.Name) * comp.ConstantProperties.Molar_Weight / SMass / 1000
                                 Next
                                 .Phases(0).Properties.massflow = SMass
 
@@ -520,8 +520,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 i += 1
                             Next
                             For Each comp In .Phases(0).Compounds.Values
-                                comp.FracaoMolar = Vmol(comp.Name) / SMole
-                                comp.FracaoMassica = Vmol(comp.Name) * comp.ConstantProperties.Molar_Weight / SMass / 1000
+                                comp.MoleFraction = Vmol(comp.Name) / SMole
+                                comp.MassFraction = Vmol(comp.Name) * comp.ConstantProperties.Molar_Weight / SMass / 1000
                             Next
                             .Phases(0).Properties.massflow = SMass
 
@@ -606,8 +606,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                         Dim i As Integer = 0
                         For Each comp In .Phases(0).Compounds.Values
-                            comp.FracaoMolar = 0
-                            comp.FracaoMassica = 0
+                            comp.MoleFraction = 0
+                            comp.MassFraction = 0
                             i += 1
                         Next
                         .Phases(0).Properties.massflow = Nothing

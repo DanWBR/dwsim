@@ -194,7 +194,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             result = Me.m_iapws97.densW(T, P / 100000)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                         Case "surfacetension"
-                            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                         Case Else
                             Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                             ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -252,7 +252,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             result = Me.SIA.sea_density_si(salinity, T, P)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                         Case "surfacetension"
-                            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                         Case Else
                             Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                             ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -385,7 +385,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                 result = Me.SIA.sea_density_si(salinity, T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity.GetValueOrDefault / result
-                Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
             ElseIf phaseID = 1 Then
 
@@ -416,11 +416,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             result = 1
-            Me.CurrentMaterialStream.Phases(0).Properties2.kvalue = result
+            Me.CurrentMaterialStream.Phases(0).Properties.kvalue = result
             result = 0
-            Me.CurrentMaterialStream.Phases(0).Properties2.logKvalue = result
+            Me.CurrentMaterialStream.Phases(0).Properties.logKvalue = result
 
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = DW_CalcTensaoSuperficial_ISOL(Phase.Liquid1, T, P)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = DW_CalcTensaoSuperficial_ISOL(Phase.Liquid1, T, P)
 
         End Sub
 
@@ -450,7 +450,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             If water Is Nothing Then Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             If salt Is Nothing Then Throw New Exception("Salt compound not found. Please setup your simulation accordingly.")
 
-            Dim salinity As Double = salt.FracaoMassica.GetValueOrDefault / water.FracaoMassica.GetValueOrDefault
+            Dim salinity As Double = salt.MassFraction.GetValueOrDefault / water.MassFraction.GetValueOrDefault
 
             If Phase1 = Phase.Liquid Then
                 Return Me.SIA.sea_viscosity(salinity, T)
@@ -497,7 +497,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             If water Is Nothing Then Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             If salt Is Nothing Then Throw New Exception("Salt compound not found. Please setup your simulation accordingly.")
 
-            Dim salinity As Double = salt.FracaoMassica.GetValueOrDefault / water.FracaoMassica.GetValueOrDefault
+            Dim salinity As Double = salt.MassFraction.GetValueOrDefault / water.MassFraction.GetValueOrDefault
 
             Return Me.SIA.sea_vaporpressure(salinity, T)
 
@@ -720,7 +720,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             If water Is Nothing Then Throw New Exception("Water compound not found. Please setup your simulation accordingly.")
             If salt Is Nothing Then Throw New Exception("Salt compound not found. Please setup your simulation accordingly.")
 
-            Dim salinity As Double = salt.FracaoMassica.GetValueOrDefault / water.FracaoMassica.GetValueOrDefault
+            Dim salinity As Double = salt.MassFraction.GetValueOrDefault / water.MassFraction.GetValueOrDefault
 
             If Double.IsInfinity(salinity) Then salinity = 0.0#
 

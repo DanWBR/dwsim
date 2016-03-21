@@ -6870,9 +6870,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Fração Molar - .
         '''</summary>
-        Friend Shared ReadOnly Property FracaoMolar3() As String
+        Friend Shared ReadOnly Property MoleFraction3() As String
             Get
-                Return ResourceManager.GetString("FracaoMolar3", resourceCulture)
+                Return ResourceManager.GetString("MoleFraction3", resourceCulture)
             End Get
         End Property
         

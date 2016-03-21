@@ -1072,7 +1072,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name)
                                 mat.PropertyPackage.CurrentMaterialStream = mat
                                 For Each subst As Compound In mat.Phases(0).Compounds.Values
-                                    subst.FracaoMassica = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
+                                    subst.MassFraction = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
                                 Next
                             End If
                         Next

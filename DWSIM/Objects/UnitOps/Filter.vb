@@ -180,14 +180,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MassFlow = instr.Phases(1).Compounds(comp.Name).MassFlow * Wlout / Wlin
-                        comp.FracaoMassica = comp.MassFlow / Wlout
+                        comp.MassFraction = comp.MassFlow / Wlout
                     Next
                     mw = 0.0#
                     For Each comp In .Phases(0).Compounds.Values
-                        mw += comp.FracaoMassica / comp.ConstantProperties.Molar_Weight
+                        mw += comp.MassFraction / comp.ConstantProperties.Molar_Weight
                     Next
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = comp.FracaoMassica / comp.ConstantProperties.Molar_Weight / mw
+                        comp.MoleFraction = comp.MassFraction / comp.ConstantProperties.Molar_Weight / mw
                     Next
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight / 1000
@@ -204,14 +204,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MassFlow = instr.Phases(1).Compounds(comp.Name).MassFlow * (Wlin - Wlout) / Wlin + instr.Phases(7).Compounds(comp.Name).MassFlow
-                        comp.FracaoMassica = comp.MassFlow / Wsout
+                        comp.MassFraction = comp.MassFlow / Wsout
                     Next
                     mw = 0.0#
                     For Each comp In .Phases(0).Compounds.Values
-                        mw += comp.FracaoMassica / comp.ConstantProperties.Molar_Weight
+                        mw += comp.MassFraction / comp.ConstantProperties.Molar_Weight
                     Next
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = comp.FracaoMassica / comp.ConstantProperties.Molar_Weight / mw
+                        comp.MoleFraction = comp.MassFraction / comp.ConstantProperties.Molar_Weight / mw
                     Next
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight / 1000
@@ -285,8 +285,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = 0
-                        comp.FracaoMassica = 0
+                        comp.MoleFraction = 0
+                        comp.MassFraction = 0
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = Nothing
@@ -306,8 +306,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = 0
-                        comp.FracaoMassica = 0
+                        comp.MoleFraction = 0
+                        comp.MassFraction = 0
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = Nothing

@@ -196,7 +196,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim T As Double
 
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
         End Sub
 
@@ -310,7 +310,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Next
                 Case Phase.Vapor
                     For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                        subst.PartialVolume = subst.FracaoMolar.GetValueOrDefault * 8.314 * T / P
+                        subst.PartialVolume = subst.MoleFraction.GetValueOrDefault * 8.314 * T / P
                     Next
             End Select
 
@@ -625,11 +625,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.FracaoMolar = Vnf(i) / M
+                                subst.MoleFraction = Vnf(i) / M
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
                             Next
 
                             Dim Vx = result("LiquidPhaseMolarComposition")
@@ -640,7 +640,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMolar = Vx(i)
+                                subst.MoleFraction = Vx(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = ACL(i)
                                 subst.PartialVolume = 0
@@ -648,11 +648,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMolar = Vs(i)
+                                subst.MoleFraction = Vs(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -660,11 +660,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMolar = Vy(i)
+                                subst.MoleFraction = Vy(i)
                                 subst.FugacityCoeff = 1.0#
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -672,7 +672,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                             Next
 
                             Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xs * Me.AUX_MMM(Phase.Solid) + xv * Me.AUX_MMM(Phase.Vapor))
@@ -746,11 +746,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.FracaoMolar = Vnf(i) / M
+                                subst.MoleFraction = Vnf(i) / M
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
                             Next
 
                             Dim Vx = result("LiquidPhaseMolarComposition")
@@ -761,7 +761,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMolar = Vx(i)
+                                subst.MoleFraction = Vx(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = ACL(i)
                                 subst.PartialVolume = 0
@@ -769,11 +769,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMolar = Vs(i)
+                                subst.MoleFraction = Vs(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -781,11 +781,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMolar = Vy(i)
+                                subst.MoleFraction = Vy(i)
                                 subst.FugacityCoeff = 1.0#
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -793,7 +793,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                             Next
 
                             Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xs * Me.AUX_MMM(Phase.Solid) + xv * Me.AUX_MMM(Phase.Vapor))
@@ -840,11 +840,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.FracaoMolar = Vnf(i) / M
+                                subst.MoleFraction = Vnf(i) / M
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
                             Next
 
                             Dim Vx = result("LiquidPhaseMolarComposition")
@@ -855,7 +855,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMolar = Vx(i)
+                                subst.MoleFraction = Vx(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = ACL(i)
                                 subst.PartialVolume = 0
@@ -863,11 +863,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMolar = Vs(i)
+                                subst.MoleFraction = Vs(i)
                                 subst.FugacityCoeff = 0
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -875,11 +875,11 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMolar = Vy(i)
+                                subst.MoleFraction = Vy(i)
                                 subst.FugacityCoeff = 1.0#
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -887,7 +887,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                             Next
 
                             Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xs * Me.AUX_MMM(Phase.Solid) + xv * Me.AUX_MMM(Phase.Vapor))

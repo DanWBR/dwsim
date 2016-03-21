@@ -32,156 +32,10 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
     <System.Serializable()> Public Class Compound
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
-
-        Protected m_molarfraction As Nullable(Of Double) = 0.0#
-        Protected m_massfraction As Nullable(Of Double) = 0.0#
-        Protected m_molarflow As Nullable(Of Double) = 0.0#
-        Protected m_massflow As Nullable(Of Double) = 0.0#
-        Protected m_fugacitycoeff As Nullable(Of Double) = 0.0#
-        Protected m_activitycoeff As Nullable(Of Double) = 0.0#
-        Protected m_partialvolume As Nullable(Of Double) = 0.0#
-        Protected m_partialpressure As Nullable(Of Double) = 0.0#
-        Protected m_volumetricflow As Nullable(Of Double) = 0.0#
-        Protected m_volumetricfraction As Nullable(Of Double) = 0.0#
-        Protected m_isPF As Boolean = False
-        Protected m_lnKval As Double = 0
-        Protected m_Kval As Double = 0
-
-        Public Property lnKvalue() As Double
-            Get
-                Return m_lnKval
-            End Get
-            Set(ByVal value As Double)
-                m_lnKval = value
-            End Set
-        End Property
-
-        Public Property Kvalue() As Double
-            Get
-                Return m_Kval
-            End Get
-            Set(ByVal value As Double)
-                m_Kval = value
-            End Set
-        End Property
-
-        Public Property FracaoDePetroleo() As Boolean
-            Get
-                Return m_isPF
-            End Get
-            Set(ByVal value As Boolean)
-                m_isPF = value
-            End Set
-        End Property
-
-        Public Property FracaoMolar() As Nullable(Of Double)
-            Get
-                Return m_molarfraction
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                m_molarfraction = value
-            End Set
-        End Property
-
-        Public Property FracaoMassica() As Nullable(Of Double)
-            Get
-                Return m_massfraction
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                m_massfraction = value
-            End Set
-        End Property
-
-        Public Property MolarFlow() As Nullable(Of Double)
-            Get
-                Return Me.m_molarflow
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                Me.m_molarflow = value
-            End Set
-        End Property
-
-        Public Property MassFlow() As Nullable(Of Double)
-            Get
-                Return Me.m_massflow
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                Me.m_massflow = value
-            End Set
-        End Property
-
-        Public Property FugacityCoeff() As Nullable(Of Double)
-            Get
-                Return Me.m_fugacitycoeff
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                Me.m_fugacitycoeff = value
-            End Set
-        End Property
-
-        Public Property ActivityCoeff() As Nullable(Of Double)
-            Get
-                Return Me.m_activitycoeff
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                Me.m_activitycoeff = value
-            End Set
-        End Property
-
-        Public Property PartialVolume() As Nullable(Of Double)
-            Get
-                Return Me.m_partialvolume
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                Me.m_partialvolume = value
-            End Set
-        End Property
-
-        Public Property PartialPressure() As Nullable(Of Double)
-            Get
-                Return Me.m_partialpressure
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                Me.m_partialpressure = value
-            End Set
-        End Property
-
-        Public Property VolumetricFlow() As Nullable(Of Double)
-            Get
-                Return Me.m_volumetricflow
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                Me.m_volumetricflow = value
-            End Set
-        End Property
-
-        Public Property VolumetricFraction() As Nullable(Of Double)
-            Get
-                Return Me.m_volumetricfraction
-            End Get
-            Set(ByVal value As Nullable(Of Double))
-                Me.m_volumetricfraction = value
-            End Set
-        End Property
-
-        Public Property ComponentDescription() As String
-
-        Public Property ComponentName() As String
-       
-
-        Public Property Name() As String
-            Get
-                Return ComponentName
-            End Get
-            Set(ByVal value As String)
-                ComponentName = value
-            End Set
-        End Property
+        Implements XMLSerializer.Interfaces.ICustomXMLSerialization, CapeOpen.ICapeIdentification, Interfaces.ICompound
 
         Public TDProperties As New TemperatureDependentProperties
         Public PDProperties As New PressureDependentProperties
-        Public ConstantProperties As New ConstantProperties
 
         Public Sub New(ByVal name As String, ByVal description As String)
 
@@ -200,6 +54,40 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         End Function
 
+        Public Property ComponentDescription As String Implements CapeOpen.ICapeIdentification.ComponentDescription
+
+        Public Property ComponentName As String Implements CapeOpen.ICapeIdentification.ComponentName
+
+        Public Property ActivityCoeff As Double? Implements Interfaces.ICompound.ActivityCoeff
+
+        Public Property PetroleumFraction As Boolean Implements Interfaces.ICompound.PetroleumFraction
+
+        Public Property MassFraction As Double? Implements Interfaces.ICompound.MassFraction
+
+        Public Property MoleFraction As Double? Implements Interfaces.ICompound.MoleFraction
+
+        Public Property FugacityCoeff As Double? Implements Interfaces.ICompound.FugacityCoeff
+
+        Public Property Kvalue As Double Implements Interfaces.ICompound.Kvalue
+
+        Public Property lnKvalue As Double Implements Interfaces.ICompound.lnKvalue
+
+        Public Property MassFlow As Double? Implements Interfaces.ICompound.MassFlow
+
+        Public Property MolarFlow As Double? Implements Interfaces.ICompound.MolarFlow
+
+        Public Property Name As String Implements Interfaces.ICompound.Name
+
+        Public Property PartialPressure As Double? Implements Interfaces.ICompound.PartialPressure
+
+        Public Property PartialVolume As Double? Implements Interfaces.ICompound.PartialVolume
+
+        Public Property VolumetricFlow As Double? Implements Interfaces.ICompound.VolumetricFlow
+
+        Public Property VolumetricFraction As Double? Implements Interfaces.ICompound.VolumetricFraction
+
+        Public Property ConstantProperties As Interfaces.ICompoundConstantProperties Implements Interfaces.ICompound.ConstantProperties
+
     End Class
 
     <System.Serializable()> Public Class Phase
@@ -208,23 +96,18 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Implements Interfaces.IPhase
 
-        Public Property Name As String = ""
-
-        Public Property Compounds As Dictionary(Of String, Compound)
-
-        Public Property Properties As New SinglePhaseMixtureProperties
-        Public Property Properties2 As New TwoPhaseMixtureProperties
+        Public Property Properties As New PhaseProperties
 
         Public Sub New(ByVal name As String, ByVal description As String)
 
             Me.Name = name
             Me.ComponentName = name
             Me.ComponentDescription = description
-            Me.Compounds = New Dictionary(Of String, Compound)
+            Me.Compounds = New Dictionary(Of String, Interfaces.ICompound)
 
         End Sub
 
-        Public Sub New(ByVal name As String, ByVal description As String, ByVal Compounds As Dictionary(Of String, Compound))
+        Public Sub New(ByVal name As String, ByVal description As String, ByVal Compounds As Dictionary(Of String, Interfaces.ICompound))
 
             Me.Name = name
             Me.ComponentName = name
@@ -246,8 +129,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Next
 
             XMLSerializer.XMLSerializer.Deserialize(Me.Properties, (From xel As XElement In data Select xel Where xel.Name = "Properties").Elements.ToList)
-            XMLSerializer.XMLSerializer.Deserialize(Me.Properties2, (From xel As XElement In data Select xel Where xel.Name = "Properties2").Elements.ToList)
-
+       
         End Function
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
@@ -259,8 +141,8 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
                 .Add(New XElement("Compounds"))
 
-                For Each kvp As KeyValuePair(Of String, Compound) In Me.Compounds
-                    elements(elements.Count - 1).Add(New XElement("Compound", kvp.Value.SaveData().ToArray()))
+                For Each kvp As KeyValuePair(Of String, Interfaces.ICompound) In Me.Compounds
+                    elements(elements.Count - 1).Add(New XElement("Compound", DirectCast(kvp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()))
                 Next
 
                 Dim props As PropertyInfo() = Me.GetType.GetProperties()
@@ -275,9 +157,6 @@ Namespace DWSIM.Thermodynamics.BaseClasses
                 .Add(New XElement("Properties"))
                 elements(elements.Count - 1).Add(XMLSerializer.XMLSerializer.Serialize(Me.Properties))
 
-                .Add(New XElement("Properties2"))
-                elements(elements.Count - 1).Add(XMLSerializer.XMLSerializer.Serialize(Me.Properties2))
-
             End With
 
             Return elements
@@ -287,6 +166,10 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         Public Property ComponentDescription As String = "" Implements Interfaces.IPhase.ComponentDescription
 
         Public Property ComponentName As String = "" Implements Interfaces.IPhase.ComponentName
+
+        Public Property Compounds As Dictionary(Of String, Interfaces.ICompound) Implements Interfaces.IPhase.Compounds
+
+        Public Property Name As String = "" Implements Interfaces.IPhase.Name
 
     End Class
 
@@ -1637,101 +1520,103 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
     End Class
 
-    <System.Serializable()> Public Class SinglePhaseMixtureProperties
+    <System.Serializable()> Public Class PhaseProperties
 
-        Public Property osmoticCoefficient As Nullable(Of Double)
-        Public Property freezingPointDepression As Nullable(Of Double)
-        Public Property freezingPoint As Nullable(Of Double)
-        Public Property ionicStrength As Nullable(Of Double)
-        Public Property pH As Nullable(Of Double)
-
-        Public Property dewTemperature() As Nullable(Of Double)
-
-        Public Property dewPressure() As Nullable(Of Double)
-
-        Public Property bubbleTemperature() As Nullable(Of Double)
-
-        Public Property bubblePressure() As Nullable(Of Double)
-
-        Public Property activity() As Nullable(Of Double)
-        
-        Public Property activityCoefficient() As Nullable(Of Double)
-         
-        Public Property compressibility() As Nullable(Of Double)
-
-        Public Property compressibilityFactor() As Nullable(Of Double)
-
-        Public Property density() As Nullable(Of Double)
-
-        Public Property enthalpy() As Nullable(Of Double)
-
-        Public Property entropy() As Nullable(Of Double)
-
-        Public Property enthalpyF() As Nullable(Of Double)
-
-        Public Property entropyF() As Nullable(Of Double)
-
-        Public Property excessEnthalpy() As Nullable(Of Double)
-
-        Public Property excessEntropy() As Nullable(Of Double)
-
-        Public Property molarflow() As Nullable(Of Double)
-
-        Public Property massflow() As Nullable(Of Double)
-        
-        Public Property molarfraction() As Nullable(Of Double)
-       
-        Public Property massfraction() As Nullable(Of Double)
-        
-        Public Property fugacity() As Nullable(Of Double)
-        
-        Public Property fugacityCoefficient() As Nullable(Of Double)
-        
-        Public Property heatCapacityCp() As Nullable(Of Double)
-        
-        Public Property heatCapacityCv() As Nullable(Of Double)
-       
-        Public Property jouleThomsonCoefficient() As Nullable(Of Double)
-      
-        Public Property logFugacityCoefficient() As Nullable(Of Double)
-       
-        Public Property molecularWeight() As Nullable(Of Double)
-       
-        Public Property pressure() As Nullable(Of Double)
-      
-        Public Property temperature() As Nullable(Of Double)
-       
-        Public Property speedOfSound() As Nullable(Of Double)
-       
-        Public Property thermalConductivity() As Nullable(Of Double)
-        
-        Public Property viscosity() As Nullable(Of Double)
-        
-        Public Property kinematic_viscosity() As Nullable(Of Double)
-        
-        Public Property volumetric_flow() As Nullable(Of Double)
-       
-        Public Property molar_enthalpy() As Nullable(Of Double)
-      
-        Public Property molar_entropy() As Nullable(Of Double)
-       
-        Public Property molar_enthalpyF() As Nullable(Of Double)
-     
-        Public Property molar_entropyF() As Nullable(Of Double)    
+        Implements Interfaces.IPhaseProperties
 
         Public Sub New()
 
         End Sub
-    End Class
 
-    <System.Serializable()> Public Class TwoPhaseMixtureProperties
+        Public Property activity As Double? Implements Interfaces.IPhaseProperties.activity
 
-        Public Property kvalue() As Nullable(Of Double)
-       
-        Public Property logKvalue() As Nullable(Of Double)
-      
-        Public Property surfaceTension() As Nullable(Of Double)
+        Public Property activityCoefficient As Double? Implements Interfaces.IPhaseProperties.activityCoefficient
 
+        Public Property bubblePressure As Double? Implements Interfaces.IPhaseProperties.bubblePressure
+
+        Public Property bubbleTemperature As Double? Implements Interfaces.IPhaseProperties.bubbleTemperature
+
+        Public Property compressibility As Double? Implements Interfaces.IPhaseProperties.compressibility
+
+        Public Property compressibilityFactor As Double? Implements Interfaces.IPhaseProperties.compressibilityFactor
+
+        Public Property density As Double? Implements Interfaces.IPhaseProperties.density
+
+        Public Property dewPressure As Double? Implements Interfaces.IPhaseProperties.dewPressure
+
+        Public Property dewTemperature As Double? Implements Interfaces.IPhaseProperties.dewTemperature
+
+        Public Property enthalpy As Double? Implements Interfaces.IPhaseProperties.enthalpy
+
+        Public Property enthalpyF As Double? Implements Interfaces.IPhaseProperties.enthalpyF
+
+        Public Property entropy As Double? Implements Interfaces.IPhaseProperties.entropy
+
+        Public Property entropyF As Double? Implements Interfaces.IPhaseProperties.entropyF
+
+        Public Property excessEnthalpy As Double? Implements Interfaces.IPhaseProperties.excessEnthalpy
+
+        Public Property excessEntropy As Double? Implements Interfaces.IPhaseProperties.excessEntropy
+
+        Public Property freezingPoint As Double? Implements Interfaces.IPhaseProperties.freezingPoint
+
+        Public Property freezingPointDepression As Double? Implements Interfaces.IPhaseProperties.freezingPointDepression
+
+        Public Property fugacity As Double? Implements Interfaces.IPhaseProperties.fugacity
+
+        Public Property fugacityCoefficient As Double? Implements Interfaces.IPhaseProperties.fugacityCoefficient
+
+        Public Property heatCapacityCp As Double? Implements Interfaces.IPhaseProperties.heatCapacityCp
+
+        Public Property heatCapacityCv As Double? Implements Interfaces.IPhaseProperties.heatCapacityCv
+
+        Public Property ionicStrength As Double? Implements Interfaces.IPhaseProperties.ionicStrength
+
+        Public Property jouleThomsonCoefficient As Double? Implements Interfaces.IPhaseProperties.jouleThomsonCoefficient
+
+        Public Property kinematic_viscosity As Double? Implements Interfaces.IPhaseProperties.kinematic_viscosity
+
+        Public Property kvalue As Double? Implements Interfaces.IPhaseProperties.kvalue
+
+        Public Property logFugacityCoefficient As Double? Implements Interfaces.IPhaseProperties.logFugacityCoefficient
+
+        Public Property logKvalue As Double? Implements Interfaces.IPhaseProperties.logKvalue
+
+        Public Property massflow As Double? Implements Interfaces.IPhaseProperties.massflow
+
+        Public Property massfraction As Double? Implements Interfaces.IPhaseProperties.massfraction
+
+        Public Property molar_enthalpy As Double? Implements Interfaces.IPhaseProperties.molar_enthalpy
+
+        Public Property molar_enthalpyF As Double? Implements Interfaces.IPhaseProperties.molar_enthalpyF
+
+        Public Property molar_entropy As Double? Implements Interfaces.IPhaseProperties.molar_entropy
+
+        Public Property molar_entropyF As Double? Implements Interfaces.IPhaseProperties.molar_entropyF
+
+        Public Property molarflow As Double? Implements Interfaces.IPhaseProperties.molarflow
+
+        Public Property molarfraction As Double? Implements Interfaces.IPhaseProperties.molarfraction
+
+        Public Property molecularWeight As Double? Implements Interfaces.IPhaseProperties.molecularWeight
+
+        Public Property osmoticCoefficient As Double? Implements Interfaces.IPhaseProperties.osmoticCoefficient
+
+        Public Property pH As Double? Implements Interfaces.IPhaseProperties.pH
+
+        Public Property pressure As Double? Implements Interfaces.IPhaseProperties.pressure
+
+        Public Property speedOfSound As Double? Implements Interfaces.IPhaseProperties.speedOfSound
+
+        Public Property surfaceTension As Double? Implements Interfaces.IPhaseProperties.surfaceTension
+
+        Public Property temperature As Double? Implements Interfaces.IPhaseProperties.temperature
+
+        Public Property thermalConductivity As Double? Implements Interfaces.IPhaseProperties.thermalConductivity
+
+        Public Property viscosity As Double? Implements Interfaces.IPhaseProperties.viscosity
+
+        Public Property volumetric_flow As Double? Implements Interfaces.IPhaseProperties.volumetric_flow
     End Class
 
     <System.Serializable()> Public Class InteractionParameter
@@ -1788,249 +1673,10 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
     <System.Serializable()> Public Class ConstantProperties
 
-        Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization
-
-        Public Name As String = ""
-        Public CAS_Number As String = ""
-        Public Formula As String = ""
-        Public SMILES As String = ""
-        Public InChI As String = ""
-        Public ChemicalStructure As String = ""
-        Public Molar_Weight As Double
-        Public Critical_Temperature As Double
-        Public Critical_Pressure As Double
-        Public Critical_Volume As Double
-        Public Critical_Compressibility As Double
-        Public Acentric_Factor As Double
-        Public Z_Rackett As Double
-        Public PR_Volume_Translation_Coefficient As Double
-        Public SRK_Volume_Translation_Coefficient As Double
-        Public Chao_Seader_Acentricity As Double
-        Public Chao_Seader_Solubility_Parameter As Double
-        Public Chao_Seader_Liquid_Molar_Volume As Double
-        Public IG_Entropy_of_Formation_25C As Double
-        Public IG_Enthalpy_of_Formation_25C As Double
-        Public IG_Gibbs_Energy_of_Formation_25C As Double
-        Public Dipole_Moment As Double
-        Public Vapor_Pressure_Constant_A As Double
-        Public Vapor_Pressure_Constant_B As Double
-        Public Vapor_Pressure_Constant_C As Double
-        Public Vapor_Pressure_Constant_D As Double
-        Public Vapor_Pressure_Constant_E As Double
-        Public Vapor_Pressure_TMIN As Double
-        Public Vapor_Pressure_TMAX As Double
-        Public Ideal_Gas_Heat_Capacity_Const_A As Double
-        Public Ideal_Gas_Heat_Capacity_Const_B As Double
-        Public Ideal_Gas_Heat_Capacity_Const_C As Double
-        Public Ideal_Gas_Heat_Capacity_Const_D As Double
-        Public Ideal_Gas_Heat_Capacity_Const_E As Double
-        Public Liquid_Viscosity_Const_A As Double
-        Public Liquid_Viscosity_Const_B As Double
-        Public Liquid_Viscosity_Const_C As Double
-        Public Liquid_Viscosity_Const_D As Double
-        Public Liquid_Viscosity_Const_E As Double
-        Public Liquid_Density_Const_A As Double
-        Public Liquid_Density_Const_B As Double
-        Public Liquid_Density_Const_C As Double
-        Public Liquid_Density_Const_D As Double
-        Public Liquid_Density_Const_E As Double
-        Public Liquid_Density_Tmin As Double
-        Public Liquid_Density_Tmax As Double
-        Public Liquid_Heat_Capacity_Const_A As Double
-        Public Liquid_Heat_Capacity_Const_B As Double
-        Public Liquid_Heat_Capacity_Const_C As Double
-        Public Liquid_Heat_Capacity_Const_D As Double
-        Public Liquid_Heat_Capacity_Const_E As Double
-        Public Liquid_Heat_Capacity_Tmin As Double
-        Public Liquid_Heat_Capacity_Tmax As Double
-        Public Liquid_Thermal_Conductivity_Const_A As Double
-        Public Liquid_Thermal_Conductivity_Const_B As Double
-        Public Liquid_Thermal_Conductivity_Const_C As Double
-        Public Liquid_Thermal_Conductivity_Const_D As Double
-        Public Liquid_Thermal_Conductivity_Const_E As Double
-        Public Liquid_Thermal_Conductivity_Tmin As Double
-        Public Liquid_Thermal_Conductivity_Tmax As Double
-        Public Vapor_Thermal_Conductivity_Const_A As Double
-        Public Vapor_Thermal_Conductivity_Const_B As Double
-        Public Vapor_Thermal_Conductivity_Const_C As Double
-        Public Vapor_Thermal_Conductivity_Const_D As Double
-        Public Vapor_Thermal_Conductivity_Const_E As Double
-        Public Vapor_Thermal_Conductivity_Tmin As Double
-        Public Vapor_Thermal_Conductivity_Tmax As Double
-        Public Vapor_Viscosity_Const_A As Double
-        Public Vapor_Viscosity_Const_B As Double
-        Public Vapor_Viscosity_Const_C As Double
-        Public Vapor_Viscosity_Const_D As Double
-        Public Vapor_Viscosity_Const_E As Double
-        Public Vapor_Viscosity_Tmin As Double
-        Public Vapor_Viscosity_Tmax As Double
-        Public Solid_Density_Const_A As Double
-        Public Solid_Density_Const_B As Double
-        Public Solid_Density_Const_C As Double
-        Public Solid_Density_Const_D As Double
-        Public Solid_Density_Const_E As Double
-        Public Solid_Density_Tmin As Double
-        Public Solid_Density_Tmax As Double
-        Public Surface_Tension_Const_A As Double
-        Public Surface_Tension_Const_B As Double
-        Public Surface_Tension_Const_C As Double
-        Public Surface_Tension_Const_D As Double
-        Public Surface_Tension_Const_E As Double
-        Public Surface_Tension_Tmin As Double
-        Public Surface_Tension_Tmax As Double
-        Public Solid_Heat_Capacity_Const_A As Double
-        Public Solid_Heat_Capacity_Const_B As Double
-        Public Solid_Heat_Capacity_Const_C As Double
-        Public Solid_Heat_Capacity_Const_D As Double
-        Public Solid_Heat_Capacity_Const_E As Double
-        Public Solid_Heat_Capacity_Tmin As Double
-        Public Solid_Heat_Capacity_Tmax As Double
-        Public Normal_Boiling_Point As Double
-        Public ID As Integer
-        Public IsPF As Integer = 0
-        Public IsHYPO As Integer = 0
-        Public HVap_A As Double
-        Public HVap_B As Double
-        Public HVap_C As Double
-        Public HVap_D As Double
-        Public HVap_E As Double
-        Public HVap_TMIN As Double
-        Public HVap_TMAX As Double
-        Public UNIQUAC_R As Double
-        Public UNIQUAC_Q As Double
-
-        Public IsFPROPSSupported As Boolean = False
-        Public IsCOOLPROPSupported As Boolean = False
-        Public IsModified As Boolean = False
-
-        Public UNIFACGroups As UNIFACGroupCollection
-        Public MODFACGroups As UNIFACGroupCollection
-        Public NISTMODFACGroups As UNIFACGroupCollection
-        Public Elements As New ElementCollection
-
-        Public VaporPressureEquation As String = ""
-        Public IdealgasCpEquation As String = ""
-        Public LiquidViscosityEquation As String = ""
-        Public VaporViscosityEquation As String = ""
-        Public VaporizationEnthalpyEquation As String = ""
-        Public LiquidDensityEquation As String = ""
-        Public LiquidHeatCapacityEquation As String = ""
-        Public LiquidThermalConductivityEquation As String = ""
-        Public VaporThermalConductivityEquation As String = ""
-        Public SolidDensityEquation As String = ""
-        Public SolidHeatCapacityEquation As String = ""
-        Public SurfaceTensionEquation As String = ""
-
-        Public PC_SAFT_sigma As Double = 0.0#
-        Public PC_SAFT_epsilon_k As Double = 0.0#
-        Public PC_SAFT_m As Double = 0.0#
-
-        Public PF_MM As Nullable(Of Double) = Nothing
-        Public NBP As Nullable(Of Double) = Nothing
-        Public PF_vA As Nullable(Of Double) = Nothing
-        Public PF_vB As Nullable(Of Double) = Nothing
-        Public PF_Watson_K As Nullable(Of Double) = Nothing
-        Public PF_SG As Nullable(Of Double) = Nothing
-        Public PF_v1 As Nullable(Of Double) = Nothing
-        Public PF_Tv1 As Nullable(Of Double) = Nothing
-        Public PF_v2 As Nullable(Of Double) = Nothing
-        Public PF_Tv2 As Nullable(Of Double) = Nothing
-
-        'Databases: 'DWSIM', 'CheResources', 'ChemSep' OR 'User'
-        'User databases are XML-serialized versions of this base class, and they may include hypos and pseudos.
-        Public OriginalDB As String = "DWSIM"
-        Public CurrentDB As String = "DWSIM"
-        Public CompCreatorStudyFile As String = ""
-
-        'COSMO-SAC's database equivalent name
-        Public COSMODBName = ""
-
-        'Electrolyte-related properties
-        Public IsIon As Boolean = False
-        Public IsSalt As Boolean = False
-        Public IsHydratedSalt As Boolean = False
-        Public HydrationNumber As Double = 0.0#
-        Public Charge As Integer = 0
-        Public PositiveIon As String = ""
-        Public NegativeIon As String = ""
-        Public PositiveIonStoichCoeff As Integer = 0
-        Public NegativeIonStoichCoeff As Integer = 0
-        Public StoichSum As Integer = 0
-        Public Electrolyte_DelGF As Double = 0.0#
-        Public Electrolyte_DelHF As Double = 0.0#
-        Public Electrolyte_Cp0 As Double = 0.0#
-        Public TemperatureOfFusion As Double = 0.0#
-        Public EnthalpyOfFusionAtTf As Double = 0.0#
-        Public SolidTs As Double = 0.0#
-        Public SolidDensityAtTs As Double = 0.0#
-        Public StandardStateMolarVolume As Double = 0.0#
-        Public MolarVolume_v2i As Double = 0.0#
-        Public MolarVolume_v3i As Double = 0.0#
-        Public MolarVolume_k1i As Double = 0.0#
-        Public MolarVolume_k2i As Double = 0.0#
-        Public MolarVolume_k3i As Double = 0.0#
-        Public Ion_CpAq_a As Double = 0.0#
-        Public Ion_CpAq_b As Double = 0.0#
-        Public Ion_CpAq_c As Double = 0.0#
-
-        'Black-Oil Properties
-
-        Public IsBlackOil As Boolean = False
-
-        'gas specific gravity
-        Public BO_SGG As Double = 0.0#
-        'oil specific gravity
-        Public BO_SGO As Double = 0.0#
-        'gas-oil ratio (m3/m3 STD)
-        Public BO_GOR As Double = 0.0#
-        'basic sediments and water (%)
-        Public BO_BSW As Double = 0.0#
-        'oil viscosity at T1 (m2/s)
-        Public BO_OilVisc1 As Double = 0.0#
-        'oil viscosity T1 (K)
-        Public BO_OilViscTemp1 As Double = 0.0#
-        'oil viscosity at T2 (m2/s)
-        Public BO_OilVisc2 As Double = 0.0#
-        'oil viscosity T2 (K)
-        Public BO_OilViscTemp2 As Double = 0.0#
-        'oil parafins percentage
-        Public BO_PNA_P As Double = 0.0#
-        'oil napthenics percentage
-        Public BO_PNA_N As Double = 0.0#
-        'oil aromatics percentage
-        Public BO_PNA_A As Double = 0.0#
-
-        Public Comments As String = ""
-
-        'the following properties are no longer used but kept for compatibility reasons
-        <XmlIgnore()> Public UNIFAC_Ri As Double
-        <XmlIgnore()> Public UNIFAC_Qi As Double
-        <XmlIgnore()> Public UNIFAC_01_CH4 As Integer
-        <XmlIgnore()> Public UNIFAC_02_CH3 As Integer
-        <XmlIgnore()> Public UNIFAC_03_CH2 As Integer
-        <XmlIgnore()> Public UNIFAC_04_CH As Integer
-        <XmlIgnore()> Public UNIFAC_05_H2O As Integer
-        <XmlIgnore()> Public UNIFAC_06_H2S As Integer
-        <XmlIgnore()> Public UNIFAC_07_CO2 As Integer
-        <XmlIgnore()> Public UNIFAC_08_N2 As Integer
-        <XmlIgnore()> Public UNIFAC_09_O2 As Integer
-        <XmlIgnore()> Public UNIFAC_10_OH As Integer
-        <XmlIgnore()> Public UNIFAC_11_ACH As Integer
-        <XmlIgnore()> Public UNIFAC_12_ACCH2 As Integer
-        <XmlIgnore()> Public UNIFAC_13_ACCH3 As Integer
-        <XmlIgnore()> Public UNIFAC_14_ACOH As Integer
-        <XmlIgnore()> Public UNIFAC_15_CH3CO As Integer
-        <XmlIgnore()> Public UNIFAC_16_CH2CO As Integer
-        <XmlIgnore()> Public Element_C As Integer = 0
-        <XmlIgnore()> Public Element_H As Integer = 0
-        <XmlIgnore()> Public Element_O As Integer = 0
-        <XmlIgnore()> Public Element_N As Integer = 0
-        <XmlIgnore()> Public Element_S As Integer = 0
+        Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization, Interfaces.ICompoundConstantProperties
 
         Public Sub New()
-            UNIFACGroups = New UNIFACGroupCollection
-            MODFACGroups = New UNIFACGroupCollection
-            NISTMODFACGroups = New UNIFACGroupCollection
+
         End Sub
 
         Public Function Clone() As Object Implements System.ICloneable.Clone
@@ -2063,28 +1709,28 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "UNIFACGroups").Elements
                 If xel2.@Name Is Nothing Then
-                    Me.UNIFACGroups.Collection.Add(xel2.@GroupID.ToString, xel2.@Value)
+                    Me.UNIFACGroups.Add(xel2.@GroupID.ToString, xel2.@Value)
                 Else
                     Dim id As Integer = unif.Group2ID(xel2.@Name)
-                    Me.UNIFACGroups.Collection.Add(id.ToString, xel2.@Value)
+                    Me.UNIFACGroups.Add(id.ToString, xel2.@Value)
                 End If
             Next
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "MODFACGroups").Elements
                 If xel2.@Name Is Nothing Then
-                    Me.MODFACGroups.Collection.Add(xel2.@GroupID.ToString, xel2.@Value)
+                    Me.MODFACGroups.Add(xel2.@GroupID.ToString, xel2.@Value)
                 Else
                     Dim id As Integer = modf.Group2ID(xel2.@Name)
-                    Me.MODFACGroups.Collection.Add(id.ToString, xel2.@Value)
+                    Me.MODFACGroups.Add(id.ToString, xel2.@Value)
                 End If
             Next
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "NISTMODFACGroups").Elements
-                Me.NISTMODFACGroups.Collection.Add(xel2.@GroupID.ToString, xel2.@Value)
+                Me.NISTMODFACGroups.Add(xel2.@GroupID.ToString, xel2.@Value)
             Next
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Elements").Elements
-                Me.Elements.Collection.Add(xel2.@Name, xel2.@Value)
+                Me.Elements.Add(xel2.@Name, xel2.@Value)
             Next
 
             unif = Nothing
@@ -2105,8 +1751,8 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
                 If Not UNIFACGroups Is Nothing Then
 
-                    For Each key As String In UNIFACGroups.Collection.Keys
-                        .Item(xelements.Count - 1).Add(New XElement("Item", New XAttribute("GroupID", key), New XAttribute("Value", UNIFACGroups.Collection(key.ToString))))
+                    For Each key As String In UNIFACGroups.Keys
+                        .Item(xelements.Count - 1).Add(New XElement("Item", New XAttribute("GroupID", key), New XAttribute("Value", UNIFACGroups(key.ToString))))
                     Next
 
                 End If
@@ -2115,8 +1761,8 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
                 If Not MODFACGroups Is Nothing Then
 
-                    For Each key As String In MODFACGroups.Collection.Keys
-                        .Item(xelements.Count - 1).Add(New XElement("Item", New XAttribute("GroupID", key), New XAttribute("Value", MODFACGroups.Collection(key.ToString))))
+                    For Each key As String In MODFACGroups.Keys
+                        .Item(xelements.Count - 1).Add(New XElement("Item", New XAttribute("GroupID", key), New XAttribute("Value", MODFACGroups(key.ToString))))
                     Next
 
                 End If
@@ -2125,8 +1771,8 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
                 If Not MODFACGroups Is Nothing Then
 
-                    For Each key As String In NISTMODFACGroups.Collection.Keys
-                        .Item(xelements.Count - 1).Add(New XElement("Item", New XAttribute("GroupID", key), New XAttribute("Value", NISTMODFACGroups.Collection(key.ToString))))
+                    For Each key As String In NISTMODFACGroups.Keys
+                        .Item(xelements.Count - 1).Add(New XElement("Item", New XAttribute("GroupID", key), New XAttribute("Value", NISTMODFACGroups(key.ToString))))
                     Next
 
                 End If
@@ -2135,8 +1781,8 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
                 If Not Me.Elements Is Nothing Then
 
-                    For Each key As String In Me.Elements.Collection.Keys
-                        .Item(xelements.Count - 1).Add(New XElement("Item", New XAttribute("Name", key), New XAttribute("Value", Me.Elements.Collection(key))))
+                    For Each key As String In Me.Elements.Keys
+                        .Item(xelements.Count - 1).Add(New XElement("Item", New XAttribute("Name", key), New XAttribute("Value", Me.Elements(key))))
                     Next
 
                 End If
@@ -2147,24 +1793,376 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         End Function
 
+        Public Property Acentric_Factor As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Acentric_Factor
+
+        Public Property BO_BSW As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_BSW
+
+        Public Property BO_GOR As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_GOR
+
+        Public Property BO_OilVisc1 As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_OilVisc1
+
+        Public Property BO_OilVisc2 As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_OilVisc2
+
+        Public Property BO_OilViscTemp1 As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_OilViscTemp1
+
+        Public Property BO_OilViscTemp2 As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_OilViscTemp2
+
+        Public Property BO_PNA_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_PNA_A
+
+        Public Property BO_PNA_N As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_PNA_N
+
+        Public Property BO_PNA_P As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_PNA_P
+
+        Public Property BO_SGG As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_SGG
+
+        Public Property BO_SGO As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_SGO
+
+        Public Property CAS_Number As String = "" Implements Interfaces.ICompoundConstantProperties.CAS_Number
+
+        Public Property Chao_Seader_Acentricity As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Chao_Seader_Acentricity
+
+        Public Property Chao_Seader_Liquid_Molar_Volume As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Chao_Seader_Liquid_Molar_Volume
+
+        Public Property Chao_Seader_Solubility_Parameter As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Chao_Seader_Solubility_Parameter
+
+        Public Property Charge As Integer Implements Interfaces.ICompoundConstantProperties.Charge
+
+        Public Property ChemicalStructure As String = "" Implements Interfaces.ICompoundConstantProperties.ChemicalStructure
+
+        Public Property Comments As String = "" Implements Interfaces.ICompoundConstantProperties.Comments
+
+        Public Property CompCreatorStudyFile As String = "" Implements Interfaces.ICompoundConstantProperties.CompCreatorStudyFile
+
+        Public Property COSMODBName As Object Implements Interfaces.ICompoundConstantProperties.COSMODBName
+
+        Public Property Critical_Compressibility As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Critical_Compressibility
+
+        Public Property Critical_Pressure As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Critical_Pressure
+
+        Public Property Critical_Temperature As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Critical_Temperature
+
+        Public Property Critical_Volume As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Critical_Volume
+
+        Public Property CurrentDB As String = "DWSIM" Implements Interfaces.ICompoundConstantProperties.CurrentDB
+
+        Public Property Dipole_Moment As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Dipole_Moment
+
+        Public Property Electrolyte_Cp0 As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Electrolyte_Cp0
+
+        Public Property Electrolyte_DelGF As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Electrolyte_DelGF
+
+        Public Property Electrolyte_DelHF As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Electrolyte_DelHF
+
+        Public Property EnthalpyOfFusionAtTf As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.EnthalpyOfFusionAtTf
+
+        Public Property Formula As String = "" Implements Interfaces.ICompoundConstantProperties.Formula
+
+        Public Property HVap_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.HVap_A
+
+        Public Property HVap_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.HVap_B
+
+        Public Property HVap_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.HVap_C
+
+        Public Property HVap_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.HVap_D
+
+        Public Property HVap_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.HVap_E
+
+        Public Property HVap_TMAX As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.HVap_TMAX
+
+        Public Property HVap_TMIN As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.HVap_TMIN
+
+        Public Property HydrationNumber As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.HydrationNumber
+
+        Public Property ID As Integer Implements Interfaces.ICompoundConstantProperties.ID
+
+        Public Property Ideal_Gas_Heat_Capacity_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Ideal_Gas_Heat_Capacity_Const_A
+
+        Public Property Ideal_Gas_Heat_Capacity_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Ideal_Gas_Heat_Capacity_Const_B
+
+        Public Property Ideal_Gas_Heat_Capacity_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Ideal_Gas_Heat_Capacity_Const_C
+
+        Public Property Ideal_Gas_Heat_Capacity_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Ideal_Gas_Heat_Capacity_Const_D
+
+        Public Property Ideal_Gas_Heat_Capacity_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Ideal_Gas_Heat_Capacity_Const_E
+
+        Public Property IdealgasCpEquation As String = "" Implements Interfaces.ICompoundConstantProperties.IdealgasCpEquation
+
+        Public Property IG_Enthalpy_of_Formation_25C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.IG_Enthalpy_of_Formation_25C
+
+        Public Property IG_Entropy_of_Formation_25C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.IG_Entropy_of_Formation_25C
+
+        Public Property IG_Gibbs_Energy_of_Formation_25C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.IG_Gibbs_Energy_of_Formation_25C
+
+        Public Property InChI As String = "" Implements Interfaces.ICompoundConstantProperties.InChI
+
+        Public Property Ion_CpAq_a As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Ion_CpAq_a
+
+        Public Property Ion_CpAq_b As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Ion_CpAq_b
+
+        Public Property Ion_CpAq_c As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Ion_CpAq_c
+
+        Public Property IsBlackOil As Boolean Implements Interfaces.ICompoundConstantProperties.IsBlackOil
+
+        Public Property IsCOOLPROPSupported As Boolean Implements Interfaces.ICompoundConstantProperties.IsCOOLPROPSupported
+
+        Public Property IsFPROPSSupported As Boolean Implements Interfaces.ICompoundConstantProperties.IsFPROPSSupported
+
+        Public Property IsHydratedSalt As Boolean Implements Interfaces.ICompoundConstantProperties.IsHydratedSalt
+
+        Public Property IsHYPO As Integer Implements Interfaces.ICompoundConstantProperties.IsHYPO
+
+        Public Property IsIon As Boolean Implements Interfaces.ICompoundConstantProperties.IsIon
+
+        Public Property IsModified As Boolean Implements Interfaces.ICompoundConstantProperties.IsModified
+
+        Public Property IsPF As Integer Implements Interfaces.ICompoundConstantProperties.IsPF
+
+        Public Property IsSalt As Boolean Implements Interfaces.ICompoundConstantProperties.IsSalt
+
+        Public Property Liquid_Density_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Density_Const_A
+
+        Public Property Liquid_Density_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Density_Const_B
+
+        Public Property Liquid_Density_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Density_Const_C
+
+        Public Property Liquid_Density_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Density_Const_D
+
+        Public Property Liquid_Density_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Density_Const_E
+
+        Public Property Liquid_Density_Tmax As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Density_Tmax
+
+        Public Property Liquid_Density_Tmin As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Density_Tmin
+
+        Public Property Liquid_Heat_Capacity_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Heat_Capacity_Const_A
+
+        Public Property Liquid_Heat_Capacity_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Heat_Capacity_Const_B
+
+        Public Property Liquid_Heat_Capacity_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Heat_Capacity_Const_C
+
+        Public Property Liquid_Heat_Capacity_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Heat_Capacity_Const_D
+
+        Public Property Liquid_Heat_Capacity_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Heat_Capacity_Const_E
+
+        Public Property Liquid_Heat_Capacity_Tmax As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Heat_Capacity_Tmax
+
+        Public Property Liquid_Heat_Capacity_Tmin As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Heat_Capacity_Tmin
+
+        Public Property Liquid_Thermal_Conductivity_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Thermal_Conductivity_Const_A
+
+        Public Property Liquid_Thermal_Conductivity_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Thermal_Conductivity_Const_B
+
+        Public Property Liquid_Thermal_Conductivity_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Thermal_Conductivity_Const_C
+
+        Public Property Liquid_Thermal_Conductivity_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Thermal_Conductivity_Const_D
+
+        Public Property Liquid_Thermal_Conductivity_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Thermal_Conductivity_Const_E
+
+        Public Property Liquid_Thermal_Conductivity_Tmax As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Thermal_Conductivity_Tmax
+
+        Public Property Liquid_Thermal_Conductivity_Tmin As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Thermal_Conductivity_Tmin
+
+        Public Property Liquid_Viscosity_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Viscosity_Const_A
+
+        Public Property Liquid_Viscosity_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Viscosity_Const_B
+
+        Public Property Liquid_Viscosity_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Viscosity_Const_C
+
+        Public Property Liquid_Viscosity_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Viscosity_Const_D
+
+        Public Property Liquid_Viscosity_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Liquid_Viscosity_Const_E
+
+        Public Property LiquidDensityEquation As String = "" Implements Interfaces.ICompoundConstantProperties.LiquidDensityEquation
+
+        Public Property LiquidHeatCapacityEquation As String = "" Implements Interfaces.ICompoundConstantProperties.LiquidHeatCapacityEquation
+
+        Public Property LiquidThermalConductivityEquation As String = "" Implements Interfaces.ICompoundConstantProperties.LiquidThermalConductivityEquation
+
+        Public Property LiquidViscosityEquation As String = "" Implements Interfaces.ICompoundConstantProperties.LiquidViscosityEquation
+
+        Public Property Molar_Weight As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Molar_Weight
+
+        Public Property MolarVolume_k1i As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.MolarVolume_k1i
+
+        Public Property MolarVolume_k2i As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.MolarVolume_k2i
+
+        Public Property MolarVolume_k3i As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.MolarVolume_k3i
+
+        Public Property MolarVolume_v2i As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.MolarVolume_v2i
+
+        Public Property MolarVolume_v3i As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.MolarVolume_v3i
+
+        Public Property Name As String = "" Implements Interfaces.ICompoundConstantProperties.Name
+
+        Public Property NBP As Double? Implements Interfaces.ICompoundConstantProperties.NBP
+
+        Public Property NegativeIon As String = "" Implements Interfaces.ICompoundConstantProperties.NegativeIon
+
+        Public Property NegativeIonStoichCoeff As Integer Implements Interfaces.ICompoundConstantProperties.NegativeIonStoichCoeff
+
+        Public Property Normal_Boiling_Point As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Normal_Boiling_Point
+
+        Public Property OriginalDB As String = "DWSIM" Implements Interfaces.ICompoundConstantProperties.OriginalDB
+
+        Public Property PC_SAFT_epsilon_k As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.PC_SAFT_epsilon_k
+
+        Public Property PC_SAFT_m As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.PC_SAFT_m
+
+        Public Property PC_SAFT_sigma As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.PC_SAFT_sigma
+
+        Public Property PF_MM As Double? Implements Interfaces.ICompoundConstantProperties.PF_MM
+
+        Public Property PF_SG As Double? Implements Interfaces.ICompoundConstantProperties.PF_SG
+
+        Public Property PF_Tv1 As Double? Implements Interfaces.ICompoundConstantProperties.PF_Tv1
+
+        Public Property PF_Tv2 As Double? Implements Interfaces.ICompoundConstantProperties.PF_Tv2
+
+        Public Property PF_v1 As Double? Implements Interfaces.ICompoundConstantProperties.PF_v1
+
+        Public Property PF_v2 As Double? Implements Interfaces.ICompoundConstantProperties.PF_v2
+
+        Public Property PF_vA As Double? Implements Interfaces.ICompoundConstantProperties.PF_vA
+
+        Public Property PF_vB As Double? Implements Interfaces.ICompoundConstantProperties.PF_vB
+
+        Public Property PF_Watson_K As Double? Implements Interfaces.ICompoundConstantProperties.PF_Watson_K
+
+        Public Property PositiveIon As String = "" Implements Interfaces.ICompoundConstantProperties.PositiveIon
+
+        Public Property PositiveIonStoichCoeff As Integer Implements Interfaces.ICompoundConstantProperties.PositiveIonStoichCoeff
+
+        Public Property PR_Volume_Translation_Coefficient As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.PR_Volume_Translation_Coefficient
+
+        Public Property SMILES As String = "" Implements Interfaces.ICompoundConstantProperties.SMILES
+
+        Public Property Solid_Density_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Density_Const_A
+
+        Public Property Solid_Density_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Density_Const_B
+
+        Public Property Solid_Density_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Density_Const_C
+
+        Public Property Solid_Density_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Density_Const_D
+
+        Public Property Solid_Density_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Density_Const_E
+
+        Public Property Solid_Density_Tmax As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Density_Tmax
+
+        Public Property Solid_Density_Tmin As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Density_Tmin
+
+        Public Property Solid_Heat_Capacity_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Heat_Capacity_Const_A
+
+        Public Property Solid_Heat_Capacity_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Heat_Capacity_Const_B
+
+        Public Property Solid_Heat_Capacity_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Heat_Capacity_Const_C
+
+        Public Property Solid_Heat_Capacity_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Heat_Capacity_Const_D
+
+        Public Property Solid_Heat_Capacity_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Heat_Capacity_Const_E
+
+        Public Property Solid_Heat_Capacity_Tmax As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Heat_Capacity_Tmax
+
+        Public Property Solid_Heat_Capacity_Tmin As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Solid_Heat_Capacity_Tmin
+
+        Public Property SolidDensityAtTs As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.SolidDensityAtTs
+
+        Public Property SolidDensityEquation As String = "" Implements Interfaces.ICompoundConstantProperties.SolidDensityEquation
+
+        Public Property SolidHeatCapacityEquation As String = "" Implements Interfaces.ICompoundConstantProperties.SolidHeatCapacityEquation
+
+        Public Property SolidTs As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.SolidTs
+
+        Public Property SRK_Volume_Translation_Coefficient As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.SRK_Volume_Translation_Coefficient
+
+        Public Property StandardStateMolarVolume As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.StandardStateMolarVolume
+
+        Public Property StoichSum As Integer Implements Interfaces.ICompoundConstantProperties.StoichSum
+
+        Public Property Surface_Tension_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Surface_Tension_Const_A
+
+        Public Property Surface_Tension_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Surface_Tension_Const_B
+
+        Public Property Surface_Tension_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Surface_Tension_Const_C
+
+        Public Property Surface_Tension_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Surface_Tension_Const_D
+
+        Public Property Surface_Tension_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Surface_Tension_Const_E
+
+        Public Property Surface_Tension_Tmax As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Surface_Tension_Tmax
+
+        Public Property Surface_Tension_Tmin As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Surface_Tension_Tmin
+
+        Public Property SurfaceTensionEquation As String = "" Implements Interfaces.ICompoundConstantProperties.SurfaceTensionEquation
+
+        Public Property TemperatureOfFusion As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.TemperatureOfFusion
+
+        Public Property UNIQUAC_Q As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.UNIQUAC_Q
+
+        Public Property UNIQUAC_R As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.UNIQUAC_R
+
+        Public Property Vapor_Pressure_Constant_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Pressure_Constant_A
+
+        Public Property Vapor_Pressure_Constant_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Pressure_Constant_B
+
+        Public Property Vapor_Pressure_Constant_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Pressure_Constant_C
+
+        Public Property Vapor_Pressure_Constant_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Pressure_Constant_D
+
+        Public Property Vapor_Pressure_Constant_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Pressure_Constant_E
+
+        Public Property Vapor_Pressure_TMAX As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Pressure_TMAX
+
+        Public Property Vapor_Pressure_TMIN As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Pressure_TMIN
+
+        Public Property Vapor_Thermal_Conductivity_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Thermal_Conductivity_Const_A
+
+        Public Property Vapor_Thermal_Conductivity_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Thermal_Conductivity_Const_B
+
+        Public Property Vapor_Thermal_Conductivity_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Thermal_Conductivity_Const_C
+
+        Public Property Vapor_Thermal_Conductivity_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Thermal_Conductivity_Const_D
+
+        Public Property Vapor_Thermal_Conductivity_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Thermal_Conductivity_Const_E
+
+        Public Property Vapor_Thermal_Conductivity_Tmax As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Thermal_Conductivity_Tmax
+
+        Public Property Vapor_Thermal_Conductivity_Tmin As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Thermal_Conductivity_Tmin
+
+        Public Property Vapor_Viscosity_Const_A As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Viscosity_Const_A
+
+        Public Property Vapor_Viscosity_Const_B As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Viscosity_Const_B
+
+        Public Property Vapor_Viscosity_Const_C As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Viscosity_Const_C
+
+        Public Property Vapor_Viscosity_Const_D As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Viscosity_Const_D
+
+        Public Property Vapor_Viscosity_Const_E As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Viscosity_Const_E
+
+        Public Property Vapor_Viscosity_Tmax As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Viscosity_Tmax
+
+        Public Property Vapor_Viscosity_Tmin As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Vapor_Viscosity_Tmin
+
+        Public Property VaporizationEnthalpyEquation As String = "" Implements Interfaces.ICompoundConstantProperties.VaporizationEnthalpyEquation
+
+        Public Property VaporPressureEquation As String = "" Implements Interfaces.ICompoundConstantProperties.VaporPressureEquation
+
+        Public Property VaporThermalConductivityEquation As String = "" Implements Interfaces.ICompoundConstantProperties.VaporThermalConductivityEquation
+
+        Public Property VaporViscosityEquation As String = "" Implements Interfaces.ICompoundConstantProperties.VaporViscosityEquation
+
+        Public Property Z_Rackett As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Z_Rackett
+
+        Public Property Elements As SortedList = New SortedList() Implements Interfaces.ICompoundConstantProperties.Elements
+
+        Public Property MODFACGroups As SortedList = New SortedList() Implements Interfaces.ICompoundConstantProperties.MODFACGroups
+
+        Public Property NISTMODFACGroups As SortedList = New SortedList() Implements Interfaces.ICompoundConstantProperties.NISTMODFACGroups
+
+        Public Property UNIFACGroups As SortedList = New SortedList() Implements Interfaces.ICompoundConstantProperties.UNIFACGroups
+
     End Class
 
     <System.Serializable()> Public Class ConstantPropertiesCollection
         Public Collection() As ConstantProperties
-    End Class
-
-    <System.Serializable()> Public Class UNIFACGroupCollection
-        Public Collection As System.Collections.SortedList
-        Sub New()
-            Collection = New System.Collections.SortedList
-        End Sub
-    End Class
-
-    <System.Serializable()> Public Class ElementCollection
-        Public Collection As New System.Collections.SortedList
-        Sub New()
-            Collection = New System.Collections.SortedList
-        End Sub
     End Class
 
 #End Region

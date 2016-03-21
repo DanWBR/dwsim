@@ -211,7 +211,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Case "surfacetension"
-                    Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                    Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                 Case Else
                     Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                     ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -382,7 +382,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim T As Double
 
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
         End Sub
 
@@ -612,7 +612,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Next
                 Case Phase.Vapor
                     For Each subst As Thermodynamics.BaseClasses.Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                        subst.PartialVolume = subst.FracaoMolar.GetValueOrDefault * 8.314 * T / P
+                        subst.PartialVolume = subst.MoleFraction.GetValueOrDefault * 8.314 * T / P
                     Next
             End Select
 

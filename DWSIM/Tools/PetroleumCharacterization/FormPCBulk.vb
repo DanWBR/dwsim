@@ -357,13 +357,7 @@ Public Class FormPCBulk
                 .IG_Enthalpy_of_Formation_25C = tmp(0)
                 .IG_Entropy_of_Formation_25C = tmp(1)
                 .IG_Gibbs_Energy_of_Formation_25C = tmp(0) - 298.15 * tmp(1)
-                Try
-                    .Element_C = tmp(2)
-                    .Element_H = tmp(3)
-                Catch ex As Exception
-
-                End Try
-
+         
                 Dim methods2 As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS
                 Dim methods As New DWSIM.Utilities.Hypos.Methods.HYP
 
@@ -390,10 +384,10 @@ Public Class FormPCBulk
             Dim subst As New Compound(cprop.Name, "")
 
             With subst
-                .FracaoMolar = dMF(i)
+                .MoleFraction = dMF(i)
                 .ConstantProperties = cprop
                 .Name = cprop.Name
-                .FracaoDePetroleo = True
+                .PetroleumFraction = True
             End With
 
             ccol.Add(cprop.Name, subst)
@@ -500,7 +494,7 @@ Public Class FormPCBulk
         For Each subst As Compound In ccol.Values
             With subst
                 nm = .Name
-                fm = Format(.FracaoMolar, nf)
+                fm = Format(.MoleFraction, nf)
                 nbp = Format(Converter.ConvertFromSI(su.temperature, .ConstantProperties.NBP), nf)
                 sgi = Format(.ConstantProperties.PF_SG, nf)
                 mm = Format(.ConstantProperties.PF_MM, nf)
@@ -750,16 +744,16 @@ Public Class FormPCBulk
         Call frm.AddComponentsRows(myCOMS)
         Dim wtotal As Double = 0
         For Each subst In ccol.Values
-            wtotal += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
+            wtotal += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
         Next
         For Each subst In ccol.Values
-            subst.FracaoMassica = subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight / wtotal
+            subst.MassFraction = subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight / wtotal
         Next
         For Each subst In ccol.Values
             With myCOMS.Phases(0).Compounds
                 .Item(subst.Name).ConstantProperties = subst.ConstantProperties
-                .Item(subst.Name).FracaoMassica = subst.FracaoMassica
-                .Item(subst.Name).FracaoMolar = subst.FracaoMolar
+                .Item(subst.Name).MassFraction = subst.MassFraction
+                .Item(subst.Name).MoleFraction = subst.MoleFraction
             End With
             myCOMS.Phases(1).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
             myCOMS.Phases(2).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties

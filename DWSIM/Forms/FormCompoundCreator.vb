@@ -435,8 +435,8 @@ Public Class FormCompoundCreator
                 CheckBoxEnthOfFusion.Checked = .CalcEM
 
                 AtomDataGrid.Rows.Clear()
-                For i = 0 To .cp.Elements.Collection.Count - 1
-                    AtomDataGrid.Rows.Add(New Object() {.cp.Elements.Collection.GetKey(i), .cp.Elements.Collection.GetByIndex(i)})
+                For i = 0 To .cp.Elements.Count - 1
+                    AtomDataGrid.Rows.Add(New Object() {.cp.Elements.GetKey(i), .cp.Elements.GetByIndex(i)})
                 Next
 
                 For Each it As Object In cbEqPVAP.Items
@@ -532,8 +532,8 @@ Public Class FormCompoundCreator
 
                 populating = True
                 For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
-                    If .cp.UNIFACGroups.Collection(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.UNIFACGroups.Collection(r.Cells(1).Value) 'old file format - Subgroup name
-                    If .cp.UNIFACGroups.Collection(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.UNIFACGroups.Collection(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
+                    If .cp.UNIFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.UNIFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
+                    If .cp.UNIFACGroups(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.UNIFACGroups(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
 
                     If r.Cells(2).Value > 0 Then
                         r.Cells(2).Style.BackColor = Color.PaleGreen
@@ -543,8 +543,8 @@ Public Class FormCompoundCreator
 
                 Next
                 For Each r As DataGridViewRow In Me.GridMODFAC.Rows
-                    If .cp.MODFACGroups.Collection(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.MODFACGroups.Collection(r.Cells(1).Value) 'old file format - Subgroup name
-                    If .cp.MODFACGroups.Collection(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.MODFACGroups.Collection(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
+                    If .cp.MODFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.MODFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
+                    If .cp.MODFACGroups(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.MODFACGroups(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
 
                     If r.Cells(2).Value > 0 Then
                         r.Cells(2).Style.BackColor = Color.PaleGreen
@@ -553,13 +553,11 @@ Public Class FormCompoundCreator
                     End If
                 Next
 
-                If .cp.NISTMODFACGroups Is Nothing Then
-                    .cp.NISTMODFACGroups = New DWSIM.Thermodynamics.BaseClasses.UNIFACGroupCollection
-                End If
+                If .cp.NISTMODFACGroups Is Nothing Then .cp.NISTMODFACGroups = New SortedList()
 
                 For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
-                    If .cp.NISTMODFACGroups.Collection(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.NISTMODFACGroups.Collection(r.Cells(1).Value) 'old file format - Subgroup name
-                    If .cp.NISTMODFACGroups.Collection(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.NISTMODFACGroups.Collection(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
+                    If .cp.NISTMODFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.NISTMODFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
+                    If .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) <> "" Then r.Cells(2).Value = .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) 'new file format - Subgroup ID
 
                     If r.Cells(2).Value > 0 Then
                         r.Cells(2).Style.BackColor = Color.PaleGreen
@@ -645,7 +643,7 @@ Public Class FormCompoundCreator
         For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
             'Joback groups from UNIFAC subgroups
             If r.Cells(2).Value > 0 Then
-                ugc = mycase.cp.UNIFACGroups.Collection(r.Cells(3).Tag(2))
+                ugc = mycase.cp.UNIFACGroups(r.Cells(3).Tag(2))
                 JG = UNIFAClines(r.Index + 2).Split(",")(8) 'Joback Subgroup List
                 For k = 0 To 3
                     JSG = JG.Split("/")(k)
@@ -786,19 +784,19 @@ Public Class FormCompoundCreator
                 .cp.Liquid_Viscosity_Const_D = CheckEmptyCell(tbLIQVISC_D.Text)
                 .cp.Liquid_Viscosity_Const_E = CheckEmptyCell(tbLIQVISC_E.Text)
 
-                .cp.UNIFACGroups.Collection.Clear()
+                .cp.UNIFACGroups.Clear()
                 For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
-                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.UNIFACGroups.Collection(r.Cells(3).Tag(2)) = r.Cells(2).Value
+                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.UNIFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
                 Next
 
-                .cp.MODFACGroups.Collection.Clear()
+                .cp.MODFACGroups.Clear()
                 For Each r As DataGridViewRow In Me.GridMODFAC.Rows
-                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.MODFACGroups.Collection(r.Cells(3).Tag(2)) = r.Cells(2).Value
+                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.MODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
                 Next
 
-                .cp.NISTMODFACGroups.Collection.Clear()
+                .cp.NISTMODFACGroups.Clear()
                 For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
-                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.NISTMODFACGroups.Collection(r.Cells(3).Tag(2)) = r.Cells(2).Value
+                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
                 Next
 
                 Dim JC As Integer
@@ -816,9 +814,9 @@ Public Class FormCompoundCreator
                     If JC > 0 Then .AdditionalAtoms.Add(New Integer() {r.Index, JC})
                 Next
 
-                .cp.Elements.Collection.Clear()
+                .cp.Elements.Clear()
                 For Each r As DataGridViewRow In Me.AtomDataGrid.Rows
-                    .cp.Elements.Collection.Add(r.Cells(0).Value, r.Cells(1).Value)
+                    .cp.Elements.Add(r.Cells(0).Value, r.Cells(1).Value)
                 Next
 
 
@@ -1161,13 +1159,13 @@ Public Class FormCompoundCreator
         If loaded Then
             'get group amounts
             If Not populating Then
-                mycase.cp.UNIFACGroups.Collection.Clear()
+                mycase.cp.UNIFACGroups.Clear()
             End If
             For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
                 If Not r.Cells(2).Value Is Nothing Then
                     If Convert.ToInt32(r.Cells(2).Value) <> 0 Then
                         If Not populating Then
-                            mycase.cp.UNIFACGroups.Collection.Add(r.Cells(3).Tag(2), r.Cells(2).Value)
+                            mycase.cp.UNIFACGroups.Add(r.Cells(3).Tag(2), r.Cells(2).Value)
                             r.Cells(2).Style.BackColor = Color.PaleGreen
                         End If
                     End If
@@ -2711,9 +2709,9 @@ Public Class FormCompoundCreator
             'In case of additionalt Joback groups no UNIFAC calculation is possible anymore.
             'Delete UNIFAC groups to prevent wrong calculations.
             If Not PureUNIFACCompound Then
-                mycase.cp.UNIFACGroups.Collection.Clear()
-                mycase.cp.MODFACGroups.Collection.Clear()
-                mycase.cp.NISTMODFACGroups.Collection.Clear()
+                mycase.cp.UNIFACGroups.Clear()
+                mycase.cp.MODFACGroups.Clear()
+                mycase.cp.NISTMODFACGroups.Clear()
             End If
 
             DWSIM.Databases.UserDB.AddCompounds(New DWSIM.Thermodynamics.BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)

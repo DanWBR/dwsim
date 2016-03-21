@@ -268,8 +268,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             specstr.Phases(0).Properties.molarflow = summ
             specstr.Phases(0).Properties.massflow = sumw
             For Each sb As Compound In specstr.Phases(0).Compounds.Values
-                If summ <> 0.0# Then sb.FracaoMolar = sb.MolarFlow.GetValueOrDefault / summ Else sb.FracaoMolar = 0.0#
-                If sumw <> 0.0# Then sb.FracaoMassica = sb.MassFlow.GetValueOrDefault / sumw Else sb.FracaoMassica = 0.0#
+                If summ <> 0.0# Then sb.MoleFraction = sb.MolarFlow.GetValueOrDefault / summ Else sb.MoleFraction = 0.0#
+                If sumw <> 0.0# Then sb.MassFraction = sb.MassFlow.GetValueOrDefault / sumw Else sb.MassFraction = 0.0#
             Next
             summ = 0
             sumw = 0
@@ -280,8 +280,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             otherstr.Phases(0).Properties.molarflow = summ
             otherstr.Phases(0).Properties.massflow = sumw
             For Each sb As Compound In otherstr.Phases(0).Compounds.Values
-                If summ <> 0.0# Then sb.FracaoMolar = sb.MolarFlow.GetValueOrDefault / summ Else sb.FracaoMolar = 0.0#
-                If sumw <> 0.0# Then sb.FracaoMassica = sb.MassFlow.GetValueOrDefault / sumw Else sb.FracaoMassica = 0.0#
+                If summ <> 0.0# Then sb.MoleFraction = sb.MolarFlow.GetValueOrDefault / summ Else sb.MoleFraction = 0.0#
+                If sumw <> 0.0# Then sb.MassFraction = sb.MassFlow.GetValueOrDefault / sumw Else sb.MassFraction = 0.0#
             Next
 
             'pass conditions
@@ -367,8 +367,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = 0
-                        comp.FracaoMassica = 0
+                        comp.MoleFraction = 0
+                        comp.MassFraction = 0
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = Nothing
@@ -388,8 +388,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = 0
-                        comp.FracaoMassica = 0
+                        comp.MoleFraction = 0
+                        comp.MassFraction = 0
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = Nothing

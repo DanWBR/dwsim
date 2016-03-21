@@ -75,7 +75,7 @@ Public Class FormUNIFACRegression
             Case "UNIFAC"
                 myType = "UNIFAC"
                 For Each cp As ConstantProperties In _comps.Values
-                    For Each ufg In cp.UNIFACGroups.Collection.Keys
+                    For Each ufg In cp.UNIFACGroups.Keys
                         pg = uni.UnifGroups.Groups(Integer.Parse(ufg)).PrimGroupName
                         If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.UnifGroups.Groups(ufg).PrimaryGroup)
                     Next
@@ -83,7 +83,7 @@ Public Class FormUNIFACRegression
             Case "Modified UNIFAC (Dortmund)"
                 myType = "MODFAC"
                 For Each cp As ConstantProperties In _comps.Values
-                    For Each ufg In cp.MODFACGroups.Collection.Keys
+                    For Each ufg In cp.MODFACGroups.Keys
                         pg = uni.ModfGroups.Groups(Integer.Parse(ufg)).MainGroupName
                         If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.ModfGroups.Groups(ufg).PrimaryGroup)
                     Next
@@ -91,7 +91,7 @@ Public Class FormUNIFACRegression
             Case "Modified UNIFAC (NIST)"
                 myType = "MODFAC-NIST"
                 For Each cp As ConstantProperties In _comps.Values
-                    For Each ufg In cp.NISTMODFACGroups.Collection.Keys
+                    For Each ufg In cp.NISTMODFACGroups.Keys
                         pg = uni.ModfGroups.Groups(Integer.Parse(ufg)).MainGroupName
                         If Not PrimaryGroups.ContainsKey(pg) Then PrimaryGroups.Add(pg, uni.ModfGroups.Groups(ufg).PrimaryGroup)
                     Next
@@ -180,25 +180,25 @@ Public Class FormUNIFACRegression
             IPGrid.Item(0, k).Style.ForeColor = Color.White
             IPGrid.Item(0, k).Style.Alignment = DataGridViewContentAlignment.MiddleRight
             If myType = "UNIFAC" Then
-                If cp.UNIFACGroups.Collection.Count > 0 Then
-                    For Each ufg As String In cp.UNIFACGroups.Collection.Keys
+                If cp.UNIFACGroups.Count > 0 Then
+                    For Each ufg As String In cp.UNIFACGroups.Keys
                         l = Integer.Parse(ufg)
                         pg = uni.UnifGroups.Groups(l).PrimGroupName
                         l = PrimaryGroups.IndexOfKey(pg)
-                        IPGrid.Item(l + 1, k).Value = IPGrid.Item(l + 1, k).Value + cp.UNIFACGroups.Collection.Item(ufg)
+                        IPGrid.Item(l + 1, k).Value = IPGrid.Item(l + 1, k).Value + cp.UNIFACGroups.Item(ufg)
                     Next
                 Else
                     IPGrid.Item(0, k).Style.BackColor = Color.Yellow
                     IPGrid.Item(0, k).Style.ForeColor = Color.Black
                 End If
             ElseIf myType = "MODFAC" Then
-                If cp.MODFACGroups.Collection.Count > 0 Then
-                    For Each ufg As String In cp.MODFACGroups.Collection.Keys
+                If cp.MODFACGroups.Count > 0 Then
+                    For Each ufg As String In cp.MODFACGroups.Keys
                         l = Integer.Parse(ufg)
                         pg = uni.ModfGroups.Groups(l).MainGroupName
                         l = PrimaryGroups.IndexOfKey(pg)
                         g1 = IPGrid.Item(l + 1, k).Value
-                        g2 = cp.MODFACGroups.Collection.Item(ufg)
+                        g2 = cp.MODFACGroups.Item(ufg)
                         IPGrid.Item(l + 1, k).Value = g1 + g2
                     Next
                 Else
@@ -206,13 +206,13 @@ Public Class FormUNIFACRegression
                     IPGrid.Item(0, k).Style.ForeColor = Color.Black
                 End If
             Else 'NIST-MODFAC
-                If cp.NISTMODFACGroups.Collection.Count > 0 Then
-                    For Each ufg As String In cp.NISTMODFACGroups.Collection.Keys
+                If cp.NISTMODFACGroups.Count > 0 Then
+                    For Each ufg As String In cp.NISTMODFACGroups.Keys
                         l = Integer.Parse(ufg)
                         pg = uni.ModfGroups.Groups(l).MainGroupName
                         l = PrimaryGroups.IndexOfKey(pg)
                         g1 = IPGrid.Item(l + 1, k).Value
-                        g2 = cp.NISTMODFACGroups.Collection.Item(ufg)
+                        g2 = cp.NISTMODFACGroups.Item(ufg)
                         IPGrid.Item(l + 1, k).Value = g1 + g2
                     Next
                 Else
@@ -251,7 +251,7 @@ Public Class FormUNIFACRegression
             Select Case cbModel.SelectedItem
                 Case "UNIFAC"
                     For Each c As ConstantProperties In FormMain.AvailableComponents.Values
-                        If c.UNIFACGroups.Collection.Count > 0 Then
+                        If c.UNIFACGroups.Count > 0 Then
                             compounds.Add(c.Name & " (" & c.CurrentDB & ")")
                         End If
                     Next
@@ -269,7 +269,7 @@ Public Class FormUNIFACRegression
                     LblTUnit.Visible = True
                 Case "Modified UNIFAC (Dortmund)"
                     For Each c As ConstantProperties In FormMain.AvailableComponents.Values
-                        If c.MODFACGroups.Collection.Count > 0 Then
+                        If c.MODFACGroups.Count > 0 Then
                             compounds.Add(c.Name & " (" & c.CurrentDB & ")")
                         End If
                     Next
@@ -287,7 +287,7 @@ Public Class FormUNIFACRegression
                     LblTUnit.Visible = False
                 Case "Modified UNIFAC (NIST)"
                     For Each c As ConstantProperties In FormMain.AvailableComponents.Values
-                        If c.NISTMODFACGroups.Collection.Count > 0 Then
+                        If c.NISTMODFACGroups.Count > 0 Then
                             compounds.Add(c.Name & " (" & c.CurrentDB & ")")
                         End If
                     Next

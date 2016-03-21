@@ -212,7 +212,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Case "surfacetension"
-                    Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                    Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                 Case "osmoticcoefficient"
                     Dim constprops As New List(Of ConstantProperties)
                     For Each su As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values

@@ -310,7 +310,7 @@ Namespace PropertyPackages
                                                    Me.AUX_CPi(subst.ConstantProperties.Name, T) * subst.ConstantProperties.Molar_Weight - 8.314)
                 End If
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                vk(i) = subst.FracaoMassica * vk(i)
+                vk(i) = subst.MassFraction * vk(i)
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
@@ -367,7 +367,7 @@ Namespace PropertyPackages
                                                subst.ConstantProperties.Molar_Weight, "X")
                 End If
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                vk(i) = subst.FracaoMassica * vk(i)
+                vk(i) = subst.MassFraction * vk(i)
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
@@ -521,7 +521,7 @@ Namespace PropertyPackages
             Dim subst As BaseClasses.Compound
             Dim val As Double = 0
             For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_SURFTi(subst.ConstantProperties, T)
+                val += subst.MoleFraction.GetValueOrDefault * Me.AUX_SURFTi(subst.ConstantProperties, T)
             Next
             Return val
 
@@ -660,7 +660,7 @@ Namespace PropertyPackages
                     vk(i) = MyBase.AUX_VAPVISCi(subst.ConstantProperties, T)
                 End If
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                vk(i) = subst.FracaoMolar * vk(i)
+                vk(i) = subst.MoleFraction * vk(i)
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
@@ -674,7 +674,7 @@ Namespace PropertyPackages
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                vk(i) = subst.FracaoMassica / Me.AUX_LIQDENSi(subst.ConstantProperties, T)
+                vk(i) = subst.MassFraction / Me.AUX_LIQDENSi(subst.ConstantProperties, T)
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
                 i = i + 1
             Next
@@ -739,7 +739,7 @@ Namespace PropertyPackages
                     vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Phase.Vapor) / 1000
                 End If
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                vk(i) = subst.FracaoMolar * vk(i)
+                vk(i) = subst.MoleFraction * vk(i)
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
@@ -820,7 +820,7 @@ Namespace PropertyPackages
                             vk(i) = 0.0#
                         End If
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                        vk(i) = subst.FracaoMassica * vk(i)
+                        vk(i) = subst.MassFraction * vk(i)
                         i = i + 1
                     Next
                 Case Phase.Vapor
@@ -860,7 +860,7 @@ Namespace PropertyPackages
                             vk(i) = 0.0#
                         End If
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                        vk(i) = subst.FracaoMassica * vk(i)
+                        vk(i) = subst.MassFraction * vk(i)
                         i = i + 1
                     Next
             End Select
@@ -936,7 +936,7 @@ Namespace PropertyPackages
                             vk(i) = 0.0#
                         End If
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                        vk(i) = subst.FracaoMassica * vk(i)
+                        vk(i) = subst.MassFraction * vk(i)
                         i = i + 1
                     Next
                 Case Phase.Vapor
@@ -976,7 +976,7 @@ Namespace PropertyPackages
                             vk(i) = 0.0#
                         End If
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                        vk(i) = subst.FracaoMassica * vk(i)
+                        vk(i) = subst.MassFraction * vk(i)
                         i = i + 1
                     Next
             End Select

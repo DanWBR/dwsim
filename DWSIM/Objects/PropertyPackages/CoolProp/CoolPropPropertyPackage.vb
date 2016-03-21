@@ -202,7 +202,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQDENSi(cprop As Thermodynamics.BaseClasses.ConstantProperties, T As Double) As Double
+        Public Overrides Function AUX_LIQDENSi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -318,7 +318,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                                    Me.AUX_CPi(subst.ConstantProperties.Name, T) * subst.ConstantProperties.Molar_Weight - 8.314)
                 End If
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                vk(i) = subst.FracaoMassica * vk(i)
+                vk(i) = subst.MassFraction * vk(i)
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
@@ -375,7 +375,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                                                subst.ConstantProperties.Molar_Weight, "X")
                 End If
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                vk(i) = subst.FracaoMassica * vk(i)
+                vk(i) = subst.MassFraction * vk(i)
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
@@ -421,7 +421,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_LIQDENSi(subst As Thermodynamics.BaseClasses.Compound, T As Double) As Double
+        Public Overrides Function AUX_LIQDENSi(subst As Interfaces.ICompound, T As Double) As Double
             Dim sub1 = subst.ConstantProperties.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -529,7 +529,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim val As Double = 0
             For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_SURFTi(subst.ConstantProperties, T)
+                val += subst.MoleFraction.GetValueOrDefault * Me.AUX_SURFTi(subst.ConstantProperties, T)
             Next
             Return val
 
@@ -668,7 +668,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     vk(i) = MyBase.AUX_VAPVISCi(subst.ConstantProperties, T)
                 End If
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                vk(i) = subst.FracaoMolar * vk(i)
+                vk(i) = subst.MoleFraction * vk(i)
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
@@ -682,7 +682,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                vk(i) = subst.FracaoMassica / Me.AUX_LIQDENSi(subst.ConstantProperties, T)
+                vk(i) = subst.MassFraction / Me.AUX_LIQDENSi(subst.ConstantProperties, T)
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
                 i = i + 1
             Next
@@ -747,7 +747,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Phase.Vapor) / 1000
                 End If
                 If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                vk(i) = subst.FracaoMolar * vk(i)
+                vk(i) = subst.MoleFraction * vk(i)
                 i = i + 1
             Next
             val = MathEx.Common.Sum(vk)
@@ -828,7 +828,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             vk(i) = 0.0#
                         End If
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                        vk(i) = subst.FracaoMassica * vk(i)
+                        vk(i) = subst.MassFraction * vk(i)
                         i = i + 1
                     Next
                 Case Phase.Vapor
@@ -868,7 +868,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             vk(i) = 0.0#
                         End If
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                        vk(i) = subst.FracaoMassica * vk(i)
+                        vk(i) = subst.MassFraction * vk(i)
                         i = i + 1
                     Next
             End Select
@@ -944,7 +944,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             vk(i) = 0.0#
                         End If
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                        vk(i) = subst.FracaoMassica * vk(i)
+                        vk(i) = subst.MassFraction * vk(i)
                         i = i + 1
                     Next
                 Case Phase.Vapor
@@ -984,7 +984,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                             vk(i) = 0.0#
                         End If
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
-                        vk(i) = subst.FracaoMassica * vk(i)
+                        vk(i) = subst.MassFraction * vk(i)
                         i = i + 1
                     Next
             End Select
@@ -1505,7 +1505,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Case "surfacetension"
-                    Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                    Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                 Case Else
                     Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                     ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -1530,7 +1530,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim T As Double
 
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
         End Sub
 

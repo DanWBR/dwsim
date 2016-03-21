@@ -113,7 +113,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.SRK_Volume_Translation_Coefficient * Me.m_pr.bi(0.08664, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.SRK_Volume_Translation_Coefficient * Me.m_pr.bi(0.08664, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
             Next
 
             Return val
@@ -352,7 +352,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Case "surfacetension"
-                    Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                    Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                 Case Else
                     Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                     ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -520,7 +520,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim T As Double
 
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
         End Sub
 
@@ -573,7 +573,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             i = 0
             For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                Vz(i) += comp.FracaoMolar.GetValueOrDefault
+                Vz(i) += comp.MoleFraction.GetValueOrDefault
                 i += 1
             Next
 
@@ -1075,7 +1075,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
             i = 0
             For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                Vz(i) += comp.FracaoMolar.GetValueOrDefault
+                Vz(i) += comp.MoleFraction.GetValueOrDefault
                 i += 1
             Next
             i = 0

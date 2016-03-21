@@ -111,13 +111,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim sum As Double
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 sum = 0
-                If subst.ConstantProperties.NISTMODFACGroups.Collection.Count > 0 Then
-                    For Each s As String In subst.ConstantProperties.NISTMODFACGroups.Collection.Keys
-                        sum += subst.ConstantProperties.NISTMODFACGroups.Collection(s) * Me.m_uni.ModfGroups.Groups(s).Q
+                If subst.ConstantProperties.NISTMODFACGroups.Count > 0 Then
+                    For Each s As String In subst.ConstantProperties.NISTMODFACGroups.Keys
+                        sum += subst.ConstantProperties.NISTMODFACGroups(s) * Me.m_uni.ModfGroups.Groups(s).Q
                     Next
                 Else
-                    For Each s As String In subst.ConstantProperties.MODFACGroups.Collection.Keys
-                        sum += subst.ConstantProperties.MODFACGroups.Collection(s) * Me.m_uni.ModfGroups.Groups(s).Q
+                    For Each s As String In subst.ConstantProperties.MODFACGroups.Keys
+                        sum += subst.ConstantProperties.MODFACGroups(s) * Me.m_uni.ModfGroups.Groups(s).Q
                     Next
                 End If
                 Dim obj = Me.m_uni.RET_EKI(Me.RET_VN(subst), sum)

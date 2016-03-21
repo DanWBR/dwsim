@@ -161,8 +161,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             i = 0
             For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In feed.Phases(0).Compounds.Values
-                z(i) = comp.FracaoMolar.GetValueOrDefault
-                'K(i) = feed.Phases(2).Compounds(comp.Name).FracaoMolar.GetValueOrDefault / feed.Phases(1).Compounds(comp.Name).FracaoMolar.GetValueOrDefault
+                z(i) = comp.MoleFraction.GetValueOrDefault
+                'K(i) = feed.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault / feed.Phases(1).Compounds(comp.Name).MoleFraction.GetValueOrDefault
                 id(i) = comp.Name
                 'If Double.IsInfinity(K(i)) Then K(i) = 1.0E+20
                 If Me.m_lightkey = comp.Name Then lki = i
@@ -354,8 +354,8 @@ restart:    B = F - D
             i = 0
             Dmw = 0
             For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Compounds.Values
-                If Double.IsNaN(xd(i)) = False Then comp.FracaoMolar = xd(i) Else comp.FracaoMolar = 0
-                Dmw += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
+                If Double.IsNaN(xd(i)) = False Then comp.MoleFraction = xd(i) Else comp.MoleFraction = 0
+                Dmw += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 i = i + 1
             Next
             With distillate.Phases(0)
@@ -367,8 +367,8 @@ restart:    B = F - D
             i = 0
             Bmw = 0
             For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Compounds.Values
-                If Double.IsNaN(xb(i)) = False Then comp.FracaoMolar = xb(i) Else comp.FracaoMolar = 0
-                Bmw += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
+                If Double.IsNaN(xb(i)) = False Then comp.MoleFraction = xb(i) Else comp.MoleFraction = 0
+                Bmw += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 i = i + 1
             Next
             With bottoms.Phases(0)
@@ -387,7 +387,7 @@ restart:    B = F - D
             pp.CurrentMaterialStream = distillate
 
             For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Compounds.Values
-                comp.FracaoMassica = pp.AUX_CONVERT_MOL_TO_MASS(comp.Name, 0)
+                comp.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(comp.Name, 0)
             Next
 
             If Me.condtype = CondenserType.PartialCond Then
@@ -407,7 +407,7 @@ restart:    B = F - D
             pp.CurrentMaterialStream = bottoms
 
             For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Compounds.Values
-                comp.FracaoMassica = pp.AUX_CONVERT_MOL_TO_MASS(comp.Name, 0)
+                comp.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(comp.Name, 0)
             Next
 
             result = pp.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.VAP, m_boilerpressure, 0.001, 0)
@@ -439,8 +439,8 @@ restart:    B = F - D
             Dim NminS, Ss, Ns As Double
 
             Ss = z(lki) / z(hki) * xb(hki) / xb(lki)
-            'alpha_s = bottoms.Phases(2).Compounds(m_lightkey).FracaoMolar.GetValueOrDefault / bottoms.Phases(1).Compounds(m_lightkey).FracaoMolar.GetValueOrDefault
-            'alpha_s = alpha_s / (bottoms.Phases(2).Compounds(m_heavykey).FracaoMolar.GetValueOrDefault / bottoms.Phases(1).Compounds(m_heavykey).FracaoMolar.GetValueOrDefault)
+            'alpha_s = bottoms.Phases(2).Compounds(m_lightkey).MoleFraction.GetValueOrDefault / bottoms.Phases(1).Compounds(m_lightkey).MoleFraction.GetValueOrDefault
+            'alpha_s = alpha_s / (bottoms.Phases(2).Compounds(m_heavykey).MoleFraction.GetValueOrDefault / bottoms.Phases(1).Compounds(m_heavykey).MoleFraction.GetValueOrDefault)
             NminS = Log(Ss) / Log(alpha(lki))
             Ns = NminS * m_N / m_Nmin
             ofs = Ns

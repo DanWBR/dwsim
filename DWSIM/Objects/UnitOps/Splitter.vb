@@ -146,8 +146,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                                 j = 0
                                 For Each comp In .Phases(0).Compounds.Values
-                                    comp.FracaoMolar = ems.Phases(0).Compounds(comp.Name).FracaoMolar
-                                    comp.FracaoMassica = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).FracaoMassica
+                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction
+                                    comp.MassFraction = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MassFraction
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massflow = W * Me.Ratios(i)
@@ -201,8 +201,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                                 j = 0
                                 For Each comp In .Phases(0).Compounds.Values
-                                    comp.FracaoMolar = ems.Phases(0).Compounds(comp.Name).FracaoMolar
-                                    comp.FracaoMassica = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).FracaoMassica
+                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction
+                                    comp.MassFraction = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MassFraction
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massflow = wn(i)
@@ -257,8 +257,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                                 j = 0
                                 For Each comp In .Phases(0).Compounds.Values
-                                    comp.FracaoMolar = ems.Phases(0).Compounds(comp.Name).FracaoMolar
-                                    comp.FracaoMassica = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).FracaoMassica
+                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction
+                                    comp.MassFraction = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MassFraction
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massflow = Nothing
@@ -305,8 +305,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         .Phases(0).Properties.enthalpy = Nothing
                         Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                         For Each comp In .Phases(0).Compounds.Values
-                            comp.FracaoMolar = 0
-                            comp.FracaoMassica = 0
+                            comp.MoleFraction = 0
+                            comp.MassFraction = 0
                             j += 1
                         Next
                         .Phases(0).Properties.massflow = Nothing

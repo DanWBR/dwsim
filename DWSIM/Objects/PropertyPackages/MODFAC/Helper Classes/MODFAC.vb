@@ -294,9 +294,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages.Auxiliary
             res.Clear()
 
             For Each group As ModfacGroup In Me.ModfGroups.Groups.Values
-                For Each s As String In cp.MODFACGroups.Collection.Keys
+                For Each s As String In cp.MODFACGroups.Keys
                     If s = group.Secondary_Group Then
-                        res.Add(group.Secondary_Group, cp.MODFACGroups.Collection(s))
+                        res.Add(group.Secondary_Group, cp.MODFACGroups(s))
                         Exit For
                     End If
                 Next

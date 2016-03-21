@@ -437,28 +437,28 @@ Namespace DWSIM.Databases
                                 End Select
                             Next
                         Case "UnifacVLE"
-                            If cp.UNIFACGroups.Collection Is Nothing Then cp.UNIFACGroups.Collection = New SortedList
+                            If cp.UNIFACGroups Is Nothing Then cp.UNIFACGroups = New SortedList
                             For Each node3 As XmlNode In node2.ChildNodes
                                 Select Case node3.Name
                                     Case "group"
-                                        If Not cp.UNIFACGroups.Collection.ContainsKey(node3.Attributes("id").Value) Then
-                                            cp.UNIFACGroups.Collection.Add(node3.Attributes("id").Value, Integer.Parse(node3.Attributes("value").Value))
+                                        If Not cp.UNIFACGroups.ContainsKey(node3.Attributes("id").Value) Then
+                                            cp.UNIFACGroups.Add(node3.Attributes("id").Value, Integer.Parse(node3.Attributes("value").Value))
                                         End If
                                 End Select
                             Next
                         Case "ModifiedUnifac"
-                            If cp.MODFACGroups.Collection Is Nothing Then cp.MODFACGroups.Collection = New SortedList
+                            If cp.MODFACGroups Is Nothing Then cp.MODFACGroups = New SortedList
                             For Each node3 As XmlNode In node2.ChildNodes
                                 Select Case node3.Name
                                     Case "group"
-                                        If Not cp.MODFACGroups.Collection.ContainsKey(node3.Attributes("id").Value) Then
-                                            cp.MODFACGroups.Collection.Add(node3.Attributes("id").Value, Integer.Parse(node3.Attributes("value").Value))
+                                        If Not cp.MODFACGroups.ContainsKey(node3.Attributes("id").Value) Then
+                                            cp.MODFACGroups.Add(node3.Attributes("id").Value, Integer.Parse(node3.Attributes("value").Value))
                                         End If
                                 End Select
                             Next
-                            If cp.NISTMODFACGroups.Collection Is Nothing Then cp.NISTMODFACGroups.Collection = New SortedList
-                            For Each sg As String In cp.MODFACGroups.Collection.Keys
-                                cp.NISTMODFACGroups.Collection.Add(sg, cp.MODFACGroups.Collection(sg))
+                            If cp.NISTMODFACGroups Is Nothing Then cp.NISTMODFACGroups = New SortedList
+                            For Each sg As String In cp.MODFACGroups.Keys
+                                cp.NISTMODFACGroups.Add(sg, cp.MODFACGroups(sg))
                             Next
                     End Select
                 Next
@@ -617,18 +617,18 @@ Namespace DWSIM.Databases
                             Case "UNIQUAC_q"
                                 If node2.InnerText <> "" Then .UNIQUAC_Q = Double.Parse(node2.InnerText, nf)
                             Case "UNIFAC"
-                                .UNIFACGroups.Collection = New SortedList
+                                .UNIFACGroups = New SortedList
                                 For Each node3 As XmlNode In node2.ChildNodes
-                                    .UNIFACGroups.Collection.Add(unif.Group2ID(node3.Attributes("name").InnerText), Integer.Parse(node3.InnerText))
+                                    .UNIFACGroups.Add(unif.Group2ID(node3.Attributes("name").InnerText), Integer.Parse(node3.InnerText))
                                 Next
-                                .MODFACGroups.Collection = New SortedList
+                                .MODFACGroups = New SortedList
                                 For Each node3 As XmlNode In node2.ChildNodes
-                                    .MODFACGroups.Collection.Add(modf.Group2ID(node3.Attributes("name").InnerText), Integer.Parse(node3.InnerText))
+                                    .MODFACGroups.Add(modf.Group2ID(node3.Attributes("name").InnerText), Integer.Parse(node3.InnerText))
                                 Next
                             Case "elements"
-                                .Elements.Collection = New SortedList
+                                .Elements = New SortedList
                                 For Each node3 As XmlNode In node2.ChildNodes
-                                    .Elements.Collection.Add(node3.Attributes("name").InnerText, Integer.Parse(node3.InnerText))
+                                    .Elements.Add(node3.Attributes("name").InnerText, Integer.Parse(node3.InnerText))
                                 Next
                             Case "COSMODBName"
                                 cp.COSMODBName = node2.InnerText
@@ -923,9 +923,9 @@ Namespace DWSIM.Databases
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_N", "")).InnerText = comp.BO_PNA_N.ToString(cult)
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_P", "")).InnerText = comp.BO_PNA_P.ToString(cult)
 
-                    If comp.UNIFACGroups.Collection.Count > 0 Then
+                    If comp.UNIFACGroups.Count > 0 Then
                         With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "UNIFAC", ""))
-                            For Each kvp As DictionaryEntry In comp.UNIFACGroups.Collection
+                            For Each kvp As DictionaryEntry In comp.UNIFACGroups
                                 .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "UNIFACGroup", "")).InnerText = kvp.Value
                                 .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("ID"))
                                 .ChildNodes(.ChildNodes.Count - 1).Attributes("ID").Value = kvp.Key
@@ -933,9 +933,9 @@ Namespace DWSIM.Databases
                         End With
                     End If
                     
-                    If comp.MODFACGroups.Collection.Count > 0 Then
+                    If comp.MODFACGroups.Count > 0 Then
                         With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "MODFAC", ""))
-                            For Each kvp As DictionaryEntry In comp.MODFACGroups.Collection
+                            For Each kvp As DictionaryEntry In comp.MODFACGroups
                                 .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "MODFACGroup", "")).InnerText = kvp.Value
                                 .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("ID"))
                                 .ChildNodes(.ChildNodes.Count - 1).Attributes("ID").Value = kvp.Key
@@ -943,9 +943,9 @@ Namespace DWSIM.Databases
                         End With
                     End If
                     
-                    If comp.NISTMODFACGroups.Collection.Count > 0 Then
+                    If comp.NISTMODFACGroups.Count > 0 Then
                         With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "NISTMODFAC", ""))
-                            For Each kvp As DictionaryEntry In comp.NISTMODFACGroups.Collection
+                            For Each kvp As DictionaryEntry In comp.NISTMODFACGroups
                                 .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "NISTMODFACGroup", "")).InnerText = kvp.Value
                                 .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("ID"))
                                 .ChildNodes(.ChildNodes.Count - 1).Attributes("ID").Value = kvp.Key
@@ -953,7 +953,7 @@ Namespace DWSIM.Databases
                         End With
                     End If
                     With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "elements", ""))
-                        For Each el As DictionaryEntry In comp.Elements.Collection
+                        For Each el As DictionaryEntry In comp.Elements
                             .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "element", "")).InnerText = el.Value
                             .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("name"))
                             .ChildNodes(.ChildNodes.Count - 1).Attributes("name").Value = el.Key
@@ -1174,40 +1174,40 @@ Namespace DWSIM.Databases
                             Case "UNIQUAC_q"
                                 If node2.InnerText <> "" Then .UNIQUAC_Q = Double.Parse(node2.InnerText, nf)
                             Case "UNIFAC"
-                                .UNIFACGroups.Collection = New SortedList
+                                .UNIFACGroups = New SortedList
                                 Dim unif As New SimulationObjects.PropertyPackages.Auxiliary.Unifac
                                 Dim GID, nid As String
                                 For Each node3 As XmlNode In node2.ChildNodes
                                     nid = node3.Attributes.Item(0).Name
                                     If node3.Attributes.Item(0).Name = "ID" Then
-                                        .UNIFACGroups.Collection.Add(node3.Attributes("ID").InnerText, Integer.Parse(node3.InnerText))
+                                        .UNIFACGroups.Add(node3.Attributes("ID").InnerText, Integer.Parse(node3.InnerText))
                                     Else 'read data of old file format
                                         GID = unif.Group2ID(node3.Attributes("name").InnerText)
-                                        .UNIFACGroups.Collection.Add(GID, Integer.Parse(node3.InnerText))
+                                        .UNIFACGroups.Add(GID, Integer.Parse(node3.InnerText))
                                     End If
                                 Next
                             Case "MODFAC"
-                                .MODFACGroups.Collection = New SortedList
+                                .MODFACGroups = New SortedList
                                 Dim modf As New SimulationObjects.PropertyPackages.Auxiliary.Modfac
                                 Dim GID As String
                                 For Each node3 As XmlNode In node2.ChildNodes
                                     If node3.Attributes.Item(0).Name = "ID" Then
-                                        .MODFACGroups.Collection.Add(node3.Attributes("ID").InnerText, Integer.Parse(node3.InnerText))
+                                        .MODFACGroups.Add(node3.Attributes("ID").InnerText, Integer.Parse(node3.InnerText))
                                     Else 'read data of old file format
                                         GID = modf.Group2ID(node3.Attributes("name").InnerText)
-                                        .MODFACGroups.Collection.Add(node3.Attributes("name").InnerText, Integer.Parse(node3.InnerText))
+                                        .MODFACGroups.Add(node3.Attributes("name").InnerText, Integer.Parse(node3.InnerText))
                                     End If
                                 Next
                             Case "NISTMODFAC"
-                                .NISTMODFACGroups.Collection = New SortedList
+                                .NISTMODFACGroups = New SortedList
                                 Dim nimodf As New SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC
                                 Dim GID As String
                                 For Each node3 As XmlNode In node2.ChildNodes
                                     If node3.Attributes.Item(0).Name = "ID" Then
-                                        .NISTMODFACGroups.Collection.Add(node3.Attributes("ID").InnerText, Integer.Parse(node3.InnerText))
+                                        .NISTMODFACGroups.Add(node3.Attributes("ID").InnerText, Integer.Parse(node3.InnerText))
                                     Else 'read data of old file format
                                         GID = nimodf.Group2ID(node3.Attributes("name").InnerText)
-                                        .NISTMODFACGroups.Collection.Add(node3.Attributes("name").InnerText, Integer.Parse(node3.InnerText))
+                                        .NISTMODFACGroups.Add(node3.Attributes("name").InnerText, Integer.Parse(node3.InnerText))
                                     End If
                                 Next
                             Case "PC_SAFT_sigma"
@@ -1217,9 +1217,9 @@ Namespace DWSIM.Databases
                             Case "PC_SAFT_epsilon_k"
                                 .PC_SAFT_epsilon_k = Double.Parse(node2.InnerText, nf)
                             Case "elements"
-                                .Elements.Collection = New SortedList
+                                .Elements = New SortedList
                                 For Each node3 As XmlNode In node2.ChildNodes
-                                    .Elements.Collection.Add(node3.Attributes("name").InnerText, Integer.Parse(node3.InnerText))
+                                    .Elements.Add(node3.Attributes("name").InnerText, Integer.Parse(node3.InnerText))
                                 Next
                             Case "BlackOil_GOR"
                                 .BO_GOR = Double.Parse(node2.InnerText, nf)

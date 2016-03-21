@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Enums.vb" />
     <Compile Include="ICompound.vb" />
+    <Compile Include="ICompoundConstantProperties.vb" />
     <Compile Include="IFlowsheet.vb" />
     <Compile Include="IGraphicObject.vb" />
     <Compile Include="IMaterialStream.vb" />

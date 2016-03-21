@@ -492,7 +492,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Case "surfacetension"
-                    Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                    Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                 Case Else
                     Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                     ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -517,7 +517,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim T As Double
 
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
 
         End Sub
 
@@ -633,7 +633,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         '    Dim name As String = ""
 
         '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-        '        If s.FracaoMolar.GetValueOrDefault >= maxZ Then
+        '        If s.MoleFraction.GetValueOrDefault >= maxZ Then
         '            name = s.Name
         '            maxZ = Vz(i)
         '        End If
@@ -651,9 +651,9 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
         '    Dim name As String = ""
 
         '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-        '        If s.FracaoMolar.GetValueOrDefault >= maxZ Then
+        '        If s.MoleFraction.GetValueOrDefault >= maxZ Then
         '            name = s.Name
-        '            maxZ = s.FracaoMolar.GetValueOrDefault
+        '            maxZ = s.MoleFraction.GetValueOrDefault
         '        End If
         '        i += 1
         '    Next

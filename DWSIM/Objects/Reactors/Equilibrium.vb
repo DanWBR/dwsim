@@ -178,10 +178,10 @@ Namespace DWSIM.SimulationObjects.Reactors
             For Each s As Compound In tms.Phases(0).Compounds.Values
                 If Me.ComponentIDs.Contains(s.Name) Then
                     s.MolarFlow = N(s.Name)
-                    s.FracaoMolar = N(s.Name) / sumfm
+                    s.MoleFraction = N(s.Name) / sumfm
                     sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 Else
-                    s.FracaoMolar = s.MolarFlow / sumfm
+                    s.MoleFraction = s.MolarFlow / sumfm
                 End If
                 sumn += s.MolarFlow
             Next
@@ -193,7 +193,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                 If Me.ComponentIDs.Contains(s.Name) Then
                     s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 End If
-                s.FracaoMassica = s.MassFlow / (sum1 + Winerts)
+                s.MassFraction = s.MassFlow / (sum1 + Winerts)
                 sumw += s.MassFlow
             Next
 
@@ -221,9 +221,9 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             i = 0
             For Each s As Compound In tms.Phases(2).Compounds.Values
-                If s.FracaoMolar > 0.0# Then
+                If s.MoleFraction > 0.0# Then
                     fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = (fugs(i) * s.FracaoMolar.GetValueOrDefault * P / P0)
+                    CP(i) = (fugs(i) * s.MoleFraction.GetValueOrDefault * P / P0)
                 Else
                     fugs(i) = s.FugacityCoeff.GetValueOrDefault
                     CP(i) = (fugs(i) * 0.0000000001 * P / P0)
@@ -296,10 +296,10 @@ Namespace DWSIM.SimulationObjects.Reactors
             For Each s As Compound In tms.Phases(0).Compounds.Values
                 If Me.ComponentIDs.Contains(s.Name) Then
                     s.MolarFlow = N(s.Name)
-                    s.FracaoMolar = N(s.Name) / sumfm
+                    s.MoleFraction = N(s.Name) / sumfm
                     sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 Else
-                    s.FracaoMolar = s.MolarFlow / sumfm
+                    s.MoleFraction = s.MolarFlow / sumfm
                 End If
                 sumn += s.MolarFlow
             Next
@@ -311,7 +311,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                 If Me.ComponentIDs.Contains(s.Name) Then
                     s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 End If
-                s.FracaoMassica = s.MassFlow / (sum1 + Winerts)
+                s.MassFraction = s.MassFlow / (sum1 + Winerts)
                 sumw += s.MassFlow
             Next
 
@@ -339,10 +339,10 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             i = 0
             For Each s As Compound In tms.Phases(2).Compounds.Values
-                If s.FracaoMolar > 0.0# Then
+                If s.MoleFraction > 0.0# Then
                     'DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
                     fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = (fugs(i) * s.FracaoMolar.GetValueOrDefault * P / P0)
+                    CP(i) = (fugs(i) * s.MoleFraction.GetValueOrDefault * P / P0)
                 Else
                     fugs(i) = s.FugacityCoeff.GetValueOrDefault
                     CP(i) = (fugs(i) * 0.01 * P / P0)
@@ -410,10 +410,10 @@ Namespace DWSIM.SimulationObjects.Reactors
             For Each s As Compound In tms.Phases(0).Compounds.Values
                 If Me.ComponentIDs.Contains(s.Name) Then
                     s.MolarFlow = N(s.Name)
-                    s.FracaoMolar = N(s.Name) / sumfm
+                    s.MoleFraction = N(s.Name) / sumfm
                     sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 Else
-                    s.FracaoMolar = s.MolarFlow / sumfm
+                    s.MoleFraction = s.MolarFlow / sumfm
                 End If
                 sumn += s.MolarFlow
             Next
@@ -425,7 +425,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                 If Me.ComponentIDs.Contains(s.Name) Then
                     s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 End If
-                s.FracaoMassica = s.MassFlow / (sum1 + Winerts)
+                s.MassFraction = s.MassFlow / (sum1 + Winerts)
                 sumw += s.MassFlow
             Next
 
@@ -452,10 +452,10 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             i = 0
             For Each s As Compound In tms.Phases(2).Compounds.Values
-                If s.FracaoMolar <> 0.0# Then
+                If s.MoleFraction <> 0.0# Then
                     DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
                     fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = s.FracaoMolar * (DGf + Log(fugs(i) * s.FracaoMolar.GetValueOrDefault * P / P0))
+                    CP(i) = s.MoleFraction * (DGf + Log(fugs(i) * s.MoleFraction.GetValueOrDefault * P / P0))
                 Else
                     CP(i) = 0.0#
                 End If
@@ -528,7 +528,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             For Each comp As Compound In tms.Phases(0).Compounds.Values
                 con_lc(i) = 0.0#
                 con_uc(i) = 1.0#
-                con_val(i) = comp.FracaoMolar.GetValueOrDefault
+                con_val(i) = comp.MoleFraction.GetValueOrDefault
                 i += 1
             Next
 
@@ -919,14 +919,14 @@ Namespace DWSIM.SimulationObjects.Reactors
             'Check to see if are negative molar fractions.
             Dim sum1 As Double = 0
             For Each subst As Compound In tms.Phases(0).Compounds.Values
-                If subst.FracaoMolar.GetValueOrDefault < 0 Then
+                If subst.MoleFraction.GetValueOrDefault < 0 Then
                     subst.MolarFlow = 0
                 Else
                     sum1 += subst.MolarFlow.GetValueOrDefault
                 End If
             Next
             For Each subst As Compound In tms.Phases(0).Compounds.Values
-                subst.FracaoMolar = subst.MolarFlow.GetValueOrDefault / sum1
+                subst.MoleFraction = subst.MolarFlow.GetValueOrDefault / sum1
             Next
 
             ims = tms.Clone
@@ -1095,14 +1095,14 @@ Namespace DWSIM.SimulationObjects.Reactors
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = Vy(j)
-                        comp.FracaoMassica = Vwy(j)
+                        comp.MoleFraction = Vy(j)
+                        comp.MassFraction = Vwy(j)
                         j += 1
                     Next
                     j = 0
                     For Each comp In .Phases(2).Compounds.Values
-                        comp.FracaoMolar = Vy(j)
-                        comp.FracaoMassica = Vwy(j)
+                        comp.MoleFraction = Vy(j)
+                        comp.MassFraction = Vwy(j)
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = W * (wtotaly * xv / (wtotaly * xv + wtotalx * xl))
@@ -1125,14 +1125,14 @@ Namespace DWSIM.SimulationObjects.Reactors
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = Vx(j)
-                        comp.FracaoMassica = Vwx(j)
+                        comp.MoleFraction = Vx(j)
+                        comp.MassFraction = Vwx(j)
                         j += 1
                     Next
                     j = 0
                     For Each comp In .Phases(3).Compounds.Values
-                        comp.FracaoMolar = Vx(j)
-                        comp.FracaoMassica = Vwx(j)
+                        comp.MoleFraction = Vx(j)
+                        comp.MassFraction = Vwx(j)
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = W * (wtotalx * xl / (wtotaly * xv + wtotalx * xl))
@@ -1190,8 +1190,8 @@ Namespace DWSIM.SimulationObjects.Reactors
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = 0
-                        comp.FracaoMassica = 0
+                        comp.MoleFraction = 0
+                        comp.MassFraction = 0
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = Nothing
@@ -1211,8 +1211,8 @@ Namespace DWSIM.SimulationObjects.Reactors
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = 0
-                        comp.FracaoMassica = 0
+                        comp.MoleFraction = 0
+                        comp.MassFraction = 0
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = Nothing

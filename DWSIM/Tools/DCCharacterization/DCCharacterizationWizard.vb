@@ -447,7 +447,7 @@ Public Class DCCharacterizationWizard
             With subst
                 .ConstantProperties = cprops
                 .Name = cprops.Name
-                .FracaoDePetroleo = True
+                .PetroleumFraction = True
             End With
 
             ccol.Add(cprops.Name, subst)
@@ -459,7 +459,7 @@ Public Class DCCharacterizationWizard
         If Me.TextBoxBulkMW.Text <> "" Then
             Dim mixtMW As Double = 0
             For Each c As Compound In ccol.Values
-                mixtMW += c.FracaoMolar * c.ConstantProperties.Molar_Weight
+                mixtMW += c.MoleFraction * c.ConstantProperties.Molar_Weight
             Next
             Dim facm As Double = Convert.ToDouble(Me.TextBoxBulkMW.Text) / mixtMW
             For Each c As Compound In ccol.Values
@@ -470,7 +470,7 @@ Public Class DCCharacterizationWizard
         If Me.TextBoxBulkD.Text <> "" Then
             Dim mixtD As Double = 0
             For Each c As Compound In ccol.Values
-                mixtD += c.FracaoMassica * c.ConstantProperties.PF_SG.GetValueOrDefault
+                mixtD += c.MassFraction * c.ConstantProperties.PF_SG.GetValueOrDefault
             Next
             Dim facd As Double = 141.5 / (131.5 + Convert.ToDouble(Me.TextBoxBulkD.Text)) / mixtD
             For Each c As Compound In ccol.Values
@@ -555,8 +555,6 @@ Public Class DCCharacterizationWizard
                 .IG_Enthalpy_of_Formation_25C = tmp(0)
                 .IG_Entropy_of_Formation_25C = tmp(1)
                 .IG_Gibbs_Energy_of_Formation_25C = tmp(0) - 298.15 * tmp(1)
-                .Element_C = tmp(2)
-                .Element_H = tmp(3)
 
                 Dim methods As New DWSIM.Utilities.Hypos.Methods.HYP
 
@@ -693,7 +691,7 @@ Public Class DCCharacterizationWizard
         For Each subst As Compound In ccol.Values
             With subst
                 nm = .Name
-                fm = Format(.FracaoMolar, nf)
+                fm = Format(.MoleFraction, nf)
                 nbp = Format(Converter.ConvertFromSI(su.temperature, .ConstantProperties.NBP), nf)
                 sg = Format(.ConstantProperties.PF_SG, nf)
                 mm = Format(.ConstantProperties.PF_MM, nf)
@@ -748,16 +746,16 @@ Public Class DCCharacterizationWizard
         form.AddComponentsRows(myCOMS)
         Dim wtotal As Double = 0
         For Each subst In ccol.Values
-            wtotal += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
+            wtotal += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
         Next
         For Each subst In ccol.Values
-            subst.FracaoMassica = subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight / wtotal
+            subst.MassFraction = subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight / wtotal
         Next
         For Each subst In ccol.Values
             With myCOMS.Phases(0).Compounds
                 .Item(subst.Name).ConstantProperties = subst.ConstantProperties
-                .Item(subst.Name).FracaoMassica = subst.FracaoMassica
-                .Item(subst.Name).FracaoMolar = subst.FracaoMolar
+                .Item(subst.Name).MassFraction = subst.MassFraction
+                .Item(subst.Name).MoleFraction = subst.MoleFraction
             End With
             myCOMS.Phases(1).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
             myCOMS.Phases(2).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
@@ -925,14 +923,14 @@ Public Class DCCharacterizationWizard
                     fv = (tccol(i).fvf - tccol(i).fv0) / (tccol(tccol.Count - 1).fvf - tccol(0).fv0)
                     fw = fv * subst.ConstantProperties.PF_SG.GetValueOrDefault
                     fm = fw / subst.ConstantProperties.Molar_Weight
-                    subst.FracaoMolar = fm / sum1
+                    subst.MoleFraction = fm / sum1
                     i = i + 1
                 Next
             Case 1
                 'mole percent
                 i = 0
                 For Each subst As Compound In Me.ccol.Values
-                    subst.FracaoMolar = (tccol(i).fvf - tccol(i).fv0) / (tccol(tccol.Count - 1).fvf - tccol(0).fv0)
+                    subst.MoleFraction = (tccol(i).fvf - tccol(i).fv0) / (tccol(tccol.Count - 1).fvf - tccol(0).fv0)
                     i = i + 1
                 Next
             Case 2
@@ -949,7 +947,7 @@ Public Class DCCharacterizationWizard
                 For Each subst As Compound In Me.ccol.Values
                     fw = (tccol(i).fvf - tccol(i).fv0) / (tccol(tccol.Count - 1).fvf - tccol(0).fv0)
                     fm = fw / subst.ConstantProperties.Molar_Weight
-                    subst.FracaoMolar = fm / sum1
+                    subst.MoleFraction = fm / sum1
                     i = i + 1
                 Next
 
@@ -958,11 +956,11 @@ Public Class DCCharacterizationWizard
         Dim wxtotal As Double = 0
 
         For Each subst As Compound In ccol.Values
-            wxtotal += subst.FracaoMolar * subst.ConstantProperties.Molar_Weight
+            wxtotal += subst.MoleFraction * subst.ConstantProperties.Molar_Weight
         Next
 
         For Each subst As Compound In ccol.Values
-            subst.FracaoMassica = subst.FracaoMolar * subst.ConstantProperties.Molar_Weight / wxtotal
+            subst.MassFraction = subst.MoleFraction * subst.ConstantProperties.Molar_Weight / wxtotal
         Next
 
     End Sub

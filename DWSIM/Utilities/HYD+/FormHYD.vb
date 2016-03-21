@@ -91,7 +91,7 @@ Public Class FormHYD
                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                 Dim i As Integer = 0
                 For Each comp In mat.Phases(0).Compounds.Values
-                    Vz(i) = comp.FracaoMolar.GetValueOrDefault
+                    Vz(i) = comp.MoleFraction.GetValueOrDefault
                     nomes(i) = comp.Name
                     i += 1
                 Next

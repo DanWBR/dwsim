@@ -67,7 +67,7 @@ Namespace BaseClasses
             End Set
         End Property
 
-        Public Property FracaoDePetroleo() As Boolean
+        Public Property PetroleumFraction() As Boolean
             Get
                 Return m_isPF
             End Get
@@ -76,7 +76,7 @@ Namespace BaseClasses
             End Set
         End Property
 
-        Public Property FracaoMolar() As Nullable(Of Double)
+        Public Property MoleFraction() As Nullable(Of Double)
             Get
                 Return m_molarfraction
             End Get
@@ -85,7 +85,7 @@ Namespace BaseClasses
             End Set
         End Property
 
-        Public Property FracaoMassica() As Nullable(Of Double)
+        Public Property MassFraction() As Nullable(Of Double)
             Get
                 Return m_massfraction
             End Get

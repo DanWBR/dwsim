@@ -213,7 +213,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     .Phases(0).Properties.enthalpy = Values("Enthalpy")
 
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = msfrom.Phases(0).Compounds(comp.Name).FracaoMolar
+                        comp.MoleFraction = msfrom.Phases(0).Compounds(comp.Name).MoleFraction
                     Next
 
                     .CalcOverallCompMassFractions()
@@ -469,21 +469,21 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                                 j = 0
                                 For Each comp In .Phases(0).Compounds.Values
-                                    comp.FracaoMolar = ems.Phases(0).Compounds(comp.Name).FracaoMolar
-                                    comp.FracaoMassica = ems.Phases(0).Compounds(comp.Name).FracaoMassica
+                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction
+                                    comp.MassFraction = ems.Phases(0).Compounds(comp.Name).MassFraction
                                     j += 1
                                 Next
                                 ms.PropertyPackage.DW_CalcVazaoMolar()
                                 j = 0
                                 For Each comp In .Phases(1).Compounds.Values
-                                    comp.FracaoMolar = Vx(j)
-                                    comp.FracaoMassica = Vwx(j)
+                                    comp.MoleFraction = Vx(j)
+                                    comp.MassFraction = Vwx(j)
                                     j += 1
                                 Next
                                 j = 0
                                 For Each comp In .Phases(2).Compounds.Values
-                                    comp.FracaoMolar = Vy(j)
-                                    comp.FracaoMassica = Vwy(j)
+                                    comp.MoleFraction = Vy(j)
+                                    comp.MassFraction = Vwy(j)
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massfraction = 1

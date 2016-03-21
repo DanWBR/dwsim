@@ -288,20 +288,20 @@ FINAL:
                 .Phases(0).Properties.massfraction = 1
                 .Phases(3).Properties.massfraction = lf
                 .Phases(2).Properties.massfraction = vf
-                .Phases(0).Compounds(wkey).FracaoMolar = 1
-                If lf > 0 Then .Phases(3).Compounds(wkey).FracaoMolar = 1
+                .Phases(0).Compounds(wkey).MoleFraction = 1
+                If lf > 0 Then .Phases(3).Compounds(wkey).MoleFraction = 1
                 If lf > 0 Then .Phases(3).Compounds(wkey).FugacityCoeff = 1
-                If lf = 0 Then .Phases(3).Compounds(wkey).FracaoMolar = 0
-                If vf > 0 Then .Phases(2).Compounds(wkey).FracaoMolar = 1
+                If lf = 0 Then .Phases(3).Compounds(wkey).MoleFraction = 0
+                If vf > 0 Then .Phases(2).Compounds(wkey).MoleFraction = 1
                 If vf > 0 Then .Phases(2).Compounds(wkey).FugacityCoeff = 1
-                If vf = 0 Then .Phases(2).Compounds(wkey).FracaoMolar = 0
-                .Phases(0).Compounds(wkey).FracaoMassica = 1
-                If lf > 0 Then .Phases(3).Compounds(wkey).FracaoMassica = 1
+                If vf = 0 Then .Phases(2).Compounds(wkey).MoleFraction = 0
+                .Phases(0).Compounds(wkey).MassFraction = 1
+                If lf > 0 Then .Phases(3).Compounds(wkey).MassFraction = 1
                 If lf > 0 Then .Phases(3).Compounds(wkey).FugacityCoeff = 1
-                If lf = 0 Then .Phases(3).Compounds(wkey).FracaoMassica = 0
-                If vf > 0 Then .Phases(2).Compounds(wkey).FracaoMassica = 1
+                If lf = 0 Then .Phases(3).Compounds(wkey).MassFraction = 0
+                If vf > 0 Then .Phases(2).Compounds(wkey).MassFraction = 1
                 If vf > 0 Then .Phases(2).Compounds(wkey).FugacityCoeff = 1
-                If vf = 0 Then .Phases(2).Compounds(wkey).FracaoMassica = 0
+                If vf = 0 Then .Phases(2).Compounds(wkey).MassFraction = 0
 
                 If lf = 0 Then
                     With .Phases(3).Properties
@@ -686,7 +686,7 @@ FINAL:
                     result = Me.m_iapws97.densW(T, P / 100000)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Case "surfacetension"
-                    Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = Me.AUX_SURFTM(T)
+                    Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
                 Case Else
                     Dim ex As Exception = New CapeOpen.CapeThrmPropertyNotAvailableException
                     ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
@@ -865,12 +865,12 @@ FINAL:
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             result = 1
-            Me.CurrentMaterialStream.Phases(0).Properties2.kvalue = result
+            Me.CurrentMaterialStream.Phases(0).Properties.kvalue = result
             result = 0
-            Me.CurrentMaterialStream.Phases(0).Properties2.logKvalue = result
+            Me.CurrentMaterialStream.Phases(0).Properties.logKvalue = result
             Dim Tr = T / 647.13
             result = 0.18548 * (1 - Tr) ^ (2.717 - 3.554 * Tr + 2.047 * Tr ^ 2)
-            Me.CurrentMaterialStream.Phases(0).Properties2.surfaceTension = result
+            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = result
 
         End Sub
 

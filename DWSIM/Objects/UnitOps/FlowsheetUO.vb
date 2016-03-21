@@ -642,8 +642,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                             For Each s In CompoundMappings
                                 If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
-                                    If Not msto.Phases(0).Compounds(s.Value).FracaoMassica.HasValue Then msto.Phases(0).Compounds(s.Value).FracaoMassica = 0.0#
-                                    msto.Phases(0).Compounds(s.Value).FracaoMassica += msfrom.Phases(0).Compounds(s.Key).MassFlow.GetValueOrDefault / wt
+                                    If Not msto.Phases(0).Compounds(s.Value).MassFraction.HasValue Then msto.Phases(0).Compounds(s.Value).MassFraction = 0.0#
+                                    msto.Phases(0).Compounds(s.Value).MassFraction += msfrom.Phases(0).Compounds(s.Key).MassFlow.GetValueOrDefault / wt
                                 End If
                             Next
 
@@ -655,8 +655,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                             For Each s In CompoundMappings
                                 If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
-                                    If Not msto.Phases(0).Compounds(s.Value).FracaoMassica.HasValue Then msto.Phases(0).Compounds(s.Value).FracaoMassica = 0.0#
-                                    msto.Phases(0).Compounds(s.Value).FracaoMassica += msfrom.Phases(0).Compounds(s.Key).FracaoMassica.GetValueOrDefault
+                                    If Not msto.Phases(0).Compounds(s.Value).MassFraction.HasValue Then msto.Phases(0).Compounds(s.Value).MassFraction = 0.0#
+                                    msto.Phases(0).Compounds(s.Value).MassFraction += msfrom.Phases(0).Compounds(s.Key).MassFraction.GetValueOrDefault
                                 End If
                             Next
 
@@ -677,8 +677,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                             For Each s In CompoundMappings
                                 If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
-                                    If Not msto.Phases(0).Compounds(s.Value).FracaoMolar.HasValue Then msto.Phases(0).Compounds(s.Value).FracaoMolar = 0.0#
-                                    msto.Phases(0).Compounds(s.Value).FracaoMolar += msfrom.Phases(0).Compounds(s.Key).MolarFlow.GetValueOrDefault / mt
+                                    If Not msto.Phases(0).Compounds(s.Value).MoleFraction.HasValue Then msto.Phases(0).Compounds(s.Value).MoleFraction = 0.0#
+                                    msto.Phases(0).Compounds(s.Value).MoleFraction += msfrom.Phases(0).Compounds(s.Key).MolarFlow.GetValueOrDefault / mt
                                 End If
                             Next
 
@@ -690,8 +690,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                             For Each s In CompoundMappings
                                 If msfrom.Phases(0).Compounds.ContainsKey(s.Key) And msto.Phases(0).Compounds.ContainsKey(s.Value) Then
-                                    If Not msto.Phases(0).Compounds(s.Value).FracaoMolar.HasValue Then msto.Phases(0).Compounds(s.Value).FracaoMolar = 0.0#
-                                    msto.Phases(0).Compounds(s.Value).FracaoMolar += msfrom.Phases(0).Compounds(s.Key).FracaoMolar.GetValueOrDefault
+                                    If Not msto.Phases(0).Compounds(s.Value).MoleFraction.HasValue Then msto.Phases(0).Compounds(s.Value).MoleFraction = 0.0#
+                                    msto.Phases(0).Compounds(s.Value).MoleFraction += msfrom.Phases(0).Compounds(s.Key).MoleFraction.GetValueOrDefault
                                 End If
                             Next
 
@@ -756,7 +756,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                             For Each s In msto.Phases(0).Compounds.Values
                                 If msfrom.Phases(0).Compounds.ContainsKey(s.Name) And msto.Phases(0).Compounds.ContainsKey(s.Name) Then
-                                    msto.Phases(0).Compounds(s.Name).FracaoMassica = msfrom.Phases(0).Compounds(s.Name).MassFlow.GetValueOrDefault / wt
+                                    msto.Phases(0).Compounds(s.Name).MassFraction = msfrom.Phases(0).Compounds(s.Name).MassFlow.GetValueOrDefault / wt
                                 End If
                             Next
 
@@ -768,7 +768,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                             For Each s In msto.Phases(0).Compounds.Values
                                 If msfrom.Phases(0).Compounds.ContainsKey(s.Name) And msto.Phases(0).Compounds.ContainsKey(s.Name) Then
-                                    msto.Phases(0).Compounds(s.Name).FracaoMassica = msfrom.Phases(0).Compounds(s.Name).FracaoMassica.GetValueOrDefault
+                                    msto.Phases(0).Compounds(s.Name).MassFraction = msfrom.Phases(0).Compounds(s.Name).MassFraction.GetValueOrDefault
                                 End If
                             Next
 
@@ -789,7 +789,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                             For Each s In msto.Phases(0).Compounds.Values
                                 If msfrom.Phases(0).Compounds.ContainsKey(s.Name) And msto.Phases(0).Compounds.ContainsKey(s.Name) Then
-                                    msto.Phases(0).Compounds(s.Name).FracaoMolar = msfrom.Phases(0).Compounds(s.Name).MolarFlow.GetValueOrDefault / mt
+                                    msto.Phases(0).Compounds(s.Name).MoleFraction = msfrom.Phases(0).Compounds(s.Name).MolarFlow.GetValueOrDefault / mt
                                 End If
                             Next
 
@@ -801,7 +801,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                             For Each s In msto.Phases(0).Compounds.Values
                                 If msfrom.Phases(0).Compounds.ContainsKey(s.Name) And msto.Phases(0).Compounds.ContainsKey(s.Name) Then
-                                    msto.Phases(0).Compounds(s.Name).FracaoMolar = msfrom.Phases(0).Compounds(s.Name).FracaoMolar.GetValueOrDefault
+                                    msto.Phases(0).Compounds(s.Name).MoleFraction = msfrom.Phases(0).Compounds(s.Name).MoleFraction.GetValueOrDefault
                                 End If
                             Next
 

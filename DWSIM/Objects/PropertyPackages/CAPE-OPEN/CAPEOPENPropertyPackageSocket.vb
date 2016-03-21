@@ -245,7 +245,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
                     Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
                     Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
                     For Each subst In Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Compounds.Values
-                        subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, pi.DWPhaseIndex)
+                        subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, pi.DWPhaseIndex)
                     Next
                 End If
             Next
@@ -358,12 +358,12 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim Vx(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1), Vy(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             For Each su As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                Vx(i) = su.FracaoMolar.GetValueOrDefault
+                Vx(i) = su.MoleFraction.GetValueOrDefault
                 i += 1
             Next
             i = 0
             For Each su As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                Vy(i) = su.FracaoMolar.GetValueOrDefault
+                Vy(i) = su.MoleFraction.GetValueOrDefault
                 i += 1
             Next
             xl = Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault
@@ -430,7 +430,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             Dim i As Integer = 0
             For Each c As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                c.FracaoMolar = Vz(i)
+                c.MoleFraction = Vz(i)
                 i += 1
             Next
 
@@ -492,12 +492,12 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim Ki(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1), Vx(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1), Vy(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             For Each su As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                Vx(i) = su.FracaoMolar.GetValueOrDefault
+                Vx(i) = su.MoleFraction.GetValueOrDefault
                 i += 1
             Next
             i = 0
             For Each su As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                Vy(i) = su.FracaoMolar.GetValueOrDefault
+                Vy(i) = su.MoleFraction.GetValueOrDefault
                 i += 1
             Next
             i = 0
@@ -737,10 +737,10 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
             If _coversion = "1.0" Then
                 CType(_copp, ICapeThermoCalculationRoutine).CalcProp(Me.CurrentMaterialStream, New String() {"surfaceTension"}, New String() {phase}, "Mixture")
-                Return Me.CurrentMaterialStream.Phases(Phase1).Properties2.surfaceTension.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.surfaceTension.GetValueOrDefault
             Else
                 CType(_copp, ICapeThermoPropertyRoutine).CalcTwoPhaseProp(New String() {"surfaceTension"}, New String() {"VaporLiquid"})
-                Return Me.CurrentMaterialStream.Phases(Phase1).Properties2.surfaceTension.GetValueOrDefault
+                Return Me.CurrentMaterialStream.Phases(Phase1).Properties.surfaceTension.GetValueOrDefault
             End If
 
             Me.CurrentMaterialStream.Phases(0).Properties.temperature = tant
@@ -1035,7 +1035,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim mwt As Double = 0.0#
             Dim i As Integer = 0
             For Each c As Compound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                mwt += c.FracaoMolar.GetValueOrDefault * mw(i)
+                mwt += c.MoleFraction.GetValueOrDefault * mw(i)
                 i += 1
             Next
 
@@ -1054,14 +1054,14 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim i As Integer = 0
             Dim j As Integer = 0
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
-                mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * mw(i)
+                mol_x_mm += sub1.MoleFraction.GetValueOrDefault * mw(i)
                 If subst = sub1.Name Then j = i
                 i += 1
             Next
 
             sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Compounds(subst)
             If mol_x_mm <> 0.0# Then
-                Return sub1.FracaoMolar.GetValueOrDefault * mw(j) / mol_x_mm
+                Return sub1.MoleFraction.GetValueOrDefault * mw(j) / mol_x_mm
             Else
                 Return 0.0#
             End If
@@ -1079,13 +1079,13 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
             Dim i As Integer = 0
             Dim j As Integer = 0
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
-                mass_div_mm += sub1.FracaoMassica.GetValueOrDefault / mw(i)
+                mass_div_mm += sub1.MassFraction.GetValueOrDefault / mw(i)
                 If subst = sub1.Name Then j = i
                 i += 1
             Next
 
             sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Compounds(subst)
-            Return sub1.FracaoMassica.GetValueOrDefault / mw(j) / mass_div_mm
+            Return sub1.MassFraction.GetValueOrDefault / mw(j) / mass_div_mm
 
         End Function
 

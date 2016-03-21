@@ -755,7 +755,7 @@ Namespace PropertyPackages
                     Dim val As Double = 0.0#
                     Dim subst As BaseClasses.Compound
                     For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                        val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
+                        val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
                     Next
                     Return val
                 Case Else
@@ -771,11 +771,11 @@ Namespace PropertyPackages
 
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
                 If phasenumber = 2 Then
-                    mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * bop.VaporMolecularWeight(sub1.ConstantProperties.BO_SGG)
+                    mol_x_mm += sub1.MoleFraction.GetValueOrDefault * bop.VaporMolecularWeight(sub1.ConstantProperties.BO_SGG)
                 ElseIf phasenumber = 3 Then
-                    mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * bop.LiquidMolecularWeight(sub1.ConstantProperties.BO_SGO, sub1.ConstantProperties.BO_BSW)
+                    mol_x_mm += sub1.MoleFraction.GetValueOrDefault * bop.LiquidMolecularWeight(sub1.ConstantProperties.BO_SGO, sub1.ConstantProperties.BO_BSW)
                 Else
-                    mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * bop.LiquidMolecularWeight(sub1.ConstantProperties.BO_SGG, sub1.ConstantProperties.BO_BSW)
+                    mol_x_mm += sub1.MoleFraction.GetValueOrDefault * bop.LiquidMolecularWeight(sub1.ConstantProperties.BO_SGG, sub1.ConstantProperties.BO_BSW)
                 End If
             Next
 
@@ -783,11 +783,11 @@ Namespace PropertyPackages
 
             If mol_x_mm <> 0.0# Then
                 If phasenumber = 2 Then
-                    Return sub1.FracaoMolar.GetValueOrDefault * bop.VaporMolecularWeight(sub1.ConstantProperties.BO_SGG) / mol_x_mm
+                    Return sub1.MoleFraction.GetValueOrDefault * bop.VaporMolecularWeight(sub1.ConstantProperties.BO_SGG) / mol_x_mm
                 ElseIf phasenumber = 3 Then
-                    Return sub1.FracaoMolar.GetValueOrDefault * bop.LiquidMolecularWeight(sub1.ConstantProperties.BO_SGO, sub1.ConstantProperties.BO_BSW) / mol_x_mm
+                    Return sub1.MoleFraction.GetValueOrDefault * bop.LiquidMolecularWeight(sub1.ConstantProperties.BO_SGO, sub1.ConstantProperties.BO_BSW) / mol_x_mm
                 Else
-                    Return sub1.FracaoMolar.GetValueOrDefault * bop.LiquidMolecularWeight(sub1.ConstantProperties.BO_SGO, sub1.ConstantProperties.BO_BSW) / mol_x_mm
+                    Return sub1.MoleFraction.GetValueOrDefault * bop.LiquidMolecularWeight(sub1.ConstantProperties.BO_SGO, sub1.ConstantProperties.BO_BSW) / mol_x_mm
                 End If
             Else
                 Return 0.0#

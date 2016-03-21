@@ -332,7 +332,7 @@ Namespace DWSIM.SimulationObjects.Streams
             Dim subs As DWSIM.Thermodynamics.BaseClasses.Compound
             Dim comp As Double = 0
             For Each subs In Me.Phases(0).Compounds.Values
-                comp += subs.FracaoMolar.GetValueOrDefault
+                comp += subs.MoleFraction.GetValueOrDefault
             Next
 
             If DebugMode Then AppendDebugLine(String.Format("Checking mixture composition. Sum must be higher than zero. Sum = {0}", comp))
@@ -585,8 +585,8 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
 
                     For Each comp In Phases(i).Compounds.Values
-                        comp.FracaoMolar = ASource.Phases(i).Compounds(comp.Name).FracaoMolar
-                        comp.FracaoMassica = ASource.Phases(i).Compounds(comp.Name).FracaoMassica
+                        comp.MoleFraction = ASource.Phases(i).Compounds(comp.Name).MoleFraction
+                        comp.MassFraction = ASource.Phases(i).Compounds(comp.Name).MassFraction
                         comp.MassFlow = ASource.Phases(i).Compounds(comp.Name).MassFlow
                         comp.MolarFlow = ASource.Phases(i).Compounds(comp.Name).MolarFlow
                     Next
@@ -674,8 +674,8 @@ Namespace DWSIM.SimulationObjects.Streams
                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
 
                 For Each comp In Phases(i).Compounds.Values
-                    comp.FracaoMolar = Nothing
-                    comp.FracaoMassica = Nothing
+                    comp.MoleFraction = Nothing
+                    comp.MassFraction = Nothing
                 Next
 
                 'Should be define after concentrations?!?!
@@ -700,7 +700,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
             Dim i As Integer = 0
             For Each c As Compound In Me.Phases(0).Compounds.Values
-                c.FracaoMolar = Vx(i)
+                c.MoleFraction = Vx(i)
                 i += 1
             Next
 
@@ -709,7 +709,7 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Sub EqualizeOverallComposition()
 
             For Each c As Compound In Me.Phases(0).Compounds.Values
-                c.FracaoMolar = 1 / Me.Phases(0).Compounds.Count
+                c.MoleFraction = 1 / Me.Phases(0).Compounds.Count
             Next
 
         End Sub
@@ -718,11 +718,11 @@ Namespace DWSIM.SimulationObjects.Streams
 
             Dim mt As Double = 0.0#
             For Each S In Phases(0).Compounds.Values
-                mt += S.FracaoMolar.GetValueOrDefault
+                mt += S.MoleFraction.GetValueOrDefault
             Next
 
             For Each S In Phases(0).Compounds.Values
-                S.FracaoMolar /= mt
+                S.MoleFraction /= mt
             Next
 
         End Sub
@@ -731,11 +731,11 @@ Namespace DWSIM.SimulationObjects.Streams
 
             Dim mt As Double = 0.0#
             For Each S In Phases(0).Compounds.Values
-                mt += S.FracaoMassica.GetValueOrDefault
+                mt += S.MassFraction.GetValueOrDefault
             Next
 
             For Each S In Phases(0).Compounds.Values
-                S.FracaoMassica /= mt
+                S.MassFraction /= mt
             Next
 
         End Sub
@@ -745,10 +745,10 @@ Namespace DWSIM.SimulationObjects.Streams
             Dim mol_x_mm As Double
             Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
             For Each sub1 In Phases(0).Compounds.Values
-                mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight
+                mol_x_mm += sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight
             Next
             For Each sub1 In Phases(0).Compounds.Values
-                sub1.FracaoMassica = sub1.FracaoMolar.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight / mol_x_mm
+                sub1.MassFraction = sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight / mol_x_mm
             Next
 
         End Sub
@@ -758,10 +758,10 @@ Namespace DWSIM.SimulationObjects.Streams
             Dim mol_x_mm As Double
             Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
             For Each sub1 In Phases(0).Compounds.Values
-                mol_x_mm += sub1.FracaoMassica.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
+                mol_x_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
             Next
             For Each sub1 In Phases(0).Compounds.Values
-                sub1.FracaoMolar = sub1.FracaoMassica.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mol_x_mm
+                sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mol_x_mm
             Next
 
         End Sub
@@ -794,7 +794,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     idx = 2
             End Select
             For Each c As Compound In Me.Phases(idx).Compounds.Values
-                c.FracaoMolar = Vx(i)
+                c.MoleFraction = Vx(i)
                 i += 1
             Next
 
@@ -1516,19 +1516,19 @@ Namespace DWSIM.SimulationObjects.Streams
                     Case 103, 111, 112, 113, 114, 115, 150
                         If Me.Phases(0).Compounds.ContainsKey(sname) Then
                             If propidx = 103 Then
-                                value = Me.Phases(0).Compounds(sname).FracaoMassica.GetValueOrDefault
+                                value = Me.Phases(0).Compounds(sname).MassFraction.GetValueOrDefault
                             ElseIf propidx = 111 Then
-                                value = Me.Phases(2).Compounds(sname).FracaoMassica.GetValueOrDefault
+                                value = Me.Phases(2).Compounds(sname).MassFraction.GetValueOrDefault
                             ElseIf propidx = 112 Then
-                                value = Me.Phases(1).Compounds(sname).FracaoMassica.GetValueOrDefault
+                                value = Me.Phases(1).Compounds(sname).MassFraction.GetValueOrDefault
                             ElseIf propidx = 113 Then
-                                value = Me.Phases(3).Compounds(sname).FracaoMassica.GetValueOrDefault
+                                value = Me.Phases(3).Compounds(sname).MassFraction.GetValueOrDefault
                             ElseIf propidx = 114 Then
-                                value = Me.Phases(4).Compounds(sname).FracaoMassica.GetValueOrDefault
+                                value = Me.Phases(4).Compounds(sname).MassFraction.GetValueOrDefault
                             ElseIf propidx = 115 Then
-                                value = Me.Phases(5).Compounds(sname).FracaoMassica.GetValueOrDefault
+                                value = Me.Phases(5).Compounds(sname).MassFraction.GetValueOrDefault
                             ElseIf propidx = 150 Then
-                                value = Me.Phases(7).Compounds(sname).FracaoMassica.GetValueOrDefault
+                                value = Me.Phases(7).Compounds(sname).MassFraction.GetValueOrDefault
                             End If
                         Else
                             value = 0
@@ -1536,19 +1536,19 @@ Namespace DWSIM.SimulationObjects.Streams
                     Case 102, 106, 107, 108, 109, 110, 149
                         If Me.Phases(0).Compounds.ContainsKey(sname) Then
                             If propidx = 102 Then
-                                value = Me.Phases(0).Compounds(sname).FracaoMolar.GetValueOrDefault
+                                value = Me.Phases(0).Compounds(sname).MoleFraction.GetValueOrDefault
                             ElseIf propidx = 106 Then
-                                value = Me.Phases(2).Compounds(sname).FracaoMolar.GetValueOrDefault
+                                value = Me.Phases(2).Compounds(sname).MoleFraction.GetValueOrDefault
                             ElseIf propidx = 107 Then
-                                value = Me.Phases(1).Compounds(sname).FracaoMolar.GetValueOrDefault
+                                value = Me.Phases(1).Compounds(sname).MoleFraction.GetValueOrDefault
                             ElseIf propidx = 108 Then
-                                value = Me.Phases(3).Compounds(sname).FracaoMolar.GetValueOrDefault
+                                value = Me.Phases(3).Compounds(sname).MoleFraction.GetValueOrDefault
                             ElseIf propidx = 109 Then
-                                value = Me.Phases(4).Compounds(sname).FracaoMolar.GetValueOrDefault
+                                value = Me.Phases(4).Compounds(sname).MoleFraction.GetValueOrDefault
                             ElseIf propidx = 110 Then
-                                value = Me.Phases(5).Compounds(sname).FracaoMolar.GetValueOrDefault
+                                value = Me.Phases(5).Compounds(sname).MoleFraction.GetValueOrDefault
                             ElseIf propidx = 149 Then
-                                value = Me.Phases(7).Compounds(sname).FracaoMolar.GetValueOrDefault
+                                value = Me.Phases(7).Compounds(sname).MoleFraction.GetValueOrDefault
                             End If
                         Else
                             value = 0
@@ -1784,27 +1784,27 @@ Namespace DWSIM.SimulationObjects.Streams
                     Me.Phases(2).Properties.molarfraction = propval
                 Case 102
                     If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                        Me.Phases(0).Compounds(sname).FracaoMolar = propval
+                        Me.Phases(0).Compounds(sname).MoleFraction = propval
                         Dim mtotal As Double = 0
                         Me.PropertyPackage.DW_CalcCompMolarFlow(0)
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            mtotal += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
+                            mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                         Next
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.FracaoMassica = comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
+                            comp.MassFraction = comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
                         Next
                         Me.PropertyPackage.DW_CalcCompMassFlow(0)
                     End If
                 Case 103
                     If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                        Me.Phases(0).Compounds(sname).FracaoMassica = propval
+                        Me.Phases(0).Compounds(sname).MassFraction = propval
                         Dim mtotal As Double = 0
                         Me.PropertyPackage.DW_CalcCompMassFlow(0)
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            mtotal += comp.FracaoMassica.GetValueOrDefault / comp.ConstantProperties.Molar_Weight
+                            mtotal += comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight
                         Next
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.FracaoMolar = comp.FracaoMassica.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / mtotal
+                            comp.MoleFraction = comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / mtotal
                         Next
                         Me.PropertyPackage.DW_CalcCompMolarFlow(0)
                     End If
@@ -1818,15 +1818,15 @@ Namespace DWSIM.SimulationObjects.Streams
                         Next
                         Me.Phases(0).Properties.molarflow = summ
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.FracaoMolar = comp.MolarFlow / summ
+                            comp.MoleFraction = comp.MolarFlow / summ
                         Next
                         Dim mtotal As Double = 0
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            mtotal += comp.FracaoMolar.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
+                            mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                         Next
                         Me.Phases(0).Properties.massflow = mtotal * summ / 1000
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.FracaoMassica = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.massflow.GetValueOrDefault
+                            comp.MassFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.massflow.GetValueOrDefault
                         Next
                     End If
                 Case 105
@@ -1839,15 +1839,15 @@ Namespace DWSIM.SimulationObjects.Streams
                         Next
                         Me.Phases(0).Properties.massflow = mtotal
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.FracaoMassica = comp.MassFlow / mtotal
+                            comp.MassFraction = comp.MassFlow / mtotal
                         Next
                         Dim summ As Double = 0
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            summ += comp.FracaoMassica.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / 1000
+                            summ += comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / 1000
                         Next
                         Me.Phases(0).Properties.molarflow = mtotal / summ
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.FracaoMolar = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.molarflow.GetValueOrDefault
+                            comp.MoleFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.molarflow.GetValueOrDefault
                         Next
                     End If
             End Select
@@ -2493,11 +2493,11 @@ Namespace DWSIM.SimulationObjects.Streams
                     res.Add(Me.Phases(f).Properties.thermalConductivity.GetValueOrDefault)
                 Case "fugacity"
                     For Each c As String In comps
-                        res.Add(Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault * Me.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault * Me.Phases(0).Properties.pressure.GetValueOrDefault)
+                        res.Add(Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault * Me.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault * Me.Phases(0).Properties.pressure.GetValueOrDefault)
                     Next
                 Case "activity"
                     For Each c As String In comps
-                        res.Add(Me.Phases(f).Compounds(c).ActivityCoeff.GetValueOrDefault * Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                        res.Add(Me.Phases(f).Compounds(c).ActivityCoeff.GetValueOrDefault * Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                     Next
                 Case "fugacitycoefficient"
                     For Each c As String In comps
@@ -2588,20 +2588,20 @@ Namespace DWSIM.SimulationObjects.Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole", ""
                             For Each c As String In comps
-                                res.Add(Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                                res.Add(Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                             Next
                         Case "Mass", "mass"
                             For Each c As String In comps
-                                res.Add(Me.Phases(f).Compounds(c).FracaoMassica.GetValueOrDefault)
+                                res.Add(Me.Phases(f).Compounds(c).MassFraction.GetValueOrDefault)
                             Next
                         Case ""
                             If [property].ToLower.Contains("mole") Then
                                 For Each c As String In comps
-                                    res.Add(Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                                    res.Add(Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                                 Next
                             ElseIf [property].ToLower.Contains("mass") Then
                                 For Each c As String In comps
-                                    res.Add(Me.Phases(f).Compounds(c).FracaoMassica.GetValueOrDefault)
+                                    res.Add(Me.Phases(f).Compounds(c).MassFraction.GetValueOrDefault)
                                 Next
                             End If
                     End Select
@@ -2636,7 +2636,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         res.Add(Me.Phases(0).Compounds(c).lnKvalue)
                     Next
                 Case "surfacetension"
-                    res.Add(Me.Phases(1).Properties2.surfaceTension)
+                    res.Add(Me.Phases(1).Properties.surfaceTension)
                 Case Else
                     Dim ex As New CapeOpen.CapeThrmPropertyNotAvailableException
                     Dim hcode As Integer = 0
@@ -2829,7 +2829,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Case "fugacity"
                     i = 0
                     For Each c As String In comps
-                        Me.Phases(f).Compounds(c).FugacityCoeff = values(comps.IndexOf(c)) / (Me.Phases(0).Properties.pressure.GetValueOrDefault * Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                        Me.Phases(f).Compounds(c).FugacityCoeff = values(comps.IndexOf(c)) / (Me.Phases(0).Properties.pressure.GetValueOrDefault * Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                         i += 1
                     Next
                 Case "fugacitycoefficient"
@@ -2934,13 +2934,13 @@ Namespace DWSIM.SimulationObjects.Streams
                         Case "Molar", "molar", "mole", "Mole"
                             i = 0
                             For Each c As String In comps
-                                Me.Phases(f).Compounds(c).FracaoMolar = values(comps.IndexOf(c))
+                                Me.Phases(f).Compounds(c).MoleFraction = values(comps.IndexOf(c))
                                 i += 1
                             Next
                         Case "Mass", "mass"
                             i = 0
                             For Each c As String In comps
-                                Me.Phases(f).Compounds(c).FracaoMassica = values(comps.IndexOf(c))
+                                Me.Phases(f).Compounds(c).MassFraction = values(comps.IndexOf(c))
                                 i += 1
                             Next
                     End Select
@@ -2973,7 +2973,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         i += 1
                     Next
                 Case "surfacetension"
-                    Me.Phases(0).Properties2.surfaceTension = values(0)
+                    Me.Phases(0).Properties.surfaceTension = values(0)
                 Case Else
                     Dim ex As New CapeOpen.CapeThrmPropertyNotAvailableException
                     Dim hcode As Integer = 0
@@ -3834,11 +3834,11 @@ Namespace DWSIM.SimulationObjects.Streams
                     res.Add(Me.Phases(f).Properties.thermalConductivity.GetValueOrDefault)
                 Case "fugacity"
                     For Each c As String In comps
-                        res.Add(Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault * Me.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault * Me.Phases(0).Properties.pressure.GetValueOrDefault)
+                        res.Add(Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault * Me.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault * Me.Phases(0).Properties.pressure.GetValueOrDefault)
                     Next
                 Case "activity"
                     For Each c As String In comps
-                        res.Add(Me.Phases(f).Compounds(c).ActivityCoeff.GetValueOrDefault * Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                        res.Add(Me.Phases(f).Compounds(c).ActivityCoeff.GetValueOrDefault * Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                     Next
                 Case "fugacitycoefficient"
                     For Each c As String In comps
@@ -3929,20 +3929,20 @@ Namespace DWSIM.SimulationObjects.Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             For Each c As String In comps
-                                res.Add(Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                                res.Add(Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                             Next
                         Case "Mass", "mass"
                             For Each c As String In comps
-                                res.Add(Me.Phases(f).Compounds(c).FracaoMassica.GetValueOrDefault)
+                                res.Add(Me.Phases(f).Compounds(c).MassFraction.GetValueOrDefault)
                             Next
                         Case ""
                             If [property].ToLower.Contains("mole") Then
                                 For Each c As String In comps
-                                    res.Add(Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                                    res.Add(Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                                 Next
                             ElseIf [property].ToLower.Contains("mass") Then
                                 For Each c As String In comps
-                                    res.Add(Me.Phases(f).Compounds(c).FracaoMassica.GetValueOrDefault)
+                                    res.Add(Me.Phases(f).Compounds(c).MassFraction.GetValueOrDefault)
                                 Next
                             End If
                     End Select
@@ -4023,13 +4023,13 @@ Namespace DWSIM.SimulationObjects.Streams
             Select Case phaseLabel.ToLower
                 Case "overall"
                     For Each c As String In comps
-                        arr.Add(Me.Phases(0).Compounds(c).FracaoMolar.GetValueOrDefault)
+                        arr.Add(Me.Phases(0).Compounds(c).MoleFraction.GetValueOrDefault)
                     Next
                 Case Else
                     For Each pi As PhaseInfo In Me.PropertyPackage.PhaseMappings.Values
                         If phaseLabel = pi.PhaseLabel Then
                             For Each c As String In comps
-                                arr.Add(Me.Phases(pi.DWPhaseIndex).Compounds(c).FracaoMolar.GetValueOrDefault)
+                                arr.Add(Me.Phases(pi.DWPhaseIndex).Compounds(c).MoleFraction.GetValueOrDefault)
                             Next
                             Exit For
                         End If
@@ -4115,7 +4115,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         res.Add(Me.Phases(0).Compounds(c).lnKvalue)
                     Next
                 Case "surfacetension"
-                    res.Add(Me.Phases(0).Properties2.surfaceTension.GetValueOrDefault)
+                    res.Add(Me.Phases(0).Properties.surfaceTension.GetValueOrDefault)
                 Case Else
                     Throw New CapeOpen.CapeThrmPropertyNotAvailableException
             End Select
@@ -4307,7 +4307,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Case "fugacity"
                     Dim i As Integer = 0
                     For Each c As String In comps
-                        Me.Phases(f).Compounds(c).FugacityCoeff = values(comps.IndexOf(c)) / (Me.Phases(0).Properties.pressure.GetValueOrDefault * Me.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                        Me.Phases(f).Compounds(c).FugacityCoeff = values(comps.IndexOf(c)) / (Me.Phases(0).Properties.pressure.GetValueOrDefault * Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                         i += 1
                     Next
                 Case "fugacitycoefficient"
@@ -4412,13 +4412,13 @@ Namespace DWSIM.SimulationObjects.Streams
                         Case "Molar", "molar", "mole", "Mole"
                             Dim i As Integer = 0
                             For Each c As String In comps
-                                Me.Phases(f).Compounds(c).FracaoMolar = values(comps.IndexOf(c))
+                                Me.Phases(f).Compounds(c).MoleFraction = values(comps.IndexOf(c))
                                 i += 1
                             Next
                         Case "Mass", "mass"
                             Dim i As Integer = 0
                             For Each c As String In comps
-                                Me.Phases(f).Compounds(c).FracaoMassica = values(comps.IndexOf(c))
+                                Me.Phases(f).Compounds(c).MassFraction = values(comps.IndexOf(c))
                                 i += 1
                             Next
                     End Select
@@ -4513,7 +4513,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         i += 1
                     Next
                 Case "surfacetension"
-                    Me.Phases(0).Properties2.surfaceTension = values(0)
+                    Me.Phases(0).Properties.surfaceTension = values(0)
                 Case Else
                     Dim ex = New CapeOpen.CapeThrmPropertyNotAvailableException
                     Dim hcode As Integer = 0

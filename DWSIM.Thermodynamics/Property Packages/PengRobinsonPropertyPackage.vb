@@ -605,7 +605,7 @@ Namespace PropertyPackages
 
             i = 0
             For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                Vz(i) += comp.FracaoMolar.GetValueOrDefault
+                Vz(i) += comp.MoleFraction.GetValueOrDefault
                 i += 1
             Next
 
@@ -1107,7 +1107,7 @@ Namespace PropertyPackages
             Dim comp As BaseClasses.Compound
             i = 0
             For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                Vz(i) += comp.FracaoMolar.GetValueOrDefault
+                Vz(i) += comp.MoleFraction.GetValueOrDefault
                 i += 1
             Next
             i = 0
@@ -1686,7 +1686,7 @@ Namespace PropertyPackages
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.PR_Volume_Translation_Coefficient * Me.m_pr.bi(0.0778, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.PR_Volume_Translation_Coefficient * Me.m_pr.bi(0.0778, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure)
             Next
 
             Return val

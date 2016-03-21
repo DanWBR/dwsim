@@ -633,7 +633,7 @@ Namespace PropertyPackages
         '    Dim name As String = ""
 
         '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-        '        If s.FracaoMolar.GetValueOrDefault >= maxZ Then
+        '        If s.MoleFraction.GetValueOrDefault >= maxZ Then
         '            name = s.Name
         '            maxZ = Vz(i)
         '        End If
@@ -651,9 +651,9 @@ Namespace PropertyPackages
         '    Dim name As String = ""
 
         '    For Each s As Compound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-        '        If s.FracaoMolar.GetValueOrDefault >= maxZ Then
+        '        If s.MoleFraction.GetValueOrDefault >= maxZ Then
         '            name = s.Name
-        '            maxZ = s.FracaoMolar.GetValueOrDefault
+        '            maxZ = s.MoleFraction.GetValueOrDefault
         '        End If
         '        i += 1
         '    Next

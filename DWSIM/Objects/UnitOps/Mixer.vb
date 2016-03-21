@@ -129,7 +129,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         If Not Vw.ContainsKey(comp.Name) Then
                             Vw.Add(comp.Name, 0)
                         End If
-                        Vw(comp.Name) += comp.FracaoMassica.GetValueOrDefault * ms.Phases(0).Properties.massflow.GetValueOrDefault
+                        Vw(comp.Name) += comp.MassFraction.GetValueOrDefault * ms.Phases(0).Properties.massflow.GetValueOrDefault
                     Next
                     If W <> 0.0# Then T += ms.Phases(0).Properties.massflow.GetValueOrDefault / W * ms.Phases(0).Properties.temperature.GetValueOrDefault
                 End If
@@ -146,18 +146,18 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 .Phases(0).Properties.massfraction = 1
                 Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                 For Each comp In .Phases(0).Compounds.Values
-                    If W <> 0.0# Then comp.FracaoMassica = Vw(comp.Name) / W
+                    If W <> 0.0# Then comp.MassFraction = Vw(comp.Name) / W
                 Next
                 Dim mass_div_mm As Double = 0
                 Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
                 For Each sub1 In .Phases(0).Compounds.Values
-                    mass_div_mm += sub1.FracaoMassica.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
+                    mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
                 Next
                 For Each sub1 In .Phases(0).Compounds.Values
                     If W <> 0.0# Then
-                        sub1.FracaoMolar = sub1.FracaoMassica.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
+                        sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
                     Else
-                        sub1.FracaoMolar = 0.0#
+                        sub1.MoleFraction = 0.0#
                     End If
                 Next
                 Me.PropertyPackage.CurrentMaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
@@ -194,8 +194,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Phases(0).Properties.molarfraction = 1
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = 0
-                        comp.FracaoMassica = 0
+                        comp.MoleFraction = 0
+                        comp.MassFraction = 0
                     Next
                     .Phases(0).Properties.massflow = Nothing
                     .Phases(0).Properties.molarflow = Nothing

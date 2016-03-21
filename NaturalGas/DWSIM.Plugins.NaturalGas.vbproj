@@ -150,6 +150,10 @@
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
       <Name>DWSIM.DrawingTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50BFD69A-487E-4B38-86EA-48ACD85A0EB1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
       <Project>{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}</Project>
       <Name>DWSIM</Name>

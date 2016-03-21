@@ -625,10 +625,10 @@ Namespace DWSIM.SimulationObjects.Reactors
                 Next
                 For Each s2 As Compound In ims.Phases(0).Compounds.Values
                     If DN.ContainsKey(s2.Name) Then
-                        s2.FracaoMolar = (ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault + DN(s2.Name)) / Nsum
+                        s2.MoleFraction = (ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault + DN(s2.Name)) / Nsum
                         s2.MolarFlow = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault + DN(s2.Name)
                     Else
-                        s2.FracaoMolar = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault / Nsum
+                        s2.MoleFraction = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault / Nsum
                         s2.MolarFlow = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault
                     End If
                 Next
@@ -638,11 +638,11 @@ Namespace DWSIM.SimulationObjects.Reactors
                 Dim mmm As Double = 0
                 Dim mf As Double = 0
                 For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                    mmm += s3.FracaoMolar.GetValueOrDefault * s3.ConstantProperties.Molar_Weight
+                    mmm += s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight
                 Next
                 For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                    s3.FracaoMassica = s3.FracaoMolar.GetValueOrDefault * s3.ConstantProperties.Molar_Weight / mmm
-                    s3.MassFlow = s3.FracaoMassica.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+                    s3.MassFraction = s3.MoleFraction.GetValueOrDefault * s3.ConstantProperties.Molar_Weight / mmm
+                    s3.MassFlow = s3.MassFraction.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
                     mf += s3.MassFlow.GetValueOrDefault
                 Next
 
@@ -754,14 +754,14 @@ Namespace DWSIM.SimulationObjects.Reactors
                     mtotal = 0
                     wtotal = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        mtotal += ims.Phases(0).Compounds(comp.Name).FracaoMolar.GetValueOrDefault
-                        wtotal += ims.Phases(0).Compounds(comp.Name).FracaoMassica.GetValueOrDefault
+                        mtotal += ims.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                        wtotal += ims.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
                     Next
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = ims.Phases(0).Compounds(comp.Name).FracaoMolar.GetValueOrDefault / mtotal
-                        comp.FracaoMassica = ims.Phases(0).Compounds(comp.Name).FracaoMassica.GetValueOrDefault / wtotal
-                        comp.MassFlow = comp.FracaoMassica.GetValueOrDefault * .Phases(0).Properties.massflow.GetValueOrDefault
-                        comp.MolarFlow = comp.FracaoMolar.GetValueOrDefault * .Phases(0).Properties.molarflow.GetValueOrDefault
+                        comp.MoleFraction = ims.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault / mtotal
+                        comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault / wtotal
+                        comp.MassFlow = comp.MassFraction.GetValueOrDefault * .Phases(0).Properties.massflow.GetValueOrDefault
+                        comp.MolarFlow = comp.MoleFraction.GetValueOrDefault * .Phases(0).Properties.molarflow.GetValueOrDefault
                     Next
                 End With
             End If
@@ -803,8 +803,8 @@ Namespace DWSIM.SimulationObjects.Reactors
                     Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.FracaoMolar = 0
-                        comp.FracaoMassica = 0
+                        comp.MoleFraction = 0
+                        comp.MassFraction = 0
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = Nothing

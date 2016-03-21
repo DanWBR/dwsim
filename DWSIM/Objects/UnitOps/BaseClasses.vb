@@ -3531,7 +3531,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaMistura"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(0).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r2 To r3 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3543,7 +3543,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseVapor"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(2).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r3 To r4 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3555,7 +3555,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(1).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r4 To r5 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3567,7 +3567,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(3).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r5 To r6 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3579,7 +3579,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(4).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                 Next
                 For propidx = r6 To 101
                     value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -3591,7 +3591,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
                 DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                 For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(6).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.FracaoMolar.GetValueOrDefault, nf), ""})
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                 Next
             Else
                 For Each prop As String In properties

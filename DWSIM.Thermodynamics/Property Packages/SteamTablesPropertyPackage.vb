@@ -288,20 +288,20 @@ FINAL:
                 .Phases(0).Properties.massfraction = 1
                 .Phases(3).Properties.massfraction = lf
                 .Phases(2).Properties.massfraction = vf
-                .Phases(0).Compounds(wkey).FracaoMolar = 1
-                If lf > 0 Then .Phases(3).Compounds(wkey).FracaoMolar = 1
+                .Phases(0).Compounds(wkey).MoleFraction = 1
+                If lf > 0 Then .Phases(3).Compounds(wkey).MoleFraction = 1
                 If lf > 0 Then .Phases(3).Compounds(wkey).FugacityCoeff = 1
-                If lf = 0 Then .Phases(3).Compounds(wkey).FracaoMolar = 0
-                If vf > 0 Then .Phases(2).Compounds(wkey).FracaoMolar = 1
+                If lf = 0 Then .Phases(3).Compounds(wkey).MoleFraction = 0
+                If vf > 0 Then .Phases(2).Compounds(wkey).MoleFraction = 1
                 If vf > 0 Then .Phases(2).Compounds(wkey).FugacityCoeff = 1
-                If vf = 0 Then .Phases(2).Compounds(wkey).FracaoMolar = 0
-                .Phases(0).Compounds(wkey).FracaoMassica = 1
-                If lf > 0 Then .Phases(3).Compounds(wkey).FracaoMassica = 1
+                If vf = 0 Then .Phases(2).Compounds(wkey).MoleFraction = 0
+                .Phases(0).Compounds(wkey).MassFraction = 1
+                If lf > 0 Then .Phases(3).Compounds(wkey).MassFraction = 1
                 If lf > 0 Then .Phases(3).Compounds(wkey).FugacityCoeff = 1
-                If lf = 0 Then .Phases(3).Compounds(wkey).FracaoMassica = 0
-                If vf > 0 Then .Phases(2).Compounds(wkey).FracaoMassica = 1
+                If lf = 0 Then .Phases(3).Compounds(wkey).MassFraction = 0
+                If vf > 0 Then .Phases(2).Compounds(wkey).MassFraction = 1
                 If vf > 0 Then .Phases(2).Compounds(wkey).FugacityCoeff = 1
-                If vf = 0 Then .Phases(2).Compounds(wkey).FracaoMassica = 0
+                If vf = 0 Then .Phases(2).Compounds(wkey).MassFraction = 0
 
                 If lf = 0 Then
                     With .Phases(3).Properties

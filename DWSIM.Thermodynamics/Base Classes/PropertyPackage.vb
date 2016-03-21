@@ -1327,20 +1327,20 @@ Namespace PropertyPackages
 
             For Each c As Compound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
 
-                cml1 = Me.CurrentMaterialStream.Phases(3).Compounds(c.Name).FracaoMolar.GetValueOrDefault
-                cml2 = Me.CurrentMaterialStream.Phases(4).Compounds(c.Name).FracaoMolar.GetValueOrDefault
-                cml3 = Me.CurrentMaterialStream.Phases(5).Compounds(c.Name).FracaoMolar.GetValueOrDefault
-                cmw = Me.CurrentMaterialStream.Phases(6).Compounds(c.Name).FracaoMolar.GetValueOrDefault
+                cml1 = Me.CurrentMaterialStream.Phases(3).Compounds(c.Name).MoleFraction.GetValueOrDefault
+                cml2 = Me.CurrentMaterialStream.Phases(4).Compounds(c.Name).MoleFraction.GetValueOrDefault
+                cml3 = Me.CurrentMaterialStream.Phases(5).Compounds(c.Name).MoleFraction.GetValueOrDefault
+                cmw = Me.CurrentMaterialStream.Phases(6).Compounds(c.Name).MoleFraction.GetValueOrDefault
 
                 If Not cml1.IsValid Then cml1 = 0.0#
                 If Not cml2.IsValid Then cml2 = 0.0#
                 If Not cml3.IsValid Then cml3 = 0.0#
                 If Not cmw.IsValid Then cmw = 0.0#
 
-                cwl1 = Me.CurrentMaterialStream.Phases(3).Compounds(c.Name).FracaoMassica.GetValueOrDefault
-                cwl2 = Me.CurrentMaterialStream.Phases(4).Compounds(c.Name).FracaoMassica.GetValueOrDefault
-                cwl3 = Me.CurrentMaterialStream.Phases(5).Compounds(c.Name).FracaoMassica.GetValueOrDefault
-                cww = Me.CurrentMaterialStream.Phases(6).Compounds(c.Name).FracaoMassica.GetValueOrDefault
+                cwl1 = Me.CurrentMaterialStream.Phases(3).Compounds(c.Name).MassFraction.GetValueOrDefault
+                cwl2 = Me.CurrentMaterialStream.Phases(4).Compounds(c.Name).MassFraction.GetValueOrDefault
+                cwl3 = Me.CurrentMaterialStream.Phases(5).Compounds(c.Name).MassFraction.GetValueOrDefault
+                cww = Me.CurrentMaterialStream.Phases(6).Compounds(c.Name).MassFraction.GetValueOrDefault
 
                 If Not cwl1.IsValid Then cwl1 = 0.0#
                 If Not cwl2.IsValid Then cwl2 = 0.0#
@@ -1349,8 +1349,8 @@ Namespace PropertyPackages
 
                 cml = (xl1 * cml1 + xl2 * cml2 + xl3 * cml3 + xw * cmw) / xl
                 cwl = (wl1 * cwl1 + wl2 * cwl2 + wl3 * cwl3 + ww * cww) / wl
-                c.FracaoMolar = cml
-                c.FracaoMassica = cwl
+                c.MoleFraction = cml
+                c.MassFraction = cwl
 
             Next
 
@@ -1637,7 +1637,7 @@ Namespace PropertyPackages
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMolar = Vx(i)
+                                subst.MoleFraction = Vx(i)
                                 subst.FugacityCoeff = FCL(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -1645,11 +1645,11 @@ Namespace PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                subst.FracaoMolar = Vx2(i)
+                                subst.MoleFraction = Vx2(i)
                                 subst.FugacityCoeff = FCL2(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -1657,11 +1657,11 @@ Namespace PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMolar = Vy(i)
+                                subst.MoleFraction = Vy(i)
                                 subst.FugacityCoeff = FCV(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -1669,11 +1669,11 @@ Namespace PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMolar = Vs(i)
+                                subst.MoleFraction = Vs(i)
                                 subst.FugacityCoeff = FCS(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -1681,7 +1681,7 @@ Namespace PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                             Next
 
                             Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -1797,7 +1797,7 @@ Namespace PropertyPackages
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMolar = Vx(i)
+                                subst.MoleFraction = Vx(i)
                                 subst.FugacityCoeff = FCL(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -1805,11 +1805,11 @@ Namespace PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                subst.FracaoMolar = Vx2(i)
+                                subst.MoleFraction = Vx2(i)
                                 subst.FugacityCoeff = FCL2(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -1817,11 +1817,11 @@ Namespace PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMolar = Vy(i)
+                                subst.MoleFraction = Vy(i)
                                 subst.FugacityCoeff = FCV(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -1829,12 +1829,12 @@ Namespace PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                             Next
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMolar = Vs(i)
+                                subst.MoleFraction = Vs(i)
                                 subst.FugacityCoeff = 1.0#
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -1842,7 +1842,7 @@ Namespace PropertyPackages
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                             Next
 
                             Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -1898,7 +1898,7 @@ Namespace PropertyPackages
 
                                 Tsat = 0.0#
                                 For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                    Tsat += subst.FracaoMolar * Me.AUX_TSATi(P, subst.Name)
+                                    Tsat += subst.MoleFraction * Me.AUX_TSATi(P, subst.Name)
                                 Next
 
                                 hl = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
@@ -1960,12 +1960,12 @@ Namespace PropertyPackages
 
                                     i = 0
                                     For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                        subst.FracaoMolar = vz(i)
+                                        subst.MoleFraction = vz(i)
                                         subst.FugacityCoeff = 1
                                         subst.ActivityCoeff = 1
                                         subst.PartialVolume = 0
                                         subst.PartialPressure = P
-                                        subst.FracaoMassica = vz(i)
+                                        subst.MassFraction = vz(i)
                                         i += 1
                                     Next
 
@@ -1978,22 +1978,22 @@ Namespace PropertyPackages
 
                                     i = 0
                                     For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                        subst.FracaoMolar = vz(i)
+                                        subst.MoleFraction = vz(i)
                                         subst.FugacityCoeff = 1
                                         subst.ActivityCoeff = 1
                                         subst.PartialVolume = 0
                                         subst.PartialPressure = P
-                                        subst.FracaoMassica = vz(i)
+                                        subst.MassFraction = vz(i)
                                         i += 1
                                     Next
                                     i = 0
                                     For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                        subst.FracaoMolar = vz(i)
+                                        subst.MoleFraction = vz(i)
                                         subst.FugacityCoeff = 1
                                         subst.ActivityCoeff = 1
                                         subst.PartialVolume = 0
                                         subst.PartialPressure = P
-                                        subst.FracaoMassica = vz(i)
+                                        subst.MassFraction = vz(i)
                                         i += 1
                                     Next
 
@@ -2027,7 +2027,7 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
 
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                    subst.FracaoMolar = Vx(i)
+                                    subst.MoleFraction = Vx(i)
                                     subst.FugacityCoeff = FCL(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
@@ -2036,12 +2036,12 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
+                                    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                    subst.FracaoMolar = Vx2(i)
+                                    subst.MoleFraction = Vx2(i)
                                     subst.FugacityCoeff = FCL2(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
@@ -2050,12 +2050,12 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
+                                    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                    subst.FracaoMolar = Vy(i)
+                                    subst.MoleFraction = Vy(i)
                                     subst.FugacityCoeff = FCV(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
@@ -2064,12 +2064,12 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
+                                    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                    subst.FracaoMolar = Vs(i)
+                                    subst.MoleFraction = Vs(i)
                                     subst.FugacityCoeff = FCS(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
@@ -2077,7 +2077,7 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
                                     i += 1
                                 Next
                                 For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
+                                    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                                 Next
 
                                 Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -2124,7 +2124,7 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
 
                                 Tsat = 0.0#
                                 For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                    Tsat += subst.FracaoMolar * Me.AUX_TSATi(P, subst.Name)
+                                    Tsat += subst.MoleFraction * Me.AUX_TSATi(P, subst.Name)
                                 Next
 
                                 hl = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
@@ -2167,22 +2167,22 @@ redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mi
 
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                    subst.FracaoMolar = vz(i)
+                                    subst.MoleFraction = vz(i)
                                     subst.FugacityCoeff = 1
                                     subst.ActivityCoeff = 1
                                     subst.PartialVolume = 0
                                     subst.PartialPressure = P
-                                    subst.FracaoMassica = vz(i)
+                                    subst.MassFraction = vz(i)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                    subst.FracaoMolar = vz(i)
+                                    subst.MoleFraction = vz(i)
                                     subst.FugacityCoeff = 1
                                     subst.ActivityCoeff = 1
                                     subst.PartialVolume = 0
                                     subst.PartialPressure = P
-                                    subst.FracaoMassica = vz(i)
+                                    subst.MassFraction = vz(i)
                                     i += 1
                                 Next
 
@@ -2213,7 +2213,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                    subst.FracaoMolar = Vx(i)
+                                    subst.MoleFraction = Vx(i)
                                     subst.FugacityCoeff = FCL(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
@@ -2222,12 +2222,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
+                                    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                    subst.FracaoMolar = Vx2(i)
+                                    subst.MoleFraction = Vx2(i)
                                     subst.FugacityCoeff = FCL2(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
@@ -2236,12 +2236,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 Next
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
+                                    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                                     i += 1
                                 Next
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                    subst.FracaoMolar = Vy(i)
+                                    subst.MoleFraction = Vy(i)
                                     subst.FugacityCoeff = FCV(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
@@ -2251,13 +2251,13 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                                 i = 1
                                 For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
+                                    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                                     i += 1
                                 Next
 
                                 i = 0
                                 For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                    subst.FracaoMolar = Vs(i)
+                                    subst.MoleFraction = Vs(i)
                                     subst.FugacityCoeff = 1.0#
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
@@ -2265,7 +2265,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     i += 1
                                 Next
                                 For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
+                                    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                                 Next
 
                                 Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -2317,7 +2317,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                                 Tsat = 0.0#
                                 For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                    Tsat += subst.FracaoMolar * Me.AUX_TSATi(P, subst.Name)
+                                    Tsat += subst.MoleFraction * Me.AUX_TSATi(P, subst.Name)
                                 Next
 
                                 HL = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
@@ -2364,7 +2364,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMolar = Vx(i)
+                                subst.MoleFraction = Vx(i)
                                 subst.FugacityCoeff = FCL(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -2372,11 +2372,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 3)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                subst.FracaoMolar = Vx2(i)
+                                subst.MoleFraction = Vx2(i)
                                 subst.FugacityCoeff = FCL2(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -2384,11 +2384,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 4)
                             Next
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMolar = Vy(i)
+                                subst.MoleFraction = Vy(i)
                                 subst.FugacityCoeff = FCV(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -2396,12 +2396,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 2)
                             Next
 
                             i = 0
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMolar = Vs(i)
+                                subst.MoleFraction = Vs(i)
                                 subst.FugacityCoeff = 1.0#
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
@@ -2409,7 +2409,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
-                                subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
+                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 7)
                             Next
 
                             Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl * Me.AUX_MMM(Phase.Liquid1) / (xl * Me.AUX_MMM(Phase.Liquid1) + xl2 * Me.AUX_MMM(Phase.Liquid2) + xv * Me.AUX_MMM(Phase.Vapor) + xs * Me.AUX_MMM(Phase.Solid))
@@ -3004,7 +3004,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             i = 0
             For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                Vz(i) += comp.FracaoMolar.GetValueOrDefault
+                Vz(i) += comp.MoleFraction.GetValueOrDefault
                 i += 1
             Next
 
@@ -3846,7 +3846,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As BaseClasses.ConstantProperties
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).FracaoMolar.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             m.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaMistura"), True)
                             m.Item(m.Count - 1).IsReadOnly = True
                             m.Item(m.Count - 1).DefaultValue = Nothing
@@ -3855,7 +3855,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Vapor
                         Dim v As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).FracaoMolar.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             v.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseVapor"), True)
                             v.Item(v.Count - 1).IsReadOnly = True
                             v.Item(v.Count - 1).DefaultValue = Nothing
@@ -3864,7 +3864,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).FracaoMolar.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
                             l.Item(l.Count - 1).IsReadOnly = True
                             l.Item(l.Count - 1).DefaultValue = Nothing
@@ -3873,7 +3873,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l1 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).FracaoMolar.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l1.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
                             l1.Item(l1.Count - 1).IsReadOnly = True
                             l1.Item(l1.Count - 1).DefaultValue = Nothing
@@ -3882,7 +3882,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l2 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).FracaoMolar.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l2.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
                             l2.Item(l2.Count - 1).IsReadOnly = True
                             l2.Item(l2.Count - 1).DefaultValue = Nothing
@@ -3891,7 +3891,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l3 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).FracaoMolar.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l3.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
                             l3.Item(l3.Count - 1).IsReadOnly = True
                             l3.Item(l3.Count - 1).DefaultValue = Nothing
@@ -3900,7 +3900,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l4 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).FracaoMolar.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l4.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseLquid"), True)
                             l4.Item(l4.Count - 1).IsReadOnly = True
                             l4.Item(l4.Count - 1).DefaultValue = Nothing
@@ -3909,7 +3909,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim s As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).FracaoMolar.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             s.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomolarnaPhaseSolida"), True)
                             s.Item(s.Count - 1).IsReadOnly = True
                             s.Item(s.Count - 1).DefaultValue = Nothing
@@ -3990,7 +3990,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As BaseClasses.ConstantProperties
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).FracaoMassica.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             m.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaMistura"), True)
                             m.Item(m.Count - 1).IsReadOnly = True
                             m.Item(m.Count - 1).DefaultValue = Nothing
@@ -3999,7 +3999,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Vapor
                         Dim v As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).FracaoMassica.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(2).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             v.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseVapo"), True)
                             v.Item(v.Count - 1).IsReadOnly = True
                             v.Item(v.Count - 1).DefaultValue = Nothing
@@ -4008,7 +4008,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).FracaoMassica.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(1).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
                             l.Item(l.Count - 1).IsReadOnly = True
                             l.Item(l.Count - 1).DefaultValue = Nothing
@@ -4017,7 +4017,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l1 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).FracaoMassica.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(3).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l1.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
                             l1.Item(l1.Count - 1).IsReadOnly = True
                             l1.Item(l1.Count - 1).DefaultValue = Nothing
@@ -4026,7 +4026,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l2 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).FracaoMassica.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(4).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l2.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
                             l2.Item(l2.Count - 1).IsReadOnly = True
                             l2.Item(l2.Count - 1).DefaultValue = Nothing
@@ -4035,7 +4035,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l3 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).FracaoMassica.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(5).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l3.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
                             l3.Item(l3.Count - 1).IsReadOnly = True
                             l3.Item(l3.Count - 1).DefaultValue = Nothing
@@ -4044,7 +4044,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l4 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).FracaoMassica.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(6).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             l4.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
                             l4.Item(l4.Count - 1).IsReadOnly = True
                             l4.Item(l4.Count - 1).DefaultValue = Nothing
@@ -4053,7 +4053,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         'PropertyGridEx.CustomPropertyCollection - Solido
                         Dim s As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).FracaoMassica.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            valor = Format(Me.CurrentMaterialStream.Phases(7).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
                             s.Add(App.GetComponentName(comp.Name), valor, False, App.GetLocalString("Mistura"), App.GetLocalString("FraomssicanaPhaseLqui"), True)
                             s.Item(s.Count - 1).IsReadOnly = True
                             s.Item(s.Count - 1).DefaultValue = Nothing
@@ -5000,7 +5000,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Dim water As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(3).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
                         Dim salt As Compound = (From subst As Compound In Me.CurrentMaterialStream.Phases(3).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
 
-                        Dim salinity As Double = salt.FracaoMassica.GetValueOrDefault / water.FracaoMassica.GetValueOrDefault
+                        Dim salinity As Double = salt.MassFraction.GetValueOrDefault / water.MassFraction.GetValueOrDefault
 
                         val = Format(salinity, Flowsheet.Options.NumberFormat)
                         pl.Add(App.GetLocalString("Salinity"), val, True, App.GetLocalString("Lquido"), App.GetLocalString("Salinity"), True)
@@ -5424,7 +5424,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                subst.Kvalue = Me.CurrentMaterialStream.Phases(2).Compounds(subst.Name).FracaoMolar.GetValueOrDefault / Me.CurrentMaterialStream.Phases(1).Compounds(subst.Name).FracaoMolar.GetValueOrDefault
+                subst.Kvalue = Me.CurrentMaterialStream.Phases(2).Compounds(subst.Name).MoleFraction.GetValueOrDefault / Me.CurrentMaterialStream.Phases(1).Compounds(subst.Name).MoleFraction.GetValueOrDefault
                 subst.lnKvalue = Log(subst.Kvalue)
             Next
 
@@ -5435,14 +5435,14 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             If Not phaseID = -1 Then
                 With Me.CurrentMaterialStream.Phases(phaseID)
                     For Each subs As Compound In .Compounds.Values
-                        subs.MolarFlow = .Properties.molarflow.GetValueOrDefault * subs.FracaoMolar.GetValueOrDefault
+                        subs.MolarFlow = .Properties.molarflow.GetValueOrDefault * subs.MoleFraction.GetValueOrDefault
                     Next
                 End With
             Else
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In Me.CurrentMaterialStream.Phases.Values
                     With phase
                         For Each subs As Compound In .Compounds.Values
-                            subs.MolarFlow = .Properties.molarflow.GetValueOrDefault * subs.FracaoMolar.GetValueOrDefault
+                            subs.MolarFlow = .Properties.molarflow.GetValueOrDefault * subs.MoleFraction.GetValueOrDefault
                         Next
                     End With
                 Next
@@ -5477,14 +5477,14 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             If Not phaseID = -1 Then
                 With Me.CurrentMaterialStream.Phases(phaseID)
                     For Each subs As Compound In .Compounds.Values
-                        subs.MassFlow = .Properties.massflow.GetValueOrDefault * subs.FracaoMassica.GetValueOrDefault
+                        subs.MassFlow = .Properties.massflow.GetValueOrDefault * subs.MassFraction.GetValueOrDefault
                     Next
                 End With
             Else
                 For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In Me.CurrentMaterialStream.Phases.Values
                     With phase
                         For Each subs As Compound In .Compounds.Values
-                            subs.MassFlow = .Properties.massflow.GetValueOrDefault * subs.FracaoMassica.GetValueOrDefault
+                            subs.MassFlow = .Properties.massflow.GetValueOrDefault * subs.MassFraction.GetValueOrDefault
                         Next
                     End With
                 Next
@@ -5509,7 +5509,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     For Each subs As Compound In .Compounds.Values
                         TotalMolarFlow = .Properties.molarflow.GetValueOrDefault
                         TotalVolFlow = .Properties.volumetric_flow.GetValueOrDefault
-                        MolarFrac = subs.FracaoMolar.GetValueOrDefault
+                        MolarFrac = subs.MoleFraction.GetValueOrDefault
                         PartialVol = subs.PartialVolume.GetValueOrDefault
                         VolFlow = TotalMolarFlow * MolarFrac * PartialVol
                         If TotalVolFlow > 0 Then
@@ -5543,7 +5543,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         For Each subs As Compound In .Compounds.Values
                             TotalMolarFlow = .Properties.molarflow.GetValueOrDefault
                             TotalVolFlow = .Properties.volumetric_flow.GetValueOrDefault
-                            MolarFrac = subs.FracaoMolar.GetValueOrDefault
+                            MolarFrac = subs.MoleFraction.GetValueOrDefault
                             PartialVol = subs.PartialVolume.GetValueOrDefault
                             VolFlow = TotalMolarFlow * MolarFrac * PartialVol
                             If TotalVolFlow > 0 Then
@@ -5713,8 +5713,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
-                subst.FracaoMolar = Nothing
-                subst.FracaoMassica = Nothing
+                subst.MoleFraction = Nothing
+                subst.MassFraction = Nothing
                 subst.MolarFlow = Nothing
                 subst.MassFlow = Nothing
             Next
@@ -5727,7 +5727,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                Tc += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Critical_Temperature
+                Tc += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Critical_Temperature
             Next
 
             Return Tc
@@ -5740,7 +5740,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                Tb += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point
+                Tb += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point
             Next
 
             Return Tb
@@ -5753,7 +5753,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                Tf += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.TemperatureOfFusion
+                Tf += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.TemperatureOfFusion
             Next
 
             Return Tf
@@ -5766,7 +5766,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Acentric_Factor
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Acentric_Factor
             Next
 
             Return val
@@ -5779,7 +5779,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Critical_Compressibility
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Critical_Compressibility
             Next
 
             Return val
@@ -5793,9 +5793,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 If subst.ConstantProperties.Z_Rackett <> 0 Then
-                    val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Z_Rackett
+                    val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Z_Rackett
                 Else
-                    val += subst.FracaoMolar.GetValueOrDefault * (0.29056 - 0.08775 * subst.ConstantProperties.Acentric_Factor)
+                    val += subst.MoleFraction.GetValueOrDefault * (0.29056 - 0.08775 * subst.ConstantProperties.Acentric_Factor)
                 End If
             Next
 
@@ -5813,7 +5813,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 If vc = 0.0# Then
                     vc = Auxiliary.PROPS.Vc(subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor)
                 End If
-                val += subst.FracaoMolar.GetValueOrDefault * vc
+                val += subst.MoleFraction.GetValueOrDefault * vc
             Next
 
             Return val / 1000
@@ -5826,7 +5826,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Critical_Pressure
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Critical_Pressure
             Next
 
             Return val
@@ -5863,9 +5863,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 Tc = subst.ConstantProperties.Critical_Temperature
                 If T / Tc <= 1 Then
-                    val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, T)
+                    val += subst.MoleFraction.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, T)
                 Else
-                    val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, 0.5 * Tc)
+                    val += subst.MoleFraction.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, 0.5 * Tc)
                 End If
             Next
 
@@ -5892,7 +5892,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
             Next
 
             Return val
@@ -5905,7 +5905,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             vc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Volume
             If vc = 0.0# Then vc = Auxiliary.PROPS.Vc(Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds(sub1).ConstantProperties.Critical_Temperature, Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds(sub1).ConstantProperties.Critical_Pressure, Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds(sub1).ConstantProperties.Acentric_Factor)
 
-            val = Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds(sub1).FracaoMolar.GetValueOrDefault * vc
+            val = Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds(sub1).MoleFraction.GetValueOrDefault * vc
 
             val = val / Me.AUX_VCM(Phase) / 1000
 
@@ -6023,7 +6023,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_CPi(subst.Name, T)
+                val += subst.MassFraction.GetValueOrDefault * Me.AUX_CPi(subst.Name, T)
             Next
 
             Return val 'KJ/Kg/K
@@ -6036,7 +6036,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.IG_Enthalpy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.IG_Enthalpy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
             Next
 
             Dim mw As Double = Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Properties.molecularWeight.GetValueOrDefault
@@ -6051,7 +6051,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.IG_Entropy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.IG_Entropy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
             Next
 
             Dim mw As Double = Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Properties.molecularWeight.GetValueOrDefault
@@ -6498,9 +6498,9 @@ Final3:
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 'logvisc = Math.Log(Me.AUX_LIQVISCi(subst.Name, T))
                 If Not Double.IsInfinity(logvisc) Then
-                    val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_LIQVISCi(subst.Name, T)
+                    val += subst.MoleFraction.GetValueOrDefault * Me.AUX_LIQVISCi(subst.Name, T)
                 Else
-                    val2 += subst.FracaoMolar.GetValueOrDefault
+                    val2 += subst.MoleFraction.GetValueOrDefault
                 End If
             Next
 
@@ -6532,9 +6532,9 @@ Final3:
                     End With
                 Else
                     subst.TDProperties.surfaceTension = 0
-                    ftotal -= subst.FracaoMolar.GetValueOrDefault
+                    ftotal -= subst.MoleFraction.GetValueOrDefault
                 End If
-                val += subst.FracaoMolar.GetValueOrDefault * subst.TDProperties.surfaceTension.GetValueOrDefault / ftotal
+                val += subst.MoleFraction.GetValueOrDefault * subst.TDProperties.surfaceTension.GetValueOrDefault / ftotal
             Next
 
             Return val
@@ -6597,9 +6597,9 @@ Final3:
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If subst.ConstantProperties.VaporThermalConductivityEquation <> "" Then
-                    val += subst.FracaoMolar.GetValueOrDefault * Me.CalcCSTDepProp(subst.ConstantProperties.VaporThermalConductivityEquation, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_A, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_B, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_C, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_D, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
+                    val += subst.MoleFraction.GetValueOrDefault * Me.CalcCSTDepProp(subst.ConstantProperties.VaporThermalConductivityEquation, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_A, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_B, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_C, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_D, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
                 Else
-                    val += subst.FracaoMolar.GetValueOrDefault * Auxiliary.PROPS.condtg_elyhanley(T, Me.AUX_TCM(Phase.Vapor), Me.AUX_VCM(Phase.Vapor), Me.AUX_ZCM(Phase.Vapor), Me.AUX_WM(Phase.Vapor), Me.AUX_MMM(Phase.Vapor), Me.DW_CalcCv_ISOL(Phase.Vapor, T, P) * Me.AUX_MMM(Phase.Vapor))
+                    val += subst.MoleFraction.GetValueOrDefault * Auxiliary.PROPS.condtg_elyhanley(T, Me.AUX_TCM(Phase.Vapor), Me.AUX_VCM(Phase.Vapor), Me.AUX_ZCM(Phase.Vapor), Me.AUX_WM(Phase.Vapor), Me.AUX_MMM(Phase.Vapor), Me.DW_CalcCv_ISOL(Phase.Vapor, T, P) * Me.AUX_MMM(Phase.Vapor))
                 End If
                 i = i + 1
             Next
@@ -6645,7 +6645,7 @@ Final3:
             Dim val As Double = 0.0#
 
             For Each subst As Compound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                val += subst.FracaoMolar.GetValueOrDefault * Me.AUX_VAPVISCi(subst.ConstantProperties, T)
+                val += subst.MoleFraction.GetValueOrDefault * Me.AUX_VAPVISCi(subst.ConstantProperties, T)
             Next
 
             val = Auxiliary.PROPS.viscg_jossi_stiel_thodos(val, T, MM / RHO / 1000, AUX_TCM(Phase.Vapor), AUX_PCM(Phase.Vapor), AUX_VCM(Phase.Vapor), AUX_MMM(Phase.Vapor))
@@ -6690,12 +6690,12 @@ Final3:
                     D = subst.ConstantProperties.Solid_Density_Const_D
                     E = subst.ConstantProperties.Solid_Density_Const_E
                     result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
-                    val += subst.FracaoMassica.GetValueOrDefault * 1 / (result * mw)
+                    val += subst.MassFraction.GetValueOrDefault * 1 / (result * mw)
                 Else
                     If subst.ConstantProperties.SolidDensityAtTs <> 0.0# Then
-                        val += subst.FracaoMassica.GetValueOrDefault * 1 / subst.ConstantProperties.SolidDensityAtTs
+                        val += subst.MassFraction.GetValueOrDefault * 1 / subst.ConstantProperties.SolidDensityAtTs
                     Else
-                        zerodens += subst.FracaoMassica.GetValueOrDefault
+                        zerodens += subst.MassFraction.GetValueOrDefault
                     End If
                 End If
             Next
@@ -6801,7 +6801,7 @@ Final3:
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
-                                vk(i) = subst.FracaoMassica / vk(i)
+                                vk(i) = subst.MassFraction / vk(i)
                                 i = i + 1
                             Next
                             val = 1 / MathEx.Common.Sum(vk)
@@ -6863,7 +6863,7 @@ Final3:
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
-                                vk(i) = subst.FracaoMassica / vk(i)
+                                vk(i) = subst.MassFraction / vk(i)
                                 i = i + 1
                             Next
                             val = 1 / MathEx.Common.Sum(vk)
@@ -6908,7 +6908,7 @@ Final3:
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
-                                vk(i) = subst.FracaoMassica / vk(i)
+                                vk(i) = subst.MassFraction / vk(i)
                                 i = i + 1
                             Next
                             val = 1 / MathEx.Common.Sum(vk)
@@ -6953,7 +6953,7 @@ Final3:
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
-                                vk(i) = subst.FracaoMassica / vk(i)
+                                vk(i) = subst.MassFraction / vk(i)
                                 i = i + 1
                             Next
                             val = 1 / MathEx.Common.Sum(vk)
@@ -6996,7 +6996,7 @@ Final3:
                                 Else
                                     vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                 End If
-                                vk(i) = subst.FracaoMassica / vk(i)
+                                vk(i) = subst.MassFraction / vk(i)
                                 i = i + 1
                             Next
                             val = 1 / MathEx.Common.Sum(vk)
@@ -7094,7 +7094,7 @@ Final3:
 
             val = 0
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
-                val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_LIQ_Cpi(subst.ConstantProperties, T)
+                val += subst.MassFraction.GetValueOrDefault * Me.AUX_LIQ_Cpi(subst.ConstantProperties, T)
             Next
 
             Return val
@@ -7209,55 +7209,55 @@ Final3:
                 Case PropertyPackages.Phase.Mixture
 
                     For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                        If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                        If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
+                            subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
+                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Liquid
 
                     For Each subst In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                        If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                        If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
+                            subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
+                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Liquid1
 
                     For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                        If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                        If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
+                            subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
+                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Liquid2
 
                     For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                        If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                        If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
+                            subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
+                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Liquid3
 
                     For Each subst In Me.CurrentMaterialStream.Phases(5).Compounds.Values
-                        If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                        If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
+                            subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
+                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
                 Case PropertyPackages.Phase.Vapor
 
                     For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                        If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                            subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                        If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
+                            subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                         End If
-                        val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
+                        val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDTi(T1, T2, subst.Name)
                     Next
 
             End Select
@@ -7272,10 +7272,10 @@ Final3:
             Dim subst As BaseClasses.Compound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                If subst.FracaoMolar.GetValueOrDefault <> 0.0# And subst.FracaoMassica.GetValueOrDefault = 0.0# Then
-                    subst.FracaoMassica = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
+                If subst.MoleFraction.GetValueOrDefault <> 0.0# And subst.MassFraction.GetValueOrDefault = 0.0# Then
+                    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, Me.RET_PHASEID(Phase))
                 End If
-                val += subst.FracaoMassica.GetValueOrDefault * Me.AUX_INT_CPDT_Ti(T1, T2, subst.Name)
+                val += subst.MassFraction.GetValueOrDefault * Me.AUX_INT_CPDT_Ti(T1, T2, subst.Name)
             Next
 
             Return val
@@ -7404,12 +7404,12 @@ Final3:
             Dim mol_x_mm As Double
             Dim sub1 As BaseClasses.Compound
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
-                mol_x_mm += sub1.FracaoMolar.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight
+                mol_x_mm += sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight
             Next
 
             sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Compounds(subst)
             If mol_x_mm <> 0.0# Then
-                Return sub1.FracaoMolar.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight / mol_x_mm
+                Return sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight / mol_x_mm
             Else
                 Return 0.0#
             End If
@@ -7421,11 +7421,11 @@ Final3:
             Dim mass_div_mm As Double
             Dim sub1 As BaseClasses.Compound
             For Each sub1 In Me.CurrentMaterialStream.Phases(phasenumber).Compounds.Values
-                mass_div_mm += sub1.FracaoMassica.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
+                mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
             Next
 
             sub1 = Me.CurrentMaterialStream.Phases(phasenumber).Compounds(subst)
-            Return sub1.FracaoMassica.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
+            Return sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
 
         End Function
 
@@ -7511,7 +7511,7 @@ Final3:
             Dim i As Integer = 0
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val(i) = subst.FracaoMolar.GetValueOrDefault
+                val(i) = subst.MoleFraction.GetValueOrDefault
                 i += 1
             Next
 
@@ -7542,7 +7542,7 @@ Final3:
             Dim sum As Double = 0.0#
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                val(i) = subst.FracaoMassica.GetValueOrDefault
+                val(i) = subst.MassFraction.GetValueOrDefault
                 sum += val(i)
                 i += 1
             Next
@@ -7737,7 +7737,7 @@ Final3:
             If Phase = PropertyPackages.Phase.Mixture Then phaseID = 0
 
             'For Each subst In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
-            '    val += subst.FracaoMassica.GetValueOrDefault * subst.ConstantProperties.Enthalpy_of_Formation_25C
+            '    val += subst.MassFraction.GetValueOrDefault * subst.ConstantProperties.Enthalpy_of_Formation_25C
             'Next
 
             Return Me.AUX_INT_CPDTm(T1, T2, Phase) + val
@@ -7787,9 +7787,9 @@ Final3:
             If Phase = PropertyPackages.Phase.Liquid3 Then phaseID = 5
             If Phase = PropertyPackages.Phase.Vapor Then phaseID = 2
             If Phase = PropertyPackages.Phase.Mixture Then phaseID = 0
-            'subst.FracaoMassica.GetValueOrDefault * subst.ConstantProperties.Standard_Absolute_Entropy 
+            'subst.MassFraction.GetValueOrDefault * subst.ConstantProperties.Standard_Absolute_Entropy 
             For Each subst In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
-                If subst.FracaoMolar.GetValueOrDefault <> 0 Then val += -8.314 * subst.FracaoMolar.GetValueOrDefault * Math.Log(subst.FracaoMolar.GetValueOrDefault) / subst.ConstantProperties.Molar_Weight
+                If subst.MoleFraction.GetValueOrDefault <> 0 Then val += -8.314 * subst.MoleFraction.GetValueOrDefault * Math.Log(subst.MoleFraction.GetValueOrDefault) / subst.ConstantProperties.Molar_Weight
             Next
 
             Dim tmp = Me.AUX_INT_CPDT_Tm(T1, T2, Phase) + val - 8.314 * Math.Log(P2 / 101325) / Me.AUX_MMM(Phase)
@@ -8091,7 +8091,7 @@ Final3:
 
             i = 0
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                If subst.FracaoMolar.GetValueOrDefault <> 0 Then Return i
+                If subst.MoleFraction.GetValueOrDefault <> 0 Then Return i
             Next
 
             Return -1
@@ -8124,7 +8124,7 @@ Final3:
             bo = False
             c = 0
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                If subst.FracaoMolar.GetValueOrDefault <> 0 Then c += 1
+                If subst.MoleFraction.GetValueOrDefault <> 0 Then c += 1
                 If subst.ConstantProperties.IsBlackOil Then bo = True
             Next
 
@@ -9486,12 +9486,12 @@ Final3:
                             basis = ""
                         Case "fugacity"
                             For Each c As String In comps
-                                res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault * Me.CurrentMaterialStream.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault * Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault)
+                                res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault * Me.CurrentMaterialStream.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault * Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault)
                             Next
                             basis = ""
                         Case "activity"
                             For Each c As String In comps
-                                res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).ActivityCoeff.GetValueOrDefault * Me.CurrentMaterialStream.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                                res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).ActivityCoeff.GetValueOrDefault * Me.CurrentMaterialStream.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                             Next
                             basis = ""
                         Case "fugacitycoefficient"
@@ -9591,20 +9591,20 @@ Final3:
                             Select Case basis
                                 Case "Molar", "molar", "mole", "Mole"
                                     For Each c As String In comps
-                                        res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                                        res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                                     Next
                                 Case "Mass", "mass"
                                     For Each c As String In comps
-                                        res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).FracaoMassica.GetValueOrDefault)
+                                        res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).MassFraction.GetValueOrDefault)
                                     Next
                                 Case ""
                                     If [property].ToLower.Contains("mole") Then
                                         For Each c As String In comps
-                                            res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).FracaoMolar.GetValueOrDefault)
+                                            res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                                         Next
                                     ElseIf [property].ToLower.Contains("mass") Then
                                         For Each c As String In comps
-                                            res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).FracaoMassica.GetValueOrDefault)
+                                            res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).MassFraction.GetValueOrDefault)
                                         Next
                                     End If
                             End Select
@@ -10140,7 +10140,7 @@ Final3:
 
                     i = 0
                     For Each s As Compound In ms.Phases(2).Compounds.Values
-                        vz(i) = s.FracaoMolar.GetValueOrDefault
+                        vz(i) = s.MoleFraction.GetValueOrDefault
                         i += 1
                     Next
                     pf = ms.Phases(2).Properties.molarfraction.GetValueOrDefault
@@ -10156,7 +10156,7 @@ Final3:
 
                     i = 0
                     For Each s As Compound In ms.Phases(3).Compounds.Values
-                        vz(i) = s.FracaoMolar.GetValueOrDefault
+                        vz(i) = s.MoleFraction.GetValueOrDefault
                         i += 1
                     Next
                     pf = ms.Phases(3).Properties.molarfraction.GetValueOrDefault
@@ -10172,7 +10172,7 @@ Final3:
 
                     i = 0
                     For Each s As Compound In ms.Phases(4).Compounds.Values
-                        vz(i) = s.FracaoMolar.GetValueOrDefault
+                        vz(i) = s.MoleFraction.GetValueOrDefault
                         i += 1
                     Next
                     pf = ms.Phases(4).Properties.molarfraction.GetValueOrDefault
@@ -10188,7 +10188,7 @@ Final3:
 
                     i = 0
                     For Each s As Compound In ms.Phases(7).Compounds.Values
-                        vz(i) = s.FracaoMolar.GetValueOrDefault
+                        vz(i) = s.MoleFraction.GetValueOrDefault
                         i += 1
                     Next
                     pf = ms.Phases(7).Properties.molarfraction.GetValueOrDefault
@@ -10415,30 +10415,30 @@ Final3:
             With ms
                 i = 0
                 For Each s As Compound In .Phases(0).Compounds.Values
-                    s.FracaoMolar = Vz(i)
+                    s.MoleFraction = Vz(i)
                     i += 1
                 Next
                 If Vy IsNot Nothing Then
                     i = 0
                     For Each s As Compound In .Phases(2).Compounds.Values
-                        s.FracaoMolar = Vy(i)
+                        s.MoleFraction = Vy(i)
                         i += 1
                     Next
                     Vwy = Me.AUX_CONVERT_MOL_TO_MASS(Vy)
                     i = 0
                     For Each s As Compound In .Phases(2).Compounds.Values
-                        s.FracaoMassica = Vwy(i)
+                        s.MassFraction = Vwy(i)
                         i += 1
                     Next
                 Else
                     i = 0
                     For Each s As Compound In .Phases(2).Compounds.Values
-                        s.FracaoMolar = 0.0#
+                        s.MoleFraction = 0.0#
                         i += 1
                     Next
                     i = 0
                     For Each s As Compound In .Phases(2).Compounds.Values
-                        s.FracaoMassica = 0.0#
+                        s.MassFraction = 0.0#
                         i += 1
                     Next
                 End If
@@ -10446,24 +10446,24 @@ Final3:
                 If Vx1 IsNot Nothing Then
                     i = 0
                     For Each s As Compound In .Phases(3).Compounds.Values
-                        s.FracaoMolar = Vx1(i)
+                        s.MoleFraction = Vx1(i)
                         i += 1
                     Next
                     Vwx1 = Me.AUX_CONVERT_MOL_TO_MASS(Vx1)
                     i = 0
                     For Each s As Compound In .Phases(3).Compounds.Values
-                        s.FracaoMassica = Vwx1(i)
+                        s.MassFraction = Vwx1(i)
                         i += 1
                     Next
                 Else
                     i = 0
                     For Each s As Compound In .Phases(3).Compounds.Values
-                        s.FracaoMolar = 0.0#
+                        s.MoleFraction = 0.0#
                         i += 1
                     Next
                     i = 0
                     For Each s As Compound In .Phases(3).Compounds.Values
-                        s.FracaoMassica = 0.0#
+                        s.MassFraction = 0.0#
                         i += 1
                     Next
                 End If
@@ -10471,24 +10471,24 @@ Final3:
                 If Vx2 IsNot Nothing Then
                     i = 0
                     For Each s As Compound In .Phases(4).Compounds.Values
-                        s.FracaoMolar = Vx2(i)
+                        s.MoleFraction = Vx2(i)
                         i += 1
                     Next
                     Vwx2 = Me.AUX_CONVERT_MOL_TO_MASS(Vx2)
                     i = 0
                     For Each s As Compound In .Phases(4).Compounds.Values
-                        s.FracaoMassica = Vwx2(i)
+                        s.MassFraction = Vwx2(i)
                         i += 1
                     Next
                 Else
                     i = 0
                     For Each s As Compound In .Phases(4).Compounds.Values
-                        s.FracaoMolar = 0.0#
+                        s.MoleFraction = 0.0#
                         i += 1
                     Next
                     i = 0
                     For Each s As Compound In .Phases(4).Compounds.Values
-                        s.FracaoMassica = 0.0#
+                        s.MassFraction = 0.0#
                         i += 1
                     Next
                 End If
@@ -10496,24 +10496,24 @@ Final3:
                 If Vs IsNot Nothing Then
                     i = 0
                     For Each s As Compound In .Phases(7).Compounds.Values
-                        s.FracaoMolar = Vs(i)
+                        s.MoleFraction = Vs(i)
                         i += 1
                     Next
                     Vws = Me.AUX_CONVERT_MOL_TO_MASS(Vs)
                     i = 0
                     For Each s As Compound In .Phases(7).Compounds.Values
-                        s.FracaoMassica = Vws(i)
+                        s.MassFraction = Vws(i)
                         i += 1
                     Next
                 Else
                     i = 0
                     For Each s As Compound In .Phases(7).Compounds.Values
-                        s.FracaoMolar = 0.0#
+                        s.MoleFraction = 0.0#
                         i += 1
                     Next
                     i = 0
                     For Each s As Compound In .Phases(7).Compounds.Values
-                        s.FracaoMassica = 0.0#
+                        s.MassFraction = 0.0#
                         i += 1
                     Next
                 End If

@@ -122,9 +122,9 @@ Public Class FrmColdProperties
                 Dim i As Integer = 0
                 Dim Vx(mat.Phases(0).Compounds.Count - 1) As Double
                 For Each subst As Compound In mat.Phases(0).Compounds.Values
-                    MABP += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point
-                    CABP += subst.FracaoMolar.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point ^ (1 / 3)
-                    Vx(i) = subst.FracaoMolar
+                    MABP += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point
+                    CABP += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Normal_Boiling_Point ^ (1 / 3)
+                    Vx(i) = subst.MoleFraction
                     i = i + 1
                 Next
                 CABP = CABP ^ 3
@@ -184,14 +184,14 @@ Public Class FrmColdProperties
                     mat.Phases(0).Properties.pressure = 101325
                     j = 0
                     For Each subst As Compound In mat.Phases(1).Compounds.Values
-                        subst.FracaoMolar = vl(j)
+                        subst.MoleFraction = vl(j)
                         j += 1
                     Next
                     pp.DW_CalcProp("density", PropertyPackages.Phase.Liquid)
                     dl = mat.Phases(1).Properties.density.GetValueOrDefault
                     j = 0
                     For Each subst As Compound In mat.Phases(1).Compounds.Values
-                        subst.FracaoMolar = vv(j)
+                        subst.MoleFraction = vv(j)
                         j += 1
                     Next
                     pp.DW_CalcProp("density", PropertyPackages.Phase.Liquid)
