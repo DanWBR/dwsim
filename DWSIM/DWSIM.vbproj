@@ -17,7 +17,7 @@
     </ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <ApplicationIcon>dwsim_splash.ico</ApplicationIcon>
+    <ApplicationIcon>DWSIM4 icon.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
@@ -59,6 +59,7 @@
     </WarningsAsErrors>
     <UseVSHostingProcess>true</UseVSHostingProcess>
     <Prefer32Bit>false</Prefer32Bit>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>Full</DebugType>
@@ -2755,7 +2756,7 @@
     <Content Include="Assets\windows\win64\IpOptFSS39.dll" />
     <Content Include="Assets\windows\win64\lpsolve55.dll" />
     <Content Include="Assets\windows\win64\PC_SAFT_PROP.dll" />
-    <Content Include="dwsim_splash.ico" />
+    <Content Include="DWSIM4 icon.ico" />
     <None Include="Resources\shape_align_middle1.png" />
     <None Include="Resources\shape_align_center1.png" />
     <None Include="Resources\shape_align_top.png" />
