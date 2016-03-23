@@ -17,22 +17,23 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DWSIM.MathEx.PolySolve
+Imports DWSIM.Thermodynamics.PropertyPackages
 
 Namespace DWSIM.Utilities.HYD
 
     Public Class ChenGuo
 
         Dim am As DWSIM.Utilities.HYD.AuxMethods
-        Dim unf As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC
-        Dim unfPP As DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage
-        Dim prPP As DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage
+        Dim unf As PropertyPackages.Auxiliary.UNIQUAC
+        Dim unfPP As PropertyPackages.UNIQUACPropertyPackage
+        Dim prPP As PropertyPackages.PengRobinsonPropertyPackage
 
         Sub New(ByVal materialStream As DWSIM.SimulationObjects.Streams.MaterialStream)
 
             am = New DWSIM.Utilities.HYD.AuxMethods
-            prPP = New DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage
-            unf = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC
-            unfPP = New DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage
+            prPP = New PropertyPackages.PengRobinsonPropertyPackage
+            unf = New PropertyPackages.Auxiliary.UNIQUAC
+            unfPP = New PropertyPackages.UNIQUACPropertyPackage
 
             unfPP.CurrentMaterialStream = materialStream
             prPP.CurrentMaterialStream = materialStream
@@ -160,8 +161,8 @@ Namespace DWSIM.Utilities.HYD
 
             'CALCULAR EQUILIBRIO L-V
 
-            prPP.Parameters("PP_FLASHALGORITHM") = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
-           
+            prPP.Parameters("PP_FLASHALGORITHM") = FlashMethod.DWSIMDefault
+
             Dim eqtmp = prPP.FlashBase.Flash_PT(Vz, P, T, prPP)
 
             Dim L = eqtmp(0)
@@ -826,7 +827,7 @@ STEP2:
 
             'CALCULAR EQUILIBRIO L-V
 
-            prPP.Parameters("PP_FLASHALGORITHM") = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+            prPP.Parameters("PP_FLASHALGORITHM") = FlashMethod.DWSIMDefault
             Dim eqtmp = prPP.FlashBase.Flash_PT(Vz, P, T, prPP)
 
             Dim L = eqtmp(0)

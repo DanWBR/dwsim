@@ -2148,7 +2148,7 @@ Based on the following document: http://www.chem.mtu.edu/~jmkeith/fuel_cell_curr
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-938ce079-8219-43f7-b4c5-37020707b002</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage</Type>
+      <Type>PropertyPackages.PengRobinsonPropertyPackage</Type>
       <ComponentName>Peng-Robinson (PR)</ComponentName>
       <ComponentDescription>Property Package that uses the Peng-Robinson EOS. Recommended for use with hydrocarbons and non-condensables.
 The properties are calculated directly from the EOS and/or experimental data, except:

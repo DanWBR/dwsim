@@ -9816,7 +9816,7 @@ Calculated OK.</DebugText>
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-f19ee93e-351a-4917-a793-33d3158a4b86</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.SourWaterPropertyPackage</Type>
+      <Type>PropertyPackages.SourWaterPropertyPackage</Type>
       <ComponentName>Sour Water</ComponentName>
       <ComponentDescription>The Sour Water Property Package is based on the SWEQ model described in the USEPA Report EPA-600/2-80-067: 'A new correlation of NH3, CO2, and H2S volatility data from aqueous sour water systems', by Wilson, Grant M., available online at http://nepis.epa.gov/Exe/ZyPDF.cgi?Dockey=9101B309.PDF  
 
@@ -9849,7 +9849,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     </PropertyPackage>
     <PropertyPackage>
       <ID>PP-fb588b5d-358e-4fce-85b5-8c16b896eb7e</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage</Type>
+      <Type>PropertyPackages.PengRobinsonPropertyPackage</Type>
       <ComponentName>Peng-Robinson (PR)</ComponentName>
       <ComponentDescription>Property Package that uses the Peng-Robinson Cubic Equation of State. Recommended for use with hydrocarbons and non-condensables.</ComponentDescription>
       <Tag>PP_2</Tag>

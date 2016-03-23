@@ -564,7 +564,7 @@ Namespace PropertyPackages
 
         Public Function DW_ReturnPhaseEnvelopeSequential(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            Dim cpc As New DWSIM.Utilities.TCP.Methods_SRK
+            Dim cpc As New Utilities.TCP.Methods_SRK
 
             Dim i As Integer
 
@@ -1070,7 +1070,7 @@ Namespace PropertyPackages
 
         Public Function DW_ReturnPhaseEnvelopeParallel(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            Dim cpc As New DWSIM.Utilities.TCP.Methods_SRK
+            Dim cpc As New Utilities.TCP.Methods_SRK
             Dim i, j, k, l As Integer
             Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
             Dim Vz(n) As Double

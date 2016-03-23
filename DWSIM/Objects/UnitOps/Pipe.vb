@@ -17,8 +17,9 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary
-Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
+Imports PropertyPackages.Auxiliary
+Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 
 Namespace DWSIM.SimulationObjects.UnitOperations
 
@@ -194,7 +195,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then
@@ -518,7 +519,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 If oms.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
                                     oms.Phases(0).Properties.temperature = Tin - 2
                                     oms.PropertyPackage.CurrentMaterialStream = oms
-                                    oms.PropertyPackage.DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                    oms.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                                     z2 = oms.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
                                     dzdT = (z2 - z) / -2
                                 Else
@@ -828,7 +829,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
             Dim segmento As New PipeSection
 
             For Each segmento In Me.Profile.Sections.Values

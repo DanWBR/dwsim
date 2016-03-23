@@ -1687,7 +1687,7 @@ Dew Temperature</Text>
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-d1f1017d-23c4-4deb-8f9c-f3badf72debf</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage</Type>
+      <Type>PropertyPackages.NRTLPropertyPackage</Type>
       <ComponentName>NRTL</ComponentName>
       <ComponentDescription>In diesem Paket wird das NRTL-Modell (Non-Random Two-Liquid) für die Berechnung der Aktivitätskoeffizienten in der Flüssigphase verwendet. Enthalpien werden mit dem Lee-Kesler-Modell berechnet, wogegen die Dampfphasenfugazitäten und die anderen thermodynamischen Eigenschaften (beide Phasen) mit der Zustandsgleichung nach Peng-Robinson berechnet werden.</ComponentDescription>
       <Tag>PP_1</Tag>

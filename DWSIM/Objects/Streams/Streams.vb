@@ -20,7 +20,7 @@ Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports CapeOpen
 Imports System.Linq
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Runtime.InteropServices
 Imports System.Threading.Tasks
 Imports System.Runtime.Serialization
@@ -45,7 +45,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Implements Interfaces.IMaterialStream
 
-        Friend _pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+        Friend _pp As PropertyPackages.PropertyPackage
         Friend _ppid As String = ""
 
         Protected m_Phases As New Dictionary(Of Integer, DWSIM.Thermodynamics.BaseClasses.Phase)
@@ -161,7 +161,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore()> Public Property PropertyPackage() As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+        <Xml.Serialization.XmlIgnore()> Public Property PropertyPackage() As PropertyPackages.PropertyPackage
             Get
                 If Not _pp Is Nothing Then Return _pp
                 If _ppid Is Nothing Then _ppid = ""
@@ -169,7 +169,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     If FlowSheet.Options.PropertyPackages.ContainsKey(_ppid) Then
                         Return FlowSheet.Options.PropertyPackages(_ppid)
                     Else
-                        For Each pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In FlowSheet.Options.PropertyPackages.Values
+                        For Each pp As PropertyPackages.PropertyPackage In FlowSheet.Options.PropertyPackages.Values
                             _ppid = pp.UniqueID
                             Return pp
                             Exit For
@@ -181,7 +181,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
                 Return Nothing
             End Get
-            Set(ByVal value As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
+            Set(ByVal value As PropertyPackages.PropertyPackage)
                 If value IsNot Nothing Then
                     _ppid = value.UniqueID
                     _pp = value
@@ -369,33 +369,33 @@ Namespace DWSIM.SimulationObjects.Streams
 
                         If Me.GraphicObject.InputConnectors(0).IsAttached Then
                             If DebugMode Then AppendDebugLine(String.Format("Stream is single-compound and attached to the outlet of an unit operation. PH flash equilibrium calculation forced."))
-                            .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.H)
+                            .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
                         Else
                             Select Case Me.SpecType
                                 Case StreamSpec.Temperature_and_Pressure
-                                    .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
+                                    .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                                 Case StreamSpec.Pressure_and_Enthalpy
-                                    .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.H)
+                                    .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
                                 Case StreamSpec.Pressure_and_Entropy
-                                    .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.S)
+                                    .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.S)
                                 Case StreamSpec.Pressure_and_VaporFraction
-                                    .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.VAP)
+                                    .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.VAP)
                                 Case StreamSpec.Temperature_and_VaporFraction
-                                    .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.VAP)
+                                    .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.VAP)
                             End Select
                         End If
                     Else
                         Select Case Me.SpecType
                             Case StreamSpec.Temperature_and_Pressure
-                                .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
+                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                             Case StreamSpec.Pressure_and_Enthalpy
-                                .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.H)
+                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
                             Case StreamSpec.Pressure_and_Entropy
-                                .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.S)
+                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.S)
                             Case StreamSpec.Pressure_and_VaporFraction
-                                .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.VAP)
+                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.VAP)
                             Case StreamSpec.Temperature_and_VaporFraction
-                                .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.VAP)
+                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.VAP)
                         End Select
                     End If
 
@@ -426,9 +426,9 @@ Namespace DWSIM.SimulationObjects.Streams
                         Try
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                      .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                                                                      .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
                                                                   Else
-                                                                      .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                                                                      .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                                                                   End If
                                                               End Sub,
                                                       My.Application.TaskCancellationTokenSource.Token,
@@ -436,9 +436,9 @@ Namespace DWSIM.SimulationObjects.Streams
                                                       My.Application.AppTaskScheduler)
                             Dim task2 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                      .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid2)
+                                                                      .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
                                                                   Else
-                                                                      .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid2)
+                                                                      .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
                                                                   End If
                                                               End Sub,
                                                       My.Application.TaskCancellationTokenSource.Token,
@@ -446,9 +446,9 @@ Namespace DWSIM.SimulationObjects.Streams
                                                       My.Application.AppTaskScheduler)
                             Dim task3 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                      .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid3)
+                                                                      .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
                                                                   Else
-                                                                      .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid3)
+                                                                      .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
                                                                   End If
                                                               End Sub,
                                                       My.Application.TaskCancellationTokenSource.Token,
@@ -456,9 +456,9 @@ Namespace DWSIM.SimulationObjects.Streams
                                                       My.Application.AppTaskScheduler)
                             Dim task4 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                      .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Aqueous)
+                                                                      .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
                                                                   Else
-                                                                      .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Aqueous)
+                                                                      .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
                                                                   End If
                                                               End Sub,
                                                       My.Application.TaskCancellationTokenSource.Token,
@@ -468,7 +468,7 @@ Namespace DWSIM.SimulationObjects.Streams
                                                                   If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                       .DW_CalcSolidPhaseProps()
                                                                   Else
-                                                                      .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Solid)
+                                                                      .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
                                                                   End If
                                                               End Sub,
                                                       My.Application.TaskCancellationTokenSource.Token,
@@ -476,9 +476,9 @@ Namespace DWSIM.SimulationObjects.Streams
                                                       My.Application.AppTaskScheduler)
                             Dim task6 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                      .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                                                      .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                                                                   Else
-                                                                      .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                                                      .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                                                                   End If
                                                               End Sub,
                                                       My.Application.TaskCancellationTokenSource.Token,
@@ -492,40 +492,40 @@ Namespace DWSIM.SimulationObjects.Streams
                         My.Application.IsRunningParallelTasks = False
                     Else
                         If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                            .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
                         Else
-                            .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                            .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                         End If
                         If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid2)
+                            .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
                         Else
-                            .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid2)
+                            .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
                         End If
                         If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid3)
+                            .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
                         Else
-                            .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid3)
+                            .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
                         End If
                         If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Aqueous)
+                            .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
                         Else
-                            .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Aqueous)
+                            .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
                         End If
                         If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
                             .DW_CalcSolidPhaseProps()
                         Else
-                            .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Solid)
+                            .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
                         End If
                         If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                            .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                         Else
-                            .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                            .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                         End If
                     End If
                     If Me.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And Me.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
-                        .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                        .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                     Else
-                        .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                     End If
 
                     If DebugMode Then AppendDebugLine(String.Format("Phase properties calculated succesfully."))
@@ -536,7 +536,7 @@ Namespace DWSIM.SimulationObjects.Streams
                             .DW_CalcCompMassFlow(-1)
                             .DW_CalcCompVolFlow(-1)
                             .DW_CalcOverallProps()
-                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                            .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
                             .DW_CalcVazaoVolumetrica()
                             .DW_CalcKvalue()
                         Case 2
@@ -546,7 +546,7 @@ Namespace DWSIM.SimulationObjects.Streams
                             .DW_CalcCompMassFlow(-1)
                             .DW_CalcCompVolFlow(-1)
                             .DW_CalcOverallProps()
-                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                            .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
                             .DW_CalcKvalue()
                     End Select
 
@@ -976,7 +976,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
 
                 Me.PropertyPackage.CurrentMaterialStream = Me
-                Me.PropertyPackage.PopulatePropertyGrid(pgrid, FlowSheet, su)
+                Me.PopulatePropertyGrid2(pgrid, FlowSheet, su)
 
                 If Not Me.Annotation Is Nothing Then
                     .Item.Add(DWSIM.App.GetLocalString("Anotaes"), Me, "Annotation", False, DWSIM.App.GetLocalString("Outros"), DWSIM.App.GetLocalString("Cliquenobotocomretic"), True)
@@ -992,6 +992,1577 @@ Namespace DWSIM.SimulationObjects.Streams
                 .ShowCustomProperties = True
 
                 pgrid.ExpandGroup("[7] " & DWSIM.App.GetLocalString("FraomolardaPhase"))
+
+            End With
+
+        End Sub
+
+        Public Overridable Sub PopulatePropertyGrid2(ByRef pg As PropertyGridEx.PropertyGridEx, ByRef Flowsheet As FormFlowsheet, ByVal su As Units)
+
+
+            Dim Converter As New Converter
+            Dim valor As Double = 0.0#
+
+            With pg
+
+                Select Case Me.CompositionBasis
+                    Case Enums.CompositionBasis.Molar_Fractions
+                        'PropertyGridEx.CustomPropertyCollection - Mistura
+                        Dim m As New PropertyGridEx.CustomPropertyCollection()
+                        Dim comp As BaseClasses.ConstantProperties
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            m.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaMistura"), True)
+                            m.Item(m.Count - 1).IsReadOnly = True
+                            m.Item(m.Count - 1).DefaultValue = Nothing
+                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Vapor
+                        Dim v As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            v.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseVapor"), True)
+                            v.Item(v.Count - 1).IsReadOnly = True
+                            v.Item(v.Count - 1).DefaultValue = Nothing
+                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(1).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l.Item(l.Count - 1).IsReadOnly = True
+                            l.Item(l.Count - 1).DefaultValue = Nothing
+                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(3).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l1.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l1.Item(l1.Count - 1).IsReadOnly = True
+                            l1.Item(l1.Count - 1).DefaultValue = Nothing
+                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(4).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l2.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l2.Item(l2.Count - 1).IsReadOnly = True
+                            l2.Item(l2.Count - 1).DefaultValue = Nothing
+                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(5).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l3.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l3.Item(l3.Count - 1).IsReadOnly = True
+                            l3.Item(l3.Count - 1).DefaultValue = Nothing
+                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(6).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l4.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l4.Item(l4.Count - 1).IsReadOnly = True
+                            l4.Item(l4.Count - 1).DefaultValue = Nothing
+                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim s As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(7).Compounds(comp.Name).MoleFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            s.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseSolida"), True)
+                            s.Item(s.Count - 1).IsReadOnly = True
+                            s.Item(s.Count - 1).DefaultValue = Nothing
+                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        .Item.Add("[1] " & DWSIM.App.GetLocalString("Mistura"), m, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Composiomolardamistu"), True)
+                        With .Item(.Item.Count - 1)
+                            If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                            .IsBrowsable = True
+                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                            .CustomEditor = New System.Drawing.Design.UITypeEditor
+                        End With
+                        If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[2] " & DWSIM.App.GetLocalString("Vapor"), v, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[3] " & DWSIM.App.GetLocalString("OverallLiquid"), l, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas2"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[4] " & DWSIM.App.GetLocalString("Liquid1"), l1, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas2"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[5] " & DWSIM.App.GetLocalString("Liquid2"), l2, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas2"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[6] " & DWSIM.App.GetLocalString("Liquid3"), l3, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas2"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[7] " & DWSIM.App.GetLocalString("Aqueous"), l4, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas2"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[8] " & DWSIM.App.GetLocalString("Solid"), s, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas2"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                    Case Enums.CompositionBasis.Mass_Fractions
+                        'PropertyGridEx.CustomPropertyCollection - Mistura
+                        Dim m As New PropertyGridEx.CustomPropertyCollection()
+                        Dim comp As BaseClasses.ConstantProperties
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            m.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomssicanaMistura"), True)
+                            m.Item(m.Count - 1).IsReadOnly = True
+                            m.Item(m.Count - 1).DefaultValue = Nothing
+                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Vapor
+                        Dim v As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(2).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            v.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomssicanaFaseVapo"), True)
+                            v.Item(v.Count - 1).IsReadOnly = True
+                            v.Item(v.Count - 1).DefaultValue = Nothing
+                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(1).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomssicanaFaseLqui"), True)
+                            l.Item(l.Count - 1).IsReadOnly = True
+                            l.Item(l.Count - 1).DefaultValue = Nothing
+                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(3).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l1.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomssicanaFaseLqui"), True)
+                            l1.Item(l1.Count - 1).IsReadOnly = True
+                            l1.Item(l1.Count - 1).DefaultValue = Nothing
+                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(4).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l2.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomssicanaFaseLqui"), True)
+                            l2.Item(l2.Count - 1).IsReadOnly = True
+                            l2.Item(l2.Count - 1).DefaultValue = Nothing
+                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(5).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l3.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomssicanaFaseLqui"), True)
+                            l3.Item(l3.Count - 1).IsReadOnly = True
+                            l3.Item(l3.Count - 1).DefaultValue = Nothing
+                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(6).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l4.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomssicanaFaseLqui"), True)
+                            l4.Item(l4.Count - 1).IsReadOnly = True
+                            l4.Item(l4.Count - 1).DefaultValue = Nothing
+                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Solido
+                        Dim s As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(7).Compounds(comp.Name).MassFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            s.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomssicanaFaseLqui"), True)
+                            s.Item(s.Count - 1).IsReadOnly = True
+                            s.Item(s.Count - 1).DefaultValue = Nothing
+                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        .Item.Add("[1] " & DWSIM.App.GetLocalString("Mistura"), m, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Composiomssicadamist"), True)
+                        With .Item(.Item.Count - 1)
+                            If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                            .IsBrowsable = True
+                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                            .CustomEditor = New System.Drawing.Design.UITypeEditor
+                        End With
+                        If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[2] " & DWSIM.App.GetLocalString("Vapor"), v, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas3"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[3] " & DWSIM.App.GetLocalString("OverallLiquid"), l, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[4] " & DWSIM.App.GetLocalString("Liquid1"), l1, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[5] " & DWSIM.App.GetLocalString("Liquid2"), l2, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[6] " & DWSIM.App.GetLocalString("Liquid3"), l3, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[7] " & DWSIM.App.GetLocalString("Aqueous"), l4, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[8] " & DWSIM.App.GetLocalString("Solid"), s, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+
+                    Case Enums.CompositionBasis.Volumetric_Fractions
+                        'PropertyGridEx.CustomPropertyCollection - Mistura
+                        Dim m As New PropertyGridEx.CustomPropertyCollection()
+                        Dim comp As BaseClasses.ConstantProperties
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(0).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            m.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VolFractionMixture"), True)
+                            m.Item(m.Count - 1).IsReadOnly = True
+                            m.Item(m.Count - 1).DefaultValue = Nothing
+                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Vapor
+                        Dim v As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(2).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            v.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VolFractionVaporPhase"), True)
+                            v.Item(v.Count - 1).IsReadOnly = True
+                            v.Item(v.Count - 1).DefaultValue = Nothing
+                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(1).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VolFractionLiqPhase"), True)
+                            l.Item(l.Count - 1).IsReadOnly = True
+                            l.Item(l.Count - 1).DefaultValue = Nothing
+                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(3).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l1.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VolFractionLiqPhase"), True)
+                            l1.Item(l1.Count - 1).IsReadOnly = True
+                            l1.Item(l1.Count - 1).DefaultValue = Nothing
+                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(4).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l2.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VolFractionLiqPhase"), True)
+                            l2.Item(l2.Count - 1).IsReadOnly = True
+                            l2.Item(l2.Count - 1).DefaultValue = Nothing
+                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(5).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l3.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VolFractionLiqPhase"), True)
+                            l3.Item(l3.Count - 1).IsReadOnly = True
+                            l3.Item(l3.Count - 1).DefaultValue = Nothing
+                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(6).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            l4.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VolFractionLiqPhase"), True)
+                            l4.Item(l4.Count - 1).IsReadOnly = True
+                            l4.Item(l4.Count - 1).DefaultValue = Nothing
+                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Solid
+                        Dim s As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(7).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault, Flowsheet.Options.FractionNumberFormat)
+                            s.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VolFractionSolPhase"), True)
+                            s.Item(s.Count - 1).IsReadOnly = True
+                            s.Item(s.Count - 1).DefaultValue = Nothing
+                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        .Item.Add("[1] " & DWSIM.App.GetLocalString("Mistura"), m, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Composiomssicadamist"), True)
+                        With .Item(.Item.Count - 1)
+                            If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                            .IsBrowsable = True
+                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                            .CustomEditor = New System.Drawing.Design.UITypeEditor
+                        End With
+                        If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[2] " & DWSIM.App.GetLocalString("Vapor"), v, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas3"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[3] " & DWSIM.App.GetLocalString("OverallLiquid"), l, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[4] " & DWSIM.App.GetLocalString("Liquid1"), l1, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[5] " & DWSIM.App.GetLocalString("Liquid2"), l2, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[6] " & DWSIM.App.GetLocalString("Liquid3"), l3, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[7] " & DWSIM.App.GetLocalString("Aqueous"), l4, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[8] " & DWSIM.App.GetLocalString("Solid"), s, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas4"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                    Case Enums.CompositionBasis.Mass_Flows
+                        'PropertyGridEx.CustomPropertyCollection - Mistura
+                        Dim m As New PropertyGridEx.CustomPropertyCollection()
+                        Dim comp As BaseClasses.ConstantProperties
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(0).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            m.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaMistura"), True)
+                            m.Item(m.Count - 1).IsReadOnly = True
+                            m.Item(m.Count - 1).DefaultValue = Nothing
+                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Vapor
+                        Dim v As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(2).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            v.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseVapo"), True)
+                            v.Item(v.Count - 1).IsReadOnly = True
+                            v.Item(v.Count - 1).DefaultValue = Nothing
+                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(1).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
+                            l.Item(l.Count - 1).IsReadOnly = True
+                            l.Item(l.Count - 1).DefaultValue = Nothing
+                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(3).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l1.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
+                            l1.Item(l1.Count - 1).IsReadOnly = True
+                            l1.Item(l1.Count - 1).DefaultValue = Nothing
+                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(4).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l2.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
+                            l2.Item(l2.Count - 1).IsReadOnly = True
+                            l2.Item(l2.Count - 1).DefaultValue = Nothing
+                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(5).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l3.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
+                            l3.Item(l3.Count - 1).IsReadOnly = True
+                            l3.Item(l3.Count - 1).DefaultValue = Nothing
+                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(6).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l4.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
+                            l4.Item(l4.Count - 1).IsReadOnly = True
+                            l4.Item(l4.Count - 1).DefaultValue = Nothing
+                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Solid
+                        Dim s As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            s.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseSolida"), True)
+                            s.Item(s.Count - 1).IsReadOnly = True
+                            s.Item(s.Count - 1).DefaultValue = Nothing
+                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        .Item.Add("[1] " & DWSIM.App.GetLocalString("Mistura"), m, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Vazomssicadamistura"), True)
+                        With .Item(.Item.Count - 1)
+                            If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                            .IsBrowsable = True
+                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                            .CustomEditor = New System.Drawing.Design.UITypeEditor
+                        End With
+                        If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[2] " & DWSIM.App.GetLocalString("Vapor"), v, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas5"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[3] " & DWSIM.App.GetLocalString("OverallLiquid"), l, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas6"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[4] " & DWSIM.App.GetLocalString("Liquid1"), l1, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas6"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[5] " & DWSIM.App.GetLocalString("Liquid2"), l2, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas6"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[6] " & DWSIM.App.GetLocalString("Liquid3"), l3, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas6"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[7] " & DWSIM.App.GetLocalString("Aqueous"), l4, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas6"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[8] " & DWSIM.App.GetLocalString("Solid"), s, True, DWSIM.App.GetLocalString("Composiesmssicas2"), DWSIM.App.GetLocalString("Mostraacomposiodafas7"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                    Case Enums.CompositionBasis.Molar_Flows
+                        'PropertyGridEx.CustomPropertyCollection - Mistura
+                        Dim m As New PropertyGridEx.CustomPropertyCollection()
+                        Dim comp As BaseClasses.ConstantProperties
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            m.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaMistura"), True)
+                            m.Item(m.Count - 1).IsReadOnly = True
+                            m.Item(m.Count - 1).DefaultValue = Nothing
+                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Vapor
+                        Dim v As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            v.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseVapor"), True)
+                            v.Item(v.Count - 1).IsReadOnly = True
+                            v.Item(v.Count - 1).DefaultValue = Nothing
+                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l.Item(l.Count - 1).IsReadOnly = True
+                            l.Item(l.Count - 1).DefaultValue = Nothing
+                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l1.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l1.Item(l1.Count - 1).IsReadOnly = True
+                            l1.Item(l1.Count - 1).DefaultValue = Nothing
+                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l2.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l2.Item(l2.Count - 1).IsReadOnly = True
+                            l2.Item(l2.Count - 1).DefaultValue = Nothing
+                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(5).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l3.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l3.Item(l3.Count - 1).IsReadOnly = True
+                            l3.Item(l3.Count - 1).DefaultValue = Nothing
+                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(6).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l4.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
+                            l4.Item(l4.Count - 1).IsReadOnly = True
+                            l4.Item(l4.Count - 1).DefaultValue = Nothing
+                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Solid
+                        Dim s As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            s.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseSolida"), True)
+                            s.Item(s.Count - 1).IsReadOnly = True
+                            s.Item(s.Count - 1).DefaultValue = Nothing
+                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        .Item.Add("[1] " & DWSIM.App.GetLocalString("Mistura"), m, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Composiomolardamistu"), True)
+                        With .Item(.Item.Count - 1)
+                            If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                            .IsBrowsable = True
+                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                            .CustomEditor = New System.Drawing.Design.UITypeEditor
+                        End With
+                        If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[2] " & DWSIM.App.GetLocalString("Vapor"), v, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas7"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[3] " & DWSIM.App.GetLocalString("OverallLiquid"), l, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas8"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[4] " & DWSIM.App.GetLocalString("Liquid1"), l1, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas8"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[5] " & DWSIM.App.GetLocalString("Liquid2"), l2, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas8"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[6] " & DWSIM.App.GetLocalString("Liquid3"), l3, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas8"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[7] " & DWSIM.App.GetLocalString("Aqueous"), l4, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas8"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[8] " & DWSIM.App.GetLocalString("Solid"), s, True, DWSIM.App.GetLocalString("Composiesmolares2"), DWSIM.App.GetLocalString("Mostraacomposiodafas8"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                    Case Enums.CompositionBasis.Volumetric_Flows
+                        'PropertyGridEx.CustomPropertyCollection - Mistura
+                        Dim m As New PropertyGridEx.CustomPropertyCollection()
+                        Dim comp As BaseClasses.ConstantProperties
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            m.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaMist"), True)
+                            m.Item(m.Count - 1).IsReadOnly = True
+                            m.Item(m.Count - 1).DefaultValue = Nothing
+                            m.Item(m.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Vapor
+                        Dim v As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(2).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            v.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
+                            v.Item(v.Count - 1).IsReadOnly = True
+                            v.Item(v.Count - 1).DefaultValue = Nothing
+                            v.Item(v.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(1).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
+                            l.Item(l.Count - 1).IsReadOnly = True
+                            l.Item(l.Count - 1).DefaultValue = Nothing
+                            l.Item(l.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l1 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(3).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l1.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
+                            l1.Item(l1.Count - 1).IsReadOnly = True
+                            l1.Item(l1.Count - 1).DefaultValue = Nothing
+                            l1.Item(l1.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l2 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(4).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l2.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
+                            l2.Item(l2.Count - 1).IsReadOnly = True
+                            l2.Item(l2.Count - 1).DefaultValue = Nothing
+                            l2.Item(l2.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l3 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(5).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l3.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
+                            l3.Item(l3.Count - 1).IsReadOnly = True
+                            l3.Item(l3.Count - 1).DefaultValue = Nothing
+                            l3.Item(l3.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Liquido
+                        Dim l4 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(6).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            l4.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
+                            l4.Item(l4.Count - 1).IsReadOnly = True
+                            l4.Item(l4.Count - 1).DefaultValue = Nothing
+                            l4.Item(l4.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        'PropertyGridEx.CustomPropertyCollection - Solid
+                        Dim s As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(7).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            s.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFaseSolida"), True)
+                            s.Item(s.Count - 1).IsReadOnly = True
+                            s.Item(s.Count - 1).DefaultValue = Nothing
+                            s.Item(s.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        .Item.Add("[1] " & DWSIM.App.GetLocalString("Mistura"), m, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Vazovolumtricadamist"), True)
+                        With .Item(.Item.Count - 1)
+                            If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                            .IsBrowsable = True
+                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                            .CustomEditor = New System.Drawing.Design.UITypeEditor
+                        End With
+                        If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[2] " & DWSIM.App.GetLocalString("Vapor"), v, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas9"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[3] " & DWSIM.App.GetLocalString("OverallLiquid"), l, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas10"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[4] " & DWSIM.App.GetLocalString("Liquid1"), l1, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas10"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[5] " & DWSIM.App.GetLocalString("Liquid2"), l2, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas10"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[6] " & DWSIM.App.GetLocalString("Liquid3"), l3, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas10"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[7] " & DWSIM.App.GetLocalString("Aqueous"), l4, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas10"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                        If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
+                            .Item.Add("[8] " & DWSIM.App.GetLocalString("Solid"), s, True, DWSIM.App.GetLocalString("Composiesvolumtrica2"), DWSIM.App.GetLocalString("Mostraacomposiodafas10"), True)
+                            With .Item(.Item.Count - 1)
+                                If Me.GraphicObject.InputConnectors(0).IsAttached Then .IsReadOnly = True
+                                .IsBrowsable = True
+                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                                .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            End With
+                        End If
+                    Case Else
+
+                End Select
+
+                If Me.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 And _
+                    Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                    'Kvalues
+                    Dim comp As BaseClasses.ConstantProperties
+                    Dim k0 As New PropertyGridEx.CustomPropertyCollection()
+                    For Each comp In Flowsheet.Options.SelectedComponents.Values
+                        valor = Format(Me.Phases(0).Compounds(comp.Name).Kvalue, Flowsheet.Options.NumberFormat)
+                        k0.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("Kvalues"), DWSIM.App.GetLocalString("Kvalues"), True)
+                        k0.Item(k0.Count - 1).IsReadOnly = True
+                        k0.Item(k0.Count - 1).DefaultValue = Nothing
+                        k0.Item(k0.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                    Next
+                    .Item.Add(DWSIM.App.GetLocalString("Kvalues"), k0, True, DWSIM.App.GetLocalString("ComponentDistribution"), DWSIM.App.GetLocalString("ComponentDistribution"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsReadOnly = True
+                        .IsBrowsable = True
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    End With
+                    Dim k1 As New PropertyGridEx.CustomPropertyCollection()
+                    For Each comp In Flowsheet.Options.SelectedComponents.Values
+                        valor = Format(Me.Phases(0).Compounds(comp.Name).lnKvalue, Flowsheet.Options.NumberFormat)
+                        k1.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("LnKvalues"), DWSIM.App.GetLocalString("LnKvalues"), True)
+                        k1.Item(k1.Count - 1).IsReadOnly = True
+                        k1.Item(k1.Count - 1).DefaultValue = Nothing
+                        k1.Item(k1.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                    Next
+                    .Item.Add(DWSIM.App.GetLocalString("LnKvalues"), k1, True, DWSIM.App.GetLocalString("ComponentDistribution"), DWSIM.App.GetLocalString("ComponentDistribution"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsReadOnly = True
+                        .IsBrowsable = True
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                    End With
+                End If
+
+                Dim val, refval As Nullable(Of Double)
+
+                Dim tmp As Nullable(Of Double)
+                Dim it As PropertyGridEx.CustomProperty = Nothing
+
+                If Me.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 And _
+                    (Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Or _
+                     Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0) Then
+
+                    Dim pm As New PropertyGridEx.CustomPropertyCollection()
+                    'PropertyGridEx.CustomPropertyCollection - Mistura
+                    refval = Me.Phases(0).Properties.enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("EntalpiaEspecficadam"), True)
+                    refval = Me.Phases(0).Properties.entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("EntropiaEspecficadam"), True)
+                    refval = Me.Phases(0).Properties.molar_enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
+                    refval = Me.Phases(0).Properties.molar_entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("MolarEntropy"), True)
+                    refval = Me.Phases(0).Properties.molecularWeight.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Massamolardamistura"), True)
+                    refval = Me.Phases(0).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Massaespecficadamist"), True)
+                    'refval = Me.Phases(0).Properties.massflow.GetValueOrDefault / CDbl(Me.Phases(0).Properties.density.GetValueOrDefault)
+                    'If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    'pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
+                    'refval = Me.Phases(0).Properties.massflow.GetValueOrDefault
+                    'If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    'pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
+                    refval = Me.Phases(0).Properties.thermalConductivity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Condutividadetrmicad"), True)
+
+                    If Flowsheet.Options.CalculateBubbleAndDewPoints Then
+                        refval = Me.Phases(0).Properties.bubblePressure.GetValueOrDefault
+                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
+                        pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("BubblePress"), su.pressure), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("BubblePress"), True)
+                        refval = Me.Phases(0).Properties.dewPressure.GetValueOrDefault
+                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
+                        pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("DewPress"), su.pressure), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("DewPress"), True)
+                        refval = Me.Phases(0).Properties.bubbleTemperature.GetValueOrDefault
+                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                        pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("BubbleTemp"), su.temperature), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("BubbleTemp"), True)
+                        refval = Me.Phases(0).Properties.dewTemperature.GetValueOrDefault
+                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                        pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("DewTemp"), su.temperature), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("DewTemp"), True)
+                    End If
+
+                    For Each it In pm
+                        it.DefaultValue = Nothing
+                        it.DefaultType = GetType(Nullable(Of Double))
+                    Next
+
+                    .Item.Add("[P1] " & DWSIM.App.GetLocalString("Mistura"), pm, True, DWSIM.App.GetLocalString("Propriedades3"), DWSIM.App.GetLocalString("Propriedadesdamistur"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsBrowsable = True
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                    End With
+
+                ElseIf Flowsheet.Options.CalculateBubbleAndDewPoints Then
+
+                    Dim pm As New PropertyGridEx.CustomPropertyCollection()
+
+                    refval = Me.Phases(0).Properties.bubblePressure.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("BubblePress"), su.pressure), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("BubblePress"), True)
+                    refval = Me.Phases(0).Properties.dewPressure.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("DewPress"), su.pressure), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("DewPress"), True)
+                    refval = Me.Phases(0).Properties.bubbleTemperature.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("BubbleTemp"), su.temperature), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("BubbleTemp"), True)
+                    refval = Me.Phases(0).Properties.dewTemperature.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                    pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("DewTemp"), su.temperature), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("DewTemp"), True)
+
+                    For Each it In pm
+                        it.DefaultValue = Nothing
+                        it.DefaultType = GetType(Nullable(Of Double))
+                    Next
+
+                    .Item.Add("[P1] " & DWSIM.App.GetLocalString("Mistura"), pm, True, DWSIM.App.GetLocalString("Propriedades3"), DWSIM.App.GetLocalString("Propriedadesdamistur"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsBrowsable = True
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                    End With
+
+                End If
+
+                val = Nothing
+
+                If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+
+                    Dim pv As New PropertyGridEx.CustomPropertyCollection()
+                    'PropertyGridEx.CustomPropertyCollection - Vapor
+                    refval = Me.Phases(2).Properties.enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf"), True)
+                    refval = Me.Phases(2).Properties.entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("EntropiaEspecficadaf"), True)
+                    refval = Me.Phases(2).Properties.molar_enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
+                    refval = Me.Phases(2).Properties.molar_entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("MolarEntropy"), True)
+                    refval = Me.Phases(2).Properties.molecularWeight.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Massamolardafasevapo"), True)
+                    refval = Me.Phases(2).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Massaespecficadafase"), True)
+                    refval = Me.Phases(2).Properties.massflow.GetValueOrDefault / CDbl(Me.Phases(2).Properties.density.GetValueOrDefault)
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
+                    refval = Me.Phases(2).Properties.massflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
+                    refval = Me.Phases(2).Properties.molarflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
+                    refval = Me.Phases(2).Properties.molarfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pv.Add(DWSIM.App.GetLocalString("Fraomolardafase"), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Fraomolardafasenamis"), True)
+                    refval = Me.Phases(2).Properties.massfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pv.Add(DWSIM.App.GetLocalString("Fraomssicadafase"), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Fraomssicadafasenami"), True)
+                    refval = Me.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pv.Add("Z", val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
+                    refval = Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
+                    refval = Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault / CDbl(Me.Phases(2).Properties.heatCapacityCv.GetValueOrDefault)
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
+                    pv.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
+                    refval = Me.Phases(2).Properties.thermalConductivity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Condutividadetrmicad1"), True)
+                    refval = Me.Phases(2).Properties.kinematic_viscosity.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
+                    refval = Me.Phases(2).Properties.viscosity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), "E")
+                    pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
+
+                    For Each it In pv
+                        it.DefaultValue = Nothing
+                        it.DefaultType = GetType(Nullable(Of Double))
+                    Next
+
+                    .Item.Add("[P2] " & DWSIM.App.GetLocalString("Vapor"), pv, True, DWSIM.App.GetLocalString("Propriedades3"), DWSIM.App.GetLocalString("Propriedadesdafaseva"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsBrowsable = True
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                    End With
+
+                End If
+
+                val = Nothing
+
+                If Me.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
+
+                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
+                    'PropertyGridEx.CustomPropertyCollection - Liquido
+                    refval = Me.Phases(1).Properties.enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
+                    refval = Me.Phases(1).Properties.entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
+                    refval = Me.Phases(1).Properties.molar_enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
+                    refval = Me.Phases(1).Properties.molar_entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
+                    refval = Me.Phases(1).Properties.molecularWeight.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
+                    refval = Me.Phases(1).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
+                    refval = Me.Phases(1).Properties.massflow.GetValueOrDefault / Me.Phases(1).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
+                    refval = Me.Phases(1).Properties.massflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
+                    refval = Me.Phases(1).Properties.molarflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
+                    refval = Me.Phases(1).Properties.molarfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomolardafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomolardafasenamis"), True)
+                    refval = Me.Phases(1).Properties.massfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomssicadafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomssicadafasenami"), True)
+                    'refval = Me.Phases(1).Properties.compressibilityFactor.GetValueOrDefault
+                    'If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    'pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
+                    refval = Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
+                    refval = Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(1).Properties.heatCapacityCv.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
+                    pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
+                    refval = Me.Phases(0).Properties.surfaceTension.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.surfaceTension, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Tensosuperficial"), su.surfaceTension), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Tensosuperficialentr"), True)
+                    refval = Me.Phases(1).Properties.thermalConductivity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
+                    refval = Me.Phases(1).Properties.kinematic_viscosity.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
+                    refval = Me.Phases(1).Properties.viscosity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), "E")
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
+
+                    For Each it In pl
+                        it.DefaultValue = Nothing
+                        it.DefaultType = GetType(Nullable(Of Double))
+                    Next
+
+                    .Item.Add("[P3] " & DWSIM.App.GetLocalString("OverallLiquid"), pl, True, DWSIM.App.GetLocalString("Propriedades3"), DWSIM.App.GetLocalString("PropriedadesdaFaseLq"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsBrowsable = True
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                    End With
+
+                End If
+
+                If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+
+                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
+                    'PropertyGridEx.CustomPropertyCollection - Liquido
+
+                    If TypeOf Me.PropertyPackage Is SeawaterPropertyPackage Then
+
+                        Dim water As Compound = (From subst As Compound In Me.Phases(3).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+                        Dim salt As Compound = (From subst As Compound In Me.Phases(3).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
+
+                        Dim salinity As Double = salt.MassFraction.GetValueOrDefault / water.MassFraction.GetValueOrDefault
+
+                        val = Format(salinity, Flowsheet.Options.NumberFormat)
+                        pl.Add(DWSIM.App.GetLocalString("Salinity"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Salinity"), True)
+
+                    End If
+
+                    If TypeOf Me.PropertyPackage Is SourWaterPropertyPackage Then
+
+                        refval = Me.Phases(3).Properties.pH.GetValueOrDefault
+                        If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                        pl.Add(DWSIM.App.GetLocalString("pH"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("pH"), True)
+
+                    End If
+
+                    If Me.PropertyPackage.IsElectrolytePP Then
+
+                        'Liquid Phase Activity Coefficients
+                        Dim comp As BaseClasses.ConstantProperties
+                        Dim k0 As New PropertyGridEx.CustomPropertyCollection()
+                        For Each comp In Flowsheet.Options.SelectedComponents.Values
+                            valor = Format(Me.Phases(3).Compounds(comp.Name).ActivityCoeff, Flowsheet.Options.NumberFormat)
+                            k0.Add(DWSIM.App.GetComponentName(comp.Name), valor, False, DWSIM.App.GetLocalString("ActivityCoefficients"), DWSIM.App.GetLocalString("ActivityCoefficients"), True)
+                            k0.Item(k0.Count - 1).IsReadOnly = True
+                            k0.Item(k0.Count - 1).DefaultValue = Nothing
+                            k0.Item(k0.Count - 1).DefaultType = GetType(Nullable(Of Double))
+                        Next
+                        pl.Add(DWSIM.App.GetLocalString("ActivityCoefficients"), k0, True, DWSIM.App.GetLocalString("ActivityCoefficients"), DWSIM.App.GetLocalString("LiquidPhaseActivityCoefficients"), True)
+                        With pl.Item(pl.Count - 1)
+                            .IsReadOnly = True
+                            .IsBrowsable = True
+                            .CustomEditor = New System.Drawing.Design.UITypeEditor
+                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        End With
+
+                        refval = Me.Phases(3).Properties.pH.GetValueOrDefault
+                        If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                        pl.Add(DWSIM.App.GetLocalString("pH"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("pH"), True)
+
+                        refval = Me.Phases(3).Properties.osmoticCoefficient.GetValueOrDefault
+                        If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                        pl.Add(DWSIM.App.GetLocalString("OsmoticCoefficient"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("OsmoticCoefficient"), True)
+
+                        refval = Me.Phases(3).Properties.freezingPoint.GetValueOrDefault
+                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                        pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("FreezingPoint"), su.temperature), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("FreezingPoint"), True)
+
+                        refval = Me.Phases(3).Properties.freezingPointDepression.GetValueOrDefault
+                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.deltaT, refval), Flowsheet.Options.NumberFormat)
+                        pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("FreezingPointDepression"), su.deltaT), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("FreezingPointDepression"), True)
+
+                    End If
+
+                    refval = Me.Phases(3).Properties.enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
+                    refval = Me.Phases(3).Properties.entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
+                    refval = Me.Phases(3).Properties.molar_enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
+                    refval = Me.Phases(3).Properties.molar_entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
+                    refval = Me.Phases(3).Properties.molecularWeight.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
+                    refval = Me.Phases(3).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
+                    refval = Me.Phases(3).Properties.massflow.GetValueOrDefault / Me.Phases(3).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
+                    refval = Me.Phases(3).Properties.massflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
+                    refval = Me.Phases(3).Properties.molarflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
+                    refval = Me.Phases(3).Properties.molarfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomolardafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomolardafasenamis"), True)
+                    refval = Me.Phases(3).Properties.massfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomssicadafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomssicadafasenami"), True)
+                    refval = Me.Phases(3).Properties.compressibilityFactor.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
+                    refval = Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
+                    refval = Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(3).Properties.heatCapacityCv.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
+                    pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
+                    refval = Me.Phases(3).Properties.thermalConductivity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
+                    refval = Me.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
+                    refval = Me.Phases(3).Properties.viscosity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), "E")
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
+
+                    For Each it In pl
+                        it.DefaultValue = Nothing
+                        it.DefaultType = GetType(Nullable(Of Double))
+                    Next
+
+                    .Item.Add("[P4] " & DWSIM.App.GetLocalString("Liquid1"), pl, True, DWSIM.App.GetLocalString("Propriedades3"), DWSIM.App.GetLocalString("PropriedadesdaFaseLq"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsBrowsable = True
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                    End With
+
+                End If
+
+                If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
+
+                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
+                    'PropertyGridEx.CustomPropertyCollection - Liquido
+                    refval = Me.Phases(4).Properties.enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
+                    refval = Me.Phases(4).Properties.entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
+                    refval = Me.Phases(4).Properties.molar_enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
+                    refval = Me.Phases(4).Properties.molar_entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
+                    refval = Me.Phases(4).Properties.molecularWeight.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
+                    refval = Me.Phases(4).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
+                    refval = Me.Phases(4).Properties.massflow.GetValueOrDefault / Me.Phases(4).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
+                    refval = Me.Phases(4).Properties.massflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
+                    refval = Me.Phases(4).Properties.molarflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
+                    refval = Me.Phases(4).Properties.molarfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomolardafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomolardafasenamis"), True)
+                    refval = Me.Phases(4).Properties.massfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomssicadafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomssicadafasenami"), True)
+                    refval = Me.Phases(4).Properties.compressibilityFactor.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
+                    refval = Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
+                    refval = Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(4).Properties.heatCapacityCv.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
+                    pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
+                    refval = Me.Phases(4).Properties.thermalConductivity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
+                    refval = Me.Phases(4).Properties.kinematic_viscosity.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
+                    refval = Me.Phases(4).Properties.viscosity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
+
+                    For Each it In pl
+                        it.DefaultValue = Nothing
+                        it.DefaultType = GetType(Nullable(Of Double))
+                    Next
+
+                    .Item.Add("[P5] " & DWSIM.App.GetLocalString("Liquid2"), pl, True, DWSIM.App.GetLocalString("Propriedades3"), DWSIM.App.GetLocalString("PropriedadesdaFaseLq"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsBrowsable = True
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                    End With
+
+                End If
+
+                If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
+
+                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
+                    'PropertyGridEx.CustomPropertyCollection - Liquido
+                    refval = Me.Phases(5).Properties.enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
+                    refval = Me.Phases(5).Properties.entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
+                    refval = Me.Phases(5).Properties.molar_enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
+                    refval = Me.Phases(5).Properties.molar_entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
+                    refval = Me.Phases(5).Properties.molecularWeight.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
+                    refval = Me.Phases(5).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
+                    refval = Me.Phases(5).Properties.massflow.GetValueOrDefault / Me.Phases(5).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
+                    refval = Me.Phases(5).Properties.massflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
+                    refval = Me.Phases(5).Properties.molarflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
+                    refval = Me.Phases(5).Properties.molarfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomolardafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomolardafasenamis"), True)
+                    refval = Me.Phases(5).Properties.massfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomssicadafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomssicadafasenami"), True)
+                    refval = Me.Phases(5).Properties.compressibilityFactor.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
+                    refval = Me.Phases(5).Properties.heatCapacityCp.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
+                    refval = Me.Phases(5).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(5).Properties.heatCapacityCv.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
+                    pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
+                    refval = Me.Phases(5).Properties.thermalConductivity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
+                    refval = Me.Phases(5).Properties.kinematic_viscosity.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
+                    refval = Me.Phases(5).Properties.viscosity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
+
+                    For Each it In pl
+                        it.DefaultValue = Nothing
+                        it.DefaultType = GetType(Nullable(Of Double))
+                    Next
+
+                    .Item.Add("[P6] " & DWSIM.App.GetLocalString("Liquid3"), pl, True, DWSIM.App.GetLocalString("Propriedades3"), DWSIM.App.GetLocalString("PropriedadesdaFaseLq"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsBrowsable = True
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                    End With
+
+                End If
+
+                If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
+
+                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
+                    'PropertyGridEx.CustomPropertyCollection - Liquido
+                    refval = Me.Phases(6).Properties.enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
+                    refval = Me.Phases(6).Properties.entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
+                    refval = Me.Phases(6).Properties.molar_enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
+                    refval = Me.Phases(6).Properties.molar_entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
+                    refval = Me.Phases(6).Properties.molecularWeight.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
+                    refval = Me.Phases(6).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
+                    refval = Me.Phases(6).Properties.massflow.GetValueOrDefault / Me.Phases(6).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
+                    refval = Me.Phases(6).Properties.massflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
+                    refval = Me.Phases(6).Properties.molarflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
+                    refval = Me.Phases(6).Properties.molarfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomolardafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomolardafasenamis"), True)
+                    refval = Me.Phases(6).Properties.massfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomssicadafase"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fraomssicadafasenami"), True)
+                    refval = Me.Phases(6).Properties.compressibilityFactor.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
+                    refval = Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
+                    refval = Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(6).Properties.heatCapacityCv.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
+                    pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
+                    refval = Me.Phases(6).Properties.thermalConductivity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
+                    refval = Me.Phases(6).Properties.kinematic_viscosity.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
+                    refval = Me.Phases(6).Properties.viscosity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
+
+                    For Each it In pl
+                        it.DefaultValue = Nothing
+                        it.DefaultType = GetType(Nullable(Of Double))
+                    Next
+
+                    .Item.Add("[P7] " & DWSIM.App.GetLocalString("Aqueous"), pl, True, DWSIM.App.GetLocalString("Propriedades3"), DWSIM.App.GetLocalString("PropriedadesdaFaseLq"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsBrowsable = True
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                    End With
+
+                End If
+
+                If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
+
+                    Dim pl As New PropertyGridEx.CustomPropertyCollection()
+                    'PropertyGridEx.CustomPropertyCollection - Solid
+                    refval = Me.Phases(7).Properties.enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
+                    refval = Me.Phases(7).Properties.entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
+                    refval = Me.Phases(7).Properties.molar_enthalpy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
+                    refval = Me.Phases(7).Properties.molar_entropy.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("MolarEntropy"), True)
+                    refval = Me.Phases(7).Properties.molecularWeight.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
+                    refval = Me.Phases(7).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
+                    refval = Me.Phases(7).Properties.massflow.GetValueOrDefault / Me.Phases(7).Properties.density.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
+                    refval = Me.Phases(7).Properties.massflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
+                    refval = Me.Phases(7).Properties.molarflow.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
+                    refval = Me.Phases(7).Properties.molarfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomolardafase"), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Fraomolardafasenamis"), True)
+                    refval = Me.Phases(7).Properties.massfraction.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add(DWSIM.App.GetLocalString("Fraomssicadafase"), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Fraomssicadafasenami"), True)
+                    refval = Me.Phases(7).Properties.compressibilityFactor.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
+                    pl.Add("Z", val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
+                    refval = Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
+                    refval = Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(7).Properties.heatCapacityCv.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
+                    pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
+                    refval = Me.Phases(7).Properties.thermalConductivity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
+                    refval = Me.Phases(7).Properties.kinematic_viscosity.GetValueOrDefault
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
+                    refval = Me.Phases(7).Properties.viscosity.GetValueOrDefault
+                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
+                    pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
+
+                    For Each it In pl
+                        it.DefaultValue = Nothing
+                        it.DefaultType = GetType(Nullable(Of Double))
+                    Next
+
+                    .Item.Add("[P8] " & DWSIM.App.GetLocalString("Solid"), pl, True, DWSIM.App.GetLocalString("Propriedades3"), DWSIM.App.GetLocalString("PropriedadesdaFaseSolida"), True)
+                    With .Item(.Item.Count - 1)
+                        .IsBrowsable = True
+                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
+                        .CustomEditor = New System.Drawing.Design.UITypeEditor
+                    End With
+
+                End If
 
             End With
 
@@ -2433,7 +4004,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
             End If
             Dim f As Integer = 0
-            Dim phs As DWSIM.SimulationObjects.PropertyPackages.Phase
+            Dim phs As PropertyPackages.Phase
             Select Case phase.ToLower
                 Case "overall"
                     f = 0
@@ -2780,7 +4351,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
             End If
             Dim f As Integer = -1
-            Dim phs As DWSIM.SimulationObjects.PropertyPackages.Phase
+            Dim phs As PropertyPackages.Phase
             Select Case phase.ToLower
                 Case "overall"
                     f = 0
@@ -3767,7 +5338,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Next
             End If
             Dim f As Integer = -1
-            Dim phs As DWSIM.SimulationObjects.PropertyPackages.Phase
+            Dim phs As PropertyPackages.Phase
             Select Case phaseLabel.ToLower
                 Case "overall"
                     f = 0
@@ -4251,7 +5822,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Next
             End If
             Dim f As Integer = -1
-            Dim phs As DWSIM.SimulationObjects.PropertyPackages.Phase
+            Dim phs As PropertyPackages.Phase
             Select Case phaseLabel.ToLower
                 Case "overall"
                     f = 0
@@ -5225,6 +6796,16 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Function Clone1() As IMaterialStream Implements IMaterialStream.Clone
             Return Me.Clone()
         End Function
+
+        Public ReadOnly Property Flowsheet1 As IFlowsheet Implements IMaterialStream.Flowsheet
+            Get
+                Return FlowSheet
+            End Get
+        End Property
+
+        Public Sub Validate1() Implements IMaterialStream.Validate
+            Validate()
+        End Sub
 
     End Class
 

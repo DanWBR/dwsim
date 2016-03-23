@@ -27,7 +27,7 @@ Imports ICSharpCode.SharpZipLib.Core
 Imports ICSharpCode.SharpZipLib.Zip
 Imports WeifenLuo.WinFormsUI.Docking
 Imports WeifenLuo.WinFormsUI
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports DWSIM.DrawingTools
 Imports Infralution.Localization
@@ -69,7 +69,7 @@ Public Class FormMain
 
     Public AvailableComponents As New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
     Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
-    Public PropertyPackages As New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
+    Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
 
     Public COMonitoringObjects As New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
 
@@ -818,7 +818,7 @@ Public Class FormMain
 
     Public Function CopyPropertyPackages() As Object
 
-        Dim col As New System.Collections.Generic.Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
+        Dim col As New System.Collections.Generic.Dictionary(Of String, PropertyPackages.PropertyPackage)
 
         For Each pp As PropertyPackage In Me.PropertyPackages.Values
             col.Add(pp.ComponentName, CType(pp.Clone, PropertyPackage))
@@ -1589,9 +1589,9 @@ Public Class FormMain
             End If
         Next
 
-        For Each pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In form.Options.PropertyPackages.Values
+        For Each pp As PropertyPackages.PropertyPackage In form.Options.PropertyPackages.Values
             Try
-                If pp.ConfigForm Is Nothing Then pp.ReconfigureConfigForm()
+                'If pp.ConfigForm Is Nothing Then pp.ReconfigureConfigForm()
             Catch ex As Exception
                 excs.Add(New Exception("Error Reconfiguring Property Package", ex))
             End Try

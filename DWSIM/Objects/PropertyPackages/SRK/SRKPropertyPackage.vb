@@ -562,7 +562,7 @@ Namespace DWSIM.SimulationObjects.PropertyPackages
 
         Public Function DW_ReturnPhaseEnvelopeSequential(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            Dim cpc As New DWSIM.Utilities.TCP.Methods_SRK
+            Dim cpc As New Utilities.TCP.Methods_SRK
 
             Dim i As Integer
 

@@ -124,8 +124,8 @@ Namespace DWSIM.SimulationObjects.Reactors
             Loop Until i = maxrank + 1
 
             Dim ims As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Clone
-            Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Me.PropertyPackage
-            Dim ppr As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
+            Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
+            Dim ppr As New PropertyPackages.RaoultPropertyPackage()
 
             ims.SetFlowsheet(Me.FlowSheet)
 
@@ -352,20 +352,20 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                             'Calcular corrente de matéria com T e P
                             .DW_CalcVazaoMolar()
-                            .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
+                            .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                             If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                             End If
                             If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                             End If
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)
+                            .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
                             .DW_CalcOverallProps()
-                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                            .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
                             .DW_CalcVazaoVolumetrica()
 
                         End With
@@ -376,20 +376,20 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                             'Calcular corrente de matéria com T e P
                             .DW_CalcVazaoMolar()
-                            .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
+                            .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                             If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                             End If
                             If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                             End If
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)
+                            .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
                             .DW_CalcOverallProps()
-                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                            .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
                             .DW_CalcVazaoVolumetrica()
 
                         End With
@@ -414,20 +414,20 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                             'Calcular corrente de matéria com T e P
                             .DW_CalcVazaoMolar()
-                            .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
+                            .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                             If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                             End If
                             If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                             End If
-                            .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)
+                            .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
                             .DW_CalcOverallProps()
-                            .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                            .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
                             .DW_CalcVazaoVolumetrica()
 
                         End With

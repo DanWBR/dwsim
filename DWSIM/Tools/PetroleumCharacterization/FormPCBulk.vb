@@ -16,11 +16,12 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary
+Imports PropertyPackages.Auxiliary
 Imports System.Math
 Imports DWSIM.DWSIM.MathEx.GammaFunctions
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 
 
 Public Class FormPCBulk
@@ -278,7 +279,7 @@ Public Class FormPCBulk
             dVB(i) = PropertyMethods.ViscWaltherASTM_B(T1, dV1(i), T2, dV2(i))
         Next
 
-        Dim prop As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS
+        Dim prop As New Thermodynamics.PropertyPackages.Auxiliary.PROPS
         Dim prop2 As New DWSIM.Utilities.PetroleumCharacterization.Methods.GL
         Dim rnd As New Random
         Dim id = rnd.Next(1000, 9999)
@@ -357,9 +358,9 @@ Public Class FormPCBulk
                 .IG_Enthalpy_of_Formation_25C = tmp(0)
                 .IG_Entropy_of_Formation_25C = tmp(1)
                 .IG_Gibbs_Energy_of_Formation_25C = tmp(0) - 298.15 * tmp(1)
-         
-                Dim methods2 As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS
-                Dim methods As New DWSIM.Utilities.Hypos.Methods.HYP
+
+                Dim methods2 As New Thermodynamics.PropertyPackages.Auxiliary.PROPS
+                Dim methods As New Utilities.Hypos.Methods.HYP
 
                 .HVap_A = methods.DHvb_Vetere(.Critical_Temperature, .Critical_Pressure, .Normal_Boiling_Point) / .Molar_Weight
 
@@ -401,13 +402,13 @@ Public Class FormPCBulk
         Dim srkvsfit As New Methods.SRKVSFitting
         Dim nbpfit As New Methods.NBPFitting
         Dim tms As New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
-        Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+        Dim pp As PropertyPackages.PropertyPackage
         Dim fzra, fw, fprvs, fsrkvs As Double
 
         If frm.Options.PropertyPackages.Count > 0 Then
             pp = frm.Options.SelectedPropertyPackage
         Else
-            pp = New DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage()
+            pp = New PropertyPackages.PengRobinsonPropertyPackage()
         End If
 
         For Each c As Compound In ccol.Values

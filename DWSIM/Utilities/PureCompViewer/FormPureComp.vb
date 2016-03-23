@@ -67,7 +67,7 @@ Public Class FormPureComp
         Dim su As DWSIM.SystemsOfUnits.Units = Flowsheet.Options.SelectedUnitSystem
         Dim cv As New DWSIM.SystemsOfUnits.Converter
         Dim nf As String = Flowsheet.Options.NumberFormat
-        Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Flowsheet.Options.SelectedPropertyPackage
+        Dim pp As PropertyPackages.PropertyPackage = Flowsheet.Options.SelectedPropertyPackage
 
         Me.MatStream = New MaterialStream("", "")
 
@@ -618,7 +618,7 @@ Public Class FormPureComp
             'UNIFAC
             tbUNIFAC.Text = ""
             If Not constprop.UNIFACGroups Is Nothing Then
-                Dim unif As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac
+                Dim unif As New Thermodynamics.PropertyPackages.Auxiliary.Unifac
                 For Each s As String In constprop.UNIFACGroups.Keys
                     tbUNIFAC.Text += unif.ID2Group(s) & " " & constprop.UNIFACGroups(s) & ", "
                 Next
@@ -628,7 +628,7 @@ Public Class FormPureComp
             'MODFAC
             tbMODFAC.Text = ""
             If Not constprop.MODFACGroups Is Nothing Then
-                Dim unif As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
+                Dim unif As New Thermodynamics.PropertyPackages.Auxiliary.Modfac
                 For Each s As String In constprop.MODFACGroups.Keys
                     tbMODFAC.Text += unif.ID2Group(s) & " " & constprop.MODFACGroups(s) & ", "
                 Next
@@ -638,7 +638,7 @@ Public Class FormPureComp
             'MODFAC
             tbMODFACNIST.Text = ""
             If Not constprop.NISTMODFACGroups Is Nothing Then
-                Dim unif As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC
+                Dim unif As New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
                 For Each s As String In constprop.NISTMODFACGroups.Keys
                     tbMODFACNIST.Text += unif.ID2Group(s) & " " & constprop.NISTMODFACGroups(s) & ", "
                 Next

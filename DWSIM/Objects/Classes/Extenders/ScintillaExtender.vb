@@ -175,11 +175,11 @@ Module scintillaExtender
         For Each m In methods
             netprops += m.Name + " "
         Next
-        props = Type.GetType("DWSIM.DWSIM.SimulationObjects.PropertyPackages.PropertyPackage").GetProperties()
+        props = Type.GetType("PropertyPackages.PropertyPackage").GetProperties()
         For Each p In props
             If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
         Next
-        methods = Type.GetType("DWSIM.DWSIM.SimulationObjects.PropertyPackages.PropertyPackage").GetMethods()
+        methods = Type.GetType("PropertyPackages.PropertyPackage").GetMethods()
         For Each m In methods
             netprops += m.Name + " "
         Next
@@ -285,11 +285,11 @@ Module scintillaExtender
                         suggestions += (m.Name) + " "
                     Next
                 Case "PropertyPackage"
-                    Dim props = Type.GetType("DWSIM.DWSIM.SimulationObjects.PropertyPackages.PropertyPackage").GetProperties()
+                    Dim props = Type.GetType("PropertyPackages.PropertyPackage").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
                     Next
-                    Dim methods = Type.GetType("DWSIM.DWSIM.SimulationObjects.PropertyPackages.PropertyPackage").GetMethods()
+                    Dim methods = Type.GetType("PropertyPackages.PropertyPackage").GetMethods()
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
@@ -370,7 +370,7 @@ Module scintillaExtender
                     Dim prop = Type.GetType("DWSIM.SpreadsheetForm").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "PropertyPackage"
-                    Dim prop = Type.GetType("DWSIM.DWSIM.SimulationObjects.PropertyPackages.PropertyPackage").GetMember(lastkeyword)
+                    Dim prop = Type.GetType("PropertyPackages.PropertyPackage").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "UnitOp", "Me"
                     Dim prop = Type.GetType("DWSIM.DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass").GetMember(lastkeyword)

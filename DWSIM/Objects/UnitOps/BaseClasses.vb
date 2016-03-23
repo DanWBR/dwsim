@@ -30,7 +30,7 @@ Imports System.Runtime.InteropServices.Marshal
 Imports System.Runtime.InteropServices
 Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Text
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports PropertyGridEx
 Imports DWSIM.DWSIM.DrawingTools
 Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
@@ -3631,7 +3631,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         'CAPE-OPEN Error Interfaces
         Implements ECapeUser, ECapeUnknown, ECapeRoot
 
-        Friend _pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+        Friend _pp As PropertyPackages.PropertyPackage
         Friend _ppid As String = ""
 
         Friend _capeopenmode As Boolean = False
@@ -3719,7 +3719,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 If FlowSheet.Options.PropertyPackages.ContainsKey(_ppid) Then
                     Return FlowSheet.Options.PropertyPackages(_ppid)
                 Else
-                    For Each pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In Me.FlowSheet.Options.PropertyPackages.Values
+                    For Each pp As PropertyPackages.PropertyPackage In Me.FlowSheet.Options.PropertyPackages.Values
                         _ppid = pp.UniqueID
                         Return pp
                         Exit For

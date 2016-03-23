@@ -52,7 +52,7 @@ Public Class FormConfigFPROPS
 
         Me.KryptonDataGridView2.Rows.Clear()
 
-        Dim ppu As DWSIM.SimulationObjects.PropertyPackages.FPROPSPropertyPackage = _pp
+        Dim ppu As PropertyPackages.FPROPSPropertyPackage = _pp
 
         Dim nf As String = "0.####"
 
@@ -64,7 +64,7 @@ Public Class FormConfigFPROPS
         '                            'check if collection has id2 as primary id
         '                            If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
         '                                If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-        '                                    ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData)
+        '                                    ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.PR_IPData)
         '                                    Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
         '                                    KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
         '                                    With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -84,7 +84,7 @@ Public Class FormConfigFPROPS
         '                    End If
         '                Next
         '            Else
-        '                ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData))
+        '                ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PR_IPData))
         '                GoTo gt0
         '            End If
         '        Next
@@ -99,7 +99,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                             'check if collection has id2 as primary id
                             If ppu.m_uni.InteractionParameters.ContainsKey(cp2.Name) Then
                                 If Not ppu.m_uni.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                    ppu.m_uni.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData)
+                                    ppu.m_uni.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData)
                                     Dim a12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).A12
                                     Dim a21 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).A21
                                     dgvu1.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf), Format(a21, nf)})
@@ -121,7 +121,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                     End If
                 Next
             Else
-                ppu.m_uni.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData))
+                ppu.m_uni.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData))
                 GoTo gt1
             End If
         Next
@@ -188,7 +188,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
     Private Sub dgvu1_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvu1.CellValueChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.FPROPSPropertyPackage = _pp
+            Dim ppu As PropertyPackages.FPROPSPropertyPackage = _pp
             Dim value As Object = dgvu1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Dim id1 As String = dgvu1.Rows(e.RowIndex).Cells(0).Tag.ToString
             Dim id2 As String = dgvu1.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -203,7 +203,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
     Private Sub KryptonDataGridView2_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles KryptonDataGridView2.CellValueChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.FPROPSPropertyPackage = _pp
+            Dim ppu As PropertyPackages.FPROPSPropertyPackage = _pp
             Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Dim id1 As String = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
             Dim id2 As String = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -241,20 +241,20 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         Dim ms As New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
 
-        Dim ppn As New DWSIM.SimulationObjects.PropertyPackages.FPROPSPropertyPackage
-        Dim uniquac As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC
+        Dim ppn As New PropertyPackages.FPROPSPropertyPackage
+        Dim uniquac As New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC
 
         Dim ppu, unifac As Object
 
         If sender.Name = "Button1" Then
-            ppu = New DWSIM.SimulationObjects.PropertyPackages.UNIFACPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac
+            ppu = New PropertyPackages.UNIFACPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.Unifac
         ElseIf sender.Name = "Button5" Then
-            ppu = New DWSIM.SimulationObjects.PropertyPackages.UNIFACLLPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UnifacLL
+            ppu = New PropertyPackages.UNIFACLLPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.UnifacLL
         Else
-            ppu = New DWSIM.SimulationObjects.PropertyPackages.MODFACPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
+            ppu = New PropertyPackages.MODFACPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.Modfac
         End If
 
         Dim id1 As String = dgvu1.Rows(row).Cells(0).Tag.ToString
@@ -294,8 +294,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         Do
 
             uniquac.InteractionParameters.Clear()
-            uniquac.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData))
-            uniquac.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData())
+            uniquac.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData))
+            uniquac.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData())
             uniquac.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A12 = x(0)
             uniquac.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A21 = x(1)
 
@@ -306,8 +306,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             fx(1) = Math.Log(actu(1) / actnd(1))
 
             uniquac.InteractionParameters.Clear()
-            uniquac.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData))
-            uniquac.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData())
+            uniquac.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData))
+            uniquac.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData())
             uniquac.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A12 = x(0) + delta1
             uniquac.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A21 = x(1)
 
@@ -321,8 +321,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             dfdx(1, 0) = -(fxd(1) - fx(1)) / delta1
 
             uniquac.InteractionParameters.Clear()
-            uniquac.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData))
-            uniquac.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData())
+            uniquac.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData))
+            uniquac.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData())
             uniquac.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A12 = x(0)
             uniquac.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A21 = x(1) + delta2
 

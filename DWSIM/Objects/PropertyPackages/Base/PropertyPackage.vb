@@ -3584,8 +3584,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     If Critical Then
 
-                        Dim cpc As New DWSIM.Utilities.TCP.Methods
-                        Dim cpcs As New DWSIM.Utilities.TCP.Methods_SRK
+                        Dim cpc As New Utilities.TCP.Methods
+                        Dim cpcs As New Utilities.TCP.Methods_SRK
                         Dim CP As New ArrayList
                         Dim TCR, PCR, VCR As Double
 

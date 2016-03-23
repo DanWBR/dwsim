@@ -40,7 +40,7 @@ Public Class FormConfigLIQUAC
             Next
         End With
 
-        Dim ppu As DWSIM.SimulationObjects.PropertyPackages.LIQUAC2PropertyPackage = _pp
+        Dim ppu As PropertyPackages.LIQUAC2PropertyPackage = _pp
 
         Dim nf As String = "0.####"
 
@@ -66,7 +66,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
                             'check if collection has id2 as primary id
                             If ppu.m_uni.InteractionParameters.ContainsKey(id2) Then
                                 If Not ppu.m_uni.InteractionParameters(id2).ContainsKey(id1) Then
-                                    ppu.m_uni.InteractionParameters(id1).Add(id2, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.LIQUAC2_IPData)
+                                    ppu.m_uni.InteractionParameters(id1).Add(id2, New Thermodynamics.PropertyPackages.Auxiliary.LIQUAC2_IPData)
                                     Dim a12 As Double = ppu.m_uni.InteractionParameters(id1)(id2).A12
                                     Dim a21 As Double = ppu.m_uni.InteractionParameters(id1)(id2).A21
                                     Dim b12 As Double = ppu.m_uni.InteractionParameters(id1)(id2).B12
@@ -92,7 +92,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
                     End If
                 Next
             Else
-                ppu.m_uni.InteractionParameters.Add(id1, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.LIQUAC2_IPData))
+                ppu.m_uni.InteractionParameters.Add(id1, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.LIQUAC2_IPData))
                 GoTo gt1
             End If
         Next
@@ -152,7 +152,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
 
     Private Sub dgvu1_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvu1.CellValueChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.LIQUAC2PropertyPackage = _pp
+            Dim ppu As PropertyPackages.LIQUAC2PropertyPackage = _pp
             Dim value As Object = dgvu1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Dim id1 As String = dgvu1.Rows(e.RowIndex).Cells(0).Tag.ToString
             Dim id2 As String = dgvu1.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -175,7 +175,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
 
     Private Sub TextBox1_TextChanged(sender As System.Object, e As System.EventArgs) Handles tbMaxIts.TextChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.LIQUAC2PropertyPackage = _pp
+            Dim ppu As PropertyPackages.LIQUAC2PropertyPackage = _pp
             If Integer.TryParse(tbMaxIts.Text, New Integer) Then
                 tbMaxIts.ForeColor = Color.Blue
                 ppu.ElectrolyteFlash.MaximumIterations = tbMaxIts.Text
@@ -187,7 +187,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
 
     Private Sub tbTol_TextChanged(sender As System.Object, e As System.EventArgs) Handles tbTol.TextChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.LIQUAC2PropertyPackage = _pp
+            Dim ppu As PropertyPackages.LIQUAC2PropertyPackage = _pp
             If Double.TryParse(tbTol.Text, New Double) Then
                 tbTol.ForeColor = Color.Blue
                 ppu.ElectrolyteFlash.Tolerance = tbTol.Text
@@ -199,14 +199,14 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
 
     Private Sub chkCalcChemEq_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkCalcChemEq.CheckedChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.LIQUAC2PropertyPackage = _pp
+            Dim ppu As PropertyPackages.LIQUAC2PropertyPackage = _pp
             ppu.ElectrolyteFlash.CalculateChemicalEquilibria = chkCalcChemEq.Checked
         End If
     End Sub
 
     Private Sub cbReacSets_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbReacSets.SelectedIndexChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.LIQUAC2PropertyPackage = _pp
+            Dim ppu As PropertyPackages.LIQUAC2PropertyPackage = _pp
             Dim reacsetID As String = (From rset As ReactionSet In _form.Options.ReactionSets.Values Select rset Where rset.Name = cbReacSets.SelectedItem.ToString).FirstOrDefault.ID
             ppu.ElectrolyteFlash.ReactionSet = reacsetID
         End If

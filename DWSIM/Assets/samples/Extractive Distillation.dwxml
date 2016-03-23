@@ -11843,7 +11843,7 @@ More information on how to load a ChemSep database in DWSIM can be found at http
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-fe4a6037-7e54-4296-a5ee-c5da0e3d1ebc</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage</Type>
+      <Type>PropertyPackages.NRTLPropertyPackage</Type>
       <ComponentName>NRTL</ComponentName>
       <ComponentDescription>In this Property Package, the NRTL (Non-Random Two-Liquid) model is used to calculate liquid-phase activity coefficients. Enthalpies are calculated by the Lee-Kesler model, while vapor-phase fugacities and other thermodynamic  properties (both phases) are calculated by the Peng-Robinson EOS.</ComponentDescription>
       <Tag>PP_1</Tag>

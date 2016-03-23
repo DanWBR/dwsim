@@ -97,11 +97,11 @@ Namespace DWSIM.Flowsheet
 
         Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
 
-        Public PropertyPackages As Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
+        Public PropertyPackages As Dictionary(Of String, PropertyPackages.PropertyPackage)
 
-        Public ReadOnly Property SelectedPropertyPackage() As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+        Public ReadOnly Property SelectedPropertyPackage() As PropertyPackages.PropertyPackage
             Get
-                For Each pp2 As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In PropertyPackages.Values
+                For Each pp2 As PropertyPackages.PropertyPackage In PropertyPackages.Values
                     Return pp2
                     Exit For
                 Next
@@ -134,7 +134,7 @@ Namespace DWSIM.Flowsheet
             Reactions = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Reaction)
             ReactionSets = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ReactionSet)
             Databases = New Dictionary(Of String, String())
-            PropertyPackages = New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.PropertyPackage)
+            PropertyPackages = New Dictionary(Of String, PropertyPackages.PropertyPackage)
             PetroleumAssays = New Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)
 
             With ReactionSets

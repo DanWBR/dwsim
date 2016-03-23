@@ -25,6 +25,7 @@ Imports DWSIM.DWSIM.Extras
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Linq
 Imports DWSIM.DWSIM.Flowsheet
+Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class FormSimulSettings
 
@@ -133,7 +134,7 @@ Public Class FormSimulSettings
 
             'property packages
             Me.DataGridViewPP.Rows.Clear()
-            For Each pp2 As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values
+            For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values
                 Me.DataGridViewPP.Rows.Add(New String() {pp2.ComponentName, pp2.ComponentName, pp2.ComponentDescription})
             Next
 
@@ -155,7 +156,7 @@ Public Class FormSimulSettings
 
         With Me.dgvpp.Rows
             .Clear()
-            For Each pp2 As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In FrmChild.Options.PropertyPackages.Values
+            For Each pp2 As PropertyPackages.PropertyPackage In FrmChild.Options.PropertyPackages.Values
                 .Add(New Object() {pp2.UniqueID, pp2.Tag, pp2.ComponentName})
             Next
         End With
@@ -181,25 +182,25 @@ Public Class FormSimulSettings
         tbFlashValidationTolerance.Text = Me.FrmChild.Options.FlashValidationDGETolerancePct
 
         Select Case Me.FrmChild.Options.PropertyPackageFlashAlgorithm
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+            Case FlashMethod.DWSIMDefault
                 ComboBoxFlashAlg.SelectedIndex = 0
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoops3P,
-                    DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoops3PV2,
-                    DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoops3PV3
+            Case FlashMethod.NestedLoops3P,
+                    FlashMethod.NestedLoops3PV2,
+                    FlashMethod.NestedLoops3PV3
                 ComboBoxFlashAlg.SelectedIndex = 1
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut
+            Case FlashMethod.InsideOut
                 ComboBoxFlashAlg.SelectedIndex = 2
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut3P
+            Case FlashMethod.InsideOut3P
                 ComboBoxFlashAlg.SelectedIndex = 3
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin2P
+            Case FlashMethod.GibbsMin2P
                 ComboBoxFlashAlg.SelectedIndex = 4
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin3P
+            Case FlashMethod.GibbsMin3P
                 ComboBoxFlashAlg.SelectedIndex = 5
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE
+            Case FlashMethod.NestedLoopsSLE
                 ComboBoxFlashAlg.SelectedIndex = 6
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE_SS
+            Case FlashMethod.NestedLoopsSLE_SS
                 ComboBoxFlashAlg.SelectedIndex = 7
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsImmiscible
+            Case FlashMethod.NestedLoopsImmiscible
                 ComboBoxFlashAlg.SelectedIndex = 8
             Case Else
                 ComboBoxFlashAlg.SelectedIndex = 0
@@ -1006,12 +1007,12 @@ Public Class FormSimulSettings
         Else
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
         End If
-        Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
+        Dim pp As PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
         pp.ReconfigureConfigForm()
-        pp.ConfigForm._pp = pp
-        pp.ConfigForm._comps = FrmChild.Options.SelectedComponents
-        pp.ConfigForm._form = FrmChild
-        pp.ShowConfigForm(FrmChild)
+        'pp.ConfigForm._pp = pp
+        'pp.ConfigForm._comps = FrmChild.Options.SelectedComponents
+        'pp.ConfigForm._form = FrmChild
+        'pp.ShowConfigForm(FrmChild)
     End Sub
 
     Private Sub btnDeletePP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeletePP.Click
@@ -1023,7 +1024,7 @@ Public Class FormSimulSettings
                           .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_PropertyPackageRemoved"), dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(1).Value)})
                 FrmChild.Options.PropertyPackages.Remove(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value)
                 dgvpp.Rows.RemoveAt(dgvpp.SelectedCells(0).RowIndex)
-             End If
+            End If
         Else
             If Not dgvpp.SelectedRows.Count = 0 Then
                 FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageRemoved,
@@ -1037,7 +1038,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnCopyPP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyPP.Click
-        Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+        Dim pp As PropertyPackages.PropertyPackage
         Try
             Dim ppid As String = ""
             If DWSIM.App.IsRunningOnMono Then
@@ -1126,7 +1127,7 @@ Public Class FormSimulSettings
 
                 Me.FrmChild.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
                 Me.FrmChild.Options.NotSelectedComponents.Remove(tmpcomp.Name)
-             
+
                 Me.ListViewA.Items.Add(tmpcomp.Name, DWSIM.App.GetComponentName(tmpcomp.Name) & " (" & tmpcomp.OriginalDB & ")", 0).Tag = tmpcomp.Name
 
                 If Not DWSIM.App.IsRunningOnMono Then Me.ogc1.Rows.RemoveAt(index)
@@ -1205,7 +1206,7 @@ Public Class FormSimulSettings
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
 
-        Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+        Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
 
         With pp
@@ -1239,33 +1240,33 @@ Public Class FormSimulSettings
         Me.chkValidateEqCalc.Enabled = True
         Select Case ComboBoxFlashAlg.SelectedIndex
             Case 0
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.DWSIMDefault
                 Me.GroupBox11.Enabled = False
             Case 1
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoops3PV3
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoops3PV3
                 Me.GroupBox11.Enabled = True
             Case 2
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.InsideOut
                 Me.GroupBox11.Enabled = False
             Case 3
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut3P
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.InsideOut3P
                 Me.GroupBox11.Enabled = True
             Case 4
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin2P
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin2P
                 Me.GroupBox11.Enabled = False
             Case 5
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin3P
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin3P
                 Me.GroupBox11.Enabled = True
             Case 6
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsSLE
                 Me.GroupBox11.Enabled = False
                 Me.chkValidateEqCalc.Enabled = False
             Case 7
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE_SS
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsSLE_SS
                 Me.GroupBox11.Enabled = False
                 Me.chkValidateEqCalc.Enabled = False
             Case 8
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsImmiscible
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsImmiscible
                 Me.GroupBox11.Enabled = True
         End Select
     End Sub

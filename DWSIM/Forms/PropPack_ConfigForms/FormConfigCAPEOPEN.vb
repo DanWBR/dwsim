@@ -2,7 +2,7 @@
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
 Imports CapeOpen
 Imports DWSIM.Interfaces
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Linq
 
 <System.Serializable()> Public Class FormConfigCAPEOPEN

@@ -29444,7 +29444,7 @@ The column was first converged with the Bubble-Point method and then optimized w
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-1c0c860d-9134-4b96-89f5-56d4e2389cf1</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage</Type>
+      <Type>PropertyPackages.PengRobinsonPropertyPackage</Type>
       <ComponentName>Peng-Robinson (PR)</ComponentName>
       <ComponentDescription>Property Package that uses the Peng-Robinson EOS. Recommended for use with hydrocarbons and non-condensables.
 The properties are calculated directly from the EOS and/or experimental data, except:

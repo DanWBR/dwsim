@@ -17,6 +17,7 @@
 
 Imports System
 Imports System.ComponentModel
+Imports DWSIM.Thermodynamics
 
 
 Public Class FrmCritpt
@@ -26,8 +27,8 @@ Public Class FrmCritpt
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Dim cp As DWSIM.Utilities.TCP.Methods
-    Dim cps As DWSIM.Utilities.TCP.Methods_SRK
+    Dim cp As Utilities.TCP.Methods
+    Dim cps As Utilities.TCP.Methods_SRK
 
     Public su As New DWSIM.SystemsOfUnits.Units
     Public cv As New DWSIM.SystemsOfUnits.Converter
@@ -49,7 +50,7 @@ Public Class FrmCritpt
 
             Dim gobj As GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
             Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
-            Dim pr As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+            Dim pr As PropertyPackages.PropertyPackage
 
             pr = Frm.Options.SelectedPropertyPackage
             pr.CurrentMaterialStream = mat
@@ -109,22 +110,22 @@ Public Class FrmCritpt
 
             If Frm.Options.SelectedPropertyPackage.ComponentName.Contains("Peng-Robinson (PR)") Then
 
-                Me.cp = New DWSIM.Utilities.TCP.Methods
+                Me.cp = New Utilities.TCP.Methods
                 pc = Me.cp.CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
 
             ElseIf Frm.Options.SelectedPropertyPackage.ComponentName.Contains("SRK") Then
 
-                Me.cps = New DWSIM.Utilities.TCP.Methods_SRK
+                Me.cps = New Utilities.TCP.Methods_SRK
                 pc = Me.cps.CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
 
             End If
 
             Dim ppc, ptc, pvc, pzc, tpc, ttc, tvc, tzc As Double
 
-            ppc = Format(Converter.ConvertFromSI(su.pressure, pr.AUX_PCM(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)), nf)
-            ptc = Format(Converter.ConvertFromSI(su.temperature, pr.AUX_TCM(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)), nf)
-            pvc = Format(Converter.ConvertFromSI(su.molar_volume, pr.AUX_VCM(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture) * 1000), nf)
-            pzc = Format(pr.AUX_ZCM(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture), nf)
+            ppc = Format(Converter.ConvertFromSI(su.pressure, pr.AUX_PCM(PropertyPackages.Phase.Mixture)), nf)
+            ptc = Format(Converter.ConvertFromSI(su.temperature, pr.AUX_TCM(PropertyPackages.Phase.Mixture)), nf)
+            pvc = Format(Converter.ConvertFromSI(su.molar_volume, pr.AUX_VCM(PropertyPackages.Phase.Mixture) * 1000), nf)
+            pzc = Format(pr.AUX_ZCM(PropertyPackages.Phase.Mixture), nf)
 
             Grid1.Rows.Add(New Object() {Grid1.Rows.Count + 1, "PCP", ptc, ppc, pvc, pzc})
 

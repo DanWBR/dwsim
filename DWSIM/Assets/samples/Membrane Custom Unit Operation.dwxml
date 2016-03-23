@@ -5402,7 +5402,7 @@ raffinate.SetProp("totalFlow", "Overall", None, "", "mole", [qtr])
   <PropertyPackages>
     <PropertyPackage>
       <ID>112490f0-6ec4-43f3-91ea-885f2ad73a5e</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage</Type>
+      <Type>PropertyPackages.PengRobinsonPropertyPackage</Type>
       <ComponentName>Peng-Robinson (PR)</ComponentName>
       <ComponentDescription>Property Package that uses the Peng-Robinson EOS. Recommended for use with hydrocarbons and non-condensables.
 The properties are calculated directly from the EOS and/or experimental data, except:

@@ -5781,7 +5781,7 @@ Try playing with the Gibbs reactor solving method options and compare the result
   <PropertyPackages>
     <PropertyPackage>
       <ID>debfb970-7f4a-4b09-b928-d782056b1e07</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage</Type>
+      <Type>PropertyPackages.PengRobinsonPropertyPackage</Type>
       <ComponentName></ComponentName>
       <ComponentDescription></ComponentDescription>
       <Tag>PP_1</Tag>

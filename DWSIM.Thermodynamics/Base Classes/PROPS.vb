@@ -20,7 +20,7 @@ Imports DWSIM.Thermodynamics.MathEx.PolySolve
 
 Namespace PropertyPackages.Auxiliary
 
-    <System.Serializable()> Class PROPS
+    <System.Serializable()> Public Class PROPS
 
         Shared Function Cpl_rb(cpig As Double, T As Double, Tc As Double, w As Double, MW As Double) As Double
 

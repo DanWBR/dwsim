@@ -47,8 +47,8 @@ Namespace DWSIM.SimulationObjects.Reactors
 
         <System.NonSerialized()> Dim form As FormFlowsheet
         <System.NonSerialized()> Dim ims As DWSIM.SimulationObjects.Streams.MaterialStream
-        <System.NonSerialized()> Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
-        <System.NonSerialized()> Dim ppr As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
+        <System.NonSerialized()> Dim pp As PropertyPackages.PropertyPackage
+        <System.NonSerialized()> Dim ppr As New PropertyPackages.RaoultPropertyPackage()
 
         Public Property IsothermalTemperature() As Double
             Get
@@ -281,7 +281,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
             ims = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Clone
             pp = Me.PropertyPackage
-            ppr = New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
+            ppr = New PropertyPackages.RaoultPropertyPackage()
 
             ims.SetFlowsheet(Me.FlowSheet)
 

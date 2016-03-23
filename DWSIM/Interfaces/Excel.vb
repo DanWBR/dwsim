@@ -21,7 +21,7 @@
 
 Imports ExcelDna.Integration
 Imports DWSIM.DWSIM.SimulationObjects
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Reflection
 Imports System.IO

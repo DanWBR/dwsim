@@ -174,7 +174,7 @@ Namespace PropertyPackages
 
         Public _phasemappings As New Dictionary(Of String, PhaseInfo)
 
-        Friend IsElectrolytePP As Boolean = False
+        Public IsElectrolytePP As Boolean = False
 
         Private LoopVarF, LoopVarX As Double, LoopVarState As State
 
@@ -2910,7 +2910,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             If My.Settings.EnableGPUProcessing Then App.InitComputeDevice()
 
-            Dim cpc As New DWSIM.Utilities.TCP.Methods
+            Dim cpc As New Utilities.TCP.Methods
 
             Dim i As Integer
 
@@ -3501,8 +3501,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     If Critical Then
 
-                        Dim cpc As New DWSIM.Utilities.TCP.Methods
-                        Dim cpcs As New DWSIM.Utilities.TCP.Methods_SRK
+                        Dim cpc As New Utilities.TCP.Methods
+                        Dim cpcs As New Utilities.TCP.Methods_SRK
                         Dim CP As New ArrayList
                         Dim TCR, PCR, VCR As Double
 
@@ -8825,8 +8825,8 @@ Final3:
 
 #Region "   CAPE-OPEN ICapeUtilities Implementation"
 
-        Friend _availablecomps As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
-        Friend _selectedcomps As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+        Public _availablecomps As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+        Public _selectedcomps As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
         <System.NonSerialized()> Friend _pme As Object
 

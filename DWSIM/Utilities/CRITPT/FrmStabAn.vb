@@ -24,7 +24,7 @@ Public Class FrmStabAn
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Dim cp As DWSIM.Utilities.TCP.Methods
+    Dim cp As Utilities.TCP.Methods
 
     Public su As New DWSIM.SystemsOfUnits.Units
     Public cv As New DWSIM.SystemsOfUnits.Converter
@@ -37,7 +37,7 @@ Public Class FrmStabAn
             Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
             Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
 
-            Dim pr As New DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage
+            Dim pr As New PropertyPackages.PengRobinsonPropertyPackage
 
             pr.CurrentMaterialStream = mat
 
@@ -141,7 +141,7 @@ Public Class FrmStabAn
 
         Me.Frm = My.Application.ActiveSimulation
 
-        Me.cp = New DWSIM.Utilities.TCP.Methods
+        Me.cp = New Utilities.TCP.Methods
 
         Me.su = Frm.Options.SelectedUnitSystem
         Me.nf = Frm.Options.NumberFormat

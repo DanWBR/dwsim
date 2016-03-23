@@ -51729,7 +51729,7 @@
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage</Type>
+      <Type>PropertyPackages.PengRobinsonPropertyPackage</Type>
       <ComponentName>Peng-Robinson (PR)</ComponentName>
       <ComponentDescription>Property Package that uses the Peng-Robinson EOS. Recommended for use with hydrocarbons and non-condensables.
 The properties are calculated directly from the EOS and/or experimental data, except:

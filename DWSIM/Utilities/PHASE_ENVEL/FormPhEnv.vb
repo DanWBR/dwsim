@@ -24,7 +24,7 @@ Public Class FormPhEnv
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Dim cp As DWSIM.Utilities.TCP.Methods
+    Dim cp As Utilities.TCP.Methods
 
     Public su As New DWSIM.SystemsOfUnits.Units
     Public cv As New DWSIM.SystemsOfUnits.Converter
@@ -55,7 +55,7 @@ Public Class FormPhEnv
 
         Me.Frm = My.Application.ActiveSimulation
 
-        Me.cp = New DWSIM.Utilities.TCP.Methods
+        Me.cp = New Utilities.TCP.Methods
 
         Me.su = Frm.Options.SelectedUnitSystem
         Me.nf = Frm.Options.NumberFormat
@@ -917,7 +917,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
             os = Converter.ConvertFromSI(su.entropy, mat.Phases(0).Properties.entropy.GetValueOrDefault)
         End If
 
-        Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Frm.Options.SelectedPropertyPackage
+        Dim pp As PropertyPackages.PropertyPackage = Frm.Options.SelectedPropertyPackage
 
         pp.CurrentMaterialStream = mat
 
@@ -934,7 +934,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
             Pmin = 101325
             Pmax = PC(0)(1) * 1.3
             Dim i As Integer = 0
-            Vz = pp.RET_VMOL(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)
+            Vz = pp.RET_VMOL(PropertyPackages.Phase.Mixture)
             Vn = pp.RET_VNAMES
 
             Dim m_aux As New DWSIM.Utilities.HYD.AuxMethods

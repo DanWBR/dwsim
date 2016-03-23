@@ -22,7 +22,7 @@ Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary
 Imports System.Globalization
 Imports System.Linq
 Imports System.Xml.Linq
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.DrawingTools
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Extras
@@ -446,9 +446,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
             End Try
 
-            For Each pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In form.Options.PropertyPackages.Values
+            For Each pp As PropertyPackages.PropertyPackage In form.Options.PropertyPackages.Values
                 Try
-                    If pp.ConfigForm Is Nothing Then pp.ReconfigureConfigForm()
+                    'If pp.ConfigForm Is Nothing Then pp.ReconfigureConfigForm()
                 Catch ex As Exception
                     excs.Add(New Exception("Error Reconfiguring Property Package", ex))
                 End Try

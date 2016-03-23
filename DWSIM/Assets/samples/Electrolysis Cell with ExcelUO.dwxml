@@ -2968,7 +2968,7 @@ Excel definition file "Electrolysis.xlsx" from sample folder.
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-d3703759-f504-49fc-9e67-738f6bd41367</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage</Type>
+      <Type>PropertyPackages.RaoultPropertyPackage</Type>
       <ComponentName>Raoult's Law</ComponentName>
       <ComponentDescription>Reference Property Package (Ideal Gas/Solution).</ComponentDescription>
       <Tag>PP_1</Tag>

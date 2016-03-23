@@ -19,7 +19,7 @@
 Imports DWSIM.Thermodynamics.MathEx.Common
 Imports DWSIM.Thermodynamics.MathEx
 
-Namespace DWSIM.Utilities.TCP
+Namespace Utilities.TCP
 
     <System.Serializable()> Public Class Methods
 
@@ -81,7 +81,7 @@ restart:        fV = TRIPLESUM(Vc_inf, Vz, VTc, VPc, VVc, Vw, VKIj)
             Loop Until fV * fV_inf < 0 Or Vc_inf <= b
             Vc_sup = Vc_inf - delta_Vc
             'Vc_inf = Vc_inf - delta_Vc
-            
+
             If Vc_inf <= b Then GoTo Final2
 
             'método de Brent para encontrar Vc
@@ -946,7 +946,7 @@ Final2:
             Loop Until fT * fT_inf < 0 Or Tc_inf > Tc_sup
             Tc_sup = Tc_inf
             Tc_inf = Tc_inf - delta_Tc
-            
+
             'método de Brent para encontrar Tc
 
             Dim aa, bb, cc, dd, ee, min1, min2, fa, fb, fc, pp, qq, rr, ss, tol1, xm As Double

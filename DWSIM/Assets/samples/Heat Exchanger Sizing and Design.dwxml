@@ -3770,7 +3770,7 @@ Final Heat Exchanger dimensions are: length 30 ft., 500 tubes and 29 in. interna
   <PropertyPackages>
     <PropertyPackage>
       <ID>3d4b62a7-0ebb-4f44-8e1d-c93c533c7519</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.PengRobinsonLKPropertyPackage</Type>
+      <Type>PropertyPackages.PengRobinsonLKPropertyPackage</Type>
       <ComponentName></ComponentName>
       <ComponentDescription></ComponentDescription>
       <Tag>PP_2</Tag>

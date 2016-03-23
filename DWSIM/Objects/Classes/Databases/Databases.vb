@@ -20,7 +20,7 @@
 Imports FileHelpers
 Imports System.Xml
 Imports System.IO
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary
+Imports PropertyPackages.Auxiliary
 Imports CProp = CoolProp
 
 Namespace DWSIM.Databases
@@ -120,8 +120,8 @@ Namespace DWSIM.Databases
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
-            Dim unif As New Global.DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac
-            Dim modf As New Global.DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
+            Dim unif As New PropertyPackages.Auxiliary.Unifac
+            Dim modf As New PropertyPackages.Auxiliary.Modfac
 
             For Each node As XmlNode In xmldoc.ChildNodes(0).ChildNodes
                 cp = New Thermodynamics.BaseClasses.ConstantProperties
@@ -511,8 +511,8 @@ Namespace DWSIM.Databases
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
-            Dim unif As New SimulationObjects.PropertyPackages.Auxiliary.Unifac
-            Dim modf As New SimulationObjects.PropertyPackages.Auxiliary.Modfac
+            Dim unif As New PropertyPackages.Auxiliary.Unifac
+            Dim modf As New PropertyPackages.Auxiliary.Modfac
 
             For Each node As XmlNode In xmldoc.ChildNodes(1)
                 cp = New Thermodynamics.BaseClasses.ConstantProperties
@@ -1175,7 +1175,7 @@ Namespace DWSIM.Databases
                                 If node2.InnerText <> "" Then .UNIQUAC_Q = Double.Parse(node2.InnerText, nf)
                             Case "UNIFAC"
                                 .UNIFACGroups = New SortedList
-                                Dim unif As New SimulationObjects.PropertyPackages.Auxiliary.Unifac
+                                Dim unif As New PropertyPackages.Auxiliary.Unifac
                                 Dim GID, nid As String
                                 For Each node3 As XmlNode In node2.ChildNodes
                                     nid = node3.Attributes.Item(0).Name
@@ -1188,7 +1188,7 @@ Namespace DWSIM.Databases
                                 Next
                             Case "MODFAC"
                                 .MODFACGroups = New SortedList
-                                Dim modf As New SimulationObjects.PropertyPackages.Auxiliary.Modfac
+                                Dim modf As New PropertyPackages.Auxiliary.Modfac
                                 Dim GID As String
                                 For Each node3 As XmlNode In node2.ChildNodes
                                     If node3.Attributes.Item(0).Name = "ID" Then
@@ -1200,7 +1200,7 @@ Namespace DWSIM.Databases
                                 Next
                             Case "NISTMODFAC"
                                 .NISTMODFACGroups = New SortedList
-                                Dim nimodf As New SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC
+                                Dim nimodf As New PropertyPackages.Auxiliary.NISTMFAC
                                 Dim GID As String
                                 For Each node3 As XmlNode In node2.ChildNodes
                                     If node3.Attributes.Item(0).Name = "ID" Then

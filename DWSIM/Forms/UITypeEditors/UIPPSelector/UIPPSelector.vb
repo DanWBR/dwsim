@@ -19,7 +19,7 @@
 Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
 Imports System.ComponentModel
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Namespace DWSIM.Editors.PropertyPackages
 
     <System.Serializable()> Public Class UIPPSelector

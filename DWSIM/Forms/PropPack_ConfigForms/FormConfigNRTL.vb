@@ -55,7 +55,7 @@ Public Class FormConfigNRTL
 
         Me.KryptonDataGridView2.Rows.Clear()
 
-        Dim ppu As DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage = _pp
+        Dim ppu As PropertyPackages.NRTLPropertyPackage = _pp
 
         Dim nf As String = "0.0000"
 
@@ -67,7 +67,7 @@ gt0:        If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                             'check if collection has id2 as primary id
                             If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
                                 If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                    ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData)
+                                    ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.PR_IPData)
                                     Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
                                     KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                     With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -87,7 +87,7 @@ gt0:        If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     End If
                 Next
             Else
-                ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData))
+                ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PR_IPData))
                 GoTo gt0
             End If
         Next
@@ -102,7 +102,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                             'check if collection has id2 as primary id
                             If ppu.m_uni.InteractionParameters.ContainsKey(cp2.Name) Then
                                 If Not ppu.m_uni.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                    ppu.m_uni.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL_IPData)
+                                    ppu.m_uni.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.NRTL_IPData)
                                     Dim a12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).A12
                                     Dim a21 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).A21
                                     Dim b12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).B12
@@ -134,7 +134,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                     End If
                 Next
             Else
-                ppu.m_uni.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL_IPData))
+                ppu.m_uni.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.NRTL_IPData))
                 GoTo gt1
             End If
         Next
@@ -220,7 +220,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
     Private Sub dgvu1_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvu1.CellValueChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage = _pp
+            Dim ppu As PropertyPackages.NRTLPropertyPackage = _pp
             Dim value As Object = dgvu1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Dim id1 As String = dgvu1.Rows(e.RowIndex).Cells(0).Tag.ToString
             Dim id2 As String = dgvu1.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -288,7 +288,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         If Loaded Then
             Dim oldvalue As Double = 0.0#
             Dim newvalue As Double = 0.0#
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage = _pp
+            Dim ppu As PropertyPackages.NRTLPropertyPackage = _pp
             Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Dim id1 As String = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
             Dim id2 As String = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -308,8 +308,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
     End Sub
 
     Dim actu(5), actn(5) As Double
-    Dim ppn As DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage
-    Dim nrtl As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL
+    Dim ppn As PropertyPackages.NRTLPropertyPackage
+    Dim nrtl As Thermodynamics.PropertyPackages.Auxiliary.NRTL
     Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim ppu, unifac As Object
 
@@ -318,8 +318,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         Dim a1(1), a2(1), a3(1) As Double
 
         nrtl.InteractionParameters.Clear()
-        nrtl.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL_IPData))
-        nrtl.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL_IPData())
+        nrtl.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.NRTL_IPData))
+        nrtl.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New Thermodynamics.PropertyPackages.Auxiliary.NRTL_IPData())
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A12 = x(0)
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A21 = x(1)
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).alpha12 = 0.2
@@ -373,21 +373,21 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         ms = New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
 
-        ppn = New DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage
-        nrtl = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL
+        ppn = New PropertyPackages.NRTLPropertyPackage
+        nrtl = New Thermodynamics.PropertyPackages.Auxiliary.NRTL
 
         If sender.Name = "Button1" Then
-            ppu = New DWSIM.SimulationObjects.PropertyPackages.UNIFACPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac
+            ppu = New PropertyPackages.UNIFACPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.Unifac
         ElseIf sender.Name = "Button5" Then
-            ppu = New DWSIM.SimulationObjects.PropertyPackages.UNIFACLLPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UnifacLL
+            ppu = New PropertyPackages.UNIFACLLPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.UnifacLL
         ElseIf sender.Name = "Button6" Then
-            ppu = New DWSIM.SimulationObjects.PropertyPackages.NISTMFACPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC
+            ppu = New PropertyPackages.NISTMFACPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
         Else
-            ppu = New DWSIM.SimulationObjects.PropertyPackages.MODFACPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
+            ppu = New PropertyPackages.MODFACPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.Modfac
         End If
 
         Dim id1 As String = dgvu1.Rows(row).Cells(0).Tag.ToString

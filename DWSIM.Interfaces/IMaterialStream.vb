@@ -20,4 +20,8 @@
 
     Function Clone() As IMaterialStream
 
+    ReadOnly Property Flowsheet As IFlowsheet
+
+    Sub Validate()
+
 End Interface

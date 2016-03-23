@@ -80,7 +80,7 @@ Public Class FormHYD
 
             If mat.PropertyPackage.RET_VCAS().Contains("7732-18-5") Then
 
-                Dim unif As New DWSIM.SimulationObjects.PropertyPackages.UNIFACPropertyPackage
+                Dim unif As New PropertyPackages.UNIFACPropertyPackage
 
                 unif.CurrentMaterialStream = mat
 

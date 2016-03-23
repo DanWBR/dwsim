@@ -2,6 +2,7 @@
 Imports OutlookStyleControls
 Imports Cudafy
 Imports Cudafy.Host
+Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class FormConfigCAPEOPEN2
 
@@ -140,25 +141,25 @@ Public Class FormConfigCAPEOPEN2
         End If
 
         Select Case _pp.FlashAlgorithm
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+            Case FlashMethod.DWSIMDefault
                 ComboBoxFlashAlg.SelectedIndex = 0
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoops3P,
-                    DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoops3PV2,
-                    DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoops3PV3
+            Case FlashMethod.NestedLoops3P,
+                    FlashMethod.NestedLoops3PV2,
+                    FlashMethod.NestedLoops3PV3
                 ComboBoxFlashAlg.SelectedIndex = 1
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut
+            Case FlashMethod.InsideOut
                 ComboBoxFlashAlg.SelectedIndex = 2
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut3P
+            Case FlashMethod.InsideOut3P
                 ComboBoxFlashAlg.SelectedIndex = 3
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin2P
+            Case FlashMethod.GibbsMin2P
                 ComboBoxFlashAlg.SelectedIndex = 4
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin3P
+            Case FlashMethod.GibbsMin3P
                 ComboBoxFlashAlg.SelectedIndex = 5
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE
+            Case FlashMethod.NestedLoopsSLE
                 ComboBoxFlashAlg.SelectedIndex = 6
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE_SS
+            Case FlashMethod.NestedLoopsSLE_SS
                 ComboBoxFlashAlg.SelectedIndex = 7
-            Case DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsImmiscible
+            Case FlashMethod.NestedLoopsImmiscible
                 ComboBoxFlashAlg.SelectedIndex = 8
             Case Else
                 ComboBoxFlashAlg.SelectedIndex = 0
@@ -230,31 +231,31 @@ Public Class FormConfigCAPEOPEN2
     Private Sub ComboBoxFlashAlg_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBoxFlashAlg.SelectedIndexChanged
         Select Case ComboBoxFlashAlg.SelectedIndex
             Case 0
-                Me._pp.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                Me._pp.FlashAlgorithm = FlashMethod.DWSIMDefault
                 Me.GroupBox11.Enabled = False
             Case 1
-                Me._pp.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoops3PV3
+                Me._pp.FlashAlgorithm = FlashMethod.NestedLoops3PV3
                 Me.GroupBox11.Enabled = True
             Case 2
-                Me._pp.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut
+                Me._pp.FlashAlgorithm = FlashMethod.InsideOut
                 Me.GroupBox11.Enabled = False
             Case 3
-                Me._pp.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut3P
+                Me._pp.FlashAlgorithm = FlashMethod.InsideOut3P
                 Me.GroupBox11.Enabled = True
             Case 4
-                Me._pp.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin2P
+                Me._pp.FlashAlgorithm = FlashMethod.GibbsMin2P
                 Me.GroupBox11.Enabled = False
             Case 5
-                Me._pp.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin3P
+                Me._pp.FlashAlgorithm = FlashMethod.GibbsMin3P
                 Me.GroupBox11.Enabled = True
             Case 6
-                Me._pp.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE
+                Me._pp.FlashAlgorithm = FlashMethod.NestedLoopsSLE
                 Me.GroupBox11.Enabled = False
-             Case 7
-                Me._pp.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE_SS
+            Case 7
+                Me._pp.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS
                 Me.GroupBox11.Enabled = False
             Case 8
-                Me._pp.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsImmiscible
+                Me._pp.FlashAlgorithm = FlashMethod.NestedLoopsImmiscible
                 Me.GroupBox11.Enabled = True
         End Select
     End Sub
@@ -351,9 +352,9 @@ Public Class FormConfigCAPEOPEN2
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         _pp.ReconfigureConfigForm()
-        _pp.ConfigForm._pp = _pp
-        _pp.ConfigForm._comps = _selcomps
-        _pp.ShowConfigForm()
+        '_pp.ConfigForm._pp = _pp
+        '_pp.ConfigForm._comps = _selcomps
+        '_pp.ShowConfigForm()
     End Sub
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged

@@ -20,6 +20,7 @@ Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports DWSIM.DWSIM.Extras
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class FormConfigWizard
 
@@ -83,39 +84,39 @@ Public Class FormConfigWizard
 
             'property packages
             Me.ListViewPP.Items.Clear()
-            For Each pp2 As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values
+            For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values
                 Select Case pp2.PackageType
-                    Case DWSIM.SimulationObjects.PropertyPackages.PackageType.EOS
+                    Case PropertyPackages.PackageType.EOS
                         With Me.ListViewPP.Items.Add(pp2.ComponentName)
                             .Group = Me.ListViewPP.Groups("EOS")
                             .ToolTipText = pp2.ComponentDescription
                         End With
-                    Case DWSIM.SimulationObjects.PropertyPackages.PackageType.ActivityCoefficient
+                    Case PropertyPackages.PackageType.ActivityCoefficient
                         With Me.ListViewPP.Items.Add(pp2.ComponentName)
                             .Group = Me.ListViewPP.Groups("ACT")
                             .ToolTipText = pp2.ComponentDescription
                         End With
-                    Case DWSIM.SimulationObjects.PropertyPackages.PackageType.ChaoSeader
+                    Case PropertyPackages.PackageType.ChaoSeader
                         With Me.ListViewPP.Items.Add(pp2.ComponentName)
                             .Group = Me.ListViewPP.Groups("CS")
                             .ToolTipText = pp2.ComponentDescription
                         End With
-                    Case DWSIM.SimulationObjects.PropertyPackages.PackageType.VaporPressure
+                    Case PropertyPackages.PackageType.VaporPressure
                         With Me.ListViewPP.Items.Add(pp2.ComponentName)
                             .Group = Me.ListViewPP.Groups("VAP")
                             .ToolTipText = pp2.ComponentDescription
                         End With
-                    Case DWSIM.SimulationObjects.PropertyPackages.PackageType.Miscelaneous
+                    Case PropertyPackages.PackageType.Miscelaneous
                         With Me.ListViewPP.Items.Add(pp2.ComponentName)
                             .Group = Me.ListViewPP.Groups("MISC")
                             .ToolTipText = pp2.ComponentDescription
                         End With
-                    Case DWSIM.SimulationObjects.PropertyPackages.PackageType.CorrespondingStates
+                    Case PropertyPackages.PackageType.CorrespondingStates
                         With Me.ListViewPP.Items.Add(pp2.ComponentName)
                             .Group = Me.ListViewPP.Groups("CST")
                             .ToolTipText = pp2.ComponentDescription
                         End With
-                    Case DWSIM.SimulationObjects.PropertyPackages.PackageType.CAPEOPEN
+                    Case PropertyPackages.PackageType.CAPEOPEN
                         With Me.ListViewPP.Items.Add(pp2.ComponentName)
                             .Group = Me.ListViewPP.Groups("CAP")
                             .ToolTipText = pp2.ComponentDescription
@@ -141,7 +142,7 @@ Public Class FormConfigWizard
 
         With Me.dgvpp.Rows
             .Clear()
-            For Each pp2 As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In FrmChild.Options.PropertyPackages.Values
+            For Each pp2 As PropertyPackages.PropertyPackage In FrmChild.Options.PropertyPackages.Values
                 .Add(New Object() {pp2.UniqueID, pp2.Tag, pp2.ComponentName})
             Next
         End With
@@ -327,7 +328,7 @@ Public Class FormConfigWizard
     End Sub
 
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
-        Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+        Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(ListViewPP.SelectedItems(0).Text).Clone
         With pp
             pp.Tag = "PP_" & CStr(Me.dgvpp.Rows.Count + 1)
@@ -336,12 +337,12 @@ Public Class FormConfigWizard
         FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
         Me.dgvpp.Rows(Me.dgvpp.Rows.Count - 1).Selected = True
-        If TypeOf pp Is DWSIM.SimulationObjects.PropertyPackages.CAPEOPENPropertyPackage Then
+        If TypeOf pp Is PropertyPackages.CAPEOPENPropertyPackage Then
             pp.ReconfigureConfigForm()
-            pp.ConfigForm._pp = pp
-            pp.ConfigForm._comps = FrmChild.Options.SelectedComponents
-            pp.ConfigForm._form = FrmChild
-            pp.ShowConfigForm(FrmChild)
+            'pp.ConfigForm._pp = pp
+            'pp.ConfigForm._comps = FrmChild.Options.SelectedComponents
+            'pp.ConfigForm._form = FrmChild
+            'pp.ShowConfigForm(FrmChild)
         End If
     End Sub
 
@@ -393,23 +394,23 @@ Public Class FormConfigWizard
     Private Sub ListBoxPP_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ListBoxPP.SelectedIndexChanged
         Select Case ListBoxPP.SelectedIndex
             Case 0
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.DWSIMDefault
             Case 1
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoops3PV3
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoops3PV3
             Case 2
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.InsideOut
             Case 3
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.InsideOut3P
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.InsideOut3P
             Case 4
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin2P
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin2P
             Case 5
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.GibbsMin3P
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin3P
             Case 6
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsSLE
             Case 7
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE_SS
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsSLE_SS
             Case 8
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsImmiscible
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsImmiscible
         End Select
     End Sub
 
@@ -465,13 +466,13 @@ Public Class FormConfigWizard
         If e.ColumnIndex = 3 Then
             Dim ppid As String = ""
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
-            Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
+            Dim pp As PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
             If pp.IsConfigurable Then
                 pp.ReconfigureConfigForm()
-                pp.ConfigForm._pp = pp
-                pp.ConfigForm._comps = FrmChild.Options.SelectedComponents
-                pp.ConfigForm._form = FrmChild
-                pp.ShowConfigForm(FrmChild)
+                'pp.ConfigForm._pp = pp
+                'pp.ConfigForm._comps = FrmChild.Options.SelectedComponents
+                'pp.ConfigForm._form = FrmChild
+                'pp.ShowConfigForm(FrmChild)
             Else
                 MessageBox.Show(DWSIM.App.GetLocalString("NonConfigurablePP"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             End If

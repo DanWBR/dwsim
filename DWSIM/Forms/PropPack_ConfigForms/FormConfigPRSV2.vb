@@ -16,7 +16,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.IO
 Imports DWSIM.DWSIM.Flowsheet
 
@@ -58,7 +58,7 @@ gt0:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name.ToLower) T
                                 'check if collection has id2 as primary id
                                 If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name.ToLower) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name.ToLower).ContainsKey(cp.Name.ToLower) Then
-                                        ppu.m_pr.InteractionParameters(cp.Name.ToLower).Add(cp2.Name.ToLower, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PRSV2_IPData)
+                                        ppu.m_pr.InteractionParameters(cp.Name.ToLower).Add(cp2.Name.ToLower, New Thermodynamics.PropertyPackages.Auxiliary.PRSV2_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name.ToLower)(cp2.Name.ToLower).kij
                                         Dim a21 As Double = ppu.m_pr.InteractionParameters(cp.Name.ToLower)(cp2.Name.ToLower).kji
                                         KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp2.Name), DWSIM.App.GetComponentName(cp.Name), Format(a12, nf), Format(a21, nf)})
@@ -80,7 +80,7 @@ gt0:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name.ToLower) T
                         End If
                     Next
                 Else
-                    ppu.m_pr.InteractionParameters.Add(cp.Name.ToLower, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PRSV2_IPData))
+                    ppu.m_pr.InteractionParameters.Add(cp.Name.ToLower, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PRSV2_IPData))
                     GoTo gt0
                 End If
             Next
@@ -94,7 +94,7 @@ gt1:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
                     Dim kappa3 As Double = ppu.m_pr._data(cp.Name.ToLower).kappa3
                     dgvu1.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), kappa1, kappa2, kappa3})
                 Else
-                    ppu.m_pr._data.Add(cp.Name.ToLower, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PRSV2Param)
+                    ppu.m_pr._data.Add(cp.Name.ToLower, New Thermodynamics.PropertyPackages.Auxiliary.PRSV2Param)
                     GoTo gt1
                 End If
             Next
@@ -109,7 +109,7 @@ gt0a:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name.ToLower) T
                                 'check if collection has id2 as primary id
                                 If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name.ToLower) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name.ToLower).ContainsKey(cp.Name.ToLower) Then
-                                        ppu.m_pr.InteractionParameters(cp.Name.ToLower).Add(cp2.Name.ToLower, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PRSV2_IPData)
+                                        ppu.m_pr.InteractionParameters(cp.Name.ToLower).Add(cp2.Name.ToLower, New Thermodynamics.PropertyPackages.Auxiliary.PRSV2_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name.ToLower)(cp2.Name.ToLower).kij
                                         Dim a21 As Double = ppu.m_pr.InteractionParameters(cp.Name.ToLower)(cp2.Name.ToLower).kji
                                         KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp2.Name), DWSIM.App.GetComponentName(cp.Name), Format(a12, nf), Format(a21, nf)})
@@ -131,7 +131,7 @@ gt0a:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name.ToLower) T
                         End If
                     Next
                 Else
-                    ppu.m_pr.InteractionParameters.Add(cp.Name.ToLower, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PRSV2_IPData))
+                    ppu.m_pr.InteractionParameters.Add(cp.Name.ToLower, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PRSV2_IPData))
                     GoTo gt0a
                 End If
             Next
@@ -145,7 +145,7 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
                     Dim kappa3 As Double = ppu.m_pr._data(cp.Name.ToLower).kappa3
                     dgvu1.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), kappa1, kappa2, kappa3})
                 Else
-                    ppu.m_pr._data.Add(cp.Name.ToLower, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PRSV2Param)
+                    ppu.m_pr._data.Add(cp.Name.ToLower, New Thermodynamics.PropertyPackages.Auxiliary.PRSV2Param)
                     GoTo gt2
                 End If
             Next

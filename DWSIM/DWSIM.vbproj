@@ -301,6 +301,7 @@
     <Import Include="DWSIM.DWSIM.SystemsOfUnits" />
     <Import Include="DWSIM.DWSIM.Thermodynamics" />
     <Import Include="DWSIM.DWSIM.Thermodynamics.BaseClasses" />
+    <Import Include="DWSIM.Thermodynamics" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -710,82 +711,24 @@
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
     <Compile Include="Objects\Classes\Extenders\SimplexExtender.vb" />
     <Compile Include="Objects\Classes\TaskSchedulers\STATaskScheduler.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\ActivityCoefficientBase.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\ActivityCoefficientPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\Electrolyte.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\ElectrolyteBase.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\Base.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\BlackOil.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\BostonBrittInsideOut.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\BostonFournierInsideOut3P.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\ElectrolyteSVLE.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\GibbsMinimization3P.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\NestedLoops.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\NestedLoops3P.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\NestedLoops3PV2.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\NestedLoops3PV3.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\NestedLoopsImmiscible.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\NestedLoopsSLE.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\Seawater.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\SimpleLLE.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\FlashAlgorithms\SourWater.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\MichelsenBase.vb" />
-    <Compile Include="Objects\PropertyPackages\BlackOil\BlackOilPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\BlackOil\Helper Classes\BlackOilProperties.vb" />
-    <Compile Include="Objects\PropertyPackages\CAPE-OPEN\CAPEOPENPropertyPackageManager.vb" />
-    <Compile Include="Objects\PropertyPackages\CAPE-OPEN\CAPEOPENPropertyPackageSocket.vb" />
-    <Compile Include="Objects\PropertyPackages\ChaoSeader\ChaoSeaderPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\ChaoSeader\Helper Classes\CS.vb" />
-    <Compile Include="Objects\PropertyPackages\CoolProp\CoolPropPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\ExtendedUNIQUAC\ExUNIQUACPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\ExtendedUNIQUAC\Model\ExUNIQUAC.vb" />
-    <Compile Include="Objects\PropertyPackages\FPROPS\FPROPSPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\FPROPS\FPROPS_NativeCalls.vb" />
-    <Compile Include="Objects\PropertyPackages\GraysonStreed\GraysonStreedPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\GraysonStreed\Helper Classes\GS.vb" />
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigLKP.Designer.vb">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigLKP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\PropertyPackages\LeeKeslerPlocker\Helper Classes\LKP.vb" />
-    <Compile Include="Objects\PropertyPackages\LeeKeslerPlocker\LKPPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\LIQUAC2\LIQUAC2PropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\LIQUAC2\Model\LIQUAC2.vb" />
-    <Compile Include="Objects\PropertyPackages\NIST-MODFAC\Helper Classes\NISTMFAC.vb" />
-    <Compile Include="Objects\PropertyPackages\NIST-MODFAC\NISTMFACPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\PengRobinson\Helper Classes\PR.vb" />
-    <Compile Include="Objects\PropertyPackages\PRSV2\PRSV2-VL.vb" />
-    <Compile Include="Objects\PropertyPackages\PRSV2\PRSV2.vb" />
-    <Compile Include="Objects\PropertyPackages\PRSV2\PRSV2PropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\PRSV2\PRSV2VLPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\Raoult\Helper Classes\Ideal.vb" />
-    <Compile Include="Objects\PropertyPackages\Seawater\Helper Classes\Seawater.vb" />
-    <Compile Include="Objects\PropertyPackages\Seawater\SeawaterPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\SourWater\SourWaterPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\SRK\Helper Classes\SRK2.vb" />
-    <Compile Include="Objects\PropertyPackages\MODFAC\Helper Classes\MODFAC.vb" />
-    <Compile Include="Objects\PropertyPackages\MODFAC\MODFACPropertyPackage.vb" />
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigNRTL.Designer.vb">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigNRTL.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\PropertyPackages\NRTL\Helper Classes\NRTL.vb" />
-    <Compile Include="Objects\PropertyPackages\NRTL\NRTLPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\PC-SAFT\Helper Classes\PCSAFT.vb" />
-    <Compile Include="Objects\PropertyPackages\PC-SAFT\PCSAFTPropertyPackage.vb" />
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigUNIQUAC.Designer.vb">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigUNIQUAC.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\PropertyPackages\UNIFAC\UNIFACPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\UNIQUAC\Helper Classes\UNIQUAC.vb" />
-    <Compile Include="Objects\PropertyPackages\UNIQUAC\UNIQUACPropertyPackage.vb" />
     <Compile Include="Objects\Reactors\BaseReactor.vb" />
     <Compile Include="Objects\Reactors\Conversion.vb" />
     <Compile Include="Objects\Reactors\CSTR.vb" />
@@ -845,7 +788,6 @@
     <Compile Include="Objects\UnitOps\Heater.vb" />
     <Compile Include="Objects\UnitOps\Mixer.vb" />
     <Compile Include="Objects\UnitOps\Pipe.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\PropertyPackage.vb" />
     <Compile Include="Objects\UnitOps\Pump.vb" />
     <Compile Include="Objects\UnitOps\ShortcutColumn.vb" />
     <Compile Include="Objects\UnitOps\SolidsSeparator.vb" />
@@ -915,8 +857,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Objects\PropertyPackages\SRK\Helper Classes\SRK.vb" />
-    <Compile Include="Objects\PropertyPackages\SRK\SRKPropertyPackage.vb" />
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
     <Compile Include="Objects\Classes\Optimization\SensitivityAnalysis.vb" />
     <Compile Include="Solvers\AzureSolverClient.vb" />
@@ -983,8 +923,6 @@
     <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\PropertyPackages\PengRobinsonLK\Helper Classes\LK.vb" />
-    <Compile Include="Objects\PropertyPackages\PengRobinsonLK\PRLK.vb" />
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigPP.Designer.vb">
       <DependentUpon>FormConfigPP.vb</DependentUpon>
     </Compile>
@@ -992,14 +930,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Objects\Classes\Math\MATRIX2.vb" />
-    <Compile Include="Objects\PropertyPackages\PengRobinson\Helper Classes\PENGROB.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\PROPS.vb" />
-    <Compile Include="Objects\PropertyPackages\PengRobinson\PengRobinsonPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\Raoult\RaoultPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\SteamTables\Helper Classes\IAPWS_IF97.vb" />
-    <Compile Include="Objects\PropertyPackages\SteamTables\SteamTablesPropertyPackage.vb" />
-    <Compile Include="Objects\PropertyPackages\UNIFAC\Helper Classes\UNIFAC.vb" />
-    <Compile Include="Objects\PropertyPackages\UNIFAC\UNIFACLLPropertyPackage.vb" />
     <Compile Include="Objects\Classes\General\TreeViewDataAccess.vb" />
     <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorFormEditor.vb" />
     <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIRVSelectorForm.Designer.vb">
@@ -1119,7 +1049,6 @@
     <Compile Include="Utilities\CRITPT\FrmStabAn.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utilities\CRITPT\Helper Classes\CRITPT.vb" />
     <Compile Include="Utilities\CRITPT\FrmCritpt.designer.vb">
       <DependentUpon>FrmCritpt.vb</DependentUpon>
     </Compile>
@@ -1143,7 +1072,6 @@
     <Compile Include="Utilities\HYD+\Helper Classes\HYDR_CG.vb" />
     <Compile Include="Utilities\HYD+\Helper Classes\HYDR_KS.vb" />
     <Compile Include="Utilities\HYD+\Helper Classes\HYDR_vdwP_PP.vb" />
-    <Compile Include="Objects\PropertyPackages\Base\HYP.vb" />
     <Compile Include="Utilities\PHASE_ENVEL\FormPhEnv.Designer.vb">
       <DependentUpon>FormPhEnv.vb</DependentUpon>
     </Compile>
@@ -1604,6 +1532,10 @@
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
+      <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
+      <Name>DWSIM.Thermodynamics</Name>
     </ProjectReference>
     <ProjectReference Include="..\GenericDictionaryEditor\Controls.GenericDictionaryEditor.csproj">
       <Project>{a541272d-0c07-40bc-b03c-73d95e072b99}</Project>

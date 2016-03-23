@@ -11084,7 +11084,7 @@ outlet temperatures.</Text>
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-4c1af77d-b71e-43bd-9c79-3ad2dd8d7102</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage</Type>
+      <Type>PropertyPackages.PengRobinsonPropertyPackage</Type>
       <ComponentName>Peng-Robinson (PR)</ComponentName>
       <ComponentDescription>Property Package that uses the Peng-Robinson EOS. Recommended for use with hydrocarbons and non-condensables.
 The properties are calculated directly from the EOS and/or experimental data, except:

@@ -17,7 +17,7 @@
 
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class FormLLEDiagram
 
@@ -360,7 +360,7 @@ Public Class FormLLEDiagram
         Dim Ko, LastKo As New Konode
         Dim Pt As PointF
         Dim InitialPoints As New ArrayList
-        Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Nothing
+        Dim pp As PropertyPackages.PropertyPackage = Nothing
         Dim final, first, searchmode As Boolean
         Dim w, stepsize, D1, D2 As Double
         Dim dir(1) As Double

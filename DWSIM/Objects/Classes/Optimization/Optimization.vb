@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Xml
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.IO

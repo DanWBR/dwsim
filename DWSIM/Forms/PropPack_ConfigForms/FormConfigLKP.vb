@@ -57,7 +57,7 @@ Public Class FormConfigLKP
 
         Me.KryptonDataGridView2.Rows.Clear()
 
-        Dim ppu As New DWSIM.SimulationObjects.PropertyPackages.LKPPropertyPackage
+        Dim ppu As New PropertyPackages.LKPPropertyPackage
         ppu = _pp
 
         Dim nf As String = "0.####"
@@ -70,7 +70,7 @@ gt1:        If ppu.m_lk.InteractionParameters.ContainsKey(cp.Name) Then
                             'check if collection has id2 as primary id
                             If ppu.m_lk.InteractionParameters.ContainsKey(cp2.Name) Then
                                 If Not ppu.m_lk.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                    ppu.m_lk.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.LKP_IPData)
+                                    ppu.m_lk.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.LKP_IPData)
                                     Dim a12 As Double = ppu.m_lk.InteractionParameters(cp.Name)(cp2.Name).kij
                                     KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                     With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -90,7 +90,7 @@ gt1:        If ppu.m_lk.InteractionParameters.ContainsKey(cp.Name) Then
                     End If
                 Next
             Else
-                ppu.m_lk.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.LKP_IPData))
+                ppu.m_lk.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.LKP_IPData))
                 GoTo gt1
             End If
         Next

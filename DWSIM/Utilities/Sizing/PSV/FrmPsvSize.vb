@@ -125,23 +125,23 @@ Public Class FrmPsvSize
 
             With mymat.PropertyPackage
                 .CurrentMaterialStream = mymat
-                .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.T, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P)
+                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                 If mymat.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                    .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                    .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
                 Else
-                    .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                 End If
                 If mymat.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                    .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                    .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                 Else
-                    .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                 End If
                 If mymat.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And mymat.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
-                    .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                    .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                 Else
-                    .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                 End If
-                mymat.PropertyPackage.DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Mixture)
+                mymat.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
             End With
 
             Dim rho90 = mymat.Phases(0).Properties.density.GetValueOrDefault

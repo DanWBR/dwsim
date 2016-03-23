@@ -55,7 +55,7 @@ Public Class FormConfigUNIQUAC
 
         Me.KryptonDataGridView2.Rows.Clear()
 
-        Dim ppu As DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage = _pp
+        Dim ppu As PropertyPackages.UNIQUACPropertyPackage = _pp
 
         Dim nf As String = "0.####"
 
@@ -67,7 +67,7 @@ gt0:        If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                             'check if collection has id2 as primary id
                             If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
                                 If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                    ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData)
+                                    ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.PR_IPData)
                                     Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
                                     KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                     With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -87,7 +87,7 @@ gt0:        If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     End If
                 Next
             Else
-                ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData))
+                ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PR_IPData))
                 GoTo gt0
             End If
         Next
@@ -102,7 +102,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                             'check if collection has id2 as primary id
                             If ppu.m_uni.InteractionParameters.ContainsKey(cp2.Name) Then
                                 If Not ppu.m_uni.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                    ppu.m_uni.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData)
+                                    ppu.m_uni.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData)
                                     Dim a12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).A12
                                     Dim a21 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).A21
                                     Dim b12 As Double = ppu.m_uni.InteractionParameters(cp.Name)(cp2.Name).B12
@@ -132,7 +132,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                     End If
                 Next
             Else
-                ppu.m_uni.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData))
+                ppu.m_uni.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData))
                 GoTo gt1
             End If
         Next
@@ -223,7 +223,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
     Private Sub dgvu1_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvu1.CellValueChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage = _pp
+            Dim ppu As PropertyPackages.UNIQUACPropertyPackage = _pp
             Dim value As Object = dgvu1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Dim id1 As String = dgvu1.Rows(e.RowIndex).Cells(0).Tag.ToString
             Dim id2 As String = dgvu1.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -286,7 +286,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         If Loaded Then
             Dim oldvalue As Double = 0.0#
             Dim newvalue As Double = 0.0#
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage = _pp
+            Dim ppu As PropertyPackages.UNIQUACPropertyPackage = _pp
             Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Dim id1 As String = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
             Dim id2 As String = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -324,8 +324,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
     End Sub
 
     Dim actu(5), actn(5) As Double
-    Dim ppu As DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage
-    Dim uniquac As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC
+    Dim ppu As PropertyPackages.UNIQUACPropertyPackage
+    Dim uniquac As Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC
     Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim ppuf, unifac As Object
 
@@ -334,8 +334,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         Dim a1(1), a2(1), a3(1) As Double
 
         uniquac.InteractionParameters.Clear()
-        uniquac.InteractionParameters.Add(ppu.RET_VIDS()(0), New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData))
-        uniquac.InteractionParameters(ppu.RET_VIDS()(0)).Add(ppu.RET_VIDS()(1), New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData())
+        uniquac.InteractionParameters.Add(ppu.RET_VIDS()(0), New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData))
+        uniquac.InteractionParameters(ppu.RET_VIDS()(0)).Add(ppu.RET_VIDS()(1), New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData())
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A12 = x(0)
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A21 = x(1)
 
@@ -390,22 +390,22 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         ms = New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
 
-        ppu = New DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage
-        uniquac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC
+        ppu = New PropertyPackages.UNIQUACPropertyPackage
+        uniquac = New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC
 
 
         If sender.Name = "Button1" Then
-            ppuf = New DWSIM.SimulationObjects.PropertyPackages.UNIFACPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac
+            ppuf = New PropertyPackages.UNIFACPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.Unifac
         ElseIf sender.Name = "Button5" Then
-            ppuf = New DWSIM.SimulationObjects.PropertyPackages.UNIFACLLPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UnifacLL
+            ppuf = New PropertyPackages.UNIFACLLPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.UnifacLL
         ElseIf sender.Name = "Button6" Then
-            ppuf = New DWSIM.SimulationObjects.PropertyPackages.NISTMFACPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC
+            ppuf = New PropertyPackages.NISTMFACPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
         Else
-            ppuf = New DWSIM.SimulationObjects.PropertyPackages.MODFACPropertyPackage
-            unifac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
+            ppuf = New PropertyPackages.MODFACPropertyPackage
+            unifac = New Thermodynamics.PropertyPackages.Auxiliary.Modfac
         End If
 
         Dim id1 As String = dgvu1.Rows(row).Cells(0).Tag.ToString
@@ -504,13 +504,13 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                 Next
 
                 If sender.Name = "Button1" Then
-                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                    ppu.CurrentMaterialStream.Flowsheet.ShowMessage("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Interfaces.IFlowsheet.MessageType.Information)
                 ElseIf sender.Name = "Button5" Then
-                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                    ppu.CurrentMaterialStream.Flowsheet.ShowMessage("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Interfaces.IFlowsheet.MessageType.Information)
                 ElseIf sender.Name = "Button6" Then
-                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using NIST-MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                    ppu.CurrentMaterialStream.Flowsheet.ShowMessage("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using NIST-MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Interfaces.IFlowsheet.MessageType.Information)
                 Else
-                    ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                    ppu.CurrentMaterialStream.Flowsheet.ShowMessage("UNIQUAC interaction parameter estimation @ T = " & Format(T1, "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Interfaces.IFlowsheet.MessageType.Information)
                 End If
 
                 dgvu1.Rows(row).Cells(3).Value = finalval2(0)
@@ -522,7 +522,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
             Catch ex As Exception
 
-                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation finished with an error: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.Information)
+                ppu.CurrentMaterialStream.Flowsheet.ShowMessage("UNIQUAC interaction parameter estimation finished with an error: " & ex.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
 
             Finally
 
@@ -672,11 +672,11 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         If e.Error Is Nothing Then
 
             If e.Result(9) = "Button1" Then
-                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                ppu.CurrentMaterialStream.Flowsheet.ShowMessage("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Interfaces.IFlowsheet.MessageType.Information)
             ElseIf e.Result(9) = "Button5" Then
-                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                ppu.CurrentMaterialStream.Flowsheet.ShowMessage("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Interfaces.IFlowsheet.MessageType.Information)
             Else
-                ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                ppu.CurrentMaterialStream.Flowsheet.ShowMessage("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(e.Result(6), "N2") & "%.", Interfaces.IFlowsheet.MessageType.Information)
             End If
 
             Dim row As Integer = dgvu1.SelectedCells(0).RowIndex
@@ -690,7 +690,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         Else
 
-            ppu.CurrentMaterialStream.FlowSheet.WriteToLog("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished with an error: " & e.Error.ToString, Color.Red, DWSIM.Flowsheet.MessageType.Information)
+            ppu.CurrentMaterialStream.Flowsheet.ShowMessage("UNIQUAC interaction parameter estimation from " & Format(e.Result(7), "N2") & " to " & Format(e.Result(8), "N2") & " K using MODFAC finished with an error: " & e.Error.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
 
         End If
 

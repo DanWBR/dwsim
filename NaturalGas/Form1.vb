@@ -7,7 +7,7 @@ Imports System.Windows.Forms
 Imports System.Linq
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Threading.Tasks
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.DWSIM.SystemsOfUnits
 Imports DWSIM.DrawingTools.GraphicObjects
 
@@ -200,8 +200,8 @@ Public Class Form1
                 '           After calculating Pisat (water partial vapor pressure), use the AUX_TSATi function 
                 '           to return the saturation temperature (dew point).
                 Dim wdp, hdp, iwdp, wc0, wc15, wc20, wcb, wdp1, iwdp1, hdp1 As Double
-                Dim fa As New DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV2
-                Dim fa2 As New DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV2
+                Dim fa As New DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV2
+                Dim fa2 As New DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV2
                 fa.StabSearchCompIDs = New String() {"Agua", "Water"}
                 fa.StabSearchSeverity = 2
 
@@ -257,17 +257,17 @@ Public Class Form1
                 d = mw / 28.9626
 
                 tmpms.Phases(0).Properties.temperature = 273.15 + 0
-                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.Thermodynamics.PropertyPackages.Phase.Vapor)
                 z0 = tmpms.Phases(2).Properties.compressibilityFactor
                 d0 = d / z0
 
                 tmpms.Phases(0).Properties.temperature = 273.15 + 15.56
-                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.Thermodynamics.PropertyPackages.Phase.Vapor)
                 z15 = tmpms.Phases(2).Properties.compressibilityFactor
                 d15 = d / z15
 
                 tmpms.Phases(0).Properties.temperature = 273.15 + 20
-                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                tmpms.PropertyPackage.DW_CalcPhaseProps(DWSIM.Thermodynamics.PropertyPackages.Phase.Vapor)
                 z20 = tmpms.Phases(2).Properties.compressibilityFactor
                 d20 = d / z20
 

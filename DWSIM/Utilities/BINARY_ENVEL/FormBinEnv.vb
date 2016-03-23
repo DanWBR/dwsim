@@ -18,7 +18,7 @@ Imports DWSIM.DWSIM.SimulationObjects.Streams
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class FormBinEnv
 
@@ -215,7 +215,7 @@ Public Class FormBinEnv
         Dim compare As Boolean = e.Argument(8)
 
         Dim k As Integer
-        Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Nothing
+        Dim pp As PropertyPackages.PropertyPackage = Nothing
 
         Dim results As New ArrayList
 

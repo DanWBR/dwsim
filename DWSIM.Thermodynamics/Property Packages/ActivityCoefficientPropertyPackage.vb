@@ -36,10 +36,10 @@ Namespace PropertyPackages
 
         Inherits PropertyPackage
 
-        Friend m_pr As New PropertyPackages.Auxiliary.PengRobinson
-        Friend m_lk As New PropertyPackages.Auxiliary.LeeKesler
+        Public m_pr As New PropertyPackages.Auxiliary.PengRobinson
+        Public m_lk As New PropertyPackages.Auxiliary.LeeKesler
 
-        Friend m_act As PropertyPackages.Auxiliary.IActivityCoefficientBase
+        Public m_act As PropertyPackages.Auxiliary.IActivityCoefficientBase
 
 #Region "Initialization"
 

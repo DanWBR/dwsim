@@ -16,7 +16,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.IO
 Imports DWSIM.DWSIM.Flowsheet
 
@@ -41,13 +41,13 @@ Public Class FormConfigPP
 
         Select Case type
             Case "UNIFAC"
-                uni = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac
+                uni = New Thermodynamics.PropertyPackages.Auxiliary.Unifac
             Case "UNIFACLL"
-                uni = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UnifacLL
+                uni = New Thermodynamics.PropertyPackages.Auxiliary.UnifacLL
             Case "MODFAC"
-                uni = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
+                uni = New Thermodynamics.PropertyPackages.Auxiliary.Modfac
             Case "NIST-MODFAC"
-                uni = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC
+                uni = New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
         End Select
 
         'create list of all subgroups and primary groups
@@ -275,7 +275,7 @@ gt1:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                 'check if collection has id2 as primary id
                                 If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData)
+                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
                                         KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                         With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -295,7 +295,7 @@ gt1:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         End If
                     Next
                 Else
-                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData))
+                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gt1
                 End If
             Next
@@ -314,7 +314,7 @@ gtu:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                 'check if collection has id2 as primary id
                                 If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData)
+                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
                                         KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                         With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -334,7 +334,7 @@ gtu:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         End If
                     Next
                 Else
-                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData))
+                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gtu
                 End If
             Next
@@ -353,7 +353,7 @@ gtul:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                 'check if collection has id2 as primary id
                                 If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData)
+                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
                                         KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                         With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -373,7 +373,7 @@ gtul:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         End If
                     Next
                 Else
-                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData))
+                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gtul
                 End If
             Next
@@ -392,7 +392,7 @@ gtmu:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                 'check if collection has id2 as primary id
                                 If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData)
+                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
                                         KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                         With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -412,7 +412,7 @@ gtmu:           If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         End If
                     Next
                 Else
-                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData))
+                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gtmu
                 End If
             Next
@@ -430,7 +430,7 @@ gtmun:          If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                 'check if collection has id2 as primary id
                                 If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData)
+                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
                                         KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                         With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -450,7 +450,7 @@ gtmun:          If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         End If
                     Next
                 Else
-                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData))
+                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gtmun
                 End If
             Next
@@ -467,7 +467,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                                 'check if collection has id2 as primary id
                                 If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
                                     If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
-                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData)
+                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New Thermodynamics.PropertyPackages.Auxiliary.PR_IPData)
                                         Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
                                         KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                         With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -487,7 +487,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         End If
                     Next
                 Else
-                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PR_IPData))
+                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gt2
                 End If
             Next
@@ -541,7 +541,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
             Dim id1 As String = ""
             Dim id2 As String = ""
             If TypeOf _pp Is SRKPropertyPackage Then
-                Dim ppu As DWSIM.SimulationObjects.PropertyPackages.SRKPropertyPackage = _pp
+                Dim ppu As PropertyPackages.SRKPropertyPackage = _pp
                 Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
                 id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -552,7 +552,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
                 End Select
             ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
-                Dim ppu As DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage = _pp
+                Dim ppu As PropertyPackages.PengRobinsonPropertyPackage = _pp
                 Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
                 id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -563,7 +563,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
                 End Select
             ElseIf TypeOf _pp Is UNIFACPropertyPackage Then
-                Dim ppu As DWSIM.SimulationObjects.PropertyPackages.UNIFACPropertyPackage = _pp
+                Dim ppu As PropertyPackages.UNIFACPropertyPackage = _pp
                 Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
                 id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -574,7 +574,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
                 End Select
             ElseIf TypeOf _pp Is UNIFACLLPropertyPackage Then
-                Dim ppu As DWSIM.SimulationObjects.PropertyPackages.UNIFACLLPropertyPackage = _pp
+                Dim ppu As PropertyPackages.UNIFACLLPropertyPackage = _pp
                 Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
                 id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
@@ -585,7 +585,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                         ppu.m_pr.InteractionParameters(id1)(id2).kij = Convert.ToDouble(value)
                 End Select
             ElseIf TypeOf _pp Is MODFACPropertyPackage Then
-                Dim ppu As DWSIM.SimulationObjects.PropertyPackages.MODFACPropertyPackage = _pp
+                Dim ppu As PropertyPackages.MODFACPropertyPackage = _pp
                 Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
                 id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString

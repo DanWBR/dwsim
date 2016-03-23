@@ -24,7 +24,7 @@ Imports ZedGraph
 Imports DotNumerics
 Imports Cureos.Numerics
 Imports DWSIM.DWSIM.Optimization.DatRegression
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Threading.Tasks
 Imports System.Linq
 Imports System.IO
@@ -47,7 +47,7 @@ Public Class FormDataRegression
     Public currcase As RegressionCase
     Public IP As DWSIM.Thermodynamics.BaseClasses.InteractionParameter
 
-    Public proppack As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage
+    Public proppack As PropertyPackage
     Public ppname As String = ""
 
     Public regressedparameters As New Dictionary(Of String, Double)
@@ -447,7 +447,7 @@ Public Class FormDataRegression
                     Select Case currcase.model
                         Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"
                             If PVF Then
-                                proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -473,7 +473,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -505,7 +505,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                         Case "UNIQUAC"
                             If PVF Then
-                                proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -531,7 +531,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -564,7 +564,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("A12", x(0))
                             regressedparameters.Add("A21", x(1))
                         Case "PRSV2-M", "PRSV2-VL"
-                            proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                            proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
                             ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                             ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             If PVF Then
@@ -591,7 +591,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -624,7 +624,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                             regressedparameters.Add("kji", x(1))
                         Case "NRTL"
-                            proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                            proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
                             ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                             ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                             If PVF Then
@@ -651,7 +651,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -737,8 +737,8 @@ Public Class FormDataRegression
                 Case DataType.TPxy
                 Case DataType.Pxx, DataType.Txx
                     proppack.Parameters("PP_FLASHALGORITHM") = 9
-                    proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.SimpleLLE
-                    Dim flashinstance As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE = TryCast(proppack.FlashBase, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE)
+                    proppack.FlashAlgorithm = FlashMethod.SimpleLLE
+                    Dim flashinstance As Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE = TryCast(proppack.FlashBase, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE)
                     If Not flashinstance Is Nothing Then
                         With flashinstance
                             .UseInitialEstimatesForPhase1 = True
@@ -1019,10 +1019,10 @@ Public Class FormDataRegression
                 Case DataType.TTxSE, DataType.TTxSS
                     If currcase.datatype = DataType.TTxSE Then
                         proppack.Parameters("PP_FLASHALGORITHM") = 7
-                        proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE
+                        proppack.FlashAlgorithm = FlashMethod.NestedLoopsSLE
                     Else
                         proppack.Parameters("PP_FLASHALGORITHM") = 10
-                        proppack.FlashAlgorithm = DWSIM.SimulationObjects.PropertyPackages.FlashMethod.NestedLoopsSLE_SS
+                        proppack.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS
                     End If
                     proppack.Parameters("PP_PTFELT") = 0.001
                     proppack.Parameters("PP_PTFMEI") = 1000
@@ -2697,10 +2697,10 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
     End Sub
 
     Dim actu(5), actn(5) As Double
-    Dim ppu As DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage
-    Dim uniquac As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC
-    Dim ppn As DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage
-    Dim nrtl As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL
+    Dim ppu As PropertyPackages.UNIQUACPropertyPackage
+    Dim uniquac As Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC
+    Dim ppn As PropertyPackages.NRTLPropertyPackage
+    Dim nrtl As Thermodynamics.PropertyPackages.Auxiliary.NRTL
     Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
 
     Private Function FunctionValueNRTL(ByVal x() As Double) As Double
@@ -2708,8 +2708,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim a1(1), a2(1), a3(1) As Double
 
         nrtl.InteractionParameters.Clear()
-        nrtl.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL_IPData))
-        nrtl.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL_IPData())
+        nrtl.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.NRTL_IPData))
+        nrtl.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New Thermodynamics.PropertyPackages.Auxiliary.NRTL_IPData())
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A12 = x(0)
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A21 = x(1)
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).alpha12 = 0.2
@@ -2761,8 +2761,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim a1(1), a2(1), a3(1) As Double
 
         uniquac.InteractionParameters.Clear()
-        uniquac.InteractionParameters.Add(ppu.RET_VIDS()(0), New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData))
-        uniquac.InteractionParameters(ppu.RET_VIDS()(0)).Add(ppu.RET_VIDS()(1), New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC_IPData())
+        uniquac.InteractionParameters.Add(ppu.RET_VIDS()(0), New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData))
+        uniquac.InteractionParameters(ppu.RET_VIDS()(0)).Add(ppu.RET_VIDS()(1), New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData())
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A12 = x(0)
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A21 = x(1)
 
@@ -2814,8 +2814,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         Cursor = Cursors.WaitCursor
 
-        ppu = New DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage(True)
-        uniquac = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC
+        ppu = New PropertyPackages.UNIQUACPropertyPackage(True)
+        uniquac = New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC
 
         ms = New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
 
@@ -2847,21 +2847,21 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         Select Case model
             Case "UNIFAC"
-                ppuf = New DWSIM.SimulationObjects.PropertyPackages.UNIFACPropertyPackage(True)
+                ppuf = New PropertyPackages.UNIFACPropertyPackage(True)
                 ppuf.CurrentMaterialStream = ms
-                unif = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac
+                unif = New Thermodynamics.PropertyPackages.Auxiliary.Unifac
             Case "UNIFAC-LL"
-                ppufll = New DWSIM.SimulationObjects.PropertyPackages.UNIFACLLPropertyPackage(True)
+                ppufll = New PropertyPackages.UNIFACLLPropertyPackage(True)
                 ppufll.CurrentMaterialStream = ms
-                unifll = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UnifacLL
+                unifll = New Thermodynamics.PropertyPackages.Auxiliary.UnifacLL
             Case "MODFAC"
-                ppmu = New DWSIM.SimulationObjects.PropertyPackages.MODFACPropertyPackage(True)
+                ppmu = New PropertyPackages.MODFACPropertyPackage(True)
                 ppmu.CurrentMaterialStream = ms
-                modf = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
+                modf = New Thermodynamics.PropertyPackages.Auxiliary.Modfac
             Case Else
-                ppmun = New DWSIM.SimulationObjects.PropertyPackages.NISTMFACPropertyPackage(True)
+                ppmun = New PropertyPackages.NISTMFACPropertyPackage(True)
                 ppmun.CurrentMaterialStream = ms
-                nmodf = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC
+                nmodf = New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
         End Select
 
         Dim T1 = 298.15
@@ -2994,8 +2994,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         Cursor = Cursors.WaitCursor
 
-        ppn = New DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage(True)
-        nrtl = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NRTL
+        ppn = New PropertyPackages.NRTLPropertyPackage(True)
+        nrtl = New Thermodynamics.PropertyPackages.Auxiliary.NRTL
 
         ms = New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
 
@@ -3027,21 +3027,21 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         Select Case model
             Case "UNIFAC"
-                ppuf = New DWSIM.SimulationObjects.PropertyPackages.UNIFACPropertyPackage(True)
+                ppuf = New PropertyPackages.UNIFACPropertyPackage(True)
                 ppuf.CurrentMaterialStream = ms
-                unif = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac
+                unif = New Thermodynamics.PropertyPackages.Auxiliary.Unifac
             Case "UNIFAC-LL"
-                ppufll = New DWSIM.SimulationObjects.PropertyPackages.UNIFACLLPropertyPackage(True)
+                ppufll = New PropertyPackages.UNIFACLLPropertyPackage(True)
                 ppufll.CurrentMaterialStream = ms
-                unifll = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UnifacLL
+                unifll = New Thermodynamics.PropertyPackages.Auxiliary.UnifacLL
             Case "MODFAC"
-                ppmu = New DWSIM.SimulationObjects.PropertyPackages.MODFACPropertyPackage(True)
+                ppmu = New PropertyPackages.MODFACPropertyPackage(True)
                 ppmu.CurrentMaterialStream = ms
-                modf = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
+                modf = New Thermodynamics.PropertyPackages.Auxiliary.Modfac
             Case Else
-                ppmun = New DWSIM.SimulationObjects.PropertyPackages.NISTMFACPropertyPackage(True)
+                ppmun = New PropertyPackages.NISTMFACPropertyPackage(True)
                 ppmun.CurrentMaterialStream = ms
-                nmodf = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC
+                nmodf = New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
         End Select
 
         Dim T1 = 298.15

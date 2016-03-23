@@ -153,7 +153,7 @@ Public Class CompositionEditorForm
                 'molarity = mol solute per liter solution
                 Dim n As Integer = Me.Compounds.Count
                 Dim liqdens(n - 1), nbp(n - 1) As Double
-                Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
+                Dim ipp As New PropertyPackages.RaoultPropertyPackage()
                 ipp.CurrentMaterialStream = Stream
                 Dim i As Integer = 0
                 For Each s As Compound In Me.Compounds.Values
@@ -241,7 +241,7 @@ Public Class CompositionEditorForm
                 'liquid vol. frac
                 Dim n As Integer = Me.Compounds.Count
                 Dim liqdens(n - 1), nbp(n - 1), volfrac(n - 1), totalvol As Double
-                Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
+                Dim ipp As New PropertyPackages.RaoultPropertyPackage()
                 ipp.CurrentMaterialStream = Stream
                 Dim T As Double = 273.15 + 15.56 'standard temperature
                 Dim i As Integer = 0
@@ -311,7 +311,7 @@ Public Class CompositionEditorForm
                 If RadioButton5.Checked Then
                     Dim n As Integer = Me.Compounds.Count
                     Dim liqdens(n - 1), nbp(n - 1), volfrac(n - 1), totalvol As Double
-                    Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
+                    Dim ipp As New PropertyPackages.RaoultPropertyPackage()
                     ipp.CurrentMaterialStream = Stream
                     Dim i As Integer = 0
                     totalvol = 0.0#
@@ -428,7 +428,7 @@ Public Class CompositionEditorForm
                     'molarity = mol solute per liter solution
                     Dim n As Integer = Me.Compounds.Count
                     Dim liqdens(n - 1), nbp(n - 1) As Double
-                    Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
+                    Dim ipp As New PropertyPackages.RaoultPropertyPackage()
                     ipp.CurrentMaterialStream = Stream
                     Dim i As Integer = 0
                     For Each s As Compound In Me.Compounds.Values
@@ -464,7 +464,7 @@ Public Class CompositionEditorForm
                     'liquid vol. frac
                     Dim n As Integer = Me.Compounds.Count
                     Dim liqdens(n - 1), nbp(n - 1), volfrac(n - 1), totalvol As Double
-                    Dim ipp As New DWSIM.SimulationObjects.PropertyPackages.RaoultPropertyPackage()
+                    Dim ipp As New PropertyPackages.RaoultPropertyPackage()
                     ipp.CurrentMaterialStream = Stream
                     Dim i As Integer = 0
                     totalvol = 0.0#

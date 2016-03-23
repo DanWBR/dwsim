@@ -24,7 +24,7 @@ Imports System.Drawing
 Imports System.Linq
 Imports System.IO
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports Microsoft.Win32
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
@@ -193,8 +193,8 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
                 Me.Options.SimulationAuthor = "user"
             End If
 
-            For Each pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage In Me.Options.PropertyPackages.Values
-                If pp.ConfigForm Is Nothing Then pp.ReconfigureConfigForm()
+            For Each pp As PropertyPackages.PropertyPackage In Me.Options.PropertyPackages.Values
+                'If pp.ConfigForm Is Nothing Then pp.ReconfigureConfigForm()
             Next
 
             Me.Options.NotSelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)

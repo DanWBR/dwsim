@@ -2325,7 +2325,7 @@ The inner flowsheet can be opened and edited independently of this simulation (f
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-15e7b4e5-4f0c-4281-82f7-4076f7293ec4</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.PengRobinsonPropertyPackage</Type>
+      <Type>PropertyPackages.PengRobinsonPropertyPackage</Type>
       <ComponentName>Peng-Robinson (PR)</ComponentName>
       <ComponentDescription>Property Package that uses the Peng-Robinson EOS. Recommended for use with hydrocarbons and non-condensables.
 The properties are calculated directly from the EOS and/or experimental data, except:

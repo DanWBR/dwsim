@@ -379,7 +379,7 @@ restart:    B = F - D
 
             Dim result As Object
             Dim TD, TB, TF, HF, HD, HD0, HB, HL As Double
-            Dim pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage = Me.PropertyPackage
+            Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
 
             TF = feed.Phases(0).Properties.temperature
             HF = feed.Phases(0).Properties.enthalpy.GetValueOrDefault * feed.Phases(0).Properties.molecularWeight.GetValueOrDefault

@@ -19,9 +19,10 @@
 Imports System.Math
 Imports DWSIM.DWSIM.MathEx.BrentOpt
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages.Auxiliary
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports PropertyPackages.Auxiliary
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.DWSIM.SimulationObjects.Streams
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 
 Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
@@ -55,7 +56,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
             dens1 = comp.ConstantProperties.PF_SG * 999.96
 
             With comp.ConstantProperties
-                dens2 = DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor, .Molar_Weight, .Z_Rackett * multipl)
+                dens2 = PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor, .Molar_Weight, .Z_Rackett * multipl)
             End With
 
             If Double.IsNaN(dens1 - dens2) Then

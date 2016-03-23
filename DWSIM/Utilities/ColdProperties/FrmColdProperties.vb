@@ -96,7 +96,7 @@ Public Class FrmColdProperties
 
                 Dim bof = bopp.CalcBOFluid(bopp.RET_VMOL(PropertyPackages.Phase.Mixture), bopp.DW_GetConstantProperties)
 
-                Dim bop As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.BlackOilProperties
+                Dim bop As New Thermodynamics.PropertyPackages.Auxiliary.BlackOilProperties
 
                 MeABP = bop.LiquidNormalBoilingPoint(bof.SGO, bof.BSW)
                 SG = bof.SGO

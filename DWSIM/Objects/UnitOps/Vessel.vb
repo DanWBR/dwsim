@@ -284,55 +284,55 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     'calculate mixture stream
                     If .AUX_IS_SINGLECOMP(PropertyPackages.Phase.Mixture) Then
                         'if it is a single compound stream, needs to calculate a PH-Flash to get phase distribution correctly.
-                        .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.H)
+                        .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
                     Else
                         Select Case Me.FlashSpecification
                             Case FlashSpec.PH
-                                .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.H)
+                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H)
                             Case FlashSpec.PVF
-                                .DW_CalcEquilibrium(DWSIM.SimulationObjects.PropertyPackages.FlashSpec.P, DWSIM.SimulationObjects.PropertyPackages.FlashSpec.VAP)
+                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.VAP)
                         End Select
                     End If
                     If mix.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                        .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                        .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
                     Else
-                        .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                     End If
                     If mix.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                        .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid2)
+                        .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
                     Else
-                        .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid2)
+                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
                     End If
                     If mix.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                        .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid3)
+                        .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
                     Else
-                        .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid3)
+                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
                     End If
                     If mix.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                        .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Aqueous)
+                        .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
                     Else
-                        .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Aqueous)
+                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
                     End If
                     If mix.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-                        .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Solid)
+                        .DW_CalcPhaseProps(PropertyPackages.Phase.Solid)
                     Else
-                        .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Solid)
+                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
                     End If
                     If mix.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                        .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                        .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                     Else
-                        .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                     End If
                     If mix.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And mix.Phases(2).Properties.molarfraction.GetValueOrDefault < 1 Then
-                        .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                        .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                     Else
-                        .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                     End If
                     .DW_CalcCompMolarFlow(-1)
                     .DW_CalcCompMassFlow(-1)
                     .DW_CalcCompVolFlow(-1)
                     .DW_CalcOverallProps()
-                    .DW_CalcTwoPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid, DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                    .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
                     .DW_CalcVazaoVolumetrica()
                     .DW_CalcKvalue()
 

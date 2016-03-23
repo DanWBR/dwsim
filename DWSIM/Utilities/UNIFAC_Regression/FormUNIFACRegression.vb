@@ -20,7 +20,7 @@
 
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
-Imports DWSIM.DWSIM.SimulationObjects.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.DWSIM.MathEx
 Imports System.Math
 Imports ZedGraph
@@ -30,6 +30,7 @@ Imports DWSIM.DWSIM.Optimization.DatRegression
 Imports System.Threading.Tasks
 Imports System.Linq
 Imports System.IO
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 
 Public Class FormUNIFACRegression
 
@@ -255,7 +256,7 @@ Public Class FormUNIFACRegression
                             compounds.Add(c.Name & " (" & c.CurrentDB & ")")
                         End If
                     Next
-                    uni = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac
+                    uni = New Thermodynamics.PropertyPackages.Auxiliary.Unifac
                     TBbij.Visible = False
                     Lblbij.Visible = False
                     TBbji.Visible = False
@@ -273,7 +274,7 @@ Public Class FormUNIFACRegression
                             compounds.Add(c.Name & " (" & c.CurrentDB & ")")
                         End If
                     Next
-                    uni = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac
+                    uni = New Thermodynamics.PropertyPackages.Auxiliary.Modfac
                     TBbij.Visible = True
                     Lblbij.Visible = True
                     TBbji.Visible = True
@@ -291,7 +292,7 @@ Public Class FormUNIFACRegression
                             compounds.Add(c.Name & " (" & c.CurrentDB & ")")
                         End If
                     Next
-                    uni = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC
+                    uni = New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
                     TBbij.Visible = True
                     Lblbij.Visible = True
                     TBbji.Visible = True
@@ -353,7 +354,7 @@ Public Class FormUNIFACRegression
 
             Select Case T.Name
                 Case "Unifac"
-                    Dim gr As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac = uni
+                    Dim gr As Thermodynamics.PropertyPackages.Auxiliary.Unifac = uni
                     For Each group In gr.UnifGroups.Groups
                         If group.Value.PrimGroupName = GN1 Then GI1 = group.Value.PrimaryGroup
                         If group.Value.PrimGroupName = GN2 Then GI2 = group.Value.PrimaryGroup
@@ -365,7 +366,7 @@ Public Class FormUNIFACRegression
                     TBcij.Text = ""
                     TBcji.Text = ""
                 Case "Modfac"
-                    Dim gr As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac = uni
+                    Dim gr As Thermodynamics.PropertyPackages.Auxiliary.Modfac = uni
                     For Each group In gr.ModfGroups.Groups
                         If group.Value.MainGroupName = GN1 Then GI1 = group.Value.PrimaryGroup
                         If group.Value.MainGroupName = GN2 Then GI2 = group.Value.PrimaryGroup
@@ -377,7 +378,7 @@ Public Class FormUNIFACRegression
                     TBcij.Text = EvalIPNF("c", GI1, GI2)
                     TBcji.Text = EvalIPNF("c", GI2, GI1)
                 Case "NISTMFAC"
-                    Dim gr As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC = uni
+                    Dim gr As Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC = uni
                     For Each group In gr.ModfGroups.Groups
                         If group.Value.MainGroupName = GN1 Then GI1 = group.Value.PrimaryGroup
                         If group.Value.MainGroupName = GN2 Then GI2 = group.Value.PrimaryGroup
@@ -406,7 +407,7 @@ Public Class FormUNIFACRegression
         Dim T As Type = uni.GetType
         Select Case T.Name
             Case "NISTMFAC"
-                Dim gr As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.NISTMFAC = uni
+                Dim gr As Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC = uni
                 Select Case F
                     Case "a"
                         If gr.ModfGroups.InteracParam_aij.ContainsKey(g1) Then
@@ -428,7 +429,7 @@ Public Class FormUNIFACRegression
                         End If
                 End Select
             Case "MODFAC"
-                Dim gr As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Modfac = uni
+                Dim gr As Thermodynamics.PropertyPackages.Auxiliary.Modfac = uni
                 Select Case F
                     Case "a"
                         If gr.ModfGroups.InteracParam_aij.ContainsKey(g1) Then
@@ -450,7 +451,7 @@ Public Class FormUNIFACRegression
                         End If
                 End Select
             Case "Unifac"
-                Dim gr As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.Unifac = uni
+                Dim gr As Thermodynamics.PropertyPackages.Auxiliary.Unifac = uni
                 If gr.UnifGroups.InteracParam.ContainsKey(g1) Then
                     If gr.UnifGroups.InteracParam(g1).ContainsKey(g2) Then
                         EvalIPNF = gr.UnifGroups.InteracParam(g2)(g1)
@@ -570,7 +571,7 @@ Public Class FormUNIFACRegression
 
 
         mat.Phases(0).Properties.temperature = T
-        Dim slle As New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE()
+        Dim slle As New FlashAlgorithms.SimpleLLE()
         Dim resultL As Object = slle.Flash_PT(VZ, P, T, _pp)
         L1 = resultL(0)
         L2 = resultL(5)

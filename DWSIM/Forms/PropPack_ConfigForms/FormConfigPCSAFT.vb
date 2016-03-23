@@ -46,7 +46,7 @@ Public Class FormConfigPCSAFT
 
         Me.KryptonDataGridView2.Rows.Clear()
 
-        Dim ppu As DWSIM.SimulationObjects.PropertyPackages.PCSAFTPropertyPackage = _pp
+        Dim ppu As PropertyPackages.PCSAFTPropertyPackage = _pp
 
         Dim nf As String = "0.0000"
 
@@ -58,7 +58,7 @@ gt0:        If ppu.m_pr.InteractionParameters.ContainsKey(cp.CAS_Number) Then
                             'check if collection has id2 as primary id
                             If ppu.m_pr.InteractionParameters.ContainsKey(cp2.CAS_Number) Then
                                 If Not ppu.m_pr.InteractionParameters(cp2.CAS_Number).ContainsKey(cp.CAS_Number) Then
-                                    ppu.m_pr.InteractionParameters(cp.CAS_Number).Add(cp2.CAS_Number, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PCSIP)
+                                    ppu.m_pr.InteractionParameters(cp.CAS_Number).Add(cp2.CAS_Number, New Thermodynamics.PropertyPackages.Auxiliary.PCSIP)
                                     Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.CAS_Number)(cp2.CAS_Number).kij
                                     KryptonDataGridView2.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), DWSIM.App.GetComponentName(cp2.Name), Format(a12, nf)})
                                     With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
@@ -78,7 +78,7 @@ gt0:        If ppu.m_pr.InteractionParameters.ContainsKey(cp.CAS_Number) Then
                     End If
                 Next
             Else
-                ppu.m_pr.InteractionParameters.Add(cp.CAS_Number, New Dictionary(Of String, DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PCSIP))
+                ppu.m_pr.InteractionParameters.Add(cp.CAS_Number, New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.PCSIP))
                 GoTo gt0
             End If
         Next
@@ -93,7 +93,7 @@ gt1:        If ppu.m_pr.Data.ContainsKey(cp.CAS_Number) Then
                 Dim epsilon As Double = ppu.m_pr.Data(cp.CAS_Number).epsilon
                 dgvu1.Rows.Add(New Object() {DWSIM.App.GetComponentName(cp.Name), cp.CAS_Number, mw, m, sigma, epsilon})
             Else
-                ppu.m_pr.Data.Add(cp.CAS_Number, New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.PCSParam)
+                ppu.m_pr.Data.Add(cp.CAS_Number, New Thermodynamics.PropertyPackages.Auxiliary.PCSParam)
                 GoTo gt1
             End If
         Next
@@ -133,7 +133,7 @@ gt1:        If ppu.m_pr.Data.ContainsKey(cp.CAS_Number) Then
 
     Private Sub dgvu1_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvu1.CellValueChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.PCSAFTPropertyPackage = _pp
+            Dim ppu As PropertyPackages.PCSAFTPropertyPackage = _pp
             Dim value As Object = dgvu1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Dim id1 As String = dgvu1.Rows(e.RowIndex).Cells(1).Value.ToString
             Select Case e.ColumnIndex
@@ -151,7 +151,7 @@ gt1:        If ppu.m_pr.Data.ContainsKey(cp.CAS_Number) Then
 
     Private Sub KryptonDataGridView2_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles KryptonDataGridView2.CellValueChanged
         If Loaded Then
-            Dim ppu As DWSIM.SimulationObjects.PropertyPackages.PCSAFTPropertyPackage = _pp
+            Dim ppu As PropertyPackages.PCSAFTPropertyPackage = _pp
             Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
             Dim id1 As String = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
             Dim id2 As String = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString

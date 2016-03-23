@@ -192,7 +192,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
 #Region "    DWSIM Specific"
 
-        Public Function EvaluateK(ByVal T As Double, ByVal pp As DWSIM.SimulationObjects.PropertyPackages.PropertyPackage) As Double
+        Public Function EvaluateK(ByVal T As Double, ByVal pp As PropertyPackages.PropertyPackage) As Double
 
             'equilibrium constant calculation
 
@@ -1281,8 +1281,8 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
-            Dim unif As New SimulationObjects.PropertyPackages.Auxiliary.Unifac
-            Dim modf As New SimulationObjects.PropertyPackages.Auxiliary.Modfac
+            Dim unif As New PropertyPackages.Auxiliary.Unifac
+            Dim modf As New PropertyPackages.Auxiliary.Modfac
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "UNIFACGroups").Elements
                 If xel2.@Name Is Nothing Then

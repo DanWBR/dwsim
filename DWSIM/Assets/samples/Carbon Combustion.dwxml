@@ -5026,7 +5026,7 @@
   <PropertyPackages>
     <PropertyPackage>
       <ID>PP-214f7568-341d-4b54-8230-5ac82b1d644d</ID>
-      <Type>DWSIM.DWSIM.SimulationObjects.PropertyPackages.NRTLPropertyPackage</Type>
+      <Type>PropertyPackages.NRTLPropertyPackage</Type>
       <ComponentName>NRTL</ComponentName>
       <ComponentDescription>In this Property Package, the NRTL (Non-Random Two-Liquid) model is used to calculate liquid-phase activity coefficients. Enthalpies are calculated by the Lee-Kesler model, while vapor-phase fugacities and other thermodynamic properties (both phases) are calculated by the Peng-Robinson EOS.</ComponentDescription>
       <Tag>PP_1</Tag>

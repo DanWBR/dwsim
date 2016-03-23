@@ -23,14 +23,14 @@ Namespace DWSIM.Utilities.HYD
     Public Class KlaudaSandler
 
         Dim am As DWSIM.Utilities.HYD.AuxMethods
-        Dim unf As DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC
-        Dim unfPP As DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage
+        Dim unf As PropertyPackages.Auxiliary.UNIQUAC
+        Dim unfPP As PropertyPackages.UNIQUACPropertyPackage
 
         Sub New(ByVal materialStream As DWSIM.SimulationObjects.Streams.MaterialStream)
 
             am = New DWSIM.Utilities.HYD.AuxMethods
-            unf = New DWSIM.SimulationObjects.PropertyPackages.Auxiliary.UNIQUAC
-            unfPP = New DWSIM.SimulationObjects.PropertyPackages.UNIQUACPropertyPackage
+            unf = New PropertyPackages.Auxiliary.UNIQUAC
+            unfPP = New PropertyPackages.UNIQUACPropertyPackage
 
             unfPP.CurrentMaterialStream = materialStream
 

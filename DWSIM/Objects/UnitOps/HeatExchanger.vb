@@ -672,19 +672,19 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .CurrentMaterialStream = tms
                             .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                             If tms.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                             End If
                             If tms.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                             End If
                             If tms.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And tms.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                             End If
                             tms.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
                         End With
@@ -700,19 +700,19 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .CurrentMaterialStream = tms
                             .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                             If tms.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid1)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                             End If
                             If tms.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Vapor)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                             End If
                             If tms.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And tms.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
-                                .DW_CalcPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                             Else
-                                .DW_ZerarPhaseProps(DWSIM.SimulationObjects.PropertyPackages.Phase.Liquid)
+                                .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                             End If
                             tms.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
                         End With
