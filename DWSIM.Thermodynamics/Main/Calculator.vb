@@ -100,7 +100,7 @@ Public Class Calculator
                         Case 0
                             gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
                                         GetType(PropertyPackages.ThermoPlugs.PR),
-                                        GetType(PropertyPackages.Auxiliary.SRK))
+                                        GetType(PropertyPackages.ThermoPlugs.SRK))
                             gpumod.Serialize("emulator.cdfy")
                         Case 1
                             Dim cp As New Cudafy.CompileProperties()
@@ -115,12 +115,12 @@ Public Class Calculator
                             End With
                             gpumod = CudafyTranslator.Cudafy(cp, GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
                                         GetType(PropertyPackages.ThermoPlugs.PR),
-                                        GetType(PropertyPackages.Auxiliary.SRK))
+                                        GetType(PropertyPackages.ThermoPlugs.SRK))
                             gpumod.Serialize("cudacode.cdfy")
                         Case 2
                             gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
                                         GetType(PropertyPackages.ThermoPlugs.PR),
-                                        GetType(PropertyPackages.Auxiliary.SRK))
+                                        GetType(PropertyPackages.ThermoPlugs.SRK))
                     End Select
                 End If
             End If
