@@ -185,8 +185,8 @@ Namespace PropertyPackages.Auxiliary
 
         Function GAMMA_MR(ByVal T As Double, ByVal Vx As Double(), ByVal Vids As String(), ByVal VQ As Double(), ByVal VR As Double())
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
-            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
+            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism, .TaskScheduler = Calculator.AppTaskScheduler}
 
             Dim n As Integer = UBound(Vx)
 

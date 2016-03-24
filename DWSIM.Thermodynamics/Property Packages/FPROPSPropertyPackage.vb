@@ -662,7 +662,7 @@ Namespace PropertyPackages
 
         Public Function GetFluidStruct(ByVal fluidnames() As String) As PureFluid_struct()
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim mystruct(fluidnames.Length - 1) As PureFluid_struct
 
@@ -677,7 +677,7 @@ Namespace PropertyPackages
 
         Private Function FPROPS_CalcCp(ByVal Vw As Array, ByVal T As Double, ByVal P As Double, ByVal fluidstruct() As PureFluid_struct, ByVal fluidstate As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim myerr As FpropsError_enum = FpropsError_enum.FPROPS_NO_ERROR
 
@@ -695,7 +695,7 @@ Namespace PropertyPackages
 
         Private Function FPROPS_CalcCv(ByVal Vw As Array, ByVal T As Double, ByVal P As Double, ByVal fluidstruct() As PureFluid_struct, ByVal fluidstate As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim myerr As FpropsError_enum = FpropsError_enum.FPROPS_NO_ERROR
 
@@ -712,7 +712,7 @@ Namespace PropertyPackages
 
         Private Function FPROPS_CalcH(ByVal Vw As Array, ByVal T As Double, ByVal P As Double, ByVal fluidstruct() As PureFluid_struct, ByVal fluidstate As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim myerr As FpropsError_enum = FpropsError_enum.FPROPS_NO_ERROR
 
@@ -729,7 +729,7 @@ Namespace PropertyPackages
 
         Private Function FPROPS_CalcS(ByVal Vw As Array, ByVal T As Double, ByVal P As Double, ByVal fluidstruct() As PureFluid_struct, ByVal fluidstate As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim myerr As FpropsError_enum = FpropsError_enum.FPROPS_NO_ERROR
 
@@ -746,7 +746,7 @@ Namespace PropertyPackages
 
         Private Function FPROPS_CalcZ(ByVal Vw As Array, ByVal T As Double, ByVal P As Double, ByVal fluidstruct() As PureFluid_struct, ByVal fluidstate As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim myerr As FpropsError_enum = FpropsError_enum.FPROPS_NO_ERROR
 
@@ -766,7 +766,7 @@ Namespace PropertyPackages
 
         Private Function CalcRho(ByVal T As Double, ByVal P As Double, ByVal fluidstruct As PureFluid_struct, ByVal fluidstate As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim f1, f2, x1, dfdx As Double, cnt As Integer
             Dim myerr As FpropsError_enum = FpropsError_enum.FPROPS_NO_ERROR
@@ -791,14 +791,14 @@ Namespace PropertyPackages
                 dfdx = (f2 - f1) / (0.01 * x1)
 
                 If Abs(dfdx) < 0.0000000001 Or Double.IsNaN(f1) Or Double.IsInfinity(f1) Then
-                    App.WriteToConsole("FPROPS WARNING: compound: " & fluidstruct.name & ", state: " & fluidstate.ToString, 2)
-                    App.WriteToConsole("FPROPS WARNING: unable to calculate density at P = " & P & " Pa and T = " & T & " K", 2)
+                    Calculator.WriteToConsole("FPROPS WARNING: compound: " & fluidstruct.name & ", state: " & fluidstate.ToString, 2)
+                    Calculator.WriteToConsole("FPROPS WARNING: unable to calculate density at P = " & P & " Pa and T = " & T & " K", 2)
                     fprops.fprops_sat_p(P, satt, rhof, rhog, fluidstruct)
                     If fluidstate = State.Liquid Then
-                        App.WriteToConsole("FPROPS WARNING: returning calculated density @ saturation temperature (" & satt & " K => " & rhof & " kg/m3", 2)
+                        Calculator.WriteToConsole("FPROPS WARNING: returning calculated density @ saturation temperature (" & satt & " K => " & rhof & " kg/m3", 2)
                         Return rhof
                     Else
-                        App.WriteToConsole("FPROPS WARNING: returning calculated density @ saturation temperature (" & satt & " K => " & rhog & " kg/m3", 2)
+                        Calculator.WriteToConsole("FPROPS WARNING: returning calculated density @ saturation temperature (" & satt & " K => " & rhog & " kg/m3", 2)
                         Return rhog
                     End If
                 End If
@@ -816,7 +816,7 @@ Namespace PropertyPackages
 
         Private Function CalcRho(ByVal Vw As Array, ByVal T As Double, ByVal P As Double, ByVal fluidstruct() As PureFluid_struct, ByVal fluidstate As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim myerr As FpropsError_enum = FpropsError_enum.FPROPS_NO_ERROR
 

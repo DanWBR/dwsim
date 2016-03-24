@@ -59,7 +59,7 @@ Namespace PropertyPackages
 #Region "    DWSIM Functions"
 
         Private Sub WriteWarningMessage(message As String)
-            Select Case My.Settings.DebugLevel
+            Select Case Calculator.DebugLevel
                 Case 0
                     'do nothing
                 Case 1
@@ -98,7 +98,7 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function AUX_PVAPi(index As Integer, T As Double) As Double
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
             Dim sub1 As String = RET_VNAMES()(index)
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -123,7 +123,7 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
                 Tmin = CoolProp.Props1SI(sub1, "TMIN")
@@ -987,7 +987,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim val As Double
             Dim i As Integer
@@ -1090,7 +1090,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim val As Double
             Dim i As Integer
@@ -1193,9 +1193,9 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
-            App.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
-            App.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
-            App.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
+            Calculator.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
+            Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
+            Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
             Dim n As Integer = UBound(Vx)
             Dim i As Integer
@@ -1216,7 +1216,7 @@ Namespace PropertyPackages
                 Next
             End If
 
-            App.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
+            Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
 
             Return fugcoeff
 
@@ -1242,7 +1242,7 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As Phase)
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim result As Double
             Dim dwpl As Phase
@@ -1391,7 +1391,7 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim result As Double = 0.0#
             Dim resultObj As Object = Nothing

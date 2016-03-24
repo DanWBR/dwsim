@@ -185,12 +185,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If errfunc <= 0.0000000001 Then Exit Do
 
-                If Double.IsNaN(S) Then Throw New Exception(App.GetLocalString("PP_FlashTPSolidFracError"))
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PP_FlashMaxIt2"))
+                If Double.IsNaN(S) Then Throw New Exception(Calculator.GetLocalString("PP_FlashTPSolidFracError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PP_FlashMaxIt2"))
 
                 ecount += 1
 
-               App.Flowsheet.CheckStatus()
+                PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop
 
@@ -345,7 +345,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1), Vs(1) As Double
             Dim i, n, ecount As Integer
@@ -613,7 +613,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
             dt = d2 - d1
 
-            If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             WriteDebugInfo("TV Flash [Seawater]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
@@ -671,7 +671,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
             dt = d2 - d1
 
-            If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             WriteDebugInfo("PV Flash [Seawater]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 

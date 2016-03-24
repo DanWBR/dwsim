@@ -190,7 +190,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If Double.IsNaN(Math.Abs(e1) + Math.Abs(e2)) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 ElseIf Math.Abs(e3) < 0.0000000001 And ecount > 0 Then
 
@@ -241,12 +241,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ecount += 1
 
-                If Double.IsNaN(L) Then Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If Double.IsNaN(L) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
                 WriteDebugInfo("PT Flash [NL-SLE]: Iteration #" & ecount & ", LF = " & L)
 
-               App.Flowsheet.CheckStatus()
+                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until convergiu = 1
 
@@ -634,7 +634,7 @@ out:        d2 = Date.Now
 
                     If Double.IsNaN(e1 + e2) Then
 
-                        Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                        Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                     ElseIf Math.Abs(e3) < 0.0000000001 And ecount > 0 Then
 
@@ -675,13 +675,13 @@ out:        d2 = Date.Now
 
                     ecount += 1
 
-                    If Double.IsNaN(V) Then Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
-                    If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                    If Double.IsNaN(V) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
+                    If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
 
                     WriteDebugInfo("PT Flash [NL-SLE]: Iteration #" & ecount & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until convergiu = 1
 
@@ -689,7 +689,7 @@ out:            'calculate global phase fractions
                 L = L * (1 - S)
                 V = V * (1 - S)
 
-                If gcount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If gcount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
 out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) < 0.0000005) And (Math.Abs(GS_old - S) < 0.0000005) Then GlobalConv = True
 
@@ -819,12 +819,12 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
 
                 If errfunc <= etol Then Exit Do
 
-                If Double.IsNaN(S) Then Throw New Exception(App.GetLocalString("PP_FlashTPSolidFracError"))
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PP_FlashMaxIt2"))
+                If Double.IsNaN(S) Then Throw New Exception(Calculator.GetLocalString("PP_FlashTPSolidFracError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PP_FlashMaxIt2"))
 
                 ecount += 1
 
-               App.Flowsheet.CheckStatus()
+                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop
 
@@ -929,7 +929,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 100, tolEXT, maxitEXT, {P, Vz, PP})
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1), Vs(1) As Double
             Dim i, n, ecount As Integer
@@ -1332,7 +1332,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("PV Flash [SLE]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1442,7 +1442,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                         WriteDebugInfo("PV Flash [SLE]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                       App.Flowsheet.CheckStatus()
+                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                     Loop Until (Math.Abs(fval) < etol And e1 < etol) Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1490,7 +1490,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
             dt = d2 - d1
 
-            If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             If PP.AUX_CheckTrivial(Ki) Then Throw New Exception("PV Flash [SLE]: Invalid result: converged to the trivial solution (T = " & T & " ).")
 
@@ -1734,7 +1734,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                 WriteDebugInfo("PV Flash [NL-SLE]: Iteration #" & ecount & ", T = " & T & ", LF = " & L)
 
-               App.Flowsheet.CheckStatus()
+                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until Math.Abs(T - Tant) < 0.01 Or Double.IsNaN(T) = True Or ecount > maxit_e Or Double.IsNaN(T) Or Double.IsInfinity(T)
 

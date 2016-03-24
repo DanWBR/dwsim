@@ -224,7 +224,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If Double.IsNaN(e1 + e2) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
 
                 ElseIf Math.Abs(e3) < 0.0000000001 And ecount > 0 Then
 
@@ -255,15 +255,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 ecount += 1
 
                 If Double.IsNaN(V) Then
-                    Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
                 End If
                 If ecount > maxit_e Then
-                    Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
                 End If
 
                 WriteDebugInfo("PT Flash [NL]: Iteration #" & ecount & ", VF = " & V)
 
-               App.Flowsheet.CheckStatus()
+                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until converged = 1
 
@@ -308,7 +308,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Public Function Flash_PH_1(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim i, j, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -358,22 +358,22 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     If cnt < 2 Then
 
-                        If My.Settings.EnableParallelProcessing Then
-                            
+                        If Calculator.EnableParallelProcessing Then
+
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   fx = Herror("PT", x1, P, Vz, PP)(0)
                                                               End Sub,
-                                                                App.TaskCancellationTokenSource.Token,
+                                                                Calculator.TaskCancellationTokenSource.Token,
                                                                 TaskCreationOptions.None,
-                                                                App.AppTaskScheduler)
+                                                                Calculator.AppTaskScheduler)
                             Dim task2 = Task.Factory.StartNew(Sub()
                                                                   fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                               End Sub,
-                                                                App.TaskCancellationTokenSource.Token,
+                                                                Calculator.TaskCancellationTokenSource.Token,
                                                                 TaskCreationOptions.None,
-                                                                App.AppTaskScheduler)
+                                                                Calculator.AppTaskScheduler)
                             Task.WaitAll(task1, task2)
-                            
+
                         Else
                             fx = Herror("PT", x1, P, Vz, PP)(0)
                             fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
@@ -434,7 +434,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Public Function Flash_PH_2(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim i, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -472,26 +472,26 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             Dim alreadymt As Boolean = False
 
-            If My.Settings.EnableParallelProcessing Then
-                
+            If Calculator.EnableParallelProcessing Then
+
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       Dim ErrRes1 = Herror("PV", 0, P, Vz, PP)
                                                       Hb = ErrRes1(0)
                                                       Tb = ErrRes1(1)
                                                   End Sub,
-                                                      App.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      App.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       Dim ErrRes2 = Herror("PV", 1, P, Vz, PP)
                                                       Hd = ErrRes2(0)
                                                       Td = ErrRes2(1)
                                                   End Sub,
-                                                  App.TaskCancellationTokenSource.Token,
+                                                  Calculator.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  App.AppTaskScheduler)
+                                                  Calculator.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
-                
+
             Else
                 ErrRes = Herror("PV", 0, P, Vz, PP)
                 Hb = ErrRes(0)
@@ -608,7 +608,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Public Function Flash_PS_1(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, j, n, ecount As Integer
@@ -657,22 +657,22 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     If cnt < 2 Then
 
-                        If My.Settings.EnableParallelProcessing Then
-                            
+                        If Calculator.EnableParallelProcessing Then
+
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   fx = Serror("PT", x1, P, Vz, PP)(0)
                                                               End Sub,
-                                                                  App.TaskCancellationTokenSource.Token,
+                                                                  Calculator.TaskCancellationTokenSource.Token,
                                                                   TaskCreationOptions.None,
-                                                                  App.AppTaskScheduler)
+                                                                  Calculator.AppTaskScheduler)
                             Dim task2 = Task.Factory.StartNew(Sub()
                                                                   fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                               End Sub,
-                                                              App.TaskCancellationTokenSource.Token,
+                                                              Calculator.TaskCancellationTokenSource.Token,
                                                               TaskCreationOptions.None,
-                                                              App.AppTaskScheduler)
+                                                              Calculator.AppTaskScheduler)
                             Task.WaitAll(task1, task2)
-                            
+
                         Else
                             fx = Serror("PT", x1, P, Vz, PP)(0)
                             fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
@@ -735,7 +735,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Public Function Flash_PS_2(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, n, ecount As Integer
@@ -774,26 +774,26 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             Dim alreadymt As Boolean = False
 
-            If My.Settings.EnableParallelProcessing Then
-                
+            If Calculator.EnableParallelProcessing Then
+
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       Dim ErrRes1 = Serror("PV", 0, P, Vz, PP)
                                                       Sb = ErrRes1(0)
                                                       Tb = ErrRes1(1)
                                                   End Sub,
-                                                      App.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      App.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       Dim ErrRes2 = Serror("PV", 1, P, Vz, PP)
                                                       Sd = ErrRes2(0)
                                                       Td = ErrRes2(1)
                                                   End Sub,
-                                                  App.TaskCancellationTokenSource.Token,
+                                                  Calculator.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  App.AppTaskScheduler)
+                                                  Calculator.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
-                
+
             Else
                 ErrRes = Serror("PV", 0, P, Vz, PP)
                 Sb = ErrRes(0)
@@ -1136,7 +1136,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -1251,7 +1251,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -1261,7 +1261,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             dt = d2 - d1
 
-            If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
 
             If PP.AUX_CheckTrivial(Ki) Then Throw New Exception("TV Flash [NL]: Invalid result: converged to the trivial solution (P = " & P & " ).")
 
@@ -1455,7 +1455,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1528,7 +1528,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until (Math.Abs(fval) < etol And e1 < etol) Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1538,7 +1538,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             dt = d2 - d1
 
-            If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
 
             If PP.AUX_CheckTrivial(Ki) Then Throw New Exception("PV Flash [NL]: Invalid result: converged to the trivial solution (T = " & T & " ).")
 
@@ -1583,7 +1583,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             WriteDebugInfo("PH Flash [NL]: Current T = " & T & ", Current H Error = " & herr)
 
-           App.Flowsheet.CheckStatus()
+            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
         End Function
 
@@ -1622,7 +1622,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             WriteDebugInfo("PS Flash [NL]: Current T = " & T & ", Current S Error = " & serr)
 
-           App.Flowsheet.CheckStatus()
+            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
         End Function
 

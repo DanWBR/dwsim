@@ -1122,8 +1122,8 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
     Private Sub ToolStripButton14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton14.Click
         My.Application.CalculatorStopRequested = True
-        If My.Application.TaskCancellationTokenSource IsNot Nothing Then
-            My.Application.TaskCancellationTokenSource.Cancel()
+        If Calculator.TaskCancellationTokenSource IsNot Nothing Then
+            Calculator.TaskCancellationTokenSource.Cancel()
         End If
     End Sub
 

@@ -324,8 +324,8 @@ Public Class FormLLEDiagram
         mat.Phases(0).Compounds(Names(cbComp3.SelectedIndex)).MoleFraction = 1 - Pt.X - Pt.Y
 
         If My.Settings.EnableGPUProcessing Then
-            DWSIM.App.InitComputeDevice()
-            My.Application.gpu.EnableMultithreading()
+            Calculator.InitComputeDevice()
+            Calculator.gpu.EnableMultithreading()
         End If
 
         Try
@@ -334,8 +334,8 @@ Public Class FormLLEDiagram
             MessageBox.Show(ex.Message.ToString, "Error", MessageBoxButtons.OK)
         Finally
             If My.Settings.EnableGPUProcessing Then
-                My.Application.gpu.DisableMultithreading()
-                My.Application.gpu.FreeAll()
+                Calculator.gpu.DisableMultithreading()
+                Calculator.gpu.FreeAll()
             End If
         End Try
 

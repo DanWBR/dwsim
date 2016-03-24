@@ -20,7 +20,6 @@
 Imports FileHelpers
 Imports System.Xml
 Imports System.IO
-Imports PropertyPackages.Auxiliary
 Imports CProp = CoolProp
 
 Namespace DWSIM.Databases

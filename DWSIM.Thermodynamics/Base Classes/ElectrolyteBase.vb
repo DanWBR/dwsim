@@ -442,15 +442,15 @@ Namespace PropertyPackages
 
                         Case FlashSpec.H
 
-                            Throw New Exception(App.GetLocalString("PropPack_FlashTHNotSupported"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashTHNotSupported"))
 
                         Case FlashSpec.S
 
-                            Throw New Exception(App.GetLocalString("PropPack_FlashTSNotSupported"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashTSNotSupported"))
 
                         Case FlashSpec.VAP
 
-                            Throw New Exception(App.GetLocalString("PropPack_FlashTVNotSupported"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashTVNotSupported"))
 
                     End Select
 
@@ -496,7 +496,7 @@ Namespace PropertyPackages
 
                         Case FlashSpec.S
 
-                            Throw New Exception(App.GetLocalString("PropPack_FlashPSNotSupported"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashPSNotSupported"))
 
                         Case FlashSpec.VAP
 
@@ -700,15 +700,15 @@ Namespace PropertyPackages
 
                         Case FlashSpec.H
 
-                            Throw New Exception(App.GetLocalString("PropPack_FlashTHNotSupported"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashTHNotSupported"))
 
                         Case FlashSpec.S
 
-                            Throw New Exception(App.GetLocalString("PropPack_FlashTSNotSupported"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashTSNotSupported"))
 
                         Case FlashSpec.VAP
 
-                            Throw New Exception(App.GetLocalString("PropPack_FlashTVNotSupported"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashTVNotSupported"))
 
                     End Select
 
@@ -812,7 +812,7 @@ Namespace PropertyPackages
 
                         Case FlashSpec.S
 
-                            Throw New Exception(App.GetLocalString("PropPack_FlashPSNotSupported"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashPSNotSupported"))
 
                         Case FlashSpec.VAP
 

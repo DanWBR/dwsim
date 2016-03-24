@@ -16,12 +16,12 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization
-Imports PropertyPackages.Auxiliary
 Imports System.Math
-Imports DWSIM.DWSIM.MathEx.GammaFunctions
+Imports DWSIM.Thermodynamics.MathEx.GammaFunctions
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
+Imports DWSIM.Thermodynamics
 
 
 Public Class FormPCBulk
@@ -523,15 +523,15 @@ Public Class FormPCBulk
             x(i) = i / 1000
         Next
 
-        DWSIM.MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
+        MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
 
         For i = 0 To n
-            q(i) = B_MW / A_MW * DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _MW, w, 1000, i / n) ^ B_MW
+            q(i) = B_MW / A_MW * MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _MW, w, 1000, i / n) ^ B_MW
         Next
 
         For i = 1 To n
-            val1 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _MW, w, 1000, (i - 1) / n)
-            val2 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _MW, w, 1000, i / n)
+            val1 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _MW, w, 1000, (i - 1) / n)
+            val2 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _MW, w, 1000, i / n)
             dMF(i) = Exp(-B_MW / A_MW * val1 ^ B_MW) - Exp(-B_MW / A_MW * val2 ^ B_MW)
             dMW_(i) = 1 / dMF(i) * (A_MW / B_MW) ^ (1 / B_MW) * (igammaf.incompletegammac(1 + 1 / B_MW, q(i - 1)) - igammaf.incompletegammac(1 + 1 / B_MW, q(i)))
             dMW(i) = MW0 * (1 + dMW_(i))
@@ -554,15 +554,15 @@ Public Class FormPCBulk
             x(i) = i / 1000
         Next
 
-        DWSIM.MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
+        MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
 
         For i = 0 To n
-            q(i) = B_TB / A_TB * DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _TB, w, 1000, i / n) ^ B_TB
+            q(i) = B_TB / A_TB * MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _TB, w, 1000, i / n) ^ B_TB
         Next
 
         For i = 1 To n
-            val1 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _TB, w, 1000, (i - 1) / n)
-            val2 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _TB, w, 1000, i / n)
+            val1 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _TB, w, 1000, (i - 1) / n)
+            val2 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _TB, w, 1000, i / n)
             dMF(i) = Exp(-B_TB / A_TB * val1 ^ B_TB) - Exp(-B_TB / A_TB * val2 ^ B_TB)
             dTB_(i) = 1 / dMF(i) * (A_TB / B_TB) ^ (1 / B_TB) * (igammaf.incompletegammac(1 + 1 / B_TB, q(i - 1)) - igammaf.incompletegammac(1 + 1 / B_TB, q(i)))
             dTB(i) = TB0 * (1 + dTB_(i))
@@ -595,15 +595,15 @@ Public Class FormPCBulk
             x(i) = i / 1000
         Next
 
-        DWSIM.MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
+        MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
 
         For i = 0 To n
-            q(i) = B_SG / A_SG * DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _SG, w, 1000, i / n) ^ B_SG
+            q(i) = B_SG / A_SG * MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _SG, w, 1000, i / n) ^ B_SG
         Next
 
         For i = 1 To n
-            val1 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _SG, w, 1000, (i - 1) / n)
-            val2 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _SG, w, 1000, i / n)
+            val1 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _SG, w, 1000, (i - 1) / n)
+            val2 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _SG, w, 1000, i / n)
             dMF(i) = Exp(-B_SG / A_SG * val1 ^ B_SG) - Exp(-B_SG / A_SG * val2 ^ B_SG)
             dSG_(i) = 1 / dMF(i) * (A_SG / B_SG) ^ (1 / B_SG) * (igammaf.incompletegammac(1 + 1 / B_SG, q(i - 1)) - igammaf.incompletegammac(1 + 1 / B_SG, q(i)))
             dSG(i) = SG0 * (1 + dSG_(i))
@@ -624,15 +624,15 @@ Public Class FormPCBulk
             x(i) = i / 1000
         Next
 
-        DWSIM.MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
+        MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
 
         For i = 0 To n
-            q(i) = B_V / A_V * DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V1, w, 999, i / n) ^ B_V
+            q(i) = B_V / A_V * MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V1, w, 999, i / n) ^ B_V
         Next
 
         For i = 1 To n
-            val1 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V1, w, 999, (i - 1) / n)
-            val2 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V1, w, 999, i / n)
+            val1 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V1, w, 999, (i - 1) / n)
+            val2 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V1, w, 999, i / n)
             dV1_(i) = 1 / dMF(i) * (A_V / B_V) ^ (1 / B_V) * (igammaf.incompletegammac(1 + 1 / B_V, q(i - 1)) - igammaf.incompletegammac(1 + 1 / B_V, q(i)))
             dV1(i) = V10 * (1 + dV1_(i))
         Next
@@ -650,15 +650,15 @@ Public Class FormPCBulk
             x(i) = i / 1000
         Next
 
-        DWSIM.MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
+        MathEx.Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(x, 1000, 0.5, w)
 
         For i = 0 To n
-            q(i) = B_V / A_V * DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V2, w, 999, i / n) ^ B_V
+            q(i) = B_V / A_V * MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V2, w, 999, i / n) ^ B_V
         Next
 
         For i = 1 To n
-            val1 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V2, w, 999, (i - 1) / n)
-            val2 = DWSIM.MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V2, w, 999, i / n)
+            val1 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V2, w, 999, (i - 1) / n)
+            val2 = MathEx.Interpolation.polinterpolation.barycentricinterpolation(x, _V2, w, 999, i / n)
             dV2_(i) = 1 / dMF(i) * (A_V / B_V) ^ (1 / B_V) * (igammaf.incompletegammac(1 + 1 / B_V, q(i - 1)) - igammaf.incompletegammac(1 + 1 / B_V, q(i)))
             dV2(i) = V20 * (1 + dV2_(i))
         Next

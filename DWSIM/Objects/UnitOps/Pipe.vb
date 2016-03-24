@@ -17,7 +17,6 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports PropertyPackages.Auxiliary
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 

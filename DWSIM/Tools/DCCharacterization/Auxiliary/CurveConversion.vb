@@ -222,7 +222,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
             Public Function GetCoeffs(ByVal x As Double(), ByVal y As Double(), ByVal inest() As Double, ByVal epsg As Double, ByVal epsf As Double, ByVal epsx As Double, ByVal maxits As Integer) As Object
 
-                Dim lmsolve As New DWSIM.MathEx.LM.levenbergmarquardt
+                Dim lmsolve As New MathEx.LM.levenbergmarquardt
                 lmsolve.DefineFuncGradDelegate(AddressOf fv)
 
                 Dim newc(UBound(inest) + 1) As Double

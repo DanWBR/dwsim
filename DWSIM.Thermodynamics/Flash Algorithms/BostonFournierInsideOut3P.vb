@@ -810,7 +810,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Hl2 = proppack.DW_CalcEnthalpy(Vx2, T, Pf, State.Liquid) * proppack.AUX_MMM(Vx2)
             eberror = Hf - V * Hv - L1 * Hl1 - L2 * Hl2
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -880,7 +880,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Hl2 = proppack.DW_CalcEnthalpy(Vx2, T, Pf, State.Liquid) * proppack.AUX_MMM(Vx2)
             eberror = Hf - V * Hv - L1 * Hl1 - L2 * Hl2
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return Abs(eberror)
 
@@ -948,7 +948,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim eberror As Double = Sf - V * Sv - L1 * Sl1 - L2 * Sl2
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -1016,7 +1016,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim eberror As Double = Sf - V * Sv - L1 * Sl1 - L2 * Sl2
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return Abs(eberror)
 
@@ -1204,8 +1204,8 @@ restart:    Do
 
                 ecount += 1
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
-                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
+                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 WriteDebugInfo("PH Flash 3P [IO]: Iteration #" & ecount & ", T = " & T)
                 WriteDebugInfo("PH Flash 3P [IO]: Iteration #" & ecount & ", VF = " & V)
@@ -1213,7 +1213,7 @@ restart:    Do
                 WriteDebugInfo("PH Flash 3P [IO]: Iteration #" & ecount & ", L2F = " & L2)
                 WriteDebugInfo("PH Flash 3P [IO]: Iteration #" & ecount & ", H error = " & fr)
 
-               App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1254,7 +1254,7 @@ restart:    Do
 
         Private Function EnergyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim Hl1, Hl2, balerror As Double
 
@@ -1273,7 +1273,7 @@ restart:    Do
 
         Private Function EnergyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim HV, balerror As Double
 
@@ -1468,14 +1468,14 @@ restart:    Do
 
                 ecount += 1
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
-                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
+                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 WriteDebugInfo("PS Flash 3P [IO]: Iteration #" & ecount & ", T = " & T)
                 WriteDebugInfo("PS Flash 3P [IO]: Iteration #" & ecount & ", VF = " & V)
                 WriteDebugInfo("PS Flash 3P [IO]: Iteration #" & ecount & ", S error = " & fr)
 
-               App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1523,7 +1523,7 @@ restart:    Do
 
         Private Function EntropyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim Sl1, Sl2, balerror As Double
 
@@ -1542,7 +1542,7 @@ restart:    Do
 
         Private Function EntropyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim SV, balerror As Double
 
@@ -1739,15 +1739,15 @@ restart:    Do
                 ecount += 1
 
                 If Double.IsNaN(V) Then
-                    Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
                 End If
                 If ecount > maxit_e Then
-                    Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
                 End If
 
                 WriteDebugInfo("PT Flash [IO]: Iteration #" & ecount & ", VF = " & V)
 
-               App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1832,7 +1832,7 @@ out:
 
             Dim err1 As Double = Kb - 1
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return err1 ^ 2
 
@@ -2069,15 +2069,15 @@ out:
                 ecount += 1
 
                 If ecount > maxit_e Then
-                    Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
                 End If
                 If Double.IsNaN(AbsSum(fx)) Then
-                    Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                 End If
 
                 WriteDebugInfo("PV Flash 3P [IO]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-               App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol * (n + 2)
 
@@ -2273,12 +2273,12 @@ out:
 
                 ecount += 1
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
-                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
+                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 WriteDebugInfo("TV Flash 3P [IO]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-               App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -2340,7 +2340,7 @@ out:
 
             Dim eberror As Double = (L1 + L2) - Lf
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -2396,7 +2396,7 @@ out:
 
             Dim eberror As Double = (L1 + L2) - Lf
 
-           App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 

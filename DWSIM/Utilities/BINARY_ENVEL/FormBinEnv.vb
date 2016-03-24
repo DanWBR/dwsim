@@ -190,8 +190,8 @@ Public Class FormBinEnv
             Me.Button1.Enabled = False
 
             If My.Settings.EnableGPUProcessing Then
-                DWSIM.App.InitComputeDevice()
-                My.Application.gpu.EnableMultithreading()
+                Calculator.InitComputeDevice()
+                Calculator.gpu.EnableMultithreading()
             End If
 
             Me.BackgroundWorker1.RunWorkerAsync(New Object() {tipocalc, P, T, chkVLE.Checked, lle, chkSLE.Checked, chkCritical.Checked, rbSolidSolution.Checked, chkCompareModels.Checked})
@@ -254,8 +254,8 @@ Public Class FormBinEnv
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
 
         If My.Settings.EnableGPUProcessing Then
-            My.Application.gpu.DisableMultithreading()
-            My.Application.gpu.FreeAll()
+            Calculator.gpu.DisableMultithreading()
+            Calculator.gpu.FreeAll()
         End If
 
         Me.Button1.Enabled = True

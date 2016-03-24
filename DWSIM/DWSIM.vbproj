@@ -293,7 +293,6 @@
     <Import Include="DWSIM.DrawingTools" />
     <Import Include="DWSIM.DrawingTools.GraphicObjects" />
     <Import Include="DWSIM.DWSIM.Flowsheet" />
-    <Import Include="DWSIM.DWSIM.SimulationObjects.PropertyPackages" />
     <Import Include="DWSIM.DWSIM.SimulationObjects.Reactors" />
     <Import Include="DWSIM.DWSIM.SimulationObjects.SpecialOps" />
     <Import Include="DWSIM.DWSIM.SimulationObjects.Streams" />
@@ -422,6 +421,7 @@
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigPRSV2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\PropPack_ConfigForms\MathEx.vb" />
     <Compile Include="Forms\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.Designer.vb">
       <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
     </Compile>
@@ -477,22 +477,6 @@
     <Compile Include="Objects\Classes\Databases\Databases.vb" />
     <Compile Include="Objects\Classes\Extenders\SIMDExtenders.vb" />
     <Compile Include="Objects\Classes\MAPI\MAPI.vb" />
-    <Compile Include="Objects\Classes\Math\AP.vb" />
-    <Compile Include="Objects\Classes\Math\Brent.vb" />
-    <Compile Include="Objects\Classes\Math\BrentMinimize.vb" />
-    <Compile Include="Objects\Classes\Math\Broyden.vb" />
-    <Compile Include="Objects\Classes\Math\BS.vb" />
-    <Compile Include="Objects\Classes\Math\LP_Solve.vb" />
-    <Compile Include="Objects\Classes\Math\cMatLib.vb" />
-    <Compile Include="Objects\Classes\Math\GDEM.vb" />
-    <Compile Include="Objects\Classes\Math\General.vb" />
-    <Compile Include="Objects\Classes\Math\GammaF.vb" />
-    <Compile Include="Objects\Classes\Math\Interpolation.vb" />
-    <Compile Include="Objects\Classes\Math\LBFGS.vb" />
-    <Compile Include="Objects\Classes\Math\LBFGSB.vb" />
-    <Compile Include="Objects\Classes\Math\LM.vb" />
-    <Compile Include="Objects\Classes\Math\MatrixOps.vb" />
-    <Compile Include="Objects\Classes\Math\SysLin.vb" />
     <Compile Include="Objects\Classes\Optimization\Optimization.vb" />
     <Compile Include="Forms\AboutBoxNET.Designer.vb">
       <DependentUpon>AboutBoxNET.vb</DependentUpon>
@@ -929,7 +913,6 @@
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigPP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\Classes\Math\MATRIX2.vb" />
     <Compile Include="Objects\Classes\General\TreeViewDataAccess.vb" />
     <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorFormEditor.vb" />
     <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIRVSelectorForm.Designer.vb">

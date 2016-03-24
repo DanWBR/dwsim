@@ -22,7 +22,6 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Math
 Imports System.Threading.Tasks
 Imports System.Linq
-Imports DWSIM.Thermodynamics.DWSIM
 
 Namespace PropertyPackages
 
@@ -552,9 +551,9 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_ReturnPhaseEnvelope(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            If My.Settings.EnableGPUProcessing Then App.InitComputeDevice()
+            If Calculator.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
                 Return DW_ReturnPhaseEnvelopeParallel(parameters, bw)
             Else
                 Return DW_ReturnPhaseEnvelopeSequential(parameters, bw)
@@ -1842,9 +1841,9 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
-            App.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
-            App.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
-            App.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
+            Calculator.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
+            Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
+            Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
             Dim srkn As New PropertyPackages.ThermoPlugs.SRK
 
@@ -1861,7 +1860,7 @@ Namespace PropertyPackages
 
             fugcoeff = lnfug.ExpY
 
-            App.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
+            Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
 
             Return fugcoeff
 

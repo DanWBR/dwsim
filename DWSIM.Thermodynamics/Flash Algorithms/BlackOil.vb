@@ -83,7 +83,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
         Public Function Flash_PH_1(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim i, j, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -132,23 +132,23 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
                 Do
 
-                    If My.Settings.EnableParallelProcessing Then
+                    If Calculator.EnableParallelProcessing Then
                         
-                        If My.Settings.EnableGPUProcessing Then
-                            'App.gpu.EnableMultithreading()
+                        If Calculator.EnableGPUProcessing Then
+                            'Calculator.gpu.EnableMultithreading()
                         End If
                         Dim task1 = Task.Factory.StartNew(Sub()
                                                               fx = Herror("PT", x1, P, Vz, PP)(0)
                                                           End Sub,
-                                                              App.TaskCancellationTokenSource.Token,
+                                                              Calculator.TaskCancellationTokenSource.Token,
                                                               TaskCreationOptions.None,
-                                                              App.AppTaskScheduler)
+                                                              Calculator.AppTaskScheduler)
                         Dim task2 = Task.Factory.StartNew(Sub()
                                                               fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                           End Sub,
-                                                          App.TaskCancellationTokenSource.Token,
+                                                          Calculator.TaskCancellationTokenSource.Token,
                                                           TaskCreationOptions.None,
-                                                          App.AppTaskScheduler)
+                                                          Calculator.AppTaskScheduler)
                         Task.WaitAll(task1, task2)
                         
                     Else
@@ -203,7 +203,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
         Public Function Flash_PS_1(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, j, n, ecount As Integer
@@ -252,23 +252,23 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
                 Do
 
-                    If My.Settings.EnableParallelProcessing Then
+                    If Calculator.EnableParallelProcessing Then
                         
-                        If My.Settings.EnableGPUProcessing Then
-                            'App.gpu.EnableMultithreading()
+                        If Calculator.EnableGPUProcessing Then
+                            'Calculator.gpu.EnableMultithreading()
                         End If
                         Dim task1 = Task.Factory.StartNew(Sub()
                                                               fx = Serror("PT", x1, P, Vz, PP)(0)
                                                           End Sub,
-                                                              App.TaskCancellationTokenSource.Token,
+                                                              Calculator.TaskCancellationTokenSource.Token,
                                                               TaskCreationOptions.None,
-                                                              App.AppTaskScheduler)
+                                                              Calculator.AppTaskScheduler)
                         Dim task2 = Task.Factory.StartNew(Sub()
                                                               fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                           End Sub,
-                                                          App.TaskCancellationTokenSource.Token,
+                                                          Calculator.TaskCancellationTokenSource.Token,
                                                           TaskCreationOptions.None,
-                                                          App.AppTaskScheduler)
+                                                          Calculator.AppTaskScheduler)
                         Task.WaitAll(task1, task2)
                         
                     Else
@@ -534,8 +534,6 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
             WriteDebugInfo("PH Flash [NL]: Current T = " & T & ", Current H Error = " & herr)
 
-            App.Flowsheet.CheckStatus()
-
         End Function
 
         Function OBJ_FUNC_PS_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
@@ -573,8 +571,6 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
             WriteDebugInfo("PS Flash [NL]: Current T = " & T & ", Current S Error = " & serr)
 
-            App.Flowsheet.CheckStatus()
-
         End Function
         Function OBJ_FUNC_PV_FLASH(ByVal Type As String, ByVal T As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 
@@ -588,8 +584,6 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
             Vy = tmp(3)
 
             Return Vf - V
-
-            App.Flowsheet.CheckStatus()
 
         End Function
         Function Herror(ByVal type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object

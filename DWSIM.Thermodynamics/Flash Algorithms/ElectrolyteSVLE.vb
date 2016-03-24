@@ -59,7 +59,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Sub WriteDebugInfo(text As String)
 
-            Select Case My.Settings.DebugLevel
+            Select Case Calculator.DebugLevel
                 Case 0
                     'do nothing
                 Case 1
@@ -240,7 +240,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 int_count += 1
 
-                App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 'Loop Until int_count > MaximumIterations
 
@@ -311,11 +311,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim rxn As Interfaces.IReaction
 
             'check active reactions (equilibrium only) in the reaction set
-            For Each rxnsb As Interfaces.IReactionSetBase In App.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
-                If App.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
+            For Each rxnsb As Interfaces.IReactionSetBase In proppack.CurrentMaterialStream.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
+                If proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
                     Me.Reactions.Add(rxnsb.ReactionID)
                     Me.ReactionExtents.Add(rxnsb.ReactionID, 0)
-                    rxn = App.Flowsheet.Reactions(rxnsb.ReactionID)
+                    rxn = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID)
                     'equilibrium constant calculation
                     Select Case rxn.KExprType
                         Case KOpt.Constant
@@ -354,7 +354,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 i = 0
                 For Each rxid As String In Me.Reactions
-                    rx = App.Flowsheet.Reactions(rxid)
+                    rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
                     j = 0
                     For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
                         If Not Me.ComponentIDs.Contains(comp.CompName) Then
@@ -374,7 +374,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 'E: matrix of stoichometric coefficients
                 i = 0
                 For Each rxid As String In Me.Reactions
-                    rx = App.Flowsheet.Reactions(rxid)
+                    rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
                     j = 0
                     For Each cname As String In Me.ComponentIDs
                         If rx.Components.ContainsKey(cname) Then
@@ -412,7 +412,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 i = 0
                 For Each rxid As String In Me.Reactions
-                    rx = App.Flowsheet.Reactions(rxid)
+                    rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
                     j = 0
                     For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
                         var1 = -N0(comp.CompName) / comp.StoichCoeff
@@ -438,9 +438,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Next
                 Else
                     i = 0
-                    For Each rxnsb As Interfaces.IReactionSetBase In App.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
-                        If App.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
-                            rxn = App.Flowsheet.Reactions(rxnsb.ReactionID)
+                    For Each rxnsb As Interfaces.IReactionSetBase In proppack.CurrentMaterialStream.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
+                        If proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
+                            rxn = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID)
                             If rxn.ConstantKeqValue < 1 Then
                                 REx(i) = 0.01#
                             ElseIf rxn.ConstantKeqValue > 70 Then
@@ -513,7 +513,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
                     End If
 
-                    App.Flowsheet.CheckStatus()
+                    proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop
 
@@ -646,7 +646,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To Me.Reactions.Count - 1
                 prod(i) = 1
                 For Each s As String In Me.ComponentIDs
-                    With App.Flowsheet.Reactions(Me.Reactions(i))
+                    With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
                         If .Components.ContainsKey(s) Then
                             If .Components(s).StoichCoeff > 0 Then
                                 For j = 0 To nc
@@ -664,7 +664,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim pen_val As Double = ReturnPenaltyValue()
 
             For i = 0 To Me.Reactions.Count - 1
-                With App.Flowsheet.Reactions(Me.Reactions(i))
+                With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
                     f(i) = Log(prod(i)) - Log(.ConstantKeqValue)
                     If Double.IsNaN(f(i)) Or Double.IsInfinity(f(i)) Or pen_val <> 0.0# Then
                         f(i) = pen_val ^ 2
@@ -760,7 +760,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim j, n, ecount As Integer
@@ -974,12 +974,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     x *= 0.99
                 Else
                     x = x - fx * (x - x00) / (fx - fx00)
-                    If Double.IsNaN(x) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                    If Double.IsNaN(x) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                 End If
 
                 ecount += 1
 
-                If ecount > maxitEXT Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If ecount > maxitEXT Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             Loop
 
@@ -1060,12 +1060,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     x += 1.0#
                 Else
                     x = x - fx * (x - x00) / (fx - fx00)
-                    If Double.IsNaN(x) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                    If Double.IsNaN(x) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                 End If
 
                 ecount += 1
 
-                If ecount > maxitEXT Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If ecount > maxitEXT Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             Loop
 

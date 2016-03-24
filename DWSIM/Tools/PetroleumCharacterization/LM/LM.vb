@@ -38,7 +38,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization
         Public Function GetCoeffs(ByVal x As Double(), ByVal y As Double(), ByVal inest As Double(), ByVal fittype As FitType, _
                                 ByVal epsg As Double, ByVal epsf As Double, ByVal epsx As Double, ByVal maxits As Integer) As Object
 
-            Dim lmsolve As New DWSIM.MathEx.LM.levenbergmarquardt
+            Dim lmsolve As New MathEx.LM.levenbergmarquardt
             Select Case fittype
                 Case LMFit.FitType.Pvap
                     lmsolve.DefineFuncGradDelegate(AddressOf fvpvap)

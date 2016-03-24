@@ -28,18 +28,9 @@ Namespace My
 
         Public UtilityPlugins As Dictionary(Of String, Interfaces.IUtilityPlugin)
 
-        Public Property IsRunningParallelTasks As Boolean = False
-        Public Property TaskCancellationTokenSource As New Threading.CancellationTokenSource
-
-        Public Property AppTaskScheduler As Tasks.TaskScheduler = Tasks.TaskScheduler.Default
-
         Public Property PushUndoRedoAction As Boolean = True
 
         Public Property ActiveSimulation As FormFlowsheet
-        Public Property CAPEOPENMode As Boolean = False
-        Public Property gpu As Cudafy.Host.GPGPU
-        Public Property gpumod As CudafyModule
-        Public Property prevlang As Integer = 0 '0 = CUDA, 1 = OpenCL
 
         Public Property UserUnitSystems As Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
 
@@ -128,6 +119,15 @@ Namespace My
             'set CUDA params
             CudafyModes.Compiler = eGPUCompiler.All
             CudafyModes.Target = My.Settings.CudafyTarget
+
+            'set calculator parameters
+            Calculator.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
+            Calculator.EnableParallelProcessing = My.Settings.EnableParallelProcessing
+            Calculator.EnableGPUProcessing = My.Settings.EnableGPUProcessing
+            Calculator.CudafyTarget = My.Settings.CudafyTarget
+            Calculator.CudafyDeviceID = My.Settings.CudafyDeviceID
+            Calculator.UseSIMDExtensions = My.Settings.UseSIMDExtensions
+            Calculator.DebugLevel = My.Settings.DebugLevel
 
         End Sub
 

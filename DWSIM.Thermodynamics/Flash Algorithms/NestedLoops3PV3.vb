@@ -251,7 +251,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If Double.IsNaN(Math.Abs(e1) + Math.Abs(e2)) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 ElseIf Math.Abs(e3) < itol And (e1 + e2) < itol And ecount > 0 Then
                     convergiu = 1
@@ -299,12 +299,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ecount += 1
 
-                If Double.IsNaN(V) Then Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If Double.IsNaN(V) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
                 WriteDebugInfo("PT Flash [NL-3PV3]: Iteration #" & ecount & ", VF = " & V)
 
-                App.Flowsheet.CheckStatus()
+                PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until convergiu = 1
 
@@ -477,7 +477,7 @@ out:
 
             Dim alreadymt As Boolean = False
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  Ki1 = PP.DW_CalcKvalue(Vx1EST, VyEST, T, P)
@@ -594,11 +594,11 @@ out:
 
             Do
 
-                If My.Settings.EnableParallelProcessing Then
+                If Calculator.EnableParallelProcessing Then
 
-                    If My.Settings.EnableGPUProcessing Then
-                        'If Not App.gpu.IsMultithreadingEnabled Then
-                        '    App.gpu.EnableMultithreading()
+                    If Calculator.EnableGPUProcessing Then
+                        'If Not Calculator.gpu.IsMultithreadingEnabled Then
+                        '    Calculator.gpu.EnableMultithreading()
                         'Else
                         '    alreadymt = True
                         'End If
@@ -682,7 +682,7 @@ out:
 
                 ElseIf Double.IsNaN(Math.Abs(e1) + Math.Abs(e4) + Math.Abs(e2)) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
 
                 Else
 
@@ -744,7 +744,7 @@ out:
 
                 End If
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
                 ecount += 1
 
@@ -810,7 +810,7 @@ out:
 
             Dim alreadymt As Boolean = False
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  Dim ErrRes1 = Herror("PV", 0, P, Vz, PP)
@@ -952,7 +952,7 @@ out:
                 If T <= Tmin Or T >= Tmax Or ecount > maxitEXT Then Throw New Exception("PH Flash [NL3PV3]: Invalid result: Temperature did not converge.")
             End If
 
-            If ecount > maxitEXT Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+            If ecount > maxitEXT Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
             d2 = Date.Now
             dt = d2 - d1
@@ -1010,7 +1010,7 @@ out:
 
                 Do
 
-                    If My.Settings.EnableParallelProcessing Then
+                    If Calculator.EnableParallelProcessing Then
 
                         Dim task1 As Task = New Task(Sub()
                                                          fx = Serror(x1, {P, Vz, PP})
@@ -1117,7 +1117,7 @@ alt:
 
             Dim alreadymt As Boolean = False
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  If V > 0 Then _Hv = proppack.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
@@ -1189,12 +1189,10 @@ alt:
         End Function
 
         Function Herror(ByVal type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
-            App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PH_FLASH(type, X, P, Vz, PP)
         End Function
 
         Function Serror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PS_FLASH(Tt, Sf, Pf, fi)
         End Function
 
@@ -1581,7 +1579,7 @@ alt:
                 e3 = Math.Abs(T - Tant) + Math.Abs(L1 - L1ant) + Math.Abs(L2 - L2ant)
 
                 ecount += 1
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
             Loop Until (e1 + e2 + e3 + e4) < etol
 
 out:        L1 = L1 * (1 - V) 'calculate global phase fractions
@@ -1686,7 +1684,7 @@ out:        L1 = L1 * (1 - V) 'calculate global phase fractions
                 e4 = Math.Abs(L1 - L1ant) + Math.Abs(L2 - L2ant)
 
                 ecount += 1
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
             Loop Until (e1 + e2 + e3 + e4) < etol And Math.Abs(P - Pant) < 1
 
 out:        L1 = L1 * (1 - V) 'calculate global phase fractions

@@ -102,7 +102,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = App.GetLocalString("SistemaSI")
+                .Name = Calculator.GetLocalString("SistemaSI")
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -186,7 +186,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = App.GetLocalString("Personalizado1BR")
+                .Name = Calculator.GetLocalString("Personalizado1BR")
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -270,7 +270,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = App.GetLocalString("Personalizado2SC")
+                .Name = Calculator.GetLocalString("Personalizado2SC")
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -354,7 +354,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = App.GetLocalString("Personalizado3CNTP")
+                .Name = Calculator.GetLocalString("Personalizado3CNTP")
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -438,7 +438,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = App.GetLocalString("Personalizado4")
+                .Name = Calculator.GetLocalString("Personalizado4")
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -522,7 +522,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = App.GetLocalString("Personalizado5")
+                .Name = Calculator.GetLocalString("Personalizado5")
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -606,7 +606,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = App.GetLocalString("SistemaIngls")
+                .Name = Calculator.GetLocalString("SistemaIngls")
 
                 .gor = "ft3/bbl"
 
@@ -692,7 +692,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = App.GetLocalString("SistemaCGS")
+                .Name = Calculator.GetLocalString("SistemaCGS")
 
                 .accel = "cm/s2"
                 .area = "cm2"

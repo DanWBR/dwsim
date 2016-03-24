@@ -3307,7 +3307,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Else
                     Dim frm As FormFlowsheet = My.Application.ActiveSimulation
                     If Not frm Is Nothing Then Return frm Else Return Nothing
-                    If Not My.Application.CAPEOPENMode Then
+                    If Not Calculator.CAPEOPENMode Then
                         If Not FormMain.ActiveMdiChild Is Nothing Then
                             If TypeOf FormMain.ActiveMdiChild Is FormFlowsheet Then
                                 If frm Is Nothing Then frm = FormMain.ActiveMdiChild Else m_flowsheet = frm

@@ -336,7 +336,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             dfdx(1, 1) = -(fxd(1) - fx(1)) / delta2
 
             'solve linear system
-            DWSIM.MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, UBound(fx) + 1, dx)
+            MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, UBound(fx) + 1, dx)
 
             x0(0) = x(0)
             x0(1) = x(1)

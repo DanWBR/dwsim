@@ -21,6 +21,7 @@ Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports CapeOpen
 Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports DWSIM.Thermodynamics
 Imports System.Runtime.InteropServices
 Imports System.Threading.Tasks
 Imports System.Runtime.Serialization
@@ -254,7 +255,7 @@ Namespace DWSIM.SimulationObjects.Streams
             Me.Phases.Add(6, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Aqueous"), ""))
             Me.Phases.Add(7, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Solid"), ""))
 
-            If Not My.Application.CAPEOPENMode And Not Me.FlowSheet Is Nothing Then
+            If Not Calculator.CAPEOPENMode And Not Me.FlowSheet Is Nothing Then
 
 
             End If
@@ -422,7 +423,6 @@ Namespace DWSIM.SimulationObjects.Streams
                     End If
 
                     If doparallel Then
-                        My.Application.IsRunningParallelTasks = True
                         Try
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
@@ -431,9 +431,9 @@ Namespace DWSIM.SimulationObjects.Streams
                                                                       .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                                                                   End If
                                                               End Sub,
-                                                      My.Application.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      My.Application.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                             Dim task2 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                       .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
@@ -441,9 +441,9 @@ Namespace DWSIM.SimulationObjects.Streams
                                                                       .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
                                                                   End If
                                                               End Sub,
-                                                      My.Application.TaskCancellationTokenSource.Token,
+                                                         Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      My.Application.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                             Dim task3 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                       .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
@@ -451,9 +451,9 @@ Namespace DWSIM.SimulationObjects.Streams
                                                                       .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
                                                                   End If
                                                               End Sub,
-                                                      My.Application.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      My.Application.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                             Dim task4 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                       .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
@@ -461,9 +461,9 @@ Namespace DWSIM.SimulationObjects.Streams
                                                                       .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
                                                                   End If
                                                               End Sub,
-                                                      My.Application.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      My.Application.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                             Dim task5 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                       .DW_CalcSolidPhaseProps()
@@ -471,9 +471,9 @@ Namespace DWSIM.SimulationObjects.Streams
                                                                       .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
                                                                   End If
                                                               End Sub,
-                                                      My.Application.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      My.Application.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                             Dim task6 = Task.Factory.StartNew(Sub()
                                                                   If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                       .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
@@ -481,15 +481,15 @@ Namespace DWSIM.SimulationObjects.Streams
                                                                       .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                                                                   End If
                                                               End Sub,
-                                                      My.Application.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      My.Application.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                             Task.WaitAll(task1, task2, task3, task4, task5, task6)
                         Catch ae As AggregateException
                             Me.FlowSheet.ProcessScripts(Extras.Script.EventType.ObjectCalculationError, Extras.Script.ObjectType.FlowsheetObject, Me.Name)
                             Throw ae.Flatten().InnerException
                         End Try
-                        My.Application.IsRunningParallelTasks = False
+
                     Else
                         If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
                             .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
@@ -4684,7 +4684,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
             Dim ids, formulas, nms, bts, casnos, molws As New ArrayList
 
-            If My.Application.CAPEOPENMode Then
+            If Calculator.CAPEOPENMode Then
                 For Each c As ConstantProperties In Me.PropertyPackage._selectedcomps.Values
                     ids.Add(c.Name)
                     formulas.Add(c.Formula)
@@ -6841,7 +6841,7 @@ Namespace DWSIM.SimulationObjects.Streams
         Sub CreateParamCol()
 
             m_work = New CapeOpen.RealParameter("work", Me.EnergyFlow.GetValueOrDefault, 0.0#, "J/s")
-       
+
         End Sub
 
         ''' <summary>
@@ -7013,7 +7013,7 @@ Namespace DWSIM.SimulationObjects.Streams
         End Function
 
         Public Function Item(ByVal index As Object) As Object Implements CapeOpen.ICapeCollection.Item
-   
+
             Return m_work
         End Function
 

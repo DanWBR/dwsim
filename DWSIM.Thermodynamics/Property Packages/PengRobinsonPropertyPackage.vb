@@ -349,7 +349,7 @@ Namespace PropertyPackages
 
             If phaseID = 3 Or phaseID = 4 Or phaseID = 5 Or phaseID = 6 Then
 
-                If My.Settings.EnableParallelProcessing Then
+                If Calculator.EnableParallelProcessing Then
 
                     Dim tasks(7) As Task
 
@@ -450,7 +450,7 @@ Namespace PropertyPackages
 
             ElseIf phaseID = 2 Then
 
-                If My.Settings.EnableParallelProcessing Then
+                If Calculator.EnableParallelProcessing Then
 
                     Dim tasks(7) As Task
 
@@ -580,9 +580,9 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_ReturnPhaseEnvelope(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            If My.Settings.EnableGPUProcessing Then App.InitComputeDevice()
+            If Calculator.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
                 Return DW_ReturnPhaseEnvelopeParallel(parameters, bw)
             Else
                 Return DW_ReturnPhaseEnvelopeSequential(parameters, bw)
@@ -1986,9 +1986,9 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
-            App.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
-            App.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
-            App.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
+            Calculator.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
+            Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
+            Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
             Dim lnfug As Double()
 
@@ -2003,7 +2003,7 @@ Namespace PropertyPackages
 
             fugcoeff = lnfug.ExpY
 
-            App.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
+            Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
 
             Return fugcoeff
 

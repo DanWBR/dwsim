@@ -86,7 +86,7 @@ Public Class SpreadsheetForm
             .Imports.AddType(GetType(System.Math))
             .Imports.AddType(GetType(System.String))
             .Imports.AddType(GetType(Microsoft.VisualBasic.Strings))
-            .Imports.AddType(GetType(DWSIM.MathEx.Common))
+            .Imports.AddType(GetType(MathEx.Common))
         End With
 
         DefineVariables()
@@ -500,7 +500,7 @@ Public Class SpreadsheetForm
                     .Imports.AddType(GetType(System.Math))
                     .Imports.AddType(GetType(System.String))
                     .Imports.AddType(GetType(Microsoft.VisualBasic.Strings))
-                    .Imports.AddType(GetType(DWSIM.MathEx.Common))
+                    .Imports.AddType(GetType(MathEx.Common))
                 End With
             End If
 

@@ -260,7 +260,7 @@ Namespace DWSIM.Flowsheet
 
             ms.Calculated = False
 
-            If My.Settings.EnableGPUProcessing Then DWSIM.App.InitComputeDevice()
+            If My.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
             RaiseEvent MaterialStreamCalculationStarted(form, New System.EventArgs(), ms)
 
@@ -507,7 +507,7 @@ Namespace DWSIM.Flowsheet
                                     If myinfo.ObjectType = ObjectType.MaterialStream Then
                                         CalculateMaterialStream(form, form.Collections.FlowsheetObjectCollection(myinfo.Name), , Isolated)
                                     Else
-                                        If My.Settings.EnableGPUProcessing Then DWSIM.App.InitComputeDevice()
+                                        If My.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
                                         CalculateFlowsheet(form, myinfo, Nothing, Isolated)
                                     End If
                                 End If
@@ -515,7 +515,7 @@ Namespace DWSIM.Flowsheet
                                 If myinfo.ObjectType = ObjectType.MaterialStream Then
                                     CalculateMaterialStream(form, form.Collections.FlowsheetObjectCollection(myinfo.Name), , Isolated)
                                 Else
-                                    If My.Settings.EnableGPUProcessing Then DWSIM.App.InitComputeDevice()
+                                    If My.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
                                     CalculateFlowsheet(form, myinfo, Nothing, Isolated)
                                 End If
                             End If
@@ -589,7 +589,7 @@ Namespace DWSIM.Flowsheet
         ''' <remarks></remarks>
         Private Shared Function ProcessQueueInternalAsync(ByVal form As FormFlowsheet, ByVal ct As Threading.CancellationToken) As List(Of Exception)
 
-            If My.Settings.EnableGPUProcessing Then DWSIM.App.InitComputeDevice()
+            If My.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
             Dim loopex As New List(Of Exception)
 
@@ -645,7 +645,7 @@ Namespace DWSIM.Flowsheet
         ''' <remarks></remarks>
         Private Shared Function ProcessQueueInternalAsyncParallel(ByVal form As FormFlowsheet, ByVal orderedlist As Dictionary(Of Integer, List(Of StatusChangeEventArgs)), ct As Threading.CancellationToken) As List(Of Exception)
 
-            If My.Settings.EnableGPUProcessing Then DWSIM.App.InitComputeDevice()
+            If My.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
             Dim loopex As New Concurrent.ConcurrentBag(Of Exception)
 
@@ -663,7 +663,7 @@ Namespace DWSIM.Flowsheet
             Next
 
             Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism,
-                                                        .TaskScheduler = My.Application.AppTaskScheduler}
+                                                        .TaskScheduler = Calculator.AppTaskScheduler}
 
             For Each li In orderedlist
                 Dim objlist As New ArrayList
@@ -720,16 +720,15 @@ Namespace DWSIM.Flowsheet
         ''' <remarks></remarks>
         Public Shared Sub CheckCalculatorStatus()
             If DWSIM.App.IsMainThread Then
-                If Not My.Application.IsRunningParallelTasks Then
-                    If Not My.Application.CAPEOPENMode Then
+                    If Not Calculator.CAPEOPENMode Then
                         If My.Application.CalculatorStopRequested = True Then
                             My.Application.MasterCalculatorStopRequested = True
                             My.Application.CalculatorStopRequested = False
-                            If My.Application.TaskCancellationTokenSource IsNot Nothing Then
-                                If Not My.Application.TaskCancellationTokenSource.IsCancellationRequested Then
-                                    My.Application.TaskCancellationTokenSource.Cancel()
+                            If Calculator.TaskCancellationTokenSource IsNot Nothing Then
+                                If Not Calculator.TaskCancellationTokenSource.IsCancellationRequested Then
+                                    Calculator.TaskCancellationTokenSource.Cancel()
                                 End If
-                                My.Application.TaskCancellationTokenSource.Token.ThrowIfCancellationRequested()
+                                Calculator.TaskCancellationTokenSource.Token.ThrowIfCancellationRequested()
                             Else
                                 Throw New Exception(DWSIM.App.GetLocalString("CalculationAborted"))
                             End If
@@ -737,7 +736,6 @@ Namespace DWSIM.Flowsheet
                     End If
                     Application.DoEvents()
                 End If
-            End If
         End Sub
 
         ''' <summary>
@@ -991,9 +989,9 @@ Namespace DWSIM.Flowsheet
 
                 If form.MasterFlowsheet Is Nothing Then
                     If ts Is Nothing Then ts = New CancellationTokenSource
-                    My.Application.TaskCancellationTokenSource = ts
+                    Calculator.TaskCancellationTokenSource = ts
                 End If
-                Dim ct As CancellationToken = My.Application.TaskCancellationTokenSource.Token
+                Dim ct As CancellationToken = Calculator.TaskCancellationTokenSource.Token
 
                 Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass
 
@@ -1089,8 +1087,8 @@ Namespace DWSIM.Flowsheet
                 'initialize GPU if option enabled
 
                 If My.Settings.EnableGPUProcessing And form.MasterFlowsheet Is Nothing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 Select Case mode
@@ -1224,7 +1222,7 @@ Namespace DWSIM.Flowsheet
                                                                      End If
                                                                  Next
 
-                                                                 DWSIM.MathEx.Broyden.broydn(totalv - 1, recvars, recerrs, recdvars, recvarsb, recerrsb, rechess, If(icount < 2, 0, 1))
+                                                                 MathEx.Broyden.broydn(totalv - 1, recvars, recerrs, recdvars, recvarsb, recerrsb, rechess, If(icount < 2, 0, 1))
 
                                                                  i = 0
                                                                  For Each r As String In recycles
@@ -1275,14 +1273,14 @@ Namespace DWSIM.Flowsheet
                             Select Case My.Settings.TaskScheduler
                                 Case 0 'default
                                     If My.Settings.EnableGPUProcessing Then
-                                        My.Application.AppTaskScheduler = TaskScheduler.FromCurrentSynchronizationContext
+                                        Calculator.AppTaskScheduler = TaskScheduler.FromCurrentSynchronizationContext
                                     Else
-                                        My.Application.AppTaskScheduler = TaskScheduler.Default
+                                        Calculator.AppTaskScheduler = TaskScheduler.Default
                                     End If
                                 Case 1 'sta
-                                    My.Application.AppTaskScheduler = New DWSIM.Auxiliary.TaskSchedulers.StaTaskScheduler(nthreads)
+                                    Calculator.AppTaskScheduler = New DWSIM.Auxiliary.TaskSchedulers.StaTaskScheduler(nthreads)
                                 Case 2 'limited concurrency
-                                    My.Application.AppTaskScheduler = New DWSIM.Auxiliary.TaskSchedulers.LimitedConcurrencyLevelTaskScheduler(nthreads)
+                                    Calculator.AppTaskScheduler = New DWSIM.Auxiliary.TaskSchedulers.LimitedConcurrencyLevelTaskScheduler(nthreads)
                             End Select
 
                         End If
@@ -1290,11 +1288,11 @@ Namespace DWSIM.Flowsheet
                         Try
                             If mode = 0 Then
                                 'this task will run synchronously with the UI thread.
-                                maintask.RunSynchronously(My.Application.AppTaskScheduler)
+                                maintask.RunSynchronously(Calculator.AppTaskScheduler)
                             Else
                                 form.UpdateStatusLabel(DWSIM.App.GetLocalString("Calculando") & " " & DWSIM.App.GetLocalString("Fluxograma") & "...")
                                 'this task will run asynchronously.
-                                maintask.Start(My.Application.AppTaskScheduler)
+                                maintask.Start(Calculator.AppTaskScheduler)
                                 If form.MasterFlowsheet Is Nothing Then
                                     While Not (Date.Now - d1).TotalMilliseconds >= My.Settings.SolverTimeoutSeconds * 1000
                                         maintask.Wait(500, ct)
@@ -1327,7 +1325,7 @@ Namespace DWSIM.Flowsheet
 
                         'If form.Visible Then ts.Dispose()
 
-                        'My.Application.TaskCancellationTokenSource = Nothing
+                        'Calculator.TaskCancellationTokenSource = Nothing
 
                         'clears the object lists.
 
@@ -1379,8 +1377,8 @@ Namespace DWSIM.Flowsheet
                 'Frees GPU memory if enabled.
 
                 If My.Settings.EnableGPUProcessing And form.MasterFlowsheet Is Nothing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 'updates the display status of all objects in the calculation list.

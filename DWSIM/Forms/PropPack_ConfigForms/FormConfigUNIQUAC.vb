@@ -340,7 +340,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A21 = x(1)
 
         If My.Settings.EnableParallelProcessing Then
-            My.Application.IsRunningParallelTasks = True
+            
             Try
                 Dim task1 As Task = New Task(Sub()
                                                  a1 = uniquac.GAMMA_MR(298.15, New Double() {0.25, 0.75}, ppu.RET_VIDS, ppu.RET_VQ, ppu.RET_VR)
@@ -358,7 +358,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             Catch ae As AggregateException
                 Throw ae.Flatten().InnerException
             End Try
-            My.Application.IsRunningParallelTasks = False
+            
         Else
             a1 = uniquac.GAMMA_MR(298.15, New Double() {0.25, 0.75}, ppu.RET_VIDS, ppu.RET_VQ, ppu.RET_VR)
             a2 = uniquac.GAMMA_MR(298.15, New Double() {0.5, 0.5}, ppu.RET_VIDS, ppu.RET_VQ, ppu.RET_VR)
@@ -429,7 +429,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         ppu.CurrentMaterialStream = ms
         ppuf.CurrentMaterialStream = ms
 
-        If My.Settings.EnableGPUProcessing Then DWSIM.App.InitComputeDevice()
+        If My.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
         If Not chkTdep.Checked Then
 
@@ -440,8 +440,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             Try
 
                 If My.Settings.EnableParallelProcessing Then
-                    My.Application.IsRunningParallelTasks = True
-                    If My.Settings.EnableGPUProcessing Then My.Application.gpu.EnableMultithreading()
+                    
+                    If My.Settings.EnableGPUProcessing Then Calculator.gpu.EnableMultithreading()
                     Try
                         Dim task1 As Task = New Task(Sub()
                                                          a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
@@ -460,11 +460,11 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                         Throw ae.Flatten().InnerException
                     Finally
                         If My.Settings.EnableGPUProcessing Then
-                            My.Application.gpu.DisableMultithreading()
-                            My.Application.gpu.FreeAll()
+                            Calculator.gpu.DisableMultithreading()
+                            Calculator.gpu.FreeAll()
                         End If
                     End Try
-                    My.Application.IsRunningParallelTasks = False
+                    
                 Else
                     a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
                     a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
@@ -544,8 +544,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         Dim Tmin, Tmax, T1, dT As Double, i, j As Integer
 
-        Tmin = DWSIM.MathEx.Common.Max(ppu.RET_VTF())
-        Tmax = DWSIM.MathEx.Common.Min(ppu.RET_VTB())
+        Tmin = MathEx.Common.Max(ppu.RET_VTF())
+        Tmax = MathEx.Common.Min(ppu.RET_VTB())
 
         dT = (Tmax - Tmin) / 5
 
@@ -560,8 +560,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             Dim a1(1), a2(1), a3(1) As Double
 
             If My.Settings.EnableParallelProcessing Then
-                My.Application.IsRunningParallelTasks = True
-                If My.Settings.EnableGPUProcessing Then My.Application.gpu.EnableMultithreading()
+                
+                If My.Settings.EnableGPUProcessing Then Calculator.gpu.EnableMultithreading()
                 Try
                     Dim task1 As Task = New Task(Sub()
                                                      a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppu.RET_VR, ppuf.RET_VEKI)
@@ -580,11 +580,11 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                     Throw ae.Flatten().InnerException
                 Finally
                     If My.Settings.EnableGPUProcessing Then
-                        My.Application.gpu.DisableMultithreading()
-                        My.Application.gpu.FreeAll()
+                        Calculator.gpu.DisableMultithreading()
+                        Calculator.gpu.FreeAll()
                     End If
                 End Try
-                My.Application.IsRunningParallelTasks = False
+                
             Else
                 a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)
                 a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppuf.RET_VQ(), ppuf.RET_VR, ppuf.RET_VEKI)

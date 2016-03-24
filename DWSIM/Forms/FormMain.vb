@@ -1306,7 +1306,7 @@ Public Class FormMain
         Next
 
         Dim form As FormFlowsheet = New FormFlowsheet()
-        My.Application.CAPEOPENMode = False
+        Calculator.CAPEOPENMode = False
         My.Application.ActiveSimulation = form
 
         Application.DoEvents()
@@ -1354,8 +1354,7 @@ Public Class FormMain
 
         For Each xel As XElement In data
             Try
-                Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                Dim obj As PropertyPackage = Activator.CreateInstance(t)
+                Dim obj As PropertyPackage = PropertyPackage.ReturnInstance(xel.Element("Type").Value)
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
                 If form.Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID

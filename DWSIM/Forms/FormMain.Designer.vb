@@ -673,7 +673,7 @@ Partial Class FormMain
 
         ' This call is required by the Windows Form Designer.
 
-        If Not My.Application.CommandLineMode Or Not My.Application.CAPEOPENMode Then
+        If Not My.Application.CommandLineMode Or Not Calculator.CAPEOPENMode Then
             InitializeComponent()
         End If
 
@@ -741,7 +741,7 @@ Partial Class FormMain
 
         pathsep = Path.DirectorySeparatorChar
 
-        If Not My.Application.CAPEOPENMode Then
+        If Not Calculator.CAPEOPENMode Then
             AddPropPacks()
             GetComponents()
         End If

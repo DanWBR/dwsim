@@ -3,9 +3,6 @@ Imports Nini.Config
 Imports System.Globalization
 Imports System.Reflection
 Imports System.Linq
-Imports Cudafy.Translator
-Imports Cudafy
-Imports Cudafy.Host
 
 '    Shared Functions
 '    Copyright 2008-2014 Daniel Wagner O. de Medeiros
@@ -398,72 +395,6 @@ Namespace DWSIM
             source.Configs("Misc").Set("CurrentEnvironment", My.Settings.CurrentEnvironment)
 
             source.Save(configfile)
-
-        End Sub
-
-        Shared Sub InitComputeDevice()
-
-            If My.Application.gpu Is Nothing Then
-
-                'set target language
-
-                Select Case My.Settings.CudafyTarget
-                    Case 0, 1
-                        CudafyTranslator.Language = eLanguage.Cuda
-                    Case 2
-                        CudafyTranslator.Language = eLanguage.OpenCL
-                End Select
-
-                'get the gpu instance
-
-                Dim gputype As eGPUType = My.Settings.CudafyTarget
-
-                My.Application.gpu = CudafyHost.GetDevice(gputype, My.Settings.CudafyDeviceID)
-
-                'cudafy all classes that contain a gpu function
-
-                If My.Application.gpumod Is Nothing Then
-                    Select Case My.Settings.CudafyTarget
-                        Case 0, 1
-                            My.Application.gpumod = CudafyModule.TryDeserialize("cudacode.cdfy")
-                        Case 2
-                            'OpenCL code is device-specific and must be compiled on each initialization
-                    End Select
-                    If My.Application.gpumod Is Nothing OrElse Not My.Application.gpumod.TryVerifyChecksums() Then
-                        Select Case My.Settings.CudafyTarget
-                            Case 0
-                                My.Application.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
-                                            GetType(PropertyPackages.ThermoPlugs.PR),
-                                            GetType(PropertyPackages.ThermoPlugs.SRK))
-                                My.Application.gpumod.Serialize("emulator.cdfy")
-                            Case 1
-                                Dim cp As New Cudafy.CompileProperties()
-                                With cp
-                                    .Architecture = eArchitecture.sm_20
-                                    .CompileMode = eCudafyCompileMode.Default
-                                    .Platform = ePlatform.All
-                                    .WorkingDirectory = My.Computer.FileSystem.SpecialDirectories.Temp
-                                    'CUDA SDK v6.5 path
-                                    .CompilerPath = "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe"
-                                    .IncludeDirectoryPath = "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"
-                                End With
-                                My.Application.gpumod = CudafyTranslator.Cudafy(cp, GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
-                                            GetType(PropertyPackages.ThermoPlugs.PR),
-                                            GetType(PropertyPackages.ThermoPlugs.SRK))
-                                My.Application.gpumod.Serialize("cudacode.cdfy")
-                            Case 2
-                                My.Application.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
-                                            GetType(PropertyPackages.ThermoPlugs.PR),
-                                            GetType(PropertyPackages.ThermoPlugs.SRK))
-                        End Select
-                    End If
-                End If
-
-                'load cudafy module
-
-                If Not My.Application.gpu.IsModuleLoaded(My.Application.gpumod.Name) Then My.Application.gpu.LoadModule(My.Application.gpumod)
-
-            End If
 
         End Sub
 

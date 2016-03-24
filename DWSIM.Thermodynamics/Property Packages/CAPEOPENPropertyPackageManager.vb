@@ -21,61 +21,61 @@ Public Class CAPEOPENPropertyPackageManager
         Select Case PackageName
             Case "FPROPS"
                 pp = New FPROPSPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescFPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescFPP")
             Case "CoolProp"
                 pp = New CoolPropPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescCPPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescCPPP")
             Case "PC-SAFT"
                 pp = New PCSAFTPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescPCSAFTPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescPCSAFTPP")
             Case "Peng-Robinson (PR)"
                 pp = New PengRobinsonPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescPengRobinsonPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescPengRobinsonPP")
             Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2)"
                 pp = New PRSV2PropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescPRSV2PP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescPRSV2PP")
             Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
                 pp = New PRSV2VLPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescPRSV2VLPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescPRSV2VLPP")
             Case "Soave-Redlich-Kwong (SRK)"
                 pp = New SRKPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescSoaveRedlichKwongSRK")
+                pp.ComponentDescription = Calculator.GetLocalString("DescSoaveRedlichKwongSRK")
             Case "Peng-Robinson / Lee-Kesler (PR/LK)"
                 pp = New PengRobinsonLKPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescPRLK")
+                pp.ComponentDescription = Calculator.GetLocalString("DescPRLK")
             Case "UNIFAC"
                 pp = New UNIFACPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescUPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescUPP")
             Case "UNIFAC-LL"
                 pp = New UNIFACLLPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescUPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescUPP")
             Case "NRTL"
                 pp = New NRTLPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescNRTLPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescNRTLPP")
             Case "UNIQUAC"
                 pp = New UNIQUACPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescUNIQUACPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescUNIQUACPP")
             Case "Modified UNIFAC (Dortmund)"
                 pp = New MODFACPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescMUPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescMUPP")
             Case "Modified UNIFAC (NIST)"
                 pp = New NISTMFACPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescNUPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescNUPP")
             Case "Chao-Seader"
                 pp = New ChaoSeaderPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescCSLKPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescCSLKPP")
             Case "Grayson-Streed"
                 pp = New GraysonStreedPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescGSLKPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescGSLKPP")
             Case "Lee-Kesler-Plöcker"
                 pp = New LKPPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescLKPPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescLKPPP")
             Case "Raoult's Law"
                 pp = New RaoultPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescRPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescRPP")
             Case "IAPWS-IF97 Steam Tables"
                 pp = New SteamTablesPropertyPackage(True)
-                pp.ComponentDescription = App.GetLocalString("DescSteamTablesPP")
+                pp.ComponentDescription = Calculator.GetLocalString("DescSteamTablesPP")
             Case Else
                 Throw New CapeBadArgumentException("Property Package not found.")
         End Select

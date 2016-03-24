@@ -249,7 +249,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If Double.IsNaN(Math.Abs(e1) + Math.Abs(e2)) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 ElseIf Math.Abs(e3) < 0.0000000001 And ecount > 0 Then
 
@@ -300,12 +300,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ecount += 1
 
-                If Double.IsNaN(V) Then Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If Double.IsNaN(V) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
                 WriteDebugInfo("PT Flash [NL]: Iteration #" & ecount & ", VF = " & V)
 
-               App.Flowsheet.CheckStatus()
+                PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until convergiu = 1
 
@@ -660,7 +660,7 @@ out:
 
                 ElseIf Double.IsNaN(Math.Abs(e1) + Math.Abs(e4) + Math.Abs(e2)) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
 
                 Else
 
@@ -725,7 +725,7 @@ out:
 
                 End If
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
                 ecount += 1
 
@@ -800,10 +800,10 @@ out:
 
                 Do
 
-                    If My.Settings.EnableParallelProcessing Then
+                    If Calculator.EnableParallelProcessing Then
                         
-                        If My.Settings.EnableGPUProcessing Then
-                            App.gpu.EnableMultithreading()
+                        If Calculator.EnableGPUProcessing Then
+                            Calculator.gpu.EnableMultithreading()
                         End If
                         Try
                             Dim task1 As Task = New Task(Sub()
@@ -818,9 +818,9 @@ out:
                         Catch ae As AggregateException
                             Throw ae.Flatten().InnerException
                         Finally
-                            If My.Settings.EnableGPUProcessing Then
-                                App.gpu.DisableMultithreading()
-                                App.gpu.FreeAll()
+                            If Calculator.EnableGPUProcessing Then
+                                Calculator.gpu.DisableMultithreading()
+                                Calculator.gpu.FreeAll()
                             End If
                         End Try
                         
@@ -933,10 +933,10 @@ alt:
 
                 Do
 
-                    If My.Settings.EnableParallelProcessing Then
+                    If Calculator.EnableParallelProcessing Then
                         
-                        If My.Settings.EnableGPUProcessing Then
-                            App.gpu.EnableMultithreading()
+                        If Calculator.EnableGPUProcessing Then
+                            Calculator.gpu.EnableMultithreading()
                         End If
                         Try
                             Dim task1 As Task = New Task(Sub()
@@ -951,9 +951,9 @@ alt:
                         Catch ae As AggregateException
                             Throw ae.Flatten().InnerException
                         Finally
-                            If My.Settings.EnableGPUProcessing Then
-                                App.gpu.DisableMultithreading()
-                                App.gpu.FreeAll()
+                            If Calculator.EnableGPUProcessing Then
+                                Calculator.gpu.DisableMultithreading()
+                                Calculator.gpu.FreeAll()
                             End If
                         End Try
                         
@@ -1094,12 +1094,10 @@ alt:
         End Function
 
         Function Herror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-           App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PH_FLASH(Tt, Sf, Pf, fi)
         End Function
 
         Function Serror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-           App.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PS_FLASH(Tt, Sf, Pf, fi)
         End Function
 
@@ -1532,7 +1530,7 @@ alt:
 
                 ElseIf Double.IsNaN(Math.Abs(e1) + Math.Abs(e4) + Math.Abs(e2)) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
 
                 Else
 
@@ -1607,7 +1605,7 @@ alt:
 
                 End If
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
                 ecount += 1
 
@@ -1808,7 +1806,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, 0.0#, 
 
                 ElseIf Double.IsNaN(Math.Abs(e1) + Math.Abs(e4) + Math.Abs(e2)) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
 
                 Else
 
@@ -1882,7 +1880,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, 0.0#, 
 
                 End If
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
                 ecount += 1
 

@@ -80,7 +80,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(ByVal Vz() As Double, ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi() As Double = Nothing) As Object
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim i, j, k As Integer
 
@@ -574,7 +574,7 @@ out:        Return result
 
             Dim alreadymt As Boolean = False
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  Dim ErrRes1 = Herror("PV", 0, P, Vz, PP)
@@ -714,7 +714,7 @@ out:        Return result
                 If T <= Tmin Or T >= Tmax Or ecount > maxitEXT Then Throw New Exception("PH Flash [NL3PV3]: Invalid result: Temperature did not converge.")
             End If
 
-            If ecount > maxitEXT Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+            If ecount > maxitEXT Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
             d2 = Date.Now
             dt = d2 - d1
@@ -772,7 +772,7 @@ out:        Return result
 
                 Do
 
-                    If My.Settings.EnableParallelProcessing Then
+                    If Calculator.EnableParallelProcessing Then
 
                         Dim task1 As Task = New Task(Sub()
                                                          fx = Serror(x1, {P, Vz, PP})
@@ -879,11 +879,11 @@ alt:
 
             Dim alreadymt As Boolean = False
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
 
-                If My.Settings.EnableGPUProcessing Then
-                    'If Not App.gpu.IsMultithreadingEnabled Then
-                    '    App.gpu.EnableMultithreading()
+                If Calculator.EnableGPUProcessing Then
+                    'If Not Calculator.gpu.IsMultithreadingEnabled Then
+                    '    Calculator.gpu.EnableMultithreading()
                     'Else
                     '    alreadymt = True
                     'End If
@@ -958,12 +958,12 @@ alt:
         End Function
 
         Function Herror(ByVal type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PH_FLASH(type, X, P, Vz, PP)
         End Function
 
         Function Serror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PS_FLASH(Tt, Sf, Pf, fi)
         End Function
 
@@ -999,7 +999,7 @@ alt:
                     Tf = Tant * 1.01
                 End If
                 cnt += 1
-                If cnt >= maxit Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If cnt >= maxit Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
             Loop Until Math.Abs(fi_ / HT) < tol Or Double.IsNaN(Tf) Or Abs(Tf - Tant) < tol
 
             Return Tf
@@ -1038,7 +1038,7 @@ alt:
                     Tf = Tant * 1.01
                 End If
                 cnt += 1
-                If cnt >= maxit Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If cnt >= maxit Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
             Loop Until Math.Abs(fi_ / ST) < tol Or Double.IsNaN(Tf) Or Abs(Tf - Tant) < tol
 
             Return Tf
@@ -1477,7 +1477,7 @@ alt:
 
                 ElseIf Double.IsNaN(Math.Abs(e1) + Math.Abs(e4) + Math.Abs(e2)) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
 
                 Else
 
@@ -1552,7 +1552,7 @@ alt:
 
                 End If
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
                 ecount += 1
 
@@ -1753,7 +1753,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, 0.0#, 
 
                 ElseIf Double.IsNaN(Math.Abs(e1) + Math.Abs(e4) + Math.Abs(e2)) Then
 
-                    Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
 
                 Else
 
@@ -1827,7 +1827,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, 0.0#, 
 
                 End If
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
                 ecount += 1
 
@@ -1843,7 +1843,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
         Private Function FunctionValue(ByVal x() As Double) As Double
 
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim pval As Double = 0.0#
             Dim fcv(n), fcl(n), fcl2(n) As Double
@@ -1863,7 +1863,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             If L <> 0.0# Then Vx1(i) = Abs((fi(i) - x(i)) / L) Else Vx1(i) = 0.0#
                         Next
 
-                        If My.Settings.EnableParallelProcessing Then
+                        If Calculator.EnableParallelProcessing Then
 
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -1924,10 +1924,10 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             If soma_x1 <> 0.0# Then Vx1(i) /= soma_x1
                         Next
 
-                        If My.Settings.EnableParallelProcessing Then
+                        If Calculator.EnableParallelProcessing Then
 
-                            If My.Settings.EnableGPUProcessing Then
-                                'App.gpu.EnableMultithreading()
+                            If Calculator.EnableGPUProcessing Then
+                                'Calculator.gpu.EnableMultithreading()
                             End If
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2014,10 +2014,10 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         Vx2(i) /= soma_x2
                     Next
 
-                    If My.Settings.EnableParallelProcessing Then
+                    If Calculator.EnableParallelProcessing Then
 
-                        If My.Settings.EnableGPUProcessing Then
-                            'App.gpu.EnableMultithreading()
+                        If Calculator.EnableGPUProcessing Then
+                            'Calculator.gpu.EnableMultithreading()
                         End If
                         Dim task1 As Task = New Task(Sub()
                                                          fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2082,7 +2082,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             Vx1(i) = Abs((fi(i) - x(i)) / L)
                         Next
 
-                        If My.Settings.EnableParallelProcessing Then
+                        If Calculator.EnableParallelProcessing Then
                             
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2135,7 +2135,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             Vx1(i) /= soma_x1
                         Next
 
-                        If My.Settings.EnableParallelProcessing Then
+                        If Calculator.EnableParallelProcessing Then
                             
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2214,10 +2214,10 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         Vx2(i) /= soma_x2
                     Next
 
-                    If My.Settings.EnableParallelProcessing Then
+                    If Calculator.EnableParallelProcessing Then
                         
-                        If My.Settings.EnableGPUProcessing Then
-                            'App.gpu.EnableMultithreading()
+                        If Calculator.EnableGPUProcessing Then
+                            'Calculator.gpu.EnableMultithreading()
                         End If
                         Dim task1 As Task = New Task(Sub()
                                                          fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2282,7 +2282,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         x3(j) = x(j) * (1 - epsilon)
                     End If
                 Next
-                If My.Settings.EnableParallelProcessing Then
+                If Calculator.EnableParallelProcessing Then
                     
                     Dim task1 As Task = New Task(Sub()
                                                      f2 = FunctionGradient(x2)

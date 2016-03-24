@@ -84,8 +84,8 @@ Namespace PropertyPackages.Auxiliary
 
         Function Z_SRK(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VTc, ByVal VPc, ByVal Vw, ByVal TIPO)
 
-            App.WriteToConsole("SRK cubic equation root finder (Z) for T = " & T & " K, P = " & P & " Pa and Phase = " & TIPO, 3)
-            App.WriteToConsole("Mole fractions: " & DirectCast(Vx, Double()).ToArrayString, 3)
+            Calculator.WriteToConsole("SRK cubic equation root finder (Z) for T = " & T & " K, P = " & P & " Pa and Phase = " & TIPO, 3)
+            Calculator.WriteToConsole("Mole fractions: " & DirectCast(Vx, Double()).ToArrayString, 3)
 
             Dim ai(), bi(), aml2(), amv2() As Double
             Dim n, R, coeff(3), tmp() As Double
@@ -222,7 +222,7 @@ Namespace PropertyPackages.Auxiliary
                 Z_SRK = temp1(2, 0)
             End If
 
-            App.WriteToConsole("Result: Z = " & Z_SRK, 3)
+            Calculator.WriteToConsole("Result: Z = " & Z_SRK, 3)
 
         End Function
 
@@ -723,7 +723,7 @@ Namespace PropertyPackages.Auxiliary
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z -= 0.00001
-                        If Z < 0 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z < 0 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 Else
@@ -732,7 +732,7 @@ Namespace PropertyPackages.Auxiliary
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z += 0.00001
-                        If Z > 1 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z > 1 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 End If

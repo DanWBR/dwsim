@@ -318,7 +318,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 F = Vnf.SumY
 
-                If Double.IsNaN(F) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                If Double.IsNaN(F) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 If Abs(L - Lold) < etol * 100 And ecount > 1 Then Exit Do
 
@@ -328,11 +328,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 merr = (totalkg - totalkg1) / totalkg * 100
 
-                'If merr > 5.0# Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                'If merr > 5.0# Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 ecount += 1
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             Loop
 
@@ -473,7 +473,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     fx = pch - nch
 
                     If Double.IsNaN(fx) Then
-                        Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                        Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                     End If
 
                     If Abs(fx) * 1000 < itol Then Exit Do
@@ -488,15 +488,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         If pH < 2.0# Then pH = 2.0# + icount / 100
                         If pH > 14.0# Then pH = 14.0# - icount / 100
                         If Double.IsNaN(pH) Then
-                            Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                         End If
                     End If
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                     icount += 1
 
-                    If icount > maxit_i * 10 Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                    If icount > maxit_i * 10 Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
                 Loop
 
@@ -515,7 +515,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 icount0 += 1
 
-                If icount0 > maxit_i * 10 Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If icount0 > maxit_i * 10 Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             Loop
 
@@ -523,7 +523,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim i, j, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -572,22 +572,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Do
 
-                    If My.Settings.EnableParallelProcessing Then
-                        
+                    If Calculator.EnableParallelProcessing Then
+
                         Dim task1 = Task.Factory.StartNew(Sub()
                                                               fx = Herror("PT", x1, P, Vz, PP)(0)
                                                           End Sub,
-                                                            App.TaskCancellationTokenSource.Token,
+                                                            Calculator.TaskCancellationTokenSource.Token,
                                                             TaskCreationOptions.None,
-                                                            App.AppTaskScheduler)
+                                                            Calculator.AppTaskScheduler)
                         Dim task2 = Task.Factory.StartNew(Sub()
                                                               fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                           End Sub,
-                                                            App.TaskCancellationTokenSource.Token,
+                                                            Calculator.TaskCancellationTokenSource.Token,
                                                             TaskCreationOptions.None,
-                                                            App.AppTaskScheduler)
+                                                            Calculator.AppTaskScheduler)
                         Task.WaitAll(task1, task2)
-                        
+
                     Else
                         fx = Herror("PT", x1, P, Vz, PP)(0)
                         fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
@@ -604,7 +604,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     maxDT *= 0.95
                     cnt += 1
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until cnt > maxitEXT Or Double.IsNaN(x1) Or x1 < 0.0#
 
@@ -636,7 +636,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, j, n, ecount As Integer
@@ -685,22 +685,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Do
 
-                    If My.Settings.EnableParallelProcessing Then
-                        
+                    If Calculator.EnableParallelProcessing Then
+
                         Dim task1 = Task.Factory.StartNew(Sub()
                                                               fx = Serror("PT", x1, P, Vz, PP)(0)
                                                           End Sub,
-                                                          App.TaskCancellationTokenSource.Token,
+                                                          Calculator.TaskCancellationTokenSource.Token,
                                                           TaskCreationOptions.None,
-                                                          App.AppTaskScheduler)
+                                                          Calculator.AppTaskScheduler)
                         Dim task2 = Task.Factory.StartNew(Sub()
                                                               fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                           End Sub,
-                                                          App.TaskCancellationTokenSource.Token,
+                                                          Calculator.TaskCancellationTokenSource.Token,
                                                           TaskCreationOptions.None,
-                                                          App.AppTaskScheduler)
+                                                          Calculator.AppTaskScheduler)
                         Task.WaitAll(task1, task2)
-                        
+
                     Else
                         fx = Serror("PT", x1, P, Vz, PP)(0)
                         fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
@@ -715,7 +715,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     cnt += 1
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until cnt > maxitEXT Or Double.IsNaN(x1)
 
@@ -786,7 +786,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             WriteDebugInfo("PH Flash [Sour Water]: Current T = " & T & ", Current H Error = " & herr)
 
-           App.Flowsheet.CheckStatus()
+            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
         End Function
 
@@ -825,7 +825,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             WriteDebugInfo("PS Flash [Sour Water]: Current T = " & T & ", Current S Error = " & serr)
 
-           App.Flowsheet.CheckStatus()
+            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
         End Function
 
@@ -906,14 +906,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     x *= 0.99
                 Else
                     x = x - fx * (x - x00) / (fx - fx00)
-                    If Double.IsNaN(x) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                    If Double.IsNaN(x) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                 End If
 
                 ecount += 1
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
-               App.Flowsheet.CheckStatus()
+                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop
 
@@ -1083,10 +1083,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         ecount += 1
 
                         If ecount > maxit_e * 10 Then
-                            Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
                         End If
 
-                       App.Flowsheet.CheckStatus()
+                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                     Loop
 
@@ -1118,16 +1118,16 @@ fallback:           Vx = Vz.Clone
                         T = 1 / (1 / T - Log(Pspec / Pcalc) / 4500)
 
                         If Double.IsNaN(T) Then
-                            Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                         End If
 
                         ecount += 1
 
                         If ecount > maxit_e * 10 Then
-                            Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
                         End If
 
-                       App.Flowsheet.CheckStatus()
+                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                     Loop
 
@@ -1165,14 +1165,14 @@ fallback:           Vx = Vz.Clone
                         x += 1.0#
                     Else
                         x = x - 0.1 * fx * (x - x00) / (fx - fx00)
-                        If Double.IsNaN(x) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                        If Double.IsNaN(x) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                     End If
 
                     ecount += 1
 
-                    If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                    If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop
 

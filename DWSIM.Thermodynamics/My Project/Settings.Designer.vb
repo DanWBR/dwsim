@@ -31,7 +31,7 @@ Namespace My
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
     Private Shared Sub AutoSaveSettings(ByVal sender As Global.System.Object, ByVal e As Global.System.EventArgs)
         If My.Application.SaveMySettingsOnExit Then
-            My.Settings.Save()
+            Calculator.Save()
         End If
     End Sub
 #End If
@@ -52,125 +52,6 @@ Namespace My
 #End If
                 Return defaultInstance
             End Get
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property EnableParallelProcessing() As Boolean
-            Get
-                Return CType(Me("EnableParallelProcessing"),Boolean)
-            End Get
-            Set
-                Me("EnableParallelProcessing") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("-1")>  _
-        Public Property MaxDegreeOfParallelism() As Integer
-            Get
-                Return CType(Me("MaxDegreeOfParallelism"),Integer)
-            End Get
-            Set
-                Me("MaxDegreeOfParallelism") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property EnableGPUProcessing() As Boolean
-            Get
-                Return CType(Me("EnableGPUProcessing"),Boolean)
-            End Get
-            Set
-                Me("EnableGPUProcessing") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property UseSIMDExtensions() As Boolean
-            Get
-                Return CType(Me("UseSIMDExtensions"),Boolean)
-            End Get
-            Set
-                Me("UseSIMDExtensions") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property DebugLevel() As Integer
-            Get
-                Return CType(Me("DebugLevel"),Integer)
-            End Get
-            Set
-                Me("DebugLevel") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property SelectedGPU() As String
-            Get
-                Return CType(Me("SelectedGPU"),String)
-            End Get
-            Set
-                Me("SelectedGPU") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property CudafyTarget() As Integer
-            Get
-                Return CType(Me("CudafyTarget"),Integer)
-            End Get
-            Set
-                Me("CudafyTarget") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property CudafyDeviceID() As Integer
-            Get
-                Return CType(Me("CudafyDeviceID"),Integer)
-            End Get
-            Set
-                Me("CudafyDeviceID") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property ChemSepDatabasePath() As String
-            Get
-                Return CType(Me("ChemSepDatabasePath"),String)
-            End Get
-            Set
-                Me("ChemSepDatabasePath") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property UserDatabases() As Global.System.Collections.Specialized.StringCollection
-            Get
-                Return CType(Me("UserDatabases"),Global.System.Collections.Specialized.StringCollection)
-            End Get
-            Set
-                Me("UserDatabases") = value
-            End Set
         End Property
     End Class
 End Namespace

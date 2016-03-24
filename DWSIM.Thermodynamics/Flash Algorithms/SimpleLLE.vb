@@ -159,7 +159,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Next
 
 
-                If Double.IsNaN(err) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                If Double.IsNaN(err) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 If ecount > 0 And (Abs(err) < 0.000001 Or L1 < 0.0001 Or L2 < 0.0001 Or S < 0.0001) Then Exit Do
 
@@ -173,7 +173,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ecount += 1
 
-                If ecount > 10000 Then Throw New Exception(App.GetLocalString("Nmeromximodeiteraesa3"))
+                If ecount > 10000 Then Throw New Exception(Calculator.GetLocalString("Nmeromximodeiteraesa3"))
 
             Loop
 
@@ -207,7 +207,7 @@ out:        d2 = Date.Now
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, n, ecount As Integer
@@ -254,7 +254,7 @@ out:        d2 = Date.Now
             If Tref = 0 Then Tref = 298.15
             x1 = Tref
             Do
-                If My.Settings.EnableParallelProcessing Then
+                If Calculator.EnableParallelProcessing Then
                     
                     Dim task1 As Task = New Task(Sub()
                                                      fx = Herror(x1, {P, Vz, PP})
@@ -308,7 +308,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = My.Settings.EnableParallelProcessing
+            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, n, ecount As Integer
@@ -354,7 +354,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             If Tref = 0 Then Tref = 298.15
             x1 = Tref
             Do
-                If My.Settings.EnableParallelProcessing Then
+                If Calculator.EnableParallelProcessing Then
                     
                     Dim task1 As Task = New Task(Sub()
                                                      fx = Serror(x1, {P, Vz, PP})
@@ -614,7 +614,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("TV Flash [SimpleLLE]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(P - Pant) < 1 Or Double.IsNaN(P) = True Or ecount > maxit_e Or Double.IsNaN(P) Or Double.IsInfinity(P)
 
@@ -718,7 +718,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("TV Flash [SimpleLLE]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -939,7 +939,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("PV Flash [SimpleLLE]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(T - Tant) < 0.1 Or Double.IsNaN(T) = True Or ecount > maxit_e Or Double.IsNaN(T) Or Double.IsInfinity(T)
 
@@ -1041,7 +1041,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("PV Flash [SimpleLLE]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                   App.Flowsheet.CheckStatus()
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 

@@ -110,8 +110,8 @@ Namespace PropertyPackages.Auxiliary
 
         Function Z_PR(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal TIPO As String) As Double
 
-            App.WriteToConsole("PR cubic equation root finder (Z) for T = " & T & " K, P = " & P & " Pa and Phase = " & TIPO, 3)
-            App.WriteToConsole("Mole fractions: " & DirectCast(Vx, Double()).ToArrayString, 3)
+            Calculator.WriteToConsole("PR cubic equation root finder (Z) for T = " & T & " K, P = " & P & " Pa and Phase = " & TIPO, 3)
+            Calculator.WriteToConsole("Mole fractions: " & DirectCast(Vx, Double()).ToArrayString, 3)
 
             Dim n, R, coeff(3) As Double
 
@@ -209,7 +209,7 @@ Namespace PropertyPackages.Auxiliary
                 Z_PR = temp1(2, 0)
             End If
 
-            App.WriteToConsole("Result: Z = " & Z_PR, 3)
+            Calculator.WriteToConsole("Result: Z = " & Z_PR, 3)
 
         End Function
 
@@ -317,8 +317,8 @@ Namespace PropertyPackages.Auxiliary
 
             Dim MMm As Double = Vz.MultiplyY(VMM).SumY
 
-            If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
+            If Calculator.EnableParallelProcessing Then
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism, .TaskScheduler = Calculator.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(ii)
                                                      alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
                                                      ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)

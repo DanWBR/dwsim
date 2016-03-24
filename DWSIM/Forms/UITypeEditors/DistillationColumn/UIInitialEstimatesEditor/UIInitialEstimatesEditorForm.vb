@@ -19,7 +19,7 @@ Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
-Imports DWSIM.DWSIM.MathEx.Interpolation
+Imports DWSIM.Thermodynamics.MathEx.Interpolation
 
 Public Class UIInitialEstimatesEditorForm
 
@@ -386,7 +386,7 @@ Public Class UIInitialEstimatesEditorForm
         Next
 
         For Each c As DataGridViewCell In Me.dgvv.SelectedCells
-            If c.Value Is Nothing And c.ColumnIndex = 1 Then c.Value = DWSIM.MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
+            If c.Value Is Nothing And c.ColumnIndex = 1 Then c.Value = MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
         Next
 
     End Sub
@@ -407,7 +407,7 @@ Public Class UIInitialEstimatesEditorForm
         Next
 
         For Each c As DataGridViewCell In Me.dgvv.SelectedCells
-            If c.Value Is Nothing And c.ColumnIndex = 2 Then c.Value = DWSIM.MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
+            If c.Value Is Nothing And c.ColumnIndex = 2 Then c.Value = MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
         Next
 
     End Sub
@@ -428,7 +428,7 @@ Public Class UIInitialEstimatesEditorForm
         Next
 
         For Each c As DataGridViewCell In Me.dgvv.SelectedCells
-            If c.Value Is Nothing And c.ColumnIndex = 3 Then c.Value = DWSIM.MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
+            If c.Value Is Nothing And c.ColumnIndex = 3 Then c.Value = MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
         Next
 
     End Sub

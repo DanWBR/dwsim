@@ -321,12 +321,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ecount += 1
 
-                If Double.IsNaN(V) Then Throw New Exception(App.GetLocalString("PropPack_FlashTPVapFracError"))
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt2"))
+                If Double.IsNaN(V) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
                 WriteDebugInfo("PT Flash [IO]: Iteration #" & ecount & ", VF = " & V)
 
-                App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSqrSumY(fx) < etol
 
@@ -507,7 +507,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
                 ui(i) = Log(Ki(i) / Kb)
             Next
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
 
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       DHv1 = PP.DW_CalcEnthalpyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
@@ -515,9 +515,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
                                                       C = DHv2
                                                       D = (DHv1 - C) / (T - Tref)
                                                   End Sub,
-                                                      App.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      App.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       If T < MathEx.Common.Max(VTc, Vz) Then
                                                           DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
@@ -529,9 +529,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
                                                           F = 0
                                                       End If
                                                   End Sub,
-                                                  App.TaskCancellationTokenSource.Token,
+                                                  Calculator.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  App.AppTaskScheduler)
+                                                  Calculator.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -625,7 +625,7 @@ restart:    Do
                 Bc = Log(Kb_ / Kb) / (1 / T_ - 1 / T)
                 Ac = Log(Kb) - Bc * (1 / T - 1 / T_)
 
-                If My.Settings.EnableParallelProcessing Then
+                If Calculator.EnableParallelProcessing Then
 
                     Dim task1 = Task.Factory.StartNew(Sub()
                                                           DHv1 = PP.DW_CalcEnthalpyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
@@ -633,9 +633,9 @@ restart:    Do
                                                           Cc = DHv2
                                                           Dc = (DHv1 - Cc) / (T - T0)
                                                       End Sub,
-                                                      App.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      App.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                     Dim task2 = Task.Factory.StartNew(Sub()
                                                           If T < MathEx.Common.Max(VTc, Vz) Then
                                                               DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
@@ -647,9 +647,9 @@ restart:    Do
                                                               Fc = 0
                                                           End If
                                                       End Sub,
-                                                  App.TaskCancellationTokenSource.Token,
+                                                  Calculator.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  App.AppTaskScheduler)
+                                                  Calculator.AppTaskScheduler)
                     Task.WaitAll(task1, task2)
 
                 Else
@@ -732,13 +732,13 @@ restart:    Do
 
                 ecount += 1
 
-                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 WriteDebugInfo("PH Flash [IO]: Iteration #" & ecount & ", T = " & T)
                 WriteDebugInfo("PH Flash [IO]: Iteration #" & ecount & ", VF = " & V)
                 WriteDebugInfo("PH Flash [IO]: Iteration #" & ecount & ", H error = " & fr)
 
-                App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSqrSumY(fx) < etol Or ecount > maxit_e
 
@@ -805,7 +805,7 @@ restart:    Do
 
             Else
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
             End If
 
@@ -981,7 +981,7 @@ restart:    Do
                 ui(i) = Log(Ki(i) / Kb)
             Next
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  DSv1 = PP.DW_CalcEntropyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
@@ -1097,7 +1097,7 @@ restart:    Do
                 Bc = Log(Kb_ / Kb) / (1 / T_ - 1 / T)
                 Ac = Log(Kb) - Bc * (1 / T - 1 / T_)
 
-                If My.Settings.EnableParallelProcessing Then
+                If Calculator.EnableParallelProcessing Then
 
                     Dim task1 As Task = New Task(Sub()
                                                      DSv1 = PP.DW_CalcEntropyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
@@ -1200,14 +1200,14 @@ restart:    Do
 
                 ecount += 1
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
-                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
+                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 WriteDebugInfo("PS Flash [IO]: Iteration #" & ecount & ", T = " & T)
                 WriteDebugInfo("PS Flash [IO]: Iteration #" & ecount & ", VF = " & V)
                 WriteDebugInfo("PS Flash [IO]: Iteration #" & ecount & ", H error = " & fr)
 
-                App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1544,16 +1544,16 @@ restart:    Do
                 ecount += 1
 
                 If ecount > maxit_e Then
-                    Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
                 End If
                 If Double.IsNaN(AbsSum(fx)) Then
-                    Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                 End If
 
                 WriteDebugInfo("PV Flash [IO]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
                 WriteDebugInfo("PV Flash [IO]: Iteration #" & ecount & ", Damping Factor = " & alpha)
 
-                App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol * (n + 2)
 
@@ -1825,8 +1825,8 @@ final:      d2 = Date.Now
 
                 ecount += 1
 
-                If ecount > maxit_e Then Throw New Exception(App.GetLocalString("PropPack_FlashMaxIt"))
-                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(App.GetLocalString("PropPack_FlashError"))
+                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
+                If Double.IsNaN(AbsSum(fx)) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
                 WriteDebugInfo("TV Flash [IO]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
                 WriteDebugInfo("TV Flash [IO]: Iteration #" & ecount & ", Damping Factor = " & alpha)
@@ -1882,8 +1882,6 @@ final:      d2 = Date.Now
 
             Dim eberror As Double = L - Lf
 
-            App.Flowsheet.CheckStatus()
-
             Return eberror
 
         End Function
@@ -1917,8 +1915,6 @@ final:      d2 = Date.Now
             V = 1 - L
 
             Dim eberror As Double = L - Lf
-
-            App.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -1963,7 +1959,7 @@ final:      d2 = Date.Now
 
             Dim eberror As Double = Hf / 1000 - L * (DHl + Hlid) - V * (DHv + Hvid)
 
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -2008,7 +2004,7 @@ final:      d2 = Date.Now
 
             Dim eberror As Double = Hf / 1000 - L * (DHl + Hlid) - V * (DHv + Hvid)
 
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return Abs(eberror)
 
@@ -2016,7 +2012,7 @@ final:      d2 = Date.Now
 
         Private Function EnergyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim HL, balerror As Double
 
@@ -2035,7 +2031,7 @@ final:      d2 = Date.Now
 
         Private Function EnergyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim HV, balerror As Double
 
@@ -2091,7 +2087,7 @@ final:      d2 = Date.Now
             Slid = proppack.RET_Sid(298.15, T, Pf, Vx) * proppack.AUX_MMM(Vx)
 
             Dim eberror As Double = Sf - L * (DSl + Slid) - V * (DSv + Svid)
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -2133,7 +2129,7 @@ final:      d2 = Date.Now
             Slid = proppack.RET_Sid(298.15, T, Pf, Vx) * proppack.AUX_MMM(Vx)
 
             Dim eberror As Double = Sf - L * (DSl + Slid) - V * (DSv + Svid)
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror ^ 2
 
@@ -2141,7 +2137,7 @@ final:      d2 = Date.Now
 
         Private Function EntropyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim SL, balerror As Double
 
@@ -2160,7 +2156,7 @@ final:      d2 = Date.Now
 
         Private Function EntropyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim SV, balerror As Double
 
@@ -2203,7 +2199,7 @@ final:      d2 = Date.Now
 
             For i = 0 To n
                 Kw11(i) = K(i)
-                App.Flowsheet.CheckStatus()
+                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
                 Kw21(i) = K2(i)
             Next
 
@@ -2259,7 +2255,7 @@ final:      d2 = Date.Now
 
             Dim eberror As Double = sumpi / sumeuipi - 1
 
-            App.Flowsheet.CheckStatus()
+            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror ^ 2
 

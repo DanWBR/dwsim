@@ -2,24 +2,30 @@
 Imports Cudafy.Translator
 Imports Cudafy
 Imports Cudafy.Host
+Imports System.Threading
 
-Public Class App
+Public Class Calculator
 
-    Public Shared Property Flowsheet As Interfaces.IFlowsheet
-    Public Shared Property AppTaskScheduler As TaskScheduler
+    Public Shared Property AppTaskScheduler As TaskScheduler = Tasks.TaskScheduler.Default
     Public Shared Property gpu As Cudafy.Host.GPGPU
     Public Shared Property gpumod As CudafyModule
     Public Shared Property prevlang As Integer = 0 '0 = CUDA, 1 = OpenCL
+    Public Shared Property TaskCancellationTokenSource As CancellationTokenSource
+    Public Shared Property CAPEOPENMode As Boolean
 
-    Sub New()
+    Public Shared Property MaxDegreeOfParallelism As Integer = -1
+    Public Shared Property UseSIMDExtensions As Boolean = True
+    Public Shared Property EnableParallelProcessing As Boolean = True
+    Public Shared Property EnableGPUProcessing As Boolean = True
+    Public Shared Property CudafyTarget As Integer = 0
+    Public Shared Property CudafyDeviceID As Integer = 0
+    Public Shared Property DebugLevel As Integer = 0
 
+    Sub New(scheduler As TaskScheduler, tcs As CancellationTokenSource, COmode As Boolean)
+        AppTaskScheduler = scheduler
+        TaskCancellationTokenSource = tcs
+        CAPEOPENMode = COmode
     End Sub
-
-    Shared Property TaskCancellationTokenSource As Object
-
-    Shared Property IsRunningParallelTasks As Boolean
-
-    Shared Property CAPEOPENMode As Boolean
 
     Shared Sub WriteToConsole(text As String, level As Integer)
 
@@ -31,7 +37,7 @@ Public Class App
 
     Public Shared Sub CheckParallelPInvoke()
 
-        If My.Settings.EnableParallelProcessing Then Throw New InvalidOperationException(GetLocalString("ParallelPInvokeError"))
+        If Calculator.EnableParallelProcessing Then Throw New InvalidOperationException(GetLocalString("ParallelPInvokeError"))
 
     End Sub
 
@@ -68,7 +74,7 @@ Public Class App
 
             'set target language
 
-            Select Case My.Settings.CudafyTarget
+            Select Case Calculator.CudafyTarget
                 Case 0, 1
                     CudafyTranslator.Language = eLanguage.Cuda
                 Case 2
@@ -77,21 +83,21 @@ Public Class App
 
             'get the gpu instance
 
-            Dim gputype As eGPUType = My.Settings.CudafyTarget
+            Dim gputype As eGPUType = Calculator.CudafyTarget
 
-            gpu = CudafyHost.GetDevice(gputype, My.Settings.CudafyDeviceID)
+            gpu = CudafyHost.GetDevice(gputype, Calculator.CudafyDeviceID)
 
             'cudafy all classes that contain a gpu function
 
             If gpumod Is Nothing Then
-                Select Case My.Settings.CudafyTarget
+                Select Case Calculator.CudafyTarget
                     Case 0, 1
                         gpumod = CudafyModule.TryDeserialize("cudacode.cdfy")
                     Case 2
                         'OpenCL code is device-specific and must be compiled on each initialization
                 End Select
                 If gpumod Is Nothing OrElse Not gpumod.TryVerifyChecksums() Then
-                    Select Case My.Settings.CudafyTarget
+                    Select Case Calculator.CudafyTarget
                         Case 0
                             gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
                                         GetType(PropertyPackages.ThermoPlugs.PR),
@@ -127,9 +133,5 @@ Public Class App
         End If
 
     End Sub
-
-    Shared Function GetComponentName(Name As String) As Object
-        Throw New NotImplementedException
-    End Function
 
 End Class

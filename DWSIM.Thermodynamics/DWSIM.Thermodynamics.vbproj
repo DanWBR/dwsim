@@ -100,7 +100,7 @@
     <Compile Include="Extensions\ExtensionMethods.vb" />
     <Compile Include="Extensions\SIMDExtenders.vb" />
     <Compile Include="Flash Algorithms\PointF.vb" />
-    <Compile Include="Helper Classes\App.vb" />
+    <Compile Include="Main\Interface.vb" />
     <Compile Include="Helper Classes\ChemSepIDConverter.vb" />
     <Compile Include="Math Classes\AP.vb" />
     <Compile Include="Math Classes\Brent.vb" />
@@ -217,6 +217,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

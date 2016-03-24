@@ -640,8 +640,8 @@ Namespace ExcelAddIn
                 pp.SetMaterial(ms)
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 If prop.ToLower <> "molecularweight" Then
@@ -649,8 +649,8 @@ Namespace ExcelAddIn
                 End If
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim results As Double() = Nothing
@@ -762,15 +762,15 @@ Namespace ExcelAddIn
                 pp._tpcompids = comps
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TP", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -972,15 +972,15 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.temperature = InitialEstimate
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PH", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1096,15 +1096,15 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.temperature = InitialEstimate
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PS", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1220,15 +1220,15 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.temperature = InitialEstimate
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PVF", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1344,15 +1344,15 @@ Namespace ExcelAddIn
                 ms.Phases(0).Properties.pressure = InitialEstimate
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TVF", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1796,15 +1796,15 @@ Namespace ExcelAddIn
                 pp._tpcompids = comps
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TP", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1909,15 +1909,15 @@ Namespace ExcelAddIn
                 pp._tpcompids = comps
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PH", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -2024,15 +2024,15 @@ Namespace ExcelAddIn
                 pp._tpcompids = comps
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PS", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -2139,15 +2139,15 @@ Namespace ExcelAddIn
                 pp._tpcompids = comps
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PVF", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -2254,15 +2254,15 @@ Namespace ExcelAddIn
                 pp._tpcompids = comps
 
                 If My.Settings.EnableGPUProcessing Then
-                    DWSIM.App.InitComputeDevice()
-                    My.Application.gpu.EnableMultithreading()
+                    Calculator.InitComputeDevice()
+                    Calculator.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TVF", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    My.Application.gpu.DisableMultithreading()
-                    My.Application.gpu.FreeAll()
+                    Calculator.gpu.DisableMultithreading()
+                    Calculator.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing

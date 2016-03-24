@@ -55,7 +55,7 @@
         If My.Settings.UseSIMDExtensions Then
             Return Yeppp.Core.Min_V64f_S64f(vector, 0, vector.Length)
         Else
-            Return Convert.ToDouble(DWSIM.MathEx.Common.Min(vector))
+            Return Convert.ToDouble(MathEx.Common.Min(vector))
         End If
 
     End Function
@@ -71,7 +71,7 @@
         If My.Settings.UseSIMDExtensions Then
             Return Yeppp.Core.Max_V64f_S64f(vector, 0, vector.Length)
         Else
-            Return Convert.ToDouble(DWSIM.MathEx.Common.Max(vector))
+            Return Convert.ToDouble(MathEx.Common.Max(vector))
         End If
 
     End Function
@@ -87,7 +87,7 @@
         If My.Settings.UseSIMDExtensions Then
             Return Yeppp.Core.Sum_V64f_S64f(vector, 0, vector.Length)
         Else
-            Return DWSIM.MathEx.Common.Sum(vector)
+            Return MathEx.Common.Sum(vector)
         End If
 
     End Function
@@ -103,7 +103,7 @@
         If My.Settings.UseSIMDExtensions Then
             Return Yeppp.Core.SumAbs_V64f_S64f(vector, 0, vector.Length)
         Else
-            Return DWSIM.MathEx.Common.AbsSum(vector)
+            Return MathEx.Common.AbsSum(vector)
         End If
 
     End Function
@@ -119,7 +119,7 @@
         If My.Settings.UseSIMDExtensions Then
             Return Yeppp.Core.SumSquares_V64f_S64f(vector, 0, vector.Length)
         Else
-            Return DWSIM.MathEx.Common.SumSqr(vector)
+            Return MathEx.Common.SumSqr(vector)
         End If
 
     End Function

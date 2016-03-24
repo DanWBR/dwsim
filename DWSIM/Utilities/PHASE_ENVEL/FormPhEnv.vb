@@ -140,8 +140,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
             Me.Button1.Enabled = False
 
             If My.Settings.EnableGPUProcessing Then
-                DWSIM.App.InitComputeDevice()
-                My.Application.gpu.EnableMultithreading()
+                Calculator.InitComputeDevice()
+                Calculator.gpu.EnableMultithreading()
             End If
 
             Me.BackgroundWorker1.RunWorkerAsync(New Object() {0, Me.TextBox1.Text, Me.CheckBox1.Checked, Me.CheckBox3.Checked, Me.chkpip.Checked, Me.chkhyd.Checked, Me.CheckBoxHYDVAP.Checked})
@@ -986,8 +986,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
 
         If My.Settings.EnableGPUProcessing Then
-            My.Application.gpu.DisableMultithreading()
-            My.Application.gpu.FreeAll()
+            Calculator.gpu.DisableMultithreading()
+            Calculator.gpu.FreeAll()
         End If
 
         Me.Button1.Enabled = True
@@ -1061,7 +1061,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
             c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         Next
 
-        Dim maxl As Integer = DWSIM.MathEx.Common.Max(New Object() {TVB.Count, TVD.Count, TE.Count, TQ.Count, TI.Count, THsI.Count, TOWF.Count}) - 1
+        Dim maxl As Integer = MathEx.Common.Max(New Object() {TVB.Count, TVD.Count, TE.Count, TQ.Count, TI.Count, THsI.Count, TOWF.Count}) - 1
 
         Dim k, j As Integer
         Dim maxc As Integer = Me.Grid1.Columns.Count - 1

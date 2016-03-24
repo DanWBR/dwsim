@@ -34,7 +34,7 @@ Namespace MathEx.Interpolation
     'OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     '************************************************************************
 
-    Class polinterpolation
+    Public Class polinterpolation
 
         '************************************************************************
         '    Interpolation using barycentric formula
@@ -653,7 +653,7 @@ Namespace MathEx.Interpolation
     'OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     '************************************************************************
 
-    Class ratinterpolation
+    Public Class ratinterpolation
 
         '************************************************************************
         '    Rational barycentric interpolation without poles

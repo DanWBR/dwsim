@@ -19,7 +19,7 @@
 Imports System.Collections.Generic
 Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.DWSIM.SimulationObjects
-Imports DWSIM.DWSIM.MathEx
+Imports DWSIM.Thermodynamics.MathEx
 Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 Imports Mapack

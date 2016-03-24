@@ -53,7 +53,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Sub WriteDebugInfo(text As String)
 
-            App.WriteToConsole(text, 1)
+            Calculator.WriteToConsole(text, 1)
 
         End Sub
 
@@ -298,7 +298,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 #Region "Generic Functions"
 
         Public Overridable Function Flash_PSF(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
-            Throw New Exception(App.GetLocalString("PropPack_FlashPSFError"))
+            Throw New Exception(Calculator.GetLocalString("PropPack_FlashPSFError"))
             Return Nothing
         End Function
 
@@ -451,20 +451,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim gl, gv As Double
 
-            If My.Settings.EnableParallelProcessing Then
+            If Calculator.EnableParallelProcessing Then
                 
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       fcv = pp.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
                                                   End Sub,
-                                                      App.TaskCancellationTokenSource.Token,
+                                                      Calculator.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      App.AppTaskScheduler)
+                                                      Calculator.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       fcl = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
                                                   End Sub,
-                                                  App.TaskCancellationTokenSource.Token,
+                                                  Calculator.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  App.AppTaskScheduler)
+                                                  Calculator.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
                 
             Else
@@ -578,20 +578,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             j = j + 1
                         Loop Until j = n + 1
 
-                        If My.Settings.EnableParallelProcessing Then
+                        If Calculator.EnableParallelProcessing Then
                             
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   fcv = pp.DW_CalcFugCoeff(currcomp, T, P, State.Vapor)
                                                               End Sub,
-                                                                  App.TaskCancellationTokenSource.Token,
+                                                                  Calculator.TaskCancellationTokenSource.Token,
                                                                   TaskCreationOptions.None,
-                                                                  App.AppTaskScheduler)
+                                                                  Calculator.AppTaskScheduler)
                             Dim task2 = Task.Factory.StartNew(Sub()
                                                                   fcl = pp.DW_CalcFugCoeff(currcomp, T, P, State.Liquid)
                                                               End Sub,
-                                                              App.TaskCancellationTokenSource.Token,
+                                                              Calculator.TaskCancellationTokenSource.Token,
                                                               TaskCreationOptions.None,
-                                                              App.AppTaskScheduler)
+                                                              Calculator.AppTaskScheduler)
                             Task.WaitAll(task1, task2)
                             
                         Else
@@ -844,7 +844,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim fx, fx2, dfdx As Double
                 Dim i As Integer = 0
                 Do
-                    If My.Settings.EnableParallelProcessing Then
+                    If Calculator.EnableParallelProcessing Then
                         
                         Dim task1 As Task = New Task(Sub()
                                                          fx = 1 - CalcPIP(Vx, P, Tinv, pp, eos)(0)

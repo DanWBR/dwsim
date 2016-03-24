@@ -141,7 +141,7 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim result As Double = 0.0#
             Dim resultObj As Object = Nothing
@@ -254,7 +254,7 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim result As Double
             Dim dwpl As Phase
@@ -570,7 +570,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim H As Double
 
@@ -586,7 +586,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim H As Double
 
@@ -602,7 +602,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim S As Double
 
@@ -618,7 +618,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEntropyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
             Dim S As Double
 
@@ -730,11 +730,11 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
-            App.CheckParallelPInvoke()
+            Calculator.CheckParallelPInvoke()
 
-            App.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
-            App.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
-            App.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
+            Calculator.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
+            Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
+            Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
             Dim lnfug As Object
 
@@ -752,7 +752,7 @@ Namespace PropertyPackages
                 fugcoeff(i) = Exp(lnfug(i))
             Next
 
-            App.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
+            Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
 
             Return fugcoeff
 

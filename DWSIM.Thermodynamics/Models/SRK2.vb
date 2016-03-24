@@ -36,8 +36,8 @@ Namespace PropertyPackages.ThermoPlugs
             Dim aux1, aux2, auxtmp(n) As Double
             aux1 = -8.314 / 2 * (0.45724 / T) ^ 0.5
 
-            If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
+            If Calculator.EnableParallelProcessing Then
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism, .TaskScheduler = Calculator.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(k)
                                                      For l As Integer = 0 To n
                                                          auxtmp(k) += Vz(k) * Vz(l) * (1 - VKij(k, l)) * (ci(l) * (ai(k) * Tc(l) / Pc(l)) ^ 0.5 + ci(k) * (ai(l) * Tc(k) / Pc(k)) ^ 0.5)
@@ -65,8 +65,8 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim a(n, n) As Double
 
-            If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
+            If Calculator.EnableParallelProcessing Then
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism, .TaskScheduler = Calculator.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(k)
                                                      For j As Integer = 0 To n
                                                          a(k, j) = (ai(k) * ai(j)) ^ 0.5 * (1 - vkij(k, j))
@@ -93,8 +93,8 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim saml, aml(n), aml2(n) As Double
 
-            If My.Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism, .TaskScheduler = App.AppTaskScheduler}
+            If Calculator.EnableParallelProcessing Then
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism, .TaskScheduler = Calculator.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(k)
                                                      For j As Integer = 0 To n
                                                          aml(k) += Vx(k) * Vx(j) * a(k, j)
@@ -217,7 +217,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         Shared Function ZtoMinG(ByVal Z_ As Array, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array) As Object
 
-            App.WriteToConsole("SRK min-G root finder (Z) for T = " & T & " K, P = " & P & " Pa and Z = " & DirectCast(Z_, Object()).ToArrayString, 3)
+            Calculator.WriteToConsole("SRK min-G root finder (Z) for T = " & T & " K, P = " & P & " Pa and Z = " & DirectCast(Z_, Object()).ToArrayString, 3)
 
             Dim S, H, Z As Double
 
@@ -312,7 +312,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Next
 
-            App.WriteToConsole("Result: Min-G Z Index = " & k, 3)
+            Calculator.WriteToConsole("Result: Min-G Z Index = " & k, 3)
 
             Return New Object() {k, G(k)}
 
@@ -320,7 +320,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         Public Overrides Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
 
-            If My.Settings.EnableGPUProcessing Then
+            If Calculator.EnableGPUProcessing Then
                 Return CalcLnFugGPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
             Else
                 Return CalcLnFugCPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
@@ -484,7 +484,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         Public Shared Sub srk_gpu_func(n As Integer, Vx As Double(), VKij As Double(,), Tc As Double(), Pc As Double(), w As Double(), T As Double, alpha As Double(), ai As Double(), bi As Double(), a As Double(,), aml_temp As Double(), bml_temp As Double(), aml2_temp As Double())
 
-            Dim gpu As GPGPU = App.gpu
+            Dim gpu As GPGPU = Calculator.gpu
 
             'gpu.Lock()
             gpu.SetCurrentContext()
@@ -1002,7 +1002,7 @@ Namespace PropertyPackages.ThermoPlugs
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z -= 0.00001
-                        If Z < 0 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z < 0 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 Else
@@ -1011,7 +1011,7 @@ Namespace PropertyPackages.ThermoPlugs
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z += 0.00001
-                        If Z > 1 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z > 1 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 End If
@@ -1173,7 +1173,7 @@ Namespace PropertyPackages.ThermoPlugs
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z -= 0.00001
-                        If Z < 0 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z < 0 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 Else
@@ -1182,7 +1182,7 @@ Namespace PropertyPackages.ThermoPlugs
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z += 0.00001
-                        If Z > 1 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z > 1 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 End If
@@ -1344,7 +1344,7 @@ Namespace PropertyPackages.ThermoPlugs
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z -= 0.00001
-                        If Z < 0 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z < 0 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 Else
@@ -1353,7 +1353,7 @@ Namespace PropertyPackages.ThermoPlugs
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z += 0.00001
-                        If Z > 1 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z > 1 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 End If
@@ -1515,7 +1515,7 @@ Namespace PropertyPackages.ThermoPlugs
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z -= 0.00001
-                        If Z < 0 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z < 0 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 Else
@@ -1524,7 +1524,7 @@ Namespace PropertyPackages.ThermoPlugs
                     Do
                         findZ = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
                         Z += 0.00001
-                        If Z > 1 Then Throw New Exception(App.GetLocalString("PropPack_ZError"))
+                        If Z > 1 Then Throw New Exception(Calculator.GetLocalString("PropPack_ZError"))
                     Loop Until Math.Abs(findZ) < 0.0001
 
                 End If

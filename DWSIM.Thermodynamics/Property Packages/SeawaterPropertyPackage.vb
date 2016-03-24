@@ -581,9 +581,9 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
-            App.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
-            App.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
-            App.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
+            Calculator.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
+            Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
+            Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
             Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
             For Each s As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -635,7 +635,7 @@ Namespace PropertyPackages
                 Next
             End If
 
-            App.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
+            Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
 
             Return fugcoeff
 
@@ -698,8 +698,8 @@ Namespace PropertyPackages
 
             If Parameters("PP_IGNORE_SALINITY_LIMIT") = 0 Then
                 If salinity > Seawater.sal_smax Then
-                    If App.Flowsheet IsNot Nothing Then
-                        App.Flowsheet.ShowMessage(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Interfaces.IFlowsheet.MessageType.Warning)
+                    If Me.CurrentMaterialStream.Flowsheet IsNot Nothing Then
+                        Me.CurrentMaterialStream.Flowsheet.ShowMessage(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Interfaces.IFlowsheet.MessageType.Warning)
                     End If
                     salinity = Seawater.sal_smax
                 End If
@@ -724,8 +724,8 @@ Namespace PropertyPackages
 
             If Parameters("PP_IGNORE_SALINITY_LIMIT") = 0 Then
                 If salinity > Seawater.sal_smax Then
-                    If App.Flowsheet IsNot Nothing Then
-                        App.Flowsheet.ShowMessage(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Interfaces.IFlowsheet.MessageType.Warning)
+                    If Me.CurrentMaterialStream.Flowsheet IsNot Nothing Then
+                        Me.CurrentMaterialStream.Flowsheet.ShowMessage(Me.ComponentName & "/" & New StackFrame(1).GetMethod.Name & "(): maximum salinity exceeded (" & Format(salinity, "0.00") & " kg/kg). Using upper limit value (" & Format(Seawater.sal_smax, "0.00") & " kg/kg).", Interfaces.IFlowsheet.MessageType.Warning)
                     End If
                     salinity = Seawater.sal_smax
                 End If
