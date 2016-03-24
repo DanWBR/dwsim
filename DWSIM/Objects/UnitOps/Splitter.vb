@@ -331,7 +331,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Function
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -419,7 +419,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             i += 1
                         Next
                     Case OpMode.StreamMassFlowSpec
-                        Dim valor = Format(Converter.ConvertFromSI(su.massflow, Me.StreamFlowSpec), FlowSheet.Options.NumberFormat)
+                        Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.StreamFlowSpec), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_SP_1"), su.massflow), valor, False, DWSIM.App.GetLocalString("Parmetros2"), "", True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -428,7 +428,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
                         If n = 3 Then
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Stream2FlowSpec), FlowSheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Stream2FlowSpec), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_SP_2"), su.massflow), valor, False, DWSIM.App.GetLocalString("Parmetros2"), "", True)
                             With .Item(.Item.Count - 1)
                                 .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -438,7 +438,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End With
                         End If
                     Case OpMode.StreamMoleFlowSpec
-                        Dim valor = Format(Converter.ConvertFromSI(su.molarflow, Me.StreamFlowSpec), FlowSheet.Options.NumberFormat)
+                        Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.StreamFlowSpec), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_SP_1"), su.molarflow), valor, False, DWSIM.App.GetLocalString("Parmetros2"), "", True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -447,7 +447,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
                         If n = 3 Then
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Stream2FlowSpec), FlowSheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Stream2FlowSpec), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_SP_2"), su.molarflow), valor, False, DWSIM.App.GetLocalString("Parmetros2"), "", True)
                             With .Item(.Item.Count - 1)
                                 .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -463,21 +463,21 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Select Case prop
                 Case "PROP_SP_1"
                     If Me.OperationMode = OpMode.StreamMassFlowSpec Then
-                        value = Converter.ConvertFromSI(su.massflow, Me.StreamFlowSpec)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.StreamFlowSpec)
                     Else
-                        value = Converter.ConvertFromSI(su.molarflow, Me.StreamFlowSpec)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.StreamFlowSpec)
                     End If
                 Case "PROP_SP_2"
                     If Me.OperationMode = OpMode.StreamMassFlowSpec Then
-                        value = Converter.ConvertFromSI(su.massflow, Me.Stream2FlowSpec)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Stream2FlowSpec)
                     Else
-                        value = Converter.ConvertFromSI(su.molarflow, Me.Stream2FlowSpec)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Stream2FlowSpec)
                     End If
                 Case "SR1"
                     If Me.Ratios.Count > 0 Then value = Me.Ratios(0)
@@ -515,21 +515,21 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Return proplist.ToArray(GetType(System.String))
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Select Case prop
                 Case "PROP_SP_1"
                     If Me.OperationMode = OpMode.StreamMassFlowSpec Then
-                        Me.StreamFlowSpec = Converter.ConvertToSI(su.massflow, propval)
+                        Me.StreamFlowSpec = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
                     Else
-                        Me.StreamFlowSpec = Converter.ConvertToSI(su.molarflow, propval)
+                        Me.StreamFlowSpec = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval)
                     End If
                 Case "PROP_SP_2"
                     If Me.OperationMode = OpMode.StreamMassFlowSpec Then
-                        Me.Stream2FlowSpec = Converter.ConvertToSI(su.massflow, propval)
+                        Me.Stream2FlowSpec = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
                     Else
-                        Me.Stream2FlowSpec = Converter.ConvertToSI(su.molarflow, propval)
+                        Me.Stream2FlowSpec = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval)
                     End If
                 Case "SR1"
                     If propval >= 0 And propval <= 1 Then
@@ -547,7 +547,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim value As String = ""
             If prop.StartsWith("P") Then
                 Select Case Me.OperationMode

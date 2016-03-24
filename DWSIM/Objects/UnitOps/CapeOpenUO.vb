@@ -1165,7 +1165,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             UpdatePortsFromConnectors()
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 

@@ -20,7 +20,7 @@
         End If
 
         Dim curve As DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps.Curve
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
         Dim i As Integer = 0
 
         curve = Me.selectedpump.Curves("HEAD")
@@ -325,7 +325,7 @@
 
         Dim pxh, pyh, pxp, pyp, pxn, pyn, pxs, pys, pxe, pye, pxop, pyop, pxnd, pynd As New ArrayList
 
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim i As Integer
         Dim xunit, yunit As String
@@ -341,8 +341,8 @@
             yunit = Me.selectedpump.Curves("HEAD").yunit
             For i = 0 To x.Count - 1
                 If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                    pxh.Add(Converter.ConvertFromSI(flowunit, Converter.ConvertToSI(xunit, x(i))))
-                    pyh.Add(Converter.ConvertFromSI(headunit, Converter.ConvertToSI(yunit, y(i))))
+                    pxh.Add(SystemsOfUnits.Converter.ConvertFromSI(flowunit, SystemsOfUnits.Converter.ConvertToSI(xunit, x(i))))
+                    pyh.Add(SystemsOfUnits.Converter.ConvertFromSI(headunit, SystemsOfUnits.Converter.ConvertToSI(yunit, y(i))))
                 End If
             Next
         End If
@@ -354,8 +354,8 @@
             yunit = Me.selectedpump.Curves("POWER").yunit
             For i = 0 To x.Count - 1
                 If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                    pxp.Add(Converter.ConvertFromSI(flowunit, Converter.ConvertToSI(xunit, x(i))))
-                    pyp.Add(Converter.ConvertFromSI(powerunit, Converter.ConvertToSI(yunit, y(i))))
+                    pxp.Add(SystemsOfUnits.Converter.ConvertFromSI(flowunit, SystemsOfUnits.Converter.ConvertToSI(xunit, x(i))))
+                    pyp.Add(SystemsOfUnits.Converter.ConvertFromSI(powerunit, SystemsOfUnits.Converter.ConvertToSI(yunit, y(i))))
                 End If
             Next
         End If
@@ -367,7 +367,7 @@
             yunit = Me.selectedpump.Curves("EFF").yunit
             For i = 0 To x.Count - 1
                 If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                    pxe.Add(Converter.ConvertFromSI(flowunit, Converter.ConvertToSI(xunit, x(i))))
+                    pxe.Add(SystemsOfUnits.Converter.ConvertFromSI(flowunit, SystemsOfUnits.Converter.ConvertToSI(xunit, x(i))))
                     If yunit = "%" Then
                         If effunit = "%" Then
                             pye.Add(Convert.ToDouble(y(i)))
@@ -392,8 +392,8 @@
             yunit = Me.selectedpump.Curves("NPSH").yunit
             For i = 0 To x.Count - 1
                 If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                    pxn.Add(Converter.ConvertFromSI(flowunit, Converter.ConvertToSI(xunit, x(i))))
-                    pyn.Add(Converter.ConvertFromSI(headunit, Converter.ConvertToSI(yunit, y(i))))
+                    pxn.Add(SystemsOfUnits.Converter.ConvertFromSI(flowunit, SystemsOfUnits.Converter.ConvertToSI(xunit, x(i))))
+                    pyn.Add(SystemsOfUnits.Converter.ConvertFromSI(headunit, SystemsOfUnits.Converter.ConvertToSI(yunit, y(i))))
                 End If
             Next
         End If
@@ -405,17 +405,17 @@
             yunit = Me.selectedpump.Curves("SYSTEM").yunit
             For i = 0 To x.Count - 1
                 If Double.TryParse(x(i), New Double) And Double.TryParse(y(i), New Double) Then
-                    pxs.Add(Converter.ConvertFromSI(flowunit, Converter.ConvertToSI(xunit, x(i))))
-                    pys.Add(Converter.ConvertFromSI(headunit, Converter.ConvertToSI(yunit, y(i))))
+                    pxs.Add(SystemsOfUnits.Converter.ConvertFromSI(flowunit, SystemsOfUnits.Converter.ConvertToSI(xunit, x(i))))
+                    pys.Add(SystemsOfUnits.Converter.ConvertFromSI(headunit, SystemsOfUnits.Converter.ConvertToSI(yunit, y(i))))
                 End If
             Next
         End If
 
-        pxop.Add(Converter.ConvertFromSI(flowunit, Me.selectedpump.CurveFlow))
-        pyop.Add(Converter.ConvertFromSI(headunit, Me.selectedpump.CurveSysHead))
+        pxop.Add(SystemsOfUnits.Converter.ConvertFromSI(flowunit, Me.selectedpump.CurveFlow))
+        pyop.Add(SystemsOfUnits.Converter.ConvertFromSI(headunit, Me.selectedpump.CurveSysHead))
 
-        pxnd.Add(Converter.ConvertFromSI(flowunit, Me.selectedpump.CurveFlow))
-        pynd.Add(Converter.ConvertFromSI(headunit, Me.selectedpump.NPSH))
+        pxnd.Add(SystemsOfUnits.Converter.ConvertFromSI(flowunit, Me.selectedpump.CurveFlow))
+        pynd.Add(SystemsOfUnits.Converter.ConvertFromSI(headunit, Me.selectedpump.NPSH))
 
         Dim line As New ZedGraph.LineObj(Color.Black, 0, 0, 0, 0)
 

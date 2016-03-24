@@ -349,7 +349,7 @@ Public Class FormConfigWizard
     Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
         FrmChild.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
-        Dim su As DWSIM.SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+        Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
 
         With Me.DataGridView1.Rows
             .Clear()

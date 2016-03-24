@@ -24,7 +24,7 @@ Public Class GibbsInitialEstimatesEditorForm
     Public gr As Reactor_Gibbs
     Public form As FormFlowsheet
     Public inlet, outletv, outletl As Streams.MaterialStream
-    Dim su As DWSIM.SystemsOfUnits.Units
+    Dim su As SystemsOfUnits.Units
     Dim nf As String = ""
 
     Public ie As List(Of Double)
@@ -45,7 +45,7 @@ Public Class GibbsInitialEstimatesEditorForm
 
         Dim i As Integer = 0
         For Each s As String In gr.ComponentIDs
-            Me.grid.Rows.Add(New Object() {DWSIM.App.GetComponentName(s), Format(Converter.ConvertFromSI(su.molarflow, ie(i)), nf)})
+            Me.grid.Rows.Add(New Object() {DWSIM.App.GetComponentName(s), Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, ie(i)), nf)})
             i += 1
         Next
 
@@ -55,28 +55,28 @@ Public Class GibbsInitialEstimatesEditorForm
 
     Private Sub grid_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grid.CellValueChanged
         If loaded Then
-            ie(e.RowIndex) = Converter.ConvertToSI(su.molarflow, grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
+            ie(e.RowIndex) = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, grid.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
         End If
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
         For Each r As DataGridViewRow In grid.Rows
             Dim s As String = gr.ComponentIDs(r.Index)
-            r.Cells(1).Value = Format(Converter.ConvertFromSI(su.molarflow, inlet.Phases(0).Compounds(s).MolarFlow.GetValueOrDefault), nf)
+            r.Cells(1).Value = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, inlet.Phases(0).Compounds(s).MolarFlow.GetValueOrDefault), nf)
         Next
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         For Each r As DataGridViewRow In grid.Rows
             Dim s As String = gr.ComponentIDs(r.Index)
-            r.Cells(1).Value = Format(Converter.ConvertFromSI(su.molarflow, outletv.Phases(0).Compounds(s).MolarFlow.GetValueOrDefault), nf)
+            r.Cells(1).Value = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, outletv.Phases(0).Compounds(s).MolarFlow.GetValueOrDefault), nf)
         Next
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         For Each r As DataGridViewRow In grid.Rows
             Dim s As String = gr.ComponentIDs(r.Index)
-            r.Cells(1).Value = Format(Converter.ConvertFromSI(su.molarflow, outletl.Phases(0).Compounds(s).MolarFlow.GetValueOrDefault), nf)
+            r.Cells(1).Value = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, outletl.Phases(0).Compounds(s).MolarFlow.GetValueOrDefault), nf)
         Next
     End Sub
 

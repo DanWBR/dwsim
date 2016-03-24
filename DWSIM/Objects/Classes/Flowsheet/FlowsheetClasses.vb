@@ -95,7 +95,7 @@ Namespace DWSIM.Flowsheet
 
         Implements Interfaces.IFlowsheetOptions
 
-        Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
+        Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
 
         Public PropertyPackages As Dictionary(Of String, PropertyPackages.PropertyPackage)
 
@@ -123,7 +123,7 @@ Namespace DWSIM.Flowsheet
 
         Public PetroleumAssays As Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)
 
-        Public SelectedUnitSystem As DWSIM.SystemsOfUnits.Units
+        Public SelectedUnitSystem As SystemsOfUnits.Units
 
 
         Sub New()

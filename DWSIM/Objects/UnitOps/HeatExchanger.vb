@@ -1138,7 +1138,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             'To be implemented according to the heat exchanger connectors.
 
@@ -1208,14 +1208,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Select Case CalcMode
                     Case HeatExchangerCalcMode.CalcArea, HeatExchangerCalcMode.CalcBothTemp, HeatExchangerCalcMode.CalcBothTemp_UA, HeatExchangerCalcMode.CalcTempColdOut, HeatExchangerCalcMode.CalcTempHotOut
                         .Item.Add(DWSIM.App.GetLocalString("HXFlowDirection"), Me, "FlowDir", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXFlowDirectionDesc"), True)
-                        AValue = Format(Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("HXHotSidePressureDrop"), su.deltaP), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXHotSidePressureDrop"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
                             .Tag = New Object() {FlowSheet.Options.NumberFormat, su.deltaP, "DP"}
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
-                        AValue = Format(Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("HXColdSidePressureDrop"), su.deltaP), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXColdSidePressureDrop"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1226,7 +1226,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Select Case CalcMode
                     Case HeatExchangerCalcMode.CalcBothTemp_UA
-                        AValue = Format(Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("Area"), su.area), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HeatTransferArea"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1234,7 +1234,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Tag = New Object() {FlowSheet.Options.NumberFormat, su.area, "A"}
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
-                        AValue = Format(Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("OverallHeatTranferCoefficientDesc"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1243,7 +1243,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
                     Case HeatExchangerCalcMode.CalcBothTemp
-                        AValue = Format(Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("Area"), su.area), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HeatTransferArea"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1251,7 +1251,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Tag = New Object() {FlowSheet.Options.NumberFormat, su.area, "A"}
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
-                        AValue = Format(Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("HeatLoad"), su.heatflow), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HeatLoadOfEquipment"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1260,7 +1260,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
                     Case HeatExchangerCalcMode.CalcTempColdOut
-                        AValue = Format(Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("Area"), su.area), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HeatTransferArea"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1268,7 +1268,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Tag = New Object() {FlowSheet.Options.NumberFormat, su.area, "A"}
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
-                        AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("HXTempHotOut"), su.temperature), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXTempHotOutDesc"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1277,7 +1277,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
                     Case HeatExchangerCalcMode.CalcTempHotOut
-                        AValue = Format(Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("Area"), su.area), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HeatTransferArea"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1285,7 +1285,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Tag = New Object() {FlowSheet.Options.NumberFormat, su.area, "A"}
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
-                        AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("HXTempColdOut"), su.temperature), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXTempColdOutDesc"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1297,7 +1297,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         .Item.Add(DWSIM.App.GetLocalString("HXDefinedTemperature"), Me, "DefinedTemperature", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXDefinedTemperatureDesc"), True)
                         Select Case Me.DefinedTemperature
                             Case SpecifiedTemperature.Cold_Fluid
-                                AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
+                                AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
                                 .Item.Add(FT(DWSIM.App.GetLocalString("HXTempColdOut"), su.temperature), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXTempColdOutDesc"), True)
                                 With .Item(.Item.Count - 1)
                                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1306,7 +1306,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                     .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                                 End With
                             Case SpecifiedTemperature.Hot_Fluid
-                                AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
+                                AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
                                 .Item.Add(FT(DWSIM.App.GetLocalString("HXTempHotOut"), su.temperature), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXTempHotOutDesc"), True)
                                 With .Item(.Item.Count - 1)
                                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1315,7 +1315,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                     .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                                 End With
                         End Select
-                        AValue = Format(Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("OverallHeatTranferCoefficientDesc"), True)
                     Case HeatExchangerCalcMode.ShellandTube_Rating
                         .Item.Add(DWSIM.App.GetLocalString("STHXProperties"), Me, "STProperties", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("STHXPropertiesDesc"), True)
@@ -1323,7 +1323,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .CustomEditor = New DWSIM.Editors.HeatExchanger.UISTHXEditor
                         End With
                     Case HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor
-                        AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("HXTempColdOut"), su.temperature), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXTempColdOutDesc"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1331,7 +1331,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
-                        AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
+                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("HXTempHotOut"), su.temperature), AValue, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("HXTempHotOutDesc"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1351,71 +1351,71 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     Select Case CalcMode
                         Case HeatExchangerCalcMode.CalcBothTemp_UA
-                            AValue = Format(Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HeatLoad"), su.heatflow), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HeatLoadOfEquipment"), True)
                         Case HeatExchangerCalcMode.CalcBothTemp
-                            AValue = Format(Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXTempHotOut"), su.temperature), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXTempHotOutDesc"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXTempColdOut"), su.temperature), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXTempColdOutDesc"), True)
                         Case HeatExchangerCalcMode.CalcTempColdOut
-                            AValue = Format(Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HeatLoad"), su.heatflow), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HeatLoadOfEquipment"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXTempColdOut"), su.temperature), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXTempColdOutDesc"), True)
                         Case HeatExchangerCalcMode.CalcTempHotOut
-                            AValue = Format(Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HeatLoad"), su.heatflow), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HeatLoadOfEquipment"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXTempHotOut"), su.temperature), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXTempHotOutDesc"), True)
                         Case HeatExchangerCalcMode.CalcArea
                             Select Case Me.DefinedTemperature
                                 Case SpecifiedTemperature.Cold_Fluid
-                                    AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
+                                    AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
                                     .Item.Add(FT(DWSIM.App.GetLocalString("HXTempHotOut"), su.temperature), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXTempHotOutDesc"), True)
                                 Case SpecifiedTemperature.Hot_Fluid
-                                    AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
+                                    AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
                                     .Item.Add(FT(DWSIM.App.GetLocalString("HXTempColdOut"), su.temperature), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXTempColdOutDesc"), True)
                             End Select
-                            AValue = Format(Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("Area"), su.area), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HeatTransferArea"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HeatLoad"), su.heatflow), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HeatLoadOfEquipment"), True)
                         Case HeatExchangerCalcMode.ShellandTube_Rating
-                            AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXTempHotOut"), su.temperature), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXTempHotOutDesc"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXTempColdOut"), su.temperature), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXTempColdOutDesc"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HeatLoad"), su.heatflow), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HeatLoadOfEquipment"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("Area"), su.area), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HeatTransferArea"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXHotSidePressureDrop"), su.deltaP), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXHotSidePressureDrop"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXColdSidePressureDrop"), su.deltaP), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXColdSidePressureDrop"), True)
                             AValue = Format(Me.LMTD_F, FlowSheet.Options.NumberFormat)
                             .Item.Add("F", AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXColdSidePressureDrop"), True)
                         Case HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor
-                            AValue = Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.OverallFoulingFactor)
+                            AValue = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.OverallFoulingFactor)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXFoulingFactor"), su.foulingfactor), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXFoulingFactorDesc"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HeatLoad"), su.heatflow), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HeatLoadOfEquipment"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("Area"), su.area), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HeatTransferArea"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXHotSidePressureDrop"), su.deltaP), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXHotSidePressureDrop"), True)
-                            AValue = Format(Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop), FlowSheet.Options.NumberFormat)
+                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT(DWSIM.App.GetLocalString("HXColdSidePressureDrop"), su.deltaP), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXColdSidePressureDrop"), True)
                             AValue = Format(Me.LMTD_F, FlowSheet.Options.NumberFormat)
                             .Item.Add("F", AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXLMTDCorr"), True)
@@ -1424,7 +1424,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Item.Add(FT(DWSIM.App.GetLocalString("MaximumHeatExchange"), su.heatflow), Format(Me.MaxHeatExchange, FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("MaximumHeatExchangeDesc"), True)
                     .Item.Add(FT(DWSIM.App.GetLocalString("ThermalEfficiency"), "%"), Format(Me.ThermalEfficiency, FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("ThermalEfficiencyDesc"), True)
 
-                    AValue = Format(Converter.ConvertFromSI(su.deltaT, Me.LMTD), FlowSheet.Options.NumberFormat)
+                    AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.LMTD), FlowSheet.Options.NumberFormat)
                     .Item.Add(FT(DWSIM.App.GetLocalString("HXLMTD"), su.deltaT), AValue, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("HXLMTDDesc"), True)
 
                     If CalcMode = HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor Or CalcMode = HeatExchangerCalcMode.ShellandTube_Rating Then
@@ -1451,8 +1451,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -1460,61 +1460,61 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case 0
                     'PROP_HX_0	Global Heat Transfer Coefficient (U)
-                    value = Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient.GetValueOrDefault)
                 Case 1
                     'PROP_HX_1	Heat Exchange Area (A)
-                    value = Converter.ConvertFromSI(su.area, Me.Area.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area.GetValueOrDefault)
                 Case 2
                     'PROP_HX_2	Heat Load
-                    value = Converter.ConvertFromSI(su.heatflow, Me.Q.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q.GetValueOrDefault)
                 Case 3
-                    value = Converter.ConvertFromSI(su.temperature, Me.TempColdOut)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut)
                 Case 4
-                    value = Converter.ConvertFromSI(su.temperature, Me.TempHotOut)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut)
                 Case 5
-                    value = Converter.ConvertFromSI(su.diameter, Me.STProperties.Shell_Di)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Shell_Di)
                 Case 6
-                    value = Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Shell_Fouling)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Shell_Fouling)
                 Case 7
                     value = Me.STProperties.Shell_BaffleCut
                 Case 8
                     value = Me.STProperties.Shell_NumberOfShellsInSeries
                 Case 9
-                    value = Converter.ConvertFromSI(su.thickness, Me.STProperties.Shell_BaffleSpacing)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Shell_BaffleSpacing)
                 Case 10
-                    value = Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_Di)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_Di)
                 Case 11
-                    value = Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_De)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_De)
                 Case 12
-                    value = Converter.ConvertFromSI(su.distance, Me.STProperties.Tube_Length)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.STProperties.Tube_Length)
                 Case 13
-                    value = Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Tube_Fouling)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Tube_Fouling)
                 Case 14
                     value = Me.STProperties.Tube_PassesPerShell
                 Case 15
                     value = Me.STProperties.Tube_NumberPerShell
                 Case 16
-                    value = Converter.ConvertFromSI(su.thickness, Me.STProperties.Tube_Pitch)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Tube_Pitch)
                 Case 17
-                    value = Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.OverallFoulingFactor)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.OverallFoulingFactor)
                 Case 18
                     value = Me.LMTD_F
                 Case 19
-                    value = Converter.ConvertFromSI(su.deltaT, Me.LMTD)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.LMTD)
                 Case 20
-                    value = Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Ft)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Ft)
                 Case 21
-                    value = Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fc)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fc)
                 Case 22
-                    value = Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fs)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fs)
                 Case 23
-                    value = Converter.ConvertFromSI("", Me.STProperties.ReS)
+                    value = SystemsOfUnits.Converter.ConvertFromSI("", Me.STProperties.ReS)
                 Case 24
-                    value = Converter.ConvertFromSI("", Me.STProperties.ReT)
+                    value = SystemsOfUnits.Converter.ConvertFromSI("", Me.STProperties.ReT)
                 Case 25
                     value = ThermalEfficiency
                 Case 26
-                    value = Converter.ConvertFromSI(su.heatflow, MaxHeatExchange)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, MaxHeatExchange)
             End Select
 
             Return value
@@ -1550,59 +1550,59 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
 
                 Case 0
                     'PROP_HX_0	Global Heat Transfer Coefficient (U)
-                    Me.OverallCoefficient = Converter.ConvertToSI(su.heat_transf_coeff, propval)
+                    Me.OverallCoefficient = SystemsOfUnits.Converter.ConvertToSI(su.heat_transf_coeff, propval)
                 Case 1
                     'PROP_HX_1	Heat Exchange Area (A)
-                    Me.Area = Converter.ConvertToSI(su.area, propval)
+                    Me.Area = SystemsOfUnits.Converter.ConvertToSI(su.area, propval)
                 Case 2
                     'PROP_HX_1	Heat Load (Q)
-                    Me.Q = Converter.ConvertToSI(su.heatflow, propval)
+                    Me.Q = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
                 Case 3
                     'PROP_HX_3	Cold Fluid Outlet Temperature
-                    Me.TempColdOut = Converter.ConvertToSI(su.temperature, propval)
+                    Me.TempColdOut = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
                 Case 4
                     'PROP_HX_4	Hot Fluid Outlet Temperature
-                    Me.TempHotOut = Converter.ConvertToSI(su.temperature, propval)
+                    Me.TempHotOut = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
                 Case 5
-                    Me.STProperties.Shell_Di = Converter.ConvertToSI(su.diameter, propval)
+                    Me.STProperties.Shell_Di = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
                 Case 6
-                    Me.STProperties.Shell_Fouling = Converter.ConvertToSI(su.foulingfactor, propval)
+                    Me.STProperties.Shell_Fouling = SystemsOfUnits.Converter.ConvertToSI(su.foulingfactor, propval)
                 Case 7
                     Me.STProperties.Shell_BaffleCut = propval
                 Case 8
                     Me.STProperties.Shell_NumberOfShellsInSeries = propval
                 Case 9
-                    Me.STProperties.Shell_BaffleSpacing = Converter.ConvertToSI(su.thickness, propval)
+                    Me.STProperties.Shell_BaffleSpacing = SystemsOfUnits.Converter.ConvertToSI(su.thickness, propval)
                 Case 10
-                    Me.STProperties.Tube_Di = Converter.ConvertToSI(su.diameter, propval)
+                    Me.STProperties.Tube_Di = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
                 Case 11
-                    Me.STProperties.Tube_De = Converter.ConvertToSI(su.diameter, propval)
+                    Me.STProperties.Tube_De = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
                 Case 12
-                    Me.STProperties.Tube_Length = Converter.ConvertToSI(su.distance, propval)
+                    Me.STProperties.Tube_Length = SystemsOfUnits.Converter.ConvertToSI(su.distance, propval)
                 Case 13
-                    Me.STProperties.Tube_Fouling = Converter.ConvertToSI(su.foulingfactor, propval)
+                    Me.STProperties.Tube_Fouling = SystemsOfUnits.Converter.ConvertToSI(su.foulingfactor, propval)
                 Case 14
                     Me.STProperties.Tube_PassesPerShell = propval
                 Case 15
                     Me.STProperties.Tube_NumberPerShell = propval
                 Case 16
-                    Me.STProperties.Tube_Pitch = Converter.ConvertToSI(su.thickness, propval)
+                    Me.STProperties.Tube_Pitch = SystemsOfUnits.Converter.ConvertToSI(su.thickness, propval)
             End Select
             Return 1
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

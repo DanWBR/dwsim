@@ -309,7 +309,7 @@ Public Class FormSimulSettings
     Public Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
         FrmChild.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
-        Dim su As DWSIM.SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+        Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
 
         With Me.DataGridView1.Rows
             .Clear()
@@ -640,7 +640,7 @@ Public Class FormSimulSettings
             Dim oldvalue As String = ""
             Dim member As String = ""
 
-            Dim su As DWSIM.SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+            Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
 
             Select Case cell.Style.Tag
                 Case 1
@@ -854,7 +854,7 @@ Public Class FormSimulSettings
             If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 myStream = Me.SaveFileDialog1.OpenFile()
                 If Not (myStream Is Nothing) Then
-                    Dim su As DWSIM.SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+                    Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
                     Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                     Try
                         mySerializer.Serialize(myStream, su)
@@ -879,10 +879,10 @@ Public Class FormSimulSettings
         If Me.OpenFileDialog2.ShowDialog() = Windows.Forms.DialogResult.OK Then
             myStream = Me.OpenFileDialog2.OpenFile()
             If Not (myStream Is Nothing) Then
-                Dim su As New DWSIM.SystemsOfUnits.Units
+                Dim su As New SystemsOfUnits.Units
                 Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                 Try
-                    su = DirectCast(mySerializer.Deserialize(myStream), DWSIM.SystemsOfUnits.Units)
+                    su = DirectCast(mySerializer.Deserialize(myStream), SystemsOfUnits.Units)
                     If FormMain.AvailableUnitSystems.ContainsKey(su.Name) Then
                         su.Name += "_1"
                     End If

@@ -15,8 +15,8 @@ Public Class FormTable
 
     Private Sub FormTable_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
-        Dim su As DWSIM.SystemsOfUnits.Units = m_form.Options.SelectedUnitSystem
+        Dim cv As New SystemsOfUnits.Converter
+        Dim su As SystemsOfUnits.Units = m_form.Options.SelectedUnitSystem
 
         Me.Text = m_form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & DWSIM.App.GetLocalString("VisualizarResultados3")
 
@@ -44,12 +44,12 @@ Public Class FormTable
             For Each ps In .Sections.Values
                 If ps.Tipo = "Tubulaosimples" Then
                     For Each res In ps.Resultados
-                        Me.DataGridView1.Rows.Add(New Object() {Converter.ConvertFromSI(su.distance, comp_ant), Converter.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault), Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault), Converter.ConvertFromSI(su.velocity, res.LiqVel), Converter.ConvertFromSI(su.velocity, res.VapVel), Converter.ConvertFromSI(su.heatflow, res.CalorTransferido), res.HoldupDeLiquido, DWSIM.App.GetLocalString(res.TipoFluxo), Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC), Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal), Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall), Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation), Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_external)})
+                        Me.DataGridView1.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant), SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault), SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault), SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel), SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel), SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido), res.HoldupDeLiquido, DWSIM.App.GetLocalString(res.TipoFluxo), SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC), SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal), SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall), SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation), SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_external)})
                         comp_ant += ps.Comprimento / ps.Incrementos
                     Next
                 Else
                     For Each res In ps.Resultados
-                        Me.DataGridView1.Rows.Add(New Object() {Converter.ConvertFromSI(su.distance, comp_ant), Converter.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault), Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault), Converter.ConvertFromSI(su.velocity, res.LiqVel), Converter.ConvertFromSI(su.velocity, res.VapVel), Converter.ConvertFromSI(su.heatflow, res.CalorTransferido), res.HoldupDeLiquido, DWSIM.App.GetLocalString(res.TipoFluxo)})
+                        Me.DataGridView1.Rows.Add(New Object() {SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant), SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault), SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault), SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel), SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel), SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido), res.HoldupDeLiquido, DWSIM.App.GetLocalString(res.TipoFluxo)})
                     Next
                 End If
             Next

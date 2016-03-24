@@ -29,8 +29,8 @@ Public Class FormGraph
 
     Sub GetXY(ByVal EixoX As Integer, ByVal EixoY As Integer)
 
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
-        Dim su As DWSIM.SystemsOfUnits.Units = m_form.Options.SelectedUnitSystem
+        Dim cv As New SystemsOfUnits.Converter
+        Dim su As SystemsOfUnits.Units = m_form.Options.SelectedUnitSystem
 
         Dim count As Integer = 0
         Dim ps0 As PipeSection
@@ -59,13 +59,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.distance, comp_ant)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.distance, comp_ant)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant)
                                 i += 1
                             Next
                         End If
@@ -82,13 +82,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 i += 1
                             Next
                         End If
@@ -104,13 +104,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 i += 1
                             Next
                         End If
@@ -126,13 +126,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 i += 1
                             Next
                         End If
@@ -148,13 +148,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel)
                                 i += 1
                             Next
                         End If
@@ -170,13 +170,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vx(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                vx(i) = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 i += 1
                             Next
                         End If
@@ -195,7 +195,7 @@ Public Class FormGraph
                     Dim i As Integer = 0
                     For Each ps In .Sections.Values
                         For Each res In ps.Resultados
-                            vy(i) = Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC)
+                            vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC)
                             i += 1
                         Next
                     Next
@@ -231,13 +231,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.distance, comp_ant)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.distance, comp_ant)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant)
                                 i += 1
                             Next
                         End If
@@ -253,13 +253,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial)
                                 i += 1
                             Next
                         End If
@@ -275,13 +275,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial)
                                 i += 1
                             Next
                         End If
@@ -297,13 +297,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.velocity, res.LiqVel)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel)
                                 i += 1
                             Next
                         End If
@@ -319,14 +319,14 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
                                 i += 1
-                                vy(i) = Converter.ConvertFromSI(su.velocity, res.VapVel)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel)
                             Next
                         End If
                     Next
@@ -341,13 +341,13 @@ Public Class FormGraph
                     For Each ps In .Sections.Values
                         If ps.Tipo = "Tubulaosimples" Then
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 comp_ant += ps.Comprimento / ps.Incrementos
                                 i += 1
                             Next
                         Else
                             For Each res In ps.Resultados
-                                vy(i) = Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                vy(i) = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido)
                                 i += 1
                             Next
                         End If

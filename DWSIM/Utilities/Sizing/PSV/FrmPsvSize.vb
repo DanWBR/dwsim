@@ -13,8 +13,8 @@ Public Class FrmPsvSize
     Dim sz As DWSIM.Utilities.PSV.Sizing
     Dim ev As DWSIM.Utilities.PSV.Evaluation
 
-    Public su As New DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As New SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
     Private Sub Form4_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -185,13 +185,13 @@ Public Class FrmPsvSize
             Me.saimat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 
 
-            Me.TextBox1.Text = Format(Converter.ConvertFromSI(su.temperature, entmat.Phases(0).Properties.temperature), nf)
-            Me.TextBox2.Text = Format(Converter.ConvertFromSI(su.pressure, entmat.Phases(0).Properties.pressure), nf)
-            Me.TextBox4.Text = Format(Converter.ConvertFromSI(su.pressure, saimat.Phases(0).Properties.pressure), nf)
+            Me.TextBox1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, entmat.Phases(0).Properties.temperature), nf)
+            Me.TextBox2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, entmat.Phases(0).Properties.pressure), nf)
+            Me.TextBox4.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, saimat.Phases(0).Properties.pressure), nf)
 
-            Me.TextBox8.Text = Format(Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(0).Properties.volumetric_flow.GetValueOrDefault), nf)
-            Me.TextBox7.Text = Format(Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(3).Properties.volumetric_flow.GetValueOrDefault), nf)
-            Me.TextBox5.Text = Format(Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(2).Properties.volumetric_flow.GetValueOrDefault), nf)
+            Me.TextBox8.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(0).Properties.volumetric_flow.GetValueOrDefault), nf)
+            Me.TextBox7.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(3).Properties.volumetric_flow.GetValueOrDefault), nf)
+            Me.TextBox5.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(2).Properties.volumetric_flow.GetValueOrDefault), nf)
 
             'Gás
             'Líquido

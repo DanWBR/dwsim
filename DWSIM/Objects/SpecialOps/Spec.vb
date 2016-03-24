@@ -52,8 +52,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         <System.NonSerialized()> Protected m_eopt As ExpressionContext
 
         <System.NonSerialized()> Protected formC As Global.DWSIM.FormFlowsheet
-        Protected su As DWSIM.SystemsOfUnits.Units
-        Protected cv As New DWSIM.SystemsOfUnits.Converter
+        Protected su As SystemsOfUnits.Units
+        Protected cv As New SystemsOfUnits.Converter
         Protected nf As String = ""
 
         Public Property CalculateTargetObject() As Boolean
@@ -450,7 +450,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         End Function
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With FlowSheet.FormProps.PGEx1
 
@@ -552,7 +552,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             Return 0
 
         End Function

@@ -472,7 +472,7 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
     End Sub
 
-    Public Sub AddUnitSystem(ByVal su As DWSIM.SystemsOfUnits.Units)
+    Public Sub AddUnitSystem(ByVal su As SystemsOfUnits.Units)
 
         If Not My.Application.UserUnitSystems.ContainsKey(su.Name) Then
             My.Application.UserUnitSystems.Add(su.Name, su)
@@ -2883,7 +2883,7 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
                 Case UndoRedoActionType.SystemOfUnitsAdded
 
-                    Dim su = DirectCast(act.NewValue, DWSIM.SystemsOfUnits.Units)
+                    Dim su = DirectCast(act.NewValue, SystemsOfUnits.Units)
 
                     If undo Then
                         Me.FrmStSim1.ComboBox2.SelectedIndex = 0
@@ -2894,7 +2894,7 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 
                 Case UndoRedoActionType.SystemOfUnitsRemoved
 
-                    Dim su = DirectCast(act.NewValue, DWSIM.SystemsOfUnits.Units)
+                    Dim su = DirectCast(act.NewValue, SystemsOfUnits.Units)
 
                     If undo Then
                         Me.Options.AvailableUnitSystems.Add(su.Name, su)

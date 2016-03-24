@@ -5,7 +5,7 @@ Public Class frmMatList
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Protected Conversor As DWSIM.SystemsOfUnits.Converter
+    Protected Conversor As SystemsOfUnits.Converter
     Protected filename As String = ""
     Protected Flowsheet As FormFlowsheet
     Protected RowsCreated As Boolean = False
@@ -58,9 +58,9 @@ Public Class frmMatList
     Sub AddColumn(ByRef ms As DWSIM.SimulationObjects.Streams.MaterialStream)
 
         Me.Flowsheet = My.Application.ActiveSimulation
-        Me.Conversor = New DWSIM.SystemsOfUnits.Converter
+        Me.Conversor = New SystemsOfUnits.Converter
 
-        Dim su As DWSIM.SystemsOfUnits.Units
+        Dim su As SystemsOfUnits.Units
         su = Flowsheet.Options.SelectedUnitSystem
 
         Me.DataGridView1.Columns.Add(ms.Name, ms.GraphicObject.Tag)

@@ -26,11 +26,11 @@ Public Class UIPumpAroundsEditorForm
     Dim cb As Object
 
     Dim loaded As Boolean = False
-    Dim cvt As DWSIM.SystemsOfUnits.Converter
+    Dim cvt As SystemsOfUnits.Converter
 
     Private Sub UIPumpAroundsEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cvt = New DWSIM.SystemsOfUnits.Converter()
+        cvt = New SystemsOfUnits.Converter()
 
         form = My.Application.ActiveSimulation
         dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
@@ -53,7 +53,7 @@ Public Class UIPumpAroundsEditorForm
         With Me.dgv1.Rows
             .Clear()
             For Each pa As PumpAround In dc.PArCol.Collection.Values
-                .Add(New Object() {.Count + 1, pa.Name, pa.FromStage, pa.ToStage, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.deltaP, pa.DeltaP), pa.ID})
+                .Add(New Object() {.Count + 1, pa.Name, pa.FromStage, pa.ToStage, SystemsOfUnits.Converter.ConvertFromSI(form.Options.SelectedUnitSystem.deltaP, pa.DeltaP), pa.ID})
             Next
         End With
 
@@ -105,7 +105,7 @@ Public Class UIPumpAroundsEditorForm
                 Case 3
                     dc.PArCol.Collection(id).ToStage = value
                 Case 4
-                    dc.PArCol.Collection(id).DeltaP = Converter.ConvertToSI(form.Options.SelectedUnitSystem.deltaP, value)
+                    dc.PArCol.Collection(id).DeltaP = SystemsOfUnits.Converter.ConvertToSI(form.Options.SelectedUnitSystem.deltaP, value)
             End Select
         End If
     End Sub

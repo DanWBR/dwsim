@@ -31,8 +31,8 @@ Public Class FormReportConfig
 
     Dim DT As New DataTable
     Dim filename As String
-    Dim Conversor As New DWSIM.SystemsOfUnits.Converter
-    Dim su As New DWSIM.SystemsOfUnits.Units
+    Dim Conversor As New SystemsOfUnits.Converter
+    Dim su As New SystemsOfUnits.Units
     Dim nf As String
 
     Private Sub FillDataTable()

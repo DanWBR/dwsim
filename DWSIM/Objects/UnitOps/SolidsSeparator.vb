@@ -268,7 +268,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -336,8 +336,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -377,9 +377,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
@@ -396,8 +396,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            'If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            'Dim cv As New DWSIM.SystemsOfUnits.Converter
+            'If su Is Nothing Then su = New SystemsOfUnits.SI
+            'Dim cv As New SystemsOfUnits.Converter
             Dim value As String = "%"
             'Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

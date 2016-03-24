@@ -10989,7 +10989,7 @@
     <Type>DWSIM.DWSIM.Flowsheet.ClsFormOptions</Type>
     <SimulationMode></SimulationMode>
     <SelectedUnitSystem>
-      <Type>DWSIM.DWSIM.SystemsOfUnits.SI</Type>
+      <Type>DWSIM.SystemsOfUnits.SI</Type>
       <nome>SI System</nome>
       <area>m2</area>
       <distance>m</distance>

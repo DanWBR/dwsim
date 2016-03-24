@@ -25,14 +25,14 @@ Public Class UIResultsForm
     Public form As FormFlowsheet
 
     Dim loaded As Boolean = False
-    Dim cv As DWSIM.SystemsOfUnits.Converter
-    Dim su As DWSIM.SystemsOfUnits.Units
+    Dim cv As SystemsOfUnits.Converter
+    Dim su As SystemsOfUnits.Units
     Dim nf As String
     Dim SelTab As Integer
 
     Private Sub UIResultsForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cv = New DWSIM.SystemsOfUnits.Converter()
+        cv = New SystemsOfUnits.Converter()
         dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
         nf = form.Options.NumberFormat
         su = form.Options.SelectedUnitSystem
@@ -58,17 +58,17 @@ Public Class UIResultsForm
         Dim cx0(nc)(), cxf(nc)(), cy0(nc)(), cyf(nc)(), cK0(nc)(), cKf(nc)(), cxm(nc)(), cym(nc)() As Double
 
         For i = 0 To ns
-            T0(i) = Format(Converter.ConvertFromSI(su.temperature, dc.T0(i)), nf)
-            Tf(i) = Format(Converter.ConvertFromSI(su.temperature, dc.Tf(i)), nf)
-            V0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.V0(i)), nf)
-            Vf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.Vf(i)), nf)
-            L0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.L0(i)), nf)
-            Lf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.Lf(i)), nf)
-            VSS0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.VSS0(i)), nf)
-            VSSf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.VSSf(i)), nf)
-            LSS0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.LSS0(i)), nf)
-            LSSf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.LSSf(i)), nf)
-            P0(i) = Format(Converter.ConvertFromSI(su.pressure, dc.P0(i)), nf)
+            T0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, dc.T0(i)), nf)
+            Tf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, dc.Tf(i)), nf)
+            V0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.V0(i)), nf)
+            Vf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.Vf(i)), nf)
+            L0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.L0(i)), nf)
+            Lf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.Lf(i)), nf)
+            VSS0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.VSS0(i)), nf)
+            VSSf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.VSSf(i)), nf)
+            LSS0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.LSS0(i)), nf)
+            LSSf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.LSSf(i)), nf)
+            P0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, dc.P0(i)), nf)
             x0(i) = dc.x0(i)
             xf(i) = dc.xf(i)
             y0(i) = dc.y0(i)
@@ -181,7 +181,7 @@ Public Class UIResultsForm
     End Sub
     Private Sub FillGraphs()
 
-        cv = New DWSIM.SystemsOfUnits.Converter()
+        cv = New SystemsOfUnits.Converter()
 
         Dim ns As Integer = dc.NumberOfStages - 1
         Dim nc As Integer = UBound(dc.x0(0))
@@ -195,17 +195,17 @@ Public Class UIResultsForm
             py(i) = i + 1
         Next
         For i = 0 To ns
-            T0(i) = Format(Converter.ConvertFromSI(su.temperature, dc.T0(i)), nf)
-            Tf(i) = Format(Converter.ConvertFromSI(su.temperature, dc.Tf(i)), nf)
-            V0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.V0(i)), nf)
-            Vf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.Vf(i)), nf)
-            L0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.L0(i)), nf)
-            Lf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.Lf(i)), nf)
-            VSS0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.VSS0(i)), nf)
-            VSSf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.VSSf(i)), nf)
-            LSS0(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.LSS0(i)), nf)
-            LSSf(i) = Format(Converter.ConvertFromSI(su.molarflow, dc.LSSf(i)), nf)
-            P0(i) = Format(Converter.ConvertFromSI(su.pressure, dc.P0(i)), nf)
+            T0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, dc.T0(i)), nf)
+            Tf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, dc.Tf(i)), nf)
+            V0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.V0(i)), nf)
+            Vf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.Vf(i)), nf)
+            L0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.L0(i)), nf)
+            Lf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.Lf(i)), nf)
+            VSS0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.VSS0(i)), nf)
+            VSSf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.VSSf(i)), nf)
+            LSS0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.LSS0(i)), nf)
+            LSSf(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dc.LSSf(i)), nf)
+            P0(i) = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, dc.P0(i)), nf)
             x0(i) = dc.x0(i)
             xf(i) = dc.xf(i)
             y0(i) = dc.y0(i)

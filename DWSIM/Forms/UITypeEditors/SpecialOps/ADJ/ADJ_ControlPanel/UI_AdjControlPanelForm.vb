@@ -13,8 +13,8 @@ Public Class UI_AdjControlPanelForm
     Public myADJ As SpecialOps.Adjust
     Public py1, py2 As ArrayList
 
-    Public su As DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
     Private Sub UI_AdjControlPanelForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -27,7 +27,7 @@ Public Class UI_AdjControlPanelForm
         myADJ = formC.Collections.FlowsheetObjectCollection(formC.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
         With myADJ
-            Me.tbAjuste.Text = Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), .AdjustValue)
+            Me.tbAjuste.Text = SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), .AdjustValue)
             Me.tbMaxIt.Text = .MaximumIterations
             Me.tbStep.Text = .StepSize
             Me.tbTol.Text = .Tolerance
@@ -176,8 +176,8 @@ Public Class UI_AdjControlPanelForm
                 cvVal = Me.GetCtlVarValue()
                 cnt += 1
 
-                py1.Add(Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
-                py2.Add(Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
+                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
+                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
 
                 AtualizaGrafico()
 
@@ -241,8 +241,8 @@ Public Class UI_AdjControlPanelForm
                 Me.lblStatus.Text = DWSIM.App.GetLocalString("Ajustando")
                 Me.lblItXdeY.Text = DWSIM.App.GetLocalString("Procurandosubinterva")
                 Me.tbErro.Text = f
-                py1.Add(Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
-                py2.Add(Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
+                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
+                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
                 AtualizaGrafico()
                 minval = minval + delta
                 Me.SetMnpVarValue(minval)
@@ -254,8 +254,8 @@ Public Class UI_AdjControlPanelForm
                 Me.lblStatus.Text = DWSIM.App.GetLocalString("Ajustando")
                 Me.lblItXdeY.Text = DWSIM.App.GetLocalString("Procurandosubinterva")
                 Me.tbErro.Text = f_inf
-                py1.Add(Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
-                py2.Add(Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
+                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
+                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
                 AtualizaGrafico()
                 l += 1
                 If l > 5 Then
@@ -361,8 +361,8 @@ Public Class UI_AdjControlPanelForm
                 Me.tbErro.Text = fbb
                 iter2 += 1
 
-                py1.Add(Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
-                py2.Add(Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
+                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
+                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
 
                 AtualizaGrafico()
 

@@ -211,7 +211,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -251,7 +251,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
                 End With
 
-                Dim valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Quedadepressoaplicad5"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -260,7 +260,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .DefaultType = GetType(Nullable(Of Double))
                 End With
 
-                valor = Format(Converter.ConvertFromSI(su.volume, Me.Volume), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volume, Me.Volume), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("TKVol"), su.volume), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("TKVol"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -280,7 +280,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         .DefaultType = GetType(System.String)
                     End With
                 Else
-                    .Item.Add(FT(DWSIM.App.GetLocalString("TKResTime"), su.time), Format(Converter.ConvertFromSI(su.time, Me.ResidenceTime), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("TKResTime"), True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("TKResTime"), su.time), Format(SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.ResidenceTime), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("TKResTime"), True)
                     With .Item(.Item.Count - 1)
                         .CustomTypeConverter = New System.ComponentModel.StringConverter
                         .DefaultValue = Nothing
@@ -294,8 +294,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -303,7 +303,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case 0
                     'PROP_TK_0	Pressure Drop
-                    value = Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
 
             End Select
 
@@ -338,25 +338,25 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 0
                     'PROP_TK_0	Pressure Drop
-                    Me.DeltaP = Converter.ConvertToSI(su.deltaP, propval)
+                    Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
                 Case 1
                     'PROP_TK_1	Volume
-                    Me.DeltaP = Converter.ConvertToSI(su.volume, propval)
+                    Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
             End Select
             Return 1
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

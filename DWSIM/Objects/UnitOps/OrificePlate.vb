@@ -313,7 +313,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -359,7 +359,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Dim valor As Double = 0
 
-                valor = Converter.ConvertFromSI(su.diameter, Me.OrificeDiameter)
+                valor = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.OrificeDiameter)
                 .Item.Add(FT(DWSIM.App.GetLocalString("OPOrificeDiameter"), su.diameter), Format(valor, FlowSheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
                 .Item(.Item.Count - 1).CustomTypeConverter = New System.ComponentModel.StringConverter
                 .Item(.Item.Count - 1).Tag2 = "PROP_OP_1"
@@ -368,11 +368,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 .Item.Add(DWSIM.App.GetLocalString("OPCorrectionFactor"), Format(Me.CorrectionFactor, FlowSheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
                 .Item(.Item.Count - 1).Tag2 = "PROP_OP_3"
 
-                .Item.Add(FT(DWSIM.App.GetLocalString("OPOrificePressureDrop"), su.deltaP), Format(Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("OPOrificePressureDrop"), su.deltaP), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                 .Item(.Item.Count - 1).Tag2 = "PROP_OP_4"
-                .Item.Add(FT(DWSIM.App.GetLocalString("OPOverallPressureDrop"), su.deltaP), Format(Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("OPOverallPressureDrop"), su.deltaP), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                 .Item(.Item.Count - 1).Tag2 = "PROP_OP_5"
-                .Item.Add(FT(DWSIM.App.GetLocalString("OPDeltaT"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("OPDeltaT"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                 .Item(.Item.Count - 1).Tag2 = "PROP_OP_6"
 
 
@@ -389,8 +389,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -400,7 +400,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     value = Me.OrifType
                 Case 1
                     'PROP_OP_1	Orifice Diameter	1
-                    value = Converter.ConvertFromSI(su.diameter, Me.OrificeDiameter)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.OrificeDiameter)
                 Case 2
                     'PROP_OP_2	Beta (d/D)	1
                     value = Me.Beta
@@ -409,13 +409,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     value = Me.CorrectionFactor
                 Case 4
                     'PROP_OP_4	Overall Pressure Drop	0
-                    value = Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop)
                 Case 5
                     'PROP_OP_5	Orifice Pressure Drop	0
-                    value = Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop)
                 Case 6
                     'PROP_OP_6	Delta T	0
-                    value = Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
             End Select
 
             Return value
@@ -455,9 +455,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
@@ -466,7 +466,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Me.OrifType = propval
                 Case 1
                     'PROP_OP_1	Orifice Diameter	1
-                    Me.OrificeDiameter = Converter.ConvertToSI(su.diameter, propval)
+                    Me.OrificeDiameter = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
                 Case 2
                     'PROP_OP_2	Beta (d/D)	1
                     Me.Beta = propval
@@ -478,7 +478,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

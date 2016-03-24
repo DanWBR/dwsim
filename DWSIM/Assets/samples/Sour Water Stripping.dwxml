@@ -8656,7 +8656,7 @@ Calculated OK.</DebugText>
     <Type>DWSIM.DWSIM.Flowsheet.ClsFormOptions</Type>
     <SimulationMode></SimulationMode>
     <SelectedUnitSystem>
-      <Type>DWSIM.DWSIM.SystemsOfUnits.SI</Type>
+      <Type>DWSIM.SystemsOfUnits.SI</Type>
       <nome>SI System</nome>
       <mass>kg</mass>
       <reac_rate_heterog>mol/[kg.s]</reac_rate_heterog>

@@ -27,8 +27,8 @@ Public Class FormBinEnv
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Public su As New DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As New SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
     Dim mw1, mw2 As Double
 
@@ -90,8 +90,8 @@ Public Class FormBinEnv
             Me.lblP.Text = su.pressure
             Me.lblT.Text = su.temperature
 
-            Me.tbP.Text = Format(Converter.ConvertFromSI(su.pressure, 101325), nf)
-            Me.tbT.Text = Format(Converter.ConvertFromSI(su.temperature, 298.15), nf)
+            Me.tbP.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, 101325), nf)
+            Me.tbT.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, 298.15), nf)
 
             Me.GraphControl.IsShowPointValues = True
 
@@ -161,8 +161,8 @@ Public Class FormBinEnv
                 Next
             Next
 
-            P = Converter.ConvertToSI(su.pressure, tbP.Text)
-            T = Converter.ConvertToSI(su.temperature, tbT.Text)
+            P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, tbP.Text)
+            T = SystemsOfUnits.Converter.ConvertToSI(su.temperature, tbT.Text)
 
             Dim tipocalc As String = ""
             If Me.RadioButton1.Checked Then
@@ -409,11 +409,11 @@ Public Class FormBinEnv
                     Do
                         If py1(i) <> 0.0# Then
                             vx1.Add(px(i))
-                            vy1.Add(Converter.ConvertFromSI(su.temperature, py1(i)))
+                            vy1.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, py1(i)))
                         End If
                         If py2(i) <> 0.0# Then
                             vx2.Add(px(i))
-                            vy2.Add(Converter.ConvertFromSI(su.temperature, py2(i)))
+                            vy2.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, py2(i)))
                         End If
                         i += 1
                     Loop Until i = px.Count
@@ -424,7 +424,7 @@ Public Class FormBinEnv
                     Do
                         vx1l1.Add(px1l1(i))
                         vx1l2.Add(px1l2(i))
-                        vy3.Add(Converter.ConvertFromSI(su.temperature, py3(i)))
+                        vy3.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, py3(i)))
                         i += 1
                     Loop Until i = px1l1.Count
                 End If
@@ -433,7 +433,7 @@ Public Class FormBinEnv
                     i = 0
                     Do
                         vxs1.Add(pxs1(i))
-                        vys1.Add(Converter.ConvertFromSI(su.temperature, pys1(i)))
+                        vys1.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, pys1(i)))
                         i += 1
                     Loop Until i = pys1.Count
                 End If
@@ -442,7 +442,7 @@ Public Class FormBinEnv
                     i = 0
                     Do
                         vxs2.Add(pxs2(i))
-                        vys2.Add(Converter.ConvertFromSI(su.temperature, pys2(i)))
+                        vys2.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, pys2(i)))
                         i += 1
                     Loop Until i = pys2.Count
                 End If
@@ -451,7 +451,7 @@ Public Class FormBinEnv
                     i = 0
                     Do
                         vxc.Add(pxc(i))
-                        vyc.Add(Converter.ConvertFromSI(su.temperature, pyc(i)))
+                        vyc.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, pyc(i)))
                         i += 1
                     Loop Until i = pxc.Count
                 End If
@@ -541,7 +541,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "P = " & Converter.ConvertFromSI(su.pressure, P) & " " & su.pressure
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "P = " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, P) & " " & su.pressure
                     With .AddCurve("[" & ppname & "] " & DWSIM.App.GetLocalString("PontosdeBolha"), vx1.ToArray(GetType(Double)), vy1.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.SmoothTension = 0.3
@@ -629,11 +629,11 @@ Public Class FormBinEnv
                 Do
                     If py1(i) <> 0.0# Then
                         vx1.Add(px(i))
-                        vy1.Add(Converter.ConvertFromSI(su.pressure, py1(i)))
+                        vy1.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, py1(i)))
                     End If
                     If py2(i) <> 0.0# Then
                         vx2.Add(px(i))
-                        vy2.Add(Converter.ConvertFromSI(su.pressure, py2(i)))
+                        vy2.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, py2(i)))
                     End If
                     i += 1
                 Loop Until i = px.Count
@@ -643,7 +643,7 @@ Public Class FormBinEnv
                     Do
                         vx1l1.Add(px1l1(i))
                         vx1l2.Add(px1l2(i))
-                        vy3.Add(Converter.ConvertFromSI(su.pressure, py3(i)))
+                        vy3.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, py3(i)))
                         i += 1
                     Loop Until i = px1l1.Count
                 End If
@@ -693,7 +693,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & Converter.ConvertFromSI(su.temperature, T) & " " & su.temperature
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T) & " " & su.temperature
                     With .AddCurve("[" & ppname & "] " & DWSIM.App.GetLocalString("PontosdeBolha"), vx1.ToArray(GetType(Double)), vy1.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.Style = linetype
@@ -787,7 +787,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "P = " & Converter.ConvertFromSI(su.pressure, P) & " " & su.pressure
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "P = " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, P) & " " & su.pressure
                     With .AddCurve("[" & ppname & "]", vx.ToArray(GetType(Double)), vy.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.Style = linetype
@@ -870,7 +870,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & Converter.ConvertFromSI(su.temperature, T) & " " & su.temperature
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T) & " " & su.temperature
                     With .AddCurve("[" & ppname & "]", vx.ToArray(GetType(Double)), vy.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.Style = linetype
@@ -953,7 +953,7 @@ Public Class FormBinEnv
                 End With
 
                 With Me.GraphControl.GraphPane
-                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & Converter.ConvertFromSI(su.temperature, T) & " " & su.temperature & ", P = " & Converter.ConvertFromSI(su.pressure, P) & " " & su.pressure
+                    .Title.Text = c(0) & " / " & c(1) & vbCrLf & "T = " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T) & " " & su.temperature & ", P = " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, P) & " " & su.pressure
                     With .AddCurve("[" & ppname & "]", vx.ToArray(GetType(Double)), vy.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                         .Line.IsSmooth = False
                         .Line.Style = linetype

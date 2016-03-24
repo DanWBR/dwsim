@@ -38,7 +38,7 @@ Public Class FormUNIFACRegression
 
     Friend mycase As New UNIFACIPRegressionCase
 
-    Public cv As DWSIM.SystemsOfUnits.Converter
+    Public cv As SystemsOfUnits.Converter
     Public ci As Globalization.CultureInfo = Globalization.CultureInfo.CurrentUICulture
     Public _pp As Object
     Public _comps As New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
@@ -50,7 +50,7 @@ Public Class FormUNIFACRegression
     Dim GN1, GN2, Comp1, Comp2 As String
 
     Private Sub FormUNIFACRegression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cv = New DWSIM.SystemsOfUnits.Converter
+        cv = New SystemsOfUnits.Converter
         mat = New MaterialStream("", "")
         Comp1 = ""
         Comp2 = ""
@@ -1017,7 +1017,7 @@ End Class
 <System.Serializable()> Public Class UNIFACIPRegressionCase
     Public Filename As String = ""
     Public Databasepath As String = ""
-    Public su As DWSIM.SystemsOfUnits.Units
+    Public su As SystemsOfUnits.Units
     Public Title, Description As String
     Public Component1, Component2 As String
     Public ModelType As String

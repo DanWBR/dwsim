@@ -102,7 +102,7 @@ Namespace DWSIM.Editors.Generic
 
                 If Not ufrom Is Nothing Then
                     If Double.TryParse(uvalue, New Double) Then
-                        value = Converter.ConvertFromSI(uto, Converter.ConvertToSI(ufrom, uvalue))
+                        value = SystemsOfUnits.Converter.ConvertFromSI(uto, SystemsOfUnits.Converter.ConvertToSI(ufrom, uvalue))
                     Else
                         MsgBox("Input value is not a valid number.", MsgBoxStyle.OkOnly, "Error")
                     End If

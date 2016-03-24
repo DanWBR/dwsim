@@ -29,8 +29,8 @@ Public Class FormSensAnalysis
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Public nf As String
-    Public su As DWSIM.SystemsOfUnits.Units
-    Public cv As DWSIM.SystemsOfUnits.Converter
+    Public su As SystemsOfUnits.Units
+    Public cv As SystemsOfUnits.Converter
     Public form As FormFlowsheet
 
     Public abortCalc As Boolean = False
@@ -57,7 +57,7 @@ Public Class FormSensAnalysis
 
         form = My.Application.ActiveSimulation
 
-        cv = New DWSIM.SystemsOfUnits.Converter
+        cv = New SystemsOfUnits.Converter
         su = form.Options.SelectedUnitSystem
         nf = form.Options.NumberFormat
 
@@ -299,7 +299,7 @@ Public Class FormSensAnalysis
             Next
             Me.dgvResults.Rows.Clear()
             For Each result As Double() In .results
-                Me.dgvResults.Rows.Add(New Object() {Format(Converter.ConvertFromSI(sacase.iv1.unit, result(0)), nf), Format(Converter.ConvertFromSI(sacase.iv2.unit, result(1)), nf), Format(Converter.ConvertFromSI(sacase.dv.unit, result(2)), nf)})
+                Me.dgvResults.Rows.Add(New Object() {Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv1.unit, result(0)), nf), Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv2.unit, result(1)), nf), Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.dv.unit, result(2)), nf)})
             Next
             Me.tbStats.Text = .stats
             Me.tbExpression.Text = .expression
@@ -321,7 +321,7 @@ Public Class FormSensAnalysis
                         dgrow.Cells(2).Value = DWSIM.App.GetLocalString("SpreadsheetCell")
                         dgrow.Cells(3).Value = DWSIM.App.GetPropertyName(.propID)
                     End If
-                    dgrow.Cells(4).Value = Converter.ConvertFromSI(.unit, .currentvalue)
+                    dgrow.Cells(4).Value = SystemsOfUnits.Converter.ConvertFromSI(.unit, .currentvalue)
                     dgrow.Cells(5).Value = .unit
                 End With
             Next
@@ -481,7 +481,7 @@ Public Class FormSensAnalysis
                         .objectID = "SpreadsheetCell"
                     End If
                     .propID = Me.ReturnPropertyID(.objectID, dgrow.Cells(3).Value)
-                    .currentvalue = Converter.ConvertToSI(dgrow.Cells(5).Value, dgrow.Cells(4).Value)
+                    .currentvalue = SystemsOfUnits.Converter.ConvertToSI(dgrow.Cells(5).Value, dgrow.Cells(4).Value)
                     .unit = dgrow.Cells(5).Value
                 End With
                 .variables.Add(var.id, var)
@@ -525,14 +525,14 @@ Public Class FormSensAnalysis
         SaveForm(sacase)
 
         With sacase
-            iv1ll = Converter.ConvertToSI(.iv1.unit, .iv1.lowerlimit)
-            iv1ul = Converter.ConvertToSI(.iv1.unit, .iv1.upperlimit)
+            iv1ll = SystemsOfUnits.Converter.ConvertToSI(.iv1.unit, .iv1.lowerlimit)
+            iv1ul = SystemsOfUnits.Converter.ConvertToSI(.iv1.unit, .iv1.upperlimit)
             iv1np = .iv1.points - 1
             iv1id = .iv1.objectID
             iv1prop = .iv1.propID
             If chkIndVar2.Checked Then
-                iv2ll = Converter.ConvertToSI(.iv2.unit, .iv2.lowerlimit)
-                iv2ul = Converter.ConvertToSI(.iv2.unit, .iv2.upperlimit)
+                iv2ll = SystemsOfUnits.Converter.ConvertToSI(.iv2.unit, .iv2.lowerlimit)
+                iv2ul = SystemsOfUnits.Converter.ConvertToSI(.iv2.unit, .iv2.upperlimit)
                 iv2np = .iv2.points - 1
                 iv2id = .iv2.objectID
                 iv2prop = .iv2.propID
@@ -621,7 +621,7 @@ Public Class FormSensAnalysis
                             .Imports.AddType(GetType(System.Math))
                             For Each var As SAVariable In selectedsacase.variables.Values
                                 If var.objectID <> "SpreadsheetCell" Then
-                                    .Variables.Add(var.name, Converter.ConvertFromSI(var.unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)))
+                                    .Variables.Add(var.name, SystemsOfUnits.Converter.ConvertFromSI(var.unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)))
                                 Else
                                     .Variables.Add(var.name, form.FormSpreadsheet.GetCellValue(var.propID).Value)
                                 End If
@@ -647,13 +647,13 @@ Public Class FormSensAnalysis
                         res.Add(currresults.ToArray(Type.GetType("System.Double")))
                     End If
                     If rbExp.Checked Then
-                        Me.dgvResults.Rows.Add(New Object() {Format(Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf), Format(Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf), Format(dvval, nf)})
+                        Me.dgvResults.Rows.Add(New Object() {Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf), Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf), Format(dvval, nf)})
                     Else
                         Dim formattedvalues As New ArrayList
-                        formattedvalues.Add(Format(Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf))
-                        formattedvalues.Add(Format(Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf))
+                        formattedvalues.Add(Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf))
+                        formattedvalues.Add(Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf))
                         For Each var As SAVariable In selectedsacase.depvariables.Values
-                            formattedvalues.Add(Format(Converter.ConvertFromSI(var.unit, var.currentvalue), nf))
+                            formattedvalues.Add(Format(SystemsOfUnits.Converter.ConvertFromSI(var.unit, var.currentvalue), nf))
                         Next
                         Me.dgvResults.Rows.Add(formattedvalues.ToArray())
                     End If

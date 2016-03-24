@@ -11,8 +11,8 @@ Public Class UI_SpecControlPanelForm
 
     Public mySPEC As SpecialOps.Spec
     
-    Public su As DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
     Private Sub UI_SpecControlPanelForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

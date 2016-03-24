@@ -27,11 +27,11 @@ Public Class UISideRectifiersEditorForm
     Dim loaded As Boolean = False
 
     Dim tpl As DWSIM.SimulationObjects.UnitOperations.Auxiliary.DGVCBSelectors.Templates
-    Dim cvt As DWSIM.SystemsOfUnits.Converter
+    Dim cvt As SystemsOfUnits.Converter
 
     Private Sub UISideRectifiersEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cvt = New DWSIM.SystemsOfUnits.Converter()
+        cvt = New SystemsOfUnits.Converter()
 
         form = My.Application.ActiveSimulation
         dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
@@ -58,9 +58,9 @@ Public Class UISideRectifiersEditorForm
             .Clear()
             For Each rss As SideRectifier In dc.SideRectCol.Collection.Values
                 If dc.MaterialStreams.ContainsKey(rss.LiquidProductStreamID) And dc.MaterialStreams.ContainsKey(rss.VaporProductStreamID) Then
-                    '.Add(New Object() {.Count + 1, rss.Name, rss.Stages.Count, rss.FromStage, rss.ToStage, rss.RefluxRatio, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.VaporRate), dc.MaterialStreams(rss.VaporProductStreamID).Tag, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.LiquidRate), dc.MaterialStreams(rss.LiquidProductStreamID).Tag, rss.ID})
+                    '.Add(New Object() {.Count + 1, rss.Name, rss.Stages.Count, rss.FromStage, rss.ToStage, rss.RefluxRatio, SystemsOfUnits.Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.VaporRate), dc.MaterialStreams(rss.VaporProductStreamID).Tag, SystemsOfUnits.Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.LiquidRate), dc.MaterialStreams(rss.LiquidProductStreamID).Tag, rss.ID})
                 Else
-                    .Add(New Object() {.Count + 1, rss.Name, rss.Stages.Count, rss.FromStage, rss.ToStage, rss.RefluxRatio, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.VaporRate), "", Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.LiquidRate), "", rss.ID})
+                    .Add(New Object() {.Count + 1, rss.Name, rss.Stages.Count, rss.FromStage, rss.ToStage, rss.RefluxRatio, SystemsOfUnits.Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.VaporRate), "", SystemsOfUnits.Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, rss.LiquidRate), "", rss.ID})
                 End If
             Next
         End With
@@ -129,7 +129,7 @@ Public Class UISideRectifiersEditorForm
                 Case 5
                     dc.SideRectCol.Collection(id).RefluxRatio = value
                 Case 6
-                    dc.SideRectCol.Collection(id).VaporRate = Converter.ConvertToSI(form.Options.SelectedUnitSystem.molarflow, value)
+                    dc.SideRectCol.Collection(id).VaporRate = SystemsOfUnits.Converter.ConvertToSI(form.Options.SelectedUnitSystem.molarflow, value)
                 Case 7
                     Dim msid As String = dc.SideRectCol.Collection(id).VaporProductStreamID
                     If dc.MaterialStreams.ContainsKey(msid) Then
@@ -142,7 +142,7 @@ Public Class UISideRectifiersEditorForm
                         dc.SideRectCol.Collection(id).VaporProductStreamID = id2
                     End If
                 Case 8
-                    dc.SideRectCol.Collection(id).LiquidRate = Converter.ConvertToSI(form.Options.SelectedUnitSystem.molarflow, value)
+                    dc.SideRectCol.Collection(id).LiquidRate = SystemsOfUnits.Converter.ConvertToSI(form.Options.SelectedUnitSystem.molarflow, value)
                 Case 9
                     Dim msid As String = dc.SideRectCol.Collection(id).LiquidProductStreamID
                     If dc.MaterialStreams.ContainsKey(msid) Then

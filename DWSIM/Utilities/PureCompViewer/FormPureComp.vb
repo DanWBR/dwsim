@@ -64,8 +64,8 @@ Public Class FormPureComp
 
     Sub Populate()
 
-        Dim su As DWSIM.SystemsOfUnits.Units = Flowsheet.Options.SelectedUnitSystem
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim su As SystemsOfUnits.Units = Flowsheet.Options.SelectedUnitSystem
+        Dim cv As New SystemsOfUnits.Converter
         Dim nf As String = Flowsheet.Options.NumberFormat
         Dim pp As PropertyPackages.PropertyPackage = Flowsheet.Options.SelectedPropertyPackage
 
@@ -136,8 +136,8 @@ Public Class FormPureComp
 
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_CPi(constprop.Name, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_CPi(constprop.Name, T))
                     vxCp.Add(TD)
                     vyCp.Add(VD)
                     Me.DataTableVapour.Item(0, Row).Value = Format(TD, nf)
@@ -174,8 +174,8 @@ Public Class FormPureComp
             vyVapVisc.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.viscosity, pp.AUX_VAPVISCi(constprop, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, pp.AUX_VAPVISCi(constprop, T))
                     vxVapVisc.Add(TD)
                     vyVapVisc.Add(VD)
                     Me.DataTableVapour.Item(2, Row).Value = Format(TD, nf)
@@ -214,8 +214,8 @@ Public Class FormPureComp
             vyVapThCond.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.thermalConductivity, pp.AUX_VAPTHERMCONDi(constprop, T, 101325))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, pp.AUX_VAPTHERMCONDi(constprop, T, 101325))
                     vxVapThCond.Add(TD)
                     vyVapThCond.Add(VD)
                     Me.DataTableVapour.Item(4, Row).Value = Format(TD, nf)
@@ -258,8 +258,8 @@ Public Class FormPureComp
 
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_LIQ_Cpi(constprop, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_LIQ_Cpi(constprop, T))
                     vxLiqCp.Add(TD)
                     vyLiqCp.Add(VD)
                     Me.DataTableLiquid.Item(0, Row).Value = Format(TD, nf)
@@ -297,8 +297,8 @@ Public Class FormPureComp
             vyDHvap.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.enthalpy, pp.AUX_HVAPi(constprop.Name, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, pp.AUX_HVAPi(constprop.Name, T))
                     vxDHvap.Add(TD)
                     vyDHvap.Add(VD)
                     Me.DataTableLiquid.Item(2, Row).Value = Format(TD, nf)
@@ -337,8 +337,8 @@ Public Class FormPureComp
             vyPvap.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.pressure, pp.AUX_PVAPi(constprop.Name, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, pp.AUX_PVAPi(constprop.Name, T))
                     vxPvap.Add(TD)
                     vyPvap.Add(VD)
                     Me.DataTableLiquid.Item(4, Row).Value = Format(TD, nf)
@@ -379,8 +379,8 @@ Public Class FormPureComp
             vySurfTens.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.tpmp_surfaceTension, pp.AUX_SURFTi(constprop, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.tpmp_surfaceTension, pp.AUX_SURFTi(constprop, T))
                     vxSurfTens.Add(TD)
                     vySurfTens.Add(VD)
                     Me.DataTableLiquid.Item(6, Row).Value = Format(TD, nf)
@@ -417,8 +417,8 @@ Public Class FormPureComp
             vyVisc.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.viscosity, pp.AUX_LIQVISCi(constprop.Name, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, pp.AUX_LIQVISCi(constprop.Name, T))
                     vxVisc.Add(TD)
                     vyVisc.Add(VD)
                     Me.DataTableLiquid.Item(8, Row).Value = Format(TD, nf)
@@ -458,8 +458,8 @@ Public Class FormPureComp
             vyLD.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.density, pp.AUX_LIQDENSi(constprop, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.density, pp.AUX_LIQDENSi(constprop, T))
                     vxLD.Add(TD)
                     vyLD.Add(VD)
                     Me.DataTableLiquid.Item(10, Row).Value = Format(TD, nf)
@@ -498,8 +498,8 @@ Public Class FormPureComp
             vyLiqThCond.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.thermalConductivity, pp.AUX_LIQTHERMCONDi(constprop, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, pp.AUX_LIQTHERMCONDi(constprop, T))
                     vxLiqThCond.Add(TD)
                     vyLiqThCond.Add(VD)
                     Me.DataTableLiquid.Item(12, Row).Value = Format(TD, nf)
@@ -540,8 +540,8 @@ Public Class FormPureComp
             vySD.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.density, pp.AUX_SOLIDDENSi(constprop, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.density, pp.AUX_SOLIDDENSi(constprop, T))
                     vxSD.Add(TD)
                     vySD.Add(VD)
                     'Me.DataTable.Item(10, Row).Value = Format(TD, nf)
@@ -584,8 +584,8 @@ Public Class FormPureComp
             vySCP.Clear()
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
-                    TD = Converter.ConvertFromSI(su.temperature, T)
-                    VD = Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_SolidHeatCapacity(constprop, T))
+                    TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_SolidHeatCapacity(constprop, T))
                     vxSCP.Add(TD)
                     vySCP.Add(VD)
                     'Me.DataTable.Item(12, Row).Value = Format(TD, nf)
@@ -705,18 +705,18 @@ Public Class FormPureComp
             .Add(New Object() {"ID", constprop.ID, ""})
             .Add(New Object() {DWSIM.App.GetLocalString("CASNumber"), constprop.CAS_Number, ""})
             .Add(New Object() {DWSIM.App.GetLocalString("Massamolar"), Format(constprop.Molar_Weight, nf), su.molecularWeight})
-            .Add(New Object() {DWSIM.App.GetLocalString("TemperaturaCrtica"), Format(Converter.ConvertFromSI(su.temperature, constprop.Critical_Temperature), nf), su.temperature})
-            .Add(New Object() {DWSIM.App.GetLocalString("PressoCrtica"), Format(Converter.ConvertFromSI(su.pressure, constprop.Critical_Pressure), nf), su.pressure})
-            .Add(New Object() {DWSIM.App.GetLocalString("VolumeCrtico"), Format(Converter.ConvertFromSI(su.molar_volume, constprop.Critical_Volume), nf), su.molar_volume})
+            .Add(New Object() {DWSIM.App.GetLocalString("TemperaturaCrtica"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Critical_Temperature), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("PressoCrtica"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, constprop.Critical_Pressure), nf), su.pressure})
+            .Add(New Object() {DWSIM.App.GetLocalString("VolumeCrtico"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, constprop.Critical_Volume), nf), su.molar_volume})
             .Add(New Object() {DWSIM.App.GetLocalString("CompressibilidadeCrt"), Format(constprop.Critical_Compressibility, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("FatorAcntrico"), Format(constprop.Acentric_Factor, nf), ""})
-            .Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.enthalpy})
-            .Add(New Object() {DWSIM.App.GetLocalString("EnergyFlowdeGibbsdeForm2"), Format(Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
-            .Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(Converter.ConvertFromSI(su.temperature, constprop.Normal_Boiling_Point), nf), su.temperature})
-            .Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(Converter.ConvertFromSI(su.temperature, constprop.TemperatureOfFusion), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("EnergyFlowdeGibbsdeForm2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Normal_Boiling_Point), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.TemperatureOfFusion), nf), su.temperature})
             .Add(New Object() {DWSIM.App.GetLocalString("EnthalpyOfFusionAtTf"), Format(constprop.EnthalpyOfFusionAtTf, nf), "kJ/mol"})
-            .Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfSolidDensity_Ts"), Format(Converter.ConvertFromSI(su.temperature, constprop.SolidTs), nf), su.temperature})
-            .Add(New Object() {DWSIM.App.GetLocalString("SolidDensityAtTs"), Format(Converter.ConvertFromSI(su.density, constprop.SolidDensityAtTs), nf), su.density})
+            .Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfSolidDensity_Ts"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.SolidTs), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("SolidDensityAtTs"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, constprop.SolidDensityAtTs), nf), su.density})
             .Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderAcentricFactor"), Format(constprop.Chao_Seader_Acentricity, nf), "-"})
             .Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderSolubilityParameter"), Format(constprop.Chao_Seader_Solubility_Parameter, nf), "(cal/mL)^0.5"})
             .Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderLiquidMolarVolume"), Format(constprop.Chao_Seader_Liquid_Molar_Volume, nf), "mL/mol"})
@@ -729,18 +729,18 @@ Public Class FormPureComp
             .Add(New Object() {DWSIM.App.GetLocalString("HydrationNumber"), constprop.HydrationNumber, ""})
             .Add(New Object() {DWSIM.App.GetLocalString("PositiveIon"), constprop.PositiveIon, ""})
             .Add(New Object() {DWSIM.App.GetLocalString("NegativeIon"), constprop.NegativeIon, ""})
-            .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
-            .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelHF), nf), su.enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
+            .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelHF), nf), su.enthalpy})
             .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_Cp0"), Format(constprop.Electrolyte_Cp0, nf), "kJ/[mol.K]"})
             .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_StdStateMolVol"), Format(constprop.StandardStateMolarVolume, nf), "cm3/mol"})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGG"), Format(constprop.BO_SGG, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGO"), Format(constprop.BO_SGO, nf), ""})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(Converter.ConvertFromSI(su.gor, constprop.BO_GOR), nf), su.gor})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.gor, constprop.BO_GOR), nf), su.gor})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_BSW"), Format(constprop.BO_BSW, nf), ""})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(Converter.ConvertFromSI(su.cinematic_viscosity, constprop.BO_OilVisc1), nf), su.cinematic_viscosity})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(Converter.ConvertFromSI(su.temperature, constprop.BO_OilViscTemp1), nf), su.temperature})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(Converter.ConvertFromSI(su.cinematic_viscosity, constprop.BO_OilVisc2), nf), su.cinematic_viscosity})
-            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(Converter.ConvertFromSI(su.temperature, constprop.BO_OilViscTemp2), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, constprop.BO_OilVisc1), nf), su.cinematic_viscosity})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.BO_OilViscTemp1), nf), su.temperature})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, constprop.BO_OilVisc2), nf), su.cinematic_viscosity})
+            .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.BO_OilViscTemp2), nf), su.temperature})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_P"), Format(constprop.BO_PNA_P, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_N"), Format(constprop.BO_PNA_N, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_A"), Format(constprop.BO_PNA_A, nf), ""})
@@ -764,32 +764,32 @@ Public Class FormPureComp
 
     Private Sub GridProps_CellEndEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles GridProps.CellEndEdit
 
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
-        Dim su As DWSIM.SystemsOfUnits.Units = Flowsheet.Options.SelectedUnitSystem
+        Dim cv As New SystemsOfUnits.Converter
+        Dim su As SystemsOfUnits.Units = Flowsheet.Options.SelectedUnitSystem
         Select Case e.RowIndex
             Case 0 '.Add(New Object() {DWSIM.App.GetLocalString("Database"), constprop.CurrentDB, ""})
             Case 1 '.Add(New Object() {DWSIM.App.GetLocalString("Type"), DWSIM.App.GetComponentType(constprop), ""})
             Case 2 '.Add(New Object() {"ID", constprop.ID, ""})
             Case 3 '.Add(New Object() {DWSIM.App.GetLocalString("CASNumber"), constprop.CAS_Number, ""})
             Case 4 '.Add(New Object() {DWSIM.App.GetLocalString("Massamolar"), Format(constprop.Molar_Weight, nf), su.molecularWeight})
-                constprop.Molar_Weight = Converter.ConvertToSI(su.molecularWeight, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 5 '.Add(New Object() {DWSIM.App.GetLocalString("TemperaturaCrtica"), Format(Converter.ConvertFromSI(su.temperature, constprop.Critical_Temperature), nf), su.temperature})
-                constprop.Critical_Temperature = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 6 '.Add(New Object() {DWSIM.App.GetLocalString("PressoCrtica"), Format(Converter.ConvertFromSI(su.pressure, constprop.Critical_Pressure), nf), su.pressure})
-                constprop.Critical_Pressure = Converter.ConvertToSI(su.pressure, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 7 '.Add(New Object() {DWSIM.App.GetLocalString("VolumeCrtico"), Format(Converter.ConvertFromSI(su.molar_volume, constprop.Critical_Volume), nf), su.molar_volume})
-                constprop.Critical_Volume = Converter.ConvertToSI(su.volume, GridProps.Rows(e.RowIndex).Cells(1).Value)
+                constprop.Molar_Weight = SystemsOfUnits.Converter.ConvertToSI(su.molecularWeight, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 5 '.Add(New Object() {DWSIM.App.GetLocalString("TemperaturaCrtica"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Critical_Temperature), nf), su.temperature})
+                constprop.Critical_Temperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 6 '.Add(New Object() {DWSIM.App.GetLocalString("PressoCrtica"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, constprop.Critical_Pressure), nf), su.pressure})
+                constprop.Critical_Pressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 7 '.Add(New Object() {DWSIM.App.GetLocalString("VolumeCrtico"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, constprop.Critical_Volume), nf), su.molar_volume})
+                constprop.Critical_Volume = SystemsOfUnits.Converter.ConvertToSI(su.volume, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 8 '.Add(New Object() {DWSIM.App.GetLocalString("CompressibilidadeCrt"), Format(constprop.Critical_Compressibility, nf), ""})
                 constprop.Critical_Compressibility = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 9 '.Add(New Object() {DWSIM.App.GetLocalString("FatorAcntrico"), Format(constprop.Acentric_Factor, nf), ""})
                 constprop.Acentric_Factor = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 10 '.Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.enthalpy})
-                constprop.IG_Enthalpy_of_Formation_25C = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 11 '.Add(New Object() {DWSIM.App.GetLocalString("EnergyFlowdeGibbsdeForm2"), Format(Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
-                constprop.IG_Gibbs_Energy_of_Formation_25C = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 12 '.Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(Converter.ConvertFromSI(su.temperature, constprop.Normal_Boiling_Point), nf), su.temperature})
-                constprop.Normal_Boiling_Point = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-                constprop.NBP = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 10 '.Add(New Object() {DWSIM.App.GetLocalString("EntalpiadeFormaodoGs"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.IG_Enthalpy_of_Formation_25C), nf), su.enthalpy})
+                constprop.IG_Enthalpy_of_Formation_25C = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 11 '.Add(New Object() {DWSIM.App.GetLocalString("EnergyFlowdeGibbsdeForm2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, constprop.IG_Gibbs_Energy_of_Formation_25C), nf), su.enthalpy})
+                constprop.IG_Gibbs_Energy_of_Formation_25C = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 12 '.Add(New Object() {DWSIM.App.GetLocalString("PontoNormaldeEbulio"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Normal_Boiling_Point), nf), su.temperature})
+                constprop.Normal_Boiling_Point = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+                constprop.NBP = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 17 '.Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderAcentricFactor"), Format(constprop.Chao_Seader_Acentricity, nf), "-"})
                 constprop.Chao_Seader_Acentricity = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 18 '.Add(New Object() {DWSIM.App.GetLocalString("ChaoSeaderSolubilityParameter"), Format(constprop.Chao_Seader_Solubility_Parameter, nf), "(cal/mL)^0.5"})
@@ -814,19 +814,19 @@ Public Class FormPureComp
                 constprop.PositiveIon = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 28 '.Add(New Object() {DWSIM.App.GetLocalString("NegativeIon"), constprop.NegativeIon, ""})
                 constprop.NegativeIon = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 13 '.Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(Converter.ConvertFromSI(su.temperature, constprop.TemperatureOfFusion), nf), su.temperature})
-                constprop.TemperatureOfFusion = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 13 '.Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.TemperatureOfFusion), nf), su.temperature})
+                constprop.TemperatureOfFusion = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 14 '.Add(New Object() {DWSIM.App.GetLocalString("EnthalpyOfFusionAtTf"), Format(constprop.EnthalpyOfFusionAtTf, nf), "kJ/mol"})
                 constprop.EnthalpyOfFusionAtTf = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 15 '.Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfSolidDensity_Ts"), Format(Converter.ConvertFromSI(su.temperature, constprop.SolidTs), nf), su.temperature})
-                constprop.SolidTs = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 16 '.Add(New Object() {DWSIM.App.GetLocalString("SolidDensityAtTs"), Format(Converter.ConvertFromSI(su.density, constprop.SolidDensityAtTs), nf), su.density})
-                constprop.SolidDensityAtTs = Converter.ConvertToSI(su.density, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 29 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
-                constprop.Electrolyte_DelGF = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 30 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
-                constprop.Electrolyte_DelHF = Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 31 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_Cp0"), Format(Converter.ConvertFromSI(su.heatCapacityCp, constprop.Electrolyte_Cp0), nf), su.heatCapacityCp})
+            Case 15 '.Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfSolidDensity_Ts"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.SolidTs), nf), su.temperature})
+                constprop.SolidTs = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 16 '.Add(New Object() {DWSIM.App.GetLocalString("SolidDensityAtTs"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, constprop.SolidDensityAtTs), nf), su.density})
+                constprop.SolidDensityAtTs = SystemsOfUnits.Converter.ConvertToSI(su.density, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 29 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
+                constprop.Electrolyte_DelGF = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 30 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
+                constprop.Electrolyte_DelHF = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 31 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_Cp0"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, constprop.Electrolyte_Cp0), nf), su.heatCapacityCp})
                 constprop.Electrolyte_Cp0 = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 32 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_StdStateMolVol"), Format(constprop.StandardStateMolarVolume, nf), "cm3/mol"})
                 constprop.StandardStateMolarVolume = GridProps.Rows(e.RowIndex).Cells(1).Value
@@ -834,18 +834,18 @@ Public Class FormPureComp
                 constprop.BO_SGG = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 34 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGO"), Format(constprop.BO_SGO, nf), ""})
                 constprop.BO_SGO = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 35 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(Converter.ConvertFromSI(su.gor, constprop.BO_GOR), nf), su.gor})
-                constprop.BO_GOR = Converter.ConvertToSI(su.gor, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 35 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.gor, constprop.BO_GOR), nf), su.gor})
+                constprop.BO_GOR = SystemsOfUnits.Converter.ConvertToSI(su.gor, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 36 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_BSW"), Format(constprop.BO_BSW, nf), ""})
                 constprop.BO_BSW = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 37 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
-                constprop.BO_OilVisc1 = Converter.ConvertToSI(su.cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 38 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
-                constprop.BO_OilViscTemp1 = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 39 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
-                constprop.BO_OilVisc2 = Converter.ConvertToSI(su.cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 40 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
-                constprop.BO_OilViscTemp2 = Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 37 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
+                constprop.BO_OilVisc1 = SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 38 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
+                constprop.BO_OilViscTemp1 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 39 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
+                constprop.BO_OilVisc2 = SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
+            Case 40 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
+                constprop.BO_OilViscTemp2 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 41 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_P"), Format(constprop.BO_PNA_P, nf), ""})
                 constprop.BO_PNA_P = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 42 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_N"), Format(constprop.BO_PNA_N, nf), ""})

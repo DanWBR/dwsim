@@ -490,19 +490,19 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     For i = 0 To chead.x.Count - 1
                         If Double.TryParse(chead.x(i), New Double) And Double.TryParse(chead.y(i), New Double) Then
-                            xhead.Add(Converter.ConvertToSI(chead.xunit, chead.x(i)))
-                            yhead.Add(Converter.ConvertToSI(chead.yunit, chead.y(i)))
+                            xhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.xunit, chead.x(i)))
+                            yhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.yunit, chead.y(i)))
                         End If
                     Next
                     For i = 0 To cnpsh.x.Count - 1
                         If Double.TryParse(cnpsh.x(i), New Double) And Double.TryParse(cnpsh.y(i), New Double) Then
-                            xnpsh.Add(Converter.ConvertToSI(cnpsh.xunit, cnpsh.x(i)))
-                            ynpsh.Add(Converter.ConvertToSI(cnpsh.yunit, cnpsh.y(i)))
+                            xnpsh.Add(SystemsOfUnits.Converter.ConvertToSI(cnpsh.xunit, cnpsh.x(i)))
+                            ynpsh.Add(SystemsOfUnits.Converter.ConvertToSI(cnpsh.yunit, cnpsh.y(i)))
                         End If
                     Next
                     For i = 0 To ceff.x.Count - 1
                         If Double.TryParse(ceff.x(i), New Double) And Double.TryParse(ceff.y(i), New Double) Then
-                            xeff.Add(Converter.ConvertToSI(ceff.xunit, ceff.x(i)))
+                            xeff.Add(SystemsOfUnits.Converter.ConvertToSI(ceff.xunit, ceff.x(i)))
                             If ceff.yunit = "%" Then
                                 yeff.Add(ceff.y(i) / 100)
                             Else
@@ -512,14 +512,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Next
                     For i = 0 To cpower.x.Count - 1
                         If Double.TryParse(cpower.x(i), New Double) And Double.TryParse(cpower.y(i), New Double) Then
-                            xpower.Add(Converter.ConvertToSI(cpower.xunit, cpower.x(i)))
-                            ypower.Add(Converter.ConvertToSI(cpower.yunit, cpower.y(i)))
+                            xpower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.xunit, cpower.x(i)))
+                            ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, cpower.y(i)))
                         End If
                     Next
                     For i = 0 To csystem.x.Count - 1
                         If Double.TryParse(csystem.x(i), New Double) And Double.TryParse(csystem.y(i), New Double) Then
-                            xsystem.Add(Converter.ConvertToSI(csystem.xunit, csystem.x(i)))
-                            ysystem.Add(Converter.ConvertToSI(csystem.yunit, csystem.y(i)))
+                            xsystem.Add(SystemsOfUnits.Converter.ConvertToSI(csystem.xunit, csystem.x(i)))
+                            ysystem.Add(SystemsOfUnits.Converter.ConvertToSI(csystem.yunit, csystem.y(i)))
                         End If
                     Next
 
@@ -882,7 +882,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -949,7 +949,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             End If
                         End If
                     Case CalculationMode.Delta_P
-                        Dim valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                        Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT("Delta P", su.deltaP), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Diferenadepressoentr"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -973,7 +973,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .DefaultType = GetType(Nullable(Of Double))
                         End With
                     Case CalculationMode.Power
-                        Dim valor = Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                        Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("EnergyFlownecessria"), su.heatflow), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Potnciarequeridapela"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -982,7 +982,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
                     Case CalculationMode.OutletPressure
-                        Dim valor = Format(Converter.ConvertFromSI(su.pressure, Me.Pout), FlowSheet.Options.NumberFormat)
+                        Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Pout), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("Pressoajusante"), su.pressure), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("Diferenadepressoentr"), True)
                         With .Item(.Item.Count - 1)
                             .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -1010,64 +1010,64 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 .DefaultValue = Nothing
                                 .CustomEditor = New DWSIM.Editors.Pump.UIPumpCurvesEditor
                             End With
-                            .Item.Add(FT(DWSIM.App.GetLocalString("PumpCurveHead"), su.head), Format(Converter.ConvertFromSI(su.head, Me.CurveHead), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("PumpCurveHead"), su.head), Format(SystemsOfUnits.Converter.ConvertFromSI(su.head, Me.CurveHead), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                             .Item.Add(DWSIM.App.GetLocalString("PumpCurveEfficiency"), Format(Me.CurveEff, FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
-                            .Item.Add(FT(DWSIM.App.GetLocalString("PumpCurvePower"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.CurvePower), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
-                            Dim valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("PumpCurvePower"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CurvePower), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                            Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT("Delta P", su.deltaP), valor, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadepressoentr"), True)
                             With .Item(.Item.Count - 1)
                                 .DefaultValue = Nothing
                                 .DefaultType = GetType(Nullable(Of Double))
                             End With
-                            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                             With .Item(.Item.Count - 1)
                                 .DefaultValue = Nothing
                                 .DefaultType = GetType(Nullable(Of Double))
                             End With
-                            .Item.Add(FT(DWSIM.App.GetLocalString("PumpCurveNPSHr"), su.head), Format(Converter.ConvertFromSI(su.head, Me.CurveNPSHr), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("PumpCurveNPSHr"), su.head), Format(SystemsOfUnits.Converter.ConvertFromSI(su.head, Me.CurveNPSHr), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                         Case CalculationMode.Delta_P
-                            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                             With .Item(.Item.Count - 1)
                                 .DefaultValue = Nothing
                                 .DefaultType = GetType(Nullable(Of Double))
                             End With
-                            .Item.Add(FT(DWSIM.App.GetLocalString("EnergyFlownecessria"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciarequeridapela"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("EnergyFlownecessria"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciarequeridapela"), True)
                             With .Item(.Item.Count - 1)
                                 .DefaultValue = Nothing
                                 .DefaultType = GetType(Nullable(Of Double))
                             End With
                         Case CalculationMode.EnergyStream, CalculationMode.Power
-                            Dim valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                            Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT("Delta P", su.deltaP), valor, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadepressoentr"), True)
                             With .Item(.Item.Count - 1)
                                 .DefaultValue = Nothing
                                 .DefaultType = GetType(Nullable(Of Double))
                             End With
-                            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                             With .Item(.Item.Count - 1)
                                 .DefaultValue = Nothing
                                 .DefaultType = GetType(Nullable(Of Double))
                             End With
                         Case CalculationMode.OutletPressure
-                            Dim valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                            Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                             .Item.Add(FT("Delta P", su.deltaP), valor, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadepressoentr"), True)
                             With .Item(.Item.Count - 1)
                                 .DefaultValue = Nothing
                                 .DefaultType = GetType(Nullable(Of Double))
                             End With
-                            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                             With .Item(.Item.Count - 1)
                                 .DefaultValue = Nothing
                                 .DefaultType = GetType(Nullable(Of Double))
                             End With
-                            .Item.Add(FT(DWSIM.App.GetLocalString("EnergyFlownecessria"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciarequeridapela"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("EnergyFlownecessria"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciarequeridapela"), True)
                             With .Item(.Item.Count - 1)
                                 .DefaultValue = Nothing
                                 .DefaultType = GetType(Nullable(Of Double))
                             End With
                     End Select
                 End If
-                .Item.Add(FT(DWSIM.App.GetLocalString("PumpNPSHd"), su.head), Format(Converter.ConvertFromSI(su.head, Me.NPSH.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciarequeridapela"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("PumpNPSHd"), su.head), Format(SystemsOfUnits.Converter.ConvertFromSI(su.head, Me.NPSH.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Potnciarequeridapela"), True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .DefaultType = GetType(Nullable(Of Double))
@@ -1086,8 +1086,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -1095,16 +1095,16 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case 0
                     'PROP_PU_0	Pressure Increase (Head)
-                    value = Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
                 Case 1
                     'PROP_PU_1(Efficiency)
                     value = Me.Eficiencia.GetValueOrDefault
                 Case 2
                     'PROP_PU_2(Delta - T)
-                    value = Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
                 Case 3
                     'PROP_PU_3	Power Required
-                    value = Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
 
             End Select
 
@@ -1138,27 +1138,27 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 0
                     'PROP_PU_0	Pressure Increase (Head)
-                    Me.DeltaP = Converter.ConvertToSI(su.deltaP, propval)
+                    Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
                 Case 1
                     'PROP_PU_1(Efficiency)
                     Me.Eficiencia = propval
                 Case 3
-                    Me.DeltaQ = Converter.ConvertToSI(su.heatflow, propval)
+                    Me.DeltaQ = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
             End Select
             Return 1
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

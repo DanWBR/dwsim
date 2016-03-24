@@ -30,8 +30,8 @@ Public Class FrmCritpt
     Dim cp As Utilities.TCP.Methods
     Dim cps As Utilities.TCP.Methods_SRK
 
-    Public su As New DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As New SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
     Private Sub FrmCritpt_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -122,9 +122,9 @@ Public Class FrmCritpt
 
             Dim ppc, ptc, pvc, pzc, tpc, ttc, tvc, tzc As Double
 
-            ppc = Format(Converter.ConvertFromSI(su.pressure, pr.AUX_PCM(PropertyPackages.Phase.Mixture)), nf)
-            ptc = Format(Converter.ConvertFromSI(su.temperature, pr.AUX_TCM(PropertyPackages.Phase.Mixture)), nf)
-            pvc = Format(Converter.ConvertFromSI(su.molar_volume, pr.AUX_VCM(PropertyPackages.Phase.Mixture) * 1000), nf)
+            ppc = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, pr.AUX_PCM(PropertyPackages.Phase.Mixture)), nf)
+            ptc = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, pr.AUX_TCM(PropertyPackages.Phase.Mixture)), nf)
+            pvc = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, pr.AUX_VCM(PropertyPackages.Phase.Mixture) * 1000), nf)
             pzc = Format(pr.AUX_ZCM(PropertyPackages.Phase.Mixture), nf)
 
             Grid1.Rows.Add(New Object() {Grid1.Rows.Count + 1, "PCP", ptc, ppc, pvc, pzc})
@@ -135,9 +135,9 @@ Public Class FrmCritpt
                 tmp = pc(0)
 
                 For Each tmp In pc
-                    ttc = Format(Converter.ConvertFromSI(su.temperature, tmp(0)), nf)
-                    tpc = Format(Converter.ConvertFromSI(su.pressure, tmp(1)), nf)
-                    tvc = Format(Converter.ConvertFromSI(su.molar_volume, tmp(2) * 1000), nf)
+                    ttc = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, tmp(0)), nf)
+                    tpc = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, tmp(1)), nf)
+                    tvc = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, tmp(2) * 1000), nf)
                     tzc = Format(tmp(1) * tmp(2) / (8.314 * tmp(0)), nf)
                     Grid1.Rows.Add(New Object() {Grid1.Rows.Count + 1, "TCP", ttc, tpc, tvc, tzc})
                 Next

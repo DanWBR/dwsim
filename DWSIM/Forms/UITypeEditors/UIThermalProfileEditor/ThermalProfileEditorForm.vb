@@ -2,8 +2,8 @@
 
     Inherits System.Windows.Forms.Form
 
-    Dim su As DWSIM.SystemsOfUnits.Units
-    Dim cv As DWSIM.SystemsOfUnits.Converter
+    Dim su As SystemsOfUnits.Units
+    Dim cv As SystemsOfUnits.Converter
     Dim form As FormFlowsheet
 
     Private Sub RadioButton9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton9.CheckedChanged
@@ -174,7 +174,7 @@
 
         form = My.Application.ActiveSimulation
         su = form.Options.SelectedUnitSystem
-        cv = New DWSIM.SystemsOfUnits.Converter
+        cv = New SystemsOfUnits.Converter
 
         Me.Label52.Text = su.heat_transf_coeff
         Me.Label39.Text = su.temperature
@@ -194,12 +194,12 @@
                 If Me.ThermalProfile.Tipo = DWSIM.Editors.PipeEditor.ThermalProfileType.Estimar_CGTC Then Me.RadioButton7.Checked = True
                 Me.ComboBoxMAMB.SelectedIndex = .Meio
                 Me.ComboBoxMAT.SelectedIndex = .Material
-                Me.TextBoxCGTC.Text = Converter.ConvertFromSI(su.heat_transf_coeff, .CGTC_Definido).ToString()
-                Me.TextBoxCT.Text = Converter.ConvertFromSI(su.heatflow, .Calor_trocado).ToString()
-                Me.TextBoxCTERM.Text = Converter.ConvertFromSI(su.thermalConductivity, .Condtermica).ToString()
-                Me.TextBoxESP.Text = Converter.ConvertFromSI(su.thickness, .Espessura).ToString()
-                Me.TextBoxTA.Text = Converter.ConvertFromSI(su.temperature, .Temp_amb_definir).ToString()
-                Me.TextBoxTA2.Text = Converter.ConvertFromSI(su.temperature, .Temp_amb_estimar).ToString()
+                Me.TextBoxCGTC.Text = SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, .CGTC_Definido).ToString()
+                Me.TextBoxCT.Text = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, .Calor_trocado).ToString()
+                Me.TextBoxCTERM.Text = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, .Condtermica).ToString()
+                Me.TextBoxESP.Text = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, .Espessura).ToString()
+                Me.TextBoxTA.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .Temp_amb_definir).ToString()
+                Me.TextBoxTA2.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .Temp_amb_estimar).ToString()
                 Me.TextBoxVEL.Text = .Velocidade.ToString()
                 Me.CheckBoxICTE.Checked = .Incluir_cte
                 Me.CheckBoxICTI.Checked = .Incluir_cti
@@ -222,7 +222,7 @@
 
     Private Sub TextBoxCGTC_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxCGTC.TextChanged
         Try
-            Me.ThermalProfile.CGTC_Definido = Converter.ConvertToSI(su.heat_transf_coeff, Double.Parse(Me.TextBoxCGTC.Text))
+            Me.ThermalProfile.CGTC_Definido = SystemsOfUnits.Converter.ConvertToSI(su.heat_transf_coeff, Double.Parse(Me.TextBoxCGTC.Text))
             Me.TextBoxCGTC.ForeColor = Color.Blue
         Catch ex As Exception
             Me.TextBoxCGTC.ForeColor = Color.Red
@@ -231,7 +231,7 @@
 
     Private Sub TextBoxTA_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxTA.TextChanged
         Try
-            Me.ThermalProfile.Temp_amb_definir = Converter.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTA.Text))
+            Me.ThermalProfile.Temp_amb_definir = SystemsOfUnits.Converter.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTA.Text))
             Me.TextBoxTA.ForeColor = Color.Blue
         Catch ex As Exception
             Me.TextBoxTA.ForeColor = Color.Red
@@ -240,7 +240,7 @@
 
     Private Sub TextBoxCT_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxCT.TextChanged
         Try
-            Me.ThermalProfile.Calor_trocado = Converter.ConvertToSI(su.heatflow, Double.Parse(Me.TextBoxCT.Text))
+            Me.ThermalProfile.Calor_trocado = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, Double.Parse(Me.TextBoxCT.Text))
             Me.TextBoxCT.ForeColor = Color.Blue
         Catch ex As Exception
             Me.TextBoxCT.ForeColor = Color.Red
@@ -249,7 +249,7 @@
 
     Private Sub TextBoxTA2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxTA2.TextChanged
         Try
-            Me.ThermalProfile.Temp_amb_estimar = Converter.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTA2.Text))
+            Me.ThermalProfile.Temp_amb_estimar = SystemsOfUnits.Converter.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTA2.Text))
             Me.TextBoxTA2.ForeColor = Color.Blue
         Catch ex As Exception
             Me.TextBoxTA2.ForeColor = Color.Red
@@ -258,7 +258,7 @@
 
     Private Sub TextBoxCTERM_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxCTERM.TextChanged
         Try
-            Me.ThermalProfile.Condtermica = Converter.ConvertToSI(su.thermalConductivity, Double.Parse(Me.TextBoxCTERM.Text))
+            Me.ThermalProfile.Condtermica = SystemsOfUnits.Converter.ConvertToSI(su.thermalConductivity, Double.Parse(Me.TextBoxCTERM.Text))
             Me.TextBoxCTERM.ForeColor = Color.Blue
         Catch ex As Exception
             Me.TextBoxCTERM.ForeColor = Color.Red
@@ -267,7 +267,7 @@
 
     Private Sub TextBoxESP_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxESP.TextChanged
         Try
-            Me.ThermalProfile.Espessura = Converter.ConvertToSI(su.thickness, Double.Parse(Me.TextBoxESP.Text))
+            Me.ThermalProfile.Espessura = SystemsOfUnits.Converter.ConvertToSI(su.thickness, Double.Parse(Me.TextBoxESP.Text))
             Me.TextBoxESP.ForeColor = Color.Blue
         Catch ex As Exception
             Me.TextBoxESP.ForeColor = Color.Red

@@ -4547,7 +4547,7 @@
     <Type>DWSIM.DWSIM.Flowsheet.ClsFormOptions</Type>
     <SimulationMode></SimulationMode>
     <SelectedUnitSystem>
-      <Type>DWSIM.DWSIM.SystemsOfUnits.SI_Deriv5</Type>
+      <Type>DWSIM.SystemsOfUnits.SI_Deriv5</Type>
       <nome>Nutzer 5</nome>
       <mass>kg</mass>
       <reac_rate_heterog>kmol/[kg.s]</reac_rate_heterog>

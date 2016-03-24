@@ -17,6 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Windows.Forms
+Imports DWSIM.Thermodynamics.SystemsOfUnits
 
 <System.Serializable()> Public Class PipeEditor
 
@@ -79,7 +80,7 @@ Imports System.Windows.Forms
         End Set
     End Property
 
-    Public Property SystemOfUnits() As DWSIM.SystemsOfUnits.Units
+    Public Property SystemOfUnits() As SystemsOfUnits.Units
 
     Public Property NumberFormat As String
 
@@ -976,7 +977,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem2_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem2.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem2.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 25 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
@@ -987,7 +988,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem3_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem3.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem3.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 43 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
@@ -998,7 +999,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem4_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem4.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem4.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 55 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
@@ -1009,7 +1010,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem5_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem5.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem5.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 65 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
@@ -1020,7 +1021,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem6_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem6.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem6.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 79 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
@@ -1031,7 +1032,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem7_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem7.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem7.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 86 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, Double.Parse(DN(r, 1), System.Globalization.CultureInfo.InvariantCulture)), NumberFormat)
@@ -1042,7 +1043,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem8_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem8.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem8.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 98 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
@@ -1053,7 +1054,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem9_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem9.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem9.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 109 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
@@ -1064,7 +1065,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem10_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem10.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem10.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 122 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
@@ -1075,7 +1076,7 @@ Imports System.Windows.Forms
     Private Sub ToolStripMenuItem11_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem11.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem11.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 135 - 4
         GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
@@ -1088,7 +1089,7 @@ Imports System.Windows.Forms
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
 
         Dim column As New DataGridViewColumn
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
         Dim v1, v2, v3, v4, v5, v6, v7, v8, v9 As Object
 
         If Not Me.Profile Is Nothing Then Me.Profile.Sections.Clear()
@@ -1177,7 +1178,7 @@ Imports System.Windows.Forms
 
     Private Sub ConvertProfileToGrid(ByVal Profile As PipeProfile)
 
-        Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Dim cv As New SystemsOfUnits.Converter
         Dim psec As New PipeSection
 
         'If Not Me.GridMalha.Columns Is Nothing Then Me.GridMalha.Columns.Clear()

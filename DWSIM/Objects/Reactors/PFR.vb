@@ -185,7 +185,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     Next
 
                     rx = kxf * rxf - kxr * rxr
-                    Rxi(rxn.ID) = Converter.ConvertToSI(rxn.VelUnit, rx)
+                    Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
 
                     Kf(i) = kxf
                     Kr(i) = kxr
@@ -222,7 +222,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                     denmval = rxn.Expr.Evaluate
 
-                    rx = Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
+                    rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
 
                 End If
 
@@ -480,7 +480,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                                 rxr *= (C(sb.CompName) * convfactors(sb.CompName)) ^ sb.ReverseOrder
                             Next
 
-                            rx = Converter.ConvertToSI(rxn.VelUnit, kxf * rxf - kxr * rxr)
+                            rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, kxf * rxf - kxr * rxr)
 
                             If Kf.Count - 1 <= i Then
                                 Kf.Add(kxf)
@@ -528,7 +528,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                                 Throw New Exception(DWSIM.App.GetLocalString("PFRDenominatorEvaluationError") & " " & rxn.Name)
                             End Try
 
-                            rx = Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
+                            rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
 
                         End If
 
@@ -945,7 +945,7 @@ Namespace DWSIM.SimulationObjects.Reactors
         End Function
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -1005,7 +1005,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                 Dim valor As Double
 
                 If Me.ReactorOperationMode = OperationMode.OutletTemperature Then
-                    valor = Format(Converter.ConvertFromSI(su.temperature, Me.OutletTemperature), FlowSheet.Options.NumberFormat)
+                    valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature), FlowSheet.Options.NumberFormat)
                     .Item.Add(FT(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature"), su.temperature), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
                     With .Item(.Item.Count - 1)
                         .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
@@ -1013,7 +1013,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     End With
                 End If
 
-                valor = Format(Converter.ConvertFromSI(su.volume, Me.Volume), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volume, Me.Volume), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("RCSTRPGridItem1"), su.volume), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RCSTRPGridItem1Help"), True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
@@ -1026,33 +1026,33 @@ Namespace DWSIM.SimulationObjects.Reactors
                     .DefaultType = GetType(Nullable(Of Double))
                 End With
 
-                valor = Format(Converter.ConvertFromSI(su.distance, Me.Length), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.Length), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("PFRLength"), su.distance), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("PFRLengthDesc"), True)
 
-                valor = Format(Converter.ConvertFromSI(su.density, Me.CatalystLoading), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.CatalystLoading), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("PFRCatalystLoading"), su.density), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("PFRCatalystLoadingDesc"), True)
 
-                valor = Format(Converter.ConvertFromSI(su.diameter, Me.CatalystParticleDiameter), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.CatalystParticleDiameter), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("PFRCatalystParticleDiameter"), su.diameter), valor, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("PFRCatalystParticleDiameterDesc"), True)
 
                 .Item.Add(DWSIM.App.GetLocalString("PFRCatalystVoidFraction"), Me, "CatalystVoidFraction", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("PFRCatalystVoidFractionDesc"), True)
 
                 If Me.GraphicObject.Calculated Then
 
-                    valor = Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                    valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                     .Item.Add(FT(DWSIM.App.GetLocalString("Quedadepresso"), su.deltaP), valor, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Quedadepressoaplicad6"), True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
                     End With
 
-                    .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
                     End With
 
-                    .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
                     With .Item(.Item.Count - 1)
                         .DefaultValue = Nothing
                         .DefaultType = GetType(Nullable(Of Double))
@@ -1115,7 +1115,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     'CustomPropertyCollection
                     Dim m4 As New PropertyGridEx.CustomPropertyCollection()
                     For Each dbl As KeyValuePair(Of String, Double) In DHRi
-                        m4.Add(form.Options.Reactions(dbl.Key).Name, Format(Converter.ConvertFromSI(su.heatflow, dbl.Value), FlowSheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("ReactionHeats"), DWSIM.App.GetLocalString(""), True)
+                        m4.Add(form.Options.Reactions(dbl.Key).Name, Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, dbl.Value), FlowSheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("ReactionHeats"), DWSIM.App.GetLocalString(""), True)
                         m4.Item(m4.Count - 1).IsReadOnly = True
                         m4.Item(m4.Count - 1).DefaultValue = Nothing
                         m4.Item(m4.Count - 1).DefaultType = GetType(Nullable(Of Double))
@@ -1142,8 +1142,8 @@ Namespace DWSIM.SimulationObjects.Reactors
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -1151,7 +1151,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                 Case 0
                     'PROP_HT_0	Pressure Drop
-                    value = Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
 
             End Select
 
@@ -1179,24 +1179,24 @@ Namespace DWSIM.SimulationObjects.Reactors
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
 
                 Case 0
                     'PROP_HT_0	Pressure Drop
-                    Me.DeltaP = Converter.ConvertToSI(su.deltaP, propval)
+                    Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
 
             End Select
             Return 1
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

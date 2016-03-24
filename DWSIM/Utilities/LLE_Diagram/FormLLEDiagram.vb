@@ -26,8 +26,8 @@ Public Class FormLLEDiagram
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Public su As New DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As New SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
     Public Names() As String
 
@@ -450,8 +450,8 @@ Public Class FormLLEDiagram
 
         mat.SetFlowsheet(Frm)
         pp.CurrentMaterialStream = mat
-        P = Converter.ConvertToSI(su.pressure, tbP.Text)
-        T = Converter.ConvertToSI(su.temperature, tbT.Text)
+        P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, tbP.Text)
+        T = SystemsOfUnits.Converter.ConvertToSI(su.temperature, tbT.Text)
         mat.Phases(0).Properties.pressure = P
         mat.Phases(0).Properties.temperature = T
 
@@ -620,10 +620,10 @@ Public Class FormLLEDiagram
             cbPropPack.SelectedIndex = 0
 
             Me.lblT.Text = su.temperature
-            Me.tbT.Text = Format(Converter.ConvertFromSI(su.temperature, 298.15), nf)
+            Me.tbT.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, 298.15), nf)
 
             Me.lblP.Text = su.pressure
-            Me.tbP.Text = Format(Converter.ConvertFromSI(su.pressure, 101400), nf)
+            Me.tbP.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, 101400), nf)
 
             DataGridView1.Columns(0).HeaderText = "[1] " & cbComp1.Text
             DataGridView1.Columns(1).HeaderText = "[1] " & cbComp2.Text

@@ -8,8 +8,9 @@ Imports System.Linq
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.PropertyPackages
-Imports DWSIM.DWSIM.SystemsOfUnits
+Imports DWSIM.Thermodynamics.SystemsOfUnits
 Imports DWSIM.DrawingTools.GraphicObjects
+Imports DWSIM.Thermodynamics
 
 Public Class Form1
 
@@ -349,10 +350,7 @@ Public Class Form1
                 Dim nf As String = fsheet.Options.NumberFormat
 
                 'get a reference to the current unit system.
-                Dim su As DWSIM.DWSIM.SystemsOfUnits.Units = fsheet.Options.SelectedUnitSystem
-
-                'declare a new unit conversor to convert (some) calculated values to the current unit system.
-                Dim cv As New DWSIM.DWSIM.SystemsOfUnits.Converter()
+                Dim su As SystemsOfUnits.Units = fsheet.Options.SelectedUnitSystem
 
                 'populate property grid with calculated values.
 

@@ -26,8 +26,8 @@ Public Class FormHYD
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Public su As New DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As New SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
     Dim resPC, resTC As Object
@@ -229,7 +229,7 @@ Public Class FormHYD
                     Me.KryptonButton2.Enabled = False
                     PhasesTC = DWSIM.App.GetLocalString("ND")
                 Else
-                    Label8.Text = Format(Converter.ConvertFromSI(su.pressure, PH), nf)
+                    Label8.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PH), nf)
                     Me.KryptonButton2.Enabled = True
                     If CheckBox1.Checked Then
                         PhasesTC = DWSIM.App.GetLocalString("VaporAndHydrate") & " (" & tipoTC & ")"
@@ -249,7 +249,7 @@ Public Class FormHYD
                     Me.KryptonButton3.Enabled = False
                     PhasesPC = DWSIM.App.GetLocalString("ND")
                 Else
-                    Label14.Text = Format(Converter.ConvertFromSI(su.temperature, TH), nf)
+                    Label14.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, TH), nf)
                     Me.KryptonButton3.Enabled = True
                     If CheckBox1.Checked Then
                         PhasesPC = DWSIM.App.GetLocalString("VaporAndHydrate") & " (" & tipoPC & ")"
@@ -259,8 +259,8 @@ Public Class FormHYD
                         If Math.Abs(TH - resPC(0)) < 0.01 Then PhasesPC = DWSIM.App.GetLocalString("SlidoGeloLquidoguaGs1") & tipoPC & ")"
                     End If
                 End If
-                Label17.Text = Format(Converter.ConvertFromSI(su.pressure, P), nf)
-                Label9.Text = Format(Converter.ConvertFromSI(su.temperature, T), nf)
+                Label17.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, P), nf)
+                Label9.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T), nf)
                 Label12.Text = PhasesPC
                 Label10.Text = PhasesTC
 
@@ -302,8 +302,8 @@ Public Class FormHYD
         Dim frmdet As New FormHYD_DET
         With frmdet
             .res = resTC
-            .P = Converter.ConvertToSI(su.pressure, Label8.Text)
-            .T = Converter.ConvertToSI(su.temperature, Label9.Text)
+            .P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, Label8.Text)
+            .T = SystemsOfUnits.Converter.ConvertToSI(su.temperature, Label9.Text)
             If Label10.ToString.Contains("sII") Then .sI = False
             .model = ComboBox1.SelectedIndex
             .nomes = nomesglobal
@@ -318,8 +318,8 @@ Public Class FormHYD
         Dim frmdet As New FormHYD_DET
         With frmdet
             .res = resPC
-            .P = Converter.ConvertToSI(su.pressure, Label17.Text)
-            .T = Converter.ConvertToSI(su.temperature, Label14.Text)
+            .P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, Label17.Text)
+            .T = SystemsOfUnits.Converter.ConvertToSI(su.temperature, Label14.Text)
             If Label12.ToString.Contains("sII") Then .sI = False
             .model = ComboBox1.SelectedIndex
             .nomes = nomesglobal

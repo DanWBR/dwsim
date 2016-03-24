@@ -350,7 +350,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
             Dim value As Double
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -385,9 +385,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 cpc2.Add(DWSIM.App.GetLocalString("Propriedade"), DWSIM.App.GetPropertyName(Me.ManipulatedObjectData.m_Property), True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
 
                 If Me.ManipulatedObject IsNot Nothing Then
-                    value = Format(Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MinVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MinVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                     cpc2.Add(FT(DWSIM.App.GetLocalString("Valormnimoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                    value = Format(Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MaxVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MaxVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                     cpc2.Add(FT(DWSIM.App.GetLocalString("Valormximoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
                 End If
                 .Item.Add(DWSIM.App.GetLocalString("VarivelManipulada"), cpc2, False, DWSIM.App.GetLocalString("Configuraes1"), DWSIM.App.GetLocalString("Selecioneavarivelase2"))
@@ -416,7 +416,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 End If
 
                 If Me.ControlledObject IsNot Nothing Then
-                    value = Format(Converter.ConvertFromSI(Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su), Me.AdjustValue), FlowSheet.Options.NumberFormat)
+                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su), Me.AdjustValue), FlowSheet.Options.NumberFormat)
                     .Item.Add(FT(DWSIM.App.GetLocalString("ValordeAjusteouOffse"), Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SetpointdoAjusteouov"), True)
                 End If
                 .Item.Add(DWSIM.App.GetLocalString("NmeroMximodeIteraes"), Me, "MaximumIterations", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("Nmeromximodeiteraesa"), True)
@@ -455,7 +455,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
             Return 0
         End Function
 

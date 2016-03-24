@@ -806,7 +806,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -829,7 +829,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
                 .Item(.Item.Count - 1).Tag2 = "SpecType"
 
-                valor = Format(Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.temperature.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.temperature.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add("[2] " & FT(DWSIM.App.GetLocalString("Temperatura"), su.temperature), valor, True, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("Temperaturadacorrent"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -843,7 +843,7 @@ Namespace DWSIM.SimulationObjects.Streams
                             .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
                     End Select
                 End With
-                valor = Format(Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.pressure.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.pressure.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT("[3] " & DWSIM.App.GetLocalString("Presso"), su.pressure), valor, True, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("Pressodacorrente"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -857,7 +857,7 @@ Namespace DWSIM.SimulationObjects.Streams
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                     End Select
                 End With
-                valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(0).Properties.massflow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(0).Properties.massflow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add("[4] " & FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), valor, False, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -865,7 +865,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     .Tag = New Object() {FlowSheet.Options.NumberFormat, su.massflow, "W"}
                     .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                 End With
-                valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Properties.molarflow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Properties.molarflow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add("[5] " & FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), valor, False, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -873,7 +873,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     .Tag = New Object() {FlowSheet.Options.NumberFormat, su.molarflow, "M"}
                     .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                 End With
-                valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add("[6] " & FT(DWSIM.App.GetLocalString("Vazovolumtrica"), su.volumetricFlow), valor, False, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("Vazovolumtricadacorr"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -906,7 +906,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     .CustomEditor = New System.Drawing.Design.UITypeEditor
                 End With
 
-                valor = Format(Converter.ConvertFromSI(su.enthalpy, Me.Phases(0).Properties.enthalpy.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(0).Properties.enthalpy.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add("[8] " & FlowSheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), valor, True, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("EntalpiaEspecficadam"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -918,7 +918,7 @@ Namespace DWSIM.SimulationObjects.Streams
                             .IsReadOnly = True
                     End Select
                 End With
-                valor = Format(Converter.ConvertFromSI(su.entropy, Me.Phases(0).Properties.entropy.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(0).Properties.entropy.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add("[9] " & FlowSheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), valor, True, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("EntropiaEspecficadam"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -997,10 +997,10 @@ Namespace DWSIM.SimulationObjects.Streams
 
         End Sub
 
-        Public Overridable Sub PopulatePropertyGrid2(ByRef pg As PropertyGridEx.PropertyGridEx, ByRef Flowsheet As FormFlowsheet, ByVal su As Units)
+        Public Overridable Sub PopulatePropertyGrid2(ByRef pg As PropertyGridEx.PropertyGridEx, ByRef Flowsheet As FormFlowsheet, ByVal su As SystemsOfUnits.Units)
 
 
-            Dim Converter As New Converter
+            Dim Converter As New SystemsOfUnits.Converter
             Dim valor As Double = 0.0#
 
             With pg
@@ -1444,7 +1444,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As BaseClasses.ConstantProperties
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(0).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(0).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             m.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaMistura"), True)
                             m.Item(m.Count - 1).IsReadOnly = True
                             m.Item(m.Count - 1).DefaultValue = Nothing
@@ -1453,7 +1453,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Vapor
                         Dim v As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(2).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(2).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             v.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseVapo"), True)
                             v.Item(v.Count - 1).IsReadOnly = True
                             v.Item(v.Count - 1).DefaultValue = Nothing
@@ -1462,7 +1462,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(1).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(1).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
                             l.Item(l.Count - 1).IsReadOnly = True
                             l.Item(l.Count - 1).DefaultValue = Nothing
@@ -1471,7 +1471,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l1 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(3).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(3).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l1.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
                             l1.Item(l1.Count - 1).IsReadOnly = True
                             l1.Item(l1.Count - 1).DefaultValue = Nothing
@@ -1480,7 +1480,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l2 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(4).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(4).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l2.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
                             l2.Item(l2.Count - 1).IsReadOnly = True
                             l2.Item(l2.Count - 1).DefaultValue = Nothing
@@ -1489,7 +1489,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l3 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(5).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(5).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l3.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
                             l3.Item(l3.Count - 1).IsReadOnly = True
                             l3.Item(l3.Count - 1).DefaultValue = Nothing
@@ -1498,7 +1498,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l4 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(6).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(6).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l4.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseLqui"), True)
                             l4.Item(l4.Count - 1).IsReadOnly = True
                             l4.Item(l4.Count - 1).DefaultValue = Nothing
@@ -1507,7 +1507,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Solid
                         Dim s As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.massflow, Me.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             s.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.massflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazomssicanaFaseSolida"), True)
                             s.Item(s.Count - 1).IsReadOnly = True
                             s.Item(s.Count - 1).DefaultValue = Nothing
@@ -1588,7 +1588,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As BaseClasses.ConstantProperties
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             m.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaMistura"), True)
                             m.Item(m.Count - 1).IsReadOnly = True
                             m.Item(m.Count - 1).DefaultValue = Nothing
@@ -1597,7 +1597,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Vapor
                         Dim v As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             v.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseVapor"), True)
                             v.Item(v.Count - 1).IsReadOnly = True
                             v.Item(v.Count - 1).DefaultValue = Nothing
@@ -1606,7 +1606,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
                             l.Item(l.Count - 1).IsReadOnly = True
                             l.Item(l.Count - 1).DefaultValue = Nothing
@@ -1615,7 +1615,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l1 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l1.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
                             l1.Item(l1.Count - 1).IsReadOnly = True
                             l1.Item(l1.Count - 1).DefaultValue = Nothing
@@ -1624,7 +1624,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l2 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l2.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
                             l2.Item(l2.Count - 1).IsReadOnly = True
                             l2.Item(l2.Count - 1).DefaultValue = Nothing
@@ -1633,7 +1633,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l3 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(5).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(5).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l3.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
                             l3.Item(l3.Count - 1).IsReadOnly = True
                             l3.Item(l3.Count - 1).DefaultValue = Nothing
@@ -1642,7 +1642,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l4 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(6).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(6).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l4.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseLquid"), True)
                             l4.Item(l4.Count - 1).IsReadOnly = True
                             l4.Item(l4.Count - 1).DefaultValue = Nothing
@@ -1651,7 +1651,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Solid
                         Dim s As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             s.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.molarflow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("FraomolarnaFaseSolida"), True)
                             s.Item(s.Count - 1).IsReadOnly = True
                             s.Item(s.Count - 1).DefaultValue = Nothing
@@ -1732,7 +1732,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         Dim m As New PropertyGridEx.CustomPropertyCollection()
                         Dim comp As BaseClasses.ConstantProperties
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             m.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaMist"), True)
                             m.Item(m.Count - 1).IsReadOnly = True
                             m.Item(m.Count - 1).DefaultValue = Nothing
@@ -1741,7 +1741,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Vapor
                         Dim v As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(2).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(2).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             v.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
                             v.Item(v.Count - 1).IsReadOnly = True
                             v.Item(v.Count - 1).DefaultValue = Nothing
@@ -1750,7 +1750,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(1).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(1).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
                             l.Item(l.Count - 1).IsReadOnly = True
                             l.Item(l.Count - 1).DefaultValue = Nothing
@@ -1759,7 +1759,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l1 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(3).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(3).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l1.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
                             l1.Item(l1.Count - 1).IsReadOnly = True
                             l1.Item(l1.Count - 1).DefaultValue = Nothing
@@ -1768,7 +1768,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l2 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(4).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(4).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l2.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
                             l2.Item(l2.Count - 1).IsReadOnly = True
                             l2.Item(l2.Count - 1).DefaultValue = Nothing
@@ -1777,7 +1777,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l3 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(5).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(5).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l3.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
                             l3.Item(l3.Count - 1).IsReadOnly = True
                             l3.Item(l3.Count - 1).DefaultValue = Nothing
@@ -1786,7 +1786,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Liquido
                         Dim l4 As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(6).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(6).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             l4.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFase"), True)
                             l4.Item(l4.Count - 1).IsReadOnly = True
                             l4.Item(l4.Count - 1).DefaultValue = Nothing
@@ -1795,7 +1795,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         'PropertyGridEx.CustomPropertyCollection - Solid
                         Dim s As New PropertyGridEx.CustomPropertyCollection()
                         For Each comp In Flowsheet.Options.SelectedComponents.Values
-                            valor = Format(Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(7).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
+                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(7).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault), Flowsheet.Options.NumberFormat)
                             s.Add(Flowsheet.FT(DWSIM.App.GetComponentName(comp.Name), su.volumetricFlow), Format(valor, Flowsheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("VazovolumtricanaFaseSolida"), True)
                             s.Item(s.Count - 1).IsReadOnly = True
                             s.Item(s.Count - 1).DefaultValue = Nothing
@@ -1923,45 +1923,45 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim pm As New PropertyGridEx.CustomPropertyCollection()
                     'PropertyGridEx.CustomPropertyCollection - Mistura
                     refval = Me.Phases(0).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("EntalpiaEspecficadam"), True)
                     refval = Me.Phases(0).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("EntropiaEspecficadam"), True)
                     refval = Me.Phases(0).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
                     refval = Me.Phases(0).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("MolarEntropy"), True)
                     refval = Me.Phases(0).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Massamolardamistura"), True)
                     refval = Me.Phases(0).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Massaespecficadamist"), True)
                     'refval = Me.Phases(0).Properties.massflow.GetValueOrDefault / CDbl(Me.Phases(0).Properties.density.GetValueOrDefault)
-                    'If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    'If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     'pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     'refval = Me.Phases(0).Properties.massflow.GetValueOrDefault
-                    'If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    'If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
                     'pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
                     refval = Me.Phases(0).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("Condutividadetrmicad"), True)
 
                     If Flowsheet.Options.CalculateBubbleAndDewPoints Then
                         refval = Me.Phases(0).Properties.bubblePressure.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
+                        If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
                         pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("BubblePress"), su.pressure), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("BubblePress"), True)
                         refval = Me.Phases(0).Properties.dewPressure.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
+                        If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
                         pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("DewPress"), su.pressure), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("DewPress"), True)
                         refval = Me.Phases(0).Properties.bubbleTemperature.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                        If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
                         pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("BubbleTemp"), su.temperature), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("BubbleTemp"), True)
                         refval = Me.Phases(0).Properties.dewTemperature.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                        If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
                         pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("DewTemp"), su.temperature), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("DewTemp"), True)
                     End If
 
@@ -1982,16 +1982,16 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim pm As New PropertyGridEx.CustomPropertyCollection()
 
                     refval = Me.Phases(0).Properties.bubblePressure.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("BubblePress"), su.pressure), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("BubblePress"), True)
                     refval = Me.Phases(0).Properties.dewPressure.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("DewPress"), su.pressure), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("DewPress"), True)
                     refval = Me.Phases(0).Properties.bubbleTemperature.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("BubbleTemp"), su.temperature), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("BubbleTemp"), True)
                     refval = Me.Phases(0).Properties.dewTemperature.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
                     pm.Add(Flowsheet.FT(DWSIM.App.GetLocalString("DewTemp"), su.temperature), val, True, DWSIM.App.GetLocalString("Mistura"), DWSIM.App.GetLocalString("DewTemp"), True)
 
                     For Each it In pm
@@ -2015,31 +2015,31 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim pv As New PropertyGridEx.CustomPropertyCollection()
                     'PropertyGridEx.CustomPropertyCollection - Vapor
                     refval = Me.Phases(2).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf"), True)
                     refval = Me.Phases(2).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("EntropiaEspecficadaf"), True)
                     refval = Me.Phases(2).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
                     refval = Me.Phases(2).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("MolarEntropy"), True)
                     refval = Me.Phases(2).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Massamolardafasevapo"), True)
                     refval = Me.Phases(2).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Massaespecficadafase"), True)
                     refval = Me.Phases(2).Properties.massflow.GetValueOrDefault / CDbl(Me.Phases(2).Properties.density.GetValueOrDefault)
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     refval = Me.Phases(2).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
                     refval = Me.Phases(2).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
                     refval = Me.Phases(2).Properties.molarfraction.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
@@ -2051,19 +2051,19 @@ Namespace DWSIM.SimulationObjects.Streams
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
                     pv.Add("Z", val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
                     refval = Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
                     refval = Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault / CDbl(Me.Phases(2).Properties.heatCapacityCv.GetValueOrDefault)
                     If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
                     pv.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
                     refval = Me.Phases(2).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Condutividadetrmicad1"), True)
                     refval = Me.Phases(2).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
                     refval = Me.Phases(2).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), "E")
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, refval), "E")
                     pv.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Vapor"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
 
                     For Each it In pv
@@ -2087,31 +2087,31 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim pl As New PropertyGridEx.CustomPropertyCollection()
                     'PropertyGridEx.CustomPropertyCollection - Liquido
                     refval = Me.Phases(1).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
                     refval = Me.Phases(1).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
                     refval = Me.Phases(1).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
                     refval = Me.Phases(1).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
                     refval = Me.Phases(1).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
                     refval = Me.Phases(1).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
                     refval = Me.Phases(1).Properties.massflow.GetValueOrDefault / Me.Phases(1).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     refval = Me.Phases(1).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
                     refval = Me.Phases(1).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
                     refval = Me.Phases(1).Properties.molarfraction.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
@@ -2123,22 +2123,22 @@ Namespace DWSIM.SimulationObjects.Streams
                     'If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
                     'pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
                     refval = Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
                     refval = Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(1).Properties.heatCapacityCv.GetValueOrDefault
                     If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
                     pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
                     refval = Me.Phases(0).Properties.surfaceTension.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.surfaceTension, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.surfaceTension, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Tensosuperficial"), su.surfaceTension), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Tensosuperficialentr"), True)
                     refval = Me.Phases(1).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
                     refval = Me.Phases(1).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
                     refval = Me.Phases(1).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), "E")
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, refval), "E")
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
 
                     For Each it In pl
@@ -2209,41 +2209,41 @@ Namespace DWSIM.SimulationObjects.Streams
                         pl.Add(DWSIM.App.GetLocalString("OsmoticCoefficient"), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("OsmoticCoefficient"), True)
 
                         refval = Me.Phases(3).Properties.freezingPoint.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
+                        If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, refval), Flowsheet.Options.NumberFormat)
                         pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("FreezingPoint"), su.temperature), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("FreezingPoint"), True)
 
                         refval = Me.Phases(3).Properties.freezingPointDepression.GetValueOrDefault
-                        If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.deltaT, refval), Flowsheet.Options.NumberFormat)
+                        If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, refval), Flowsheet.Options.NumberFormat)
                         pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("FreezingPointDepression"), su.deltaT), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("FreezingPointDepression"), True)
 
                     End If
 
                     refval = Me.Phases(3).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
                     refval = Me.Phases(3).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
                     refval = Me.Phases(3).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
                     refval = Me.Phases(3).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
                     refval = Me.Phases(3).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
                     refval = Me.Phases(3).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
                     refval = Me.Phases(3).Properties.massflow.GetValueOrDefault / Me.Phases(3).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     refval = Me.Phases(3).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
                     refval = Me.Phases(3).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
                     refval = Me.Phases(3).Properties.molarfraction.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
@@ -2255,19 +2255,19 @@ Namespace DWSIM.SimulationObjects.Streams
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
                     pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
                     refval = Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
                     refval = Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(3).Properties.heatCapacityCv.GetValueOrDefault
                     If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
                     pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
                     refval = Me.Phases(3).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
                     refval = Me.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, refval), "E")
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
                     refval = Me.Phases(3).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), "E")
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, refval), "E")
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
 
                     For Each it In pl
@@ -2289,31 +2289,31 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim pl As New PropertyGridEx.CustomPropertyCollection()
                     'PropertyGridEx.CustomPropertyCollection - Liquido
                     refval = Me.Phases(4).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
                     refval = Me.Phases(4).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
                     refval = Me.Phases(4).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
                     refval = Me.Phases(4).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
                     refval = Me.Phases(4).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
                     refval = Me.Phases(4).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
                     refval = Me.Phases(4).Properties.massflow.GetValueOrDefault / Me.Phases(4).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     refval = Me.Phases(4).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
                     refval = Me.Phases(4).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
                     refval = Me.Phases(4).Properties.molarfraction.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
@@ -2325,19 +2325,19 @@ Namespace DWSIM.SimulationObjects.Streams
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
                     pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
                     refval = Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
                     refval = Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(4).Properties.heatCapacityCv.GetValueOrDefault
                     If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
                     pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
                     refval = Me.Phases(4).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
                     refval = Me.Phases(4).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
                     refval = Me.Phases(4).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
 
                     For Each it In pl
@@ -2359,31 +2359,31 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim pl As New PropertyGridEx.CustomPropertyCollection()
                     'PropertyGridEx.CustomPropertyCollection - Liquido
                     refval = Me.Phases(5).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
                     refval = Me.Phases(5).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
                     refval = Me.Phases(5).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
                     refval = Me.Phases(5).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
                     refval = Me.Phases(5).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
                     refval = Me.Phases(5).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
                     refval = Me.Phases(5).Properties.massflow.GetValueOrDefault / Me.Phases(5).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     refval = Me.Phases(5).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
                     refval = Me.Phases(5).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
                     refval = Me.Phases(5).Properties.molarfraction.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
@@ -2395,19 +2395,19 @@ Namespace DWSIM.SimulationObjects.Streams
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
                     pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
                     refval = Me.Phases(5).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
                     refval = Me.Phases(5).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(5).Properties.heatCapacityCv.GetValueOrDefault
                     If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
                     pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
                     refval = Me.Phases(5).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
                     refval = Me.Phases(5).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
                     refval = Me.Phases(5).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
 
                     For Each it In pl
@@ -2429,31 +2429,31 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim pl As New PropertyGridEx.CustomPropertyCollection()
                     'PropertyGridEx.CustomPropertyCollection - Liquido
                     refval = Me.Phases(6).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
                     refval = Me.Phases(6).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
                     refval = Me.Phases(6).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
                     refval = Me.Phases(6).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("MolarEntropy"), True)
                     refval = Me.Phases(6).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
                     refval = Me.Phases(6).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
                     refval = Me.Phases(6).Properties.massflow.GetValueOrDefault / Me.Phases(6).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     refval = Me.Phases(6).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
                     refval = Me.Phases(6).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
                     refval = Me.Phases(6).Properties.molarfraction.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
@@ -2465,19 +2465,19 @@ Namespace DWSIM.SimulationObjects.Streams
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
                     pl.Add("Z", val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
                     refval = Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
                     refval = Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(6).Properties.heatCapacityCv.GetValueOrDefault
                     If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
                     pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
                     refval = Me.Phases(6).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
                     refval = Me.Phases(6).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
                     refval = Me.Phases(6).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Lquido"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
 
                     For Each it In pl
@@ -2499,31 +2499,31 @@ Namespace DWSIM.SimulationObjects.Streams
                     Dim pl As New PropertyGridEx.CustomPropertyCollection()
                     'PropertyGridEx.CustomPropertyCollection - Solid
                     refval = Me.Phases(7).Properties.enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("EntalpiaEspecficadaf2"), True)
                     refval = Me.Phases(7).Properties.entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("EntropiaEspecficadaf2"), True)
                     refval = Me.Phases(7).Properties.molar_enthalpy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("MolarEnthalpy"), True)
                     refval = Me.Phases(7).Properties.molar_entropy.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("MolarEntropy"), True)
                     refval = Me.Phases(7).Properties.molecularWeight.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Massamolardafaselqui"), True)
                     refval = Me.Phases(7).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Massaespecfica"), su.density), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Massaespecficadafase2"), True)
                     refval = Me.Phases(7).Properties.massflow.GetValueOrDefault / Me.Phases(7).Properties.density.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("VazoTP"), su.volumetricFlow), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Vazovolumtricanascon"), True)
                     refval = Me.Phases(7).Properties.massflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Vazomssicadacorrente"), True)
                     refval = Me.Phases(7).Properties.molarflow.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Vazomolar"), su.molarflow), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Vazomolardacorrente"), True)
                     refval = Me.Phases(7).Properties.molarfraction.GetValueOrDefault
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
@@ -2535,19 +2535,19 @@ Namespace DWSIM.SimulationObjects.Streams
                     If refval.HasValue = True Then val = Format(refval, Flowsheet.Options.NumberFormat)
                     pl.Add("Z", val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Fatordecompressibili"), True)
                     refval = Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT("Cp", su.heatCapacityCp), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Capacidadecalorficad"), True)
                     refval = Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(7).Properties.heatCapacityCv.GetValueOrDefault
                     If refval.HasValue = True And Double.IsNaN(refval) = False Then tmp = Format(refval, Flowsheet.Options.NumberFormat) Else tmp = 0.0#
                     pl.Add("Cp/Cv", tmp, True, DWSIM.App.GetLocalString("lquida"), DWSIM.App.GetLocalString("Razoentreascapacidad"), True)
                     refval = Me.Phases(7).Properties.thermalConductivity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Condutividadetrmicad2"), True)
                     refval = Me.Phases(7).Properties.kinematic_viscosity.GetValueOrDefault
-                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True And Double.IsNaN(refval) = False Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Viscosidadecinemtica2"), True)
                     refval = Me.Phases(7).Properties.viscosity.GetValueOrDefault
-                    If refval.HasValue = True Then val = Format(Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
+                    If refval.HasValue = True Then val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, refval), Flowsheet.Options.NumberFormat)
                     pl.Add(Flowsheet.FT(DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity), val, True, DWSIM.App.GetLocalString("Solid"), DWSIM.App.GetLocalString("Viscosidadedinmicada"), True)
 
                     For Each it In pl
@@ -2570,8 +2570,8 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Object = ""
             Dim sname As String = ""
 
@@ -2586,82 +2586,82 @@ Namespace DWSIM.SimulationObjects.Streams
 
                     Case 0
                         'PROP_MS_0 Temperature
-                        value = Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.temperature.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.temperature.GetValueOrDefault)
                     Case 1
                         'PROP_MS_1 Pressure
-                        value = Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.pressure.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.pressure.GetValueOrDefault)
                     Case 2
                         'PROP_MS_2	Mass Flow
-                        value = Converter.ConvertFromSI(su.massflow, Me.Phases(0).Properties.massflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(0).Properties.massflow.GetValueOrDefault)
                     Case 3
                         'PROP_MS_3	Molar Flow
-                        value = Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Properties.molarflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Properties.molarflow.GetValueOrDefault)
                     Case 4
                         'PROP_MS_4	Volumetric Flow
-                        value = Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault)
                     Case 5
                         'PROP_MS_5	Mixture Density
-                        value = Converter.ConvertFromSI(su.density, Me.Phases(0).Properties.density.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(0).Properties.density.GetValueOrDefault)
                     Case 6
                         'PROP_MS_6	Mixture Molar Weight
-                        value = Converter.ConvertFromSI(su.molecularWeight, Me.Phases(0).Properties.molecularWeight.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(0).Properties.molecularWeight.GetValueOrDefault)
                     Case 7
                         'PROP_MS_7	Mixture Specific Enthalpy
-                        value = Converter.ConvertFromSI(su.enthalpy, Me.Phases(0).Properties.enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(0).Properties.enthalpy.GetValueOrDefault)
                     Case 8
                         'PROP_MS_8	Mixture Specific Entropy
-                        value = Converter.ConvertFromSI(su.entropy, Me.Phases(0).Properties.entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(0).Properties.entropy.GetValueOrDefault)
                     Case 9
                         'PROP_MS_9	Mixture Molar Enthalpy
-                        value = Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(0).Properties.molar_enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(0).Properties.molar_enthalpy.GetValueOrDefault)
                     Case 10
                         'PROP_MS_10	Mixture Molar Entropy
-                        value = Converter.ConvertFromSI(su.molar_entropy, Me.Phases(0).Properties.molar_entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(0).Properties.molar_entropy.GetValueOrDefault)
                     Case 11
                         'PROP_MS_11	Mixture Thermal Conductivity
-                        value = Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(0).Properties.thermalConductivity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(0).Properties.thermalConductivity.GetValueOrDefault)
                     Case 12
                         'PROP_MS_12	Vapor Phase Density
-                        value = Converter.ConvertFromSI(su.density, Me.Phases(2).Properties.density.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(2).Properties.density.GetValueOrDefault)
                     Case 13
                         'PROP_MS_13	Vapor Phase Molar Weight
-                        value = Converter.ConvertFromSI(su.molecularWeight, Me.Phases(2).Properties.molecularWeight.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(2).Properties.molecularWeight.GetValueOrDefault)
                     Case 14
                         'PROP_MS_14	Vapor Phase Specific Enthalpy
-                        value = Converter.ConvertFromSI(su.enthalpy, Me.Phases(2).Properties.enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(2).Properties.enthalpy.GetValueOrDefault)
                     Case 15
                         'PROP_MS_15	Vapor Phase Specific Entropy
-                        value = Converter.ConvertFromSI(su.entropy, Me.Phases(2).Properties.entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(2).Properties.entropy.GetValueOrDefault)
                     Case 16
                         'PROP_MS_16	Vapor Phase Molar Enthalpy
-                        value = Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(2).Properties.molar_enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(2).Properties.molar_enthalpy.GetValueOrDefault)
                     Case 17
                         'PROP_MS_17	Vapor Phase Molar Entropy
-                        value = Converter.ConvertFromSI(su.molar_entropy, Me.Phases(2).Properties.molar_entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(2).Properties.molar_entropy.GetValueOrDefault)
                     Case 18
                         'PROP_MS_18	Vapor Phase Thermal Conductivity
-                        value = Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(2).Properties.thermalConductivity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(2).Properties.thermalConductivity.GetValueOrDefault)
                     Case 19
                         'PROP_MS_19	Vapor Phase Kinematic Viscosity
-                        value = Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(2).Properties.kinematic_viscosity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(2).Properties.kinematic_viscosity.GetValueOrDefault)
                     Case 20
                         'PROP_MS_20	Vapor Phase Dynamic Viscosity
-                        value = Converter.ConvertFromSI(su.viscosity, Me.Phases(2).Properties.viscosity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(2).Properties.viscosity.GetValueOrDefault)
                     Case 21
                         'PROP_MS_21	Vapor Phase Heat Capacity (Cp)
-                        value = Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault)
                     Case 22
                         'PROP_MS_22	Vapor Phase Heat Capacity Ratio (Cp/Cv)
                         value = Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(2).Properties.heatCapacityCv.GetValueOrDefault
                     Case 23
                         'PROP_MS_23	Vapor Phase Mass Flow
-                        value = Converter.ConvertFromSI(su.massflow, Me.Phases(2).Properties.massflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(2).Properties.massflow.GetValueOrDefault)
                     Case 24
                         'PROP_MS_24	Vapor Phase Molar Flow
-                        value = Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Properties.molarflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Properties.molarflow.GetValueOrDefault)
                     Case 25
                         'PROP_MS_25	Vapor Phase Volumetric Flow
-                        value = Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(2).Properties.volumetric_flow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(2).Properties.volumetric_flow.GetValueOrDefault)
                     Case 26
                         'PROP_MS_26	Vapor Phase Compressibility Factor
                         value = Me.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
@@ -2676,46 +2676,46 @@ Namespace DWSIM.SimulationObjects.Streams
                         value = Me.Phases(2).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
                     Case 30
                         'PROP_MS_30	Liquid Phase (Mixture) Density
-                        value = Converter.ConvertFromSI(su.density, Me.Phases(1).Properties.density.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(1).Properties.density.GetValueOrDefault)
                     Case 31
                         'PROP_MS_31	Liquid Phase (Mixture) Molar Weight
-                        value = Converter.ConvertFromSI(su.molecularWeight, Me.Phases(1).Properties.molecularWeight.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(1).Properties.molecularWeight.GetValueOrDefault)
                     Case 32
                         'PROP_MS_32	Liquid Phase (Mixture) Specific Enthalpy
-                        value = Converter.ConvertFromSI(su.enthalpy, Me.Phases(1).Properties.enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(1).Properties.enthalpy.GetValueOrDefault)
                     Case 33
                         'PROP_MS_33	Liquid Phase (Mixture) Specific Entropy
-                        value = Converter.ConvertFromSI(su.entropy, Me.Phases(1).Properties.entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(1).Properties.entropy.GetValueOrDefault)
                     Case 34
                         'PROP_MS_34	Liquid Phase (Mixture) Molar Enthalpy
-                        value = Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(1).Properties.molar_enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(1).Properties.molar_enthalpy.GetValueOrDefault)
                     Case 35
                         'PROP_MS_35	Liquid Phase (Mixture) Molar Entropy
-                        value = Converter.ConvertFromSI(su.molar_entropy, Me.Phases(1).Properties.molar_entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(1).Properties.molar_entropy.GetValueOrDefault)
                     Case 36
                         'PROP_MS_36	Liquid Phase (Mixture) Thermal Conductivity
-                        value = Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(1).Properties.thermalConductivity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(1).Properties.thermalConductivity.GetValueOrDefault)
                     Case 37
                         'PROP_MS_37	Liquid Phase (Mixture) Kinematic Viscosity
-                        value = Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(1).Properties.kinematic_viscosity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(1).Properties.kinematic_viscosity.GetValueOrDefault)
                     Case 38
                         'PROP_MS_38	Liquid Phase (Mixture) Dynamic Viscosity
-                        value = Converter.ConvertFromSI(su.viscosity, Me.Phases(1).Properties.viscosity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(1).Properties.viscosity.GetValueOrDefault)
                     Case 39
                         'PROP_MS_39	Liquid Phase (Mixture) Heat Capacity (Cp)
-                        value = Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault)
                     Case 40
                         'PROP_MS_40	Liquid Phase (Mixture) Heat Capacity Ratio (Cp/Cv)
                         value = Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(1).Properties.heatCapacityCv.GetValueOrDefault
                     Case 41
                         'PROP_MS_41	Liquid Phase (Mixture) Mass Flow
-                        value = Converter.ConvertFromSI(su.massflow, Me.Phases(1).Properties.massflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(1).Properties.massflow.GetValueOrDefault)
                     Case 42
                         'PROP_MS_42	Liquid Phase (Mixture) Molar Flow
-                        value = Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Properties.molarflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Properties.molarflow.GetValueOrDefault)
                     Case 43
                         'PROP_MS_43	Liquid Phase (Mixture) Volumetric Flow
-                        value = Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(1).Properties.volumetric_flow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(1).Properties.volumetric_flow.GetValueOrDefault)
                     Case 44
                         'PROP_MS_44	Liquid Phase (Mixture) Compressibility Factor
                         value = Me.Phases(1).Properties.compressibilityFactor.GetValueOrDefault
@@ -2730,46 +2730,46 @@ Namespace DWSIM.SimulationObjects.Streams
                         value = Me.Phases(1).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
                     Case 48
                         'PROP_MS_48	Liquid Phase (1) Density
-                        value = Converter.ConvertFromSI(su.density, Me.Phases(3).Properties.density.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(3).Properties.density.GetValueOrDefault)
                     Case 49
                         'PROP_MS_49	Liquid Phase (1) Molar Weight
-                        value = Converter.ConvertFromSI(su.molecularWeight, Me.Phases(3).Properties.molecularWeight.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(3).Properties.molecularWeight.GetValueOrDefault)
                     Case 50
                         'PROP_MS_50	Liquid Phase (1) Specific Enthalpy
-                        value = Converter.ConvertFromSI(su.enthalpy, Me.Phases(3).Properties.enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(3).Properties.enthalpy.GetValueOrDefault)
                     Case 51
                         'PROP_MS_51	Liquid Phase (1) Specific Entropy
-                        value = Converter.ConvertFromSI(su.entropy, Me.Phases(3).Properties.entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(3).Properties.entropy.GetValueOrDefault)
                     Case 52
                         'PROP_MS_52	Liquid Phase (1) Molar Enthalpy
-                        value = Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(3).Properties.molar_enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(3).Properties.molar_enthalpy.GetValueOrDefault)
                     Case 53
                         'PROP_MS_53	Liquid Phase (1) Molar Entropy
-                        value = Converter.ConvertFromSI(su.molar_entropy, Me.Phases(3).Properties.molar_entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(3).Properties.molar_entropy.GetValueOrDefault)
                     Case 54
                         'PROP_MS_54	Liquid Phase (1) Thermal Conductivity
-                        value = Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(3).Properties.thermalConductivity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(3).Properties.thermalConductivity.GetValueOrDefault)
                     Case 55
                         'PROP_MS_55	Liquid Phase (1) Kinematic Viscosity
-                        value = Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault)
                     Case 56
                         'PROP_MS_56	Liquid Phase (1) Dynamic Viscosity
-                        value = Converter.ConvertFromSI(su.viscosity, Me.Phases(3).Properties.viscosity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(3).Properties.viscosity.GetValueOrDefault)
                     Case 57
                         'PROP_MS_57	Liquid Phase (1) Heat Capacity (Cp)
-                        value = Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault)
                     Case 58
                         'PROP_MS_58	Liquid Phase (1) Heat Capacity Ratio (Cp/Cv)
                         value = Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(3).Properties.heatCapacityCv.GetValueOrDefault
                     Case 59
                         'PROP_MS_59	Liquid Phase (1) Mass Flow
-                        value = Converter.ConvertFromSI(su.massflow, Me.Phases(3).Properties.massflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(3).Properties.massflow.GetValueOrDefault)
                     Case 60
                         'PROP_MS_60	Liquid Phase (1) Molar Flow
-                        value = Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Properties.molarflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Properties.molarflow.GetValueOrDefault)
                     Case 61
                         'PROP_MS_61	Liquid Phase (1) Volumetric Flow
-                        value = Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(3).Properties.volumetric_flow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(3).Properties.volumetric_flow.GetValueOrDefault)
                     Case 62
                         'PROP_MS_62	Liquid Phase (1) Compressibility Factor
                         value = Me.Phases(3).Properties.compressibilityFactor.GetValueOrDefault
@@ -2784,46 +2784,46 @@ Namespace DWSIM.SimulationObjects.Streams
                         value = Me.Phases(3).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
                     Case 66
                         'PROP_MS_66	Liquid Phase (2) Density
-                        value = Converter.ConvertFromSI(su.density, Me.Phases(4).Properties.density.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(4).Properties.density.GetValueOrDefault)
                     Case 67
                         'PROP_MS_67	Liquid Phase (2) Molar Weight
-                        value = Converter.ConvertFromSI(su.molecularWeight, Me.Phases(4).Properties.molecularWeight.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(4).Properties.molecularWeight.GetValueOrDefault)
                     Case 68
                         'PROP_MS_68	Liquid Phase (2) Specific Enthalpy
-                        value = Converter.ConvertFromSI(su.enthalpy, Me.Phases(4).Properties.enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(4).Properties.enthalpy.GetValueOrDefault)
                     Case 69
                         'PROP_MS_69	Liquid Phase (2) Specific Entropy
-                        value = Converter.ConvertFromSI(su.entropy, Me.Phases(4).Properties.entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(4).Properties.entropy.GetValueOrDefault)
                     Case 70
                         'PROP_MS_70	Liquid Phase (2) Molar Enthalpy
-                        value = Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(4).Properties.molar_enthalpy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(4).Properties.molar_enthalpy.GetValueOrDefault)
                     Case 71
                         'PROP_MS_71	Liquid Phase (2) Molar Entropy
-                        value = Converter.ConvertFromSI(su.molar_entropy, Me.Phases(4).Properties.molar_entropy.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(4).Properties.molar_entropy.GetValueOrDefault)
                     Case 72
                         'PROP_MS_72	Liquid Phase (2) Thermal Conductivity
-                        value = Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(4).Properties.thermalConductivity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(4).Properties.thermalConductivity.GetValueOrDefault)
                     Case 73
                         'PROP_MS_73	Liquid Phase (2) Kinematic Viscosity
-                        value = Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(4).Properties.kinematic_viscosity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(4).Properties.kinematic_viscosity.GetValueOrDefault)
                     Case 74
                         'PROP_MS_74	Liquid Phase (2) Dynamic Viscosity
-                        value = Converter.ConvertFromSI(su.viscosity, Me.Phases(4).Properties.viscosity.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(4).Properties.viscosity.GetValueOrDefault)
                     Case 75
                         'PROP_MS_75	Liquid Phase (2) Heat Capacity (Cp)
-                        value = Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault)
                     Case 76
                         'PROP_MS_76	Liquid Phase (2) Heat Capacity Ratio (Cp/Cv)
                         value = Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(4).Properties.heatCapacityCv.GetValueOrDefault
                     Case 77
                         'PROP_MS_77	Liquid Phase (2) Mass Flow
-                        value = Converter.ConvertFromSI(su.massflow, Me.Phases(4).Properties.massflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(4).Properties.massflow.GetValueOrDefault)
                     Case 78
                         'PROP_MS_78	Liquid Phase (2) Molar Flow
-                        value = Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Properties.molarflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Properties.molarflow.GetValueOrDefault)
                     Case 79
                         'PROP_MS_79	Liquid Phase (2) Volumetric Flow
-                        value = Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(4).Properties.volumetric_flow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(4).Properties.volumetric_flow.GetValueOrDefault)
                     Case 80
                         'PROP_MS_80	Liquid Phase (2) Compressibility Factor
                         value = Me.Phases(4).Properties.compressibilityFactor.GetValueOrDefault
@@ -2839,70 +2839,70 @@ Namespace DWSIM.SimulationObjects.Streams
                     Case 84
                         'PROP_MS_84	Aqueous Phase Density
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.density, Me.Phases(6).Properties.density.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(6).Properties.density.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 85
                         'PROP_MS_85	Aqueous Phase Molar Weight
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.molecularWeight, Me.Phases(6).Properties.molecularWeight.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(6).Properties.molecularWeight.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 86
                         'PROP_MS_86	Aqueous Phase Specific Enthalpy
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.enthalpy, Me.Phases(6).Properties.enthalpy.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(6).Properties.enthalpy.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 87
                         'PROP_MS_87	Aqueous Phase Specific Entropy
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.entropy, Me.Phases(6).Properties.entropy.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(6).Properties.entropy.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 88
                         'PROP_MS_88	Aqueous Phase Molar Enthalpy
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(6).Properties.molar_enthalpy.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(6).Properties.molar_enthalpy.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 89
                         'PROP_MS_89	Aqueous Phase Molar Entropy
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.molar_entropy, Me.Phases(6).Properties.molar_entropy.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(6).Properties.molar_entropy.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 90
                         'PROP_MS_90	Aqueous Phase Thermal Conductivity
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(6).Properties.thermalConductivity.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(6).Properties.thermalConductivity.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 91
                         'PROP_MS_91	Aqueous Phase Kinematic Viscosity
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(6).Properties.kinematic_viscosity.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(6).Properties.kinematic_viscosity.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 92
                         'PROP_MS_92	Aqueous Phase Dynamic Viscosity
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.viscosity, Me.Phases(6).Properties.viscosity.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(6).Properties.viscosity.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 93
                         'PROP_MS_93	Aqueous Phase Heat Capacity (Cp)
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault)
                         Else
                             value = 0
                         End If
@@ -2916,21 +2916,21 @@ Namespace DWSIM.SimulationObjects.Streams
                     Case 95
                         'PROP_MS_95	Aqueous Phase Mass Flow
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.massflow, Me.Phases(6).Properties.massflow.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(6).Properties.massflow.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 96
                         'PROP_MS_96	Aqueous Phase Molar Flow
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.molarflow, Me.Phases(6).Properties.molarflow.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(6).Properties.molarflow.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 97
                         'PROP_MS_97	Aqueous Phase Volumetric Flow
                         If Me.Phases.ContainsKey(6) Then
-                            value = Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(6).Properties.volumetric_flow.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(6).Properties.volumetric_flow.GetValueOrDefault)
                         Else
                             value = 0
                         End If
@@ -2965,70 +2965,70 @@ Namespace DWSIM.SimulationObjects.Streams
                     Case 131
                         'PROP_MS_131	Solid Phase Density
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.density, Me.Phases(7).Properties.density.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(7).Properties.density.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 132
                         'PROP_MS_132	Solid Phase Molar Weight
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.molecularWeight, Me.Phases(7).Properties.molecularWeight.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(7).Properties.molecularWeight.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 133
                         'PROP_MS_133	Solid Phase Specific Enthalpy
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.enthalpy, Me.Phases(7).Properties.enthalpy.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(7).Properties.enthalpy.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 134
                         'PROP_MS_134	Solid Phase Specific Entropy
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.entropy, Me.Phases(7).Properties.entropy.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(7).Properties.entropy.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 135
                         'PROP_MS_135	Solid Phase Molar Enthalpy
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(7).Properties.molar_enthalpy.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(7).Properties.molar_enthalpy.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 136
                         'PROP_MS_136	Solid Phase Molar Entropy
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.molar_entropy, Me.Phases(7).Properties.molar_entropy.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(7).Properties.molar_entropy.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 137
                         'PROP_MS_137	Solid Phase Thermal Conductivity
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(7).Properties.thermalConductivity.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(7).Properties.thermalConductivity.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 138
                         'PROP_MS_138	Solid Phase Kinematic Viscosity
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(7).Properties.kinematic_viscosity.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(7).Properties.kinematic_viscosity.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 139
                         'PROP_MS_139	Solid Phase Dynamic Viscosity
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.viscosity, Me.Phases(7).Properties.viscosity.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(7).Properties.viscosity.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 140
                         'PROP_MS_140	Solid Phase Heat Capacity (Cp)
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault)
                         Else
                             value = 0
                         End If
@@ -3042,21 +3042,21 @@ Namespace DWSIM.SimulationObjects.Streams
                     Case 142
                         'PROP_MS_142	Solid Phase Mass Flow
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.massflow, Me.Phases(7).Properties.massflow.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(7).Properties.massflow.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 143
                         'PROP_MS_143	Solid Phase Molar Flow
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Properties.molarflow.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Properties.molarflow.GetValueOrDefault)
                         Else
                             value = 0
                         End If
                     Case 144
                         'PROP_MS_144	Solid Phase Volumetric Flow
                         If Me.Phases.ContainsKey(7) Then
-                            value = Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(7).Properties.volumetric_flow.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(7).Properties.volumetric_flow.GetValueOrDefault)
                         Else
                             value = 0
                         End If
@@ -3131,19 +3131,19 @@ Namespace DWSIM.SimulationObjects.Streams
                     Case 104, 116, 117, 118, 119, 151
                         If Me.Phases(0).Compounds.ContainsKey(sname) Then
                             If propidx = 104 Then
-                                value = Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Compounds(sname).MolarFlow.GetValueOrDefault)
                             ElseIf propidx = 116 Then
-                                value = Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Compounds(sname).MolarFlow.GetValueOrDefault)
                             ElseIf propidx = 117 Then
-                                value = Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Compounds(sname).MolarFlow.GetValueOrDefault)
                             ElseIf propidx = 118 Then
-                                value = Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Compounds(sname).MolarFlow.GetValueOrDefault)
                             ElseIf propidx = 119 Then
-                                value = Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Compounds(sname).MolarFlow.GetValueOrDefault)
                             ElseIf propidx = 120 Then
-                                value = Converter.ConvertFromSI(su.molarflow, Me.Phases(5).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(5).Compounds(sname).MolarFlow.GetValueOrDefault)
                             ElseIf propidx = 151 Then
-                                value = Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Compounds(sname).MolarFlow.GetValueOrDefault)
                             End If
                         Else
                             value = 0
@@ -3151,31 +3151,31 @@ Namespace DWSIM.SimulationObjects.Streams
                     Case 105, 121, 122, 123, 124, 125, 152
                         If Me.Phases(0).Compounds.ContainsKey(sname) Then
                             If propidx = 105 Then
-                                value = Converter.ConvertFromSI(su.massflow, Me.Phases(0).Compounds(sname).MassFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(0).Compounds(sname).MassFlow.GetValueOrDefault)
                             ElseIf propidx = 121 Then
-                                value = Converter.ConvertFromSI(su.massflow, Me.Phases(2).Compounds(sname).MassFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(2).Compounds(sname).MassFlow.GetValueOrDefault)
                             ElseIf propidx = 122 Then
-                                value = Converter.ConvertFromSI(su.massflow, Me.Phases(1).Compounds(sname).MassFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(1).Compounds(sname).MassFlow.GetValueOrDefault)
                             ElseIf propidx = 123 Then
-                                value = Converter.ConvertFromSI(su.massflow, Me.Phases(3).Compounds(sname).MassFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(3).Compounds(sname).MassFlow.GetValueOrDefault)
                             ElseIf propidx = 124 Then
-                                value = Converter.ConvertFromSI(su.massflow, Me.Phases(4).Compounds(sname).MassFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(4).Compounds(sname).MassFlow.GetValueOrDefault)
                             ElseIf propidx = 125 Then
-                                value = Converter.ConvertFromSI(su.massflow, Me.Phases(5).Compounds(sname).MassFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(5).Compounds(sname).MassFlow.GetValueOrDefault)
                             ElseIf propidx = 152 Then
-                                value = Converter.ConvertFromSI(su.massflow, Me.Phases(7).Compounds(sname).MassFlow.GetValueOrDefault)
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(7).Compounds(sname).MassFlow.GetValueOrDefault)
                             End If
                         Else
                             value = 0
                         End If
                     Case 126
-                        value = Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.bubblePressure.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.bubblePressure.GetValueOrDefault)
                     Case 127
-                        value = Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.dewPressure.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.dewPressure.GetValueOrDefault)
                     Case 128
-                        value = Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.bubbleTemperature.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.bubbleTemperature.GetValueOrDefault)
                     Case 129
-                        value = Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.dewTemperature.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.dewTemperature.GetValueOrDefault)
                     Case 130
                         If Me.Phases(1).Properties.molarfraction.GetValueOrDefault = 1.0# Then
                             value = "Liquid Only"
@@ -3188,7 +3188,7 @@ Namespace DWSIM.SimulationObjects.Streams
                         value = Me.Phases(3).Properties.pH
                     Case 154
                         'total energy flow
-                        value = Converter.ConvertFromSI(su.heatflow, Phases(0).Properties.enthalpy.GetValueOrDefault * Phases(0).Properties.massflow.GetValueOrDefault)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Phases(0).Properties.enthalpy.GetValueOrDefault * Phases(0).Properties.massflow.GetValueOrDefault)
                 End Select
 
                 Return value
@@ -3314,10 +3314,10 @@ Namespace DWSIM.SimulationObjects.Streams
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
             Dim sname As String = ""
             If prop.Split(",").Length = 2 Then
@@ -3329,31 +3329,31 @@ Namespace DWSIM.SimulationObjects.Streams
             Select Case propidx
                 Case 0
                     'PROP_MS_0 Temperature
-                    Me.Phases(0).Properties.temperature = Converter.ConvertToSI(su.temperature, propval)
+                    Me.Phases(0).Properties.temperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
                 Case 1
                     'PROP_MS_1 Pressure
-                    Me.Phases(0).Properties.pressure = Converter.ConvertToSI(su.pressure, propval)
+                    Me.Phases(0).Properties.pressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                 Case 2
                     'PROP_MS_2	Mass Flow
-                    Me.Phases(0).Properties.massflow = Converter.ConvertToSI(su.massflow, propval)
+                    Me.Phases(0).Properties.massflow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
                     Me.PropertyPackage.DW_CalcVazaoMolar()
                     Me.PropertyPackage.DW_CalcVazaoVolumetrica()
                 Case 3
                     'PROP_MS_3	Molar Flow
-                    Me.Phases(0).Properties.molarflow = Converter.ConvertToSI(su.molarflow, propval)
+                    Me.Phases(0).Properties.molarflow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval)
                     Me.PropertyPackage.DW_CalcVazaoMassica()
                     Me.PropertyPackage.DW_CalcVazaoVolumetrica()
                 Case 4
                     'PROP_MS_4	Volumetric Flow
-                    Me.Phases(0).Properties.volumetric_flow = Converter.ConvertToSI(su.volumetricFlow, propval)
+                    Me.Phases(0).Properties.volumetric_flow = SystemsOfUnits.Converter.ConvertToSI(su.volumetricFlow, propval)
                     Me.Phases(0).Properties.massflow = Me.Phases(0).Properties.volumetric_flow * Me.Phases(0).Properties.density.GetValueOrDefault
                     Me.PropertyPackage.DW_CalcVazaoMolar()
                 Case 7
                     'PROP_MS_7	Specific Enthalpy
-                    Me.Phases(0).Properties.enthalpy = Converter.ConvertToSI(su.enthalpy, propval)
+                    Me.Phases(0).Properties.enthalpy = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, propval)
                 Case 8
                     'PROP_MS_8	Specific Entropy
-                    Me.Phases(0).Properties.entropy = Converter.ConvertToSI(su.entropy, propval)
+                    Me.Phases(0).Properties.entropy = SystemsOfUnits.Converter.ConvertToSI(su.entropy, propval)
                 Case 27
                     'PROP_MS_27	Molar fraction vapour phase
                     Me.Phases(2).Properties.molarfraction = propval
@@ -3385,8 +3385,8 @@ Namespace DWSIM.SimulationObjects.Streams
                     End If
                 Case 104
                     If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                        Me.Phases(0).Compounds(sname).MolarFlow = Converter.ConvertToSI(su.molarflow, propval)
-                        Me.Phases(0).Compounds(sname).MassFlow = Converter.ConvertToSI(su.molarflow, propval) / 1000 * Me.Phases(0).Compounds(sname).ConstantProperties.Molar_Weight
+                        Me.Phases(0).Compounds(sname).MolarFlow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval)
+                        Me.Phases(0).Compounds(sname).MassFlow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval) / 1000 * Me.Phases(0).Compounds(sname).ConstantProperties.Molar_Weight
                         Dim summ As Double = 0
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
                             summ += comp.MolarFlow
@@ -3406,8 +3406,8 @@ Namespace DWSIM.SimulationObjects.Streams
                     End If
                 Case 105
                     If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                        Me.Phases(0).Compounds(sname).MassFlow = Converter.ConvertToSI(su.massflow, propval)
-                        Me.Phases(0).Compounds(sname).MolarFlow = Converter.ConvertToSI(su.massflow, propval) / Me.Phases(0).Compounds(sname).ConstantProperties.Molar_Weight * 1000
+                        Me.Phases(0).Compounds(sname).MassFlow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
+                        Me.Phases(0).Compounds(sname).MolarFlow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval) / Me.Phases(0).Compounds(sname).ConstantProperties.Molar_Weight * 1000
                         Dim mtotal As Double = 0
                         For Each comp As Compound In Me.Phases(0).Compounds.Values
                             mtotal += comp.MassFlow
@@ -3431,7 +3431,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim value As String = ""
 
             If prop <> "" Then
@@ -6862,7 +6862,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -6892,7 +6892,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     .DefaultValue = Nothing
                 End With
 
-                Dim valor = Format(Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_ES_0"), su.heatflow), valor, False, DWSIM.App.GetLocalString("Propriedades2"), DWSIM.App.GetLocalString("QuantidadedeEnergyFlowp"), True)
                 With .Item(.Item.Count - 1)
                     .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -6928,8 +6928,8 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -6937,7 +6937,7 @@ Namespace DWSIM.SimulationObjects.Streams
 
                 Case 0
                     'PROP_ES_0	Power
-                    value = Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault)
 
             End Select
 
@@ -6970,21 +6970,21 @@ Namespace DWSIM.SimulationObjects.Streams
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 0
                     'PROP_ES_0	Power
-                    Me.EnergyFlow = Converter.ConvertToSI(su.heatflow, propval)
+                    Me.EnergyFlow = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
             End Select
             Return 1
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

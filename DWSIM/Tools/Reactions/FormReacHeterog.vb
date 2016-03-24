@@ -27,8 +27,8 @@ Public Class FormReacHeterog
     Public mode As String = "Add"
     Public rc As Reaction
     Public fc As FormFlowsheet
-    Public su As DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
     Public loaded As Boolean = False
 

@@ -686,7 +686,7 @@ Partial Class FormMain
 
         'load user unit systems
 
-        If My.Application.UserUnitSystems Is Nothing Then My.Application.UserUnitSystems = New Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
+        If My.Application.UserUnitSystems Is Nothing Then My.Application.UserUnitSystems = New Dictionary(Of String, SystemsOfUnits.Units)
         If My.Application.UtilityPlugins Is Nothing Then My.Application.UtilityPlugins = New Dictionary(Of String, Interfaces.IUtilityPlugin)
 
         Dim xdoc As New XDocument()
@@ -723,7 +723,7 @@ Partial Class FormMain
 
                 For Each xel In data
                     Try
-                        Dim su As New DWSIM.SystemsOfUnits.SI()
+                        Dim su As New SystemsOfUnits.SI()
                         su.LoadData(xel.Elements.ToList)
                         myarraylist.Add(su)
                     Catch ex As Exception
@@ -733,7 +733,7 @@ Partial Class FormMain
 
             End If
 
-            For Each su As DWSIM.SystemsOfUnits.Units In myarraylist
+            For Each su As SystemsOfUnits.Units In myarraylist
                 If Not My.Application.UserUnitSystems.ContainsKey(su.Name) Then My.Application.UserUnitSystems.Add(su.Name, su)
             Next
 
@@ -748,18 +748,18 @@ Partial Class FormMain
 
         With Me.AvailableUnitSystems
 
-            .Add(DWSIM.App.GetLocalString("SistemaSI"), New DWSIM.SystemsOfUnits.SI)
-            .Add(DWSIM.App.GetLocalString("SistemaCGS"), New DWSIM.SystemsOfUnits.CGS)
-            .Add(DWSIM.App.GetLocalString("SistemaIngls"), New DWSIM.SystemsOfUnits.English)
-            .Add(DWSIM.App.GetLocalString("Personalizado1BR"), New DWSIM.SystemsOfUnits.SIUnits_Custom1)
-            .Add(DWSIM.App.GetLocalString("Personalizado2SC"), New DWSIM.SystemsOfUnits.SIUnits_Custom2)
-            .Add(DWSIM.App.GetLocalString("Personalizado3CNTP"), New DWSIM.SystemsOfUnits.SIUnits_Custom3)
-            .Add(DWSIM.App.GetLocalString("Personalizado4"), New DWSIM.SystemsOfUnits.SIUnits_Custom4)
-            .Add(DWSIM.App.GetLocalString("Personalizado5"), New DWSIM.SystemsOfUnits.SIUnits_Custom5)
+            .Add(DWSIM.App.GetLocalString("SistemaSI"), New SystemsOfUnits.SI)
+            .Add(DWSIM.App.GetLocalString("SistemaCGS"), New SystemsOfUnits.CGS)
+            .Add(DWSIM.App.GetLocalString("SistemaIngls"), New SystemsOfUnits.English)
+            .Add(DWSIM.App.GetLocalString("Personalizado1BR"), New SystemsOfUnits.SIUnits_Custom1)
+            .Add(DWSIM.App.GetLocalString("Personalizado2SC"), New SystemsOfUnits.SIUnits_Custom2)
+            .Add(DWSIM.App.GetLocalString("Personalizado3CNTP"), New SystemsOfUnits.SIUnits_Custom3)
+            .Add(DWSIM.App.GetLocalString("Personalizado4"), New SystemsOfUnits.SIUnits_Custom4)
+            .Add(DWSIM.App.GetLocalString("Personalizado5"), New SystemsOfUnits.SIUnits_Custom5)
 
             If Not My.Application.UserUnitSystems Is Nothing Then
                 If My.Application.UserUnitSystems.Count > 0 Then
-                    Dim su As New DWSIM.SystemsOfUnits.Units
+                    Dim su As New SystemsOfUnits.Units
                     For Each su In My.Application.UserUnitSystems.Values
                         If Not .ContainsKey(su.Name) Then .Add(su.Name, su)
                     Next

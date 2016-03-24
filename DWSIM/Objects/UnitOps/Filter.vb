@@ -362,7 +362,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Converter As New DWSIM.SystemsOfUnits.Converter
+            Dim Converter As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -420,15 +420,15 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Dim value As Double
 
-                value = Converter.ConvertFromSI(su.mediumresistance, Me.FilterMediumResistance)
+                value = SystemsOfUnits.Converter.ConvertFromSI(su.mediumresistance, Me.FilterMediumResistance)
                 .Item.Add(FT(DWSIM.App.GetLocalString("FilterMediumResistance"), su.mediumresistance), Format(value, FlowSheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("FilterMediumResistanceDesc"), True)
                 .Item(.Item.Count - 1).CustomTypeConverter = New System.ComponentModel.StringConverter
                 .Item(.Item.Count - 1).Tag2 = "PROP_FT_4"
-                value = Converter.ConvertFromSI(su.cakeresistance, Me.SpecificCakeResistance)
+                value = SystemsOfUnits.Converter.ConvertFromSI(su.cakeresistance, Me.SpecificCakeResistance)
                 .Item.Add(FT(DWSIM.App.GetLocalString("FilterSpecificCakeResistance"), su.cakeresistance), Format(value, FlowSheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("FilterSpecificCakeResistanceDesc"), True)
                 .Item(.Item.Count - 1).CustomTypeConverter = New System.ComponentModel.StringConverter
                 .Item(.Item.Count - 1).Tag2 = "PROP_FT_5"
-                value = Converter.ConvertFromSI(su.time, Me.FilterCycleTime)
+                value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.FilterCycleTime)
                 .Item.Add(FT(DWSIM.App.GetLocalString("FilterCycleTime"), su.time), Format(value, FlowSheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("FilterCycleTimeDesc"), True)
                 .Item(.Item.Count - 1).CustomTypeConverter = New System.ComponentModel.StringConverter
                 .Item(.Item.Count - 1).Tag2 = "PROP_FT_3"
@@ -445,12 +445,12 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Select Case Me.CalcMode
                     Case CalculationMode.Design
-                        value = Converter.ConvertFromSI(su.deltaP, Me.PressureDrop)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.PressureDrop)
                         .Item.Add(FT(DWSIM.App.GetLocalString("FilterPressureDrop"), su.deltaP), Format(value, FlowSheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("FilterPressureDropDesc"), True)
                         .Item(.Item.Count - 1).CustomTypeConverter = New System.ComponentModel.StringConverter
                         .Item(.Item.Count - 1).Tag2 = "PROP_FT_7"
                     Case CalculationMode.Simulation
-                        value = Converter.ConvertFromSI(su.area, Me.TotalFilterArea)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.TotalFilterArea)
                         .Item.Add(FT(DWSIM.App.GetLocalString("FilterArea"), su.area), Format(value, FlowSheet.Options.NumberFormat), False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("FilterAreaDesc"), True)
                         .Item(.Item.Count - 1).CustomTypeConverter = New System.ComponentModel.StringConverter
                         .Item(.Item.Count - 1).Tag2 = "PROP_FT_1"
@@ -459,11 +459,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 If Me.GraphicObject.Calculated Then
                     Select Case Me.CalcMode
                         Case CalculationMode.Design
-                            .Item.Add(FT(DWSIM.App.GetLocalString("FilterArea"), su.area), Format(Converter.ConvertFromSI(su.area, Me.TotalFilterArea), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("FilterAreaDesc"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("FilterArea"), su.area), Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.TotalFilterArea), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("FilterAreaDesc"), True)
                         Case CalculationMode.Simulation
-                            .Item.Add(FT(DWSIM.App.GetLocalString("FilterPressureDrop"), su.deltaP), Format(Converter.ConvertFromSI(su.deltaP, Me.PressureDrop), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("FilterPressureDropDesc"), True)
+                            .Item.Add(FT(DWSIM.App.GetLocalString("FilterPressureDrop"), su.deltaP), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.PressureDrop), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("FilterPressureDropDesc"), True)
                     End Select
-                    .Item.Add(FT(DWSIM.App.GetLocalString("CSepEnergyImbalance"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.EnergyImb), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("CSepEnergyImbalance"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
                 End If
 
                 If Me.IsSpecAttached = True Then
@@ -486,36 +486,36 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 0
                     'PROP_FT_0	Energy Balance	
-                    value = Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
                 Case 1
                     'PROP_FT_1	Total Filter Area	
-                    value = Converter.ConvertFromSI(su.area, Me.TotalFilterArea)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.TotalFilterArea)
                 Case 2
                     'PROP_FT_2	Cake Relative Humidity (%)	
                     value = Me.CakeRelativeHumidity
                 Case 3
                     'PROP_FT_3	Cycle Time	
-                    value = Converter.ConvertFromSI(su.time, Me.FilterCycleTime)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.FilterCycleTime)
                 Case 4
                     'PROP_FT_4	Filter Medium Resistance	
-                    value = Converter.ConvertFromSI(su.mediumresistance, Me.FilterMediumResistance)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.mediumresistance, Me.FilterMediumResistance)
                 Case 5
                     'PROP_FT_5	Specific Cake Resistance	
-                    value = Converter.ConvertFromSI(su.cakeresistance, Me.SpecificCakeResistance)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.cakeresistance, Me.SpecificCakeResistance)
                 Case 6
                     'PROP_FT_6	Submerged Area Fraction	
                     value = Me.SubmergedAreaFraction
                 Case 7
                     'PROP_FT_7	Total Pressure Drop	
-                    value = Converter.ConvertFromSI(su.pressure, Me.PressureDrop)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.PressureDrop)
             End Select
 
             Return value
@@ -532,9 +532,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
@@ -542,25 +542,25 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     'PROP_FT_0	Energy Balance	
                 Case 1
                     'PROP_FT_1	Total Filter Area	
-                    Me.TotalFilterArea = Converter.ConvertToSI(su.area, propval)
+                    Me.TotalFilterArea = SystemsOfUnits.Converter.ConvertToSI(su.area, propval)
                 Case 2
                     'PROP_FT_2	Cake Relative Humidity (%)	
                     Me.CakeRelativeHumidity = propval
                 Case 3
                     'PROP_FT_3	Cycle Time	
-                    Me.FilterCycleTime = Converter.ConvertToSI(su.time, propval)
+                    Me.FilterCycleTime = SystemsOfUnits.Converter.ConvertToSI(su.time, propval)
                 Case 4
                     'PROP_FT_4	Filter Medium Resistance	
-                    Me.FilterMediumResistance = Converter.ConvertToSI(su.mediumresistance, propval)
+                    Me.FilterMediumResistance = SystemsOfUnits.Converter.ConvertToSI(su.mediumresistance, propval)
                 Case 5
                     'PROP_FT_5	Specific Cake Resistance	
-                    Me.SpecificCakeResistance = Converter.ConvertToSI(su.cakeresistance, propval)
+                    Me.SpecificCakeResistance = SystemsOfUnits.Converter.ConvertToSI(su.cakeresistance, propval)
                 Case 6
                     'PROP_FT_6	Submerged Area Fraction	
                     Me.SubmergedAreaFraction = propval
                 Case 7
                     'PROP_FT_7	Total Pressure Drop	
-                    Me.PressureDrop = Converter.ConvertToSI(su.deltaP, propval)
+                    Me.PressureDrop = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
             End Select
 
             Return 1
@@ -568,8 +568,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

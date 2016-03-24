@@ -27,7 +27,7 @@ Public Class UIStagesEditorForm
 
     Dim loaded As Boolean = False
 
-    Dim cvt As DWSIM.SystemsOfUnits.Converter
+    Dim cvt As SystemsOfUnits.Converter
 
     Private Sub UIStagesEditorForm_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
@@ -35,7 +35,7 @@ Public Class UIStagesEditorForm
 
     Private Sub UIStagesEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cvt = New DWSIM.SystemsOfUnits.Converter()
+        cvt = New SystemsOfUnits.Converter()
 
         Dim i As Integer = 0
 
@@ -46,7 +46,7 @@ Public Class UIStagesEditorForm
             .Clear()
             i = 0
             Do
-                .Add(New Object() {i, dc.Stages(i).Name, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.pressure, dc.Stages(i).P), dc.Stages(i).Efficiency})
+                .Add(New Object() {i, dc.Stages(i).Name, SystemsOfUnits.Converter.ConvertFromSI(form.Options.SelectedUnitSystem.pressure, dc.Stages(i).P), dc.Stages(i).Efficiency})
                 i = i + 1
             Loop Until i = dc.Stages.Count
             Select Case dc.ColumnType
@@ -119,7 +119,7 @@ Public Class UIStagesEditorForm
         If loaded Then
             If e.ColumnIndex = 2 Then
                 'pressure
-                dc.Stages(e.RowIndex).P = Converter.ConvertToSI(form.Options.SelectedUnitSystem.pressure, dgv1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
+                dc.Stages(e.RowIndex).P = SystemsOfUnits.Converter.ConvertToSI(form.Options.SelectedUnitSystem.pressure, dgv1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
             ElseIf e.ColumnIndex = 3 Then
                 'efficiency
                 dc.Stages(e.RowIndex).Efficiency = dgv1.Rows(e.RowIndex).Cells(e.ColumnIndex).Value

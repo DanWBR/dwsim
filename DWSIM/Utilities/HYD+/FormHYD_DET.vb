@@ -29,8 +29,8 @@ Public Class FormHYD_DET
 
     Dim Frm As FormFlowsheet
 
-    Public su As New DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As New SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
     Public Sub FormDET_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -143,10 +143,10 @@ Public Class FormHYD_DET
 
         If model <> 2 Then
 
-            Label8.Text = Format(Converter.ConvertFromSI(su.pressure, P), nf)
-            Label9.Text = Format(Converter.ConvertFromSI(su.temperature, T), nf)
+            Label8.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, P), nf)
+            Label9.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T), nf)
             Label10.Text = Phases
-            Label11.Text = Format(Converter.ConvertFromSI(su.temperature, res(0)), nf)
+            Label11.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res(0)), nf)
             Label12.Text = Format(res(1), "####0.########")
             Label13.Text = Format(res(2) / 1000, "####0.0000#")
             Label14.Text = Format(res(3) / 1000, "####0.0000#")
@@ -163,10 +163,10 @@ Public Class FormHYD_DET
 
         Else
 
-            Label8.Text = Format(Converter.ConvertFromSI(su.pressure, P), nf)
-            Label9.Text = Format(Converter.ConvertFromSI(su.temperature, T), nf)
+            Label8.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, P), nf)
+            Label9.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T), nf)
             Label10.Text = Phases
-            Label11.Text = Format(Converter.ConvertFromSI(su.temperature, res(0)), nf)
+            Label11.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res(0)), nf)
             Label12.Text = Format(res(1), "####0.########")
             Label13.Text = DWSIM.App.GetLocalString("ND") 'Format(res(2) / 1000, "####0.0000#")
             Label14.Text = DWSIM.App.GetLocalString("ND") 'Format(res(3) / 1000, "####0.0000#")

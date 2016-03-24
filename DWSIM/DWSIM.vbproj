@@ -297,7 +297,6 @@
     <Import Include="DWSIM.DWSIM.SimulationObjects.SpecialOps" />
     <Import Include="DWSIM.DWSIM.SimulationObjects.Streams" />
     <Import Include="DWSIM.DWSIM.SimulationObjects.UnitOperations" />
-    <Import Include="DWSIM.DWSIM.SystemsOfUnits" />
     <Import Include="DWSIM.DWSIM.Thermodynamics" />
     <Import Include="DWSIM.DWSIM.Thermodynamics.BaseClasses" />
     <Import Include="DWSIM.Thermodynamics" />
@@ -776,7 +775,6 @@
     <Compile Include="Objects\UnitOps\Splitter.vb" />
     <Compile Include="Objects\Streams\Streams.vb" />
     <Compile Include="Objects\Classes\Thermo\BaseThermoClasses.vb" />
-    <Compile Include="Objects\Classes\Units\SystemsOfUnits.vb" />
     <Compile Include="Objects\UnitOps\Tank.vb" />
     <Compile Include="Objects\UnitOps\Turbine.vb" />
     <Compile Include="Objects\UnitOps\Valve.vb" />

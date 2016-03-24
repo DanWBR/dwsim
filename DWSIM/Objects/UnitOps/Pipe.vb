@@ -1516,7 +1516,7 @@ Final3:     T = bbb
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -1586,7 +1586,7 @@ Final3:     T = bbb
                 Select Case Me.Specification
                     Case specmode.Length
                     Case specmode.OutletPressure
-                        valor = Format(Converter.ConvertFromSI(su.pressure, Me.OutletPressure), FlowSheet.Options.NumberFormat)
+                        valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.OutletPressure), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("ValveOutletPressure"), su.pressure), valor, False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
                         With .Item(.Item.Count - 1)
                             .Tag2 = "PROP_PI_3"
@@ -1594,7 +1594,7 @@ Final3:     T = bbb
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
                     Case specmode.OutletTemperature
-                        valor = Format(Converter.ConvertFromSI(su.temperature, Me.OutletTemperature), FlowSheet.Options.NumberFormat)
+                        valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature), FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("HeaterCoolerOutletTemperature"), su.temperature), valor, False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
                         With .Item(.Item.Count - 1)
                             .Tag2 = "PROP_PI_4"
@@ -1611,19 +1611,19 @@ Final3:     T = bbb
                 .Item.Add(DWSIM.App.GetLocalString("Erromximodapresso") & " (Pa)", Me, "TolP", False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
                 .Item.Add(DWSIM.App.GetLocalString("Erromximodatemperatu") & " (K)", Me, "TolT", False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
 
-                .Item.Add(FT("Delta P", su.deltaP), Format(Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenadepressoentr"), True)
+                .Item.Add(FT("Delta P", su.deltaP), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenadepressoentr"), True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .DefaultType = GetType(Nullable(Of Double))
                 End With
 
-                .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("DeltaT2"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenadetemperatur"), True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .DefaultType = GetType(Nullable(Of Double))
                 End With
 
-                .Item.Add(FT(DWSIM.App.GetLocalString("Calortrocado"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Quantidadedecalortro"), True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("Calortrocado"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Quantidadedecalortro"), True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .DefaultType = GetType(Nullable(Of Double))
@@ -1654,26 +1654,26 @@ Final3:     T = bbb
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 0
-                    value = Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
                 Case 1
-                    value = Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
                 Case 2
-                    value = Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
                 Case 3
-                    value = Converter.ConvertFromSI(su.pressure, Me.OutletPressure)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.OutletPressure)
                 Case 4
-                    value = Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
                 Case 5
-                    value = Converter.ConvertFromSI(su.heat_transf_coeff, Me.ThermalProfile.CGTC_Definido)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.ThermalProfile.CGTC_Definido)
                 Case 6
-                    value = Converter.ConvertFromSI(su.temperature, Me.ThermalProfile.Temp_amb_definir)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ThermalProfile.Temp_amb_definir)
             End Select
 
             Return value
@@ -1690,22 +1690,22 @@ Final3:     T = bbb
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 2
-                    Me.ThermalProfile.Calor_trocado = Converter.ConvertToSI(su.heatflow, propval)
+                    Me.ThermalProfile.Calor_trocado = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
                 Case 3
-                    Me.OutletPressure = Converter.ConvertToSI(su.pressure, propval)
+                    Me.OutletPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                 Case 4
-                    Me.OutletTemperature = Converter.ConvertToSI(su.temperature, propval)
+                    Me.OutletTemperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
                 Case 5
-                    Me.ThermalProfile.CGTC_Definido = Converter.ConvertToSI(su.heat_transf_coeff, propval)
+                    Me.ThermalProfile.CGTC_Definido = SystemsOfUnits.Converter.ConvertToSI(su.heat_transf_coeff, propval)
                 Case 6
-                    Me.ThermalProfile.Temp_amb_definir = Converter.ConvertToSI(su.temperature, propval)
+                    Me.ThermalProfile.Temp_amb_definir = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
             End Select
 
             Return 1
@@ -1713,7 +1713,7 @@ Final3:     T = bbb
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
+            If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

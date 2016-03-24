@@ -95,9 +95,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
-    <Compile Include="Base Classes\CRITPT.vb" />
+    <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
-    <Compile Include="Extensions\ExtensionMethods.vb" />
+    <Compile Include="Extensions\GeneralExtenders.vb" />
     <Compile Include="Extensions\SIMDExtenders.vb" />
     <Compile Include="Flash Algorithms\PointF.vb" />
     <Compile Include="Main\Interface.vb" />
@@ -122,10 +122,10 @@
     <Compile Include="Property Packages\ActivityCoefficientPropertyPackage.vb" />
     <Compile Include="Base Classes\Electrolyte.vb" />
     <Compile Include="Base Classes\ElectrolyteBase.vb" />
-    <Compile Include="Base Classes\HYP.vb" />
+    <Compile Include="Models\Hypotheticals.vb" />
     <Compile Include="Base Classes\MichelsenBase.vb" />
     <Compile Include="Base Classes\PropertyPackage.vb" />
-    <Compile Include="Base Classes\PROPS.vb" />
+    <Compile Include="Models\FluidProperties.vb" />
     <Compile Include="Flash Algorithms\Base.vb" />
     <Compile Include="Flash Algorithms\BlackOil.vb" />
     <Compile Include="Flash Algorithms\BostonBrittInsideOut.vb" />
@@ -162,19 +162,19 @@
     <Compile Include="Property Packages\CAPEOPENPropertyPackageSocket.vb" />
     <Compile Include="Property Packages\ChaoSeaderPropertyPackage.vb" />
     <Compile Include="Property Packages\CoolPropPropertyPackage.vb" />
-    <Compile Include="Models\CS.vb" />
-    <Compile Include="Models\ExUNIQUAC.vb" />
+    <Compile Include="Models\ChaoSeader.vb" />
+    <Compile Include="Models\ExtendedUNIQUAC.vb" />
     <Compile Include="Property Packages\ExUNIQUACPropertyPackage.vb" />
     <Compile Include="Property Packages\FPROPSPropertyPackage.vb" />
-    <Compile Include="Models\FPROPS_NativeCalls.vb" />
+    <Compile Include="Models\FPROPS.vb" />
     <Compile Include="Property Packages\GraysonStreedPropertyPackage.vb" />
-    <Compile Include="Models\GS.vb" />
-    <Compile Include="Models\IAPWS_IF97.vb" />
+    <Compile Include="Models\GraysonStreed.vb" />
+    <Compile Include="Models\SteamTables_IAPWS_IF97.vb" />
     <Compile Include="Models\Ideal.vb" />
     <Compile Include="Models\LIQUAC2.vb" />
     <Compile Include="Property Packages\LIQUAC2PropertyPackage.vb" />
-    <Compile Include="Models\LK.vb" />
-    <Compile Include="Models\LKP.vb" />
+    <Compile Include="Models\LeeKesler.vb" />
+    <Compile Include="Models\LeeKeslerPlocker.vb" />
     <Compile Include="Property Packages\LKPPropertyPackage.vb" />
     <Compile Include="Models\MODFAC.vb" />
     <Compile Include="Property Packages\MODFACPropertyPackage.vb" />
@@ -184,10 +184,10 @@
     <Compile Include="Property Packages\NRTLPropertyPackage.vb" />
     <Compile Include="Models\PCSAFT.vb" />
     <Compile Include="Property Packages\PCSAFTPropertyPackage.vb" />
-    <Compile Include="Models\PENGROB.vb" />
+    <Compile Include="Models\PengRobinson.vb" />
     <Compile Include="Property Packages\PengRobinsonPropertyPackage.vb" />
-    <Compile Include="Models\PR.vb" />
-    <Compile Include="Models\PRLK.vb" />
+    <Compile Include="Models\PengRobinson2.vb" />
+    <Compile Include="Property Packages\PengRobinsonLeeKeslerPropertyPackage.vb" />
     <Compile Include="Models\PRSV2-VL.vb" />
     <Compile Include="Models\PRSV2.vb" />
     <Compile Include="Property Packages\PRSV2PropertyPackage.vb" />
@@ -196,10 +196,10 @@
     <Compile Include="Models\Seawater.vb" />
     <Compile Include="Property Packages\SeawaterPropertyPackage.vb" />
     <Compile Include="Property Packages\SourWaterPropertyPackage.vb" />
-    <Compile Include="Models\SRK.vb" />
-    <Compile Include="Models\SRK2.vb" />
+    <Compile Include="Models\SoaveRedlichKwong.vb" />
+    <Compile Include="Models\SoaveRedlichKwong2.vb" />
     <Compile Include="Property Packages\SRKPropertyPackage.vb" />
-    <Compile Include="Models\STEAM67.vb" />
+    <Compile Include="Models\Steam67.vb" />
     <Compile Include="Property Packages\SteamTablesPropertyPackage.vb" />
     <Compile Include="Models\UNIFAC.vb" />
     <Compile Include="Property Packages\UNIFACLLPropertyPackage.vb" />
@@ -217,7 +217,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

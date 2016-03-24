@@ -217,10 +217,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     With specstr.Phases(0).Compounds(cs.ComponentID)
                         Select Case cs.SepSpec
                             Case SeparationSpec.MassFlow
-                                .MassFlow = Converter.ConvertToSI(su.massflow, cs.SpecValue)
+                                .MassFlow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, cs.SpecValue)
                                 .MolarFlow = .MassFlow / .ConstantProperties.Molar_Weight * 1000
                             Case SeparationSpec.MolarFlow
-                                .MolarFlow = Converter.ConvertToSI(su.molarflow, cs.SpecValue)
+                                .MolarFlow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, cs.SpecValue)
                                 .MassFlow = .MolarFlow * .ConstantProperties.Molar_Weight / 1000
                             Case SeparationSpec.PercentInletMassFlow
                                 Dim mf As Double = instr.Phases(0).Compounds(cs.ComponentID).MassFlow.GetValueOrDefault
@@ -444,7 +444,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -511,7 +511,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .CustomEditor = New DWSIM.Editors.ComponentSeparator.UICSepSpecEditor
                 End With
 
-                .Item.Add(FT(DWSIM.App.GetLocalString("CSepEnergyImbalance"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.EnergyImb), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                .Item.Add(FT(DWSIM.App.GetLocalString("CSepEnergyImbalance"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
 
                 .ExpandAllGridItems()
 
@@ -520,8 +520,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -529,7 +529,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case 0
 
-                    value = Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
 
             End Select
 
@@ -556,9 +556,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
@@ -570,8 +570,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

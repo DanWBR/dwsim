@@ -68,7 +68,7 @@ Public Class FormMain
     Private tmpform2 As FormFlowsheet
 
     Public AvailableComponents As New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
-    Public AvailableUnitSystems As New Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
+    Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
     Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
 
     Public COMonitoringObjects As New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)

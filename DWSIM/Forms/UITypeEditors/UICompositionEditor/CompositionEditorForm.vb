@@ -9,7 +9,7 @@ Public Class CompositionEditorForm
     Public Stream As MaterialStream
     Public Solvent As String = ""
     Public Q, W, T As Double
-    Public SU As DWSIM.SystemsOfUnits.Units
+    Public SU As SystemsOfUnits.Units
     Public NF As String = ""
     Private loaded As Boolean = False
 
@@ -114,8 +114,8 @@ Public Class CompositionEditorForm
                 For Each row In GridComp.Rows
                     total += row.Cells(0).Value
                 Next
-                Dim cv As New DWSIM.SystemsOfUnits.Converter
-                Q = Converter.ConvertToSI(SU.molarflow, total)
+                Dim cv As New SystemsOfUnits.Converter
+                Q = SystemsOfUnits.Converter.ConvertToSI(SU.molarflow, total)
                 For Each row In Me.GridComp.Rows
                     Me.Compounds(row.HeaderCell.Tag).MoleFraction = row.Cells(0).Value / total
                 Next
@@ -134,8 +134,8 @@ Public Class CompositionEditorForm
                 For Each row In GridComp.Rows
                     total += row.Cells(0).Value
                 Next
-                Dim cv As New DWSIM.SystemsOfUnits.Converter
-                W = Converter.ConvertToSI(SU.massflow, total)
+                Dim cv As New SystemsOfUnits.Converter
+                W = SystemsOfUnits.Converter.ConvertToSI(SU.massflow, total)
                 For Each row In Me.GridComp.Rows
                     Me.Compounds(row.HeaderCell.Tag).MassFraction = row.Cells(0).Value / total
                 Next
@@ -415,14 +415,14 @@ Public Class CompositionEditorForm
                         row.Cells(0).Value = Me.Compounds(row.HeaderCell.Tag).MassFraction
                     Next
                 ElseIf Me.RadioButton3.Checked Then
-                    Dim cv As New DWSIM.SystemsOfUnits.Converter
+                    Dim cv As New SystemsOfUnits.Converter
                     For Each row In Me.GridComp.Rows
-                        row.Cells(0).Value = Converter.ConvertFromSI(SU.molarflow, Me.Compounds(row.HeaderCell.Tag).MoleFraction.GetValueOrDefault * Q)
+                        row.Cells(0).Value = SystemsOfUnits.Converter.ConvertFromSI(SU.molarflow, Me.Compounds(row.HeaderCell.Tag).MoleFraction.GetValueOrDefault * Q)
                     Next
                 ElseIf Me.RadioButton4.Checked Then
-                    Dim cv As New DWSIM.SystemsOfUnits.Converter
+                    Dim cv As New SystemsOfUnits.Converter
                     For Each row In Me.GridComp.Rows
-                        row.Cells(0).Value = Converter.ConvertFromSI(SU.massflow, Me.Compounds(row.HeaderCell.Tag).MassFraction.GetValueOrDefault * W)
+                        row.Cells(0).Value = SystemsOfUnits.Converter.ConvertFromSI(SU.massflow, Me.Compounds(row.HeaderCell.Tag).MassFraction.GetValueOrDefault * W)
                     Next
                 ElseIf Me.RadioButton5.Checked Then
                     'molarity = mol solute per liter solution
@@ -440,7 +440,7 @@ Public Class CompositionEditorForm
                         End If
                         i += 1
                     Next
-                    Dim cv As New DWSIM.SystemsOfUnits.Converter
+                    Dim cv As New SystemsOfUnits.Converter
                     i = 0
                     For Each row In Me.GridComp.Rows
                         If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
@@ -452,7 +452,7 @@ Public Class CompositionEditorForm
                     Next
                 ElseIf Me.RadioButton6.Checked Then
                     'molarity = mol solute per kg solvent
-                    Dim cv As New DWSIM.SystemsOfUnits.Converter
+                    Dim cv As New SystemsOfUnits.Converter
                     For Each row In Me.GridComp.Rows
                         If DWSIM.App.GetLocalString(row.HeaderCell.Tag) = Me.ComboBox1.SelectedItem.ToString Then
                             row.Cells(0).Value = Me.Compounds(row.HeaderCell.Tag).MassFraction.GetValueOrDefault * W

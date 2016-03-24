@@ -640,7 +640,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Function
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -772,7 +772,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Next
 
                 '======== heat due to enthalpy balance ============
-                Dim valor = Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("CalorFornecido"), su.heatflow), valor, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("Quantidadedecalortro"), True)
                 .Item(.Item.Count - 1).Tag = New Object() {FlowSheet.Options.NumberFormat, su.heatflow, "E"}
 
@@ -790,8 +790,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
 
             Dim propType As String = prop.Split("_")(0)
@@ -799,7 +799,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             Select Case propType
                 Case "Calc"
-                    value = Converter.ConvertFromSI(su.heatflow, DeltaQ.GetValueOrDefault)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, DeltaQ.GetValueOrDefault)
                 Case "In"
                     value = InputParams(propID).Value
                 Case "Out"
@@ -845,16 +845,16 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
 
             Dim propType As String = prop.Split("_")(0)
             Dim propID As String = prop.Split("_")(1)
 
             Select Case propType
                 Case "Calc"
-                    DeltaQ = Converter.ConvertToSI(su.heatflow, propval)
+                    DeltaQ = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
                 Case "In"
                     InputParams(propID).Value = propval
                 Case "Out"
@@ -865,8 +865,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
 
             Dim propType As String = prop.Split("_")(0)

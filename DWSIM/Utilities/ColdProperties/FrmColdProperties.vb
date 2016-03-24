@@ -29,8 +29,8 @@ Public Class FrmColdProperties
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim frm As FormFlowsheet
 
-    Public su As New DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As New SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
     Private Sub FrmColdProperties_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -250,14 +250,14 @@ Public Class FrmColdProperties
 
             RVP = (10 ^ ((Log(TVP / 6894.76) + 7261 / (310.95 * 1.8) - 12.82) / (2799 / (310.95 * 1.8) - 2.227)) + 14.6959) * 6894.76
 
-            Me.TextBox1.Text = Format(Converter.ConvertFromSI(su.pressure, TVP), nf)
-            Me.TextBox2.Text = Format(Converter.ConvertFromSI(su.pressure, RVP), nf)
-            Me.TextBox3.Text = Format(Converter.ConvertFromSI(su.viscosity, v1), nf)
-            Me.TextBox4.Text = Format(Converter.ConvertFromSI(su.viscosity, v2), nf)
-            Me.TextBox5.Text = Format(Converter.ConvertFromSI(su.temperature, FlashPoint), nf)
-            Me.TextBox6.Text = Format(Converter.ConvertFromSI(su.temperature, PourPoint), nf)
-            Me.TextBox7.Text = Format(Converter.ConvertFromSI(su.temperature, CloudPoint), nf)
-            Me.TextBox8.Text = Format(Converter.ConvertFromSI(su.temperature, FreezingPoint), nf)
+            Me.TextBox1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, TVP), nf)
+            Me.TextBox2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, RVP), nf)
+            Me.TextBox3.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, v1), nf)
+            Me.TextBox4.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, v2), nf)
+            Me.TextBox5.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, FlashPoint), nf)
+            Me.TextBox6.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, PourPoint), nf)
+            Me.TextBox7.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, CloudPoint), nf)
+            Me.TextBox8.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, FreezingPoint), nf)
             Me.TextBox9.Text = Format(RefractionIndex, nf)
             Me.TextBox10.Text = Format(CetaneIndex, nf)
 

@@ -336,7 +336,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
         Public Sub Update(ByRef form As FormFlowsheet)
 
-            Dim su As DWSIM.SystemsOfUnits.Units = form.Options.SelectedUnitSystem
+            Dim su As SystemsOfUnits.Units = form.Options.SelectedUnitSystem
             Dim nf As String = form.Options.NumberFormat
 
             m_items = New Dictionary(Of String, List(Of DWSIM.Extras.NodeItem))

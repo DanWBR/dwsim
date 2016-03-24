@@ -32,7 +32,7 @@ Namespace My
 
         Public Property ActiveSimulation As FormFlowsheet
 
-        Public Property UserUnitSystems As Dictionary(Of String, DWSIM.SystemsOfUnits.Units)
+        Public Property UserUnitSystems As Dictionary(Of String, SystemsOfUnits.Units)
 
         Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
 
@@ -44,7 +44,7 @@ Namespace My
             xdoc = New XDocument
             xdoc.Add(New XElement("Units"))
 
-            For Each su2 As DWSIM.SystemsOfUnits.Units In UserUnitSystems.Values
+            For Each su2 As SystemsOfUnits.Units In UserUnitSystems.Values
                 xdoc.Element("Units").Add(New XElement(XmlConvert.EncodeName(su2.Name)))
                 xel = xdoc.Element("Units").Element(XmlConvert.EncodeName(su2.Name))
                 xel.Add(su2.SaveData())

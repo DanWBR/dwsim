@@ -27,11 +27,11 @@ Public Class UISteamedSideStripperEditorForm
     Dim loaded As Boolean = False
 
     Dim tpl As DWSIM.SimulationObjects.UnitOperations.Auxiliary.DGVCBSelectors.Templates
-    Dim cvt As DWSIM.SystemsOfUnits.Converter
+    Dim cvt As SystemsOfUnits.Converter
 
     Private Sub UISteamedSideStripperEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cvt = New DWSIM.SystemsOfUnits.Converter()
+        cvt = New SystemsOfUnits.Converter()
 
         form = My.Application.ActiveSimulation
         dc = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
@@ -58,9 +58,9 @@ Public Class UISteamedSideStripperEditorForm
             .Clear()
             For Each sss As SteamedSideStripper In dc.StmSStrCol.Collection.Values
                 If dc.MaterialStreams.ContainsKey(sss.ProductStreamID) And dc.MaterialStreams.ContainsKey(sss.SteamStreamID) Then
-                    '.Add(New Object() {.Count + 1, sss.Name, sss.Stages.Count, sss.FromStage, sss.ToStage, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, sss.ProductRate), dc.MaterialStreams(sss.ProductStreamID).Tag, dc.MaterialStreams(sss.SteamStreamID).Tag, sss.ID})
+                    '.Add(New Object() {.Count + 1, sss.Name, sss.Stages.Count, sss.FromStage, sss.ToStage, SystemsOfUnits.Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, sss.ProductRate), dc.MaterialStreams(sss.ProductStreamID).Tag, dc.MaterialStreams(sss.SteamStreamID).Tag, sss.ID})
                 Else
-                    .Add(New Object() {.Count + 1, sss.Name, sss.Stages.Count, sss.FromStage, sss.ToStage, Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, sss.ProductRate), "", "", sss.ID})
+                    .Add(New Object() {.Count + 1, sss.Name, sss.Stages.Count, sss.FromStage, sss.ToStage, SystemsOfUnits.Converter.ConvertFromSI(form.Options.SelectedUnitSystem.molarflow, sss.ProductRate), "", "", sss.ID})
                 End If
             Next
         End With
@@ -126,7 +126,7 @@ Public Class UISteamedSideStripperEditorForm
                 Case 4
                     dc.StmSStrCol.Collection(id).ToStage = value
                 Case 5
-                    dc.StmSStrCol.Collection(id).ProductRate = Converter.ConvertToSI(form.Options.SelectedUnitSystem.molarflow, value)
+                    dc.StmSStrCol.Collection(id).ProductRate = SystemsOfUnits.Converter.ConvertToSI(form.Options.SelectedUnitSystem.molarflow, value)
                 Case 6
                     Dim msid As String = dc.StmSStrCol.Collection(id).ProductStreamID
                     If dc.MaterialStreams.ContainsKey(msid) Then

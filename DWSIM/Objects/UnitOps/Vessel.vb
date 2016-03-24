@@ -582,7 +582,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -708,7 +708,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 .Item.Add(DWSIM.App.GetLocalString("SobreporTemperaturad"), Me, "OverrideT", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SelecioLiquidrueparaign4"), True)
                 If Me.OverrideT Then
-                    Dim valor = Format(Converter.ConvertFromSI(su.temperature, Me.FlashTemperature), FlowSheet.Options.NumberFormat)
+                    Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.FlashTemperature), FlowSheet.Options.NumberFormat)
                     .Item.Add(FT(DWSIM.App.GetLocalString("Temperatura"), su.temperature), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("Temperaturadeseparao"), True)
                     With .Item(.Item.Count - 1)
                         .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -719,7 +719,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 End If
                 .Item.Add(DWSIM.App.GetLocalString("SobreporPressodesepa"), Me, "OverrideP", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SelecioLiquidrueparaign5"), True)
                 If Me.OverrideP Then
-                    Dim valor = Format(Converter.ConvertFromSI(su.pressure, Me.FlashPressure), FlowSheet.Options.NumberFormat)
+                    Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.FlashPressure), FlowSheet.Options.NumberFormat)
                     .Item.Add(FT(DWSIM.App.GetLocalString("Presso"), su.pressure), Double.Parse(valor), False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("Pressodeseparao"), True)
                     With .Item(.Item.Count - 1)
                         .CustomTypeConverter = New System.ComponentModel.StringConverter
@@ -730,7 +730,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 End If
 
                 If Me.GraphicObject.Calculated Then
-                    .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("RConvPGridItem3"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, DWSIM.App.GetLocalString("Resultados3"), "", True)
                 End If
 
                 .ExpandAllGridItems()
@@ -740,8 +740,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -749,10 +749,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case 0
                     'PROP_SV_0	Separation Temperature
-                    value = Converter.ConvertFromSI(su.temperature, Me.FlashTemperature)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.FlashTemperature)
                 Case 1
                     'PROP_SV_1	Separation Pressure
-                    value = Converter.ConvertFromSI(su.pressure, Me.FlashPressure)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.FlashPressure)
 
             End Select
 
@@ -780,25 +780,25 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
                 Case 0
                     'PROP_SV_0	Separation Temperature
-                    Me.FlashTemperature = Converter.ConvertToSI(su.temperature, propval)
+                    Me.FlashTemperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
                 Case 1
                     'PROP_SV_1	Separation Pressure
-                    Me.FlashPressure = Converter.ConvertToSI(su.pressure, propval)
+                    Me.FlashPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
             End Select
             Return 1
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

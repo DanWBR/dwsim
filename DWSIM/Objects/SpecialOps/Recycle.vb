@@ -578,7 +578,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
-            Dim Conversor As New DWSIM.SystemsOfUnits.Converter
+            Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid
 
@@ -631,19 +631,19 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
                 Dim valor As Double
 
-                valor = Format(Converter.ConvertFromSI(su.deltaT, Me.ConvergenceParameters.Temperatura), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ConvergenceParameters.Temperatura), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("Temperatura"), su.deltaT), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), DWSIM.App.GetLocalString("Tolernciaparaadifere"), True)
-                valor = Format(Converter.ConvertFromSI(su.deltaP, Me.ConvergenceParameters.Pressao), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ConvergenceParameters.Pressao), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("Presso"), su.deltaP), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), DWSIM.App.GetLocalString("Tolernciaparaadifere2"), True)
-                valor = Format(Converter.ConvertFromSI(su.massflow, Me.ConvergenceParameters.VazaoMassica), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceParameters.VazaoMassica), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("Vazomssica"), su.massflow), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), DWSIM.App.GetLocalString("Tolernciaparaadifere3"), True)
 
                 .Item.Add(DWSIM.App.GetLocalString("Iteraesnecessrias"), Me, "IterationsTaken", True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Nmerodeiteraesusadas"), True)
-                valor = Format(Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.TemperaturaE), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.TemperaturaE), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("Erronatemperatura"), su.deltaT), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor"), True)
-                valor = Format(Converter.ConvertFromSI(su.deltaP, Me.ConvergenceHistory.PressaoE), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ConvergenceHistory.PressaoE), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("Erronapresso"), su.deltaP), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor2"), True)
-                valor = Format(Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE), FlowSheet.Options.NumberFormat)
+                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE), FlowSheet.Options.NumberFormat)
                 .Item.Add(FT(DWSIM.App.GetLocalString("Erronavazomssica"), su.massflow), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor3"), True)
 
                 If Not Me.Annotation Is Nothing Then
@@ -662,8 +662,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
 
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
@@ -674,22 +674,22 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     value = Me.MaximumIterations
                 Case 1
                     'PROP_RY_1	Mass Flow Tolerance
-                    value = Converter.ConvertFromSI(su.massflow, Me.ConvergenceParameters.VazaoMassica)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceParameters.VazaoMassica)
                 Case 2
                     'PROP_RY_2	Temperature Tolerance
-                    value = Converter.ConvertFromSI(su.temperature, Me.ConvergenceParameters.Temperatura)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ConvergenceParameters.Temperatura)
                 Case 3
                     'PROP_RY_3	Pressure Tolerance
-                    value = Converter.ConvertFromSI(su.pressure, Me.ConvergenceParameters.Pressao)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ConvergenceParameters.Pressao)
                 Case 4
                     'PROP_RY_4	Mass Flow Error
-                    value = Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE)
                 Case 5
                     'PROP_RY_5	Temperature Error
-                    value = Converter.ConvertFromSI(su.temperature, Me.ConvergenceHistory.TemperaturaE)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ConvergenceHistory.TemperaturaE)
                 Case 6
                     'PROP_RY_6	Pressure Error
-                    value = Converter.ConvertFromSI(su.pressure, Me.ConvergenceHistory.PressaoE)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ConvergenceHistory.PressaoE)
             End Select
 
             Return value
@@ -723,9 +723,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             proplist = Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As DWSIM.SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
@@ -735,21 +735,21 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                     Me.MaximumIterations = propval
                 Case 1
                     'PROP_RY_1	Mass Flow Tolerance
-                    Me.ConvergenceParameters.VazaoMassica = Converter.ConvertToSI(su.massflow, propval)
+                    Me.ConvergenceParameters.VazaoMassica = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
                 Case 2
                     'PROP_RY_2	Temperature Tolerance
-                    Me.ConvergenceParameters.Temperatura = Converter.ConvertToSI(su.temperature, propval)
+                    Me.ConvergenceParameters.Temperatura = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
                 Case 3
                     'PROP_RY_3	Pressure Tolerance
-                    Me.ConvergenceParameters.Pressao = Converter.ConvertToSI(su.pressure, propval)
+                    Me.ConvergenceParameters.Pressao = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
 
             End Select
             Return 1
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
-            If su Is Nothing Then su = New DWSIM.SystemsOfUnits.SI
-            Dim cv As New DWSIM.SystemsOfUnits.Converter
+            If su Is Nothing Then su = New SystemsOfUnits.SI
+            Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 

@@ -67,16 +67,16 @@
             Me.rhoe = Me.entmat.Phases(0).Properties.density.GetValueOrDefault
             Me.qe = Me.entmat.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
-            Dim su As DWSIM.SystemsOfUnits.Units = Frm.Options.SelectedUnitSystem
-            Dim conv As New DWSIM.SystemsOfUnits.Converter
+            Dim su As SystemsOfUnits.Units = Frm.Options.SelectedUnitSystem
+            Dim conv As New SystemsOfUnits.Converter
 
-            Me.LblLiq.Text = Format(Converter.ConvertFromSI(su.volumetricFlow, ql), Frm.Options.NumberFormat) & " " & su.volumetricFlow & _
-                            ", " & Format(Converter.ConvertFromSI(su.massflow, wl), Frm.Options.NumberFormat) & " " & su.massflow & _
-                            ", " & Format(Converter.ConvertFromSI(su.density, rhol), Frm.Options.NumberFormat) & " " & su.density
+            Me.LblLiq.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, ql), Frm.Options.NumberFormat) & " " & su.volumetricFlow & _
+                            ", " & Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, wl), Frm.Options.NumberFormat) & " " & su.massflow & _
+                            ", " & Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, rhol), Frm.Options.NumberFormat) & " " & su.density
 
-            Me.LblGas.Text = Format(Converter.ConvertFromSI(su.molarflow, msv.Phases(0).Properties.molarflow.GetValueOrDefault), Frm.Options.NumberFormat) & " " & su.molarflow & _
-                            ", " & Format(Converter.ConvertFromSI(su.massflow, wv), Frm.Options.NumberFormat) & " " & su.massflow & _
-                            ", " & Format(Converter.ConvertFromSI(su.density, rhov), Frm.Options.NumberFormat) & " " & su.density
+            Me.LblGas.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, msv.Phases(0).Properties.molarflow.GetValueOrDefault), Frm.Options.NumberFormat) & " " & su.molarflow & _
+                            ", " & Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, wv), Frm.Options.NumberFormat) & " " & su.massflow & _
+                            ", " & Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, rhov), Frm.Options.NumberFormat) & " " & su.density
 
             Me.RLD = Me.tbRLD.Text
             Me.C = Me.tbC.Text

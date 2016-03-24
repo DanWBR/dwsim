@@ -26,8 +26,8 @@ Public Class FrmStabAn
 
     Dim cp As Utilities.TCP.Methods
 
-    Public su As New DWSIM.SystemsOfUnits.Units
-    Public cv As New DWSIM.SystemsOfUnits.Converter
+    Public su As New SystemsOfUnits.Units
+    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -101,8 +101,8 @@ Public Class FrmStabAn
 
                 i = 0
                 Do
-                    px.Add(Converter.ConvertFromSI(su.temperature, res(i)(0)))
-                    py.Add(Converter.ConvertFromSI(su.pressure, res(i)(1)))
+                    px.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res(i)(0)))
+                    py.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res(i)(1)))
                     i += 1
                 Loop Until i = res.Count
 
@@ -115,7 +115,7 @@ Public Class FrmStabAn
                 End With
                 With Me.GraphPvap.GraphPane
                     .CurveList.Clear()
-                    .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {Converter.ConvertFromSI(su.temperature, pc(0))}, New Double() {Converter.ConvertFromSI(su.pressure, pc(1))}, Color.Black, ZedGraph.SymbolType.Circle)
+                    .AddCurve(DWSIM.App.GetLocalString("PontoCrtico"), New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.temperature, pc(0))}, New Double() {SystemsOfUnits.Converter.ConvertFromSI(su.pressure, pc(1))}, Color.Black, ZedGraph.SymbolType.Circle)
                     .AddCurve(DWSIM.App.GetLocalString("LimitedeEstabilidade"), px.ToArray(GetType(Double)), py.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.None).Line.IsSmooth = True
                     .AxisChange(Me.CreateGraphics)
                 End With

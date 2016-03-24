@@ -10,7 +10,7 @@
     <Type>DWSIM.DWSIM.Flowsheet.ClsFormOptions</Type>
     <SimulationMode></SimulationMode>
     <SelectedUnitSystem>
-      <Type>DWSIM.DWSIM.SystemsOfUnits.SI_Deriv5</Type>
+      <Type>DWSIM.SystemsOfUnits.SI_Deriv5</Type>
       <nome>Nutzer 5</nome>
       <area>m2</area>
       <distance>m</distance>

@@ -29,7 +29,7 @@ Public Class FormUnitGen
 
         frm = My.Application.ActiveSimulation
 
-        Dim currentset As DWSIM.SystemsOfUnits.Units = frm.Options.SelectedUnitSystem
+        Dim currentset As SystemsOfUnits.Units = frm.Options.SelectedUnitSystem
 
         Dim rd As New Random
         Me.TextBox1.Text = "UNID_" & rd.Next(1000, 9999)
@@ -247,7 +247,7 @@ Public Class FormUnitGen
 
         If Me.TextBox1.Text <> "" Then
 
-            Dim su As New DWSIM.SystemsOfUnits.Units
+            Dim su As New SystemsOfUnits.Units
             With su
                 .Name = Me.TextBox1.Text
                 .pdp_boilingPointTemperature = Me.DataGridView1.Rows(0).Cells(1).Value
