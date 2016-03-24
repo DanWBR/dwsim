@@ -565,50 +565,6 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
 End Namespace
 
-Namespace DWSIM.SimulationObjects.SpecialOps.Helpers.Spec
-
-    Public Enum TipoVar
-        Fonte
-        Destino
-        Nenhum
-    End Enum
-
-    <System.Serializable()> Public Class SourceObjectInfo
-
-        Public m_Type As String = ""
-        Public m_Name As String = ""
-        Public m_ID As String = ""
-        Public m_Property As String = ""
-
-        Sub New()
-
-        End Sub
-
-        Overrides Function ToString() As String
-            Return DWSIM.App.GetLocalString("Cliqueparaselecionar")
-        End Function
-
-    End Class
-
-    <System.Serializable()> Public Class TargetObjectInfo
-
-        Public m_Type As String = ""
-        Public m_Name As String = ""
-        Public m_ID As String = ""
-        Public m_Property As String = ""
-
-        Sub New()
-
-        End Sub
-
-        Overrides Function ToString() As String
-            Return DWSIM.App.GetLocalString("Cliqueparaselecionar")
-        End Function
-
-    End Class
-
-End Namespace
-
 
 
 
