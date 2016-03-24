@@ -421,7 +421,6 @@
     <Compile Include="Forms\PropPack_ConfigForms\FormConfigPRSV2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\MathEx.vb" />
     <Compile Include="Forms\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.Designer.vb">
       <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
     </Compile>
@@ -475,7 +474,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Objects\Classes\Databases\Databases.vb" />
-    <Compile Include="Objects\Classes\Extenders\SIMDExtenders.vb" />
     <Compile Include="Objects\Classes\MAPI\MAPI.vb" />
     <Compile Include="Objects\Classes\Optimization\Optimization.vb" />
     <Compile Include="Forms\AboutBoxNET.Designer.vb">
@@ -1234,6 +1232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWhatsNew.resx">
       <DependentUpon>FormWhatsNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigBase.resx">
+      <DependentUpon>FormConfigBase.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN2.de.resx">
       <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>

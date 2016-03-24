@@ -17,7 +17,8 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
+Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports System.Linq
 
 Namespace DWSIM.SimulationObjects.UnitOperations
 
@@ -126,7 +127,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Dim form As FormFlowsheet = Me.FlowSheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
-           If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+            If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
                     .Calculated = False
@@ -382,10 +383,31 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 VmL2(i) = mix.Phases(4).Compounds(comp.Name).MassFlow.GetValueOrDefault + (1 - SR) * mix.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault
                 i += 1
             Next
-            If VnL1.SumY > 0.0# Then VnL1 = VnL1.NormalizeY
-            If VmL1.SumY > 0.0# Then VmL1 = VmL1.NormalizeY
-            If VnL2.SumY > 0.0# Then VnL2 = VnL2.NormalizeY
-            If VmL2.SumY > 0.0# Then VmL2 = VmL2.NormalizeY
+            Dim sum1, sum2, sum3, sum4 As Double
+            sum1 = VnL1.Sum
+            If VnL1.Sum > 0.0# Then
+                For i = 0 To VnL1.Length - 1
+                    VnL1(i) /= sum1
+                Next
+            End If
+            sum2 = VmL1.Sum
+            If VmL1.Sum > 0.0# Then
+                For i = 0 To VnL1.Length - 1
+                    VmL1(i) /= sum2
+                Next
+            End If
+            sum3 = VnL2.Sum
+            If VnL2.Sum > 0.0# Then
+                For i = 0 To VnL1.Length - 1
+                    VnL2(i) /= sum3
+                Next
+            End If
+            sum4 = VmL2.Sum
+            If VmL2.Sum > 0.0# Then
+                For i = 0 To VnL1.Length - 1
+                    VmL2(i) /= sum4
+                Next
+            End If
             WL1 = mix.Phases(3).Properties.massflow.GetValueOrDefault
             WL2 = mix.Phases(4).Properties.massflow.GetValueOrDefault
             WS = mix.Phases(7).Properties.massflow.GetValueOrDefault

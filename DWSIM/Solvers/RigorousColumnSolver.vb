@@ -23,6 +23,7 @@ Imports Mapack
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Threading.Tasks
 Imports System.Linq
+Imports DWSIM.Thermodynamics
 
 Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.SolvingMethods
 
@@ -2311,7 +2312,10 @@ restart:            fx = Me.FunctionValue(xvar)
                 Next
 
                 t_error_ant = t_error
-                t_error = Tj.SubtractY(Tj_ant).AbsSqrSumY
+                t_error = 0.0#
+                For i = 0 To ns
+                    t_error += (Tj(i) - Tj_ant(i)) ^ 2
+                Next
 
                 For i = ns To 0 Step -1
                     sumy(i) = 0
@@ -2326,7 +2330,9 @@ restart:            fx = Me.FunctionValue(xvar)
                 Next
 
                 For i = 0 To ns
-                    yc(i) = yc(i).MultiplyConstY(1 / sumy(i))
+                    For j = 0 To nc - 1
+                        yc(i)(j) = yc(i)(j) / sumy(i)
+                    Next
                 Next
 
                 If doparallel Then
@@ -2448,7 +2454,7 @@ restart:            fx = Me.FunctionValue(xvar)
                 'Ljs
                 For i = 0 To ns
                     If i < ns Then Lj(i) = Vj(i + 1) + sum1(i) - Vj(0) Else Lj(i) = sum1(i) - Vj(0)
-                    If Lj(i) < 0.0# Then Lj(i) = 0.0001 * Fj.SumY
+                    If Lj(i) < 0.0# Then Lj(i) = 0.0001 * Fj.Sum
                 Next
 
                 'reboiler and condenser heat duties

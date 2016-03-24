@@ -21,6 +21,7 @@ Imports DWSIM.DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle
 Imports System.Linq
 Imports System.ComponentModel
 Imports PropertyGridEx
+Imports DWSIM.Thermodynamics
 
 Namespace DWSIM.SimulationObjects.SpecialOps
 
@@ -400,7 +401,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             If Me.CopyOnStreamDataError Then
                 copydata = True
             Else
-                If Not Tnew.IsValid Or Not Pnew.IsValid Or Not Wnew.IsValid Or Not ems.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).SumY.IsValid Then copydata = False
+                If Not Tnew.IsValid Or Not Pnew.IsValid Or Not Wnew.IsValid Or Not ems.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).Sum.IsValid Then copydata = False
             End If
 
             If Not Me.AccelerationMethod = AccelMethod.GlobalBroyden And copydata Then

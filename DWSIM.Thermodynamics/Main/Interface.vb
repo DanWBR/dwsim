@@ -12,7 +12,6 @@ Public Class Calculator
     Public Shared Property prevlang As Integer = 0 '0 = CUDA, 1 = OpenCL
     Public Shared Property TaskCancellationTokenSource As CancellationTokenSource
     Public Shared Property CAPEOPENMode As Boolean
-
     Public Shared Property MaxDegreeOfParallelism As Integer = -1
     Public Shared Property UseSIMDExtensions As Boolean = True
     Public Shared Property EnableParallelProcessing As Boolean = True
@@ -28,7 +27,7 @@ Public Class Calculator
     End Sub
 
     Shared Sub WriteToConsole(text As String, level As Integer)
-
+        'If level > DebugLevel Then Console.WriteLine(text)
     End Sub
 
     Shared Function GetLocalString(text As String) As String

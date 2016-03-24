@@ -1075,7 +1075,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                         If Double.IsNaN(Sum(fx)) Then Throw New Exception("Calculation error")
 
-                    Loop Until fx.AbsSumY < 0.001 Or niter > 249
+                    Loop Until MathEx.Common.AbsSum(fx) < 0.001 Or niter > 249
 
                     If niter > 249 Then
                         Throw New Exception("Reached the maximum number of iterations without converging.")
