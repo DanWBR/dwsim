@@ -33,6 +33,8 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
 Imports System.Threading
+Imports DWSIM.Interfaces
+Imports DWSIM.Interfaces.Interfaces2
 
 Namespace DWSIM.SimulationObjects.UnitOperations
 
@@ -195,7 +197,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End If
 
             If _istr IsNot Nothing Then
-                Dim myuo As Interfaces.IPersistStreamInit = TryCast(_couo, Interfaces.IPersistStreamInit)
+                Dim myuo As IPersistStreamInit = TryCast(_couo, IPersistStreamInit)
                 If Not myuo Is Nothing Then
                     Try
                         _istr.baseStream.Position = 0
@@ -244,9 +246,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             _istr = Nothing
 
             If Not _couo Is Nothing Then
-                Dim myuo As Interfaces.IPersistStreamInit = TryCast(_couo, Interfaces.IPersistStreamInit)
+                Dim myuo As IPersistStreamInit = TryCast(_couo, IPersistStreamInit)
                 If Not myuo Is Nothing Then
-                    Dim myuo2 As Interfaces.IPersistStreamInit = TryCast(_couo, Interfaces.IPersistStreamInit)
+                    Dim myuo2 As IPersistStreamInit = TryCast(_couo, IPersistStreamInit)
                     If myuo2 IsNot Nothing Then
                         _istr = New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.ComIStreamWrapper(New MemoryStream())
                         Try

@@ -20,7 +20,6 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports System.IO
 Imports System.Linq
-Imports DWSIM.Interfaces2
 Imports DWSIM.DWSIM
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports Microsoft.Scripting.Hosting
@@ -34,6 +33,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports PropertyGridEx
 Imports DWSIM.DWSIM.DrawingTools
 Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
+Imports DWSIM.Interfaces.Interfaces
 
 Namespace DWSIM.SimulationObjects.UnitOperations
 
@@ -3382,7 +3382,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Property SpecVarType() As DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar
-     
+
         ''' <summary>
         ''' Gets or sets the graphic object representation of this object in the flowsheet.
         ''' </summary>
@@ -3475,7 +3475,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
-            
+
             Return elements
 
         End Function
@@ -3885,7 +3885,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Friend _ports As CapeOpen.PortCollection
         Friend _parameters As CapeOpen.ParameterCollection
         Friend _simcontext As Object = Nothing
-        
+
         ''' <summary>
         ''' Calculates the Unit Operation.
         ''' </summary>

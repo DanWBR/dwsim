@@ -36,6 +36,8 @@ Imports System.Globalization
 Imports DWSIM.DrawingTools
 Imports System.Reflection
 Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
+Imports DWSIM.Interfaces
+Imports DWSIM.Interfaces.Interfaces2
 
 <System.Serializable()> Public Class FormFlowsheet
 
@@ -2257,8 +2259,8 @@ Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
             Dim t As Type = Type.GetTypeFromProgID(myCOMO.TypeName)
             _como = Activator.CreateInstance(t)
             If TryCast(_como, CapeOpen.ICapeUtilities) IsNot Nothing Then
-                If TryCast(_como, Interfaces.IPersistStreamInit) IsNot Nothing Then
-                    CType(_como, Interfaces.IPersistStreamInit).InitNew()
+                If TryCast(_como, IPersistStreamInit) IsNot Nothing Then
+                    CType(_como, IPersistStreamInit).InitNew()
                 End If
                 With CType(_como, CapeOpen.ICapeUtilities)
                     .Initialize()
