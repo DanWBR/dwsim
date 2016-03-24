@@ -78,6 +78,7 @@
     <Compile Include="IReactionSetBase.vb" />
     <Compile Include="IReactionStoichBase.vb" />
     <Compile Include="ISimulationObject.vb" />
+    <Compile Include="IUnitsOfMeasure.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

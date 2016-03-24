@@ -17,7 +17,6 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Windows.Forms
-Imports DWSIM.Thermodynamics.SystemsOfUnits
 
 <System.Serializable()> Public Class PipeEditor
 
@@ -977,11 +976,10 @@ Imports DWSIM.Thermodynamics.SystemsOfUnits
     Private Sub ToolStripMenuItem2_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem2.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem2.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New SystemsOfUnits.Converter
-
+    
         Dim r = idx + 25 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
 
     End Sub
 
@@ -991,8 +989,8 @@ Imports DWSIM.Thermodynamics.SystemsOfUnits
         Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 43 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
 
     End Sub
 
@@ -1002,8 +1000,8 @@ Imports DWSIM.Thermodynamics.SystemsOfUnits
         Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 55 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
 
     End Sub
 
@@ -1013,52 +1011,48 @@ Imports DWSIM.Thermodynamics.SystemsOfUnits
         Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 65 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
 
     End Sub
 
     Private Sub ToolStripMenuItem6_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem6.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem6.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New SystemsOfUnits.Converter
-
+      
         Dim r = idx + 79 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
 
     End Sub
 
     Private Sub ToolStripMenuItem7_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem7.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem7.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New SystemsOfUnits.Converter
-
+     
         Dim r = idx + 86 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, Double.Parse(DN(r, 1), System.Globalization.CultureInfo.InvariantCulture)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, Double.Parse(DN(r, 6), System.Globalization.CultureInfo.InvariantCulture)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, Double.Parse(DN(r, 1), System.Globalization.CultureInfo.InvariantCulture)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, Double.Parse(DN(r, 6), System.Globalization.CultureInfo.InvariantCulture)), NumberFormat)
 
     End Sub
 
     Private Sub ToolStripMenuItem8_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem8.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem8.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New SystemsOfUnits.Converter
-
+   
         Dim r = idx + 98 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
 
     End Sub
 
     Private Sub ToolStripMenuItem9_DropDownItemClicked(ByVal sender As Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles ToolStripMenuItem9.DropDownItemClicked
 
         Dim idx = ToolStripMenuItem9.DropDownItems.IndexOf(e.ClickedItem)
-        Dim cv As New SystemsOfUnits.Converter
-
+   
         Dim r = idx + 109 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
 
     End Sub
 
@@ -1068,8 +1062,8 @@ Imports DWSIM.Thermodynamics.SystemsOfUnits
         Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 122 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
 
     End Sub
 
@@ -1079,8 +1073,8 @@ Imports DWSIM.Thermodynamics.SystemsOfUnits
         Dim cv As New SystemsOfUnits.Converter
 
         Dim r = idx + 135 - 4
-        GridMalha.CurrentCell.Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.CurrentCell.Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(SystemsOfUnits.Converter.Convert("in", SystemOfUnits.diameter, DN(r, 6)), NumberFormat)
 
     End Sub
 
@@ -1107,7 +1101,7 @@ Imports DWSIM.Thermodynamics.SystemsOfUnits
 
                 If v2 = DWSIM.App.GetLocalString("Tubulaosimples") Then v2 = "Tubulaosimples"
 
-                Me.Profile.Sections.Add(column.Index + 1, New PipeSection(v1, v2, v3, v4, v5, Converter.Convert(Me.SystemOfUnits.distance, "m", v6), Converter.Convert(Me.SystemOfUnits.distance, "m", v7), Converter.Convert(Me.SystemOfUnits.diameter, "in", v8), Converter.Convert(Me.SystemOfUnits.diameter, "in", v9)))
+                Me.Profile.Sections.Add(column.Index + 1, New PipeSection(v1, v2, v3, v4, v5, SystemsOfUnits.Converter.Convert(Me.SystemOfUnits.distance, "m", v6), SystemsOfUnits.Converter.Convert(Me.SystemOfUnits.distance, "m", v7), SystemsOfUnits.Converter.Convert(Me.SystemOfUnits.diameter, "in", v8), SystemsOfUnits.Converter.Convert(Me.SystemOfUnits.diameter, "in", v9)))
             Else
                 Label1.Text = DWSIM.App.GetLocalString("Erronasecao") & " " & column.Index + 1 & "."
                 RaiseEvent StatusChanged(e, PipeEditorStatus.Erro)
@@ -1197,10 +1191,10 @@ Imports DWSIM.Thermodynamics.SystemsOfUnits
             Else
                 Me.GridMalha.Rows(4).Cells(psec.Indice - 1).Value = psec.Material
             End If
-            Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = Format(Converter.Convert("m", Me.SystemOfUnits.distance, psec.Comprimento), NumberFormat)
-            Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Value = Format(Converter.Convert("m", Me.SystemOfUnits.distance, psec.Elevacao), NumberFormat)
-            Me.GridMalha.Rows(7).Cells(psec.Indice - 1).Value = Format(Converter.Convert("in", Me.SystemOfUnits.diameter, psec.DE), NumberFormat)
-            Me.GridMalha.Rows(8).Cells(psec.Indice - 1).Value = Format(Converter.Convert("in", Me.SystemOfUnits.diameter, psec.DI), NumberFormat)
+            Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = Format(SystemsOfUnits.Converter.Convert("m", Me.SystemOfUnits.distance, psec.Comprimento), NumberFormat)
+            Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Value = Format(SystemsOfUnits.Converter.Convert("m", Me.SystemOfUnits.distance, psec.Elevacao), NumberFormat)
+            Me.GridMalha.Rows(7).Cells(psec.Indice - 1).Value = Format(SystemsOfUnits.Converter.Convert("in", Me.SystemOfUnits.diameter, psec.DE), NumberFormat)
+            Me.GridMalha.Rows(8).Cells(psec.Indice - 1).Value = Format(SystemsOfUnits.Converter.Convert("in", Me.SystemOfUnits.diameter, psec.DI), NumberFormat)
         Next
         psec = Nothing
 

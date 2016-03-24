@@ -1,4 +1,6 @@
-﻿Public Class PumpCurvesEditorForm
+﻿Imports DWSIM.SharedClasses
+
+Public Class PumpCurvesEditorForm
 
     Public selectedpump As DWSIM.SimulationObjects.UnitOperations.Pump
     Private headunit, powerunit, effunit, flowunit As String

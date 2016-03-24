@@ -27,6 +27,7 @@ Imports ZedGraph
 Imports DotNumerics
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports Cureos.Numerics
+Imports DWSIM.SharedClasses
 
 Public Class FormOptimization
 

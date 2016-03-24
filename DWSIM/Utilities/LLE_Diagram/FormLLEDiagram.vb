@@ -18,6 +18,7 @@
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports DWSIM.SharedClasses
 
 Public Class FormLLEDiagram
 

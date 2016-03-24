@@ -2,6 +2,7 @@
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports System.IO
+Imports DWSIM.SharedClasses
 
 '    Copyright 2008-2014 Daniel Wagner O. de Medeiros
 '              2013-2014 Gregor Reichert

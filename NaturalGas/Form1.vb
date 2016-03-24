@@ -8,9 +8,10 @@ Imports System.Linq
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.PropertyPackages
-Imports DWSIM.Thermodynamics.SystemsOfUnits
+Imports DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.Thermodynamics
+Imports DWSIM.SharedClasses
 
 Public Class Form1
 

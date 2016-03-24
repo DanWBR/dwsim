@@ -300,6 +300,7 @@
     <Import Include="DWSIM.DWSIM.SimulationObjects.UnitOperations" />
     <Import Include="DWSIM.DWSIM.Thermodynamics" />
     <Import Include="DWSIM.DWSIM.Thermodynamics.BaseClasses" />
+    <Import Include="DWSIM.SharedClasses" />
     <Import Include="DWSIM.Thermodynamics" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
@@ -1514,6 +1515,10 @@
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>

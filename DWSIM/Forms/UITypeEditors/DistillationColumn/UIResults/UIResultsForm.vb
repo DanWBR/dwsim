@@ -18,6 +18,7 @@
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations
 Imports DWSIM.DWSIM.SimulationObjects
+Imports DWSIM.SharedClasses
 
 Public Class UIResultsForm
 

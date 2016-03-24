@@ -19,6 +19,7 @@
 Imports Ciloci.Flee
 Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.SharedClasses
 
 Public Class FormReacConv
 

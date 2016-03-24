@@ -86,6 +86,7 @@ Namespace SystemsOfUnits
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
+            Return True
         End Function
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
@@ -102,7 +103,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = Calculator.GetLocalString("SistemaSI")
+                .Name = "SI"
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -186,7 +187,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = Calculator.GetLocalString("Personalizado1BR")
+                .Name = "Custom1"
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -270,7 +271,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = Calculator.GetLocalString("Personalizado2SC")
+                .Name = "Custom2"
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -354,7 +355,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = Calculator.GetLocalString("Personalizado3CNTP")
+                .Name = "Custom3"
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -438,7 +439,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = Calculator.GetLocalString("Personalizado4")
+                .Name = "Custom4"
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -522,7 +523,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = Calculator.GetLocalString("Personalizado5")
+                .Name = "Custom5"
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -606,7 +607,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = Calculator.GetLocalString("SistemaIngls")
+                .Name = "ENG"
 
                 .gor = "ft3/bbl"
 
@@ -692,7 +693,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = Calculator.GetLocalString("SistemaCGS")
+                .Name = "CGS"
 
                 .accel = "cm/s2"
                 .area = "cm2"

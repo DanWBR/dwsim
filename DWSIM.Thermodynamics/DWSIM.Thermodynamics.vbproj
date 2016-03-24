@@ -208,7 +208,6 @@
     <Compile Include="Property Packages\UNIFACPropertyPackage.vb" />
     <Compile Include="Models\UNIQUAC.vb" />
     <Compile Include="Property Packages\UNIQUACPropertyPackage.vb" />
-    <Compile Include="Systems of Units\SystemsOfUnits.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
