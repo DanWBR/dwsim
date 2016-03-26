@@ -86,7 +86,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Private startingRotation As Single = 0
     Private originalRotation As Single = 0
     Private selectionRect As Rectangle
-    Private rectp0 As Point
+    Private rectp0 As New Point
     Private hoverRect As Rectangle
     Private hoverrotation As Integer = 0
 

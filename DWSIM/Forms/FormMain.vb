@@ -1288,6 +1288,12 @@ Public Class FormMain
         If xel.Name = "FracaoMolar" Then xel.Name = "MoleFraction"
         If xel.Name = "FracaoMassica" Then xel.Name = "MassFraction"
         If xel.Name = "FracaoDePetroleo" Then xel.Name = "PetroleumFraction"
+        If xel.Value = "Nenhum" Then xel.Value = "None"
+        If xel.Value = "Destino" Then xel.Value = "Target"
+        If xel.Value = "Fonte" Then xel.Value = "Source"
+        If xel.Value = "Manipulada" Then xel.Value = "Manipulated"
+        If xel.Value = "Referencia" Then xel.Value = "Referenced"
+        If xel.Value = "Controlada" Then xel.Value = "Controlled"
 
     End Sub
 

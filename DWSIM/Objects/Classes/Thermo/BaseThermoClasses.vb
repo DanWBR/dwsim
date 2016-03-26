@@ -85,9 +85,9 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Public Property VolumetricFraction As Double? = 0.0# Implements Interfaces.ICompound.VolumetricFraction
 
-        Public Property ConstantProperties As New ConstantProperties
+        <XmlIgnore> Public Property ConstantProperties As New ConstantProperties
 
-        Public Property ConstantProperties1 As Interfaces.ICompoundConstantProperties Implements Interfaces.ICompound.ConstantProperties
+        <XmlIgnore> Public Property ConstantProperties1 As Interfaces.ICompoundConstantProperties Implements Interfaces.ICompound.ConstantProperties
             Get
                 Return ConstantProperties
             End Get

@@ -75,19 +75,19 @@ Namespace GraphicObjects
 
         Public Property SemiTransparent As Boolean = False
 
-        Public Overridable Property LineWidth() As Single
+        Public Overridable Property LineWidth() As Single = 3
 
-        Public Overridable Property GradientMode() As Boolean
+        Public Overridable Property GradientMode() As Boolean = True
 
-        Public Overridable Property LineColor() As Color
+        Public Overridable Property LineColor() As Color = Color.Black
 
-        Public Overridable Property Fill() As Boolean
+        Public Overridable Property Fill() As Boolean = False
 
-        Public Overridable Property FillColor() As Color
+        Public Overridable Property FillColor() As Color = Color.LightGray
 
-        Public Overridable Property GradientColor1() As Color
+        Public Overridable Property GradientColor1() As Color = Color.LightGray
 
-        Public Overridable Property GradientColor2() As Color
+        Public Overridable Property GradientColor2() As Color = Color.White
 
         Public Overridable Sub DrawTag(ByVal g As System.Drawing.Graphics, ByVal rotationmatrix As Drawing2D.Matrix)
 
@@ -856,6 +856,43 @@ Namespace GraphicObjects
 
 #End Region
 
+        Public Sub UpdateStatus2(ByRef ConnPen As Pen, ByRef Conn As ConnectorGraphic, ByRef p1 As Point, ByRef p2 As Point)
+
+            Dim alpha As Integer = 255
+            If SemiTransparent Then alpha = 50
+
+            Dim color1, color2, color3 As Color
+            color1 = Color.FromArgb(alpha, Color.SteelBlue)
+            color2 = Color.FromArgb(alpha, Color.Salmon)
+            color3 = Color.FromArgb(alpha, Color.YellowGreen)
+
+            If Conn.AttachedFrom.Status = Status.Calculated And Conn.AttachedTo.Status = Status.Calculated Then
+                ConnPen = New Pen(New LinearGradientBrush(p1.ToSDPoint, p2.ToSDPoint, color1, color1), Me.LineWidth)
+            ElseIf Conn.AttachedFrom.Status = Status.Calculated And Conn.AttachedTo.Status = Status.ErrorCalculating Then
+                ConnPen = New Pen(New LinearGradientBrush(p1.ToSDPoint, p2.ToSDPoint, color1, color2), Me.LineWidth)
+            ElseIf Conn.AttachedFrom.Status = Status.ErrorCalculating And Conn.AttachedTo.Status = Status.Calculated Then
+                ConnPen = New Pen(New LinearGradientBrush(p1.ToSDPoint, p2.ToSDPoint, color2, color1), Me.LineWidth)
+            ElseIf Conn.AttachedFrom.Status = Status.ErrorCalculating And Conn.AttachedTo.Status = Status.ErrorCalculating Then
+                ConnPen = New Pen(New LinearGradientBrush(p1.ToSDPoint, p2.ToSDPoint, color2, color2), Me.LineWidth)
+            ElseIf Conn.AttachedFrom.Status = Status.Calculating And Conn.AttachedTo.Status = Status.ErrorCalculating Then
+                ConnPen = New Pen(New LinearGradientBrush(p1.ToSDPoint, p2.ToSDPoint, color3, color2), Me.LineWidth)
+            ElseIf Conn.AttachedFrom.Status = Status.ErrorCalculating And Conn.AttachedTo.Status = Status.Calculating Then
+                ConnPen = New Pen(New LinearGradientBrush(p1.ToSDPoint, p2.ToSDPoint, color2, color3), Me.LineWidth)
+            ElseIf Conn.AttachedFrom.Status = Status.Calculating And Conn.AttachedTo.Status = Status.Calculated Then
+                ConnPen = New Pen(New LinearGradientBrush(p1.ToSDPoint, p2.ToSDPoint, color3, color1), Me.LineWidth)
+            ElseIf Conn.AttachedFrom.Status = Status.Calculated And Conn.AttachedTo.Status = Status.Calculating Then
+                ConnPen = New Pen(New LinearGradientBrush(p1.ToSDPoint, p2.ToSDPoint, color1, color3), Me.LineWidth)
+            End If
+
+            With ConnPen
+                .EndCap = Drawing2D.LineCap.ArrowAnchor
+                .StartCap = Drawing2D.LineCap.NoAnchor
+                .LineJoin = LineJoin.Round
+            End With
+
+        End Sub
+
+
         Public Overloads Overrides Function HitTest(ByVal pt As System.Drawing.Point) As Boolean
             Dim gp As New Drawing2D.GraphicsPath()
             Dim myMatrix As New Drawing2D.Matrix()
@@ -936,6 +973,8 @@ Namespace GraphicObjects
                 .StartCap = Drawing2D.LineCap.NoAnchor
                 .LineJoin = LineJoin.Round
             End With
+
+            UpdateStatus2(myPen, Me, StartPos, EndPos)
 
             Dim DeltaX, DeltaY As Integer
             DeltaX = 10

@@ -48,6 +48,30 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         <System.NonSerialized()> Protected Friend m_flowsheet As FormFlowsheet
 
+        Public MustOverride Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
+
+#Region "    Constructors"
+
+        Public Sub New()
+
+        End Sub
+
+        Sub CreateNew()
+            CreatedWithThreadID = Threading.Thread.CurrentThread.ManagedThreadId
+        End Sub
+
+#End Region
+
+#Region "    ICapeIdentification"
+
+        Public Property ComponentDescription() As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription
+
+        Public Property ComponentName() As String = "" Implements CapeOpen.ICapeIdentification.ComponentName
+
+#End Region
+
+#Region "    ISimulationObject"
+
         Public Property Calculated As Boolean = False Implements Interfaces.ISimulationObject.Calculated
 
         Public Property DebugMode As Boolean = False Implements Interfaces.ISimulationObject.DebugMode
@@ -57,22 +81,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         <Xml.Serialization.XmlIgnore> Public Property CreatedWithThreadID As Integer = 0 Implements Interfaces.ISimulationObject.CreatedWithThreadID
 
         <Xml.Serialization.XmlIgnore> Public Property LastUpdated As New Date Implements Interfaces.ISimulationObject.LastUpdated
-
-        Public MustOverride Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-        Public Sub New()
-
-        End Sub
-
-        Public Property ComponentDescription() As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription
-
-        ''' <summary>
-        ''' Gets the name of the component.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns>CapeString</returns>
-        ''' <remarks>Implements CapeOpen.ICapeIdentification.ComponentDescription</remarks>
-        Public Property ComponentName() As String = "" Implements CapeOpen.ICapeIdentification.ComponentName
 
         ''' <summary>
         ''' Calculates the object.
@@ -174,6 +182,308 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             If onlypositive Then If val.IsNegative Then Throw New ArgumentException(DWSIM.App.GetLocalString("ErrorInvalidUOSpecValue") & " (name: " & paramname & ", value: " & val & ")")
 
         End Sub
+
+        Public Property Annotation() As String Implements Interfaces.ISimulationObject.Annotation
+
+        ''' <summary>
+        ''' Checks if an Adjust operation is attached to this object.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property IsAdjustAttached() As Boolean = False Implements Interfaces.ISimulationObject.IsAdjustAttached
+
+        ''' <summary>
+        ''' If an Adjust object is attached to this object, returns its ID.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property AttachedAdjustId() As String = "" Implements Interfaces.ISimulationObject.AttachedAdjustId
+
+        ''' <summary>
+        ''' If an Adjust object is attached to this object, returns a variable describing how this object is used by it (manipulated, controlled or reference).
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property AdjustVarType() As Interfaces.Enums.AdjustVarType Implements Interfaces.ISimulationObject.AdjustVarType
+
+        ''' <summary>
+        ''' Checks if an Specification operation is attached to this object.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property IsSpecAttached() As Boolean = False Implements Interfaces.ISimulationObject.IsSpecAttached
+
+        ''' <summary>
+        ''' If an Specification object is attached to this object, returns its ID.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property AttachedSpecId() As String = "" Implements Interfaces.ISimulationObject.AttachedSpecId
+
+        ''' <summary>
+        ''' If an Specification object is attached to this object, returns a variable describing how this object is used by it (target or source).
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Property SpecVarType() As Interfaces.Enums.SpecVarType Implements Interfaces.ISimulationObject.SpecVarType
+
+        ''' <summary>
+        ''' Gets or sets the graphic object representation of this object in the flowsheet.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        <Xml.Serialization.XmlIgnore> Public Property GraphicObject() As Interfaces.IGraphicObject Implements Interfaces.ISimulationObject.GraphicObject
+
+        ''' <summary>
+        ''' Object's Unique ID (Name)
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns></returns>
+        ''' <remarks>This property is the same as the graphic object 'Name' property.</remarks>
+        Public Property Name() As String = "" Implements Interfaces.ISimulationObject.Name
+
+        Public MustOverride Function GetProperties(proptype As PropertyType) As String() Implements Interfaces.ISimulationObject.GetProperties
+
+        Public MustOverride Function GetPropertyUnit(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As String Implements Interfaces.ISimulationObject.GetPropertyUnit
+
+        Public MustOverride Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
+
+        Public MustOverride Function SetPropertyValue(prop As String, propval As Object, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean Implements Interfaces.ISimulationObject.SetPropertyValue
+
+#End Region
+
+#Region "    ICloneable"
+
+        ''' <summary>
+        ''' Clones the current object, returning a new one with identical properties.
+        ''' </summary>
+        ''' <returns>An object of the same type with the same properties.</returns>
+        ''' <remarks>Properties and fields marked with the 'NonSerializable' attribute aren't cloned.</remarks>
+        Public Function Clone() As Object Implements System.ICloneable.Clone
+
+            Return ObjectCopy(Me)
+
+        End Function
+
+        Function ObjectCopy(ByVal obj As DWSIM.SimulationObjects.UnitOperations.BaseClass) As DWSIM.SimulationObjects.UnitOperations.BaseClass
+
+            Dim objMemStream As New MemoryStream(250000)
+            Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
+
+            objBinaryFormatter.Serialize(objMemStream, obj)
+
+            objMemStream.Seek(0, SeekOrigin.Begin)
+
+            ObjectCopy = objBinaryFormatter.Deserialize(objMemStream)
+
+            objMemStream.Close()
+
+        End Function
+
+#End Region
+
+#Region "    IDisposable Support "
+
+        Public disposedValue As Boolean = False        ' To detect redundant calls
+
+        Protected Overridable Sub Dispose(ByVal disposing As Boolean)
+            Me.disposedValue = True
+        End Sub
+
+        ' This code added by Visual Basic to correctly implement the disposable pattern.
+        Public Sub Dispose() Implements IDisposable.Dispose
+
+            ' Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) above.
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+
+        End Sub
+#End Region
+
+#Region "    IXMLSerialization"
+
+        ''' <summary>
+        ''' Loads object data stored in a collection of XML elements.
+        ''' </summary>
+        ''' <param name="data"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Overridable Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
+
+        End Function
+
+        ''' <summary>
+        ''' Saves object data in a collection of XML elements.
+        ''' </summary>
+        ''' <returns>A List of XML elements containing object data.</returns>
+        ''' <remarks></remarks>
+        Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+
+            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
+
+            Return elements
+
+        End Function
+
+#End Region
+
+#Region "    Extras"
+
+        ''' <summary>
+        ''' Copies the object properties to the Clipboard.
+        ''' </summary>
+        ''' <param name="su">Units system to use.</param>
+        ''' <param name="nf">Number format to use.</param>
+        ''' <remarks></remarks>
+        Public Sub CopyDataToClipboard(su As SystemsOfUnits.Units, nf As String)
+
+            Dim DT As New DataTable
+            DT.Columns.Clear()
+            DT.Columns.Add(("Propriedade"), GetType(System.String))
+            DT.Columns.Add(("Valor"), GetType(System.String))
+            DT.Columns.Add(("Unidade"), GetType(System.String))
+            DT.Rows.Clear()
+
+            Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass
+            Dim properties() As String
+            Dim description As String
+            Dim objtype As ObjectType
+            Dim propidx, r1, r2, r3, r4, r5, r6 As Integer
+            r1 = 5
+            r2 = 12
+            r3 = 30
+            r4 = 48
+            r5 = 66
+            r6 = 84
+
+            baseobj = Me
+            properties = baseobj.GetProperties(Interfaces.Enums.PropertyType.ALL)
+            objtype = baseobj.GraphicObject.ObjectType
+            description = DWSIM.App.GetLocalString(baseobj.GraphicObject.Description)
+            If objtype = ObjectType.MaterialStream Then
+                Dim value As String
+                For propidx = 0 To r1 - 1
+                    value = baseobj.GetPropertyValue(properties(propidx), su)
+                    If Double.TryParse(value, New Double) Then
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                    Else
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                    End If
+                Next
+                For propidx = r1 To r2 - 1
+                    value = baseobj.GetPropertyValue(properties(propidx), su)
+                    If Double.TryParse(value, New Double) Then
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                    Else
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                    End If
+                Next
+                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaMistura"), "", ""})
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(0).Compounds.Values
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                Next
+                For propidx = r2 To r3 - 1
+                    value = baseobj.GetPropertyValue(properties(propidx), su)
+                    If Double.TryParse(value, New Double) Then
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                    Else
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                    End If
+                Next
+                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseVapor"), "", ""})
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(2).Compounds.Values
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                Next
+                For propidx = r3 To r4 - 1
+                    value = baseobj.GetPropertyValue(properties(propidx), su)
+                    If Double.TryParse(value, New Double) Then
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                    Else
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                    End If
+                Next
+                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(1).Compounds.Values
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                Next
+                For propidx = r4 To r5 - 1
+                    value = baseobj.GetPropertyValue(properties(propidx), su)
+                    If Double.TryParse(value, New Double) Then
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                    Else
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                    End If
+                Next
+                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(3).Compounds.Values
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                Next
+                For propidx = r5 To r6 - 1
+                    value = baseobj.GetPropertyValue(properties(propidx), su)
+                    If Double.TryParse(value, New Double) Then
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                    Else
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                    End If
+                Next
+                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(4).Compounds.Values
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                Next
+                For propidx = r6 To 101
+                    value = baseobj.GetPropertyValue(properties(propidx), su)
+                    If Double.TryParse(value, New Double) Then
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                    Else
+                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                    End If
+                Next
+                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
+                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(6).Compounds.Values
+                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                Next
+            Else
+                For Each prop As String In properties
+                    DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(prop), Format(baseobj.GetPropertyValue(prop, su), nf), baseobj.GetPropertyUnit(prop, su)})
+                Next
+            End If
+
+            Dim st As New StringBuilder(DWSIM.App.GetLocalString(Me.ComponentDescription) & ": " & Me.GraphicObject.Tag & vbCrLf)
+            For Each r As DataRow In DT.Rows
+                Dim l As String = ""
+                For Each o As Object In r.ItemArray
+                    l += o.ToString() & vbTab
+                Next
+                st.AppendLine(l)
+            Next
+
+            Clipboard.SetText(st.ToString())
+
+            DT.Clear()
+            DT.Dispose()
+            DT = Nothing
+
+        End Sub
+
+        ''' <summary>
+        ''' Formats a property string, adding its units in parenthesis.
+        ''' </summary>
+        ''' <param name="prop">Property string</param>
+        ''' <param name="unit">Property units</param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Function FT(ByRef prop As String, ByVal unit As String)
+            Return prop & " (" & unit & ")"
+        End Function
 
         Public Sub HandlePropertyChange(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
 
@@ -3225,17 +3535,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Sub
 
         ''' <summary>
-        ''' Formats a property string, adding its units in parenthesis.
-        ''' </summary>
-        ''' <param name="prop">Property string</param>
-        ''' <param name="unit">Property units</param>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Function FT(ByRef prop As String, ByVal unit As String)
-            Return prop & " (" & unit & ")"
-        End Function
-
-        ''' <summary>
         ''' Sets the Flowsheet to which this object belongs to.
         ''' </summary>
         ''' <param name="flowsheet">Flowsheet instance.</param>
@@ -3250,7 +3549,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns>Flowsheet instance.</returns>
         ''' <remarks></remarks>
-        Public Overridable ReadOnly Property FlowSheet() As Global.DWSIM.FormFlowsheet
+        Public Overridable ReadOnly Property FlowSheet() As FormFlowsheet
             Get
                 If Not m_flowsheet Is Nothing Then
                     Return m_flowsheet
@@ -3283,288 +3582,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End Get
         End Property
 
-        Public Property Annotation() As String Implements Interfaces.ISimulationObject.Annotation
-
-        ''' <summary>
-        ''' Checks if an Adjust operation is attached to this object.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property IsAdjustAttached() As Boolean = False Implements Interfaces.ISimulationObject.IsAdjustAttached
-
-        ''' <summary>
-        ''' If an Adjust object is attached to this object, returns its ID.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property AttachedAdjustId() As String = "" Implements Interfaces.ISimulationObject.AttachedAdjustId
-
-        ''' <summary>
-        ''' If an Adjust object is attached to this object, returns a variable describing how this object is used by it (manipulated, controlled or reference).
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property AdjustVarType() As Interfaces.Enums.AdjustVarType Implements Interfaces.ISimulationObject.AdjustVarType
-
-        ''' <summary>
-        ''' Checks if an Specification operation is attached to this object.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property IsSpecAttached() As Boolean = False Implements Interfaces.ISimulationObject.IsSpecAttached
-
-        ''' <summary>
-        ''' If an Specification object is attached to this object, returns its ID.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property AttachedSpecId() As String = "" Implements Interfaces.ISimulationObject.AttachedSpecId
-
-        ''' <summary>
-        ''' If an Specification object is attached to this object, returns a variable describing how this object is used by it (target or source).
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property SpecVarType() As Interfaces.Enums.SpecVarType Implements Interfaces.ISimulationObject.SpecVarType
-
-        ''' <summary>
-        ''' Gets or sets the graphic object representation of this object in the flowsheet.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore> Public Property GraphicObject() As Interfaces.IGraphicObject Implements Interfaces.ISimulationObject.GraphicObject
-
-        ''' <summary>
-        ''' Object's Unique ID (Name)
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks>This property is the same as the graphic object 'Name' property.</remarks>
-        Public Property Name() As String = "" Implements Interfaces.ISimulationObject.Name
-
-        Public MustOverride Function GetProperties(proptype As PropertyType) As String() Implements Interfaces.ISimulationObject.GetProperties
-
-        Public MustOverride Function GetPropertyUnit(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As String Implements Interfaces.ISimulationObject.GetPropertyUnit
-
-        Public MustOverride Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
-
-        Public MustOverride Function SetPropertyValue(prop As String, propval As Object, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean Implements Interfaces.ISimulationObject.SetPropertyValue
-
-        Sub CreateNew()
-            CreatedWithThreadID = Threading.Thread.CurrentThread.ManagedThreadId
-        End Sub
-
-        ''' <summary>
-        ''' Clones the current object, returning a new one with identical properties.
-        ''' </summary>
-        ''' <returns>An object of the same type with the same properties.</returns>
-        ''' <remarks>Properties and fields marked with the 'NonSerializable' attribute aren't cloned.</remarks>
-        Public Function Clone() As Object Implements System.ICloneable.Clone
-
-            Return ObjectCopy(Me)
-
-        End Function
-
-        Function ObjectCopy(ByVal obj As DWSIM.SimulationObjects.UnitOperations.BaseClass) As DWSIM.SimulationObjects.UnitOperations.BaseClass
-
-            Dim objMemStream As New MemoryStream(250000)
-            Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
-
-            objBinaryFormatter.Serialize(objMemStream, obj)
-
-            objMemStream.Seek(0, SeekOrigin.Begin)
-
-            ObjectCopy = objBinaryFormatter.Deserialize(objMemStream)
-
-            objMemStream.Close()
-
-        End Function
-
-#Region "   IDisposable Support "
-
-        Public disposedValue As Boolean = False        ' To detect redundant calls
-
-        Protected Overridable Sub Dispose(ByVal disposing As Boolean)
-            Me.disposedValue = True
-        End Sub
-
-        ' This code added by Visual Basic to correctly implement the disposable pattern.
-        Public Sub Dispose() Implements IDisposable.Dispose
-
-            ' Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) above.
-            Dispose(True)
-            GC.SuppressFinalize(Me)
-
-        End Sub
 #End Region
-
-        ''' <summary>
-        ''' Loads object data stored in a collection of XML elements.
-        ''' </summary>
-        ''' <param name="data"></param>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Overridable Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
-
-            XMLSerializer.XMLSerializer.Deserialize(Me, data)
-
-        End Function
-
-        ''' <summary>
-        ''' Saves object data in a collection of XML elements.
-        ''' </summary>
-        ''' <returns>A List of XML elements containing object data.</returns>
-        ''' <remarks></remarks>
-        Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
-
-            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
-
-            Return elements
-
-        End Function
-
-        ''' <summary>
-        ''' Copies the object properties to the Clipboard.
-        ''' </summary>
-        ''' <param name="su">Units system to use.</param>
-        ''' <param name="nf">Number format to use.</param>
-        ''' <remarks></remarks>
-        Public Sub CopyDataToClipboard(su As SystemsOfUnits.Units, nf As String)
-
-            Dim DT As New DataTable
-            DT.Columns.Clear()
-            DT.Columns.Add(("Propriedade"), GetType(System.String))
-            DT.Columns.Add(("Valor"), GetType(System.String))
-            DT.Columns.Add(("Unidade"), GetType(System.String))
-            DT.Rows.Clear()
-
-            Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass
-            Dim properties() As String
-            Dim description As String
-            Dim objtype As ObjectType
-            Dim propidx, r1, r2, r3, r4, r5, r6 As Integer
-            r1 = 5
-            r2 = 12
-            r3 = 30
-            r4 = 48
-            r5 = 66
-            r6 = 84
-
-            baseobj = Me
-            properties = baseobj.GetProperties(Interfaces.Enums.PropertyType.ALL)
-            objtype = baseobj.GraphicObject.ObjectType
-            description = DWSIM.App.GetLocalString(baseobj.GraphicObject.Description)
-            If objtype = ObjectType.MaterialStream Then
-                Dim value As String
-                For propidx = 0 To r1 - 1
-                    value = baseobj.GetPropertyValue(properties(propidx), su)
-                    If Double.TryParse(value, New Double) Then
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
-                    Else
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
-                    End If
-                Next
-                For propidx = r1 To r2 - 1
-                    value = baseobj.GetPropertyValue(properties(propidx), su)
-                    If Double.TryParse(value, New Double) Then
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
-                    Else
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
-                    End If
-                Next
-                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaMistura"), "", ""})
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(0).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                Next
-                For propidx = r2 To r3 - 1
-                    value = baseobj.GetPropertyValue(properties(propidx), su)
-                    If Double.TryParse(value, New Double) Then
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
-                    Else
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
-                    End If
-                Next
-                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseVapor"), "", ""})
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(2).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                Next
-                For propidx = r3 To r4 - 1
-                    value = baseobj.GetPropertyValue(properties(propidx), su)
-                    If Double.TryParse(value, New Double) Then
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
-                    Else
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
-                    End If
-                Next
-                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(1).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                Next
-                For propidx = r4 To r5 - 1
-                    value = baseobj.GetPropertyValue(properties(propidx), su)
-                    If Double.TryParse(value, New Double) Then
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
-                    Else
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
-                    End If
-                Next
-                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(3).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                Next
-                For propidx = r5 To r6 - 1
-                    value = baseobj.GetPropertyValue(properties(propidx), su)
-                    If Double.TryParse(value, New Double) Then
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
-                    Else
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
-                    End If
-                Next
-                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(4).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                Next
-                For propidx = r6 To 101
-                    value = baseobj.GetPropertyValue(properties(propidx), su)
-                    If Double.TryParse(value, New Double) Then
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
-                    Else
-                        DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
-                    End If
-                Next
-                DT.Rows.Add(New String() {DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In CType(Me, Streams.MaterialStream).Phases(6).Compounds.Values
-                    DT.Rows.Add(New String() {DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                Next
-            Else
-                For Each prop As String In properties
-                    DT.Rows.Add(New String() {DWSIM.App.GetPropertyName(prop), Format(baseobj.GetPropertyValue(prop, su), nf), baseobj.GetPropertyUnit(prop, su)})
-                Next
-            End If
-
-            Dim st As New StringBuilder(DWSIM.App.GetLocalString(Me.ComponentDescription) & ": " & Me.GraphicObject.Tag & vbCrLf)
-            For Each r As DataRow In DT.Rows
-                Dim l As String = ""
-                For Each o As Object In r.ItemArray
-                    l += o.ToString() & vbTab
-                Next
-                st.AppendLine(l)
-            Next
-
-            Clipboard.SetText(st.ToString())
-
-            DT.Clear()
-            DT.Dispose()
-            DT = Nothing
-
-        End Sub
 
     End Class
 
