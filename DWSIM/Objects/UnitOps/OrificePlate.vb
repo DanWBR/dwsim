@@ -19,6 +19,7 @@
 Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.SharedClasses
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace DWSIM.SimulationObjects.UnitOperations
 

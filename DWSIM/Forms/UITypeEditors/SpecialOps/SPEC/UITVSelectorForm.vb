@@ -1,6 +1,6 @@
 ﻿Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Linq
-Imports DWSIM.DrawingTools.GraphicObjects.ObjectType
+Imports DWSIM.Interfaces.Enums.GraphicObjects.ObjectType
 Imports DWSIM.DrawingTools.GraphicObjects
 
 Public Class UITVSelectorForm

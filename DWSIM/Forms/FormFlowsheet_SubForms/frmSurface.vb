@@ -11,12 +11,13 @@ Imports System.Linq
 Imports System.Threading.Tasks
 Imports DWSIM.DWSIM.Flowsheet
 Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Public Class frmSurface
     Inherits DockContent
 
     Private m_connecting As Boolean = False
-    Private m_stPoint As New Point
+    Private m_stPoint As New Drawing.Point
 
     Public Flowsheet As FormFlowsheet
     Public PGEx2 As PropertyGridEx.PropertyGridEx
@@ -421,15 +422,15 @@ Public Class frmSurface
         If e.Button = Windows.Forms.MouseButtons.Left Then
 
             If Me.FlowsheetDesignSurface.QuickConnect And My.Computer.Keyboard.CtrlKeyDown Then
-                Dim mousePT As New Point(Flowsheet.gscTogoc(e.X, e.Y))
+                Dim mousePT As New Drawing.Point(Flowsheet.gscTogoc(e.X, e.Y))
                 Dim mpx = mousePT.X
                 Dim mpy = mousePT.Y
                 Me.m_stPoint = mousePT
-                Dim myCTool As New ConnectToolGraphic(mousePT)
+                Dim myCTool As New ConnectToolGraphic(mousePT.X, mousePT.Y)
                 myCTool.Name = "CTOOL1234567890"
                 myCTool.Width = mousePT.X
                 myCTool.Height = mousePT.Y
-                Me.m_startobj = Me.FlowsheetDesignSurface.drawingObjects.FindObjectAtPoint(mousePT)
+                Me.m_startobj = Me.FlowsheetDesignSurface.drawingObjects.FindObjectAtPoint(mousePT.ToDTPoint)
                 Me.FlowsheetDesignSurface.drawingObjects.Add(myCTool)
                 Me.m_connecting = True
             Else
@@ -450,7 +451,7 @@ Public Class frmSurface
 
             Me.FlowsheetDesignSurface.drawingObjects.Remove(Me.FlowsheetDesignSurface.drawingObjects.FindObjectWithName("CTOOL1234567890"))
 
-            Me.m_endobj = Me.FlowsheetDesignSurface.drawingObjects.FindObjectAtPoint(Flowsheet.gscTogoc(e.X, e.Y))
+            Me.m_endobj = Me.FlowsheetDesignSurface.drawingObjects.FindObjectAtPoint(Flowsheet.gscTogoc(e.X, e.Y).ToDTPoint)
 
             Me.FlowsheetDesignSurface.SelectRectangle = True
             Me.FlowsheetDesignSurface.Invalidate()
@@ -474,7 +475,7 @@ Public Class frmSurface
                     Dim gObj As GraphicObject = Nothing
                     Dim fillclr As Color = Color.WhiteSmoke
                     Dim lineclr As Color = Color.Red
-                    Dim mousePT As Point = Flowsheet.gscTogoc(e.X, e.Y)
+                    Dim mousePT As Drawing.Point = Flowsheet.gscTogoc(e.X, e.Y)
                     Dim mpx = mousePT.X '- SplitContainer1.SplitterDistance
                     Dim mpy = mousePT.Y '- ToolStripContainer1.TopToolStripPanel.Height
                     Dim tobj As ObjectType = ObjectType.Nenhum
@@ -620,21 +621,21 @@ Public Class frmSurface
 
     Private Sub FlowsheetDesignSurface_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles FlowsheetDesignSurface.MouseMove
 
-        Dim px As Point = Flowsheet.gscTogoc(e.Location.X, e.Location.Y)
-        Dim px2 As Point = Flowsheet.gscTogoc(e.Location.X + 20, e.Location.Y + 20)
+        Dim px As Drawing.Point = Flowsheet.gscTogoc(e.Location.X, e.Location.Y)
+        Dim px2 As Drawing.Point = Flowsheet.gscTogoc(e.Location.X + 20, e.Location.Y + 20)
 
         If Me.m_connecting Then
 
             Dim myCTool As ConnectToolGraphic = Me.FlowsheetDesignSurface.drawingObjects.FindObjectWithName("CTOOL1234567890")
 
-            Dim mousePT As New Point(Flowsheet.gscTogoc(e.X, e.Y))
+            Dim mousePT As New Drawing.Point(Flowsheet.gscTogoc(e.X, e.Y))
 
             myCTool.Width = mousePT.X
             myCTool.Height = mousePT.Y
 
         ElseIf Not FlowsheetDesignSurface.dragging Then
 
-            Dim gobj As GraphicObject = Me.FlowsheetDesignSurface.drawingObjects.FindObjectAtPoint(px)
+            Dim gobj As GraphicObject = Me.FlowsheetDesignSurface.drawingObjects.FindObjectAtPoint(px.ToDTPoint)
 
             If Not gobj Is Nothing Then
 
@@ -2902,8 +2903,8 @@ Public Class frmSurface
         If e.Effect = DragDropEffects.Copy Then
             Dim obj As DataGridViewRow = e.Data.GetData("System.Windows.Forms.DataGridViewRow")
             Dim tobj As ObjectType = ObjectType.Nenhum
-            Dim p As Point = Me.FlowsheetDesignSurface.PointToClient(New Point(e.X, e.Y))
-            Dim mousePT As Point = Flowsheet.gscTogoc(p.X, p.Y)
+            Dim p As Drawing.Point = Me.FlowsheetDesignSurface.PointToClient(New Drawing.Point(e.X, e.Y))
+            Dim mousePT As Drawing.Point = Flowsheet.gscTogoc(p.X, p.Y)
             Dim mpx = mousePT.X
             Dim mpy = mousePT.Y
             'Dim text As String = Flowsheet.FormObjListView.DataGridView1.Rows(obj.Index).Cells(0).Value.ToString.TrimEnd(" ")
@@ -3128,7 +3129,7 @@ Public Class frmSurface
 
             'handle the possibility that the viewport is scrolled,
             'adjust my origin coordintates to compensate
-            Dim pt As Point = Me.FlowsheetDesignSurface.AutoScrollPosition
+            Dim pt As Drawing.Point = Me.FlowsheetDesignSurface.AutoScrollPosition
             g.TranslateTransform(pt.X * scale, pt.Y * scale)
 
             'draw the actual objects onto the page, on top of the grid

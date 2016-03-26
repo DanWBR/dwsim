@@ -1,5 +1,5 @@
 ﻿Imports DWSIM.DWSIM.SimulationObjects
-Imports DWSIM.DrawingTools.GraphicObjects.ObjectType
+Imports DWSIM.Interfaces.Enums.GraphicObjects.ObjectType
 
 Public Class UISVSelectorForm
 

@@ -38,6 +38,7 @@ Imports System.Reflection
 Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 <System.Serializable()> Public Class FormFlowsheet
 
@@ -567,8 +568,8 @@ Imports DWSIM.Interfaces.Interfaces2
 
     End Function
 
-    Public Function gscTogoc(ByVal X As Integer, ByVal Y As Integer) As Point
-        Dim myNewPoint As Point
+    Public Function gscTogoc(ByVal X As Integer, ByVal Y As Integer) As Drawing.Point
+        Dim myNewPoint As Drawing.Point
         myNewPoint.X = Convert.ToInt32((X - Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X) / Me.FormSurface.FlowsheetDesignSurface.Zoom)
         myNewPoint.Y = Convert.ToInt32((Y - Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y) / Me.FormSurface.FlowsheetDesignSurface.Zoom)
         Return myNewPoint
@@ -1736,7 +1737,7 @@ Imports DWSIM.Interfaces.Interfaces2
             Dim con2OK As Boolean = False
 
             'posicionar pontos nos primeiros slots livres
-            Dim StartPos, EndPos As New Point
+            Dim StartPos, EndPos As New Drawing.Point
             Dim InConSlot, OutConSlot As New ConnectionPoint
             If Not gObjFrom Is Nothing Then
                 If Not gObjTo Is Nothing Then
@@ -1758,7 +1759,8 @@ Imports DWSIM.Interfaces.Interfaces2
                             If tidx = -1 Then
                                 For Each InConSlot In gObjTo.InputConnectors
                                     If Not InConSlot.IsAttached And InConSlot.Type = ConType.ConIn Then
-                                        EndPos = InConSlot.Position
+                                        EndPos.X = InConSlot.Position.X
+                                        EndPos.Y = InConSlot.Position.Y
                                         InConSlot.IsAttached = True
                                         con2OK = True
                                         Exit For
@@ -1767,7 +1769,8 @@ Imports DWSIM.Interfaces.Interfaces2
                             Else
                                 If Not gObjTo.InputConnectors(tidx).IsAttached And gObjTo.InputConnectors(tidx).Type = ConType.ConIn Then
                                     InConSlot = gObjTo.InputConnectors(tidx)
-                                    EndPos = InConSlot.Position
+                                    EndPos.X = InConSlot.Position.X
+                                    EndPos.Y = InConSlot.Position.Y
                                     InConSlot.IsAttached = True
                                     con2OK = True
                                 End If
@@ -1776,7 +1779,8 @@ Imports DWSIM.Interfaces.Interfaces2
                             If tidx = -1 Then
                                 For Each InConSlot In gObjTo.InputConnectors
                                     If Not InConSlot.IsAttached And InConSlot.Type = ConType.ConEn Then
-                                        EndPos = InConSlot.Position
+                                        EndPos.X = InConSlot.Position.X
+                                        EndPos.Y = InConSlot.Position.Y
                                         InConSlot.IsAttached = True
                                         con2OK = True
                                         Exit For
@@ -1785,7 +1789,8 @@ Imports DWSIM.Interfaces.Interfaces2
                             Else
                                 If Not gObjTo.InputConnectors(tidx).IsAttached And gObjTo.InputConnectors(tidx).Type = ConType.ConEn Then
                                     InConSlot = gObjTo.InputConnectors(tidx)
-                                    EndPos = InConSlot.Position
+                                    EndPos.X = InConSlot.Position.X
+                                    EndPos.Y = InConSlot.Position.Y
                                     InConSlot.IsAttached = True
                                     con2OK = True
                                 End If
@@ -1798,7 +1803,8 @@ Imports DWSIM.Interfaces.Interfaces2
                         If fidx = -1 Then
                             For Each OutConSlot In gObjFrom.OutputConnectors
                                 If Not OutConSlot.IsAttached Then
-                                    StartPos = OutConSlot.Position
+                                    StartPos.X = OutConSlot.Position.X
+                                    StartPos.Y = OutConSlot.Position.Y
                                     OutConSlot.IsAttached = True
                                     If con2OK Then con1OK = True
                                     Exit For
@@ -1807,7 +1813,8 @@ Imports DWSIM.Interfaces.Interfaces2
                         Else
                             If Not gObjFrom.OutputConnectors(fidx).IsAttached Then
                                 OutConSlot = gObjFrom.OutputConnectors(fidx)
-                                StartPos = OutConSlot.Position
+                                StartPos.X = OutConSlot.Position.X
+                                StartPos.Y = OutConSlot.Position.Y
                                 OutConSlot.IsAttached = True
                                 If con2OK Then con1OK = True
                             End If
@@ -1825,11 +1832,13 @@ Imports DWSIM.Interfaces.Interfaces2
                             And gObjFrom.ObjectType <> ObjectType.AbsorptionColumn And gObjFrom.ObjectType <> ObjectType.OT_EnergyRecycle _
                             And gObjFrom.ObjectType <> ObjectType.RefluxedAbsorber And gObjFrom.ObjectType <> ObjectType.ReboiledAbsorber Then
                             If Not gObjFrom.EnergyConnector.IsAttached Then
-                                StartPos = gObjFrom.EnergyConnector.Position
+                                StartPos.X = gObjFrom.EnergyConnector.Position.X
+                                StartPos.Y = gObjFrom.EnergyConnector.Position.Y
                                 gObjFrom.EnergyConnector.IsAttached = True
                                 con1OK = True
                                 OutConSlot = gObjFrom.EnergyConnector
-                                EndPos = gObjTo.InputConnectors(0).Position
+                                EndPos.X = gObjTo.InputConnectors(0).Position.X
+                                EndPos.Y = gObjTo.InputConnectors(0).Position.Y
                                 gObjTo.InputConnectors(0).IsAttached = True
                                 con2OK = True
                                 InConSlot = gObjTo.InputConnectors(0)
@@ -1838,7 +1847,8 @@ Imports DWSIM.Interfaces.Interfaces2
                             If tidx = -1 Then
                                 For Each InConSlot In gObjTo.InputConnectors
                                     If Not InConSlot.IsAttached And InConSlot.Type = ConType.ConIn Then
-                                        EndPos = InConSlot.Position
+                                        EndPos.X = InConSlot.Position.X
+                                        EndPos.Y = InConSlot.Position.Y
                                         InConSlot.IsAttached = True
                                         con2OK = True
                                         Exit For
@@ -1847,7 +1857,8 @@ Imports DWSIM.Interfaces.Interfaces2
                             Else
                                 If Not gObjTo.InputConnectors(tidx).IsAttached And gObjTo.InputConnectors(tidx).Type = ConType.ConIn Then
                                     InConSlot = gObjTo.InputConnectors(tidx)
-                                    EndPos = InConSlot.Position
+                                    EndPos.X = InConSlot.Position.X
+                                    EndPos.Y = InConSlot.Position.Y
                                     InConSlot.IsAttached = True
                                     con2OK = True
                                 End If
@@ -1855,7 +1866,8 @@ Imports DWSIM.Interfaces.Interfaces2
                             If fidx = -1 Then
                                 For Each OutConSlot In gObjFrom.OutputConnectors
                                     If Not OutConSlot.IsAttached And OutConSlot.Type = ConType.ConEn Then
-                                        StartPos = OutConSlot.Position
+                                        StartPos.X = OutConSlot.Position.X
+                                        StartPos.Y = OutConSlot.Position.Y
                                         OutConSlot.IsAttached = True
                                         If con2OK Then con1OK = True
                                         Exit For
@@ -1864,7 +1876,8 @@ Imports DWSIM.Interfaces.Interfaces2
                             Else
                                 If Not gObjFrom.OutputConnectors(fidx).IsAttached Then
                                     OutConSlot = gObjFrom.OutputConnectors(fidx)
-                                    StartPos = OutConSlot.Position
+                                    StartPos.X = OutConSlot.Position.X
+                                    StartPos.Y = OutConSlot.Position.Y
                                     OutConSlot.IsAttached = True
                                     If con2OK Then con1OK = True
                                 End If
@@ -1881,7 +1894,7 @@ Imports DWSIM.Interfaces.Interfaces2
             End If
             If con1OK = True And con2OK = True Then
                 'desenhar conector
-                Dim myCon As New ConnectorGraphic(StartPos, EndPos, 1, Color.DarkRed)
+                Dim myCon As New ConnectorGraphic(StartPos.X, StartPos.Y, EndPos.X, EndPos.Y, 1, Color.DarkRed)
                 OutConSlot.AttachedConnector = myCon
                 InConSlot.AttachedConnector = myCon
                 With myCon

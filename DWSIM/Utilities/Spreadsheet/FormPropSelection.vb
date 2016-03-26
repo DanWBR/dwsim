@@ -1,6 +1,6 @@
 ﻿Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Linq
-Imports DWSIM.DrawingTools.GraphicObjects.ObjectType
+Imports DWSIM.Interfaces.Enums.GraphicObjects.ObjectType
 
 Public Class FormPropSelection
 
@@ -63,7 +63,7 @@ Public Class FormPropSelection
 
     Private Sub ListBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles TreeView1.AfterSelect
 
-        Dim obj As GraphicObjects.GraphicObject
+        Dim obj As GraphicObject
 
         TreeView2.Nodes.Clear()
         TreeView3.Nodes.Clear()

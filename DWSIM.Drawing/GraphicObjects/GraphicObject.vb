@@ -15,125 +15,17 @@ Imports System.Collections.Generic
 Imports System.Linq
 Imports DWSIM.Interfaces
 Imports System.Xml.Linq
+Imports DWSIM.Interfaces.Enums
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace GraphicObjects
-
-    Public Enum ObjectType
-
-        NodeIn
-        NodeOut
-        NodeEn
-        Pump
-        Tank
-        Vessel
-        MaterialStream
-        EnergyStream
-        Compressor
-        Expander
-        TPVessel
-        Cooler
-        Heater
-        Pipe
-        Valve
-        Nenhum
-        GO_Table
-        GO_Text
-        GO_Image
-        GO_FloatingTable
-        OT_Adjust
-        OT_Spec
-        OT_Recycle
-        RCT_Conversion
-        RCT_Equilibrium
-        RCT_Gibbs
-        RCT_CSTR
-        RCT_PFR
-        HeatExchanger
-        ShortcutColumn
-        DistillationColumn
-        AbsorptionColumn
-        RefluxedAbsorber
-        ReboiledAbsorber
-        OT_EnergyRecycle
-        GO_Animation
-        ComponentSeparator
-        OrificePlate
-        CustomUO
-        ExcelUO
-        CapeOpenUO
-        FlowsheetUO
-        GO_MasterTable
-        SolidSeparator
-        Filter
-        GO_SpreadsheetTable
-
-    End Enum
-
-    Public Enum ShapeIcon
-
-        DefaultShape
-        NodeIn
-        NodeOut
-        Pump
-        Tank
-        Vessel
-        Compressor
-        Expander
-        Cooler
-        Heater
-        Pipe
-        Valve
-        RCT_Conversion
-        RCT_Equilibrium
-        RCT_Gibbs
-        RCT_CSTR
-        RCT_PFR
-        HeatExchanger
-        DistillationColumn
-        AbsorptionColumn
-        ComponentSeparator
-        OrificePlate
-
-    End Enum
-
-    Public Enum Status
-        Calculated
-        Calculating
-        ErrorCalculating
-        Inactive
-        Idle
-        NotCalculated
-    End Enum
 
     <System.Serializable()> Public MustInherit Class GraphicObject
 
         Implements IGraphicObject
 
-        Protected m_Position As New Point(0, 0)
-        Protected m_Size As New Size(0, 0)
-        Protected m_Rotation As Single = 0
-        Protected m_AutoSize As Boolean = True
-        Protected m_Container As GraphicObjectCollection
-        Protected m_Name As String = ""
-        Protected m_IsConnector As Boolean = False
-        Protected m_InputConnectors As New System.Collections.Generic.List(Of ConnectionPoint)
-        Protected m_OutputConnectors As New System.Collections.Generic.List(Of ConnectionPoint)
-        Protected m_EnergyConnector As New ConnectionPoint
-        Protected m_SpecialConnectors As New System.Collections.Generic.List(Of ConnectionPoint)
-        Protected m_tag As String = ""
-        Protected m_active As Boolean = True
-        Protected m_calculated As Boolean = False
-        Protected m_isenergy As Boolean = False
-        Protected m_ObjectType As ObjectType = ObjectType.Nenhum
-        Protected m_flippedV As Boolean = False
-        Protected m_flippedH As Boolean = False
-        Protected m_shape As Integer = 0
-        Protected m_ainfo As Object = Nothing
-        Protected m_objdesc As String = ""
-        Protected m_status As Status = Status.NotCalculated
-        Protected m_icon As ShapeIcon = ShapeIcon.DefaultShape
-        Protected m_mixpoint As Boolean = False
-        Protected m_splitpoint As Boolean = False
+        Friend _Size As Size
+        Friend m_Rotation As Single
 
         Public Property Selected As Boolean = False
 
@@ -146,206 +38,42 @@ Namespace GraphicObjects
             If Not t Is Nothing Then Return Activator.CreateInstance(t) Else Return Nothing
         End Function
 
-        Public ReadOnly Property MixPoint() As Boolean
-            Get
-                Return m_mixpoint
-            End Get
-        End Property
-
-        Public ReadOnly Property SplitPoint() As Boolean
-            Get
-                Return m_splitpoint
-            End Get
-        End Property
-
-        Public Property ShapeOverride() As ShapeIcon
-            Get
-                Return m_icon
-            End Get
-            Set(ByVal value As ShapeIcon)
-                m_icon = value
-            End Set
-        End Property
-
-        Public Property Status() As Status
-            Get
-                Return m_status
-            End Get
-            Set(ByVal value As Status)
-                m_status = value
-            End Set
-        End Property
-
-        Public Property Description() As String
-            Get
-                Return m_objdesc
-            End Get
-            Set(ByVal value As String)
-                m_objdesc = value
-            End Set
-        End Property
-
-        Public Property AdditionalInfo() As Object
-            Get
-                Return m_ainfo
-            End Get
-            Set(ByVal value As Object)
-                m_ainfo = value
-            End Set
-        End Property
-
-        Public Property Shape() As Integer
-            Get
-                Return m_shape
-            End Get
-            Set(ByVal value As Integer)
-                m_shape = value
-            End Set
-        End Property
-
-        Public Property FlippedH() As Boolean
-            Get
-                Return Me.m_flippedH
-            End Get
-            Set(ByVal value As Boolean)
-                Me.m_flippedH = value
-            End Set
-        End Property
-
-        Public Property FlippedV() As Boolean
-            Get
-                Return Me.m_flippedV
-            End Get
-            Set(ByVal value As Boolean)
-                Me.m_flippedV = value
-            End Set
-        End Property
-
-        Public Property ObjectType() As ObjectType
-            Get
-                Return m_ObjectType
-            End Get
-            Set(ByVal tipo As ObjectType)
-                m_ObjectType = tipo
-            End Set
-        End Property
-
-        Public Property IsEnergyStream() As Boolean
-            Get
-                Return m_isenergy
-            End Get
-            Set(ByVal Value As Boolean)
-                m_isenergy = Value
-            End Set
-        End Property
-
-        Public Overridable Property Active() As Boolean
-            Get
-                Return m_active
-            End Get
-            Set(ByVal Value As Boolean)
-                m_active = Value
-                If Value Then Me.Status = GraphicObjects.Status.NotCalculated Else Me.Status = GraphicObjects.Status.Inactive
-            End Set
-        End Property
-
-        Public Overridable Property Calculated() As Boolean
+        Public Overridable Property Calculated() As Boolean Implements IGraphicObject.Calculated
             Get
                 Select Case Status
-                    Case GraphicObjects.Status.Calculated
+                    Case Status.Calculated
                         Return True
-                    Case GraphicObjects.Status.Calculating
+                    Case Status.Calculating
                         Return False
-                    Case GraphicObjects.Status.ErrorCalculating
+                    Case Status.ErrorCalculating
                         Return False
-                    Case GraphicObjects.Status.Idle
+                    Case Status.Idle
                         Return True
-                    Case GraphicObjects.Status.Inactive
+                    Case Status.Inactive
                         Return False
-                    Case GraphicObjects.Status.NotCalculated
+                    Case Status.NotCalculated
                         Return False
                     Case Else
                         Return False
                 End Select
             End Get
             Set(ByVal Value As Boolean)
-                m_calculated = Value
                 If Value = False Then
-                    Status = GraphicObjects.Status.ErrorCalculating
+                    Status = Status.ErrorCalculating
                 Else
-                    Status = GraphicObjects.Status.Calculated
+                    Status = Status.Calculated
                 End If
-            End Set
-        End Property
-
-        Public Overridable Overloads Property Tag() As String
-            Get
-                Return m_tag
-            End Get
-            Set(ByVal Value As String)
-                Try
-                    m_tag = CStr(Value)
-                Catch ex As Exception
-                    MsgBox("Erro ao identificar objeto.", MsgBoxStyle.Critical, "Erro")
-                End Try
-            End Set
-        End Property
-
-        Public Property Container() As GraphicObjectCollection
-            Get
-                Return m_Container
-            End Get
-            Set(ByVal Value As GraphicObjectCollection)
-                m_Container = Value
-            End Set
-        End Property
-
-        Public Property InputConnectors() As System.Collections.Generic.List(Of ConnectionPoint)
-            Get
-                Return m_InputConnectors
-            End Get
-            Set(ByVal Value As System.Collections.Generic.List(Of ConnectionPoint))
-                m_InputConnectors = Value
-            End Set
-        End Property
-
-        Public Property OutputConnectors() As System.Collections.Generic.List(Of ConnectionPoint)
-            Get
-                Return m_OutputConnectors
-            End Get
-            Set(ByVal Value As System.Collections.Generic.List(Of ConnectionPoint))
-                m_OutputConnectors = Value
-            End Set
-        End Property
-
-        Public Property SpecialConnectors() As System.Collections.Generic.List(Of ConnectionPoint)
-            Get
-                Return m_SpecialConnectors
-            End Get
-            Set(ByVal Value As System.Collections.Generic.List(Of ConnectionPoint))
-                m_SpecialConnectors = Value
-            End Set
-        End Property
-
-        Public Property EnergyConnector() As ConnectionPoint
-            Get
-                Return Me.m_EnergyConnector
-            End Get
-            Set(ByVal Value As ConnectionPoint)
-                Me.m_EnergyConnector = Value
             End Set
         End Property
 
         Public Overridable Overloads Function HitTest(ByVal pt As System.Drawing.Point) As Boolean
             Dim gp As New Drawing2D.GraphicsPath()
             Dim myMatrix As New Drawing2D.Matrix()
-
             gp.AddRectangle(New Rectangle(X, Y, Width, Height))
             If Me.Rotation <> 0 Then
                 myMatrix.RotateAt(Me.Rotation, New PointF(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), _
                     Drawing.Drawing2D.MatrixOrder.Append)
             End If
-
             gp.Transform(myMatrix)
             Return gp.IsVisible(pt)
         End Function
@@ -354,7 +82,6 @@ Namespace GraphicObjects
             'is this object contained within the supplied rectangle
             Dim gp As New Drawing2D.GraphicsPath()
             Dim myMatrix As New Drawing2D.Matrix()
-
             gp.AddRectangle(New Rectangle(X, Y, Width, Height))
             If Me.Rotation <> 0 Then
                 myMatrix.RotateAt(Me.Rotation, New PointF(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), _
@@ -421,105 +148,37 @@ Namespace GraphicObjects
 
 #End Region
 
-        Public Overridable Property AutoSize() As Boolean
-            Get
-                Return m_AutoSize
-            End Get
-            Set(ByVal Value As Boolean)
-                If Value <> m_AutoSize Then
-                    m_AutoSize = Value
-                End If
-            End Set
-        End Property
-
-        Public Overridable Property IsConnector() As Boolean
-            Get
-                Return m_IsConnector
-            End Get
-            Set(ByVal Value As Boolean)
-                If Value <> m_IsConnector Then
-                    m_IsConnector = Value
-                End If
-            End Set
-        End Property
-
-        Public Overridable Property X() As Integer
-            Get
-                Return m_Position.X
-            End Get
-            Set(ByVal Value As Integer)
-                m_Position.X = Value
-            End Set
-        End Property
-
-        Public Overridable Property Y() As Integer
-            Get
-                Return m_Position.Y
-            End Get
-            Set(ByVal Value As Integer)
-                m_Position.Y = Value
-            End Set
-        End Property
-
-        Public Overridable Property Name() As String
-            Get
-                Return m_Name
-            End Get
-            Set(ByVal name As String)
-                m_Name = name
-            End Set
-        End Property
-
         Public Overridable Function GetPosition() As Point
-            Dim myPosition As New Point(m_Position.X, m_Position.Y)
+            Dim myPosition As New Point(X, Y)
             Return myPosition
         End Function
 
         Public Overridable Sub SetPosition(ByVal Value As Point)
-            'any value is currently ok,
-            'but I might want to add validation later.
-            m_Position = Value
+            X = Value.X
+            Y = Value.Y
         End Sub
 
-        Public Overridable Property Height() As Integer
-            Get
-                Return m_Size.Height
-            End Get
-            Set(ByVal Value As Integer)
-                m_Size.Height = Value
-            End Set
-        End Property
-
-        Public Overridable Property Width() As Integer
-            Get
-                Return m_Size.Width
-            End Get
-            Set(ByVal Value As Integer)
-                m_Size.Width = Value
-            End Set
-        End Property
 
         Public Overridable Sub SetSize(ByVal Value As Size)
-            m_Size = Value
+            _Size = Value
         End Sub
 
         Public Overridable Function GetSize() As Size
-            Dim mySize As New Size(m_Size.Width, m_Size.Height)
+            Dim mySize As New Size(_Size.Width, _Size.Height)
             Return mySize
         End Function
 
-        Public Overridable Property Rotation() As Single
+        Public Overridable Property Rotation() As Integer Implements IGraphicObject.Rotation
             Get
                 Return m_Rotation
                 If IsRunningOnMono() Then Return 0
             End Get
-            Set(ByVal Value As Single)
+            Set(ByVal Value As Integer)
                 If System.Math.Abs(Value) <= 360 Then
                     m_Rotation = Value
                     If IsRunningOnMono() Then m_Rotation = 0
                 Else
-                    Throw New ArgumentOutOfRangeException("Rotation", _
-                        "Rotation must be between -360.0 and 360.0")
+                    Throw New ArgumentOutOfRangeException("Rotation", "Rotation must be between -360.0 and 360.0")
                 End If
             End Set
         End Property
@@ -541,7 +200,6 @@ Namespace GraphicObjects
         Public Sub RotateConnectors()
 
             Dim center As Point = New Point(X + Me.Width / 2, Y + Me.Height / 2)
-
             Dim pt As Point
             Dim raio, angulo As Double
             Dim con As ConnectionPoint
@@ -628,7 +286,7 @@ Namespace GraphicObjects
 
                 .Add(New XElement("InputConnectors"))
 
-                For Each cp As ConnectionPoint In m_InputConnectors
+                For Each cp As ConnectionPoint In InputConnectors
                     If cp.IsAttached And Not cp.AttachedConnector Is Nothing Then
                         elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", cp.IsAttached.ToString(ci)),
                                                                                         New XAttribute("ConnType", cp.Type.ToString),
@@ -642,7 +300,7 @@ Namespace GraphicObjects
 
                 .Add(New XElement("OutputConnectors"))
 
-                For Each cp As ConnectionPoint In m_OutputConnectors
+                For Each cp As ConnectionPoint In OutputConnectors
                     If cp.IsAttached And Not cp.AttachedConnector Is Nothing Then
                         elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", cp.IsAttached.ToString(ci)), _
                                                                                         New XAttribute("ConnType", cp.Type.ToString),
@@ -670,7 +328,7 @@ Namespace GraphicObjects
 
                 .Add(New XElement("SpecialConnectors"))
 
-                For Each cp As ConnectionPoint In m_SpecialConnectors
+                For Each cp As ConnectionPoint In SpecialConnectors
                     If cp.IsAttached Then
                         elements(elements.Count - 1).Add(New XElement("Connector", New XAttribute("IsAttached", cp.IsAttached.ToString(ci)),
                                                                                         New XAttribute("AttachedToObjID", cp.AttachedConnector.AttachedTo.Name.ToString), _
@@ -689,6 +347,62 @@ Namespace GraphicObjects
             Return elements
 
         End Function
+
+        Public Property Active As Boolean = True Implements IGraphicObject.Active
+
+        Public Property AdditionalInfo As Object = Nothing Implements IGraphicObject.AdditionalInfo
+
+        Public Property Description As String = "" Implements IGraphicObject.Description
+
+        Public Property FlippedH As Boolean = False Implements IGraphicObject.FlippedH
+
+        Public Property FlippedV As Boolean = False Implements IGraphicObject.FlippedV
+
+        Public Property IsEnergyStream As Boolean = False Implements IGraphicObject.IsEnergyStream
+
+        Public Property ObjectType As ObjectType = Enums.GraphicObjects.ObjectType.Nenhum Implements IGraphicObject.ObjectType
+
+        Public Property Shape As Integer = 0 Implements IGraphicObject.Shape
+
+        Public Property ShapeOverride As ShapeIcon = ShapeIcon.DefaultShape Implements IGraphicObject.ShapeOverride
+
+        Public Property Status As Status = Enums.GraphicObjects.Status.NotCalculated Implements IGraphicObject.Status
+
+        Public Property AutoSize As Boolean = False Implements IGraphicObject.AutoSize
+
+        Public Property Height As Integer = 0 Implements IGraphicObject.Height
+
+        Public Property IsConnector As Boolean = False Implements IGraphicObject.IsConnector
+
+        Public Property Name As String = "" Implements IGraphicObject.Name
+
+        Public Property Tag As String = "" Implements IGraphicObject.Tag
+
+        Public Property Width As Integer = 0 Implements IGraphicObject.Width
+
+        Public Property X As Integer = 0 Implements IGraphicObject.X
+
+        Public Property Y As Integer = 0 Implements IGraphicObject.Y
+
+        Public Property EnergyConnector As IConnectionPoint = New ConnectionPoint() Implements IGraphicObject.EnergyConnector
+
+        Public Property InputConnectors As New List(Of IConnectionPoint) Implements IGraphicObject.InputConnectors
+
+        Public Property OutputConnectors As New List(Of IConnectionPoint) Implements IGraphicObject.OutputConnectors
+
+        Public Property SpecialConnectors As New List(Of IConnectionPoint) Implements IGraphicObject.SpecialConnectors
+
+        Public Property Position As IPoint = New Point() Implements IGraphicObject.Position
+
+        Public Function Clone() As IGraphicObject Implements IGraphicObject.Clone
+            Dim instance As XMLSerializer.Interfaces.ICustomXMLSerialization = Activator.CreateInstance(Me.GetType)
+            instance.LoadData(Me.SaveData)
+            Return instance
+        End Function
+
+        Public Sub Draw1(surface As Object) Implements IGraphicObject.Draw
+            Draw(DirectCast(surface, System.Drawing.Graphics))
+        End Sub
 
     End Class
 

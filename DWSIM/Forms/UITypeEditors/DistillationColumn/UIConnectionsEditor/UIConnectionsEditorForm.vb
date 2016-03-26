@@ -465,9 +465,9 @@ Public Class UIConnectionsEditorForm
                             fidx = 0
                             tidx = .InputConnectors.Count - 1
                             If dc.GraphicObject.FlippedH Then
-                                .InputConnectors(.InputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                .InputConnectors(.InputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             Else
-                                .InputConnectors(.InputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                .InputConnectors(.InputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             End If
                             form.ConnectObject(FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface), dc.GraphicObject, fidx, tidx)
                             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).StreamID = sid
@@ -522,9 +522,9 @@ Public Class UIConnectionsEditorForm
                             tidx = 0
                             .OutputConnectors(.OutputConnectors.Count - 1).Type = ConType.ConOut
                             If dc.GraphicObject.FlippedH Then
-                                .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                .OutputConnectors(.OutputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             Else
-                                .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                .OutputConnectors(.OutputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             End If
                             form.ConnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface), fidx, tidx)
                             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).StreamID = sid
@@ -586,25 +586,25 @@ Public Class UIConnectionsEditorForm
                             .OutputConnectors(.OutputConnectors.Count - 1).Type = ConType.ConOut
                             fidx = .OutputConnectors.Count - 1
                             tidx = 0
-                            Dim pos As Point
+                            Dim pos As New DrawingTools.Point
                             Select Case dc.MaterialStreams(id).StreamBehavior
                                 Case StreamInformation.Behavior.OverheadVapor
                                     If Not dc.GraphicObject.FlippedH Then
-                                        pos = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.02 * dc.GraphicObject.Height)
+                                        pos = New DrawingTools.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.02 * dc.GraphicObject.Height)
                                     Else
-                                        pos = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.02 * dc.GraphicObject.Height)
+                                        pos = New DrawingTools.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.02 * dc.GraphicObject.Height)
                                     End If
                                 Case StreamInformation.Behavior.Distillate
                                     If Not dc.GraphicObject.FlippedH Then
-                                        pos = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.3 * dc.GraphicObject.Height)
+                                        pos = New DrawingTools.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.3 * dc.GraphicObject.Height)
                                     Else
-                                        pos = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.3 * dc.GraphicObject.Height)
+                                        pos = New DrawingTools.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.3 * dc.GraphicObject.Height)
                                     End If
                                 Case StreamInformation.Behavior.BottomsLiquid
                                     If Not dc.GraphicObject.FlippedH Then
-                                        pos = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.98 * dc.GraphicObject.Height)
+                                        pos = New DrawingTools.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.98 * dc.GraphicObject.Height)
                                     Else
-                                        pos = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.98 * dc.GraphicObject.Height)
+                                        pos = New DrawingTools.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.98 * dc.GraphicObject.Height)
                                     End If
                             End Select
                             .OutputConnectors(.OutputConnectors.Count - 1).Position = pos
@@ -669,9 +669,9 @@ Public Class UIConnectionsEditorForm
                                     fidx = .OutputConnectors.Count - 1
                                     tidx = 0
                                     If dc.GraphicObject.FlippedH Then
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.08 * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.08 * dc.GraphicObject.Height)
                                     Else
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.08 * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.08 * dc.GraphicObject.Height)
                                     End If
                                     Try
                                         form.ConnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface), fidx, tidx)
@@ -686,9 +686,9 @@ Public Class UIConnectionsEditorForm
                                     fidx = .OutputConnectors.Count - 1
                                     tidx = 0
                                     If dc.GraphicObject.FlippedH Then
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.825 * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X, dc.GraphicObject.Y + 0.825 * dc.GraphicObject.Height)
                                     Else
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.825 * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.825 * dc.GraphicObject.Height)
                                     End If
                                     Try
                                         form.ConnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface), fidx, tidx)
@@ -703,9 +703,9 @@ Public Class UIConnectionsEditorForm
                                     fidx = .OutputConnectors.Count - 1
                                     tidx = 0
                                     If dc.GraphicObject.FlippedH Then
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.EnergyStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.EnergyStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                                     Else
-                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.EnergyStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
+                                        .OutputConnectors(.OutputConnectors.Count - 1).Position = New DrawingTools.Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.EnergyStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                                     End If
                                     Try
                                         form.ConnectObject(dc.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(sid, form.FormSurface.FlowsheetDesignSurface), fidx, tidx)

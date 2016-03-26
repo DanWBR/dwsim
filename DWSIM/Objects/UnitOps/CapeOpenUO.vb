@@ -35,6 +35,8 @@ Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
 Imports System.Threading
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
+Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.DrawingTools
 
 Namespace DWSIM.SimulationObjects.UnitOperations
 
@@ -512,8 +514,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         End Sub
 
         Sub CreateConnectors()
-            Me.GraphicObject.InputConnectors = New List(Of ConnectionPoint)
-            Me.GraphicObject.OutputConnectors = New List(Of ConnectionPoint)
+            Me.GraphicObject.InputConnectors = New List(Of Interfaces.IConnectionPoint)
+            Me.GraphicObject.OutputConnectors = New List(Of Interfaces.IConnectionPoint)
             Dim nip As Integer = 1
             Dim nop As Integer = 1
             Dim objid As String = ""
@@ -571,8 +573,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 End If
             Next
 
-            Me.GraphicObject.InputConnectors = New List(Of ConnectionPoint)
-            Me.GraphicObject.OutputConnectors = New List(Of ConnectionPoint)
+            Me.GraphicObject.InputConnectors = New List(Of Interfaces.IConnectionPoint)
+            Me.GraphicObject.OutputConnectors = New List(Of Interfaces.IConnectionPoint)
 
             If Not _couo Is Nothing Then
                 Dim cnobj As Object = Nothing

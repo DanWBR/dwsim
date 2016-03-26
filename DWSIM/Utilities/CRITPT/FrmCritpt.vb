@@ -48,7 +48,7 @@ Public Class FrmCritpt
 
         If Not Me.ComboBox3.SelectedItem Is Nothing Then
 
-            Dim gobj As GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
+            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
             Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
             Dim pr As PropertyPackages.PropertyPackage
 

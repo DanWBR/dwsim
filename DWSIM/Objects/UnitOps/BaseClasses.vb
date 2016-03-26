@@ -34,6 +34,7 @@ Imports PropertyGridEx
 Imports DWSIM.DWSIM.DrawingTools
 Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
 Imports DWSIM.Interfaces.Interfaces
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace DWSIM.SimulationObjects.UnitOperations
 

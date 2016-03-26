@@ -52,7 +52,7 @@ Public Class FormReportConfig
         Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass
         Dim properties() As String
         Dim description As String
-        Dim objtype As GraphicObjects.ObjectType
+        Dim objtype As ObjectType
         Dim propidx, r1, r2, r3, r4, r5, r6 As Integer
         Dim inclcond, inclcomp, inclmist, inclvap, inclliqm, inclliq1, inclliq2, inclaq As Boolean
         r1 = 5

@@ -19,6 +19,7 @@
 Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace DWSIM.SimulationObjects.UnitOperations
 
@@ -118,9 +119,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-        
+
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then
                 'Call function to calculate flowsheet
                 With objargs
@@ -272,7 +273,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 'Zerar valores da corrente de matéria conectada a jusante

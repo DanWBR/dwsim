@@ -24,7 +24,8 @@ Imports System.Math
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 Imports Mapack
 Imports System.Linq
-Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
+Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.DrawingTools
 
 Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 

@@ -17,6 +17,7 @@ Imports System.Linq
 Imports System.Collections.Generic
 Imports System.Windows.Forms
 Imports DWSIM.DrawingTools.GraphicObjects
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 <System.Serializable()> Public Class GraphicsSurface
     Inherits System.Windows.Forms.UserControl
@@ -457,7 +458,7 @@ Imports DWSIM.DrawingTools.GraphicObjects
 
         'handle the possibility that the viewport is scrolled,
         'adjust my origin coordintates to compensate
-        Dim pt As Point = Me.AutoScrollPosition
+        Dim pt As Point = New Point(Me.AutoScrollPosition.X, Me.AutoScrollPosition.Y)
         g.TranslateTransform(pt.X, pt.Y)
 
         DrawGrid(g)
@@ -656,14 +657,14 @@ Imports DWSIM.DrawingTools.GraphicObjects
 
     Public Overloads Function gscTogoc( _
             ByVal gsPT As Point) As Point
-        Dim myNewPoint As Point
+        Dim myNewPoint As New Point
         myNewPoint.X = Convert.ToInt32((gsPT.X - Me.AutoScrollPosition.X) / Me.Zoom)
         myNewPoint.Y = Convert.ToInt32((gsPT.Y - Me.AutoScrollPosition.Y) / Me.Zoom)
         Return myNewPoint
     End Function
     Public Overloads Function gscTogoc( _
             ByVal X As Integer, ByVal Y As Integer) As Point
-        Dim myNewPoint As Point
+        Dim myNewPoint As New Point
         myNewPoint.X = Convert.ToInt32((X - Me.AutoScrollPosition.X) / Me.Zoom)
         myNewPoint.Y = Convert.ToInt32((Y - Me.AutoScrollPosition.Y) / Me.Zoom)
         Return myNewPoint
@@ -674,7 +675,7 @@ Imports DWSIM.DrawingTools.GraphicObjects
         'note that there is no need for a New for my Point
         'before I can assign values to X and Y
         'as it is a structure not an object
-        Dim myNewPoint As Point
+        Dim myNewPoint As New Point
         myNewPoint.X = Convert.ToInt32((goPT.X) * Me.Zoom)
         myNewPoint.Y = Convert.ToInt32((goPT.Y) * Me.Zoom)
 
@@ -682,7 +683,7 @@ Imports DWSIM.DrawingTools.GraphicObjects
     End Function
     Public Overloads Function gocTogsc( _
             ByVal X As Integer, ByVal Y As Integer) As Point
-        Dim myNewPoint As Point
+        Dim myNewPoint As New Point
         myNewPoint.X = Convert.ToInt32(X * Me.Zoom)
         myNewPoint.Y = Convert.ToInt32(Y * Me.Zoom)
         Return myNewPoint
@@ -1047,13 +1048,13 @@ Imports DWSIM.DrawingTools.GraphicObjects
             If My.Computer.Keyboard.CtrlKeyDown Then
                 Dim dx, dy As Integer
 
-                Dim Cursorpos, Pos1, Pos2 As Point
+                Dim Cursorpos, Pos1, Pos2 As Drawing.Point
                 Cursorpos = Cursor.Position
-                Pos1 = gscTogoc(Cursorpos)
+                Pos1 = gscTogoc(Cursorpos.X, Cursorpos.Y).ToSDPoint
 
                 'do zoom
                 If e.Delta > 0 Then Me.Zoom += 0.05 Else Me.Zoom -= 0.05
-                Pos2 = gscTogoc(Cursorpos)
+                Pos2 = gscTogoc(Cursorpos.X, Cursorpos.Y).ToSDPoint
 
                 dx = Pos1.X - Pos2.X
                 dy = Pos1.Y - Pos2.Y
@@ -1134,7 +1135,6 @@ Imports DWSIM.DrawingTools.GraphicObjects
             If Me.drawingObjects.Contains(objectToDelete) Then
                 Me.drawingObjects.Remove(objectToDelete)
                 Me.SelectedObject = Nothing
-                objectToDelete.Container = Nothing
                 Me.Invalidate()
             End If
         End If

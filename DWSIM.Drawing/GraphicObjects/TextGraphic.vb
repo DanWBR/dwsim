@@ -27,7 +27,7 @@ Namespace GraphicObjects
 
         Public Sub New()
             MyBase.New()
-            Me.ObjectType = GraphicObjects.ObjectType.GO_Text
+            Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.GO_Text
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point, ByVal text As String, _

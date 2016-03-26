@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="GraphicObjects\ShapeGraphics.vb" />
     <Compile Include="GraphicObjects\TextGraphic.vb" />
+    <Compile Include="Point.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

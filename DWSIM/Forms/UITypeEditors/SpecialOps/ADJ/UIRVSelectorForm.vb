@@ -1,5 +1,4 @@
-﻿Imports DWSIM.DrawingTools.GraphicObjects.ObjectType
-Imports DWSIM.DrawingTools.GraphicObjects
+﻿Imports DWSIM.DrawingTools.GraphicObjects
 
 Public Class UIRVSelectorForm
 

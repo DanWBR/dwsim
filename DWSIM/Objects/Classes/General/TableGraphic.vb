@@ -22,6 +22,7 @@ Imports System.Drawing.Drawing2D
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.Extras
 Imports System.Linq
+Imports DWSIM.DrawingTools
 
 Namespace DWSIM.DrawingTools.GraphicObjects2
 
@@ -125,13 +126,13 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             m_sortedlist = New List(Of String)
         End Sub
 
-        Public Sub New(ByVal graphicPosition As Point)
+        Public Sub New(ByVal graphicPosition As Drawing.Point)
             Me.New()
-            Me.SetPosition(graphicPosition)
+            Me.SetPosition(graphicPosition.ToDTPoint)
         End Sub
 
         Public Sub New(ByVal posX As Integer, ByVal posY As Integer)
-            Me.New(New Point(posX, posY))
+            Me.New(New Drawing.Point(posX, posY))
         End Sub
 
 #End Region
@@ -581,8 +582,8 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             gContainer = g.BeginContainer()
             SetQuality(g)
             myMatrix = g.Transform()
-            If m_Rotation <> 0 Then
-                myMatrix.RotateAt(m_Rotation, New PointF(X, Y), Drawing.Drawing2D.MatrixOrder.Append)
+            If Rotation <> 0 Then
+                myMatrix.RotateAt(Rotation, New PointF(X, Y), Drawing.Drawing2D.MatrixOrder.Append)
                 g.Transform = myMatrix
             End If
 
@@ -799,13 +800,13 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             Me.BaseOwner = owner
         End Sub
 
-        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal graphicPosition As Point)
+        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal graphicPosition As Drawing.Point)
             Me.New(owner)
-            Me.SetPosition(graphicPosition)
+            Me.SetPosition(graphicPosition.ToDTPoint)
         End Sub
 
         Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal posX As Integer, ByVal posY As Integer)
-            Me.New(owner, New Point(posX, posY))
+            Me.New(owner, New Drawing.Point(posX, posY))
         End Sub
 
         Public Sub New()
@@ -995,8 +996,8 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             gContainer = g.BeginContainer()
             SetQuality(g)
             myMatrix = g.Transform()
-            If m_Rotation <> 0 Then
-                myMatrix.RotateAt(m_Rotation, New PointF(X, Y), Drawing.Drawing2D.MatrixOrder.Append)
+            If Rotation <> 0 Then
+                myMatrix.RotateAt(Rotation, New PointF(X, Y), Drawing.Drawing2D.MatrixOrder.Append)
                 g.Transform = myMatrix
             End If
 
@@ -1131,13 +1132,13 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             Me.BaseOwner = owner
         End Sub
 
-        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal graphicPosition As Point)
+        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal graphicPosition As Drawing.Point)
             Me.New(owner)
-            Me.SetPosition(graphicPosition)
+            Me.SetPosition(graphicPosition.ToDTPoint)
         End Sub
 
         Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal posX As Integer, ByVal posY As Integer)
-            Me.New(owner, New Point(posX, posY))
+            Me.New(owner, New Drawing.Point(posX, posY))
         End Sub
 
 #End Region
@@ -1458,13 +1459,13 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             Me.Spreadsheet = sheet
         End Sub
 
-        Public Sub New(ByVal sheet As SpreadsheetForm, ByVal graphicPosition As Point)
+        Public Sub New(ByVal sheet As SpreadsheetForm, ByVal graphicPosition As Drawing.Point)
             Me.New(sheet)
-            Me.SetPosition(graphicPosition)
+            Me.SetPosition(graphicPosition.ToDTPoint)
         End Sub
 
         Public Sub New(ByVal sheet As SpreadsheetForm, ByVal posX As Integer, ByVal posY As Integer)
-            Me.New(sheet, New Point(posX, posY))
+            Me.New(sheet, New Drawing.Point(posX, posY))
         End Sub
 
         Public Sub New()
@@ -1652,8 +1653,8 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             gContainer = g.BeginContainer()
             SetQuality(g)
             myMatrix = g.Transform()
-            If m_Rotation <> 0 Then
-                myMatrix.RotateAt(m_Rotation, New PointF(X, Y), Drawing.Drawing2D.MatrixOrder.Append)
+            If Rotation <> 0 Then
+                myMatrix.RotateAt(Rotation, New PointF(X, Y), Drawing.Drawing2D.MatrixOrder.Append)
                 g.Transform = myMatrix
             End If
 

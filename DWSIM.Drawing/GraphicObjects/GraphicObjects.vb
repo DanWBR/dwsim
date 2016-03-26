@@ -12,6 +12,7 @@
 
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace GraphicObjects
 
@@ -156,7 +157,7 @@ Namespace GraphicObjects
                 Next
                 For i = 0 To Me.InnerList.Count - 1
                     drawObj = CType(Me.InnerList(i), GraphicObject)
-                    If drawObj.ObjectType <> ObjectType.Nenhum Then
+                    If drawObj.ObjectType <> Interfaces.Enums.GraphicObjects.ObjectType.Nenhum Then
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
                                 oldlinecolor = .LineColor
@@ -210,7 +211,7 @@ Namespace GraphicObjects
                     Me.InnerList.Count > 0 Then
                 For i = Me.InnerList.Count - 1 To 0 Step -1
                     drawObj = CType(Me.InnerList(i), GraphicObject)
-                    If drawObj.HitTest(pt) Then
+                    If drawObj.HitTest(pt.ToSDPoint) Then
                         Return drawObj
                         Exit For
                     End If
@@ -280,7 +281,6 @@ Namespace GraphicObjects
         End Property
 
         Public Function Add(ByVal value As GraphicObject) As Integer
-            value.Container = Me
             Return List.Add(value)
         End Function
 

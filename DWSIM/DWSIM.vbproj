@@ -300,6 +300,8 @@
     <Import Include="DWSIM.DWSIM.SimulationObjects.UnitOperations" />
     <Import Include="DWSIM.DWSIM.Thermodynamics" />
     <Import Include="DWSIM.DWSIM.Thermodynamics.BaseClasses" />
+    <Import Include="DWSIM.Interfaces.Enums" />
+    <Import Include="DWSIM.Interfaces.Enums.GraphicObjects" />
     <Import Include="DWSIM.SharedClasses" />
     <Import Include="DWSIM.Thermodynamics" />
     <Import Include="Microsoft.VisualBasic" />

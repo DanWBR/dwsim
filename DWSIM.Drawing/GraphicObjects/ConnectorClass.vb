@@ -1,93 +1,24 @@
-Imports System.Drawing
-
 Namespace GraphicObjects
 
-    Public Enum ConType
-
-        ConIn = -1
-        ConOut = 1
-        ConEn = 0
-        ConSp = 2
-
-    End Enum
-    Public Enum ConDir
-        Up
-        Down
-        Right
-        Left
-    End Enum
     <Serializable()> Public Class ConnectionPoint
 
-        Protected mPosition As Point
-        Protected mType As ConType
-        Protected mDir As ConDir = ConDir.Right
-        Protected mIsAttached As Boolean = False
-        Protected mAttachedConnector As ConnectorGraphic = Nothing
-        Protected mConnectorName As String = ""
+        Implements Interfaces.IConnectionPoint
 
-        Public Overridable Property Position() As Point
+        Public Property AttachedConnector As Interfaces.IConnectorGraphicObject = Nothing Implements Interfaces.IConnectionPoint.AttachedConnector
 
-            Get
-                Return mPosition
-            End Get
-            Set(ByVal pt As Point)
-                mPosition = pt
-            End Set
+        Public Property ConnectorName As String = "" Implements Interfaces.IConnectionPoint.ConnectorName
 
-        End Property
+        Public Property Direction As Interfaces.Enums.GraphicObjects.ConDir = Interfaces.Enums.GraphicObjects.ConDir.Right Implements Interfaces.IConnectionPoint.Direction
 
-        Public Overridable Property Type() As ConType
+        Public Property IsAttached As Boolean = False Implements Interfaces.IConnectionPoint.IsAttached
 
-            Get
-                Return mType
-            End Get
-            Set(ByVal ConnectionType As ConType)
-                mType = ConnectionType
-            End Set
+        Public Property Type As Interfaces.Enums.GraphicObjects.ConType Implements Interfaces.IConnectionPoint.Type
 
-        End Property
-        Public Overridable Property Direction() As ConDir
+        Public Property X As Integer = 0 Implements Interfaces.IConnectionPoint.X
 
-            Get
-                Return mDir
-            End Get
-            Set(ByVal ConnectionDirection As ConDir)
-                mDir = ConnectionDirection
-            End Set
+        Public Property Y As Integer = 0 Implements Interfaces.IConnectionPoint.Y
 
-        End Property
-        Public Overridable Property AttachedConnector() As ConnectorGraphic
-
-            Get
-                Return mAttachedConnector
-            End Get
-            Set(ByVal connector As ConnectorGraphic)
-                mAttachedConnector = connector
-            End Set
-
-        End Property
-
-        Public Overridable Property IsAttached() As Boolean
-
-            Get
-                Return mIsAttached
-            End Get
-            Set(ByVal Value As Boolean)
-                mIsAttached = Value
-            End Set
-
-        End Property
-
-        Public Overridable Property ConnectorName() As String
-
-            Get
-                Return mConnectorName
-            End Get
-            Set(ByVal ConnName As String)
-                mConnectorName = ConnName
-            End Set
-
-        End Property
+        Public Property Position As Interfaces.IPoint = New DrawingTools.Point() Implements Interfaces.IConnectionPoint.Position
 
     End Class
 

@@ -14,22 +14,13 @@
 Imports System.Drawing
 Imports System.Drawing.Drawing2D
 Imports System.Xml.Linq
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace GraphicObjects
 
     <Serializable()> Public MustInherit Class ShapeGraphic
 
         Inherits GraphicObject
-
-        Protected m_lineWidth As Single = 3
-        Protected m_lineColor As Color = Color.Black
-        Protected m_fillColor As Color = Color.LightGray
-        Protected m_fill As Boolean = False
-        Protected m_gradientmode As Boolean = True
-        Protected m_gradientcolor1 As Color = Color.LightGray
-        Protected m_gradientcolor2 As Color = Color.White
-
-        Public Property SemiTransparent As Boolean = False
 
         Public Sub SetQuality(g As Graphics)
 
@@ -66,15 +57,15 @@ Namespace GraphicObjects
             If SemiTransparent Then alpha = 50
 
             Select Case gobj.Status
-                Case GraphicObjects.Status.Calculated
+                Case Status.Calculated
                     gobj.LineColor = Color.FromArgb(alpha, Color.SteelBlue)
-                Case GraphicObjects.Status.Calculating
+                Case Status.Calculating
                     gobj.LineColor = Color.FromArgb(alpha, Color.YellowGreen)
-                Case GraphicObjects.Status.ErrorCalculating
+                Case Status.ErrorCalculating
                     gobj.LineColor = Color.FromArgb(alpha, Color.DarkRed)
-                Case GraphicObjects.Status.Idle
+                Case Status.Idle
                     gobj.LineColor = Color.FromArgb(alpha, Color.SteelBlue)
-                Case GraphicObjects.Status.Inactive
+                Case Status.Inactive
                     gobj.LineColor = Color.FromArgb(alpha, Color.Gray)
                 Case Else
                     gobj.LineColor = Color.FromArgb(alpha, gobj.LineColor)
@@ -82,114 +73,21 @@ Namespace GraphicObjects
 
         End Sub
 
-        Public Sub UpdateStatusC(ByRef ConnPen As Pen, ByRef Conn As ConnectorGraphic, ByRef p1 As Point, ByRef p2 As Point)
-
-            Dim alpha As Integer = 255
-            If SemiTransparent Then alpha = 50
-
-            Dim color1, color2, color3 As Color
-            color1 = Color.FromArgb(alpha, Color.SteelBlue)
-            color2 = Color.FromArgb(alpha, Color.Salmon)
-            color3 = Color.FromArgb(alpha, Color.YellowGreen)
-
-            If Conn.AttachedFrom.Status = GraphicObjects.Status.Calculated And Conn.AttachedTo.Status = GraphicObjects.Status.Calculated Then
-                ConnPen = New Pen(New LinearGradientBrush(p1, p2, color1, color1), Me.LineWidth)
-            ElseIf Conn.AttachedFrom.Status = GraphicObjects.Status.Calculated And Conn.AttachedTo.Status = GraphicObjects.Status.ErrorCalculating Then
-                ConnPen = New Pen(New LinearGradientBrush(p1, p2, color1, color2), Me.LineWidth)
-            ElseIf Conn.AttachedFrom.Status = GraphicObjects.Status.ErrorCalculating And Conn.AttachedTo.Status = GraphicObjects.Status.Calculated Then
-                ConnPen = New Pen(New LinearGradientBrush(p1, p2, color2, color1), Me.LineWidth)
-            ElseIf Conn.AttachedFrom.Status = GraphicObjects.Status.ErrorCalculating And Conn.AttachedTo.Status = GraphicObjects.Status.ErrorCalculating Then
-                ConnPen = New Pen(New LinearGradientBrush(p1, p2, color2, color2), Me.LineWidth)
-            ElseIf Conn.AttachedFrom.Status = GraphicObjects.Status.Calculating And Conn.AttachedTo.Status = GraphicObjects.Status.ErrorCalculating Then
-                ConnPen = New Pen(New LinearGradientBrush(p1, p2, color3, color2), Me.LineWidth)
-            ElseIf Conn.AttachedFrom.Status = GraphicObjects.Status.ErrorCalculating And Conn.AttachedTo.Status = GraphicObjects.Status.Calculating Then
-                ConnPen = New Pen(New LinearGradientBrush(p1, p2, color2, color3), Me.LineWidth)
-            ElseIf Conn.AttachedFrom.Status = GraphicObjects.Status.Calculating And Conn.AttachedTo.Status = GraphicObjects.Status.Calculated Then
-                ConnPen = New Pen(New LinearGradientBrush(p1, p2, color3, color1), Me.LineWidth)
-            ElseIf Conn.AttachedFrom.Status = GraphicObjects.Status.Calculated And Conn.AttachedTo.Status = GraphicObjects.Status.Calculating Then
-                ConnPen = New Pen(New LinearGradientBrush(p1, p2, color1, color3), Me.LineWidth)
-            End If
-
-            With ConnPen
-                .EndCap = Drawing2D.LineCap.ArrowAnchor
-                .StartCap = Drawing2D.LineCap.NoAnchor
-                .LineJoin = LineJoin.Round
-            End With
-
-        End Sub
+        Public Property SemiTransparent As Boolean = False
 
         Public Overridable Property LineWidth() As Single
-            Get
-                Return m_lineWidth
-            End Get
-            Set(ByVal Value As Single)
-                If Value > 0 Then
-                    m_lineWidth = Value
-                Else
-                    Throw New ArgumentOutOfRangeException("LineWidth", "Line Width must be > 0")
-                End If
-            End Set
-        End Property
 
         Public Overridable Property GradientMode() As Boolean
-            Get
-                Return m_gradientmode
-            End Get
-            Set(ByVal Value As Boolean)
-                m_gradientmode = Value
-            End Set
-        End Property
 
         Public Overridable Property LineColor() As Color
-            Get
-                Return m_lineColor
-            End Get
-            Set(ByVal Value As Color)
-                m_lineColor = Value
-            End Set
-        End Property
 
         Public Overridable Property Fill() As Boolean
-            Get
-                Return m_fill
-            End Get
-            Set(ByVal Value As Boolean)
-                m_fill = Value
-            End Set
-        End Property
 
         Public Overridable Property FillColor() As Color
-            Get
-                Return m_fillColor
-            End Get
-            Set(ByVal Value As Color)
-                m_fillColor = Value
-            End Set
-        End Property
 
         Public Overridable Property GradientColor1() As Color
-            Get
-                Return m_gradientcolor1
-            End Get
-            Set(ByVal Value As Color)
-                m_gradientcolor1 = Value
-            End Set
-        End Property
 
         Public Overridable Property GradientColor2() As Color
-            Get
-                Return m_gradientcolor2
-            End Get
-            Set(ByVal Value As Color)
-                m_gradientcolor2 = Value
-            End Set
-        End Property
-
-        Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)
-
-            MyBase.Draw(g)
-
-        End Sub
 
         Public Overridable Sub DrawTag(ByVal g As System.Drawing.Graphics, ByVal rotationmatrix As Drawing2D.Matrix)
 
@@ -211,6 +109,7 @@ Namespace GraphicObjects
         End Sub
 
         Protected Function GetRoundedLine(ByVal points As PointF(), ByVal cornerRadius As Single) As GraphicsPath
+
             Dim path As New GraphicsPath()
             Dim previousEndPoint As PointF = PointF.Empty
             Dim thisradius As Single = cornerRadius
@@ -387,6 +286,7 @@ Namespace GraphicObjects
             g.EndContainer(gContainer)
 
         End Sub
+
     End Class
 
     <Serializable()> Public Class PumpGraphic
@@ -395,7 +295,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Pump
+            Me.ObjectType = ObjectType.Pump
             Me.Description = "Bomba"
         End Sub
 
@@ -601,7 +501,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Pipe
+            Me.ObjectType = ObjectType.Pipe
             Me.Description = "Tubulao"
         End Sub
 
@@ -743,7 +643,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Tank
+            Me.ObjectType = ObjectType.Tank
             Me.Description = "Tanque"
         End Sub
 
@@ -900,15 +800,10 @@ Namespace GraphicObjects
     End Class
 
     <Serializable()> Public Class ConnectorGraphic
+
         Inherits ShapeGraphic
 
-        Protected m_AttFrom As GraphicObject = Nothing
-        Protected m_AttTo As GraphicObject = Nothing
-        Protected m_AttFromIndex As Integer
-        Protected m_AttToIndex As Integer
-
-        Protected m_AttFromEn As Boolean = False
-        Protected m_AttToEn As Boolean = False
+        Implements Interfaces.IConnectorGraphicObject
 
 #Region "Constructors"
         Public Sub New()
@@ -980,70 +875,16 @@ Namespace GraphicObjects
         End Sub
 
         Public Function GetEndPosition() As Point
-            Dim endPosition As New Point(Me.m_Position.X, Me.m_Position.Y)
-            endPosition.X += Me.m_Size.Width
-            endPosition.Y += Me.m_Size.Height
+            Dim endPosition As New Point(Me.X, Me.Y)
+            endPosition.X += Me._Size.Width
+            endPosition.Y += Me._Size.Height
             Return endPosition
         End Function
 
         Public Sub SetEndPosition(ByVal Value As Point)
-            m_Size.Width = Value.X - Me.m_Position.X
-            m_Size.Height = Value.Y - Me.m_Position.Y
+            _Size.Width = Value.X - Me.X
+            _Size.Height = Value.Y - Me.Y
         End Sub
-
-        Public Property AttachedFromConnectorIndex() As Integer
-            Get
-                Return m_AttFromIndex
-            End Get
-            Set(ByVal index As Integer)
-                m_AttFromIndex = index
-            End Set
-        End Property
-
-        Public Property AttachedToConnectorIndex() As Integer
-            Get
-                Return m_AttToIndex
-            End Get
-            Set(ByVal index As Integer)
-                m_AttToIndex = index
-            End Set
-        End Property
-
-        Public Property AttachedToEnergy() As Boolean
-            Get
-                Return m_AttToEn
-            End Get
-            Set(ByVal value As Boolean)
-                m_AttToEn = value
-            End Set
-        End Property
-
-        Public Property AttachedFromEnergy() As Boolean
-            Get
-                Return m_AttFromEn
-            End Get
-            Set(ByVal value As Boolean)
-                m_AttFromEn = value
-            End Set
-        End Property
-
-        Public Property AttachedFrom() As GraphicObject
-            Get
-                Return m_AttFrom
-            End Get
-            Set(ByVal gObj As GraphicObject)
-                m_AttFrom = gObj
-            End Set
-        End Property
-
-        Public Property AttachedTo() As GraphicObject
-            Get
-                Return m_AttTo
-            End Get
-            Set(ByVal gObj As GraphicObject)
-                m_AttTo = gObj
-            End Set
-        End Property
 
         Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)
             Dim gContainer As System.Drawing.Drawing2D.GraphicsContainer
@@ -1061,12 +902,12 @@ Namespace GraphicObjects
             'posicionar pontos nos primeiros slots livres
             Dim StartPos, EndPos As New Point
             Dim StartDir, EndDir As ConDir
-            If Me.AttachedFrom.ObjectType = GraphicObjects.ObjectType.EnergyStream Then
-                If Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.CustomUO Or _
-                Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.ShortcutColumn Or _
-                Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.OT_EnergyRecycle Or _
-                Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.CapeOpenUO Or _
-                Me.AttachedTo.ObjectType = GraphicObjects.ObjectType.Vessel Then
+            If Me.AttachedFrom.ObjectType = ObjectType.EnergyStream Then
+                If Me.AttachedTo.ObjectType = ObjectType.CustomUO Or _
+                Me.AttachedTo.ObjectType = ObjectType.ShortcutColumn Or _
+                Me.AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Or _
+                Me.AttachedTo.ObjectType = ObjectType.CapeOpenUO Or _
+                Me.AttachedTo.ObjectType = ObjectType.Vessel Then
                     StartPos = Me.AttachedFrom.OutputConnectors(0).Position
                     EndPos = Me.AttachedTo.InputConnectors(Me.AttachedToConnectorIndex).Position
                     StartDir = Me.AttachedFrom.OutputConnectors(0).Direction
@@ -1095,8 +936,6 @@ Namespace GraphicObjects
                 .StartCap = Drawing2D.LineCap.NoAnchor
                 .LineJoin = LineJoin.Round
             End With
-
-            UpdateStatusC(myPen, Me, StartPos, EndPos)
 
             Dim DeltaX, DeltaY As Integer
             DeltaX = 10
@@ -1636,6 +1475,18 @@ Namespace GraphicObjects
             Return True
         End Function
 
+        Public Property AttachedFrom As Interfaces.IGraphicObject = Nothing Implements Interfaces.IConnectorGraphicObject.AttachedFrom
+
+        Public Property AttachedFromConnectorIndex As Integer = -1 Implements Interfaces.IConnectorGraphicObject.AttachedFromConnectorIndex
+
+        Public Property AttachedFromEnergy As Boolean = False Implements Interfaces.IConnectorGraphicObject.AttachedFromEnergy
+
+        Public Property AttachedTo As Interfaces.IGraphicObject = Nothing Implements Interfaces.IConnectorGraphicObject.AttachedTo
+
+        Public Property AttachedToConnectorIndex As Integer = -1 Implements Interfaces.IConnectorGraphicObject.AttachedToConnectorIndex
+
+        Public Property AttachedToEnergy As Boolean = False Implements Interfaces.IConnectorGraphicObject.AttachedToEnergy
+
     End Class
 
     <Serializable()> Public Class NodeInGraphic
@@ -1643,9 +1494,8 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.NodeIn
+            Me.ObjectType = ObjectType.NodeIn
             Me.Description = "Misturador"
-            Me.m_mixpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -1843,9 +1693,8 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.NodeOut
+            Me.ObjectType = ObjectType.NodeOut
             Me.Description = "Divisor"
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -2014,11 +1863,12 @@ Namespace GraphicObjects
     End Class
 
     <Serializable()> Public Class NodeEnGraphic
+
         Inherits ShapeGraphic
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.NodeEn
+            Me.ObjectType = ObjectType.NodeEn
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -2191,9 +2041,8 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Vessel
+            Me.ObjectType = ObjectType.Vessel
             Me.Description = "VasoSeparadorGL"
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -2446,7 +2295,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Compressor
+            Me.ObjectType = ObjectType.Compressor
             Me.Description = "CompressorAdiabtico"
         End Sub
 
@@ -2618,7 +2467,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Heater
+            Me.ObjectType = ObjectType.Heater
             Me.Description = "Aquecedor"
         End Sub
 
@@ -2825,7 +2674,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Cooler
+            Me.ObjectType = ObjectType.Cooler
             Me.Description = "Resfriador"
         End Sub
 
@@ -2999,7 +2848,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.MaterialStream
+            Me.ObjectType = ObjectType.MaterialStream
             Me.Description = "CorrentedeMatria"
         End Sub
 
@@ -3163,7 +3012,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.EnergyStream
+            Me.ObjectType = ObjectType.EnergyStream
             Me.IsEnergyStream = True
             Me.Description = "CorrentedeEnergia"
         End Sub
@@ -3325,7 +3174,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Valve
+            Me.ObjectType = ObjectType.Valve
             Me.Description = "Vlvula"
         End Sub
 
@@ -3513,7 +3362,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Expander
+            Me.ObjectType = ObjectType.Expander
             Me.Description = "TurbinaAdiabtica"
         End Sub
 
@@ -3676,7 +3525,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.TPVessel
+            Me.ObjectType = ObjectType.TPVessel
             Me.Description = "VasoSeparadorGL"
         End Sub
 
@@ -3934,15 +3783,15 @@ Namespace GraphicObjects
         End Sub
 
         Public Function GetEndPosition() As Point
-            Dim endPosition As New Point(Me.m_Position.X, Me.m_Position.Y)
-            endPosition.X += Me.m_Size.Width
-            endPosition.Y += Me.m_Size.Height
+            Dim endPosition As New Point(Me.X, Me.Y)
+            endPosition.X += Me._Size.Width
+            endPosition.Y += Me._Size.Height
             Return endPosition
         End Function
 
         Public Sub SetEndPosition(ByVal Value As Point)
-            m_Size.Width = Value.X - Me.m_Position.X
-            m_Size.Height = Value.Y - Me.m_Position.Y
+            _Size.Width = Value.X - Me.X
+            _Size.Height = Value.Y - Me.Y
         End Sub
 
         Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)
@@ -3962,7 +3811,7 @@ Namespace GraphicObjects
 
             'posicionar pontos nos primeiros slots livres
 
-            g.DrawLines(myPen, New Point() {New Point(Me.X, Me.Y), New Point(Me.Width, Me.Height)})
+            g.DrawLines(myPen, New Drawing.Point() {New Drawing.Point(Me.X, Me.Y), New Drawing.Point(Me.Width, Me.Height)})
 
             g.EndContainer(gContainer)
 
@@ -4004,7 +3853,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.OT_Adjust
+            Me.ObjectType = ObjectType.OT_Adjust
             Me.Description = "Ajuste"
         End Sub
 
@@ -4118,7 +3967,7 @@ Namespace GraphicObjects
                     .EndCap = Drawing2D.LineCap.ArrowAnchor
                     .StartCap = Drawing2D.LineCap.Flat
                 End With
-                g.DrawLines(cpen, New Point() {New Point(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New Point(Me.m_mvPT.X, Me.Y + Me.Height / 2), Me.m_mvPT.GetPosition})
+                g.DrawLines(cpen, New Drawing.Point() {New Drawing.Point(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New Drawing.Point(Me.m_mvPT.X, Me.Y + Me.Height / 2), Me.m_mvPT.GetPosition.ToSDPoint})
             End If
             If Not Me.ConnectedToCv Is Nothing Then
                 Dim cpen As New Pen(Color.FromArgb(alpha, Color.Red), 2)
@@ -4128,7 +3977,7 @@ Namespace GraphicObjects
                     .EndCap = Drawing2D.LineCap.ArrowAnchor
                     .StartCap = Drawing2D.LineCap.DiamondAnchor
                 End With
-                g.DrawLines(cpen, New Point() {New Point(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New Point(Me.m_cvPT.X, Me.Y + Me.Height / 2), Me.m_cvPT.GetPosition})
+                g.DrawLines(cpen, New Drawing.Point() {New Drawing.Point(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New Drawing.Point(Me.m_cvPT.X, Me.Y + Me.Height / 2), Me.m_cvPT.GetPosition.ToSDPoint})
             End If
             If Not Me.ConnectedToRv Is Nothing Then
                 Dim cpen As New Pen(Color.FromArgb(alpha, Color.Red), 2)
@@ -4138,7 +3987,7 @@ Namespace GraphicObjects
                     .EndCap = Drawing2D.LineCap.ArrowAnchor
                     .StartCap = Drawing2D.LineCap.DiamondAnchor
                 End With
-                g.DrawLines(cpen, New Point() {New Point(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New Point(Me.m_rvPT.X, Me.Y + Me.Height / 2), Me.m_rvPT.GetPosition})
+                g.DrawLines(cpen, New Drawing.Point() {New Drawing.Point(Me.X + Me.Width / 2, Me.Y + Me.Height / 2), New Drawing.Point(Me.m_rvPT.X, Me.Y + Me.Height / 2), Me.m_rvPT.GetPosition.ToSDPoint})
             End If
 
             Dim rect2 As New Rectangle(X - Width * 1 / 2, Y - Height * 1 / 2, Width * 2, Height * 2)
@@ -4252,7 +4101,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.OT_Spec
+            Me.ObjectType = ObjectType.OT_Spec
             Me.Description = "Especificao"
         End Sub
 
@@ -4368,7 +4217,7 @@ Namespace GraphicObjects
                     .EndCap = Drawing2D.LineCap.ArrowAnchor
                     .StartCap = Drawing2D.LineCap.Flat
                 End With
-                g.DrawLines(cpen, New Point() {New Point(Me.X + Me.Width, Me.Y + Me.Height / 2), New Point(Me.m_svPT.X + Me.m_svPT.Width / 2, Me.Y + Me.Height / 2), New Point(Me.m_svPT.X + Me.m_svPT.Width / 2, Me.m_svPT.Y + Me.m_svPT.Height / 2)})
+                g.DrawLines(cpen, New Drawing.Point() {New Drawing.Point(Me.X + Me.Width, Me.Y + Me.Height / 2), New Drawing.Point(Me.m_svPT.X + Me.m_svPT.Width / 2, Me.Y + Me.Height / 2), New Drawing.Point(Me.m_svPT.X + Me.m_svPT.Width / 2, Me.m_svPT.Y + Me.m_svPT.Height / 2)})
             End If
 
             If Not Me.ConnectedToTv Is Nothing Then
@@ -4379,7 +4228,7 @@ Namespace GraphicObjects
                     .EndCap = Drawing2D.LineCap.ArrowAnchor
                     .StartCap = Drawing2D.LineCap.DiamondAnchor
                 End With
-                g.DrawLines(cpen, New Point() {New Point(Me.X + Me.Width, Me.Y + Me.Height / 2), New Point(Me.m_tvPT.X + Me.m_tvPT.Width / 2, Me.Y + Me.Height / 2), New Point(Me.m_tvPT.X + Me.m_tvPT.Width / 2, Me.m_tvPT.Y + Me.m_tvPT.Height / 2)})
+                g.DrawLines(cpen, New Drawing.Point() {New Drawing.Point(Me.X + Me.Width, Me.Y + Me.Height / 2), New Drawing.Point(Me.m_tvPT.X + Me.m_tvPT.Width / 2, Me.Y + Me.Height / 2), New Drawing.Point(Me.m_tvPT.X + Me.m_tvPT.Width / 2, Me.m_tvPT.Y + Me.m_tvPT.Height / 2)})
             End If
 
             Dim rect2 As New Rectangle(X - Width * 1 / 2, Y - Height * 1 / 2, Width * 2, Height * 2)
@@ -4474,7 +4323,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.OT_Recycle
+            Me.ObjectType = ObjectType.OT_Recycle
             Me.Description = "Reciclo"
         End Sub
 
@@ -4662,7 +4511,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.OT_EnergyRecycle
+            Me.ObjectType = ObjectType.OT_EnergyRecycle
             Me.Description = "EnergyRecycle"
         End Sub
 
@@ -4855,9 +4704,8 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.RCT_Conversion
+            Me.ObjectType = ObjectType.RCT_Conversion
             Me.Description = "ReatorConversao"
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -4990,9 +4838,8 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.RCT_Equilibrium
+            Me.ObjectType = ObjectType.RCT_Equilibrium
             Me.Description = "ReatorEquilibrio"
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -5122,9 +4969,8 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.RCT_Gibbs
+            Me.ObjectType = ObjectType.RCT_Gibbs
             Me.Description = "ReatorGibbs"
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -5256,7 +5102,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.RCT_CSTR
+            Me.ObjectType = ObjectType.RCT_CSTR
             Me.Description = "ReatorCSTR"
         End Sub
 
@@ -5440,7 +5286,7 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.RCT_PFR
+            Me.ObjectType = ObjectType.RCT_PFR
             Me.Description = "ReatorPFR"
         End Sub
 
@@ -5597,10 +5443,8 @@ Namespace GraphicObjects
 #Region "Constructors"
         Public Sub New()
             'Defines the unitop type.
-            ObjectType = GraphicObjects.ObjectType.HeatExchanger
+            ObjectType = ObjectType.HeatExchanger
             'Creates 2 in and 2 out connection points.
-            Me.m_mixpoint = True
-            Me.m_splitpoint = True
             CreateConnectors(2, 2)
             Me.Description = "HeatExchanger"
         End Sub
@@ -5750,11 +5594,10 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.ShortcutColumn
+            Me.ObjectType = ObjectType.ShortcutColumn
             CreateConnectors(2, 2)
             Me.InputConnectors(1).Type = ConType.ConEn
             Me.Description = "ShortcutColumn"
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -6011,10 +5854,8 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.DistillationColumn
+            Me.ObjectType = ObjectType.DistillationColumn
             Me.Description = "DistillationColumn"
-            Me.m_mixpoint = True
-            Me.m_splitpoint = True
             'CreateConnectors(2, 2)
             'Me.InputConnectors(1).Type = ConType.ConEn
         End Sub
@@ -6284,12 +6125,8 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.AbsorptionColumn
+            Me.ObjectType = ObjectType.AbsorptionColumn
             Me.Description = "AbsorptionColumn"
-            Me.m_mixpoint = True
-            Me.m_splitpoint = True
-            'CreateConnectors(2, 2)
-            'Me.InputConnectors(1).Type = ConType.ConEn
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -6380,7 +6217,7 @@ Namespace GraphicObjects
 
             UpdateStatus(Me)
 
-            If Me.Status = GraphicObjects.Status.Calculating Then
+            If Me.Status = Status.Calculating Then
 
             End If
 
@@ -6533,12 +6370,10 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.ReboiledAbsorber
+            Me.ObjectType = ObjectType.ReboiledAbsorber
             'CreateConnectors(2, 2)
             'Me.InputConnectors(1).Type = ConType.ConEn
             Me.Description = "ReboiledAbsorber"
-            Me.m_mixpoint = True
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -6779,12 +6614,10 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.RefluxedAbsorber
+            Me.ObjectType = ObjectType.RefluxedAbsorber
             'CreateConnectors(2, 2)
             'Me.InputConnectors(1).Type = ConType.ConEn
             Me.Description = "RefluxedAbsorber"
-            Me.m_mixpoint = True
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -7056,10 +6889,8 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.ComponentSeparator
+            Me.ObjectType = ObjectType.ComponentSeparator
             Me.Description = "ComponentSeparator"
-            Me.m_mixpoint = False
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -7183,10 +7014,8 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.SolidSeparator
+            Me.ObjectType = ObjectType.SolidSeparator
             Me.Description = "SolidSeparator"
-            Me.m_mixpoint = False
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -7305,10 +7134,8 @@ Namespace GraphicObjects
 #Region "Constructors"
 
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.Filter
+            Me.ObjectType = ObjectType.Filter
             Me.Description = "Filter"
-            Me.m_mixpoint = False
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -7431,7 +7258,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.OrificePlate
+            Me.ObjectType = ObjectType.OrificePlate
             Me.Description = "OrificePlate"
         End Sub
 
@@ -7592,10 +7419,8 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.CustomUO
+            Me.ObjectType = ObjectType.CustomUO
             Me.Description = "Custom Unit Operation"
-            Me.m_mixpoint = True
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)
@@ -7866,7 +7691,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.ExcelUO
+            Me.ObjectType = ObjectType.ExcelUO
             Me.Description = "ExcelUO"
         End Sub
 
@@ -8092,7 +7917,7 @@ Namespace GraphicObjects
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.FlowsheetUO
+            Me.ObjectType = ObjectType.FlowsheetUO
             Me.Description = "FlowsheetUO"
         End Sub
 
@@ -8323,17 +8148,14 @@ Namespace GraphicObjects
 
     End Class
 
-
     <Serializable()> Public Class CapeOpenUOGraphic
 
         Inherits ShapeGraphic
 
 #Region "Constructors"
         Public Sub New()
-            Me.ObjectType = GraphicObjects.ObjectType.CapeOpenUO
+            Me.ObjectType = ObjectType.CapeOpenUO
             Me.Description = "CapeOpenUnitOperation"
-            Me.m_mixpoint = True
-            Me.m_splitpoint = True
         End Sub
 
         Public Sub New(ByVal graphicPosition As Point)

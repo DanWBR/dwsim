@@ -19,6 +19,11 @@ Module Extensions
     End Sub
 
     <System.Runtime.CompilerServices.Extension()> _
+    Public Function ToDTPoint(pt As System.Drawing.Point) As DrawingTools.Point
+        Return New DrawingTools.Point(pt.X, pt.Y)
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> _
     Public Sub ExpandGroup(propertyGrid As PropertyGridEx.PropertyGridEx, groupName As String)
         Dim root As GridItem = propertyGrid.SelectedGridItem
         'Get the parent
@@ -142,7 +147,7 @@ Module Extensions
         For Each n As String In numbers
             If n <> "" Then doubles.Add(Convert.ToDouble(n, ci))
         Next
-        
+
         Return doubles.ToArray
 
     End Function
@@ -326,7 +331,7 @@ Module Extensions
     ''' <param name="twoDimensionalArray"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension> Public Function ToJaggedArray(Of T)(twoDimensionalArray As t(,)) As t()()
+    <System.Runtime.CompilerServices.Extension> Public Function ToJaggedArray(Of T)(twoDimensionalArray As T(,)) As T()()
 
         Dim rowsFirstIndex As Integer = twoDimensionalArray.GetLowerBound(0)
         Dim rowsLastIndex As Integer = twoDimensionalArray.GetUpperBound(0)
@@ -355,7 +360,7 @@ Module Extensions
     ''' <param name="jaggedArray"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension> Public Function FromJaggedArray(Of T)(jaggedArray As t()()) As t(,)
+    <System.Runtime.CompilerServices.Extension> Public Function FromJaggedArray(Of T)(jaggedArray As T()()) As T(,)
 
         Dim rowsFirstIndex As Integer = jaggedArray.GetLowerBound(0)
         Dim rowsLastIndex As Integer = jaggedArray.GetUpperBound(0)
