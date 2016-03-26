@@ -51,9 +51,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Property Calculated As Boolean = False Implements Interfaces.ISimulationObject.Calculated
 
         Public Property DebugMode As Boolean = False Implements Interfaces.ISimulationObject.DebugMode
+
         Public Property DebugText As String = "" Implements Interfaces.ISimulationObject.DebugText
 
         <Xml.Serialization.XmlIgnore> Public Property CreatedWithThreadID As Integer = 0 Implements Interfaces.ISimulationObject.CreatedWithThreadID
+
         <Xml.Serialization.XmlIgnore> Public Property LastUpdated As New Date Implements Interfaces.ISimulationObject.LastUpdated
 
         Public MustOverride Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
@@ -113,7 +115,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' Validates the object, checking its connections and other parameters.
         ''' </summary>
         ''' <remarks></remarks>
-        Public Overridable Sub Validate()
+        Public Overridable Sub Validate() Implements Interfaces.ISimulationObject.Validate
 
             Dim vForm As Global.DWSIM.FormFlowsheet = FlowSheet
             Dim vEventArgs As New DWSIM.Extras.StatusChangeEventArgs
@@ -166,55 +168,12 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <param name="onlypositive">Value should be a positive double or not.</param>
         ''' <param name="paramname">Name of the parameter (ex. P, T, W, H etc.)</param>
         ''' <remarks></remarks>
-        Public Sub CheckSpec(val As Double, onlypositive As Boolean, paramname As String)
+        Public Sub CheckSpec(val As Double, onlypositive As Boolean, paramname As String) Implements Interfaces.ISimulationObject.CheckSpec
 
             If Not val.IsValid Then Throw New ArgumentException(DWSIM.App.GetLocalString("ErrorInvalidUOSpecValue") & " (name: " & paramname & ", value: " & val & ")")
             If onlypositive Then If val.IsNegative Then Throw New ArgumentException(DWSIM.App.GetLocalString("ErrorInvalidUOSpecValue") & " (name: " & paramname & ", value: " & val & ")")
 
         End Sub
-
-        Public Enum PropertyType
-            RO = 0
-            RW = 1
-            WR = 2
-            ALL = 3
-        End Enum
-
-        ''' <summary>
-        ''' Get a list of all properties of the object.
-        ''' </summary>
-        ''' <param name="proptype">Type of the property.</param>
-        ''' <returns>A list of property identifiers.</returns>
-        ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
-        Public MustOverride Function GetProperties(ByVal proptype As PropertyType) As String()
-
-        ''' <summary>
-        ''' Gets the value of a property.
-        ''' </summary>
-        ''' <param name="prop">Property identifier.</param>
-        ''' <param name="su">Units system to use. Null to use the default (SI) system.</param>
-        ''' <returns>Property value.</returns>
-        ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
-        Public MustOverride Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing)
-
-        ''' <summary>
-        ''' Gets the units of a property.
-        ''' </summary>
-        ''' <param name="prop">Property identifier.</param>
-        ''' <param name="su">Units system to use. Null to use the default (SI) system.</param>
-        ''' <returns>Property units.</returns>
-        ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
-        Public MustOverride Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing)
-
-        ''' <summary>
-        ''' Sets the value of a property.
-        ''' </summary>
-        ''' <param name="prop">Property identifier.</param>
-        ''' <param name="propval">Property value to set at the specified units.</param>
-        ''' <param name="su">Units system to use. Null to use the default (SI) system.</param>
-        ''' <returns></returns>
-        ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
-        Public MustOverride Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing)
 
         Public Sub HandlePropertyChange(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
 
@@ -259,7 +218,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 .Sender = "PropertyGrid"
                             End With
 
-                            If fs.IsSpecAttached = True And fs.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(fs.AttachedSpecId).Calculate()
+                            If fs.IsSpecAttached = True And fs.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(fs.AttachedSpecId).Calculate()
                             FlowSheet.CalculationQueue.Enqueue(objargs)
 
                         End If
@@ -377,7 +336,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If es.IsSpecAttached = True And es.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(es.AttachedSpecId).Calculate()
+                        If es.IsSpecAttached = True And es.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(es.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -470,7 +429,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If sp.IsSpecAttached = True And sp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(sp.AttachedSpecId).Calculate()
+                        If sp.IsSpecAttached = True And sp.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(sp.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -515,7 +474,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -556,7 +515,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -609,7 +568,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If ft.IsSpecAttached = True And ft.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(ft.AttachedSpecId).Calculate()
+                        If ft.IsSpecAttached = True And ft.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(ft.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -652,7 +611,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -696,7 +655,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -735,7 +694,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -791,7 +750,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -847,7 +806,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -896,7 +855,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -987,7 +946,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If vessel.IsSpecAttached = True And vessel.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(vessel.AttachedSpecId).Calculate()
+                        If vessel.IsSpecAttached = True And vessel.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(vessel.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1043,7 +1002,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1083,7 +1042,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1123,7 +1082,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1189,7 +1148,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1265,7 +1224,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1345,7 +1304,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If bb.IsSpecAttached = True And bb.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
+                        If bb.IsSpecAttached = True And bb.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(bb.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1389,7 +1348,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If sc.IsSpecAttached = True And sc.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(sc.AttachedSpecId).Calculate()
+                        If sc.IsSpecAttached = True And sc.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(sc.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1422,7 +1381,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If op.IsSpecAttached = True And op.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(op.AttachedSpecId).Calculate()
+                        If op.IsSpecAttached = True And op.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(op.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1453,7 +1412,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Sender = "PropertyGrid"
                         End With
 
-                        If eo.IsSpecAttached = True And eo.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(eo.AttachedSpecId).Calculate()
+                        If eo.IsSpecAttached = True And eo.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(eo.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -1479,7 +1438,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                         Dim obj = FlowSheet.Collections.FlowsheetObjectCollection.Item(sobj.Name)
 
-                        If obj.IsSpecAttached = True And obj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then FlowSheet.Collections.FlowsheetObjectCollection(obj.AttachedSpecId).Calculate()
+                        If obj.IsSpecAttached = True And obj.SpecVarType = SpecVarType.Source Then FlowSheet.Collections.FlowsheetObjectCollection(obj.AttachedSpecId).Calculate()
                         FlowSheet.CalculationQueue.Enqueue(objargs)
 
                     End If
@@ -3324,7 +3283,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End Get
         End Property
 
-        Public Property Annotation() As DWSIM.Extras.Annotation
+        Public Property Annotation() As String Implements Interfaces.ISimulationObject.Annotation
 
         ''' <summary>
         ''' Checks if an Adjust operation is attached to this object.
@@ -3332,7 +3291,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property IsAdjustAttached() As Boolean = False
+        Public Property IsAdjustAttached() As Boolean = False Implements Interfaces.ISimulationObject.IsAdjustAttached
 
         ''' <summary>
         ''' If an Adjust object is attached to this object, returns its ID.
@@ -3340,7 +3299,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property AttachedAdjustId() As String = ""
+        Public Property AttachedAdjustId() As String = "" Implements Interfaces.ISimulationObject.AttachedAdjustId
 
         ''' <summary>
         ''' If an Adjust object is attached to this object, returns a variable describing how this object is used by it (manipulated, controlled or reference).
@@ -3348,7 +3307,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property AdjustVarType() As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.TipoVar
+        Public Property AdjustVarType() As Interfaces.Enums.AdjustVarType Implements Interfaces.ISimulationObject.AdjustVarType
 
         ''' <summary>
         ''' Checks if an Specification operation is attached to this object.
@@ -3356,7 +3315,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property IsSpecAttached() As Boolean = False
+        Public Property IsSpecAttached() As Boolean = False Implements Interfaces.ISimulationObject.IsSpecAttached
 
         ''' <summary>
         ''' If an Specification object is attached to this object, returns its ID.
@@ -3364,7 +3323,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property AttachedSpecId() As String = ""
+        Public Property AttachedSpecId() As String = "" Implements Interfaces.ISimulationObject.AttachedSpecId
 
         ''' <summary>
         ''' If an Specification object is attached to this object, returns a variable describing how this object is used by it (target or source).
@@ -3372,7 +3331,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property SpecVarType() As DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar
+        Public Property SpecVarType() As Interfaces.Enums.SpecVarType Implements Interfaces.ISimulationObject.SpecVarType
 
         ''' <summary>
         ''' Gets or sets the graphic object representation of this object in the flowsheet.
@@ -3380,7 +3339,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore> Public Property GraphicObject() As Interfaces.IGraphicObject
+        <Xml.Serialization.XmlIgnore> Public Property GraphicObject() As Interfaces.IGraphicObject Implements Interfaces.ISimulationObject.GraphicObject
 
         ''' <summary>
         ''' Object's Unique ID (Name)
@@ -3388,15 +3347,15 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks>This property is the same as the graphic object 'Name' property.</remarks>
-        Public Property Name() As String = ""
+        Public Property Name() As String = "" Implements Interfaces.ISimulationObject.Name
 
-        ''' <summary>
-        ''' Gets or sets the flowsheet table object associated with this object.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property PropertyTable() As TableGraphic
+        Public MustOverride Function GetProperties(proptype As PropertyType) As String() Implements Interfaces.ISimulationObject.GetProperties
+
+        Public MustOverride Function GetPropertyUnit(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As String Implements Interfaces.ISimulationObject.GetPropertyUnit
+
+        Public MustOverride Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
+
+        Public MustOverride Function SetPropertyValue(prop As String, propval As Object, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean Implements Interfaces.ISimulationObject.SetPropertyValue
 
         Sub CreateNew()
             CreatedWithThreadID = Threading.Thread.CurrentThread.ManagedThreadId
@@ -3499,7 +3458,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             r6 = 84
 
             baseobj = Me
-            properties = baseobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+            properties = baseobj.GetProperties(Interfaces.Enums.PropertyType.ALL)
             objtype = baseobj.GraphicObject.ObjectType
             description = DWSIM.App.GetLocalString(baseobj.GraphicObject.Description)
             If objtype = ObjectType.MaterialStream Then
@@ -3785,9 +3744,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 If Me.IsSpecAttached = True Then
                     .Item.Add(DWSIM.App.GetLocalString("ObjetoUtilizadopor"), FlowSheet.Collections.FlowsheetObjectCollection(Me.AttachedSpecId).GraphicObject.Tag, True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
                     Select Case Me.SpecVarType
-                        Case SpecialOps.Helpers.Spec.TipoVar.Destino
+                        Case Interfaces.Enums.SpecVarType.Target
                             .Item.Add(DWSIM.App.GetLocalString("Utilizadocomo"), DWSIM.App.GetLocalString(Me.SpecVarType.ToString), True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
-                        Case SpecialOps.Helpers.Spec.TipoVar.Fonte
+                        Case Interfaces.Enums.SpecVarType.Source
                             .Item.Add(DWSIM.App.GetLocalString("Utilizadocomo"), DWSIM.App.GetLocalString("SpecSource"), True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
                     End Select
                 End If
@@ -4293,13 +4252,6 @@ End Namespace
 
 Namespace DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust
 
-    Public Enum TipoVar
-        Manipulada
-        Controlada
-        Referencia
-        Nenhum
-    End Enum
-
     <System.Serializable()> Public Class ManipulatedObjectInfo
 
         Public m_Type As String = ""
@@ -4354,12 +4306,6 @@ Namespace DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust
 End Namespace
 
 Namespace DWSIM.SimulationObjects.SpecialOps.Helpers.Spec
-
-    Public Enum TipoVar
-        Fonte
-        Destino
-        Nenhum
-    End Enum
 
     <System.Serializable()> Public Class SourceObjectInfo
 

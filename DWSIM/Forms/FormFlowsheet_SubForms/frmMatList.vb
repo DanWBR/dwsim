@@ -66,7 +66,7 @@ Public Class frmMatList
         Me.DataGridView1.Columns.Add(ms.Name, ms.GraphicObject.Tag)
         Me.DataGridView1.Columns(ms.Name).SortMode = DataGridViewColumnSortMode.NotSortable
 
-        Dim props As String() = ms.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+        Dim props As String() = ms.GetProperties(Interfaces.Enums.PropertyType.ALL)
         Dim unit As String = ""
 
         Me.SuspendLayout()

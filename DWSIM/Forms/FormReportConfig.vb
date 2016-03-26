@@ -72,7 +72,7 @@ Public Class FormReportConfig
 
         For Each lvi As ListViewItem In Me.ListView1.Items
             baseobj = frm.Collections.FlowsheetObjectCollection(lvi.Tag)
-            properties = baseobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+            properties = baseobj.GetProperties(Interfaces.Enums.PropertyType.ALL)
             objtype = baseobj.GraphicObject.ObjectType
             description = DWSIM.App.GetLocalString(baseobj.GraphicObject.Description)
             If objtype = ObjectType.MaterialStream Then

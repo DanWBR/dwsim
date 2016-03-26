@@ -240,7 +240,7 @@ Public Class UITVSelectorForm
         With TreeView3.Nodes
             Dim key As String = e.Node.Tag
 
-            Dim properties As String() = formC.Collections.FlowsheetObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
+            Dim properties As String() = formC.Collections.FlowsheetObjectCollection(key).GetProperties(Interfaces.Enums.PropertyType.WR)
 
             For Each prop As String In properties
                 .Add(prop, DWSIM.App.GetPropertyName(prop)).Tag = prop
@@ -261,7 +261,7 @@ Public Class UITVSelectorForm
             With formC.Collections.FlowsheetObjectCollection(Me.selectionData.m_ID)
                 .IsSpecAttached = False
                 .AttachedSpecId = ""
-                .SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Nenhum
+                .SpecVarType = SpecVarType.None
             End With
         End If
 
@@ -274,7 +274,7 @@ Public Class UITVSelectorForm
             With formC.Collections.FlowsheetObjectCollection(Me.selectionData.m_ID)
                 .IsSpecAttached = True
                 .AttachedSpecId = formC.FormSurface.FlowsheetDesignSurface.SelectedObject.Name
-                .SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Destino
+                .SpecVarType = SpecVarType.Target
             End With
         End If
 

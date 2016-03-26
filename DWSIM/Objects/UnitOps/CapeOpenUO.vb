@@ -1467,7 +1467,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Sub
 
-        Public Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
+        Public Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             If Not Me._params Is Nothing Then
                 Dim props As New ArrayList
                 For Each p As ICapeIdentification In Me._params
@@ -1479,11 +1479,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End If
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
             Return ""
         End Function
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
             If Not Me._params Is Nothing Then
                 For Each p As ICapeIdentification In Me._params
                     If p.ComponentName = prop Then
@@ -1497,7 +1497,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End If
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
             For Each p As ICapeIdentification In Me._params
                 If p.ComponentName = prop Then
                     CType(p, ICapeParameter).value = propval

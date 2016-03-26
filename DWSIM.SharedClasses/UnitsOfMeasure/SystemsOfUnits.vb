@@ -22,63 +22,7 @@ Namespace SystemsOfUnits
 
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
 
-        Public Name As String
-
-        Public mass As String = "kg", reac_rate_heterog As String = "mol/[kg.s]", area, distance,
-            time, volume, molar_volume, diameter, thickness, molar_conc, mass_conc,
-            heat_transf_coeff, force, accel, spec_vol, reac_rate, velocity, foulingfactor,
-            cakeresistance, mediumresistance As String
-
-        Public gor As String = "m3/m3"
-
-        Public molar_enthalpy, molar_entropy As String
-
-        Public idealGasHeatCapacity As String
-        Public surfaceTension As String
-        Public thermalConductivityOfLiquid As String
-        Public thermalConductivityOfVapor As String
-        Public vaporPressure As String
-        Public viscosityOfLiquid As String
-        Public viscosityOfVapor As String
-
-        Public pdp_boilingPointTemperature As String
-        Public pdp_meltingTemperature As String
-
-        Public activity As String
-        Public activityCoefficient As String
-        Public compressibility As String
-        Public compressibilityFactor As String
-        Public density As String
-        Public enthalpy As String
-        Public entropy As String
-        Public excessEnthalpy As String
-        Public excessEntropy As String
-        Public molarflow As String
-        Public massflow As String
-        Public molarfraction As String
-        Public massfraction As String
-        Public fugacity As String
-        Public fugacityCoefficient As String
-        Public heatCapacityCp As String
-        Public heatCapacityCv As String
-        Public jouleThomsonCoefficient As String
-        Public logFugacityCoefficient As String
-        Public molecularWeight As String
-        Public pressure As String
-        Public temperature As String
-        Public speedOfSound As String
-        Public thermalConductivity As String
-        Public viscosity As String
-        Public cinematic_viscosity As String
-        Public volumetricFlow As String
-        Public heatflow As String
-        Public head As String
-        Public deltaT As String
-        Public deltaP As String
-
-        Public tpmp_kvalue As String
-        Public tpmp_logKvalue As String
-        Public tpmp_surfaceTension As String
+        Implements Interfaces.IUnitsOfMeasure
 
         Public Sub New()
 
@@ -93,6 +37,137 @@ Namespace SystemsOfUnits
             Return XMLSerializer.XMLSerializer.Serialize(Me, True)
         End Function
 
+        Public Property accel As String Implements Interfaces.IUnitsOfMeasure.accel
+
+        Public Property activity As String Implements Interfaces.IUnitsOfMeasure.activity
+
+        Public Property activityCoefficient As String Implements Interfaces.IUnitsOfMeasure.activityCoefficient
+
+        Public Property area As String Implements Interfaces.IUnitsOfMeasure.area
+
+        Public Property cakeresistance As String Implements Interfaces.IUnitsOfMeasure.cakeresistance
+
+        Public Property cinematic_viscosity As String Implements Interfaces.IUnitsOfMeasure.cinematic_viscosity
+
+        Public Property compressibility As String Implements Interfaces.IUnitsOfMeasure.compressibility
+
+        Public Property compressibilityFactor As String Implements Interfaces.IUnitsOfMeasure.compressibilityFactor
+
+        Public Property deltaP As String Implements Interfaces.IUnitsOfMeasure.deltaP
+
+        Public Property deltaT As String Implements Interfaces.IUnitsOfMeasure.deltaT
+
+        Public Property density As String Implements Interfaces.IUnitsOfMeasure.density
+
+        Public Property diameter As String Implements Interfaces.IUnitsOfMeasure.diameter
+
+        Public Property distance As String Implements Interfaces.IUnitsOfMeasure.distance
+
+        Public Property enthalpy As String Implements Interfaces.IUnitsOfMeasure.enthalpy
+
+        Public Property entropy As String Implements Interfaces.IUnitsOfMeasure.entropy
+
+        Public Property excessEnthalpy As String Implements Interfaces.IUnitsOfMeasure.excessEnthalpy
+
+        Public Property excessEntropy As String Implements Interfaces.IUnitsOfMeasure.excessEntropy
+
+        Public Property force As String Implements Interfaces.IUnitsOfMeasure.force
+
+        Public Property foulingfactor As String Implements Interfaces.IUnitsOfMeasure.foulingfactor
+
+        Public Property fugacity As String Implements Interfaces.IUnitsOfMeasure.fugacity
+
+        Public Property fugacityCoefficient As String Implements Interfaces.IUnitsOfMeasure.fugacityCoefficient
+
+        Public Property gor As String Implements Interfaces.IUnitsOfMeasure.gor
+
+        Public Property head As String Implements Interfaces.IUnitsOfMeasure.head
+
+        Public Property heat_transf_coeff As String Implements Interfaces.IUnitsOfMeasure.heat_transf_coeff
+
+        Public Property heatCapacityCp As String Implements Interfaces.IUnitsOfMeasure.heatCapacityCp
+
+        Public Property heatCapacityCv As String Implements Interfaces.IUnitsOfMeasure.heatCapacityCv
+
+        Public Property heatflow As String Implements Interfaces.IUnitsOfMeasure.heatflow
+
+        Public Property idealGasHeatCapacity As String Implements Interfaces.IUnitsOfMeasure.idealGasHeatCapacity
+
+        Public Property jouleThomsonCoefficient As String Implements Interfaces.IUnitsOfMeasure.jouleThomsonCoefficient
+
+        Public Property kvalue As String Implements Interfaces.IUnitsOfMeasure.kvalue
+
+        Public Property logFugacityCoefficient As String Implements Interfaces.IUnitsOfMeasure.logFugacityCoefficient
+
+        Public Property logKvalue As String Implements Interfaces.IUnitsOfMeasure.logKvalue
+
+        Public Property mass As String Implements Interfaces.IUnitsOfMeasure.mass
+
+        Public Property mass_conc As String Implements Interfaces.IUnitsOfMeasure.mass_conc
+
+        Public Property massflow As String Implements Interfaces.IUnitsOfMeasure.massflow
+
+        Public Property massfraction As String Implements Interfaces.IUnitsOfMeasure.massfraction
+
+        Public Property mediumresistance As String Implements Interfaces.IUnitsOfMeasure.mediumresistance
+
+        Public Property molar_conc As String Implements Interfaces.IUnitsOfMeasure.molar_conc
+
+        Public Property molar_enthalpy As Object Implements Interfaces.IUnitsOfMeasure.molar_enthalpy
+
+        Public Property molar_entropy As String Implements Interfaces.IUnitsOfMeasure.molar_entropy
+
+        Public Property molar_volume As String Implements Interfaces.IUnitsOfMeasure.molar_volume
+
+        Public Property molarflow As String Implements Interfaces.IUnitsOfMeasure.molarflow
+
+        Public Property molarfraction As String Implements Interfaces.IUnitsOfMeasure.molarfraction
+
+        Public Property molecularWeight As String Implements Interfaces.IUnitsOfMeasure.molecularWeight
+
+        Public Property Name As String Implements Interfaces.IUnitsOfMeasure.Name
+
+        Public Property pdp_boilingPointTemperature As String Implements Interfaces.IUnitsOfMeasure.pdp_boilingPointTemperature
+
+        Public Property pdp_meltingTemperature As String Implements Interfaces.IUnitsOfMeasure.pdp_meltingTemperature
+
+        Public Property pressure As String Implements Interfaces.IUnitsOfMeasure.pressure
+
+        Public Property reac_rate As String Implements Interfaces.IUnitsOfMeasure.reac_rate
+
+        Public Property reac_rate_heterog As String Implements Interfaces.IUnitsOfMeasure.reac_rate_heterog
+
+        Public Property spec_vol As String Implements Interfaces.IUnitsOfMeasure.spec_vol
+
+        Public Property speedOfSound As String Implements Interfaces.IUnitsOfMeasure.speedOfSound
+
+        Public Property surfaceTension As String Implements Interfaces.IUnitsOfMeasure.surfaceTension
+
+        Public Property temperature As String Implements Interfaces.IUnitsOfMeasure.temperature
+
+        Public Property thermalConductivity As String Implements Interfaces.IUnitsOfMeasure.thermalConductivity
+
+        Public Property thermalConductivityOfLiquid As String Implements Interfaces.IUnitsOfMeasure.thermalConductivityOfLiquid
+
+        Public Property thermalConductivityOfVapor As String Implements Interfaces.IUnitsOfMeasure.thermalConductivityOfVapor
+
+        Public Property thickness As String Implements Interfaces.IUnitsOfMeasure.thickness
+
+        Public Property time As String Implements Interfaces.IUnitsOfMeasure.time
+
+        Public Property vaporPressure As String Implements Interfaces.IUnitsOfMeasure.vaporPressure
+
+        Public Property velocity As String Implements Interfaces.IUnitsOfMeasure.velocity
+
+        Public Property viscosity As String Implements Interfaces.IUnitsOfMeasure.viscosity
+
+        Public Property viscosityOfLiquid As String Implements Interfaces.IUnitsOfMeasure.viscosityOfLiquid
+
+        Public Property viscosityOfVapor As String Implements Interfaces.IUnitsOfMeasure.viscosityOfVapor
+
+        Public Property volume As String Implements Interfaces.IUnitsOfMeasure.volume
+
+        Public Property volumetricFlow As String Implements Interfaces.IUnitsOfMeasure.volumetricFlow
     End Class
 
     <System.Serializable()> Public Class SI
@@ -165,9 +240,9 @@ Namespace SystemsOfUnits
                 .vaporPressure = "Pa"
                 .viscosityOfLiquid = "Pa.s"
                 .viscosityOfVapor = "Pa.s"
-                .tpmp_kvalue = "-"
-                .tpmp_logKvalue = "-"
-                .tpmp_surfaceTension = "N/m"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "N/m"
                 .heatflow = "kW"
                 .head = "m"
                 .deltaP = "Pa"
@@ -249,9 +324,9 @@ Namespace SystemsOfUnits
                 .vaporPressure = "kgf/cm2_a"
                 .viscosityOfLiquid = "cP"
                 .viscosityOfVapor = "cP"
-                .tpmp_kvalue = "-"
-                .tpmp_logKvalue = "-"
-                .tpmp_surfaceTension = "N/m"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "N/m"
                 .heatflow = "kW"
                 .head = "m"
                 .deltaP = "kgf/cm2"
@@ -333,9 +408,9 @@ Namespace SystemsOfUnits
                 .vaporPressure = "kgf/cm2_a"
                 .viscosityOfLiquid = "cP"
                 .viscosityOfVapor = "cP"
-                .tpmp_kvalue = "-"
-                .tpmp_logKvalue = "-"
-                .tpmp_surfaceTension = "N/m"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "N/m"
                 .heatflow = "kW"
                 .head = "m"
                 .deltaP = "kgf/cm2"
@@ -417,9 +492,9 @@ Namespace SystemsOfUnits
                 .vaporPressure = "kgf/cm2_a"
                 .viscosityOfLiquid = "cP"
                 .viscosityOfVapor = "cP"
-                .tpmp_kvalue = "-"
-                .tpmp_logKvalue = "-"
-                .tpmp_surfaceTension = "N/m"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "N/m"
                 .heatflow = "kW"
                 .head = "m"
                 .deltaP = "kgf/cm2"
@@ -501,9 +576,9 @@ Namespace SystemsOfUnits
                 .vaporPressure = "kPa"
                 .viscosityOfLiquid = "cP"
                 .viscosityOfVapor = "cP"
-                .tpmp_kvalue = "-"
-                .tpmp_logKvalue = "-"
-                .tpmp_surfaceTension = "N/m"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "N/m"
                 .heatflow = "kJ/d"
                 .head = "m"
                 .deltaP = "kgf/cm2"
@@ -585,9 +660,9 @@ Namespace SystemsOfUnits
                 .vaporPressure = "bar"
                 .viscosityOfLiquid = "Pa.s"
                 .viscosityOfVapor = "Pa.s"
-                .tpmp_kvalue = "-"
-                .tpmp_logKvalue = "-"
-                .tpmp_surfaceTension = "N/m"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "N/m"
                 .heatflow = "kW"
                 .head = "m"
                 .deltaP = "bar"
@@ -669,9 +744,9 @@ Namespace SystemsOfUnits
                 .vaporPressure = "lbf/ft2"
                 .viscosityOfLiquid = "lbm/[ft.h]"
                 .viscosityOfVapor = "lbm/[ft.h]"
-                .tpmp_kvalue = "-"
-                .tpmp_logKvalue = "-"
-                .tpmp_surfaceTension = "lbf/in"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "lbf/in"
                 .volumetricFlow = "ft3/s"
                 .cinematic_viscosity = "ft2/s"
                 .heatflow = "BTU/h"
@@ -753,9 +828,9 @@ Namespace SystemsOfUnits
                 .vaporPressure = "atm"
                 .viscosityOfLiquid = "cP"
                 .viscosityOfVapor = "cP"
-                .tpmp_kvalue = "-"
-                .tpmp_logKvalue = "-"
-                .tpmp_surfaceTension = "dyn/cm2"
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = "dyn/cm2"
                 .volumetricFlow = "cm3/s"
                 .cinematic_viscosity = "cSt"
                 .heatflow = "kcal/h"

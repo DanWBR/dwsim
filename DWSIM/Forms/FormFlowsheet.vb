@@ -2727,7 +2727,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                     Dim fobj = Me.Collections.FlowsheetObjectCollection(act.ObjID)
 
-                    If fobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL).Contains(act.PropertyName) Then
+                    If fobj.GetProperties(Interfaces.Enums.PropertyType.ALL).Contains(act.PropertyName) Then
                         'Property is listed, set using SetProperty
                         fobj.SetPropertyValue(act.PropertyName, pval, act.Tag)
                     Else

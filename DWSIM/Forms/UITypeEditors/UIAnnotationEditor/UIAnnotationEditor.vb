@@ -46,7 +46,7 @@ Namespace DWSIM.Editors.Annotation
 
                 Dim selectionControl As New AnnotationEditorForm
                 Dim form As FormFlowsheet = My.Application.ActiveSimulation
-                selectionControl.rtftext = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Annotation.annotation
+                selectionControl.rtftext = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name).Annotation
                 selectionControl.Text = DWSIM.App.GetLocalString("editanot") & form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & "..."
 
                 editorService.ShowDialog(selectionControl)

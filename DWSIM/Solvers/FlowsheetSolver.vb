@@ -78,7 +78,7 @@ Namespace DWSIM.Flowsheet
                                         form.UpdateStatusLabel(String.Format(DWSIM.App.GetLocalString("CalculatingWith"), gobj.Tag, "'" & myObj.PropertyPackage.Tag & "' (" & myObj.PropertyPackage.ComponentName & ")"))
                                         myUnitOp.Solve()
                                         gobj.Status = Status.Calculated
-                                        If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myUnitOp.AttachedSpecId), Spec).Calculate()
+                                        If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(myUnitOp.AttachedSpecId), Spec).Calculate()
                                         form.WriteToLog(gobj.Tag & ": " & DWSIM.App.GetLocalString("Calculadocomsucesso"), Color.DarkGreen, DWSIM.Flowsheet.MessageType.Information)
                                         form.UpdateStatusLabel(preLab)
                                     Else
@@ -88,7 +88,7 @@ Namespace DWSIM.Flowsheet
                                     End If
                                 End If
                             End If
-                            If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
+                            If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                             form.FormSurface.Refresh()
                         End If
                     Case ObjectType.EnergyStream
@@ -106,7 +106,7 @@ Namespace DWSIM.Flowsheet
                                     myUnitOp.Solve()
                                     form.WriteToLog(gobj.Tag & ": " & DWSIM.App.GetLocalString("Calculadocomsucesso"), Color.DarkGreen, DWSIM.Flowsheet.MessageType.Information)
                                     myUnitOp.GraphicObject.Calculated = True
-                                    If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myUnitOp.AttachedSpecId), Spec).Calculate()
+                                    If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(myUnitOp.AttachedSpecId), Spec).Calculate()
                                     form.UpdateStatusLabel(preLab)
                                     gobj = myUnitOp.GraphicObject
                                     gobj.Calculated = True
@@ -116,7 +116,7 @@ Namespace DWSIM.Flowsheet
                                 End If
                                 form.FormSurface.Refresh()
                             End If
-                            If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
+                            If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                         End If
                     Case Else
                         If objArgs.Sender = "PropertyGrid" Or objArgs.Sender = "Adjust" Or objArgs.Sender = "FlowsheetSolver" Then
@@ -126,7 +126,7 @@ Namespace DWSIM.Flowsheet
                             myObj.Solve()
                             form.WriteToLog(objArgs.Tag & ": " & DWSIM.App.GetLocalString("Calculadocomsucesso"), Color.DarkGreen, DWSIM.Flowsheet.MessageType.Information)
                             myObj.GraphicObject.Calculated = True
-                            If myObj.IsSpecAttached = True And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
+                            If myObj.IsSpecAttached = True And myObj.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                             form.FormProps.PGEx1.Refresh()
                         Else
                             Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Name)
@@ -145,7 +145,7 @@ Namespace DWSIM.Flowsheet
                                     End If
                                 Next
                             End If
-                            If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
+                            If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                         End If
                 End Select
 
@@ -179,17 +179,17 @@ Namespace DWSIM.Flowsheet
                         Dim myObj As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                         RaiseEvent MaterialStreamCalculationStarted(form, New System.EventArgs(), myObj)
                         CalculateMaterialStreamAsync(form, myObj, ct)
-                        If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
+                        If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                         RaiseEvent MaterialStreamCalculationFinished(form, New System.EventArgs(), myObj)
                     Case ObjectType.EnergyStream
                         Dim myObj As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.FlowsheetObjectCollection(objArgs.Name)
-                        If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
-                         myObj.Calculated = True
+                        If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
+                        myObj.Calculated = True
                     Case Else
                         Dim myObj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(objArgs.Name)
                         RaiseEvent UnitOpCalculationStarted(form, New System.EventArgs(), objArgs)
                         myObj.Solve()
-                        If myObj.IsSpecAttached And myObj.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
+                        If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(myObj.AttachedSpecId), Spec).Calculate()
                         RaiseEvent UnitOpCalculationFinished(form, New System.EventArgs(), objArgs)
                 End Select
                 form.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, objArgs.Name)
@@ -272,7 +272,7 @@ Namespace DWSIM.Flowsheet
 
             RaiseEvent MaterialStreamCalculationFinished(form, New System.EventArgs(), ms)
 
-            If ms.IsSpecAttached = True And ms.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then DirectCast(form.Collections.FlowsheetObjectCollection(ms.AttachedSpecId), Spec).Calculate()
+            If ms.IsSpecAttached = True And ms.SpecVarType = SpecVarType.Source Then DirectCast(form.Collections.FlowsheetObjectCollection(ms.AttachedSpecId), Spec).Calculate()
 
             ms.LastUpdated = Date.Now
             ms.Calculated = True
@@ -720,22 +720,22 @@ Namespace DWSIM.Flowsheet
         ''' <remarks></remarks>
         Public Shared Sub CheckCalculatorStatus()
             If DWSIM.App.IsMainThread Then
-                    If Not Calculator.CAPEOPENMode Then
-                        If My.Application.CalculatorStopRequested = True Then
-                            My.Application.MasterCalculatorStopRequested = True
-                            My.Application.CalculatorStopRequested = False
-                            If Calculator.TaskCancellationTokenSource IsNot Nothing Then
-                                If Not Calculator.TaskCancellationTokenSource.IsCancellationRequested Then
-                                    Calculator.TaskCancellationTokenSource.Cancel()
-                                End If
-                                Calculator.TaskCancellationTokenSource.Token.ThrowIfCancellationRequested()
-                            Else
-                                Throw New Exception(DWSIM.App.GetLocalString("CalculationAborted"))
+                If Not Calculator.CAPEOPENMode Then
+                    If My.Application.CalculatorStopRequested = True Then
+                        My.Application.MasterCalculatorStopRequested = True
+                        My.Application.CalculatorStopRequested = False
+                        If Calculator.TaskCancellationTokenSource IsNot Nothing Then
+                            If Not Calculator.TaskCancellationTokenSource.IsCancellationRequested Then
+                                Calculator.TaskCancellationTokenSource.Cancel()
                             End If
+                            Calculator.TaskCancellationTokenSource.Token.ThrowIfCancellationRequested()
+                        Else
+                            Throw New Exception(DWSIM.App.GetLocalString("CalculationAborted"))
                         End If
                     End If
-                    Application.DoEvents()
                 End If
+                Application.DoEvents()
+            End If
         End Sub
 
         ''' <summary>
@@ -944,7 +944,7 @@ Namespace DWSIM.Flowsheet
                     newstack.Add(o)
                     obj = form.Collections.FlowsheetObjectCollection(o)
                     'if the object has a spec attached to it, set the destination object to be calculated after it.
-                    If obj.IsSpecAttached And obj.SpecVarType = SpecialOps.Helpers.Spec.TipoVar.Fonte Then
+                    If obj.IsSpecAttached And obj.SpecVarType = SpecVarType.Source Then
                         newstack.Add(DirectCast(form.Collections.FlowsheetObjectCollection(obj.AttachedSpecId), Spec).TargetObjectData.m_ID)
                     End If
                 Next
@@ -955,7 +955,7 @@ Namespace DWSIM.Flowsheet
                         newlist.Add(o)
                         obj = form.Collections.FlowsheetObjectCollection(o)
                         'if the object has a spec attached to it, set the destination object to be calculated after it.
-                        If obj.IsSpecAttached And obj.SpecVarType = SpecialOps.Helpers.Spec.TipoVar.Fonte Then
+                        If obj.IsSpecAttached And obj.SpecVarType = SpecVarType.Source Then
                             newlist.Add(DirectCast(form.Collections.FlowsheetObjectCollection(obj.AttachedSpecId), Spec).TargetObjectData.m_ID)
                         End If
                     Next
@@ -1574,7 +1574,7 @@ Namespace DWSIM.Flowsheet
                             .ObjectType = ObjectType.MaterialStream
                             .Tag = ms.GraphicObject.Tag
                         End With
-                        If ms.IsSpecAttached = True And ms.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then
+                        If ms.IsSpecAttached = True And ms.SpecVarType = SpecVarType.Source Then
                             DirectCast(form.Collections.FlowsheetObjectCollection(ms.AttachedSpecId), Spec).Calculate()
                         End If
                         form.CalculationQueue.Enqueue(objargs)
@@ -1589,7 +1589,7 @@ Namespace DWSIM.Flowsheet
                                 .ObjectType = ObjectType.MaterialStream
                                 .Tag = ms.GraphicObject.Tag
                             End With
-                            If ms.IsSpecAttached = True And ms.SpecVarType = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Fonte Then
+                            If ms.IsSpecAttached = True And ms.SpecVarType = SpecVarType.Source Then
                                 DirectCast(form.Collections.FlowsheetObjectCollection(ms.AttachedSpecId), Spec).Calculate()
                             End If
                             form.CalculationQueue.Enqueue(objargs)

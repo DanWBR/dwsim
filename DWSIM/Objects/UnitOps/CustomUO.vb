@@ -478,7 +478,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             MyBase.PropertyValueChanged(s, e)
         End Sub
 
-        Public Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
+        Public Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Select Case proptype
                 Case PropertyType.ALL
                     Return Me.OutputVariables.Keys.ToArray.Union(Me.InputVariables.Keys.ToArray).ToArray
@@ -491,17 +491,17 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             End Select
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
             Return ""
         End Function
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
             If Me.OutputVariables.ContainsKey(prop) Then Return Me.OutputVariables(prop)
             If Me.InputVariables.ContainsKey(prop) Then Return Me.InputVariables(prop)
             Return Nothing
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
             If Me.InputVariables.ContainsKey(prop) Then Me.InputVariables(prop) = propval
             Return Nothing
         End Function

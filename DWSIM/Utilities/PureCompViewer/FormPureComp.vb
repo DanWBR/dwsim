@@ -94,7 +94,7 @@ Public Class FormPureComp
         Me.DataTableLiquid.Columns.Item(1).HeaderText = DWSIM.App.GetLocalString("CapacidadeCalorfica") & " " & su.heatCapacityCp
         Me.DataTableLiquid.Columns.Item(3).HeaderText = DWSIM.App.GetLocalString("EntalpiadeVaporizao") & " " & su.enthalpy
         Me.DataTableLiquid.Columns.Item(5).HeaderText = DWSIM.App.GetLocalString("PressodeVapor") & " " & su.pressure
-        Me.DataTableLiquid.Columns.Item(7).HeaderText = DWSIM.App.GetLocalString("Tensosuperficial") & " " & su.tpmp_surfaceTension
+        Me.DataTableLiquid.Columns.Item(7).HeaderText = DWSIM.App.GetLocalString("Tensosuperficial") & " " & su.surfaceTension
         Me.DataTableLiquid.Columns.Item(9).HeaderText = DWSIM.App.GetLocalString("ViscosidadeLquido") & " " & su.viscosity
         Me.DataTableLiquid.Columns.Item(11).HeaderText = DWSIM.App.GetLocalString("LiquidDensity") & " " & su.density
         Me.DataTableLiquid.Columns.Item(13).HeaderText = DWSIM.App.GetLocalString("Condutividadetrmica") & " " & su.thermalConductivity
@@ -381,7 +381,7 @@ Public Class FormPureComp
             If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
-                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.tpmp_surfaceTension, pp.AUX_SURFTi(constprop, T))
+                    VD = SystemsOfUnits.Converter.ConvertFromSI(su.surfaceTension, pp.AUX_SURFTi(constprop, T))
                     vxSurfTens.Add(TD)
                     vySurfTens.Add(VD)
                     Me.DataTableLiquid.Item(6, Row).Value = Format(TD, nf)
@@ -400,7 +400,7 @@ Public Class FormPureComp
                 End With
                 .Title.IsVisible = False
                 .XAxis.Title.Text = "T [ " & su.temperature & " ] "
-                .YAxis.Title.Text = DWSIM.App.GetLocalString("Tensosuperficial") & " [ " & su.tpmp_surfaceTension & " ] "
+                .YAxis.Title.Text = DWSIM.App.GetLocalString("Tensosuperficial") & " [ " & su.surfaceTension & " ] "
                 .AxisChange(Me.CreateGraphics)
             End With
             Me.GraphSurfT.Invalidate()

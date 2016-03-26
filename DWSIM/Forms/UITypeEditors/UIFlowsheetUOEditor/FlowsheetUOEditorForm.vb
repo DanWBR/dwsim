@@ -205,9 +205,9 @@ Public Class FlowsheetUOEditorForm
         For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsuo.Fsheet.Collections.FlowsheetObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 If dependent Then
-                    Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+                    Return obj.GetProperties(Interfaces.Enums.PropertyType.ALL)
                 Else
-                    Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
+                    Return obj.GetProperties(Interfaces.Enums.PropertyType.WR)
                 End If
                 Exit Function
             End If
@@ -232,7 +232,7 @@ Public Class FlowsheetUOEditorForm
 
     Private Function ReturnPropertyID(ByVal objectID As String, ByVal propTAG As String) As String
 
-        Dim props As String() = fsuo.Fsheet.Collections.FlowsheetObjectCollection(objectID).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+        Dim props As String() = fsuo.Fsheet.Collections.FlowsheetObjectCollection(objectID).GetProperties(Interfaces.Enums.PropertyType.ALL)
         For Each prop As String In props
             If DWSIM.App.GetPropertyName(prop) = propTAG Then
                 Return prop

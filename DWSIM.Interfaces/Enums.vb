@@ -1,5 +1,25 @@
 ﻿Namespace Enums
 
+    Public Enum AdjustVarType
+        Manipulated = 0
+        Controlled = 1
+        Reference = 2
+        None = 3
+    End Enum
+
+    Public Enum SpecVarType
+        Source = 0
+        Target = 1
+        None = 2
+    End Enum
+
+    Public Enum PropertyType
+        RO = 0
+        RW = 1
+        WR = 2
+        ALL = 3
+    End Enum
+
     Public Enum StreamSpec
         Temperature_and_Pressure = 0
         Pressure_and_Enthalpy = 1

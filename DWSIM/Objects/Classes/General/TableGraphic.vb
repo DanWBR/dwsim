@@ -361,7 +361,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
                     m_items(kvp.Key).Add(New NodeItem(DWSIM.App.GetLocalString("Objeto"), kvp.Key, "", 0, 0, ""))
                     If Me.HeaderText = "" Then Me.HeaderText = DWSIM.App.GetLocalString("MasterTable") & " - " & DWSIM.App.GetLocalString(myobj.ComponentDescription)
                     Dim mypropid As String = ""
-                    Dim props() As String = myobj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+                    Dim props() As String = myobj.GetProperties(Interfaces.Enums.PropertyType.ALL)
                     For Each kvp2 As KeyValuePair(Of String, Boolean) In m_propertylist
                         If kvp2.Value = True Then
                             For Each p As String In props
@@ -508,7 +508,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
                 If m_objectlist.Count > 0 Then
                     For Each s As String In m_objectlist.Keys
-                        props = form.GetFlowsheetSimulationObject(s).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+                        props = form.GetFlowsheetSimulationObject(s).GetProperties(Interfaces.Enums.PropertyType.ALL)
                         Exit For
                     Next
                     For Each p As String In props

@@ -286,9 +286,9 @@ Public Class FormUnitGen
                 .vaporPressure = Me.DataGridView1.Rows(1).Cells(1).Value
                 .viscosityOfLiquid = Me.DataGridView1.Rows(13).Cells(1).Value
                 .viscosityOfVapor = Me.DataGridView1.Rows(13).Cells(1).Value
-                .tpmp_kvalue = "-"
-                .tpmp_logKvalue = "-"
-                .tpmp_surfaceTension = Me.DataGridView1.Rows(8).Cells(1).Value
+                .kvalue = "-"
+                .logKvalue = "-"
+                .surfaceTension = Me.DataGridView1.Rows(8).Cells(1).Value
                 .heatflow = Me.DataGridView1.Rows(17).Cells(1).Value
                 .head = Me.DataGridView1.Rows(16).Cells(1).Value
                 .deltaP = Me.DataGridView1.Rows(14).Cells(1).Value

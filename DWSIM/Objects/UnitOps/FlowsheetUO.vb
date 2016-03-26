@@ -853,7 +853,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Sub
 
-        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
@@ -871,7 +871,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Function
 
-        Public Overloads Overrides Function GetProperties(ByVal proptype As DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType) As String()
+        Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim proplist As New ArrayList
             If Initialized Then
                 Select Case proptype
@@ -895,7 +895,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Return proplist.ToArray(GetType(System.String))
         End Function
 
-        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
@@ -907,7 +907,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Function
 
-        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As SystemsOfUnits.Units = Nothing) As Object
+        Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
 
             Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
 
@@ -1125,7 +1125,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
-            Me.Annotation.annotation = New Object() {"", (From xel As XElement In data Select xel Where xel.Name = "Annotation").SingleOrDefault.Value}
+            Me.Annotation = (From xel As XElement In data Select xel Where xel.Name = "Annotation").SingleOrDefault.Value
 
             ParseFilePath()
 

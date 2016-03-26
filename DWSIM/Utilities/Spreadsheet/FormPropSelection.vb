@@ -230,9 +230,9 @@ Public Class FormPropSelection
 
             Dim properties As String()
             If mode = 0 Then
-                properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+                properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(Interfaces.Enums.PropertyType.ALL)
             Else
-                properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
+                properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(Interfaces.Enums.PropertyType.WR)
             End If
 
             For Each prop As String In properties
@@ -264,7 +264,7 @@ Public Class FormPropSelection
                 End If
             Else
                 Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = formC.GetFlowsheetSimulationObject(Me.TreeView2.SelectedNode.Text)
-                If obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.RO).Contains(Me.TreeView3.SelectedNode.Tag) Then
+                If obj.GetProperties(Interfaces.Enums.PropertyType.RO).Contains(Me.TreeView3.SelectedNode.Tag) Then
                     Me.wi = New DWSIM.Extras.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, True)
                 Else
                     Me.wi = New DWSIM.Extras.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, False)

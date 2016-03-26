@@ -72,9 +72,9 @@
       <spmp_head>m</spmp_head>
       <spmp_deltaT>C.</spmp_deltaT>
       <spmp_deltaP>bar</spmp_deltaP>
-      <tpmp_kvalue>-</tpmp_kvalue>
-      <tpmp_logKvalue>-</tpmp_logKvalue>
-      <tpmp_surfaceTension>N/m</tpmp_surfaceTension>
+      <kvalue>-</kvalue>
+      <logKvalue>-</logKvalue>
+      <surfaceTension>N/m</surfaceTension>
     </SelectedUnitSystem>
     <NumberFormat>#0.0####</NumberFormat>
     <FractionNumberFormat>#0.0######</FractionNumberFormat>

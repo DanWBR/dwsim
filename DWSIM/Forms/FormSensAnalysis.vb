@@ -144,9 +144,9 @@ Public Class FormSensAnalysis
             For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
                 If objectTAG = obj.GraphicObject.Tag Then
                     If dependent Then
-                        Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+                        Return obj.GetProperties(Interfaces.Enums.PropertyType.ALL)
                     Else
-                        Return obj.GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.WR)
+                        Return obj.GetProperties(Interfaces.Enums.PropertyType.WR)
                     End If
                     Exit Function
                 End If
@@ -857,7 +857,7 @@ Public Class FormSensAnalysis
         If objectID = "SpreadsheetCell" Then
             Return propTAG
         Else
-            Dim props As String() = form.Collections.FlowsheetObjectCollection(objectID).GetProperties(DWSIM.SimulationObjects.UnitOperations.BaseClass.PropertyType.ALL)
+            Dim props As String() = form.Collections.FlowsheetObjectCollection(objectID).GetProperties(Interfaces.Enums.PropertyType.ALL)
             For Each prop As String In props
                 If DWSIM.App.GetPropertyName(prop) = propTAG Then
                     Return prop
