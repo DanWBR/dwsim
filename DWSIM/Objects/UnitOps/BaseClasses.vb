@@ -42,29 +42,19 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Implements ICloneable, IDisposable, XMLSerializer.Interfaces.ICustomXMLSerialization
 
-        Implements ICapeIdentification
-
-        Implements Interfaces.ISimulationObject
+        Implements ICapeIdentification, Interfaces.ISimulationObject
 
         Public Const ClassId As String = ""
 
-        Protected m_IsAdjustAttached As Boolean = False
-        Protected m_AdjustId As String = ""
-        Protected m_AdjustVarType As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.TipoVar = DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.TipoVar.Nenhum
-
-        Protected m_IsSpecAttached As Boolean = False
-        Protected m_SpecId As String = ""
-        Protected m_SpecVarType As DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar = DWSIM.SimulationObjects.SpecialOps.Helpers.Spec.TipoVar.Nenhum
-
         <System.NonSerialized()> Protected Friend m_flowsheet As FormFlowsheet
 
-        Public Property Calculated As Boolean = False
+        Public Property Calculated As Boolean = False Implements Interfaces.ISimulationObject.Calculated
 
-        Public Property DebugMode As Boolean = False
-        Public Property DebugText As String = ""
+        Public Property DebugMode As Boolean = False Implements Interfaces.ISimulationObject.DebugMode
+        Public Property DebugText As String = "" Implements Interfaces.ISimulationObject.DebugText
 
-        <Xml.Serialization.XmlIgnore> Public Property CreatedWithThreadID As Integer = 0
-        <Xml.Serialization.XmlIgnore> Public Property LastUpdated As New Date
+        <Xml.Serialization.XmlIgnore> Public Property CreatedWithThreadID As Integer = 0 Implements Interfaces.ISimulationObject.CreatedWithThreadID
+        <Xml.Serialization.XmlIgnore> Public Property LastUpdated As New Date Implements Interfaces.ISimulationObject.LastUpdated
 
         Public MustOverride Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
@@ -153,11 +143,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Sub
 
-        Public Overridable Function GetDebugReport() As String
+        Public Overridable Function GetDebugReport() As String Implements Interfaces.ISimulationObject.GetDebugReport
             Return "Error - function not implemented"
         End Function
 
-        Public Sub AppendDebugLine(text As String)
+        Public Sub AppendDebugLine(text As String) Implements Interfaces.ISimulationObject.AppendDebugLine
             DebugText += text & vbCrLf & vbCrLf
         End Sub
 
@@ -167,7 +157,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property ErrorMessage() As String
+        Public Property ErrorMessage() As String Implements Interfaces.ISimulationObject.ErrorMessage
 
         ''' <summary>
         ''' Checks if a value is valid.
@@ -3390,7 +3380,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore> Public Property GraphicObject() As GraphicObject
+        <Xml.Serialization.XmlIgnore> Public Property GraphicObject() As Interfaces.IGraphicObject
 
         ''' <summary>
         ''' Object's Unique ID (Name)

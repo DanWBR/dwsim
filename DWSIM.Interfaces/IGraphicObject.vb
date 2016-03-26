@@ -56,6 +56,8 @@ Public Interface IGraphicObject
 
     Property Position As IPoint
 
+    Property Selected As Boolean
+
 End Interface
 
 Public Interface IConnectionPoint

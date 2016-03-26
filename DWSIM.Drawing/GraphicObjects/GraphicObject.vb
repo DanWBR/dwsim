@@ -27,13 +27,11 @@ Namespace GraphicObjects
         Friend _Size As Size
         Friend m_Rotation As Single
 
-        Public Property Selected As Boolean = False
-
         Public Function IsRunningOnMono() As Boolean
             Return Not Type.GetType("Mono.Runtime") Is Nothing
         End Function
 
-        Public Shared Function ReturnInstance(typename As String) As GraphicObject
+        Public Shared Function ReturnInstance(typename As String) As IGraphicObject
             Dim t As Type = Type.GetType(typename, False)
             If Not t Is Nothing Then Return Activator.CreateInstance(t) Else Return Nothing
         End Function
@@ -403,6 +401,8 @@ Namespace GraphicObjects
         Public Sub Draw1(surface As Object) Implements IGraphicObject.Draw
             Draw(DirectCast(surface, System.Drawing.Graphics))
         End Sub
+
+        Public Property Selected As Boolean = False Implements IGraphicObject.Selected
 
     End Class
 

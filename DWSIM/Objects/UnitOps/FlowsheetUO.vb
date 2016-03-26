@@ -184,7 +184,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                     If Not t Is Nothing Then obj = Activator.CreateInstance(t)
                     If obj Is Nothing Then
-                        obj = GraphicObject.ReturnInstance(xel.Element("Type").Value)
+                        obj = GraphicObjects.GraphicObject.ReturnInstance(xel.Element("Type").Value)
                     End If
                     obj.LoadData(xel.Elements.ToList)
                     If Not TypeOf obj Is TableGraphic Then
@@ -381,7 +381,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim t As Type = Type.GetType(xel2.Element("Type").Value, False)
                     If Not t Is Nothing Then obj = Activator.CreateInstance(t)
                     If obj Is Nothing Then
-                        obj = GraphicObject.ReturnInstance(xel2.Element("Type").Value)
+                        obj = GraphicObjects.GraphicObject.ReturnInstance(xel2.Element("Type").Value)
                     End If
                     obj.LoadData(xel2.Elements.ToList)
                     DirectCast(obj, TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
