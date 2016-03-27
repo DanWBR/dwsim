@@ -65,6 +65,7 @@
     <Compile Include="Enums.vb" />
     <Compile Include="ICompound.vb" />
     <Compile Include="ICompoundConstantProperties.vb" />
+    <Compile Include="IFlashAlgorithm.vb" />
     <Compile Include="IFlowsheet.vb" />
     <Compile Include="IFlowsheetOptions.vb" />
     <Compile Include="IGraphicObject.vb" />

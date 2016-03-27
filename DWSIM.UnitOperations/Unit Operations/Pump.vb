@@ -186,7 +186,7 @@ Namespace UnitOperations
         Protected m_FixOnDeltaP As Boolean = True
         Protected m_cmode As CalculationMode = CalculationMode.Delta_P
 
-        Protected m_curves As New Dictionary(Of String, UnitOperations.Auxiliary.PipingOps.Curve)
+        Protected m_curves As New Dictionary(Of String, Curve)
 
         Protected _curvehead As Double
         Protected _curveeff As Double
@@ -794,16 +794,6 @@ Namespace UnitOperations
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                 End With
 
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = True
-                    .Name = Me.Name
-                    .Tag = Me.GraphicObject.Tag
-                    .ObjectType = ObjectType.Pump
-                End With
-
-                form.CalculationQueue.Enqueue(objargs)
-
             Else
 
                 AppendDebugLine("Calculation finished successfully.")
@@ -846,16 +836,6 @@ Namespace UnitOperations
                     .GraphicObject.Calculated = False
                 End With
             End If
-
-            'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-            With objargs
-                .Calculated = False
-                .Name = Me.Name
-                .ObjectType = ObjectType.Pump
-            End With
-
-            form.CalculationQueue.Enqueue(objargs)
 
         End Function
 

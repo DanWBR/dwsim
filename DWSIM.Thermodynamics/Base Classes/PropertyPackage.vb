@@ -488,6 +488,7 @@ Namespace PropertyPackages
                 Return m_ss
             End Get
         End Property
+
 #End Region
 
 #Region "   Cloning Support"
@@ -1352,6 +1353,33 @@ Namespace PropertyPackages
             Me.CurrentMaterialStream.Phases(1).Properties.compressibilityFactor = 0.0#
 
         End Sub
+
+        Public Function CalculateEquilibrium(calctype As Interfaces.Enums.FlashCalculationType, val1 As Double, val2 As Double, mixmolefrac() As Double, initialKval() As Double, initialestimate As Double) As Interfaces.IFlashCalculationResult Implements Interfaces.IPropertyPackage.CalculateEquilibrium
+
+            Select Case calctype
+                Case Interfaces.Enums.FlashCalculationType.PressureTemperature
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.PressureEnthalpy
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.PressureEntropy
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.PressureSolidFraction
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.SF, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.PressureVaporFraction
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.TemperatureEnthalpy
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.TemperatureEntropy
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.TemperatureSolidFraction
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.SF, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.TemperatureVaporFraction
+                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                Case Else
+                    Throw New NotImplementedException
+            End Select
+
+        End Function
 
         Public Overridable Sub DW_CalcEquilibrium(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec)
 

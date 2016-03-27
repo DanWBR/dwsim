@@ -1,5 +1,17 @@
 ﻿Namespace Enums
 
+    Public Enum FlashCalculationType
+        PressureTemperature = 0
+        PressureEnthalpy = 1
+        PressureEntropy = 2
+        TemperatureEnthalpy = 3
+        TemperatureEntropy = 4
+        PressureVaporFraction = 5
+        TemperatureVaporFraction = 6
+        PressureSolidFraction = 7
+        TemperatureSolidFraction = 8
+    End Enum
+
     Public Enum AdjustVarType
         Manipulated = 0
         Controlled = 1

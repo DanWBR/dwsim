@@ -24,18 +24,6 @@ Imports System.Linq
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
-    Public Enum FlashCalculationType
-        PressureTemperature = 0
-        PressureEnthalpy = 1
-        PressureEntropy = 2
-        TemperatureEnthalpy = 3
-        TemperatureEntropy = 4
-        PressureVaporFraction = 5
-        TemperatureVaporFraction = 6
-        PressureSolidFraction = 7
-        TemperatureSolidFraction = 8
-    End Enum
-
     ''' <summary>
     ''' This is the base class for the flash algorithms.
     ''' </summary>
@@ -973,30 +961,32 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     ''' <remarks></remarks>
     <System.Serializable> Public Class FlashCalculationResult
 
+        Implements Interfaces.IFlashCalculationResult
+
         ''' <summary>
         ''' Defines the base mole amount for determination of phase/compound fractions. Default is 1.
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property BaseMoleAmount As Double = 1.0#
-        Public Property Kvalues As New List(Of Double)
-        Public Property MixtureMoleAmounts As New List(Of Double)
-        Public Property VaporPhaseMoleAmounts As New List(Of Double)
-        Public Property LiquidPhase1MoleAmounts As New List(Of Double)
-        Public Property LiquidPhase2MoleAmounts As New List(Of Double)
-        Public Property SolidPhaseMoleAmounts As New List(Of Double)
-        Public Property CalculatedTemperature As Nullable(Of Double)
-        Public Property CalculatedPressure As Nullable(Of Double)
-        Public Property CalculatedEnthalpy As Nullable(Of Double)
-        Public Property CalculatedEntropy As Nullable(Of Double)
-        Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
-        Public Property FlashAlgorithmType As String = ""
+        Public Property BaseMoleAmount As Double = 1.0# Implements Interfaces.IFlashCalculationResult.BaseMoleAmount
+        Public Property Kvalues As New List(Of Double) Implements Interfaces.IFlashCalculationResult.Kvalues
+        Public Property MixtureMoleAmounts As New List(Of Double) Implements Interfaces.IFlashCalculationResult.MixtureMoleAmounts
+        Public Property VaporPhaseMoleAmounts As New List(Of Double) Implements Interfaces.IFlashCalculationResult.VaporPhaseMoleAmounts
+        Public Property LiquidPhase1MoleAmounts As New List(Of Double) Implements Interfaces.IFlashCalculationResult.LiquidPhase1MoleAmounts
+        Public Property LiquidPhase2MoleAmounts As New List(Of Double) Implements Interfaces.IFlashCalculationResult.LiquidPhase2MoleAmounts
+        Public Property SolidPhaseMoleAmounts As New List(Of Double) Implements Interfaces.IFlashCalculationResult.SolidPhaseMoleAmounts
+        Public Property CalculatedTemperature As Nullable(Of Double) Implements Interfaces.IFlashCalculationResult.CalculatedTemperature
+        Public Property CalculatedPressure As Nullable(Of Double) Implements Interfaces.IFlashCalculationResult.CalculatedPressure
+        Public Property CalculatedEnthalpy As Nullable(Of Double) Implements Interfaces.IFlashCalculationResult.CalculatedEnthalpy
+        Public Property CalculatedEntropy As Nullable(Of Double) Implements Interfaces.IFlashCalculationResult.CalculatedEntropy
+        Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties) Implements Interfaces.IFlashCalculationResult.CompoundProperties
+        Public Property FlashAlgorithmType As String = "" Implements Interfaces.IFlashCalculationResult.FlashAlgorithmType
         Public Property FlashSpecification1 As PropertyPackages.FlashSpec
         Public Property FlashSpecification2 As PropertyPackages.FlashSpec
-        Public Property ResultException As Exception
-        Public Property IterationsTaken As Integer = 0
-        Public Property TimeTaken As New TimeSpan()
+        Public Property ResultException As Exception Implements Interfaces.IFlashCalculationResult.ResultException
+        Public Property IterationsTaken As Integer = 0 Implements Interfaces.IFlashCalculationResult.IterationsTaken
+        Public Property TimeTaken As New TimeSpan() Implements Interfaces.IFlashCalculationResult.TimeTaken
 
         Sub New()
 
@@ -1008,7 +998,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Sub
 
-        Public Function GetVaporPhaseMoleFractions() As Double()
+        Public Function GetVaporPhaseMoleFractions() As Double() Implements Interfaces.IFlashCalculationResult.GetVaporPhaseMoleFractions
 
             Dim collection As List(Of Double) = VaporPhaseMoleAmounts
 
@@ -1026,7 +1016,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetLiquidPhase1MoleFractions() As Double()
+        Public Function GetLiquidPhase1MoleFractions() As Double() Implements Interfaces.IFlashCalculationResult.GetLiquidPhase1MoleFractions
 
             Dim collection As List(Of Double) = LiquidPhase1MoleAmounts
 
@@ -1044,7 +1034,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetLiquidPhase2MoleFractions() As Double()
+        Public Function GetLiquidPhase2MoleFractions() As Double() Implements Interfaces.IFlashCalculationResult.GetLiquidPhase2MoleFractions
 
             Dim collection As List(Of Double) = LiquidPhase2MoleAmounts
 
@@ -1062,7 +1052,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetSolidPhaseMoleFractions() As Double()
+        Public Function GetSolidPhaseMoleFractions() As Double() Implements Interfaces.IFlashCalculationResult.GetSolidPhaseMoleFractions
 
             Dim collection As List(Of Double) = SolidPhaseMoleAmounts
 
@@ -1080,7 +1070,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetVaporPhaseMoleFraction() As Double
+        Public Function GetVaporPhaseMoleFraction() As Double Implements Interfaces.IFlashCalculationResult.GetVaporPhaseMoleFraction
 
             Dim collection As List(Of Double) = VaporPhaseMoleAmounts
 
@@ -1088,7 +1078,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetLiquidPhase1MoleFraction() As Double
+        Public Function GetLiquidPhase1MoleFraction() As Double Implements Interfaces.IFlashCalculationResult.GetLiquidPhase1MoleFraction
 
             Dim collection As List(Of Double) = LiquidPhase1MoleAmounts
 
@@ -1096,7 +1086,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetLiquidPhase2MoleFraction() As Double
+        Public Function GetLiquidPhase2MoleFraction() As Double Implements Interfaces.IFlashCalculationResult.GetLiquidPhase2MoleFraction
 
             Dim collection As List(Of Double) = LiquidPhase2MoleAmounts
 
@@ -1104,7 +1094,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetSolidPhaseMoleFraction() As Double
+        Public Function GetSolidPhaseMoleFraction() As Double Implements Interfaces.IFlashCalculationResult.GetSolidPhaseMoleFraction
 
             Dim collection As List(Of Double) = SolidPhaseMoleAmounts
 
@@ -1112,31 +1102,31 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetVaporPhaseMassFractions() As Double()
+        Public Function GetVaporPhaseMassFractions() As Double() Implements Interfaces.IFlashCalculationResult.GetVaporPhaseMassFractions
 
             Return ConvertToMassFractions(GetVaporPhaseMoleFractions())
 
         End Function
 
-        Public Function GetLiquidPhase1MassFractions() As Double()
+        Public Function GetLiquidPhase1MassFractions() As Double() Implements Interfaces.IFlashCalculationResult.GetLiquidPhase1MassFractions
 
             Return ConvertToMassFractions(GetLiquidPhase1MoleFractions())
 
         End Function
 
-        Public Function GetLiquidPhase2MassFractions() As Double()
+        Public Function GetLiquidPhase2MassFractions() As Double() Implements Interfaces.IFlashCalculationResult.GetLiquidPhase2MassFractions
 
             Return ConvertToMassFractions(GetLiquidPhase2MoleFractions())
 
         End Function
 
-        Public Function GetSolidPhaseMassFractions() As Double()
+        Public Function GetSolidPhaseMassFractions() As Double() Implements Interfaces.IFlashCalculationResult.GetSolidPhaseMassFractions
 
             Return ConvertToMassFractions(GetSolidPhaseMoleFractions())
 
         End Function
 
-        Private Function ConvertToMassFractions(ByVal Vz As Double()) As Double()
+        Private Function ConvertToMassFractions(ByVal Vz As Double()) As Double() Implements Interfaces.IFlashCalculationResult.ConvertToMassFractions
 
             Dim Vwe(UBound(Vz)) As Double
             Dim mol_x_mm As Double = 0
@@ -1162,7 +1152,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Private Function CalcMolarWeight(ByVal Vz() As Double) As Double
+        Private Function CalcMolarWeight(ByVal Vz() As Double) As Double Implements Interfaces.IFlashCalculationResult.CalcMolarWeight
 
             Dim val As Double
 
@@ -1177,7 +1167,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetVaporPhaseMassFraction() As Double
+        Public Function GetVaporPhaseMassFraction() As Double Implements Interfaces.IFlashCalculationResult.GetVaporPhaseMassFraction
 
             Dim mw, vw As Double
 
@@ -1188,7 +1178,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetLiquidPhase1MassFraction() As Double
+        Public Function GetLiquidPhase1MassFraction() As Double Implements Interfaces.IFlashCalculationResult.GetLiquidPhase1MassFraction
 
             Dim mw, l1w As Double
 
@@ -1199,7 +1189,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetLiquidPhase2MassFraction() As Double
+        Public Function GetLiquidPhase2MassFraction() As Double Implements Interfaces.IFlashCalculationResult.GetLiquidPhase2MassFraction
 
             Dim mw, l2w As Double
 
@@ -1210,7 +1200,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function GetSolidPhaseMassFraction() As Double
+        Public Function GetSolidPhaseMassFraction() As Double Implements Interfaces.IFlashCalculationResult.GetSolidPhaseMassFraction
 
             Dim mw, sw As Double
 
@@ -1222,12 +1212,5 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
     End Class
-    <System.Serializable()> Public Class FlashResult
-        Public P, T, H, S As Double 'pressure, temperature, enthalpy, entropy
-        Public LF, L1F, L2F, VF, SF As Double 'molar fraction of phases
-        Public Vx(), Vx1(), Vx2(), Vy(), Vs() As Double 'molar fractions in each phase
-        Public Counter As Integer 'number of iterations
-        Public Err As Double 'final error
-        Public dT As TimeSpan
-    End Class
+
 End Namespace

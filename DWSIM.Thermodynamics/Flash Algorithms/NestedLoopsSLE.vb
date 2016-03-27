@@ -260,12 +260,12 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         End Function
 
-        Function Flash_SL(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage) As FlashResult
+        Function Flash_SL(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
+
             'This flash is used to calculate the solid/liquid equilibrium at given pressure and temperature
             'Input parameters:  global mole fractions Vz
             'Result Parameters: number of moles in each phase
 
-            Dim Result As New FlashResult
             Dim MaxError As Double = 0.0000001
 
             Dim i, n, ecount As Integer
@@ -395,18 +395,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Loop Until Abs(L - L_old) < MaxError
 
 out:        d2 = Date.Now
-            With Result
-                .LF = L
-                .SF = 1 - L
-                .VF = 0
-                .Vx = Vx
-                .Vs = Vs
-                .Err = L - L_old
-                .Counter = ecount
-                .dT = d2 - d1
-            End With
 
-            Return Result
+            Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
+
         End Function
 
         Public Function Flash_PT_NL(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
@@ -470,14 +461,14 @@ out:        d2 = Date.Now
                     '================================================
                     '== Do initial SLE flash to precipitate solids ==
                     '================================================
-                    Dim SL_Result As FlashResult
+                    Dim SL_Result As Object
                     SL_Result = Flash_SL(Vz, P, T, PP)
-                    Vx = SL_Result.Vx
-                    Vs = SL_Result.Vs
+                    Vx = SL_Result(3)
+                    Vs = SL_Result(4)
 
                     'calculate global phase fractions
-                    L = SL_Result.LF * (1 - V)
-                    S = SL_Result.SF * (1 - V)
+                    L = SL_Result(0) * (1 - V)
+                    S = SL_Result(1) * (1 - V)
                 End If
 
                 'only solids or vapour left
@@ -1457,18 +1448,18 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
                     '== Do SLE flash to precipitate solids ==========
                     '================================================
                     Vs_ant = Vs.Clone
-                    Dim SL_Result As FlashResult
+                    Dim SL_Result As Object
                     SL_Result = Flash_SL(Vz, P, T, PP)
-                    Vx = SL_Result.Vx
-                    Vs = SL_Result.Vs
+                    Vx = SL_Result(3)
+                    Vs = SL_Result(4)
 
                     '================================================
                     '== Calculate global phase fractions ============
                     '================================================
                     GL_old = L
                     GS_old = S
-                    L = SL_Result.LF * (1 - V)
-                    S = SL_Result.SF * (1 - V)
+                    L = SL_Result(0) * (1 - V)
+                    S = SL_Result(1) * (1 - V)
 
                     '===================================================================
                     '== Calculate vapour fraction relative to vapour/liquid ============
