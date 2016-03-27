@@ -14,6 +14,8 @@
 
     Property AtEquilibrium As Boolean
 
+    Property PropertyPackage As IPropertyPackage
+
     Sub SetPhaseComposition(Vx As Array, phs As Integer)
 
     Sub SetOverallComposition(Vx As Array)
@@ -23,5 +25,7 @@
     ReadOnly Property Flowsheet As IFlowsheet
 
     Sub Validate()
+
+    Sub ClearAllProps()
 
 End Interface

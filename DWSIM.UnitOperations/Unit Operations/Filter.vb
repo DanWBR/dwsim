@@ -26,6 +26,7 @@ Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace UnitOperations
 
@@ -77,44 +78,21 @@ Namespace UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As FormFlowsheet = Me.FlowSheet
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.Filter
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.Filter
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.Filter
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
-            Dim instr, outstr1, outstr2 As Streams.MaterialStream
-            instr = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            outstr1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            outstr2 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+            Dim instr, outstr1, outstr2 As IMaterialStream
+            instr = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            outstr1 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            outstr2 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
 
             'the filter doesn't support a vapor phase in the inlet stream.
+
             If instr.Phases(2).Properties.massflow.GetValueOrDefault > 0.0# Then
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("FilterVaporPhaseNotSupported"))
             End If
@@ -141,13 +119,6 @@ Namespace UnitOperations
             crh = Me.CakeRelativeHumidity / 100
 
             If crh > frh Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.Filter
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("FilterInvalidCakeHumidity"))
             End If
 

@@ -162,7 +162,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore()> Public Property PropertyPackage() As PropertyPackages.PropertyPackage
+        <Xml.Serialization.XmlIgnore()> Public Property PropertyPackage() As PropertyPackage
             Get
                 If Not _pp Is Nothing Then Return _pp
                 If _ppid Is Nothing Then _ppid = ""
@@ -182,7 +182,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
                 Return Nothing
             End Get
-            Set(ByVal value As PropertyPackages.PropertyPackage)
+            Set(ByVal value As PropertyPackage)
                 If value IsNot Nothing Then
                     _ppid = value.UniqueID
                     _pp = value
@@ -5048,7 +5048,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' Using the ClearAllProps method results in a Material Object that is in the same state as
         ''' when it was first created. It is an alternative to using the CreateMaterial method but it is
         ''' expected to have a smaller overhead in operating system resources.</remarks>
-        Public Sub ClearAllProps() Implements ICapeThermoMaterial.ClearAllProps
+        Public Sub ClearAllProps() Implements ICapeThermoMaterial.ClearAllProps, Interfaces.IMaterialStream.ClearAllProps
             Me.PropertyPackage.CurrentMaterialStream = Me
             Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
             Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
