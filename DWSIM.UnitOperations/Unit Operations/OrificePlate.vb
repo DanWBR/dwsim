@@ -163,8 +163,8 @@ Namespace UnitOperations
 
             Dim instr, outstr As Streams.MaterialStream
 
-            instr = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            outstr = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            instr = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            outstr = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 
             Me.PropertyPackage.CurrentMaterialStream = instr
             Ti = instr.Phases(0).Properties.temperature.GetValueOrDefault
@@ -247,18 +247,18 @@ Namespace UnitOperations
             Me.DeltaT = T2 - Ti
 
             'Atribuir valores à corrente de matéria conectada à jusante
-            With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            With Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 .Phases(0).Properties.temperature = T2
                 .Phases(0).Properties.pressure = P2
                 .Phases(0).Properties.enthalpy = H2
-                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim comp As Interfaces.ICompound
                 Dim i As Integer = 0
                 For Each comp In .Phases(0).Compounds.Values
-                    comp.MoleFraction = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MoleFraction
-                    comp.MassFraction = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MassFraction
+                    comp.MoleFraction = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MoleFraction
+                    comp.MassFraction = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MassFraction
                     i += 1
                 Next
-                .Phases(0).Properties.massflow = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
+                .Phases(0).Properties.massflow = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
             End With
 
             'Call function to calculate flowsheet
@@ -281,13 +281,13 @@ Namespace UnitOperations
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                With Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.molarfraction = 1
                     .Phases(0).Properties.massfraction = 1
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     Dim i As Integer = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0

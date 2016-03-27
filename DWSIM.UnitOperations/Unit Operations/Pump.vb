@@ -21,8 +21,10 @@ Imports System.Globalization
 Imports System.Reflection
 Imports System.Linq
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.UnitOperations.Auxiliary.PipingOps
+Imports DWSIM.Thermodynamics.MathEx.Interpolation
 
-Namespace UnitOperations.Auxiliary.PipingOps
+Namespace Auxiliary.PipingOps
 
     Public Enum CurveType
         Head
@@ -410,34 +412,34 @@ Namespace UnitOperations
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
             Dim form As Interfaces.IFlowsheet = Me.FlowSheet
-        
+
             If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow4"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-               Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+                Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
-            Me.PropertyPackage.CurrentMaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
 
             Me.PropertyPackage.CurrentMaterialStream.Validate()
 
             Dim Ti, Pi, Hi, Wi, rho_li, qli, qvi, ei, ein, T2, P2, H2 As Double
 
-            qvi = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(2).Properties.volumetric_flow.GetValueOrDefault
+            qvi = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(2).Properties.volumetric_flow.GetValueOrDefault
             If qvi > 0 And Not Me.IgnorePhase Then Throw New Exception(Me.FlowSheet.GetTranslatedString("ExisteumaPhasevaporna"))
 
-            Ti = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.temperature.GetValueOrDefault
-            Pi = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.pressure.GetValueOrDefault
-            rho_li = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.density.GetValueOrDefault
-            qli = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(1).Properties.volumetric_flow.GetValueOrDefault
-            Hi = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.enthalpy.GetValueOrDefault
-            Wi = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
+            Ti = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.temperature.GetValueOrDefault
+            Pi = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.pressure.GetValueOrDefault
+            rho_li = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.density.GetValueOrDefault
+            qli = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(1).Properties.volumetric_flow.GetValueOrDefault
+            Hi = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.enthalpy.GetValueOrDefault
+            Wi = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
             ei = Hi * Wi
             ein = ei
 
-            If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.ComponentName))
+            If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Tag))
             If DebugMode Then AppendDebugLine(String.Format("Flash Algorithm: {0}", Me.PropertyPackage.FlashBase.GetType.Name))
             If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, W = {3} kg/s, Liquid Flow = {4} m3/s", Ti, Pi, Hi, Wi, qli))
 
@@ -603,7 +605,7 @@ Namespace UnitOperations
                     Me.CurveFlow = qli
 
                     'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
-                    With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                    With Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
                     End With
@@ -613,7 +615,7 @@ Namespace UnitOperations
                     Dim tmp As Object
 
                     'Corrente de EnergyFlow - pegar valor do DH
-                    With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                    With Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
                         Me.DeltaQ = .EnergyFlow.GetValueOrDefault 'Wi * (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100)
                     End With
 
@@ -652,7 +654,7 @@ Namespace UnitOperations
                     Dim tmp As Object
 
                     'Corrente de EnergyFlow - pegar valor do DH
-                    With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                    With Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
                         .EnergyFlow = Me.DeltaQ
                     End With
 
@@ -688,11 +690,11 @@ Namespace UnitOperations
 
                 Case CalculationMode.Delta_P
 
-                    qvi = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(2).Properties.volumetric_flow.GetValueOrDefault.ToString
+                    qvi = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(2).Properties.volumetric_flow.GetValueOrDefault.ToString
 
                     If qvi > 0 And Not Me.IgnorePhase Then Throw New Exception(Me.FlowSheet.GetTranslatedString("ExisteumaPhasevaporna"))
 
-                    Me.PropertyPackage.CurrentMaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                    Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
                     P2 = Pi + Me.DeltaP.GetValueOrDefault
                     CheckSpec(P2, True, "outlet pressure")
 
@@ -724,14 +726,14 @@ Namespace UnitOperations
                     End Try
 
                     'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
-                    With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                    With Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
                     End With
 
                 Case CalculationMode.OutletPressure
 
-                    Me.PropertyPackage.CurrentMaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                    Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
 
                     P2 = Me.Pout
                     CheckSpec(P2, True, "outlet pressure")
@@ -766,7 +768,7 @@ Namespace UnitOperations
                     End Try
 
                     'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
-                    With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                    With Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
                     End With
@@ -776,19 +778,19 @@ Namespace UnitOperations
             If Not DebugMode Then
 
                 'Atribuir valores à corrente de matéria conectada à jusante
-                Dim omstr As MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                Dim omstr As IMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 With omstr
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     Dim i As Integer = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MoleFraction
-                        comp.MassFraction = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MassFraction
+                        comp.MoleFraction = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MoleFraction
+                        comp.MassFraction = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Compounds(comp.Name).MassFraction
                         i += 1
                     Next
-                    .Phases(0).Properties.massflow = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
+                    .Phases(0).Properties.massflow = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                 End With
 
@@ -812,18 +814,18 @@ Namespace UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
+            Dim form As IFlowsheet = Me.FlowSheet
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                With Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.molarfraction = 1
                     .Phases(0).Properties.massfraction = 1
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     Dim i As Integer = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0
@@ -839,7 +841,7 @@ Namespace UnitOperations
 
             'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
-                With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                With Me.FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     .EnergyFlow = Nothing
                     .GraphicObject.Calculated = False
                 End With

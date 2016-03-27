@@ -113,11 +113,11 @@ Namespace UnitOperations
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                outstr1 = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
+                outstr1 = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With outstr1
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wlvout
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MassFlow = (1 - sse) * instr.Phases(7).Compounds(comp.Name).MassFlow + instr.Phases(2).Compounds(comp.Name).MassFlow
                         comp.MassFlow += lse * (instr.Phases(3).Compounds(comp.Name).MassFlow + instr.Phases(4).Compounds(comp.Name).MassFlow)
@@ -138,11 +138,11 @@ Namespace UnitOperations
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                outstr2 = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
+                outstr2 = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With outstr2
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wsout
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MassFlow = sse * instr.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault + (1 - lse) * (instr.Phases(3).Compounds(comp.Name).MassFlow + instr.Phases(4).Compounds(comp.Name).MassFlow)
                         comp.MassFraction = If(Wsout > 0.0#, comp.MassFlow / Wsout, 0.0#)
@@ -191,12 +191,12 @@ Namespace UnitOperations
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0
@@ -212,12 +212,12 @@ Namespace UnitOperations
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0

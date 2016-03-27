@@ -329,38 +329,38 @@ Namespace UnitOperations
                 Try
                     Dim id = obj.Name
                     Dim gobj = obj.GraphicObject
-                    form.Collections.FlowsheetObjectCollection.Add(id, obj)
+                    Me.FlowSheet.SimulationObjects.Add(id, obj)
                     form.Collections.GraphicObjectCollection.Add(id, gobj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Unit Operation Information", ex))
                 End Try
             Next
 
-            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.FlowSheet.SimulationObjects.Values
                 Try
                     If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Adjust) IsNot Nothing Then
                         Dim so2 As DWSIM.SimulationObjects.SpecialOps.Adjust = so
-                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ManipulatedObjectData.m_ID) Then
-                            so2.ManipulatedObject = form.Collections.FlowsheetObjectCollection(so2.ManipulatedObjectData.m_ID)
+                        If Me.FlowSheet.SimulationObjects.ContainsKey(so2.ManipulatedObjectData.m_ID) Then
+                            so2.ManipulatedObject = Me.FlowSheet.SimulationObjects(so2.ManipulatedObjectData.m_ID)
                             DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToMv = so2.ManipulatedObject.GraphicObject
                         End If
-                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ControlledObjectData.m_ID) Then
-                            so2.ControlledObject = form.Collections.FlowsheetObjectCollection(so2.ControlledObjectData.m_ID)
+                        If Me.FlowSheet.SimulationObjects.ContainsKey(so2.ControlledObjectData.m_ID) Then
+                            so2.ControlledObject = Me.FlowSheet.SimulationObjects(so2.ControlledObjectData.m_ID)
                             DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToCv = so2.ControlledObject.GraphicObject
                         End If
-                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ReferencedObjectData.m_ID) Then
-                            so2.ReferenceObject = form.Collections.FlowsheetObjectCollection(so2.ReferencedObjectData.m_ID)
+                        If Me.FlowSheet.SimulationObjects.ContainsKey(so2.ReferencedObjectData.m_ID) Then
+                            so2.ReferenceObject = Me.FlowSheet.SimulationObjects(so2.ReferencedObjectData.m_ID)
                             DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
                         End If
                     End If
                     If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Spec) IsNot Nothing Then
                         Dim so2 As DWSIM.SimulationObjects.SpecialOps.Spec = so
-                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.TargetObjectData.m_ID) Then
-                            so2.TargetObject = form.Collections.FlowsheetObjectCollection(so2.TargetObjectData.m_ID)
+                        If Me.FlowSheet.SimulationObjects.ContainsKey(so2.TargetObjectData.m_ID) Then
+                            so2.TargetObject = Me.FlowSheet.SimulationObjects(so2.TargetObjectData.m_ID)
                             DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
                         End If
-                        If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.SourceObjectData.m_ID) Then
-                            so2.SourceObject = form.Collections.FlowsheetObjectCollection(so2.SourceObjectData.m_ID)
+                        If Me.FlowSheet.SimulationObjects.ContainsKey(so2.SourceObjectData.m_ID) Then
+                            so2.SourceObject = Me.FlowSheet.SimulationObjects(so2.SourceObjectData.m_ID)
                             DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
                         End If
                     End If
@@ -384,7 +384,7 @@ Namespace UnitOperations
                         obj = GraphicObjects.GraphicObject.ReturnInstance(xel2.Element("Type").Value)
                     End If
                     obj.LoadData(xel2.Elements.ToList)
-                    DirectCast(obj, TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
+                    DirectCast(obj, TableGraphic).BaseOwner = Me.FlowSheet.SimulationObjects(xel2.<Owner>.Value)
                     form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Flowsheet Table Information", ex))
@@ -493,8 +493,8 @@ Namespace UnitOperations
             'For Each xel As XElement In data
             '    Try
             '        Dim id As String = xel.<Name>.Value
-            '        If form.Collections.FlowsheetObjectCollection.ContainsKey(id) Then
-            '            Dim obj = form.Collections.FlowsheetObjectCollection(id).GraphicObject
+            '        If Me.FlowSheet.SimulationObjects.ContainsKey(id) Then
+            '            Dim obj = Me.FlowSheet.SimulationObjects(id).GraphicObject
             '            obj.LoadData(xel.Elements.ToList)
             '        End If
             '    Catch ex As Exception
@@ -507,7 +507,7 @@ Namespace UnitOperations
             For Each xel As XElement In data
                 Try
                     Dim id As String = xel.<Name>.Value
-                    Dim obj = form.Collections.FlowsheetObjectCollection(id)
+                    Dim obj = Me.FlowSheet.SimulationObjects(id)
                     obj.LoadData(xel.Elements.ToList)
                     If TypeOf obj Is Streams.MaterialStream Then
                         For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
@@ -537,7 +537,7 @@ Namespace UnitOperations
             xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
             xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Form.Collections.FlowsheetObjectCollection.Values
+            For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.FlowSheet.SimulationObjects.Values
                 xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
             Next
 

@@ -177,7 +177,7 @@ Namespace UnitOperations
                     End If
 
                     Dim Ti, Pi, Hi, Wi, T2, P2, H2, Hin, Hout, Win, Wout, MassBal As Double
-                    Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
+                    Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
                     Dim ParName As String
                     Dim i As Integer
 
@@ -210,7 +210,7 @@ Namespace UnitOperations
                     Dim S As DWSIM.SimulationObjects.Streams.MaterialStream
                     For k = 0 To 3
                         If Me.GraphicObject.InputConnectors(k).IsAttached Then
-                            S = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(k).AttachedConnector.AttachedFrom.Name)
+                            S = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(k).AttachedConnector.AttachedFrom.Name)
                             Me.PropertyPackage.CurrentMaterialStream = S
                             Ti = S.Phases(0).Properties.temperature.GetValueOrDefault.ToString
                             Pi = S.Phases(0).Properties.pressure.GetValueOrDefault.ToString
@@ -225,7 +225,7 @@ Namespace UnitOperations
                             mysheetIn.Cells(8, 2 + k).Value = Hi
 
                             Dim dy As Integer = 0
-                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Compounds.Values
+                            For Each comp As Interfaces.ICompound In S.Phases(0).Compounds.Values
                                 mysheetIn.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetOut.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetIn.Cells(12 + dy, 2 + k).Value = comp.MolarFlow
@@ -236,7 +236,7 @@ Namespace UnitOperations
                             mysheetIn.Cells(7, 2 + k).Value = ""
                             mysheetIn.Cells(8, 2 + k).Value = ""
                             Dim dy As Integer = 0
-                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
+                            For Each comp As Interfaces.ICompound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
                                 mysheetIn.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetOut.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetIn.Cells(12 + dy, 2 + k).Value = ""
@@ -255,7 +255,7 @@ Namespace UnitOperations
 
                     For k = 0 To 3 'run through all streams to execute TP-flash
                         If Me.GraphicObject.OutputConnectors(k).IsAttached Then
-                            Me.PropertyPackage.CurrentMaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(k).AttachedConnector.AttachedTo.Name)
+                            Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(k).AttachedConnector.AttachedTo.Name)
 
                             T2 = mysheetOut.Cells(6, 2 + k).Value
                             P2 = mysheetOut.Cells(7, 2 + k).Value
@@ -265,7 +265,7 @@ Namespace UnitOperations
                                 .Phases(0).Properties.temperature = T2
                                 .Phases(0).Properties.pressure = P2
 
-                                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                                Dim comp As Interfaces.ICompound
                                 i = 0
                                 SMole = 0
                                 SMass = 0
@@ -397,7 +397,7 @@ Namespace UnitOperations
                 End If
 
                 Dim Ti, Pi, Hi, Wi, T2, P2, H2, Hin, Hout, Win, Wout, MassBal As Double
-                Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
+                Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
                 Dim ParName As String
                 Dim i As Integer
 
@@ -430,7 +430,7 @@ Namespace UnitOperations
                 Dim S As DWSIM.SimulationObjects.Streams.MaterialStream
                 For k = 0 To 3
                     If Me.GraphicObject.InputConnectors(k).IsAttached Then
-                        S = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(k).AttachedConnector.AttachedFrom.Name)
+                        S = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(k).AttachedConnector.AttachedFrom.Name)
                         Me.PropertyPackage.CurrentMaterialStream = S
                         Ti = S.Phases(0).Properties.temperature.GetValueOrDefault
                         Pi = S.Phases(0).Properties.pressure.GetValueOrDefault
@@ -445,7 +445,7 @@ Namespace UnitOperations
                         mysheetIn.Cells(7, 1 + k).Value = Hi
 
                         Dim dy As Integer = 0
-                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Compounds.Values
+                        For Each comp As Interfaces.ICompound In S.Phases(0).Compounds.Values
                             mysheetIn.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetOut.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetIn.Cells(11 + dy, 1 + k).Value = comp.MolarFlow.GetValueOrDefault
@@ -456,7 +456,7 @@ Namespace UnitOperations
                         mysheetIn.Cells(6, 1 + k).Value = ""
                         mysheetIn.Cells(7, 1 + k).Value = ""
                         Dim dy As Integer = 0
-                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each comp As Interfaces.ICompound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
                             mysheetIn.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetOut.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetIn.Cells(11 + dy, 1 + k).Value = ""
@@ -497,7 +497,7 @@ Namespace UnitOperations
 
                 For k = 0 To 3 'run through all streams to execute TP-flash
                     If Me.GraphicObject.OutputConnectors(k).IsAttached Then
-                        Me.PropertyPackage.CurrentMaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(k).AttachedConnector.AttachedTo.Name)
+                        Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(k).AttachedConnector.AttachedTo.Name)
 
                         T2 = mysheetOut.Cells(5, 1 + k).Value
                         P2 = mysheetOut.Cells(6, 1 + k).Value
@@ -507,7 +507,7 @@ Namespace UnitOperations
                             .Phases(0).Properties.temperature = T2
                             .Phases(0).Properties.pressure = P2
 
-                            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                            Dim comp As Interfaces.ICompound
                             i = 0
                             SMole = 0
                             SMass = 0
@@ -597,13 +597,13 @@ Namespace UnitOperations
                 If Me.GraphicObject.OutputConnectors(k).IsAttached Then
 
                     'Zerar valores da corrente de matéria conectada a jusante
-                    With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(k).AttachedConnector.AttachedTo.Name)
+                    With Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(k).AttachedConnector.AttachedTo.Name)
                         .Phases(0).Properties.temperature = Nothing
                         .Phases(0).Properties.pressure = Nothing
                         .Phases(0).Properties.enthalpy = Nothing
                         .Phases(0).Properties.molarfraction = 1
                         .Phases(0).Properties.massfraction = 1
-                        Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                        Dim comp As Interfaces.ICompound
                         Dim i As Integer = 0
                         For Each comp In .Phases(0).Compounds.Values
                             comp.MoleFraction = 0
@@ -620,7 +620,7 @@ Namespace UnitOperations
 
             'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
-                With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                With Me.FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     .EnergyFlow = Nothing
                     .GraphicObject.Calculated = False
                 End With

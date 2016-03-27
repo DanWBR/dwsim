@@ -258,7 +258,7 @@ Namespace UnitOperations
 
         End Function
 
-        Function ObjectCopy(ByVal obj As DWSIM.SimulationObjects.UnitOperations.BaseClass) As DWSIM.SimulationObjects.UnitOperations.BaseClass
+        Function ObjectCopy(ByVal obj As UnitOperations.BaseClass) As UnitOperations.BaseClass
 
             Dim objMemStream As New MemoryStream(250000)
             Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
@@ -340,7 +340,7 @@ Namespace UnitOperations
             DT.Columns.Add(("Unidade"), GetType(System.String))
             DT.Rows.Clear()
 
-            Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass
+            Dim baseobj As BaseClass
             Dim properties() As String
             Dim description As String
             Dim objtype As ObjectType
@@ -964,7 +964,7 @@ Namespace UnitOperations
         Friend m_dirty As Boolean = True
 
         Public Sub GetClassID(ByRef pClassID As System.Guid) Implements IPersistStreamInit.GetClassID
-            pClassID = New Guid(DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass.ClassId)
+            pClassID = New Guid(UnitOpBaseClass.ClassId)
         End Sub
 
         Public Sub GetSizeMax(ByRef pcbSize As Long) Implements IPersistStreamInit.GetSizeMax
@@ -1172,7 +1172,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public MustInherit Class SpecialOpBaseClass
 
-        Inherits DWSIM.SimulationObjects.UnitOperations.BaseClass
+        Inherits BaseClass
 
         Public Sub New()
             MyBase.CreateNew()

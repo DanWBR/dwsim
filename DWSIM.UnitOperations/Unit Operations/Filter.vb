@@ -173,11 +173,11 @@ Namespace UnitOperations
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                outstr1 = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
+                outstr1 = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With outstr1
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wlout
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MassFlow = instr.Phases(1).Compounds(comp.Name).MassFlow * Wlout / Wlin
                         comp.MassFraction = comp.MassFlow / Wlout
@@ -197,11 +197,11 @@ Namespace UnitOperations
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                outstr2 = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
+                outstr2 = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With outstr2
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wsout
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MassFlow = instr.Phases(1).Compounds(comp.Name).MassFlow * (Wlin - Wlout) / Wlin + instr.Phases(7).Compounds(comp.Name).MassFlow
                         comp.MassFraction = comp.MassFlow / Wsout
@@ -248,7 +248,7 @@ Namespace UnitOperations
 
             'update energy stream power value
 
-            With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+            With Me.FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                 .EnergyFlow = Me.EnergyImb
                 .GraphicObject.Calculated = True
             End With
@@ -277,12 +277,12 @@ Namespace UnitOperations
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0
@@ -298,12 +298,12 @@ Namespace UnitOperations
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedTo.Name)
+                ms = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As Interfaces.ICompound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0
@@ -319,7 +319,7 @@ Namespace UnitOperations
 
             'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
-                With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                With Me.FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     .EnergyFlow = Nothing
                     .GraphicObject.Calculated = False
                 End With

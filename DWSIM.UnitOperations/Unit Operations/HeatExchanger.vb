@@ -323,7 +323,7 @@ Namespace UnitOperations
             'calculate maximum theoretical heat exchange
             If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate hot stream outlet enthalpy... P = {0} Pa, T = {1} K", Ph2, Tc1))
             Dim HHx As Double
-            Dim tmpstr As MaterialStream = StInHot.Clone
+            Dim tmpstr As IMaterialStream = StInHot.Clone
             tmpstr.PropertyPackage = StInHot.PropertyPackage.Clone
             tmpstr.SetFlowsheet(StInHot.FlowSheet)
             tmpstr.PropertyPackage.CurrentMaterialStream = tmpstr
@@ -665,7 +665,7 @@ Namespace UnitOperations
                         Dim tmp = StInCold.PropertyPackage.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P, Tc2, Pc2, 0)
                         Hc2 = tmp(4)
                         Q = Wc * (Hc2 - Hc1)
-                        Dim tms As MaterialStream = StInCold.Clone
+                        Dim tms As IMaterialStream = StInCold.Clone
                         tms.SetFlowsheet(StInCold.FlowSheet)
                         tms.Phases(0).Properties.temperature = Tcm
                         With tms.PropertyPackage

@@ -3477,7 +3477,7 @@ Namespace UnitOperations
                 sp.SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate Or _
                 sp.SType = ColumnSpec.SpecType.Component_Recovery Then
                     i = 0
-                    For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In stream.Phases(0).Compounds.Values
+                    For Each comp As Interfaces.ICompound In stream.Phases(0).Compounds.Values
                         If sp.ComponentID = comp.Name Then sp.ComponentIndex = i
                         i = i + 1
                     Next
@@ -3591,12 +3591,12 @@ Namespace UnitOperations
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0) - Me.CondenserDeltaP
                             i = 0
-                            For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                            For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = xf(0)(i)
                                 i += 1
                             Next
                             i = 0
-                            For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                            For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                 subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(0))(i)
                                 i += 1
                             Next
@@ -3608,12 +3608,12 @@ Namespace UnitOperations
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0)
                             i = 0
-                            For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                            For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = yf(0)(i)
                                 i += 1
                             Next
                             i = 0
-                            For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                            For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                 subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(0))(i)
                                 i += 1
                             Next
@@ -3625,12 +3625,12 @@ Namespace UnitOperations
                             .Phases(0).Properties.temperature = Tf(ns)
                             .Phases(0).Properties.pressure = P(ns)
                             i = 0
-                            For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                            For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = xf(ns)(i)
                                 i += 1
                             Next
                             i = 0
-                            For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                            For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                 subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(ns))(i)
                                 i += 1
                             Next
@@ -3644,12 +3644,12 @@ Namespace UnitOperations
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
                                 i = 0
-                                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                                For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = xf(sidx)(i)
                                     i += 1
                                 Next
                                 i = 0
-                                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                                For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                     subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(sidx))(i)
                                     i += 1
                                 Next
@@ -3660,12 +3660,12 @@ Namespace UnitOperations
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
                                 i = 0
-                                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                                For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = yf(sidx)(i)
                                     i += 1
                                 Next
                                 i = 0
-                                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                                For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                     subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(sidx))(i)
                                     i += 1
                                 Next
@@ -3758,7 +3758,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                                 .Phases(0).Properties.temperature = 0
                                 .Phases(0).Properties.pressure = 0
                                 i = 0
-                                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                                For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = 0
                                     i += 1
                                 Next
@@ -3770,7 +3770,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                                 .Phases(0).Properties.temperature = 0
                                 .Phases(0).Properties.pressure = 0
                                 i = 0
-                                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                                For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = 0
                                     i += 1
                                 Next
@@ -3782,7 +3782,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                                 .Phases(0).Properties.temperature = 0
                                 .Phases(0).Properties.pressure = 0
                                 i = 0
-                                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                                For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = 0
                                     i += 1
                                 Next
@@ -3796,7 +3796,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                                     .Phases(0).Properties.temperature = 0
                                     .Phases(0).Properties.pressure = 0
                                     i = 0
-                                    For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                                    For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                         subst.MoleFraction = 0
                                         i += 1
                                     Next
@@ -3807,7 +3807,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                                     .Phases(0).Properties.temperature = 0
                                     .Phases(0).Properties.pressure = 0
                                     i = 0
-                                    For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In .Phases(0).Compounds.Values
+                                    For Each subst As Interfaces.ICompound In .Phases(0).Compounds.Values
                                         subst.MoleFraction = 0
                                         i += 1
                                     Next
