@@ -16,6 +16,8 @@
 
     ReadOnly Property GraphicObjects As Dictionary(Of String, IGraphicObject)
 
+    ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
+
     ReadOnly Property Settings As Dictionary(Of String, Object)
 
     Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType)
@@ -26,6 +28,10 @@
 
     Function GetTranslatedString(text As String, locale As String) As String
 
+    Function GetTranslatedString(text As String) As String
+
     ReadOnly Property FlowsheetOptions As IFlowsheetOptions
+
+    Function GetFlowsheetSimulationObject(p1 As String) As Object
 
 End Interface

@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DWSIM.UnitOperations</RootNamespace>
+    <AssemblyName>DWSIM.UnitOperations</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>DWSIM.UnitOperations.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>DWSIM.UnitOperations.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CapeOpen">
+      <HintPath>..\..\DWSIM3\DWSIM\bin\Release\CapeOpen.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Unit Operations\CapeOpenUO.vb" />
+    <Compile Include="Unit Operations\ComponentSeparator.vb" />
+    <Compile Include="Unit Operations\Compressor.vb" />
+    <Compile Include="Unit Operations\Cooler.vb" />
+    <Compile Include="Unit Operations\CustomUO.vb" />
+    <Compile Include="Unit Operations\EnergyMixer.vb" />
+    <Compile Include="Unit Operations\ExcelUO.vb" />
+    <Compile Include="Unit Operations\Filter.vb" />
+    <Compile Include="Unit Operations\FlowsheetUO.vb" />
+    <Compile Include="Unit Operations\Heater.vb" />
+    <Compile Include="Unit Operations\HeatExchanger.vb" />
+    <Compile Include="Unit Operations\Mixer.vb" />
+    <Compile Include="Unit Operations\OrificePlate.vb" />
+    <Compile Include="Unit Operations\Pipe.vb" />
+    <Compile Include="Unit Operations\Pump.vb" />
+    <Compile Include="Unit Operations\RigorousColumn.vb" />
+    <Compile Include="Unit Operations\ShortcutColumn.vb" />
+    <Compile Include="Unit Operations\SolidsSeparator.vb" />
+    <Compile Include="Unit Operations\Splitter.vb" />
+    <Compile Include="Unit Operations\Tank.vb" />
+    <Compile Include="Unit Operations\Turbine.vb" />
+    <Compile Include="Unit Operations\Valve.vb" />
+    <Compile Include="Unit Operations\Vessel.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
+      <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
+      <Name>DWSIM.CustomXMLSerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
+      <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
+      <Name>DWSIM.DrawingTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GenericDictionaryEditor\Controls.GenericDictionaryEditor.csproj">
+      <Project>{a541272d-0c07-40bc-b03c-73d95e072b99}</Project>
+      <Name>Controls.GenericDictionaryEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\Controls.PropertyGridEx.vbproj">
+      <Project>{b0bb47f2-21c4-41fc-b6e6-40757adfc4a1}</Project>
+      <Name>Controls.PropertyGridEx</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

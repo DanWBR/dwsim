@@ -142,6 +142,9 @@ Namespace PropertyPackages
         'DWSIM XML support
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
 
+        'DWSIM IPropertyPackage
+        Implements DWSIM.Interfaces.IPropertyPackage
+
         Public Const ClassId As String = ""
 
         <System.NonSerialized()> Private m_ms As Interfaces.IMaterialStream = Nothing
@@ -150,9 +153,6 @@ Namespace PropertyPackages
 
         Public m_par As New System.Collections.Generic.Dictionary(Of String, Double)
         Public m_Henry As New System.Collections.Generic.Dictionary(Of String, HenryParam)
-
-        Private _tag As String = ""
-        Private _uniqueID As String = ""
 
         <NonSerialized> Private m_ip As DataTable
 
@@ -433,23 +433,9 @@ Namespace PropertyPackages
             End Get
         End Property
 
-        Public Property UniqueID() As String
-            Get
-                Return _uniqueID
-            End Get
-            Set(ByVal value As String)
-                _uniqueID = value
-            End Set
-        End Property
+        Public Property UniqueID() As String Implements DWSIM.Interfaces.IPropertyPackage.UniqueID
 
-        Public Property Tag() As String
-            Get
-                If _tag = "" Then Return Me.ComponentName Else Return _tag
-            End Get
-            Set(ByVal value As String)
-                _tag = value
-            End Set
-        End Property
+        Public Property Tag() As String Implements DWSIM.Interfaces.IPropertyPackage.Tag
 
         Public ReadOnly Property PackageType() As PackageType
             Get
@@ -488,7 +474,7 @@ Namespace PropertyPackages
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property CurrentMaterialStream() As Interfaces.IMaterialStream
+        Public Property CurrentMaterialStream() As Interfaces.IMaterialStream Implements Interfaces.IPropertyPackage.CurrentMaterialStream
             Get
                 Return m_ms
             End Get
@@ -9173,7 +9159,7 @@ Final3:
 
         Private _name, _description, _interfacename, _moreinfo, _operation, _scope As String, _code As Integer
 
-        Public ReadOnly Property Name() As String Implements CapeOpen.ECapeRoot.Name
+        Public ReadOnly Property Name() As String Implements CapeOpen.ECapeRoot.Name, DWSIM.Interfaces.IPropertyPackage.Name
             Get
                 Return _name
             End Get

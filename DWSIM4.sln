@@ -37,6 +37,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics", "DWS
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.SharedClasses", "DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj", "{30E167D2-5B5A-453A-A92C-18FF3BBB6691}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.UnitOperations", "DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj", "{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -221,6 +223,16 @@ Global
 		{30E167D2-5B5A-453A-A92C-18FF3BBB6691}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{30E167D2-5B5A-453A-A92C-18FF3BBB6691}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{30E167D2-5B5A-453A-A92C-18FF3BBB6691}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

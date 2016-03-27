@@ -3235,4 +3235,30 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #End Region
 
+    Public Function GetTranslatedString1(text As String) As String Implements IFlowsheet.GetTranslatedString
+        Dim returntext As String = text
+        returntext = DWSIM.App.GetLocalString(text)
+        If returntext <> text Then Return returntext
+        returntext = DWSIM.App.GetPropertyName(text)
+        If returntext <> text Then Return returntext
+        returntext = DWSIM.App.GetLocalTipString(text)
+        If returntext <> text Then Return returntext
+        returntext = DWSIM.App.GetComponentName(text)
+        Return returntext
+    End Function
+
+    Public ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.PropertyPackages
+        Get
+            Dim dict As New Dictionary(Of String, IPropertyPackage)
+            For Each item In Options.PropertyPackages
+                dict.Add(item.Key, item.Value)
+            Next
+            Return dict
+        End Get
+    End Property
+
+    Public Function GetFlowsheetSimulationObject1(p1 As String) As Object Implements IFlowsheet.GetFlowsheetSimulationObject
+        Return Me.GetFlowsheetSimulationObject(p1)
+    End Function
+
 End Class
