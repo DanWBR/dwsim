@@ -21,27 +21,6 @@ Module Extensions
     End Sub
 
     <System.Runtime.CompilerServices.Extension()> _
-    Public Sub ExpandGroup(propertyGrid As PropertyGridEx.PropertyGridEx, groupName As String)
-        Dim root As GridItem = propertyGrid.SelectedGridItem
-        'Get the parent
-        While root.Parent IsNot Nothing
-            root = root.Parent
-        End While
-
-        If root IsNot Nothing Then
-            For Each g As GridItem In root.GridItems
-                For Each g2 As GridItem In g.GridItems
-                    If g2.Label = groupName Then
-                        g2.Expanded = True
-                        Exit For
-                    End If
-                Next
-            Next
-        End If
-
-    End Sub
-
-    <System.Runtime.CompilerServices.Extension()> _
     Public Function GetUnits(control As System.Windows.Forms.GridItem) As String
         If control.Value.ToString().Split(" ").Length > 1 Then
             Return control.Value.ToString.Substring(control.Value.ToString.IndexOf(" "c) + 1, control.Value.ToString.Length - control.Value.ToString.IndexOf(" "c) - 1)

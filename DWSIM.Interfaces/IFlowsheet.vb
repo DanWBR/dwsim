@@ -34,6 +34,10 @@
 
     ReadOnly Property FlowsheetOptions As IFlowsheetOptions
 
-    Function GetFlowsheetSimulationObject(p1 As String) As Object
+    Function GetFlowsheetSimulationObject(tag As String) As ISimulationObject
+
+    Function GetSelectedFlowsheetSimulationObject(tag As String) As ISimulationObject
+
+    Sub DisplayForm(form As Object)
 
 End Interface

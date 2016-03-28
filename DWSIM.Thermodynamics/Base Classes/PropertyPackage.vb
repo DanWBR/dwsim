@@ -30,7 +30,8 @@ Imports System.Runtime.Serialization.Formatters
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
-Imports DWSIM.Interfaces.Interfaces
+Imports DWSIM.Interfaces
+Imports DWSIM.Interfaces.Interfaces2
 
 Namespace PropertyPackages
 
@@ -143,7 +144,7 @@ Namespace PropertyPackages
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
 
         'DWSIM IPropertyPackage
-        Implements DWSIM.Interfaces.IPropertyPackage
+        Implements IPropertyPackage
 
         Public Const ClassId As String = ""
 
@@ -433,9 +434,9 @@ Namespace PropertyPackages
             End Get
         End Property
 
-        Public Property UniqueID() As String Implements DWSIM.Interfaces.IPropertyPackage.UniqueID
+        Public Property UniqueID() As String Implements IPropertyPackage.UniqueID
 
-        Public Property Tag() As String Implements DWSIM.Interfaces.IPropertyPackage.Tag
+        Public Property Tag() As String Implements IPropertyPackage.Tag
 
         Public ReadOnly Property PackageType() As PackageType
             Get
@@ -9187,7 +9188,7 @@ Final3:
 
         Private _name, _description, _interfacename, _moreinfo, _operation, _scope As String, _code As Integer
 
-        Public ReadOnly Property Name() As String Implements CapeOpen.ECapeRoot.Name, DWSIM.Interfaces.IPropertyPackage.Name
+        Public ReadOnly Property Name() As String Implements CapeOpen.ECapeRoot.Name, IPropertyPackage.Name
             Get
                 Return _name
             End Get

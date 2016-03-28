@@ -1,4 +1,58 @@
+Imports System.Windows.Forms
+
 Module Extensions
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Sub ExpandGroup(propertyGrid As PropertyGridEx.PropertyGridEx, groupName As String)
+        Dim root As GridItem = propertyGrid.SelectedGridItem
+        'Get the parent
+        While root.Parent IsNot Nothing
+            root = root.Parent
+        End While
+
+        If root IsNot Nothing Then
+            For Each g As GridItem In root.GridItems
+                For Each g2 As GridItem In g.GridItems
+                    If g2.Label = groupName Then
+                        g2.Expanded = True
+                        Exit For
+                    End If
+                Next
+            Next
+        End If
+
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Function GetUnits(control As System.Windows.Forms.GridItem) As String
+        If control.Value.ToString().Split(" ").Length > 1 Then
+            Return control.Value.ToString.Substring(control.Value.ToString.IndexOf(" "c) + 1, control.Value.ToString.Length - control.Value.ToString.IndexOf(" "c) - 1)
+        Else
+            Return ""
+        End If
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Function GetValue(control As System.Windows.Forms.GridItem) As Double
+        Dim istring As Object
+        If control.Value.ToString().Split(" ").Length > 1 Then
+            istring = control.Value.ToString().Split(" ")(0)
+            If Double.TryParse(istring.ToString, New Double) Then
+                Return Convert.ToDouble(istring)
+            Else
+                Return Double.NaN
+            End If
+        ElseIf control.Value.ToString().Split(" ").Length = 1 Then
+            istring = control.Value
+            If Double.TryParse(istring.ToString, New Double) Then
+                Return Convert.ToDouble(control.Value)
+            Else
+                Return Double.NaN
+            End If
+        Else
+            Return Double.NaN
+        End If
+    End Function
 
     <System.Runtime.CompilerServices.Extension()> _
     Public Function ToArrayString(vector As Double()) As String
@@ -50,7 +104,7 @@ Module Extensions
         For Each n As String In numbers
             If n <> "" Then doubles.Add(Convert.ToDouble(n, ci))
         Next
-        
+
         Return doubles.ToArray
 
     End Function
@@ -162,7 +216,7 @@ Module Extensions
     ''' <param name="twoDimensionalArray"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension> Public Function ToJaggedArray(Of T)(twoDimensionalArray As t(,)) As t()()
+    <System.Runtime.CompilerServices.Extension> Public Function ToJaggedArray(Of T)(twoDimensionalArray As T(,)) As T()()
 
         Dim rowsFirstIndex As Integer = twoDimensionalArray.GetLowerBound(0)
         Dim rowsLastIndex As Integer = twoDimensionalArray.GetUpperBound(0)
@@ -191,7 +245,7 @@ Module Extensions
     ''' <param name="jaggedArray"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension> Public Function FromJaggedArray(Of T)(jaggedArray As t()()) As t(,)
+    <System.Runtime.CompilerServices.Extension> Public Function FromJaggedArray(Of T)(jaggedArray As T()()) As T(,)
 
         Dim rowsFirstIndex As Integer = jaggedArray.GetLowerBound(0)
         Dim rowsLastIndex As Integer = jaggedArray.GetUpperBound(0)

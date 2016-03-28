@@ -25,7 +25,6 @@ Imports System.Runtime.Serialization.Formatters
 Imports System.Runtime.InteropServices.Marshal
 Imports System.Runtime.InteropServices
 Imports System.Text
-Imports PropertyGridEx
 Imports DWSIM.Interfaces.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
@@ -42,8 +41,6 @@ Namespace UnitOperations
         Public Const ClassId As String = ""
 
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
-
-        Public MustOverride Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
 #Region "    Constructors"
 
@@ -503,6 +500,8 @@ Namespace UnitOperations
 
 #End Region
 
+        Public MustOverride Sub DisplayEditForm() Implements ISimulationObject.DisplayEditForm
+
     End Class
 
     <System.Serializable()> <ComVisible(True)> Public MustInherit Class UnitOpBaseClass
@@ -658,54 +657,6 @@ Namespace UnitOperations
             DeCalculate()
 
             Calculated = False
-
-        End Sub
-
-        ''' <summary>
-        ''' Populates the Property Grid with properties from this object.
-        ''' </summary>
-        ''' <param name="pgrid"></param>
-        ''' <param name="su"></param>
-        ''' <remarks></remarks>
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            With pgrid
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("UOPropertyPackage"), Me.PropertyPackage.Tag, False, Me.FlowSheet.GetTranslatedString("Outros"), "", True)
-                With .Item(.Item.Count - 1)
-                    .CustomEditor = New DWSIM.Editors.PropertyPackages.UIPPSelector With {.form = Me.FlowSheet}
-                End With
-                If Not Me.GraphicObject Is Nothing Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Ativo"), Me.GraphicObject, "Active", False, Me.FlowSheet.GetTranslatedString("Miscelnea4"), "", True)
-                End If
-                If Me.IsSpecAttached = True Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("ObjetoUtilizadopor"), FlowSheet.SimulationObjects(Me.AttachedSpecId).GraphicObject.Tag, True, Me.FlowSheet.GetTranslatedString("Miscelnea4"), "", True)
-                    Select Case Me.SpecVarType
-                        Case Interfaces.Enums.SpecVarType.Target
-                            .Item.Add(Me.FlowSheet.GetTranslatedString("Utilizadocomo"), Me.FlowSheet.GetTranslatedString(Me.SpecVarType.ToString), True, Me.FlowSheet.GetTranslatedString("Miscelnea4"), "", True)
-                        Case Interfaces.Enums.SpecVarType.Source
-                            .Item.Add(Me.FlowSheet.GetTranslatedString("Utilizadocomo"), Me.FlowSheet.GetTranslatedString("SpecSource"), True, Me.FlowSheet.GetTranslatedString("Miscelnea4"), "", True)
-                    End Select
-                End If
-                If Not Me.Annotation Is Nothing Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Anotaes"), Me, "Annotation", False, Me.FlowSheet.GetTranslatedString("Outros"), Me.FlowSheet.GetTranslatedString("Cliquenobotocomretic"), True)
-                End If
-                .Item.Add("ID", Me.Name, True, Me.FlowSheet.GetTranslatedString("Outros"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("LastUpdatedOn"), Me.LastUpdated.ToString("O"), True, Me.FlowSheet.GetTranslatedString("Outros"), "", True)
-
-            End With
-
-        End Sub
-
-        Public Overrides Sub PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
-
-            If e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("UOPropertyPackage")) Then
-                If e.ChangedItem.Value <> "" Then
-                    If FlowSheet.PropertyPackages.ContainsKey(e.ChangedItem.Value) Then
-                        Me.PropertyPackage = FlowSheet.PropertyPackages(e.ChangedItem.Value)
-                    End If
-                End If
-            End If
 
         End Sub
 

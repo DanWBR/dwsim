@@ -24,6 +24,8 @@ Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Linq
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics
 
 Namespace DWSIM.SimulationObjects.Reactors
 

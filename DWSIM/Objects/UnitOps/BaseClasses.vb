@@ -3584,6 +3584,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
 #End Region
 
+        Public Sub DisplayEditForm() Implements Interfaces.ISimulationObject.DisplayEditForm
+
+        End Sub
     End Class
 
     <System.Serializable()> <ComVisible(True)> Public MustInherit Class UnitOpBaseClass

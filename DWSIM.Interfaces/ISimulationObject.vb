@@ -1,5 +1,7 @@
 ﻿Public Interface ISimulationObject
 
+    Sub DisplayEditForm()
+
     Property ErrorMessage() As String
 
     Function GetDebugReport() As String

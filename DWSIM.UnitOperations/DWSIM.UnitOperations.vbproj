@@ -62,6 +62,7 @@
   <ItemGroup>
     <Import Include="DWSIM.Interfaces" />
     <Import Include="DWSIM.SharedClasses" />
+    <Import Include="DWSIM.Thermodynamics" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />

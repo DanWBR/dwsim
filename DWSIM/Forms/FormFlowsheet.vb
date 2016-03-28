@@ -51,7 +51,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     'DWSIM IFlowsheet interface
     Implements Interfaces.IFlowsheet
 
-
 #Region "    Variable Declarations "
 
     Public Property MasterFlowsheet As FormFlowsheet = Nothing
@@ -3238,8 +3237,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End Get
     End Property
 
-    Public Function GetFlowsheetSimulationObject1(p1 As String) As Object Implements IFlowsheet.GetFlowsheetSimulationObject
-        Return Me.GetFlowsheetSimulationObject(p1)
+    Public Function GetFlowsheetSimulationObject1(tag As String) As ISimulationObject Implements IFlowsheet.GetFlowsheetSimulationObject
+        Return Me.GetFlowsheetSimulationObject(tag)
     End Function
 
     Public ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds
@@ -3247,5 +3246,18 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             Return Options.SelectedComponents.ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
+
+    Public Function GetSelectedFlowsheetSimulationObject(tag As String) As ISimulationObject Implements IFlowsheet.GetSelectedFlowsheetSimulationObject
+        Return Me.FormSurface.FlowsheetDesignSurface.SelectedObject
+    End Function
+
+    Public Sub DisplayForm(form As Object) Implements IFlowsheet.DisplayForm
+        Dim dpanel = TryCast(form, DockContent)
+        If Not dpanel Is Nothing Then
+            dpanel.Show(Me.dckPanel)
+        Else
+            DirectCast(form, Form).Show(Me)
+        End If
+    End Sub
 
 End Class
