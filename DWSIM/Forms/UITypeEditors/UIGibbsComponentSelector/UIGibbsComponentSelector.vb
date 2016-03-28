@@ -19,7 +19,7 @@
 Imports System.Windows.Forms.Design
 Imports System.Drawing.Design
 Imports System.ComponentModel
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Reactors
 
 Namespace DWSIM.Editors.Reactors

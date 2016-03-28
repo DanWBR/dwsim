@@ -88,7 +88,7 @@ Public Class FormHYD
 
                 Dim Vz(n), T, P As Double
                 Dim nomes(mat.Phases(0).Compounds.Count - 1) As String
-                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim comp As BaseClasses.Compound
                 Dim i As Integer = 0
                 For Each comp In mat.Phases(0).Compounds.Values
                     Vz(i) = comp.MoleFraction.GetValueOrDefault

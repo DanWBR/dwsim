@@ -43,7 +43,7 @@
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>NaN</lnKvalue>
               <Kvalue>NaN</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -61,7 +61,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>NaN</lnKvalue>
               <Kvalue>NaN</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -79,7 +79,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>NaN</lnKvalue>
               <Kvalue>NaN</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -100,7 +100,7 @@
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>3.586992</density>
             <enthalpy>405.729663</enthalpy>
             <entropy>1.763992</entropy>
@@ -117,7 +117,7 @@
             <molar_entropy>58.316097</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>NaN</surfaceTension>
           </Properties2>
         </Phase>
@@ -125,7 +125,7 @@
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -143,7 +143,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -161,7 +161,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -182,7 +182,7 @@
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>NaN</density>
             <enthalpy>0</enthalpy>
@@ -202,14 +202,14 @@
             <molar_entropy>NaN</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -227,7 +227,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -245,7 +245,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -266,7 +266,7 @@
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.968659</compressibilityFactor>
             <density>3.586992</density>
             <enthalpy>405.729663</enthalpy>
@@ -286,14 +286,14 @@
             <molar_entropy>58.316097</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -311,7 +311,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -329,7 +329,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -350,18 +350,18 @@
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -379,7 +379,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -397,7 +397,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -418,17 +418,17 @@
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -444,7 +444,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -460,7 +460,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -479,17 +479,17 @@
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -505,7 +505,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -521,7 +521,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -540,17 +540,17 @@
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -568,7 +568,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -586,7 +586,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -607,10 +607,10 @@
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -651,7 +651,7 @@
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>2.609199</lnKvalue>
               <Kvalue>13.588164</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -669,7 +669,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>1.918225</lnKvalue>
               <Kvalue>6.808861</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -687,7 +687,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.687031</lnKvalue>
               <Kvalue>0.503067</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -708,7 +708,7 @@
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>877.099285</density>
             <enthalpy>349.467716</enthalpy>
             <entropy>0.92037</entropy>
@@ -725,7 +725,7 @@
             <molar_entropy>16.509107</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.053551</surfaceTension>
           </Properties2>
         </Phase>
@@ -733,7 +733,7 @@
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -751,7 +751,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -769,7 +769,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -790,7 +790,7 @@
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>877.099285</density>
             <enthalpy>349.387957</enthalpy>
@@ -810,14 +810,14 @@
             <molar_entropy>16.509107</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -835,7 +835,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -853,7 +853,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -874,17 +874,17 @@
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -902,7 +902,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -920,7 +920,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -941,7 +941,7 @@
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.005191</compressibilityFactor>
             <density>877.099285</density>
@@ -962,14 +962,14 @@
             <molar_entropy>16.509107</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -987,7 +987,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1005,7 +1005,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1026,17 +1026,17 @@
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1052,7 +1052,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1068,7 +1068,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1087,17 +1087,17 @@
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1113,7 +1113,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1129,7 +1129,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1148,17 +1148,17 @@
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1176,7 +1176,7 @@
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1194,7 +1194,7 @@
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1215,10 +1215,10 @@
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -1466,7 +1466,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>1.803118</lnKvalue>
               <Kvalue>6.06854</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1484,7 +1484,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>2.456286</lnKvalue>
               <Kvalue>11.661417</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1502,7 +1502,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.025813</lnKvalue>
               <Kvalue>0.974517</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1523,7 +1523,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>943.074603</density>
             <enthalpy>384.867247</enthalpy>
             <entropy>0.987833</entropy>
@@ -1540,7 +1540,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>17.793499</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.055714</surfaceTension>
           </Properties2>
         </Phase>
@@ -1548,7 +1548,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1566,7 +1566,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1584,7 +1584,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1605,7 +1605,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>943.074603</density>
             <enthalpy>384.852869</enthalpy>
@@ -1625,14 +1625,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>17.793499</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1650,7 +1650,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1668,7 +1668,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1689,17 +1689,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1717,7 +1717,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1735,7 +1735,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1756,7 +1756,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.001426</compressibilityFactor>
             <density>943.074603</density>
@@ -1777,14 +1777,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>17.793499</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1802,7 +1802,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1820,7 +1820,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1841,17 +1841,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1867,7 +1867,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1883,7 +1883,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1902,17 +1902,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1928,7 +1928,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1944,7 +1944,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1963,17 +1963,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1991,7 +1991,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2009,7 +2009,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2030,10 +2030,10 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -2126,7 +2126,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-1.793784</lnKvalue>
               <Kvalue>0.16633</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2144,7 +2144,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-1.121377</lnKvalue>
               <Kvalue>0.325831</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2162,7 +2162,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0.001571</lnKvalue>
               <Kvalue>1.001572</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2183,7 +2183,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>941.482583</density>
             <enthalpy>393.011178</enthalpy>
             <entropy>1.003807</entropy>
@@ -2200,7 +2200,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>18.081223</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.055329</surfaceTension>
           </Properties2>
         </Phase>
@@ -2208,7 +2208,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2226,7 +2226,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2244,7 +2244,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2265,7 +2265,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>941.482583</density>
             <enthalpy>392.996685</enthalpy>
@@ -2285,14 +2285,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>18.081223</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2310,7 +2310,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2328,7 +2328,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2349,17 +2349,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2377,7 +2377,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2395,7 +2395,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2416,7 +2416,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.0504</compressibilityFactor>
             <density>941.482583</density>
@@ -2437,14 +2437,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>18.081223</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2462,7 +2462,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2480,7 +2480,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2501,17 +2501,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2527,7 +2527,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2543,7 +2543,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2562,17 +2562,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2588,7 +2588,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2604,7 +2604,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2623,17 +2623,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2651,7 +2651,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2669,7 +2669,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2690,10 +2690,10 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -2841,7 +2841,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>NaN</lnKvalue>
               <Kvalue>NaN</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2859,7 +2859,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>2.087301</lnKvalue>
               <Kvalue>8.063124</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2877,7 +2877,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-7.2E-05</lnKvalue>
               <Kvalue>0.999928</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2898,7 +2898,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>904.314826</density>
             <enthalpy>585.834678</enthalpy>
             <entropy>1.34187</entropy>
@@ -2915,7 +2915,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>24.173768</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.045886</surfaceTension>
           </Properties2>
         </Phase>
@@ -2923,7 +2923,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2941,7 +2941,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2959,7 +2959,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2980,7 +2980,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>904.314826</density>
             <enthalpy>585.833759</enthalpy>
@@ -3000,14 +3000,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>24.173768</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3025,7 +3025,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3043,7 +3043,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3064,17 +3064,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3092,7 +3092,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3110,7 +3110,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3131,7 +3131,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.004726</compressibilityFactor>
             <density>904.314826</density>
@@ -3152,14 +3152,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>24.173768</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3177,7 +3177,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3195,7 +3195,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3216,17 +3216,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3242,7 +3242,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3258,7 +3258,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3277,17 +3277,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3303,7 +3303,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3319,7 +3319,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3338,17 +3338,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3366,7 +3366,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3384,7 +3384,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3405,10 +3405,10 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -3449,7 +3449,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>4.595856</lnKvalue>
               <Kvalue>99.072872</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3467,7 +3467,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>2.228386</lnKvalue>
               <Kvalue>9.284872</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3485,7 +3485,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.179276</lnKvalue>
               <Kvalue>0.835875</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3506,7 +3506,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>991.88931</density>
             <enthalpy>28.779561</enthalpy>
             <entropy>0.094359</entropy>
@@ -3523,7 +3523,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>1.701829</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.070956</surfaceTension>
           </Properties2>
         </Phase>
@@ -3531,7 +3531,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3549,7 +3549,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3567,7 +3567,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3588,7 +3588,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>991.88931</density>
             <enthalpy>28.697688</enthalpy>
@@ -3608,14 +3608,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>1.701829</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3633,7 +3633,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3651,7 +3651,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3672,17 +3672,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3700,7 +3700,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3718,7 +3718,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3739,7 +3739,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.001677</compressibilityFactor>
             <density>991.88931</density>
@@ -3760,14 +3760,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>1.701829</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3785,7 +3785,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3803,7 +3803,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3824,17 +3824,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3850,7 +3850,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3866,7 +3866,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3885,17 +3885,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3911,7 +3911,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3927,7 +3927,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3946,17 +3946,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3974,7 +3974,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -3992,7 +3992,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4013,10 +4013,10 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -4202,7 +4202,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>4.719376</lnKvalue>
               <Kvalue>112.098277</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4220,7 +4220,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>2.306229</lnKvalue>
               <Kvalue>10.036502</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4238,7 +4238,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.204179</lnKvalue>
               <Kvalue>0.815316</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4259,7 +4259,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>994.021157</density>
             <enthalpy>0</enthalpy>
             <entropy>0</entropy>
@@ -4276,7 +4276,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>0</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.072053</surfaceTension>
           </Properties2>
         </Phase>
@@ -4284,7 +4284,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4302,7 +4302,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4320,7 +4320,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4341,7 +4341,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>994.021157</density>
             <enthalpy>0</enthalpy>
@@ -4361,14 +4361,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>0</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4386,7 +4386,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4404,7 +4404,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4425,17 +4425,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4453,7 +4453,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4471,7 +4471,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4492,7 +4492,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.000852</compressibilityFactor>
             <density>994.021157</density>
@@ -4513,14 +4513,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>0</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4538,7 +4538,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4556,7 +4556,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4577,17 +4577,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4603,7 +4603,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4619,7 +4619,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4638,17 +4638,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4664,7 +4664,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4680,7 +4680,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4699,17 +4699,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4727,7 +4727,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4745,7 +4745,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4766,10 +4766,10 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -4810,7 +4810,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>1.803118</lnKvalue>
               <Kvalue>6.06854</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4828,7 +4828,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>2.456286</lnKvalue>
               <Kvalue>11.661417</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4846,7 +4846,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.025813</lnKvalue>
               <Kvalue>0.974517</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4867,7 +4867,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>943.074603</density>
             <enthalpy>384.867247</enthalpy>
             <entropy>0.987833</entropy>
@@ -4884,7 +4884,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>17.793499</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.055714</surfaceTension>
           </Properties2>
         </Phase>
@@ -4892,7 +4892,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4910,7 +4910,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4928,7 +4928,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4949,7 +4949,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>943.074603</density>
             <enthalpy>384.852869</enthalpy>
@@ -4969,14 +4969,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>17.793499</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -4994,7 +4994,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5012,7 +5012,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5033,17 +5033,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5061,7 +5061,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5079,7 +5079,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5100,7 +5100,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.001426</compressibilityFactor>
             <density>943.074603</density>
@@ -5121,14 +5121,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>17.793499</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5146,7 +5146,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5164,7 +5164,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5185,17 +5185,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5211,7 +5211,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5227,7 +5227,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5246,17 +5246,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5272,7 +5272,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5288,7 +5288,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5307,17 +5307,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5335,7 +5335,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5353,7 +5353,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5374,10 +5374,10 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -5418,7 +5418,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>4.662415</lnKvalue>
               <Kvalue>105.891468</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5436,7 +5436,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>2.270596</lnKvalue>
               <Kvalue>9.685174</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5454,7 +5454,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.192256</lnKvalue>
               <Kvalue>0.825096</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5475,7 +5475,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>993.295629</density>
             <enthalpy>10.341973</enthalpy>
             <entropy>0.034403</entropy>
@@ -5492,7 +5492,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>0.620482</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.07166</surfaceTension>
           </Properties2>
         </Phase>
@@ -5500,7 +5500,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5518,7 +5518,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5536,7 +5536,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5557,7 +5557,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>993.295629</density>
             <enthalpy>10.312534</enthalpy>
@@ -5577,14 +5577,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>0.620482</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5602,7 +5602,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5620,7 +5620,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5641,17 +5641,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5669,7 +5669,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5687,7 +5687,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5708,7 +5708,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.001694</compressibilityFactor>
             <density>993.295629</density>
@@ -5729,14 +5729,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>0.620482</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5754,7 +5754,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5772,7 +5772,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5793,17 +5793,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5819,7 +5819,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5835,7 +5835,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5854,17 +5854,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5880,7 +5880,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5896,7 +5896,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5915,17 +5915,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5943,7 +5943,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5961,7 +5961,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -5982,10 +5982,10 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -6126,7 +6126,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>4.70592</lnKvalue>
               <Kvalue>110.599937</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6144,7 +6144,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>2.293103</lnKvalue>
               <Kvalue>9.905626</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6162,7 +6162,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.201149</lnKvalue>
               <Kvalue>0.817791</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6183,7 +6183,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>994.011895</density>
             <enthalpy>0.136301</enthalpy>
             <entropy>0.000457</entropy>
@@ -6200,7 +6200,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>0.008244</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.072048</surfaceTension>
           </Properties2>
         </Phase>
@@ -6208,7 +6208,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6226,7 +6226,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6244,7 +6244,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6265,7 +6265,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>994.011895</density>
             <enthalpy>0.135913</enthalpy>
@@ -6285,14 +6285,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>0.008244</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6310,7 +6310,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6328,7 +6328,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6349,17 +6349,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6377,7 +6377,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6395,7 +6395,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6416,7 +6416,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.001704</compressibilityFactor>
             <density>994.011895</density>
@@ -6437,14 +6437,14 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
             <molar_entropy>0.008244</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6462,7 +6462,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6480,7 +6480,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6501,17 +6501,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6527,7 +6527,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6543,7 +6543,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6562,17 +6562,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6588,7 +6588,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6604,7 +6604,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6623,17 +6623,17 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6651,7 +6651,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6669,7 +6669,7 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6690,10 +6690,10 @@ PH Flash [Sour Water]: Invalid result: Temperature did not converge.
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -6788,7 +6788,7 @@ Calculated OK.</DebugText>
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>NaN</lnKvalue>
               <Kvalue>NaN</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6806,7 +6806,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>4.258591</lnKvalue>
               <Kvalue>70.710266</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6824,7 +6824,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.000697</lnKvalue>
               <Kvalue>0.999303</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6845,7 +6845,7 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>907.014925</density>
             <enthalpy>-1899.490034</enthalpy>
             <entropy>-5.054403</entropy>
@@ -6862,7 +6862,7 @@ Calculated OK.</DebugText>
             <molar_entropy>-91.055027</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.045886</surfaceTension>
           </Properties2>
         </Phase>
@@ -6870,7 +6870,7 @@ Calculated OK.</DebugText>
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6888,7 +6888,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6906,7 +6906,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6927,7 +6927,7 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>907.014925</density>
             <enthalpy>-1899.490034</enthalpy>
@@ -6947,14 +6947,14 @@ Calculated OK.</DebugText>
             <molar_entropy>-91.055027</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6972,7 +6972,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -6990,7 +6990,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7011,17 +7011,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7039,7 +7039,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7057,7 +7057,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7078,7 +7078,7 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.00465</compressibilityFactor>
             <density>907.014925</density>
@@ -7099,14 +7099,14 @@ Calculated OK.</DebugText>
             <molar_entropy>-91.055027</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7124,7 +7124,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7142,7 +7142,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7163,17 +7163,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7189,7 +7189,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7205,7 +7205,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7224,17 +7224,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7250,7 +7250,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7266,7 +7266,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7285,17 +7285,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7313,7 +7313,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7331,7 +7331,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7352,10 +7352,10 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -7471,7 +7471,7 @@ Calculated OK.</DebugText>
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>NaN</lnKvalue>
               <Kvalue>NaN</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7489,7 +7489,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>2.097766</lnKvalue>
               <Kvalue>8.147945</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7507,7 +7507,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-7.3E-05</lnKvalue>
               <Kvalue>0.999927</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7528,7 +7528,7 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>910.262917</density>
             <enthalpy>559.242728</enthalpy>
             <entropy>1.299212</entropy>
@@ -7545,7 +7545,7 @@ Calculated OK.</DebugText>
             <molar_entropy>23.405291</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.04724</surfaceTension>
           </Properties2>
         </Phase>
@@ -7553,7 +7553,7 @@ Calculated OK.</DebugText>
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7571,7 +7571,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7589,7 +7589,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7610,7 +7610,7 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>910.262917</density>
             <enthalpy>559.241812</enthalpy>
@@ -7630,14 +7630,14 @@ Calculated OK.</DebugText>
             <molar_entropy>23.405291</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7655,7 +7655,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7673,7 +7673,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7694,17 +7694,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7722,7 +7722,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7740,7 +7740,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7761,7 +7761,7 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.004754</compressibilityFactor>
             <density>910.262917</density>
@@ -7782,14 +7782,14 @@ Calculated OK.</DebugText>
             <molar_entropy>23.405291</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7807,7 +7807,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7825,7 +7825,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7846,17 +7846,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7872,7 +7872,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7888,7 +7888,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7907,17 +7907,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7933,7 +7933,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7949,7 +7949,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7968,17 +7968,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -7996,7 +7996,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8014,7 +8014,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8035,10 +8035,10 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -8079,7 +8079,7 @@ Calculated OK.</DebugText>
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-1.717086</lnKvalue>
               <Kvalue>0.179589</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8097,7 +8097,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-1.007124</lnKvalue>
               <Kvalue>0.365268</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8115,7 +8115,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0.001478</lnKvalue>
               <Kvalue>1.001479</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8136,7 +8136,7 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>937.765517</density>
             <enthalpy>411.544786</enthalpy>
             <entropy>1.03961</entropy>
@@ -8153,7 +8153,7 @@ Calculated OK.</DebugText>
             <molar_entropy>18.72614</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.054449</surfaceTension>
           </Properties2>
         </Phase>
@@ -8161,7 +8161,7 @@ Calculated OK.</DebugText>
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8179,7 +8179,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8197,7 +8197,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8218,7 +8218,7 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>937.765517</density>
             <enthalpy>411.530059</enthalpy>
@@ -8238,14 +8238,14 @@ Calculated OK.</DebugText>
             <molar_entropy>18.72614</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8263,7 +8263,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8281,7 +8281,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8302,17 +8302,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8330,7 +8330,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8348,7 +8348,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8369,7 +8369,7 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <pH>0</pH>
             <compressibilityFactor>0.049968</compressibilityFactor>
             <density>937.765517</density>
@@ -8390,14 +8390,14 @@ Calculated OK.</DebugText>
             <molar_entropy>18.72614</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8415,7 +8415,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8433,7 +8433,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8454,17 +8454,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8480,7 +8480,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8496,7 +8496,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8515,17 +8515,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8541,7 +8541,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8557,7 +8557,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8576,17 +8576,17 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8604,7 +8604,7 @@ Calculated OK.</DebugText>
               <Nome>Hydrogen sulfide</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8622,7 +8622,7 @@ Calculated OK.</DebugText>
               <Nome>Ammonia</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -8643,10 +8643,10 @@ Calculated OK.</DebugText>
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -9883,7 +9883,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </PropertyPackages>
   <Compounds>
     <Compound>
-      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
+      <Type>DWSIM.BaseClasses.ConstantProperties</Type>
       <Name>Hydrogen sulfide</Name>
       <CAS_Number>7783-06-4</CAS_Number>
       <Formula>HSH</Formula>
@@ -10059,7 +10059,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
       <Elements />
     </Compound>
     <Compound>
-      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
+      <Type>DWSIM.BaseClasses.ConstantProperties</Type>
       <Name>Ammonia</Name>
       <CAS_Number>7664-41-7</CAS_Number>
       <Formula>NH3</Formula>
@@ -10235,7 +10235,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
       <Elements />
     </Compound>
     <Compound>
-      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
+      <Type>DWSIM.BaseClasses.ConstantProperties</Type>
       <Name>Water</Name>
       <CAS_Number>7732-18-5</CAS_Number>
       <Formula>HOH</Formula>

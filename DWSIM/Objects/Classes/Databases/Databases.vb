@@ -21,6 +21,7 @@ Imports FileHelpers
 Imports System.Xml
 Imports System.IO
 Imports CProp = CoolProp
+Imports System.Linq
 
 Namespace DWSIM.Databases
 
@@ -115,7 +116,7 @@ Namespace DWSIM.Databases
         Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
-            Dim cpa As New ArrayList()
+            Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
@@ -473,7 +474,7 @@ Namespace DWSIM.Databases
 
             Next
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
+            Return cpa.ToArray()
 
         End Function
 
@@ -506,7 +507,7 @@ Namespace DWSIM.Databases
         Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
-            Dim cpa As New ArrayList()
+            Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
@@ -649,7 +650,7 @@ Namespace DWSIM.Databases
             unif = Nothing
             modf = Nothing
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
+            Return cpa.ToArray
 
         End Function
 
@@ -682,7 +683,7 @@ Namespace DWSIM.Databases
         Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
-            Dim cpa As New ArrayList()
+            Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
             Dim i As Integer = 100000
@@ -770,7 +771,7 @@ Namespace DWSIM.Databases
                 i += 1
             Next
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
+            Return cpa.ToArray()
 
         End Function
 
@@ -1015,7 +1016,7 @@ Namespace DWSIM.Databases
             xmldoc.Load(reader)
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
-            Dim cpa As New ArrayList()
+            Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
@@ -1255,7 +1256,7 @@ Namespace DWSIM.Databases
             reader.Close()
             reader = Nothing
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
+            Return cpa.ToArray()
 
         End Function
 
@@ -1368,7 +1369,7 @@ Namespace DWSIM.Databases
             xmldoc.Load(reader)
 
             Dim IP As Thermodynamics.BaseClasses.InteractionParameter
-            Dim IPA As New ArrayList()
+            Dim IPA As New List(Of Thermodynamics.BaseClasses.InteractionParameter)
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
             For Each node As XmlNode In xmldoc.ChildNodes(1)
@@ -1407,7 +1408,7 @@ Namespace DWSIM.Databases
             reader.Close()
             reader = Nothing
 
-            Return IPA.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.InteractionParameter"))
+            Return IPA.ToArray()
 
         End Function
 
@@ -1490,7 +1491,7 @@ Namespace DWSIM.Databases
         Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
-            Dim cpa As New ArrayList()
+            Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
             Dim i As Integer = 200000
@@ -1581,7 +1582,7 @@ Namespace DWSIM.Databases
                 i += 1
             Next
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
+            Return cpa.ToArray()
 
         End Function
 
@@ -1628,7 +1629,7 @@ Namespace DWSIM.Databases
                 i += 1
             Next
 
-            Return cpa.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
+            Return cpa.ToArray(Type.GetType("DWSIM.BaseClasses.ConstantProperties"))
 
         End Function
 

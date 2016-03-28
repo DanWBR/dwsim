@@ -1,5 +1,5 @@
 ﻿Imports com.ggasoftware.indigo
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports System.IO
 Imports DWSIM.SharedClasses
@@ -34,7 +34,7 @@ Public Class FormPureComp
 
     Dim vxCp, vyCp, vxPvap, vyPvap, vxVisc, vyVisc, vxDHvap, vyDHvap, vxLD, vyLD, vxSD, vySD, vxSCP, vySCP, vxVapVisc,
         vyVapVisc, vxVapThCond, vyVapThCond, vxLiqThCond, vyLiqThCond, vxSurfTens, vySurfTens, vxLiqCp, vyLiqCp As New ArrayList
-    Public constprop As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+    Public constprop As BaseClasses.ConstantProperties
 
     Private Sub FormPureComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -45,7 +45,7 @@ Public Class FormPureComp
             OnlyViewing = True
 
             With Me.Flowsheet
-                Dim subst As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+                Dim subst As BaseClasses.ConstantProperties
                 Me.ComboBox1.Items.Clear()
                 For Each subst In .Options.SelectedComponents.Values
                     Me.ComboBox1.Items.Add(DWSIM.App.GetComponentName(subst.Name) + " [" + subst.Name + "]")
@@ -859,8 +859,8 @@ Public Class FormPureComp
         SetCompStatus()
 
         For Each mat As DWSIM.SimulationObjects.Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
-            For Each p As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In p.Compounds.Values
+            For Each p As BaseClasses.Phase In mat.Phases.Values
+                For Each subst As BaseClasses.Compound In p.Compounds.Values
                     If subst.ConstantProperties.Name = constprop.Name Then
                         subst.ConstantProperties = constprop
                         Exit For
@@ -893,7 +893,7 @@ Public Class FormPureComp
     End Sub
 
     Private Sub BtnRestaurar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnRestaurar.Click
-        Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+        Dim cpa() As BaseClasses.ConstantProperties
 
         Select Case constprop.OriginalDB
             Case "DWSIM"
@@ -979,8 +979,8 @@ Public Class FormPureComp
         End Select
 
         For Each mat As DWSIM.SimulationObjects.Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
-            For Each p As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-                For Each subst As DWSIM.Thermodynamics.BaseClasses.Compound In p.Compounds.Values
+            For Each p As BaseClasses.Phase In mat.Phases.Values
+                For Each subst As BaseClasses.Compound In p.Compounds.Values
                     subst.ConstantProperties = constprop
                 Next
             Next

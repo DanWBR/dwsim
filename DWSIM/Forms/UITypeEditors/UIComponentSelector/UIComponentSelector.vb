@@ -82,7 +82,7 @@ Namespace DWSIM.Editors.Components
                 form = My.Application.ActiveSimulation
 
                 Me.ListView2.Items.Clear()
-                For Each comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
+                For Each comp As BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
                     Dim lvi As New ListViewItem()
                     With lvi
                         .Text = DWSIM.App.GetComponentName(comp.Name)

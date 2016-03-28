@@ -443,7 +443,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                         cp = Me.GraphicObject.InputConnectors(0)
                         If cp.IsAttached Then
                             ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
-                            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                            Dim comp As BaseClasses.Compound
                             i = 0
                             For Each comp In ms.Phases(0).Compounds.Values
                                 wtotalx += Vx(i) * comp.ConstantProperties.Molar_Weight
@@ -467,7 +467,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                                 .Phases(0).Properties.pressure = Pnew
                                 .Phases(0).Properties.massflow = Wnew
                                 .Phases(0).Properties.enthalpy = H
-                                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                                Dim comp As BaseClasses.Compound
                                 j = 0
                                 For Each comp In .Phases(0).Compounds.Values
                                     comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction

@@ -15,7 +15,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.SharedClasses
@@ -393,24 +393,24 @@ Public Class FormLLEDiagram
         ' assign components to phases
         '=============================
 
-        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+        For Each phase As BaseClasses.Phase In mat.Phases.Values
             phase.Compounds.Clear() 'delete old assignment
         Next
 
         Dim N As String
         N = Names(cbComp1.SelectedIndex)
-        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Compounds.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
+        For Each phase As BaseClasses.Phase In mat.Phases.Values
+            phase.Compounds.Add(N, New BaseClasses.Compound(N, ""))
             phase.Compounds(N).ConstantProperties = Frm.Options.SelectedComponents(N)
         Next
         N = Names(cbComp2.SelectedIndex)
-        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Compounds.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
+        For Each phase As BaseClasses.Phase In mat.Phases.Values
+            phase.Compounds.Add(N, New BaseClasses.Compound(N, ""))
             phase.Compounds(N).ConstantProperties = Frm.Options.SelectedComponents(N)
         Next
         N = Names(cbComp3.SelectedIndex)
-        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Compounds.Add(N, New DWSIM.Thermodynamics.BaseClasses.Compound(N, ""))
+        For Each phase As BaseClasses.Phase In mat.Phases.Values
+            phase.Compounds.Add(N, New BaseClasses.Compound(N, ""))
             phase.Compounds(N).ConstantProperties = Frm.Options.SelectedComponents(N)
         Next
 

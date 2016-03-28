@@ -160,7 +160,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             P = feed.Phases(0).Properties.pressure.GetValueOrDefault
 
             i = 0
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In feed.Phases(0).Compounds.Values
+            For Each comp As BaseClasses.Compound In feed.Phases(0).Compounds.Values
                 z(i) = comp.MoleFraction.GetValueOrDefault
                 'K(i) = feed.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault / feed.Phases(1).Compounds(comp.Name).MoleFraction.GetValueOrDefault
                 id(i) = comp.Name
@@ -353,7 +353,7 @@ restart:    B = F - D
 
             i = 0
             Dmw = 0
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Compounds.Values
+            For Each comp As BaseClasses.Compound In distillate.Phases(0).Compounds.Values
                 If Double.IsNaN(xd(i)) = False Then comp.MoleFraction = xd(i) Else comp.MoleFraction = 0
                 Dmw += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 i = i + 1
@@ -366,7 +366,7 @@ restart:    B = F - D
 
             i = 0
             Bmw = 0
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Compounds.Values
+            For Each comp As BaseClasses.Compound In bottoms.Phases(0).Compounds.Values
                 If Double.IsNaN(xb(i)) = False Then comp.MoleFraction = xb(i) Else comp.MoleFraction = 0
                 Bmw += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                 i = i + 1
@@ -386,7 +386,7 @@ restart:    B = F - D
 
             pp.CurrentMaterialStream = distillate
 
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In distillate.Phases(0).Compounds.Values
+            For Each comp As BaseClasses.Compound In distillate.Phases(0).Compounds.Values
                 comp.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(comp.Name, 0)
             Next
 
@@ -406,7 +406,7 @@ restart:    B = F - D
 
             pp.CurrentMaterialStream = bottoms
 
-            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In bottoms.Phases(0).Compounds.Values
+            For Each comp As BaseClasses.Compound In bottoms.Phases(0).Compounds.Values
                 comp.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(comp.Name, 0)
             Next
 

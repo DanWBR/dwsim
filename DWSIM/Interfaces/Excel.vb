@@ -22,7 +22,7 @@
 Imports ExcelDna.Integration
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.PropertyPackages
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Reflection
 Imports System.IO
 
@@ -44,8 +44,8 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
-                    phase.Compounds.Add(compound, New DWSIM.Thermodynamics.BaseClasses.Compound(compound, ""))
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                    phase.Compounds.Add(compound, New BaseClasses.Compound(compound, ""))
                     phase.Compounds(compound).ConstantProperties = pp._availablecomps(compound)
                 Next
 
@@ -93,8 +93,8 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
-                    phase.Compounds.Add(compound, New DWSIM.Thermodynamics.BaseClasses.Compound(compound, ""))
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                    phase.Compounds.Add(compound, New BaseClasses.Compound(compound, ""))
                     phase.Compounds(compound).ConstantProperties = pp._availablecomps(compound)
                 Next
 
@@ -436,7 +436,7 @@ Namespace ExcelAddIn
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
             If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-            Dim iplist As List(Of DWSIM.Thermodynamics.BaseClasses.InteractionParameter) = DWSIM.Databases.UserIPDB.GetStoredIPsets(Compound1, Compound2, Model)
+            Dim iplist As List(Of BaseClasses.InteractionParameter) = DWSIM.Databases.UserIPDB.GetStoredIPsets(Compound1, Compound2, Model)
 
             Dim ipdata(iplist.Count, 9) As Object
 
@@ -614,9 +614,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -730,9 +730,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -938,9 +938,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1062,9 +1062,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1186,9 +1186,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1310,9 +1310,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1710,9 +1710,9 @@ Namespace ExcelAddIn
 
             Dim ms As New Streams.MaterialStream("", "")
 
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+            For Each phase As BaseClasses.Phase In ms.Phases.Values
                 For Each c As String In compounds
-                    phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                    phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                     phase.Compounds(c).ConstantProperties = proppack._availablecomps(c)
                 Next
             Next
@@ -1764,9 +1764,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1877,9 +1877,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -1992,9 +1992,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -2107,9 +2107,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next
@@ -2222,9 +2222,9 @@ Namespace ExcelAddIn
 
                 Dim ms As New Streams.MaterialStream("", "")
 
-                For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
                     For Each c As String In compounds
-                        phase.Compounds.Add(c, New DWSIM.Thermodynamics.BaseClasses.Compound(c, ""))
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
                         phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
                     Next
                 Next

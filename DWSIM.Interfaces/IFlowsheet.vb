@@ -20,6 +20,8 @@
 
     ReadOnly Property Settings As Dictionary(Of String, Object)
 
+    ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties)
+
     Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType)
 
     Sub ShowDebugInfo(ByVal text As String, ByVal level As Integer)

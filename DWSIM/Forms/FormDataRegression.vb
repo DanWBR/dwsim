@@ -16,7 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DrawingTools
 Imports DWSIM.Thermodynamics.MathEx
 Imports System.Math
@@ -45,7 +45,7 @@ Public Class FormDataRegression
     Private forceclose As Boolean = False
 
     Public currcase As RegressionCase
-    Public IP As DWSIM.Thermodynamics.BaseClasses.InteractionParameter
+    Public IP As BaseClasses.InteractionParameter
 
     Public proppack As PropertyPackage
     Public ppname As String = ""
@@ -58,7 +58,7 @@ Public Class FormDataRegression
     Private Sub FormDataRegression_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         cv = New SystemsOfUnits.Converter
-        IP = New DWSIM.Thermodynamics.BaseClasses.InteractionParameter
+        IP = New BaseClasses.InteractionParameter
 
         'get list of compounds
         Dim compounds As New ArrayList
@@ -2824,11 +2824,11 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         comp2 = FormMain.AvailableComponents(id2)
 
         With ms
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+            For Each phase As BaseClasses.Phase In ms.Phases.Values
                 With phase
-                    .Compounds.Add(comp1.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp1.Name, ""))
+                    .Compounds.Add(comp1.Name, New BaseClasses.Compound(comp1.Name, ""))
                     .Compounds(comp1.Name).ConstantProperties = comp1
-                    .Compounds.Add(comp2.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp2.Name, ""))
+                    .Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
                     .Compounds(comp2.Name).ConstantProperties = comp2
                 End With
             Next
@@ -3004,11 +3004,11 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         comp2 = FormMain.AvailableComponents(id2)
 
         With ms
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+            For Each phase As BaseClasses.Phase In ms.Phases.Values
                 With phase
-                    .Compounds.Add(comp1.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp1.Name, ""))
+                    .Compounds.Add(comp1.Name, New BaseClasses.Compound(comp1.Name, ""))
                     .Compounds(comp1.Name).ConstantProperties = comp1
-                    .Compounds.Add(comp2.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp2.Name, ""))
+                    .Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
                     .Compounds(comp2.Name).ConstantProperties = comp2
                 End With
             Next
@@ -3616,7 +3616,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             End With
             If Me.tbIPDBName.Text <> "" Then
                 Try
-                    DWSIM.Databases.UserIPDB.AddInteractionParameters(New DWSIM.Thermodynamics.BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
+                    DWSIM.Databases.UserIPDB.AddInteractionParameters(New BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
                     MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
                 Catch ex As Exception
                     MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)

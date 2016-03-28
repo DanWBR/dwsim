@@ -97,7 +97,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached And Not cp.AttachedConnector.AttachedFrom.ObjectType = ObjectType.EnergyStream Then
                     ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     Dim i As Integer = 0
                     For Each comp In ms.Phases(0).Compounds.Values
                         Vw(i) += comp.MassFraction.GetValueOrDefault * ms.Phases(0).Properties.massflow.GetValueOrDefault
@@ -108,13 +108,13 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 Dim i As Integer = 0
-                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim comp As BaseClasses.Compound
                 For Each comp In .Phases(0).Compounds.Values
                     comp.MassFraction = Vw(i) / W
                     i += 1
                 Next
                 Dim mass_div_mm As Double = 0
-                Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim sub1 As BaseClasses.Compound
                 For Each sub1 In .Phases(0).Compounds.Values
                     mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
                     i += 1
@@ -160,7 +160,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.molarfraction = 1
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     Dim i As Integer = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0

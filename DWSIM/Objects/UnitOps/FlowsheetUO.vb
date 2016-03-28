@@ -24,7 +24,7 @@ Imports System.Linq
 Imports System.Xml.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.DrawingTools
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Extras
 Imports System.IO
 Imports System.Threading.Tasks
@@ -312,7 +312,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                            If Not gobj Is Nothing Then
                                                obj.LoadData(xel.Elements.ToList)
                                                If TypeOf obj Is Streams.MaterialStream Then
-                                                   For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                                                   For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                                                        For Each c As ConstantProperties In form.Options.SelectedComponents.Values
                                                            phase.Compounds(c.Name).ConstantProperties = c
                                                        Next
@@ -454,11 +454,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 End Try
             Next
 
-            form.Options.NotSelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+            form.Options.NotSelectedComponents = New Dictionary(Of String, BaseClasses.ConstantProperties)
 
-            Dim tmpc As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+            Dim tmpc As BaseClasses.ConstantProperties
             For Each tmpc In FormMain.AvailableComponents.Values
-                Dim newc As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+                Dim newc As New BaseClasses.ConstantProperties
                 newc = tmpc
                 If Not form.Options.SelectedComponents.ContainsKey(tmpc.Name) Then
                     form.Options.NotSelectedComponents.Add(tmpc.Name, newc)
@@ -510,7 +510,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     Dim obj = form.Collections.FlowsheetObjectCollection(id)
                     obj.LoadData(xel.Elements.ToList)
                     If TypeOf obj Is Streams.MaterialStream Then
-                        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                        For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                             For Each c As ConstantProperties In form.Options.SelectedComponents.Values
                                 phase.Compounds(c.Name).ConstantProperties = c
                             Next

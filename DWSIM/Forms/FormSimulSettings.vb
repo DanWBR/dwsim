@@ -17,7 +17,7 @@
 
 Imports OutlookStyleControls
 Imports System.Xml.Serialization
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization.Formatters
 Imports System.IO
@@ -107,7 +107,7 @@ Public Class FormSimulSettings
 
         FrmChild = My.Application.ActiveSimulation
 
-        Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+        Dim comp As BaseClasses.ConstantProperties
         If Not loaded Or reset Then
 
             ACSC1 = New AutoCompleteStringCollection
@@ -914,7 +914,7 @@ Public Class FormSimulSettings
 
     End Sub
 
-    Public Function AddCompToGrid(ByRef comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties) As Integer
+    Public Function AddCompToGrid(ByRef comp As BaseClasses.ConstantProperties) As Integer
 
 
 
@@ -958,7 +958,7 @@ Public Class FormSimulSettings
 
     End Function
 
-    Public Function GetCompRowIndex(ByRef comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties) As Integer
+    Public Function GetCompRowIndex(ByRef comp As BaseClasses.ConstantProperties) As Integer
 
         For Each r As OutlookGridRow In ogc1.Rows
 
@@ -1117,7 +1117,7 @@ Public Class FormSimulSettings
 
             If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(ogc1.Rows(index).Cells(0).Value) Then
 
-                Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+                Dim tmpcomp As New BaseClasses.ConstantProperties
                 tmpcomp = Me.FrmChild.Options.NotSelectedComponents(ogc1.Rows(index).Cells(0).Value)
 
                 If tmpcomp.OriginalDB = "CoolProp" And My.Settings.ShowCoolPropWarning Then
@@ -1160,7 +1160,7 @@ Public Class FormSimulSettings
 
     Sub RemoveCompFromSimulation(ByVal compid As String)
 
-        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+        Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim nm As String = compid
         tmpcomp = Me.FrmChild.Options.SelectedComponents(nm)
         Me.FrmChild.Options.SelectedComponents.Remove(tmpcomp.Name)
@@ -1171,7 +1171,7 @@ Public Class FormSimulSettings
         Dim proplist As New ArrayList
 
         For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+            For Each phase As BaseClasses.Phase In ms.Phases.Values
                 phase.Compounds.Remove(tmpcomp.Name)
             Next
         Next
@@ -1326,7 +1326,7 @@ Public Class FormSimulSettings
 
         Dim myStream As System.IO.FileStream
         Dim cp As ConstantProperties
-        Dim col As New DWSIM.Thermodynamics.BaseClasses.ConstantPropertiesCollection
+        Dim col As New BaseClasses.ConstantPropertiesCollection
         Dim col2 As New ArrayList
 
         Dim dbid As String = "User_" & Guid.NewGuid().ToString
@@ -1337,13 +1337,13 @@ Public Class FormSimulSettings
             col2.Add(cp)
         Next
 
-        col.Collection = col2.ToArray(Type.GetType("DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties"))
+        col.Collection = col2.ToArray(Type.GetType("DWSIM.BaseClasses.ConstantProperties"))
 
         If Me.sfdxml1.ShowDialog() = Windows.Forms.DialogResult.OK Then
             myStream = Me.sfdxml1.OpenFile()
             Dim filename As String = myStream.Name
             myStream.Close()
-            Dim x As Serialization.XmlSerializer = New Serialization.XmlSerializer(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantPropertiesCollection))
+            Dim x As Serialization.XmlSerializer = New Serialization.XmlSerializer(GetType(BaseClasses.ConstantPropertiesCollection))
             Dim writer As IO.TextWriter = New IO.StreamWriter(filename)
             x.Serialize(writer, col)
             writer.Close()
@@ -1413,8 +1413,8 @@ Public Class FormSimulSettings
 
             If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
 
-                Dim tmpsubst As New DWSIM.Thermodynamics.BaseClasses.Compound("", "")
-                Dim toreplace As DWSIM.Thermodynamics.BaseClasses.ConstantProperties = Nothing
+                Dim tmpsubst As New BaseClasses.Compound("", "")
+                Dim toreplace As BaseClasses.ConstantProperties = Nothing
 
                 If DWSIM.App.IsRunningOnMono Then
                     If Me.ogc1.SelectedCells.Count > 0 Then
@@ -1428,7 +1428,7 @@ Public Class FormSimulSettings
 
                 Dim proplist As New ArrayList
                 For Each mstr In FrmChild.Collections.FlowsheetObjectCollection.Values
-                    For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mstr.Phases.Values
+                    For Each phase As BaseClasses.Phase In mstr.Phases.Values
                         tmpsubst = phase.Compounds(Me.ListViewA.SelectedItems(0).Tag)
                         phase.Compounds.Remove(Me.ListViewA.SelectedItems(0).Tag)
                         tmpsubst.ConstantProperties = toreplace

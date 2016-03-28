@@ -16,7 +16,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports OutlookStyleControls
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports DWSIM.DWSIM.Extras
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
@@ -57,7 +57,7 @@ Public Class FormConfigWizard
 
         FrmChild = My.Application.ActiveSimulation
 
-        Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+        Dim comp As BaseClasses.ConstantProperties
         If Not loaded Or reset Then
 
             ACSC1 = New AutoCompleteStringCollection
@@ -166,7 +166,7 @@ Public Class FormConfigWizard
 
     End Sub
 
-    Public Function AddCompToGrid(ByRef comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties) As Integer
+    Public Function AddCompToGrid(ByRef comp As BaseClasses.ConstantProperties) As Integer
 
         'If Not initialized Then
         '    Me.Visible = False
@@ -262,7 +262,7 @@ Public Class FormConfigWizard
         ' TODO Add code to check that index is within range. If it is out of range, don't do anything.
         If Me.loaded Then
             If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(ogc1.Rows(index).Cells(0).Value) Then
-                Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+                Dim tmpcomp As New BaseClasses.ConstantProperties
                 tmpcomp = Me.FrmChild.Options.NotSelectedComponents(ogc1.Rows(index).Cells(0).Value)
 
                 If tmpcomp.OriginalDB = "CoolProp" And My.Settings.ShowCoolPropWarning Then
@@ -276,8 +276,8 @@ Public Class FormConfigWizard
 
                 Dim proplist As New ArrayList
                 For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
-                    For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
-                        phase.Compounds.Add(tmpcomp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(tmpcomp.Name, ""))
+                    For Each phase As BaseClasses.Phase In ms.Phases.Values
+                        phase.Compounds.Add(tmpcomp.Name, New BaseClasses.Compound(tmpcomp.Name, ""))
                         phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
                     Next
                 Next
@@ -299,7 +299,7 @@ Public Class FormConfigWizard
 
     Sub RemoveCompFromSimulation(ByVal compid As String)
 
-        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+        Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim nm As String = compid
         tmpcomp = Me.FrmChild.Options.SelectedComponents(nm)
         Me.FrmChild.Options.SelectedComponents.Remove(tmpcomp.Name)
@@ -310,7 +310,7 @@ Public Class FormConfigWizard
         Dim proplist As New ArrayList
 
         For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+            For Each phase As BaseClasses.Phase In ms.Phases.Values
                 phase.Compounds.Remove(tmpcomp.Name)
             Next
         Next

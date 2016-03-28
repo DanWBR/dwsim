@@ -18,7 +18,7 @@
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization
 Imports System.Math
 Imports DWSIM.Thermodynamics.MathEx.GammaFunctions
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.Thermodynamics
@@ -52,7 +52,7 @@ Public Class FormPCBulk
 
     Dim n As Integer
 
-    Public m_comps As New System.Collections.Generic.Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Compound)
+    Public m_comps As New System.Collections.Generic.Dictionary(Of String, BaseClasses.Compound)
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KButton1.Click
 
@@ -718,8 +718,8 @@ Public Class FormPCBulk
         'finalize button
 
         Dim corr As String = Me.TextBox1.Text
-        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
-        Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
+        Dim tmpcomp As New BaseClasses.ConstantProperties
+        Dim subst As BaseClasses.Compound
         Dim gObj As GraphicObject = Nothing
         Dim idx As Integer = 0
 

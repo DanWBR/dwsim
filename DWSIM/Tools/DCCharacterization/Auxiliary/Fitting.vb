@@ -18,7 +18,7 @@
 
 Imports System.Math
 Imports DWSIM.Thermodynamics.MathEx.BrentOpt
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary

@@ -7,7 +7,7 @@ Public Class CSepSpecEditorForm
 
     Private Sub CSepSpecEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        For Each comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In My.Application.ActiveSimulation.Options.SelectedComponents.Values
+        For Each comp As BaseClasses.ConstantProperties In My.Application.ActiveSimulation.Options.SelectedComponents.Values
             If Not compspecs.ContainsKey(comp.Name) Then
                 Me.compspecs.Add(comp.Name, New Auxiliary.ComponentSeparationSpec(comp.Name, Auxiliary.SeparationSpec.PercentInletMassFlow, 0, "%"))
             End If

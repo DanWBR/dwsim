@@ -5,7 +5,7 @@ Imports FileHelpers
 Imports DWSIM
 Imports System.Windows.Forms
 Imports System.Linq
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.SharedClasses.SystemsOfUnits

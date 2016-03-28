@@ -49,7 +49,7 @@
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>29.6102289202548</lnKvalue>
               <Kvalue>7237007587580.61</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -67,7 +67,7 @@
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>34.7306406407222</lnKvalue>
               <Kvalue>1.21150603878177E+15</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -85,7 +85,7 @@
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>39.9269547217241</lnKvalue>
               <Kvalue>2.18804432115797E+17</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -103,7 +103,7 @@
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>45.5226236528028</lnKvalue>
               <Kvalue>5.8914779171952E+19</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -121,7 +121,7 @@
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-3.80612882602154</lnKvalue>
               <Kvalue>0.0222340845816136</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -142,7 +142,7 @@
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>924.71999985482</density>
             <enthalpy>-2033.95932970679</enthalpy>
             <entropy>-5.41235665052444</entropy>
@@ -159,7 +159,7 @@
             <molar_entropy>-118.992638553633</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.102776875359477</surfaceTension>
           </Properties2>
         </Phase>
@@ -167,7 +167,7 @@
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -185,7 +185,7 @@
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -203,7 +203,7 @@
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -221,7 +221,7 @@
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -239,7 +239,7 @@
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -260,7 +260,7 @@
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>1031.27263394635</density>
             <enthalpy>-2493.37288510794</enthalpy>
@@ -280,14 +280,14 @@
             <molar_entropy>-120.521730802016</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -305,7 +305,7 @@
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -323,7 +323,7 @@
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -341,7 +341,7 @@
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -359,7 +359,7 @@
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -380,7 +380,7 @@
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <activity>0</activity>
             <activityCoefficient>0</activityCoefficient>
             <compressibilityFactor>0.0680701939411848</compressibilityFactor>
@@ -407,14 +407,14 @@
             <molar_entropy>-81.6481458644254</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -432,7 +432,7 @@
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -450,7 +450,7 @@
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -468,7 +468,7 @@
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -486,7 +486,7 @@
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -507,7 +507,7 @@
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.00818439866907574</compressibilityFactor>
             <density>1031.27263394635</density>
             <enthalpy>-2493.37288510794</enthalpy>
@@ -527,14 +527,14 @@
             <molar_entropy>-120.521730802016</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -552,7 +552,7 @@
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -570,7 +570,7 @@
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -588,7 +588,7 @@
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -606,7 +606,7 @@
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -627,17 +627,17 @@
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -653,7 +653,7 @@
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -669,7 +669,7 @@
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -685,7 +685,7 @@
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -701,7 +701,7 @@
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -720,17 +720,17 @@
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -746,7 +746,7 @@
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -762,7 +762,7 @@
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -778,7 +778,7 @@
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -794,7 +794,7 @@
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -813,17 +813,17 @@
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -841,7 +841,7 @@
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -859,7 +859,7 @@
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -877,7 +877,7 @@
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -895,7 +895,7 @@
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -916,10 +916,10 @@
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -1103,7 +1103,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.0399901834092747</lnKvalue>
               <Kvalue>0.960798870875314</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1121,7 +1121,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.0498841313275787</lnKvalue>
               <Kvalue>0.951339648576934</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1139,7 +1139,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.0608774329951639</lnKvalue>
               <Kvalue>0.940938560729717</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1157,7 +1157,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-0.0739134361646123</lnKvalue>
               <Kvalue>0.928752086704429</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1175,7 +1175,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0.101566665503808</lnKvalue>
               <Kvalue>1.10690370822567</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1196,7 +1196,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>2000.97891695171</density>
             <enthalpy>-405.714387007531</enthalpy>
             <entropy>-0.8367031202921</entropy>
@@ -1213,7 +1213,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
             <molar_entropy>-72.265771483055</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.0483499869196639</surfaceTension>
           </Properties2>
         </Phase>
@@ -1221,7 +1221,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1239,7 +1239,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1257,7 +1257,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1275,7 +1275,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1293,7 +1293,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1314,7 +1314,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>2000.97891695171</density>
             <enthalpy>-405.714387007531</enthalpy>
@@ -1334,14 +1334,14 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
             <molar_entropy>-72.265771483055</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1359,7 +1359,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1377,7 +1377,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1395,7 +1395,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1413,7 +1413,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1434,7 +1434,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <activity>0</activity>
             <activityCoefficient>0</activityCoefficient>
             <fugacity>0</fugacity>
@@ -1442,14 +1442,14 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
             <logFugacityCoefficient>0</logFugacityCoefficient>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1467,7 +1467,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1485,7 +1485,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1503,7 +1503,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1521,7 +1521,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1542,7 +1542,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.0498968978766993</compressibilityFactor>
             <density>2000.97891695171</density>
             <enthalpy>-405.714387007531</enthalpy>
@@ -1562,14 +1562,14 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
             <molar_entropy>-72.265771483055</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1587,7 +1587,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1605,7 +1605,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1623,7 +1623,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1641,7 +1641,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1662,17 +1662,17 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1688,7 +1688,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1704,7 +1704,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1720,7 +1720,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1736,7 +1736,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1755,17 +1755,17 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1781,7 +1781,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1797,7 +1797,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1813,7 +1813,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1829,7 +1829,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1848,17 +1848,17 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1876,7 +1876,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1894,7 +1894,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1912,7 +1912,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1930,7 +1930,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -1951,10 +1951,10 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -1986,7 +1986,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <ID>0</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-6.50067829749626</lnKvalue>
               <Kvalue>0.0015024197597158</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2004,7 +2004,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-1.45200990187288</lnKvalue>
               <Kvalue>0.234099298312612</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2022,7 +2022,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>3.67238494142855</lnKvalue>
               <Kvalue>39.3456310768909</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2040,7 +2040,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>9.1917233457674</lnKvalue>
               <Kvalue>9815.55200186474</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2058,7 +2058,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>-39.5205570602866</lnKvalue>
               <Kvalue>6.86183304387537E-18</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2079,7 +2079,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Mixture</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <density>1036.62708769123</density>
             <enthalpy>-2474.94064722367</enthalpy>
             <entropy>-6.64760529983337</entropy>
@@ -2096,7 +2096,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
             <molar_entropy>-120.316339469401</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
             <surfaceTension>0.102718183225254</surfaceTension>
           </Properties2>
         </Phase>
@@ -2104,7 +2104,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <ID>1</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2122,7 +2122,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2140,7 +2140,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2158,7 +2158,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2176,7 +2176,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2197,7 +2197,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Overall Liquid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0</compressibilityFactor>
             <density>1036.62708769123</density>
             <enthalpy>-2476.70144680381</enthalpy>
@@ -2217,14 +2217,14 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
             <molar_entropy>-120.316339469401</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>2</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2242,7 +2242,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2260,7 +2260,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2278,7 +2278,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2296,7 +2296,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2317,7 +2317,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Vapor</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <activity>0</activity>
             <activityCoefficient>0</activityCoefficient>
             <compressibilityFactor>0.0812758404890602</compressibilityFactor>
@@ -2342,14 +2342,14 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
             <molar_entropy>-105.114583159829</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>3</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2367,7 +2367,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2385,7 +2385,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2403,7 +2403,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2421,7 +2421,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2442,7 +2442,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Liquid 1</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
             <compressibilityFactor>0.00822887820916954</compressibilityFactor>
             <density>1036.62708769123</density>
             <enthalpy>-2476.70144680381</enthalpy>
@@ -2462,14 +2462,14 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
             <molar_entropy>-120.316339469401</molar_entropy>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>4</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2487,7 +2487,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2505,7 +2505,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2523,7 +2523,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2541,7 +2541,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2562,17 +2562,17 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Liquid 2</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>5</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2588,7 +2588,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2604,7 +2604,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2620,7 +2620,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2636,7 +2636,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2655,17 +2655,17 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Liquid 3</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>6</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2681,7 +2681,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2697,7 +2697,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2713,7 +2713,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2729,7 +2729,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2748,17 +2748,17 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Aqueous</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
         <Phase>
           <ID>7</ID>
           <Compounds>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2776,7 +2776,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nHeptano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2794,7 +2794,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nOctano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2812,7 +2812,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nNonano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2830,7 +2830,7 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
               <Nome>nDecano</Nome>
             </Compound>
             <Compound>
-              <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.Compound</Type>
+              <Type>DWSIM.BaseClasses.Compound</Type>
               <lnKvalue>0</lnKvalue>
               <Kvalue>0</Kvalue>
               <FracaoDePetroleo>false</FracaoDePetroleo>
@@ -2851,10 +2851,10 @@ underflow.SetProp("totalFlow", "Overall", None, "", "mass", [tu])	# kg/s
           <Descricao></Descricao>
           <Nome>Solid</Nome>
           <Properties>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.SinglePhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.SinglePhaseMixtureProperties</Type>
           </Properties>
           <Properties2>
-            <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.TwoPhaseMixtureProperties</Type>
+            <Type>DWSIM.BaseClasses.TwoPhaseMixtureProperties</Type>
           </Properties2>
         </Phase>
       </Phases>
@@ -3115,7 +3115,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
   </PropertyPackages>
   <Compounds>
     <Compound>
-      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
+      <Type>DWSIM.BaseClasses.ConstantProperties</Type>
       <Name>nHeptano</Name>
       <CAS_Number>142-82-5</CAS_Number>
       <Formula>C7H16</Formula>
@@ -3257,7 +3257,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       </Elements>
     </Compound>
     <Compound>
-      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
+      <Type>DWSIM.BaseClasses.ConstantProperties</Type>
       <Name>nOctano</Name>
       <CAS_Number>111-65-9</CAS_Number>
       <Formula>C8H18</Formula>
@@ -3399,7 +3399,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       </Elements>
     </Compound>
     <Compound>
-      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
+      <Type>DWSIM.BaseClasses.ConstantProperties</Type>
       <Name>nNonano</Name>
       <CAS_Number>111-84-2</CAS_Number>
       <Formula>C9H20</Formula>
@@ -3541,7 +3541,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       </Elements>
     </Compound>
     <Compound>
-      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
+      <Type>DWSIM.BaseClasses.ConstantProperties</Type>
       <Name>nDecano</Name>
       <CAS_Number>124-18-5</CAS_Number>
       <Formula>C10H22</Formula>
@@ -3683,7 +3683,7 @@ Liquid Surface Tension: Brock-Bird Method</ComponentDescription>
       </Elements>
     </Compound>
     <Compound>
-      <Type>DWSIM.DWSIM.Thermodynamics.BaseClasses.ConstantProperties</Type>
+      <Type>DWSIM.BaseClasses.ConstantProperties</Type>
       <Name>Agua</Name>
       <CAS_Number>7732-18-5</CAS_Number>
       <Formula>H2O</Formula>

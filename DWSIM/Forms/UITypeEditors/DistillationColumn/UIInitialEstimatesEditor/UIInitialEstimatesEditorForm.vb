@@ -61,7 +61,7 @@ Public Class UIInitialEstimatesEditorForm
         Next
 
         Dim j As Integer = 0
-        For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
+        For Each cp As BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
             dgvcl.Columns.Add(cp.Name, DWSIM.App.GetComponentName(cp.Name))
             dgvcv.Columns.Add(cp.Name, DWSIM.App.GetComponentName(cp.Name))
             j = j + 1
@@ -81,7 +81,7 @@ Public Class UIInitialEstimatesEditorForm
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name
-            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
+            For Each cp As BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
                 ob(j) = Format(dc.InitialEstimates.LiqCompositions(i)(cp.Name).Value, nf)
                 j = j + 1
             Next
@@ -94,7 +94,7 @@ Public Class UIInitialEstimatesEditorForm
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name
-            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
+            For Each cp As BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
                 ob(j) = Format(dc.InitialEstimates.VapCompositions(i)(cp.Name).Value, nf)
                 j = j + 1
             Next
@@ -327,7 +327,7 @@ Public Class UIInitialEstimatesEditorForm
         Next
 
         Dim j As Integer = 0
-        For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
+        For Each cp As BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
             dgvcl.Columns.Add(cp.Name, DWSIM.App.GetComponentName(cp.Name))
             dgvcv.Columns.Add(cp.Name, DWSIM.App.GetComponentName(cp.Name))
             j = j + 1
@@ -338,7 +338,7 @@ Public Class UIInitialEstimatesEditorForm
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name
-            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
+            For Each cp As BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
                 ob(j) = Format(_ies.LiqCompositions(i)(cp.Name).Value, nf)
                 j = j + 1
             Next
@@ -354,7 +354,7 @@ Public Class UIInitialEstimatesEditorForm
         For Each st As Stage In dc.Stages
             j = 1
             ob(0) = dc.Stages(i).Name
-            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
+            For Each cp As BaseClasses.ConstantProperties In form.Options.SelectedComponents.Values
                 ob(j) = Format(_ies.VapCompositions(i)(cp.Name).Value, nf)
                 j = j + 1
             Next

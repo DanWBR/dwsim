@@ -75,7 +75,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base Class\BaseClasses.vb" />
+    <Compile Include="Base Class\SimulationObjectBaseClasses.vb" />
     <Compile Include="Misc\CapeOpenObjInfo.vb" />
     <Compile Include="Misc\CCapeCollection.vb" />
     <Compile Include="Misc\ComIStreamWrapper.vb" />

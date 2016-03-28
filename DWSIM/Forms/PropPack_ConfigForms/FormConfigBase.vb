@@ -4,6 +4,6 @@
 
     Public _pp As PropertyPackages.PropertyPackage
     Public _form As FormFlowsheet
-    Public _comps As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+    Public _comps As Dictionary(Of String, BaseClasses.ConstantProperties)
 
 End Class

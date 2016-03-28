@@ -44,7 +44,7 @@ Public Class FrmStabAn
             Dim n As Integer = mat.Phases(0).Compounds.Count - 1
 
             Dim Vz(n) As Double
-            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+            Dim comp As BaseClasses.Compound
             Dim i As Integer = 0
             For Each comp In mat.Phases(0).Compounds.Values
                 Vz(i) += comp.MoleFraction.GetValueOrDefault

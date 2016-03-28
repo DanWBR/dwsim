@@ -225,7 +225,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             mysheetIn.Cells(8, 2 + k).Value = Hi
 
                             Dim dy As Integer = 0
-                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Compounds.Values
+                            For Each comp As BaseClasses.Compound In S.Phases(0).Compounds.Values
                                 mysheetIn.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetOut.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetIn.Cells(12 + dy, 2 + k).Value = comp.MolarFlow
@@ -236,7 +236,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             mysheetIn.Cells(7, 2 + k).Value = ""
                             mysheetIn.Cells(8, 2 + k).Value = ""
                             Dim dy As Integer = 0
-                            For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
+                            For Each comp As BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
                                 mysheetIn.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetOut.Cells(12 + dy, 1).Value = comp.ConstantProperties.Name
                                 mysheetIn.Cells(12 + dy, 2 + k).Value = ""
@@ -265,7 +265,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                                 .Phases(0).Properties.temperature = T2
                                 .Phases(0).Properties.pressure = P2
 
-                                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                                Dim comp As BaseClasses.Compound
                                 i = 0
                                 SMole = 0
                                 SMass = 0
@@ -445,7 +445,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         mysheetIn.Cells(7, 1 + k).Value = Hi
 
                         Dim dy As Integer = 0
-                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In S.Phases(0).Compounds.Values
+                        For Each comp As BaseClasses.Compound In S.Phases(0).Compounds.Values
                             mysheetIn.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetOut.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetIn.Cells(11 + dy, 1 + k).Value = comp.MolarFlow.GetValueOrDefault
@@ -456,7 +456,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         mysheetIn.Cells(6, 1 + k).Value = ""
                         mysheetIn.Cells(7, 1 + k).Value = ""
                         Dim dy As Integer = 0
-                        For Each comp As DWSIM.Thermodynamics.BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
+                        For Each comp As BaseClasses.Compound In Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values
                             mysheetIn.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetOut.Cells(11 + dy, 0).Value = comp.ConstantProperties.Name
                             mysheetIn.Cells(11 + dy, 1 + k).Value = ""
@@ -507,7 +507,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             .Phases(0).Properties.temperature = T2
                             .Phases(0).Properties.pressure = P2
 
-                            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                            Dim comp As BaseClasses.Compound
                             i = 0
                             SMole = 0
                             SMass = 0
@@ -603,7 +603,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         .Phases(0).Properties.enthalpy = Nothing
                         .Phases(0).Properties.molarfraction = 1
                         .Phases(0).Properties.massfraction = 1
-                        Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                        Dim comp As BaseClasses.Compound
                         Dim i As Integer = 0
                         For Each comp In .Phases(0).Compounds.Values
                             comp.MoleFraction = 0

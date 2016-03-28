@@ -228,7 +228,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached And cp.Type = ConType.ConIn Then
                     ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     For Each comp In ms.Phases(0).Compounds.Values
                         If Not Vw.ContainsKey(comp.Name) Then
                             Vw.Add(comp.Name, 0)
@@ -253,12 +253,12 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 .Phases(0).Properties.molarfraction = 1
                 .Phases(0).Properties.massfraction = 1
                 .Phases(2).Properties.molarfraction = VF
-                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim comp As BaseClasses.Compound
                 For Each comp In .Phases(0).Compounds.Values
                     If W <> 0.0# Then comp.MassFraction = Vw(comp.Name) / W
                 Next
                 Dim mass_div_mm As Double = 0
-                Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim sub1 As BaseClasses.Compound
                 For Each sub1 In .Phases(0).Compounds.Values
                     mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
                 Next
@@ -437,7 +437,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = mix.Phases(2).Properties.enthalpy
                     .Phases(0).Properties.massflow = mix.Phases(2).Properties.massflow
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = mix.Phases(2).Compounds(comp.Name).MoleFraction
                         comp.MassFraction = mix.Phases(2).Compounds(comp.Name).MassFraction
@@ -455,7 +455,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Phases(0).Properties.pressure = P
                     If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
                     .Phases(0).Properties.enthalpy = HL1
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     i = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = VnL1(i)
@@ -476,7 +476,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         .Phases(0).Properties.pressure = P
                         If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
                         .Phases(0).Properties.enthalpy = HL2
-                        Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                        Dim comp As BaseClasses.Compound
                         i = 0
                         For Each comp In .Phases(0).Compounds.Values
                             comp.MoleFraction = VnL2(i)
@@ -533,7 +533,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0
@@ -554,7 +554,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0

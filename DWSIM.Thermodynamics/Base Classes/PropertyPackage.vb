@@ -5655,7 +5655,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_DELGig_RT(ByVal T1 As Double, ByVal T2 As Double, ByVal ID() As String, ByVal stcoeff() As Double, ByVal baseID As Integer, Optional ByVal mode2 As Boolean = False) As Double
+        Public Function AUX_DELGig_RT(ByVal T1 As Double, ByVal T2 As Double, ByVal ID() As String, ByVal stcoeff() As Double, ByVal baseID As Integer, Optional ByVal mode2 As Boolean = False) As Double Implements Interfaces.IPropertyPackage.AUX_DELGig_RT
 
             Dim n As Integer = ID.Length
 

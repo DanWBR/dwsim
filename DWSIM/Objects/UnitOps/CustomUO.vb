@@ -190,7 +190,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Catch ex As Exception
             End Try
             engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-            engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
+            engine.Runtime.LoadAssembly(GetType(BaseClasses.ConstantProperties).Assembly)
             engine.Runtime.LoadAssembly(GetType(GraphicObject).Assembly)
             engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
             scope = engine.CreateScope()
@@ -656,7 +656,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
                         engine.Runtime.LoadAssembly(GetType(CAPEOPEN110.ICapeIdentification).Assembly)
                         engine.Runtime.LoadAssembly(GetType(CapeOpen.ICapeIdentification).Assembly)
-                        engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
+                        engine.Runtime.LoadAssembly(GetType(BaseClasses.ConstantProperties).Assembly)
                         scope = engine.CreateScope()
                         scope.SetVariable("pme", Me._simcontext)
                         scope.SetVariable("this", Me)

@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports CapeOpen
 Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
@@ -66,7 +66,7 @@ Namespace DWSIM.SimulationObjects.Streams
             Me.Phases.Clear()
 
             For Each xel As XElement In dataPhases
-                Dim p As New DWSIM.Thermodynamics.BaseClasses.Phase(xel.<Name>.Value, "")
+                Dim p As New BaseClasses.Phase(xel.<Name>.Value, "")
                 p.LoadData(xel.Elements.ToList)
                 Me.Phases.Add(xel.<ID>.Value, p)
             Next
@@ -218,14 +218,14 @@ Namespace DWSIM.SimulationObjects.Streams
             Me.ComponentName = name
             Me.ComponentDescription = description
 
-            Me.Phases.Add(0, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Mistura"), ""))
-            Me.Phases.Add(1, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("OverallLiquid"), ""))
-            Me.Phases.Add(2, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Vapor"), ""))
-            Me.Phases.Add(3, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid1"), ""))
-            Me.Phases.Add(4, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid2"), ""))
-            Me.Phases.Add(5, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid3"), ""))
-            Me.Phases.Add(6, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Aqueous"), ""))
-            Me.Phases.Add(7, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Solid"), ""))
+            Me.Phases.Add(0, New BaseClasses.Phase(DWSIM.App.GetLocalString("Mistura"), ""))
+            Me.Phases.Add(1, New BaseClasses.Phase(DWSIM.App.GetLocalString("OverallLiquid"), ""))
+            Me.Phases.Add(2, New BaseClasses.Phase(DWSIM.App.GetLocalString("Vapor"), ""))
+            Me.Phases.Add(3, New BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid1"), ""))
+            Me.Phases.Add(4, New BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid2"), ""))
+            Me.Phases.Add(5, New BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid3"), ""))
+            Me.Phases.Add(6, New BaseClasses.Phase(DWSIM.App.GetLocalString("Aqueous"), ""))
+            Me.Phases.Add(7, New BaseClasses.Phase(DWSIM.App.GetLocalString("Solid"), ""))
 
             'Me.PropertyPackage = FlowSheet.Options.PropertyPackages(0)
 
@@ -246,14 +246,14 @@ Namespace DWSIM.SimulationObjects.Streams
             Me.ComponentName = name
             Me.ComponentDescription = description
 
-            Me.Phases.Add(0, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Mistura"), ""))
-            Me.Phases.Add(1, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("OverallLiquid"), ""))
-            Me.Phases.Add(2, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Vapor"), ""))
-            Me.Phases.Add(3, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid1"), ""))
-            Me.Phases.Add(4, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid2"), ""))
-            Me.Phases.Add(5, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid3"), ""))
-            Me.Phases.Add(6, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Aqueous"), ""))
-            Me.Phases.Add(7, New DWSIM.Thermodynamics.BaseClasses.Phase(DWSIM.App.GetLocalString("Solid"), ""))
+            Me.Phases.Add(0, New BaseClasses.Phase(DWSIM.App.GetLocalString("Mistura"), ""))
+            Me.Phases.Add(1, New BaseClasses.Phase(DWSIM.App.GetLocalString("OverallLiquid"), ""))
+            Me.Phases.Add(2, New BaseClasses.Phase(DWSIM.App.GetLocalString("Vapor"), ""))
+            Me.Phases.Add(3, New BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid1"), ""))
+            Me.Phases.Add(4, New BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid2"), ""))
+            Me.Phases.Add(5, New BaseClasses.Phase(DWSIM.App.GetLocalString("Liquid3"), ""))
+            Me.Phases.Add(6, New BaseClasses.Phase(DWSIM.App.GetLocalString("Aqueous"), ""))
+            Me.Phases.Add(7, New BaseClasses.Phase(DWSIM.App.GetLocalString("Solid"), ""))
 
             If Not Calculator.CAPEOPENMode And Not Me.FlowSheet Is Nothing Then
 
@@ -274,7 +274,7 @@ Namespace DWSIM.SimulationObjects.Streams
             End Get
         End Property
 
-        Public Function GetPhase(phasename As String) As DWSIM.Thermodynamics.BaseClasses.Phase
+        Public Function GetPhase(phasename As String) As BaseClasses.Phase
             Select Case phasename
                 Case "Vapor"
                     Return Phases(2)
@@ -330,7 +330,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, VF = {1}", T, Me.Phases(2).Properties.molarfraction.GetValueOrDefault))
             End Select
 
-            Dim subs As DWSIM.Thermodynamics.BaseClasses.Compound
+            Dim subs As BaseClasses.Compound
             Dim comp As Double = 0
             For Each subs In Me.Phases(0).Compounds.Values
                 comp += subs.MoleFraction.GetValueOrDefault
@@ -582,7 +582,7 @@ Namespace DWSIM.SimulationObjects.Streams
                     Phases(i).Properties.enthalpy = ASource.Phases(i).Properties.enthalpy
 
                     'Copy component properties.
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
 
                     For Each comp In Phases(i).Compounds.Values
                         comp.MoleFraction = ASource.Phases(i).Compounds(comp.Name).MoleFraction
@@ -671,7 +671,7 @@ Namespace DWSIM.SimulationObjects.Streams
                 Phases(i).Properties.massfraction = Nothing
 
                 'Copy component properties.
-                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim comp As BaseClasses.Compound
 
                 For Each comp In Phases(i).Compounds.Values
                     comp.MoleFraction = Nothing
@@ -743,7 +743,7 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Sub CalcOverallCompMassFractions()
 
             Dim mol_x_mm As Double
-            Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
+            Dim sub1 As BaseClasses.Compound
             For Each sub1 In Phases(0).Compounds.Values
                 mol_x_mm += sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight
             Next
@@ -756,7 +756,7 @@ Namespace DWSIM.SimulationObjects.Streams
         Public Sub CalcOverallCompMoleFractions()
 
             Dim mol_x_mm As Double
-            Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
+            Dim sub1 As BaseClasses.Compound
             For Each sub1 In Phases(0).Compounds.Values
                 mol_x_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
             Next
@@ -934,16 +934,16 @@ Namespace DWSIM.SimulationObjects.Streams
                 If Me.GraphicObject.InputConnectors(0).IsAttached Then
                     If Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle Then
                         .Item(.Item.Count - 1).IsReadOnly = True
-                        .Item(.Item.Count - 1).DefaultType = GetType(Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Compound))
+                        .Item(.Item.Count - 1).DefaultType = GetType(Dictionary(Of String, BaseClasses.Compound))
                         .Item(.Item.Count - 1).Visible = False
                     Else
                         .Item(.Item.Count - 1).DefaultValue = Nothing
-                        .Item(.Item.Count - 1).DefaultType = GetType(Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Compound))
+                        .Item(.Item.Count - 1).DefaultType = GetType(Dictionary(Of String, BaseClasses.Compound))
                         .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.Composition.UICompositionEditor
                     End If
                 Else
                     .Item(.Item.Count - 1).DefaultValue = Nothing
-                    .Item(.Item.Count - 1).DefaultType = GetType(Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Compound))
+                    .Item(.Item.Count - 1).DefaultType = GetType(Dictionary(Of String, BaseClasses.Compound))
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.Composition.UICompositionEditor
                 End If
                 .Item.Add("[B] " & DWSIM.App.GetLocalString("Basedacomposio"), Me, "CompositionBasis", False, DWSIM.App.GetLocalString("Condies1"), DWSIM.App.GetLocalString("Selecioneabaseparaav"), True)

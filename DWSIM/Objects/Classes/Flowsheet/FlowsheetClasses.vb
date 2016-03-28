@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Linq
 
@@ -109,15 +109,15 @@ Namespace DWSIM.Flowsheet
             End Get
         End Property
 
-        Public SelectedComponents As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+        Public SelectedComponents As Dictionary(Of String, BaseClasses.ConstantProperties)
 
-        Public NotSelectedComponents As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+        Public NotSelectedComponents As Dictionary(Of String, BaseClasses.ConstantProperties)
 
         Public Databases As Dictionary(Of String, String())
 
-        Public Reactions As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Reaction)
+        Public Reactions As Dictionary(Of String, BaseClasses.Reaction)
 
-        Public ReactionSets As Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ReactionSet)
+        Public ReactionSets As Dictionary(Of String, BaseClasses.ReactionSet)
 
         Public SimulationMode As String = ""
 
@@ -127,11 +127,11 @@ Namespace DWSIM.Flowsheet
 
         Sub New()
 
-            SelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
-            NotSelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+            SelectedComponents = New Dictionary(Of String, BaseClasses.ConstantProperties)
+            NotSelectedComponents = New Dictionary(Of String, BaseClasses.ConstantProperties)
             SelectedUnitSystem = New SystemsOfUnits.SI()
-            Reactions = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.Reaction)
-            ReactionSets = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ReactionSet)
+            Reactions = New Dictionary(Of String, BaseClasses.Reaction)
+            ReactionSets = New Dictionary(Of String, BaseClasses.ReactionSet)
             Databases = New Dictionary(Of String, String())
             PropertyPackages = New Dictionary(Of String, PropertyPackages.PropertyPackage)
             PetroleumAssays = New Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)

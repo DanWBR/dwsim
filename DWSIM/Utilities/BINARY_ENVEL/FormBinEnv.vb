@@ -1,4 +1,4 @@
-﻿Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+﻿Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
@@ -135,11 +135,11 @@ Public Class FormBinEnv
 
             Me.mat = New MaterialStream("", "")
 
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+            For Each phase As BaseClasses.Phase In mat.Phases.Values
                 For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
                     If DWSIM.App.GetComponentName(cp.Name) = cbComp1.SelectedItem.ToString Then
                         With phase
-                            .Compounds.Add(cp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(cp.Name, ""))
+                            .Compounds.Add(cp.Name, New BaseClasses.Compound(cp.Name, ""))
                             .Compounds(cp.Name).ConstantProperties = cp
                             mw1 = cp.Molar_Weight
                         End With
@@ -148,11 +148,11 @@ Public Class FormBinEnv
                 Next
             Next
 
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+            For Each phase As BaseClasses.Phase In mat.Phases.Values
                 For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
                     If DWSIM.App.GetComponentName(cp.Name) = cbComp2.SelectedItem.ToString Then
                         With phase
-                            .Compounds.Add(cp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(cp.Name, ""))
+                            .Compounds.Add(cp.Name, New BaseClasses.Compound(cp.Name, ""))
                             .Compounds(cp.Name).ConstantProperties = cp
                             mw2 = cp.Molar_Weight
                         End With

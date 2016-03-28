@@ -18,7 +18,7 @@
 'Imports DWSIM.SimulationObjects
 Imports System.ComponentModel
 Imports FileHelpers
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters
 Imports System.Runtime.Serialization
 Imports System.IO
@@ -67,7 +67,7 @@ Public Class FormMain
 
     Private tmpform2 As FormFlowsheet
 
-    Public AvailableComponents As New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+    Public AvailableComponents As New Dictionary(Of String, BaseClasses.ConstantProperties)
     Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
     Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
 
@@ -747,10 +747,10 @@ Public Class FormMain
     Public Sub LoadCSDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim csdb As New DWSIM.Databases.ChemSep
-            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+            Dim cpa() As BaseClasses.ConstantProperties
             csdb.Load(filename)
             cpa = csdb.Transfer()
-            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
+            For Each cp As BaseClasses.ConstantProperties In cpa
                 cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
                 If Not Me.AvailableComponents.ContainsKey(cp.Name) Then
                     Me.AvailableComponents.Add(cp.Name, cp)
@@ -763,10 +763,10 @@ Public Class FormMain
     Public Sub LoadDWSIMDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim dwdb As New DWSIM.Databases.DWSIM
-            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+            Dim cpa() As BaseClasses.ConstantProperties
             dwdb.Load(filename)
             cpa = dwdb.Transfer()
-            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
+            For Each cp As BaseClasses.ConstantProperties In cpa
                 cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
                 If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
             Next
@@ -776,10 +776,10 @@ Public Class FormMain
     Public Sub LoadBDDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim bddb As New DWSIM.Databases.Biodiesel
-            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+            Dim cpa() As BaseClasses.ConstantProperties
             bddb.Load(filename)
             cpa = bddb.Transfer()
-            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
+            For Each cp As BaseClasses.ConstantProperties In cpa
                 If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
             Next
         End If
@@ -788,10 +788,10 @@ Public Class FormMain
     Public Sub LoadEDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim edb As New DWSIM.Databases.Electrolyte
-            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+            Dim cpa() As BaseClasses.ConstantProperties
             edb.Load(filename)
             cpa = edb.Transfer()
-            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
+            For Each cp As BaseClasses.ConstantProperties In cpa
                 If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
             Next
         End If
@@ -800,11 +800,11 @@ Public Class FormMain
     Public Sub LoadCPDB(ByVal filename As String)
         If File.Exists(filename) Then
             Dim cpdb As New DWSIM.Databases.CoolProp
-            Dim cpa() As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+            Dim cpa() As BaseClasses.ConstantProperties
             cpdb.Load(filename)
             Try
                 cpa = cpdb.Transfer()
-                For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In cpa
+                For Each cp As BaseClasses.ConstantProperties In cpa
                     If Not Me.AvailableComponents.ContainsKey(cp.Name) Then
                         Me.AvailableComponents.Add(cp.Name, cp)
                     Else
@@ -1392,7 +1392,7 @@ Public Class FormMain
                                            If Not gobj Is Nothing Then
                                                obj.LoadData(xel.Elements.ToList)
                                                If TypeOf obj Is Streams.MaterialStream Then
-                                                   For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                                                   For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                                                        For Each c As ConstantProperties In form.Options.SelectedComponents.Values
                                                            phase.Compounds(c.Name).ConstantProperties = c
                                                        Next
@@ -1419,7 +1419,7 @@ Public Class FormMain
                     If Not gobj Is Nothing Then
                         obj.LoadData(xel.Elements.ToList)
                         If TypeOf obj Is Streams.MaterialStream Then
-                            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                            For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                                 For Each c As ConstantProperties In form.Options.SelectedComponents.Values
                                     phase.Compounds(c.Name).ConstantProperties = c
                                 Next
@@ -1602,11 +1602,11 @@ Public Class FormMain
             End Try
         Next
 
-        form.Options.NotSelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+        form.Options.NotSelectedComponents = New Dictionary(Of String, BaseClasses.ConstantProperties)
 
-        Dim tmpc As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+        Dim tmpc As BaseClasses.ConstantProperties
         For Each tmpc In Me.AvailableComponents.Values
-            Dim newc As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+            Dim newc As New BaseClasses.ConstantProperties
             newc = tmpc
             If Not form.Options.SelectedComponents.ContainsKey(tmpc.Name) Then
                 form.Options.NotSelectedComponents.Add(tmpc.Name, newc)

@@ -30,7 +30,7 @@ Imports System.Xml.Linq
 Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Reflection
 Imports System.Runtime.Serialization.Formatters.Binary
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
 Imports System.Threading
 Imports DWSIM.Interfaces

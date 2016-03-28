@@ -124,7 +124,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached Then
                     ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     For Each comp In ms.Phases(0).Compounds.Values
                         If Not Vw.ContainsKey(comp.Name) Then
                             Vw.Add(comp.Name, 0)
@@ -144,12 +144,12 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 .Phases(0).Properties.massflow = W
                 .Phases(0).Properties.molarfraction = 1
                 .Phases(0).Properties.massfraction = 1
-                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim comp As BaseClasses.Compound
                 For Each comp In .Phases(0).Compounds.Values
                     If W <> 0.0# Then comp.MassFraction = Vw(comp.Name) / W
                 Next
                 Dim mass_div_mm As Double = 0
-                Dim sub1 As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim sub1 As BaseClasses.Compound
                 For Each sub1 In .Phases(0).Compounds.Values
                     mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
                 Next
@@ -192,7 +192,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.molarfraction = 1
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0
                         comp.MassFraction = 0

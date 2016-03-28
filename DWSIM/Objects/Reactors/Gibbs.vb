@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports Ciloci.Flee
 Imports System.Math
 Imports System.Linq
@@ -1616,7 +1616,7 @@ Namespace DWSIM.SimulationObjects.Reactors
             cp = Me.GraphicObject.InputConnectors(0)
             If cp.IsAttached Then
                 ms = form.Collections.FlowsheetObjectCollection(cp.AttachedConnector.AttachedFrom.Name)
-                Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                Dim comp As BaseClasses.Compound
                 i = 0
                 For Each comp In ms.Phases(0).Compounds.Values
                     wtotalx += Vx(i) * comp.ConstantProperties.Molar_Weight
@@ -1639,7 +1639,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = H * (wtotaly * xv / (wtotaly * xv + wtotalx * xl))
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = Vy(j)
@@ -1670,7 +1670,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = H * (wtotalx * xl / (wtotaly * xv + wtotalx * xl))
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = Vx(j)
@@ -1735,7 +1735,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0
@@ -1756,7 +1756,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0

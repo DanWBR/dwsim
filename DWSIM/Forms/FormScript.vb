@@ -116,7 +116,7 @@ Imports System.Threading
         Catch ex As Exception
         End Try
         engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-        engine.Runtime.LoadAssembly(GetType(DWSIM.Thermodynamics.BaseClasses.ConstantProperties).Assembly)
+        engine.Runtime.LoadAssembly(GetType(Thermodynamics.BaseClasses.ConstantProperties).Assembly)
         engine.Runtime.LoadAssembly(GetType(GraphicObject).Assembly)
         engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
         If My.Application.CommandLineMode Then

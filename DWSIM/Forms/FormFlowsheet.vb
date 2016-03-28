@@ -27,7 +27,7 @@ Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports Microsoft.Win32
 Imports DWSIM.DWSIM.SimulationObjects
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports DWSIM.DWSIM.Flowsheet
 Imports DWSIM.DWSIM.Extras
@@ -50,6 +50,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     'DWSIM IFlowsheet interface
     Implements Interfaces.IFlowsheet
+
 
 #Region "    Variable Declarations "
 
@@ -200,11 +201,11 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 'If pp.ConfigForm Is Nothing Then pp.ReconfigureConfigForm()
             Next
 
-            Me.Options.NotSelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+            Me.Options.NotSelectedComponents = New Dictionary(Of String, BaseClasses.ConstantProperties)
 
-            Dim tmpc As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+            Dim tmpc As BaseClasses.ConstantProperties
             For Each tmpc In FormMain.AvailableComponents.Values
-                Dim newc As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
+                Dim newc As New BaseClasses.ConstantProperties
                 newc = tmpc
                 Me.Options.NotSelectedComponents.Add(tmpc.Name, newc)
             Next
@@ -492,11 +493,11 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         If Me.Options.SelectedComponents.Count = 0 Then
             MessageBox.Show(DWSIM.App.GetLocalString("Nohcomponentesaadici"))
         Else
-            Dim comp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In MaterialStream.Phases.Values
+            Dim comp As BaseClasses.ConstantProperties
+            For Each phase As BaseClasses.Phase In MaterialStream.Phases.Values
                 For Each comp In Me.Options.SelectedComponents.Values
                     With phase
-                        .Compounds.Add(comp.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp.Name, ""))
+                        .Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                         .Compounds(comp.Name).ConstantProperties = comp
                     End With
                 Next
@@ -2659,7 +2660,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                             If Not Options.SelectedComponents.ContainsKey(subst.Name) And Not compoundstoremove.Contains(subst.Name) Then compoundstoremove.Add(subst.Name)
                         Next
                     End If
-                    For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                    For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                         For Each c As ConstantProperties In Options.SelectedComponents.Values
                             If Not phase.Compounds.ContainsKey(c.Name) Then phase.Compounds.Add(c.Name, New Compound(c.Name, "") With {.ConstantProperties = c})
                             phase.Compounds(c.Name).ConstantProperties = c
@@ -2683,7 +2684,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
             For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In objlist
                 If TypeOf obj Is Streams.MaterialStream Then
-                    For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                    For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                         For Each comp In compoundstoremove
                             phase.Compounds.Remove(comp)
                         Next
@@ -2786,7 +2787,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                         Collections.FlowsheetObjectCollection(FormSurface.AddObjectToSurface(gobj1.ObjectType, gobj1.X, gobj1.Y, gobj1.Tag, gobj1.Name)).LoadData(act.OldValue)
                         FormSurface.FlowsheetDesignSurface.drawingObjects.FindObjectWithName(gobj1.Name).LoadData(gobj1.SaveData)
                         If gobj1.ObjectType = ObjectType.MaterialStream Then
-                            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In DirectCast(Collections.FlowsheetObjectCollection(gobj1.Name), Streams.MaterialStream).Phases.Values
+                            For Each phase As BaseClasses.Phase In DirectCast(Collections.FlowsheetObjectCollection(gobj1.Name), Streams.MaterialStream).Phases.Values
                                 For Each c As ConstantProperties In Options.SelectedComponents.Values
                                     phase.Compounds(c.Name).ConstantProperties = c
                                 Next
@@ -3147,41 +3148,25 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects
         Get
-            Dim dict As New Dictionary(Of String, Interfaces.IGraphicObject)
-            For Each kvp In Collections.GraphicObjectCollection
-                dict.Add(kvp.Key, kvp.Value)
-            Next
-            Return dict
+            Return Collections.GraphicObjectCollection.ToDictionary(Of String, IGraphicObject)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
 
     Public ReadOnly Property SimulationObjects As Dictionary(Of String, Interfaces.ISimulationObject) Implements Interfaces.IFlowsheet.SimulationObjects
         Get
-            Dim dict As New Dictionary(Of String, Interfaces.ISimulationObject)
-            For Each kvp In Collections.FlowsheetObjectCollection
-                dict.Add(kvp.Key, kvp.Value)
-            Next
-            Return dict
+            Return Collections.FlowsheetObjectCollection.ToDictionary(Of String, ISimulationObject)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
 
     Public ReadOnly Property Reactions As Dictionary(Of String, Interfaces.IReaction) Implements Interfaces.IFlowsheet.Reactions
         Get
-            Dim dict As New Dictionary(Of String, Interfaces.IReaction)
-            For Each kvp In Options.Reactions
-                dict.Add(kvp.Key, kvp.Value)
-            Next
-            Return dict
+            Return Options.Reactions.ToDictionary(Of String, IReaction)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
 
     Public ReadOnly Property ReactionSets As Dictionary(Of String, Interfaces.IReactionSet) Implements Interfaces.IFlowsheet.ReactionSets
         Get
-            Dim dict As New Dictionary(Of String, Interfaces.IReactionSet)
-            For Each kvp In Options.ReactionSets
-                dict.Add(kvp.Key, kvp.Value)
-            Next
-            Return dict
+            Return Options.ReactionSets.ToDictionary(Of String, IReactionSet)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
 
@@ -3249,16 +3234,18 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.PropertyPackages
         Get
-            Dim dict As New Dictionary(Of String, IPropertyPackage)
-            For Each item In Options.PropertyPackages
-                dict.Add(item.Key, item.Value)
-            Next
-            Return dict
+            Return Options.PropertyPackages.ToDictionary(Of String, IPropertyPackage)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
 
     Public Function GetFlowsheetSimulationObject1(p1 As String) As Object Implements IFlowsheet.GetFlowsheetSimulationObject
         Return Me.GetFlowsheetSimulationObject(p1)
     End Function
+
+    Public ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds
+        Get
+            Return Options.SelectedComponents.ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+        End Get
+    End Property
 
 End Class

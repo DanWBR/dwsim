@@ -17,7 +17,7 @@
 
 
 Imports Ciloci.Flee
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 
 Public Class FormReacHeterog

@@ -1,4 +1,4 @@
-﻿Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+﻿Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.Interfaces
 
@@ -15,7 +15,7 @@ Public Class CompositionEditorForm
 
     Private Sub CompositionEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+        Dim comp As BaseClasses.Compound
         GridComp.Rows.Clear()
         GridComp.Columns(0).CellTemplate.Style.Format = Stream.FlowSheet.Options.FractionNumberFormat
         GridComp.Columns(1).CellTemplate.Style.Format = Stream.FlowSheet.Options.FractionNumberFormat
@@ -78,7 +78,7 @@ Public Class CompositionEditorForm
 
         If Not Me.Label2.Text = DWSIM.App.GetLocalString("Erro") Then
 
-            Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+            Dim comp As BaseClasses.Compound
             Dim row As DataGridViewRow
             Dim mmtotal As Double = 0
             Dim mtotal As Double = 0

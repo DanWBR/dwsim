@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
+    <Compile Include="Base Classes\ThermodynamicsBase.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Extensions\GeneralExtenders.vb" />

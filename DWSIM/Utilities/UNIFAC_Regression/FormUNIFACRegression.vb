@@ -18,7 +18,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.MathEx
@@ -41,9 +41,9 @@ Public Class FormUNIFACRegression
     Public cv As SystemsOfUnits.Converter
     Public ci As Globalization.CultureInfo = Globalization.CultureInfo.CurrentUICulture
     Public _pp As Object
-    Public _comps As New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
+    Public _comps As New Dictionary(Of String, BaseClasses.ConstantProperties)
     Public uni As Object = Nothing
-    Public IP As New DWSIM.Thermodynamics.BaseClasses.InteractionParameter
+    Public IP As New BaseClasses.InteractionParameter
 
     Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
     Dim GI1, GI2 As Integer
@@ -557,14 +557,14 @@ Public Class FormUNIFACRegression
 
         mat.Phases(0).Properties.pressure = P
         mat.Phases(0).Properties.temperature = T
-        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
+        For Each phase As BaseClasses.Phase In mat.Phases.Values
             phase.Compounds.Clear() 'delete old assignment
         Next
-        For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In mat.Phases.Values
-            phase.Compounds.Add(Comp1, New DWSIM.Thermodynamics.BaseClasses.Compound(Comp1, ""))
+        For Each phase As BaseClasses.Phase In mat.Phases.Values
+            phase.Compounds.Add(Comp1, New BaseClasses.Compound(Comp1, ""))
             phase.Compounds(Comp1).ConstantProperties = _comps.Values(0)
 
-            phase.Compounds.Add(Comp2, New DWSIM.Thermodynamics.BaseClasses.Compound(Comp2, ""))
+            phase.Compounds.Add(Comp2, New BaseClasses.Compound(Comp2, ""))
             phase.Compounds(Comp2).ConstantProperties = _comps.Values(1)
         Next
         _pp.CurrentMaterialStream = mat
@@ -990,7 +990,7 @@ Public Class FormUNIFACRegression
 
         If Me.tbIPDBName.Text <> "" Then
             Try
-                DWSIM.Databases.UserIPDB.AddInteractionParameters(New DWSIM.Thermodynamics.BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
+                DWSIM.Databases.UserIPDB.AddInteractionParameters(New BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
                 MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)

@@ -131,7 +131,7 @@ Imports DWSIM.Interfaces.Interfaces2
             'remapping necessary
             remap = True
         Else
-            For Each c As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In My.Application.ActiveSimulation.Options.SelectedComponents.Values
+            For Each c As BaseClasses.ConstantProperties In My.Application.ActiveSimulation.Options.SelectedComponents.Values
                 If Not _mappings.ContainsKey(c.Name) Then
                     'remapping necessary
                     remap = True
@@ -141,7 +141,7 @@ Imports DWSIM.Interfaces.Interfaces2
 
         If remap Then
             _mappings.Clear()
-            For Each c As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In My.Application.ActiveSimulation.Options.SelectedComponents.Values
+            For Each c As BaseClasses.ConstantProperties In My.Application.ActiveSimulation.Options.SelectedComponents.Values
                 _mappings.Add(c.Name, "")
             Next
         End If

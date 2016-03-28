@@ -15,11 +15,10 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-
 Imports Ciloci.Flee
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 
 Public Class FormReacConv
 

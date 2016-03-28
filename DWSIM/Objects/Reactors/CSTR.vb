@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports Ciloci.Flee
 Imports System.Math
 Imports DWSIM.Thermodynamics.MathEx
@@ -751,7 +751,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     .Phases(0).Properties.temperature = ims.Phases(0).Properties.temperature.GetValueOrDefault
                     .Phases(0).Properties.pressure = ims.Phases(0).Properties.pressure.GetValueOrDefault
                     .Phases(0).Properties.enthalpy = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     mtotal = 0
                     wtotal = 0
                     For Each comp In .Phases(0).Compounds.Values
@@ -801,7 +801,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.enthalpy = Nothing
-                    Dim comp As DWSIM.Thermodynamics.BaseClasses.Compound
+                    Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0

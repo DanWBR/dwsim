@@ -16,7 +16,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports System.Text
 Imports DotNumerics
@@ -142,7 +142,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         For Each r As DataGridViewRow In dgvu1.Rows
             Dim cb As DataGridViewComboBoxCell = r.Cells(2)
             cb.Items.Clear()
-            Dim ipsets As List(Of DWSIM.Thermodynamics.BaseClasses.InteractionParameter) = DWSIM.Databases.UserIPDB.GetStoredIPsets(r.Cells(0).Value, r.Cells(1).Value, "NRTL")
+            Dim ipsets As List(Of BaseClasses.InteractionParameter) = DWSIM.Databases.UserIPDB.GetStoredIPsets(r.Cells(0).Value, r.Cells(1).Value, "NRTL")
             cb.Items.Add(ipsets.Count)
             For Each ip As InteractionParameter In ipsets
                 Dim strb As New StringBuilder
@@ -398,11 +398,11 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         comp2 = _comps(id2)
 
         With ms
-            For Each phase As DWSIM.Thermodynamics.BaseClasses.Phase In ms.Phases.Values
+            For Each phase As BaseClasses.Phase In ms.Phases.Values
                 With phase
-                    .Compounds.Add(comp1.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp1.Name, ""))
+                    .Compounds.Add(comp1.Name, New BaseClasses.Compound(comp1.Name, ""))
                     .Compounds(comp1.Name).ConstantProperties = comp1
-                    .Compounds.Add(comp2.Name, New DWSIM.Thermodynamics.BaseClasses.Compound(comp2.Name, ""))
+                    .Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
                     .Compounds(comp2.Name).ConstantProperties = comp2
                 End With
             Next

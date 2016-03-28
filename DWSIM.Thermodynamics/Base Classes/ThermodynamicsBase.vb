@@ -24,12 +24,11 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports System.IO
 Imports System.Linq
-Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports System.Reflection
 Imports System.Globalization
 Imports DWSIM.Interfaces.Enums
 
-Namespace DWSIM.Thermodynamics.BaseClasses
+Namespace BaseClasses
 
     <System.Serializable()> Public Class Compound
 
@@ -407,7 +406,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
         Public Function GetIDbyName(ByVal reactname As String)
             Dim ID As String = ""
-            For Each r As Reaction In Me.m_pme.Options.Reactions.Values
+            For Each r As Reaction In Me.m_pme.Reactions.Values
                 If r.Name = reactname Then
                     ID = r.ID
                     Exit For
@@ -472,8 +471,8 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 #Region "    CAPE-OPEN Reaction Package Methods and Properties"
 
         Protected m_params As CapeOpen.ParameterCollection
-        Protected m_str As MaterialStream
-        <System.NonSerialized()> Protected m_pme As FormFlowsheet
+        Protected m_str As Interfaces.IMaterialStream
+        <System.NonSerialized()> Protected m_pme As Interfaces.IFlowsheet
         Protected m_kre As Reaction
 
         Public Function Count() As Integer Implements CapeOpen.ICapeCollection.Count
@@ -503,7 +502,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function GetBaseReactant(ByVal reacId As String) As String Implements CapeOpen.ICapeReactionChemistry.GetBaseReactant
-            Return Me.m_pme.Options.Reactions(GetIDbyName(reacId)).BaseReactant
+            Return Me.m_pme.Reactions(GetIDbyName(reacId)).BaseReactant
         End Function
 
         ''' <summary>
@@ -513,7 +512,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function GetNumberOfReactionCompounds(ByVal reacID As String) As Integer Implements CapeOpen.ICapeReactionChemistry.GetNumberOfReactionCompounds
-            Return Me.m_pme.Options.Reactions(GetIDbyName(reacID)).Components.Count
+            Return Me.m_pme.Reactions(GetIDbyName(reacID)).Components.Count
         End Function
 
         ''' <summary>
@@ -554,10 +553,10 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Dim bp As Object = Nothing
             Dim mw As Object = Nothing
             Dim cid As Object = Nothing
-            Me.m_str.GetCompoundList(cid, fm, nm, bp, mw, ci)
+            DirectCast(Me.m_str, CapeOpen.ICapeThermoCompounds).GetCompoundList(cid, fm, nm, bp, mw, ci)
             Dim n As Integer = CType(nm, String()).Length - 1
-            For Each c As ReactionStoichBase In Me.m_pme.Options.Reactions(GetIDbyName(reacId)).Components.Values
-                With Me.m_pme.Options.SelectedComponents(c.CompName)
+            For Each c As ReactionStoichBase In Me.m_pme.Reactions(GetIDbyName(reacId)).Components.Values
+                With Me.m_pme.SelectedCompounds(c.CompName)
                     For i = 0 To n
                         If ci(i) = .CAS_Number Then
                             narr.Add(cid(i))
@@ -585,7 +584,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         ''' <returns></returns>
         ''' <remarks></remarks>
         Public Function GetReactionConcBasis(ByVal reacId As String) As String Implements CapeOpen.ICapeReactionChemistry.GetReactionConcBasis
-            Select Case Me.m_pme.Options.Reactions(GetIDbyName(reacId)).ReactionBasis
+            Select Case Me.m_pme.Reactions(GetIDbyName(reacId)).ReactionBasis
                 Case ReactionBasis.Activity
                     Return "activity"
                 Case ReactionBasis.Fugacity
@@ -636,11 +635,11 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         ''' <returns></returns>
         ''' <remarks>The string returned by this method must match one of the phase labels known to the Property Package.</remarks>
         Public Function GetReactionPhase(ByVal reacId As String) As String Implements CapeOpen.ICapeReactionChemistry.GetReactionPhase
-            Select Case Me.m_pme.Options.Reactions(GetIDbyName(reacId)).ReactionPhase
+            Select Case Me.m_pme.Reactions(GetIDbyName(reacId)).ReactionPhase
                 Case PhaseName.Vapor
-                    Return Me.m_str.PropertyPackage.PhaseMappings("Vapor").PhaseLabel
+                    Return "Vapor"
                 Case PhaseName.Liquid
-                    Return Me.m_str.PropertyPackage.PhaseMappings("Liquid1").PhaseLabel
+                    Return "Liquid"
                 Case Else
                     Return "Overall"
             End Select
@@ -669,7 +668,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         Public Function GetReactionsIds() As Object Implements CapeOpen.ICapeReactionChemistry.GetReactionsIds
             Dim narr As New ArrayList
             For Each r As ReactionSetBase In Me.Reactions.Values
-                narr.Add(Me.m_pme.Options.Reactions(r.ReactionID).Name)
+                narr.Add(Me.m_pme.Reactions(r.ReactionID).Name)
             Next
             Dim names(narr.Count - 1) As String
             Array.Copy(narr.ToArray, names, narr.Count)
@@ -686,7 +685,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         ''' CAPE_KINETIC = 1,</returns>
         ''' <remarks></remarks>
         Public Function GetReactionType(ByVal reacID As String) As CapeOpen.CapeReactionType Implements CapeOpen.ICapeReactionChemistry.GetReactionType
-            Select Case Me.m_pme.Options.Reactions(GetIDbyName(reacID)).ReactionType
+            Select Case Me.m_pme.Reactions(GetIDbyName(reacID)).ReactionType
                 Case ReactionType.Conversion
                     Return CapeOpen.CapeReactionType.CAPE_KINETIC
                 Case ReactionType.Equilibrium
@@ -708,7 +707,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         ''' GetReactionCompuoundIds meaning that the first coefficient corresponds to the first compound and so on.</remarks>
         Public Function GetStoichiometricCoefficients(ByVal reacId As String) As Object Implements CapeOpen.ICapeReactionChemistry.GetStoichiometricCoefficients
             Dim narr As New ArrayList
-            For Each c As ReactionStoichBase In Me.m_pme.Options.Reactions(GetIDbyName(reacId)).Components.Values
+            For Each c As ReactionStoichBase In Me.m_pme.Reactions(GetIDbyName(reacId)).Components.Values
                 narr.Add(c.StoichCoeff)
             Next
             Dim sc(narr.Count - 1) As Double
@@ -717,8 +716,9 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         End Function
 
         Public Sub Edit() Implements CapeOpen.ICapeUtilities.Edit
-            Dim rm As New FormReacManager
-            rm.Show()
+            'Dim rm As New FormReacManager
+            'rm.Show()
+            Throw New NotImplementedException
         End Sub
 
         Public Sub Initialize() Implements CapeOpen.ICapeUtilities.Initialize
@@ -763,7 +763,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         Public Function GetReactionProp(ByVal [property] As String, ByVal phase As String, ByVal reacIds As Object, ByVal basis As String) As Object Implements CapeOpen.ICapeReactionProperties.GetReactionProp
             Dim res As New ArrayList
             For Each rid As String In reacIds
-                Dim ro As Reaction = Me.m_pme.Options.Reactions(GetIDbyName(rid))
+                Dim ro As Reaction = Me.m_pme.Reactions(GetIDbyName(rid))
                 With ro
                     Select Case [property].ToLower
                         Case "reactionrate"
@@ -807,7 +807,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
         Public Sub SetReactionProp(ByVal [property] As String, ByVal phase As String, ByVal reacIds As Object, ByVal basis As String, ByVal propVals As Object) Implements CapeOpen.ICapeReactionProperties.SetReactionProp
             Dim i As Integer = 0
             For Each rid As String In reacIds
-                Dim ro As Reaction = Me.m_pme.Options.Reactions(GetIDbyName(rid))
+                Dim ro As Reaction = Me.m_pme.Reactions(GetIDbyName(rid))
                 With ro
                     Select Case [property].ToLower
                         Case "reactionrate"
@@ -846,14 +846,14 @@ Namespace DWSIM.Thermodynamics.BaseClasses
 
             For Each rid As String In reacIds
 
-                Dim ro As Reaction = Me.m_pme.Options.Reactions(GetIDbyName(rid))
+                Dim ro As Reaction = Me.m_pme.Reactions(GetIDbyName(rid))
 
                 With ro
                     For Each p As String In props
                         Select Case p.ToLower
                             Case "reactionrate"
 
-                                Dim ims As MaterialStream = Me.m_str
+                                Dim ims As Interfaces.IMaterialStream = Me.m_str
                                 Dim co As New Dictionary(Of String, Double)
 
                                 'initial mole flows
@@ -964,7 +964,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Else
                 'get ID
                 Dim id As String = CType(materialObject, CapeOpen.ICapeIdentification).ComponentDescription
-                Dim myms As MaterialStream = Me.m_pme.Collections.FlowsheetObjectCollection(id)
+                Dim myms As Interfaces.IMaterialStream = Me.m_pme.SimulationObjects(id)
                 'proceed with copy
                 Me.m_str = myms
             End If
@@ -980,7 +980,7 @@ Namespace DWSIM.Thermodynamics.BaseClasses
             Else
                 'get ID
                 Dim id As String = CType(material, CapeOpen.ICapeIdentification).ComponentDescription
-                Dim myms As MaterialStream = Me.m_pme.Collections.FlowsheetObjectCollection(id)
+                Dim myms As Interfaces.IMaterialStream = Me.m_pme.SimulationObjects(id)
                 'proceed with copy
                 Me.m_str = myms
             End If

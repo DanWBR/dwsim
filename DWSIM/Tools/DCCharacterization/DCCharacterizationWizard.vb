@@ -18,7 +18,7 @@
 
 Imports System.Math
 Imports DWSIM.Thermodynamics.MathEx
-Imports DWSIM.DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization
 Imports DWSIM.Thermodynamics.PropertyPackages
@@ -719,8 +719,8 @@ Public Class DCCharacterizationWizard
         'finalize button
 
         Dim corr As String = Me.TextBoxStreamName.Text
-        Dim tmpcomp As New DWSIM.Thermodynamics.BaseClasses.ConstantProperties
-        Dim subst As DWSIM.Thermodynamics.BaseClasses.Compound
+        Dim tmpcomp As New BaseClasses.ConstantProperties
+        Dim subst As BaseClasses.Compound
         Dim gObj As GraphicObject = Nothing
         Dim idx As Integer = 0
 
