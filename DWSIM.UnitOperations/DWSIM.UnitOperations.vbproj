@@ -46,6 +46,9 @@
     <Reference Include="CapeOpen">
       <HintPath>..\..\DWSIM3\DWSIM\bin\Release\CapeOpen.dll</HintPath>
     </Reference>
+    <Reference Include="Ciloci.Flee">
+      <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -70,6 +73,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Energy Stream\Streams.vb" />
+    <Compile Include="Logical Operations\Adjust.vb" />
+    <Compile Include="Logical Operations\EnergyRecycle.vb" />
+    <Compile Include="Logical Operations\Recycle.vb" />
+    <Compile Include="Logical Operations\Spec.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -85,6 +93,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Reactors\BaseReactor.vb" />
+    <Compile Include="Reactors\Conversion.vb" />
+    <Compile Include="Reactors\CSTR.vb" />
+    <Compile Include="Reactors\Equilibrium.vb" />
+    <Compile Include="Reactors\Gibbs.vb" />
+    <Compile Include="Reactors\PFR.vb" />
     <Compile Include="Unit Operations\CapeOpenUO.vb" />
     <Compile Include="Unit Operations\ComponentSeparator.vb" />
     <Compile Include="Unit Operations\Compressor.vb" />

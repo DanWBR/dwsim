@@ -95,7 +95,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UIEditors\UIPPSelector\UIPPSelector.vb" />
+    <Compile Include="Property Editors\UIPPSelector\UIPPSelector.vb" />
     <Compile Include="UnitsOfMeasure\SystemsOfUnits.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -134,7 +134,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Streams\" />
+    <Folder Include="Material Stream\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

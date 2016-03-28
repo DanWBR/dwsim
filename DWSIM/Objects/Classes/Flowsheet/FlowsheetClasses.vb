@@ -125,7 +125,6 @@ Namespace DWSIM.Flowsheet
 
         Public SelectedUnitSystem As SystemsOfUnits.Units
 
-
         Sub New()
 
             SelectedComponents = New Dictionary(Of String, DWSIM.Thermodynamics.BaseClasses.ConstantProperties)
@@ -219,6 +218,15 @@ Namespace DWSIM.Flowsheet
         Public Property UsePhaseIdentificationAlgorithm As Boolean = False Implements Interfaces.IFlowsheetOptions.UsePhaseIdentificationAlgorithm
 
         Public Property ValidateEquilibriumCalc As Boolean = False Implements Interfaces.IFlowsheetOptions.ValidateEquilibriumCalc
+
+        Public Property SelectedUnitSystem1 As Interfaces.IUnitsOfMeasure Implements Interfaces.IFlowsheetOptions.SelectedUnitSystem
+            Get
+                Return Me.SelectedUnitSystem
+            End Get
+            Set(value As Interfaces.IUnitsOfMeasure)
+                Me.SelectedUnitSystem = value
+            End Set
+        End Property
 
     End Class
 

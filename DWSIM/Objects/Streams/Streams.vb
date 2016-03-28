@@ -49,7 +49,7 @@ Namespace DWSIM.SimulationObjects.Streams
         Friend _pp As PropertyPackages.PropertyPackage
         Friend _ppid As String = ""
 
-        Protected m_Phases As New Dictionary(Of Integer, DWSIM.Thermodynamics.BaseClasses.Phase)
+        Protected m_Phases As New Dictionary(Of Integer, IPhase)
 
         <System.NonSerialized()> Private _flowsheet As FormFlowsheet
 
@@ -88,8 +88,8 @@ Namespace DWSIM.SimulationObjects.Streams
                 End If
                 .Add(New XElement("PropertyPackage", ppid))
                 .Add(New XElement("Phases"))
-                For Each kvp As KeyValuePair(Of Integer, DWSIM.Thermodynamics.BaseClasses.Phase) In m_Phases
-                    .Item(.Count - 1).Add(New XElement("Phase", {New XElement("ID", kvp.Key), kvp.Value.SaveData().ToArray()}))
+                For Each kvp As KeyValuePair(Of Integer, IPhase) In m_Phases
+                    .Item(.Count - 1).Add(New XElement("Phase", {New XElement("ID", kvp.Key), DirectCast(kvp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
                 Next
             End With
 
@@ -268,7 +268,7 @@ Namespace DWSIM.SimulationObjects.Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Overrides ReadOnly Property Phases() As Dictionary(Of Integer, DWSIM.Thermodynamics.BaseClasses.Phase)
+        Public Overrides ReadOnly Property Phases() As Dictionary(Of Integer, IPhase) Implements IMaterialStream.Phases
             Get
                 Return m_Phases
             End Get
@@ -6783,16 +6783,6 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Public Property CompositionBasis As CompositionBasis Implements IMaterialStream.CompositionBasis
 
-        Public ReadOnly Property Phases1 As Dictionary(Of Integer, IPhase) Implements IMaterialStream.Phases
-            Get
-                Dim dict As New Dictionary(Of Integer, IPhase)
-                For Each item In Phases
-                    dict.Add(item.Key, item.Value)
-                Next
-                Return dict
-            End Get
-        End Property
-
         Public Function Clone1() As IMaterialStream Implements IMaterialStream.Clone
             Return Me.Clone()
         End Function
@@ -6807,6 +6797,7 @@ Namespace DWSIM.SimulationObjects.Streams
             Validate()
         End Sub
 
+        Public Property PropertyPackage1 As IPropertyPackage Implements IMaterialStream.PropertyPackage
     End Class
 
     <System.Serializable()> Public Class EnergyStream

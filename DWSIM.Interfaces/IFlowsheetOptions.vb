@@ -41,4 +41,6 @@
 
     Property PropertyPackageFlashAlgorithm As Integer
 
+    Property SelectedUnitSystem As IUnitsOfMeasure
+
 End Interface
