@@ -23,6 +23,7 @@ Imports DWSIM.Thermodynamics.MathEx
 Imports DWSIM.Thermodynamics
 Imports System.Math
 Imports DWSIM.Thermodynamics.Streams
+Imports DWSIM.Interfaces.Enums
 
 Namespace UnitOperations
 
@@ -73,52 +74,16 @@ Namespace UnitOperations
 
         Public Overrides Sub Validate()
 
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-
+    
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.Vessel
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Nohcorrentedematriac10"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.Vessel
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Nohcorrentedematriac11"))
             ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.Vessel
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Nohcorrentedematriac11"))
             ElseIf Not Me.GraphicObject.EnergyConnector.IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.Vessel
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(1).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.Vessel
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
@@ -126,7 +91,7 @@ Namespace UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-       
+
             'Validate unitop status.
             Me.Validate()
 
@@ -506,7 +471,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
 
             If Me.GraphicObject.EnergyConnector.IsAttached Then
 
-                Dim cduty As SimulationObjects.Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                Dim cduty As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
 
                 With cduty
                     .EnergyFlow = Nothing
@@ -514,17 +479,6 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                 End With
 
             End If
-
-            'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-            With objargs
-                .Calculated = False
-                .Name = Me.Name
-                .Tag = Me.GraphicObject.Tag
-                .ObjectType = Me.GraphicObject.ObjectType
-            End With
-
-            FlowSheet.CalculationQueue.Enqueue(objargs)
 
         End Function
 

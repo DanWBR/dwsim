@@ -17,14 +17,14 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.SharedClasses
 
 Namespace UnitOperations
 
     <System.Serializable()> Public Class OrificePlate
 
-        Inherits Global.DWSIM.SharedClasses.UnitOperations.BaseClass
+        Inherits UnitOperations.BaseClass
 
         Public Enum CalcMethod
             Homogeneous = 0
@@ -243,22 +243,10 @@ Namespace UnitOperations
                 .Phases(0).Properties.massflow = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
             End With
 
-            'Call function to calculate flowsheet
-            With objargs
-                .Calculated = True
-                .Name = Me.Name
-                .Tag = Me.GraphicObject.Tag
-                .ObjectType = ObjectType.OrificePlate
-            End With
-
-            form.CalculationQueue.Enqueue(objargs)
-
         End Function
 
 
         Public Overrides Function DeCalculate() As Integer
-
-            Dim form As Global.DWSIM.IFLowsheet = Me.FlowSheet
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
