@@ -17,7 +17,6 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 
@@ -25,7 +24,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class OrificePlate
 
-        Inherits SharedClasses.UnitOperations.BaseClass
+        Inherits Global.DWSIM.SharedClasses.UnitOperations.BaseClass
 
         Public Enum CalcMethod
             Homogeneous = 0
@@ -135,33 +134,16 @@ Namespace UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.OrificePlate
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.OrificePlate
-                End With
-
                 Throw New Exception(Me.FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
             Dim Ti, Pi, Wi, T2, P2, H2, H1, xv, xl, wv, wl As Double
             Dim rhom, mum, rhov, rhol, muv, mul As Double
 
-            Dim instr, outstr As Streams.MaterialStream
+            Dim instr, outstr As Thermodynamics.Streams.MaterialStream
 
             instr = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             outstr = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
@@ -276,7 +258,7 @@ Namespace UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.FlowSheet
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
@@ -301,93 +283,7 @@ Namespace UnitOperations
 
             End If
 
-            'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-            With objargs
-                .Calculated = False
-                .Name = Me.Name
-                .ObjectType = ObjectType.OrificePlate
-            End With
-
-            form.CalculationQueue.Enqueue(objargs)
-
         End Function
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim ent, saida As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada"), ent, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesada"), saida, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                '.Item.Add(Me.FlowSheet.GetTranslatedString("CorrentedeEnergia"), energ, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                'With .Item(.Item.Count - 1)
-                '    .DefaultValue = Nothing
-                '    .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector
-                'End With
-
-                '.Item.Add(Me.FlowSheet.GetTranslatedString("OPCalculationMethod"), Me, "CalculationMethod", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("OPOrificeType"), Me, "OrifType", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-                .Item(.Item.Count - 1).Tag2 = "OrifType"
-
-                Dim valor As Double = 0
-
-                valor = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.OrificeDiameter)
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OPOrificeDiameter"), su.diameter), Format(valor, FlowSheet.Options.NumberFormat), False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-                .Item(.Item.Count - 1).CustomTypeConverter = New System.ComponentModel.StringConverter
-                .Item(.Item.Count - 1).Tag2 = "PROP_OP_1"
-                .Item.Add(Me.FlowSheet.GetTranslatedString("OPBeta"), Format(Me.Beta, FlowSheet.Options.NumberFormat), False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-                .Item(.Item.Count - 1).Tag2 = "PROP_OP_2"
-                .Item.Add(Me.FlowSheet.GetTranslatedString("OPCorrectionFactor"), Format(Me.CorrectionFactor, FlowSheet.Options.NumberFormat), False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-                .Item(.Item.Count - 1).Tag2 = "PROP_OP_3"
-
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OPOrificePressureDrop"), su.deltaP), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("Diferenadetemperatur"), True)
-                .Item(.Item.Count - 1).Tag2 = "PROP_OP_4"
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OPOverallPressureDrop"), su.deltaP), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("Diferenadetemperatur"), True)
-                .Item(.Item.Count - 1).Tag2 = "PROP_OP_5"
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OPDeltaT"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("Diferenadetemperatur"), True)
-                .Item(.Item.Count - 1).Tag2 = "PROP_OP_6"
-
-
-                If Me.GraphicObject.Calculated = False Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Mensagemdeerro"), Me, "ErrorMessage", True, Me.FlowSheet.GetTranslatedString("Miscelnea4"), Me.FlowSheet.GetTranslatedString("Mensagemretornadaqua"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultType = GetType(System.String)
-                    End With
-                End If
-
-            End With
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
@@ -511,6 +407,10 @@ Namespace UnitOperations
 
             Return value
         End Function
+
+        Public Overrides Sub DisplayEditForm()
+
+        End Sub
     End Class
 
 End Namespace

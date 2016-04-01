@@ -99,7 +99,7 @@ Namespace UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.FlowSheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
@@ -289,7 +289,7 @@ Namespace UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.FlowSheet
 
             Dim i As Integer = 0
             Dim j As Integer = 0
@@ -330,138 +330,6 @@ Namespace UnitOperations
             form.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim saida1, saida2, saida3, ent As String
-
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida1 = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida1 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(1).IsAttached = True Then
-                    saida2 = Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida2 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(2).IsAttached = True Then
-                    saida3 = Me.GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida3 = ""
-                End If
-
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada"), ent, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida1"), saida1, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = 1
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida2"), saida2, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = 0
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                If saida1 <> "" And saida2 <> "" Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida3"), saida3, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = 0
-                        .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                    End With
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SplitterOperationMode"), Me, "OperationMode", False, Me.FlowSheet.GetTranslatedString("Parmetros2"), "", True)
-                .Item(.Item.Count - 1).Tag2 = "OperationMode"
-
-                Dim n As Integer = 0
-                For Each cp In Me.GraphicObject.OutputConnectors
-                    If cp.IsAttached Then
-                        n += 1
-                    End If
-                Next
-
-                Select Case Me.OperationMode
-                    Case OpMode.SplitRatios
-                        Dim i As Integer = 0
-                        Dim RO As Boolean
-                        Dim cg2 As ConnectionPoint
-                        For Each cg2 In Me.GraphicObject.OutputConnectors
-                            If cg2.IsAttached = True Then
-                                RO = False
-                                If i = 1 And saida3 = "" Then RO = True
-                                If i = 2 Then RO = True
-                                .Item.Add("[Split Ratio] " & cg2.AttachedConnector.AttachedTo.Tag, Me.Ratios.Item(i), RO, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("Digiteumvalorentre0e"), True)
-                                With .Item(.Item.Count - 1)
-                                    .DefaultValue = GetType(System.Double)
-                                End With
-                            End If
-                            i += 1
-                        Next
-                    Case OpMode.StreamMassFlowSpec
-                        Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.StreamFlowSpec), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_SP_1"), su.massflow), valor, False, Me.FlowSheet.GetTranslatedString("Parmetros2"), "", True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_SP_1"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.massflow, "W"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                        If n = 3 Then
-                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Stream2FlowSpec), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_SP_2"), su.massflow), valor, False, Me.FlowSheet.GetTranslatedString("Parmetros2"), "", True)
-                            With .Item(.Item.Count - 1)
-                                .CustomTypeConverter = New System.ComponentModel.StringConverter
-                                .Tag2 = "PROP_SP_2"
-                                .Tag = New Object() {FlowSheet.Options.NumberFormat, su.massflow, "W"}
-                                .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                            End With
-                        End If
-                    Case OpMode.StreamMoleFlowSpec
-                        Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.StreamFlowSpec), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_SP_1"), su.molarflow), valor, False, Me.FlowSheet.GetTranslatedString("Parmetros2"), "", True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_SP_1"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.molarflow, "M"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                        If n = 3 Then
-                            valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Stream2FlowSpec), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_SP_2"), su.molarflow), valor, False, Me.FlowSheet.GetTranslatedString("Parmetros2"), "", True)
-                            With .Item(.Item.Count - 1)
-                                .CustomTypeConverter = New System.ComponentModel.StringConverter
-                                .Tag2 = "PROP_SP_2"
-                                .Tag = New Object() {FlowSheet.Options.NumberFormat, su.molarflow, "M"}
-                                .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                            End With
-                        End If
-                End Select
-
-            End With
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
             If su Is Nothing Then su = New SystemsOfUnits.SI

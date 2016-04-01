@@ -49,6 +49,9 @@
     <Reference Include="Ciloci.Flee">
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
     </Reference>
+    <Reference Include="Mapack">
+      <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -60,6 +63,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
+    <Import Include="DWSIM.DrawingTools" />
     <Import Include="DWSIM.Interfaces" />
     <Import Include="DWSIM.SharedClasses" />
     <Import Include="DWSIM.Thermodynamics" />
@@ -94,12 +98,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reactors\BaseReactor.vb" />
-    <Compile Include="Reactors\Conversion.vb" />
-    <Compile Include="Reactors\CSTR.vb" />
-    <Compile Include="Reactors\Equilibrium.vb" />
-    <Compile Include="Reactors\Gibbs.vb" />
-    <Compile Include="Reactors\PFR.vb" />
     <Compile Include="Unit Operations\CapeOpenUO.vb" />
     <Compile Include="Unit Operations\ComponentSeparator.vb" />
     <Compile Include="Unit Operations\Compressor.vb" />

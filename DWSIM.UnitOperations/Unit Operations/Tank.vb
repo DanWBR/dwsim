@@ -93,7 +93,7 @@ Namespace UnitOperations
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.Flowsheet
             Dim Ti, Pi, Hi, Wi, rho_li, qli, qvi, ei, ein, P2, Q As Double
 
             qvi = Me.FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(2).Properties.volumetric_flow.GetValueOrDefault.ToString
@@ -171,7 +171,7 @@ Namespace UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.Flowsheet
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
@@ -208,89 +208,6 @@ Namespace UnitOperations
             form.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim ent, saida, energ As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida = ""
-                End If
-
-                If Me.GraphicObject.EnergyConnector.IsAttached = True Then
-                    energ = Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Tag
-                Else
-                    energ = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada"), ent, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesada"), saida, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Quedadepresso"), su.deltaP), valor, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("Quedadepressoaplicad5"), True)
-                With .Item(.Item.Count - 1)
-                    .CustomTypeConverter = New System.ComponentModel.StringConverter
-                    .Tag2 = "PROP_TK_0"
-                    .DefaultValue = Nothing
-                    .DefaultType = GetType(Nullable(Of Double))
-                End With
-
-                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volume, Me.Volume), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("TKVol"), su.volume), valor, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("TKVol"), True)
-                With .Item(.Item.Count - 1)
-                    .CustomTypeConverter = New System.ComponentModel.StringConverter
-                    .Tag2 = "PROP_TK_1"
-                    .DefaultValue = Nothing
-                    .DefaultType = GetType(Double)
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("IgnorarVapornaEntrad"), Me, "IgnorePhase", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("IgnorarVapornaEntrad"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultType = GetType(Boolean)
-                End With
-
-                If Me.GraphicObject.Calculated = False Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Mensagemdeerro"), Me, "ErrorMessage", True, Me.FlowSheet.GetTranslatedString("Miscelnea3"), Me.FlowSheet.GetTranslatedString("Mensagemretornadaqua"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultType = GetType(System.String)
-                    End With
-                Else
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("TKResTime"), su.time), Format(SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.ResidenceTime), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("TKResTime"), True)
-                    With .Item(.Item.Count - 1)
-                        .CustomTypeConverter = New System.ComponentModel.StringConverter
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Double)
-                    End With
-                End If
-
-            End With
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 

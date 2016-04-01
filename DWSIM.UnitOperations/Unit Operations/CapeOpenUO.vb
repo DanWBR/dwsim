@@ -448,7 +448,7 @@ Namespace UnitOperations
                                 End Try
                                 If cnobj IsNot Nothing Then
                                     If Not Me.FlowSheet Is Nothing Then
-                                        Dim mystr As DWSIM.SimulationObjects.UnitOperations.BaseClass = Me.FlowSheet.Collections.FlowsheetObjectCollection(CType(cnobj, ICapeIdentification).ComponentDescription)
+                                        Dim mystr As DWSIM.SimulationObjects.UnitOperations.BaseClass = Me.FlowSheet.SimulationObjects(CType(cnobj, ICapeIdentification).ComponentDescription)
                                         Try
                                             cnobj = myport.connectedObject
                                         Catch ex As Exception
@@ -620,7 +620,7 @@ Namespace UnitOperations
                                 If cnobj IsNot Nothing Then
                                     objid = CType(cnobj, ICapeIdentification).ComponentDescription
                                     myport.Disconnect()
-                                    Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByName(objid, Me.FlowSheet.FormSurface.FlowsheetDesignSurface)
+                                    Dim gobj As GraphicObject = IFLowsheet.SearchSurfaceObjectsByName(objid, Me.FlowSheet.FormSurface.FlowsheetDesignSurface)
                                     Select Case myport.portType
                                         Case CapePortType.CAPE_MATERIAL
                                             Me.FlowSheet.ConnectObject(gobj, Me.GraphicObject, 0, Me.GraphicObject.InputConnectors.Count - 1)
@@ -649,7 +649,7 @@ Namespace UnitOperations
                                 If cnobj IsNot Nothing Then
                                     objid = CType(cnobj, ICapeIdentification).ComponentDescription
                                     myport.Disconnect()
-                                    Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByName(objid, Me.FlowSheet.FormSurface.FlowsheetDesignSurface)
+                                    Dim gobj As GraphicObject = IFLowsheet.SearchSurfaceObjectsByName(objid, Me.FlowSheet.FormSurface.FlowsheetDesignSurface)
                                     Select Case myport.portType
                                         Case CapePortType.CAPE_MATERIAL
                                             Me.FlowSheet.ConnectObject(Me.GraphicObject, gobj, Me.GraphicObject.OutputConnectors.Count - 1, 0)
@@ -767,7 +767,7 @@ Namespace UnitOperations
                         End Try
                         Try
                             If Not cnobj Is Nothing Then
-                                _ports(_ports.Count - 1).Connect(Me.FlowSheet.Collections.FlowsheetObjectCollection(CType(cnobj, ICapeIdentification).ComponentDescription))
+                                _ports(_ports.Count - 1).Connect(Me.FlowSheet.SimulationObjects(CType(cnobj, ICapeIdentification).ComponentDescription))
                             End If
                         Catch ex As Exception
                             Dim ecu As CapeOpen.ECapeUser = myuo
@@ -792,7 +792,7 @@ Namespace UnitOperations
                         If Not c.IsAttached Then
                             p.Disconnect()
                         ElseIf c.IsAttached And cnobj Is Nothing Then
-                            p.Connect(Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedFrom.Name))
+                            p.Connect(Me.FlowSheet.SimulationObjects(c.AttachedConnector.AttachedFrom.Name))
                         End If
                     End If
                 Next
@@ -809,7 +809,7 @@ Namespace UnitOperations
                         If Not c.IsAttached Then
                             p.Disconnect()
                         ElseIf c.IsAttached And cnobj Is Nothing Then
-                            p.Connect(Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name))
+                            p.Connect(Me.FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name))
                         End If
                     End If
                 Next
@@ -1029,7 +1029,7 @@ Namespace UnitOperations
             If Not _couo Is Nothing Then
                 For Each c As ConnectionPoint In Me.GraphicObject.InputConnectors
                     If c.IsAttached And c.Type = ConType.ConIn Then
-                        Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedFrom.Name)
+                        Dim mat As Streams.MaterialStream = Me.FlowSheet.SimulationObjects(c.AttachedConnector.AttachedFrom.Name)
                         mat.SetFlowsheet(Me.FlowSheet)
                     End If
                 Next
@@ -1064,7 +1064,7 @@ Namespace UnitOperations
                     Try
                         For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.IsAttached And c.Type = ConType.ConOut Then
-                                Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name)
+                                Dim mat As Streams.MaterialStream = Me.FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
                                 mat.ClearAllProps()
                             End If
                         Next
@@ -1073,7 +1073,7 @@ Namespace UnitOperations
                         UpdateParams()
                         For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.IsAttached And c.Type = ConType.ConOut Then
-                                Dim mat As Streams.MaterialStream = Me.FlowSheet.Collections.FlowsheetObjectCollection(c.AttachedConnector.AttachedTo.Name)
+                                Dim mat As Streams.MaterialStream = Me.FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
                                 mat.PropertyPackage.CurrentMaterialStream = mat
                                 For Each subst As Compound In mat.Phases(0).Compounds.Values
                                     subst.MassFraction = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
@@ -1163,308 +1163,6 @@ Namespace UnitOperations
 
         Public Overrides Sub Validate()
             MyBase.Validate()
-        End Sub
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            UpdatePortsFromConnectors()
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                'identify
-                .Item.Add("Name", _seluo.Name, True, "1. CAPE-OPEN Object Info", "", True)
-                .Item.Add("Description", _seluo.Description, True, "1. CAPE-OPEN Object Info", "", True)
-                .Item.Add("ProgID", _seluo.TypeName, True, "1. CAPE-OPEN Object Info", "", True)
-                .Item.Add("Version", _seluo.Version, True, "1. CAPE-OPEN Object Info", "", True)
-                .Item.Add("CAPE-OPEN Version", _seluo.CapeVersion, True, "1. CAPE-OPEN Object Info", "", True)
-                .Item.Add("File Location", _seluo.Location, True, "1. CAPE-OPEN Object Info", "", True)
-                .Item.Add("Vendor URL", _seluo.VendorURL, True, "1. CAPE-OPEN Object Info", "", True)
-                '.Item.Add("Help URL", _seluo.HelpURL, True, "1. CAPE-OPEN Object Info", "", True)
-
-                'show edit form if available
-                .Item.Add("Editing Form", "click to show ->", False, "2. Editing Form", "", True)
-                .Item(.Item.Count - 1).OnClick = AddressOf Me.Edit
-
-                Dim cnobj As Object = Nothing
-
-                'populate ports
-                For Each p As UnitPort In _ports
-                    If p.portType = CapePortType.CAPE_MATERIAL Then
-                        Dim tag As String = ""
-                        Try
-                            cnobj = p.connectedObject
-                        Catch ex As Exception
-                            cnobj = Nothing
-                        End Try
-                        Dim conobj As DWSIM.SimulationObjects.Streams.MaterialStream = cnobj
-                        If Not conobj Is Nothing Then tag = conobj.GraphicObject.Tag
-                        .Item.Add(p.ComponentName + " [" + p.direction.ToString + ", " + p.portType.ToString() + "]", tag, False, "3. Ports", p.ComponentDescription, True)
-                        With .Item(.Item.Count - 1)
-                            .Tag = _ports.IndexOf(p)
-                            If p.direction = CapePortDirection.CAPE_INLET Then
-                                .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                            Else
-                                .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                            End If
-                        End With
-                    ElseIf p.portType = CapePortType.CAPE_ENERGY Then
-                        Dim tag As String = ""
-                        Try
-                            cnobj = p.connectedObject
-                        Catch ex As Exception
-                            cnobj = Nothing
-                        End Try
-                        Dim conobj As DWSIM.SimulationObjects.Streams.EnergyStream = cnobj
-                        If Not conobj Is Nothing Then tag = conobj.GraphicObject.Tag
-                        .Item.Add(p.ComponentName + " [" + p.direction.ToString + ", " + p.portType.ToString() + "]", tag, False, "3. Ports", p.ComponentDescription, True)
-                        With .Item(.Item.Count - 1)
-                            .Tag = _ports.IndexOf(p)
-                            If p.direction = CapePortDirection.CAPE_INLET Then
-                                .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
-                            Else
-                                .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector
-                            End If
-                        End With
-                    End If
-                Next
-
-                .Item.Add("Shape Override", Me.GraphicObject, "ShapeOverride", False, "4. Parameters", "Overrides the graphical representation of the object in the Flowsheet.", True)
-                .Item.Add("Recalculate Output Streams", Me, "RecalcOutputStreams", False, "4. Parameters", "Recalculate output streams using the selected property package.", True)
-
-                If Not TryCast(_couo, ICapeKineticReactionContext) Is Nothing Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("RConvPGridItem1"), FlowSheet.Options.ReactionSets(Me.ReactionSetID).Name, False, "4. Parameters", Me.FlowSheet.GetTranslatedString("RConvPGridItem1Help"), True)
-                    With .Item(.Item.Count - 1)
-                        .CustomEditor = New DWSIM.Editors.Reactors.UIReactionSetSelector
-                        .IsDropdownResizable = True
-                    End With
-                End If
-
-                'populate parameters
-                For Each p As Object In _params
-                    Dim id As String = ""
-                    Dim desc As String = ""
-                    id = CType(p, ICapeIdentification).ComponentName
-                    desc = CType(p, ICapeIdentification).ComponentDescription
-                    'find parameter type
-                    Dim myp As ICapeParameterSpec = TryCast(p, ICapeParameterSpec)
-                    Select Case myp.Type
-                        Case CapeParamType.CAPE_ARRAY
-                            Dim par As CapeArrayParameter = p
-                            Dim m2 As New PropertyGridEx.CustomPropertyCollection()
-                            Dim i As Integer = 0
-                            For Each o In DirectCast(par.value, System.Array)
-                                m2.Add(i.ToString, o, True, "", "", True)
-                                m2.Item(m2.Count - 1).IsReadOnly = True
-                                i += 1
-                            Next
-                            .Item.Add(id, m2, If(par.Mode = CapeParamMode.CAPE_OUTPUT, True, False), "4. Parameters", desc, True)
-                            With .Item(.Item.Count - 1)
-                                .IsReadOnly = True
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        Case CapeParamType.CAPE_BOOLEAN
-                            Dim par As BooleanParameter = TryCast(p, BooleanParameter)
-                            .Item.Add(id, par, "Value", If(par.Mode = CapeParamMode.CAPE_OUTPUT, True, False), "4. Parameters", desc, True)
-                            .Item(.Item.Count - 1).Tag2 = id
-                        Case CapeParamType.CAPE_INT
-                            Dim par As IntegerParameter = TryCast(p, IntegerParameter)
-                            .Item.Add(id, par, "Value", If(par.Mode = CapeParamMode.CAPE_OUTPUT, True, False), "4. Parameters", desc, True)
-                            .Item(.Item.Count - 1).Tag2 = id
-                        Case CapeParamType.CAPE_OPTION
-                            Dim par As OptionParameter = TryCast(p, OptionParameter)
-                            .Item.Add(id, par, "Value", If(par.Mode = CapeParamMode.CAPE_OUTPUT, True, False), "4. Parameters", desc, True)
-                            .Item(.Item.Count - 1).Tag2 = id
-                            With .Item(.Item.Count - 1)
-                                If Not par.OptionList Is Nothing Then .Choices = New PropertyGridEx.CustomChoices(par.OptionList, False)
-                            End With
-                        Case CapeParamType.CAPE_REAL
-                            Dim par As RealParameter = TryCast(p, RealParameter)
-                            .Item.Add(id, par, "SIValue", If(par.Mode = CapeParamMode.CAPE_OUTPUT, True, False), "4. Parameters", desc, True)
-                            .Item(.Item.Count - 1).Tag2 = id
-                    End Select
-                Next
-
-                If Me.GraphicObject.Calculated = False Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Mensagemdeerro"), Me, "ErrorMessage", True, Me.FlowSheet.GetTranslatedString("Miscelnea5"), Me.FlowSheet.GetTranslatedString("Mensagemretornadaqua"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultType = GetType(System.String)
-                    End With
-                End If
-
-            End With
-
-        End Sub
-
-        Public Overrides Sub PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
-
-            MyBase.PropertyValueChanged(s, e)
-
-            If e.ChangedItem.Parent.Label.Contains("Parameters") Then
-
-                RestoreParams()
-
-            ElseIf e.ChangedItem.Parent.Label.Contains("Ports") Then
-                Dim index, indexc, i As Integer
-                i = 0
-                For Each gi As GridItem In e.ChangedItem.Parent.GridItems
-                    If gi.Label = e.ChangedItem.Label Then
-                        index = i
-                        Exit For
-                    End If
-                    i += 1
-                Next
-                If e.ChangedItem.Label.Contains("[CAPE_INLET, CAPE_MATERIAL]") Then
-                    For Each p As UnitPort In _ports
-                        i = 0
-                        If e.ChangedItem.Label.Contains(p.ComponentName) Then
-                            For Each c As ConnectionPoint In Me.GraphicObject.InputConnectors
-                                If p.ComponentName = c.ConnectorName And _
-                                p.direction = CapePortDirection.CAPE_INLET And _
-                                p.portType = CapePortType.CAPE_MATERIAL Then
-                                    indexc = i
-                                    Exit For
-                                End If
-                                i += 1
-                            Next
-                        End If
-                    Next
-                    If e.ChangedItem.Value <> "" Then
-                        If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, Me.GraphicObject.X - 40, Me.GraphicObject.Y, e.ChangedItem.Value)
-                        ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
-                            MessageBox.Show(Me.FlowSheet.GetTranslatedString("Todasasconexespossve"), Me.FlowSheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            Exit Sub
-                        End If
-                        If Me.GraphicObject.InputConnectors(indexc).IsAttached Then
-                            Me.FlowSheet.DisconnectObject(Me.GraphicObject.InputConnectors(indexc).AttachedConnector.AttachedFrom, Me.GraphicObject)
-                            _ports(index).Disconnect()
-                        End If
-                        Me.FlowSheet.ConnectObject(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), Me.GraphicObject, 0, indexc)
-                        _ports(index).Connect(Me.FlowSheet.GetFlowsheetSimulationObject(e.ChangedItem.Value))
-                    Else
-                        If e.OldValue.ToString <> "" Then
-                            Me.FlowSheet.DisconnectObject(Me.GraphicObject.InputConnectors(indexc).AttachedConnector.AttachedFrom, Me.GraphicObject)
-                            _ports(index).Disconnect()
-                        End If
-                    End If
-                ElseIf e.ChangedItem.Label.Contains("[CAPE_OUTLET, CAPE_MATERIAL]") Then
-                    For Each p As UnitPort In _ports
-                        i = 0
-                        If e.ChangedItem.Label.Contains(p.ComponentName) Then
-                            For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
-                                If p.ComponentName = c.ConnectorName And _
-                                p.direction = CapePortDirection.CAPE_OUTLET And _
-                                p.portType = CapePortType.CAPE_MATERIAL Then
-                                    indexc = i
-                                    Exit For
-                                End If
-                                i += 1
-                            Next
-                        End If
-                    Next
-                    If e.ChangedItem.Value <> "" Then
-                        If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(ObjectType.MaterialStream, Me.GraphicObject.X + Me.GraphicObject.Width + 40, Me.GraphicObject.Y, e.ChangedItem.Value)
-                        ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
-                            MessageBox.Show(Me.FlowSheet.GetTranslatedString("Todasasconexespossve"), Me.FlowSheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            Exit Sub
-                        End If
-                        If Me.GraphicObject.OutputConnectors(indexc).IsAttached Then
-                            Me.FlowSheet.DisconnectObject(Me.GraphicObject, Me.GraphicObject.OutputConnectors(indexc).AttachedConnector.AttachedTo)
-                            _ports(index).Disconnect()
-                        End If
-                        Me.FlowSheet.ConnectObject(Me.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), indexc, 0)
-                        _ports(index).Connect(Me.FlowSheet.GetFlowsheetSimulationObject(e.ChangedItem.Value))
-                    Else
-                        If e.OldValue.ToString <> "" Then
-                            Me.FlowSheet.DisconnectObject(Me.GraphicObject, Me.GraphicObject.OutputConnectors(indexc).AttachedConnector.AttachedTo)
-                            _ports(index).Disconnect()
-                        End If
-                    End If
-                ElseIf e.ChangedItem.Label.Contains("[CAPE_INLET, CAPE_ENERGY]") Then
-                    For Each p As UnitPort In _ports
-                        i = 0
-                        If e.ChangedItem.Label.Contains(p.ComponentName) Then
-                            For Each c As ConnectionPoint In Me.GraphicObject.InputConnectors
-                                If p.ComponentName = c.ConnectorName And _
-                                p.direction = CapePortDirection.CAPE_INLET And _
-                                p.portType = CapePortType.CAPE_ENERGY Then
-                                    indexc = i
-                                    Exit For
-                                End If
-                                i += 1
-                            Next
-                        End If
-                    Next
-                    If e.ChangedItem.Value <> "" Then
-                        If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, Me.GraphicObject.X - 40, Me.GraphicObject.Y, e.ChangedItem.Value)
-                        ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).OutputConnectors(0).IsAttached Then
-                            MessageBox.Show(Me.FlowSheet.GetTranslatedString("Todasasconexespossve"), Me.FlowSheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            Exit Sub
-                        End If
-                        If Me.GraphicObject.InputConnectors(indexc).IsAttached Then
-                            Me.FlowSheet.DisconnectObject(Me.GraphicObject.InputConnectors(indexc).AttachedConnector.AttachedFrom, Me.GraphicObject)
-                            _ports(index).Disconnect()
-                        End If
-                        Me.FlowSheet.ConnectObject(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), Me.GraphicObject, 0, indexc)
-                        _ports(index).Connect(Me.FlowSheet.GetFlowsheetSimulationObject(e.ChangedItem.Value))
-                    Else
-                        If e.OldValue.ToString <> "" Then
-                            Me.FlowSheet.DisconnectObject(Me.GraphicObject.InputConnectors(indexc).AttachedConnector.AttachedFrom, Me.GraphicObject)
-                            _ports(index).Disconnect()
-                        End If
-                    End If
-                ElseIf e.ChangedItem.Label.Contains("[CAPE_OUTLET, CAPE_ENERGY]") Then
-                    For Each p As UnitPort In _ports
-                        i = 0
-                        If e.ChangedItem.Label.Contains(p.ComponentName) Then
-                            For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
-                                If p.ComponentName = c.ConnectorName And _
-                                p.direction = CapePortDirection.CAPE_OUTLET And _
-                                p.portType = CapePortType.CAPE_ENERGY Then
-                                    indexc = i
-                                    Exit For
-                                End If
-                                i += 1
-                            Next
-                        End If
-                    Next
-                    If e.ChangedItem.Value <> "" Then
-                        If FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface) Is Nothing Then
-                            Dim oguid As String = Me.FlowSheet.FormSurface.AddObjectToSurface(ObjectType.EnergyStream, Me.GraphicObject.X + Me.GraphicObject.Width + 40, Me.GraphicObject.Y, e.ChangedItem.Value)
-                        ElseIf CType(FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), GraphicObject).InputConnectors(0).IsAttached Then
-                            MessageBox.Show(Me.FlowSheet.GetTranslatedString("Todasasconexespossve"), Me.FlowSheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            Exit Sub
-                        End If
-                        If Me.GraphicObject.OutputConnectors(indexc).IsAttached Then
-                            Me.FlowSheet.DisconnectObject(Me.GraphicObject, Me.GraphicObject.OutputConnectors(indexc).AttachedConnector.AttachedTo)
-                            _ports(index).Disconnect()
-                        End If
-                        Me.FlowSheet.ConnectObject(Me.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByTag(e.ChangedItem.Value, Me.FlowSheet.FormSurface.FlowsheetDesignSurface), indexc, 0)
-                        _ports(index).Connect(Me.FlowSheet.GetFlowsheetSimulationObject(e.ChangedItem.Value))
-                    Else
-                        If e.OldValue.ToString <> "" Then
-                            Me.FlowSheet.DisconnectObject(Me.GraphicObject, Me.GraphicObject.OutputConnectors(indexc).AttachedConnector.AttachedTo)
-                            _ports(index).Disconnect()
-                        End If
-                    End If
-                End If
-
-                UpdateConnectorPositions()
-
-            End If
-
         End Sub
 
         Public Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()

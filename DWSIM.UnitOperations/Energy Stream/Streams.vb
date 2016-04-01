@@ -82,72 +82,6 @@ Namespace Streams
 
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(pgrid As PropertyGridEx.PropertyGridEx, su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                Dim ent, saida As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida = ""
-                End If
-
-                .Item.Add(DWSIM.App.GetLocalString("Conectadoaentrada"), ent, True, DWSIM.App.GetLocalString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                End With
-
-                .Item.Add(DWSIM.App.GetLocalString("Conectadoasada"), saida, True, DWSIM.App.GetLocalString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                End With
-
-                Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetPropertyName("PROP_ES_0"), su.heatflow), valor, False, DWSIM.App.GetLocalString("Propriedades2"), DWSIM.App.GetLocalString("QuantidadedeEnergyFlowp"), True)
-                With .Item(.Item.Count - 1)
-                    .CustomTypeConverter = New System.ComponentModel.StringConverter
-                    .Tag2 = "PROP_ES_0"
-                    .DefaultValue = Nothing
-                    .DefaultType = GetType(Nullable(Of Double))
-                End With
-
-                If Me.GraphicObject.InputConnectors(0).IsAttached Then
-                    If Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.AbsorptionColumn And
-                        Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.DistillationColumn And
-                        Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.ReboiledAbsorber And
-                        Not Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.RefluxedAbsorber Then
-                        .Item(2).IsReadOnly = True
-                    End If
-                Else
-                    .Item(2).IsReadOnly = False
-                End If
-                If Me.IsSpecAttached = True Then
-                    .Item.Add(DWSIM.App.GetLocalString("ObjetoUtilizadopor"), FlowSheet.Collections.FlowsheetObjectCollection(Me.AttachedSpecId).GraphicObject.Tag, True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
-                    Select Case Me.SpecVarType
-                        Case Enums.SpecVarType.Target
-                            .Item.Add(DWSIM.App.GetLocalString("Utilizadocomo"), DWSIM.App.GetLocalString(Me.SpecVarType.ToString), True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
-                        Case Enums.SpecVarType.Source
-                            .Item.Add(DWSIM.App.GetLocalString("Utilizadocomo"), DWSIM.App.GetLocalString("SpecSource"), True, DWSIM.App.GetLocalString("Miscelnea4"), "", True)
-                    End Select
-                End If
-                .Item.Add("ID", Me.Name, True, DWSIM.App.GetLocalString("Outros"), "", True)
-                .Item.Add(DWSIM.App.GetLocalString("LastUpdatedOn"), Me.LastUpdated.ToString("O"), True, DWSIM.App.GetLocalString("Outros"), "", True)
-            End With
-
-        End Sub
-
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
@@ -240,14 +174,6 @@ Namespace Streams
         End Function
 
 #End Region
-
-        Public Overrides Sub HandlePropertyChange(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs)
-
-        End Sub
-
-        Public Overrides Sub PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs)
-
-        End Sub
 
     End Class
 

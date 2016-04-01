@@ -130,7 +130,7 @@ Namespace UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.Flowsheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
@@ -297,7 +297,7 @@ Namespace UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.Flowsheet
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
@@ -342,134 +342,6 @@ Namespace UnitOperations
             form.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim ent, saida, energ As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida = ""
-                End If
-
-                If Me.GraphicObject.InputConnectors(1).IsAttached = True Then
-                    energ = Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
-                Else
-                    energ = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada"), ent, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesada"), saida, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("CorrentedeEnergia"), energ, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
-                End With
-
-                Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Quedadepresso"), su.deltaP), Double.Parse(valor), False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("Quedadepressoaplicad3"), True)
-                With .Item(.Item.Count - 1)
-                    .CustomTypeConverter = New System.ComponentModel.StringConverter
-                    .Tag2 = "PROP_HT_0"
-                    .Tag = New Object() {FlowSheet.Options.NumberFormat, su.deltaP, "DP"}
-                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                End With
-
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("HeaterCoolerCalcMode"), Me, "CalcMode", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-                .Item(.Item.Count - 1).Tag2 = "CalcMode"
-
-                Select Case Me.CalcMode
-
-                    Case CalculationMode.EnergyStream
-
-                    Case CalculationMode.HeatAdded
-
-                        valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("CalorFornecido"), su.heatflow), Double.Parse(valor), False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("Quantidadedecalorced"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HT_3"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.heatflow, "E"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-
-                    Case CalculationMode.OutletTemperature
-
-                        valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HeaterCoolerOutletTemperature"), su.temperature), Double.Parse(valor), False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HT_2"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-
-                    Case CalculationMode.OutletVaporFraction
-
-                        valor = Format(Me.OutletVaporFraction.GetValueOrDefault, FlowSheet.Options.NumberFormat)
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("FraomolardaPhasePhaseV"), Double.Parse(valor), False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-                        With .Item(.Item.Count - 1)
-                            .Tag2 = "PROP_HT_4"
-                        End With
-
-                End Select
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Eficincia0100"), Me, "Eficiencia", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("Eficinciadoaquecedor"), True)
-                With .Item(.Item.Count - 1)
-                    .Tag2 = "PROP_HT_1"
-                    .DefaultValue = Nothing
-                    .DefaultType = GetType(Nullable(Of Double))
-                End With
-
-                If Me.GraphicObject.Calculated And Not Me.CalcMode = CalculationMode.HeatAdded Then
-                    valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("CalorFornecido"), su.heatflow), valor, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("Quantidadedecalorced"), True)
-                End If
-
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DeltaT2"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("Diferenadetemperatur"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .DefaultType = GetType(Nullable(Of Double))
-                End With
-
-                If Me.GraphicObject.Calculated = False Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Mensagemdeerro"), Me, "ErrorMessage", True, Me.FlowSheet.GetTranslatedString("Miscelnea4"), Me.FlowSheet.GetTranslatedString("Mensagemretornadaqua"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultType = GetType(System.String)
-                    End With
-                End If
-
-
-
-            End With
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 

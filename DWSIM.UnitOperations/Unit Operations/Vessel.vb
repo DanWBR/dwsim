@@ -124,7 +124,7 @@ Namespace UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As FormFlowsheet = Me.FlowSheet
+            Dim form As IFLowsheet = Me.FlowSheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
@@ -519,7 +519,7 @@ Namespace UnitOperations
             'If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then Throw New Exception(Me.FlowSheet.GetTranslatedString("Nohcorrentedematriac11"))
             'If Not Me.GraphicObject.OutputConnectors(1).IsAttached Then Throw New Exception(Me.FlowSheet.GetTranslatedString("Nohcorrentedematriac11"))
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.Flowsheet
 
             Dim j As Integer = 0
 
@@ -579,165 +579,6 @@ Namespace UnitOperations
             form.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim ent1, ent2, ent3, ent4, ent5, ent6, saida1, saida2, saida3, energ As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent1 = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent1 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(1).IsAttached = True Then
-                    ent2 = Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent2 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(2).IsAttached = True Then
-                    ent3 = Me.GraphicObject.InputConnectors(2).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent3 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(3).IsAttached = True Then
-                    ent4 = Me.GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent4 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(4).IsAttached = True Then
-                    ent5 = Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent5 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(5).IsAttached = True Then
-                    ent6 = Me.GraphicObject.InputConnectors(5).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent6 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida1 = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida1 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(1).IsAttached = True Then
-                    saida2 = Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida2 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(2).IsAttached = True Then
-                    saida3 = Me.GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida3 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(6).IsAttached = True Then
-                    energ = Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Tag
-                Else
-                    energ = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada1"), ent1, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada2"), ent2, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada3"), ent3, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada4"), ent4, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada5"), ent5, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada6"), ent6, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Saidadevapor"), saida1, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Saidadelquido"), saida2, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Saidadelquido") & " (2)", saida3, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("CorrentedeEnergia"), energ, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Pressoajusante"), Me, "PressureCalculation", False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("Selecioneumaopoquein"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("FlashSpecification"), Me, "FlashSpecification", False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("FlashSpecificationDesc"), True)
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SobreporTemperaturad"), Me, "OverrideT", False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SelecioLiquidrueparaign4"), True)
-                If Me.OverrideT Then
-                    Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.FlashTemperature), FlowSheet.Options.NumberFormat)
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Temperatura"), su.temperature), Double.Parse(valor), False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("Temperaturadeseparao"), True)
-                    With .Item(.Item.Count - 1)
-                        .CustomTypeConverter = New System.ComponentModel.StringConverter
-                        .Tag2 = "PROP_SV_0"
-                        .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
-                        .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                    End With
-                End If
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SobreporPressodesepa"), Me, "OverrideP", False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SelecioLiquidrueparaign5"), True)
-                If Me.OverrideP Then
-                    Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.FlashPressure), FlowSheet.Options.NumberFormat)
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Presso"), su.pressure), Double.Parse(valor), False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("Pressodeseparao"), True)
-                    With .Item(.Item.Count - 1)
-                        .CustomTypeConverter = New System.ComponentModel.StringConverter
-                        .Tag2 = "PROP_SV_1"
-                        .Tag = New Object() {FlowSheet.Options.NumberFormat, su.pressure, "P"}
-                        .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                    End With
-                End If
-
-                If Me.GraphicObject.Calculated Then
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("RConvPGridItem3"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), "", True)
-                End If
-
-                .ExpandAllGridItems()
-
-            End With
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
             If su Is Nothing Then su = New SystemsOfUnits.SI

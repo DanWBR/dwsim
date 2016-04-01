@@ -176,7 +176,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.Flowsheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
@@ -293,7 +293,7 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.Flowsheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.Flowsheet
 
             Me.IterationCount = 0
 
@@ -320,80 +320,6 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
             End If
 
         End Function
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                Dim ent, saida As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida = ""
-                End If
-
-                .Item.Add(DWSIM.App.GetLocalString("Correntedeentrada"), ent, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
-                End With
-
-                .Item.Add(DWSIM.App.GetLocalString("Correntedesada"), saida, False, DWSIM.App.GetLocalString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector
-                End With
-
-                .Item.Add(DWSIM.App.GetLocalString("Mtododeacelerao"), Me, "AccelerationMethod", False, DWSIM.App.GetLocalString("Configuraes2"), DWSIM.App.GetLocalString("Mtododeaceleraodacon"), True)
-
-                If Me.AccelerationMethod = DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle.AccelMethod.Wegstein Then
-                    Dim cpc As New CustomPropertyCollection
-                    cpc.Add(DWSIM.App.GetLocalString("Atrasonaacelerao"), Me.WegsteinParameters, "AccelDelay", False, DWSIM.App.GetLocalString("ParmetrosWegstein"), "", True)
-                    cpc.Add(DWSIM.App.GetLocalString("Ferqunciadeacelerao"), Me.WegsteinParameters, "AccelFreq", False, DWSIM.App.GetLocalString("ParmetrosWegstein"), "", True)
-                    cpc.Add(DWSIM.App.GetLocalString("Qmnimo"), Me.WegsteinParameters, "Qmin", False, DWSIM.App.GetLocalString("Wegstein"), "", True)
-                    cpc.Add(DWSIM.App.GetLocalString("Qmximo"), Me.WegsteinParameters, "Qmax", False, DWSIM.App.GetLocalString("Wegstein"), "", True)
-                    .Item.Add(DWSIM.App.GetLocalString("ParmetrosWegstein"), cpc, True, DWSIM.App.GetLocalString("Configuraes2"), DWSIM.App.GetLocalString("ParmetrosdomtododeWe"))
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = BrowsableTypeConverter.LabelStyle.lsEllipsis
-                    End With
-                End If
-
-                .Item.Add(DWSIM.App.GetLocalString("NmeroMximodeIteraes"), Me, "MaximumIterations", False, DWSIM.App.GetLocalString("Configuraes2"), DWSIM.App.GetLocalString("Nmeromximodeiteraesd"), True)
-
-                Dim valor As Double
-
-                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ConvergenceParameters.Energy), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("EnergyFlow"), su.heatflow), valor, False, DWSIM.App.GetLocalString("Parmetrosdeconvergn3"), "", True)
-
-                .Item.Add(DWSIM.App.GetLocalString("Iteraesnecessrias"), Me, "IterationsTaken", True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Nmerodeiteraesusadas"), True)
-                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.EnergyE), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(DWSIM.App.GetLocalString("ErronaEnergyFlow"), su.heatflow), valor, True, DWSIM.App.GetLocalString("Resultados4"), DWSIM.App.GetLocalString("Diferenaentreosvalor"), True)
-
-                If Not Me.Annotation Is Nothing Then
-                    .Item.Add(DWSIM.App.GetLocalString("Anotaes"), Me, "Annotation", False, DWSIM.App.GetLocalString("Outros"), DWSIM.App.GetLocalString("Cliquenobotocomretic"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = False
-                        .CustomEditor = New DWSIM.Editors.Annotation.UIAnnotationEditor
-                    End With
-                End If
-
-                .ExpandAllGridItems()
-
-            End With
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
             If su Is Nothing Then su = New SystemsOfUnits.SI

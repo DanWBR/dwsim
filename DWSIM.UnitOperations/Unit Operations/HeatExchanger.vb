@@ -255,11 +255,11 @@ Namespace UnitOperations
             'Validate unitop status.
             Me.Validate()
 
-            StIn0 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            StIn1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+            StIn0 = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            StIn1 = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
 
-            StOut0 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            StOut1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+            StOut0 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            StOut1 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
 
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)
             If DebugMode Then AppendDebugLine("Validating inlet stream 1...")
@@ -1107,19 +1107,19 @@ Namespace UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.FlowSheet
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
+                DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If
 
             If Me.GraphicObject.OutputConnectors(1).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
+                DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If
 
@@ -1135,319 +1135,6 @@ Namespace UnitOperations
             FlowSheet.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            'To be implemented according to the heat exchanger connectors.
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim In1, In2, Out1, Out2, energ As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    In1 = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    In1 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(1).IsAttached = True Then
-                    In2 = Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
-                Else
-                    In2 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    Out1 = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    Out1 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(1).IsAttached = True Then
-                    Out2 = Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
-                Else
-                    Out2 = ""
-                End If
-
-                If Me.GraphicObject.EnergyConnector.IsAttached = True Then
-                    energ = Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Tag
-                Else
-                    energ = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada1"), In1, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada2"), In2, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida1"), Out1, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida2"), Out2, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("HXCalculationMode"), Me, "CalculationMode", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXCalculationModeDesc"), True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("HXIgnoreLMTDError"), Me, "IgnoreLMTDError", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXIgnoreLMTDErrorDesc"), True)
-
-                Dim AValue As Double
-
-                Select Case CalcMode
-                    Case HeatExchangerCalcMode.CalcArea, HeatExchangerCalcMode.CalcBothTemp, HeatExchangerCalcMode.CalcBothTemp_UA, HeatExchangerCalcMode.CalcTempColdOut, HeatExchangerCalcMode.CalcTempHotOut
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("HXFlowDirection"), Me, "FlowDir", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXFlowDirectionDesc"), True)
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXHotSidePressureDrop"), su.deltaP), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXHotSidePressureDrop"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.deltaP, "DP"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXColdSidePressureDrop"), su.deltaP), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXColdSidePressureDrop"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.deltaP, "DP"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                End Select
-
-                Select Case CalcMode
-                    Case HeatExchangerCalcMode.CalcBothTemp_UA
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Area"), su.area), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HeatTransferArea"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_1"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.area, "A"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficientDesc"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_0"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.heat_transf_coeff, "U"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                    Case HeatExchangerCalcMode.CalcBothTemp
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Area"), su.area), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HeatTransferArea"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_1"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.area, "A"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HeatLoad"), su.heatflow), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HeatLoadOfEquipment"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_2"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.heatflow, "E"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                    Case HeatExchangerCalcMode.CalcTempColdOut
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Area"), su.area), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HeatTransferArea"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_1"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.area, "A"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempHotOut"), su.temperature), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXTempHotOutDesc"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_4"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                    Case HeatExchangerCalcMode.CalcTempHotOut
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Area"), su.area), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HeatTransferArea"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_1"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.area, "A"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempColdOut"), su.temperature), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXTempColdOutDesc"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_3"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                    Case HeatExchangerCalcMode.CalcArea
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("HXDefinedTemperature"), Me, "DefinedTemperature", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXDefinedTemperatureDesc"), True)
-                        Select Case Me.DefinedTemperature
-                            Case SpecifiedTemperature.Cold_Fluid
-                                AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
-                                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempColdOut"), su.temperature), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXTempColdOutDesc"), True)
-                                With .Item(.Item.Count - 1)
-                                    .CustomTypeConverter = New System.ComponentModel.StringConverter
-                                    .Tag2 = "PROP_HX_3"
-                                    .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
-                                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                                End With
-                            Case SpecifiedTemperature.Hot_Fluid
-                                AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
-                                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempHotOut"), su.temperature), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXTempHotOutDesc"), True)
-                                With .Item(.Item.Count - 1)
-                                    .CustomTypeConverter = New System.ComponentModel.StringConverter
-                                    .Tag2 = "PROP_HX_4"
-                                    .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
-                                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                                End With
-                        End Select
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficientDesc"), True)
-                    Case HeatExchangerCalcMode.ShellandTube_Rating
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("STHXProperties"), Me, "STProperties", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("STHXPropertiesDesc"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomEditor = New DWSIM.Editors.HeatExchanger.UISTHXEditor
-                        End With
-                    Case HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempColdOut"), su.temperature), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXTempColdOutDesc"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_3"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                        AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempHotOut"), su.temperature), AValue, False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("HXTempHotOutDesc"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomTypeConverter = New System.ComponentModel.StringConverter
-                            .Tag2 = "PROP_HX_4"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("STHXProperties"), Me, "STProperties", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("STHXPropertiesDesc"), True)
-                        With .Item(.Item.Count - 1)
-                            .CustomEditor = New DWSIM.Editors.HeatExchanger.UISTHXEditor
-                        End With
-                End Select
-
-                If Me.GraphicObject.Calculated = True Then
-
-                    'Shows some calculated properties, such as the heat load.
-
-                    Select Case CalcMode
-                        Case HeatExchangerCalcMode.CalcBothTemp_UA
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HeatLoad"), su.heatflow), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HeatLoadOfEquipment"), True)
-                        Case HeatExchangerCalcMode.CalcBothTemp
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempHotOut"), su.temperature), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXTempHotOutDesc"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempColdOut"), su.temperature), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXTempColdOutDesc"), True)
-                        Case HeatExchangerCalcMode.CalcTempColdOut
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HeatLoad"), su.heatflow), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HeatLoadOfEquipment"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempColdOut"), su.temperature), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXTempColdOutDesc"), True)
-                        Case HeatExchangerCalcMode.CalcTempHotOut
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HeatLoad"), su.heatflow), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HeatLoadOfEquipment"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempHotOut"), su.temperature), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXTempHotOutDesc"), True)
-                        Case HeatExchangerCalcMode.CalcArea
-                            Select Case Me.DefinedTemperature
-                                Case SpecifiedTemperature.Cold_Fluid
-                                    AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
-                                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempHotOut"), su.temperature), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXTempHotOutDesc"), True)
-                                Case SpecifiedTemperature.Hot_Fluid
-                                    AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
-                                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempColdOut"), su.temperature), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXTempColdOutDesc"), True)
-                            End Select
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Area"), su.area), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HeatTransferArea"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HeatLoad"), su.heatflow), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HeatLoadOfEquipment"), True)
-                        Case HeatExchangerCalcMode.ShellandTube_Rating
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempHotOut"), su.temperature), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXTempHotOutDesc"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXTempColdOut"), su.temperature), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXTempColdOutDesc"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HeatLoad"), su.heatflow), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HeatLoadOfEquipment"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Area"), su.area), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HeatTransferArea"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXHotSidePressureDrop"), su.deltaP), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXHotSidePressureDrop"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXColdSidePressureDrop"), su.deltaP), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXColdSidePressureDrop"), True)
-                            AValue = Format(Me.LMTD_F, FlowSheet.Options.NumberFormat)
-                            .Item.Add("F", AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXColdSidePressureDrop"), True)
-                        Case HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor
-                            AValue = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.OverallFoulingFactor)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXFoulingFactor"), su.foulingfactor), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXFoulingFactorDesc"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HeatLoad"), su.heatflow), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HeatLoadOfEquipment"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Area"), su.area), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HeatTransferArea"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficient"), su.heat_transf_coeff), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("OverallHeatTranferCoefficientDesc"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXHotSidePressureDrop"), su.deltaP), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXHotSidePressureDrop"), True)
-                            AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop), FlowSheet.Options.NumberFormat)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXColdSidePressureDrop"), su.deltaP), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXColdSidePressureDrop"), True)
-                            AValue = Format(Me.LMTD_F, FlowSheet.Options.NumberFormat)
-                            .Item.Add("F", AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXLMTDCorr"), True)
-                    End Select
-
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("MaximumHeatExchange"), su.heatflow), Format(Me.MaxHeatExchange, FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("MaximumHeatExchangeDesc"), True)
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("ThermalEfficiency"), "%"), Format(Me.ThermalEfficiency, FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("ThermalEfficiencyDesc"), True)
-
-                    AValue = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.LMTD), FlowSheet.Options.NumberFormat)
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HXLMTD"), su.deltaT), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXLMTDDesc"), True)
-
-                    If CalcMode = HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor Or CalcMode = HeatExchangerCalcMode.ShellandTube_Rating Then
-                        AValue = Format(Me.STProperties.ReS, FlowSheet.Options.NumberFormat)
-                        .Item.Add("Re Shell", AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXReShell"), True)
-                        AValue = Format(Me.STProperties.ReT, FlowSheet.Options.NumberFormat)
-                        .Item.Add("Re Tube", AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXReTube"), True)
-                        AValue = Format(Me.STProperties.Fs, FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT("F Shell", su.foulingfactor), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXFShell"), True)
-                        AValue = Format(Me.STProperties.Ft, FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT("F Tube", su.foulingfactor), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXFTube"), True)
-                        AValue = Format(Me.STProperties.Fc, FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT("F Pipe", su.foulingfactor), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXFPipe"), True)
-                        AValue = Format(Me.STProperties.Ff, FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT("F Fouling", su.foulingfactor), AValue, True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("HXFFouling"), True)
-                    End If
-
-                End If
-
-            End With
-
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 

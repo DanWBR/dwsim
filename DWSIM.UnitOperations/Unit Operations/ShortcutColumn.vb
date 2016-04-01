@@ -19,16 +19,16 @@
 
 Imports System.Collections.Generic
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.Thermodynamics
 Imports System.Math
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.Thermodynamics.Streams
 
 Namespace UnitOperations
 
     <System.Serializable()> Public Class ShortcutColumn
 
-        Inherits SharedClasses.UnitOperations.BaseClass
+        Inherits Global.DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass
 
         Public Enum CondenserType
             TotalCond = 0
@@ -126,21 +126,20 @@ Namespace UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-
+       
             'Validate unitop status.
             Me.Validate()
 
             'streams
 
-            Dim feed, distillate, bottoms As Streams.MaterialStream
+            Dim feed, distillate, bottoms As MaterialStream
             Dim cduty, rduty As Streams.EnergyStream
 
-            feed = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            distillate = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            bottoms = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
-            cduty = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
-            rduty = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+            feed = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            distillate = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            bottoms = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+            cduty = FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+            rduty = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
 
             feed.Validate()
 
@@ -471,7 +470,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
 
         Function rminfunc(ByVal x As Double, ByVal otherargs As Object) As Double
 
-            If Double.IsNaN(x) Then Exit Function
+            If Double.IsNaN(x) Then Return Double.NaN
 
             Dim alpha As Object = otherargs(0)
             Dim z As Object = otherargs(1)
@@ -485,8 +484,6 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                 j = j + 1
             Loop Until j = n + 1
 
-            CheckCalculatorStatus()
-
             Return value - 1 + q
 
         End Function
@@ -496,20 +493,20 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
+                DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If
 
             If Me.GraphicObject.OutputConnectors(1).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
+                DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If
 
             If Me.GraphicObject.EnergyConnector.IsAttached Then
 
-                Dim cduty As SimulationObjects.Streams.EnergyStream = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                Dim cduty As SimulationObjects.Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
 
                 With cduty
                     .EnergyFlow = Nothing
@@ -530,174 +527,6 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             FlowSheet.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim ent, saida1, saida2, ec, er As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida1 = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida1 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(1).IsAttached = True Then
-                    saida2 = Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida2 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(1).IsAttached = True Then
-                    er = Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
-                Else
-                    er = ""
-                End If
-                If Me.GraphicObject.EnergyConnector.IsAttached = True Then
-                    ec = Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Tag
-                Else
-                    ec = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCFeed"), ent, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCDistillate"), saida1, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCBottoms"), saida2, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCCondenserDuty"), ec, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCReboilerDuty"), er, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCCondenserType"), Me, "condtype", False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SCCondenserType"), True)
-                .Item(.Item.Count - 1).Tag2 = "condtype"
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCRefluxRatio"), Me, "m_refluxratio", False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SCRefluxRatio"), True)
-                .Item(.Item.Count - 1).Tag2 = "PROP_SC_0"
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCLightKey"), DWSIM.App.GetComponentName(Me.m_lightkey), False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SCLightKeyMF"), True)
-                With .Item(.Item.Count - 1)
-                    .IsBrowsable = False
-                    .CustomEditor = New DWSIM.Editors.Components.UIComponentSelector
-                    .DefaultValue = ""
-                    .DefaultType = GetType(String)
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCLightKeyMF"), Me, "m_lightkeymolarfrac", False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SCLightKeyMF"), True)
-                .Item(.Item.Count - 1).Tag2 = "PROP_SC_2"
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCHeavyKey"), DWSIM.App.GetComponentName(Me.m_heavykey), False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SCHeavyKey"), True)
-                With .Item(.Item.Count - 1)
-                    .IsBrowsable = False
-                    .CustomEditor = New DWSIM.Editors.Components.UIComponentSelector
-                    .DefaultValue = ""
-                    .DefaultType = GetType(String)
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SCHeavyKeyMF"), Me, "m_heavykeymolarfrac", False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SCHeavyKeyMF"), True)
-                .Item(.Item.Count - 1).Tag2 = "PROP_SC_1"
-                Dim valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.m_condenserpressure), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("SCCondenserPressure"), su.pressure), Double.Parse(valor), False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SCCondenserPressure"), True)
-                With .Item(.Item.Count - 1)
-                    .CustomTypeConverter = New System.ComponentModel.StringConverter
-                    .Tag2 = "PROP_SC_3"
-                    .Tag = New Object() {FlowSheet.Options.NumberFormat, su.pressure, "P"}
-                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                End With
-                valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.m_boilerpressure), FlowSheet.Options.NumberFormat)
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("SCReboilerPressure"), su.pressure), Double.Parse(valor), False, Me.FlowSheet.GetTranslatedString("Parmetros2"), Me.FlowSheet.GetTranslatedString("SCReboilerPressure"), True)
-                With .Item(.Item.Count - 1)
-                    .CustomTypeConverter = New System.ComponentModel.StringConverter
-                    .Tag2 = "PROP_SC_4"
-                    .Tag = New Object() {FlowSheet.Options.NumberFormat, su.pressure, "P"}
-                    .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                End With
-
-                If Me.GraphicObject.Calculated Then
-
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("SCMinimumRefluxRatio"), Format(Me.m_Rmin, FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCMinimumRefluxRatio"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("SCNminstages"), Format(Me.m_Nmin, FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCNminstages"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("SCNstages"), Format(Me.m_N, FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCNstages"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("SCOptimalFeedStage"), Format(Me.ofs, FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCOptimalFeedStage"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("SCStrippingLiquid"), su.molarflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.L_), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCStrippingLiquid"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("SCRectifyLiquid"), su.molarflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.L), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCRectifyLiquid"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("SCStrippingVapor"), su.molarflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.V_), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCStrippingVapor"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("SCRectifyVapor"), su.molarflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.V), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCRectifyVapor"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("SCCondenserDuty"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.m_Qc), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCCondenserDuty"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("SCReboilerDuty"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.m_Qb), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados3"), Me.FlowSheet.GetTranslatedString("SCReboilerDuty"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultValue = Nothing
-                        .DefaultType = GetType(Nullable(Of Double))
-                    End With
-
-                End If
-
-                .ExpandAllGridItems()
-
-            End With
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 

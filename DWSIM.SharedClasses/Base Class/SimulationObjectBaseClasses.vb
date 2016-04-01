@@ -469,10 +469,6 @@ Namespace UnitOperations
             Return prop & " (" & unit & ")"
         End Function
 
-        Public MustOverride Sub HandlePropertyChange(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
-
-        Public MustOverride Sub PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
-
         ''' <summary>
         ''' Sets the Flowsheet to which this object belongs to.
         ''' </summary>

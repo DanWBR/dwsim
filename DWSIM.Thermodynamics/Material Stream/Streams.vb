@@ -31,7 +31,7 @@ Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports System.Windows.Forms
 
-Namespace DWSIM.SimulationObjects.Streams
+Namespace Streams
 
     <System.Serializable()> Public Class MaterialStream
 
@@ -194,17 +194,6 @@ Namespace DWSIM.SimulationObjects.Streams
 
             End Set
         End Property
-
-        Public Overrides Sub PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
-            'MyBase.PropertyValueChanged(s, e)
-            'If e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("UOPropertyPackage")) Then
-            '    If e.ChangedItem.Value <> "" Then
-            '        If FlowSheet.Options.PropertyPackages.ContainsKey(e.ChangedItem.Value) Then
-            '            Me.PropertyPackage = FlowSheet.Options.PropertyPackages(e.ChangedItem.Value)
-            '        End If
-            '    End If
-            'End If
-        End Sub
 
         Public Sub New()
             MyBase.New()
@@ -6791,10 +6780,6 @@ Namespace DWSIM.SimulationObjects.Streams
 
         Public Sub Validate1() Implements IMaterialStream.Validate
             Validate()
-        End Sub
-
-        Public Overrides Sub HandlePropertyChange(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs)
-
         End Sub
 
         Public Property PropertyPackage1 As IPropertyPackage Implements IMaterialStream.PropertyPackage

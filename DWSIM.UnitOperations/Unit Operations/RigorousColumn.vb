@@ -18,16 +18,13 @@
 
 Imports System.Collections.Generic
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.MathEx
 Imports System.Math
-Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 Imports Mapack
 Imports System.Linq
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.DrawingTools
 
-Namespace UnitOperations.Auxiliary.SepOps
+Namespace Auxiliary.SepOps
 
     <System.Serializable()> Public Class Parameter
 
@@ -2534,494 +2531,6 @@ Namespace UnitOperations
 
         Public __dc As New DummyClass
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim cv As New SystemsOfUnits.Converter
-            Dim nf As String = FlowSheet.Options.NumberFormat
-
-            Dim obj = Me.Specs
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCNumbStages"), Me, "NumberOfStages", False, Me.FlowSheet.GetTranslatedString("DCStages"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCStagesE"), Me.__dc, False, Me.FlowSheet.GetTranslatedString("DCStages"), "", True)
-                With .Item(.Item.Count - 1)
-                    .CustomEditor = New DWSIM.Editors.Distillation.UIStagesEditor
-                End With
-
-                Dim val As Double
-
-                Select Case Me.ColumnType
-                    Case ColType.DistillationColumn
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCCondenserPressure"), su.pressure), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        .Item(.Item.Count - 1).Tag2 = "PROP_DC_0"
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCReboilerPressure"), su.pressure), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        .Item(.Item.Count - 1).Tag2 = "PROP_DC_1"
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCCondenserType"), Me, "CondenserType", False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCCondenserDeltaP"), su.deltaP), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        '.Item.Add(Me.FlowSheet.GetTranslatedString("DCRefluxRatio"), Me, "RefluxRatio", False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        Dim units As String() = New String() {}
-
-                        Dim cspec As New PropertyGridEx.CustomPropertyCollection()
-                        With cspec
-                            'condenser spec
-                            If Me.CondenserType = condtype.Partial_Condenser Then
-                                Dim cspecv As New PropertyGridEx.CustomPropertyCollection()
-                                With cspecv
-                                    .Add(Me.FlowSheet.GetTranslatedString("DCVaporFlowRate"), Me, "VaporFlowRate", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"), "", True)
-                                    .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecUnit"), Me, "VaporFlowRateUnit", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                                    units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                    With .Item(.Count - 1)
-                                        .Choices = New PropertyGridEx.CustomChoices(units, False)
-                                    End With
-                                End With
-                                .Add(Me.FlowSheet.GetTranslatedString("DCVaporFlowRate"), cspecv, False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"), "", True)
-                                With .Item(.Count - 1)
-                                    .IsBrowsable = True
-                                    .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                    .CustomEditor = New System.Drawing.Design.UITypeEditor
-                                End With
-                            End If
-                            .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecType"), Me.Specs("C"), "SType", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                            If Me.Specs("C").SType = ColumnSpec.SpecType.Component_Fraction Or _
-                                Me.Specs("C").SType = ColumnSpec.SpecType.Component_Mass_Flow_Rate Or _
-                                Me.Specs("C").SType = ColumnSpec.SpecType.Component_Recovery Or _
-                                Me.Specs("C").SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate Then
-                                .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecComp"), DWSIM.App.GetComponentName(Me.Specs("C").ComponentID), False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                                With .Item(.Count - 1)
-                                    .CustomEditor = New DWSIM.Editors.Components.UIComponentSelector
-                                End With
-                            End If
-                            .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecValue"), Me.Specs("C"), "SpecValue", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                            .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecUnit"), Me.Specs("C"), "SpecUnit", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                            Select Case Me.Specs("C").SType
-                                Case ColumnSpec.SpecType.Component_Fraction
-                                    units = New String() {"M", "We"}
-                                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
-                                    units = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
-                                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
-                                    units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                Case ColumnSpec.SpecType.Component_Recovery
-                                    units = New String() {"% M/M", "% W/W"}
-                                Case ColumnSpec.SpecType.Heat_Duty
-                                    units = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
-                                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                                    units = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
-                                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                                    units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                Case ColumnSpec.SpecType.Stream_Ratio
-                                    units = New String() {""}
-                                Case ColumnSpec.SpecType.Temperature
-                                    units = New String() {"K", "R", "C", "F"}
-                            End Select
-                            With .Item(.Count - 1)
-                                .Choices = New PropertyGridEx.CustomChoices(units, False)
-                            End With
-                        End With
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecs"), cspec, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        With .Item(.Item.Count - 1)
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-                        Dim rspec As New PropertyGridEx.CustomPropertyCollection()
-                        With rspec
-                            'reboiler spec
-                            .Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecType"), Me.Specs("R"), "SType", False, Me.FlowSheet.GetTranslatedString("DCReboilerSpec"))
-                            If Me.Specs("R").SType = ColumnSpec.SpecType.Component_Fraction Or _
-                               Me.Specs("R").SType = ColumnSpec.SpecType.Component_Mass_Flow_Rate Or _
-                               Me.Specs("R").SType = ColumnSpec.SpecType.Component_Recovery Or _
-                               Me.Specs("R").SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate Then
-                                .Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecComp"), DWSIM.App.GetComponentName(Me.Specs("R").ComponentID), False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                                With .Item(.Count - 1)
-                                    .CustomEditor = New DWSIM.Editors.Components.UIComponentSelector
-                                End With
-                            End If
-                            .Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecValue"), Me.Specs("R"), "SpecValue", False, Me.FlowSheet.GetTranslatedString("DCReboilerSpec"))
-                            .Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecUnit"), Me.Specs("R"), "SpecUnit", False, Me.FlowSheet.GetTranslatedString("DCReboilerSpec"))
-                            Select Case Me.Specs("R").SType
-                                Case ColumnSpec.SpecType.Component_Fraction
-                                    units = New String() {"M", "We"}
-                                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
-                                    units = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
-                                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
-                                    units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                Case ColumnSpec.SpecType.Component_Recovery
-                                    units = New String() {"% M/M", "% W/W"}
-                                Case ColumnSpec.SpecType.Heat_Duty
-                                    units = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
-                                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                                    units = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
-                                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                                    units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                Case ColumnSpec.SpecType.Stream_Ratio
-                                    units = New String() {""}
-                                Case ColumnSpec.SpecType.Temperature
-                                    units = New String() {"K", "R", "C", "F"}
-                            End Select
-                            With .Item(.Count - 1)
-                                .Choices = New PropertyGridEx.CustomChoices(units, False)
-                            End With
-                        End With
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecs"), rspec, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        With .Item(.Item.Count - 1)
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-                    Case ColType.AbsorptionColumn
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCFirstStgPressure"), su.pressure), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCLastStgPressure"), su.pressure), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCOperationMode"), Me, "OperationMode", False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                    Case ColType.ReboiledAbsorber
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCFirstStgPressure"), su.pressure), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCReboilerPressure"), su.pressure), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        Dim units As String() = New String() {}
-                        Dim rspec As New PropertyGridEx.CustomPropertyCollection()
-                        With rspec
-                            'reboiler spec
-                            .Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecType"), Me.Specs("R"), "SType", False, Me.FlowSheet.GetTranslatedString("DCReboilerSpec"))
-                            If Me.Specs("R").SType = ColumnSpec.SpecType.Component_Fraction Or _
-                               Me.Specs("R").SType = ColumnSpec.SpecType.Component_Mass_Flow_Rate Or _
-                               Me.Specs("R").SType = ColumnSpec.SpecType.Component_Recovery Or _
-                               Me.Specs("R").SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate Then
-                                .Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecComp"), DWSIM.App.GetComponentName(Me.Specs("R").ComponentID), False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                                With .Item(.Count - 1)
-                                    .CustomEditor = New DWSIM.Editors.Components.UIComponentSelector
-                                End With
-                            End If
-                            .Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecValue"), Me.Specs("R"), "SpecValue", False, Me.FlowSheet.GetTranslatedString("DCReboilerSpec"))
-                            .Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecUnit"), Me.Specs("R"), "SpecUnit", False, Me.FlowSheet.GetTranslatedString("DCReboilerSpec"))
-                            Select Case Me.Specs("R").SType
-                                Case ColumnSpec.SpecType.Component_Fraction
-                                    units = New String() {"M", "We"}
-                                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
-                                    units = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
-                                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
-                                    units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                Case ColumnSpec.SpecType.Component_Recovery
-                                    units = New String() {"% M/M", "% W/W"}
-                                Case ColumnSpec.SpecType.Heat_Duty
-                                    units = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
-                                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                                    units = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
-                                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                                    units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                Case ColumnSpec.SpecType.Stream_Ratio
-                                    units = New String() {""}
-                                Case ColumnSpec.SpecType.Temperature
-                                    units = New String() {"K", "R", "C", "F"}
-                            End Select
-                            With .Item(.Count - 1)
-                                .Choices = New PropertyGridEx.CustomChoices(units, False)
-                            End With
-                        End With
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCReboilerSpecs"), rspec, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        With .Item(.Item.Count - 1)
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-                    Case ColType.RefluxedAbsorber
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCCondenserPressure"), su.pressure), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure), nf)
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCLastStgPressure"), su.pressure), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCCondenserType"), Me, "CondenserType", False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP), nf)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCCondenserDeltaP"), su.deltaP), val, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                        Dim units As String() = New String() {}
-                        If Not Me.CondenserType = condtype.Full_Reflux Then
-                            Dim cspec As New PropertyGridEx.CustomPropertyCollection()
-                            With cspec
-                                'condenser spec
-                                If Me.CondenserType = condtype.Full_Reflux Or Me.CondenserType = condtype.Partial_Condenser Then
-                                    Dim cspecv As New PropertyGridEx.CustomPropertyCollection()
-                                    With cspecv
-                                        .Add(Me.FlowSheet.GetTranslatedString("DCVaporFlowRate"), Me, "VaporFlowRate", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"), "", True)
-                                        .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecUnit"), Me, "VaporFlowRateUnit", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                                        units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                        With .Item(.Count - 1)
-                                            .Choices = New PropertyGridEx.CustomChoices(units, False)
-                                        End With
-                                    End With
-                                    .Add(Me.FlowSheet.GetTranslatedString("DCVaporFlowRate"), cspecv, False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"), "", True)
-                                    With .Item(.Count - 1)
-                                        .IsBrowsable = True
-                                        .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                                    End With
-                                End If
-
-                                .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecType"), Me.Specs("C"), "SType", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                                If Me.Specs("C").SType = ColumnSpec.SpecType.Component_Fraction Or _
-                                    Me.Specs("C").SType = ColumnSpec.SpecType.Component_Mass_Flow_Rate Or _
-                                    Me.Specs("C").SType = ColumnSpec.SpecType.Component_Recovery Or _
-                                    Me.Specs("C").SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate Then
-                                    .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecComp"), DWSIM.App.GetComponentName(Me.Specs("C").ComponentID), False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                                    With .Item(.Count - 1)
-                                        .CustomEditor = New DWSIM.Editors.Components.UIComponentSelector
-                                    End With
-                                End If
-                                .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecValue"), Me.Specs("C"), "SpecValue", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                                .Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecUnit"), Me.Specs("C"), "SpecUnit", False, Me.FlowSheet.GetTranslatedString("DCCondenserSpec"))
-                                Select Case Me.Specs("C").SType
-                                    Case ColumnSpec.SpecType.Component_Fraction
-                                        units = New String() {"M", "We"}
-                                    Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
-                                        units = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
-                                    Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
-                                        units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                    Case ColumnSpec.SpecType.Component_Recovery
-                                        units = New String() {"% M/M", "% W/W"}
-                                    Case ColumnSpec.SpecType.Heat_Duty
-                                        units = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
-                                    Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                                        units = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
-                                    Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                                        units = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
-                                    Case ColumnSpec.SpecType.Stream_Ratio
-                                        units = New String() {""}
-                                    Case ColumnSpec.SpecType.Temperature
-                                        units = New String() {"K", "R", "C", "F"}
-                                End Select
-                                With .Item(.Count - 1)
-                                    .Choices = New PropertyGridEx.CustomChoices(units, False)
-                                End With
-                            End With
-                            .Item.Add(Me.FlowSheet.GetTranslatedString("DCCondenserSpecs"), cspec, False, Me.FlowSheet.GetTranslatedString("DCColumnProperties"), "", True)
-                            With .Item(.Item.Count - 1)
-                                .IsBrowsable = True
-                                .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                                .CustomEditor = New System.Drawing.Design.UITypeEditor
-                            End With
-                        End If
-                End Select
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCEditConnections"), Me.__dc, False, Me.FlowSheet.GetTranslatedString("DCConnections"), "", True)
-                With .Item(.Item.Count - 1)
-                    .CustomEditor = New DWSIM.Editors.Distillation.UIConnectionsEditor
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCUseIE"), Me, "UseTemperatureEstimates", False, Me.FlowSheet.GetTranslatedString("DCInitialEstimates"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCUseIE1"), Me, "UseVaporFlowEstimates", False, Me.FlowSheet.GetTranslatedString("DCInitialEstimates"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCUseIE3"), Me, "UseLiquidFlowEstimates", False, Me.FlowSheet.GetTranslatedString("DCInitialEstimates"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCUseIE2"), Me, "UseCompositionEstimates", False, Me.FlowSheet.GetTranslatedString("DCInitialEstimates"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCInitialEstimates2"), Me.__dc, False, Me.FlowSheet.GetTranslatedString("DCInitialEstimates"), "", True)
-                With .Item(.Item.Count - 1)
-                    .CustomEditor = New DWSIM.Editors.Distillation.UIInitialEstimates
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCAutoUpdInitEst"), Me, "AutoUpdateInitialEstimates", False, Me.FlowSheet.GetTranslatedString("DCInitialEstimates"), "", True)
-
-                If Me.SolvingMethod = SolvingMethods.DistColSolvingMethod.Russell_InsideOut Or _
-                            Me.SolvingMethod = SolvingMethods.AbsColSolvingMethod.Russell_InsideOut Or _
-                            Me.SolvingMethod = SolvingMethods.RebAbsColSolvingMethod.Russell_InsideOut Or _
-                            Me.SolvingMethod = SolvingMethods.RefAbsColSolvingMethod.Russell_InsideOut Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCILTol"), Me, "InternalLoopTolerance", False, Me.FlowSheet.GetTranslatedString("DCTolerances"), "", True)
-                End If
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCELTol"), Me, "ExternalLoopTolerance", False, Me.FlowSheet.GetTranslatedString("DCTolerances"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCMaxIt"), Me, "MaxIterations", False, Me.FlowSheet.GetTranslatedString("DCTolerances"), "", True)
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("DCSolvingMethod"), Me, "_sm", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                If Me.SolvingMethod = SolvingMethods.DistColSolvingMethod.WangHenke_BubblePoint Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCStopAtIter"), Me, "StopAtIterationNumber", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                ElseIf Me.SolvingMethod = SolvingMethods.DistColSolvingMethod.Russell_InsideOut Or _
-                        Me.SolvingMethod = SolvingMethods.AbsColSolvingMethod.Russell_InsideOut Or _
-                        Me.SolvingMethod = SolvingMethods.RebAbsColSolvingMethod.Russell_InsideOut Or _
-                        Me.SolvingMethod = SolvingMethods.RefAbsColSolvingMethod.Russell_InsideOut Then
-                    '.Item.Add(Me.FlowSheet.GetTranslatedString("DC_IO_MaxVarChgFac"), Me, "IO_MaxVarChgFac", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCAdjustSb"), Me, "AdjustSb", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DC_UseWeightedAverageKbj"), Me, "KbjWeightedAverage", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCUseIMJac"), Me, "UseIdentityAsJacobianInverse", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCUseDampingFactor"), Me, "UseDampingFactor", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCDampingFactorMin"), Me, "IO_DampingFactorMin", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "[0.0 - 0.2]", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCDampingFactorMax"), Me, "IO_DampingFactorMax", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "[1.0 - 2.0]", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCExtLoopDeltaT"), Me, "IO_ExtLoop_DeltaT", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "[0.01 - 1]", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCUseNewtonUpdate"), Me, "UseNewtonUpdate", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DC_SC_NumericalDerivativeStep"), Me, "IO_NumericalDerivativeStep", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCStoreAndReuseJacobian"), Me, "StoreAndReuseJacobian", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                ElseIf Me.SolvingMethod = SolvingMethods.DistColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Or _
-                       Me.SolvingMethod = SolvingMethods.RebAbsColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Or _
-                       Me.SolvingMethod = SolvingMethods.RefAbsColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Or _
-                        Me.SolvingMethod = SolvingMethods.AbsColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DC_SC_NumericalDerivativeStep"), Me, "SC_NumericalDerivativeStep", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.SC_MaximumTemperatureChange), nf)
-                    .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DC_SC_MaximumTemperatureChange"), su.deltaT), val, False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCUseDampingFactor"), Me, "UseDampingFactor", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCUseNewtonUpdate"), Me, "UseNewtonUpdate", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCStoreAndReuseJacobian"), Me, "StoreAndReuseJacobian", False, Me.FlowSheet.GetTranslatedString("DCSolvingMethod1"), "", True)
-                End If
-
-                If Me.GraphicObject.Calculated Then
-                    If Me.SolvingMethod = SolvingMethods.DistColSolvingMethod.Russell_InsideOut Or _
-                        Me.SolvingMethod = SolvingMethods.AbsColSolvingMethod.Russell_InsideOut Or _
-                        Me.SolvingMethod = SolvingMethods.RebAbsColSolvingMethod.Russell_InsideOut Or _
-                        Me.SolvingMethod = SolvingMethods.RefAbsColSolvingMethod.Russell_InsideOut Then
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCILIts"), Me, "ic", True, Me.FlowSheet.GetTranslatedString("DCResults"), "", True)
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCELIts"), Me, "ec", True, Me.FlowSheet.GetTranslatedString("DCResults"), "", True)
-                    ElseIf Me.SolvingMethod = SolvingMethods.DistColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Then
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCELIts"), Me, "ec", True, Me.FlowSheet.GetTranslatedString("DCResults"), "", True)
-                    Else
-                        .Item.Add(Me.FlowSheet.GetTranslatedString("DCELIts"), Me, "ic", True, Me.FlowSheet.GetTranslatedString("DCResults"), "", True)
-                    End If
-                    Select Case Me.ColumnType
-                        Case ColType.DistillationColumn
-                            val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty), nf)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.heatflow), val, True, Me.FlowSheet.GetTranslatedString("DCResults"), "", True)
-                            val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ReboilerDuty), nf)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.heatflow), val, True, Me.FlowSheet.GetTranslatedString("DCResults"), "", True)
-                        Case ColType.AbsorptionColumn
-                        Case ColType.ReboiledAbsorber
-                            val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ReboilerDuty), nf)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.heatflow), val, True, Me.FlowSheet.GetTranslatedString("DCResults"), "", True)
-                        Case ColType.RefluxedAbsorber
-                            val = Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty), nf)
-                            .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.heatflow), val, True, Me.FlowSheet.GetTranslatedString("DCResults"), "", True)
-                    End Select
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("DCResults1"), __dc, False, Me.FlowSheet.GetTranslatedString("DCResults"), "", True)
-                    With .Item(.Item.Count - 1)
-                        .CustomEditor = New DWSIM.Editors.Distillation.UIResults
-                    End With
-
-                End If
-
-                'Dim trig As Boolean = False
-
-                '.Item.Add("Trigger", trig, False, Me.FlowSheet.GetTranslatedString("Outros"), "", True)
-
-                .ExpandAllGridItems()
-
-            End With
-        End Sub
-
-        Public Overrides Sub PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
-
-            MyBase.PropertyValueChanged(s, e)
-
-            Dim su As SystemsOfUnits.Units = FlowSheet.Options.SelectedUnitSystem
-            Dim cv As New SystemsOfUnits.Converter
-
-            If e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("DCNumbStages")) Then
-
-                Dim ne As Integer = e.ChangedItem.Value
-                Dim nep As Integer = _st.Count
-                Dim dif As Integer = ne - nep
-                If dif < 0 Then
-                    Me.Stages.RemoveRange(nep + dif - 1, -dif)
-                    With Me.InitialEstimates
-                        .LiqCompositions.RemoveRange(nep + dif - 1, -dif)
-                        .VapCompositions.RemoveRange(nep + dif - 1, -dif)
-                        .LiqMolarFlows.RemoveRange(nep + dif - 1, -dif)
-                        .VapMolarFlows.RemoveRange(nep + dif - 1, -dif)
-                        .StageTemps.RemoveRange(nep + dif - 1, -dif)
-                    End With
-                ElseIf dif > 0 Then
-                    Dim i As Integer
-                    For i = 1 To dif
-                        Me.Stages.Insert(Me.Stages.Count - 1, New Stage(Guid.NewGuid().ToString))
-                        Me.Stages(Me.Stages.Count - 2).Name = Me.FlowSheet.GetTranslatedString("DCStage") & "_" & _st.Count - 2
-                        With Me.InitialEstimates
-                            Dim d As New Dictionary(Of String, Parameter)
-                            For Each cp As DWSIM.Thermodynamics.BaseClasses.ConstantProperties In Me.FlowSheet.Options.SelectedComponents.Values
-                                d.Add(cp.Name, New Parameter)
-                            Next
-                            .LiqCompositions.Insert(.LiqCompositions.Count - 1, d)
-                            .VapCompositions.Insert(.VapCompositions.Count - 1, d)
-                            .LiqMolarFlows.Insert(.LiqMolarFlows.Count - 1, New Parameter)
-                            .VapMolarFlows.Insert(.VapMolarFlows.Count - 1, New Parameter)
-                            .StageTemps.Insert(.StageTemps.Count - 1, New Parameter)
-                        End With
-                    Next
-                End If
-
-            ElseIf e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("DCCondenserDeltaP")) Then
-
-                Me.CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, e.ChangedItem.Value)
-
-            ElseIf e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("DCCondenserPressure")) Or _
-            e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("DCFirstStgPressure")) Then
-
-                Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, e.ChangedItem.Value)
-                Me.Stages(0).P = Me.CondenserPressure
-
-            ElseIf e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("DCReboilerPressure")) Or _
-            e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("DCLastStgPressure")) Then
-
-                Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, e.ChangedItem.Value)
-                Me.Stages(Me.Stages.Count - 1).P = Me.ReboilerPressure
-
-            ElseIf e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("DCDistillateFlowRate")) Then
-
-                Me.DistillateFlowRate = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, e.ChangedItem.Value)
-
-            ElseIf e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("DCCondenserType")) Then
-
-                Me.GraphicObject.Shape = Me.CondenserType
-
-                Select Case Me.CondenserType
-                    Case condtype.Full_Reflux
-
-                        For Each si As StreamInformation In Me.MaterialStreams.Values
-                            If si.StreamBehavior = StreamInformation.Behavior.Distillate Then
-                                'disconnect and remove from collection
-                                If FlowSheet.Collections.GraphicObjectCollection.ContainsKey(si.StreamID) Then
-                                    Dim idx As Integer = FormFlowsheet.SearchSurfaceObjectsByName(si.StreamID, FlowSheet.FormSurface.FlowsheetDesignSurface).InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                                    FlowSheet.DisconnectObject(Me.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(si.StreamID, FlowSheet.FormSurface.FlowsheetDesignSurface))
-                                    'Me.GraphicObject.OutputConnectors.RemoveAt(idx)
-                                End If
-                                Me.MaterialStreams.Remove(si.ID)
-                                Exit For
-                            End If
-                        Next
-
-                    Case condtype.Partial_Condenser
-
-                    Case condtype.Total_Condenser
-
-                        For Each si As StreamInformation In Me.MaterialStreams.Values
-                            If si.StreamBehavior = StreamInformation.Behavior.OverheadVapor Then
-                                'disconnect and remove from collection
-                                If FlowSheet.Collections.GraphicObjectCollection.ContainsKey(si.StreamID) Then
-                                    Dim idx As Integer = FormFlowsheet.SearchSurfaceObjectsByName(si.StreamID, FlowSheet.FormSurface.FlowsheetDesignSurface).InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                                    FlowSheet.DisconnectObject(Me.GraphicObject, FormFlowsheet.SearchSurfaceObjectsByName(si.StreamID, FlowSheet.FormSurface.FlowsheetDesignSurface))
-                                    'Me.GraphicObject.OutputConnectors.RemoveAt(idx)
-                                End If
-                                Me.MaterialStreams.Remove(si.ID)
-                                Exit For
-                            End If
-                        Next
-
-                End Select
-
-            ElseIf e.ChangedItem.Label = Me.FlowSheet.GetTranslatedString("DCCondenserSpecComp") And e.ChangedItem.Parent.Label = Me.FlowSheet.GetTranslatedString("DCCondenserSpecs") Then
-                Me.Specs("C").ComponentID = e.ChangedItem.Value
-            ElseIf e.ChangedItem.Label = Me.FlowSheet.GetTranslatedString("DCReboilerSpecComp") And e.ChangedItem.Parent.Label = Me.FlowSheet.GetTranslatedString("DCReboilerSpecs") Then
-                Me.Specs("R").ComponentID = e.ChangedItem.Value
-            ElseIf e.ChangedItem.Label.Contains(Me.FlowSheet.GetTranslatedString("DC_SC_MaximumTemperatureChange")) Then
-                Me.SC_MaximumTemperatureChange = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, e.ChangedItem.Value)
-            End If
-
-
-        End Sub
-
         Public Sub CheckConnPos()
             Dim idx As Integer
             For Each strinfo As StreamInformation In Me.MaterialStreams.Values
@@ -3187,7 +2696,7 @@ Namespace UnitOperations
             For Each ms As StreamInformation In Me.MaterialStreams.Values
                 Select Case ms.StreamBehavior
                     Case StreamInformation.Behavior.Feed
-                        stream = FlowSheet.Collections.FlowsheetObjectCollection(ms.StreamID)
+                        stream = FlowSheet.SimulationObjects(ms.StreamID)
                         pp.CurrentMaterialStream = stream
                         F(StageIndex(ms.AssociatedStage)) = stream.Phases(0).Properties.molarflow.GetValueOrDefault
                         HF(StageIndex(ms.AssociatedStage)) = stream.Phases(0).Properties.enthalpy.GetValueOrDefault * _
@@ -3209,7 +2718,7 @@ Namespace UnitOperations
                             VSS(StageIndex(ms.AssociatedStage)) = ms.FlowRate.Value
                         End If
                     Case StreamInformation.Behavior.InterExchanger
-                        Q(StageIndex(ms.AssociatedStage)) = -FlowSheet.Collections.FlowsheetObjectCollection(ms.StreamID).EnergyFlow.GetValueOrDefault
+                        Q(StageIndex(ms.AssociatedStage)) = -FlowSheet.SimulationObjects(ms.StreamID).EnergyFlow.GetValueOrDefault
                 End Select
                 i += 1
             Next
@@ -3217,7 +2726,7 @@ Namespace UnitOperations
             For Each ms As StreamInformation In Me.EnergyStreams.Values
                 Select Case ms.StreamBehavior
                     Case StreamInformation.Behavior.InterExchanger
-                        Q(StageIndex(ms.AssociatedStage)) = -FlowSheet.Collections.FlowsheetObjectCollection(ms.StreamID).EnergyFlow.GetValueOrDefault
+                        Q(StageIndex(ms.AssociatedStage)) = -FlowSheet.SimulationObjects(ms.StreamID).EnergyFlow.GetValueOrDefault
                 End Select
                 i += 1
             Next
@@ -3584,7 +3093,7 @@ Namespace UnitOperations
             For Each sinf In Me.MaterialStreams.Values
                 Select Case sinf.StreamBehavior
                     Case StreamInformation.Behavior.Distillate
-                        msm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
                             .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
                             .Phases(0).Properties.molarflow = LSSf(0)
@@ -3602,7 +3111,7 @@ Namespace UnitOperations
                             Next
                         End With
                     Case StreamInformation.Behavior.OverheadVapor
-                        msm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
                             .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
                             .Phases(0).Properties.temperature = Tf(0)
@@ -3619,7 +3128,7 @@ Namespace UnitOperations
                             Next
                         End With
                     Case StreamInformation.Behavior.BottomsLiquid
-                        msm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
                             .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
                             .Phases(0).Properties.temperature = Tf(ns)
@@ -3637,7 +3146,7 @@ Namespace UnitOperations
                         End With
                     Case StreamInformation.Behavior.Sidedraw
                         Dim sidx As Integer = StageIndex(sinf.AssociatedStage)
-                        msm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                        msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         If sinf.StreamPhase = StreamInformation.Phase.L Then
                             With msm
                                 .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
@@ -3681,12 +3190,12 @@ Namespace UnitOperations
             For Each sinf In Me.EnergyStreams.Values
                 If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
                     'condenser
-                    esm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                    esm = FlowSheet.SimulationObjects(sinf.StreamID)
                     esm.EnergyFlow = Q(0)
                     esm.GraphicObject.Calculated = True
                 ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
                     'reboiler
-                    esm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                    esm = FlowSheet.SimulationObjects(sinf.StreamID)
                     esm.EnergyFlow = Q(Me.NumberOfStages - 1)
                     esm.GraphicObject.Calculated = True
                 End If
@@ -3749,10 +3258,10 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             Dim sinf As StreamInformation
 
             For Each sinf In Me.MaterialStreams.Values
-                If FlowSheet.Collections.FlowsheetObjectCollection.ContainsKey(sinf.StreamID) Then
+                If FlowSheet.SimulationObjects.ContainsKey(sinf.StreamID) Then
                     Select Case sinf.StreamBehavior
                         Case StreamInformation.Behavior.Distillate
-                            msm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
                             With msm
                                 .Phases(0).Properties.massflow = 0
                                 .Phases(0).Properties.temperature = 0
@@ -3764,7 +3273,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                                 Next
                             End With
                         Case StreamInformation.Behavior.OverheadVapor
-                            msm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
                             With msm
                                 .Phases(0).Properties.massflow = 0
                                 .Phases(0).Properties.temperature = 0
@@ -3776,7 +3285,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                                 Next
                             End With
                         Case StreamInformation.Behavior.BottomsLiquid
-                            msm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
                             With msm
                                 .Phases(0).Properties.massflow = 0
                                 .Phases(0).Properties.temperature = 0
@@ -3789,7 +3298,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
                             End With
                         Case StreamInformation.Behavior.Sidedraw
                             Dim sidx As Integer = StageIndex(sinf.AssociatedStage)
-                            msm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                            msm = FlowSheet.SimulationObjects(sinf.StreamID)
                             If sinf.StreamPhase = StreamInformation.Phase.L Then
                                 With msm
                                     .Phases(0).Properties.massflow = 0
@@ -3822,15 +3331,15 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             Dim esm As New Streams.EnergyStream("", "")
 
             For Each sinf In Me.EnergyStreams.Values
-                If FlowSheet.Collections.FlowsheetObjectCollection.ContainsKey(sinf.StreamID) Then
+                If FlowSheet.SimulationObjects.ContainsKey(sinf.StreamID) Then
                     If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
                         'condenser
-                        esm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
                         esm.EnergyFlow = 0
                         esm.GraphicObject.Calculated = False
                     ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
                         'reboiler
-                        esm = FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID)
+                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
                         esm.EnergyFlow = 0
                         esm.GraphicObject.Calculated = False
                     End If
@@ -3863,12 +3372,12 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             'check existence/status of all specified material streams
 
             For Each sinf In Me.MaterialStreams.Values
-                If Not FlowSheet.Collections.FlowsheetObjectCollection.ContainsKey(sinf.StreamID) Then
+                If Not FlowSheet.SimulationObjects.ContainsKey(sinf.StreamID) Then
                     Throw New Exception(Me.FlowSheet.GetTranslatedString("DCStreamMissingException"))
                 Else
                     Select Case sinf.StreamBehavior
                         Case StreamInformation.Behavior.Feed
-                            If Not FlowSheet.Collections.FlowsheetObjectCollection(sinf.StreamID).GraphicObject.Calculated Then
+                            If Not FlowSheet.SimulationObjects(sinf.StreamID).GraphicObject.Calculated Then
                                 Throw New Exception(Me.FlowSheet.GetTranslatedString("DCStreamNotCalculatedException"))
                             Else
                                 feedok = True
@@ -3884,7 +3393,7 @@ final:      FlowSheet.CalculationQueue.Enqueue(objargs)
             Next
 
             For Each sinf In Me.EnergyStreams.Values
-                If Not FlowSheet.Collections.FlowsheetObjectCollection.ContainsKey(sinf.StreamID) Then
+                If Not FlowSheet.SimulationObjects.ContainsKey(sinf.StreamID) Then
                     Throw New Exception(Me.FlowSheet.GetTranslatedString("DCStreamMissingException"))
                 Else
                     Select Case sinf.StreamBehavior

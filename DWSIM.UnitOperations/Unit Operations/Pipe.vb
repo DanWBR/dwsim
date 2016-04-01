@@ -194,7 +194,7 @@ Namespace UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.FlowSheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then
@@ -828,7 +828,7 @@ Namespace UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.FlowSheet
             Dim segmento As New PipeSection
 
             For Each segmento In Me.Profile.Sections.Values
@@ -1513,144 +1513,6 @@ Final3:     T = bbb
         End Function
 
 #End Region
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim ent, saida, energ As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida = ""
-                End If
-
-                If Me.GraphicObject.EnergyConnector.IsAttached = True Then
-                    energ = Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Tag
-                Else
-                    energ = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada"), ent, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesada"), saida, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("CorrentedeEnergia"), energ, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("PerfilHidrulico"), Me, "Profile", False, Me.FlowSheet.GetTranslatedString("Perfis2"), Me.FlowSheet.GetTranslatedString("Cliquenobotocomretic2"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultType = GetType(PipeProfile)
-                    .CustomEditor = New DWSIM.Editors.PipeEditor.UIPipeEditor
-                    .CustomTypeConverter = New DWSIM.Editors.PipeEditor.PipeEditorConverter
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Equaopfluxo"), Me, "SelectedFlowPackage", False, Me.FlowSheet.GetTranslatedString("Perfis2"), Me.FlowSheet.GetTranslatedString("Selecioneaequaoparac"), True)
-                .Item(.Item.Count - 1).Tag2 = "SelectedFlowPackage"
-                .Item.Add("Status", Me.Profile, "Status", True, Me.FlowSheet.GetTranslatedString("Perfis2"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("PerfilTrmico"), Me, "ThermalProfile", False, Me.FlowSheet.GetTranslatedString("Perfis2"), Me.FlowSheet.GetTranslatedString("Cliquenobotocomretic3"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultType = GetType(Global.DWSIM.DWSIM.Editors.PipeEditor.ThermalEditorDefinitions)
-                    .CustomEditor = New DWSIM.Editors.PipeEditor.UIThermalProfileEditor
-                    .CustomTypeConverter = New DWSIM.Editors.PipeEditor.ThermalProfileEditorConverter
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("PipeSpecMode"), Me, "Specification", False, Me.FlowSheet.GetTranslatedString("Parmetros3"), Me.FlowSheet.GetTranslatedString("PipeSpecModeDesc"), True)
-                .Item(.Item.Count - 1).Tag2 = "Specification"
-
-                Dim valor As Double
-
-                Select Case Me.Specification
-                    Case specmode.Length
-                    Case specmode.OutletPressure
-                        valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.OutletPressure), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("ValveOutletPressure"), su.pressure), valor, False, Me.FlowSheet.GetTranslatedString("Parmetros3"), "", True)
-                        With .Item(.Item.Count - 1)
-                            .Tag2 = "PROP_PI_3"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.pressure, "P"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                    Case specmode.OutletTemperature
-                        valor = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature), FlowSheet.Options.NumberFormat)
-                        .Item.Add(FT(Me.FlowSheet.GetTranslatedString("HeaterCoolerOutletTemperature"), su.temperature), valor, False, Me.FlowSheet.GetTranslatedString("Parmetros3"), "", True)
-                        With .Item(.Item.Count - 1)
-                            .Tag2 = "PROP_PI_4"
-                            .Tag = New Object() {FlowSheet.Options.NumberFormat, su.temperature, "T"}
-                            .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
-                        End With
-                End Select
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("MximodeIteraesemP"), Me, "MaxPressureIterations", False, Me.FlowSheet.GetTranslatedString("Parmetros3"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("MximodeIteraesemT"), Me, "MaxTemperatureIterations", False, Me.FlowSheet.GetTranslatedString("Parmetros3"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("IncludeJTEffect"), Me, "IncludeJTEffect", False, Me.FlowSheet.GetTranslatedString("Parmetros3"), "", True)
-                '.Item.Add(Me.FlowSheet.GetTranslatedString("Tolernciapreclculode") & " (%)", Me, "TriggerFlashP", False, Me.FlowSheet.GetTranslatedString("Parmetros3"), "", True)
-                '.Item.Add(Me.FlowSheet.GetTranslatedString("Tolernciapreclculode2") & " (%)", Me, "TriggerFlashT", False, Me.FlowSheet.GetTranslatedString("Parmetros3"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Erromximodapresso") & " (Pa)", Me, "TolP", False, Me.FlowSheet.GetTranslatedString("Parmetros3"), "", True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Erromximodatemperatu") & " (K)", Me, "TolT", False, Me.FlowSheet.GetTranslatedString("Parmetros3"), "", True)
-
-                .Item.Add(FT("Delta P", su.deltaP), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados4"), Me.FlowSheet.GetTranslatedString("Diferenadepressoentr"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .DefaultType = GetType(Nullable(Of Double))
-                End With
-
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("DeltaT2"), su.deltaT), Format(SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados4"), Me.FlowSheet.GetTranslatedString("Diferenadetemperatur"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .DefaultType = GetType(Nullable(Of Double))
-                End With
-
-                .Item.Add(FT(Me.FlowSheet.GetTranslatedString("Calortrocado"), su.heatflow), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault), FlowSheet.Options.NumberFormat), True, Me.FlowSheet.GetTranslatedString("Resultados4"), Me.FlowSheet.GetTranslatedString("Quantidadedecalortro"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .DefaultType = GetType(Nullable(Of Double))
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Tabela"), Me, "Profile", False, Me.FlowSheet.GetTranslatedString("Resultados4"), Me.FlowSheet.GetTranslatedString("Cliquenobotocomretic4"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultType = GetType(Global.DWSIM.DWSIM.Editors.PipeEditor.ThermalEditorDefinitions)
-                    .CustomEditor = New DWSIM.Editors.Results.UIFormTable
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Grfico"), Me, "Profile", False, Me.FlowSheet.GetTranslatedString("Resultados4"), Me.FlowSheet.GetTranslatedString("Cliquenobotocomretic5"), True)
-                With .Item(.Item.Count - 1)
-                    .DefaultType = GetType(Global.DWSIM.DWSIM.Editors.PipeEditor.ThermalEditorDefinitions)
-                    .CustomEditor = New DWSIM.Editors.Results.UIFormGraph
-                End With
-
-                If Me.GraphicObject.Calculated = False Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Mensagemdeerro"), Me, "ErrorMessage", True, Me.FlowSheet.GetTranslatedString("Miscelnea5"), Me.FlowSheet.GetTranslatedString("Mensagemretornadaqua"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultType = GetType(System.String)
-                    End With
-                End If
-
-            End With
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 

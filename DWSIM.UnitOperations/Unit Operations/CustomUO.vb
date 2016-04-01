@@ -110,74 +110,74 @@ Namespace UnitOperations
 
             Dim ims1, ims2, ims3, ims4, ims5, ims6, oms1, oms2, oms3, oms4, oms5, oms6 As SimulationObjects.Streams.MaterialStream
             If Me.GraphicObject.InputConnectors(0).IsAttached Then
-                ims1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                ims1 = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             Else
                 ims1 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(1).IsAttached Then
-                ims2 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                ims2 = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
             Else
                 ims2 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(2).IsAttached Then
-                ims3 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(2).AttachedConnector.AttachedFrom.Name)
+                ims3 = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(2).AttachedConnector.AttachedFrom.Name)
             Else
                 ims3 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(4).IsAttached Then
-                ims4 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
+                ims4 = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
             Else
                 ims4 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(5).IsAttached Then
-                ims5 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(5).AttachedConnector.AttachedFrom.Name)
+                ims5 = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(5).AttachedConnector.AttachedFrom.Name)
             Else
                 ims5 = Nothing
             End If
             If Me.GraphicObject.InputConnectors(6).IsAttached Then
-                ims6 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Name)
+                ims6 = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Name)
             Else
                 ims6 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                oms1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                oms1 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
             Else
                 oms1 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(1).IsAttached Then
-                oms2 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+                oms2 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
             Else
                 oms2 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(2).IsAttached Then
-                oms3 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Name)
+                oms3 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Name)
             Else
                 oms3 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(4).IsAttached Then
-                oms4 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(4).AttachedConnector.AttachedTo.Name)
+                oms4 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(4).AttachedConnector.AttachedTo.Name)
             Else
                 oms4 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(5).IsAttached Then
-                oms5 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(5).AttachedConnector.AttachedTo.Name)
+                oms5 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(5).AttachedConnector.AttachedTo.Name)
             Else
                 oms5 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(6).IsAttached Then
-                oms6 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(6).AttachedConnector.AttachedTo.Name)
+                oms6 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(6).AttachedConnector.AttachedTo.Name)
             Else
                 oms6 = Nothing
             End If
 
             Dim ies1, oes1 As SimulationObjects.Streams.EnergyStream
             If Me.GraphicObject.InputConnectors(3).IsAttached Then
-                ies1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Name)
+                ies1 = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Name)
             Else
                 ies1 = Nothing
             End If
             If Me.GraphicObject.OutputConnectors(3).IsAttached Then
-                oes1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Name)
+                oes1 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Name)
             Else
                 oes1 = Nothing
             End If
@@ -283,199 +283,6 @@ Namespace UnitOperations
 
         Public Overrides Sub Validate()
             MyBase.Validate()
-        End Sub
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim ent1, ent2, ent3, ent4, ent5, ent6, ent7 As String
-
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent1 = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent1 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(1).IsAttached = True Then
-                    ent2 = Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent2 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(2).IsAttached = True Then
-                    ent3 = Me.GraphicObject.InputConnectors(2).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent3 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(3).IsAttached = True Then
-                    ent4 = Me.GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent4 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(4).IsAttached = True Then
-                    ent5 = Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent5 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(5).IsAttached = True Then
-                    ent6 = Me.GraphicObject.InputConnectors(5).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent6 = ""
-                End If
-                If Me.GraphicObject.InputConnectors(6).IsAttached = True Then
-                    ent7 = Me.GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent7 = ""
-                End If
-
-                Dim saida1, saida2, saida3, saida4, saida5, saida6, saida7 As String
-
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida1 = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida1 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(1).IsAttached = True Then
-                    saida2 = Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida2 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(2).IsAttached = True Then
-                    saida3 = Me.GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida3 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(3).IsAttached = True Then
-                    saida4 = Me.GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida4 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(4).IsAttached = True Then
-                    saida5 = Me.GraphicObject.OutputConnectors(4).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida5 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(5).IsAttached = True Then
-                    saida6 = Me.GraphicObject.OutputConnectors(5).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida6 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(6).IsAttached = True Then
-                    saida7 = Me.GraphicObject.OutputConnectors(6).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida7 = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada1"), ent1, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada2"), ent2, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada3"), ent3, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada4"), ent5, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada5"), ent6, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada6"), ent7, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("CorrentedeEnergyFlowE"), ent4, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputESSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida1"), saida1, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida2"), saida2, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida3"), saida3, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida4"), saida5, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida5"), saida6, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedesaida6"), saida7, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-                .Item.Add(Me.FlowSheet.GetTranslatedString("CorrentedeEnergyFlowS"), saida4, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputESSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("CUO_ScriptLanguage"), Me, "Language", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("InputVariables"), Me, "InputVariables", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), "", True)
-                With .Item(.Item.Count - 1)
-                    If Not DWSIM.App.IsRunningOnMono Then
-                        .CustomEditor = New Wexman.Design.GenericDictionaryEditor(Of String, Double)(Type.GetType("System.Collections.Generic.Dictionary(Of String, Double)")) With {.Title = Me.FlowSheet.GetTranslatedString("InputVariables")}
-                    End If
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("CUO_ScriptText"), Me, "ScriptText", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("Cliquenobotocomretic"), True)
-                With .Item(.Item.Count - 1)
-                    .CustomEditor = New DWSIM.Editors.CustomUO.UIScriptEditor
-                End With
-
-                If Me.GraphicObject.Calculated = False Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Mensagemdeerro"), Me, "ErrorMessage", True, Me.FlowSheet.GetTranslatedString("Miscelnea5"), Me.FlowSheet.GetTranslatedString("Mensagemretornadaqua"), True)
-                    With .Item(.Item.Count - 1)
-                        .DefaultType = GetType(System.String)
-                    End With
-                Else
-                    For Each p In OutputVariables
-                        .Item.Add(p.Key, p.Value, True, Me.FlowSheet.GetTranslatedString("OutputVariables"), Me.FlowSheet.GetTranslatedString(""), True)
-                    Next
-                End If
-
-            End With
-
-        End Sub
-
-        Public Overrides Sub PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
-            MyBase.PropertyValueChanged(s, e)
         End Sub
 
         Public Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()

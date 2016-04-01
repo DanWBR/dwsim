@@ -346,103 +346,6 @@ Namespace SharedClasses.SpecialOps
 
         End Sub
 
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim value As Double
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                Dim cpc As New CustomPropertyCollection
-                cpc.Add(DWSIM.App.GetLocalString("VarivelControlada"), Me, "ControlledObjectData", True, DWSIM.App.GetLocalString("VarivelControlada"), "", True)
-                With cpc.Item(cpc.Count - 1)
-                    .IsBrowsable = False
-                    .CustomEditor = New DWSIM.Editors.SpecialOps.UICVSelectorEditor
-                End With
-                cpc.Add(DWSIM.App.GetLocalString("TipodoObjeto"), Me.ControlledObjectData, "m_Type", True, DWSIM.App.GetLocalString("VarivelControlada"), "", True)
-                cpc.Add(DWSIM.App.GetLocalString("Objeto"), Me.ControlledObjectData, "m_Name", True, DWSIM.App.GetLocalString("VarivelControlada"), "", True)
-                cpc.Add(DWSIM.App.GetLocalString("Propriedade"), DWSIM.App.GetPropertyName(Me.ControlledObjectData.m_Property), True, DWSIM.App.GetLocalString("VarivelControlada"), "", True)
-                .Item.Add(DWSIM.App.GetLocalString("VarivelControlada"), cpc, False, DWSIM.App.GetLocalString("Configuraes1"), DWSIM.App.GetLocalString("Selecioneavarivelase"))
-                With .Item(.Item.Count - 1)
-                    .IsBrowsable = True
-                    .BrowsableLabelStyle = BrowsableTypeConverter.LabelStyle.lsEllipsis
-                    .CustomEditor = New System.Drawing.Design.UITypeEditor
-                End With
-
-                Dim cpc2 As New CustomPropertyCollection
-                cpc2.Add(DWSIM.App.GetLocalString("VarivelManipulada"), Me, "ManipulatedObjectData", True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                With cpc2.Item(cpc2.Count - 1)
-                    .IsBrowsable = False
-                    .CustomEditor = New DWSIM.Editors.SpecialOps.UIMVSelectorEditor
-                End With
-                cpc2.Add(DWSIM.App.GetLocalString("TipodoObjeto"), Me.ManipulatedObjectData, "m_Type", True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                cpc2.Add(DWSIM.App.GetLocalString("Objeto"), Me.ManipulatedObjectData, "m_Name", True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                cpc2.Add(DWSIM.App.GetLocalString("Propriedade"), DWSIM.App.GetPropertyName(Me.ManipulatedObjectData.m_Property), True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-
-                If Me.ManipulatedObject IsNot Nothing Then
-                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MinVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                    cpc2.Add(FT(DWSIM.App.GetLocalString("Valormnimoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MaxVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                    cpc2.Add(FT(DWSIM.App.GetLocalString("Valormximoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                End If
-                .Item.Add(DWSIM.App.GetLocalString("VarivelManipulada"), cpc2, False, DWSIM.App.GetLocalString("Configuraes1"), DWSIM.App.GetLocalString("Selecioneavarivelase2"))
-                With .Item(.Item.Count - 1)
-                    .IsBrowsable = True
-                    .BrowsableLabelStyle = BrowsableTypeConverter.LabelStyle.lsEllipsis
-                    .CustomEditor = New System.Drawing.Design.UITypeEditor
-                End With
-
-                .Item.Add(DWSIM.App.GetLocalString("UsaObjetocomoRefernc"), Me, "Referenced", False, DWSIM.App.GetLocalString("Configuraes1"), "", True)
-
-                If Me.Referenced Then
-                    Dim cpc3 As New CustomPropertyCollection
-                    cpc3.Add(DWSIM.App.GetLocalString("ObjetoVariveldeRefer"), Me, "ReferencedObjectData", True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                    With cpc3.Item(cpc3.Count - 1)
-                        .IsBrowsable = False
-                        .CustomEditor = New DWSIM.Editors.SpecialOps.UIRVSelectorEditor
-                    End With
-                    cpc3.Add(DWSIM.App.GetLocalString("Objeto"), Me.ReferencedObjectData, "m_Name", True, DWSIM.App.GetLocalString("ObjetoVariveldeRefer"), "", True)
-                    .Item.Add(DWSIM.App.GetLocalString("ObjetoVariveldeRefer"), cpc3, False, DWSIM.App.GetLocalString("Configuraes1"), DWSIM.App.GetLocalString("Selecioneavarivelase3"))
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = True
-                        .BrowsableLabelStyle = BrowsableTypeConverter.LabelStyle.lsEllipsis
-                        .CustomEditor = New System.Drawing.Design.UITypeEditor
-                    End With
-                End If
-
-                If Me.ControlledObject IsNot Nothing Then
-                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su), Me.AdjustValue), FlowSheet.Options.NumberFormat)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("ValordeAjusteouOffse"), Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SetpointdoAjusteouov"), True)
-                End If
-                .Item.Add(DWSIM.App.GetLocalString("NmeroMximodeIteraes"), Me, "MaximumIterations", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("Nmeromximodeiteraesa"), True)
-                .Item.Add(DWSIM.App.GetLocalString("Tolerncia"), Me, "Tolerance", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("Diferenamximaentreos"), True)
-                .Item.Add(DWSIM.App.GetLocalString("DeltaStepsize"), Me, "StepSize", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("Variaoinicialnovalor"), True)
-                .Item.Add(DWSIM.App.GetLocalString("SimultaneousAdjust"), Me, "SimultaneousAdjust", False, DWSIM.App.GetLocalString("Parmetros2"), "Puts the adjust under control of the Simultaneous Adjust Solver.", True)
-                .Item.Add(DWSIM.App.GetLocalString("PaineldeControle"), Me, "Status", True, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("CliqueparaexibiroPai"), True)
-                With .Item(.Item.Count - 1)
-                    .IsBrowsable = False
-                    .CustomEditor = New DWSIM.Editors.SpecialOps.Adjust.UI_AdjControlPanelFormEditor
-                End With
-
-                If Not Me.Annotation Is Nothing Then
-                    .Item.Add(DWSIM.App.GetLocalString("Anotaes"), Me, "Annotation", False, DWSIM.App.GetLocalString("Outros"), DWSIM.App.GetLocalString("Cliquenobotocomretic"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = False
-                        .CustomEditor = New DWSIM.Editors.Annotation.UIAnnotationEditor
-                    End With
-                End If
-
-                .ExpandAllGridItems()
-
-            End With
-
-
-        End Sub
-
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
             Return 0
         End Function
@@ -461,14 +364,6 @@ Namespace SharedClasses.SpecialOps
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
             Return 0
         End Function
-
-        Public Overrides Sub HandlePropertyChange(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs)
-
-        End Sub
-
-        Public Overrides Sub PropertyValueChanged(s As Object, e As Windows.Forms.PropertyValueChangedEventArgs)
-
-        End Sub
 
     End Class
 

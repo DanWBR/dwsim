@@ -60,7 +60,7 @@ Namespace UnitOperations
 
         Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
 
-            Dim form As FormFlowsheet = Me.FlowSheet
+            Dim form As IFLowsheet = Me.FlowSheet
             Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
 
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
@@ -93,9 +93,9 @@ Namespace UnitOperations
             End If
 
             Dim instr, outstr1, outstr2 As Streams.MaterialStream
-            instr = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            outstr1 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            outstr2 = FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+            instr = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            outstr1 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            outstr2 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
 
             Dim W As Double = instr.Phases(0).Properties.massflow.GetValueOrDefault
             Dim Wsin As Double = instr.Phases(7).Properties.massflow.GetValueOrDefault
@@ -182,7 +182,7 @@ Namespace UnitOperations
 
         Public Overrides Function DeCalculate() As Integer
 
-            Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
+            Dim form As Global.DWSIM.IFLowsheet = Me.FlowSheet
 
             Dim j As Integer = 0
 
@@ -242,98 +242,6 @@ Namespace UnitOperations
             form.CalculationQueue.Enqueue(objargs)
 
         End Function
-
-        Public Overrides Sub PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs)
-
-            MyBase.PropertyValueChanged(s, e)
-
-            If FlowSheet.Options.CalculatorActivated Then
-
-                'Call function to calculate flowsheet
-                Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-                With objargs
-                    .Tag = Me.GraphicObject.Tag
-                    .Calculated = False
-                    .Name = Me.GraphicObject.Name
-                    .ObjectType = Me.GraphicObject.ObjectType
-                    .Sender = "PropertyGrid"
-                End With
-
-                If Me.IsSpecAttached = True And Me.SpecVarType = SpecVarType.Source Then DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.AttachedSpecId), Spec).Calculate()
-                FlowSheet.CalculationQueue.Enqueue(objargs)
-
-            End If
-
-        End Sub
-
-        Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
-
-            Dim Conversor As New SystemsOfUnits.Converter
-
-            With pgrid
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-                .Item.Clear()
-
-                MyBase.PopulatePropertyGrid(pgrid, su)
-
-                Dim ent, saida1, saida2 As String
-                If Me.GraphicObject.InputConnectors(0).IsAttached = True Then
-                    ent = Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-                Else
-                    ent = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(0).IsAttached = True Then
-                    saida1 = Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida1 = ""
-                End If
-                If Me.GraphicObject.OutputConnectors(1).IsAttached = True Then
-                    saida2 = Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
-                Else
-                    saida2 = ""
-                End If
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("Correntedeentrada"), ent, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIInputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("OutletStream1"), saida1, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("OutletStream2"), saida2, False, Me.FlowSheet.GetTranslatedString("Conexes1"), "", True)
-                With .Item(.Item.Count - 1)
-                    .DefaultValue = Nothing
-                    .CustomEditor = New DWSIM.Editors.Streams.UIOutputMSSelector
-                End With
-
-                .Item.Add(Me.FlowSheet.GetTranslatedString("SolidSepEfficiency"), Me, "SeparationEfficiency", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("SolidSepEfficiencyDesc"), True)
-                .Item.Add(Me.FlowSheet.GetTranslatedString("LiquidSepEfficiency"), Me, "LiquidSeparationEfficiency", False, Me.FlowSheet.GetTranslatedString("Parmetrosdeclculo2"), Me.FlowSheet.GetTranslatedString("LiquidSepEfficiencyDesc"), True)
-
-                If Me.IsSpecAttached = True Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("ObjetoUtilizadopor"), FlowSheet.Collections.FlowsheetObjectCollection(Me.AttachedSpecId).GraphicObject.Tag, True, Me.FlowSheet.GetTranslatedString("Miscelnea2"), "", True)
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Utilizadocomo"), Me.SpecVarType, True, Me.FlowSheet.GetTranslatedString("Miscelnea3"), "", True)
-                End If
-
-                If Not Me.Annotation Is Nothing Then
-                    .Item.Add(Me.FlowSheet.GetTranslatedString("Anotaes"), Me, "Annotation", False, Me.FlowSheet.GetTranslatedString("Outros"), Me.FlowSheet.GetTranslatedString("Cliquenobotocomretic"), True)
-                    With .Item(.Item.Count - 1)
-                        .IsBrowsable = False
-                        .CustomEditor = New DWSIM.Editors.Annotation.UIAnnotationEditor
-                    End With
-                End If
-
-                .ExpandAllGridItems()
-
-            End With
-
-        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
             If su Is Nothing Then su = New SystemsOfUnits.SI
