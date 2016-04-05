@@ -232,7 +232,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             If Not DebugMode Then
 
-                'Atribuir valores à corrente de matéria conectada à jusante
+                'Atribuir valores a corrente de materia conectada a jusante
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
@@ -247,7 +247,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Phases(0).Properties.massflow = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
                 End With
 
-                'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+                'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                     .GraphicObject.Calculated = True
@@ -278,7 +278,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
-                'Zerar valores da corrente de matéria conectada a jusante
+                'Zerar valores da corrente de materia conectada a jusante
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -299,7 +299,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     .EnergyFlow = Nothing
@@ -390,7 +390,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         End With
                 End Select
 
-                .Item.Add(DWSIM.App.GetLocalString("EficinciaAdiabtica01"), Me, "EficienciaAdiabatica", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "Eficiência da turbina em relação ao processo ideal isentrópico/adiabático", True)
+                .Item.Add(DWSIM.App.GetLocalString("EficinciaAdiabtica01"), Me, "EficienciaAdiabatica", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "Eficiencia da turbina em relacao ao processo ideal isentropico/adiabatico", True)
                 With .Item(.Item.Count - 1)
                     .Tag2 = "PROP_EX_1"
                     .DefaultValue = Nothing

@@ -251,7 +251,7 @@ SS:             Enew = Me.ConvergenceHistory.Energy
 
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
 
             Dim es As DWSIM.SimulationObjects.Streams.EnergyStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 

@@ -120,7 +120,7 @@ Namespace PropertyPackages.Auxiliary
             'Dim DHres = R * Tcm * Me.Hlk(T / Tcm, P / Pcm, wm)
             Dim DHres = R * Tcm * Me.H_LK(TIPO, T / Tcm, P / Pcm, wm)
 
-            If DHres = 0 Then Throw New Exception("Erro no cálculo da entalpia [LK].")
+            If DHres = 0 Then Throw New Exception("Erro no calculo da entalpia [LK].")
 
             If MathEx.Common.Sum(Vz) = 0.0# Then
                 H_LK_MIX = 0.0#
@@ -420,7 +420,7 @@ Namespace PropertyPackages.Auxiliary
             Tsup = Tinf
             Tinf = Tinf - delta_T
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 100

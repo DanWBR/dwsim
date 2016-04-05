@@ -264,7 +264,7 @@ Public Class FormHYD
                 Label12.Text = PhasesPC
                 Label10.Text = PhasesTC
 
-                'lógica para verificar se forma hidrato ou não
+                'logica para verificar se forma hidrato ou nao
                 If T <= TH Then
                     Label21.Text = DWSIM.App.GetLocalString("Sim")
                     Label20.Text = tipoTC

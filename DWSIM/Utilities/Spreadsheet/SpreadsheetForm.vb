@@ -667,7 +667,7 @@ Public Class SpreadsheetForm
         Next
     End Sub
 
-    Private Sub AvaliarFórmulaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AvaliarFórmulaToolStripMenuItem.Click
+    Private Sub AvaliarFormulaToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AvaliarFormulaToolStripMenuItem.Click
         For Each sc In Me.DataGridView1.SelectedCells
             If Not sc.Tag Is Nothing Then
                 ccparams = sc.Tag

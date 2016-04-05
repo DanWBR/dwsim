@@ -83,7 +83,7 @@ Partial Class PipeEditorForm
         DataGridViewComboBoxCell1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewComboBoxCell1.Style = DataGridViewCellStyle1
-        DataGridViewComboBoxCell1.Value = "Aço Comum"
+        DataGridViewComboBoxCell1.Value = "Aco Comum"
         DataGridViewComboBoxCell1.ValueType = GetType(Object)
         Me.PipeEditor1.CBMat = DataGridViewComboBoxCell1
         DataGridViewComboBoxCell2.DataSource = Nothing
@@ -92,7 +92,7 @@ Partial Class PipeEditorForm
         DataGridViewComboBoxCell2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewComboBoxCell2.Style = DataGridViewCellStyle2
-        DataGridViewComboBoxCell2.Value = "Tubulação simples"
+        DataGridViewComboBoxCell2.Value = "Tubulacao simples"
         DataGridViewComboBoxCell2.ValueType = GetType(Object)
         Me.PipeEditor1.CBTemplate = DataGridViewComboBoxCell2
         Me.PipeEditor1.Name = "PipeEditor1"

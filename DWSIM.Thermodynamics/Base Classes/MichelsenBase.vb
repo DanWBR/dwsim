@@ -1356,7 +1356,7 @@ out2:               Dim order(m) As Integer, hasvp As Boolean = False
             Vsup = Vinf
             Vinf = Vinf - delta_V
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 100
@@ -2835,7 +2835,7 @@ Final2:
             Dim Tc(n), Pc(n)
             Dim b As Double
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             R = 8.314
 
@@ -2855,7 +2855,7 @@ Final2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             If Vmax = 0 Then Vmax = b * multipl
             Vmin = b * 1.05

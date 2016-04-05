@@ -12,21 +12,21 @@
             Dim tmp As Object
 
             'TIPO = Fluido aliviado pela PSV
-            'L = Letra do orifício da PSV
+            'L = Letra do orificio da PSV
             'visc em cP
             'G em kg/m3
-            'OP_P em % (sobrepressão em %)
+            'OP_P em % (sobrepressao em %)
             'P em kgf/cm²_g
             'BP em kgf/cm²_g
             'A em in.2
             'visc em cP
             'G em kg/m3
             'T em K
-            'x = fração mássica de gás
-            'rhog = densidade do gás em kg/m3
+            'x = fracao massica de gas
+            'rhog = densidade do gas em kg/m3
             'rhom = densidade da mistura em kg/m3
             'rhom90 = densidade da mistura em kg/m3 a 90% de P
-            'xo = fração volumétrica de óleo na Phase líquida
+            'xo = fracao volumetrica de oleo na Phase liquida
 
             A = AREA_API(L)
 
@@ -75,7 +75,7 @@
             'A em in.2
             'visc em cP
             'G em kg/m3
-            'OP_P em % (sobrepressão em %)
+            'OP_P em % (sobrepressao em %)
 
             P = (P + 1.033) * 101.325 / 1.033 - 101.325
             BP = (BP + 1.033) * 101.325 / 1.033 - 101.325
@@ -196,15 +196,15 @@
 
             Dim G, Pc, W As Object
 
-            'x = fração mássica de gás
-            'rhog = densidade do gás em kg/m3
+            'x = fracao massica de gas
+            'rhog = densidade do gas em kg/m3
             'rhom = densidade da mistura em kg/m3
             'rhom90 = densidade da mistura em kg/m3 a 90% de P
-            'P = pressão de alívio em kgf/cm²_g
-            'BP = contrapressão em kgf/cm²_g
-            'Q = vazão da mistura em kg/h
-            'A = área em in.2
-            'xo = fração volumétrica de óleo na Phase líquida
+            'P = pressao de alivio em kgf/cm²_g
+            'BP = contrapressao em kgf/cm²_g
+            'Q = vazao da mistura em kg/h
+            'A = area em in.2
+            'xo = fracao volumetrica de oleo na Phase liquida
 
             vg0 = (1 / rhog) * 16.0185
             v0 = (1 / rhom) * 16.0185

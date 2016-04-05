@@ -198,7 +198,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case OrificeType.CornerTaps
 
-                    'placa de orifício corner taps
+                    'placa de orificio corner taps
 
                     s2_s1 = 0
                     L1 = 0
@@ -206,7 +206,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case OrificeType.FlangeTaps
 
-                    'placa de orifício flange taps
+                    'placa de orificio flange taps
 
                     s2_s1 = 0.0508
                     L1 = 1 / (_orificediameter / 0.0254)
@@ -214,7 +214,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Case OrificeType.RadiusTaps
 
-                    'placa de orifício radius taps
+                    'placa de orificio radius taps
 
                     s2_s1 = 1.5 * _orificediameter
                     L1 = 1
@@ -246,7 +246,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             Me.DeltaT = T2 - Ti
 
-            'Atribuir valores à corrente de matéria conectada à jusante
+            'Atribuir valores a corrente de materia conectada a jusante
             With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 .Phases(0).Properties.temperature = T2
                 .Phases(0).Properties.pressure = P2
@@ -280,7 +280,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
-                'Zerar valores da corrente de matéria conectada a jusante
+                'Zerar valores da corrente de materia conectada a jusante
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing

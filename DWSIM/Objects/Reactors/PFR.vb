@@ -877,7 +877,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
             Dim estr As EnergyStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
             With estr
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault

@@ -87,7 +87,7 @@ Partial Class FrmStabAn
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(117, 13)
         Me.Label1.TabIndex = 5
-        Me.Label1.Text = "Multipl. Volume Máximo"
+        Me.Label1.Text = "Multipl. Volume Maximo"
         '
         'TextBox1
         '
@@ -130,7 +130,7 @@ Partial Class FrmStabAn
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(100, 13)
         Me.Label23.TabIndex = 0
-        Me.Label23.Text = "Corrente de Matéria"
+        Me.Label23.Text = "Corrente de Materia"
         '
         'GroupBox2
         '
@@ -143,7 +143,7 @@ Partial Class FrmStabAn
         Me.GroupBox2.Size = New System.Drawing.Size(476, 323)
         Me.GroupBox2.TabIndex = 8
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Gráfico"
+        Me.GroupBox2.Text = "Grafico"
         '
         'GraphPvap
         '

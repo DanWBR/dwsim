@@ -54,7 +54,7 @@ Public Class FrmPsvSize
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
 
-        'Preparar variáveis
+        'Preparar variaveis
         Dim T, P, SPP, BP As Double
         Dim QT, QL, QV, WT, WL, WV As Double
         Dim visc, visc_l, visc_v, me_l, me_v, xv_l, me_m As Double
@@ -103,21 +103,21 @@ Public Class FrmPsvSize
 
         Dim Ao As Double
 
-        'Dimensionar para líquido
+        'Dimensionar para liquido
         If Me.ComboBox1.SelectedItem = DWSIM.App.GetLocalString("Lquido") And Me.ComboBox2.SelectedItem = "API RP 520" Then
 
             Ao = sz.PSV_LCC_D(QL * 24 * 3600, (P * 1.033 / 101325) * (1 + SPP / 100), (BP * 1.033 / 101325), me_l, visc_l, Kd, Kc)
 
         End If
 
-        'Dimensionar para gás apenas
+        'Dimensionar para gas apenas
         If Me.ComboBox1.SelectedItem = DWSIM.App.GetLocalString("Vapor") And Me.ComboBox2.SelectedItem = "API RP 520" Then
 
             Ao = sz.PSV_G_D((P * 1.033 / 101325) * (1 + SPP / 100), (BP * 1.033 / 101325), T, WV * 3600, zg, mm_g, cpcv, Kd, Kb, Kc)
 
         End If
 
-        'Dimensionar para bifásico
+        'Dimensionar para bifasico
         If Me.ComboBox1.SelectedItem = DWSIM.App.GetLocalString("GsLquidoBifsico") And Me.ComboBox2.SelectedItem = "API RP 520" Then
 
             Dim mymat As DWSIM.SimulationObjects.Streams.MaterialStream = entmat.Clone
@@ -193,9 +193,9 @@ Public Class FrmPsvSize
             Me.TextBox7.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(3).Properties.volumetric_flow.GetValueOrDefault), nf)
             Me.TextBox5.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(2).Properties.volumetric_flow.GetValueOrDefault), nf)
 
-            'Gás
-            'Líquido
-            'Gás + Líquido (Bifásico)
+            'Gas
+            'Liquido
+            'Gas + Liquido (Bifasico)
 
             If entmat.Phases(0).Properties.volumetric_flow.GetValueOrDefault = 0 Then
                 ComboBox1.Items.Clear()

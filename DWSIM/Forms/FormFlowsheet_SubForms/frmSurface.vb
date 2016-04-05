@@ -3398,7 +3398,7 @@ Public Class frmSurface
 
     End Sub
 
-    Private Sub CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem.Click
+    Private Sub CopiarDadosParaareaDeTransferenciaToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Click
 
         Me.Flowsheet.tsmiExportData_Click(sender, e)
 
@@ -3466,7 +3466,7 @@ Public Class frmSurface
         Me.Invalidate()
     End Sub
 
-    Private Sub ZoomPadrão100ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZoomPadrão100ToolStripMenuItem.Click
+    Private Sub ZoomPadrao100ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ZoomPadrao100ToolStripMenuItem.Click
         Me.FlowsheetDesignSurface.Zoom = 1
         Me.Invalidate()
     End Sub

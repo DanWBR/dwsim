@@ -42,10 +42,10 @@ Partial Class FormReacManager
         Me.ColumnID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.ConversãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EquilíbrioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CinéticaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HeterogêneaCatalíticaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConversaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EquilibrioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CineticaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HeterogeneaCataliticaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
@@ -209,35 +209,35 @@ Partial Class FormReacManager
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConversãoToolStripMenuItem, Me.EquilíbrioToolStripMenuItem, Me.CinéticaToolStripMenuItem, Me.HeterogêneaCatalíticaToolStripMenuItem})
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConversaoToolStripMenuItem, Me.EquilibrioToolStripMenuItem, Me.CineticaToolStripMenuItem, Me.HeterogeneaCataliticaToolStripMenuItem})
         Me.ToolStripDropDownButton1.Image = Global.DWSIM.My.Resources.Resources.add
         resources.ApplyResources(Me.ToolStripDropDownButton1, "ToolStripDropDownButton1")
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
         Me.ToolStripDropDownButton1.ShowDropDownArrow = False
         '
-        'ConversãoToolStripMenuItem
+        'ConversaoToolStripMenuItem
         '
-        Me.ConversãoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
-        Me.ConversãoToolStripMenuItem.Name = "ConversãoToolStripMenuItem"
-        resources.ApplyResources(Me.ConversãoToolStripMenuItem, "ConversãoToolStripMenuItem")
+        Me.ConversaoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
+        Me.ConversaoToolStripMenuItem.Name = "ConversaoToolStripMenuItem"
+        resources.ApplyResources(Me.ConversaoToolStripMenuItem, "ConversaoToolStripMenuItem")
         '
-        'EquilíbrioToolStripMenuItem
+        'EquilibrioToolStripMenuItem
         '
-        Me.EquilíbrioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
-        Me.EquilíbrioToolStripMenuItem.Name = "EquilíbrioToolStripMenuItem"
-        resources.ApplyResources(Me.EquilíbrioToolStripMenuItem, "EquilíbrioToolStripMenuItem")
+        Me.EquilibrioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
+        Me.EquilibrioToolStripMenuItem.Name = "EquilibrioToolStripMenuItem"
+        resources.ApplyResources(Me.EquilibrioToolStripMenuItem, "EquilibrioToolStripMenuItem")
         '
-        'CinéticaToolStripMenuItem
+        'CineticaToolStripMenuItem
         '
-        Me.CinéticaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
-        Me.CinéticaToolStripMenuItem.Name = "CinéticaToolStripMenuItem"
-        resources.ApplyResources(Me.CinéticaToolStripMenuItem, "CinéticaToolStripMenuItem")
+        Me.CineticaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
+        Me.CineticaToolStripMenuItem.Name = "CineticaToolStripMenuItem"
+        resources.ApplyResources(Me.CineticaToolStripMenuItem, "CineticaToolStripMenuItem")
         '
-        'HeterogêneaCatalíticaToolStripMenuItem
+        'HeterogeneaCataliticaToolStripMenuItem
         '
-        Me.HeterogêneaCatalíticaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
-        Me.HeterogêneaCatalíticaToolStripMenuItem.Name = "HeterogêneaCatalíticaToolStripMenuItem"
-        resources.ApplyResources(Me.HeterogêneaCatalíticaToolStripMenuItem, "HeterogêneaCatalíticaToolStripMenuItem")
+        Me.HeterogeneaCataliticaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
+        Me.HeterogeneaCataliticaToolStripMenuItem.Name = "HeterogeneaCataliticaToolStripMenuItem"
+        resources.ApplyResources(Me.HeterogeneaCataliticaToolStripMenuItem, "HeterogeneaCataliticaToolStripMenuItem")
         '
         'ToolStripButton6
         '
@@ -387,10 +387,10 @@ Partial Class FormReacManager
     Public WithEvents GridRxns As System.Windows.Forms.DataGridView
     Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripDropDownButton1 As System.Windows.Forms.ToolStripDropDownButton
-    Friend WithEvents ConversãoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents EquilíbrioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CinéticaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents HeterogêneaCatalíticaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConversaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EquilibrioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CineticaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HeterogeneaCataliticaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripButton6 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton7 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton8 As System.Windows.Forms.ToolStripButton

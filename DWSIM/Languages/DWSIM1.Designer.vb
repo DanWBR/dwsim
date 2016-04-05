@@ -2000,6 +2000,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Composição da Mistura.
+        '''</summary>
+        Friend Shared ReadOnly Property ComposiodaMistura() As String
+            Get
+                Return ResourceManager.GetString("ComposiodaMistura", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Composição da Phase Líquida.
         '''</summary>
         Friend Shared ReadOnly Property ComposiodaPhaseLquida() As String
@@ -2014,15 +2023,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property ComposiodaPhaseVapor() As String
             Get
                 Return ResourceManager.GetString("ComposiodaPhaseVapor", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Composição da Mistura.
-        '''</summary>
-        Friend Shared ReadOnly Property ComposiodaMistura() As String
-            Get
-                Return ResourceManager.GetString("ComposiodaMistura", resourceCulture)
             End Get
         End Property
         
@@ -2059,6 +2059,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property CompositionBasis() As String
             Get
                 Return ResourceManager.GetString("CompositionBasis", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Componente.
+        '''</summary>
+        Friend Shared ReadOnly Property Compound() As String
+            Get
+                Return ResourceManager.GetString("Compound", resourceCulture)
             End Get
         End Property
         
@@ -3053,6 +3062,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Cópias de segurança.
+        '''</summary>
+        Friend Shared ReadOnly Property Cpiasdesegurana() As String
+            Get
+                Return ResourceManager.GetString("Cpiasdesegurana", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Cp (Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property CpPhaseLquida() As String
@@ -3067,15 +3085,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property CpPhaseVapor() As String
             Get
                 Return ResourceManager.GetString("CpPhaseVapor", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Cópias de segurança.
-        '''</summary>
-        Friend Shared ReadOnly Property Cpiasdesegurana() As String
-            Get
-                Return ResourceManager.GetString("Cpiasdesegurana", resourceCulture)
             End Get
         End Property
         
@@ -4088,7 +4097,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Um Pacote de Propriedades CAPE-OPEN é uma coleção completa, consistente e reutilizável de métodos, compostos e parâmetros do modelo de cálculo de qualquer de um conjunto de propriedades físicas conhecidas para as Phases de um material. Ele inclui todos os métodos e compostos puros dados, juntamente com as normas pertinentes à mistura e parâmetros de interação. Um Pacote de Propriedades normalmente cobre apenas um pequeno subconjunto dos compostos e métodos acessíveis através de um Sistema de Propriedades Fís [rest of string was truncated]&quot;;.
+        '''  Looks up a localized string similar to Um Pacote de Propriedades CAPE-OPEN é uma coleção completa, consistente e reutilizável de métodos, compostos e parâmetros do modelo de cálculo de qualquer de um conjunto de propriedades físicas conhecidas para as Phases de um material. Ele inclui todos os métodos e compostos puros dados, juntamente com as normas pertinentes à mistura e parâmetros de interação. Um Pacote de Propriedades normalmente cobre apenas um pequeno subconjunto dos compostos e métodos acessíveis através de um Sistema de Propriedades Fí [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescCOPP() As String
             Get
@@ -4180,7 +4189,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Novos parâmetros do modelo de previsão de propriedade modificado UNIFAC são relatados para 89 grupos principais e 984 interações de grupo em grupo, utilizando dados de equilíbrio de Phases criticamente avaliados incluindo equilíbrio líquido-vapor (ELV), o equilíbrio líquido-líquido (ELL), equilíbrio sólido-líquido (ESL) , excesso de entalpia (HE), coeficiente de atividade infinita de diluição (AINF) e dados de excesso de capacidade de calor (CPE). Os parâmetros obtidos são recomendados principalmente para co [rest of string was truncated]&quot;;.
+        '''  Looks up a localized string similar to Novos parâmetros do modelo de previsão de propriedade modificado UNIFAC são relatados para 89 grupos principais e 984 interações de grupo em grupo, utilizando dados de equilíbrio de Phases criticamente avaliados incluindo equilíbrio líquido-vapor (ELV), o equilíbrio líquido-líquido (ELL), equilíbrio sólido-líquido (ESL) , excesso de entalpia (HE), coeficiente de atividade infinita de diluição (AINF) e dados de excesso de capacidade de calor (CPE). Os parâmetros obtidos são recomendados principalmente para c [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescNUPP() As String
             Get
@@ -4191,7 +4200,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to The Perturbed Chain SAFT model is a state-of-the-art, engineering-like equation of state. It is designed for modelling mixtures of all types of substances: gases, solvents and polymers.
         '''
-        '''Perturbed-Chain SAFT is suitable for the calculation of phase equilibria and thermophysical properties of pure components and mixtures. It has been tested against experimental data for numerous systems and found to give excellent results. When compared to other equations of state, we find Perturbed-Chain SAFT to be more p [rest of string was truncated]&quot;;.
+        '''Perturbed-Chain SAFT is suitable for the calculation of phase equilibria and thermophysical properties of pure components and mixtures. It has been tested against experimental data for numerous systems and found to give excellent results. When compared to other equations of state, we find Perturbed-Chain SAFT to be more pre [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescPCSAFTPP() As String
             Get
@@ -4238,7 +4247,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to PRSV2 EOS com três parâmetros por componente (k1, k2 e k3) e dois parâmetros de interação binária do tipo Margules (kij e kji).
         '''
-        '''A modificação para o termo atrativo na equação Peng-Robinson publicado por Stryjek e Vera em 1986 (PRSV) melhorou significativamente a precisão do modelo através da introdução de um parâmetro ajustável para o componente puro e modificando o ajuste polinomial do fator acêntrico. Uma modificação posterior, publicada em 1986 (PRSV2), melhorou a precisão dos modelos através da intro [rest of string was truncated]&quot;;.
+        '''A modificação para o termo atrativo na equação Peng-Robinson publicado por Stryjek e Vera em 1986 (PRSV) melhorou significativamente a precisão do modelo através da introdução de um parâmetro ajustável para o componente puro e modificando o ajuste polinomial do fator acêntrico. Uma modificação posterior, publicada em 1986 (PRSV2), melhorou a precisão dos modelos através da introdu [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescPRSV2PP() As String
             Get
@@ -4249,7 +4258,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to PRSV2 EOS com três parâmetros por componente (k1, k2 e k3) e dois parâmetros de interação binária do tipo Margules (kij e kji).
         '''
-        '''A modificação para o termo atrativo na equação Peng-Robinson publicado por Stryjek e Vera em 1986 (PRSV) melhorou significativamente a precisão do modelo através da introdução de um parâmetro ajustável para o componente puro e modificando o ajuste polinomial do fator acêntrico. Uma modificação posterior, publicada em 1986 (PRSV2), melhorou a precisão dos modelos através da intro [rest of string was truncated]&quot;;.
+        '''A modificação para o termo atrativo na equação Peng-Robinson publicado por Stryjek e Vera em 1986 (PRSV) melhorou significativamente a precisão do modelo através da introdução de um parâmetro ajustável para o componente puro e modificando o ajuste polinomial do fator acêntrico. Uma modificação posterior, publicada em 1986 (PRSV2), melhorou a precisão dos modelos através da introdu [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescPRSV2VLPP() As String
             Get
@@ -4301,7 +4310,7 @@ Namespace My.Resources
         '''Condutividade Térmica da Phase Líquida: Método de Latini et al
         '''Condutividade Térmica da Phase Vapor: Método de Ely e Hanley
         '''Viscosidade da Phase Vapor: Método Jossi-Stiel-Thodos
-        '''Tensão Superficial da Phase Líquida:  [rest of string was truncated]&quot;;.
+        '''Tensão Superficial da Phase Líquida: M [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescSoaveRedlichKwongSRK() As String
             Get
@@ -4312,7 +4321,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to The Sour Water Property Package is based on the SWEQ model described in the USEPA Report EPA-600/2-80-067: &apos;A new correlation of NH3, CO2, and H2S volatility data from aqueous sour water systems&apos;, by Wilson, Grant M., available online at http://nepis.epa.gov/Exe/ZyPDF.cgi?Dockey=9101B309.PDF  
         '''
-        '''In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour water systems including the effects of release by caustic (NaOH) addition are considered. The original model is applicable for temperatur [rest of string was truncated]&quot;;.
+        '''In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour water systems including the effects of release by caustic (NaOH) addition are considered. The original model is applicable for temperatures [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property DescSourWaterPP() As String
             Get
@@ -6472,6 +6481,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to  (FM Mistura).
+        '''</summary>
+        Friend Shared ReadOnly Property FMMistura() As String
+            Get
+                Return ResourceManager.GetString("FMMistura", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to  (FM Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property FMPhaseLquida() As String
@@ -6486,15 +6504,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property FMPhaseVapor() As String
             Get
                 Return ResourceManager.GetString("FMPhaseVapor", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to  (FM Mistura).
-        '''</summary>
-        Friend Shared ReadOnly Property FMMistura() As String
-            Get
-                Return ResourceManager.GetString("FMMistura", resourceCulture)
             End Get
         End Property
         
@@ -6870,9 +6879,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Fração Molar - .
         '''</summary>
-        Friend Shared ReadOnly Property MoleFraction3() As String
+        Friend Shared ReadOnly Property FracaoMolar3() As String
             Get
-                Return ResourceManager.GetString("MoleFraction3", resourceCulture)
+                Return ResourceManager.GetString("FracaoMolar3", resourceCulture)
             End Get
         End Property
         
@@ -6931,6 +6940,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Fração molar da Phase na mistura.
+        '''</summary>
+        Friend Shared ReadOnly Property FraomolardaPhasenamis() As String
+            Get
+                Return ResourceManager.GetString("FraomolardaPhasenamis", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Fração molar da Phase (Phase Líquida).
         '''</summary>
         Friend Shared ReadOnly Property FraomolardaPhasePhaseL() As String
@@ -6949,11 +6967,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração molar da Phase na mistura.
+        '''  Looks up a localized string similar to Fração molar na Mistura.
         '''</summary>
-        Friend Shared ReadOnly Property FraomolardaPhasenamis() As String
+        Friend Shared ReadOnly Property FraomolarnaMistura() As String
             Get
-                Return ResourceManager.GetString("FraomolardaPhasenamis", resourceCulture)
+                Return ResourceManager.GetString("FraomolarnaMistura", resourceCulture)
             End Get
         End Property
         
@@ -6972,15 +6990,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property FraomolarnaPhaseVapor() As String
             Get
                 Return ResourceManager.GetString("FraomolarnaPhaseVapor", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Fração molar na Mistura.
-        '''</summary>
-        Friend Shared ReadOnly Property FraomolarnaMistura() As String
-            Get
-                Return ResourceManager.GetString("FraomolarnaMistura", resourceCulture)
             End Get
         End Property
         
@@ -7030,6 +7039,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Fração mássica da Phase na mistura.
+        '''</summary>
+        Friend Shared ReadOnly Property FraomssicadaPhasenami() As String
+            Get
+                Return ResourceManager.GetString("FraomssicadaPhasenami", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Fração mássica da Phase (Phase Vapor).
         '''</summary>
         Friend Shared ReadOnly Property FraomssicadaPhasePhase() As String
@@ -7066,11 +7084,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica da Phase na mistura.
+        '''  Looks up a localized string similar to Fração mássica na Mistura.
         '''</summary>
-        Friend Shared ReadOnly Property FraomssicadaPhasenami() As String
+        Friend Shared ReadOnly Property FraomssicanaMistura() As String
             Get
-                Return ResourceManager.GetString("FraomssicadaPhasenami", resourceCulture)
+                Return ResourceManager.GetString("FraomssicanaMistura", resourceCulture)
             End Get
         End Property
         
@@ -7089,15 +7107,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property FraomssicanaPhaseVapo() As String
             Get
                 Return ResourceManager.GetString("FraomssicanaPhaseVapo", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Fração mássica na Mistura.
-        '''</summary>
-        Friend Shared ReadOnly Property FraomssicanaMistura() As String
-            Get
-                Return ResourceManager.GetString("FraomssicanaMistura", resourceCulture)
             End Get
         End Property
         
@@ -8398,6 +8407,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Massa específica da mistura.
+        '''</summary>
+        Friend Shared ReadOnly Property Massaespecficadamist() As String
+            Get
+                Return ResourceManager.GetString("Massaespecficadamist", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Massa específica da Phase vapor.
         '''</summary>
         Friend Shared ReadOnly Property MassaespecficadaPhase() As String
@@ -8425,11 +8443,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa específica da mistura.
+        '''  Looks up a localized string similar to Massa específica (Mistura).
         '''</summary>
-        Friend Shared ReadOnly Property Massaespecficadamist() As String
+        Friend Shared ReadOnly Property MassaespecficaMistur() As String
             Get
-                Return ResourceManager.GetString("Massaespecficadamist", resourceCulture)
+                Return ResourceManager.GetString("MassaespecficaMistur", resourceCulture)
             End Get
         End Property
         
@@ -8452,20 +8470,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa específica (Mistura).
-        '''</summary>
-        Friend Shared ReadOnly Property MassaespecficaMistur() As String
-            Get
-                Return ResourceManager.GetString("MassaespecficaMistur", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Massa molar.
         '''</summary>
         Friend Shared ReadOnly Property Massamolar() As String
             Get
                 Return ResourceManager.GetString("Massamolar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Massa molar da mistura.
+        '''</summary>
+        Friend Shared ReadOnly Property Massamolardamistura() As String
+            Get
+                Return ResourceManager.GetString("Massamolardamistura", resourceCulture)
             End Get
         End Property
         
@@ -8488,11 +8506,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Massa molar da mistura.
+        '''  Looks up a localized string similar to Massa molar (Mistura).
         '''</summary>
-        Friend Shared ReadOnly Property Massamolardamistura() As String
+        Friend Shared ReadOnly Property MassamolarMistura() As String
             Get
-                Return ResourceManager.GetString("Massamolardamistura", resourceCulture)
+                Return ResourceManager.GetString("MassamolarMistura", resourceCulture)
             End Get
         End Property
         
@@ -8511,15 +8529,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property MassamolarPhaseVapor() As String
             Get
                 Return ResourceManager.GetString("MassamolarPhaseVapor", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Massa molar (Mistura).
-        '''</summary>
-        Friend Shared ReadOnly Property MassamolarMistura() As String
-            Get
-                Return ResourceManager.GetString("MassamolarMistura", resourceCulture)
             End Get
         End Property
         
@@ -11404,6 +11413,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Propriedades da mistura.
+        '''</summary>
+        Friend Shared ReadOnly Property Propriedadesdamistur() As String
+            Get
+                Return ResourceManager.GetString("Propriedadesdamistur", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Propriedades da Mistura.
+        '''</summary>
+        Friend Shared ReadOnly Property PropriedadesdaMistur2() As String
+            Get
+                Return ResourceManager.GetString("PropriedadesdaMistur2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Propriedades da Phase Líquida.
         '''</summary>
         Friend Shared ReadOnly Property PropriedadesdaPhaseLq() As String
@@ -11427,24 +11454,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property PropriedadesdaPhaseVa2() As String
             Get
                 Return ResourceManager.GetString("PropriedadesdaPhaseVa2", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Propriedades da mistura.
-        '''</summary>
-        Friend Shared ReadOnly Property Propriedadesdamistur() As String
-            Get
-                Return ResourceManager.GetString("Propriedadesdamistur", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Propriedades da Mistura.
-        '''</summary>
-        Friend Shared ReadOnly Property PropriedadesdaMistur2() As String
-            Get
-                Return ResourceManager.GetString("PropriedadesdaMistur2", resourceCulture)
             End Get
         End Property
         
@@ -13573,15 +13582,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Componente.
-        '''</summary>
-        Friend Shared ReadOnly Property Compound() As String
-            Get
-                Return ResourceManager.GetString("Compound", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Substância removida.
         '''</summary>
         Friend Shared ReadOnly Property Substnciaremovida() As String
@@ -14923,29 +14923,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão mássica (Phase Líquida).
-        '''</summary>
-        Friend Shared ReadOnly Property VazomssicaPhaseLquida() As String
-            Get
-                Return ResourceManager.GetString("VazomssicaPhaseLquida", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Vazão mássica (Phase Vapor).
-        '''</summary>
-        Friend Shared ReadOnly Property VazomssicaPhaseVapor() As String
-            Get
-                Return ResourceManager.GetString("VazomssicaPhaseVapor", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Vazão mássica (Mistura).
         '''</summary>
         Friend Shared ReadOnly Property VazomssicaMistura() As String
             Get
                 Return ResourceManager.GetString("VazomssicaMistura", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Vazão mássica na Mistura.
+        '''</summary>
+        Friend Shared ReadOnly Property VazomssicanaMistura() As String
+            Get
+                Return ResourceManager.GetString("VazomssicanaMistura", resourceCulture)
             End Get
         End Property
         
@@ -14968,11 +14959,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Vazão mássica na Mistura.
+        '''  Looks up a localized string similar to Vazão mássica (Phase Líquida).
         '''</summary>
-        Friend Shared ReadOnly Property VazomssicanaMistura() As String
+        Friend Shared ReadOnly Property VazomssicaPhaseLquida() As String
             Get
-                Return ResourceManager.GetString("VazomssicanaMistura", resourceCulture)
+                Return ResourceManager.GetString("VazomssicaPhaseLquida", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Vazão mássica (Phase Vapor).
+        '''</summary>
+        Friend Shared ReadOnly Property VazomssicaPhaseVapor() As String
+            Get
+                Return ResourceManager.GetString("VazomssicaPhaseVapor", resourceCulture)
             End Get
         End Property
         
@@ -15031,6 +15031,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Vazão volumétrica na Mistura.
+        '''</summary>
+        Friend Shared ReadOnly Property VazovolumtricanaMist() As String
+            Get
+                Return ResourceManager.GetString("VazovolumtricanaMist", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Vazão volumétrica na Phase Vapor.
         '''</summary>
         Friend Shared ReadOnly Property VazovolumtricanaPhase() As String
@@ -15045,15 +15054,6 @@ Namespace My.Resources
         Friend Shared ReadOnly Property VazovolumtricanaPhase1() As String
             Get
                 Return ResourceManager.GetString("VazovolumtricanaPhase1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Vazão volumétrica na Mistura.
-        '''</summary>
-        Friend Shared ReadOnly Property VazovolumtricanaMist() As String
-            Get
-                Return ResourceManager.GetString("VazovolumtricanaMist", resourceCulture)
             End Get
         End Property
         

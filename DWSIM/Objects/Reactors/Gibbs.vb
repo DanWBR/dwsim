@@ -1173,7 +1173,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                             With pp
                                 .CurrentMaterialStream = ims
-                                'Calcular corrente de matéria com T e P
+                                'Calcular corrente de materia com T e P
                                 '.DW_CalcVazaoMolar()
                                 .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                                 If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
@@ -1214,7 +1214,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                             With pp
                                 .CurrentMaterialStream = ims
-                                'Calcular corrente de matéria com T e P
+                                'Calcular corrente de materia com T e P
                                 '.DW_CalcVazaoMolar()
                                 .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                                 If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
@@ -1489,7 +1489,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                                 With pp
                                     .CurrentMaterialStream = ims
-                                    'Calcular corrente de matéria com T e P
+                                    'Calcular corrente de materia com T e P
                                     '.DW_CalcVazaoMolar()
                                     .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                                     If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
@@ -1516,7 +1516,7 @@ Namespace DWSIM.SimulationObjects.Reactors
 
                                 With pp
                                     .CurrentMaterialStream = ims
-                                    'Calcular corrente de matéria com T e P
+                                    'Calcular corrente de materia com T e P
                                     '.DW_CalcVazaoMolar()
                                     .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                                     If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
@@ -1558,7 +1558,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                                 ims.Phases(0).Properties.temperature = OutletTemperature
                                 With pp
                                     .CurrentMaterialStream = ims
-                                    'Calcular corrente de matéria com T e P
+                                    'Calcular corrente de materia com T e P
                                     '.DW_CalcVazaoMolar()
                                     .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
                                     If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
@@ -1693,7 +1693,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
             With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True

@@ -138,7 +138,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULAR EQUILIBRIO EM BASE LIVRE DE ÁGUA
+            'CALCULAR EQUILIBRIO EM BASE LIVRE DE aGUA
 
             pos = 0
             i = 0
@@ -302,7 +302,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS VOLUMES PARCIAIS MOLARES À DILUIÇÃO INFINITA
+            'CALCULO DOS VOLUMES PARCIAIS MOLARES a DILUIcaO INFINITA
 
             Dim VLW = Math.Exp(-10.9241 + 0.00025 * (T - 273.15) - 0.0003532 * (P / 1000000.0 - 0.101325) + 0.0000001559 * (P / 1000000.0 - 0.101325) ^ 2)
             i = 0
@@ -311,7 +311,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS FATORES DE COMPRESSIBILIDADE À DILUIÇÃO INFINITA
+            'CALCULO DOS FATORES DE COMPRESSIBILIDADE a DILUIcaO INFINITA
 
             i = 0
             Do
@@ -330,7 +330,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
+            'CALCULO DAS FRAcoES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
             i = 0
             Do
@@ -349,7 +349,7 @@ Namespace DWSIM.Utilities.HYD
 
             Dim WAC As Double = unf.GAMMA(T, Vx, unfPP.RET_VIDS, unfPP.RET_VQ, unfPP.RET_VR, pos)
 
-            'CALCULO DA DEPRESSÃO NO PONTO DE FUSÃO DA ÁGUA
+            'CALCULO DA DEPRESSaO NO PONTO DE FUSaO DA aGUA
             Tnfp = 273.15
             DHm = 6001700.0 / 1000
             DT = R * Tnfp ^ 2 / DHm * Math.Log(Vx(pos) * WAC)
@@ -505,7 +505,7 @@ Namespace DWSIM.Utilities.HYD
             Dim i As Integer
             Dim n = UBound(Vz)
 
-            'CHECAR PRESENÇA DE FORMADORES DE HIDRATO sI E/OU sII
+            'CHECAR PRESENcA DE FORMADORES DE HIDRATO sI E/OU sII
             i = 0
             Do
                 If Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 15 Or Vids(i) = 14 Then sI_formers = True
@@ -535,7 +535,7 @@ START_LOOP:
             Psup = Pinf
             Pinf = Pinf - delta_P
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 100
@@ -650,7 +650,7 @@ STEP2:
             Dim i As Integer
             Dim n = UBound(Vz)
 
-            'CHECAR PRESENÇA DE FORMADORES DE HIDRATO sI E/OU sII
+            'CHECAR PRESENcA DE FORMADORES DE HIDRATO sI E/OU sII
             i = 0
             Do
                 If Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 15 Or Vids(i) = 14 Then sI_formers = True
@@ -680,7 +680,7 @@ START_LOOP:
             Tsup = Tinf
             Tinf = Tinf - delta_T
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 10000
@@ -816,7 +816,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULAR EQUILIBRIO EM BASE LIVRE DE ÁGUA
+            'CALCULAR EQUILIBRIO EM BASE LIVRE DE aGUA
 
             pos = 0
             i = 0
@@ -966,7 +966,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS VOLUMES PARCIAIS MOLARES À DILUIÇÃO INFINITA
+            'CALCULO DOS VOLUMES PARCIAIS MOLARES a DILUIcaO INFINITA
 
             Dim VLW = Math.Exp(-10.9241 + 0.00025 * (T - 273.15) - 0.0003532 * (P / 1000000.0 - 0.101325) + 0.0000001559 * (P / 1000000.0 - 0.101325) ^ 2)
             i = 0
@@ -975,7 +975,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS FATORES DE COMPRESSIBILIDADE À DILUIÇÃO INFINITA
+            'CALCULO DOS FATORES DE COMPRESSIBILIDADE a DILUIcaO INFINITA
 
             i = 0
             Do
@@ -993,7 +993,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
+            'CALCULO DAS FRAcoES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
             Dim VyNW(n) As Double
             For i = 0 To n
@@ -1040,7 +1040,7 @@ STEP2:
 
             Dim WAC As Double = unf.GAMMA(T, Vx, unfPP.RET_VIDS, unfPP.RET_VQ, unfPP.RET_VR, pos)
 
-            'CALCULO DA DEPRESSÃO NO PONTO DE FUSÃO DA ÁGUA
+            'CALCULO DA DEPRESSaO NO PONTO DE FUSaO DA aGUA
             Tnfp = 273.15
             DHm = 6001700.0 / 1000
             DT = R * Tnfp ^ 2 / DHm * Math.Log(Vx(pos) * WAC)

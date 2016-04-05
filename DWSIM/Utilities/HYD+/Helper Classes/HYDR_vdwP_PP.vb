@@ -153,7 +153,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULAR EQUILIBRIO EM BASE LIVRE DE ÁGUA
+            'CALCULAR EQUILIBRIO EM BASE LIVRE DE aGUA
 
             pos = 0
             i = 0
@@ -216,7 +216,7 @@ Namespace DWSIM.Utilities.HYD
 
             If TIPO_HIDRATO = "sI" Then
 
-                'CALCULO DA PRESSÃO DE FORMAÇÃO DO HIDRATO DE REFERÊNCIA
+                'CALCULO DA PRESSaO DE FORMAcaO DO HIDRATO DE REFEReNCIA
                 If T >= 211 And T <= 273 Then
                     PR = Math.Exp(23.0439 - 3357.57 / T - 1.85 * Math.Log(T)) * 101325
                     dPdT = PR * (3357.57 / T ^ 2 - 1.85 / T)
@@ -228,7 +228,7 @@ Namespace DWSIM.Utilities.HYD
 
             ElseIf TIPO_HIDRATO = "sII" Then
 
-                'CALCULO DA PRESSÃO DE FORMAÇÃO DO HIDRATO DE REFERÊNCIA
+                'CALCULO DA PRESSaO DE FORMAcaO DO HIDRATO DE REFEReNCIA
                 If T >= 253 And T <= 273 Then
                     PR = Math.Exp(11.5115 - 4092.37 / T + 0.316033 * Math.Log(T)) * 101325
                     dPdT = PR * (4092.37 / T ^ 2 + 0.316033 / T)
@@ -244,7 +244,7 @@ Namespace DWSIM.Utilities.HYD
 
             End If
 
-            'CALCULO DOS VOLUMES PARCIAIS MOLARES À DILUIÇÃO INFINITA
+            'CALCULO DOS VOLUMES PARCIAIS MOLARES a DILUIcaO INFINITA
 
             VLW = Math.Exp(-10.9241 + 0.00025 * (T - 273.15) - 0.0003532 * (P / 1000000.0 - 0.101325) + 0.0000001559 * (P / 1000000.0 - 0.101325) ^ 2)
             i = 0
@@ -253,7 +253,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS FATORES DE COMPRESSIBILIDADE À DILUIÇÃO INFINITA
+            'CALCULO DOS FATORES DE COMPRESSIBILIDADE a DILUIcaO INFINITA
 
             i = 0
             Do
@@ -379,7 +379,7 @@ Namespace DWSIM.Utilities.HYD
 
             Else
 
-                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
+                'CALCULO DAS FRAcoES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
                 i = 0
                 Do
@@ -398,18 +398,18 @@ Namespace DWSIM.Utilities.HYD
 
                 Dim WAC As Double = unf.GAMMA(T, Vxaq, unfPP.RET_VIDS, unfPP.RET_VQ, unfPP.RET_VR, pos)
 
-                'CALCULO DA DEPRESSÃO NO PONTO DE FUSÃO DA ÁGUA
+                'CALCULO DA DEPRESSaO NO PONTO DE FUSaO DA aGUA
                 Tnfp = 273.15
                 DHm = 6001700.0 / 1000
                 DT = R * Tnfp ^ 2 / DHm * Math.Log(Vxaq(pos) * WAC)
                 Td = DT + Tnfp
 
-                'CALCULO DO POTENCIAL QUÍMICO DA ÁGUA NO GELO
+                'CALCULO DO POTENCIAL QUiMICO DA aGUA NO GELO
                 DH = -4.1868 * (275 + (9.11 + 0.0336 * 273.1) * (T - T0) - 0.0168 * (T ^ 2 - T0 ^ 2))
                 PQRG = 302 * 4.1868 / (R * T0) + DH / R * (1 / T - 1 / T0) + 3 * 0.000001 / R * dPdT * Math.Log(T / T0)
                 PQG = PQRG * R * T + 3 * 0.000001 * (P - PR)
 
-                'CALCULO DO POTENCIAL QUÍMICO DA ÁGUA NA Phase LÍQUIDA
+                'CALCULO DO POTENCIAL QUiMICO DA aGUA NA Phase LiQUIDA
                 act = WAC
                 DH = -4.1868 * (1463.3 + 275 + (9.11 + 0.0336 * 273.1) * (T - T0) - 0.0168 * (T ^ 2 - T0 ^ 2))
                 PQRL = 302 * 4.1868 / (R * T0) + DH / R * (1 / T - 1 / T0) + (3 * 0.000001 + Math.Exp(-10.9241) - 0.00001912) / R * dPdT * Math.Log(T / T0)
@@ -452,7 +452,7 @@ Namespace DWSIM.Utilities.HYD
                     i = i + 1
                 Loop Until i = n + 1
 
-                'calcular fração total dos formadores de sI
+                'calcular fracao total dos formadores de sI
                 VysI = 0
                 i = 0
                 Do
@@ -501,7 +501,7 @@ Namespace DWSIM.Utilities.HYD
                 PWSAT = Math.Exp(17.44 - 6003.9 / T) * 1000
 
                 FUGH = PWSAT * 1.0# * Math.Exp(VbsI * (P - PWSAT) / (R * T)) * Math.Exp(sum2sI)
-                
+
             ElseIf TIPO_HIDRATO = "sII" Then
 
                 'CALCULO DAS CONSTANTES DE LANGMUIR PARA HIDRATO TIPO "SII"
@@ -534,7 +534,7 @@ Namespace DWSIM.Utilities.HYD
                     i = i + 1
                 Loop Until i = n + 1
 
-                'calcular fração total dos formadores de sII
+                'calcular fracao total dos formadores de sII
                 VysII = 0
                 i = 0
                 Do
@@ -605,7 +605,7 @@ Namespace DWSIM.Utilities.HYD
             Dim i As Integer
             Dim n = UBound(Vz)
 
-            'CHECAR PRESENÇA DE FORMADORES DE HIDRATO sI E/OU sII
+            'CHECAR PRESENcA DE FORMADORES DE HIDRATO sI E/OU sII
             i = 0
             Do
                 If Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 38 Or Vids(i) = 15 Or Vids(i) = 14 Then sI_formers = True
@@ -640,7 +640,7 @@ START_LOOP:
             Pinf = Pinf - delta_P
 
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 50
@@ -754,7 +754,7 @@ STEP2:
             Dim i As Integer
             Dim n = UBound(Vz)
 
-            'CHECAR PRESENÇA DE FORMADORES DE HIDRATO sI E/OU sII
+            'CHECAR PRESENcA DE FORMADORES DE HIDRATO sI E/OU sII
             i = 0
             Do
                 If Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 15 Or Vids(i) = 14 Then sI_formers = True
@@ -787,7 +787,7 @@ START_LOOP:
             Tsup = Tinf
             Tinf = Tinf - delta_T
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 50
@@ -924,7 +924,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULAR EQUILIBRIO EM BASE LIVRE DE ÁGUA
+            'CALCULAR EQUILIBRIO EM BASE LIVRE DE aGUA
 
             pos = 0
             i = 0
@@ -988,7 +988,7 @@ STEP2:
 
             If TIPO_HIDRATO = "sI" Then
 
-                'CALCULO DA PRESSÃO DE FORMAÇÃO DO HIDRATO DE REFERÊNCIA
+                'CALCULO DA PRESSaO DE FORMAcaO DO HIDRATO DE REFEReNCIA
                 If T >= 211 And T <= 273 Then
                     PR = Math.Exp(23.0439 - 3357.57 / T - 1.85 * Math.Log(T)) * 101325
                     dPdT = PR * (3357.57 / T ^ 2 - 1.85 / T)
@@ -1000,7 +1000,7 @@ STEP2:
 
             ElseIf TIPO_HIDRATO = "sII" Then
 
-                'CALCULO DA PRESSÃO DE FORMAÇÃO DO HIDRATO DE REFERÊNCIA
+                'CALCULO DA PRESSaO DE FORMAcaO DO HIDRATO DE REFEReNCIA
                 If T >= 253 And T <= 273 Then
                     PR = Math.Exp(11.5115 - 4092.37 / T + 0.316033 * Math.Log(T)) * 101325
                     dPdT = PR * (4092.37 / T ^ 2 + 0.316033 / T)
@@ -1016,7 +1016,7 @@ STEP2:
 
             End If
 
-            'CALCULO DOS VOLUMES PARCIAIS MOLARES À DILUIÇÃO INFINITA
+            'CALCULO DOS VOLUMES PARCIAIS MOLARES a DILUIcaO INFINITA
 
             VLW = Math.Exp(-10.9241 + 0.00025 * (T - 273.15) - 0.0003532 * (P / 1000000.0 - 0.101325) + 0.0000001559 * (P / 1000000.0 - 0.101325) ^ 2)
             i = 0
@@ -1025,7 +1025,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS FATORES DE COMPRESSIBILIDADE À DILUIÇÃO INFINITA
+            'CALCULO DOS FATORES DE COMPRESSIBILIDADE a DILUIcaO INFINITA
 
             i = 0
             Do
@@ -1158,7 +1158,7 @@ STEP2:
 
             Else
 
-                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
+                'CALCULO DAS FRAcoES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
                 Dim fresult As Object = unfPP.FlashBase.Flash_PT(Vy, P, T, unfPP)
                 If fresult(0) > 0.0# Then
@@ -1200,18 +1200,18 @@ STEP2:
 
                 Dim WAC As Double = unf.GAMMA(T, Vxaq, unfPP.RET_VIDS, unfPP.RET_VQ, unfPP.RET_VR, pos)
 
-                'CALCULO DA DEPRESSÃO NO PONTO DE FUSÃO DA ÁGUA
+                'CALCULO DA DEPRESSaO NO PONTO DE FUSaO DA aGUA
                 Tnfp = 273.15
                 DHm = 6001700.0 / 1000
                 DT = R * Tnfp ^ 2 / DHm * Math.Log(Vxaq(pos) * WAC)
                 Td = DT + Tnfp
 
-                'CALCULO DO POTENCIAL QUÍMICO DA ÁGUA NO GELO
+                'CALCULO DO POTENCIAL QUiMICO DA aGUA NO GELO
                 DH = -4.1868 * (275 + (9.11 + 0.0336 * 273.1) * (T - T0) - 0.0168 * (T ^ 2 - T0 ^ 2))
                 PQRG = 302 * 4.1868 / (R * T0) + DH / R * (1 / T - 1 / T0) + 3 * 0.000001 / R * dPdT * Math.Log(T / T0)
                 PQG = PQRG * R * T + 3 * 0.000001 * (P - PR)
 
-                'CALCULO DO POTENCIAL QUÍMICO DA ÁGUA NA Phase LÍQUIDA
+                'CALCULO DO POTENCIAL QUiMICO DA aGUA NA Phase LiQUIDA
                 act = WAC
                 DH = -4.1868 * (1463.3 + 275 + (9.11 + 0.0336 * 273.1) * (T - T0) - 0.0168 * (T ^ 2 - T0 ^ 2))
                 PQRL = 302 * 4.1868 / (R * T0) + DH / R * (1 / T - 1 / T0) + (3 * 0.000001 + Math.Exp(-10.9241) - 0.00001912) / R * dPdT * Math.Log(T / T0)
@@ -1254,7 +1254,7 @@ STEP2:
                     i = i + 1
                 Loop Until i = n + 1
 
-                'calcular fração total dos formadores de sI
+                'calcular fracao total dos formadores de sI
                 VysI = 0
                 i = 0
                 Do
@@ -1338,7 +1338,7 @@ STEP2:
                     i = i + 1
                 Loop Until i = n + 1
 
-                'calcular fração total dos formadores de sII
+                'calcular fracao total dos formadores de sII
                 VysII = 0
                 i = 0
                 Do

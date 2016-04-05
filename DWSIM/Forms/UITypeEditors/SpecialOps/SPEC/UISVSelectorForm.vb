@@ -254,7 +254,7 @@ Public Class UISVSelectorForm
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
 
-        'se o spec já tinha uma variavel como fonte, marcá-la como desconectada do mesmo
+        'se o spec ja tinha uma variavel como fonte, marca-la como desconectada do mesmo
         If formC.Collections.FlowsheetObjectCollection.ContainsKey(Me.selectionData.m_ID) Then
             With formC.Collections.FlowsheetObjectCollection(Me.selectionData.m_ID)
                 .IsSpecAttached = False

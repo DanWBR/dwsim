@@ -66,7 +66,7 @@ Namespace PropertyPackages.Auxiliary
 
         Shared Function sigma_bb(ByVal T As Double, ByVal Tb As Double, ByVal Tc As Double, ByVal Pc As Double) As Double
 
-            'Estimativa da tensão interfacial pelo método de Brock e Bird
+            'Estimativa da tensao interfacial pelo metodo de Brock e Bird
 
             Dim Tr, Tbr, Q, tmp, Pc_ As Double
 
@@ -88,7 +88,7 @@ Namespace PropertyPackages.Auxiliary
 
         Shared Function viscl_letsti(ByVal T As Double, ByVal Tc As Double, ByVal Pc As Double, ByVal w As Double, ByVal MM As Double) As Double
 
-            'Estimativa da viscosidade de líquidos pelo método de Letsou e Stiel
+            'Estimativa da viscosidade de liquidos pelo metodo de Letsou e Stiel
 
             Dim Tr As Double = T / Tc
 
@@ -106,7 +106,7 @@ Namespace PropertyPackages.Auxiliary
 
         Shared Function viscg_lucas(ByVal T As Double, ByVal Tc As Double, ByVal Pc As Double, ByVal w As Double, ByVal MM As Double) As Double
 
-            'Estimativa da viscosidade de gases pelo método de Lucas
+            'Estimativa da viscosidade de gases pelo metodo de Lucas
 
             Dim Tr As Double = T / Tc
 
@@ -122,7 +122,7 @@ Namespace PropertyPackages.Auxiliary
 
         Shared Function liq_dens_rackett(ByVal T As Double, ByVal Tc As Double, ByVal Pc As Double, ByVal w As Double, ByVal MM As Double, Optional ByVal ZRa As Double = 0, Optional ByVal P As Double = 0, Optional ByVal Pvp As Double = 0) As Double
 
-            'Cálculo da densidade do líquido utilizando o método de Rackett
+            'Calculo da densidade do liquido utilizando o metodo de Rackett
 
             If Double.IsNaN(Pvp) Then Pvp = 0.0#
 
@@ -141,7 +141,7 @@ Namespace PropertyPackages.Auxiliary
 
             If Pvp <> 0.0# And T < Tc Then
 
-                'Modified HBT method - Thomson (para líquidos comprimidos)
+                'Modified HBT method - Thomson (para liquidos comprimidos)
                 Dim a, b, c, d, e, f, g, h, j, k As Double
 
                 a = -9.070217
@@ -183,7 +183,7 @@ Namespace PropertyPackages.Auxiliary
             'Cp em J/kg°F
             Cp = Cp * 1.8 / 1000
             'tipo como "V" ou "L"
-            'SG = densidade absoluta ou densidade do líquido em lbm/ft3
+            'SG = densidade absoluta ou densidade do liquido em lbm/ft3
 
             'JT em °F in.2/lbf
 
@@ -194,7 +194,7 @@ Namespace PropertyPackages.Auxiliary
 
             If fluido = "V" Then eta = 0.0048823 * Tpc * (18 / Tpr ^ 2 - 1) / (Ppc * Cp * SG)
 
-            'para líquidos
+            'para liquidos
 
             If fluido = "L" Then eta = -1 / (SG / 16.0185 * Cp)
 
@@ -232,7 +232,7 @@ Namespace PropertyPackages.Auxiliary
                 gamma = 0.167
 
             ElseIf Tipo = "A" Then
-                'Aromáticos
+                'Aromaticos
 
                 A_ = 0.0346
                 alpha = 1.2
@@ -240,7 +240,7 @@ Namespace PropertyPackages.Auxiliary
                 gamma = 0.167
 
             ElseIf Tipo = "X" Then
-                'Outros (ex. água)
+                'Outros (ex. agua)
 
                 A_ = 0.494
                 alpha = 0
@@ -443,8 +443,8 @@ Namespace PropertyPackages.Auxiliary
 
         Shared Function viscg_jossi_stiel_thodos(ByVal eta0 As Double, ByVal T As Double, ByVal V As Double, ByVal Tc As Double, ByVal Pc As Double, ByVal Vc As Double, ByVal MM As Double) As Double
 
-            'Estimativa da viscosidade de gases em pressões elevadas pelo 
-            'método de Jossi-Stiel-Thodos
+            'Estimativa da viscosidade de gases em pressoes elevadas pelo 
+            'metodo de Jossi-Stiel-Thodos
 
             Dim Tr As Double = T / Tc
 

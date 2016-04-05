@@ -291,7 +291,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULAR EQUILIBRIO EM BASE LIVRE DE ÁGUA
+            'CALCULAR EQUILIBRIO EM BASE LIVRE DE aGUA
 
             pos = 0
             i = 0
@@ -354,7 +354,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS VOLUMES PARCIAIS MOLARES À DILUIÇÃO INFINITA
+            'CALCULO DOS VOLUMES PARCIAIS MOLARES a DILUIcaO INFINITA
 
             VLW = Math.Exp(-10.9241 + 0.00025 * (T - 273.15) - 0.0003532 * (P / 1000000.0 - 0.101325) + 0.0000001559 * (P / 1000000.0 - 0.101325) ^ 2)
             i = 0
@@ -363,7 +363,7 @@ Namespace DWSIM.Utilities.HYD
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS FATORES DE COMPRESSIBILIDADE À DILUIÇÃO INFINITA
+            'CALCULO DOS FATORES DE COMPRESSIBILIDADE a DILUIcaO INFINITA
 
             i = 0
             Do
@@ -489,7 +489,7 @@ Namespace DWSIM.Utilities.HYD
 
             Else
 
-                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
+                'CALCULO DAS FRAcoES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
                 i = 0
                 Do
@@ -517,7 +517,7 @@ Namespace DWSIM.Utilities.HYD
 
                 Dim WAC As Double = unf.GAMMA(T, Vxaq, unfPP.RET_VIDS, unfPP.RET_VQ, unfPP.RET_VR, pos)
 
-                'CALCULO DA DEPRESSÃO NO PONTO DE FUSÃO DA ÁGUA
+                'CALCULO DA DEPRESSaO NO PONTO DE FUSaO DA aGUA
                 Tnfp = 273.15
                 DHm = 6001700.0 / 1000
                 DT = R * Tnfp ^ 2 / DHm * Math.Log(Vxaq(pos) * WAC)
@@ -526,10 +526,10 @@ Namespace DWSIM.Utilities.HYD
                 'CALCULO DO VOLUME MOLAR DO GELO
                 VMG = 0.00001912 + 0.0000000008387 * T + 0.000000000004016 * T ^ 2
 
-                'CALCULO DA FUGACIDADE DA ÁGUA NO GELO
+                'CALCULO DA FUGACIDADE DA aGUA NO GELO
                 FG = Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T) * Math.Exp((VMG / (R * T) * (P - Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T))))
 
-                'CALCULO DA FUGACIDADE DA ÁGUA NA Phase LÍQUIDA
+                'CALCULO DA FUGACIDADE DA aGUA NA Phase LiQUIDA
                 act = WAC
                 FL = Vxaq(pos) * act * Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 7.6537 - 0.0161277 * T) * Math.Exp((VLW / (R * T) * (P - Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 2.9446 - 0.0161266 * T))))
 
@@ -574,7 +574,7 @@ Namespace DWSIM.Utilities.HYD
                 Nbw = 46
                 VbsI = (11.835 + 0.00002217 * T + 0.000002242 * T ^ 2) * 1.0E-30 * 6.02E+23 / Nbw - 0.000000008006 * P / 1000000.0 + 0.000000000005448 * P ^ 2 / 1000000000000.0
 
-                'CALCULAR CONSTANTES DA PRESSÃO DE VAPOR DO LÁTICE VAZIO
+                'CALCULAR CONSTANTES DA PRESSaO DE VAPOR DO LaTICE VAZIO
 
                 'CALCULAR SOMAS dos VMs (sI)
                 vm(0, 0) = 1 / 23
@@ -591,7 +591,7 @@ Namespace DWSIM.Utilities.HYD
                 Loop Until i = n + 1
                 sum2sI = vm(0, 0) * Math.Log(1 - sumvmsI(0)) + vm(0, 1) * Math.Log(1 - sumvmsI(1))
 
-                'calcular fração total dos formadores de sI
+                'calcular fracao total dos formadores de sI
                 VysI = 0
                 i = 0
                 Do
@@ -638,7 +638,7 @@ Namespace DWSIM.Utilities.HYD
                     i = i + 1
                 Loop Until i = n + 1
 
-                'CALCULAR FUGACIDADE DA ÁGUA NO HIDRATO sI
+                'CALCULAR FUGACIDADE DA aGUA NO HIDRATO sI
                 tm1 = Math.Exp(sum2sI)
                 FGsI = Math.Exp(AsI * Math.Log(T) + BsI / T + 2.7789 + DsI * T) * Math.Exp(VbsI / (R * T) * (P - Math.Exp(AsI * Math.Log(T) + BsI / T + 2.7789 + DsI * T))) * tm1
                 FGHYD = FGsI
@@ -691,9 +691,9 @@ Namespace DWSIM.Utilities.HYD
                 Loop Until i = n + 1
                 sum2sII = vm(1, 0) * Math.Log(1 - sumvmsII(0)) + vm(1, 1) * Math.Log(1 - sumvmsII(1))
 
-                'CALCULAR CONSTANTES DA PRESSÃO DE VAPOR DO LÁTICE VAZIO
+                'CALCULAR CONSTANTES DA PRESSaO DE VAPOR DO LaTICE VAZIO
 
-                'calcular fração total dos formadores de sII
+                'calcular fracao total dos formadores de sII
                 VysII = 0
                 i = 0
                 Do
@@ -740,7 +740,7 @@ Namespace DWSIM.Utilities.HYD
                     i = i + 1
                 Loop Until i = n + 1
 
-                'CALCULAR FUGACIDADE DA ÁGUA NO HIDRATO sII
+                'CALCULAR FUGACIDADE DA aGUA NO HIDRATO sII
                 FGsII = Math.Exp(AsII * Math.Log(T) + BsII / T + 2.7789 + DsII * T) * Math.Exp(VbsII / (R * T) * (P - Math.Exp(AsII * Math.Log(T) + BsII / T + 2.7789 + DsII * T))) * Math.Exp(sum2sII)
                 FGHYD = FGsII
 
@@ -761,7 +761,7 @@ Namespace DWSIM.Utilities.HYD
             Dim i As Integer
             Dim n = UBound(Vz)
 
-            'CHECAR PRESENÇA DE FORMADORES DE HIDRATO sI E/OU sII
+            'CHECAR PRESENcA DE FORMADORES DE HIDRATO sI E/OU sII
             i = 0
             Do
                 If Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 38 Or Vids(i) = 15 Or Vids(i) = 14 Then sI_formers = True
@@ -792,7 +792,7 @@ START_LOOP:
             Pinf = Pinf - delta_P
 
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 50
@@ -907,7 +907,7 @@ STEP2:
             Dim i As Integer
             Dim n = UBound(Vz)
 
-            'CHECAR PRESENÇA DE FORMADORES DE HIDRATO sI E/OU sII
+            'CHECAR PRESENcA DE FORMADORES DE HIDRATO sI E/OU sII
             i = 0
             Do
                 If Vids(i) = 1 Or Vids(i) = 2 Or Vids(i) = 15 Or Vids(i) = 14 Then sI_formers = True
@@ -937,7 +937,7 @@ START_LOOP:
             Tsup = Tinf
             Tinf = Tinf - delta_T
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 50
@@ -1077,7 +1077,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULAR EQUILIBRIO EM BASE LIVRE DE ÁGUA
+            'CALCULAR EQUILIBRIO EM BASE LIVRE DE aGUA
 
             pos = 0
             i = 0
@@ -1139,7 +1139,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS VOLUMES PARCIAIS MOLARES À DILUIÇÃO INFINITA
+            'CALCULO DOS VOLUMES PARCIAIS MOLARES a DILUIcaO INFINITA
 
             VLW = Math.Exp(-10.9241 + 0.00025 * (T - 273.15) - 0.0003532 * (P / 1000000.0 - 0.101325) + 0.0000001559 * (P / 1000000.0 - 0.101325) ^ 2)
             i = 0
@@ -1148,7 +1148,7 @@ STEP2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'CALCULO DOS FATORES DE COMPRESSIBILIDADE À DILUIÇÃO INFINITA
+            'CALCULO DOS FATORES DE COMPRESSIBILIDADE a DILUIcaO INFINITA
 
             i = 0
             Do
@@ -1274,7 +1274,7 @@ STEP2:
 
             Else
 
-                'CALCULO DAS FRAÇÕES MOLARES DOS COMPONENTES NA Phase AQUOSA
+                'CALCULO DAS FRAcoES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
                 Dim fresult As Object = unfPP.FlashBase.Flash_PT(Vy, P, T, unfPP)
                 If fresult(0) > 0.0# Then
@@ -1323,7 +1323,7 @@ STEP2:
 
                 Dim WAC As Double = unf.GAMMA(T, Vxaq, unfPP.RET_VIDS, unfPP.RET_VQ, unfPP.RET_VR, pos)
 
-                'CALCULO DA DEPRESSÃO NO PONTO DE FUSÃO DA ÁGUA
+                'CALCULO DA DEPRESSaO NO PONTO DE FUSaO DA aGUA
                 Tnfp = 273.15
                 DHm = 6001700.0 / 1000
                 DT = R * Tnfp ^ 2 / DHm * Math.Log(Vxaq(pos) * WAC)
@@ -1332,10 +1332,10 @@ STEP2:
                 'CALCULO DO VOLUME MOLAR DO GELO
                 VMG = 0.00001912 + 0.0000000008387 * T + 0.000000000004016 * T ^ 2
 
-                'CALCULO DA FUGACIDADE DA ÁGUA NO GELO
+                'CALCULO DA FUGACIDADE DA aGUA NO GELO
                 FG = Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T) * Math.Exp((VMG / (R * T) * (P - Math.Exp(4.6056 * Math.Log(T) - 5501.1243 / T + 2.9446 - 0.0081431 * T))))
 
-                'CALCULO DA FUGACIDADE DA ÁGUA NA Phase LÍQUIDA
+                'CALCULO DA FUGACIDADE DA aGUA NA Phase LiQUIDA
                 act = WAC
                 FL = Vxaq(pos) * act * Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 7.6537 - 0.0161277 * T) * Math.Exp((VLW / (R * T) * (P - Math.Exp(4.1539 * Math.Log(T) - 5500.9332 / T + 2.9446 - 0.0161266 * T))))
 
@@ -1380,7 +1380,7 @@ STEP2:
                 Nbw = 46
                 VbsI = (11.835 + 0.00002217 * T + 0.000002242 * T ^ 2) * 1.0E-30 * 6.02E+23 / Nbw - 0.000000008006 * P / 1000000.0 + 0.000000000005448 * P ^ 2 / 1000000000000.0
 
-                'CALCULAR CONSTANTES DA PRESSÃO DE VAPOR DO LÁTICE VAZIO
+                'CALCULAR CONSTANTES DA PRESSaO DE VAPOR DO LaTICE VAZIO
 
                 'CALCULAR SOMAS dos VMs (sI)
                 vm(0, 0) = 1 / 23
@@ -1397,7 +1397,7 @@ STEP2:
                 Loop Until i = n + 1
                 sum2sI = vm(0, 0) * Math.Log(1 - sumvmsI(0)) + vm(0, 1) * Math.Log(1 - sumvmsI(1))
 
-                'calcular fração total dos formadores de sI
+                'calcular fracao total dos formadores de sI
                 VysI = 0
                 i = 0
                 Do
@@ -1446,7 +1446,7 @@ STEP2:
 
                 Vh = VsI
 
-                'CALCULAR FUGACIDADE DA ÁGUA NO HIDRATO sI
+                'CALCULAR FUGACIDADE DA aGUA NO HIDRATO sI
                 tm1 = Math.Exp(sum2sI)
                 FGsI = Math.Exp(AsI * Math.Log(T) + BsI / T + 2.7789 + DsI * T) * Math.Exp(VbsI / (R * T) * (P - Math.Exp(AsI * Math.Log(T) + BsI / T + 2.7789 + DsI * T))) * tm1
                 FGHYD = FGsI
@@ -1499,9 +1499,9 @@ STEP2:
                 Loop Until i = n + 1
                 sum2sII = vm(1, 0) * Math.Log(1 - sumvmsII(0)) + vm(1, 1) * Math.Log(1 - sumvmsII(1))
 
-                'CALCULAR CONSTANTES DA PRESSÃO DE VAPOR DO LÁTICE VAZIO
+                'CALCULAR CONSTANTES DA PRESSaO DE VAPOR DO LaTICE VAZIO
 
-                'calcular fração total dos formadores de sII
+                'calcular fracao total dos formadores de sII
                 VysII = 0
                 i = 0
                 Do
@@ -1550,7 +1550,7 @@ STEP2:
 
                 Vh = VsII
 
-                'CALCULAR FUGACIDADE DA ÁGUA NO HIDRATO sII
+                'CALCULAR FUGACIDADE DA aGUA NO HIDRATO sII
                 FGsII = Math.Exp(AsII * Math.Log(T) + BsII / T + 2.7789 + DsII * T) * Math.Exp(VbsII / (R * T) * (P - Math.Exp(AsII * Math.Log(T) + BsII / T + 2.7789 + DsII * T))) * Math.Exp(sum2sII)
                 FGHYD = FGsII
 

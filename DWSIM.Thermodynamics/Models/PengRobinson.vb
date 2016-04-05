@@ -764,7 +764,7 @@ Namespace PropertyPackages.Auxiliary
             rsup = rinf
             rinf = rinf - delta_r
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 100

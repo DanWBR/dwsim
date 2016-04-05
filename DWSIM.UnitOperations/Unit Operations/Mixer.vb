@@ -168,7 +168,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
-                'Zerar valores da corrente de matéria conectada a jusante
+                'Zerar valores da corrente de materia conectada a jusante
                 With DirectCast(Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), Thermodynamics.Streams.MaterialStream)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing

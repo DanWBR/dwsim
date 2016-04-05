@@ -57,7 +57,7 @@ Public Class UI_SpecControlPanelForm
             'IGenericExpression<double> eGeneric = ExpressionFactory.CreateGeneric<double>("sqrt(a) + 1", context);
             Try
                 .Expr = .ExpContext.CompileGeneric(Of Double)(Me.tbExp.Text)
-                Me.lblExpRes.Text = DWSIM.App.GetLocalString("ExpressãoOKResultado") & Format(.Expr.Evaluate, nf)
+                Me.lblExpRes.Text = DWSIM.App.GetLocalString("ExpressaoOKResultado") & Format(.Expr.Evaluate, nf)
                 .Expression = Me.tbExp.Text
             Catch ex As ExpressionCompileException
                 Select Case ex.Reason

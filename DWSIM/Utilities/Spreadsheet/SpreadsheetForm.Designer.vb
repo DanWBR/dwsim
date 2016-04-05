@@ -56,7 +56,7 @@ Partial Class SpreadsheetForm
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CelulaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.AvaliarFórmulaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AvaliarFormulaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportarDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportarDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -273,7 +273,7 @@ Partial Class SpreadsheetForm
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CelulaToolStripMenuItem, Me.ToolStripSeparator2, Me.AvaliarFórmulaToolStripMenuItem, Me.ImportarDadosToolStripMenuItem, Me.ExportarDadosToolStripMenuItem, Me.ToolStripSeparator1, Me.LimparToolStripMenuItem, Me.CopiarToolStripMenuItem, Me.ColarToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CelulaToolStripMenuItem, Me.ToolStripSeparator2, Me.AvaliarFormulaToolStripMenuItem, Me.ImportarDadosToolStripMenuItem, Me.ExportarDadosToolStripMenuItem, Me.ToolStripSeparator1, Me.LimparToolStripMenuItem, Me.CopiarToolStripMenuItem, Me.ColarToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
         '
@@ -287,11 +287,11 @@ Partial Class SpreadsheetForm
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         '
-        'AvaliarFórmulaToolStripMenuItem
+        'AvaliarFormulaToolStripMenuItem
         '
-        Me.AvaliarFórmulaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.calculator
-        Me.AvaliarFórmulaToolStripMenuItem.Name = "AvaliarFórmulaToolStripMenuItem"
-        resources.ApplyResources(Me.AvaliarFórmulaToolStripMenuItem, "AvaliarFórmulaToolStripMenuItem")
+        Me.AvaliarFormulaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.calculator
+        Me.AvaliarFormulaToolStripMenuItem.Name = "AvaliarFormulaToolStripMenuItem"
+        resources.ApplyResources(Me.AvaliarFormulaToolStripMenuItem, "AvaliarFormulaToolStripMenuItem")
         '
         'ImportarDadosToolStripMenuItem
         '
@@ -497,7 +497,7 @@ Partial Class SpreadsheetForm
     Public WithEvents CelulaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Public WithEvents AvaliarFórmulaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents AvaliarFormulaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ExportarDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents chkUpdate As System.Windows.Forms.CheckBox
     Public WithEvents tbTolerance As System.Windows.Forms.TextBox

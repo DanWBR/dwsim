@@ -767,7 +767,7 @@ Namespace DWSIM.SimulationObjects.Reactors
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
             With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True

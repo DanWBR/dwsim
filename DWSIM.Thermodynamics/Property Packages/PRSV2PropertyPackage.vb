@@ -563,7 +563,7 @@ Namespace PropertyPackages
 
 #End Region
 
-#Region "    Métodos Numéricos"
+#Region "    Metodos Numericos"
 
         Public Function IntegralSimpsonCp(ByVal a As Double, _
                  ByVal b As Double, _

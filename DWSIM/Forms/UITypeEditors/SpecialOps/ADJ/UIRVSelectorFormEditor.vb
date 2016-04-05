@@ -43,7 +43,7 @@ Namespace DWSIM.Editors.SpecialOps
 
                 Dim selectionControl As New UIRVSelectorForm
                 Dim form As FormFlowsheet = My.Application.ActiveSimulation
-                selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - Objeto/Variável de Referência"
+                selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - Objeto/Variavel de Referencia"
                 selectionControl.selectionDataRV = value
                 selectionControl.selectionDataCV = CType(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), DWSIM.SimulationObjects.SpecialOps.Adjust).ControlledObjectData
                 selectionControl.gi = context

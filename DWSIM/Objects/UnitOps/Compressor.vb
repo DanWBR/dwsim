@@ -241,7 +241,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 If Not DebugMode Then
 
-                    'Atribuir valores à corrente de matéria conectada à jusante
+                    'Atribuir valores a corrente de materia conectada a jusante
                     With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                         .Phases(0).Properties.temperature = T2
                         .Phases(0).Properties.pressure = P2
@@ -317,7 +317,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = form.Collections.Flow
 
                 If Not DebugMode Then
 
-                    'Atribuir valores à corrente de matéria conectada à jusante
+                    'Atribuir valores a corrente de materia conectada a jusante
                     With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                         .Phases(0).Properties.temperature = T2
                         .Phases(0).Properties.pressure = P2
@@ -330,7 +330,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = form.Collections.Flow
                         .Phases(0).Properties.massflow = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
                     End With
 
-                    'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+                    'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
                     With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
@@ -361,7 +361,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = form.Collections.Flow
 
             Dim form As Global.DWSIM.FormFlowsheet = Me.FlowSheet
 
-            'Zerar valores da corrente de matéria conectada a jusante
+            'Zerar valores da corrente de materia conectada a jusante
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
                 Dim msj As DWSIM.SimulationObjects.Streams.MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
@@ -384,7 +384,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = form.Collections.Flow
 
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     .EnergyFlow = Nothing

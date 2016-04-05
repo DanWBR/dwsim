@@ -1574,9 +1574,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
     ' System.Drawing.ComIStreamWrapper.cs
     '
     ' Author:
-    ' Kornél Pál <http://www.kornelpal.hu/>
+    ' Kornel Pal <http://www.kornelpal.hu/>
     '
-    ' Copyright (C) 2005-2008 Kornél Pál
+    ' Copyright (C) 2005-2008 Kornel Pal
     '
 
     '

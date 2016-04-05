@@ -15,7 +15,7 @@
             'Q em m3/d
             'visc em cP
             'G em kg/m3
-            'OP_P em % (sobrepressão em %)
+            'OP_P em % (sobrepressao em %)
 
             P = (P + 1.033) * 101.325 / 1.033 - 101.325
             BP = (BP + 1.033) * 101.325 / 1.033 - 101.325
@@ -133,13 +133,13 @@
 
             Dim Pc, G, W, vg0, v0, v9, alpha0, eta_c, A
 
-            'x = fração mássica de gás
-            'rhog = densidade do gás em kg/m3
+            'x = fracao massica de gas
+            'rhog = densidade do gas em kg/m3
             'rhom = densidade da mistura em kg/m3
             'rhom90 = densidade da mistura em kg/m3 a 90% de P
-            'P = pressão de alívio em kgf/cm²_g
-            'BP = contrapressão em kgf/cm²_g
-            'W = vazão da mistura em kg/h
+            'P = pressao de alivio em kgf/cm²_g
+            'BP = contrapressao em kgf/cm²_g
+            'W = vazao da mistura em kg/h
 
             vg0 = (1 / rhog) * 16.0185
             v0 = (1 / rhom) * 16.0185
@@ -151,7 +151,7 @@
             alpha0 = x * vg0 / v0
             W = 9 * (v9 / v0 - 1)
 
-            'método de Brent para encontrar eta_c
+            'metodo de Brent para encontrar eta_c
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 10000

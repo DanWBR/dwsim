@@ -1111,14 +1111,14 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
-                'Zerar valores da corrente de matéria conectada a jusante
+                'Zerar valores da corrente de materia conectada a jusante
                 DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If
 
             If Me.GraphicObject.OutputConnectors(1).IsAttached Then
 
-                'Zerar valores da corrente de matéria conectada a jusante
+                'Zerar valores da corrente de materia conectada a jusante
                 DirectCast(FlowSheet.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name), MaterialStream).Clear()
 
             End If

@@ -260,7 +260,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             T2 = mysheetOut.Cells(6, 2 + k).Value
                             P2 = mysheetOut.Cells(7, 2 + k).Value
 
-                            'Atribuir valores à corrente de matéria conectada à jusante
+                            'Atribuir valores a corrente de materia conectada a jusante
                             With Me.PropertyPackage.CurrentMaterialStream
                                 .Phases(0).Properties.temperature = T2
                                 .Phases(0).Properties.pressure = P2
@@ -305,7 +305,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     Me.DeltaQ = Hout - Hin
 
-                    'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+                    'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
                     With es
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                         .GraphicObject.Calculated = True
@@ -502,7 +502,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                         T2 = mysheetOut.Cells(5, 1 + k).Value
                         P2 = mysheetOut.Cells(6, 1 + k).Value
 
-                        'Atribuir valores à corrente de matéria conectada à jusante
+                        'Atribuir valores a corrente de materia conectada a jusante
                         With Me.PropertyPackage.CurrentMaterialStream
                             .Phases(0).Properties.temperature = T2
                             .Phases(0).Properties.pressure = P2
@@ -544,7 +544,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 Me.DeltaQ = Hout - Hin
 
-                'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+                'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
                 With es
                     .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                     .GraphicObject.Calculated = True
@@ -596,7 +596,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             For k = 0 To 3
                 If Me.GraphicObject.OutputConnectors(k).IsAttached Then
 
-                    'Zerar valores da corrente de matéria conectada a jusante
+                    'Zerar valores da corrente de materia conectada a jusante
                     With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(k).AttachedConnector.AttachedTo.Name)
                         .Phases(0).Properties.temperature = Nothing
                         .Phases(0).Properties.pressure = Nothing
@@ -618,7 +618,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 End If
             Next
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     .EnergyFlow = Nothing

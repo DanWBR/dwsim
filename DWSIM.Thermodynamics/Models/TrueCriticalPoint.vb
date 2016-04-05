@@ -42,7 +42,7 @@ Namespace Utilities.TCP
             Dim Tc(n), Pc(n)
             Dim b As Double
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             R = 8.314
 
@@ -62,7 +62,7 @@ Namespace Utilities.TCP
                 i = i + 1
             Loop Until i = n + 1
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             Vc_inf = 4 * b
             If Vinf <> 0 Then Vc_inf = Vinf
@@ -84,7 +84,7 @@ restart:        fV = TRIPLESUM(Vc_inf, Vz, VTc, VPc, VVc, Vw, VKIj)
 
             If Vc_inf <= b Then GoTo Final2
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 100
@@ -211,7 +211,7 @@ Final2:
             Dim ai(n), b(n), c(n), tmp(2, n + 1), a(n, n), am2(n)
             Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), Tr(n)
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             R = 8.314
 
@@ -410,7 +410,7 @@ Final2:
             Tc_sup = Tc_inf
             Tc_inf = Tc_inf - delta_Tc
 
-            'método de Brent para encontrar Tc
+            'metodo de Brent para encontrar Tc
 
             Dim aa, bb, cc, dd, ee, min1, min2, fa, fb, fc, pp, qq, rr, ss, tol1, xm As Double
             Dim ITMAX As Integer = 1000
@@ -709,7 +709,7 @@ Final2:
             Tc_inf = Tc_inf - delta_Tc
             Tc_sup = Tc_inf
 
-            'método de Brent para encontrar Tc
+            'metodo de Brent para encontrar Tc
 
             Dim aa, bb, cc, dd, ee, min1, min2, fa, fb, fc, pp, qq, rr, ss, tol1, xm As Double
             Dim ITMAX As Integer = 100
@@ -871,7 +871,7 @@ Final2:
             Dim Tc(n), Pc(n)
             Dim b As Double
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             R = 8.314
 
@@ -891,7 +891,7 @@ Final2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             If Vmax = 0 Then Vmax = b * multipl
             Vmin = b * 1.05
@@ -947,7 +947,7 @@ Final2:
             Tc_sup = Tc_inf
             Tc_inf = Tc_inf - delta_Tc
 
-            'método de Brent para encontrar Tc
+            'metodo de Brent para encontrar Tc
 
             Dim aa, bb, cc, dd, ee, min1, min2, fa, fb, fc, pp, qq, rr, ss, tol1, xm As Double
             Dim ITMAX As Integer = 100
@@ -1053,7 +1053,7 @@ Final2:
             Dim Tc(n), Pc(n)
             Dim b As Double
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             R = 8.314
 
@@ -1073,7 +1073,7 @@ Final2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             Vc_inf = 4 * b
             If Vinf <> 0 Then Vc_inf = Vinf
@@ -1095,7 +1095,7 @@ restart:        fV = TRIPLESUM(Vc_inf, Vz, VTc, VPc, VVc, Vw, VKIj)
 
             If Vc_inf <= b Then GoTo Final2
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 100
@@ -1223,7 +1223,7 @@ Final2:
             Dim ai(n), b(n), c(n), tmp(2, n + 1), a(n, n), am2(n)
             Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), Tr(n)
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             R = 8.314
 
@@ -1423,7 +1423,7 @@ Final2:
             Tc_sup = Tc_inf
             Tc_inf = Tc_inf - delta_Tc
 
-            'método de Brent para encontrar Tc
+            'metodo de Brent para encontrar Tc
 
             Dim aa, bb, cc, dd, ee, min1, min2, fa, fb, fc, pp, qq, rr, ss, tol1, xm As Double
             Dim ITMAX As Integer = 100
@@ -1725,7 +1725,7 @@ Final2:
             Tc_inf = Tc_inf - delta_Tc
             Tc_sup = Tc_inf
 
-            'método de Brent para encontrar Tc
+            'metodo de Brent para encontrar Tc
 
             Dim aa, bb, cc, dd, ee, min1, min2, fa, fb, fc, pp, qq, rr, ss, tol1, xm As Double
             Dim ITMAX As Integer = 100
@@ -1887,7 +1887,7 @@ Final2:
             Dim Tc(n), Pc(n)
             Dim b As Double
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             R = 8.314
 
@@ -1907,7 +1907,7 @@ Final2:
                 i = i + 1
             Loop Until i = n + 1
 
-            'estimar temperatura e pressão críticas iniciais
+            'estimar temperatura e pressao criticas iniciais
 
             If Vmax = 0 Then Vmax = b * multipl
             Vmin = b * 1.05
@@ -1963,7 +1963,7 @@ Final2:
             Tc_sup = Tc_inf
             Tc_inf = Tc_inf - delta_Tc
 
-            'método de Brent para encontrar Tc
+            'metodo de Brent para encontrar Tc
 
             Dim aa, bb, cc, dd, ee, min1, min2, fa, fb, fc, pp, qq, rr, ss, tol1, xm As Double
             Dim ITMAX As Integer = 100

@@ -280,7 +280,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 
             End If
 
-            'Calculo das propriedades críticas
+            'Calculo das propriedades criticas
 
             Dim Tc_p(n - 1), Pc_p(n - 1), w_p(n - 1) As Double
 

@@ -317,7 +317,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     .EnergyFlow = Nothing

@@ -35,13 +35,13 @@ Partial Class frmSurface
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CopiarParaAÁreaDeTransferênciaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarParaAareaDeTransferenciaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExibirTudoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ZoomPadrão100ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ZoomPadrao100ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CentralizarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CMS_Sel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.TSMI_Label = New System.Windows.Forms.ToolStripMenuItem()
@@ -72,7 +72,7 @@ Partial Class frmSurface
         Me.MostrarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfigurarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreviewDialog = New System.Windows.Forms.PrintPreviewDialog()
         Me.designSurfacePrintDocument = New System.Drawing.Printing.PrintDocument()
         Me.CMS_ItemsToConnect = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -165,7 +165,7 @@ Partial Class frmSurface
         'CMS_NoSel
         '
         resources.ApplyResources(Me.CMS_NoSel, "CMS_NoSel")
-        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem5, Me.CopiarParaAÁreaDeTransferênciaToolStripMenuItem, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrão100ToolStripMenuItem, Me.CentralizarToolStripMenuItem})
+        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem5, Me.CopiarParaAareaDeTransferenciaToolStripMenuItem, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem})
         Me.CMS_NoSel.Name = "ContextMenuStrip1"
         '
         'ToolStripMenuItem3
@@ -190,12 +190,12 @@ Partial Class frmSurface
         Me.ToolStripMenuItem5.Image = Global.DWSIM.My.Resources.Resources.printer
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
         '
-        'CopiarParaAÁreaDeTransferênciaToolStripMenuItem
+        'CopiarParaAareaDeTransferenciaToolStripMenuItem
         '
-        resources.ApplyResources(Me.CopiarParaAÁreaDeTransferênciaToolStripMenuItem, "CopiarParaAÁreaDeTransferênciaToolStripMenuItem")
-        Me.CopiarParaAÁreaDeTransferênciaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripMenuItem8, Me.ToolStripMenuItem10})
-        Me.CopiarParaAÁreaDeTransferênciaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.images
-        Me.CopiarParaAÁreaDeTransferênciaToolStripMenuItem.Name = "CopiarParaAÁreaDeTransferênciaToolStripMenuItem"
+        resources.ApplyResources(Me.CopiarParaAareaDeTransferenciaToolStripMenuItem, "CopiarParaAareaDeTransferenciaToolStripMenuItem")
+        Me.CopiarParaAareaDeTransferenciaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem4, Me.ToolStripMenuItem8, Me.ToolStripMenuItem10})
+        Me.CopiarParaAareaDeTransferenciaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.images
+        Me.CopiarParaAareaDeTransferenciaToolStripMenuItem.Name = "CopiarParaAareaDeTransferenciaToolStripMenuItem"
         '
         'ToolStripMenuItem1
         '
@@ -227,11 +227,11 @@ Partial Class frmSurface
         Me.ExibirTudoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.zoom_extend
         Me.ExibirTudoToolStripMenuItem.Name = "ExibirTudoToolStripMenuItem"
         '
-        'ZoomPadrão100ToolStripMenuItem
+        'ZoomPadrao100ToolStripMenuItem
         '
-        resources.ApplyResources(Me.ZoomPadrão100ToolStripMenuItem, "ZoomPadrão100ToolStripMenuItem")
-        Me.ZoomPadrão100ToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.zoom_refresh
-        Me.ZoomPadrão100ToolStripMenuItem.Name = "ZoomPadrão100ToolStripMenuItem"
+        resources.ApplyResources(Me.ZoomPadrao100ToolStripMenuItem, "ZoomPadrao100ToolStripMenuItem")
+        Me.ZoomPadrao100ToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.zoom_refresh
+        Me.ZoomPadrao100ToolStripMenuItem.Name = "ZoomPadrao100ToolStripMenuItem"
         '
         'CentralizarToolStripMenuItem
         '
@@ -242,7 +242,7 @@ Partial Class frmSurface
         'CMS_Sel
         '
         resources.ApplyResources(Me.CMS_Sel, "CMS_Sel")
-        Me.CMS_Sel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMI_Label, Me.ToolStripSeparator3, Me.RecalcularToolStripMenuItem, Me.EditCompTSMI, Me.CopyFromTSMI, Me.RestoreTSMI, Me.DepurarObjetoToolStripMenuItem, Me.ToolStripSeparator6, Me.ConectarAToolStripMenuItem, Me.DesconectarDeToolStripMenuItem, Me.ToolStripSeparator4, Me.TSMI_Girar, Me.HorizontalmenteToolStripMenuItem, Me.ToolStripSeparator2, Me.ClonarToolStripMenuItem, Me.ExcluirToolStripMenuItem, Me.ToolStripSeparator5, Me.TabelaToolStripMenuItem, Me.ToolStripSeparator7, Me.CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem})
+        Me.CMS_Sel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMI_Label, Me.ToolStripSeparator3, Me.RecalcularToolStripMenuItem, Me.EditCompTSMI, Me.CopyFromTSMI, Me.RestoreTSMI, Me.DepurarObjetoToolStripMenuItem, Me.ToolStripSeparator6, Me.ConectarAToolStripMenuItem, Me.DesconectarDeToolStripMenuItem, Me.ToolStripSeparator4, Me.TSMI_Girar, Me.HorizontalmenteToolStripMenuItem, Me.ToolStripSeparator2, Me.ClonarToolStripMenuItem, Me.ExcluirToolStripMenuItem, Me.ToolStripSeparator5, Me.TabelaToolStripMenuItem, Me.ToolStripSeparator7, Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem})
         Me.CMS_Sel.Name = "CMS_Sel"
         '
         'TSMI_Label
@@ -403,11 +403,11 @@ Partial Class frmSurface
         resources.ApplyResources(Me.ToolStripSeparator7, "ToolStripSeparator7")
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
         '
-        'CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem
+        'CopiarDadosParaareaDeTransferenciaToolStripMenuItem
         '
-        resources.ApplyResources(Me.CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem, "CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem")
-        Me.CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.clipboard_sign
-        Me.CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem.Name = "CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem"
+        resources.ApplyResources(Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem, "CopiarDadosParaareaDeTransferenciaToolStripMenuItem")
+        Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.clipboard_sign
+        Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Name = "CopiarDadosParaareaDeTransferenciaToolStripMenuItem"
         '
         'PreviewDialog
         '
@@ -574,7 +574,7 @@ Partial Class frmSurface
     Public WithEvents RecalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents EditCompTSMI As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CopiarParaAÁreaDeTransferênciaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CopiarParaAareaDeTransferenciaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem8 As System.Windows.Forms.ToolStripMenuItem
@@ -585,12 +585,12 @@ Partial Class frmSurface
     Public WithEvents PicSimultAdjust As System.Windows.Forms.PictureBox
     Public WithEvents LabelSimultAdjustStatus As System.Windows.Forms.Label
     Public WithEvents LabelSimultAdjInfo As System.Windows.Forms.Label
-    Friend WithEvents CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CopiarDadosParaareaDeTransferenciaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents RestoreTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CopyFromTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExibirTudoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ZoomPadrão100ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ZoomPadrao100ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CentralizarToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents dckMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents FloatToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

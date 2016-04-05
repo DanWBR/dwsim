@@ -582,7 +582,7 @@ FINAL:
 
         'Public Overrides Sub DW_CalcOverallProps()
 
-        '    'frações molares/mássicas das Phases
+        '    'fracoes molares/massicas das Phases
         '    Dim xmv, xml, xwv, xwl As Double
 
         '    xmv = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault

@@ -141,7 +141,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             P2 = Pi - Me.DeltaP.GetValueOrDefault
 
-            'Atribuir valores à corrente de matéria conectada à jusante
+            'Atribuir valores a corrente de materia conectada a jusante
             With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 .Phases(0).Properties.temperature = Ti
                 .Phases(0).Properties.pressure = P2
@@ -175,7 +175,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
-                'Zerar valores da corrente de matéria conectada a jusante
+                'Zerar valores da corrente de materia conectada a jusante
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing

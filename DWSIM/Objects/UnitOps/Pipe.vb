@@ -305,7 +305,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                 oms.Validate()
 
-                'Iteração para cada segmento
+                'Iteracao para cada segmento
                 Dim count As Integer = 0
 
                 Dim j As Integer = 0
@@ -376,11 +376,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                             If Tin > Text And Tout < Text Then Tout = Text * 1.02
 
                             cntT = 0
-                            'Loop externo (convergência do Delta T)
+                            'Loop externo (convergencia do Delta T)
                             Do
 
                                 cntP = 0
-                                'Loop interno (convergência do Delta P)
+                                'Loop interno (convergencia do Delta P)
                                 Do
 
                                     With segmento
@@ -792,7 +792,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Me.DeltaT = -(TinP - Tout)
             Me.DeltaQ = -(HinP - Hout) * Win
 
-            'Atribuir valores à corrente de matéria conectada à jusante
+            'Atribuir valores a corrente de materia conectada a jusante
             With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 .Phases(0).Properties.temperature = Tout
                 .Phases(0).Properties.pressure = Pout
@@ -805,7 +805,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 .Phases(0).Properties.massflow = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name).Phases(0).Properties.massflow.GetValueOrDefault
             End With
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
             With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                 .EnergyFlow = -Me.DeltaQ.Value
                 .GraphicObject.Calculated = True
@@ -835,7 +835,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 segmento.Resultados.Clear()
             Next
 
-            'Zerar valores da corrente de matéria conectada a jusante
+            'Zerar valores da corrente de materia conectada a jusante
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                     .Phases(0).Properties.temperature = Nothing
@@ -856,7 +856,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 End With
             End If
 
-            'Corrente de EnergyFlow - atualizar valor da potência (kJ/s)
+            'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
             If Me.GraphicObject.EnergyConnector.IsAttached Then
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
                     .EnergyFlow = Nothing
@@ -878,7 +878,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         End Function
 
-#Region "        Funções"
+#Region "        Funcoes"
 
         Function Kfit(ByVal name2 As String) As Array
 
@@ -901,72 +901,72 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 tmp(0) = 50
                 tmp(1) = 1
             End If
-            'Válvula Angular;55,00;1;
+            'Valvula Angular;55,00;1;
             If name = 3 Then
                 tmp(0) = 55
                 tmp(1) = 1
             End If
-            'Válvula Borboleta (2" a 14");40,00;1;
+            'Valvula Borboleta (2" a 14");40,00;1;
             If name = 4 Then
                 tmp(0) = 40
                 tmp(1) = 1
             End If
-            'Válvula Esfera;3,00;1;
+            'Valvula Esfera;3,00;1;
             If name = 5 Then
                 tmp(0) = 3
                 tmp(1) = 1
             End If
-            'Válvula Gaveta (Aberta);8,00;1;
+            'Valvula Gaveta (Aberta);8,00;1;
             If name = 6 Then
                 tmp(0) = 8
                 tmp(1) = 1
             End If
-            'Válvula Globo;340,00;1;
+            'Valvula Globo;340,00;1;
             If name = 7 Then
                 tmp(0) = 340
                 tmp(1) = 1
             End If
-            'Válvula Lift-Check;600,00;1;
+            'Valvula Lift-Check;600,00;1;
             If name = 8 Then
                 tmp(0) = 600
                 tmp(1) = 1
             End If
-            'Válvula Pé (Poppet Disc);420,00;1;
+            'Valvula Pe (Poppet Disc);420,00;1;
             If name = 9 Then
                 tmp(0) = 420
                 tmp(1) = 1
             End If
-            'Válvula Retenção de Portinhola;100,00;1;
+            'Valvula Retencao de Portinhola;100,00;1;
             If name = 10 Then
                 tmp(0) = 100
                 tmp(1) = 1
             End If
-            'Válvula Stop-Check (Globo);400,00;1;
+            'Valvula Stop-Check (Globo);400,00;1;
             If name = 11 Then
                 tmp(0) = 400
                 tmp(1) = 1
             End If
-            'Tê (saída bilateral);20,00;1;
+            'Te (saida bilateral);20,00;1;
             If name = 12 Then
                 tmp(0) = 20
                 tmp(1) = 1
             End If
-            'Tê (saída de lado);60,00;1;
+            'Te (saida de lado);60,00;1;
             If name = 13 Then
                 tmp(0) = 60
                 tmp(1) = 1
             End If
-            'Contração Rápida d/D = 1/2;9,60;0;
+            'Contracao Rapida d/D = 1/2;9,60;0;
             If name = 14 Then
                 tmp(0) = 9.6
                 tmp(1) = 0
             End If
-            'Contração Rápida d/D = 1/4;96,00;0;
+            'Contracao Rapida d/D = 1/4;96,00;0;
             If name = 15 Then
                 tmp(0) = 96
                 tmp(1) = 0
             End If
-            'Contração Rápida d/D = 3/4;1,11;0;
+            'Contracao Rapida d/D = 3/4;1,11;0;
             If name = 16 Then
                 tmp(0) = 11
                 tmp(1) = 0
@@ -981,17 +981,17 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 tmp(0) = 0.78
                 tmp(1) = 0
             End If
-            'Expansão Rápida d/D = 1/2;9,00;0;
+            'Expansao Rapida d/D = 1/2;9,00;0;
             If name = 19 Then
                 tmp(0) = 9
                 tmp(1) = 0
             End If
-            'Expansão Rápida d/D = 1/4;225,00;0;
+            'Expansao Rapida d/D = 1/4;225,00;0;
             If name = 20 Then
                 tmp(0) = 225
                 tmp(1) = 0
             End If
-            'Expansão Rápida d/D = 3/4;0,60;0;
+            'Expansao Rapida d/D = 3/4;0,60;0;
             If name = 21 Then
                 tmp(0) = 0.6
                 tmp(1) = 0
@@ -1001,22 +1001,22 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 tmp(0) = 60
                 tmp(1) = 1
             End If
-            'Redução Normal 2:1;5,67;0;
+            'Reducao Normal 2:1;5,67;0;
             If name = 23 Then
                 tmp(0) = 5.67
                 tmp(1) = 0
             End If
-            'Redução Normal 4:3;0,65;0;
+            'Reducao Normal 4:3;0,65;0;
             If name = 24 Then
                 tmp(0) = 0.65
                 tmp(1) = 0
             End If
-            'Saída Borda;1,00;0;
+            'Saida Borda;1,00;0;
             If name = 25 Then
                 tmp(0) = 1
                 tmp(1) = 0
             End If
-            'Saída Normal;1,00;0;
+            'Saida Normal;1,00;0;
             If name = 26 Then
                 tmp(0) = 1
                 tmp(1) = 0
@@ -1033,9 +1033,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             'Espuma de Poliuretano
             'Espuma de PVC
             'Fibra de vidro
-            'Plástico
+            'Plastico
             'Vidro
-            'Definido pelo usuário
+            'Definido pelo usuario
 
             cond_isol = 0
 
@@ -1096,7 +1096,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Function k_parede(ByVal material As String, ByVal T As Double) As Double
 
             Dim kp As Double
-            'condutividade térmica da parede do duto, em W/m.K
+            'condutividade termica da parede do duto, em W/m.K
 
             If material = DWSIM.App.GetLocalString("AoComum") Then kp = -0.000000004 * T ^ 3 - 0.00002 * T ^ 2 + 0.021 * T + 33.743
             If material = DWSIM.App.GetLocalString("AoCarbono") Then kp = 0.000000007 * T ^ 3 - 0.00002 * T ^ 2 - 0.0291 * T + 70.765
@@ -1328,10 +1328,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             'viscosidade
             Dim mu = rho * (0.000001 * (0.00009 * T ^ 2 + 0.035 * T - 2.9346))
 
-            'capacidade calorífica
+            'capacidade calorifica
             Dim Cp = 0.000000000001 * T ^ 4 - 0.000000003 * T ^ 3 + 0.000002 * T ^ 2 - 0.0008 * T + 1.091
 
-            'condutividade térmica
+            'condutividade termica
             Dim k = -0.00000002 * T ^ 2 + 0.00009 * T + 0.0012
 
             Dim tmp2(3)
@@ -1368,10 +1368,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             'viscosidade
             Dim mu = Me.m_iapws97.viscW(T, P / 100000)
 
-            'capacidade calorífica
+            'capacidade calorifica
             Dim Cp = Me.m_iapws97.cpW(T, P / 100000)
 
-            'condutividade térmica
+            'condutividade termica
             Dim k = Me.m_iapws97.thconW(T, P / 100000)
 
             Dim tmp2(3)
@@ -1415,7 +1415,7 @@ START_LOOP:
             Tsup = Tinf
             Tinf = Tinf - delta_T
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 10000

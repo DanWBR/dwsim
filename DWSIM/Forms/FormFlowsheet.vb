@@ -1065,11 +1065,11 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         frmpc.ShowDialog(Me)
     End Sub
 
-    Private Sub PontoCríticoRealToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PontoCríticoRealToolStripMenuItem.Click
+    Private Sub PontoCriticoRealToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PontoCriticoRealToolStripMenuItem.Click
         Me.FormCritPt.ShowDialog(Me)
     End Sub
 
-    Private Sub DiagramaDePhasesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiagramaDePhasesToolStripMenuItem.Click
+    Private Sub DiagramaDePhasesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.FormStabAn.ShowDialog(Me)
     End Sub
 
@@ -1089,7 +1089,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorDesativado1")
     End Sub
 
-    Private Sub HYDVerificaçãoDasCondiçõesDeFormaçãoDeHidratosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HYDVerificaçãoDasCondiçõesDeFormaçãoDeHidratosToolStripMenuItem.Click
+    Private Sub HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem.Click
         Me.FormHid = New FormHYD
         Me.FormHid.Show(Me.dckPanel)
     End Sub
@@ -1102,11 +1102,11 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.FormLLEDiag = New FormLLEDiagram
         Me.FormLLEDiag.Show(Me.dckPanel)
     End Sub
-    Private Sub DiagramaBinárioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiagramaBinárioToolStripMenuItem.Click
+    Private Sub DiagramaBinarioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiagramaBinarioToolStripMenuItem.Click
         Me.FormBE = New FormBinEnv
         Me.FormBE.Show(Me.dckPanel)
     End Sub
-    Private Sub FecharSimulaçãoAtualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseToolStripMenuItem.Click
+    Private Sub FecharSimulacaoAtualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
     End Sub
 
@@ -1118,7 +1118,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.FormVS.ShowDialog(Me)
     End Sub
 
-    Private Sub PropriedadesDePetróleosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PropriedadesDePetróleosToolStripMenuItem.Click
+    Private Sub PropriedadesDePetroleosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PropriedadesDePetroleosToolStripMenuItem.Click
         Me.FormColdP = New FrmColdProperties
         Me.FormColdP.Show(Me.dckPanel)
     End Sub
@@ -1142,7 +1142,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.CalculationQueue.Clear()
     End Sub
 
-    Private Sub AnáliseDeSensibilidadeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AnáliseDeSensibilidadeToolStripMenuItem.Click
+    Private Sub AnaliseDeSensibilidadeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AnaliseDeSensibilidadeToolStripMenuItem.Click
         Me.FormSensAnalysis0 = New FormSensAnalysis
         Me.FormSensAnalysis0.Show(Me.dckPanel)
     End Sub
@@ -1152,16 +1152,16 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.FormOptimization0.Show(Me.dckPanel)
     End Sub
 
-    Private Sub GerenciadorDeReaçõesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeReaçõesToolStripMenuItem.Click
+    Private Sub GerenciadorDeReacoesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeReacoesToolStripMenuItem.Click
         Dim rm As New FormReacManager
         rm.Show(Me.dckPanel)
     End Sub
 
-    Private Sub CaracterizaçãoDePetróleosFraçõesC7ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizaçãoDePetróleosFraçõesC7ToolStripMenuItem.Click
+    Private Sub CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Click
         Me.FrmPCBulk.ShowDialog(Me)
     End Sub
 
-    Private Sub CaracterizaçãoDePetróleosCurvasDeDestilaçãoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizaçãoDePetróleosCurvasDeDestilaçãoToolStripMenuItem.Click
+    Private Sub CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Click
         Dim frmdc As New DCCharacterizationWizard
         frmdc.ShowDialog(Me)
     End Sub
@@ -1211,7 +1211,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         fs.Show(Me.dckPanel)
     End Sub
 
-    Private Sub ExibirSaídaDoConsoleToolStripMenuItem_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles consoletsmi.CheckedChanged
+    Private Sub ExibirSaidaDoConsoleToolStripMenuItem_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles consoletsmi.CheckedChanged
         If consoletsmi.Checked Then
             FormOutput.Show(dckPanel)
         Else
@@ -1229,7 +1229,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.Options.FlowsheetShowCalculationQueue = ExibirListaDeItensACalcularToolStripMenuItem.Checked
     End Sub
 
-    Private Sub ExibirRelatóriosDosObjetosCAPEOPENToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles COObjTSMI.CheckedChanged
+    Private Sub ExibirRelatoriosDosObjetosCAPEOPENToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles COObjTSMI.CheckedChanged
         If COObjTSMI.Checked Then
             FormCOReports.Show(dckPanel)
         Else
@@ -1238,7 +1238,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.Options.FlowsheetShowCOReportsWindow = COObjTSMI.Checked
     End Sub
 
-    Private Sub PainelDeVariáveisToolStripMenuItem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles varpaneltsmi.CheckedChanged
+    Private Sub PainelDeVariaveisToolStripMenuItem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles varpaneltsmi.CheckedChanged
         If varpaneltsmi.Checked Then
             FormWatch.Show(dckPanel)
         Else
@@ -1282,10 +1282,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton8.Click
-        Call Me.GerarRelatórioToolStripMenuItem_Click(sender, e)
+        Call Me.GerarRelatorioToolStripMenuItem_Click(sender, e)
     End Sub
 
-    Private Sub GerarRelatórioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerarRelatórioToolStripMenuItem.Click
+    Private Sub GerarRelatorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerarRelatorioToolStripMenuItem.Click
         Me.FrmReport.Show(Me)
     End Sub
 
@@ -1357,7 +1357,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
 
-    Private Sub GerenciadorDeAmostrasDePetróleoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeAmostrasDePetróleoToolStripMenuItem.Click
+    Private Sub GerenciadorDeAmostrasDePetroleoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Click
         Dim frmam As New FormAssayManager
         frmam.ShowDialog(Me)
         Try
@@ -2166,7 +2166,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 .Item(.Item.Count - 1).Tag2 = "GradientColor1"
                 .Item.Add("Gradiente_Cor2", gobj, "GradientColor2", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Cor2dogradienteseapl"), True)
                 .Item(.Item.Count - 1).Tag2 = "GradientColor2"
-                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj, "FillColor", False, DWSIM.App.GetLocalString("Aparncia2"), "Cor de fundo, caso o modo de gradiente não esteja ativado", True)
+                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj, "FillColor", False, DWSIM.App.GetLocalString("Aparncia2"), "Cor de fundo, caso o modo de gradiente nao esteja ativado", True)
                 .Item(.Item.Count - 1).Tag2 = "FillColor"
                 .Item.Add(DWSIM.App.GetLocalString("EspessuradaBorda"), gobj, "LineWidth", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Espessuradabordadoob"), True)
                 .Item(.Item.Count - 1).Tag2 = "LineWidth"

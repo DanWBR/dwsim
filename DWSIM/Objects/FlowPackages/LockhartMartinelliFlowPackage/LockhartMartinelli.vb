@@ -92,7 +92,7 @@ Namespace DWSIM.FlowPackages
                 'rhov e rhol em kg/m3
                 'sigma em N/m
 
-                'LM_DP - Cálculo da perda de carga utilizando o método de Lockhart-Martinelli (1949)
+                'LM_DP - Calculo da perda de carga utilizando o metodo de Lockhart-Martinelli (1949)
 
                 Dim g, teta, Cg, Cl, A, Vm, Vsl, Vsg As Double
                 Dim Re_SL, Re_SG, fsl, fsg, a1, b1, dP_SL, dP_SG

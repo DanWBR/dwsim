@@ -167,7 +167,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             If Not DebugMode Then
 
-                'Atribuir valores à corrente de matéria conectada à jusante
+                'Atribuir valores a corrente de materia conectada a jusante
                 Dim omstr As MaterialStream = form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 With omstr
                     .Phases(0).Properties.temperature = T2
@@ -209,7 +209,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
-                'Zerar valores da corrente de matéria conectada a jusante
+                'Zerar valores da corrente de materia conectada a jusante
                 With form.Collections.FlowsheetObjectCollection(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing

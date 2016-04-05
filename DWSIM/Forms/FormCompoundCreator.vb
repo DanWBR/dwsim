@@ -1313,7 +1313,7 @@ Public Class FormCompoundCreator
 
         Select Case tipo
             Case 0
-                'regressão dos dados
+                'regressao dos dados
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataPVAP, 0), CopyToVector(mycase.DataPVAP, 1), c_pv.Clone, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Pvap, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_pv = obj(0)
                 r_pv = obj(2)
@@ -1337,7 +1337,7 @@ Public Class FormCompoundCreator
                     c_cp(3) = Me.jb.CalcCpD(JGD)
                     obj = New Integer() {0, 0, 0, 10}
                 Else
-                    'regressão dos dados
+                    'regressao dos dados
                     obj = lmfit.GetCoeffs(CopyToVector(mycase.DataCPIG, 0), CopyToVector(mycase.DataCPIG, 1), c_cp, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     c_cp = obj(0)
                     r_cp = obj(2)
@@ -1345,7 +1345,7 @@ Public Class FormCompoundCreator
                 End If
 
             Case 2
-                'regressão dos dados
+                'regressao dos dados
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataLVISC, 0), CopyToVector(mycase.DataLVISC, 1), c_vi, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.LiqVisc, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_vi = obj(0)
                 r_vi = obj(2)
@@ -1370,27 +1370,27 @@ Public Class FormCompoundCreator
                 c_de(1) = 1 / Exp(Exp(bl))
                 c_de(0) = c_de(1) * rhoc
 
-                'regressão dos dados
+                'regressao dos dados
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataLDENS, 0), CopyToVector(mycase.DataLDENS, 1), c_de, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.LiqDens, 0.00001, 0.00001, 0.00001, 10000)
                 c_de = obj(0)
                 r_de = obj(2)
                 n_de = obj(3)
 
             Case 4
-                'regressão dos dados - solid density
+                'regressao dos dados - solid density
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataRoS, 0), CopyToVector(mycase.DataRoS, 1), c_sd, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000000001, 0.0000000000001, 0.0000000000001, 10000)
                 c_sd = obj(0)
                 r_sd = obj(2)
                 n_sd = obj(3)
 
             Case 5
-                'regressão dos dados - solid heat capacity
+                'regressao dos dados - solid heat capacity
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataCpS, 0), CopyToVector(mycase.DataCpS, 1), c_scp, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_scp = obj(0)
                 r_scp = obj(2)
                 n_scp = obj(3)
             Case 6
-                'regressão dos dados - liquid heat capacity
+                'regressao dos dados - liquid heat capacity
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataCPLiquid, 0), CopyToVector(mycase.DataCPLiquid, 1), c_cpl, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_cpl = obj(0)
                 r_cpl = obj(2)

@@ -32,7 +32,7 @@ Partial Class FormMain
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NovoEstudoDeRegressãoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoRegressaoUNIFACIPs = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -45,7 +45,7 @@ Partial Class FormMain
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PreferênciasDoDWSIMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PreferenciasDoDWSIMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatabaseManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiAdditionalConfig = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,14 +57,14 @@ Partial Class FormMain
         Me.MostrarBarraDeFerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DocumentaçãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ManualTécnicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GuiaDoUsuárioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ManualTecnicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GuiaDoUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.DWSIMNaInternetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DownloadsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FórumToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ForumToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RastreamentoDeBugsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistrarTiposCOMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -123,7 +123,7 @@ Partial Class FormMain
         'FileToolStripMenuItem
         '
         resources.ApplyResources(Me.FileToolStripMenuItem, "FileToolStripMenuItem")
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressãoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.ToolStripMenuItem1, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.ToolStripMenuItem1, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         '
@@ -139,11 +139,11 @@ Partial Class FormMain
         Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.wi0124_16
         Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Name = "NovoEstudoDoCriadorDeComponentesToolStripMenuItem"
         '
-        'NovoEstudoDeRegressãoDeDadosToolStripMenuItem
+        'NovoEstudoDeRegressaoDeDadosToolStripMenuItem
         '
-        resources.ApplyResources(Me.NovoEstudoDeRegressãoDeDadosToolStripMenuItem, "NovoEstudoDeRegressãoDeDadosToolStripMenuItem")
-        Me.NovoEstudoDeRegressãoDeDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.chart_line
-        Me.NovoEstudoDeRegressãoDeDadosToolStripMenuItem.Name = "NovoEstudoDeRegressãoDeDadosToolStripMenuItem"
+        resources.ApplyResources(Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, "NovoEstudoDeRegressaoDeDadosToolStripMenuItem")
+        Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.chart_line
+        Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Name = "NovoEstudoDeRegressaoDeDadosToolStripMenuItem"
         '
         'NovoRegressaoUNIFACIPs
         '
@@ -211,16 +211,16 @@ Partial Class FormMain
         'VerToolStripMenuItem
         '
         resources.ApplyResources(Me.VerToolStripMenuItem, "VerToolStripMenuItem")
-        Me.VerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PreferênciasDoDWSIMToolStripMenuItem})
+        Me.VerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PreferenciasDoDWSIMToolStripMenuItem})
         Me.VerToolStripMenuItem.Name = "VerToolStripMenuItem"
         Me.VerToolStripMenuItem.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         '
-        'PreferênciasDoDWSIMToolStripMenuItem
+        'PreferenciasDoDWSIMToolStripMenuItem
         '
-        resources.ApplyResources(Me.PreferênciasDoDWSIMToolStripMenuItem, "PreferênciasDoDWSIMToolStripMenuItem")
-        Me.PreferênciasDoDWSIMToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.application_edit
-        Me.PreferênciasDoDWSIMToolStripMenuItem.MergeIndex = 12
-        Me.PreferênciasDoDWSIMToolStripMenuItem.Name = "PreferênciasDoDWSIMToolStripMenuItem"
+        resources.ApplyResources(Me.PreferenciasDoDWSIMToolStripMenuItem, "PreferenciasDoDWSIMToolStripMenuItem")
+        Me.PreferenciasDoDWSIMToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.application_edit
+        Me.PreferenciasDoDWSIMToolStripMenuItem.MergeIndex = 12
+        Me.PreferenciasDoDWSIMToolStripMenuItem.Name = "PreferenciasDoDWSIMToolStripMenuItem"
         '
         'FerramentasToolStripMenuItem
         '
@@ -289,7 +289,7 @@ Partial Class FormMain
         'HelpToolStripMenuItem
         '
         resources.ApplyResources(Me.HelpToolStripMenuItem, "HelpToolStripMenuItem")
-        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.DocumentaçãoToolStripMenuItem, Me.toolStripSeparator5, Me.DWSIMNaInternetToolStripMenuItem, Me.RegistroToolStripMenuItem, Me.DonateToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.DocumentacaoToolStripMenuItem, Me.toolStripSeparator5, Me.DWSIMNaInternetToolStripMenuItem, Me.RegistroToolStripMenuItem, Me.DonateToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.HelpToolStripMenuItem.MergeIndex = 102
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
@@ -300,23 +300,23 @@ Partial Class FormMain
         Me.ContentsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.help
         Me.ContentsToolStripMenuItem.Name = "ContentsToolStripMenuItem"
         '
-        'DocumentaçãoToolStripMenuItem
+        'DocumentacaoToolStripMenuItem
         '
-        resources.ApplyResources(Me.DocumentaçãoToolStripMenuItem, "DocumentaçãoToolStripMenuItem")
-        Me.DocumentaçãoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManualTécnicoToolStripMenuItem, Me.GuiaDoUsuárioToolStripMenuItem})
-        Me.DocumentaçãoToolStripMenuItem.Name = "DocumentaçãoToolStripMenuItem"
+        resources.ApplyResources(Me.DocumentacaoToolStripMenuItem, "DocumentacaoToolStripMenuItem")
+        Me.DocumentacaoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManualTecnicoToolStripMenuItem, Me.GuiaDoUsuarioToolStripMenuItem})
+        Me.DocumentacaoToolStripMenuItem.Name = "DocumentacaoToolStripMenuItem"
         '
-        'ManualTécnicoToolStripMenuItem
+        'ManualTecnicoToolStripMenuItem
         '
-        resources.ApplyResources(Me.ManualTécnicoToolStripMenuItem, "ManualTécnicoToolStripMenuItem")
-        Me.ManualTécnicoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white_acrobat
-        Me.ManualTécnicoToolStripMenuItem.Name = "ManualTécnicoToolStripMenuItem"
+        resources.ApplyResources(Me.ManualTecnicoToolStripMenuItem, "ManualTecnicoToolStripMenuItem")
+        Me.ManualTecnicoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white_acrobat
+        Me.ManualTecnicoToolStripMenuItem.Name = "ManualTecnicoToolStripMenuItem"
         '
-        'GuiaDoUsuárioToolStripMenuItem
+        'GuiaDoUsuarioToolStripMenuItem
         '
-        resources.ApplyResources(Me.GuiaDoUsuárioToolStripMenuItem, "GuiaDoUsuárioToolStripMenuItem")
-        Me.GuiaDoUsuárioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white_acrobat
-        Me.GuiaDoUsuárioToolStripMenuItem.Name = "GuiaDoUsuárioToolStripMenuItem"
+        resources.ApplyResources(Me.GuiaDoUsuarioToolStripMenuItem, "GuiaDoUsuarioToolStripMenuItem")
+        Me.GuiaDoUsuarioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white_acrobat
+        Me.GuiaDoUsuarioToolStripMenuItem.Name = "GuiaDoUsuarioToolStripMenuItem"
         '
         'toolStripSeparator5
         '
@@ -326,7 +326,7 @@ Partial Class FormMain
         'DWSIMNaInternetToolStripMenuItem
         '
         resources.ApplyResources(Me.DWSIMNaInternetToolStripMenuItem, "DWSIMNaInternetToolStripMenuItem")
-        Me.DWSIMNaInternetToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DownloadsToolStripMenuItem, Me.WikiToolStripMenuItem, Me.FórumToolStripMenuItem, Me.RastreamentoDeBugsToolStripMenuItem})
+        Me.DWSIMNaInternetToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DownloadsToolStripMenuItem, Me.WikiToolStripMenuItem, Me.ForumToolStripMenuItem, Me.RastreamentoDeBugsToolStripMenuItem})
         Me.DWSIMNaInternetToolStripMenuItem.Name = "DWSIMNaInternetToolStripMenuItem"
         '
         'DownloadsToolStripMenuItem
@@ -339,10 +339,11 @@ Partial Class FormMain
         resources.ApplyResources(Me.WikiToolStripMenuItem, "WikiToolStripMenuItem")
         Me.WikiToolStripMenuItem.Name = "WikiToolStripMenuItem"
         '
-        'FórumToolStripMenuItem
+        'ForumToolStripMenuItem
         '
-        resources.ApplyResources(Me.FórumToolStripMenuItem, "FórumToolStripMenuItem")
-        Me.FórumToolStripMenuItem.Name = "FórumToolStripMenuItem"
+        resources.ApplyResources(Me.ForumToolStripMenuItem, "ForumToolStripMenuItem")
+        Me.ForumToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.world_go
+        Me.ForumToolStripMenuItem.Name = "ForumToolStripMenuItem"
         '
         'RastreamentoDeBugsToolStripMenuItem
         '
@@ -640,7 +641,7 @@ Partial Class FormMain
     Public WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
 
 
-    Public WithEvents PreferênciasDoDWSIMToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents PreferenciasDoDWSIMToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents TimerBackup As System.Windows.Forms.Timer
     Public WithEvents bgSaveBackup As System.ComponentModel.BackgroundWorker
 
@@ -780,7 +781,7 @@ Partial Class FormMain
     Public WithEvents DWSIMNaInternetToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents DownloadsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents WikiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents FórumToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents ForumToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents RastreamentoDeBugsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents DonateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
@@ -801,16 +802,16 @@ Partial Class FormMain
     Friend WithEvents tslupd As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents NovoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents NewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NovoEstudoDeRegressãoDeDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents NovoEstudoDeRegressaoDeDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NovoEstudoDoCriadorDeComponentesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveStudyDlg As System.Windows.Forms.SaveFileDialog
     Friend WithEvents SaveRegStudyDlg As System.Windows.Forms.SaveFileDialog
     Public WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NovoRegressaoUNIFACIPs As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveUnifacIPRegrDlg As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents DocumentaçãoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ManualTécnicoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents GuiaDoUsuárioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DocumentacaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ManualTecnicoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GuiaDoUsuarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SettingsPanel As System.Windows.Forms.Panel
     Friend WithEvents ButtonClose As System.Windows.Forms.Button
     Friend WithEvents VerToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem

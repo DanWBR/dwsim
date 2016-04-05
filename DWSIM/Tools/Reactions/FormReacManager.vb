@@ -81,7 +81,7 @@ Public Class FormReacManager
         End With
     End Sub
 
-    Private Sub KryptonContextMenuItem1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConversãoToolStripMenuItem.Click
+    Private Sub KryptonContextMenuItem1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConversaoToolStripMenuItem.Click
         Dim frc As New FormReacConv
         Dim result As MsgBoxResult = frc.ShowDialog()
         With Me.GridRxns.Rows
@@ -93,7 +93,7 @@ Public Class FormReacManager
         frc.Dispose()
     End Sub
 
-    Private Sub KryptonContextMenuItem2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EquilíbrioToolStripMenuItem.Click
+    Private Sub KryptonContextMenuItem2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EquilibrioToolStripMenuItem.Click
         Dim fre As New FormReacEq
         fre.ShowDialog()
         fre.Dispose()
@@ -105,7 +105,7 @@ Public Class FormReacManager
         End With
     End Sub
 
-    Private Sub KryptonContextMenuItem3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CinéticaToolStripMenuItem.Click
+    Private Sub KryptonContextMenuItem3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CineticaToolStripMenuItem.Click
         Dim frk As New FormReacKinetic
         frk.ShowDialog()
         frk.Dispose()
@@ -399,7 +399,7 @@ Public Class FormReacManager
 
     End Sub
 
-    Private Sub HeterogêneaCatalíticaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HeterogêneaCatalíticaToolStripMenuItem.Click
+    Private Sub HeterogeneaCataliticaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HeterogeneaCataliticaToolStripMenuItem.Click
         Dim frk As New FormReacHeterog
         frk.ShowDialog()
         frk.Dispose()

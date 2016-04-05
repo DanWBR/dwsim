@@ -1343,6 +1343,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Assets\data\bd.dat" />
     <None Include="Assets\data\biod_intparm_nrtl.dat" />
     <None Include="Assets\data\csid.dat" />

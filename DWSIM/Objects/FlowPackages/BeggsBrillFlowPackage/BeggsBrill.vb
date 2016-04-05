@@ -91,56 +91,56 @@ Namespace DWSIM.FlowPackages
             Else
 
 
-                'qv =  vazão de gás em m3/d reais
-                'ql = vazão de líquido em m3/d reais
-                'muv = viscosidade do gás em cP
-                'mul = viscosidade do líquido em cP
-                'rhov = densidade do gás em kg/m3
-                'rhol = densidade do líquido em kg/m3
-                'd = diâmetro da tubulação em metros
-                'l = comprimento da tubulação em metros
-                'deltaz = elevação da tubulação em metros
-                'surft = tensão superficial em N/m
+                'qv =  vazao de gas em m3/d reais
+                'ql = vazao de liquido em m3/d reais
+                'muv = viscosidade do gas em cP
+                'mul = viscosidade do liquido em cP
+                'rhov = densidade do gas em kg/m3
+                'rhol = densidade do liquido em kg/m3
+                'd = diametro da tubulacao em metros
+                'l = comprimento da tubulacao em metros
+                'deltaz = elevacao da tubulacao em metros
+                'surft = tensao superficial em N/m
                 'k = rugosidade do duto
 
-                'diâmetro de metros para ft
+                'diametro de metros para ft
                 D = D * 3.28084
 
-                'vazões de m3/d para ft3/s
+                'vazoes de m3/d para ft3/s
                 qv = qv / 24 * 0.00980963
                 ql = ql / 24 * 0.00980963
 
-                'massas específicas de kg/m3 para lb/ft3
+                'massas especificas de kg/m3 para lb/ft3
                 rhov = rhov * 0.062428
                 rhol = rhol * 0.062428
 
-                'tensão superficial de N/m para dyn/cm
+                'tensao superficial de N/m para dyn/cm
                 surft = surft * 1000
 
-                'distâncias de metros para ft
+                'distancias de metros para ft
                 L = L * 3.28084
                 deltaz = deltaz * 3.28084
 
-                'inclinação da tubulação (graus)
+                'inclinacao da tubulacao (graus)
                 Dim teta = Math.Asin(Math.Sin(deltaz / L)) * 180 / Math.PI
 
-                'área da seção transversal (ft2)
+                'area da secao transversal (ft2)
                 Dim ap = Math.PI * D ^ 2 / 4
 
                 'velocidade da mistura (ft/s)
                 Dim vm = (qv + ql) / ap
 
-                'fração volumétrica de líquido
+                'fracao volumetrica de liquido
                 Dim Cl = ql / (qv + ql)
 
-                'cálculo do regime de fluxo
+                'calculo do regime de fluxo
 
                 Dim L1 = 316 * Cl ^ 0.302
                 Dim L2 = 0.0009252 * Cl ^ -2.4684
                 Dim L3 = 0.1 * Cl ^ -1.4516
                 Dim L4 = 0.5 * Cl ^ -6.738
 
-                'Número de Froude p/ a mistura
+                'Numero de Froude p/ a mistura
                 Dim Frm = vm ^ 2 / (32.2 * D)
 
                 Dim fluxo As String
@@ -153,7 +153,7 @@ Namespace DWSIM.FlowPackages
                 If Cl >= 0.4 And Frm > L4 Then fluxo = ("Distribudo")
                 If Cl >= 0.01 And Frm > L2 And Frm < L3 Then fluxo = ("Transio")
 
-                'cálculo do ("liquidholdup") horizontal
+                'calculo do ("liquidholdup") horizontal
                 Dim El_0, El_teta As Double
                 If fluxo = ("Segregado") Then
                     El_0 = 0.98 * Cl ^ 0.4846 / (Frm ^ 0.0868)
@@ -167,7 +167,7 @@ Namespace DWSIM.FlowPackages
                     El_0 = AI * 0.98 * Cl ^ 0.4846 / (Frm ^ 0.0868) + BI * 0.845 * Cl ^ 0.5351 / (Frm ^ 0.0173)
                 End If
 
-                'calculo do fator de inclinação
+                'calculo do fator de inclinacao
                 Dim beta As Double
                 Dim vsl = ql / ap
                 Dim Nvl = 1.938 * vsl * (rhol / (32.2 * surft)) ^ 0.25
@@ -189,13 +189,13 @@ Namespace DWSIM.FlowPackages
 
                 El_teta = El_0 * B_teta
 
-                'cálculo da densidade da mistura
+                'calculo da densidade da mistura
                 Dim rhom = rhol * El_teta + rhov * (1 - El_teta)
 
-                'cálculo do delta P em função da carga hidrostática em lbf/ft2
+                'calculo do delta P em funcao da carga hidrostatica em lbf/ft2
                 Dim dP_hh = rhom * deltaz
 
-                'cálculo do delta P em função da fricção
+                'calculo do delta P em funcao da friccao
                 Dim y = Math.Log(Cl / El_teta ^ 2)
 
                 Dim S = 0.0#
@@ -205,14 +205,14 @@ Namespace DWSIM.FlowPackages
                     S = y / (-0.0523 + 3.182 * y - 0.8725 * y ^ 2 + 0.01853 * y ^ 4)
                 End If
 
-                'cálculo do número de Reynolds
+                'calculo do numero de Reynolds
                 Dim rho_ns = Cl * rhol + (1 - Cl) * rhov
                 Dim mu_ns = Cl * mul + (1 - Cl) * muv
                 Dim NRe_ns = rho_ns * vm * D / (mu_ns * 0.00067197)
 
-                'Dim k = 0.0018 ' Rugosidade do duto - aço carbono
+                'Dim k = 0.0018 ' Rugosidade do duto - aco carbono
 
-                'cálculo do fator de fricção
+                'calculo do fator de friccao
                 Dim f_ns = 0.0#
                 If NRe_ns > 3250 Then
                     Dim a = Math.Log(((k * 3.2808 / D) ^ 1.1096) / 2.8257 + (7.149 / NRe_ns) ^ 0.8961) / Math.Log(10.0#)
@@ -222,10 +222,10 @@ Namespace DWSIM.FlowPackages
                     f_ns = 64 / NRe_ns
                 End If
 
-                'cálculo do fator de fricção bifásico
+                'calculo do fator de friccao bifasico
                 Dim f_tp = f_ns * Math.Exp(S)
 
-                ' delta P devido à fricção em lbf/ft2
+                ' delta P devido a friccao em lbf/ft2
                 'Dim dP_fr = 2 * f_tp * vm ^ 2 * rho_ns * L / (32.2 * D)
                 Dim dP_fr = f_tp * vm ^ 2 / 2 * rho_ns * L / (32.2 * D)
 

@@ -1063,7 +1063,7 @@ Namespace SystemsOfUnits
                     Return value / 1000
                 Case "in.", "in"
                     Return value / 39.3701
-                Case "dyn"                              'força
+                Case "dyn"                              'forca
                     Return value / 100000
                 Case "N"
                     Return value
@@ -1079,7 +1079,7 @@ Namespace SystemsOfUnits
                     Return value * 1000000.0 / 1000
                 Case "lbmol/ft3"
                     Return value * 35.3147 * 1000
-                Case "g/L"                              'conc mássica
+                Case "g/L"                              'conc massica
                     Return value
                 Case "kg/m3"
                     Return value
@@ -1475,7 +1475,7 @@ Namespace SystemsOfUnits
                     Return value * 1000
                 Case "in.", "in"
                     Return value * 39.3701
-                Case "dyn"                              'força
+                Case "dyn"                              'forca
                     Return value * 100000
                 Case "N"
                     Return value
@@ -1491,7 +1491,7 @@ Namespace SystemsOfUnits
                     Return value / 1000000.0 * 1000
                 Case "lbmol/ft3"
                     Return value * 35.3147 * 1000
-                Case "g/L"                              'conc mássica
+                Case "g/L"                              'conc massica
                     Return value
                 Case "kg/m3"
                     Return value

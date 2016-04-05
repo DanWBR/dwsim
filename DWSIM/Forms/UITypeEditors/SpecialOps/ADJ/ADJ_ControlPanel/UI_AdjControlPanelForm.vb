@@ -282,7 +282,7 @@ Public Class UI_AdjControlPanelForm
             maxval = minval
             minval = minval - delta
 
-            'método de Brent
+            'metodo de Brent
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = maxit
             Dim iter2 As Integer

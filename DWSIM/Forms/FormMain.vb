@@ -2218,7 +2218,7 @@ ruf:                Application.DoEvents()
         If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
     End Sub
 
-    Private Sub ConfiguraçõesAdicionaisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsmiAdditionalConfig.Click
+    Private Sub ConfiguracoesAdicionaisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsmiAdditionalConfig.Click
         Dim frma As New FormAdditionalTasks
         frma.ShowDialog(Me)
     End Sub
@@ -2649,7 +2649,7 @@ ruf:                Application.DoEvents()
         Call Me.SaveFileDialog()
     End Sub
 
-    Private Sub FecharTodasAsSimulaçõesAbertasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseAllToolstripMenuItem.Click
+    Private Sub FecharTodasAsSimulacoesAbertasToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseAllToolstripMenuItem.Click
         If Me.MdiChildren.Length > 0 Then
             Dim form2 As Form
             For Each form2 In Me.MdiChildren
@@ -2666,7 +2666,7 @@ ruf:                Application.DoEvents()
         End If
     End Sub
 
-    Private Sub ManualTécnicoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManualTécnicoToolStripMenuItem.Click
+    Private Sub ManualTecnicoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManualTecnicoToolStripMenuItem.Click
         If DWSIM.App.IsRunningOnMono Then
             Dim p As New Process()
             With p
@@ -2680,7 +2680,7 @@ ruf:                Application.DoEvents()
         End If
     End Sub
 
-    Private Sub GuiaDoUsuárioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuiaDoUsuárioToolStripMenuItem.Click
+    Private Sub GuiaDoUsuarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuiaDoUsuarioToolStripMenuItem.Click
         If DWSIM.App.IsRunningOnMono Then
             Dim p As New Process()
             With p
@@ -2702,7 +2702,7 @@ ruf:                Application.DoEvents()
         System.Diagnostics.Process.Start("http://dwsim.inforside.com.br")
     End Sub
 
-    Private Sub FórumToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FórumToolStripMenuItem.Click
+    Private Sub ForumToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForumToolStripMenuItem.Click
         System.Diagnostics.Process.Start("http://sourceforge.net/p/dwsim/discussion/")
     End Sub
 
@@ -2723,7 +2723,7 @@ ruf:                Application.DoEvents()
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
-        Me.PreferênciasDoDWSIMToolStripMenuItem_Click(sender, e)
+        Me.PreferenciasDoDWSIMToolStripMenuItem_Click(sender, e)
     End Sub
 
     Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
@@ -2809,7 +2809,7 @@ ruf:                Application.DoEvents()
         m_childcount += 1
     End Sub
 
-    Private Sub NovoEstudoDeRegressãoDeDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDeRegressãoDeDadosToolStripMenuItem.Click
+    Private Sub NovoEstudoDeRegressaoDeDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Click
         Dim NewMDIChild As New FormDataRegression()
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me
@@ -2838,7 +2838,7 @@ ruf:                Application.DoEvents()
             MessageBox.Show(DWSIM.App.GetLocalString("ErrorNoUserdatabase"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
-    Private Sub PreferênciasDoDWSIMToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PreferênciasDoDWSIMToolStripMenuItem.Click
+    Private Sub PreferenciasDoDWSIMToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PreferenciasDoDWSIMToolStripMenuItem.Click
         Me.SettingsPanel.Visible = True
     End Sub
 

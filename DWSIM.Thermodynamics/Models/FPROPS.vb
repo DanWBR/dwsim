@@ -40,18 +40,18 @@ Namespace PropertyPackages.Auxiliary.FPROPS
     <System.Serializable()> Partial Public Class FPROPS_NativeConstants
 
         '''FPROPS_H -> 
-        '''Error generating expression: Valor não pode ser nulo.
-        '''Nome do parâmetro: node
+        '''Error generating expression: Valor nao pode ser nulo.
+        '''Nome do parametro: node
         Public Const FPROPS_H As String = ""
 
         '''FPROPS_RUNDATA_H -> 
-        '''Error generating expression: Valor não pode ser nulo.
-        '''Nome do parâmetro: node
+        '''Error generating expression: Valor nao pode ser nulo.
+        '''Nome do parametro: node
         Public Const FPROPS_RUNDATA_H As String = ""
 
         '''FPROPS_COMMON_H -> 
-        '''Error generating expression: Valor não pode ser nulo.
-        '''Nome do parâmetro: node
+        '''Error generating expression: Valor nao pode ser nulo.
+        '''Nome do parametro: node
         Public Const FPROPS_COMMON_H As String = ""
 
         '''Warning: Generation of Method Macros is not supported at this time
@@ -75,8 +75,8 @@ Namespace PropertyPackages.Auxiliary.FPROPS
         Public Const SQ As String = "(X) ((X)*(X))"
 
         '''FPROPS_FILEDATA_H -> 
-        '''Error generating expression: Valor não pode ser nulo.
-        '''Nome do parâmetro: node
+        '''Error generating expression: Valor nao pode ser nulo.
+        '''Nome do parametro: node
         Public Const FPROPS_FILEDATA_H As String = ""
 
         '''R_UNIVERSAL -> 8314.4621

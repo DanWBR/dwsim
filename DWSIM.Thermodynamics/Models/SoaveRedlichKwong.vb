@@ -824,7 +824,7 @@ Namespace PropertyPackages.Auxiliary
             Vsup = Vinf
             Vinf = Vinf - delta_V
 
-            'método de Brent para encontrar Vc
+            'metodo de Brent para encontrar Vc
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
             Dim ITMAX2 As Integer = 100
@@ -1136,9 +1136,9 @@ Final3:
 
                 If Not criterioOK Then
                     If TIPO = "L" Then
-                        'verificar qual componente é o mais pesado
+                        'verificar qual componente e o mais pesado
                         i = 1
-                        'hbcindex é o índice do componente mais pesado
+                        'hbcindex e o indice do componente mais pesado
                         hbcIndex = i
                         i = 0
                         Do
@@ -1147,9 +1147,9 @@ Final3:
                             End If
                             i += 1
                         Loop Until i = n + 1
-                        'aumenta-se a fração molar do componente hbc...
+                        'aumenta-se a fracao molar do componente hbc...
                         Vx(hbcIndex) += 1
-                        'e em seguida normaliza-se a composição.
+                        'e em seguida normaliza-se a composicao.
                         i = 0
                         soma_x = 0
                         Do
