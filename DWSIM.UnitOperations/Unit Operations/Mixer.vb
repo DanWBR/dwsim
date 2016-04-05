@@ -167,8 +167,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Overrides Sub DeCalculate()
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
-
-                'Zerar valores da corrente de materia conectada a jusante
                 With DirectCast(Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), Thermodynamics.Streams.MaterialStream)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -182,8 +180,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                     .Phases(0).Properties.molarflow = Nothing
                     .GraphicObject.Calculated = False
                 End With
-
             End If
+
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
@@ -210,7 +208,6 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
-
             Dim f As New EditingForm() With {.Text = Me.GraphicObject.Tag}
 
             Dim gb1 As New GroupBox() With {.Width = f.TotalWidth, .Text = "Connections", .FlatStyle = FlatStyle.Flat}
@@ -224,7 +221,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             For i As Integer = 1 To 6
                 Dim p As New FlowLayoutPanel() With {.AutoSize = True, .FlowDirection = FlowDirection.LeftToRight}
                 p.Controls.Add(New Label() With {.Width = f.DefaultLabelWidth, .Text = "Inlet Stream #" & i, .TextAlign = Drawing.ContentAlignment.MiddleLeft})
-                Dim c As New ComboBox() With {.Width = f.DefaultEditorWidth, .DropDownStyle = ComboBoxStyle.DropDownList}
+                Dim c As New ComboBox() With {.Width = f.DefaultEditorWidth, .DropDownStyle = ComboBoxStyle.DropDown}
                 c.Items.AddRange(streams)
                 AddHandler c.SelectedIndexChanged, Sub()
                                                        MsgBox("OK")
@@ -247,8 +244,16 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Dim c2 As New ComboBox() With {.Width = f.DefaultEditorWidth, .DropDownStyle = ComboBoxStyle.DropDownList}
             c2.Items.AddRange([Enum].GetNames(Me.PressureCalculation.GetType))
             AddHandler c2.SelectedIndexChanged, Sub()
-                                                    MsgBox("OK")
+                                                    Select Case c2.SelectedIndex
+                                                        Case 0
+                                                            Me.PressureCalculation = PressureBehavior.Average
+                                                        Case 1
+                                                            Me.PressureCalculation = PressureBehavior.Maximum
+                                                        Case 2
+                                                            Me.PressureCalculation = PressureBehavior.Minimum
+                                                    End Select
                                                 End Sub
+
             p2.Controls.Add(c2)
             p2.Margin = New Padding(0)
             fl2.Controls.Add(p2)
