@@ -1382,6 +1382,10 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Function CalculateEquilibrium2(calctype As Enums.FlashCalculationType, val1 As Double, val2 As Double, initialestimate As Double) As IFlashCalculationResult Implements IPropertyPackage.CalculateEquilibrium2
+            Return CalculateEquilibrium(calctype, val1, val2, RET_VMOL(Phase.Mixture), Nothing, initialestimate)
+        End Function
+
         Public Overridable Sub DW_CalcEquilibrium(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec)
 
             Me.CurrentMaterialStream.AtEquilibrium = False

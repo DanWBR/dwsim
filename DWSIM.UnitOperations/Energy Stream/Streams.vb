@@ -28,6 +28,7 @@ Imports System.Reflection
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses.UnitOperations
+Imports DWSIM.SharedClasses
 
 Namespace Streams
 
@@ -56,8 +57,8 @@ Namespace Streams
 
         Sub Init()
 
+            If Type.GetType("Mono.Runtime") Is Nothing Then CreateParamCol()
 
-            If Not DWSIM.App.IsRunningOnMono Then CreateParamCol()
         End Sub
 
         Sub CreateParamCol()
@@ -175,6 +176,9 @@ Namespace Streams
 
 #End Region
 
+        Public Overrides Sub DisplayEditForm()
+
+        End Sub
     End Class
 
 End Namespace

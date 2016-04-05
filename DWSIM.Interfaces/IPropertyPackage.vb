@@ -14,6 +14,10 @@
                                             initialKval As Double(),
                                             initialestimate As Double) As IFlashCalculationResult
 
+    Function CalculateEquilibrium2(calctype As Enums.FlashCalculationType,
+                                            val1 As Double, val2 As Double,
+                                            initialestimate As Double) As IFlashCalculationResult
+
     Function AUX_DELGig_RT(p1 As Double, T As Double, id As String(), stcoef As Double(), bcidx As Integer, Optional ByVal mode2 As Boolean = False) As Double
 
 End Interface

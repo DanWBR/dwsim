@@ -17,13 +17,15 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DWSIM.Flowsheet.FlowSheetSolver
+Imports DWSIM.Thermodynamics
+Imports DWSIM.Thermodynamics.Streams
+Imports DWSIM.SharedClasses
 
-Namespace UnitOperations
+Namespace DWSIM.SimulationObjects.UnitOperations
 
     <System.Serializable()> Public Class Mixer
 
-        Inherits SharedClasses.UnitOperations.BaseClass
+        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
         Public Enum PressureBehavior
             Average
@@ -57,20 +59,10 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Overrides Function Calculate(Optional ByVal args As Object = Nothing) As Integer
-
-            Dim form As Global.DWSIM.IFLowsheet = Me.Flowsheet
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
+        Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                'Call function to calculate flowsheet
-                With objargs
-                    .Calculated = False
-                    .Name = Me.Name
-                    .ObjectType = ObjectType.NodeIn
-                End With
-
-                Throw New Exception(Me.FlowSheet.GetTranslatedString("Nohcorrentedematriac6"))
+                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac6"))
             End If
 
             Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
@@ -83,11 +75,11 @@ Namespace UnitOperations
             We = 0
             P = 0
             Dim i As Integer = 1
-            Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
+            Dim ms As MaterialStream
             Dim cp As ConnectionPoint
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached Then
-                    If cp.AttachedConnector.AttachedFrom.Calculated = False Then Throw New Exception(Me.FlowSheet.GetTranslatedString("Umaoumaiscorrentesna"))
+                    If cp.AttachedConnector.AttachedFrom.Calculated = False Then Throw New Exception(FlowSheet.GetTranslatedString("Umaoumaiscorrentesna"))
                     ms = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
                     ms.Validate()
                     If Me.PressureCalculation = PressureBehavior.Minimum Then
@@ -119,12 +111,12 @@ Namespace UnitOperations
 
             T = 0
 
-            Dim n As Integer = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name).Phases(0).Compounds.Count
+            Dim n As Integer = DirectCast(Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream).Phases(0).Compounds.Count
             Dim Vw As New Dictionary(Of String, Double)
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached Then
                     ms = Me.FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
-                    Dim comp As Interfaces.ICompound
+                    Dim comp As BaseClasses.Compound
                     For Each comp In ms.Phases(0).Compounds.Values
                         If Not Vw.ContainsKey(comp.Name) Then
                             Vw.Add(comp.Name, 0)
@@ -137,19 +129,19 @@ Namespace UnitOperations
 
             If W = 0.0# Then T = 273.15
 
-            Dim omstr As IMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            Dim omstr As MaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
             With omstr
                 If W <> 0.0# Then .Phases(0).Properties.enthalpy = Hs
                 .Phases(0).Properties.pressure = P
                 .Phases(0).Properties.massflow = W
                 .Phases(0).Properties.molarfraction = 1
                 .Phases(0).Properties.massfraction = 1
-                Dim comp As Interfaces.ICompound
+                Dim comp As BaseClasses.Compound
                 For Each comp In .Phases(0).Compounds.Values
                     If W <> 0.0# Then comp.MassFraction = Vw(comp.Name) / W
                 Next
                 Dim mass_div_mm As Double = 0
-                Dim sub1 As Interfaces.ICompound
+                Dim sub1 As BaseClasses.Compound
                 For Each sub1 In .Phases(0).Compounds.Values
                     mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
                 Next
@@ -162,37 +154,25 @@ Namespace UnitOperations
                 Next
                 Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 If W <> 0.0# Then
-                    Dim tmp = Me.PropertyPackage.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H, P, Hs, T)
-                    T = tmp(2)
+                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(Enums.FlashCalculationType.PressureEnthalpy, P, Hs, T)
+                    T = tmp.CalculatedTemperature
                 End If
                 .Phases(0).Properties.temperature = T
                 .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
             End With
 
-            'Call function to calculate flowsheet
-            With objargs
-                .Calculated = True
-                .Name = Me.Name
-                .Tag = Me.GraphicObject.Tag
-                .ObjectType = ObjectType.NodeIn
-            End With
+        End Sub
 
-            form.CalculationQueue.Enqueue(objargs)
-
-        End Function
-
-        Public Overrides Function DeCalculate() As Integer
-
-            Dim form As Global.DWSIM.IFLowsheet = Me.FlowSheet
+        Public Overrides Sub DeCalculate()
 
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
                 'Zerar valores da corrente de matéria conectada a jusante
-                With Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                With DirectCast(Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), Thermodynamics.Streams.MaterialStream)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.molarfraction = 1
-                    Dim comp As Interfaces.ICompound
+                    Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = 0
                         comp.MassFraction = 0
@@ -203,18 +183,7 @@ Namespace UnitOperations
                 End With
 
             End If
-
-            'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
-            With objargs
-                .Calculated = False
-                .Name = Me.Name
-                .ObjectType = ObjectType.NodeIn
-            End With
-
-
-
-        End Function
+        End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
             Return 0
@@ -237,6 +206,14 @@ Namespace UnitOperations
             Return 0
 
         End Function
+
+        Public Overrides Sub DisplayEditForm()
+
+
+
+
+        End Sub
+
     End Class
 
 End Namespace

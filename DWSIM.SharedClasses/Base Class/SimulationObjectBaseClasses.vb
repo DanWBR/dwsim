@@ -78,11 +78,10 @@ Namespace UnitOperations
         ''' Calculates the object.
         ''' </summary>
         ''' <param name="args"></param>
-        ''' <returns></returns>
         ''' <remarks>Use 'Solve()' to calculate the object instead.</remarks>
-        Public Overridable Function Calculate(Optional ByVal args As Object = Nothing) As Integer
-            Return Nothing
-        End Function
+        Public Overridable Sub Calculate(Optional ByVal args As Object = Nothing)
+            Throw New NotImplementedException
+        End Sub
 
         ''' <summary>
         ''' Energy Flow property. Only implemented for Energy Streams.
@@ -638,11 +637,9 @@ Namespace UnitOperations
         ''' <summary>
         ''' Decalculates the object.
         ''' </summary>
-        ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Overridable Function DeCalculate() As Integer
-            Return Nothing
-        End Function
+        Public Overridable Sub DeCalculate()
+        End Sub
 
         ''' <summary>
         ''' Decalculates the object.
