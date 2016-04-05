@@ -210,18 +210,10 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
-            Dim defaultlabelwidth, defaultrowheight, defaulteditorwidth, defaultunitswidth, totalwidth As Integer
-
-            defaultlabelwidth = 150
-            defaulteditorwidth = 100
-            defaultunitswidth = 50
-            defaultrowheight = 28
-          
-            totalwidth = defaultlabelwidth + defaulteditorwidth + defaultunitswidth
 
             Dim f As New EditingForm() With {.Text = Me.GraphicObject.Tag}
 
-            Dim gb1 As New GroupBox() With {.Width = totalwidth, .Text = "Connections", .FlatStyle = FlatStyle.Flat}
+            Dim gb1 As New GroupBox() With {.Width = f.TotalWidth, .Text = "Connections", .FlatStyle = FlatStyle.Flat}
             Dim fl1 As New FlowLayoutPanel() With {.Dock = DockStyle.Fill, .FlowDirection = FlowDirection.TopDown}
 
             'get a list of available material streams in the flowsheet
@@ -231,8 +223,8 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Dim height As Integer = 0
             For i As Integer = 1 To 6
                 Dim p As New FlowLayoutPanel() With {.AutoSize = True, .FlowDirection = FlowDirection.LeftToRight}
-                p.Controls.Add(New Label() With {.Width = defaultlabelwidth, .Text = "Inlet Stream #" & i, .TextAlign = Drawing.ContentAlignment.MiddleLeft})
-                Dim c As New ComboBox() With {.Width = defaulteditorwidth, .DropDownStyle = ComboBoxStyle.DropDownList}
+                p.Controls.Add(New Label() With {.Width = f.DefaultLabelWidth, .Text = "Inlet Stream #" & i, .TextAlign = Drawing.ContentAlignment.MiddleLeft})
+                Dim c As New ComboBox() With {.Width = f.DefaultEditorWidth, .DropDownStyle = ComboBoxStyle.DropDownList}
                 c.Items.AddRange(streams)
                 AddHandler c.SelectedIndexChanged, Sub()
                                                        MsgBox("OK")
@@ -243,16 +235,16 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             Next
 
             gb1.Controls.Add(fl1)
-            gb1.Height = 6 * defaultrowheight + 24
+            gb1.Height = 6 * f.DefaultRowHeight + 24
             f.Contents.Controls.Add(gb1)
 
-            Dim gb2 As New GroupBox() With {.Width = totalwidth, .Text = "Properties"}
+            Dim gb2 As New GroupBox() With {.Width = f.TotalWidth, .Text = "Properties"}
 
             Dim fl2 As New FlowLayoutPanel() With {.Dock = DockStyle.Fill, .FlowDirection = FlowDirection.TopDown}
 
             Dim p2 As New FlowLayoutPanel() With {.AutoSize = True, .FlowDirection = FlowDirection.LeftToRight}
-            p2.Controls.Add(New Label() With {.Width = defaultlabelwidth, .Text = "Pressure Calculation Mode", .TextAlign = Drawing.ContentAlignment.MiddleLeft})
-            Dim c2 As New ComboBox() With {.Width = defaulteditorwidth, .DropDownStyle = ComboBoxStyle.DropDownList}
+            p2.Controls.Add(New Label() With {.Width = f.DefaultLabelWidth, .Text = "Pressure Calculation Mode", .TextAlign = Drawing.ContentAlignment.MiddleLeft})
+            Dim c2 As New ComboBox() With {.Width = f.DefaultEditorWidth, .DropDownStyle = ComboBoxStyle.DropDownList}
             c2.Items.AddRange([Enum].GetNames(Me.PressureCalculation.GetType))
             AddHandler c2.SelectedIndexChanged, Sub()
                                                     MsgBox("OK")
@@ -262,7 +254,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
             fl2.Controls.Add(p2)
 
             gb2.Controls.Add(fl2)
-            gb2.Height = defaultrowheight + 24
+            gb2.Height = f.DefaultRowHeight + 24
             f.Contents.Controls.Add(gb2)
 
             Me.FlowSheet.DisplayForm(f)
