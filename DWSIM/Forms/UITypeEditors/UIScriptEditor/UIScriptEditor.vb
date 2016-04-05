@@ -48,7 +48,7 @@ Namespace DWSIM.Editors.CustomUO
                     Dim selectionControl As New ScriptEditorForm
                     Dim ctx As PropertyGridEx.CustomProperty.CustomPropertyDescriptor = context.PropertyDescriptor
                     Dim obj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
-                    With DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), UnitOperations.CustomUO)
+                    With DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), SimulationObjects.UnitOperations.CustomUO)
                         selectionControl.scripttext = .ScriptText
                         selectionControl.fontname = .FontName
                         selectionControl.fontsize = .FontSize
@@ -57,7 +57,7 @@ Namespace DWSIM.Editors.CustomUO
                     End With
                     selectionControl.Text = form.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag & " - " & DWSIM.App.GetLocalString("ScriptEditor")
                     editorService.ShowDialog(selectionControl)
-                    With DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), UnitOperations.CustomUO)
+                    With DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), SimulationObjects.UnitOperations.CustomUO)
                         .FontName = selectionControl.tscb1.SelectedItem
                         .FontSize = selectionControl.tscb2.SelectedItem
                         .Includes = selectionControl.includes
@@ -69,7 +69,7 @@ Namespace DWSIM.Editors.CustomUO
                     Dim selectionControl As New ScriptEditorFormMono
                     Dim ctx As PropertyGridEx.CustomProperty.CustomPropertyDescriptor = context.PropertyDescriptor
                     Dim obj As DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass = form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
-                    Dim cuo As UnitOperations.CustomUO = DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), UnitOperations.CustomUO)
+                    Dim cuo As SimulationObjects.UnitOperations.CustomUO = DirectCast(form.Collections.FlowsheetObjectCollection(form.FormSurface.FlowsheetDesignSurface.SelectedObject.Name), SimulationObjects.UnitOperations.CustomUO)
                     selectionControl.scripttext = cuo.ScriptText
                     selectionControl.fontname = cuo.FontName
                     selectionControl.fontsize = cuo.FontSize

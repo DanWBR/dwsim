@@ -218,6 +218,11 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
         Public Overrides Sub PopulatePropertyGrid(ByVal pgrid As PropertyGridEx.PropertyGridEx, ByVal su As SystemsOfUnits.Units)
 
+            'Dim mix As New Global.DWSIM.UnitOperations.DWSIM.SimulationObjects.UnitOperations.Mixer("", "")
+            'mix.GraphicObject = Me.GraphicObject
+            'mix.SetFlowsheet(Me.FlowSheet)
+            'mix.DisplayEditForm()
+
             Dim Conversor As New SystemsOfUnits.Converter
 
             With pgrid

@@ -54,7 +54,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 #Region "    Variable Declarations "
 
     Public Property MasterFlowsheet As FormFlowsheet = Nothing
-    Public Property MasterUnitOp As UnitOperations.Flowsheet = Nothing
+    Public Property MasterUnitOp As Flowsheet = Nothing
     Public Property RedirectMessages As Boolean = False
 
     Public FrmStSim1 As New FormSimulSettings
