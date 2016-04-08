@@ -257,7 +257,7 @@ Namespace PropertyPackages
                     Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
                     If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                         If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, subst.ConstantProperties.Name) Else Tb = Tc
-                        If T >= Tb Then
+                        If T > Tb Then
                             Try
                                 vk(i) = CoolProp.PropsSI("L", "T", T, "P", P, subst.ConstantProperties.Name)
                             Catch ex As Exception
@@ -536,7 +536,7 @@ Namespace PropertyPackages
                 If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                     Tc = CoolProp.Props1SI(cprop.Name, "TCRIT")
                     If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, cprop.Name) Else Tb = Tc
-                    If T >= Tb Then
+                    If T > Tb Then
                         Try
                             val = CoolProp.PropsSI("L", "T", T, "P", P, cprop.Name) * 1000
                         Catch ex As Exception
@@ -619,7 +619,7 @@ Namespace PropertyPackages
                     If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                         Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
                         If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, subst.ConstantProperties.Name) Else Tb = Tc
-                        If T >= Tb Then
+                        If T > Tb Then
                             Try
                                 vk(i) = CoolProp.PropsSI("V", "T", T, "P", P, subst.ConstantProperties.Name)
                             Catch ex As Exception
@@ -698,7 +698,7 @@ Namespace PropertyPackages
                     If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                         Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
                         If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, subst.ConstantProperties.Name) Else Tb = Tc
-                        If T >= Tb Then
+                        If T > Tb Then
                             Try
                                 vk(i) = CoolProp.PropsSI("D", "T", T, "P", P, subst.ConstantProperties.Name)
                             Catch ex As Exception
@@ -831,7 +831,7 @@ Namespace PropertyPackages
                             Pmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMAX")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                                 Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, subst.ConstantProperties.Name)
-                                If T >= Tb Then
+                                If T > Tb Then
                                     vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, subst.ConstantProperties.Name) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Cp, compound " &
@@ -947,7 +947,7 @@ Namespace PropertyPackages
                             Pmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMAX")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                If T >= Tb Then
+                                If T > Tb Then
                                     vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, subst.ConstantProperties.Name) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Cv, compound " &

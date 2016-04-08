@@ -3,7 +3,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 
 <System.Serializable()> _
 <System.Runtime.InteropServices.Guid("FB964392-7410-432d-A650-C611D09A0C62")> _
-Public Class CAPEOPENPropertyPackageManager
+Public Class CAPEOPENManager
 
     Implements ICapeIdentification, ICapeThermoPropertyPackageManager, ICapeUtilities
     Implements IDisposable
@@ -156,7 +156,7 @@ Public Class CAPEOPENPropertyPackageManager
 #End Region
 
     <System.Runtime.InteropServices.ComRegisterFunction()> _
-   Private Shared Sub RegisterFunction(ByVal t As Type)
+    Private Shared Sub RegisterFunction(ByVal t As Type)
 
         Dim keyname As String = String.Concat("CLSID\\{", t.GUID.ToString, "}\\Implemented Categories")
         Dim key As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(keyname, True)

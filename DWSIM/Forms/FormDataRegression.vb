@@ -3390,7 +3390,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
             Me.tbRegResults.AppendText("Starting one-time calc for " & currcase.model & " model parameter estimation..." & vbCrLf)
 
-            Dim ppm As New CAPEOPENPropertyPackageManager()
+            Dim ppm As New CAPEOPENManager()
 
             Select Case currcase.model
                 Case "PC-SAFT"
@@ -3500,7 +3500,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         Me.tbRegResults.AppendText("Starting experimental data regression for " & currcase.model & " model parameter estimation..." & vbCrLf)
 
-        Dim ppm As New CAPEOPENPropertyPackageManager()
+        Dim ppm As New CAPEOPENManager()
 
         Select Case currcase.model
             Case "PC-SAFT"

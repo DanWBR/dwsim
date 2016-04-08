@@ -520,7 +520,7 @@ Public Class FormUNIFACRegression
         If mat Is Nothing Then mat = New MaterialStream("", "")
 
         If _pp Is Nothing Then
-            Dim ppm As New CAPEOPENPropertyPackageManager()
+            Dim ppm As New CAPEOPENManager()
 
             Select Case cbModel.SelectedItem
                 Case "Modified UNIFAC (NIST)"

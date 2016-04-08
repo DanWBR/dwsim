@@ -163,7 +163,7 @@ Namespace ExcelAddIn
         <ExcelFunction(description:="Returns a list of the available Property Packages.", HelpTopic:="ExcelAddInHelp.chm!4")> _
         Public Shared Function GetPropPackList() As Object(,)
 
-            Dim ppm As New CAPEOPENPropertyPackageManager()
+            Dim ppm As New CAPEOPENManager()
 
             Dim values As Object() = ppm.GetPropertyPackageList()
 
@@ -489,7 +489,7 @@ Namespace ExcelAddIn
         Public Shared Function GetPropList( _
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
-            Dim ppm As New CAPEOPENPropertyPackageManager()
+            Dim ppm As New CAPEOPENManager()
 
             Dim pp As PropertyPackages.PropertyPackage = ppm.GetPropertyPackage(proppack)
 
@@ -516,7 +516,7 @@ Namespace ExcelAddIn
         Public Shared Function GetPhaseList( _
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
-            Dim ppm As New CAPEOPENPropertyPackageManager()
+            Dim ppm As New CAPEOPENManager()
 
             Dim pp As PropertyPackages.PropertyPackage = ppm.GetPropertyPackage(proppack)
 
@@ -546,7 +546,7 @@ Namespace ExcelAddIn
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
             If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-            Dim ppm As New CAPEOPENPropertyPackageManager()
+            Dim ppm As New CAPEOPENManager()
 
             Dim pp As PropertyPackages.PropertyPackage = ppm.GetPropertyPackage(proppack)
 
@@ -603,7 +603,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage = ppm.GetPropertyPackage(proppack)
 
@@ -718,7 +718,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
@@ -926,7 +926,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
@@ -1050,7 +1050,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
@@ -1174,7 +1174,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
@@ -1298,7 +1298,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
@@ -1752,7 +1752,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
@@ -1865,7 +1865,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
@@ -1980,7 +1980,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
@@ -2095,7 +2095,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
@@ -2210,7 +2210,7 @@ Namespace ExcelAddIn
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-                Dim ppm As New CAPEOPENPropertyPackageManager()
+                Dim ppm As New CAPEOPENManager()
 
                 Dim pp As PropertyPackages.PropertyPackage
 
