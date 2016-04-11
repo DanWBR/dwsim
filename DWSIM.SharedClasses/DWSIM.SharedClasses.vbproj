@@ -81,12 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base Class\SimulationObjectBaseClasses.vb" />
-    <Compile Include="Base Editing Form\EditingForm.Designer.vb">
-      <DependentUpon>EditingForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Base Editing Form\EditingForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Misc\CapeOpenObjInfo.vb" />
     <Compile Include="Misc\CCapeCollection.vb" />
     <Compile Include="Misc\ComIStreamWrapper.vb" />
@@ -109,9 +103,6 @@
     <Compile Include="UnitsOfMeasure\SystemsOfUnits.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Base Editing Form\EditingForm.resx">
-      <DependentUpon>EditingForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>

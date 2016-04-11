@@ -52,6 +52,9 @@
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
     </Reference>
+    <Reference Include="RichTextBoxExtended">
+      <HintPath>..\DWSIM\References\RichTextBoxExtended.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -76,6 +79,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\EF_Mixer.Designer.vb">
+      <DependentUpon>EF_Mixer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EF_Mixer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -95,6 +104,9 @@
     <Compile Include="Unit Operations\Mixer.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\EF_Mixer.resx">
+      <DependentUpon>EF_Mixer.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -117,6 +129,10 @@
     <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.CustomXMLSerializer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DockPanel.WinFormsUI.csproj">
+      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
+      <Name>DockPanel.WinFormsUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
