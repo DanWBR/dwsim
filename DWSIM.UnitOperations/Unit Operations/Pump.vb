@@ -724,7 +724,7 @@ Namespace UnitOperations
 
                     Me.DeltaT = T2 - Ti
 
-                    
+
                     If DebugMode Then AppendDebugLine(String.Format("Doing a bubble point flash to calculate NPSH... P = {0} Pa, VF = 0", P2))
 
                     Try
@@ -815,7 +815,7 @@ Namespace UnitOperations
             If Me.GraphicObject.OutputConnectors(0).IsAttached Then
 
                 'Zerar valores da corrente de materia conectada a jusante
-                With Me.GetOutletMaterialStreams(0)
+                With Me.GetOutletMaterialStream(0)
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
                     .Phases(0).Properties.molarfraction = 1
@@ -947,6 +947,7 @@ Namespace UnitOperations
         Public Overrides Sub DisplayEditForm()
 
         End Sub
+
     End Class
 
 End Namespace

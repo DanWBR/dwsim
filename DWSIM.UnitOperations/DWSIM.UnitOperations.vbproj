@@ -103,11 +103,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Support Classes\BaseClass.vb" />
+    <Compile Include="Support Classes\BeggsBrill.vb" />
+    <Compile Include="Support Classes\LockhartMartinelli.vb" />
+    <Compile Include="Support Classes\PetalasAziz.vb" />
+    <Compile Include="Support Classes\PipeHydraulicProfile.vb" />
     <Compile Include="Unit Operations\ComponentSeparator.vb" />
     <Compile Include="Unit Operations\Compressor.vb" />
     <Compile Include="Unit Operations\Cooler.vb" />
     <Compile Include="Unit Operations\Heater.vb" />
+    <Compile Include="Unit Operations\HeatExchanger.vb" />
     <Compile Include="Unit Operations\Mixer.vb" />
+    <Compile Include="Unit Operations\Pipe.vb" />
     <Compile Include="Unit Operations\Pump.vb" />
     <Compile Include="Unit Operations\Splitter.vb" />
   </ItemGroup>

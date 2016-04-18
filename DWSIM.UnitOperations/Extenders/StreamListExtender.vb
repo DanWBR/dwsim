@@ -3,71 +3,47 @@
 Module StreamListExtender
 
     <System.Runtime.CompilerServices.Extension()> _
-    Public Function GetInletMaterialStreams(ByVal unitop As SharedClasses.UnitOperations.UnitOpBaseClass) As List(Of MaterialStream)
-        Dim mylist As New List(Of MaterialStream)
-        For Each obj In unitop.GraphicObject.InputConnectors
-            If obj.IsAttached Then
-                If obj.AttachedConnector.AttachedFrom.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream Then
-                    mylist.Add(unitop.FlowSheet.SimulationObjects(obj.AttachedConnector.AttachedFrom.Name))
-                Else
-                    mylist.Add(Nothing)
-                End If
-            Else
-                mylist.Add(Nothing)
-            End If
-        Next
-        Return mylist
+    Public Function GetInletMaterialStream(ByVal unitop As SharedClasses.UnitOperations.UnitOpBaseClass, index As Integer) As MaterialStream
+
+        If unitop.GraphicObject.InputConnectors(index).IsAttached Then
+            Return unitop.FlowSheet.SimulationObjects(unitop.GraphicObject.InputConnectors(index).AttachedConnector.AttachedFrom.Name)
+        Else
+            Return Nothing
+        End If
+
     End Function
 
     <System.Runtime.CompilerServices.Extension()> _
-    Public Function GetOutletMaterialStreams(ByVal unitop As SharedClasses.UnitOperations.UnitOpBaseClass) As List(Of MaterialStream)
-        Dim mylist As New List(Of MaterialStream)
-        For Each obj In unitop.GraphicObject.OutputConnectors
-            If obj.IsAttached Then
-                If obj.AttachedConnector.AttachedTo.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream Then
-                    mylist.Add(unitop.FlowSheet.SimulationObjects(obj.AttachedConnector.AttachedTo.Name))
-                Else
-                    mylist.Add(Nothing)
-                End If
-            Else
-                mylist.Add(Nothing)
-            End If
-        Next
-        Return mylist
+    Public Function GetOutletMaterialStream(ByVal unitop As SharedClasses.UnitOperations.UnitOpBaseClass, index As Integer) As MaterialStream
+
+        If unitop.GraphicObject.OutputConnectors(index).IsAttached Then
+            Return unitop.FlowSheet.SimulationObjects(unitop.GraphicObject.OutputConnectors(index).AttachedConnector.AttachedTo.Name)
+        Else
+            Return Nothing
+        End If
+
     End Function
 
     <System.Runtime.CompilerServices.Extension()> _
-    Public Function GetInletEnergyStreams(ByVal unitop As SharedClasses.UnitOperations.UnitOpBaseClass) As List(Of Streams.EnergyStream)
-        Dim mylist As New List(Of Streams.EnergyStream)
-        For Each obj In unitop.GraphicObject.InputConnectors
-            If obj.IsAttached Then
-                If obj.AttachedConnector.AttachedFrom.ObjectType = Enums.GraphicObjects.ObjectType.EnergyStream Then
-                    mylist.Add(unitop.FlowSheet.SimulationObjects(obj.AttachedConnector.AttachedFrom.Name))
-                Else
-                    mylist.Add(Nothing)
-                End If
-            Else
-                mylist.Add(Nothing)
-            End If
-        Next
-        Return mylist
+    Public Function GetInletEnergyStream(ByVal unitop As SharedClasses.UnitOperations.UnitOpBaseClass, index As Integer) As Streams.EnergyStream
+
+        If unitop.GraphicObject.InputConnectors(index).IsAttached Then
+            Return unitop.FlowSheet.SimulationObjects(unitop.GraphicObject.InputConnectors(index).AttachedConnector.AttachedFrom.Name)
+        Else
+            Return Nothing
+        End If
+
     End Function
 
     <System.Runtime.CompilerServices.Extension()> _
-    Public Function GetOutletEnergyStreams(ByVal unitop As SharedClasses.UnitOperations.UnitOpBaseClass) As List(Of Streams.EnergyStream)
-        Dim mylist As New List(Of Streams.EnergyStream)
-        For Each obj In unitop.GraphicObject.OutputConnectors
-            If obj.IsAttached Then
-                If obj.AttachedConnector.AttachedTo.ObjectType = Enums.GraphicObjects.ObjectType.EnergyStream Then
-                    mylist.Add(unitop.FlowSheet.SimulationObjects(obj.AttachedConnector.AttachedTo.Name))
-                Else
-                    mylist.Add(Nothing)
-                End If
-            Else
-                mylist.Add(Nothing)
-            End If
-        Next
-        Return mylist
+    Public Function GetOutletEnergyStream(ByVal unitop As SharedClasses.UnitOperations.UnitOpBaseClass, index As Integer) As Streams.EnergyStream
+
+        If unitop.GraphicObject.OutputConnectors(index).IsAttached Then
+            Return unitop.FlowSheet.SimulationObjects(unitop.GraphicObject.OutputConnectors(index).AttachedConnector.AttachedTo.Name)
+        Else
+            Return Nothing
+        End If
+
     End Function
 
     <System.Runtime.CompilerServices.Extension()> _
