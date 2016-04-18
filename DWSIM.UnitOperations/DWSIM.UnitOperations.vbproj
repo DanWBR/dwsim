@@ -108,6 +108,7 @@
     <Compile Include="Support Classes\LockhartMartinelli.vb" />
     <Compile Include="Support Classes\PetalasAziz.vb" />
     <Compile Include="Support Classes\PipeHydraulicProfile.vb" />
+    <Compile Include="Unit Operations\CapeOpenUO.vb" />
     <Compile Include="Unit Operations\ComponentSeparator.vb" />
     <Compile Include="Unit Operations\Compressor.vb" />
     <Compile Include="Unit Operations\Cooler.vb" />
