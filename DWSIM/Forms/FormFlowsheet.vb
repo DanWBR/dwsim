@@ -3268,4 +3268,19 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         DisconnectObject(gobjfrom, gobjto, False)
     End Sub
 
+    Public Function GetFlowsheetBag() As IFlowsheetBag Implements IFlowsheet.GetFlowsheetBag
+
+        Dim fbag As New SharedClasses.Flowsheet.FlowsheetBag
+
+        fbag.Compounds = Me.SelectedCompounds
+        fbag.GraphicObjects = Me.GraphicObjects
+        fbag.SimulationObjects = Me.SimulationObjects
+        fbag.PropertyPackages = Me.PropertyPackages
+        fbag.Reactions = Me.Reactions
+        fbag.ReactionSets = Me.ReactionSets
+
+        Return fbag
+
+    End Function
+
 End Class

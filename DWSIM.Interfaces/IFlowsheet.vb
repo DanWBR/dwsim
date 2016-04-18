@@ -44,4 +44,23 @@
 
     Sub DisconnectObjects(gobjfrom As IGraphicObject, gobjto As IGraphicObject)
 
+    Function GetFlowsheetBag() As IFlowsheetBag
+
+End Interface
+
+Public Interface IFlowsheetBag
+
+    Property SimulationObjects As Dictionary(Of String, ISimulationObject)
+
+    Property GraphicObjects As Dictionary(Of String, IGraphicObject)
+
+    Property Compounds As Dictionary(Of String, ICompoundConstantProperties)
+
+    Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
+
+    Property Reactions As Dictionary(Of String, IReaction)
+
+    Property ReactionSets As Dictionary(Of String, IReactionSet)
+
+
 End Interface
