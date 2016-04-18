@@ -102,7 +102,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Unit Operations\ComponentSeparator.vb" />
+    <Compile Include="Unit Operations\Compressor.vb" />
     <Compile Include="Unit Operations\Mixer.vb" />
+    <Compile Include="Unit Operations\Splitter.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Editing Forms\EF_Mixer.resx">

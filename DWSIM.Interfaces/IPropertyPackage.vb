@@ -20,4 +20,6 @@
 
     Function AUX_DELGig_RT(p1 As Double, T As Double, id As String(), stcoef As Double(), bcidx As Integer, Optional ByVal mode2 As Boolean = False) As Double
 
+    Function AUX_CPm(phase As Enums.PhaseName, Ti As Double) As Double
+
 End Interface

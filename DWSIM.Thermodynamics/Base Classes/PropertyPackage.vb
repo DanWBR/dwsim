@@ -9823,6 +9823,23 @@ Final3:
 
 #End Region
 
+        Public Function AUX_CPm1(phase As Enums.PhaseName, Ti As Double) As Double Implements IPropertyPackage.AUX_CPm
+
+            Select Case phase
+                Case Enums.PhaseName.Vapor
+                    Return AUX_CPm(PropertyPackages.Phase.Vapor, Ti)
+                Case Enums.PhaseName.Solid
+                    Return AUX_CPm(PropertyPackages.Phase.Solid, Ti)
+                Case Enums.PhaseName.Mixture
+                    Return AUX_CPm(PropertyPackages.Phase.Mixture, Ti)
+                Case Enums.PhaseName.Liquid
+                    Return AUX_CPm(PropertyPackages.Phase.Liquid, Ti)
+                Case Else
+                    Return AUX_CPm(PropertyPackages.Phase.Mixture, Ti)
+            End Select
+
+        End Function
+
     End Class
 
     ''' <summary>
