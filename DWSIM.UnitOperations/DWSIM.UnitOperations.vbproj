@@ -117,6 +117,9 @@
     <Compile Include="Unit Operations\Pipe.vb" />
     <Compile Include="Unit Operations\Pump.vb" />
     <Compile Include="Unit Operations\Splitter.vb" />
+    <Compile Include="Unit Operations\Expander.vb" />
+    <Compile Include="Unit Operations\Valve.vb" />
+    <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Editing Forms\EF_Mixer.resx">

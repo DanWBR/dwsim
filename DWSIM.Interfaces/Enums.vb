@@ -49,6 +49,17 @@
         Volumetric_Flows
     End Enum
 
+    Public Enum PhaseLabel
+        Mixture
+        Vapor
+        LiquidMixture
+        Liquid1
+        Liquid2
+        Liquid3
+        Aqueous
+        Solid
+    End Enum
+
     Public Enum PhaseName
         Liquid
         Vapor
