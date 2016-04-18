@@ -3283,4 +3283,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Function
 
+    Public Property FilePath As String Implements IFlowsheet.FilePath
+        Get
+            Return Me.Options.FilePath
+        End Get
+        Set(value As String)
+            Me.Options.FilePath = value
+        End Set
+    End Property
+
 End Class

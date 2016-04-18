@@ -120,6 +120,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Support Classes\RigorousColumnSolver.vb" />
+    <Compile Include="Unit Operations\FlowsheetUO.vb" />
     <Compile Include="Unit Operations\OrificePlate.vb" />
     <Compile Include="Support Classes\BaseClass.vb" />
     <Compile Include="Support Classes\BeggsBrill.vb" />

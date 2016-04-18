@@ -22,6 +22,8 @@
 
     ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties)
 
+    Property FilePath As String
+
     Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType)
 
     Sub ShowDebugInfo(ByVal text As String, ByVal level As Integer)
