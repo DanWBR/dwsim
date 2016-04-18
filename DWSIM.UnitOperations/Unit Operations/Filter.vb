@@ -30,7 +30,7 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 
-Namespace DWSIM.SimulationObjects.UnitOperations
+Namespace UnitOperations
 
     <System.Serializable()> Public Class Filter
 
@@ -168,7 +168,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                 With outstr2
+                With outstr2
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wsout
                     Dim comp As BaseClasses.Compound

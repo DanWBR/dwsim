@@ -25,7 +25,7 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 
-Namespace DWSIM.SimulationObjects.UnitOperations
+Namespace UnitOperations
 
     <System.Serializable()> Public Class OrificePlate
 

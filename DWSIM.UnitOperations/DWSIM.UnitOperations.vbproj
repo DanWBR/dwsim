@@ -118,7 +118,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="OrificePlate.vb" />
+    <Compile Include="Unit Operations\OrificePlate.vb" />
     <Compile Include="Support Classes\BaseClass.vb" />
     <Compile Include="Support Classes\BeggsBrill.vb" />
     <Compile Include="Support Classes\LockhartMartinelli.vb" />
@@ -128,6 +128,7 @@
     <Compile Include="Unit Operations\ComponentSeparator.vb" />
     <Compile Include="Unit Operations\Compressor.vb" />
     <Compile Include="Unit Operations\Cooler.vb" />
+    <Compile Include="Unit Operations\ShortcutColumn.vb" />
     <Compile Include="Unit Operations\Spreadsheet.vb" />
     <Compile Include="Unit Operations\Filter.vb" />
     <Compile Include="Unit Operations\Heater.vb" />
@@ -138,6 +139,7 @@
     <Compile Include="Unit Operations\SolidsSeparator.vb" />
     <Compile Include="Unit Operations\Splitter.vb" />
     <Compile Include="Unit Operations\Expander.vb" />
+    <Compile Include="Unit Operations\Tank.vb" />
     <Compile Include="Unit Operations\Valve.vb" />
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
