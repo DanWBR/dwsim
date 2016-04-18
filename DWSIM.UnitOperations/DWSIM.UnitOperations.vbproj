@@ -50,8 +50,19 @@
     <Reference Include="Ciloci.Flee">
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelApi">
+      <HintPath>..\DWSIM\References\ExcelApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="GemBox.Spreadsheet">
+      <HintPath>..\packages\GemBox.Spreadsheet.39.3.30.1037\lib\net30\GemBox.Spreadsheet.dll</HintPath>
+    </Reference>
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
+    </Reference>
+    <Reference Include="NetOffice">
+      <HintPath>..\DWSIM\References\NetOffice.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="RichTextBoxExtended">
       <HintPath>..\DWSIM\References\RichTextBoxExtended.dll</HintPath>
@@ -65,6 +76,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="VBIDEApi">
+      <HintPath>..\DWSIM\References\VBIDEApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.DrawingTools" />
@@ -103,6 +118,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="OrificePlate.vb" />
     <Compile Include="Support Classes\BaseClass.vb" />
     <Compile Include="Support Classes\BeggsBrill.vb" />
     <Compile Include="Support Classes\LockhartMartinelli.vb" />
@@ -112,11 +128,14 @@
     <Compile Include="Unit Operations\ComponentSeparator.vb" />
     <Compile Include="Unit Operations\Compressor.vb" />
     <Compile Include="Unit Operations\Cooler.vb" />
+    <Compile Include="Unit Operations\Spreadsheet.vb" />
+    <Compile Include="Unit Operations\Filter.vb" />
     <Compile Include="Unit Operations\Heater.vb" />
     <Compile Include="Unit Operations\HeatExchanger.vb" />
     <Compile Include="Unit Operations\Mixer.vb" />
     <Compile Include="Unit Operations\Pipe.vb" />
     <Compile Include="Unit Operations\Pump.vb" />
+    <Compile Include="Unit Operations\SolidsSeparator.vb" />
     <Compile Include="Unit Operations\Splitter.vb" />
     <Compile Include="Unit Operations\Expander.vb" />
     <Compile Include="Unit Operations\Valve.vb" />
