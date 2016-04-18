@@ -104,16 +104,15 @@ Partial Class AboutBoxMONO
         '
         'FaTabStrip1
         '
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem3, Me.FaTabStripItem4})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.Lblcpusimd)
         Me.FaTabStripItem1.Controls.Add(Me.Lblcpuinfo)
@@ -137,11 +136,12 @@ Partial Class AboutBoxMONO
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'Lblcpusimd
         '
-        resources.ApplyResources(Me.Lblcpusimd, "Lblcpusimd")
         Me.Lblcpusimd.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.Lblcpusimd, "Lblcpusimd")
         Me.Lblcpusimd.Name = "Lblcpusimd"
         '
         'Lblcpuinfo
@@ -258,8 +258,8 @@ Partial Class AboutBoxMONO
         '
         'TextBox1
         '
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         '
@@ -272,15 +272,14 @@ Partial Class AboutBoxMONO
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.DataGridView1)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'DataGridView1
         '
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeRows = False
@@ -289,6 +288,7 @@ Partial Class AboutBoxMONO
         Me.DataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7})
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
@@ -342,16 +342,16 @@ Partial Class AboutBoxMONO
         '
         'FaTabStripItem3
         '
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.CanClose = False
         Me.FaTabStripItem3.Controls.Add(Me.AssemblyInfoListView)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'AssemblyInfoListView
         '
-        resources.ApplyResources(Me.AssemblyInfoListView, "AssemblyInfoListView")
         Me.AssemblyInfoListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colAssemblyName, Me.colAssemblyVersion, Me.colAssemblyBuilt, Me.colAssemblyCodeBase})
+        resources.ApplyResources(Me.AssemblyInfoListView, "AssemblyInfoListView")
         Me.AssemblyInfoListView.FullRowSelect = True
         Me.AssemblyInfoListView.MultiSelect = False
         Me.AssemblyInfoListView.Name = "AssemblyInfoListView"
@@ -377,17 +377,17 @@ Partial Class AboutBoxMONO
         '
         'FaTabStripItem4
         '
-        resources.ApplyResources(Me.FaTabStripItem4, "FaTabStripItem4")
         Me.FaTabStripItem4.CanClose = False
         Me.FaTabStripItem4.Controls.Add(Me.AssemblyDetailsListView)
         Me.FaTabStripItem4.Controls.Add(Me.AssemblyNamesComboBox)
         Me.FaTabStripItem4.IsDrawn = True
         Me.FaTabStripItem4.Name = "FaTabStripItem4"
+        resources.ApplyResources(Me.FaTabStripItem4, "FaTabStripItem4")
         '
         'AssemblyDetailsListView
         '
-        resources.ApplyResources(Me.AssemblyDetailsListView, "AssemblyDetailsListView")
         Me.AssemblyDetailsListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        resources.ApplyResources(Me.AssemblyDetailsListView, "AssemblyDetailsListView")
         Me.AssemblyDetailsListView.FullRowSelect = True
         Me.AssemblyDetailsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.AssemblyDetailsListView.Name = "AssemblyDetailsListView"
