@@ -102,6 +102,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
+    <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\StreamListExtender.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -118,6 +119,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Support Classes\RigorousColumnSolver.vb" />
     <Compile Include="Unit Operations\OrificePlate.vb" />
     <Compile Include="Support Classes\BaseClass.vb" />
     <Compile Include="Support Classes\BeggsBrill.vb" />
@@ -128,6 +130,7 @@
     <Compile Include="Unit Operations\ComponentSeparator.vb" />
     <Compile Include="Unit Operations\Compressor.vb" />
     <Compile Include="Unit Operations\Cooler.vb" />
+    <Compile Include="Unit Operations\RigorousColumn.vb" />
     <Compile Include="Unit Operations\ShortcutColumn.vb" />
     <Compile Include="Unit Operations\Spreadsheet.vb" />
     <Compile Include="Unit Operations\Filter.vb" />
