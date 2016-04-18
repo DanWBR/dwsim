@@ -2861,7 +2861,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                         Dim prip As Auxiliary.LeeKeslerPlocker = pp.GetType.GetField("m_lk").GetValue(pp)
                         prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
                     ElseIf act.PropertyName.Contains("NRTL") Then
-                        Dim nrtlip As Auxiliary.NRTL = pp.GetType.GetProperty("m_uni").GetValue(pp)
+                        Dim nrtlip As Auxiliary.NRTL = pp.GetType.GetProperty("m_uni").GetValue(pp, Nothing)
                         Select Case act.PropertyName
                             Case "NRTL_A12"
                                 nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).A12 = pval
@@ -2879,7 +2879,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                                 nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).alpha12 = pval
                         End Select
                     ElseIf act.PropertyName.Contains("UNIQUAC") Then
-                        Dim uniquacip As Auxiliary.UNIQUAC = pp.GetType.GetProperty("m_uni").GetValue(pp)
+                        Dim uniquacip As Auxiliary.UNIQUAC = pp.GetType.GetProperty("m_uni").GetValue(pp, Nothing)
                         Select Case act.PropertyName
                             Case "UNIQUAC_A12"
                                 uniquacip.InteractionParameters(act.ObjID)(act.ObjID2).A12 = pval
@@ -3193,7 +3193,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             Dim dict As New Dictionary(Of String, Object)
             Dim props = My.Settings.GetType().GetProperties()
             For Each p In props
-                dict.Add(p.Name, p.GetValue(My.Settings))
+                dict.Add(p.Name, p.GetValue(My.Settings, Nothing))
             Next
             Return dict
         End Get
