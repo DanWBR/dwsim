@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
-Imports DWSIM.Thermodynamics.MathEx.BrentOpt
+Imports DWSIM.MathOps.MathEx.BrentOpt
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.DWSIM.SimulationObjects.Streams

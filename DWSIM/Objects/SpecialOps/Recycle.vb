@@ -29,6 +29,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         Inherits DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass
 
+        Implements Interfaces.IRecycle
+
         Protected m_ConvPar As ConvergenceParameters
         Protected m_ConvHist As ConvergenceHistory
         Protected m_AccelMethod As AccelMethod = AccelMethod.GlobalBroyden
@@ -42,20 +44,20 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         Protected m_InternalCounterW As Integer = 0
         Protected m_IterationsTaken As Integer = 0
 
-        Public Property Converged As Boolean = False
+        Public Property Converged As Boolean = False Implements Interfaces.IRecycle.Converged
 
         Public Property CopyOnStreamDataError As Boolean = False
 
         Protected m_Errors As New Dictionary(Of String, Double)
         Protected m_Values As New Dictionary(Of String, Double)
 
-        Public ReadOnly Property Errors As Dictionary(Of String, Double)
+        Public ReadOnly Property Errors As Dictionary(Of String, Double) Implements Interfaces.IRecycle.Errors
             Get
                 Return m_Errors
             End Get
         End Property
 
-        Public ReadOnly Property Values As Dictionary(Of String, Double)
+        Public ReadOnly Property Values As Dictionary(Of String, Double) Implements Interfaces.IRecycle.Values
             Get
                 Return m_Values
             End Get
@@ -132,7 +134,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             End Set
         End Property
 
-        Public Property AccelerationMethod() As AccelMethod
+        Public Property AccelerationMethod() As AccelMethod Implements Interfaces.IRecycle.AccelerationMethod
             Get
                 Return m_AccelMethod
             End Get
@@ -150,11 +152,11 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             End Set
         End Property
 
-        Public Property ConvergenceHistory() As ConvergenceHistory
+        Public Property ConvergenceHistory() As Interfaces.IRecycleConvergenceHistory Implements Interfaces.IRecycle.ConvergenceHistory
             Get
                 Return m_ConvHist
             End Get
-            Set(ByVal value As ConvergenceHistory)
+            Set(ByVal value As Interfaces.IRecycleConvergenceHistory)
                 m_ConvHist = value
             End Set
         End Property
@@ -193,7 +195,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         End Sub
 
-        Public Sub SetOutletStreamProperties()
+        Public Sub SetOutletStreamProperties() Implements Interfaces.IRecycle.SetOutletStreamProperties
 
             Dim msfrom, msto As DWSIM.SimulationObjects.Streams.MaterialStream
 
@@ -612,7 +614,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
                 .Item.Add(DWSIM.App.GetLocalString("Mtododeacelerao"), Me, "AccelerationMethod", False, DWSIM.App.GetLocalString("Configuraes2"), DWSIM.App.GetLocalString("Mtododeaceleraodacon"), True)
 
-                If Me.AccelerationMethod = DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle.AccelMethod.Wegstein Then
+                If Me.AccelerationMethod = AccelMethod.Wegstein Then
                     Dim cpc As New CustomPropertyCollection
                     cpc.Add(DWSIM.App.GetLocalString("Atrasonaacelerao"), Me.WegsteinParameters, "AccelDelay", False, DWSIM.App.GetLocalString("ParmetrosWegstein"), "", True)
                     cpc.Add(DWSIM.App.GetLocalString("Ferqunciadeacelerao"), Me.WegsteinParameters, "AccelFreq", False, DWSIM.App.GetLocalString("ParmetrosWegstein"), "", True)
@@ -794,13 +796,6 @@ Namespace DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle
         FlashPS
     End Enum
 
-    Public Enum AccelMethod
-        None
-        Wegstein
-        Dominant_Eigenvalue
-        GlobalBroyden
-    End Enum
-
     <System.Serializable()> Public Class ConvergenceParameters
 
         Implements XMLSerializer.Interfaces.ICustomXMLSerialization
@@ -833,29 +828,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle
 
     <System.Serializable()> Public Class ConvergenceHistory
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
-
-        Public Temperatura As Double = 0
-        Public Pressao As Double = 0
-        Public VazaoMassica As Double = 0
-        Public Entalpia As Double = 0
-        Public Entropia As Double = 0
-        Public Temperatura0 As Double = 0
-        Public Pressao0 As Double = 0
-        Public VazaoMassica0 As Double = 0
-        Public Entalpia0 As Double = 0
-        Public Entropia0 As Double = 0
-
-        Public TemperaturaE As Double = 0
-        Public PressaoE As Double = 0
-        Public VazaoMassicaE As Double = 0
-        Public EntalpiaE As Double = 0
-        Public EntropiaE As Double = 0
-        Public TemperaturaE0 As Double = 0
-        Public PressaoE0 As Double = 0
-        Public VazaoMassicaE0 As Double = 0
-        Public EntalpiaE0 As Double = 0
-        Public EntropiaE0 As Double = 0
+        Implements XMLSerializer.Interfaces.ICustomXMLSerialization, Interfaces.IRecycleConvergenceHistory
 
         Sub New()
 
@@ -872,6 +845,46 @@ Namespace DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle
             Return XMLSerializer.XMLSerializer.Serialize(Me, True)
 
         End Function
+
+        Public Property Entalpia As Double Implements Interfaces.IRecycleConvergenceHistory.Entalpia
+
+        Public Property Entalpia0 As Double Implements Interfaces.IRecycleConvergenceHistory.Entalpia0
+
+        Public Property EntalpiaE As Double Implements Interfaces.IRecycleConvergenceHistory.EntalpiaE
+
+        Public Property EntalpiaE0 As Double Implements Interfaces.IRecycleConvergenceHistory.EntalpiaE0
+
+        Public Property Entropia As Double Implements Interfaces.IRecycleConvergenceHistory.Entropia
+
+        Public Property Entropia0 As Double Implements Interfaces.IRecycleConvergenceHistory.Entropia0
+
+        Public Property EntropiaE As Double Implements Interfaces.IRecycleConvergenceHistory.EntropiaE
+
+        Public Property EntropiaE0 As Double Implements Interfaces.IRecycleConvergenceHistory.EntropiaE0
+
+        Public Property Pressao As Double Implements Interfaces.IRecycleConvergenceHistory.Pressao
+
+        Public Property Pressao0 As Double Implements Interfaces.IRecycleConvergenceHistory.Pressao0
+
+        Public Property PressaoE As Double Implements Interfaces.IRecycleConvergenceHistory.PressaoE
+
+        Public Property PressaoE0 As Double Implements Interfaces.IRecycleConvergenceHistory.PressaoE0
+
+        Public Property Temperatura As Double Implements Interfaces.IRecycleConvergenceHistory.Temperatura
+
+        Public Property Temperatura0 As Double Implements Interfaces.IRecycleConvergenceHistory.Temperatura0
+
+        Public Property TemperaturaE As Double Implements Interfaces.IRecycleConvergenceHistory.TemperaturaE
+
+        Public Property TemperaturaE0 As Double Implements Interfaces.IRecycleConvergenceHistory.TemperaturaE0
+
+        Public Property VazaoMassica As Double Implements Interfaces.IRecycleConvergenceHistory.VazaoMassica
+
+        Public Property VazaoMassica0 As Double Implements Interfaces.IRecycleConvergenceHistory.VazaoMassica0
+
+        Public Property VazaoMassicaE As Double Implements Interfaces.IRecycleConvergenceHistory.VazaoMassicaE
+
+        Public Property VazaoMassicaE0 As Double Implements Interfaces.IRecycleConvergenceHistory.VazaoMassicaE0
 
     End Class
 

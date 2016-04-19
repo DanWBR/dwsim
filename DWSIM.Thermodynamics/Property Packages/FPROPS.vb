@@ -38,7 +38,7 @@
 
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Math
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FPROPS
 
 Imports System.Runtime.InteropServices

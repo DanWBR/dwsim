@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.GlobalSettings" />
+    <Import Include="DWSIM.MathOps" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -110,23 +111,6 @@
     <Compile Include="Flash Algorithms\PointF.vb" />
     <Compile Include="Main\Calculator.vb" />
     <Compile Include="Helper Classes\ChemSepIDConverter.vb" />
-    <Compile Include="Math Classes\AP.vb" />
-    <Compile Include="Math Classes\Brent.vb" />
-    <Compile Include="Math Classes\BrentMinimize.vb" />
-    <Compile Include="Math Classes\Broyden.vb" />
-    <Compile Include="Math Classes\BS.vb" />
-    <Compile Include="Math Classes\cMatLib.vb" />
-    <Compile Include="Math Classes\GammaF.vb" />
-    <Compile Include="Math Classes\GDEM.vb" />
-    <Compile Include="Math Classes\General.vb" />
-    <Compile Include="Math Classes\Interpolation.vb" />
-    <Compile Include="Math Classes\LBFGS.vb" />
-    <Compile Include="Math Classes\LBFGSB.vb" />
-    <Compile Include="Math Classes\LM.vb" />
-    <Compile Include="Math Classes\LP_Solve.vb" />
-    <Compile Include="Math Classes\MATRIX2.vb" />
-    <Compile Include="Math Classes\MatrixOps.vb" />
-    <Compile Include="Math Classes\SysLin.vb" />
     <Compile Include="Property Packages\ActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\Electrolyte.vb" />
     <Compile Include="Base Classes\ElectrolyteBase.vb" />
@@ -252,6 +236,10 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
+      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
+      <Name>DWSIM.MathOps</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>

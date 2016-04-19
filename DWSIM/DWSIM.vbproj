@@ -301,6 +301,7 @@
     <Import Include="DWSIM.GlobalSettings" />
     <Import Include="DWSIM.Interfaces.Enums" />
     <Import Include="DWSIM.Interfaces.Enums.GraphicObjects" />
+    <Import Include="DWSIM.MathOps" />
     <Import Include="DWSIM.SharedClasses" />
     <Import Include="DWSIM.Thermodynamics" />
     <Import Include="Microsoft.VisualBasic" />
@@ -1520,6 +1521,10 @@
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
+      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
+      <Name>DWSIM.MathOps</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>

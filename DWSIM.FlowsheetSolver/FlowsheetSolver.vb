@@ -62,7 +62,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 Dim gobj As IGraphicObject = myObj.GraphicObject
                 If Not gobj Is Nothing Then
                     If gobj.OutputConnectors(0).IsAttached = True Then
-                        Dim myUnitOp As DWSIM.Interfaces.ISimulationObject = fbag.SimulationObjects(myObj.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                        Dim myUnitOp = fbag.SimulationObjects(myObj.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                         If objArgs.Sender = "Spec" Or objArgs.Sender = "FlowsheetSolver" Then
                             CalculateMaterialStream(fobj, myObj, , OnlyMe)
                         Else
@@ -88,7 +88,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 Dim gobj As IGraphicObject = myObj.GraphicObject
                 If Not gobj Is Nothing Then
                     If gobj.OutputConnectors(0).IsAttached = True And Not OnlyMe Then
-                        Dim myUnitOp As DWSIM.Interfaces.ISimulationObject = fbag.SimulationObjects(myObj.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                        Dim myUnitOp = fbag.SimulationObjects(myObj.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                         If objArgs.Calculated = True Then
                             myUnitOp.GraphicObject.Calculated = False
                             myUnitOp.Calculate()
@@ -831,9 +831,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             Dim robj = fbag.SimulationObjects(r)
             If robj.GraphicObject.ObjectType = ObjectType.OT_Recycle Then
                 recycles.Add(robj.Name)
-                Dim rec As Recycle = fbag.SimulationObjects(robj.Name)
-                If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
-                    If rec.Values.Count = 0 Then rec.Calculate()
+                Dim rec As IRecycle = fbag.SimulationObjects(robj.Name)
+                If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
+                    If rec.Values.Count = 0 Then fbag.SimulationObjects(robj.Name).Calculate()
                     totalv += rec.Values.Count
                 End If
             End If
@@ -949,7 +949,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                                  converged = True
                                                  For Each r As String In recycles
                                                      obj = fbag.SimulationObjects(r)
-                                                     converged = DirectCast(obj, SpecialOps.Recycle).Converged
+                                                     converged = DirectCast(obj, IRecycle).Converged
                                                      If Not converged Then Exit For
                                                  Next
 
@@ -960,7 +960,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                                                      For Each r As String In recycles
                                                          obj = fbag.SimulationObjects(r)
-                                                         With DirectCast(obj, SpecialOps.Recycle)
+                                                         With DirectCast(obj, IRecycle)
                                                              avgerr += 0.33 * .ConvergenceHistory.TemperaturaE / .ConvergenceHistory.Temperatura
                                                              avgerr += 0.33 * .ConvergenceHistory.PressaoE / .ConvergenceHistory.Pressao
                                                              avgerr += 0.33 * .ConvergenceHistory.VazaoMassicaE / .ConvergenceHistory.VazaoMassica
@@ -993,8 +993,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                                                          Dim i As Integer = 0
                                                          For Each r As String In recycles
-                                                             Dim rec = DirectCast(fbag.SimulationObjects(r), SpecialOps.Recycle)
-                                                             If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
+                                                             Dim rec = DirectCast(fbag.SimulationObjects(r), IRecycle)
+                                                             If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
                                                                  For Each kvp In rec.Values
                                                                      recvars(i) = kvp.Value
                                                                      recerrs(i) = rec.Errors(kvp.Key)
@@ -1007,8 +1007,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                                                          i = 0
                                                          For Each r As String In recycles
-                                                             Dim rec = DirectCast(fbag.SimulationObjects(r), SpecialOps.Recycle)
-                                                             If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
+                                                             Dim rec = DirectCast(fbag.SimulationObjects(r), IRecycle)
+                                                             If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
                                                                  For Each kvp In rec.Errors
                                                                      rec.Values(kvp.Key) = recvars(i) + recdvars(i)
                                                                      i += 1
@@ -1437,7 +1437,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                 Dim n As Integer = 0
 
-                For Each adj As SimulationObjects.SpecialOps.Adjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is Adjust)
+                For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
                     If adj.SimultaneousAdjust Then n += 1
                 Next
 
@@ -1452,7 +1452,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     Dim ic As Integer
 
                     i = 0
-                    For Each adj As SimulationObjects.SpecialOps.Adjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is Adjust)
+                    For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
                         If adj.SimultaneousAdjust Then
                             x(i) = GetMnpVarValue(fobj, adj)
                             i += 1
@@ -1528,7 +1528,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             Dim n As Integer = 0
 
-            For Each adj As SimulationObjects.SpecialOps.Adjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is Adjust)
+            For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
                 If adj.SimultaneousAdjust Then n += 1
             Next
 
@@ -1551,7 +1551,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 Dim ic As Integer
 
                 i = 0
-                For Each adj As SimulationObjects.SpecialOps.Adjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is Adjust)
+                For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
                     If adj.SimultaneousAdjust Then
                         x(i) = GetMnpVarValue(fobj, adj)
                         i += 1
@@ -1618,7 +1618,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
      
         Dim i As Integer = 0
-        For Each adj As SimulationObjects.SpecialOps.Adjust In fbag.SimulationObjects.Values
+        For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
             If adj.SimultaneousAdjust Then
                 SetMnpVarValue(x(i), fobj, adj)
                 i += 1
@@ -1629,7 +1629,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
         Dim fx(x.Length - 1) As Double
         i = 0
-        For Each adj As SimulationObjects.SpecialOps.Adjust In fbag.SimulationObjects.Values
+        For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
             If adj.SimultaneousAdjust Then
                 If adj.Referenced Then
                     fx(i) = adj.AdjustValue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
@@ -1699,7 +1699,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
 
         Dim i As Integer = 0
-        For Each adj As SimulationObjects.SpecialOps.Adjust In fbag.SimulationObjects.Values
+        For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
             If adj.SimultaneousAdjust Then
                 SetMnpVarValue(x(i), fobj, adj)
                 i += 1
@@ -1710,7 +1710,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
         Dim fx(x.Length - 1) As Double
         i = 0
-        For Each adj As SimulationObjects.SpecialOps.Adjust In fbag.SimulationObjects.Values
+        For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
             If adj.SimultaneousAdjust Then
                 If adj.Referenced Then
                     fx(i) = adj.AdjustValue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
@@ -1774,12 +1774,12 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <param name="adj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Private Shared Function GetCtlVarValue(ByVal fobj As Object, ByVal adj As SimulationObjects.SpecialOps.Adjust)
+    Private Shared Function GetCtlVarValue(ByVal fobj As Object, ByVal adj As IAdjust) As Double
 
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
 
         With adj.ControlledObjectData
-            Return fbag.SimulationObjects(.m_ID).GetPropertyValue(.m_Property)
+            Return fbag.SimulationObjects(.ID).GetPropertyValue(.PropertyName)
         End With
 
     End Function
@@ -1791,12 +1791,12 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <param name="adj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Private Shared Function GetMnpVarValue(ByVal fobj As Object, ByVal adj As SimulationObjects.SpecialOps.Adjust)
+    Private Shared Function GetMnpVarValue(ByVal fobj As Object, ByVal adj As IAdjust) As Double
 
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
 
-        With adj.ManipulatedObjectData()
-            Return fbag.SimulationObjects(.m_ID).GetPropertyValue(.m_Property)
+        With adj.ManipulatedObjectData
+            Return fbag.SimulationObjects(.ID).GetPropertyValue(.PropertyName)
         End With
 
     End Function
@@ -1808,12 +1808,12 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <param name="adj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Private Shared Function SetMnpVarValue(ByVal val As Nullable(Of Double), ByVal fobj As Object, ByVal adj As SimulationObjects.SpecialOps.Adjust)
+    Private Shared Function SetMnpVarValue(ByVal val As Nullable(Of Double), ByVal fobj As Object, ByVal adj As IAdjust)
 
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
 
-        With adj.ManipulatedObjectData()
-            fbag.SimulationObjects(.m_ID).SetPropertyValue(.m_Property, val)
+        With adj.ManipulatedObjectData
+            fbag.SimulationObjects(.ID).SetPropertyValue(.PropertyName, val)
         End With
 
         Return 1
@@ -1827,13 +1827,13 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <param name="adj"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    Private Shared Function GetRefVarValue(ByVal fobj As Object, ByVal adj As SimulationObjects.SpecialOps.Adjust)
+    Private Shared Function GetRefVarValue(ByVal fobj As Object, ByVal adj As IAdjust) As Double
 
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
 
         With adj.ManipulatedObjectData
             With adj.ControlledObjectData()
-                Return fbag.SimulationObjects(.m_ID).GetPropertyValue(.m_Name)
+                Return fbag.SimulationObjects(.ID).GetPropertyValue(.Name)
             End With
         End With
 

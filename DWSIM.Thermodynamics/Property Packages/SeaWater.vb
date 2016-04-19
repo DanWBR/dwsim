@@ -19,7 +19,7 @@
 
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
 Imports System.Linq
 
 

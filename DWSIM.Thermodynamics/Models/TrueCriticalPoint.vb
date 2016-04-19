@@ -16,8 +16,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.Thermodynamics.MathEx.Common
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx.Common
+Imports DWSIM.MathOps.MathEx
 
 Namespace Utilities.TCP
 

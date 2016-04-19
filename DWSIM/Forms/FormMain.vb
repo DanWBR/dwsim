@@ -1244,16 +1244,16 @@ Public Class FormMain
             Try
                 If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Adjust) IsNot Nothing Then
                     Dim so2 As DWSIM.SimulationObjects.SpecialOps.Adjust = so
-                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ManipulatedObjectData.m_ID) Then
-                        so2.ManipulatedObject = form.Collections.FlowsheetObjectCollection(so2.ManipulatedObjectData.m_ID)
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ManipulatedObjectData.ID) Then
+                        so2.ManipulatedObject = form.Collections.FlowsheetObjectCollection(so2.ManipulatedObjectData.ID)
                         DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToMv = so2.ManipulatedObject.GraphicObject
                     End If
-                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ControlledObjectData.m_ID) Then
-                        so2.ControlledObject = form.Collections.FlowsheetObjectCollection(so2.ControlledObjectData.m_ID)
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ControlledObjectData.ID) Then
+                        so2.ControlledObject = form.Collections.FlowsheetObjectCollection(so2.ControlledObjectData.ID)
                         DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToCv = so2.ControlledObject.GraphicObject
                     End If
-                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ReferencedObjectData.m_ID) Then
-                        so2.ReferenceObject = form.Collections.FlowsheetObjectCollection(so2.ReferencedObjectData.m_ID)
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ReferencedObjectData.ID) Then
+                        so2.ReferenceObject = form.Collections.FlowsheetObjectCollection(so2.ReferencedObjectData.ID)
                         DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
                     End If
                 End If

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1D223714-D3C8-463A-B4DC-FEFA1323EC87}</ProjectGuid>
+    <ProjectGuid>{FDFB92DE-D189-49DC-91CC-60EE78D1356C}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>DWSIM.FlowsheetSolver</RootNamespace>
-    <AssemblyName>DWSIM.FlowsheetSolver</AssemblyName>
+    <RootNamespace>DWSIM.MathOps</RootNamespace>
+    <AssemblyName>DWSIM.MathOps</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -19,8 +19,8 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>DWSIM.FlowsheetSolver.xml</DocumentationFile>
-    <NoWarn>41999,42016,42020,42021,42022</NoWarn>
+    <DocumentationFile>DWSIM.MathOps.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,8 +28,8 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>DWSIM.FlowsheetSolver.xml</DocumentationFile>
-    <NoWarn>41999,42016,42020,42021,42022</NoWarn>
+    <DocumentationFile>DWSIM.MathOps.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -44,27 +44,44 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cudafy.NET">
-      <HintPath>..\DWSIM\References\Cudafy.NET.dll</HintPath>
+    <Reference Include="Mapack">
+      <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
-    <Import Include="DWSIM.MathOps" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlowsheetSolver.vb" />
-    <Compile Include="Task Schedulers\LimitedConcurrencyLevelTaskScheduler.vb" />
+    <Compile Include="AP.vb" />
+    <Compile Include="Brent.vb" />
+    <Compile Include="BrentMinimize.vb" />
+    <Compile Include="Broyden.vb" />
+    <Compile Include="BS.vb" />
+    <Compile Include="cMatLib.vb" />
+    <Compile Include="GammaF.vb" />
+    <Compile Include="GDEM.vb" />
+    <Compile Include="General.vb" />
+    <Compile Include="Interpolation.vb" />
+    <Compile Include="LBFGS.vb" />
+    <Compile Include="LBFGSB.vb" />
+    <Compile Include="LM.vb" />
+    <Compile Include="LP_Solve.vb" />
+    <Compile Include="MATRIX2.vb" />
+    <Compile Include="MatrixOps.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -80,9 +97,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ObjectInfo.vb" />
-    <Compile Include="Script.vb" />
-    <Compile Include="Task Schedulers\STATaskScheduler.vb" />
+    <Compile Include="SysLin.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -102,24 +117,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
-      <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
-      <Name>DWSIM.CustomXMLSerializer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
-      <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
-      <Name>DWSIM.GlobalSettings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
-      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
-      <Name>DWSIM.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
-      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
-      <Name>DWSIM.MathOps</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

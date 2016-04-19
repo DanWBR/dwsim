@@ -24,7 +24,7 @@ Imports System.Windows.Forms
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
-Imports DWSIM.Thermodynamics.MathEx.Interpolation
+Imports DWSIM.MathOps.MathEx.Interpolation
 
 Namespace UnitOperations.Auxiliary.PipingOps
 

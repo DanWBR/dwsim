@@ -117,4 +117,6 @@
 
     Property PropertyPackage As IPropertyPackage
 
+    Sub SetFlowsheet(fobj As Object)
+
 End Interface

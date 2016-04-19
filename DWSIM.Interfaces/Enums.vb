@@ -1,5 +1,12 @@
 ﻿Namespace Enums
 
+    Public Enum AccelMethod
+        None
+        Wegstein
+        Dominant_Eigenvalue
+        GlobalBroyden
+    End Enum
+
     Public Enum FlashCalculationType
         PressureTemperature = 0
         PressureEnthalpy = 1

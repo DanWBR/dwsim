@@ -21,9 +21,9 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports Ciloci.Flee
 Imports System.Math
 Imports System.Linq
-Imports DWSIM.Thermodynamics.MathEx.Common
+Imports DWSIM.MathOps.MathEx.Common
 Imports DotNumerics.Optimization
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports DWSIM.Interfaces.Enums
 

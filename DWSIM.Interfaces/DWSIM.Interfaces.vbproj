@@ -80,6 +80,7 @@
     <Compile Include="IReactionSet.vb" />
     <Compile Include="IReactionSetBase.vb" />
     <Compile Include="IReactionStoichBase.vb" />
+    <Compile Include="ISpecialOps.vb" />
     <Compile Include="ISimulationObject.vb" />
     <Compile Include="IUnitsOfMeasure.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

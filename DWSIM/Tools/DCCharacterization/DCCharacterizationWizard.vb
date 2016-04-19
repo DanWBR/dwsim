@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization

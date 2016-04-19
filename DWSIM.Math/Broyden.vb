@@ -1,8 +1,4 @@
-﻿Imports Cudafy
-Imports Cudafy.Translator
-Imports Cudafy.Host
-
-Namespace MathEx
+﻿Namespace MathEx
 
     Public Class Broyden
 

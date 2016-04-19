@@ -1049,7 +1049,7 @@ Namespace DWSIM.Flowsheet
                     If robj.GraphicObject.ObjectType = ObjectType.OT_Recycle Then
                         recycles.Add(robj.Name)
                         Dim rec As Recycle = form.Collections.FlowsheetObjectCollection(robj.Name)
-                        If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
+                        If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
                             If rec.Values.Count = 0 Then rec.Calculate()
                             totalv += rec.Values.Count
                         End If
@@ -1213,7 +1213,7 @@ Namespace DWSIM.Flowsheet
                                                                  Dim i As Integer = 0
                                                                  For Each r As String In recycles
                                                                      Dim rec = DirectCast(form.Collections.FlowsheetObjectCollection(r), SpecialOps.Recycle)
-                                                                     If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
+                                                                     If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
                                                                          For Each kvp In rec.Values
                                                                              recvars(i) = kvp.Value
                                                                              recerrs(i) = rec.Errors(kvp.Key)
@@ -1227,7 +1227,7 @@ Namespace DWSIM.Flowsheet
                                                                  i = 0
                                                                  For Each r As String In recycles
                                                                      Dim rec = DirectCast(form.Collections.FlowsheetObjectCollection(r), SpecialOps.Recycle)
-                                                                     If rec.AccelerationMethod = SpecialOps.Helpers.Recycle.AccelMethod.GlobalBroyden Then
+                                                                     If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
                                                                          For Each kvp In rec.Errors
                                                                              rec.Values(kvp.Key) = recvars(i) + recdvars(i)
                                                                              i += 1
@@ -2013,7 +2013,7 @@ Namespace DWSIM.Flowsheet
         Private Shared Function GetCtlVarValue(ByVal form As FormFlowsheet, ByVal adj As SimulationObjects.SpecialOps.Adjust)
 
             With adj.ControlledObjectData
-                Return form.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Property)
+                Return form.Collections.FlowsheetObjectCollection(.ID).GetPropertyValue(.PropertyName)
             End With
 
         End Function
@@ -2028,7 +2028,7 @@ Namespace DWSIM.Flowsheet
         Private Shared Function GetMnpVarValue(ByVal form As FormFlowsheet, ByVal adj As SimulationObjects.SpecialOps.Adjust)
 
             With adj.ManipulatedObjectData()
-                Return form.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Property)
+                Return form.Collections.FlowsheetObjectCollection(.ID).GetPropertyValue(.PropertyName)
             End With
 
         End Function
@@ -2043,7 +2043,7 @@ Namespace DWSIM.Flowsheet
         Private Shared Function SetMnpVarValue(ByVal val As Nullable(Of Double), ByVal form As FormFlowsheet, ByVal adj As SimulationObjects.SpecialOps.Adjust)
 
             With adj.ManipulatedObjectData()
-                form.Collections.FlowsheetObjectCollection(.m_ID).SetPropertyValue(.m_Property, val)
+                form.Collections.FlowsheetObjectCollection(.ID).SetPropertyValue(.PropertyName, val)
             End With
 
             Return 1
@@ -2061,7 +2061,7 @@ Namespace DWSIM.Flowsheet
 
             With adj.ManipulatedObjectData
                 With adj.ControlledObjectData()
-                    Return form.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Name, form.Options.SelectedUnitSystem)
+                    Return form.Collections.FlowsheetObjectCollection(.ID).GetPropertyValue(.Name, form.Options.SelectedUnitSystem)
                 End With
             End With
 

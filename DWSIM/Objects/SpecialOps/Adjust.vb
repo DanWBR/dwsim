@@ -27,6 +27,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
 
         Inherits DWSIM.SimulationObjects.UnitOperations.SpecialOpBaseClass
 
+        Implements Interfaces.IAdjust
+
         Protected m_ManipulatedObject As DWSIM.SimulationObjects.UnitOperations.BaseClass
         Protected m_ControlledObject As DWSIM.SimulationObjects.UnitOperations.BaseClass
         Protected m_ReferenceObject As DWSIM.SimulationObjects.UnitOperations.BaseClass
@@ -46,9 +48,9 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         Protected m_Tolerance As Double = 0.0001
         Protected m_MaxIterations As Integer = 10
 
-        Protected m_ManipulatedObjectData As New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ManipulatedObjectInfo
-        Protected m_ControlledObjectData As New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ControlledObjectInfo
-        Protected m_ReferencedObjectData As New DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ReferenceObjectInfo
+        Protected m_ManipulatedObjectData As Object
+        Protected m_ControlledObjectData As Object
+        Protected m_ReferencedObjectData As Object
 
         Protected m_CV_OK As Boolean = False
         Protected m_MV_OK As Boolean = False
@@ -58,7 +60,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
         Protected m_maxVal As Nullable(Of Double) = Nothing
         Protected m_initialEstimate As Nullable(Of Double) = Nothing
 
-        Public Property SimultaneousAdjust() As Boolean
+        Public Property SimultaneousAdjust() As Boolean Implements Interfaces.IAdjust.SimultaneousAdjust
             Get
                 Return m_IsSimultAdjustEnabled
             End Get
@@ -121,29 +123,29 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             End Set
         End Property
 
-        Public Property ManipulatedObjectData() As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ManipulatedObjectInfo
+        Public Property ManipulatedObjectData() As Interfaces.ISpecialOpObjectInfo Implements Interfaces.IAdjust.ManipulatedObjectData
             Get
                 Return Me.m_ManipulatedObjectData
             End Get
-            Set(ByVal value As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ManipulatedObjectInfo)
+            Set(ByVal value As Interfaces.ISpecialOpObjectInfo)
                 Me.m_ManipulatedObjectData = value
             End Set
         End Property
 
-        Public Property ControlledObjectData() As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ControlledObjectInfo
+        Public Property ControlledObjectData() As Interfaces.ISpecialOpObjectInfo Implements Interfaces.IAdjust.ControlledObjectData
             Get
                 Return Me.m_ControlledObjectData
             End Get
-            Set(ByVal value As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ControlledObjectInfo)
+            Set(ByVal value As Interfaces.ISpecialOpObjectInfo)
                 Me.m_ControlledObjectData = value
             End Set
         End Property
 
-        Public Property ReferencedObjectData() As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ReferenceObjectInfo
+        Public Property ReferencedObjectData() As Interfaces.ISpecialOpObjectInfo Implements Interfaces.IAdjust.ReferencedObjectData
             Get
                 Return Me.m_ReferencedObjectData
             End Get
-            Set(ByVal value As DWSIM.SimulationObjects.SpecialOps.Helpers.Adjust.ReferenceObjectInfo)
+            Set(ByVal value As Interfaces.ISpecialOpObjectInfo)
                 Me.m_ReferencedObjectData = value
             End Set
         End Property
@@ -211,7 +213,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             End Set
         End Property
 
-        Public Property AdjustValue() As Double
+        Public Property AdjustValue() As Double Implements Interfaces.IAdjust.AdjustValue
             Get
                 Return Me.m_AdjustValue
             End Get
@@ -220,7 +222,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             End Set
         End Property
 
-        Public Property Referenced() As Boolean
+        Public Property Referenced() As Boolean Implements Interfaces.IAdjust.Referenced
             Get
                 Return Me.m_IsReferenced
             End Get
@@ -271,7 +273,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 With m_ManipulatedObjectData
                     .m_ID = xel.@ID
                     .m_Name = xel.@Name
-                    .m_Property = xel.@Property
+                    .PropertyName = xel.@Property
                     .m_Type = xel.@Type
                 End With
 
@@ -284,7 +286,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 With m_ControlledObjectData
                     .m_ID = xel.@ID
                     .m_Name = xel.@Name
-                    .m_Property = xel.@Property
+                    .PropertyName = xel.@Property
                     .m_Type = xel.@Type
                 End With
 
@@ -297,7 +299,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 With m_ReferencedObjectData
                     .m_ID = xel.@ID
                     .m_Name = xel.@Name
-                    .m_Property = xel.@Property
+                    .PropertyName = xel.@Property
                     .m_Type = xel.@Type
                 End With
 
@@ -313,15 +315,15 @@ Namespace DWSIM.SimulationObjects.SpecialOps
             With elements
                 .Add(New XElement("ManipulatedObjectData", New XAttribute("ID", m_ManipulatedObjectData.m_ID),
                                   New XAttribute("Name", m_ManipulatedObjectData.m_Name),
-                                  New XAttribute("Property", m_ManipulatedObjectData.m_Property),
+                                  New XAttribute("Property", m_ManipulatedObjectData.PropertyName),
                                   New XAttribute("Type", m_ManipulatedObjectData.m_Type)))
                 .Add(New XElement("ControlledObjectData", New XAttribute("ID", m_ControlledObjectData.m_ID),
                                   New XAttribute("Name", m_ControlledObjectData.m_Name),
-                                  New XAttribute("Property", m_ControlledObjectData.m_Property),
+                                  New XAttribute("Property", m_ControlledObjectData.PropertyName),
                                   New XAttribute("Type", m_ControlledObjectData.m_Type)))
                 .Add(New XElement("ReferencedObjectData", New XAttribute("ID", m_ReferencedObjectData.m_ID),
                                   New XAttribute("Name", m_ReferencedObjectData.m_Name),
-                                  New XAttribute("Property", m_ReferencedObjectData.m_Property),
+                                  New XAttribute("Property", m_ReferencedObjectData.PropertyName),
                                   New XAttribute("Type", m_ReferencedObjectData.m_Type)))
             End With
 
@@ -366,7 +368,7 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 End With
                 cpc.Add(DWSIM.App.GetLocalString("TipodoObjeto"), Me.ControlledObjectData, "m_Type", True, DWSIM.App.GetLocalString("VarivelControlada"), "", True)
                 cpc.Add(DWSIM.App.GetLocalString("Objeto"), Me.ControlledObjectData, "m_Name", True, DWSIM.App.GetLocalString("VarivelControlada"), "", True)
-                cpc.Add(DWSIM.App.GetLocalString("Propriedade"), DWSIM.App.GetPropertyName(Me.ControlledObjectData.m_Property), True, DWSIM.App.GetLocalString("VarivelControlada"), "", True)
+                cpc.Add(DWSIM.App.GetLocalString("Propriedade"), DWSIM.App.GetPropertyName(Me.ControlledObjectData.PropertyName), True, DWSIM.App.GetLocalString("VarivelControlada"), "", True)
                 .Item.Add(DWSIM.App.GetLocalString("VarivelControlada"), cpc, False, DWSIM.App.GetLocalString("Configuraes1"), DWSIM.App.GetLocalString("Selecioneavarivelase"))
                 With .Item(.Item.Count - 1)
                     .IsBrowsable = True
@@ -382,13 +384,13 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 End With
                 cpc2.Add(DWSIM.App.GetLocalString("TipodoObjeto"), Me.ManipulatedObjectData, "m_Type", True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
                 cpc2.Add(DWSIM.App.GetLocalString("Objeto"), Me.ManipulatedObjectData, "m_Name", True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                cpc2.Add(DWSIM.App.GetLocalString("Propriedade"), DWSIM.App.GetPropertyName(Me.ManipulatedObjectData.m_Property), True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
+                cpc2.Add(DWSIM.App.GetLocalString("Propriedade"), DWSIM.App.GetPropertyName(Me.ManipulatedObjectData.PropertyName), True, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
 
                 If Me.ManipulatedObject IsNot Nothing Then
-                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MinVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                    cpc2.Add(FT(DWSIM.App.GetLocalString("Valormnimoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
-                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su), Me.MaxVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
-                    cpc2.Add(FT(DWSIM.App.GetLocalString("Valormximoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
+                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.PropertyName, su), Me.MinVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                    cpc2.Add(FT(DWSIM.App.GetLocalString("Valormnimoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.PropertyName, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
+                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.PropertyName, su), Me.MaxVal.GetValueOrDefault), FlowSheet.Options.NumberFormat)
+                    cpc2.Add(FT(DWSIM.App.GetLocalString("Valormximoopcional"), Me.ManipulatedObject.GetPropertyUnit(ManipulatedObjectData.PropertyName, su)), value, False, DWSIM.App.GetLocalString("VarivelManipulada"), "", True)
                 End If
                 .Item.Add(DWSIM.App.GetLocalString("VarivelManipulada"), cpc2, False, DWSIM.App.GetLocalString("Configuraes1"), DWSIM.App.GetLocalString("Selecioneavarivelase2"))
                 With .Item(.Item.Count - 1)
@@ -416,8 +418,8 @@ Namespace DWSIM.SimulationObjects.SpecialOps
                 End If
 
                 If Me.ControlledObject IsNot Nothing Then
-                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su), Me.AdjustValue), FlowSheet.Options.NumberFormat)
-                    .Item.Add(FT(DWSIM.App.GetLocalString("ValordeAjusteouOffse"), Me.ControlledObject.GetPropertyUnit(ControlledObjectData.m_Property, su)), value, False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SetpointdoAjusteouov"), True)
+                    value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.ControlledObject.GetPropertyUnit(ControlledObjectData.PropertyName, su), Me.AdjustValue), FlowSheet.Options.NumberFormat)
+                    .Item.Add(FT(DWSIM.App.GetLocalString("ValordeAjusteouOffse"), Me.ControlledObject.GetPropertyUnit(ControlledObjectData.PropertyName, su)), value, False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("SetpointdoAjusteouov"), True)
                 End If
                 .Item.Add(DWSIM.App.GetLocalString("NmeroMximodeIteraes"), Me, "MaximumIterations", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("Nmeromximodeiteraesa"), True)
                 .Item.Add(DWSIM.App.GetLocalString("Tolerncia"), Me, "Tolerance", False, DWSIM.App.GetLocalString("Parmetros2"), DWSIM.App.GetLocalString("Diferenamximaentreos"), True)

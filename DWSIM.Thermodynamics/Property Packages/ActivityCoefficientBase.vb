@@ -28,7 +28,7 @@ Imports iop = System.Runtime.InteropServices
 Imports System.Xml.Serialization
 Imports System.Runtime.Serialization.Formatters
 Imports System.Threading.Tasks
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
 
 Namespace PropertyPackages
 

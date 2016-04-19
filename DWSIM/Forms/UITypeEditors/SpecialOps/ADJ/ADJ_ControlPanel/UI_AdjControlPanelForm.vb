@@ -27,7 +27,7 @@ Public Class UI_AdjControlPanelForm
         myADJ = formC.Collections.FlowsheetObjectCollection(formC.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
         With myADJ
-            Me.tbAjuste.Text = SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), .AdjustValue)
+            Me.tbAjuste.Text = SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), .AdjustValue)
             Me.tbMaxIt.Text = .MaximumIterations
             Me.tbStep.Text = .StepSize
             Me.tbTol.Text = .Tolerance
@@ -47,7 +47,7 @@ Public Class UI_AdjControlPanelForm
         With Me.GraphControl.GraphPane
             .Title.IsVisible = False
             .XAxis.Title.Text = DWSIM.App.GetLocalString("Iterao")
-            .YAxis.Title.Text = DWSIM.App.GetPropertyName(myADJ.ControlledObjectData.m_Property) & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, Me.su) & ")"
+            .YAxis.Title.Text = DWSIM.App.GetPropertyName(myADJ.ControlledObjectData.PropertyName) & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, Me.su) & ")"
         End With
 
         py1 = New ArrayList
@@ -81,16 +81,16 @@ Public Class UI_AdjControlPanelForm
 
         Dim mvVal, cvVal, rfVal, maxval, minval As Double
 
-        If formC.Collections.FlowsheetObjectCollection(myADJ.ControlledObjectData.m_ID).GraphicObject.Calculated Then
+        If formC.Collections.FlowsheetObjectCollection(myADJ.ControlledObjectData.ID).GraphicObject.Calculated Then
             cvVal = Me.GetCtlVarValue()
         End If
-        If formC.Collections.FlowsheetObjectCollection(myADJ.ManipulatedObjectData.m_ID).GraphicObject.Calculated Then
+        If formC.Collections.FlowsheetObjectCollection(myADJ.ManipulatedObjectData.ID).GraphicObject.Calculated Then
             mvVal = Me.GetMnpVarValue()
             maxval = myADJ.MaxVal.GetValueOrDefault
             minval = myADJ.MinVal.GetValueOrDefault
         End If
         If myADJ.Referenced Then
-            If formC.Collections.FlowsheetObjectCollection(myADJ.ReferencedObjectData.m_ID).GraphicObject.Calculated Then
+            If formC.Collections.FlowsheetObjectCollection(myADJ.ReferencedObjectData.ID).GraphicObject.Calculated Then
                 rfVal = Me.GetMnpVarValue()
             End If
         End If
@@ -176,8 +176,8 @@ Public Class UI_AdjControlPanelForm
                 cvVal = Me.GetCtlVarValue()
                 cnt += 1
 
-                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
-                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
+                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), adjval))
+                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), cvVal))
 
                 AtualizaGrafico()
 
@@ -241,8 +241,8 @@ Public Class UI_AdjControlPanelForm
                 Me.lblStatus.Text = DWSIM.App.GetLocalString("Ajustando")
                 Me.lblItXdeY.Text = DWSIM.App.GetLocalString("Procurandosubinterva")
                 Me.tbErro.Text = f
-                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
-                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
+                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), adjval))
+                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), cvVal))
                 AtualizaGrafico()
                 minval = minval + delta
                 Me.SetMnpVarValue(minval)
@@ -254,8 +254,8 @@ Public Class UI_AdjControlPanelForm
                 Me.lblStatus.Text = DWSIM.App.GetLocalString("Ajustando")
                 Me.lblItXdeY.Text = DWSIM.App.GetLocalString("Procurandosubinterva")
                 Me.tbErro.Text = f_inf
-                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
-                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
+                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), adjval))
+                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), cvVal))
                 AtualizaGrafico()
                 l += 1
                 If l > 5 Then
@@ -361,8 +361,8 @@ Public Class UI_AdjControlPanelForm
                 Me.tbErro.Text = fbb
                 iter2 += 1
 
-                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), adjval))
-                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, su), cvVal))
+                py1.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), adjval))
+                py2.Add(SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), cvVal))
 
                 AtualizaGrafico()
 
@@ -434,7 +434,7 @@ Final3:
     '    With Me.myADJ.ControlledObjectData
     '        Select Case .m_Type
     '            Case DWSIM.App.GetLocalString("CorrentedeMatria")
-    '                Select Case .m_Property
+    '                Select Case .PropertyName
     '                    Case DWSIM.App.GetLocalString("Temperatura")
     '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).Phases(0).Properties.temperature = val
     '                    Case DWSIM.App.GetLocalString("Presso")
@@ -457,7 +457,7 @@ Final3:
     '            Case DWSIM.App.GetLocalString("Divisores")
     '                Return Nothing
     '            Case DWSIM.App.GetLocalString("Tubulaes")
-    '                Select Case .m_Property
+    '                Select Case .PropertyName
     '                    Case DWSIM.App.GetLocalString("DeltaP")
     '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaP = val
     '                    Case DWSIM.App.GetLocalString("DeltaT")
@@ -468,14 +468,14 @@ Final3:
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Vlvulas")
-    '                Select Case .m_Property
+    '                Select Case .PropertyName
     '                    Case DWSIM.App.GetLocalString("DeltaT")
     '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case Else
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Bombas")
-    '                Select Case .m_Property
+    '                Select Case .PropertyName
     '                    Case DWSIM.App.GetLocalString("DeltaT")
     '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case DWSIM.App.GetLocalString("Potnciarequerida")
@@ -488,7 +488,7 @@ Final3:
     '            Case DWSIM.App.GetLocalString("Separadores")
     '                Return Nothing
     '            Case DWSIM.App.GetLocalString("Compressores"))
-    '                Select Case .m_Property
+    '                Select Case .PropertyName
     '                    Case DWSIM.App.GetLocalString("DeltaT")
     '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case DWSIM.App.GetLocalString("Potnciarequerida")
@@ -497,7 +497,7 @@ Final3:
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Turbinas")
-    '                Select Case .m_Property
+    '                Select Case .PropertyName
     '                    Case DWSIM.App.GetLocalString("DeltaT")
     '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case DWSIM.App.GetLocalString("Potnciagerada")
@@ -506,14 +506,14 @@ Final3:
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Aquecedores")
-    '                Select Case .m_Property
+    '                Select Case .PropertyName
     '                    Case DWSIM.App.GetLocalString("DeltaT")
     '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case Else
     '                        Return Nothing
     '                End Select
     '            Case DWSIM.App.GetLocalString("Resfriadores")
-    '                Select Case .m_Property
+    '                Select Case .PropertyName
     '                    Case DWSIM.App.GetLocalString("DeltaT")
     '                        Me.formC.Collections.FlowsheetObjectCollection(.m_ID).DeltaT = val
     '                    Case Else
@@ -529,7 +529,7 @@ Final3:
     Private Function GetCtlVarValue()
 
         With Me.myADJ.ControlledObjectData
-            Return formC.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Property)
+            Return formC.Collections.FlowsheetObjectCollection(.ID).GetPropertyValue(.PropertyName)
         End With
 
     End Function
@@ -537,7 +537,7 @@ Final3:
     Private Function GetMnpVarValue()
 
         With Me.myADJ.ManipulatedObjectData
-            Return formC.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Property)
+            Return formC.Collections.FlowsheetObjectCollection(.ID).GetPropertyValue(.PropertyName)
         End With
 
     End Function
@@ -545,7 +545,7 @@ Final3:
     Private Function SetMnpVarValue(ByVal val As Nullable(Of Double))
 
         With Me.myADJ.ManipulatedObjectData
-            formC.Collections.FlowsheetObjectCollection(.m_ID).SetPropertyValue(.m_Property, val)
+            formC.Collections.FlowsheetObjectCollection(.ID).SetPropertyValue(.PropertyName, val)
         End With
 
         Return 1
@@ -556,7 +556,7 @@ Final3:
 
         With Me.myADJ.ManipulatedObjectData
             With Me.myADJ.ControlledObjectData
-                Return formC.Collections.FlowsheetObjectCollection(.m_ID).GetPropertyValue(.m_Name, su)
+                Return formC.Collections.FlowsheetObjectCollection(.ID).GetPropertyValue(.Name, su)
             End With
         End With
 
@@ -585,12 +585,12 @@ Final3:
                 .XAxis.Scale.MinorStep = 1
                 .XAxis.Scale.MajorStep = 1
                 .CurveList.Clear()
-                With .AddCurve("Set-point" & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, Me.su) & ")", New Double() {1}, New Double() {Convert.ToDouble(py1(0))}, Color.SteelBlue, ZedGraph.SymbolType.Circle)
+                With .AddCurve("Set-point" & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, Me.su) & ")", New Double() {1}, New Double() {Convert.ToDouble(py1(0))}, Color.SteelBlue, ZedGraph.SymbolType.Circle)
                     .Color = Color.SteelBlue
                     .Line.IsSmooth = False
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
-                With .AddCurve(DWSIM.App.GetLocalString("VarivelControlada") & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.m_Property, Me.su) & ")", New Double() {1}, New Double() {Convert.ToDouble(py2(0))}, Color.SpringGreen, ZedGraph.SymbolType.Circle)
+                With .AddCurve(DWSIM.App.GetLocalString("VarivelControlada") & " (" & myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, Me.su) & ")", New Double() {1}, New Double() {Convert.ToDouble(py2(0))}, Color.SpringGreen, ZedGraph.SymbolType.Circle)
                     .Color = Color.SpringGreen
                     .Line.IsSmooth = False
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid

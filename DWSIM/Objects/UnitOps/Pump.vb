@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.Thermodynamics.MathEx.Interpolation
+Imports DWSIM.MathOps.MathEx.Interpolation
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.PipingOps
 Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
 Imports System.Globalization

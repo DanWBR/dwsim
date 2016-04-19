@@ -16,14 +16,14 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
 Imports Cudafy
 Imports Cudafy.Translator
 Imports Cudafy.Host
 Imports System.Math
 Imports System.Threading.Tasks
 Imports System.Linq
-Imports DWSIM.Thermodynamics.MathEx.PolySolve
+Imports DWSIM.MathOps.MathEx.PolySolve
 
 Namespace PropertyPackages.ThermoPlugs
 

@@ -20,7 +20,7 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Optimization
 Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DrawingTools
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
 Imports Ciloci.Flee
 Imports System.Math
 Imports ZedGraph

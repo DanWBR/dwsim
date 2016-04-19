@@ -18,8 +18,8 @@
 
 Imports System.Math
 
-Imports DWSIM.Thermodynamics.MathEx
-Imports DWSIM.Thermodynamics.MathEx.Common
+Imports DWSIM.MathOps.MathEx
+Imports DWSIM.MathOps.MathEx.Common
 
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms

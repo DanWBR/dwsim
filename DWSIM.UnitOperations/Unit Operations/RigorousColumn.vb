@@ -16,7 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
 Imports System.Math
 Imports Mapack
 Imports DWSIM.DrawingTools.GraphicObjects
@@ -28,6 +28,7 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
+Imports DWSIM.MathOps
 
 Namespace UnitOperations.Auxiliary.SepOps
 

@@ -19,7 +19,7 @@ Imports DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.DWSIM.SimulationObjects.UnitOperations
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
-Imports DWSIM.Thermodynamics.MathEx.Interpolation
+Imports DWSIM.MathOps.MathEx.Interpolation
 
 Public Class UIInitialEstimatesEditorForm
 

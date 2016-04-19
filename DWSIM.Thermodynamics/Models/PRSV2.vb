@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports filehelpers
-Imports DWSIM.Thermodynamics.MathEx.PolySolve
+Imports DWSIM.MathOps.MathEx.PolySolve
 
 Namespace PropertyPackages.Auxiliary
 

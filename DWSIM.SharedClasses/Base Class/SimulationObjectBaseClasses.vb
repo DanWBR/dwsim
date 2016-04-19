@@ -475,7 +475,7 @@ Namespace UnitOperations
         ''' </summary>
         ''' <param name="flowsheet">Flowsheet instance.</param>
         ''' <remarks></remarks>
-        Public Sub SetFlowsheet(ByVal flowsheet As Interfaces.IFlowsheet)
+        Public Sub SetFlowsheet(ByVal flowsheet As Object) Implements Interfaces.ISimulationObject.SetFlowsheet
             m_flowsheet = flowsheet
         End Sub
 
@@ -1137,95 +1137,25 @@ Namespace UnitOperations
 
 End Namespace
 
-Namespace SpecialOps.Helpers.Adjust
+Namespace SpecialOps.Helpers
 
-    <System.Serializable()> Public Class ManipulatedObjectInfo
+    <System.Serializable()> Public Class SpecialOpObjectInfo
 
-        Public m_Type As String = ""
-        Public m_Name As String = ""
-        Public m_ID As String = ""
-        Public m_Property As String = ""
+        Implements ISpecialOpObjectInfo
 
         Sub New()
 
         End Sub
 
-        Overrides Function ToString() As String
-            Return "Click to select..."
-        End Function
+        Public Property ID As String = "" Implements ISpecialOpObjectInfo.ID
 
-    End Class
+        Public Property Name As String = "" Implements ISpecialOpObjectInfo.Name
 
-    <System.Serializable()> Public Class ControlledObjectInfo
+        Public Property PropertyName As String = "" Implements ISpecialOpObjectInfo.PropertyName
 
-        Public m_Type As String = ""
-        Public m_Name As String = ""
-        Public m_ID As String = ""
-        Public m_Property As String = ""
-
-        Sub New()
-
-        End Sub
-
-        Overrides Function ToString() As String
-            Return "Click to select..."
-        End Function
-
-    End Class
-
-    <System.Serializable()> Public Class ReferenceObjectInfo
-
-        Public m_Type As String = ""
-        Public m_Name As String = ""
-        Public m_ID As String = ""
-        Public m_Property As String = ""
-
-        Sub New()
-
-        End Sub
-
-        Overrides Function ToString() As String
-            Return "Click to select..."
-        End Function
+        Public Property Type As String = "" Implements ISpecialOpObjectInfo.Type
 
     End Class
 
 End Namespace
 
-Namespace SpecialOps.Helpers.Spec
-
-    <System.Serializable()> Public Class SourceObjectInfo
-
-        Public m_Type As String = ""
-        Public m_Name As String = ""
-        Public m_ID As String = ""
-        Public m_Property As String = ""
-
-        Sub New()
-
-        End Sub
-
-        Overrides Function ToString() As String
-            Return "Click to select..."
-        End Function
-
-    End Class
-
-    <System.Serializable()> Public Class TargetObjectInfo
-
-        Public m_Type As String = ""
-        Public m_Name As String = ""
-        Public m_ID As String = ""
-        Public m_Property As String = ""
-
-        Sub New()
-
-        End Sub
-
-        Overrides Function ToString() As String
-            Return "Click to select..."
-        End Function
-
-    End Class
-
-End Namespace

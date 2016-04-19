@@ -21,7 +21,7 @@
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.Thermodynamics.PropertyPackages
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
 Imports System.Math
 Imports ZedGraph
 Imports DotNumerics

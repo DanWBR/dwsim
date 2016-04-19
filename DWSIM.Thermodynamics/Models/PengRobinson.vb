@@ -19,7 +19,7 @@ Imports FileHelpers
 Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages.ThermoPlugs.PR
 Imports System.Threading.Tasks
-Imports DWSIM.Thermodynamics.MathEx.PolySolve
+Imports DWSIM.MathOps.MathEx.PolySolve
 
 Namespace PropertyPackages.Auxiliary
 

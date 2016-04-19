@@ -1176,33 +1176,33 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
                     With adj
                         If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelControlada")) Then
-                            .ControlledObject = FlowSheet.Collections.FlowsheetObjectCollection(.ControlledObjectData.m_ID)
-                            .ControlledVariable = .ControlledObjectData.m_Property
+                            .ControlledObject = FlowSheet.Collections.FlowsheetObjectCollection(.ControlledObjectData.ID)
+                            .ControlledVariable = .ControlledObjectData.PropertyName
                             CType(FlowSheet.Collections.GraphicObjectCollection(adj.Name), AdjustGraphic).ConnectedToCv = .ControlledObject.GraphicObject
                             .ReferenceObject = Nothing
                             .ReferenceVariable = Nothing
                             With .ReferencedObjectData
-                                .m_ID = ""
-                                .m_Name = ""
-                                .m_Property = ""
-                                .m_Type = ""
+                                .ID = ""
+                                .Name = ""
+                                .PropertyName = ""
+                                .Type = ""
                             End With
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("VarivelManipulada")) Then
-                            .ManipulatedObject = FlowSheet.Collections.FlowsheetObjectCollection(.ManipulatedObjectData.m_ID)
+                            .ManipulatedObject = FlowSheet.Collections.FlowsheetObjectCollection(.ManipulatedObjectData.ID)
                             Dim gr As AdjustGraphic = FlowSheet.Collections.GraphicObjectCollection(adj.Name)
                             gr.ConnectedToMv = .ManipulatedObject.GraphicObject
-                            .ManipulatedVariable = .ManipulatedObjectData.m_Property
+                            .ManipulatedVariable = .ManipulatedObjectData.PropertyName
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("ObjetoVariveldeRefer")) Then
-                            .ReferenceObject = FlowSheet.Collections.FlowsheetObjectCollection(.ReferencedObjectData.m_ID)
-                            .ReferenceVariable = .ReferencedObjectData.m_Property
+                            .ReferenceObject = FlowSheet.Collections.FlowsheetObjectCollection(.ReferencedObjectData.ID)
+                            .ReferenceVariable = .ReferencedObjectData.PropertyName
                             Dim gr As AdjustGraphic = FlowSheet.Collections.GraphicObjectCollection(adj.Name)
                             gr.ConnectedToRv = .ReferenceObject.GraphicObject
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Valormnimoopcional")) Then
-                            adj.MinVal = SystemsOfUnits.Converter.ConvertToSI(adj.ManipulatedObject.GetPropertyUnit(adj.ManipulatedObjectData.m_Property, FlowSheet.Options.SelectedUnitSystem), e.ChangedItem.Value)
+                            adj.MinVal = SystemsOfUnits.Converter.ConvertToSI(adj.ManipulatedObject.GetPropertyUnit(adj.ManipulatedObjectData.PropertyName, FlowSheet.Options.SelectedUnitSystem), e.ChangedItem.Value)
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Valormximoopcional")) Then
-                            adj.MaxVal = SystemsOfUnits.Converter.ConvertToSI(adj.ManipulatedObject.GetPropertyUnit(adj.ManipulatedObjectData.m_Property, FlowSheet.Options.SelectedUnitSystem), e.ChangedItem.Value)
+                            adj.MaxVal = SystemsOfUnits.Converter.ConvertToSI(adj.ManipulatedObject.GetPropertyUnit(adj.ManipulatedObjectData.PropertyName, FlowSheet.Options.SelectedUnitSystem), e.ChangedItem.Value)
                         ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("ValordeAjusteouOffse")) Then
-                            adj.AdjustValue = SystemsOfUnits.Converter.ConvertToSI(adj.ControlledObject.GetPropertyUnit(adj.ControlledObjectData.m_Property, FlowSheet.Options.SelectedUnitSystem), e.ChangedItem.Value)
+                            adj.AdjustValue = SystemsOfUnits.Converter.ConvertToSI(adj.ControlledObject.GetPropertyUnit(adj.ControlledObjectData.PropertyName, FlowSheet.Options.SelectedUnitSystem), e.ChangedItem.Value)
                         End If
                     End With
 
@@ -3539,7 +3539,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' </summary>
         ''' <param name="flowsheet">Flowsheet instance.</param>
         ''' <remarks></remarks>
-        Public Sub SetFlowsheet(ByVal flowsheet As FormFlowsheet)
+        Public Sub SetFlowsheet(ByVal flowsheet As Object) Implements Interfaces.ISimulationObject.SetFlowsheet
             m_flowsheet = flowsheet
         End Sub
 

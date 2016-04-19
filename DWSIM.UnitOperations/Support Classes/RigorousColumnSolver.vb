@@ -17,7 +17,8 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Collections.Generic
-Imports DWSIM.Thermodynamics.MathEx
+Imports DWSIM.MathOps.MathEx
+Imports DWSIM.MathOps
 Imports System.Math
 Imports Mapack
 Imports System.Threading.Tasks
