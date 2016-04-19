@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM.GlobalSettings")> 
+<Assembly: AssemblyTitle("DWSIM Global Settings")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.GlobalSettings")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016")> 
+<Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

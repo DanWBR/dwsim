@@ -194,3 +194,4 @@ TCPServer/bin/Debug/*
 /DWSIM.Thermodynamics/bin/Release
 /DWSIM.GlobalSettings/bin/Debug
 /DWSIM.Math/bin/Debug
+/DWSIM.FlowsheetSolver/bin/Debug
