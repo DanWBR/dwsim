@@ -1101,7 +1101,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                 'Azure Service Bus
 
-                Dim azureclient As New Flowsheet.AzureSolverClient()
+                Dim azureclient As New AzureSolverClient()
 
                 Try
                     azureclient.SolveFlowsheet(fobj)
@@ -1121,7 +1121,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                 'TCP/IP Solver
 
-                Dim tcpclient As New Flowsheet.TCPSolverClient()
+                Dim tcpclient As New TCPSolverClient()
 
                 Try
                     tcpclient.SolveFlowsheet(fobj)

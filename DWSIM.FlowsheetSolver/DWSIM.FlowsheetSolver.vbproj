@@ -47,9 +47,15 @@
     <Reference Include="Cudafy.NET">
       <HintPath>..\DWSIM\References\Cudafy.NET.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ServiceBus">
+      <HintPath>..\AzureServer\References\Microsoft.ServiceBus.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="TcpComm">
+      <HintPath>..\TCPServer\References\TcpComm.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.MathOps" />
@@ -64,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FlowsheetSolver.vb" />
+    <Compile Include="Solvers\AzureSolverClient.vb" />
+    <Compile Include="Solvers\TCPSolverClient.vb" />
     <Compile Include="Task Schedulers\LimitedConcurrencyLevelTaskScheduler.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

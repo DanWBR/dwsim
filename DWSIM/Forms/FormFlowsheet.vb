@@ -49,7 +49,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 CapeOpen.ICapeFlowsheetMonitoring, CapeOpen.ICapeSimulationContext, CapeOpen.ICapeIdentification
 
     'DWSIM IFlowsheet interface
-    Implements Interfaces.IFlowsheet
+    Implements Interfaces.IFlowsheet, Interfaces.IFlowsheetBag, Interfaces.IFlowsheetGUI
 
 #Region "    Variable Declarations "
 
@@ -3145,31 +3145,31 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #Region "    IFlowsheet Implementation"
 
-    Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects
+    Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
             Return Collections.GraphicObjectCollection.ToDictionary(Of String, IGraphicObject)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
 
-    Public ReadOnly Property SimulationObjects As Dictionary(Of String, Interfaces.ISimulationObject) Implements Interfaces.IFlowsheet.SimulationObjects
+    Public ReadOnly Property SimulationObjects As Dictionary(Of String, Interfaces.ISimulationObject) Implements Interfaces.IFlowsheet.SimulationObjects, IFlowsheetBag.SimulationObjects
         Get
             Return Collections.FlowsheetObjectCollection.ToDictionary(Of String, ISimulationObject)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
 
-    Public ReadOnly Property Reactions As Dictionary(Of String, Interfaces.IReaction) Implements Interfaces.IFlowsheet.Reactions
+    Public ReadOnly Property Reactions As Dictionary(Of String, Interfaces.IReaction) Implements Interfaces.IFlowsheet.Reactions, IFlowsheetBag.Reactions
         Get
             Return Options.Reactions.ToDictionary(Of String, IReaction)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
 
-    Public ReadOnly Property ReactionSets As Dictionary(Of String, Interfaces.IReactionSet) Implements Interfaces.IFlowsheet.ReactionSets
+    Public ReadOnly Property ReactionSets As Dictionary(Of String, Interfaces.IReactionSet) Implements Interfaces.IFlowsheet.ReactionSets, IFlowsheetBag.ReactionSets
         Get
             Return Options.ReactionSets.ToDictionary(Of String, IReactionSet)(Function(k) k.Key, Function(k) k.Value)
         End Get
     End Property
 
-    Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType) Implements Interfaces.IFlowsheet.ShowMessage
+    Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType) Implements Interfaces.IFlowsheet.ShowMessage, IFlowsheetGUI.ShowMessage
         Select Case mtype
             Case Interfaces.IFlowsheet.MessageType.Information
                 WriteToLog(text, Color.Blue, MessageType.Information)
@@ -3184,28 +3184,17 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End Select
     End Sub
 
-    Public Sub CheckStatus() Implements Interfaces.IFlowsheet.CheckStatus
+    Public Sub CheckStatus() Implements Interfaces.IFlowsheet.CheckStatus, IFlowsheetGUI.CheckStatus
         CheckCalculatorStatus()
     End Sub
 
-    Public ReadOnly Property Settings As Dictionary(Of String, Object) Implements Interfaces.IFlowsheet.Settings
-        Get
-            Dim dict As New Dictionary(Of String, Object)
-            Dim props = My.Settings.GetType().GetProperties()
-            For Each p In props
-                dict.Add(p.Name, p.GetValue(My.Settings, Nothing))
-            Next
-            Return dict
-        End Get
-    End Property
-
-    Public Function GetTranslatedString(text As String, locale As String) As String Implements Interfaces.IFlowsheet.GetTranslatedString
+    Public Function GetTranslatedString(text As String, locale As String) As String Implements Interfaces.IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString
 
         Return DWSIM.App.GetLocalString(text)
 
     End Function
 
-    Public Sub ShowDebugInfo(text As String, level As Integer) Implements Interfaces.IFlowsheet.ShowDebugInfo
+    Public Sub ShowDebugInfo(text As String, level As Integer) Implements Interfaces.IFlowsheet.ShowDebugInfo, IFlowsheetGUI.ShowDebugInfo
 
         DWSIM.App.WriteToConsole(text, level)
 
@@ -3219,7 +3208,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #End Region
 
-    Public Function GetTranslatedString1(text As String) As String Implements IFlowsheet.GetTranslatedString
+    Public Function GetTranslatedString1(text As String) As String Implements IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString
         Dim returntext As String = text
         returntext = DWSIM.App.GetLocalString(text)
         If returntext <> text Then Return returntext
@@ -3231,7 +3220,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Return returntext
     End Function
 
-    Public ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.PropertyPackages
+    Public ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.PropertyPackages, IFlowsheetBag.PropertyPackages
         Get
             Return Options.PropertyPackages.ToDictionary(Of String, IPropertyPackage)(Function(k) k.Key, Function(k) k.Value)
         End Get
@@ -3241,7 +3230,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Return Me.GetFlowsheetSimulationObject(tag)
     End Function
 
-    Public ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds
+    Public ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds, IFlowsheetBag.Compounds
         Get
             Return Options.SelectedComponents.ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
         End Get
@@ -3270,14 +3259,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public Function GetFlowsheetBag() As IFlowsheetBag Implements IFlowsheet.GetFlowsheetBag
 
-        Dim fbag As New SharedClasses.Flowsheet.FlowsheetBag
-
-        fbag.Compounds = Me.SelectedCompounds
-        fbag.GraphicObjects = Me.GraphicObjects
-        fbag.SimulationObjects = Me.SimulationObjects
-        fbag.PropertyPackages = Me.PropertyPackages
-        fbag.Reactions = Me.Reactions
-        fbag.ReactionSets = Me.ReactionSets
+        Dim fbag As New SharedClasses.Flowsheet.FlowsheetBag(SimulationObjects, GraphicObjects, SelectedCompounds, PropertyPackages, Reactions, ReactionSets)
 
         Return fbag
 
@@ -3291,5 +3273,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             Me.Options.FilePath = value
         End Set
     End Property
+
+    Public Sub SaveToXML(file As String) Implements IFlowsheetBag.SaveToXML
+
+    End Sub
+
+    Public Sub UpdateProcessData(xdoc As XDocument) Implements IFlowsheetBag.UpdateProcessData
+
+    End Sub
 
 End Class

@@ -18,8 +18,6 @@
 
     ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
 
-    ReadOnly Property Settings As Dictionary(Of String, Object)
-
     ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties)
 
     Property FilePath As String
@@ -52,18 +50,21 @@ End Interface
 
 Public Interface IFlowsheetBag
 
-    Property SimulationObjects As Dictionary(Of String, ISimulationObject)
+    ReadOnly Property SimulationObjects As Dictionary(Of String, ISimulationObject)
 
-    Property GraphicObjects As Dictionary(Of String, IGraphicObject)
+    ReadOnly Property GraphicObjects As Dictionary(Of String, IGraphicObject)
 
-    Property Compounds As Dictionary(Of String, ICompoundConstantProperties)
+    ReadOnly Property Compounds As Dictionary(Of String, ICompoundConstantProperties)
 
-    Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
+    ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
 
-    Property Reactions As Dictionary(Of String, IReaction)
+    ReadOnly Property Reactions As Dictionary(Of String, IReaction)
 
-    Property ReactionSets As Dictionary(Of String, IReactionSet)
+    ReadOnly Property ReactionSets As Dictionary(Of String, IReactionSet)
 
+    Sub SaveToXML(file As String)
+
+    Sub UpdateProcessData(xdoc As XDocument)
 
 End Interface
 

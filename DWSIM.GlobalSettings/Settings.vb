@@ -23,6 +23,14 @@ Public Class Settings
 
     Shared Property SimultaneousAdjustEnabled As Boolean
 
+    Shared Property ServiceBusConnectionString As String
+
+    Shared Property CalculatorStopRequested As Boolean
+
+    Shared Property ServerIPAddress As String
+
+    Shared Property ServerPort As Integer
+
 End Class
 
 

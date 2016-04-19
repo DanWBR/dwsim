@@ -168,7 +168,12 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             Dim excs As New Concurrent.ConcurrentBag(Of Exception)
 
-            Dim form As New FlowsheetBag()
+            Dim form As New FlowsheetBag(New Dictionary(Of String, Interfaces.ISimulationObject),
+                                         New Dictionary(Of String, Interfaces.IGraphicObject),
+                                         New Dictionary(Of String, Interfaces.ICompoundConstantProperties),
+                                         New Dictionary(Of String, Interfaces.IPropertyPackage),
+                                         New Dictionary(Of String, Interfaces.IReaction),
+                                         New Dictionary(Of String, Interfaces.IReactionSet))
 
             Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
