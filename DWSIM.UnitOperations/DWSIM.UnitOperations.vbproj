@@ -50,6 +50,10 @@
     <Reference Include="Ciloci.Flee">
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
     </Reference>
+    <Reference Include="DotNumerics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\DotNumerics.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelApi">
       <HintPath>..\DWSIM\References\ExcelApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -127,6 +131,8 @@
     <Compile Include="Reactors\BaseReactor.vb" />
     <Compile Include="Reactors\Conversion.vb" />
     <Compile Include="Reactors\CSTR.vb" />
+    <Compile Include="Reactors\Equilibrium.vb" />
+    <Compile Include="Reactors\Gibbs.vb" />
     <Compile Include="Reactors\PFR.vb" />
     <Compile Include="Support Classes\RigorousColumnSolver.vb" />
     <Compile Include="Unit Operations\FlowsheetUO.vb" />
