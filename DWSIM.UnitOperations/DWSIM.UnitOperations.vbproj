@@ -105,6 +105,10 @@
     <Compile Include="Energy Stream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\StreamListExtender.vb" />
+    <Compile Include="Logical Operations\Adjust.vb" />
+    <Compile Include="Logical Operations\EnergyRecycle.vb" />
+    <Compile Include="Logical Operations\Recycle.vb" />
+    <Compile Include="Logical Operations\Spec.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -213,7 +217,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Logical Operations\" />
     <Folder Include="Reactors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
