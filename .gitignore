@@ -192,3 +192,4 @@ TCPServer/bin/Debug/*
 /DWSIM.Interfaces/bin/Release
 /DWSIM.SharedClasses/bin/Release
 /DWSIM.Thermodynamics/bin/Release
+/DWSIM.GlobalSettings/bin/Debug

@@ -308,7 +308,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Public Function Flash_PH_1(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim i, j, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -358,20 +358,20 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     If cnt < 2 Then
 
-                        If Calculator.EnableParallelProcessing Then
+                        If Settings.EnableParallelProcessing Then
 
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   fx = Herror("PT", x1, P, Vz, PP)(0)
                                                               End Sub,
-                                                                Calculator.TaskCancellationTokenSource.Token,
+                                                                Settings.TaskCancellationTokenSource.Token,
                                                                 TaskCreationOptions.None,
-                                                                Calculator.AppTaskScheduler)
+                                                               Settings.AppTaskScheduler)
                             Dim task2 = Task.Factory.StartNew(Sub()
                                                                   fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                               End Sub,
-                                                                Calculator.TaskCancellationTokenSource.Token,
+                                                                Settings.TaskCancellationTokenSource.Token,
                                                                 TaskCreationOptions.None,
-                                                                Calculator.AppTaskScheduler)
+                                                               Settings.AppTaskScheduler)
                             Task.WaitAll(task1, task2)
 
                         Else
@@ -434,7 +434,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Public Function Flash_PH_2(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim i, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -472,24 +472,24 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             Dim alreadymt As Boolean = False
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       Dim ErrRes1 = Herror("PV", 0, P, Vz, PP)
                                                       Hb = ErrRes1(0)
                                                       Tb = ErrRes1(1)
                                                   End Sub,
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                     Settings.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       Dim ErrRes2 = Herror("PV", 1, P, Vz, PP)
                                                       Hd = ErrRes2(0)
                                                       Td = ErrRes2(1)
                                                   End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -608,7 +608,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Public Function Flash_PS_1(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, j, n, ecount As Integer
@@ -657,20 +657,20 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     If cnt < 2 Then
 
-                        If Calculator.EnableParallelProcessing Then
+                        If Settings.EnableParallelProcessing Then
 
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   fx = Serror("PT", x1, P, Vz, PP)(0)
                                                               End Sub,
-                                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                                  Settings.TaskCancellationTokenSource.Token,
                                                                   TaskCreationOptions.None,
-                                                                  Calculator.AppTaskScheduler)
+                                                                 Settings.AppTaskScheduler)
                             Dim task2 = Task.Factory.StartNew(Sub()
                                                                   fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
                                                               End Sub,
-                                                              Calculator.TaskCancellationTokenSource.Token,
+                                                              Settings.TaskCancellationTokenSource.Token,
                                                               TaskCreationOptions.None,
-                                                              Calculator.AppTaskScheduler)
+                                                             Settings.AppTaskScheduler)
                             Task.WaitAll(task1, task2)
 
                         Else
@@ -735,7 +735,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Public Function Flash_PS_2(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, n, ecount As Integer
@@ -774,24 +774,24 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             Dim alreadymt As Boolean = False
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       Dim ErrRes1 = Serror("PV", 0, P, Vz, PP)
                                                       Sb = ErrRes1(0)
                                                       Tb = ErrRes1(1)
                                                   End Sub,
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                     Settings.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       Dim ErrRes2 = Serror("PV", 1, P, Vz, PP)
                                                       Sd = ErrRes2(0)
                                                       Td = ErrRes2(1)
                                                   End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
 
             Else

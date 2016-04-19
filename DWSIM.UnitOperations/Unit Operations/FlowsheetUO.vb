@@ -619,9 +619,9 @@ Namespace DWSIM.SimulationObjects.UnitOperations
 
             'Select Case Calculator.SolverMode
             '    Case 0, 3, 4
-            '        'DWSIM.Flowsheet.FlowsheetSolver.CalculateAll2(Fsheet, 0, Calculator.TaskCancellationTokenSource)
+            '        'DWSIM.Flowsheet.FlowsheetSolver.CalculateAll2(Fsheet, 0, Settings.TaskCancellationTokenSource)
             '    Case 1, 2
-            '        'DWSIM.Flowsheet.FlowsheetSolver.CalculateAll2(Fsheet, 1, Calculator.TaskCancellationTokenSource)
+            '        'DWSIM.Flowsheet.FlowsheetSolver.CalculateAll2(Fsheet, 1, Settings.TaskCancellationTokenSource)
             'End Select
 
             wout = 0.0#

@@ -317,8 +317,8 @@ Namespace PropertyPackages.Auxiliary
 
             Dim MMm As Double = Vz.MultiplyY(VMM).SumY
 
-            If Calculator.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism, .TaskScheduler = Calculator.AppTaskScheduler}
+            If Settings.EnableParallelProcessing Then
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(ii)
                                                      alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
                                                      ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)

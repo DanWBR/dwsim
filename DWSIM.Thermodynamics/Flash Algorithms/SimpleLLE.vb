@@ -207,7 +207,7 @@ out:        d2 = Date.Now
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, n, ecount As Integer
@@ -254,7 +254,7 @@ out:        d2 = Date.Now
             If Tref = 0 Then Tref = 298.15
             x1 = Tref
             Do
-                If Calculator.EnableParallelProcessing Then
+                If Settings.EnableParallelProcessing Then
                     
                     Dim task1 As Task = New Task(Sub()
                                                      fx = Herror(x1, {P, Vz, PP})
@@ -308,7 +308,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim i, n, ecount As Integer
@@ -354,7 +354,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             If Tref = 0 Then Tref = 298.15
             x1 = Tref
             Do
-                If Calculator.EnableParallelProcessing Then
+                If Settings.EnableParallelProcessing Then
                     
                     Dim task1 As Task = New Task(Sub()
                                                      fx = Serror(x1, {P, Vz, PP})

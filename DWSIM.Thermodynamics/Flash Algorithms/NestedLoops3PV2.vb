@@ -800,10 +800,10 @@ out:
 
                 Do
 
-                    If Calculator.EnableParallelProcessing Then
+                    If Settings.EnableParallelProcessing Then
                         
-                        If Calculator.EnableGPUProcessing Then
-                            Calculator.gpu.EnableMultithreading()
+                        If Settings.EnableGPUProcessing Then
+                            Settings.gpu.EnableMultithreading()
                         End If
                         Try
                             Dim task1 As Task = New Task(Sub()
@@ -818,12 +818,12 @@ out:
                         Catch ae As AggregateException
                             Throw ae.Flatten().InnerException
                         Finally
-                            If Calculator.EnableGPUProcessing Then
-                                Calculator.gpu.DisableMultithreading()
-                                Calculator.gpu.FreeAll()
+                            If Settings.EnableGPUProcessing Then
+                                Settings.gpu.DisableMultithreading()
+                                Settings.gpu.FreeAll()
                             End If
                         End Try
-                        
+
                     Else
                         fx = Herror(x1, {P, Vz, PP})
                         fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
@@ -933,10 +933,10 @@ alt:
 
                 Do
 
-                    If Calculator.EnableParallelProcessing Then
-                        
-                        If Calculator.EnableGPUProcessing Then
-                            Calculator.gpu.EnableMultithreading()
+                    If Settings.EnableParallelProcessing Then
+
+                        If Settings.EnableGPUProcessing Then
+                            Settings.gpu.EnableMultithreading()
                         End If
                         Try
                             Dim task1 As Task = New Task(Sub()
@@ -951,12 +951,12 @@ alt:
                         Catch ae As AggregateException
                             Throw ae.Flatten().InnerException
                         Finally
-                            If Calculator.EnableGPUProcessing Then
-                                Calculator.gpu.DisableMultithreading()
-                                Calculator.gpu.FreeAll()
+                            If Settings.EnableGPUProcessing Then
+                                Settings.gpu.DisableMultithreading()
+                                Settings.gpu.FreeAll()
                             End If
                         End Try
-                        
+
                     Else
                         fx = Serror(x1, {P, Vz, PP})
                         fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})

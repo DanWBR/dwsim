@@ -1135,8 +1135,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal deltat_el As Double, _
                                 Optional ByVal llex As Boolean = False) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
-            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism, .TaskScheduler = Calculator.AppTaskScheduler}
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
+            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
             llextr = llex 'liq-liq extractor
 
@@ -1761,8 +1761,8 @@ restart:            fx = Me.FunctionValue(xvar)
                 Dim tmp(ns) As Object
 
                 If doparallel Then
-                    If Calculator.EnableGPUProcessing Then
-                        'Calculator.gpu.EnableMultithreading()
+                    If Settings.EnableGPUProcessing Then
+                        'Settings.gpu.EnableMultithreading()
                     End If
 
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
@@ -1773,9 +1773,9 @@ restart:            fx = Me.FunctionValue(xvar)
                                                                      tmp(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
                                                                  End If
                                                              End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
                     task1.Wait()
                     For i = 0 To ns
                         For j = 0 To nc - 1
@@ -1785,9 +1785,9 @@ restart:            fx = Me.FunctionValue(xvar)
                         Kbj_ant(i) = Kbj(i)
                     Next
 
-                    'If Calculator.EnableGPUProcessing Then
-                    '    Calculator.gpu.DisableMultithreading()
-                    '    Calculator.gpu.FreeAll()
+                    'If Settings.EnableGPUProcessing Then
+                    '    Settings.gpu.DisableMultithreading()
+                    '    Settings.gpu.FreeAll()
                     'End If
                 Else
                     For i = 0 To ns
@@ -1839,17 +1839,17 @@ restart:            fx = Me.FunctionValue(xvar)
 
                 If doparallel Then
 
-                    If Calculator.EnableGPUProcessing Then
-                        ' Calculator.gpu.EnableMultithreading()
+                    If Settings.EnableGPUProcessing Then
+                        ' Settings.gpu.EnableMultithreading()
                     End If
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                              Sub(ipar)
                                                                  'new Ks
                                                                  K2(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj2(ipar), P(ipar))
                                                              End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
                     task1.Wait()
                     For i = 0 To ns
                         For j = 0 To nc - 1
@@ -1858,9 +1858,9 @@ restart:            fx = Me.FunctionValue(xvar)
                         Next
                     Next
 
-                    'If Calculator.EnableGPUProcessing Then
-                    '    Calculator.gpu.DisableMultithreading()
-                    '    Calculator.gpu.FreeAll()
+                    'If Settings.EnableGPUProcessing Then
+                    '    Settings.gpu.DisableMultithreading()
+                    '    Settings.gpu.FreeAll()
                     'End If
                 Else
                     For i = 0 To ns
@@ -1878,8 +1878,8 @@ restart:            fx = Me.FunctionValue(xvar)
 
                 If doparallel Then
 
-                    If Calculator.EnableGPUProcessing Then
-                        'Calculator.gpu.EnableMultithreading()
+                    If Settings.EnableGPUProcessing Then
+                        'Settings.gpu.EnableMultithreading()
                     End If
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                               Sub(ipar)
@@ -1894,14 +1894,14 @@ restart:            fx = Me.FunctionValue(xvar)
                                                                   Hl1(ipar) = pp.DW_CalcEnthalpyDeparture(xc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Liquid)
                                                                   Hl2(ipar) = pp.DW_CalcEnthalpyDeparture(xc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Liquid)
                                                               End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
                     task1.Wait()
 
-                    'If Calculator.EnableGPUProcessing Then
-                    '    Calculator.gpu.DisableMultithreading()
-                    '    Calculator.gpu.FreeAll()
+                    'If Settings.EnableGPUProcessing Then
+                    '    Settings.gpu.DisableMultithreading()
+                    '    Settings.gpu.FreeAll()
                     'End If
                 Else
                     For i = 0 To ns
@@ -2014,8 +2014,8 @@ restart:            fx = Me.FunctionValue(xvar)
                                 ByVal pp As PropertyPackages.PropertyPackage, _
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec)) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
-            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism, .TaskScheduler = Calculator.AppTaskScheduler}
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
+            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
             Dim ic As Integer
             Dim t_error, t_error_ant As Double
@@ -2100,9 +2100,9 @@ restart:            fx = Me.FunctionValue(xvar)
                                                              Hl(ipar) = pp.DW_CalcEnthalpy(x(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(x(ipar)) / 1000
                                                              Hv(ipar) = pp.DW_CalcEnthalpy(y(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(ipar)) / 1000
                                                          End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
                 task1.Wait()
 
             Else
@@ -2230,9 +2230,9 @@ restart:            fx = Me.FunctionValue(xvar)
                                                                  Sub(ipar)
                                                                      xt(ipar) = Tomich.TDMASolve(at(ipar), bt(ipar), ct(ipar), dt(ipar))
                                                                  End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
                     t1.Wait()
 
                 Else
@@ -2284,9 +2284,9 @@ restart:            fx = Me.FunctionValue(xvar)
                                                                      K(ipar) = tmpvar(6)
                                                                      If Tj(ipar) < 0 Or Double.IsNaN(Tj(ipar)) Then Tj(ipar) = Tj_ant(ipar)
                                                                  End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
                     t1.Wait()
 
                 Else
@@ -2342,9 +2342,9 @@ restart:            fx = Me.FunctionValue(xvar)
                                                                                          Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
                                                                                          Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                                      End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
                     t1.Wait()
 
                 Else
@@ -2522,8 +2522,8 @@ restart:            fx = Me.FunctionValue(xvar)
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec), _
                                 Optional ByVal llextr As Boolean = False) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
-            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism}
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
+            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism}
 
             Dim ic As Integer
             Dim t_error, comperror As Double
@@ -2715,9 +2715,9 @@ restart:            fx = Me.FunctionValue(xvar)
                                                                      dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                  End If
                                                              End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
 
                     task1.Wait(30000)
                 Else
@@ -2855,8 +2855,8 @@ restart:            fx = Me.FunctionValue(xvar)
 
         Public Function FunctionValue(ByVal x() As Double) As Double()
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
-            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Calculator.MaxDegreeOfParallelism, .TaskScheduler = Calculator.AppTaskScheduler}
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
+            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
             Dim nc, ns As Integer
             Dim i, j As Integer
@@ -2984,9 +2984,9 @@ restart:            fx = Me.FunctionValue(xvar)
                                                                  Kval(ipar)(jj) = tmp0(jj)
                                                              Next
                                                          End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
                 task1.Wait()
 
             Else
@@ -3027,9 +3027,9 @@ restart:            fx = Me.FunctionValue(xvar)
                                                                  Hl(ipar) = 0
                                                              End If
                                                          End Sub),
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                      Settings.AppTaskScheduler)
                 task1.Wait()
 
             Else

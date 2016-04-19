@@ -59,7 +59,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Sub WriteDebugInfo(text As String)
 
-            Select Case Calculator.DebugLevel
+            Select Case Settings.DebugLevel
                 Case 0
                     'do nothing
                 Case 1
@@ -760,7 +760,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
             Dim j, n, ecount As Integer

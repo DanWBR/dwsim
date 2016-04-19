@@ -2872,7 +2872,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         If My.Settings.EnableParallelProcessing Then
 
-            If My.Settings.EnableGPUProcessing Then Calculator.gpu.EnableMultithreading()
+            If My.Settings.EnableGPUProcessing Then Settings.gpu.EnableMultithreading()
             Try
                 Dim task1 As Task = New Task(Sub()
                                                  Select Case model
@@ -2918,8 +2918,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 Throw ae.Flatten().InnerException
             Finally
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
             End Try
 
@@ -3052,7 +3052,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         If My.Settings.EnableParallelProcessing Then
 
-            If My.Settings.EnableGPUProcessing Then Calculator.gpu.EnableMultithreading()
+            If My.Settings.EnableGPUProcessing Then Settings.gpu.EnableMultithreading()
             Try
                 Dim task1 As Task = New Task(Sub()
                                                  Select Case model
@@ -3098,8 +3098,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 Throw ae.Flatten().InnerException
             Finally
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
             End Try
 

@@ -1312,7 +1312,7 @@ Public Class FormMain
         Next
 
         Dim form As FormFlowsheet = New FormFlowsheet()
-        Calculator.CAPEOPENMode = False
+        Settings.CAPEOPENMode = False
         My.Application.ActiveSimulation = form
 
         Application.DoEvents()

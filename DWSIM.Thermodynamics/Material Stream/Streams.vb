@@ -164,7 +164,7 @@ Namespace Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore()> Public Property PropertyPackage() As PropertyPackage
+        <Xml.Serialization.XmlIgnore()> Public Overloads Property PropertyPackage() As PropertyPackage
             Get
                 If Not _pp Is Nothing Then Return _pp
                 If _ppid Is Nothing Then _ppid = ""
@@ -246,7 +246,7 @@ Namespace Streams
             Me.Phases.Add(6, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Aqueous"), ""))
             Me.Phases.Add(7, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Solid"), ""))
 
-            If Not Calculator.CAPEOPENMode And Not Me.FlowSheet Is Nothing Then
+            If Not Settings.CAPEOPENMode And Not Me.FlowSheet Is Nothing Then
 
 
             End If
@@ -296,7 +296,7 @@ Namespace Streams
         ''' <remarks></remarks>
         Public Shadows Sub Calculate(equilibrium As Boolean, properties As Boolean)
 
-            Dim doparallel As Boolean = Calculator.EnableParallelProcessing
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim T As Double = Me.Phases(0).Properties.temperature.GetValueOrDefault
             Dim P As Double = Me.Phases(0).Properties.pressure.GetValueOrDefault
@@ -422,9 +422,9 @@ Namespace Streams
                                                                   .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
                                                               End If
                                                           End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                         Dim task2 = Task.Factory.StartNew(Sub()
                                                               If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                   .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
@@ -432,9 +432,9 @@ Namespace Streams
                                                                   .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
                                                               End If
                                                           End Sub,
-                                                     Calculator.TaskCancellationTokenSource.Token,
+                                                     Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                         Dim task3 = Task.Factory.StartNew(Sub()
                                                               If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                   .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
@@ -442,9 +442,9 @@ Namespace Streams
                                                                   .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
                                                               End If
                                                           End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                         Dim task4 = Task.Factory.StartNew(Sub()
                                                               If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                   .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
@@ -452,9 +452,9 @@ Namespace Streams
                                                                   .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
                                                               End If
                                                           End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                         Dim task5 = Task.Factory.StartNew(Sub()
                                                               If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                   .DW_CalcSolidPhaseProps()
@@ -462,9 +462,9 @@ Namespace Streams
                                                                   .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
                                                               End If
                                                           End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                         Dim task6 = Task.Factory.StartNew(Sub()
                                                               If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
                                                                   .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
@@ -472,9 +472,9 @@ Namespace Streams
                                                                   .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                                                               End If
                                                           End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                         Task.WaitAll(task1, task2, task3, task4, task5, task6)
 
                     Else
@@ -4669,7 +4669,7 @@ Namespace Streams
 
             Dim ids, formulas, nms, bts, casnos, molws As New ArrayList
 
-            If Calculator.CAPEOPENMode Then
+            If Settings.CAPEOPENMode Then
                 For Each c As ConstantProperties In Me.PropertyPackage._selectedcomps.Values
                     ids.Add(c.Name)
                     formulas.Add(c.Formula)

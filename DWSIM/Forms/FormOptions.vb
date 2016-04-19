@@ -527,7 +527,7 @@ Public Class FormOptions
     Private Sub chkEnableParallelCalcs_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkEnableParallelCalcs.CheckedChanged
         My.Settings.EnableParallelProcessing = Me.chkEnableParallelCalcs.Checked
         Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
-        Calculator.EnableParallelProcessing = My.Settings.EnableParallelProcessing
+        Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
     End Sub
 
     Private Sub cbParallelism_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbParallelism.SelectedIndexChanged
@@ -536,7 +536,7 @@ Public Class FormOptions
         Else
             My.Settings.MaxDegreeOfParallelism = Me.cbParallelism.SelectedItem
         End If
-        Calculator.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
+        Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
     End Sub
 
     Private Sub cbGPU_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbGPU.SelectedIndexChanged
@@ -547,13 +547,13 @@ Public Class FormOptions
         Else
             My.Settings.CudafyTarget = eGPUType.OpenCL
         End If
-        Calculator.CudafyTarget = My.Settings.CudafyTarget
+        Settings.CudafyTarget = My.Settings.CudafyTarget
         Try
             For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(My.Settings.CudafyTarget, False)
                 If Me.cbGPU.SelectedItem.ToString.Split("|")(1).Contains(prop.Name) Then
                     My.Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
                     My.Settings.CudafyDeviceID = prop.DeviceId
-                    Calculator.CudafyDeviceID = My.Settings.CudafyDeviceID
+                    Settings.CudafyDeviceID = My.Settings.CudafyDeviceID
                     GetCUDACaps(prop)
                     Exit For
                 End If
@@ -562,9 +562,9 @@ Public Class FormOptions
 
         End Try
         If loaded Then
-            If Not Calculator.gpu Is Nothing Then
-                Calculator.gpu.Dispose()
-                Calculator.gpu = Nothing
+            If Not Settings.gpu Is Nothing Then
+                Settings.gpu.Dispose()
+                Settings.gpu = Nothing
             End If
         End If
     End Sub
@@ -573,7 +573,7 @@ Public Class FormOptions
         Me.cbGPU.Enabled = chkEnableGPUProcessing.Checked
         Me.tbGPUCaps.Enabled = chkEnableGPUProcessing.Checked
         My.Settings.EnableGPUProcessing = chkEnableGPUProcessing.Checked
-        Calculator.EnableGPUProcessing = My.Settings.EnableGPUProcessing
+        Settings.EnableGPUProcessing = My.Settings.EnableGPUProcessing
     End Sub
 
     Private Sub cbSolverMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolverMode.SelectedIndexChanged
@@ -608,7 +608,7 @@ Public Class FormOptions
 
     Private Sub cbDebugLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDebugLevel.SelectedIndexChanged
         My.Settings.DebugLevel = cbDebugLevel.SelectedIndex
-        Calculator.DebugLevel = My.Settings.DebugLevel
+        Settings.DebugLevel = My.Settings.DebugLevel
     End Sub
 
     Private Sub tbSolverTimeout_TextChanged(sender As Object, e As EventArgs) Handles tbSolverTimeout.TextChanged
@@ -694,7 +694,7 @@ Public Class FormOptions
 
     Private Sub chkEnableSIMD_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSIMD.CheckedChanged
         My.Settings.UseSIMDExtensions = chkEnableSIMD.Checked
-        Calculator.UseSIMDExtensions = My.Settings.UseSIMDExtensions
+        Settings.UseSIMDExtensions = My.Settings.UseSIMDExtensions
     End Sub
 
     Private Sub ComboBoxCompoundCopyMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxCompoundCopyMode.SelectedIndexChanged

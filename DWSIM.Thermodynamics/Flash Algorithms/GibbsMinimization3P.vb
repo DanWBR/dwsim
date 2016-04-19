@@ -574,7 +574,7 @@ out:        Return result
 
             Dim alreadymt As Boolean = False
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  Dim ErrRes1 = Herror("PV", 0, P, Vz, PP)
@@ -772,7 +772,7 @@ out:        Return result
 
                 Do
 
-                    If Calculator.EnableParallelProcessing Then
+                    If Settings.EnableParallelProcessing Then
 
                         Dim task1 As Task = New Task(Sub()
                                                          fx = Serror(x1, {P, Vz, PP})
@@ -879,11 +879,11 @@ alt:
 
             Dim alreadymt As Boolean = False
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
-                If Calculator.EnableGPUProcessing Then
-                    'If Not Calculator.gpu.IsMultithreadingEnabled Then
-                    '    Calculator.gpu.EnableMultithreading()
+                If Settings.EnableGPUProcessing Then
+                    'If Not Settings.gpu.IsMultithreadingEnabled Then
+                    '    Settings.gpu.EnableMultithreading()
                     'Else
                     '    alreadymt = True
                     'End If
@@ -1863,7 +1863,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             If L <> 0.0# Then Vx1(i) = Abs((fi(i) - x(i)) / L) Else Vx1(i) = 0.0#
                         Next
 
-                        If Calculator.EnableParallelProcessing Then
+                        If Settings.EnableParallelProcessing Then
 
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -1924,10 +1924,10 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             If soma_x1 <> 0.0# Then Vx1(i) /= soma_x1
                         Next
 
-                        If Calculator.EnableParallelProcessing Then
+                        If Settings.EnableParallelProcessing Then
 
-                            If Calculator.EnableGPUProcessing Then
-                                'Calculator.gpu.EnableMultithreading()
+                            If Settings.EnableGPUProcessing Then
+                                'Settings.gpu.EnableMultithreading()
                             End If
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2014,10 +2014,10 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         Vx2(i) /= soma_x2
                     Next
 
-                    If Calculator.EnableParallelProcessing Then
+                    If Settings.EnableParallelProcessing Then
 
-                        If Calculator.EnableGPUProcessing Then
-                            'Calculator.gpu.EnableMultithreading()
+                        If Settings.EnableGPUProcessing Then
+                            'Settings.gpu.EnableMultithreading()
                         End If
                         Dim task1 As Task = New Task(Sub()
                                                          fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2082,8 +2082,8 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             Vx1(i) = Abs((fi(i) - x(i)) / L)
                         Next
 
-                        If Calculator.EnableParallelProcessing Then
-                            
+                        If Settings.EnableParallelProcessing Then
+
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                                                          End Sub)
@@ -2093,7 +2093,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             task1.Start()
                             task2.Start()
                             Task.WaitAll(task1, task2)
-                            
+
                         Else
                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
@@ -2135,8 +2135,8 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             Vx1(i) /= soma_x1
                         Next
 
-                        If Calculator.EnableParallelProcessing Then
-                            
+                        If Settings.EnableParallelProcessing Then
+
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                                                          End Sub)
@@ -2150,7 +2150,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                             task2.Start()
                             task3.Start()
                             Task.WaitAll(task1, task2, task3)
-                            
+
                         Else
                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
@@ -2214,10 +2214,10 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         Vx2(i) /= soma_x2
                     Next
 
-                    If Calculator.EnableParallelProcessing Then
-                        
-                        If Calculator.EnableGPUProcessing Then
-                            'Calculator.gpu.EnableMultithreading()
+                    If Settings.EnableParallelProcessing Then
+
+                        If Settings.EnableGPUProcessing Then
+                            'Settings.gpu.EnableMultithreading()
                         End If
                         Dim task1 As Task = New Task(Sub()
                                                          fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
@@ -2232,7 +2232,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         task2.Start()
                         task3.Start()
                         Task.WaitAll(task1, task2, task3)
-                        
+
                     Else
                         fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                         fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
@@ -2282,7 +2282,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
                         x3(j) = x(j) * (1 - epsilon)
                     End If
                 Next
-                If Calculator.EnableParallelProcessing Then
+                If Settings.EnableParallelProcessing Then
                     
                     Dim task1 As Task = New Task(Sub()
                                                      f2 = FunctionGradient(x2)

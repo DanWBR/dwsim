@@ -10,7 +10,7 @@
 
         Dim vector2(vector.Length - 1) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Math.Exp_V64f_V64f(vector, 0, vector2, 0, vector.Length)
         Else
             For i As Integer = 0 To vector.Length - 1
@@ -32,7 +32,7 @@
 
         Dim vector2(vector.Length - 1) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Math.Log_V64f_V64f(vector, 0, vector2, 0, vector.Length)
         Else
             For i As Integer = 0 To vector.Length - 1
@@ -52,7 +52,7 @@
     ''' <remarks></remarks>
     <System.Runtime.CompilerServices.Extension()> Public Function MinY(vector As Double()) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Return Yeppp.Core.Min_V64f_S64f(vector, 0, vector.Length)
         Else
             Return Convert.ToDouble(MathEx.Common.Min(vector))
@@ -68,7 +68,7 @@
     ''' <remarks></remarks>
     <System.Runtime.CompilerServices.Extension()> Public Function MaxY(vector As Double()) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Return Yeppp.Core.Max_V64f_S64f(vector, 0, vector.Length)
         Else
             Return Convert.ToDouble(MathEx.Common.Max(vector))
@@ -84,7 +84,7 @@
     ''' <remarks></remarks>
     <System.Runtime.CompilerServices.Extension()> Public Function SumY(vector As Double()) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Return Yeppp.Core.Sum_V64f_S64f(vector, 0, vector.Length)
         Else
             Return MathEx.Common.Sum(vector)
@@ -100,7 +100,7 @@
     ''' <remarks></remarks>
     <System.Runtime.CompilerServices.Extension()> Public Function AbsSumY(vector As Double()) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Return Yeppp.Core.SumAbs_V64f_S64f(vector, 0, vector.Length)
         Else
             Return MathEx.Common.AbsSum(vector)
@@ -116,7 +116,7 @@
     ''' <remarks></remarks>
     <System.Runtime.CompilerServices.Extension()> Public Function AbsSqrSumY(vector As Double()) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Return Yeppp.Core.SumSquares_V64f_S64f(vector, 0, vector.Length)
         Else
             Return MathEx.Common.SumSqr(vector)
@@ -134,7 +134,7 @@
 
         Dim vector0(vector.Length - 1) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Core.Negate_V64f_V64f(vector, 0, vector0, 0, vector.Length)
         Else
             For i As Integer = 0 To vector.Length - 1
@@ -157,7 +157,7 @@
 
         Dim vector0(vector1.Length - 1) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Core.Multiply_V64fV64f_V64f(vector1, 0, vector2, 0, vector0, 0, vector1.Length)
         Else
             For i As Integer = 0 To vector1.Length - 1
@@ -180,7 +180,7 @@
 
         Dim vector0(vector.Length - 1) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Dim invvector2(vector.Length - 1) As Double
             For i As Integer = 0 To vector2.Length - 1
                 invvector2(i) = 1 / vector2(i)
@@ -208,7 +208,7 @@
 
         Dim vector0(vector.Length - 1) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Core.Subtract_V64fV64f_V64f(vector, 0, vector2, 0, vector0, 0, vector.Length)
         Else
             For i As Integer = 0 To vector.Length - 1
@@ -230,7 +230,7 @@
             invvector2(i) = 1 / vector2(i)
         Next
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Core.Subtract_V64fV64f_V64f(invvector1, 0, invvector2, 0, vector0, 0, vector.Length)
         Else
             For i As Integer = 0 To vector.Length - 1
@@ -246,7 +246,7 @@
 
         Dim vector0(vector.Length - 1) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Dim invvector2(vector.Length - 1) As Double
             For i As Integer = 0 To vector.Length - 1
                 invvector2(i) = 1 / vector2(i)
@@ -272,7 +272,7 @@
 
         Dim vector0(vector.Length - 1) As Double
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Core.Multiply_V64fS64f_V64f(vector, 0, constant, vector0, 0, vector.Length)
         Else
             For i As Integer = 0 To vector.Length - 1
@@ -296,7 +296,7 @@
         Dim vector0(vector.Length - 1) As Double
         Dim sum As Double = vector.SumY
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Core.Multiply_V64fS64f_V64f(vector, 0, 1 / sum, vector0, 0, vector.Length)
         Else
             For i As Integer = 0 To vector.Length - 1
@@ -319,7 +319,7 @@
 
         Dim vector0 As Double() = vector.Clone()
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Core.Add_IV64fV64f_IV64f(vector0, 0, vector2, 0, vector.Length)
         Else
             For i As Integer = 0 To vector.Length - 1
@@ -341,7 +341,7 @@
 
         Dim vector0 As Double() = vector.Clone()
 
-        If Calculator.UseSIMDExtensions Then
+        If Settings.UseSIMDExtensions Then
             Yeppp.Core.Add_V64fS64f_V64f(vector, 0, constant, vector0, 0, vector.Length)
         Else
             For i As Integer = 0 To vector.Length - 1

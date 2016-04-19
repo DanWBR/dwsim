@@ -191,7 +191,7 @@ Public Class FormBinEnv
 
             If My.Settings.EnableGPUProcessing Then
                 Calculator.InitComputeDevice()
-                Calculator.gpu.EnableMultithreading()
+                Settings.gpu.EnableMultithreading()
             End If
 
             Me.BackgroundWorker1.RunWorkerAsync(New Object() {tipocalc, P, T, chkVLE.Checked, lle, chkSLE.Checked, chkCritical.Checked, rbSolidSolution.Checked, chkCompareModels.Checked})
@@ -254,8 +254,8 @@ Public Class FormBinEnv
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
 
         If My.Settings.EnableGPUProcessing Then
-            Calculator.gpu.DisableMultithreading()
-            Calculator.gpu.FreeAll()
+            Settings.gpu.DisableMultithreading()
+            Settings.gpu.FreeAll()
         End If
 
         Me.Button1.Enabled = True

@@ -121,13 +121,13 @@ Namespace My
             CudafyModes.Target = My.Settings.CudafyTarget
 
             'set calculator parameters
-            Calculator.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
-            Calculator.EnableParallelProcessing = My.Settings.EnableParallelProcessing
-            Calculator.EnableGPUProcessing = My.Settings.EnableGPUProcessing
-            Calculator.CudafyTarget = My.Settings.CudafyTarget
-            Calculator.CudafyDeviceID = My.Settings.CudafyDeviceID
-            Calculator.UseSIMDExtensions = My.Settings.UseSIMDExtensions
-            Calculator.DebugLevel = My.Settings.DebugLevel
+            Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
+            Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
+            Settings.EnableGPUProcessing = My.Settings.EnableGPUProcessing
+            Settings.CudafyTarget = My.Settings.CudafyTarget
+            Settings.CudafyDeviceID = My.Settings.CudafyDeviceID
+            Settings.UseSIMDExtensions = My.Settings.UseSIMDExtensions
+            Settings.DebugLevel = My.Settings.DebugLevel
 
         End Sub
 

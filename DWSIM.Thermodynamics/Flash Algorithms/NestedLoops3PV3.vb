@@ -477,7 +477,7 @@ out:
 
             Dim alreadymt As Boolean = False
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  Ki1 = PP.DW_CalcKvalue(Vx1EST, VyEST, T, P)
@@ -594,11 +594,11 @@ out:
 
             Do
 
-                If Calculator.EnableParallelProcessing Then
+                If Settings.EnableParallelProcessing Then
 
-                    If Calculator.EnableGPUProcessing Then
-                        'If Not Calculator.gpu.IsMultithreadingEnabled Then
-                        '    Calculator.gpu.EnableMultithreading()
+                    If Settings.EnableGPUProcessing Then
+                        'If Not Settings.gpu.IsMultithreadingEnabled Then
+                        '    Settings.gpu.EnableMultithreading()
                         'Else
                         '    alreadymt = True
                         'End If
@@ -810,7 +810,7 @@ out:
 
             Dim alreadymt As Boolean = False
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  Dim ErrRes1 = Herror("PV", 0, P, Vz, PP)
@@ -1010,7 +1010,7 @@ out:
 
                 Do
 
-                    If Calculator.EnableParallelProcessing Then
+                    If Settings.EnableParallelProcessing Then
 
                         Dim task1 As Task = New Task(Sub()
                                                          fx = Serror(x1, {P, Vz, PP})
@@ -1117,7 +1117,7 @@ alt:
 
             Dim alreadymt As Boolean = False
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  If V > 0 Then _Hv = proppack.DW_CalcEnthalpy(Vy, T, P, State.Vapor)

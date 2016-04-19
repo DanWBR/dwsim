@@ -111,4 +111,10 @@
 
     Property Annotation() As String
 
+    Sub Calculate()
+
+    Sub DeCalculate()
+
+    Property PropertyPackage As IPropertyPackage
+
 End Interface

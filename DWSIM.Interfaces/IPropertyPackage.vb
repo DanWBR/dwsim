@@ -24,4 +24,6 @@
 
     Function AUX_MMM(phase As Enums.PhaseLabel) As Double
 
+    Function Clone() As IPropertyPackage
+
 End Interface

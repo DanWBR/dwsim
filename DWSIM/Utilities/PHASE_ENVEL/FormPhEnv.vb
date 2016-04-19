@@ -141,7 +141,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
             If My.Settings.EnableGPUProcessing Then
                 Calculator.InitComputeDevice()
-                Calculator.gpu.EnableMultithreading()
+                Settings.gpu.EnableMultithreading()
             End If
 
             Me.BackgroundWorker1.RunWorkerAsync(New Object() {0, Me.TextBox1.Text, Me.CheckBox1.Checked, Me.CheckBox3.Checked, Me.chkpip.Checked, Me.chkhyd.Checked, Me.CheckBoxHYDVAP.Checked})
@@ -986,8 +986,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
 
         If My.Settings.EnableGPUProcessing Then
-            Calculator.gpu.DisableMultithreading()
-            Calculator.gpu.FreeAll()
+            Settings.gpu.DisableMultithreading()
+            Settings.gpu.FreeAll()
         End If
 
         Me.Button1.Enabled = True

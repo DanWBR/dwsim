@@ -3556,7 +3556,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
                 Else
                     Dim frm As FormFlowsheet = My.Application.ActiveSimulation
                     If Not frm Is Nothing Then Return frm Else Return Nothing
-                    If Not Calculator.CAPEOPENMode Then
+                    If Not Settings.CAPEOPENMode Then
                         If Not FormMain.ActiveMdiChild Is Nothing Then
                             If TypeOf FormMain.ActiveMdiChild Is FormFlowsheet Then
                                 If frm Is Nothing Then frm = FormMain.ActiveMdiChild Else m_flowsheet = frm
@@ -3587,6 +3587,16 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         Public Sub DisplayEditForm() Implements Interfaces.ISimulationObject.DisplayEditForm
 
         End Sub
+
+        Public Sub Calculate1() Implements Interfaces.ISimulationObject.Calculate
+            Calculate()
+        End Sub
+
+        Public Sub DeCalculate() Implements Interfaces.ISimulationObject.DeCalculate
+            DeCalculate()
+        End Sub
+
+        Public Property PropertyPackage As Interfaces.IPropertyPackage Implements Interfaces.ISimulationObject.PropertyPackage
     End Class
 
     <System.Serializable()> <ComVisible(True)> Public MustInherit Class UnitOpBaseClass
@@ -3683,7 +3693,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore()> Property PropertyPackage() As PropertyPackage
+        <Xml.Serialization.XmlIgnore()> Overloads Property PropertyPackage() As PropertyPackage
             Get
                 If Not _pp Is Nothing Then Return _pp
                 If _ppid Is Nothing Then _ppid = ""
@@ -3729,7 +3739,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' </summary>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Overridable Function DeCalculate() As Integer
+        Public Overridable Overloads Function DeCalculate() As Integer
             Return Nothing
         End Function
 
@@ -3872,7 +3882,7 @@ Namespace DWSIM.SimulationObjects.UnitOperations
         ''' are required. For example, at this point the validity of Material Objects connected to ports can
         ''' be checked.
         ''' There are no input or output arguments for this method.</remarks>
-        Public Overridable Sub Calculate1() Implements CapeOpen.ICapeUnit.Calculate
+        Public Overridable Overloads Sub Calculate1() Implements CapeOpen.ICapeUnit.Calculate
             'do CAPE calculation here
         End Sub
 

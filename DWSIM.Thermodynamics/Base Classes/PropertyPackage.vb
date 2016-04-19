@@ -195,7 +195,7 @@ Namespace PropertyPackages
 
         Sub New(ByVal capeopenmode As Boolean)
 
-            Calculator.CAPEOPENMode = capeopenmode
+            Settings.CAPEOPENMode = capeopenmode
 
             If capeopenmode Then
 
@@ -289,7 +289,7 @@ Namespace PropertyPackages
         ''' <remarks></remarks>
         Public Property FlashAlgorithm() As FlashMethod
             Get
-                If Calculator.CAPEOPENMode Then
+                If Settings.CAPEOPENMode Then
                     Return _flashalgorithm
                 Else
                     If _flashalgorithm = FlashMethod.GlobalSetting Then
@@ -316,7 +316,7 @@ Namespace PropertyPackages
         ''' <remarks></remarks>
         Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
-                If Not Calculator.CAPEOPENMode Then
+                If Not Settings.CAPEOPENMode Then
                     If Not Me.Parameters.ContainsKey("PP_FLASHALGORITHM") Then
                         Me.Parameters.Add("PP_FLASHALGORITHM", 2)
                     End If
@@ -640,14 +640,14 @@ Namespace PropertyPackages
 
             Dim alreadymt As Boolean = False
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
                                                   End Sub,
-                                                        Calculator.TaskCancellationTokenSource.Token,
+                                                        Settings.TaskCancellationTokenSource.Token,
                                                         TaskCreationOptions.None,
-                                                        Calculator.AppTaskScheduler)
+                                                       Settings.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       If type = "LV" Then
                                                           fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
@@ -655,9 +655,9 @@ Namespace PropertyPackages
                                                           fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
                                                       End If
                                                   End Sub,
-                                                    Calculator.TaskCancellationTokenSource.Token,
+                                                    Settings.TaskCancellationTokenSource.Token,
                                                     TaskCreationOptions.None,
-                                                    Calculator.AppTaskScheduler)
+                                                   Settings.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -679,7 +679,7 @@ Namespace PropertyPackages
 
             If cprops Is Nothing Then cprops = DW_GetConstantProperties()
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
                 Parallel.For(0, n + 1, Sub(ii)
                                            Dim Pc, Tc, w As Double
                                            If K(ii) = 0.0# Or Double.IsInfinity(K(ii)) Or Double.IsNaN(K(ii)) Then
@@ -874,7 +874,7 @@ Namespace PropertyPackages
             Dim fugvap As Object = Nothing
             Dim fugliq As Object = Nothing
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
@@ -1017,7 +1017,7 @@ Namespace PropertyPackages
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             Dim T As Double = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
 
-            If Not Calculator.CAPEOPENMode Then
+            If Not Settings.CAPEOPENMode Then
                 If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.CalculateBubbleAndDewPoints _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
@@ -1390,7 +1390,7 @@ Namespace PropertyPackages
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 
-            If Not Calculator.CAPEOPENMode Then
+            If Not Settings.CAPEOPENMode Then
                 Try
                     Me._tpseverity = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestSeverity
                     Me._tpcompids = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestCompIds
@@ -1445,7 +1445,7 @@ Namespace PropertyPackages
                             Dim fge As Double = 0
                             Dim dge As Double = 0
 
-                            If Not Calculator.CAPEOPENMode Then
+                            If Not Settings.CAPEOPENMode Then
                                 If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
@@ -1474,7 +1474,7 @@ Namespace PropertyPackages
                             Dim Vx2 As Double() = result(6)
                             Dim Vs As Double() = result(8)
 
-                            If Not Calculator.CAPEOPENMode Then
+                            If Not Settings.CAPEOPENMode Then
 
                                 'identify phase
                                 If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.UsePhaseIdentificationAlgorithm Then
@@ -2387,7 +2387,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             End Select
 
-            If Calculator.CAPEOPENMode Then
+            If Settings.CAPEOPENMode Then
                 Dim summf As Double = 0, sumwf As Double = 0
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
                     If Not pi.PhaseLabel = "Disabled" Then
@@ -2544,7 +2544,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Vx2 = result(6)
                             Vs = result(8)
 
-                            If Not Calculator.CAPEOPENMode Then
+                            If Not Settings.CAPEOPENMode Then
                                 If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
@@ -2935,7 +2935,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         ''' <remarks></remarks>
         Public Overridable Function DW_ReturnPhaseEnvelope(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            If Calculator.EnableGPUProcessing Then Calculator.InitComputeDevice()
+            If Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
             Dim cpc As New Utilities.TCP.Methods
 
@@ -3342,7 +3342,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         ''' <remarks></remarks>
         Public Overridable Function DW_ReturnBinaryEnvelope(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            If Not Calculator.CAPEOPENMode Then
+            If Not Settings.CAPEOPENMode Then
                 Try
                     Me._tpseverity = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestSeverity
                     Me._tpcompids = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestCompIds
@@ -3353,7 +3353,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 End Try
             End If
 
-            If Calculator.EnableGPUProcessing Then Calculator.InitComputeDevice()
+            If Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
             Dim n, i As Integer
 
@@ -5462,7 +5462,7 @@ Final3:
 
             Ti = T1 + deltaT / 2
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
                 Dim values As New Concurrent.ConcurrentBag(Of Double)
                 Parallel.For(0, 10, Sub(ii)
                                         values.Add(Me.AUX_CPi(subst, Ti + deltaT * ii) * deltaT)
@@ -5511,7 +5511,7 @@ Final3:
 
             Ti = T1 + deltaT / 2
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
                 Dim values As New Concurrent.ConcurrentBag(Of Double)
                 Parallel.For(0, 10, Sub(ii)
                                         values.Add(Me.AUX_CPi(subst, Ti + deltaT * ii) * deltaT / (Ti + deltaT * (ii - 1)))
@@ -6821,7 +6821,7 @@ Final3:
 
             Dim ids, formulas, nms, bts, casnos, molws As New ArrayList
 
-            If Calculator.CAPEOPENMode Then
+            If Settings.CAPEOPENMode Then
                 For Each c As Interfaces.ICompoundConstantProperties In _selectedcomps.Values
                     ids.Add(c.Name)
                     formulas.Add(c.Formula)
@@ -7227,7 +7227,7 @@ Final3:
         ''' Compound identifiers that are returned by the GetCompoundList method of this interface. It
         ''' must be zero or a positive number.</remarks>
         Public Overridable Function GetNumCompounds() As Integer Implements ICapeThermoCompounds.GetNumCompounds
-            If Calculator.CAPEOPENMode Then
+            If Settings.CAPEOPENMode Then
                 Return Me._selectedcomps.Count
             Else
                 Return Me.CurrentMaterialStream.Phases(0).Compounds.Count
@@ -7681,7 +7681,7 @@ Final3:
         ''' It is responsibility of the implementer to decide how to handle this circumstance.</remarks>
         Public Overridable Sub CalcSinglePhaseProp(ByVal props As Object, ByVal phaseLabel As String) Implements ICapeThermoPropertyRoutine.CalcSinglePhaseProp
 
-            If Not Calculator.CAPEOPENMode Then
+            If Not Settings.CAPEOPENMode Then
 
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
                     If phaseLabel = pi.PhaseLabel Then
@@ -8016,7 +8016,7 @@ Final3:
 
             Me.DW_CalcTwoPhaseProps(Phase.Liquid, Phase.Vapor)
 
-            If Calculator.CAPEOPENMode Then
+            If Settings.CAPEOPENMode Then
 
                 Dim res As New ArrayList
                 Dim comps As New ArrayList
@@ -8353,7 +8353,7 @@ Final3:
 
             Dim T, P, Hm, Sm As Double
 
-            If Calculator.CAPEOPENMode Then
+            If Settings.CAPEOPENMode Then
 
                 Dim res As Object = Nothing
 
@@ -8402,7 +8402,7 @@ Final3:
                 ThrowCAPEException(ex, ex.GetType.ToString, ex.ToString, "ICapeThermoEquilibriumRoutine", ex.ToString, "CalcEquilibrium", "", 0)
             End Try
 
-            If Calculator.CAPEOPENMode Then
+            If Settings.CAPEOPENMode Then
 
                 Dim ms As Interfaces.IMaterialStream = Me.CurrentMaterialStream
                 Dim mo As ICapeThermoMaterial = _como
@@ -8616,7 +8616,7 @@ Final3:
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(_como)
                 End If
             End If
-            If Calculator.CAPEOPENMode Then
+            If Settings.CAPEOPENMode Then
                 _como = material
                 If TryCast(material, Interfaces.IMaterialStream) Is Nothing Then
                     Me.CurrentMaterialStream = COMaterialtoDWMaterial(material)
@@ -8641,7 +8641,7 @@ Final3:
         ''' should be raised.</remarks>
         Public Overridable Sub UnsetMaterial() Implements ICapeThermoMaterialContext.UnsetMaterial
             Me.CurrentMaterialStream = Nothing
-            If Calculator.CAPEOPENMode Then
+            If Settings.CAPEOPENMode Then
                 If _como IsNot Nothing Then
                     If System.Runtime.InteropServices.Marshal.IsComObject(_como) Then
                         System.Runtime.InteropServices.Marshal.ReleaseComObject(_como)
@@ -9854,6 +9854,10 @@ Final3:
                 Case Else
                     Return AUX_MMM1(PropertyPackages.Phase.Mixture)
             End Select
+        End Function
+
+        Public Function Clone1() As IPropertyPackage Implements IPropertyPackage.Clone
+            Return Clone()
         End Function
 
     End Class

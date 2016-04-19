@@ -66,3 +66,33 @@ Public Interface IFlowsheetBag
 
 
 End Interface
+
+Public Interface IFlowsheetGUI
+
+    Sub ShowMessage(ByVal text As String, ByVal mtype As IFlowsheet.MessageType)
+
+    Sub ShowDebugInfo(ByVal text As String, ByVal level As Integer)
+
+    Sub CheckStatus()
+
+    Function GetTranslatedString(text As String, locale As String) As String
+
+    Function GetTranslatedString(text As String) As String
+
+End Interface
+
+Public Interface IFlowsheetCalculationQueue
+
+    Property CalculationQueue As Queue(Of ICalculationArgs)
+
+End Interface
+
+Public Interface ICalculationArgs
+
+    Property Sender As String
+    Property Calculated As Boolean
+    Property Tag As String
+    Property Name As String
+    Property ObjectType As Enums.GraphicObjects.ObjectType
+
+End Interface

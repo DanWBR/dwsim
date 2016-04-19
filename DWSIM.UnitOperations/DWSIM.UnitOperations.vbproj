@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.DrawingTools" />
+    <Import Include="DWSIM.GlobalSettings" />
     <Import Include="DWSIM.Interfaces" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
@@ -181,6 +182,10 @@
     <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
       <Name>DWSIM.DrawingTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
+      <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
+      <Name>DWSIM.GlobalSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>

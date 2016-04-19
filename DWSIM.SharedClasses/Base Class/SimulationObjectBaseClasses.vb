@@ -239,6 +239,8 @@ Namespace UnitOperations
 
         Public MustOverride Function SetPropertyValue(prop As String, propval As Object, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean Implements Interfaces.ISimulationObject.SetPropertyValue
 
+        Public Overridable Property PropertyPackage As IPropertyPackage Implements ISimulationObject.PropertyPackage
+
 #End Region
 
 #Region "    ICloneable"
@@ -497,6 +499,13 @@ Namespace UnitOperations
 
         Public MustOverride Sub DisplayEditForm() Implements ISimulationObject.DisplayEditForm
 
+        Public Sub Calculate1() Implements ISimulationObject.Calculate
+
+        End Sub
+
+        Public Sub DeCalculate() Implements ISimulationObject.DeCalculate
+
+        End Sub
     End Class
 
     <System.Serializable()> <ComVisible(True)> Public MustInherit Class UnitOpBaseClass
@@ -593,7 +602,7 @@ Namespace UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore()> Property PropertyPackage() As Interfaces.IPropertyPackage
+        <Xml.Serialization.XmlIgnore()> Public Overrides Property PropertyPackage() As Interfaces.IPropertyPackage
             Get
                 If Not _pp Is Nothing Then Return _pp
                 If _ppid Is Nothing Then _ppid = ""
@@ -638,7 +647,8 @@ Namespace UnitOperations
         ''' Decalculates the object.
         ''' </summary>
         ''' <remarks></remarks>
-        Public Overridable Sub DeCalculate()
+        Public Overridable Overloads Sub DeCalculate()
+            MyBase.DeCalculate()
         End Sub
 
         ''' <summary>
@@ -727,8 +737,9 @@ Namespace UnitOperations
         ''' are required. For example, at this point the validity of Material Objects connected to ports can
         ''' be checked.
         ''' There are no input or output arguments for this method.</remarks>
-        Public Overridable Sub Calculate1() Implements CapeOpen.ICapeUnit.Calculate
+        Public Overridable Overloads Sub Calculate1() Implements CapeOpen.ICapeUnit.Calculate
             'do CAPE calculation here
+            MyBase.Calculate()
         End Sub
 
         ''' <summary>

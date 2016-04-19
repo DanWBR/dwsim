@@ -349,7 +349,7 @@ Namespace PropertyPackages
 
             If phaseID = 3 Or phaseID = 4 Or phaseID = 5 Or phaseID = 6 Then
 
-                If Calculator.EnableParallelProcessing Then
+                If Settings.EnableParallelProcessing Then
 
                     Dim tasks(7) As Task
 
@@ -450,7 +450,7 @@ Namespace PropertyPackages
 
             ElseIf phaseID = 2 Then
 
-                If Calculator.EnableParallelProcessing Then
+                If Settings.EnableParallelProcessing Then
 
                     Dim tasks(7) As Task
 
@@ -580,9 +580,9 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_ReturnPhaseEnvelope(ByVal parameters As Object, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
-            If Calculator.EnableGPUProcessing Then Calculator.InitComputeDevice()
+            If Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
                 Return DW_ReturnPhaseEnvelopeParallel(parameters, bw)
             Else
                 Return DW_ReturnPhaseEnvelopeSequential(parameters, bw)

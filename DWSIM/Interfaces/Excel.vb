@@ -641,7 +641,7 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 If prop.ToLower <> "molecularweight" Then
@@ -649,8 +649,8 @@ Namespace ExcelAddIn
                 End If
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim results As Double() = Nothing
@@ -763,14 +763,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TP", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -973,14 +973,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PH", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1097,14 +1097,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PS", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1221,14 +1221,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PVF", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1345,14 +1345,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TVF", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1797,14 +1797,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TP", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -1910,14 +1910,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PH", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -2025,14 +2025,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PS", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -2140,14 +2140,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PVF", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing
@@ -2255,14 +2255,14 @@ Namespace ExcelAddIn
 
                 If My.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
-                    Calculator.gpu.EnableMultithreading()
+                    Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TVF", "UNDEFINED")
 
                 If My.Settings.EnableGPUProcessing Then
-                    Calculator.gpu.DisableMultithreading()
-                    Calculator.gpu.FreeAll()
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
                 End If
 
                 Dim labels As String() = Nothing

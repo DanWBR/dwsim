@@ -3,28 +3,15 @@ Imports Cudafy.Translator
 Imports Cudafy
 Imports Cudafy.Host
 Imports System.Threading
+Imports DWSIM.GlobalSettings
 
 Public Class Calculator
 
-    Public Shared Property AppTaskScheduler As TaskScheduler = Tasks.TaskScheduler.Default
-    Public Shared Property gpu As Cudafy.Host.GPGPU
-    Public Shared Property gpumod As CudafyModule
-    Public Shared Property prevlang As Integer = 0 '0 = CUDA, 1 = OpenCL
-    Public Shared Property TaskCancellationTokenSource As CancellationTokenSource
-    Public Shared Property CAPEOPENMode As Boolean
-    Public Shared Property MaxDegreeOfParallelism As Integer = -1
-    Public Shared Property UseSIMDExtensions As Boolean = True
-    Public Shared Property EnableParallelProcessing As Boolean = True
-    Public Shared Property EnableGPUProcessing As Boolean = True
-    Public Shared Property CudafyTarget As Integer = 0
-    Public Shared Property CudafyDeviceID As Integer = 0
-    Public Shared Property DebugLevel As Integer = 0
-
-    Sub New(scheduler As TaskScheduler, tcs As CancellationTokenSource, COmode As Boolean)
-        AppTaskScheduler = scheduler
-        TaskCancellationTokenSource = tcs
-        CAPEOPENMode = COmode
-    End Sub
+    'Sub New(scheduler As TaskScheduler, tcs As CancellationTokenSource, COmode As Boolean)
+    '    AppTaskScheduler = scheduler
+    '    TaskCancellationTokenSource = tcs
+    '    CAPEOPENMode = COmode
+    'End Sub
 
     Shared Sub WriteToConsole(text As String, level As Integer)
         'If level > DebugLevel Then Console.WriteLine(text)
@@ -36,7 +23,7 @@ Public Class Calculator
 
     Public Shared Sub CheckParallelPInvoke()
 
-        If Calculator.EnableParallelProcessing Then Throw New InvalidOperationException(GetLocalString("ParallelPInvokeError"))
+        If Settings.EnableParallelProcessing Then Throw New InvalidOperationException(GetLocalString("ParallelPInvokeError"))
 
     End Sub
 
@@ -69,11 +56,11 @@ Public Class Calculator
 
     Shared Sub InitComputeDevice()
 
-        If gpu Is Nothing Then
+        If Settings.gpu Is Nothing Then
 
             'set target language
 
-            Select Case Calculator.CudafyTarget
+            Select Case Settings.CudafyTarget
                 Case 0, 1
                     CudafyTranslator.Language = eLanguage.Cuda
                 Case 2
@@ -82,26 +69,26 @@ Public Class Calculator
 
             'get the gpu instance
 
-            Dim gputype As eGPUType = Calculator.CudafyTarget
+            Dim gputype As eGPUType = Settings.CudafyTarget
 
-            gpu = CudafyHost.GetDevice(gputype, Calculator.CudafyDeviceID)
+            Settings.gpu = CudafyHost.GetDevice(gputype, Settings.CudafyDeviceID)
 
             'cudafy all classes that contain a gpu function
 
-            If gpumod Is Nothing Then
-                Select Case Calculator.CudafyTarget
+            If Settings.gpumod Is Nothing Then
+                Select Case Settings.CudafyTarget
                     Case 0, 1
-                        gpumod = CudafyModule.TryDeserialize("cudacode.cdfy")
+                        Settings.gpumod = CudafyModule.TryDeserialize("cudacode.cdfy")
                     Case 2
                         'OpenCL code is device-specific and must be compiled on each initialization
                 End Select
-                If gpumod Is Nothing OrElse Not gpumod.TryVerifyChecksums() Then
-                    Select Case Calculator.CudafyTarget
+                If Settings.gpumod Is Nothing OrElse Not Settings.gpumod.TryVerifyChecksums() Then
+                    Select Case Settings.CudafyTarget
                         Case 0
-                            gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
+                            Settings.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
                                         GetType(PropertyPackages.ThermoPlugs.PR),
                                         GetType(PropertyPackages.ThermoPlugs.SRK))
-                            gpumod.Serialize("emulator.cdfy")
+                            Settings.gpumod.Serialize("emulator.cdfy")
                         Case 1
                             Dim cp As New Cudafy.CompileProperties()
                             With cp
@@ -113,12 +100,12 @@ Public Class Calculator
                                 .CompilerPath = "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe"
                                 .IncludeDirectoryPath = "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"
                             End With
-                            gpumod = CudafyTranslator.Cudafy(cp, GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
+                            Settings.gpumod = CudafyTranslator.Cudafy(cp, GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
                                         GetType(PropertyPackages.ThermoPlugs.PR),
                                         GetType(PropertyPackages.ThermoPlugs.SRK))
-                            gpumod.Serialize("cudacode.cdfy")
+                            Settings.gpumod.Serialize("cudacode.cdfy")
                         Case 2
-                            gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
+                            Settings.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
                                         GetType(PropertyPackages.ThermoPlugs.PR),
                                         GetType(PropertyPackages.ThermoPlugs.SRK))
                     End Select
@@ -127,7 +114,7 @@ Public Class Calculator
 
             'load cudafy module
 
-            If Not gpu.IsModuleLoaded(gpumod.Name) Then gpu.LoadModule(gpumod)
+            If Not Settings.gpu.IsModuleLoaded(Settings.gpumod.Name) Then Settings.gpu.LoadModule(Settings.gpumod)
 
         End If
 

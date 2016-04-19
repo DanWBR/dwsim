@@ -439,20 +439,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim gl, gv As Double
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
                 
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       fcv = pp.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
                                                   End Sub,
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                     Settings.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       fcl = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
                                                   End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
                 
             Else
@@ -566,20 +566,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             j = j + 1
                         Loop Until j = n + 1
 
-                        If Calculator.EnableParallelProcessing Then
+                        If Settings.EnableParallelProcessing Then
                             
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   fcv = pp.DW_CalcFugCoeff(currcomp, T, P, State.Vapor)
                                                               End Sub,
-                                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                                  Settings.TaskCancellationTokenSource.Token,
                                                                   TaskCreationOptions.None,
-                                                                  Calculator.AppTaskScheduler)
+                                                                 Settings.AppTaskScheduler)
                             Dim task2 = Task.Factory.StartNew(Sub()
                                                                   fcl = pp.DW_CalcFugCoeff(currcomp, T, P, State.Liquid)
                                                               End Sub,
-                                                              Calculator.TaskCancellationTokenSource.Token,
+                                                              Settings.TaskCancellationTokenSource.Token,
                                                               TaskCreationOptions.None,
-                                                              Calculator.AppTaskScheduler)
+                                                             Settings.AppTaskScheduler)
                             Task.WaitAll(task1, task2)
                             
                         Else
@@ -832,7 +832,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim fx, fx2, dfdx As Double
                 Dim i As Integer = 0
                 Do
-                    If Calculator.EnableParallelProcessing Then
+                    If Settings.EnableParallelProcessing Then
                         
                         Dim task1 As Task = New Task(Sub()
                                                          fx = 1 - CalcPIP(Vx, P, Tinv, pp, eos)(0)

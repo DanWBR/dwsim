@@ -327,7 +327,7 @@ Public Class FormLLEDiagram
 
         If My.Settings.EnableGPUProcessing Then
             Calculator.InitComputeDevice()
-            Calculator.gpu.EnableMultithreading()
+            Settings.gpu.EnableMultithreading()
         End If
 
         Try
@@ -336,8 +336,8 @@ Public Class FormLLEDiagram
             MessageBox.Show(ex.Message.ToString, "Error", MessageBoxButtons.OK)
         Finally
             If My.Settings.EnableGPUProcessing Then
-                Calculator.gpu.DisableMultithreading()
-                Calculator.gpu.FreeAll()
+                Settings.gpu.DisableMultithreading()
+                Settings.gpu.FreeAll()
             End If
         End Try
 

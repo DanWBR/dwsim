@@ -507,7 +507,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
                 ui(i) = Log(Ki(i) / Kb)
             Next
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       DHv1 = PP.DW_CalcEnthalpyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
@@ -515,9 +515,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
                                                       C = DHv2
                                                       D = (DHv1 - C) / (T - Tref)
                                                   End Sub,
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                     Settings.AppTaskScheduler)
                 Dim task2 = Task.Factory.StartNew(Sub()
                                                       If T < MathEx.Common.Max(VTc, Vz) Then
                                                           DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
@@ -529,9 +529,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
                                                           F = 0
                                                       End If
                                                   End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -625,7 +625,7 @@ restart:    Do
                 Bc = Log(Kb_ / Kb) / (1 / T_ - 1 / T)
                 Ac = Log(Kb) - Bc * (1 / T - 1 / T_)
 
-                If Calculator.EnableParallelProcessing Then
+                If Settings.EnableParallelProcessing Then
 
                     Dim task1 = Task.Factory.StartNew(Sub()
                                                           DHv1 = PP.DW_CalcEnthalpyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
@@ -633,9 +633,9 @@ restart:    Do
                                                           Cc = DHv2
                                                           Dc = (DHv1 - Cc) / (T - T0)
                                                       End Sub,
-                                                      Calculator.TaskCancellationTokenSource.Token,
+                                                      Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
-                                                      Calculator.AppTaskScheduler)
+                                                     Settings.AppTaskScheduler)
                     Dim task2 = Task.Factory.StartNew(Sub()
                                                           If T < MathEx.Common.Max(VTc, Vz) Then
                                                               DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
@@ -647,9 +647,9 @@ restart:    Do
                                                               Fc = 0
                                                           End If
                                                       End Sub,
-                                                  Calculator.TaskCancellationTokenSource.Token,
+                                                  Settings.TaskCancellationTokenSource.Token,
                                                   TaskCreationOptions.None,
-                                                  Calculator.AppTaskScheduler)
+                                                 Settings.AppTaskScheduler)
                     Task.WaitAll(task1, task2)
 
                 Else
@@ -981,7 +981,7 @@ restart:    Do
                 ui(i) = Log(Ki(i) / Kb)
             Next
 
-            If Calculator.EnableParallelProcessing Then
+            If Settings.EnableParallelProcessing Then
 
                 Dim task1 As Task = New Task(Sub()
                                                  DSv1 = PP.DW_CalcEntropyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
@@ -1097,7 +1097,7 @@ restart:    Do
                 Bc = Log(Kb_ / Kb) / (1 / T_ - 1 / T)
                 Ac = Log(Kb) - Bc * (1 / T - 1 / T_)
 
-                If Calculator.EnableParallelProcessing Then
+                If Settings.EnableParallelProcessing Then
 
                     Dim task1 As Task = New Task(Sub()
                                                      DSv1 = PP.DW_CalcEntropyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)

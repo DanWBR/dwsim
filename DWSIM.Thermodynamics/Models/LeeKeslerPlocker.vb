@@ -749,7 +749,7 @@ Final3:
 
         Function CalcLnFug(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Object, ByVal VKij As Object, ByVal VTc As Object, ByVal VPc As Object, ByVal Vw As Object, ByVal VMM As Object, ByVal VVc As Object, ByVal Hid As Double) As Object
 
-            If Calculator.EnableGPUProcessing Then
+            If Settings.EnableGPUProcessing Then
                 Return CalcLnFugGPU(TIPO, T, P, Vz, VKij, VTc, VPc, Vw, VMM, VVc, Hid)
             Else
                 Return CalcLnFugCPU(TIPO, T, P, Vz, VKij, VTc, VPc, Vw, VMM, VVc, Hid)
@@ -912,7 +912,7 @@ Final3:
             Dim vcjk(n, n), tcjk(n, n) As Double
             Dim sum1(n, n), sum2(n, n) As Double
 
-            Dim gpu As GPGPU = Calculator.gpu
+            Dim gpu As GPGPU = Settings.gpu
 
             If gpu.IsMultithreadingEnabled Then gpu.SetCurrentContext()
 

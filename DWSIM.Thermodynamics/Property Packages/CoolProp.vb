@@ -59,13 +59,13 @@ Namespace PropertyPackages
 #Region "    DWSIM Functions"
 
         Private Sub WriteWarningMessage(message As String)
-            Select Case Calculator.DebugLevel
+            Select Case Settings.DebugLevel
                 Case 0
                     'do nothing
                 Case 1
                     Console.WriteLine(message)
                 Case 2, 3
-                  
+
             End Select
         End Sub
 
