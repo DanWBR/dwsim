@@ -124,6 +124,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Reactors\BaseReactor.vb" />
+    <Compile Include="Reactors\Conversion.vb" />
+    <Compile Include="Reactors\CSTR.vb" />
+    <Compile Include="Reactors\PFR.vb" />
     <Compile Include="Support Classes\RigorousColumnSolver.vb" />
     <Compile Include="Unit Operations\FlowsheetUO.vb" />
     <Compile Include="Unit Operations\OrificePlate.vb" />
@@ -216,9 +220,7 @@
       <Name>Controls.PropertyGridEx</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reactors\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
