@@ -83,6 +83,15 @@ Namespace UnitOperations
             Throw New NotImplementedException
         End Sub
 
+        Public Sub DeCalculate(Optional args As Object = Nothing) Implements ISimulationObject.DeCalculate
+            Throw New NotImplementedException
+        End Sub
+
+        Public MustOverride Sub DisplayEditForm() Implements ISimulationObject.DisplayEditForm
+
+        Public MustOverride Sub UpdateEditForm() Implements ISimulationObject.UpdateEditForm
+
+
         ''' <summary>
         ''' Energy Flow property. Only implemented for Energy Streams.
         ''' </summary>
@@ -496,12 +505,6 @@ Namespace UnitOperations
         End Property
 
 #End Region
-
-        Public MustOverride Sub DisplayEditForm() Implements ISimulationObject.DisplayEditForm
-
-        Public Sub DeCalculate(Optional args As Object = Nothing) Implements ISimulationObject.DeCalculate
-            Throw New NotImplementedException
-        End Sub
 
     End Class
 

@@ -2,6 +2,8 @@
 
     Sub DisplayEditForm()
 
+    Sub UpdateEditForm()
+
     Property ErrorMessage() As String
 
     Function GetDebugReport() As String

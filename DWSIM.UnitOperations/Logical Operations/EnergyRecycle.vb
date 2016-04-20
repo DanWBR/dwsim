@@ -386,6 +386,10 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
         Public Overrides Sub DisplayEditForm()
 
         End Sub
+
+        Public Overrides Sub UpdateEditForm()
+
+        End Sub
     End Class
 
 End Namespace

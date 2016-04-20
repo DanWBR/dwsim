@@ -896,6 +896,9 @@ Namespace UnitOperations
 
         End Function
 
+        Public Overrides Sub UpdateEditForm()
+
+        End Sub
     End Class
 
     <Serializable()> Public Class AbsorptionColumn
@@ -1028,6 +1031,10 @@ Namespace UnitOperations
             End Select
             Return 1
         End Function
+
+        Public Overrides Sub UpdateEditForm()
+
+        End Sub
     End Class
 
     <Serializable()> Public Class ReboiledAbsorber
@@ -1155,6 +1162,10 @@ Namespace UnitOperations
             End Select
             Return 1
         End Function
+
+        Public Overrides Sub UpdateEditForm()
+
+        End Sub
     End Class
 
     <Serializable()> Public Class RefluxedAbsorber
@@ -1288,6 +1299,10 @@ Namespace UnitOperations
             End Select
             Return 1
         End Function
+
+        Public Overrides Sub UpdateEditForm()
+
+        End Sub
     End Class
 
     <System.Serializable()> Public MustInherit Class Column
@@ -1468,7 +1483,7 @@ Namespace UnitOperations
                 For Each kvp As KeyValuePair(Of String, Auxiliary.SepOps.ColumnSpec) In m_specs
                     .Item(.Count - 1).Add(New XElement("Spec", New XAttribute("ID", kvp.Key), kvp.Value.SaveData.ToArray))
                 Next
-            
+
                 .Add(New XElement("Results"))
 
                 .Item(.Count - 1).Add(New XElement("compids", XMLSerializer.XMLSerializer.ArrayToString(compids, ci)))

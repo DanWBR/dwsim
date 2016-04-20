@@ -137,7 +137,7 @@ Namespace Reactors
             i = 0
             Do
                 'process reaction i
-                rxn = Flowsheet.Reactions(ar(i))
+                rxn = FlowSheet.Reactions(ar(i))
                 For Each sb As ReactionStoichBase In rxn.Components.Values
                     Ri(sb.CompName) = 0
                 Next
@@ -147,7 +147,7 @@ Namespace Reactors
             i = 0
             Do
                 'process reaction i
-                rxn = Flowsheet.Reactions(ar(i))
+                rxn = FlowSheet.Reactions(ar(i))
                 BC = rxn.BaseReactant
                 scBC = rxn.Components(BC).StoichCoeff
 
@@ -366,7 +366,7 @@ Namespace Reactors
                     Do
 
                         'process reaction i
-                        rxn = Flowsheet.Reactions(ar(i))
+                        rxn = FlowSheet.Reactions(ar(i))
 
                         'initial mole flows
                         For Each sb As ReactionStoichBase In rxn.Components.Values
@@ -426,7 +426,7 @@ Namespace Reactors
 
                         'process reaction i
 
-                        rxn = Flowsheet.Reactions(ar(i))
+                        rxn = FlowSheet.Reactions(ar(i))
                         BC = rxn.BaseReactant
                         scBC = rxn.Components(BC).StoichCoeff
 
@@ -573,7 +573,7 @@ Namespace Reactors
                     Do
 
                         'process reaction i
-                        rxn = Flowsheet.Reactions(ar(i))
+                        rxn = FlowSheet.Reactions(ar(i))
                         BC = rxn.BaseReactant
                         scBC = rxn.Components(BC).StoichCoeff
 
@@ -619,7 +619,7 @@ Namespace Reactors
                     Do
 
                         'process reaction i
-                        rxn = Flowsheet.Reactions(ar(i))
+                        rxn = FlowSheet.Reactions(ar(i))
 
                         If NS.ContainsKey(rxn.BaseReactant) Then
                             NS(rxn.BaseReactant) += Rxi(rxn.ID)
@@ -637,7 +637,7 @@ Namespace Reactors
                     Do
 
                         'process reaction i
-                        rxn = Flowsheet.Reactions(ar(i))
+                        rxn = FlowSheet.Reactions(ar(i))
 
                         'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
                         Select Case Me.ReactorOperationMode
@@ -824,7 +824,7 @@ Namespace Reactors
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = Flowsheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
                     .Phases(0).Properties.massfraction = 1
@@ -848,7 +848,7 @@ Namespace Reactors
             End If
 
             'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
-            Dim estr As Streams.EnergyStream = Flowsheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+            Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
             With estr
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
@@ -871,7 +871,7 @@ Namespace Reactors
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = Flowsheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -963,6 +963,10 @@ Namespace Reactors
         End Function
 
         Public Overrides Sub DisplayEditForm()
+
+        End Sub
+
+        Public Overrides Sub UpdateEditForm()
 
         End Sub
     End Class

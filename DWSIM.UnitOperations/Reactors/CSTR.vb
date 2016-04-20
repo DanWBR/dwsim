@@ -130,7 +130,7 @@ Namespace Reactors
             i = 0
             Do
                 'process reaction i
-                rxn = Flowsheet.Reactions(ar(i))
+                rxn = FlowSheet.Reactions(ar(i))
                 For Each sb As ReactionStoichBase In rxn.Components.Values
                     Ri(sb.CompName) = 0
                 Next
@@ -141,7 +141,7 @@ Namespace Reactors
             Do
 
                 'process reaction i
-                rxn = Flowsheet.Reactions(ar(i))
+                rxn = FlowSheet.Reactions(ar(i))
                 BC = rxn.BaseReactant
                 scBC = rxn.Components(BC).StoichCoeff
 
@@ -284,11 +284,11 @@ Namespace Reactors
             'check active reactions (kinetic and heterogeneous only) in the reaction set
             kcount = 0
             hcount = 0
-            For Each rxnsb As ReactionSetBase In Flowsheet.ReactionSets(Me.ReactionSetID).Reactions.Values
-                If Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Kinetic And rxnsb.IsActive Then
+            For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+                If FlowSheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Kinetic And rxnsb.IsActive Then
                     Me.Reactions.Add(rxnsb.ReactionID)
                     kcount += 1
-                ElseIf Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Heterogeneous_Catalytic And rxnsb.IsActive Then
+                ElseIf FlowSheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Heterogeneous_Catalytic And rxnsb.IsActive Then
                     Me.Reactions.Add(rxnsb.ReactionID)
                     hcount += 1
                 End If
@@ -298,7 +298,7 @@ Namespace Reactors
             Dim i As Integer
             i = 0
             Dim maxrank As Integer = 0
-            For Each rxnsb As ReactionSetBase In Flowsheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+            For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                 If rxnsb.Rank > maxrank And Me.Reactions.Contains(rxnsb.ReactionID) Then maxrank = rxnsb.Rank
             Next
 
@@ -307,7 +307,7 @@ Namespace Reactors
             Dim arr As New ArrayList
             Do
                 arr = New ArrayList
-                For Each rxnsb As ReactionSetBase In Flowsheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+                For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                     If rxnsb.Rank = i And Me.Reactions.Contains(rxnsb.ReactionID) Then arr.Add(rxnsb.ReactionID)
                 Next
                 If arr.Count > 0 Then Me.ReactionsSequence.Add(i, arr)
@@ -370,7 +370,7 @@ Namespace Reactors
                 Do
 
                     'process reaction i
-                    rxn = Flowsheet.Reactions(ar(i))
+                    rxn = FlowSheet.Reactions(ar(i))
 
                     'initial mole flows
                     For Each sb As ReactionStoichBase In rxn.Components.Values
@@ -428,7 +428,7 @@ Namespace Reactors
 
                     'process reaction i
 
-                    rxn = Flowsheet.Reactions(ar(i))
+                    rxn = FlowSheet.Reactions(ar(i))
                     BC = rxn.BaseReactant
                     scBC = rxn.Components(BC).StoichCoeff
 
@@ -558,7 +558,7 @@ Namespace Reactors
                 Do
 
                     'process reaction i
-                    rxn = Flowsheet.Reactions(ar(i))
+                    rxn = FlowSheet.Reactions(ar(i))
                     BC = rxn.BaseReactant
                     scBC = rxn.Components(BC).StoichCoeff
 
@@ -642,7 +642,7 @@ Namespace Reactors
                 Do
 
                     'process reaction i
-                    rxn = Flowsheet.Reactions(ar(i))
+                    rxn = FlowSheet.Reactions(ar(i))
 
                     If NS.ContainsKey(rxn.BaseReactant) Then
                         NS(rxn.BaseReactant) += Rxi(rxn.ID)
@@ -658,7 +658,7 @@ Namespace Reactors
                 Do
 
                     'process reaction i
-                    rxn = Flowsheet.Reactions(ar(i))
+                    rxn = FlowSheet.Reactions(ar(i))
 
                     'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
                     Select Case Me.ReactorOperationMode
@@ -862,6 +862,10 @@ Namespace Reactors
         End Function
 
         Public Overrides Sub DisplayEditForm()
+
+        End Sub
+
+        Public Overrides Sub UpdateEditForm()
 
         End Sub
     End Class

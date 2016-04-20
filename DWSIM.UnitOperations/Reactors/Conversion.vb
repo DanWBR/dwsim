@@ -47,13 +47,13 @@ Namespace Reactors
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
-                Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedematriac16"))
+                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac16"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedematriac15"))
+                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac15"))
             ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
-                Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedematriac15"))
+                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac15"))
             ElseIf Not Me.GraphicObject.InputConnectors(1).IsAttached Then
-                Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedeenerg17"))
+                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
             End If
 
             If Me.Conversions Is Nothing Then Me.m_conversions = New Dictionary(Of String, Double)
@@ -67,8 +67,8 @@ Namespace Reactors
             Me.DeltaT = 0
 
             'check active reactions (conversion only) in the reaction set
-            For Each rxnsb As ReactionSetBase In Flowsheet.ReactionSets(Me.ReactionSetID).Reactions.Values
-                If Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Conversion And rxnsb.IsActive Then
+            For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+                If FlowSheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Conversion And rxnsb.IsActive Then
                     Me.Reactions.Add(rxnsb.ReactionID)
                 End If
             Next
@@ -77,7 +77,7 @@ Namespace Reactors
             Dim i As Integer
             i = 0
             Dim maxrank As Integer = 0
-            For Each rxnsb As ReactionSetBase In Flowsheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+            For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                 If rxnsb.Rank > maxrank And Me.Reactions.Contains(rxnsb.ReactionID) Then maxrank = rxnsb.Rank
             Next
 
@@ -87,14 +87,14 @@ Namespace Reactors
             Dim arr As New ArrayList
             Do
                 arr = New ArrayList
-                For Each rxnsb As ReactionSetBase In Flowsheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+                For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                     If rxnsb.Rank = i And Me.Reactions.Contains(rxnsb.ReactionID) Then arr.Add(rxnsb.ReactionID)
                 Next
                 If arr.Count > 0 Then Me.ReactionsSequence.Add(i, arr)
                 i = i + 1
             Loop Until i = maxrank + 1
 
-            Dim ims As MaterialStream = DirectCast(Flowsheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
+            Dim ims As MaterialStream = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
             Dim pp = Me.PropertyPackage
             Dim ppr As New PropertyPackages.RaoultPropertyPackage()
 
@@ -136,7 +136,7 @@ Namespace Reactors
 
                     'process reaction i
 
-                    rxn = Flowsheet.Reactions(ar(i))
+                    rxn = FlowSheet.Reactions(ar(i))
                     BC = rxn.BaseReactant
                     scBC = rxn.Components(BC).StoichCoeff
 
@@ -207,7 +207,7 @@ Namespace Reactors
                 Do
 
                     'process reaction i
-                    rxn = Flowsheet.Reactions(ar(i))
+                    rxn = FlowSheet.Reactions(ar(i))
                     BC = rxn.BaseReactant
                     scBC = rxn.Components(BC).StoichCoeff
 
@@ -376,7 +376,7 @@ Namespace Reactors
             Dim cp As ConnectionPoint
             cp = Me.GraphicObject.InputConnectors(0)
             If cp.IsAttached Then
-                ms = Flowsheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
                 Dim comp As BaseClasses.Compound
                 i = 0
                 For Each comp In ms.Phases(0).Compounds.Values
@@ -396,7 +396,7 @@ Namespace Reactors
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = Flowsheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
@@ -415,7 +415,7 @@ Namespace Reactors
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                ms = Flowsheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
@@ -455,7 +455,7 @@ Namespace Reactors
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = Flowsheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -476,7 +476,7 @@ Namespace Reactors
 
             cp = Me.GraphicObject.OutputConnectors(1)
             If cp.IsAttached Then
-                ms = Flowsheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing
@@ -569,6 +569,10 @@ Namespace Reactors
         End Function
 
         Public Overrides Sub DisplayEditForm()
+
+        End Sub
+
+        Public Overrides Sub UpdateEditForm()
 
         End Sub
     End Class
