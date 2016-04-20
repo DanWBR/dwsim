@@ -288,13 +288,17 @@ Namespace Streams
             End Select
         End Function
 
+        Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+            Calculate(True, True)
+        End Sub
+
         ''' <summary>
         ''' Calculates equilibrium and/or properties for this stream.
         ''' </summary>
         ''' <param name="equilibrium"></param>
         ''' <param name="properties"></param>
         ''' <remarks></remarks>
-        Public Shadows Sub Calculate(equilibrium As Boolean, properties As Boolean)
+        Public Overloads Sub Calculate(equilibrium As Boolean, properties As Boolean)
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 

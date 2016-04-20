@@ -111,9 +111,9 @@
 
     Property Annotation() As String
 
-    Sub Calculate()
+    Sub Calculate(Optional ByVal args As Object = Nothing)
 
-    Sub DeCalculate()
+    Sub DeCalculate(Optional ByVal args As Object = Nothing)
 
     Property PropertyPackage As IPropertyPackage
 

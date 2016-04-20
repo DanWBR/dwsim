@@ -46,6 +46,8 @@
 
     Function GetFlowsheetBag() As IFlowsheetBag
 
+    Sub AddCompoundsToMaterialStream(stream As IMaterialStream)
+
 End Interface
 
 Public Interface IFlowsheetBag

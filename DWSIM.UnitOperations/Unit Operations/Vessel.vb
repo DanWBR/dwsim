@@ -151,6 +151,7 @@ Namespace UnitOperations
             Dim nc As Integer = 0
 
             Dim mix As New MaterialStream("", "", Me.FlowSheet, Me.PropertyPackage)
+            FlowSheet.AddCompoundsToMaterialStream(mix)
             Dim ms As MaterialStream = Nothing
 
             Dim cp As ConnectionPoint

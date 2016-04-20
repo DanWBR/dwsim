@@ -146,9 +146,9 @@ Namespace UnitOperations
 
             Dim msin, msout As MaterialStream, esin As Streams.EnergyStream
 
-            msin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            msout = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            esin = FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+            msin = GetInletMaterialStream(0)
+            msout = GetOutletMaterialStream(0)
+            esin = GetInletEnergyStream(1)
 
             qli = msin.Phases(1).Properties.volumetric_flow.GetValueOrDefault.ToString
 

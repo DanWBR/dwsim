@@ -9844,15 +9844,15 @@ Final3:
 
             Select Case phase
                 Case Enums.PhaseLabel.Vapor
-                    Return AUX_MMM1(PropertyPackages.Phase.Vapor)
+                    Return AUX_MMM(PropertyPackages.Phase.Vapor)
                 Case Enums.PhaseLabel.Solid
-                    Return AUX_MMM1(PropertyPackages.Phase.Solid)
+                    Return AUX_MMM(PropertyPackages.Phase.Solid)
                 Case Enums.PhaseLabel.Mixture
-                    Return AUX_MMM1(PropertyPackages.Phase.Mixture)
+                    Return AUX_MMM(PropertyPackages.Phase.Mixture)
                 Case Enums.PhaseLabel.LiquidMixture
-                    Return AUX_MMM1(PropertyPackages.Phase.Liquid)
+                    Return AUX_MMM(PropertyPackages.Phase.Liquid)
                 Case Else
-                    Return AUX_MMM1(PropertyPackages.Phase.Mixture)
+                    Return AUX_MMM(PropertyPackages.Phase.Mixture)
             End Select
         End Function
 

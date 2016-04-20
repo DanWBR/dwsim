@@ -79,7 +79,7 @@ Namespace UnitOperations
         ''' </summary>
         ''' <param name="args"></param>
         ''' <remarks>Use 'Solve()' to calculate the object instead.</remarks>
-        Public Overridable Sub Calculate(Optional ByVal args As Object = Nothing)
+        Public Overridable Sub Calculate(Optional ByVal args As Object = Nothing) Implements ISimulationObject.Calculate
             Throw New NotImplementedException
         End Sub
 
@@ -499,13 +499,10 @@ Namespace UnitOperations
 
         Public MustOverride Sub DisplayEditForm() Implements ISimulationObject.DisplayEditForm
 
-        Public Sub Calculate1() Implements ISimulationObject.Calculate
-
+        Public Sub DeCalculate(Optional args As Object = Nothing) Implements ISimulationObject.DeCalculate
+            Throw New NotImplementedException
         End Sub
 
-        Public Sub DeCalculate() Implements ISimulationObject.DeCalculate
-
-        End Sub
     End Class
 
     <System.Serializable()> <ComVisible(True)> Public MustInherit Class UnitOpBaseClass

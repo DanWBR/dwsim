@@ -483,7 +483,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
-    Public Sub AddComponentsRows(ByRef MaterialStream As Streams.MaterialStream)
+    Public Sub AddComponentsRows(ByVal MaterialStream As IMaterialStream) Implements IFlowsheet.AddCompoundsToMaterialStream
         If Me.Options.SelectedComponents.Count = 0 Then
             MessageBox.Show(DWSIM.App.GetLocalString("Nohcomponentesaadici"))
         Else

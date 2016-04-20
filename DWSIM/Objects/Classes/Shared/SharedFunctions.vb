@@ -160,7 +160,7 @@ Namespace DWSIM
                 End If
             Else
                 If Not UniqueName = "" Then
-                    If fp Is Nothing Then fp = My.Forms.FormMain
+                    If fp Is Nothing Then Return UniqueName
                     If fp.AvailableComponents.ContainsKey(UniqueName) Then
                         Dim str As String = GetLocalString("_" + UniqueName)
                         If UniqueName Is Nothing Then
