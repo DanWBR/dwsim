@@ -120,14 +120,16 @@ Namespace My
             CudafyModes.Compiler = eGPUCompiler.All
             CudafyModes.Target = My.Settings.CudafyTarget
 
-            'set calculator parameters
-            Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
-            Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
-            Settings.EnableGPUProcessing = My.Settings.EnableGPUProcessing
-            Settings.CudafyTarget = My.Settings.CudafyTarget
-            Settings.CudafyDeviceID = My.Settings.CudafyDeviceID
-            Settings.UseSIMDExtensions = My.Settings.UseSIMDExtensions
-            Settings.DebugLevel = My.Settings.DebugLevel
+            'set global settings
+            GlobalSettings.Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
+            GlobalSettings.Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
+            GlobalSettings.Settings.EnableGPUProcessing = My.Settings.EnableGPUProcessing
+            GlobalSettings.Settings.CudafyTarget = My.Settings.CudafyTarget
+            GlobalSettings.Settings.CudafyDeviceID = My.Settings.CudafyDeviceID
+            GlobalSettings.Settings.UseSIMDExtensions = My.Settings.UseSIMDExtensions
+            GlobalSettings.Settings.DebugLevel = My.Settings.DebugLevel
+
+            If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
         End Sub
 

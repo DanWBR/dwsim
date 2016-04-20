@@ -47,7 +47,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 CapeOpen.ICapeFlowsheetMonitoring, CapeOpen.ICapeSimulationContext, CapeOpen.ICapeIdentification
 
     'DWSIM IFlowsheet interface
-    Implements Interfaces.IFlowsheet, Interfaces.IFlowsheetBag, Interfaces.IFlowsheetGUI
+    Implements Interfaces.IFlowsheet, Interfaces.IFlowsheetBag, Interfaces.IFlowsheetGUI, Interfaces.IFlowsheetCalculationQueue
 
 #Region "    Variable Declarations "
 
@@ -90,7 +90,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public WithEvents Options As New DWSIM.Flowsheet.FlowsheetVariables
 
-    Public CalculationQueue As Generic.Queue(Of CalculationArgs)
+    Public Property CalculationQueue As Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
     Public FlowsheetStates As Dictionary(Of Date, FlowsheetState)
 
@@ -168,7 +168,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Me.Options.BackupFileName = str & ".dwbcs"
 
-        Me.CalculationQueue = New Generic.Queue(Of CalculationArgs)
+        Me.CalculationQueue = New Generic.Queue(Of ICalculationArgs)
 
         Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
 
@@ -222,7 +222,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             FormMatList.Show(FormSpreadsheet.Pane, FormSpreadsheet)
             FormSurface.Show(FormSpreadsheet.Pane, Nothing)
             FormLog.Show(FormSurface.Pane, DockAlignment.Bottom, 0.2)
-        
+
             dckPanel.BringToFront()
             dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
 
@@ -1660,7 +1660,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                             i2 = conptObj.AttachedConnector.AttachedToConnectorIndex
                             gobj1 = gObjTo
                             gobj2 = gObjFrom
-                             conptObj.AttachedConnector.AttachedFrom.OutputConnectors(conptObj.AttachedConnector.AttachedFromConnectorIndex).IsAttached = False
+                            conptObj.AttachedConnector.AttachedFrom.OutputConnectors(conptObj.AttachedConnector.AttachedFromConnectorIndex).IsAttached = False
                             conptObj.AttachedConnector.AttachedFrom.OutputConnectors(conptObj.AttachedConnector.AttachedFromConnectorIndex).AttachedConnector = Nothing
                             Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Clear()
                             conptObj.IsAttached = False
@@ -1691,7 +1691,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     i2 = SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex
                     gobj1 = SelObj
                     gobj2 = ObjToDisconnect
-                     SelObj.EnergyConnector.AttachedConnector.AttachedTo.InputConnectors(SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex).IsAttached = False
+                    SelObj.EnergyConnector.AttachedConnector.AttachedTo.InputConnectors(SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex).IsAttached = False
                     SelObj.EnergyConnector.AttachedConnector.AttachedTo.InputConnectors(SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex).AttachedConnector = Nothing
                     SelObj.EnergyConnector.IsAttached = False
                     Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(SelObj.EnergyConnector.AttachedConnector)

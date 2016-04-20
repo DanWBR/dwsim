@@ -7,12 +7,6 @@ Imports DWSIM.GlobalSettings
 
 Public Class Calculator
 
-    'Sub New(scheduler As TaskScheduler, tcs As CancellationTokenSource, COmode As Boolean)
-    '    AppTaskScheduler = scheduler
-    '    TaskCancellationTokenSource = tcs
-    '    CAPEOPENMode = COmode
-    'End Sub
-
     Shared Sub WriteToConsole(text As String, level As Integer)
         'If level > DebugLevel Then Console.WriteLine(text)
     End Sub
