@@ -31,7 +31,6 @@ Imports CapeOpen
 Imports System.Runtime.Serialization.Formatters
 Imports System.Linq
 Imports System.ComponentModel
-Imports Wexman.Design
 Imports System.Drawing.Design
 Imports Microsoft.Scripting.Hosting
 

@@ -1,7 +1,6 @@
 Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Collections.Generic
 Imports System.ComponentModel
-Imports PropertyGridEx
 Imports WeifenLuo.WinFormsUI.Docking
 
 Imports DWSIM.FlowsheetSolver

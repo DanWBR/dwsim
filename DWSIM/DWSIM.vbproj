@@ -1092,14 +1092,6 @@
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
       <Name>DWSIM.UnitOperations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GenericDictionaryEditor\Controls.GenericDictionaryEditor.csproj">
-      <Project>{a541272d-0c07-40bc-b03c-73d95e072b99}</Project>
-      <Name>Controls.GenericDictionaryEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\Controls.PropertyGridEx.vbproj">
-      <Project>{b0bb47f2-21c4-41fc-b6e6-40757adfc4a1}</Project>
-      <Name>Controls.PropertyGridEx</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TabStrip\Controls.TabStrip.csproj">
       <Project>{f929ca6a-87bd-42c8-8d0a-6455db6f55dc}</Project>
       <Name>Controls.TabStrip</Name>

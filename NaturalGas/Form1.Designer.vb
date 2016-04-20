@@ -24,7 +24,6 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.pg = New PropertyGridEx.PropertyGridEx()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.lblVapOnly = New System.Windows.Forms.Label()
@@ -41,53 +40,6 @@ Partial Class Form1
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'pg
-        '
-        '
-        '
-        '
-        Me.pg.DocCommentDescription.AutoEllipsis = True
-        Me.pg.DocCommentDescription.Cursor = System.Windows.Forms.Cursors.Default
-        Me.pg.DocCommentDescription.Location = New System.Drawing.Point(3, 18)
-        Me.pg.DocCommentDescription.Name = ""
-        Me.pg.DocCommentDescription.Size = New System.Drawing.Size(306, 37)
-        Me.pg.DocCommentDescription.TabIndex = 1
-        Me.pg.DocCommentImage = Nothing
-        '
-        '
-        '
-        Me.pg.DocCommentTitle.Cursor = System.Windows.Forms.Cursors.Default
-        Me.pg.DocCommentTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.pg.DocCommentTitle.Location = New System.Drawing.Point(3, 3)
-        Me.pg.DocCommentTitle.Name = ""
-        Me.pg.DocCommentTitle.Size = New System.Drawing.Size(306, 15)
-        Me.pg.DocCommentTitle.TabIndex = 0
-        Me.pg.DocCommentTitle.UseMnemonic = False
-        Me.pg.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pg.DrawFlatToolbar = True
-        Me.pg.Location = New System.Drawing.Point(4, 67)
-        Me.pg.Name = "pg"
-        Me.pg.Size = New System.Drawing.Size(312, 311)
-        Me.pg.TabIndex = 0
-        Me.pg.ToolbarVisible = False
-        '
-        '
-        '
-        Me.pg.ToolStrip.AccessibleName = "ToolBar"
-        Me.pg.ToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar
-        Me.pg.ToolStrip.AllowMerge = False
-        Me.pg.ToolStrip.AutoSize = False
-        Me.pg.ToolStrip.CanOverflow = False
-        Me.pg.ToolStrip.Dock = System.Windows.Forms.DockStyle.None
-        Me.pg.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.pg.ToolStrip.Location = New System.Drawing.Point(0, 1)
-        Me.pg.ToolStrip.Name = ""
-        Me.pg.ToolStrip.Padding = New System.Windows.Forms.Padding(2, 0, 1, 0)
-        Me.pg.ToolStrip.Size = New System.Drawing.Size(312, 25)
-        Me.pg.ToolStrip.TabIndex = 1
-        Me.pg.ToolStrip.TabStop = True
-        Me.pg.ToolStrip.Text = "PropertyGridToolBar"
-        Me.pg.ToolStrip.Visible = False
         '
         'TableLayoutPanel1
         '
@@ -96,7 +48,6 @@ Partial Class Form1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.pg, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
@@ -228,7 +179,6 @@ Partial Class Form1
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents pg As PropertyGridEx.PropertyGridEx
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel

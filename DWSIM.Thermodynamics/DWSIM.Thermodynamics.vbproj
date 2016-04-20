@@ -245,10 +245,6 @@
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\Controls.PropertyGridEx.vbproj">
-      <Project>{b0bb47f2-21c4-41fc-b6e6-40757adfc4a1}</Project>
-      <Name>Controls.PropertyGridEx</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

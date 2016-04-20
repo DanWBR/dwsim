@@ -905,19 +905,6 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
         End Property
 #End Region
 
-        Public Sub PopulateGrid(ByRef pgrid As PropertyGridEx.PropertyGridEx)
-
-            With pgrid
-
-                .Item.Clear()
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-
-            End With
-
-        End Sub
-
         Public Sub CopyToClipboard()
 
             Dim i As Integer = 0
@@ -1521,21 +1508,6 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             End Set
         End Property
 #End Region
-
-        Public Sub PopulateGrid(ByRef pgrid As PropertyGridEx.PropertyGridEx)
-
-            With pgrid
-
-                .Item.Clear()
-
-                .Item.Add("Range", Me, "SpreadsheetCellRange", False, "", "", True)
-
-                .PropertySort = PropertySort.Alphabetical
-                .ShowCustomProperties = True
-
-            End With
-
-        End Sub
 
         Public Sub CopyToClipboard()
 
