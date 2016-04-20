@@ -439,9 +439,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 DirectCast(obj, ISimulationObject).PropertyPackage = Nothing
                 DirectCast(obj, ISimulationObject).PropertyPackage = DirectCast(obj, ISimulationObject).PropertyPackage.Clone
             ElseIf TypeOf obj Is IMaterialStream Then
-                DirectCast(obj, IMaterialStream).PropertyPackage = Nothing
-                DirectCast(obj, IMaterialStream).PropertyPackage = DirectCast(obj, IMaterialStream).PropertyPackage.Clone
-                DirectCast(obj, IMaterialStream).PropertyPackage.CurrentMaterialStream = obj
+                DirectCast(obj, ISimulationObject).PropertyPackage = Nothing
+                DirectCast(obj, ISimulationObject).PropertyPackage = DirectCast(obj, ISimulationObject).PropertyPackage.Clone
+                DirectCast(obj, ISimulationObject).PropertyPackage.CurrentMaterialStream = obj
             End If
         Next
 
@@ -489,7 +489,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             If TypeOf obj Is ISimulationObject Then
                 DirectCast(obj, ISimulationObject).PropertyPackage = Nothing
             ElseIf TypeOf obj Is IMaterialStream Then
-                DirectCast(obj, IMaterialStream).PropertyPackage = Nothing
+                DirectCast(obj, ISimulationObject).PropertyPackage = Nothing
             End If
         Next
 

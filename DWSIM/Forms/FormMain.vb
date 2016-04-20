@@ -1293,7 +1293,95 @@ Public Class FormMain
         If xel.Value = "Referencia" Then xel.Value = "Referenced"
         If xel.Value = "Controlada" Then xel.Value = "Controlled"
 
+        If xel.Value.EndsWith("Streams.MaterialStream") Then xel.Value = "DWSIM.Thermodynamics.Streams.MaterialStream"
+
+        If xel.Value.EndsWith("Streams.EnergyStream") Then xel.Value = "DWSIM.UnitOperations.Streams.EnergyStream"
+
+        If xel.Value.EndsWith("UnitOperations.Vessel") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Vessel"
+        If xel.Value.EndsWith("UnitOperations.Compressor") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Compressor"
+        If xel.Value.EndsWith("UnitOperations.Expander") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Expander"
+        If xel.Value.EndsWith("UnitOperations.Heater") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Heater"
+        If xel.Value.EndsWith("UnitOperations.Cooler") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Cooler"
+        If xel.Value.EndsWith("UnitOperations.HeatExchanger") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.HeatExchanger"
+        If xel.Value.EndsWith("UnitOperations.Filter") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Filter"
+        If xel.Value.EndsWith("UnitOperations.Mixer") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Mixer"
+        If xel.Value.EndsWith("UnitOperations.Splitter") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Splitter"
+        If xel.Value.EndsWith("UnitOperations.ComponentSeparator") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.ComponentSeparator"
+        If xel.Value.EndsWith("UnitOperations.ShortcutColumn") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.ShortcutColumn"
+        If xel.Value.EndsWith("UnitOperations.CustomUO") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.CustomUO"
+        If xel.Value.EndsWith("UnitOperations.CapeOpenUO") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.CapeOpenUO"
+        If xel.Value.EndsWith("UnitOperations.Flowsheet") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Flowsheet"
+        If xel.Value.EndsWith("UnitOperations.OrificePlate") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.OrificePlate"
+        If xel.Value.EndsWith("UnitOperations.SolidsSeparator") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.SolidsSeparator"
+        If xel.Value.EndsWith("UnitOperations.ExcelUO") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.ExcelUO"
+        If xel.Value.EndsWith("UnitOperations.Tank") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Tank"
+        If xel.Value.EndsWith("UnitOperations.Valve") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Valve"
+        If xel.Value.EndsWith("UnitOperations.Pump") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Pump"
+        If xel.Value.EndsWith("UnitOperations.Pipe") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Pipe"
+        If xel.Value.EndsWith("UnitOperations.DistillationColumn") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.DistillationColumn"
+        If xel.Value.EndsWith("UnitOperations.AbsorptionColumn") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.AbsorptionColumn"
+        If xel.Value.EndsWith("UnitOperations.ReboiledAbsorber") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.ReboiledAbsorber"
+        If xel.Value.EndsWith("UnitOperations.RefluxedAbsorber") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.RefluxedAbsorber"
+
+        If xel.Value.EndsWith("Reactors.Reactor_Conversion") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_Conversion"
+        If xel.Value.EndsWith("Reactors.Reactor_Equilibrium") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_Equilibrium"
+        If xel.Value.EndsWith("Reactors.Reactor_Gibbs") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_Gibbs"
+        If xel.Value.EndsWith("Reactors.Reactor_PFR") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_PFR"
+        If xel.Value.EndsWith("Reactors.Reactor_CSTR") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_CSTR"
+
+        If xel.Value.EndsWith("SpecialOps.Adjust") Then xel.Value = "DWSIM.UnitOperations.SpecialOps.Adjust"
+        If xel.Value.EndsWith("SpecialOps.Spec") Then xel.Value = "DWSIM.UnitOperations.SpecialOps.Spec"
+        If xel.Value.EndsWith("SpecialOps.Recycle") Then xel.Value = "DWSIM.UnitOperations.SpecialOps.Recycle"
+        If xel.Value.EndsWith("SpecialOps.EnergyRecycle") Then xel.Value = "DWSIM.UnitOperations.SpecialOps.EnergyRecycle"
+
+        If xel.Value.EndsWith("DWSIM.MaterialStream") Then xel.Value = "DWSIM.Thermodynamics.Streams.MaterialStream"
+
+        If xel.Value.EndsWith("DWSIM.EnergyStream") Then xel.Value = "DWSIM.UnitOperations.Streams.EnergyStream"
+
+        If xel.Value.EndsWith("DWSIM.Vessel") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Vessel"
+        If xel.Value.EndsWith("DWSIM.Compressor") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Compressor"
+        If xel.Value.EndsWith("DWSIM.Expander") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Expander"
+        If xel.Value.EndsWith("DWSIM.Heater") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Heater"
+        If xel.Value.EndsWith("DWSIM.Cooler") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Cooler"
+        If xel.Value.EndsWith("DWSIM.HeatExchanger") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.HeatExchanger"
+        If xel.Value.EndsWith("DWSIM.Filter") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Filter"
+        If xel.Value.EndsWith("DWSIM.Mixer") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Mixer"
+        If xel.Value.EndsWith("DWSIM.Splitter") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Splitter"
+        If xel.Value.EndsWith("DWSIM.ComponentSeparator") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.ComponentSeparator"
+        If xel.Value.EndsWith("DWSIM.ShortcutColumn") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.ShortcutColumn"
+        If xel.Value.EndsWith("DWSIM.CustomUO") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.CustomUO"
+        If xel.Value.EndsWith("DWSIM.CapeOpenUO") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.CapeOpenUO"
+        If xel.Value.EndsWith("DWSIM.Flowsheet") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Flowsheet"
+        If xel.Value.EndsWith("DWSIM.OrificePlate") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.OrificePlate"
+        If xel.Value.EndsWith("DWSIM.SolidsSeparator") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.SolidsSeparator"
+        If xel.Value.EndsWith("DWSIM.ExcelUO") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.ExcelUO"
+        If xel.Value.EndsWith("DWSIM.Tank") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Tank"
+        If xel.Value.EndsWith("DWSIM.Valve") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Valve"
+        If xel.Value.EndsWith("DWSIM.Pump") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Pump"
+        If xel.Value.EndsWith("DWSIM.Pipe") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Pipe"
+        If xel.Value.EndsWith("DWSIM.DistillationColumn") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.DistillationColumn"
+        If xel.Value.EndsWith("DWSIM.AbsorptionColumn") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.AbsorptionColumn"
+        If xel.Value.EndsWith("DWSIM.ReboiledAbsorber") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.ReboiledAbsorber"
+        If xel.Value.EndsWith("DWSIM.RefluxedAbsorber") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.RefluxedAbsorber"
+
+        If xel.Value.EndsWith("DWSIM.Reactor_Conversion") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_Conversion"
+        If xel.Value.EndsWith("DWSIM.Reactor_Equilibrium") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_Equilibrium"
+        If xel.Value.EndsWith("DWSIM.Reactor_Gibbs") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_Gibbs"
+        If xel.Value.EndsWith("DWSIM.Reactor_PFR") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_PFR"
+        If xel.Value.EndsWith("DWSIM.Reactor_CSTR") Then xel.Value = "DWSIM.UnitOperations.Reactors.Reactor_CSTR"
+
+        If xel.Value.EndsWith("DWSIM.Adjust") Then xel.Value = "DWSIM.UnitOperations.SpecialOps.Adjust"
+        If xel.Value.EndsWith("DWSIM.Spec") Then xel.Value = "DWSIM.UnitOperations.SpecialOps.Spec"
+        If xel.Value.EndsWith("DWSIM.Recycle") Then xel.Value = "DWSIM.UnitOperations.SpecialOps.Recycle"
+        If xel.Value.EndsWith("DWSIM.EnergyRecycle") Then xel.Value = "DWSIM.UnitOperations.SpecialOps.EnergyRecycle"
+
     End Sub
+
+    Function AssemblyResolver(arg1 As Assembly, arg2 As String, arg3 As Boolean) As Type
+
+        Return Nothing
+
+    End Function
 
     Sub LoadXML(ByVal path As String, Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False)
 
@@ -1376,61 +1464,65 @@ Public Class FormMain
 
         Dim fsuocount = (From go As GraphicObjects.GraphicObject In form.Collections.GraphicObjectCollection.Values Where go.ObjectType = ObjectType.FlowsheetUO).Count
 
-        If fsuocount = 0 Then
+        'If fsuocount = 0 Then
 
-            Parallel.ForEach(data, Sub(xel)
-                                       Try
-                                           Dim id As String = xel.<Name>.Value
-                                           Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                                           Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
-                                           Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
-                                                               form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
-                                           obj.GraphicObject = gobj
-                                           obj.SetFlowsheet(form)
-                                           If Not gobj Is Nothing Then
-                                               obj.LoadData(xel.Elements.ToList)
-                                               If TypeOf obj Is Streams.MaterialStream Then
-                                                   For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
-                                                       For Each c As ConstantProperties In form.Options.SelectedComponents.Values
-                                                           phase.Compounds(c.Name).ConstantProperties = c
-                                                       Next
-                                                   Next
-                                               End If
-                                           End If
-                                           objlist.Add(obj)
-                                       Catch ex As Exception
-                                           excs.Add(New Exception("Error Loading Unit Operation Information", ex))
-                                       End Try
-                                   End Sub)
+        '    Parallel.ForEach(data, Sub(xel)
+        '                               Try
+        '                                   Dim id As String = xel.<Name>.Value
+        '                                   Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
+        '                                   Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
+        '                                   Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
+        '                                                       form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
+        '                                   obj.GraphicObject = gobj
+        '                                   obj.SetFlowsheet(form)
+        '                                   If Not gobj Is Nothing Then
+        '                                       obj.LoadData(xel.Elements.ToList)
+        '                                       If TypeOf obj Is Streams.MaterialStream Then
+        '                                           For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+        '                                               For Each c As ConstantProperties In form.Options.SelectedComponents.Values
+        '                                                   phase.Compounds(c.Name).ConstantProperties = c
+        '                                               Next
+        '                                           Next
+        '                                       End If
+        '                                   End If
+        '                                   objlist.Add(obj)
+        '                               Catch ex As Exception
+        '                                   excs.Add(New Exception("Error Loading Unit Operation Information", ex))
+        '                               End Try
+        '                           End Sub)
 
-        Else
+        'Else
 
-            For Each xel In data
-                Try
-                    Dim id As String = xel.<Name>.Value
-                    Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                    Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
-                    Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
-                                        form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
-                    obj.GraphicObject = gobj
-                    obj.SetFlowsheet(form)
-                    If Not gobj Is Nothing Then
-                        obj.LoadData(xel.Elements.ToList)
-                        If TypeOf obj Is Streams.MaterialStream Then
-                            For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
-                                For Each c As ConstantProperties In form.Options.SelectedComponents.Values
-                                    phase.Compounds(c.Name).ConstantProperties = c
-                                Next
+        For Each xel In data
+            Try
+                Dim id As String = xel.<Name>.Value
+                Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
+                If xel.Element("Type").Value.Contains("MaterialStream") Then
+                    obj = PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                Else
+                    obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+                End If
+                Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
+                                    form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
+                obj.GraphicObject = gobj
+                obj.SetFlowsheet(form)
+                If Not gobj Is Nothing Then
+                    obj.LoadData(xel.Elements.ToList)
+                    If TypeOf obj Is Streams.MaterialStream Then
+                        For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                            For Each c As ConstantProperties In form.Options.SelectedComponents.Values
+                                phase.Compounds(c.Name).ConstantProperties = c
                             Next
-                        End If
+                        Next
                     End If
-                    objlist.Add(obj)
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Loading Unit Operation Information", ex))
-                End Try
-            Next
+                End If
+                objlist.Add(obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Unit Operation Information", ex))
+            End Try
+        Next
 
-        End If
+        'End If
 
         'reorder compound lists in streams
 

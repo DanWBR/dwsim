@@ -14,8 +14,6 @@
 
     Property AtEquilibrium As Boolean
 
-    Property PropertyPackage As IPropertyPackage
-
     Sub SetPhaseComposition(Vx As Array, phs As Integer)
 
     Sub SetOverallComposition(Vx As Array)

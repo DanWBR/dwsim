@@ -164,7 +164,7 @@ Namespace Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        <Xml.Serialization.XmlIgnore()> Public Overloads Property PropertyPackage() As PropertyPackage
+        <Xml.Serialization.XmlIgnore()> Public Shadows Property PropertyPackage() As PropertyPackage
             Get
                 If Not _pp Is Nothing Then Return _pp
                 If _ppid Is Nothing Then _ppid = ""
@@ -5017,15 +5017,6 @@ Namespace Streams
         Public Sub Validate1() Implements IMaterialStream.Validate
             Validate()
         End Sub
-
-        Public Property PropertyPackage1 As IPropertyPackage Implements IMaterialStream.PropertyPackage
-            Get
-                Return PropertyPackage
-            End Get
-            Set(value As IPropertyPackage)
-                PropertyPackage = value
-            End Set
-        End Property
 
         Public Overrides Sub DisplayEditForm()
 

@@ -41,7 +41,8 @@ Public Class XMLSerializer
                 skip = False
                 If prop.CanWrite And prop.CanRead Then
                     Dim propname As String = prop.Name
-                    Dim attributes As Object() = obj.GetType.GetProperty(prop.Name).GetCustomAttributes(True)
+                    Dim properties = obj.GetType().GetProperties().Where(Function(p) p.Name = prop.Name)
+                    Dim attributes As Object() = properties(0).GetCustomAttributes(True)
                     For Each attr As Attribute In attributes
                         If TypeOf attr Is System.Xml.Serialization.XmlIgnoreAttribute Then
                             skip = True
@@ -144,7 +145,8 @@ Public Class XMLSerializer
             For Each prop As FieldInfo In props
                 skip = False
                 Dim propname As String = prop.Name
-                Dim attributes As Object() = obj.GetType.GetField(prop.Name).GetCustomAttributes(True)
+                Dim properties = obj.GetType().GetFields().Where(Function(p) p.Name = prop.Name)
+                Dim attributes As Object() = properties(0).GetCustomAttributes(True)
                 For Each attr As Attribute In attributes
                     If TypeOf attr Is System.Xml.Serialization.XmlIgnoreAttribute Then
                         skip = True

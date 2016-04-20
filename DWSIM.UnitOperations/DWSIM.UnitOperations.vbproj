@@ -150,10 +150,11 @@
     <Compile Include="Reactors\Gibbs.vb" />
     <Compile Include="Reactors\PFR.vb" />
     <Compile Include="Support Classes\RigorousColumnSolver.vb" />
+    <Compile Include="Type Resolver\Resolver.vb" />
     <Compile Include="Unit Operations\CustomUO.vb" />
     <Compile Include="Unit Operations\FlowsheetUO.vb" />
     <Compile Include="Unit Operations\OrificePlate.vb" />
-    <Compile Include="Support Classes\BaseClass.vb" />
+    <Compile Include="Support Classes\FlowPackageBaseClass.vb" />
     <Compile Include="Support Classes\BeggsBrill.vb" />
     <Compile Include="Support Classes\LockhartMartinelli.vb" />
     <Compile Include="Support Classes\PetalasAziz.vb" />

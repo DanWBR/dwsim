@@ -212,7 +212,7 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Shared Function ReturnInstance(typename As String) As PropertyPackage
+        Public Shared Function ReturnInstance(typename As String) As Object
 
             If typename.StartsWith("PropertyPackage") Then typename = typename.Insert(0, "DWSIM.Thermodynamics.")
             Dim t As Type = Type.GetType(typename, False)

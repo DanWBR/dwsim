@@ -471,7 +471,7 @@ Namespace BaseClasses
 #Region "    CAPE-OPEN Reaction Package Methods and Properties"
 
         Protected m_params As CapeOpen.ParameterCollection
-        Protected m_str As Interfaces.IMaterialStream
+        Protected m_str As Streams.MaterialStream
         <System.NonSerialized()> Protected m_pme As Interfaces.IFlowsheet
         Protected m_kre As Reaction
 
@@ -853,7 +853,7 @@ Namespace BaseClasses
                         Select Case p.ToLower
                             Case "reactionrate"
 
-                                Dim ims As Interfaces.IMaterialStream = Me.m_str
+                                Dim ims As Streams.MaterialStream = Me.m_str
                                 Dim co As New Dictionary(Of String, Double)
 
                                 'initial mole flows
