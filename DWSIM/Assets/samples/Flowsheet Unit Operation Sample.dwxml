@@ -98,7 +98,7 @@
   </Settings>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>
@@ -726,7 +726,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet</Type>
+      <Type>DWSIM.Flowsheet</Type>
       <SimulationFile>C:\Users\Daniel\Documents\Visual Studio 2013\Projects\DWSIM3\DWSIM\bin\x86\Release\samples\fstest_in.dwxml</SimulationFile>
       <InitializeOnLoad>true</InitializeOnLoad>
       <UpdateOnSave>false</UpdateOnSave>
@@ -787,13 +787,13 @@
       </OutputConnections>
       <InputParameters>
         <FlowsheetUOParameter>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.FlowsheetUOParameter</Type>
+          <Type>DWSIM.Auxiliary.FlowsheetUOParameter</Type>
           <ID>b1e57996-481b-40ea-9948-eb9b1ba17953</ID>
           <ObjectID>MAT-a5392a27-dc1c-4749-bedd-a0a278eddceb</ObjectID>
           <ObjectProperty>PROP_MS_1</ObjectProperty>
         </FlowsheetUOParameter>
         <FlowsheetUOParameter>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.FlowsheetUOParameter</Type>
+          <Type>DWSIM.Auxiliary.FlowsheetUOParameter</Type>
           <ID>07d664e7-8c86-4f38-a5ef-cd331b84ab11</ID>
           <ObjectID>MAT-a5392a27-dc1c-4749-bedd-a0a278eddceb</ObjectID>
           <ObjectProperty>PROP_MS_0</ObjectProperty>
@@ -801,7 +801,7 @@
       </InputParameters>
       <OutputParameters>
         <FlowsheetUOParameter>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.FlowsheetUOParameter</Type>
+          <Type>DWSIM.Auxiliary.FlowsheetUOParameter</Type>
           <ID>0cc8309c-ccab-4e1d-a734-169384d5e2c7</ID>
           <ObjectID>MAT-937ec614-986b-4b26-a5c9-0665a97568b7</ObjectID>
           <ObjectProperty>PROP_MS_2</ObjectProperty>
@@ -809,7 +809,7 @@
       </OutputParameters>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>
@@ -1420,7 +1420,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>

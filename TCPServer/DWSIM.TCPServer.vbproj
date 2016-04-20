@@ -109,6 +109,18 @@
       <Name>DWSIM.CustomXMLSerializer</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
+      <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>
+      <Name>DWSIM.FlowsheetSolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
+      <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
+      <Name>DWSIM.UnitOperations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
       <Project>{34be2d2d-9b3c-4c12-8c90-732e21cd7cb1}</Project>
       <Name>DWSIM</Name>

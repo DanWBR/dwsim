@@ -16,15 +16,15 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.SharedClasses
+Imports DWSIM.Thermodynamics.Streams
 
 Public Class FormLLEDiagram
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
+    Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
     Public su As New SystemsOfUnits.Units

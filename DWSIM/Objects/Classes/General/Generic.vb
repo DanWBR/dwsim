@@ -41,7 +41,7 @@ Namespace DWSIM.Extras
                 ElseIf typeName.Contains("System.Collections.Generic.List`1[[CapeOpen.ICapeParameter") Then
                     typeName = typeName.Replace("List`1[[CapeOpen.ICapeParameter", "List`1[[CapeOpen.CapeParameter")
                     typeName = typeName.Replace("CapeOpen, Version=1.0.4118.14986, Culture=neutral, PublicKeyToken=100cc1b5ee8fe630", "CapeOpen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=90d5303f0e924b64")
-                ElseIf typeName.Contains("DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CRealParameter") Then
+                ElseIf typeName.Contains("DWSIM.Auxiliary.CapeOpen.CRealParameter") Then
                     typeName = "CapeOpen.RealParameter"
                     assemblyName = "CapeOpen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=90d5303f0e924b64"
                 ElseIf typeName.Contains("CapeOpen.CRealParameter") Then
@@ -70,16 +70,6 @@ Namespace DWSIM.Extras
             End If
             Return Nothing
         End Function
-    End Class
-
-    <System.Serializable()> <System.Runtime.InteropServices.ComVisible(False)> Public Class StatusChangeEventArgs
-
-        Public Property Sender As String
-        Public Property Calculated As Boolean
-        Public Property Tag As String
-        Public Property Name As String
-        Public Property ObjectType As ObjectType
-
     End Class
 
     <CLSCompliant(True)> <System.Serializable()> Public Class NodeItem
@@ -240,57 +230,9 @@ Namespace DWSIM.Extras
 
     End Class
 
-    <System.Serializable()> Public Class Script
-
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
-
-        Public Enum ObjectType
-            Simulation = 0
-            Solver = 1
-            FlowsheetObject = 2
-        End Enum
-
-        Public Enum EventType
-            SimulationOpened = 0
-            SimulationSaved = 1
-            SimulationClosed = 2
-            ObjectCalculationStarted = 3
-            ObjectCalculationFinished = 4
-            ObjectCalculationError = 5
-            SolverStarted = 6
-            SolverFinished = 7
-            SolverRecycleLoop = 8
-            SimulationTimer1 = 9
-            SimulationTimer5 = 10
-            SimulationTimer15 = 11
-            SimulationTimer30 = 12
-            SimulationTimer60 = 13
-        End Enum
-
-        Public Property ID As String = ""
-        Public Property Title As String = ""
-        Public Property ScriptText As String = ""
-        Public Property LinkedObjectType As ObjectType = ObjectType.FlowsheetObject
-        Public Property LinkedObjectName As String = ""
-        Public Property LinkedEventType As EventType = EventType.SimulationOpened
-        Public Property Linked As Boolean = False
-
-        Public Function LoadData(data As List(Of XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
-            XMLSerializer.XMLSerializer.Deserialize(Me, data)
-        End Function
-
-        Public Function SaveData() As List(Of XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
-            Return XMLSerializer.XMLSerializer.Serialize(Me)
-        End Function
-
-    End Class
-
-    'custom event handler declaration
-    Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventArgs, ByVal extrainfo As Object)
-
 End Namespace
 
-Namespace DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen
+Namespace Auxiliary.CapeOpen
 
     ''' <summary>
     ''' This class if for legacy compatibility only. It should NOT be used. Use CapeOpen.RealParameter instead if necessary.

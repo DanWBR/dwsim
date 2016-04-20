@@ -22,7 +22,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization.Formatters
 Imports System.IO
 Imports DWSIM.DWSIM.Extras
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.FlowsheetSolver
 Imports System.Linq
 Imports DWSIM.DWSIM.Flowsheet
 Imports DWSIM.Thermodynamics.PropertyPackages
@@ -95,8 +95,7 @@ Public Class FormSimulSettings
             MessageBox.Show(DWSIM.App.GetLocalString("NoexistemPacotesdePr"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             'e.Cancel = True
         Else
-            FrmChild.FormProps.PGEx1.Refresh()
-            FrmChild.FormProps.PGEx2.Refresh()
+           
         End If
 
     End Sub
@@ -1167,7 +1166,7 @@ Public Class FormSimulSettings
         Me.ListViewA.Items.RemoveByKey(tmpcomp.Name)
         Me.FrmChild.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
         Me.AddCompToGrid(tmpcomp)
-        Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
+        Dim ms As Streams.MaterialStream
         Dim proplist As New ArrayList
 
         For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values

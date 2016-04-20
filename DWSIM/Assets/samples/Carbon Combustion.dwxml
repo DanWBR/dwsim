@@ -8,7 +8,7 @@
   </GeneralInfo>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>20819.55723</EnergyFlow>
       <ComponentDescription>EN-5ec8fa6a-0871-4a3b-bcc7-1649cbcd559d</ComponentDescription>
       <ComponentName>Heat</ComponentName>
@@ -33,7 +33,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Reactors.Reactor_Conversion</Type>
+      <Type>DWSIM.Reactor_Conversion</Type>
       <OutletTemperature>298.15</OutletTemperature>
       <ReactorOperationMode>Isothermic</ReactorOperationMode>
       <ReactionSetID>DefaultSet</ReactionSetID>
@@ -83,7 +83,7 @@
       <CompoundConversions />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
         <Type>DWSIM.DWSIM.Extras.Annotation</Type>
@@ -941,7 +941,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <CompositionBasis>Mass_Fractions</CompositionBasis>
       <Annotation>
         <Type>DWSIM.DWSIM.Extras.Annotation</Type>
@@ -1830,7 +1830,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
         <Type>DWSIM.DWSIM.Extras.Annotation</Type>
@@ -2717,7 +2717,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
         <Type>DWSIM.DWSIM.Extras.Annotation</Type>
@@ -3603,7 +3603,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Mixer</Type>
+      <Type>DWSIM.Mixer</Type>
       <PressureCalculation>Minimum</PressureCalculation>
       <ScriptExt_FontName>Courier New</ScriptExt_FontName>
       <ScriptExt_FontSize>10</ScriptExt_FontSize>
@@ -3638,7 +3638,7 @@
       <PropertyPackage>PP-214f7568-341d-4b54-8230-5ac82b1d644d</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Flows</CompositionBasis>
       <Annotation>
         <Type>DWSIM.DWSIM.Extras.Annotation</Type>

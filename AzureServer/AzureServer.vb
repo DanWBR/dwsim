@@ -243,10 +243,10 @@ Module AzureServer
 
     Sub ProcessData(bytes As Byte(), requestID As String)
         Using bytestream As New MemoryStream(bytes)
-            Using form As FormFlowsheet = DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream)
+            Using form As FormFlowsheet = DWSIM.UnitOperations.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream)
                 If Not solutions.ContainsKey(form.Options.Key) Then
-                    DWSIM.DWSIM.Flowsheet.FlowsheetSolver.CalculateAll2(form, 1, ts)
-                    Using retbytes As MemoryStream = DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet.ReturnProcessData(form)
+                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, 1, ts)
+                    Using retbytes As MemoryStream = DWSIM.UnitOperations.UnitOperations.Flowsheet.ReturnProcessData(form)
                         Dim uncompressedbytes As Byte() = retbytes.ToArray
                         Using compressedstream As New MemoryStream()
                             Using gzs As New BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Compress, True), 64 * 1024)

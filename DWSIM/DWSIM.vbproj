@@ -293,17 +293,18 @@
   <ItemGroup>
     <Import Include="DWSIM.DrawingTools" />
     <Import Include="DWSIM.DrawingTools.GraphicObjects" />
-    <Import Include="DWSIM.DWSIM.Flowsheet" />
-    <Import Include="DWSIM.DWSIM.SimulationObjects.Reactors" />
-    <Import Include="DWSIM.DWSIM.SimulationObjects.SpecialOps" />
-    <Import Include="DWSIM.DWSIM.SimulationObjects.Streams" />
-    <Import Include="DWSIM.DWSIM.SimulationObjects.UnitOperations" />
+    <Import Include="DWSIM.FlowsheetSolver" />
     <Import Include="DWSIM.GlobalSettings" />
     <Import Include="DWSIM.Interfaces.Enums" />
     <Import Include="DWSIM.Interfaces.Enums.GraphicObjects" />
     <Import Include="DWSIM.MathOps" />
     <Import Include="DWSIM.SharedClasses" />
+    <Import Include="DWSIM.SharedClasses.UnitOperations" />
     <Import Include="DWSIM.Thermodynamics" />
+    <Import Include="DWSIM.UnitOperations.Reactors" />
+    <Import Include="DWSIM.UnitOperations.SpecialOps" />
+    <Import Include="DWSIM.UnitOperations.Streams" />
+    <Import Include="DWSIM.UnitOperations.UnitOperations" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -316,23 +317,23 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ScriptEditorControl.designer.vb">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScriptEditorControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ScriptEditorControlMono.designer.vb">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScriptEditorControlMono.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\AboutBoxMono.Designer.vb">
       <DependentUpon>AboutBoxMono.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\AboutBoxMono.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\ScriptEditorControlMono.Designer.vb">
-      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Controls\ScriptEditorControlMono.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Controls\ScriptEditorControl.Designer.vb">
-      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Controls\ScriptEditorControl.vb">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\FormAdditionalTasks.Designer.vb">
       <DependentUpon>FormAdditionalTasks.vb</DependentUpon>
@@ -400,65 +401,6 @@
     <Compile Include="Forms\FormWhatsNew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigExUNIQUAC.Designer.vb">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigExUNIQUAC.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigFPROPS.Designer.vb">
-      <DependentUpon>FormConfigFPROPS.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigFPROPS.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigLIQUAC.Designer.vb">
-      <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigLIQUAC.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigPRSV2.Designer.vb">
-      <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigPRSV2.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.Designer.vb">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIExcelUOEditor\UIExcelUOEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UIFlowsheetUOEditor\FlowsheetUOEditorForm.Designer.vb">
-      <DependentUpon>FlowsheetUOEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIFlowsheetUOEditor\FlowsheetUOEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIFlowsheetUOEditor\UIFlowsheetEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UIFlowsheetUOViewer\FlowsheetUOViewerForm.Designer.vb">
-      <DependentUpon>FlowsheetUOViewerForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIFlowsheetUOViewer\FlowsheetUOViewerForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIFlowsheetUOViewer\UIFlowsheetUOViewer.vb" />
-    <Compile Include="Forms\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.Designer.vb">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIGibbsInitialEstimates\UIGibbsInitialEstimatesEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UIMTableObjectOrderEditor\UIMTableObjectOrder.vb" />
-    <Compile Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.Designer.vb">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Interfaces\Excel.vb" />
     <Compile Include="Languages\DWSIM1.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -496,28 +438,28 @@
     <Compile Include="Forms\FormCapeOpenUnitSelector.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmCOReports.Designer.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmCOReports.Designer.vb">
       <DependentUpon>frmCOReports.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmCOReports.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmCOReports.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmOutput.Designer.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmOutput.Designer.vb">
       <DependentUpon>frmOutput.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmOutput.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmOutput.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmQueue.Designer.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmQueue.Designer.vb">
       <DependentUpon>frmQueue.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmQueue.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmQueue.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmWatch.Designer.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmWatch.Designer.vb">
       <DependentUpon>frmWatch.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmWatch.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmWatch.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormOptimization.Designer.vb">
@@ -556,180 +498,20 @@
     <Compile Include="Forms\FormScript.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigBase.Designer.vb">
-      <DependentUpon>FormConfigBase.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigBase.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN.Designer.vb">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN2.Designer.vb">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN2.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigPCSAFT.Designer.vb">
-      <DependentUpon>FormConfigPCSAFT.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigPCSAFT.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\ComboBoxTemplates\Templates.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\DummyClass\DummyClass.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditorForm.Designer.vb">
-      <DependentUpon>UIConnectionsEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIInitialEstimatesEditor\UIInitialEstimatesEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIInitialEstimatesEditor\UIInitialEstimatesEditorForm.Designer.vb">
-      <DependentUpon>UIInitialEstimatesEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIInitialEstimatesEditor\UIInitialEstimatesEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIPumpAroundsEditor\UIPumpAroundsEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIPumpAroundsEditor\UIPumpAroundsEditorForm.Designer.vb">
-      <DependentUpon>UIPumpAroundsEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIPumpAroundsEditor\UIPumpAroundsEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIReboiledSideStrippersEditor\UIReboiledSideStripperEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIReboiledSideStrippersEditor\UIReboiledSideStripperEditorForm.Designer.vb">
-      <DependentUpon>UIReboiledSideStripperEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIReboiledSideStrippersEditor\UIReboiledSideStripperEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIResults\UIResults.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIResults\UIResultsForm.Designer.vb">
-      <DependentUpon>UIResultsForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIResults\UIResultsForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UISideRectifiersEditor\UISideRectifiersEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UISideRectifiersEditor\UISideRectifiersEditorForm.Designer.vb">
-      <DependentUpon>UISideRectifiersEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UISideRectifiersEditor\UISideRectifiersEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIStagesEditor\UIStagesEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIStagesEditor\UIStagesEditorForm.Designer.vb">
-      <DependentUpon>UIStagesEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UIStagesEditor\UIStagesEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UISteamedSideStrippersEditor\UISteamedSideStripperEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UISteamedSideStrippersEditor\UISteamedSideStripperEditorForm.Designer.vb">
-      <DependentUpon>UISteamedSideStripperEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\DistillationColumn\UISteamedSideStrippersEditor\UISteamedSideStripperEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIPipeEditor\Class1.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Objects\Classes\Pipe\PipeHydraulicProfile.vb" />
-    <Compile Include="Forms\UITypeEditors\Results\PFR\FormGraphPFR.Designer.vb">
-      <DependentUpon>FormGraphPFR.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\Results\PFR\FormGraphPFR.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\Results\PFR\UIFormGraphPFR.vb" />
-    <Compile Include="Forms\UITypeEditors\UIComponentSelector\UIComponentSelector.vb" />
-    <Compile Include="Forms\UITypeEditors\UICSepSpecEditor\UICSepSpecEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.Designer.vb">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.Designer.vb">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIElementMatrixEditor\UIElementMatrixEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UIGibbsComponentSelector\UIGibbsComponentSelector.vb" />
-    <Compile Include="Forms\UITypeEditors\UIPPSelector\UIPPSelector.vb" />
-    <Compile Include="Forms\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.Designer.vb">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIPumpCurvesEditor\UIPumpCurvesEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UIScriptEditor\UIScriptEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorForm.Designer.vb">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UISSelector\UISSelector.vb" />
-    <Compile Include="Forms\UITypeEditors\UISTHXEditor\STHXEditorForm.Designer.vb">
-      <DependentUpon>STHXEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UISTHXEditor\STHXEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UISTHXEditor\UISTHXEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UIUnitConverter\UIUnitConverter.vb" />
     <Compile Include="Interfaces\IUtilityPlugin.vb" />
     <Compile Include="Objects\Classes\Extenders\ExtensionMethods.vb" />
     <Compile Include="Objects\Classes\TaskSchedulers\LimitedConcurrencyLevelTaskScheduler.vb" />
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
     <Compile Include="Objects\Classes\Extenders\SimplexExtender.vb" />
     <Compile Include="Objects\Classes\TaskSchedulers\STATaskScheduler.vb" />
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigLKP.Designer.vb">
-      <DependentUpon>FormConfigLKP.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigLKP.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigNRTL.Designer.vb">
-      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigNRTL.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigUNIQUAC.Designer.vb">
-      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigUNIQUAC.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Objects\Reactors\BaseReactor.vb" />
-    <Compile Include="Objects\Reactors\Conversion.vb" />
-    <Compile Include="Objects\Reactors\CSTR.vb" />
-    <Compile Include="Objects\Reactors\Equilibrium.vb" />
-    <Compile Include="Objects\Reactors\Gibbs.vb" />
-    <Compile Include="Objects\Reactors\PFR.vb" />
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Objects\Classes\General\TableGraphic.vb" />
     <Compile Include="Objects\Classes\General\Generic.vb" />
-    <Compile Include="Objects\SpecialOps\Adjust.vb" />
-    <Compile Include="Objects\SpecialOps\EnergyRecycle.vb" />
-    <Compile Include="Objects\SpecialOps\Recycle.vb" />
-    <Compile Include="Objects\SpecialOps\Spec.vb" />
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmMatList.Designer.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmMatList.Designer.vb">
       <DependentUpon>frmMatList.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmMatList.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmMatList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormOptions.Designer.vb">
@@ -756,49 +538,17 @@
     <Compile Include="Forms\FormSimulSettings.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\UnitOps\BaseClasses.vb" />
-    <Compile Include="Objects\UnitOps\CapeOpenUO.vb" />
-    <Compile Include="Objects\UnitOps\ComponentSeparator.vb" />
-    <Compile Include="Objects\UnitOps\Compressor.vb" />
-    <Compile Include="Objects\UnitOps\Cooler.vb" />
-    <Compile Include="Objects\UnitOps\CustomUO.vb" />
-    <Compile Include="Objects\UnitOps\Filter.vb" />
-    <Compile Include="Objects\UnitOps\ExcelUO.vb" />
-    <Compile Include="Objects\UnitOps\FlowsheetUO.vb" />
-    <Compile Include="Objects\UnitOps\OrificePlate.vb" />
-    <Compile Include="Objects\UnitOps\RigorousColumn.vb" />
-    <Compile Include="Objects\UnitOps\HeatExchanger.vb" />
-    <Compile Include="Objects\UnitOps\EnergyMixer.vb" />
-    <Compile Include="Objects\UnitOps\Heater.vb" />
-    <Compile Include="Objects\UnitOps\Mixer.vb" />
-    <Compile Include="Objects\UnitOps\Pipe.vb" />
-    <Compile Include="Objects\UnitOps\Pump.vb" />
-    <Compile Include="Objects\UnitOps\ShortcutColumn.vb" />
-    <Compile Include="Objects\UnitOps\SolidsSeparator.vb" />
-    <Compile Include="Objects\UnitOps\Splitter.vb" />
-    <Compile Include="Objects\Streams\Streams.vb" />
-    <Compile Include="Objects\UnitOps\Tank.vb" />
-    <Compile Include="Objects\UnitOps\Turbine.vb" />
-    <Compile Include="Objects\UnitOps\Valve.vb" />
-    <Compile Include="Objects\UnitOps\Vessel.vb" />
-    <Compile Include="Objects\FlowPackages\BaseClass.vb" />
     <Compile Include="Objects\Classes\Flowsheet\FlowsheetClasses.vb" />
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmLog.Designer.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmLog.Designer.vb">
       <DependentUpon>frmLog.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmLog.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmLog.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmProps.Designer.vb">
-      <DependentUpon>frmProps.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmProps.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmSurface.Designer.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmSurface.Designer.vb">
       <DependentUpon>frmSurface.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet_SubForms\frmSurface.vb">
+    <Compile Include="Forms\Flowsheet Forms\frmSurface.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormFlowsheet.Designer.vb">
@@ -807,9 +557,6 @@
     <Compile Include="Forms\FormFlowsheet.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\FlowPackages\BeggsBrillFlowPackage\BeggsBrill.vb" />
-    <Compile Include="Objects\FlowPackages\LockhartMartinelliFlowPackage\LockhartMartinelli.vb" />
-    <Compile Include="Objects\FlowPackages\PetalasAzizFlowPackage\PetalasAziz.vb" />
     <Compile Include="Forms\FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -841,11 +588,7 @@
     </Compile>
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
     <Compile Include="Objects\Classes\Optimization\SensitivityAnalysis.vb" />
-    <Compile Include="Solvers\AzureSolverClient.vb" />
-    <Compile Include="Solvers\FlowsheetSolver.vb" />
-    <Compile Include="Solvers\RigorousColumnSolver.vb" />
     <Compile Include="Objects\Classes\PetroleumAssay\AssayClass.vb" />
-    <Compile Include="Solvers\TCPSolverClient.vb" />
     <Compile Include="Tools\AssayManager\FormAssayManager.Designer.vb">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </Compile>
@@ -885,98 +628,7 @@
     <Compile Include="Tools\Reactions\FormReacSetEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\ADJ_ControlPanel\UI_AdjControlPanelForm.Designer.vb">
-      <DependentUpon>UI_AdjControlPanelForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\ADJ_ControlPanel\UI_AdjControlPanelForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\ADJ_ControlPanel\UI_AdjControlPanelFormEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UICVSelectorFormEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UICVSelectorForm.Designer.vb">
-      <DependentUpon>UICVSelectorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UICVSelectorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorForm.Designer.vb">
-      <DependentUpon>UIMVSelectorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigPP.Designer.vb">
-      <DependentUpon>FormConfigPP.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PropPack_ConfigForms\FormConfigPP.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Objects\Classes\General\TreeViewDataAccess.vb" />
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorFormEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIRVSelectorForm.Designer.vb">
-      <DependentUpon>UIRVSelectorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIRVSelectorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\ADJ\UIRVSelectorFormEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\SpecialOps\SPEC\SPEC_ControlPanel\UI_SpecControlPanelForm.Designer.vb">
-      <DependentUpon>UI_SpecControlPanelForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\SPEC\SPEC_ControlPanel\UI_SpecControlPanelForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\SPEC\SPEC_ControlPanel\UI_SpecControlPanelFormEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\SpecialOps\SPEC\UISVSelectorForm.Designer.vb">
-      <DependentUpon>UISVSelectorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\SPEC\UISVSelectorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\SPEC\UISVSelectorFormEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\SpecialOps\SPEC\UITVSelectorForm.Designer.vb">
-      <DependentUpon>UITVSelectorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\SPEC\UITVSelectorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\SpecialOps\SPEC\UITVSelectorFormEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\Results\Pipe\FormGraph.Designer.vb">
-      <DependentUpon>FormGraph.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\Results\Pipe\FormGraph.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\Results\Pipe\FormTable.Designer.vb">
-      <DependentUpon>FormTable.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\Results\Pipe\FormTable.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\Results\Pipe\UIFormGraph.vb" />
-    <Compile Include="Forms\UITypeEditors\Results\Pipe\UIFormTable.vb" />
-    <Compile Include="Forms\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.Designer.vb">
-      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIAnnotationEditor\UIAnnotationEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UICompositionEditor\CompositionEditorForm.Designer.vb">
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UICompositionEditor\CompositionEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UICompositionEditor\UICompositionEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UIPipeEditor\PipeEditorForm.Designer.vb">
-      <DependentUpon>PipeEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIPipeEditor\PipeEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIPipeEditor\UIPipeEditor.vb" />
-    <Compile Include="Forms\UITypeEditors\UIReactionSetSelector\UIReactionSetSelector.vb" />
     <Compile Include="Tools\DCCharacterization\DCCharacterizationWizard.Designer.vb">
       <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
     </Compile>
@@ -1002,13 +654,6 @@
     <Compile Include="Utilities\Spreadsheet\SpreadsheetForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UITypeEditors\UIThermalProfileEditor\ThermalProfileEditorForm.Designer.vb">
-      <DependentUpon>ThermalProfileEditorForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIThermalProfileEditor\ThermalProfileEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\UITypeEditors\UIThermalProfileEditor\UIThermalProfileEditor.vb" />
     <Compile Include="Utilities\BINARY_ENVEL\FormBinEnv.Designer.vb">
       <DependentUpon>FormBinEnv.vb</DependentUpon>
     </Compile>
@@ -1105,6 +750,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ScriptEditorControl.en.resx">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControl.es.resx">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControl.resx">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControlMono.en.resx">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControlMono.es.resx">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControlMono.resx">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBoxMono.es.resx">
       <DependentUpon>AboutBoxMono.vb</DependentUpon>
     </EmbeddedResource>
@@ -1113,24 +776,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBoxNET.es.resx">
       <DependentUpon>AboutBoxNET.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\ScriptEditorControl.es.resx">
-      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\ScriptEditorControlMono.en.resx">
-      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\ScriptEditorControlMono.es.resx">
-      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\ScriptEditorControlMono.resx">
-      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\ScriptEditorControl.en.resx">
-      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Controls\ScriptEditorControl.resx">
-      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAdditionalTasks.de.resx">
       <DependentUpon>FormAdditionalTasks.vb</DependentUpon>
@@ -1198,7 +843,7 @@
     <EmbeddedResource Include="Forms\FormDBManager.resx">
       <DependentUpon>FormDBManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmQueue.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmQueue.es.resx">
       <DependentUpon>frmQueue.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
@@ -1232,100 +877,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWhatsNew.resx">
       <DependentUpon>FormWhatsNew.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigBase.resx">
-      <DependentUpon>FormConfigBase.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN2.de.resx">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigExUNIQUAC.de.resx">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigExUNIQUAC.en.resx">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigExUNIQUAC.es.resx">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigExUNIQUAC.resx">
-      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigLIQUAC.de.resx">
-      <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigLIQUAC.en.resx">
-      <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigLIQUAC.es.resx">
-      <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigLIQUAC.resx">
-      <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPCSAFT.es.resx">
-      <DependentUpon>FormConfigPCSAFT.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPRSV2.es.resx">
-      <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.es.resx">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.es.resx">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.de.resx">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.en.resx">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.es.resx">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIExcelUOEditor\ExcelUOEditorForm.resx">
-      <DependentUpon>ExcelUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIFlowsheetUOEditor\FlowsheetUOEditorForm.de.resx">
-      <DependentUpon>FlowsheetUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIFlowsheetUOEditor\FlowsheetUOEditorForm.en.resx">
-      <DependentUpon>FlowsheetUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIFlowsheetUOEditor\FlowsheetUOEditorForm.es.resx">
-      <DependentUpon>FlowsheetUOEditorForm.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIFlowsheetUOEditor\FlowsheetUOEditorForm.resx">
-      <DependentUpon>FlowsheetUOEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIFlowsheetUOViewer\FlowsheetUOViewerForm.resx">
-      <DependentUpon>FlowsheetUOViewerForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.de.resx">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.en.resx">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.es.resx">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIGibbsInitialEstimates\GibbsInitialEstimatesEditorForm.resx">
-      <DependentUpon>GibbsInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.de.resx">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.en.resx">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.es.resx">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorFormMono.resx">
-      <DependentUpon>ScriptEditorFormMono.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Tips.de.resx" />
     <EmbeddedResource Include="Languages\Tips.en.resx" />
@@ -1513,6 +1064,10 @@
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
       <Name>DWSIM.DrawingTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
+      <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>
+      <Name>DWSIM.FlowsheetSolver</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
@@ -1593,19 +1148,15 @@
     <None Include="Resources\CSL2094_LoRes copy.png" />
     <None Include="Resources\CB058398_LoRes copy.png" />
     <None Include="Resources\CB058398_LoRes.jpg" />
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmLog.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmLog.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmMatList.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmMatList.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmMatList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmProps.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmProps.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmSurface.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmSurface.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmSurface.vb</DependentUpon>
     </EmbeddedResource>
@@ -1613,7 +1164,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmMatList.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmMatList.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmMatList.vb</DependentUpon>
     </EmbeddedResource>
@@ -1653,15 +1204,11 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmLog.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmLog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmProps.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>frmProps.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmSurface.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmSurface.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmSurface.vb</DependentUpon>
     </EmbeddedResource>
@@ -1677,22 +1224,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPipeEditor\Class1.en.resx">
-      <DependentUpon>Class1.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPipeEditor\Class1.resx">
-      <DependentUpon>Class1.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\PFR\FormGraphPFR.en.resx">
-      <DependentUpon>FormGraphPFR.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\PFR\FormGraphPFR.resx">
-      <DependentUpon>FormGraphPFR.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Languages\DWSIM.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1700,10 +1231,6 @@
       <LastGenOutput>DWSIM1.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPP.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormConfigPP.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.es.resx">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </EmbeddedResource>
@@ -1757,98 +1284,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormReacSetEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\ADJ_ControlPanel\UI_AdjControlPanelForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UI_AdjControlPanelForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\ADJ_ControlPanel\UI_AdjControlPanelForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UI_AdjControlPanelForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UICVSelectorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UICVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UICVSelectorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UICVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIMVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIMVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPP.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormConfigPP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UIRVSelectorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIRVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UIRVSelectorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIRVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\SPEC_ControlPanel\UI_SpecControlPanelForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UI_SpecControlPanelForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\SPEC_ControlPanel\UI_SpecControlPanelForm.resx">
-      <DependentUpon>UI_SpecControlPanelForm.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\UISVSelectorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UISVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\UISVSelectorForm.resx">
-      <DependentUpon>UISVSelectorForm.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\UITVSelectorForm.resx">
-      <DependentUpon>UITVSelectorForm.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\Pipe\FormGraph.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\Pipe\FormGraph.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\Pipe\FormTable.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\Pipe\FormTable.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UICompositionEditor\CompositionEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UICompositionEditor\CompositionEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPipeEditor\PipeEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PipeEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPipeEditor\PipeEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PipeEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Utilities\BINARY_ENVEL\FormBinEnv.en.resx">
       <DependentUpon>FormBinEnv.vb</DependentUpon>
     </EmbeddedResource>
@@ -1867,14 +1302,6 @@
     <EmbeddedResource Include="Utilities\Spreadsheet\SpreadsheetForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SpreadsheetForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIThermalProfileEditor\ThermalProfileEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ThermalProfileEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIThermalProfileEditor\ThermalProfileEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ThermalProfileEditorForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utilities\BINARY_ENVEL\FormBinEnv.resx">
       <SubType>Designer</SubType>
@@ -2845,28 +2272,28 @@
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmCOReports.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmCOReports.de.resx">
       <DependentUpon>frmCOReports.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmCOReports.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmCOReports.en.resx">
       <DependentUpon>frmCOReports.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmCOReports.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmCOReports.es.resx">
       <DependentUpon>frmCOReports.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmCOReports.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmCOReports.resx">
       <DependentUpon>frmCOReports.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmWatch.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmWatch.de.resx">
       <DependentUpon>frmWatch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmWatch.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmWatch.en.resx">
       <DependentUpon>frmWatch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmWatch.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmWatch.es.resx">
       <DependentUpon>frmWatch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmWatch.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmWatch.resx">
       <DependentUpon>frmWatch.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.de.resx">
@@ -2896,47 +2323,43 @@
     <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.resx">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmLog.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmLog.de.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmLog.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmLog.es.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmMatList.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmMatList.de.resx">
       <DependentUpon>frmMatList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmMatList.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmMatList.es.resx">
       <DependentUpon>frmMatList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmOutput.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmOutput.de.resx">
       <DependentUpon>frmOutput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmOutput.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmOutput.en.resx">
       <DependentUpon>frmOutput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmOutput.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmOutput.es.resx">
       <DependentUpon>frmOutput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmOutput.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmOutput.resx">
       <DependentUpon>frmOutput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmProps.de.resx">
-      <DependentUpon>frmProps.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmProps.es.resx" />
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmQueue.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmQueue.de.resx">
       <DependentUpon>frmQueue.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmQueue.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmQueue.en.resx">
       <DependentUpon>frmQueue.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmQueue.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmQueue.resx">
       <DependentUpon>frmQueue.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmSurface.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmSurface.de.resx">
       <DependentUpon>frmSurface.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet_SubForms\frmSurface.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Forms\frmSurface.es.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLoadSave.de.resx">
@@ -3052,237 +2475,6 @@
     <EmbeddedResource Include="Forms\FormScript.resx">
       <DependentUpon>FormScript.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN.de.resx">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN.en.resx">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN.es.resx">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN.resx">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN2.en.resx">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN2.es.resx">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigCAPEOPEN2.resx">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigFPROPS.de.resx">
-      <DependentUpon>FormConfigFPROPS.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigFPROPS.en.resx">
-      <DependentUpon>FormConfigFPROPS.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigFPROPS.es.resx">
-      <DependentUpon>FormConfigFPROPS.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigFPROPS.resx">
-      <DependentUpon>FormConfigFPROPS.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPCSAFT.en.resx">
-      <DependentUpon>FormConfigPCSAFT.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPCSAFT.resx">
-      <DependentUpon>FormConfigPCSAFT.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPRSV2.en.resx">
-      <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPRSV2.resx">
-      <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditorForm.de.resx">
-      <DependentUpon>UIConnectionsEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIInitialEstimatesEditor\UIInitialEstimatesEditorForm.de.resx">
-      <DependentUpon>UIInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIPumpAroundsEditor\UIPumpAroundsEditorForm.de.resx">
-      <DependentUpon>UIPumpAroundsEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIReboiledSideStrippersEditor\UIReboiledSideStripperEditorForm.de.resx">
-      <DependentUpon>UIReboiledSideStripperEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIResults\UIResultsForm.de.resx">
-      <DependentUpon>UIResultsForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UISideRectifiersEditor\UISideRectifiersEditorForm.de.resx">
-      <DependentUpon>UISideRectifiersEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIStagesEditor\UIStagesEditorForm.de.resx">
-      <DependentUpon>UIStagesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UISteamedSideStrippersEditor\UISteamedSideStripperEditorForm.de.resx">
-      <DependentUpon>UISteamedSideStripperEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPipeEditor\Class1.de.resx">
-      <DependentUpon>Class1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\PFR\FormGraphPFR.de.resx">
-      <DependentUpon>FormGraphPFR.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\Pipe\FormGraph.de.resx">
-      <DependentUpon>FormGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\ADJ_ControlPanel\UI_AdjControlPanelForm.de.resx">
-      <DependentUpon>UI_AdjControlPanelForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\ADJ_ControlPanel\UI_AdjControlPanelForm.es.resx">
-      <DependentUpon>UI_AdjControlPanelForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditorForm.es.resx">
-      <DependentUpon>UIConnectionsEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIInitialEstimatesEditor\UIInitialEstimatesEditorForm.es.resx">
-      <DependentUpon>UIInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIPumpAroundsEditor\UIPumpAroundsEditorForm.es.resx">
-      <DependentUpon>UIPumpAroundsEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIReboiledSideStrippersEditor\UIReboiledSideStripperEditorForm.es.resx">
-      <DependentUpon>UIReboiledSideStripperEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIResults\UIResultsForm.es.resx">
-      <DependentUpon>UIResultsForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UISideRectifiersEditor\UISideRectifiersEditorForm.es.resx">
-      <DependentUpon>UISideRectifiersEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIStagesEditor\UIStagesEditorForm.es.resx">
-      <DependentUpon>UIStagesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UISteamedSideStrippersEditor\UISteamedSideStripperEditorForm.es.resx">
-      <DependentUpon>UISteamedSideStripperEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPipeEditor\Class1.es.resx">
-      <DependentUpon>Class1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\PFR\FormGraphPFR.es.resx">
-      <DependentUpon>FormGraphPFR.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\Pipe\FormGraph.es.resx">
-      <DependentUpon>FormGraph.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\Results\Pipe\FormTable.es.resx">
-      <DependentUpon>FormTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UICVSelectorForm.de.resx">
-      <DependentUpon>UICVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UICVSelectorForm.es.resx" />
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorForm.de.resx">
-      <DependentUpon>UIMVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UIMVSelectorForm.es.resx" />
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UIRVSelectorForm.de.resx">
-      <DependentUpon>UIRVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\ADJ\UIRVSelectorForm.es.resx" />
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\SPEC_ControlPanel\UI_SpecControlPanelForm.de.resx">
-      <DependentUpon>UI_SpecControlPanelForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\SPEC_ControlPanel\UI_SpecControlPanelForm.es.resx">
-      <DependentUpon>UI_SpecControlPanelForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\UISVSelectorForm.de.resx">
-      <DependentUpon>UISVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\UISVSelectorForm.es.resx">
-      <DependentUpon>UISVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\UITVSelectorForm.de.resx">
-      <DependentUpon>UITVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\SpecialOps\SPEC\UITVSelectorForm.es.resx">
-      <DependentUpon>UITVSelectorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.de.resx">
-      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIAnnotationEditor\AnnotationEditorForm.es.resx">
-      <DependentUpon>AnnotationEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UICompositionEditor\CompositionEditorForm.de.resx">
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UICompositionEditor\CompositionEditorForm.es.resx">
-      <DependentUpon>CompositionEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.de.resx">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.en.resx">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UICSepSpecEditor\CSepSpecEditorForm.resx">
-      <DependentUpon>CSepSpecEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.de.resx">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.en.resx">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIElementMatrixEditor\ElementMatrixEditorForm.resx">
-      <DependentUpon>ElementMatrixEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPipeEditor\PipeEditorForm.de.resx">
-      <DependentUpon>PipeEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPipeEditor\PipeEditorForm.es.resx">
-      <DependentUpon>PipeEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.de.resx">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.en.resx">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.es.resx">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIPumpCurvesEditor\PumpCurvesEditorForm.resx">
-      <DependentUpon>PumpCurvesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorForm.de.resx">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorForm.en.resx">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorForm.es.resx">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIScriptEditor\ScriptEditorForm.resx">
-      <DependentUpon>ScriptEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UISTHXEditor\STHXEditorForm.de.resx">
-      <DependentUpon>STHXEditorForm.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UISTHXEditor\STHXEditorForm.en.resx">
-      <DependentUpon>STHXEditorForm.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UISTHXEditor\STHXEditorForm.es.resx">
-      <DependentUpon>STHXEditorForm.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UISTHXEditor\STHXEditorForm.resx">
-      <DependentUpon>STHXEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIThermalProfileEditor\ThermalProfileEditorForm.de.resx">
-      <DependentUpon>ThermalProfileEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\UIThermalProfileEditor\ThermalProfileEditorForm.es.resx">
-      <DependentUpon>ThermalProfileEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
     <None Include="Resources\house.png" />
     <None Include="Resources\dialog-warning.png" />
     <None Include="Resources\dialog-information.png" />
@@ -3312,70 +2504,6 @@
     <None Include="Resources\page_copy.png" />
     <None Include="Resources\paste_plain.png" />
     <None Include="Resources\copy.gif" />
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIConnectionsEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIConnectionsEditor\UIConnectionsEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIConnectionsEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIInitialEstimatesEditor\UIInitialEstimatesEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIInitialEstimatesEditor\UIInitialEstimatesEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIInitialEstimatesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIPumpAroundsEditor\UIPumpAroundsEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIPumpAroundsEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIPumpAroundsEditor\UIPumpAroundsEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIPumpAroundsEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIReboiledSideStrippersEditor\UIReboiledSideStripperEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIReboiledSideStripperEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIReboiledSideStrippersEditor\UIReboiledSideStripperEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIReboiledSideStripperEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIResults\UIResultsForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIResultsForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIResults\UIResultsForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIResultsForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UISideRectifiersEditor\UISideRectifiersEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UISideRectifiersEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UISideRectifiersEditor\UISideRectifiersEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UISideRectifiersEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIStagesEditor\UIStagesEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIStagesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UIStagesEditor\UIStagesEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UIStagesEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UISteamedSideStrippersEditor\UISteamedSideStripperEditorForm.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UISteamedSideStripperEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UITypeEditors\DistillationColumn\UISteamedSideStrippersEditor\UISteamedSideStripperEditorForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>UISteamedSideStripperEditorForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Objects\Classes\Pipe\pipes.dat" />
     <EmbeddedResource Include="Objects\Classes\Pipe\fittings.dat" />
     <EmbeddedResource Include="Languages\DWSIM.de.resx">
@@ -3392,54 +2520,6 @@
     <EmbeddedResource Include="Languages\Properties.es.resx" />
     <EmbeddedResource Include="Languages\Properties.resx">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPP.de.resx">
-      <DependentUpon>FormConfigPP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigPP.es.resx">
-      <DependentUpon>FormConfigPP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigLKP.de.resx">
-      <DependentUpon>FormConfigLKP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigLKP.en.resx">
-      <DependentUpon>FormConfigLKP.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigLKP.es.resx">
-      <DependentUpon>FormConfigLKP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigLKP.resx">
-      <DependentUpon>FormConfigLKP.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigNRTL.de.resx">
-      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigNRTL.en.resx">
-      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigNRTL.es.resx">
-      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigNRTL.resx">
-      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigUNIQUAC.de.resx">
-      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigUNIQUAC.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigUNIQUAC.es.resx">
-      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropPack_ConfigForms\FormConfigUNIQUAC.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\AssayManager\FormAssayManager.en.resx">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
@@ -3635,9 +2715,7 @@
     <None Include="Resources\book.png" />
     <None Include="Resources\help-browser1.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\UITypeEditors\DistillationColumn\UISpecificationsEditor\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>"C:\Program Files (x86)\Git\bin\git.exe" rev-parse --short HEAD &gt; "$(ProjectDir)version.txt"

@@ -2,8 +2,8 @@
 
     Inherits System.Windows.Forms.Form
 
-    Dim vessel As DWSIM.SimulationObjects.UnitOperations.Vessel
-    Dim entmat As DWSIM.SimulationObjects.Streams.MaterialStream
+    Dim vessel As Vessel
+    Dim entmat As Streams.MaterialStream
     Dim Frm As FormFlowsheet
     Dim rhol, rhov, ql, qv, qe, rhoe, wl, wv As Double
     Dim RLD, C, VGI, SURGE, TR, VMAX, K As Double
@@ -51,7 +51,7 @@
             Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox1.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
             Me.vessel = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
 
-            Dim msv, msl As DWSIM.SimulationObjects.Streams.MaterialStream
+            Dim msv, msl As Streams.MaterialStream
 
             msv = Frm.Collections.FlowsheetObjectCollection(Me.vessel.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
             msl = Frm.Collections.FlowsheetObjectCollection(Me.vessel.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)

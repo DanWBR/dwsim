@@ -23,7 +23,7 @@ Public Class FormHYD
 
     Public m_aux As DWSIM.Utilities.HYD.AuxMethods
 
-    Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
+    Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
     Public su As New SystemsOfUnits.Units

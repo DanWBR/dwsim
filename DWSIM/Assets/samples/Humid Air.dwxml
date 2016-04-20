@@ -8,7 +8,7 @@
   </GeneralInfo>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
         <Type>DWSIM.DWSIM.Extras.Annotation</Type>
@@ -615,7 +615,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Cooler</Type>
+      <Type>DWSIM.Cooler</Type>
       <Annotation>
         <Type>DWSIM.DWSIM.Extras.Annotation</Type>
         <m_text></m_text>
@@ -655,7 +655,7 @@
       <PropertyPackage>PP-d1f1017d-23c4-4deb-8f9c-f3badf72debf</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Annotation>
         <Type>DWSIM.DWSIM.Extras.Annotation</Type>
@@ -1264,7 +1264,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>6.374675</EnergyFlow>
       <ComponentDescription>EN-3e8c2aa8-9aa6-4623-9eb5-02b342109550</ComponentDescription>
       <ComponentName>E</ComponentName>

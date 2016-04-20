@@ -129,9 +129,9 @@ Imports System.Threading
         scope.SetVariable("Flowsheet", fsheet)
         scope.SetVariable("AbortScript", AbortScript)
         scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
-        Dim Solver As New DWSIM.Flowsheet.FlowsheetSolver
+        Dim Solver As New FlowsheetSolver.FlowsheetSolver
         scope.SetVariable("Solver", Solver)
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In fsheet.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In fsheet.Collections.FlowsheetObjectCollection.Values
             scope.SetVariable(obj.GraphicObject.Tag.Replace("-", "_"), obj)
         Next
         Dim txtcode As String = scripttext

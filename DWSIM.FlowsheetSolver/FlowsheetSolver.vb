@@ -1048,9 +1048,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                             Settings.AppTaskScheduler = TaskScheduler.Default
                         End If
                     Case 1 'sta
-                        Settings.AppTaskScheduler = New DWSIM.Auxiliary.TaskSchedulers.StaTaskScheduler(nthreads)
+                        Settings.AppTaskScheduler = New TaskSchedulers.StaTaskScheduler(nthreads)
                     Case 2 'limited concurrency
-                        Settings.AppTaskScheduler = New DWSIM.Auxiliary.TaskSchedulers.LimitedConcurrencyLevelTaskScheduler(nthreads)
+                        Settings.AppTaskScheduler = New TaskSchedulers.LimitedConcurrencyLevelTaskScheduler(nthreads)
                 End Select
 
                 Try

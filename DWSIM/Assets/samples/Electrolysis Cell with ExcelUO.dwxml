@@ -98,7 +98,7 @@
   </Settings>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Flows</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>
@@ -696,7 +696,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.ExcelUO</Type>
+      <Type>DWSIM.ExcelUO</Type>
       <ScriptExt_Language>IronPython</ScriptExt_Language>
       <ScriptExt_ScriptTextB></ScriptExt_ScriptTextB>
       <ScriptExt_ScriptTextA></ScriptExt_ScriptTextA>
@@ -724,7 +724,7 @@
       <PropertyPackage></PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Flows</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>
@@ -1339,7 +1339,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>8.03790358659251</EnergyFlow>
       <ComponentDescription>EN-1ec7c26e-e8a8-424d-9591-112938b5e2a7</ComponentDescription>
       <ComponentName>E</ComponentName>
@@ -1356,7 +1356,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
+      <Type>DWSIM.Vessel</Type>
       <ScriptExt_Language>IronPython</ScriptExt_Language>
       <ScriptExt_ScriptTextB></ScriptExt_ScriptTextB>
       <ScriptExt_ScriptTextA></ScriptExt_ScriptTextA>
@@ -1389,7 +1389,7 @@
       <PropertyPackage></PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Flows</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>
@@ -1989,7 +1989,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Flows</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>

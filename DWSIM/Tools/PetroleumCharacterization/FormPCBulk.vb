@@ -401,7 +401,7 @@ Public Class FormPCBulk
         Dim prvsfit As New Methods.PRVSFitting
         Dim srkvsfit As New Methods.SRKVSFitting
         Dim nbpfit As New Methods.NBPFitting
-        Dim tms As New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
+        Dim tms As New Streams.MaterialStream("", "")
         Dim pp As PropertyPackages.PropertyPackage
         Dim fzra, fw, fprvs, fsrkvs As Double
 
@@ -740,7 +740,7 @@ Public Class FormPCBulk
         gObj.Name = "MAT-" & Guid.NewGuid.ToString
         frm.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
         'OBJETO DWSIM
-        Dim myCOMS As DWSIM.SimulationObjects.Streams.MaterialStream = New DWSIM.SimulationObjects.Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
+        Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr
         Call frm.AddComponentsRows(myCOMS)
         Dim wtotal As Double = 0

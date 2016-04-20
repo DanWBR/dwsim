@@ -770,7 +770,7 @@ Namespace Reactors
                 If Me.CatalystLoading = 0.0# Then
 
                     Dim resv As Object
-                    Dim fpp As New DWSIM.FlowPackages.BeggsBrill
+                    Dim fpp As New FlowPackages.BeggsBrill
                     Dim tipofluxo As String, holdup, dpf, dph, dpt As Double
 
                     resv = fpp.CalculateDeltaP(diameter * 0.0254, Me.dV * Me.Length, 0.0#, 0.000045, Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)

@@ -22,7 +22,7 @@
   </Settings>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
+      <Type>DWSIM.Vessel</Type>
       <PressureCalculation>Average</PressureCalculation>
       <OpMode>ThreePhase</OpMode>
       <OverrideT>false</OverrideT>
@@ -52,7 +52,7 @@
       <PropertyPackage></PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <AtEquilibrium>true</AtEquilibrium>
@@ -683,7 +683,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <AtEquilibrium>true</AtEquilibrium>
@@ -1289,7 +1289,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <AtEquilibrium>true</AtEquilibrium>
@@ -1895,7 +1895,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <AtEquilibrium>true</AtEquilibrium>

@@ -25,7 +25,7 @@ Namespace DWSIM.Utilities.HYD
         Dim unf As PropertyPackages.Auxiliary.UNIQUAC
         Dim unfPP As PropertyPackages.UNIQUACPropertyPackage
 
-        Sub New(ByVal materialStream As DWSIM.SimulationObjects.Streams.MaterialStream)
+        Sub New(ByVal materialStream As Streams.MaterialStream)
 
             am = New DWSIM.Utilities.HYD.AuxMethods
             unf = New PropertyPackages.Auxiliary.UNIQUAC

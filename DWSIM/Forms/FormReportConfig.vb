@@ -15,7 +15,6 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DWSIM.SimulationObjects
 Imports NetOffice
 Imports Excel = NetOffice.ExcelApi
 Imports NetOffice.ExcelApi.Enums
@@ -49,7 +48,7 @@ Public Class FormReportConfig
         DT.Rows.Clear()
 
 
-        Dim baseobj As DWSIM.SimulationObjects.UnitOperations.BaseClass
+        Dim baseobj As SharedClasses.UnitOperations.BaseClass
         Dim properties() As String
         Dim description As String
         Dim objtype As ObjectType
@@ -207,7 +206,7 @@ Public Class FormReportConfig
         KButton4.Enabled = Not DWSIM.App.IsRunningOnMono
         KButton5.Enabled = Not DWSIM.App.IsRunningOnMono
 
-        Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass
+        Dim obj As SharedClasses.UnitOperations.BaseClass
 
         For Each n As TreeNode In Me.TreeViewObj.Nodes
             n.Nodes.Clear()

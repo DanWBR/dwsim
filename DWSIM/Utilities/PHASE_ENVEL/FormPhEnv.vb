@@ -21,7 +21,7 @@ Public Class FormPhEnv
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
+    Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
     Dim cp As Utilities.TCP.Methods

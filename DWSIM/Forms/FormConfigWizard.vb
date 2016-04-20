@@ -19,7 +19,7 @@ Imports OutlookStyleControls
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports DWSIM.DWSIM.Extras
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.FlowsheetSolver
 Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class FormConfigWizard
@@ -272,7 +272,7 @@ Public Class FormConfigWizard
 
                 Me.FrmChild.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
                 Me.FrmChild.Options.NotSelectedComponents.Remove(tmpcomp.Name)
-                Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
+                Dim ms As Streams.MaterialStream
 
                 Dim proplist As New ArrayList
                 For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
@@ -306,7 +306,7 @@ Public Class FormConfigWizard
         Me.ListViewA.Items.RemoveByKey(tmpcomp.Name)
         Me.FrmChild.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
         Me.AddCompToGrid(tmpcomp)
-        Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
+        Dim ms As Streams.MaterialStream
         Dim proplist As New ArrayList
 
         For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values

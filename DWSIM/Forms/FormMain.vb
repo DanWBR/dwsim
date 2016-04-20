@@ -38,7 +38,6 @@ Imports System.Xml.Serialization
 Imports System.Xml
 Imports System.Reflection
 Imports Microsoft.Win32
-Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Text
 Imports System.Xml.Linq
 Imports DWSIM.DrawingTools.GraphicObjects
@@ -71,7 +70,7 @@ Public Class FormMain
     Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
     Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
 
-    Public COMonitoringObjects As New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
+    Public COMonitoringObjects As New Dictionary(Of String, UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
 
 #Region "    Form Events"
 
@@ -252,7 +251,7 @@ Public Class FormMain
                     For Each s2 As String In arr
                         If s2.ToLower = "{7ba1af89-b2e4-493d-bd80-2970bf4cbe99}" Then
                             'this is a CAPE-OPEN MO
-                            Dim myuo As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
+                            Dim myuo As New UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo
                             With myuo
                                 .AboutInfo = mykey.OpenSubKey("CapeDescription").GetValue("About")
                                 .CapeVersion = mykey.OpenSubKey("CapeDescription").GetValue("CapeVersion")
@@ -1086,7 +1085,6 @@ Public Class FormMain
     Function ReturnForm(ByVal str As String) As IDockContent
         Select Case str
             Case "DWSIM.frmProps"
-                Return Me.tmpform2.FormProps
             Case "DWSIM.frmLog"
                 Return Me.tmpform2.FormLog
             Case "DWSIM.frmMatList"
@@ -1227,7 +1225,7 @@ Public Class FormMain
 
     End Sub
 
-    Sub AddSimulationObjects(form As FormFlowsheet, objlist As Concurrent.ConcurrentBag(Of DWSIM.SimulationObjects.UnitOperations.BaseClass), excs As Concurrent.ConcurrentBag(Of Exception), Optional ByVal pkey As String = "")
+    Sub AddSimulationObjects(form As FormFlowsheet, objlist As Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass), excs As Concurrent.ConcurrentBag(Of Exception), Optional ByVal pkey As String = "")
 
         For Each obj In objlist
             Try
@@ -1240,10 +1238,10 @@ Public Class FormMain
             End Try
         Next
 
-        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each so As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             Try
-                If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Adjust) IsNot Nothing Then
-                    Dim so2 As DWSIM.SimulationObjects.SpecialOps.Adjust = so
+                If TryCast(so, Adjust) IsNot Nothing Then
+                    Dim so2 As Adjust = so
                     If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ManipulatedObjectData.ID) Then
                         so2.ManipulatedObject = form.Collections.FlowsheetObjectCollection(so2.ManipulatedObjectData.ID)
                         DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToMv = so2.ManipulatedObject.GraphicObject
@@ -1257,20 +1255,20 @@ Public Class FormMain
                         DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
                     End If
                 End If
-                If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Spec) IsNot Nothing Then
-                    Dim so2 As DWSIM.SimulationObjects.SpecialOps.Spec = so
-                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.TargetObjectData.m_ID) Then
-                        so2.TargetObject = form.Collections.FlowsheetObjectCollection(so2.TargetObjectData.m_ID)
+                If TryCast(so, Spec) IsNot Nothing Then
+                    Dim so2 As Spec = so
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.TargetObjectData.ID) Then
+                        so2.TargetObject = form.Collections.FlowsheetObjectCollection(so2.TargetObjectData.ID)
                         DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
                     End If
-                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.SourceObjectData.m_ID) Then
-                        so2.SourceObject = form.Collections.FlowsheetObjectCollection(so2.SourceObjectData.m_ID)
+                    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.SourceObjectData.ID) Then
+                        so2.SourceObject = form.Collections.FlowsheetObjectCollection(so2.SourceObjectData.ID)
                         DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
                     End If
                 End If
-                If TryCast(so, DWSIM.SimulationObjects.UnitOperations.CapeOpenUO) IsNot Nothing Then
-                    DirectCast(so, DWSIM.SimulationObjects.UnitOperations.CapeOpenUO).UpdateConnectors2()
-                    DirectCast(so, DWSIM.SimulationObjects.UnitOperations.CapeOpenUO).UpdatePortsFromConnectors()
+                If TryCast(so, CapeOpenUO) IsNot Nothing Then
+                    DirectCast(so, CapeOpenUO).UpdateConnectors2()
+                    DirectCast(so, CapeOpenUO).UpdatePortsFromConnectors()
                 End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Unit Operation Connection Information", ex))
@@ -1374,7 +1372,7 @@ Public Class FormMain
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
 
-        Dim objlist As New Concurrent.ConcurrentBag(Of DWSIM.SimulationObjects.UnitOperations.BaseClass)
+        Dim objlist As New Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass)
 
         Dim fsuocount = (From go As GraphicObjects.GraphicObject In form.Collections.GraphicObjectCollection.Values Where go.ObjectType = ObjectType.FlowsheetUO).Count
 
@@ -1384,7 +1382,7 @@ Public Class FormMain
                                        Try
                                            Dim id As String = xel.<Name>.Value
                                            Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                                           Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
+                                           Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
                                            Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
                                                                form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                                            obj.GraphicObject = gobj
@@ -1411,7 +1409,7 @@ Public Class FormMain
                 Try
                     Dim id As String = xel.<Name>.Value
                     Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                    Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
+                    Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
                     Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
                                         form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                     obj.GraphicObject = gobj
@@ -1564,7 +1562,7 @@ Public Class FormMain
             Dim i As Integer = 0
             For Each xel As XElement In data
                 Try
-                    Dim obj As New DWSIM.Extras.Script()
+                    Dim obj As New Script()
                     obj.LoadData(xel.Elements.ToList)
                     form.ScriptCollection.Add(obj.ID, obj)
                 Catch ex As Exception
@@ -1628,7 +1626,6 @@ Public Class FormMain
             Me.tmpform2 = form
             'form.dckPanel.SuspendLayout(True)
             form.FormLog.DockPanel = Nothing
-            form.FormProps.DockPanel = Nothing
             form.FormMatList.DockPanel = Nothing
             form.FormSpreadsheet.DockPanel = Nothing
             form.FormWatch.DockPanel = Nothing
@@ -1648,7 +1645,6 @@ Public Class FormMain
             End If
 
             Try
-                form.FormProps.Show(form.dckPanel)
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
@@ -1764,7 +1760,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each so As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             so.SetFlowsheet(form)
             xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
         Next
@@ -1867,7 +1863,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ScriptItems"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems")
 
-        For Each scr As DWSIM.Extras.Script In form.ScriptCollection.Values
+        For Each scr As Script In form.ScriptCollection.Values
             xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
         Next
 

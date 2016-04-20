@@ -19,7 +19,6 @@
 Imports System.Drawing
 Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Drawing.Drawing2D
-Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DWSIM.Extras
 Imports System.Linq
 Imports DWSIM.DrawingTools
@@ -356,7 +355,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
             For Each kvp As KeyValuePair(Of String, Boolean) In m_objectlist
                 If kvp.Value = True Then
-                    Dim myobj As DWSIM.SimulationObjects.UnitOperations.BaseClass = form.GetFlowsheetSimulationObject(kvp.Key)
+                    Dim myobj As SharedClasses.UnitOperations.BaseClass = form.GetFlowsheetSimulationObject(kvp.Key)
                     m_items.Add(kvp.Key, New List(Of NodeItem))
                     m_items(kvp.Key).Add(New NodeItem(DWSIM.App.GetLocalString("Objeto"), kvp.Key, "", 0, 0, ""))
                     If Me.HeaderText = "" Then Me.HeaderText = DWSIM.App.GetLocalString("MasterTable") & " - " & DWSIM.App.GetLocalString(myobj.ComponentDescription)
@@ -481,61 +480,6 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
                     j += 1
                 Next
             End If
-
-        End Sub
-
-        Public Sub PopulateGrid(ByRef pgrid As PropertyGridEx.PropertyGridEx, ByRef form As FormFlowsheet)
-
-            With pgrid
-
-                .Item.Clear()
-
-                .Item.Add(DWSIM.App.GetLocalString("MT_ObjectFamily"), Me, "ObjectFamily", False, "1. " & DWSIM.App.GetLocalString("MT_ObjectFamily"), "", True)
-
-                For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
-                    If obj.GraphicObject.ObjectType = Me.ObjectFamily Then
-                        If m_objectlist.ContainsKey(obj.GraphicObject.Tag) Then
-                            .Item.Add(obj.GraphicObject.Tag, m_objectlist(obj.GraphicObject.Tag), False, "2. " & DWSIM.App.GetLocalString("MT_ObjectsToShow"), "", True)
-                        Else
-                            .Item.Add(obj.GraphicObject.Tag, False, False, "2. " & DWSIM.App.GetLocalString("MT_ObjectsToShow"), "", True)
-                        End If
-                        .Item(.Item.Count - 1).DefaultType = Type.GetType("System.Boolean")
-                        .Item(.Item.Count - 1).Tag = "Object|" & obj.Name
-                    End If
-                Next
-
-                Dim props() As String = Nothing
-
-                If m_objectlist.Count > 0 Then
-                    For Each s As String In m_objectlist.Keys
-                        props = form.GetFlowsheetSimulationObject(s).GetProperties(Interfaces.Enums.PropertyType.ALL)
-                        Exit For
-                    Next
-                    For Each p As String In props
-                        If m_propertylist.ContainsKey(p) Then
-                            .Item.Add(DWSIM.App.GetPropertyName(p), m_propertylist(p), False, "4. " & DWSIM.App.GetLocalString("MT_PropertiesToShow"), "", True)
-                        Else
-                            .Item.Add(DWSIM.App.GetPropertyName(p), False, False, "4. " & DWSIM.App.GetLocalString("MT_PropertiesToShow"), "", True)
-                        End If
-                        .Item(.Item.Count - 1).DefaultType = Type.GetType("System.Boolean")
-                        .Item(.Item.Count - 1).Tag = p
-                    Next
-                End If
-
-                .Item.Add(DWSIM.App.GetLocalString("MT_SortObjectsBy"), Me, "SortBy", False, "3. " & DWSIM.App.GetLocalString("MT_Sorting"), "", True)
-                .Item(.Item.Count - 1).Choices = New PropertyGridEx.CustomChoices(Me.SortableItems, False)
-
-                If Me.SortBy = "Custom" Then
-                    .Item.Add(DWSIM.App.GetLocalString("MT_CustomSortList"), Me, "SortedList", False, "3. " & DWSIM.App.GetLocalString("MT_Sorting"), "", True)
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.MasterTable.UIMTableObjectOrderEditor
-                    .Item(.Item.Count - 1).IsBrowsable = False
-                    .Item(.Item.Count - 1).BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                End If
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-
-            End With
 
         End Sub
 
@@ -750,7 +694,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
         Inherits ShapeGraphic
 
-        Public BaseOwner As DWSIM.SimulationObjects.UnitOperations.BaseClass
+        Public BaseOwner As SharedClasses.UnitOperations.BaseClass
 
         Protected m_Font_Col1 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
         Protected m_Font_Col2 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
@@ -795,17 +739,17 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
         End Function
 
 #Region "Constructors"
-        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass)
+        Public Sub New(ByRef owner As SharedClasses.UnitOperations.BaseClass)
             Me.ObjectType = ObjectType.GO_Table
             Me.BaseOwner = owner
         End Sub
 
-        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal graphicPosition As Drawing.Point)
+        Public Sub New(ByRef owner As SharedClasses.UnitOperations.BaseClass, ByVal graphicPosition As Drawing.Point)
             Me.New(owner)
             Me.SetPosition(graphicPosition.ToDTPoint)
         End Sub
 
-        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal posX As Integer, ByVal posY As Integer)
+        Public Sub New(ByRef owner As SharedClasses.UnitOperations.BaseClass, ByVal posX As Integer, ByVal posY As Integer)
             Me.New(owner, New Drawing.Point(posX, posY))
         End Sub
 
@@ -1098,7 +1042,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
     <Serializable()> Public Class QuickTableGraphic
         Inherits ShapeGraphic
 
-        Public BaseOwner As DWSIM.SimulationObjects.UnitOperations.BaseClass
+        Public BaseOwner As SharedClasses.UnitOperations.BaseClass
 
         Protected m_HeaderFont As Font = New Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Pixel, 0, False)
 
@@ -1127,17 +1071,17 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             Me.ObjectType = ObjectType.GO_FloatingTable
         End Sub
 
-        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass)
+        Public Sub New(ByRef owner As SharedClasses.UnitOperations.BaseClass)
             Me.ObjectType = ObjectType.GO_FloatingTable
             Me.BaseOwner = owner
         End Sub
 
-        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal graphicPosition As Drawing.Point)
+        Public Sub New(ByRef owner As SharedClasses.UnitOperations.BaseClass, ByVal graphicPosition As Drawing.Point)
             Me.New(owner)
             Me.SetPosition(graphicPosition.ToDTPoint)
         End Sub
 
-        Public Sub New(ByRef owner As DWSIM.SimulationObjects.UnitOperations.BaseClass, ByVal posX As Integer, ByVal posY As Integer)
+        Public Sub New(ByRef owner As SharedClasses.UnitOperations.BaseClass, ByVal posX As Integer, ByVal posY As Integer)
             Me.New(owner, New Drawing.Point(posX, posY))
         End Sub
 

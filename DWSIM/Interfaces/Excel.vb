@@ -20,7 +20,7 @@
 '    Copyright (C) 2005-2011 Govert van Drimmelen
 
 Imports ExcelDna.Integration
-Imports DWSIM.DWSIM.SimulationObjects
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Reflection
@@ -1416,10 +1416,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(pp._availablecomps(c1).CAS_Number) Then .Add(pp._availablecomps(c1).CAS_Number, New Dictionary(Of String, Auxiliary.PCSIP))
+                                If Not .ContainsKey(pp._availablecomps(c1).CAS_Number) Then .Add(pp._availablecomps(c1).CAS_Number, New Dictionary(Of String, PCSIP))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(pp._availablecomps(c1).CAS_Number).ContainsKey(pp._availablecomps(c2).CAS_Number) Then .Item(pp._availablecomps(c1).CAS_Number).Add(pp._availablecomps(c2).CAS_Number, New Auxiliary.PCSIP())
+                                    If Not .Item(pp._availablecomps(c1).CAS_Number).ContainsKey(pp._availablecomps(c2).CAS_Number) Then .Item(pp._availablecomps(c1).CAS_Number).Add(pp._availablecomps(c2).CAS_Number, New PCSIP())
                                     With .Item(pp._availablecomps(c1).CAS_Number).Item(pp._availablecomps(c2).CAS_Number)
                                         .casno1 = pp._availablecomps(c1).CAS_Number
                                         .casno2 = pp._availablecomps(c2).CAS_Number
@@ -1440,10 +1440,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.PR_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, PR_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.PR_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New PR_IPData())
                                     With .Item(c1).Item(c2)
                                         .kij = ip1(i, j)
                                     End With
@@ -1459,10 +1459,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1.ToLower) Then .Add(c1.ToLower, New Dictionary(Of String, Auxiliary.PRSV2_IPData))
+                                If Not .ContainsKey(c1.ToLower) Then .Add(c1.ToLower, New Dictionary(Of String, PRSV2_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1.ToLower).ContainsKey(c2.ToLower) Then .Item(c1.ToLower).Add(c2.ToLower, New Auxiliary.PRSV2_IPData())
+                                    If Not .Item(c1.ToLower).ContainsKey(c2.ToLower) Then .Item(c1.ToLower).Add(c2.ToLower, New PRSV2_IPData())
                                     With .Item(c1.ToLower).Item(c2.ToLower)
                                         .kij = ip1(i, j)
                                         .kji = ip2(i, j)
@@ -1479,10 +1479,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1.ToLower) Then .Add(c1.ToLower, New Dictionary(Of String, Auxiliary.PRSV2_IPData))
+                                If Not .ContainsKey(c1.ToLower) Then .Add(c1.ToLower, New Dictionary(Of String, PRSV2_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1.ToLower).ContainsKey(c2.ToLower) Then .Item(c1.ToLower).Add(c2.ToLower, New Auxiliary.PRSV2_IPData())
+                                    If Not .Item(c1.ToLower).ContainsKey(c2.ToLower) Then .Item(c1.ToLower).Add(c2.ToLower, New PRSV2_IPData())
                                     With .Item(c1.ToLower).Item(c2.ToLower)
                                         .kij = ip1(i, j)
                                         .kji = ip2(i, j)
@@ -1499,10 +1499,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.PR_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, PR_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.PR_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New PR_IPData())
                                     With .Item(c1).Item(c2)
                                         .kij = ip1(i, j)
                                     End With
@@ -1518,10 +1518,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.PR_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, PR_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.PR_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New PR_IPData())
                                     With .Item(c1).Item(c2)
                                         .kij = ip1(i, j)
                                     End With
@@ -1537,10 +1537,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.PR_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, PR_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.PR_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New PR_IPData())
                                     With .Item(c1).Item(c2)
                                         .kij = ip1(i, j)
                                     End With
@@ -1556,10 +1556,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.PR_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, PR_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.PR_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New PR_IPData())
                                     With .Item(c1).Item(c2)
                                         .kij = ip1(i, j)
                                     End With
@@ -1575,10 +1575,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.PR_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, PR_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.PR_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New PR_IPData())
                                     With .Item(c1).Item(c2)
                                         .kij = ip1(i, j)
                                     End With
@@ -1593,10 +1593,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.NRTL_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, NRTL_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.NRTL_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New NRTL_IPData())
                                     With .Item(c1).Item(c2)
                                         .A12 = ip2(i, j)
                                         .A21 = ip3(i, j)
@@ -1620,10 +1620,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.PR_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, PR_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.PR_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New PR_IPData())
                                     With .Item(c1).Item(c2)
                                         .kij = ip1(i, j)
                                     End With
@@ -1638,10 +1638,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.UNIQUAC_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, UNIQUAC_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.UNIQUAC_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New UNIQUAC_IPData())
                                     With .Item(c1).Item(c2)
                                         .A12 = ip2(i, j)
                                         .A21 = ip3(i, j)
@@ -1664,10 +1664,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.PR_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, PR_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.PR_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New PR_IPData())
                                     With .Item(c1).Item(c2)
                                         .kij = ip1(i, j)
                                     End With
@@ -1683,10 +1683,10 @@ Namespace ExcelAddIn
                             .Clear()
                             i = 0
                             For Each c1 As String In compounds
-                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, Auxiliary.LKP_IPData))
+                                If Not .ContainsKey(c1) Then .Add(c1, New Dictionary(Of String, LKP_IPData))
                                 j = 0
                                 For Each c2 As String In compounds
-                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New Auxiliary.LKP_IPData())
+                                    If Not .Item(c1).ContainsKey(c2) Then .Item(c1).Add(c2, New LKP_IPData())
                                     With .Item(c1).Item(c2)
                                         .ID1 = c1
                                         .ID2 = c2

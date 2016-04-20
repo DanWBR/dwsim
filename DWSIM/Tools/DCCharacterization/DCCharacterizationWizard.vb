@@ -587,7 +587,7 @@ Public Class DCCharacterizationWizard
         Dim prvsfit As New Methods.PRVSFitting
         Dim srkvsfit As New Methods.SRKVSFitting
         Dim nbpfit As New Methods.NBPFitting
-        Dim tms As New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
+        Dim tms As New Streams.MaterialStream("", "")
         Dim pp As PropertyPackages.PropertyPackage
         Dim fzra, fw, fprvs, fsrkvs As Double
 
@@ -658,7 +658,7 @@ Public Class DCCharacterizationWizard
                     .Z_Rackett *= fzra
                     If .Critical_Compressibility < 0 Or recalcVc Then
                         .Critical_Compressibility = .Z_Rackett
-                        .Critical_Volume = Auxiliary.PROPS.Vc(.Critical_Temperature, .Critical_Pressure, .Acentric_Factor, .Critical_Compressibility)
+                        .Critical_Volume = Global.DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS.Vc(.Critical_Temperature, .Critical_Pressure, .Acentric_Factor, .Critical_Compressibility)
                     End If
                 End With
             End If
@@ -741,7 +741,7 @@ Public Class DCCharacterizationWizard
         gObj.Name = "MAT-" & Guid.NewGuid.ToString
         form.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
         'OBJETO DWSIM
-        Dim myCOMS As DWSIM.SimulationObjects.Streams.MaterialStream = New DWSIM.SimulationObjects.Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
+        Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr
         form.AddComponentsRows(myCOMS)
         Dim wtotal As Double = 0

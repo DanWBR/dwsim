@@ -35,11 +35,11 @@ Public Class Form1
 
         RemoveHandler fsheet.FormSurface.ObjectSelected, eventhandler
 
-        For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
-            If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
-                RemoveHandler DirectCast(f, DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet).Fsheet.FormSurface.ObjectSelected, eventhandler
-            End If
-        Next
+        'For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
+        '    If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
+        '        RemoveHandler DirectCast(f, DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet).Fsheet.FormSurface.ObjectSelected, eventhandler
+        '    End If
+        'Next
 
         My.Settings.Save()
 
@@ -67,11 +67,11 @@ Public Class Form1
 
         AddHandler fsheet.FormSurface.ObjectSelected, eventhandler
 
-        For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
-            If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
-                AddHandler DirectCast(f, DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet).Fsheet.FormSurface.ObjectSelected, eventhandler
-            End If
-        Next
+        'For Each f In fsheet.Collections.FlowsheetObjectCollection.Values
+        '    If f.GraphicObject.ObjectType = ObjectType.FlowsheetUO Then
+        '        AddHandler DirectCast(f, DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet).Fsheet.FormSurface.ObjectSelected, eventhandler
+        '    End If
+        'Next
 
     End Sub
 
@@ -102,7 +102,7 @@ Public Class Form1
                 End If
 
                 'get a reference to the material stream base class.
-                Dim dobj As DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream = fsheet.Collections.FlowsheetObjectCollection(gobj.Name)
+                Dim dobj As Streams.MaterialStream = fsheet.Collections.FlowsheetObjectCollection(gobj.Name)
 
                 'check if the stream is vapor only.
                 If dobj.Phases(2).Properties.molarfraction = 1 Then
@@ -149,7 +149,7 @@ Public Class Form1
                 Dim mw As Double = dobj.Phases(0).Properties.molecularWeight
 
                 'declare a temporary material stream so we can do calculations without messing with the simulation.
-                Dim tmpms As New DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream("", "")
+                Dim tmpms As New Streams.MaterialStream("", "")
                 tmpms = dobj.Clone
                 tmpms.PropertyPackage = dobj.PropertyPackage.Clone
                 tmpms.PropertyPackage.CurrentMaterialStream = tmpms

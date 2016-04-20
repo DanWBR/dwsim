@@ -8,7 +8,7 @@
   </GeneralInfo>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Reactors.Reactor_Equilibrium</Type>
+      <Type>DWSIM.Reactor_Equilibrium</Type>
       <ReactorOperationMode>Isothermic</ReactorOperationMode>
       <InitialGibbsEnergy>-746671.241356</InitialGibbsEnergy>
       <FinalGibbsEnergy>-854667.263308</FinalGibbsEnergy>
@@ -58,7 +58,7 @@
       </CompoundConversions>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>416.992307</EnergyFlow>
       <ComponentDescription>EN-46d4f822-46d8-4fe8-a0e0-41a825bcb576</ComponentDescription>
       <ComponentName>e2</ComponentName>
@@ -77,7 +77,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>
@@ -972,7 +972,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Reactors.Reactor_Gibbs</Type>
+      <Type>DWSIM.Reactor_Gibbs</Type>
       <SolvMethod>DirectMinimization</SolvMethod>
       <ReactorOperationMode>Isothermic</ReactorOperationMode>
       <InitialGibbsEnergy>-746671.241356</InitialGibbsEnergy>
@@ -1046,7 +1046,7 @@
       <ElementMatrix>1,0,1,1,0:0,2,0,4,2:2,0,1,0,1</ElementMatrix>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>
@@ -1941,7 +1941,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>416.992307</EnergyFlow>
       <ComponentDescription>EN-08dc3a7b-ff57-41ec-b145-15fe697cce82</ComponentDescription>
       <ComponentName>e1</ComponentName>
@@ -1960,7 +1960,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>
@@ -2669,7 +2669,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Flows</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>
@@ -3552,7 +3552,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>
@@ -4280,7 +4280,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>

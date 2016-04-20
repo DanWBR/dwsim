@@ -28,7 +28,7 @@ Namespace DWSIM.Utilities.HYD
         Dim unfPP As PropertyPackages.UNIQUACPropertyPackage
         Dim prPP As PropertyPackages.PengRobinsonPropertyPackage
 
-        Sub New(ByVal materialStream As DWSIM.SimulationObjects.Streams.MaterialStream)
+        Sub New(ByVal materialStream As Streams.MaterialStream)
 
             am = New DWSIM.Utilities.HYD.AuxMethods
             prPP = New PropertyPackages.PengRobinsonPropertyPackage

@@ -23,10 +23,9 @@ Imports WeifenLuo.WinFormsUI
 Imports System.Drawing
 Imports System.Linq
 Imports System.IO
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
-Imports DWSIM.Thermodynamics.PropertyPackages
+Imports DWSIM.FlowsheetSolver
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports Microsoft.Win32
-Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports DWSIM.DWSIM.Flowsheet
@@ -66,7 +65,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public m_simultadjustsolverenabled As Boolean = True
 
     Public FormSurface As New frmSurface
-    Public FormProps As New frmProps
     Public FormLog As New frmLog
     Public FormMatList As New frmMatList
     Public FormSpreadsheet As New SpreadsheetForm
@@ -93,7 +91,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public WithEvents Options As New DWSIM.Flowsheet.FlowsheetVariables
 
-    Public CalculationQueue As Generic.Queue(Of DWSIM.Extras.StatusChangeEventArgs)
+    Public CalculationQueue As Generic.Queue(Of CalculationArgs)
 
     Public FlowsheetStates As Dictionary(Of Date, FlowsheetState)
 
@@ -171,7 +169,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Me.Options.BackupFileName = str & ".dwbcs"
 
-        Me.CalculationQueue = New Generic.Queue(Of DWSIM.Extras.StatusChangeEventArgs)
+        Me.CalculationQueue = New Generic.Queue(Of CalculationArgs)
 
         Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
 
@@ -216,7 +214,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             dckPanel.Parent = Me
 
             FormLog.DockPanel = Nothing
-            FormProps.DockPanel = Nothing
             FormMatList.DockPanel = Nothing
             FormSpreadsheet.DockPanel = Nothing
             FormWatch.DockPanel = Nothing
@@ -226,8 +223,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             FormMatList.Show(FormSpreadsheet.Pane, FormSpreadsheet)
             FormSurface.Show(FormSpreadsheet.Pane, Nothing)
             FormLog.Show(FormSurface.Pane, DockAlignment.Bottom, 0.2)
-            FormProps.Show(dckPanel)
-
+        
             dckPanel.BringToFront()
             dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
 
@@ -361,7 +357,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End If
 
         'dispose objects
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
             If obj.disposedValue = False Then obj.Dispose()
         Next
 
@@ -448,7 +444,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End If
     End Sub
 
-    Public Sub ProcessScripts(ByVal sourceevent As DWSIM.Extras.Script.EventType, ByVal sourceobj As DWSIM.Extras.Script.ObjectType, Optional ByVal sourceobjname As String = "")
+    Public Sub ProcessScripts(ByVal sourceevent As Script.EventType, ByVal sourceobj As Script.ObjectType, Optional ByVal sourceobjname As String = "")
 
         Me.UIThread(Sub()
                         If Not Me.ScriptCollection Is Nothing Then
@@ -488,7 +484,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
-    Public Sub AddComponentsRows(ByRef MaterialStream As DWSIM.SimulationObjects.Streams.MaterialStream)
+    Public Sub AddComponentsRows(ByRef MaterialStream As Streams.MaterialStream)
         If Me.Options.SelectedComponents.Count = 0 Then
             MessageBox.Show(DWSIM.App.GetLocalString("Nohcomponentesaadici"))
         Else
@@ -556,9 +552,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Function
 
-    Public Function GetFlowsheetSimulationObject(ByVal tag As String) As DWSIM.SimulationObjects.UnitOperations.BaseClass
+    Public Function GetFlowsheetSimulationObject(ByVal tag As String) As SharedClasses.UnitOperations.BaseClass
 
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
             If obj.GraphicObject.Tag = tag Then
                 Return obj
             End If
@@ -668,7 +664,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         If Collections.GraphicObjectCollection Is Nothing Then Collections.GraphicObjectCollection = New Dictionary(Of String, GraphicObject)
 
-        If Collections.FlowsheetObjectCollection Is Nothing Then Collections.FlowsheetObjectCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
+        If Collections.FlowsheetObjectCollection Is Nothing Then Collections.FlowsheetObjectCollection = New Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
 
         If Collections.OPT_SensAnalysisCollection Is Nothing Then Collections.OPT_SensAnalysisCollection = New List(Of DWSIM.Optimization.SensitivityAnalysisCase)
 
@@ -769,7 +765,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         FormMatList.DockState = DockState.Document
         FormSpreadsheet.DockState = DockState.Document
         FormSurface.DockState = DockState.Document
-        FormProps.DockState = DockState.DockLeft
         FormLog.DockState = DockState.DockBottom
 
     End Sub
@@ -840,10 +835,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         If Not Me.FormSurface.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
-            Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+            Dim obj As SharedClasses.UnitOperations.BaseClass = Collections.FlowsheetObjectCollection(Me.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
 
             'Call function to calculate flowsheet
-            Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
+            Dim objargs As New CalculationArgs
             With objargs
                 .Calculated = False
                 .Tag = obj.GraphicObject.Tag
@@ -854,7 +849,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
             CalculationQueue.Enqueue(objargs)
 
-            CalculateAll2(Me, My.Settings.SolverMode, , True)
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, , True)
 
         End If
 
@@ -1132,9 +1127,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton13.Click
         If My.Computer.Keyboard.ShiftKeyDown Then
-            CalculateAll(Me)
+            FlowsheetSolver.FlowsheetSolver.CalculateAll(Me)
         Else
-            CalculateAll2(Me, My.Settings.SolverMode)
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
         End If
     End Sub
 
@@ -1405,8 +1400,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     Me.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatingData") & " " & Math.Round(decompressedstream.Length / 1024).ToString & " KB", Color.Brown, MessageType.Information)
                     decompressedstream.Position = 0
                     Dim xdoc As XDocument = XDocument.Load(decompressedstream)
-                    DWSIM.SimulationObjects.UnitOperations.Flowsheet.UpdateProcessData(Me, xdoc)
-                    DWSIM.Flowsheet.FlowsheetSolver.UpdateDisplayStatus(Me)
+                    Flowsheet.UpdateProcessData(Me, xdoc)
+                    FlowsheetSolver.FlowsheetSolver.UpdateDisplayStatus(Me)
                     Me.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatedDataOK"), Color.Brown, MessageType.Information)
                 End Using
             End Using
@@ -1576,8 +1571,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
                         Else
 
-                            Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Me.Collections.FlowsheetObjectCollection(SelectedObj.Name)
-                            DeCalculateDisconnectedObject(Me, SelectedObj, "Out")
+                            Dim obj As SharedClasses.UnitOperations.BaseClass = Me.Collections.FlowsheetObjectCollection(SelectedObj.Name)
 
                             gobj = SelectedObj
 
@@ -1614,13 +1608,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                             If gobj.ObjectType = ObjectType.OT_Spec Then
                                 Dim specobj As Spec = Me.Collections.FlowsheetObjectCollection(namesel)
-                                If Me.Collections.FlowsheetObjectCollection.ContainsKey(specobj.TargetObjectData.m_ID) Then
-                                    Me.Collections.FlowsheetObjectCollection(specobj.TargetObjectData.m_ID).IsSpecAttached = False
-                                    Me.Collections.FlowsheetObjectCollection(specobj.TargetObjectData.m_ID).AttachedSpecId = ""
+                                If Me.Collections.FlowsheetObjectCollection.ContainsKey(specobj.TargetObjectData.ID) Then
+                                    Me.Collections.FlowsheetObjectCollection(specobj.TargetObjectData.ID).IsSpecAttached = False
+                                    Me.Collections.FlowsheetObjectCollection(specobj.TargetObjectData.ID).AttachedSpecId = ""
                                 End If
-                                If Me.Collections.FlowsheetObjectCollection.ContainsKey(specobj.SourceObjectData.m_ID) Then
-                                    Me.Collections.FlowsheetObjectCollection(specobj.SourceObjectData.m_ID).IsSpecAttached = False
-                                    Me.Collections.FlowsheetObjectCollection(specobj.SourceObjectData.m_ID).AttachedSpecId = ""
+                                If Me.Collections.FlowsheetObjectCollection.ContainsKey(specobj.SourceObjectData.ID) Then
+                                    Me.Collections.FlowsheetObjectCollection(specobj.SourceObjectData.ID).IsSpecAttached = False
+                                    Me.Collections.FlowsheetObjectCollection(specobj.SourceObjectData.ID).AttachedSpecId = ""
                                 End If
                             End If
 
@@ -1631,8 +1625,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     End If
                 End If
             End If
-
-            If triggercalc Then ProcessCalculationQueue(Me, Nothing, False, False) Else Me.CalculationQueue.Clear()
 
         End If
     End Sub
@@ -1669,8 +1661,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                             i2 = conptObj.AttachedConnector.AttachedToConnectorIndex
                             gobj1 = gObjTo
                             gobj2 = gObjFrom
-                            DeCalculateDisconnectedObject(Me, SelObj, "In")
-                            conptObj.AttachedConnector.AttachedFrom.OutputConnectors(conptObj.AttachedConnector.AttachedFromConnectorIndex).IsAttached = False
+                             conptObj.AttachedConnector.AttachedFrom.OutputConnectors(conptObj.AttachedConnector.AttachedFromConnectorIndex).IsAttached = False
                             conptObj.AttachedConnector.AttachedFrom.OutputConnectors(conptObj.AttachedConnector.AttachedFromConnectorIndex).AttachedConnector = Nothing
                             Me.FormSurface.FlowsheetDesignSurface.SelectedObjects.Clear()
                             conptObj.IsAttached = False
@@ -1687,7 +1678,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                             i2 = conptObj.AttachedConnector.AttachedToConnectorIndex
                             gobj1 = gObjFrom
                             gobj2 = gObjTo
-                            DeCalculateDisconnectedObject(Me, SelObj, "Out")
                             conptObj.AttachedConnector.AttachedTo.InputConnectors(conptObj.AttachedConnector.AttachedToConnectorIndex).IsAttached = False
                             conptObj.AttachedConnector.AttachedTo.InputConnectors(conptObj.AttachedConnector.AttachedToConnectorIndex).AttachedConnector = Nothing
                             conptObj.IsAttached = False
@@ -1702,8 +1692,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     i2 = SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex
                     gobj1 = SelObj
                     gobj2 = ObjToDisconnect
-                    DeCalculateDisconnectedObject(Me, SelObj, "Out")
-                    SelObj.EnergyConnector.AttachedConnector.AttachedTo.InputConnectors(SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex).IsAttached = False
+                     SelObj.EnergyConnector.AttachedConnector.AttachedTo.InputConnectors(SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex).IsAttached = False
                     SelObj.EnergyConnector.AttachedConnector.AttachedTo.InputConnectors(SelObj.EnergyConnector.AttachedConnector.AttachedToConnectorIndex).AttachedConnector = Nothing
                     SelObj.EnergyConnector.IsAttached = False
                     Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(SelObj.EnergyConnector.AttachedConnector)
@@ -1718,7 +1707,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                                      .NewValue = i2,
                                      .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectDisconnected"), gobj1.Tag, gobj2.Tag)})
 
-        If triggercalc Then ProcessCalculationQueue(Me, Nothing, False, False) Else Me.CalculationQueue.Clear()
+        'If triggercalc Then ProcessCalculationQueue(Me, Nothing, False, False) Else Me.CalculationQueue.Clear()
 
     End Sub
 
@@ -1933,269 +1922,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #End Region
 
-#Region "    Property Grid 2 Populate Functions "
-
-    Public Function PopulatePGEx2(ByRef gobj As GraphicObject)
-
-        If gobj.ObjectType = ObjectType.GO_Table Then
-
-            Dim gobj2 As TableGraphic = CType(gobj, TableGraphic)
-
-            With Me.FormProps.PGEx2
-
-                .Item.Clear()
-
-                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj2, "LineColor", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Cordotextodatabela"), True)
-                .Item(.Item.Count - 1).Tag2 = "LineColor"
-                .Item.Add(DWSIM.App.GetLocalString("Cabealho"), gobj2, "HeaderFont", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodocabeal"), True)
-                .Item(.Item.Count - 1).Tag2 = "HeaderFont"
-                .Item.Add(DWSIM.App.GetLocalString("Coluna1Fonte"), gobj2, "FontCol1", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna"), True)
-                .Item(.Item.Count - 1).Tag2 = "FontCol1"
-                .Item.Add(DWSIM.App.GetLocalString("Coluna2Fonte"), gobj2, "FontCol2", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna2"), True)
-                .Item(.Item.Count - 1).Tag2 = "FontCol2"
-                .Item.Add(DWSIM.App.GetLocalString("Coluna3Fonte"), gobj2, "FontCol3", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna3"), True)
-                .Item(.Item.Count - 1).Tag2 = "FontCol3"
-                .Item.Add(DWSIM.App.GetLocalString("Tratamentodotexto"), gobj2, "TextRenderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Tipodesuavizaoaplica"), True)
-                .Item(.Item.Count - 1).Tag2 = "TextRenderStyle"
-                .Item.Add(DWSIM.App.GetLocalString("Estilodaborda"), gobj2, "BorderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Estilodabordatraceja"), True)
-                .Item(.Item.Count - 1).Tag2 = "BorderStyle"
-                .Item.Add(DWSIM.App.GetLocalString("Cordaborda"), gobj2, "BorderColor", False, DWSIM.App.GetLocalString("Aparncia2"), "", True)
-                .Item(.Item.Count - 1).Tag2 = "BorderColor"
-                .Item.Add(DWSIM.App.GetLocalString("Espaamento"), gobj2, "Padding", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Espaamentoentreotext"), True)
-                .Item(.Item.Count - 1).Tag2 = "Padding"
-                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Inclinaodatabelaemre"), True)
-                .Item(.Item.Count - 1).Tag2 = "Rotation"
-                .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj2, "IsGradientBackground", False, DWSIM.App.GetLocalString("Fundo"), "Selecione se deve ser utilizado um gradiente no fundo da tabela", True)
-                .Item(.Item.Count - 1).Tag2 = "IsGradientBackground"
-                .Item.Add(DWSIM.App.GetLocalString("Corsemgradiente"), gobj2, "FillColor", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Corsemgradiente"), True)
-                .Item(.Item.Count - 1).Tag2 = "FillColor"
-                .Item.Add(DWSIM.App.GetLocalString("Cor1gradiente"), gobj2, "BackgroundGradientColor1", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor1dogradientecasoa"), True)
-                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor1"
-                .Item.Add(DWSIM.App.GetLocalString("Cor2gradiente"), gobj2, "BackgroundGradientColor2", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor2dogradientecasoa"), True)
-                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor2"
-                .Item.Add(DWSIM.App.GetLocalString("Opacidade0255"), gobj2, "Opacity", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Nveldetransparnciada"), True)
-                .Item(.Item.Count - 1).Tag2 = "Opacity"
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-
-            End With
-
-            gobj2 = Nothing
-            FormProps.FTSProps.SelectedItem = FormProps.TSProps
-
-        ElseIf gobj.ObjectType = ObjectType.GO_MasterTable Then
-
-            Dim gobj2 As MasterTableGraphic = CType(gobj, MasterTableGraphic)
-
-            With Me.FormProps.PGEx2
-
-                .Item.Clear()
-
-                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj2, "LineColor", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Cordotextodatabela"), True)
-                .Item(.Item.Count - 1).Tag2 = "LineColor"
-                .Item.Add(DWSIM.App.GetLocalString("Cabealho"), gobj2, "HeaderFont", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodocabeal"), True)
-                .Item(.Item.Count - 1).Tag2 = "HeaderFont"
-                .Item.Add(DWSIM.App.GetLocalString("Coluna1Fonte"), gobj2, "FontCol1", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna"), True)
-                .Item(.Item.Count - 1).Tag2 = "FontCol1"
-                .Item.Add(DWSIM.App.GetLocalString("Coluna2Fonte"), gobj2, "FontCol2", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna2"), True)
-                .Item(.Item.Count - 1).Tag2 = "FontCol2"
-                .Item.Add(DWSIM.App.GetLocalString("Coluna3Fonte"), gobj2, "FontCol3", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna3"), True)
-                .Item(.Item.Count - 1).Tag2 = "FontCol3"
-                .Item.Add(DWSIM.App.GetLocalString("HeaderText"), gobj2, "HeaderText", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString(""), True)
-                .Item(.Item.Count - 1).Tag2 = "HeaderText"
-                .Item.Add(DWSIM.App.GetLocalString("Tratamentodotexto"), gobj2, "TextRenderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Tipodesuavizaoaplica"), True)
-                .Item(.Item.Count - 1).Tag2 = "TextRenderStyle"
-                .Item.Add(DWSIM.App.GetLocalString("Estilodaborda"), gobj2, "BorderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Estilodabordatraceja"), True)
-                .Item(.Item.Count - 1).Tag2 = "BorderStyle"
-                .Item.Add(DWSIM.App.GetLocalString("Cordaborda"), gobj2, "BorderColor", False, DWSIM.App.GetLocalString("Aparncia2"), "", True)
-                .Item(.Item.Count - 1).Tag2 = "BorderColor"
-                .Item.Add(DWSIM.App.GetLocalString("Espaamento"), gobj2, "Padding", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Espaamentoentreotext"), True)
-                .Item(.Item.Count - 1).Tag2 = "Padding"
-                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Inclinaodatabelaemre"), True)
-                .Item(.Item.Count - 1).Tag2 = "Rotation"
-                .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj2, "IsGradientBackground", False, DWSIM.App.GetLocalString("Fundo"), "Selecione se deve ser utilizado um gradiente no fundo da tabela", True)
-                .Item(.Item.Count - 1).Tag2 = "IsGradientBackground"
-                .Item.Add(DWSIM.App.GetLocalString("Corsemgradiente"), gobj2, "FillColor", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Corsemgradiente"), True)
-                .Item(.Item.Count - 1).Tag2 = "FillColor"
-                .Item.Add(DWSIM.App.GetLocalString("Cor1gradiente"), gobj2, "BackgroundGradientColor1", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor1dogradientecasoa"), True)
-                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor1"
-                .Item.Add(DWSIM.App.GetLocalString("Cor2gradiente"), gobj2, "BackgroundGradientColor2", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor2dogradientecasoa"), True)
-                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor2"
-                .Item.Add(DWSIM.App.GetLocalString("Opacidade0255"), gobj2, "Opacity", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Nveldetransparnciada"), True)
-                .Item(.Item.Count - 1).Tag2 = "Opacity"
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-
-            End With
-
-            gobj2 = Nothing
-            FormProps.FTSProps.SelectedItem = FormProps.TSProps
-
-        ElseIf gobj.ObjectType = ObjectType.GO_SpreadsheetTable Then
-
-            Dim gobj2 As SpreadsheetTableGraphic = CType(gobj, SpreadsheetTableGraphic)
-
-            With Me.FormProps.PGEx2
-
-                .Item.Clear()
-
-                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj2, "LineColor", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Cordotextodatabela"), True)
-                .Item(.Item.Count - 1).Tag2 = "LineColor"
-                .Item.Add(DWSIM.App.GetLocalString("Coluna1Fonte"), gobj2, "FontCol1", False, DWSIM.App.GetLocalString("Formataodotexto1"), DWSIM.App.GetLocalString("Fontedotextodacoluna"), True)
-                .Item(.Item.Count - 1).Tag2 = "FontCol1"
-                .Item.Add(DWSIM.App.GetLocalString("Tratamentodotexto"), gobj2, "TextRenderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Tipodesuavizaoaplica"), True)
-                .Item(.Item.Count - 1).Tag2 = "TextRenderStyle"
-                .Item.Add(DWSIM.App.GetLocalString("Estilodaborda"), gobj2, "BorderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Estilodabordatraceja"), True)
-                .Item(.Item.Count - 1).Tag2 = "BorderStyle"
-                .Item.Add(DWSIM.App.GetLocalString("Cordaborda"), gobj2, "BorderColor", False, DWSIM.App.GetLocalString("Aparncia2"), "", True)
-                .Item(.Item.Count - 1).Tag2 = "BorderColor"
-                .Item.Add(DWSIM.App.GetLocalString("Espaamento"), gobj2, "Padding", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Espaamentoentreotext"), True)
-                .Item(.Item.Count - 1).Tag2 = "Padding"
-                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Inclinaodatabelaemre"), True)
-                .Item(.Item.Count - 1).Tag2 = "Rotation"
-                .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj2, "IsGradientBackground", False, DWSIM.App.GetLocalString("Fundo"), "Selecione se deve ser utilizado um gradiente no fundo da tabela", True)
-                .Item(.Item.Count - 1).Tag2 = "IsGradientBackground"
-                .Item.Add(DWSIM.App.GetLocalString("Corsemgradiente"), gobj2, "FillColor", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Corsemgradiente"), True)
-                .Item(.Item.Count - 1).Tag2 = "FillColor"
-                .Item.Add(DWSIM.App.GetLocalString("Cor1gradiente"), gobj2, "BackgroundGradientColor1", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor1dogradientecasoa"), True)
-                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor1"
-                .Item.Add(DWSIM.App.GetLocalString("Cor2gradiente"), gobj2, "BackgroundGradientColor2", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Cor2dogradientecasoa"), True)
-                .Item(.Item.Count - 1).Tag2 = "BackgroundGradientColor2"
-                .Item.Add(DWSIM.App.GetLocalString("Opacidade0255"), gobj2, "Opacity", False, DWSIM.App.GetLocalString("Fundo"), DWSIM.App.GetLocalString("Nveldetransparnciada"), True)
-                .Item(.Item.Count - 1).Tag2 = "Opacity"
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-
-            End With
-
-            gobj2 = Nothing
-            FormProps.FTSProps.SelectedItem = FormProps.TSProps
-
-        ElseIf gobj.ObjectType = ObjectType.GO_Text Then
-
-            Dim gobj2 As TextGraphic = CType(gobj, TextGraphic)
-
-            With Me.FormProps.PGEx2
-
-                .Item.Clear()
-
-                .Item.Add(DWSIM.App.GetLocalString("Nome"), gobj.Tag, False, DWSIM.App.GetLocalString("Descrio1"), DWSIM.App.GetLocalString("Nomedoobjeto"), True)
-                .Item(.Item.Count - 1).Tag2 = "Tag"
-                .Item.Add(DWSIM.App.GetLocalString("Texto"), gobj2, "Text", False, "", DWSIM.App.GetLocalString("Textoaserexibidonaca"), True)
-                .Item(.Item.Count - 1).Tag2 = "Text"
-                .Item(.Item.Count - 1).CustomEditor = New System.ComponentModel.Design.MultilineStringEditor
-                .Item.Add(DWSIM.App.GetLocalString("Tratamentodotexto"), gobj2, "TextRenderStyle", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Tipodesuavizaoaplica"), True)
-                .Item(.Item.Count - 1).Tag2 = "TextRenderStyle"
-                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj2, "Color", False, "", DWSIM.App.GetLocalString("Cordotexto"), True)
-                .Item(.Item.Count - 1).Tag2 = "Color"
-                .Item.Add(DWSIM.App.GetLocalString("Fonte"), gobj2, "Font", False, "", DWSIM.App.GetLocalString("Fontedotexto"), True)
-                .Item(.Item.Count - 1).Tag2 = "Font"
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-
-            End With
-
-            gobj2 = Nothing
-            FormProps.FTSProps.SelectedItem = FormProps.TSObj
-
-        ElseIf gobj.ObjectType = ObjectType.GO_Image Then
-
-            Dim gobj2 As EmbeddedImageGraphic = CType(gobj, EmbeddedImageGraphic)
-
-            With Me.FormProps.PGEx2
-
-                .Item.Clear()
-
-                .Item.Add(DWSIM.App.GetLocalString("Autodimensionar"), gobj2, "AutoSize", False, "", DWSIM.App.GetLocalString("SelecioLiquidrueparaque"), True)
-                .Item(.Item.Count - 1).Tag2 = "AutoSize"
-                .Item.Add(DWSIM.App.GetLocalString("Altura"), gobj2, "Height", False, "", DWSIM.App.GetLocalString("Alturadafiguraempixe"), True)
-                .Item(.Item.Count - 1).Tag2 = "Height"
-                .Item.Add(DWSIM.App.GetLocalString("Largura"), gobj2, "Width", False, "", DWSIM.App.GetLocalString("Larguradafiguraempix"), True)
-                .Item(.Item.Count - 1).Tag2 = "Width"
-                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, "", DWSIM.App.GetLocalString("Rotaodafigurade0a360"), True)
-                .Item(.Item.Count - 1).Tag2 = "Rotation"
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-
-            End With
-
-            gobj2 = Nothing
-            FormProps.FTSProps.SelectedItem = FormProps.TSObj
-
-        ElseIf gobj.ObjectType = ObjectType.GO_Animation Then
-
-            Dim gobj2 As EmbeddedAnimationGraphic = CType(gobj, EmbeddedAnimationGraphic)
-
-            With Me.FormProps.PGEx2
-
-                .Item.Clear()
-
-                .Item.Add(DWSIM.App.GetLocalString("Autodimensionar"), gobj2, "AutoSize", False, "", DWSIM.App.GetLocalString("SelecioLiquidrueparaque"), True)
-                .Item(.Item.Count - 1).Tag2 = "AutoSize"
-                .Item.Add(DWSIM.App.GetLocalString("Altura"), gobj2, "Height", False, "", DWSIM.App.GetLocalString("Alturadafiguraempixe"), True)
-                .Item(.Item.Count - 1).Tag2 = "Height"
-                .Item.Add(DWSIM.App.GetLocalString("Largura"), gobj2, "Width", False, "", DWSIM.App.GetLocalString("Larguradafiguraempix"), True)
-                .Item(.Item.Count - 1).Tag2 = "Width"
-                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj2, "Rotation", False, "", DWSIM.App.GetLocalString("Rotaodafigurade0a360"), True)
-                .Item(.Item.Count - 1).Tag2 = "Rotation"
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-
-            End With
-
-            gobj2 = Nothing
-            FormProps.FTSProps.SelectedItem = FormProps.TSObj
-
-        Else
-
-            With Me.FormProps.PGEx2
-
-                .Item.Clear()
-
-                .Item.Add(DWSIM.App.GetLocalString("Nome"), gobj, "Tag", False, DWSIM.App.GetLocalString("Descrio1"), DWSIM.App.GetLocalString("Nomedoobjeto"), True)
-                .Item(.Item.Count - 1).Tag2 = "Tag"
-                .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj, "GradientMode", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("SelecioLiquidrueparaapl"), True)
-                .Item(.Item.Count - 1).Tag2 = "GradientMode"
-                .Item.Add("Gradiente_Cor1", gobj, "GradientColor1", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Cor1dogradienteseapl"), True)
-                .Item(.Item.Count - 1).Tag2 = "GradientColor1"
-                .Item.Add("Gradiente_Cor2", gobj, "GradientColor2", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Cor2dogradienteseapl"), True)
-                .Item(.Item.Count - 1).Tag2 = "GradientColor2"
-                .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj, "FillColor", False, DWSIM.App.GetLocalString("Aparncia2"), "Cor de fundo, caso o modo de gradiente nao esteja ativado", True)
-                .Item(.Item.Count - 1).Tag2 = "FillColor"
-                .Item.Add(DWSIM.App.GetLocalString("EspessuradaBorda"), gobj, "LineWidth", False, DWSIM.App.GetLocalString("Aparncia2"), DWSIM.App.GetLocalString("Espessuradabordadoob"), True)
-                .Item(.Item.Count - 1).Tag2 = "LineWidth"
-                .Item.Add(DWSIM.App.GetLocalString("Comprimento"), gobj, "Width", False, DWSIM.App.GetLocalString("Tamanho3"), DWSIM.App.GetLocalString("Comprimentodoobjetoe"), True)
-                .Item(.Item.Count - 1).Tag2 = "Width"
-                .Item.Add(DWSIM.App.GetLocalString("Altura"), gobj, "Height", False, DWSIM.App.GetLocalString("Tamanho3"), DWSIM.App.GetLocalString("Alturadoobjetoempixe"), True)
-                .Item(.Item.Count - 1).Tag2 = "Height"
-                .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj, "Rotation", False, DWSIM.App.GetLocalString("Tamanho3"), DWSIM.App.GetLocalString("Rotaodoobjetode0a360"), True)
-                .Item(.Item.Count - 1).Tag2 = "Rotation"
-                .Item.Add("X", gobj, "X", False, DWSIM.App.GetLocalString("Coordenadas4"), DWSIM.App.GetLocalString("Coordenadahorizontal"), True)
-                .Item(.Item.Count - 1).Tag2 = "X"
-                .Item.Add("Y", gobj, "Y", False, DWSIM.App.GetLocalString("Coordenadas4"), DWSIM.App.GetLocalString("Coordenadaverticaldo"), True)
-                .Item(.Item.Count - 1).Tag2 = "Y"
-
-                .PropertySort = PropertySort.Categorized
-                .ShowCustomProperties = True
-
-            End With
-
-            FormProps.FTSProps.SelectedItem = FormProps.TSProps
-
-        End If
-
-        Return 1
-
-    End Function
-
-#End Region
-
 #Region "    Plugin/CAPE-OPEN MO Management "
 
     Private Sub CreatePluginsList()
@@ -2239,7 +1965,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         'process plugin list
 
-        For Each icomo As DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo In FormMain.COMonitoringObjects.Values
+        For Each icomo As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo In FormMain.COMonitoringObjects.Values
 
             Dim tsmi As New ToolStripMenuItem
             With tsmi
@@ -2265,7 +1991,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Dim tsmi As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
 
-        Dim myCOMO As DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo = FormMain.COMonitoringObjects.Item(tsmi.Tag)
+        Dim myCOMO As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo = FormMain.COMonitoringObjects.Item(tsmi.Tag)
 
         Dim _como As Object = Nothing
         Try
@@ -2318,7 +2044,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Public Function CreateMaterialTemplate(ByVal materialTemplateName As String) As Object Implements CapeOpen.ICapeMaterialTemplateSystem.CreateMaterialTemplate
-        For Each pp As PropertyPackage In Me.Options.PropertyPackages.Values
+        For Each pp As Thermodynamics.PropertyPackages.PropertyPackage In Me.Options.PropertyPackages.Values
             If materialTemplateName = pp.ComponentName Then
                 Dim mat As New Streams.MaterialStream("temporary stream", "temporary stream", Me, pp)
                 Me.AddComponentsRows(mat)
@@ -2334,7 +2060,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public ReadOnly Property MaterialTemplates() As Object Implements CapeOpen.ICapeMaterialTemplateSystem.MaterialTemplates
         Get
             Dim pps As New ArrayList
-            For Each p As PropertyPackage In Me.Options.PropertyPackages.Values
+            For Each p As Thermodynamics.PropertyPackages.PropertyPackage In Me.Options.PropertyPackages.Values
                 pps.Add(p.ComponentName)
             Next
             Dim arr2(pps.Count - 1) As String
@@ -2344,8 +2070,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Property
 
     Public Function GetStreamCollection() As Object Implements CapeOpen.ICapeFlowsheetMonitoring.GetStreamCollection
-        Dim _col As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CCapeCollection
-        For Each o As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
+        Dim _col As New CCapeCollection
+        For Each o As SharedClasses.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
             If TryCast(o, CapeOpen.ICapeThermoMaterialObject) IsNot Nothing Then
                 'object is a CAPE-OPEN Material Object
                 _col._icol.Add(o)
@@ -2358,8 +2084,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Function
 
     Public Function GetUnitOperationCollection() As Object Implements CapeOpen.ICapeFlowsheetMonitoring.GetUnitOperationCollection
-        Dim _col As New DWSIM.SimulationObjects.UnitOperations.Auxiliary.CapeOpen.CCapeCollection
-        For Each o As DWSIM.SimulationObjects.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
+        Dim _col As New CCapeCollection
+        For Each o As SharedClasses.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
             If TryCast(o, CapeOpen.ICapeUnit) IsNot Nothing Then
                 'object is a CAPE-OPEN Unit Operation
                 _col._icol.Add(o)
@@ -2516,16 +2242,16 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-        For Each so As DWSIM.SimulationObjects.UnitOperations.BaseClass In Collections.FlowsheetObjectCollection.Values
+        For Each so As SharedClasses.UnitOperations.BaseClass In Collections.FlowsheetObjectCollection.Values
             If so.GraphicObject.Selected Then
                 xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
                 If TypeOf so Is Streams.MaterialStream Then
                     If Not ppackages.Contains(DirectCast(so, Streams.MaterialStream).PropertyPackage.Name) Then
                         ppackages.Add(DirectCast(so, Streams.MaterialStream).PropertyPackage.Name)
                     End If
-                ElseIf TypeOf so Is DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass Then
-                    If Not ppackages.Contains(DirectCast(so, DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass).PropertyPackage.Name) Then
-                        ppackages.Add(DirectCast(so, DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass).PropertyPackage.Name)
+                ElseIf TypeOf so Is SharedClasses.UnitOperations.UnitOpBaseClass Then
+                    If Not ppackages.Contains(DirectCast(so, SharedClasses.UnitOperations.UnitOpBaseClass).PropertyPackage.Name) Then
+                        ppackages.Add(DirectCast(so, SharedClasses.UnitOperations.UnitOpBaseClass).PropertyPackage.Name)
                     End If
                 End If
             End If
@@ -2541,7 +2267,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages")
 
-        For Each pp As KeyValuePair(Of String, PropertyPackage) In Options.PropertyPackages
+        For Each pp As KeyValuePair(Of String, Thermodynamics.PropertyPackages.PropertyPackage) In Options.PropertyPackages
             Dim createdms As Boolean = False
             If pp.Value.CurrentMaterialStream Is Nothing Then
                 Dim ms As New Streams.MaterialStream("", "", Me, pp.Value)
@@ -2622,7 +2348,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             For Each xel As XElement In data
                 Try
                     Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                    Dim obj As PropertyPackage = Activator.CreateInstance(t)
+                    Dim obj As Thermodynamics.PropertyPackages.PropertyPackage = Activator.CreateInstance(t)
                     obj.LoadData(xel.Elements.ToList)
                     obj.UniqueID = pkey & obj.UniqueID
                     obj.Tag = obj.Tag & " (C)"
@@ -2639,14 +2365,14 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         FormSurface.FlowsheetDesignSurface.SelectedObject = Nothing
         FormSurface.FlowsheetDesignSurface.SelectedObjects.Clear()
 
-        Dim objlist As New Concurrent.ConcurrentBag(Of DWSIM.SimulationObjects.UnitOperations.BaseClass)
+        Dim objlist As New Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass)
 
         Dim compoundstoremove As New List(Of String)
 
         For Each xel As XElement In data
             Dim id As String = pkey & xel.<Name>.Value
             Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-            Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Activator.CreateInstance(t)
+            Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
             Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
                                 FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
             obj.GraphicObject = gobj
@@ -2670,9 +2396,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             If My.Settings.ClipboardCopyMode_PropertyPackages = 1 Then
                 If TypeOf obj Is Streams.MaterialStream Then
                     DirectCast(obj, Streams.MaterialStream).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, Streams.MaterialStream)._ppid)
-                ElseIf TypeOf obj Is DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass Then
-                    If DirectCast(obj, DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass)._ppid <> "" Then
-                        DirectCast(obj, DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass)._ppid)
+                ElseIf TypeOf obj Is SharedClasses.UnitOperations.UnitOpBaseClass Then
+                    If DirectCast(obj, SharedClasses.UnitOperations.UnitOpBaseClass)._ppid <> "" Then
+                        DirectCast(obj, SharedClasses.UnitOperations.UnitOpBaseClass).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, SharedClasses.UnitOperations.UnitOpBaseClass)._ppid)
                     End If
                 End If
             End If
@@ -2681,7 +2407,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         If My.Settings.ClipboardCopyMode_Compounds = 0 Then
 
-            For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In objlist
+            For Each obj As SharedClasses.UnitOperations.BaseClass In objlist
                 If TypeOf obj Is Streams.MaterialStream Then
                     For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
                         For Each comp In compoundstoremove
@@ -2823,14 +2549,14 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     If undo Then
                         Me.Options.PropertyPackages.Remove(act.ObjID)
                     Else
-                        Dim pp As PropertyPackage = DirectCast(act.NewValue, PropertyPackage)
+                        Dim pp As Thermodynamics.PropertyPackages.PropertyPackage = DirectCast(act.NewValue, Thermodynamics.PropertyPackages.PropertyPackage)
                         Me.Options.PropertyPackages.Add(pp.UniqueID, pp)
                     End If
 
                 Case UndoRedoActionType.PropertyPackageRemoved
 
                     If undo Then
-                        Dim pp As PropertyPackage = DirectCast(act.NewValue, PropertyPackage)
+                        Dim pp As Thermodynamics.PropertyPackages.PropertyPackage = DirectCast(act.NewValue, Thermodynamics.PropertyPackages.PropertyPackage)
                         Me.Options.PropertyPackages.Add(pp.UniqueID, pp)
                     Else
                         Me.Options.PropertyPackages.Remove(act.ObjID)
@@ -2838,30 +2564,30 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                 Case UndoRedoActionType.PropertyPackagePropertyChanged
 
-                    Dim pp As PropertyPackage = DirectCast(act.Tag, PropertyPackage)
+                    Dim pp As Thermodynamics.PropertyPackages.PropertyPackage = DirectCast(act.Tag, Thermodynamics.PropertyPackages.PropertyPackage)
 
                     If act.PropertyName = "PARAM" Then
                         pp.Parameters(act.ObjID) = pval
                     ElseIf act.PropertyName = "PR_IP" Then
-                        Dim prip As Auxiliary.PengRobinson = pp.GetType.GetField("m_pr").GetValue(pp)
+                        Dim prip As PengRobinson = pp.GetType.GetField("m_pr").GetValue(pp)
                         prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
                     ElseIf act.PropertyName = "PRSV2_KIJ" Then
-                        Dim prip As Auxiliary.PRSV2 = pp.GetType.GetField("m_pr").GetValue(pp)
+                        Dim prip As PRSV2 = pp.GetType.GetField("m_pr").GetValue(pp)
                         prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
                     ElseIf act.PropertyName = "PRSV2_KJI Then" Then
-                        Dim prip As Auxiliary.PRSV2 = pp.GetType.GetField("m_pr").GetValue(pp)
+                        Dim prip As PRSV2 = pp.GetType.GetField("m_pr").GetValue(pp)
                         prip.InteractionParameters(act.ObjID)(act.ObjID2).kji = pval
                     ElseIf act.PropertyName = "PRSV2VL_KIJ" Then
-                        Dim prip As Auxiliary.PRSV2VL = pp.GetType.GetField("m_pr").GetValue(pp)
+                        Dim prip As PRSV2VL = pp.GetType.GetField("m_pr").GetValue(pp)
                         prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
                     ElseIf act.PropertyName = "PRSV2VL_KJI Then" Then
-                        Dim prip As Auxiliary.PRSV2VL = pp.GetType.GetField("m_pr").GetValue(pp)
+                        Dim prip As PRSV2VL = pp.GetType.GetField("m_pr").GetValue(pp)
                         prip.InteractionParameters(act.ObjID)(act.ObjID2).kji = pval
                     ElseIf act.PropertyName = "LK_IP" Then
-                        Dim prip As Auxiliary.LeeKeslerPlocker = pp.GetType.GetField("m_lk").GetValue(pp)
+                        Dim prip As LeeKeslerPlocker = pp.GetType.GetField("m_lk").GetValue(pp)
                         prip.InteractionParameters(act.ObjID)(act.ObjID2).kij = pval
                     ElseIf act.PropertyName.Contains("NRTL") Then
-                        Dim nrtlip As Auxiliary.NRTL = pp.GetType.GetProperty("m_uni").GetValue(pp, Nothing)
+                        Dim nrtlip As NRTL = pp.GetType.GetProperty("m_uni").GetValue(pp, Nothing)
                         Select Case act.PropertyName
                             Case "NRTL_A12"
                                 nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).A12 = pval
@@ -2879,7 +2605,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                                 nrtlip.InteractionParameters(act.ObjID)(act.ObjID2).alpha12 = pval
                         End Select
                     ElseIf act.PropertyName.Contains("UNIQUAC") Then
-                        Dim uniquacip As Auxiliary.UNIQUAC = pp.GetType.GetProperty("m_uni").GetValue(pp, Nothing)
+                        Dim uniquacip As UNIQUAC = pp.GetType.GetProperty("m_uni").GetValue(pp, Nothing)
                         Select Case act.PropertyName
                             Case "UNIQUAC_A12"
                                 uniquacip.InteractionParameters(act.ObjID)(act.ObjID2).A12 = pval
@@ -3091,7 +2817,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         PopulateUndoRedoItems()
 
-        If My.Settings.UndoRedo_RecalculateFlowsheet Then CalculateAll2(Me, My.Settings.SolverMode)
+        If My.Settings.UndoRedo_RecalculateFlowsheet Then FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
 
     End Sub
 
@@ -3107,7 +2833,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         PopulateUndoRedoItems()
 
-        If My.Settings.UndoRedo_RecalculateFlowsheet Then CalculateAll2(Me, My.Settings.SolverMode)
+        If My.Settings.UndoRedo_RecalculateFlowsheet Then FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
 
     End Sub
 
@@ -3185,7 +2911,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Public Sub CheckStatus() Implements Interfaces.IFlowsheet.CheckStatus, IFlowsheetGUI.CheckStatus
-        CheckCalculatorStatus()
+        'FlowsheetSolver.FlowsheetSolver.CheckCalculatorStatus()
     End Sub
 
     Public Function GetTranslatedString(text As String, locale As String) As String Implements Interfaces.IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString

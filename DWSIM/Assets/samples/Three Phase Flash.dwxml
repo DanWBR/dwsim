@@ -98,7 +98,7 @@
   </Settings>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent>Phenol (C6H6O)</ReferenceSolvent>
@@ -863,7 +863,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Valve</Type>
+      <Type>DWSIM.Valve</Type>
       <CalcMode>DeltaP</CalcMode>
       <DeltaP>500002</DeltaP>
       <DeltaT>0.0788818098189381</DeltaT>
@@ -893,7 +893,7 @@
       <PropertyPackage></PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <IsElectrolyteStream>false</IsElectrolyteStream>

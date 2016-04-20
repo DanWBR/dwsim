@@ -8,7 +8,7 @@
   </GeneralInfo>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>1048.135585</EnergyFlow>
       <ComponentDescription>EN-7edb4dab-3bcd-44a3-9d5c-e92afc7f32c2</ComponentDescription>
       <ComponentName>ESTR-006</ComponentName>
@@ -31,7 +31,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Pressure_and_Enthalpy</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -2489,7 +2489,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
+      <Type>DWSIM.Vessel</Type>
       <FlashSpecification>PH</FlashSpecification>
       <PressureCalculation>Average</PressureCalculation>
       <OverrideT>true</OverrideT>
@@ -2528,7 +2528,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -4960,7 +4960,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>3902.420325</EnergyFlow>
       <ComponentDescription>EN-21088100-96b9-4108-ad58-28d15a864580</ComponentDescription>
       <ComponentName>e1</ComponentName>
@@ -4983,7 +4983,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -7431,7 +7431,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Compressor</Type>
+      <Type>DWSIM.Compressor</Type>
       <CalcMode>Delta_P</CalcMode>
       <IgnorePhase>true</IgnorePhase>
       <EficienciaAdiabatica>75</EficienciaAdiabatica>
@@ -7470,7 +7470,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -9908,7 +9908,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -12356,7 +12356,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -14790,7 +14790,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>2543.376724</EnergyFlow>
       <ComponentDescription>EN-e092daf6-7248-4987-9357-125d05c2aa3c</ComponentDescription>
       <ComponentName>e2</ComponentName>
@@ -14813,14 +14813,14 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.SpecialOps.Recycle</Type>
+      <Type>DWSIM.Recycle</Type>
       <Converged>true</Converged>
       <IterationsTaken>11</IterationsTaken>
       <IterationCount>1</IterationCount>
       <FlashType>None</FlashType>
       <AccelerationMethod>None</AccelerationMethod>
       <ConvergenceParameters>
-        <Type>DWSIM.DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle.ConvergenceParameters</Type>
+        <Type>DWSIM.Helpers.Recycle.ConvergenceParameters</Type>
         <Temperatura>0.1</Temperatura>
         <Pressao>0.1</Pressao>
         <VazaoMassica>0.01</VazaoMassica>
@@ -14830,7 +14830,7 @@
         <Composicao>0.001</Composicao>
       </ConvergenceParameters>
       <ConvergenceHistory>
-        <Type>DWSIM.DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle.ConvergenceHistory</Type>
+        <Type>DWSIM.Helpers.Recycle.ConvergenceHistory</Type>
         <Temperatura>397.289571702777</Temperatura>
         <Pressao>1962938.24168</Pressao>
         <VazaoMassica>20.4440628555291</VazaoMassica>
@@ -14889,7 +14889,7 @@
       <WegPars AccelDelay="2" AccelFreq="4" Qmax="0" Qmin="-20" />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>-1463.300288</EnergyFlow>
       <ComponentDescription>EN-3cdfadda-3538-4087-8212-90deaf0b736c</ComponentDescription>
       <ComponentName>ESTR-004</ComponentName>
@@ -14912,7 +14912,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Mixer</Type>
+      <Type>DWSIM.Mixer</Type>
       <PressureCalculation>Minimum</PressureCalculation>
       <ScriptExt_FontName>Courier New</ScriptExt_FontName>
       <ScriptExt_FontSize>0</ScriptExt_FontSize>
@@ -14945,7 +14945,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -17393,7 +17393,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Compressor</Type>
+      <Type>DWSIM.Compressor</Type>
       <CalcMode>Delta_P</CalcMode>
       <IgnorePhase>true</IgnorePhase>
       <EficienciaAdiabatica>75</EficienciaAdiabatica>
@@ -17432,7 +17432,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
+      <Type>DWSIM.Vessel</Type>
       <FlashSpecification>PH</FlashSpecification>
       <PressureCalculation>Average</PressureCalculation>
       <OverrideT>true</OverrideT>
@@ -17471,7 +17471,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -19905,7 +19905,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Valve</Type>
+      <Type>DWSIM.Valve</Type>
       <OutletPressure>101325</OutletPressure>
       <CalcMode>DeltaP</CalcMode>
       <DeltaP>1523741.95999</DeltaP>
@@ -19942,7 +19942,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Mixer</Type>
+      <Type>DWSIM.Mixer</Type>
       <PressureCalculation>Minimum</PressureCalculation>
       <ScriptExt_FontName>Courier New</ScriptExt_FontName>
       <ScriptExt_FontSize>0</ScriptExt_FontSize>
@@ -19975,7 +19975,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>-4843.419312</EnergyFlow>
       <ComponentDescription>EN-ef41adac-db74-448d-8770-b96d925fd712</ComponentDescription>
       <ComponentName>ESTR-003</ComponentName>
@@ -19998,7 +19998,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Compressor</Type>
+      <Type>DWSIM.Compressor</Type>
       <CalcMode>Delta_P</CalcMode>
       <IgnorePhase>true</IgnorePhase>
       <EficienciaAdiabatica>75</EficienciaAdiabatica>
@@ -20037,7 +20037,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Pressure_and_Enthalpy</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -22488,7 +22488,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Pressure_and_Enthalpy</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -24939,7 +24939,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -27381,7 +27381,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Valve</Type>
+      <Type>DWSIM.Valve</Type>
       <OutletPressure>101325</OutletPressure>
       <CalcMode>DeltaP</CalcMode>
       <DeltaP>3654222.79999</DeltaP>
@@ -27418,14 +27418,14 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.SpecialOps.Recycle</Type>
+      <Type>DWSIM.Recycle</Type>
       <Converged>true</Converged>
       <IterationsTaken>1</IterationsTaken>
       <IterationCount>1</IterationCount>
       <FlashType>None</FlashType>
       <AccelerationMethod>None</AccelerationMethod>
       <ConvergenceParameters>
-        <Type>DWSIM.DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle.ConvergenceParameters</Type>
+        <Type>DWSIM.Helpers.Recycle.ConvergenceParameters</Type>
         <Temperatura>0.1</Temperatura>
         <Pressao>0.1</Pressao>
         <VazaoMassica>0.01</VazaoMassica>
@@ -27435,7 +27435,7 @@
         <Composicao>0.001</Composicao>
       </ConvergenceParameters>
       <ConvergenceHistory>
-        <Type>DWSIM.DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle.ConvergenceHistory</Type>
+        <Type>DWSIM.Helpers.Recycle.ConvergenceHistory</Type>
         <Temperatura>287.03014837118</Temperatura>
         <Pressao>1962938.20167</Pressao>
         <VazaoMassica>1.78377602092499</VazaoMassica>
@@ -27494,7 +27494,7 @@
       <WegPars AccelDelay="2" AccelFreq="4" Qmax="0" Qmin="-20" />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Pressure_and_Enthalpy</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -29945,7 +29945,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
+      <Type>DWSIM.Vessel</Type>
       <FlashSpecification>PH</FlashSpecification>
       <PressureCalculation>Average</PressureCalculation>
       <OverrideT>true</OverrideT>
@@ -29984,7 +29984,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -32418,7 +32418,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
+      <Type>DWSIM.Vessel</Type>
       <FlashSpecification>PH</FlashSpecification>
       <PressureCalculation>Average</PressureCalculation>
       <OverrideT>true</OverrideT>
@@ -32457,7 +32457,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Valve</Type>
+      <Type>DWSIM.Valve</Type>
       <OutletPressure>101325</OutletPressure>
       <CalcMode>DeltaP</CalcMode>
       <DeltaP>248211.36</DeltaP>
@@ -32494,7 +32494,7 @@
       <PropertyPackage>PP-89d2cade-4f79-4a90-aac8-d9e503a7ee31</PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>53.657879</EnergyFlow>
       <ComponentDescription>EN-fa6f3d1d-3e8a-4d6e-b900-7b84adca024f</ComponentDescription>
       <ComponentName>e3</ComponentName>
@@ -32517,7 +32517,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Pressure_and_Enthalpy</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -34968,7 +34968,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -37406,7 +37406,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -39838,7 +39838,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -42294,14 +42294,14 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.SpecialOps.Recycle</Type>
+      <Type>DWSIM.Recycle</Type>
       <Converged>true</Converged>
       <IterationsTaken>1</IterationsTaken>
       <IterationCount>1</IterationCount>
       <FlashType>None</FlashType>
       <AccelerationMethod>None</AccelerationMethod>
       <ConvergenceParameters>
-        <Type>DWSIM.DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle.ConvergenceParameters</Type>
+        <Type>DWSIM.Helpers.Recycle.ConvergenceParameters</Type>
         <Temperatura>0.1</Temperatura>
         <Pressao>0.1</Pressao>
         <VazaoMassica>0.01</VazaoMassica>
@@ -42311,7 +42311,7 @@
         <Composicao>0.001</Composicao>
       </ConvergenceParameters>
       <ConvergenceHistory>
-        <Type>DWSIM.DWSIM.SimulationObjects.SpecialOps.Helpers.Recycle.ConvergenceHistory</Type>
+        <Type>DWSIM.Helpers.Recycle.ConvergenceHistory</Type>
         <Temperatura>348.419482587822</Temperatura>
         <Pressao>439196.24668</Pressao>
         <VazaoMassica>0.806143937192602</VazaoMassica>
@@ -42370,7 +42370,7 @@
       <WegPars AccelDelay="2" AccelFreq="4" Qmax="0" Qmin="-20" />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>-7242.81445</EnergyFlow>
       <ComponentDescription>EN-ddfaf51b-d8a4-47dd-8068-1619df2cfcf1</ComponentDescription>
       <ComponentName>ESTR-005</ComponentName>
@@ -42393,7 +42393,7 @@
       <NodeItems />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -44825,7 +44825,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -47259,7 +47259,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>

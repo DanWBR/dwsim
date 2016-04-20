@@ -27,7 +27,7 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 Imports System.Linq
 
-Namespace DWSIM.SimulationObjects.SpecialOps
+Namespace SpecialOps
 
     <System.Serializable()> Public Class Spec
 

@@ -18,7 +18,6 @@
 
 Imports Ciloci.Flee
 Imports DWSIM.DWSIM.Utilities.Spreadsheet
-Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Linq
 
 Public Class SpreadsheetForm
@@ -749,7 +748,7 @@ Public Class SpreadsheetForm
     ''' <remarks></remarks>
     Public Sub WriteAll()
 
-        Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = Nothing
+        Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
         Dim su As SystemsOfUnits.Units = My.Application.ActiveSimulation.Options.SelectedUnitSystem
         For Each r As DataGridViewRow In Me.DataGridView1.Rows
             For Each ce As DataGridViewCell In r.Cells
@@ -759,7 +758,7 @@ Public Class SpreadsheetForm
                         obj = formc.Collections.FlowsheetObjectCollection(ccparams.ObjectID)
                         obj.SetPropertyValue(ccparams.PropID, ce.Value, su)
                         'Call function to calculate flowsheet
-                        Dim objargs As New DWSIM.Extras.StatusChangeEventArgs
+                        Dim objargs As New CalculationArgs
                         With objargs
                             .Calculated = False
                             .Name = obj.Name

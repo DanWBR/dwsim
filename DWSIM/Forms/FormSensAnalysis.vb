@@ -18,10 +18,9 @@
 
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Optimization
-Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DrawingTools
 Imports Ciloci.Flee
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.FlowsheetSolver
 Imports System.Linq
 
 Public Class FormSensAnalysis
@@ -76,7 +75,7 @@ Public Class FormSensAnalysis
 
         Me.cbObjIndVar1.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
         Me.cbObjIndVar2.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             Me.cbObjIndVar1.Items.Add(obj.GraphicObject.Tag)
             Me.cbObjIndVar2.Items.Add(obj.GraphicObject.Tag)
         Next
@@ -85,7 +84,7 @@ Public Class FormSensAnalysis
         cbc0.Sorted = True
         cbc0.MaxDropDownItems = 10
         cbc0.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             cbc0.Items.Add(obj.GraphicObject.Tag)
         Next
         cbc1 = New DataGridViewComboBoxCell
@@ -95,7 +94,7 @@ Public Class FormSensAnalysis
         cbc2.Sorted = True
         cbc2.MaxDropDownItems = 10
         cbc2.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             cbc2.Items.Add(obj.GraphicObject.Tag)
         Next
         cbc3 = New DataGridViewComboBoxCell
@@ -141,7 +140,7 @@ Public Class FormSensAnalysis
         If objectTAG = DWSIM.App.GetLocalString("SpreadsheetCell") Then
             Return form.FormSpreadsheet.GetCellString()
         Else
-            For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+            For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
                 If objectTAG = obj.GraphicObject.Tag Then
                     If dependent Then
                         Return obj.GetProperties(Interfaces.Enums.PropertyType.ALL)
@@ -193,7 +192,7 @@ Public Class FormSensAnalysis
         If Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
             For Each prop As String In props
                 If DWSIM.App.GetPropertyName(prop) = Me.cbPropIndVar1.SelectedItem.ToString Then
-                    For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+                    For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
                         If Me.cbObjIndVar1.SelectedItem.ToString = obj.GraphicObject.Tag Then
                             Me.tbUnitIndVar1.Text = obj.GetPropertyUnit(prop, su)
                             If EnableAutoSave Then SaveForm(selectedsacase)
@@ -212,7 +211,7 @@ Public Class FormSensAnalysis
         If Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
             For Each prop As String In props
                 If DWSIM.App.GetPropertyName(prop) = Me.cbPropIndVar2.SelectedItem.ToString Then
-                    For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+                    For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
                         If Me.cbObjIndVar2.SelectedItem.ToString = obj.GraphicObject.Tag Then
                             Me.tbUnitIndVar2.Text = obj.GetPropertyUnit(prop, su)
                             If EnableAutoSave Then SaveForm(selectedsacase)
@@ -612,7 +611,7 @@ Public Class FormSensAnalysis
                         End If
                     End If
                     'run simulation
-                    CalculateAll(form)
+                    FlowsheetSolver.FlowsheetSolver.CalculateAll(form)
                     'get the value of the dependent variable
                     If rbExp.Checked Then
                         Me.selectedsacase.econtext = New ExpressionContext
@@ -688,7 +687,7 @@ Public Class FormSensAnalysis
                     form.FormSpreadsheet.SetCellValue(iv2prop, iv2val0)
                 End If
             End If
-            CalculateAll(form)
+            FlowsheetSolver.FlowsheetSolver.CalculateAll(form)
             Me.tbStats.Text += "Done!" & vbCrLf
             Me.tbStats.SelectionStart = Me.tbStats.Text.Length - 1
             Me.tbStats.SelectionLength = 1
@@ -791,7 +790,7 @@ Public Class FormSensAnalysis
                             Dim props As String() = Me.ReturnProperties(Me.dgVariables.Rows(e.RowIndex).Cells(2).Value, True)
                             For Each prop As String In props
                                 If DWSIM.App.GetPropertyName(prop) = Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
-                                    Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = ReturnObject(Me.dgVariables.Rows(e.RowIndex).Cells(2).Value)
+                                    Dim obj As SharedClasses.UnitOperations.BaseClass = ReturnObject(Me.dgVariables.Rows(e.RowIndex).Cells(2).Value)
                                     tbc0.Value = Format(Val(obj.GetPropertyValue(prop, su)), nf)
                                     tbc1.Value = obj.GetPropertyUnit(prop, su)
                                     Exit For
@@ -827,7 +826,7 @@ Public Class FormSensAnalysis
                             Dim props As String() = Me.ReturnProperties(Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value, True)
                             For Each prop As String In props
                                 If DWSIM.App.GetPropertyName(prop) = Me.dgDepVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
-                                    Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = ReturnObject(Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value)
+                                    Dim obj As SharedClasses.UnitOperations.BaseClass = ReturnObject(Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value)
                                     tbc0.Value = obj.GetPropertyUnit(prop, su)
                                     Exit For
                                 End If
@@ -839,9 +838,9 @@ Public Class FormSensAnalysis
         End If
     End Sub
 
-    Private Function ReturnObject(ByVal objectTAG As String) As DWSIM.SimulationObjects.UnitOperations.BaseClass
+    Private Function ReturnObject(ByVal objectTAG As String) As SharedClasses.UnitOperations.BaseClass
 
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 Return obj
                 Exit Function

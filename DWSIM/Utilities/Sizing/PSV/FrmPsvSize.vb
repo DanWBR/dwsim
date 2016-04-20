@@ -5,9 +5,9 @@ Public Class FrmPsvSize
 
     Inherits System.Windows.Forms.Form
 
-    Dim valve As DWSIM.SimulationObjects.UnitOperations.Valve
-    Dim entmat As DWSIM.SimulationObjects.Streams.MaterialStream
-    Dim saimat As DWSIM.SimulationObjects.Streams.MaterialStream
+    Dim valve As Valve
+    Dim entmat As Streams.MaterialStream
+    Dim saimat As Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
     Dim sz As DWSIM.Utilities.PSV.Sizing
@@ -120,7 +120,7 @@ Public Class FrmPsvSize
         'Dimensionar para bifasico
         If Me.ComboBox1.SelectedItem = DWSIM.App.GetLocalString("GsLquidoBifsico") And Me.ComboBox2.SelectedItem = "API RP 520" Then
 
-            Dim mymat As DWSIM.SimulationObjects.Streams.MaterialStream = entmat.Clone
+            Dim mymat As Streams.MaterialStream = entmat.Clone
             mymat.Phases(0).Properties.pressure = entmat.Phases(0).Properties.pressure.GetValueOrDefault * 0.9
 
             With mymat.PropertyPackage

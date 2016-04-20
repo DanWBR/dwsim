@@ -18,14 +18,13 @@
 
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Optimization
-Imports DWSIM.DWSIM.SimulationObjects
 Imports DWSIM.DrawingTools
 Imports DWSIM.MathOps.MathEx
 Imports Ciloci.Flee
 Imports System.Math
 Imports ZedGraph
 Imports DotNumerics
-Imports DWSIM.DWSIM.Flowsheet.FlowsheetSolver
+Imports DWSIM.FlowsheetSolver
 Imports Cureos.Numerics
 Imports DWSIM.SharedClasses
 
@@ -91,7 +90,7 @@ Public Class FormOptimization
         cbc2.Sorted = True
         cbc2.MaxDropDownItems = 10
         cbc2.Items.Add(DWSIM.App.GetLocalString("SpreadsheetCell"))
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             cbc2.Items.Add(obj.GraphicObject.Tag)
         Next
         cbc3 = New DataGridViewComboBoxCell
@@ -254,7 +253,7 @@ Public Class FormOptimization
                             Dim props As String() = Me.ReturnProperties(Me.dgVariables.Rows(e.RowIndex).Cells(3).Value, True)
                             For Each prop As String In props
                                 If DWSIM.App.GetPropertyName(prop) = Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
-                                    Dim obj As DWSIM.SimulationObjects.UnitOperations.BaseClass = ReturnObject(Me.dgVariables.Rows(e.RowIndex).Cells(3).Value)
+                                    Dim obj As SharedClasses.UnitOperations.BaseClass = ReturnObject(Me.dgVariables.Rows(e.RowIndex).Cells(3).Value)
                                     tbc.Value = Format(obj.GetPropertyValue(prop, su), nf)
                                     tbc0.Value = Format(obj.GetPropertyValue(prop, su), nf)
                                     tbc1.Value = obj.GetPropertyUnit(prop, su)
@@ -268,7 +267,7 @@ Public Class FormOptimization
 
     Private Function ReturnProperties(ByVal objectTAG As String, ByVal dependent As Boolean) As String()
 
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 If dependent Then
                     Return obj.GetProperties(Interfaces.Enums.PropertyType.ALL)
@@ -283,9 +282,9 @@ Public Class FormOptimization
 
     End Function
 
-    Private Function ReturnObject(ByVal objectTAG As String) As DWSIM.SimulationObjects.UnitOperations.BaseClass
+    Private Function ReturnObject(ByVal objectTAG As String) As SharedClasses.UnitOperations.BaseClass
 
-        For Each obj As DWSIM.SimulationObjects.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+        For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
             If objectTAG = obj.GraphicObject.Tag Then
                 Return obj
                 Exit Function
@@ -481,10 +480,10 @@ Public Class FormOptimization
 
         If objID <> "SpreadsheetCell" Then
             form.Collections.FlowsheetObjectCollection(objID).SetPropertyValue(objProp, t)
-            CalculateObject(form, objID)
+            FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID)
         Else
             form.FormSpreadsheet.SetCellValue(objProp, t)
-            CalculateAll2(form, My.Settings.SolverMode)
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
         End If
 
         Dim pen_val As Double
@@ -597,10 +596,10 @@ Public Class FormOptimization
                 If Me.selectedoptcase.numdevscheme = 2 Then
                     If objID(i) <> "SpreadsheetCell" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
-                        CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x0)
-                        CalculateAll2(form, My.Settings.SolverMode)
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     End If
                     UpdateVariablesValues()
                     pen_val = ReturnPenaltyValue()
@@ -630,10 +629,10 @@ Public Class FormOptimization
                 If Me.selectedoptcase.numdevscheme = 4 Then
                     If objID(i) <> "SpreadsheetCell" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x1)
-                        CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x1)
-                        CalculateAll2(form, My.Settings.SolverMode)
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     End If
                     UpdateVariablesValues()
                     pen_val = ReturnPenaltyValue()
@@ -661,10 +660,10 @@ Public Class FormOptimization
                     End If
                     If objID(i) <> "SpreadsheetCell" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x2)
-                        CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x2)
-                        CalculateAll2(form, My.Settings.SolverMode)
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     End If
                     UpdateVariablesValues()
                     pen_val = ReturnPenaltyValue()
@@ -693,12 +692,12 @@ Public Class FormOptimization
                 End If
                 If objID(i) <> "SpreadsheetCell" Then
                     form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x3)
-                    CalculateObject(form, objID(i))
+                    FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                 Else
                     form.FormSpreadsheet.SetCellValue(objProp(i), x3)
-                    CalculateAll2(form, My.Settings.SolverMode)
+                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                 End If
-                CalculateObject(form, objID(i))
+                FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                 UpdateVariablesValues()
                 pen_val = ReturnPenaltyValue()
                 If Me.selectedoptcase.objfunctype = OPTObjectiveFunctionType.Expression Then
@@ -727,10 +726,10 @@ Public Class FormOptimization
                 If Me.selectedoptcase.numdevscheme = 4 Then
                     If objID(i) <> "SpreadsheetCell" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x4)
-                        CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x4)
-                        CalculateAll2(form, My.Settings.SolverMode)
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     End If
                     UpdateVariablesValues()
                     pen_val = ReturnPenaltyValue()
@@ -764,10 +763,10 @@ Public Class FormOptimization
                 End If
                 If objID(i) <> "SpreadsheetCell" Then
                     form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
-                    CalculateObject(form, objID(i))
+                    FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                 Else
                     form.FormSpreadsheet.SetCellValue(objProp(i), x0)
-                    CalculateAll2(form, My.Settings.SolverMode)
+                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                 End If
                 UpdateVariablesValues()
             Next
@@ -857,10 +856,10 @@ Public Class FormOptimization
         For i = 0 To Me.keysind.Count - 1
             If objID(i) <> "SpreadsheetCell" Then
                 form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x(i))
-                CalculateObject(form, objID(i))
+                FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
             Else
                 form.FormSpreadsheet.SetCellValue(objProp(i), x(i))
-                CalculateAll2(form, My.Settings.SolverMode)
+                FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
             End If
             UpdateVariablesValues()
         Next
@@ -966,10 +965,10 @@ Public Class FormOptimization
                 If Me.selectedoptcase.numdevscheme = 2 Then
                     If objID(i) <> "SpreadsheetCell" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
-                        CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x0)
-                        CalculateAll2(form, My.Settings.SolverMode)
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     End If
                     UpdateVariablesValues()
                     pen_val = ReturnPenaltyValue()
@@ -999,10 +998,10 @@ Public Class FormOptimization
                 If Me.selectedoptcase.numdevscheme = 4 Then
                     If objID(i) <> "SpreadsheetCell" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x1)
-                        CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x1)
-                        CalculateAll2(form, My.Settings.SolverMode)
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     End If
                     UpdateVariablesValues()
                     pen_val = ReturnPenaltyValue()
@@ -1030,10 +1029,10 @@ Public Class FormOptimization
                     End If
                     If objID(i) <> "SpreadsheetCell" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x2)
-                        CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x2)
-                        CalculateAll2(form, My.Settings.SolverMode)
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     End If
                     UpdateVariablesValues()
                     pen_val = ReturnPenaltyValue()
@@ -1062,10 +1061,10 @@ Public Class FormOptimization
                 End If
                 If objID(i) <> "SpreadsheetCell" Then
                     form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x3)
-                    CalculateObject(form, objID(i))
+                    FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                 Else
                     form.FormSpreadsheet.SetCellValue(objProp(i), x3)
-                    CalculateAll2(form, My.Settings.SolverMode)
+                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                 End If
                 UpdateVariablesValues()
                 pen_val = ReturnPenaltyValue()
@@ -1094,10 +1093,10 @@ Public Class FormOptimization
                 If Me.selectedoptcase.numdevscheme = 4 Then
                     If objID(i) <> "SpreadsheetCell" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x4)
-                        CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                     Else
                         form.FormSpreadsheet.SetCellValue(objProp(i), x4)
-                        CalculateAll2(form, My.Settings.SolverMode)
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     End If
                     UpdateVariablesValues()
                     pen_val = ReturnPenaltyValue()
@@ -1131,10 +1130,10 @@ Public Class FormOptimization
                 End If
                 If objID(i) <> "SpreadsheetCell" Then
                     form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
-                    CalculateObject(form, objID(i))
+                    FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
                 Else
                     form.FormSpreadsheet.SetCellValue(objProp(i), x0)
-                    CalculateAll2(form, My.Settings.SolverMode)
+                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                 End If
                 UpdateVariablesValues()
                 Application.DoEvents()
@@ -1457,7 +1456,7 @@ Public Class FormOptimization
         For Each var In Me.selectedoptcase.variables.Values
             form.Collections.FlowsheetObjectCollection(var.objectID).SetPropertyValue(var.propID, var.initialvalue)
         Next
-        CalculateAll(form)
+        FlowsheetSolver.FlowsheetSolver.CalculateAll(form)
 
     End Sub
 

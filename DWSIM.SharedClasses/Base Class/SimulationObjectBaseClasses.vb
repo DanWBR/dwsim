@@ -521,10 +521,10 @@ Namespace UnitOperations
         'CAPE-OPEN Error Interfaces
         Implements ECapeUser, ECapeUnknown, ECapeRoot
 
-        Friend _pp As Interfaces.IPropertyPackage
-        Friend _ppid As String = ""
+        Public _pp As Interfaces.IPropertyPackage
+        Public _ppid As String = ""
 
-        Friend _capeopenmode As Boolean = False
+        Protected _capeopenmode As Boolean = False
 
         Public Sub New()
             MyBase.CreateNew()
@@ -718,9 +718,9 @@ Namespace UnitOperations
 
 #Region "   CAPE-OPEN Unit Operation internal support"
 
-        Friend _ports As CapeOpen.PortCollection
-        Friend _parameters As CapeOpen.ParameterCollection
-        Friend _simcontext As Object = Nothing
+        Protected _ports As CapeOpen.PortCollection
+        Protected _parameters As CapeOpen.ParameterCollection
+        Protected _simcontext As Object = Nothing
 
         ''' <summary>
         ''' Calculates the Unit Operation.
@@ -916,7 +916,7 @@ Namespace UnitOperations
 
 #Region "   CAPE-OPEN Persistence Implementation"
 
-        Friend m_dirty As Boolean = True
+        Protected m_dirty As Boolean = True
 
         Public Sub GetClassID(ByRef pClassID As System.Guid) Implements IPersistStreamInit.GetClassID
             pClassID = New Guid(UnitOpBaseClass.ClassId)
@@ -1020,7 +1020,7 @@ Namespace UnitOperations
 
         End Sub
 
-        Friend Function MyResolveEventHandler(ByVal sender As Object, ByVal args As ResolveEventArgs) As System.Reflection.Assembly
+        Protected Function MyResolveEventHandler(ByVal sender As Object, ByVal args As ResolveEventArgs) As System.Reflection.Assembly
             Return Me.[GetType]().Assembly
         End Function
 
@@ -1089,11 +1089,11 @@ Namespace UnitOperations
 
 #Region "   CAPE-OPEN Reports"
 
-        Friend _reports As String() = New String() {"log", "last run", "validation results"}
-        Friend _selreport As String = ""
-        Friend _calclog As String = ""
-        Friend _lastrun As String = ""
-        Friend _valres As String = ""
+        Protected _reports As String() = New String() {"log", "last run", "validation results"}
+        Protected _selreport As String = ""
+        Protected _calclog As String = ""
+        Protected _lastrun As String = ""
+        Protected _valres As String = ""
 
         Public Sub ProduceReport(ByRef message As String) Implements CapeOpen.ICapeUnitReport.ProduceReport
             Select Case _selreport

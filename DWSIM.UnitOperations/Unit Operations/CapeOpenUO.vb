@@ -41,7 +41,7 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.UnitOperations.UnitOperations
 
-Namespace DWSIM.SimulationObjects.UnitOperations
+Namespace UnitOperations
 
     <System.Serializable()> Public Class CapeOpenUO
 

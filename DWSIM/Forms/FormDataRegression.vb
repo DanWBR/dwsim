@@ -25,6 +25,7 @@ Imports DotNumerics
 Imports Cureos.Numerics
 Imports DWSIM.DWSIM.Optimization.DatRegression
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports System.Threading.Tasks
 Imports System.Linq
 Imports System.IO
@@ -738,7 +739,7 @@ Public Class FormDataRegression
                 Case DataType.Pxx, DataType.Txx
                     proppack.Parameters("PP_FLASHALGORITHM") = 9
                     proppack.FlashAlgorithm = FlashMethod.SimpleLLE
-                    Dim flashinstance As Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE = TryCast(proppack.FlashBase, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE)
+                    Dim flashinstance As FlashAlgorithms.SimpleLLE = TryCast(proppack.FlashBase, FlashAlgorithms.SimpleLLE)
                     If Not flashinstance Is Nothing Then
                         With flashinstance
                             .UseInitialEstimatesForPhase1 = True
@@ -2698,18 +2699,18 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
     Dim actu(5), actn(5) As Double
     Dim ppu As PropertyPackages.UNIQUACPropertyPackage
-    Dim uniquac As Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC
+    Dim uniquac As UNIQUAC
     Dim ppn As PropertyPackages.NRTLPropertyPackage
-    Dim nrtl As Thermodynamics.PropertyPackages.Auxiliary.NRTL
-    Dim ms As DWSIM.SimulationObjects.Streams.MaterialStream
+    Dim nrtl As NRTL
+    Dim ms As Streams.MaterialStream
 
     Private Function FunctionValueNRTL(ByVal x() As Double) As Double
 
         Dim a1(1), a2(1), a3(1) As Double
 
         nrtl.InteractionParameters.Clear()
-        nrtl.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.NRTL_IPData))
-        nrtl.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New Thermodynamics.PropertyPackages.Auxiliary.NRTL_IPData())
+        nrtl.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, NRTL_IPData))
+        nrtl.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New NRTL_IPData())
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A12 = x(0)
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A21 = x(1)
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).alpha12 = 0.2
@@ -2761,8 +2762,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim a1(1), a2(1), a3(1) As Double
 
         uniquac.InteractionParameters.Clear()
-        uniquac.InteractionParameters.Add(ppu.RET_VIDS()(0), New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData))
-        uniquac.InteractionParameters(ppu.RET_VIDS()(0)).Add(ppu.RET_VIDS()(1), New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC_IPData())
+        uniquac.InteractionParameters.Add(ppu.RET_VIDS()(0), New Dictionary(Of String, UNIQUAC_IPData))
+        uniquac.InteractionParameters(ppu.RET_VIDS()(0)).Add(ppu.RET_VIDS()(1), New UNIQUAC_IPData())
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A12 = x(0)
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A21 = x(1)
 
@@ -2815,9 +2816,9 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Cursor = Cursors.WaitCursor
 
         ppu = New PropertyPackages.UNIQUACPropertyPackage(True)
-        uniquac = New Thermodynamics.PropertyPackages.Auxiliary.UNIQUAC
+        uniquac = New UNIQUAC
 
-        ms = New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
+        ms = New Streams.MaterialStream("", "")
 
         Dim comp1, comp2 As ConstantProperties
         comp1 = FormMain.AvailableComponents(id1)
@@ -2840,28 +2841,28 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim ppufll As UNIFACLLPropertyPackage = Nothing
         Dim ppmu As MODFACPropertyPackage = Nothing
         Dim ppmun As NISTMFACPropertyPackage = Nothing
-        Dim unif As Auxiliary.Unifac = Nothing
-        Dim unifll As Auxiliary.UnifacLL = Nothing
-        Dim modf As Auxiliary.Modfac = Nothing
-        Dim nmodf As Auxiliary.NISTMFAC = Nothing
+        Dim unif As Unifac = Nothing
+        Dim unifll As UnifacLL = Nothing
+        Dim modf As Modfac = Nothing
+        Dim nmodf As NISTMFAC = Nothing
 
         Select Case model
             Case "UNIFAC"
                 ppuf = New PropertyPackages.UNIFACPropertyPackage(True)
                 ppuf.CurrentMaterialStream = ms
-                unif = New Thermodynamics.PropertyPackages.Auxiliary.Unifac
+                unif = New Unifac
             Case "UNIFAC-LL"
                 ppufll = New PropertyPackages.UNIFACLLPropertyPackage(True)
                 ppufll.CurrentMaterialStream = ms
-                unifll = New Thermodynamics.PropertyPackages.Auxiliary.UnifacLL
+                unifll = New UnifacLL
             Case "MODFAC"
                 ppmu = New PropertyPackages.MODFACPropertyPackage(True)
                 ppmu.CurrentMaterialStream = ms
-                modf = New Thermodynamics.PropertyPackages.Auxiliary.Modfac
+                modf = New Modfac
             Case Else
                 ppmun = New PropertyPackages.NISTMFACPropertyPackage(True)
                 ppmun.CurrentMaterialStream = ms
-                nmodf = New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
+                nmodf = New NISTMFAC
         End Select
 
         Dim T1 = 298.15
@@ -2995,9 +2996,9 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Cursor = Cursors.WaitCursor
 
         ppn = New PropertyPackages.NRTLPropertyPackage(True)
-        nrtl = New Thermodynamics.PropertyPackages.Auxiliary.NRTL
+        nrtl = New NRTL
 
-        ms = New DWSIM.SimulationObjects.Streams.MaterialStream("", "")
+        ms = New Streams.MaterialStream("", "")
 
         Dim comp1, comp2 As ConstantProperties
         comp1 = FormMain.AvailableComponents(id1)
@@ -3020,28 +3021,28 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim ppufll As UNIFACLLPropertyPackage = Nothing
         Dim ppmu As MODFACPropertyPackage = Nothing
         Dim ppmun As NISTMFACPropertyPackage = Nothing
-        Dim unif As Auxiliary.Unifac = Nothing
-        Dim unifll As Auxiliary.UnifacLL = Nothing
-        Dim modf As Auxiliary.Modfac = Nothing
-        Dim nmodf As Auxiliary.NISTMFAC = Nothing
+        Dim unif As Unifac = Nothing
+        Dim unifll As UnifacLL = Nothing
+        Dim modf As Modfac = Nothing
+        Dim nmodf As NISTMFAC = Nothing
 
         Select Case model
             Case "UNIFAC"
                 ppuf = New PropertyPackages.UNIFACPropertyPackage(True)
                 ppuf.CurrentMaterialStream = ms
-                unif = New Thermodynamics.PropertyPackages.Auxiliary.Unifac
+                unif = New Unifac
             Case "UNIFAC-LL"
                 ppufll = New PropertyPackages.UNIFACLLPropertyPackage(True)
                 ppufll.CurrentMaterialStream = ms
-                unifll = New Thermodynamics.PropertyPackages.Auxiliary.UnifacLL
+                unifll = New UnifacLL
             Case "MODFAC"
                 ppmu = New PropertyPackages.MODFACPropertyPackage(True)
                 ppmu.CurrentMaterialStream = ms
-                modf = New Thermodynamics.PropertyPackages.Auxiliary.Modfac
+                modf = New Modfac
             Case Else
                 ppmun = New PropertyPackages.NISTMFACPropertyPackage(True)
                 ppmun.CurrentMaterialStream = ms
-                nmodf = New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
+                nmodf = New NISTMFAC
         End Select
 
         Dim T1 = 298.15

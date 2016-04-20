@@ -4,7 +4,7 @@ Imports System.Linq
 Imports System.Threading
 Imports System.Threading.Tasks
 
-Namespace DWSIM.Auxiliary.TaskSchedulers
+Namespace TaskSchedulers
 
     ' Provides a task scheduler that ensures a maximum concurrency level while  
     ' running on top of the thread pool. 

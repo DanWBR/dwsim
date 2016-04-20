@@ -20,8 +20,8 @@ Imports System.Math
 Imports DWSIM.MathOps.MathEx.BrentOpt
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages
-Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
+Imports DWSIM.Thermodynamics.Streams
 
 Namespace DWSIM.Utilities.PetroleumCharacterization.Methods
 

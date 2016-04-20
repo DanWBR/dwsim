@@ -60,7 +60,7 @@ Namespace UnitOperations.Auxiliary
 
 End Namespace
 
-Namespace DWSIM.SimulationObjects.UnitOperations
+Namespace UnitOperations
     <System.Serializable()> Public Class Flowsheet
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass

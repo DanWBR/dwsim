@@ -4,7 +4,7 @@ Imports System.Linq
 Imports System.Threading
 Imports System.Threading.Tasks
 
-Namespace DWSIM.Auxiliary.TaskSchedulers
+Namespace TaskSchedulers
 
     ''' <summary>Provides a scheduler that uses STA threads.</summary> 
     Public NotInheritable Class StaTaskScheduler

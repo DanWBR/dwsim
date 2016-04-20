@@ -18,7 +18,6 @@
 
 Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.SimulationObjects
 Imports System.Linq
 
 Namespace DWSIM.Flowsheet
@@ -67,7 +66,7 @@ Namespace DWSIM.Flowsheet
 
         Public GraphicObjectCollection As Dictionary(Of String, GraphicObject)
 
-        Public FlowsheetObjectCollection As Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
+        Public FlowsheetObjectCollection As Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
 
         Public OPT_SensAnalysisCollection As List(Of DWSIM.Optimization.SensitivityAnalysisCase)
 
@@ -79,7 +78,7 @@ Namespace DWSIM.Flowsheet
 
             GraphicObjectCollection = New Dictionary(Of String, GraphicObject)
 
-            FlowsheetObjectCollection = New Dictionary(Of String, DWSIM.SimulationObjects.UnitOperations.BaseClass)
+            FlowsheetObjectCollection = New Dictionary(Of String, SharedClasses.UnitOperations.BaseClass)
 
             OPT_SensAnalysisCollection = New List(Of DWSIM.Optimization.SensitivityAnalysisCase)
 

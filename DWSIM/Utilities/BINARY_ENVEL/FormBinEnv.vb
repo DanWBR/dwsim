@@ -1,5 +1,4 @@
 ﻿Imports DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.SimulationObjects.Streams
 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
@@ -19,12 +18,13 @@ Imports DWSIM.DWSIM.SimulationObjects.Streams
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports DWSIM.Thermodynamics.Streams
 
 Public Class FormBinEnv
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
+    Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
     Public su As New SystemsOfUnits.Units
@@ -76,7 +76,7 @@ Public Class FormBinEnv
             Next
 
             Me.cbPropPack.Items.Clear()
-            For Each pp As propertypackage In Me.Frm.Options.PropertyPackages.Values
+            For Each pp As PropertyPackage In Me.Frm.Options.PropertyPackages.Values
                 Me.cbPropPack.Items.Add(pp.Tag & " (" & pp.ComponentName & ")")
             Next
 

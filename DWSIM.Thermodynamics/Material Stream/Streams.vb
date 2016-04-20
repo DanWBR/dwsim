@@ -48,8 +48,8 @@ Namespace Streams
 
         Implements Interfaces.IMaterialStream
 
-        Friend _pp As PropertyPackages.PropertyPackage
-        Friend _ppid As String = ""
+        Public _pp As PropertyPackages.PropertyPackage
+        Public _ppid As String = ""
 
         Protected m_Phases As New Dictionary(Of Integer, IPhase)
 

@@ -143,19 +143,19 @@ Module scintillaExtender
 
         Dim netprops As String = ""
 
-        Dim props = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream").GetProperties()
+        Dim props = Type.GetType("DWSIM.Streams.MaterialStream").GetProperties()
         For Each p In props
             netprops += p.Name + " "
         Next
-        Dim methods = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream").GetMethods()
+        Dim methods = Type.GetType("DWSIM.Streams.MaterialStream").GetMethods()
         For Each m In methods
             netprops += m.Name + " "
         Next
-        props = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream").GetProperties()
+        props = Type.GetType("DWSIM.Streams.EnergyStream").GetProperties()
         For Each p In props
             netprops += p.Name + " "
         Next
-        methods = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream").GetMethods()
+        methods = Type.GetType("DWSIM.Streams.EnergyStream").GetMethods()
         For Each m In methods
             netprops += m.Name + " "
         Next
@@ -249,20 +249,20 @@ Module scintillaExtender
             End If
             Select Case lastkeyword
                 Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
-                    Dim props = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream").GetProperties()
+                    Dim props = Type.GetType("DWSIM.Streams.MaterialStream").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
                     Next
-                    Dim methods = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream").GetMethods()
+                    Dim methods = Type.GetType("DWSIM.Streams.MaterialStream").GetMethods()
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
                 Case "ies1", "oes1", "EnergyStream"
-                    Dim props = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream").GetProperties()
+                    Dim props = Type.GetType("DWSIM.Streams.EnergyStream").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
                     Next
-                    Dim methods = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream").GetMethods()
+                    Dim methods = Type.GetType("DWSIM.Streams.EnergyStream").GetMethods()
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
@@ -294,11 +294,11 @@ Module scintillaExtender
                         suggestions += (m.Name) + " "
                     Next
                 Case "UnitOp", "Me"
-                    Dim props = Type.GetType("DWSIM.DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass").GetProperties()
+                    Dim props = Type.GetType("DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
                     Next
-                    Dim methods = Type.GetType("DWSIM.DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass").GetMethods()
+                    Dim methods = Type.GetType("DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass").GetMethods()
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
@@ -358,10 +358,10 @@ Module scintillaExtender
             Dim lastobj = text(text.Length - 2).Trim()
             Select Case lastobj
                 Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
-                    Dim prop = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream").GetMember(lastkeyword)
+                    Dim prop = Type.GetType("DWSIM.Streams.MaterialStream").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "ies1", "oes1", "EnergyStream"
-                    Dim prop = Type.GetType("DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream").GetMember(lastkeyword)
+                    Dim prop = Type.GetType("DWSIM.Streams.EnergyStream").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "Flowsheet"
                     Dim prop = Type.GetType("DWSIM.FormFlowsheet").GetMember(lastkeyword)
@@ -373,7 +373,7 @@ Module scintillaExtender
                     Dim prop = Type.GetType("PropertyPackages.PropertyPackage").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "UnitOp", "Me"
-                    Dim prop = Type.GetType("DWSIM.DWSIM.SimulationObjects.UnitOperations.UnitOpBaseClass").GetMember(lastkeyword)
+                    Dim prop = Type.GetType("DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "Solver"
                     Dim prop = Type.GetType("DWSIM.DWSIM.Flowsheet.FlowsheetSolver").GetMember(lastkeyword)

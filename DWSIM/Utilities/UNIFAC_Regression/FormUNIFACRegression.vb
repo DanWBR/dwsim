@@ -19,7 +19,6 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.MathOps.MathEx
 Imports System.Math
@@ -31,6 +30,7 @@ Imports System.Threading.Tasks
 Imports System.Linq
 Imports System.IO
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
+Imports DWSIM.Thermodynamics.Streams
 
 Public Class FormUNIFACRegression
 
@@ -45,7 +45,7 @@ Public Class FormUNIFACRegression
     Public uni As Object = Nothing
     Public IP As New BaseClasses.InteractionParameter
 
-    Dim mat As DWSIM.SimulationObjects.Streams.MaterialStream
+    Dim mat As Streams.MaterialStream
     Dim GI1, GI2 As Integer
     Dim GN1, GN2, Comp1, Comp2 As String
 

@@ -98,7 +98,7 @@
   </Settings>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>
@@ -1141,7 +1141,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>
@@ -2184,7 +2184,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.AbsorptionColumn</Type>
+      <Type>DWSIM.AbsorptionColumn</Type>
       <OperationMode>Absorber</OperationMode>
       <SolvingMethod>2</SolvingMethod>
       <CondenserType>Total_Condenser</CondenserType>
@@ -2227,42 +2227,42 @@
         <LiquidCompositions>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2271,42 +2271,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2315,42 +2315,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2359,42 +2359,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2403,42 +2403,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2447,42 +2447,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2491,42 +2491,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2535,42 +2535,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2579,42 +2579,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2623,42 +2623,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2667,42 +2667,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2711,42 +2711,42 @@
           </LiquidComposition>
           <LiquidComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2757,42 +2757,42 @@
         <VaporCompositions>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2801,42 +2801,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2845,42 +2845,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2889,42 +2889,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2933,42 +2933,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -2977,42 +2977,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -3021,42 +3021,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -3065,42 +3065,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -3109,42 +3109,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -3153,42 +3153,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -3197,42 +3197,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -3241,42 +3241,42 @@
           </VaporComposition>
           <VaporComposition>
             <Compound ID="Metano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Etano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="Propano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nOctano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nNonano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
               <ParamType>Fixed</ParamType>
             </Compound>
             <Compound ID="nDecano">
-              <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+              <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
               <MaxVal>0</MaxVal>
               <MinVal>0</MinVal>
               <Value>0</Value>
@@ -3286,84 +3286,84 @@
         </VaporCompositions>
         <StageTemps>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </StageTemp>
           <StageTemp>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -3372,84 +3372,84 @@
         </StageTemps>
         <LiqMoleFlows>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </LiqMoleFlow>
           <LiqMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -3458,84 +3458,84 @@
         </LiqMoleFlows>
         <VapMoleFlows>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </VapMoleFlow>
           <VapMoleFlow>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -3569,62 +3569,62 @@
       <PropertyPackage></PropertyPackage>
       <Stages>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_0</Name>
           <P>101325</P>
           <T>298.259384893743</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -3632,62 +3632,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_1</Name>
           <P>101325</P>
           <T>298.262346684287</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -3695,62 +3695,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_2</Name>
           <P>101325</P>
           <T>298.267884348208</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -3758,62 +3758,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_3</Name>
           <P>101325</P>
           <T>298.278656708995</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -3821,62 +3821,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_4</Name>
           <P>101325</P>
           <T>298.298157130125</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -3884,62 +3884,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_5</Name>
           <P>101325</P>
           <T>298.333223630518</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -3947,62 +3947,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_6</Name>
           <P>101325</P>
           <T>298.392865564222</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4010,62 +4010,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_7</Name>
           <P>101325</P>
           <T>298.485668200424</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4073,62 +4073,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_8</Name>
           <P>101325</P>
           <T>298.615500035624</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4136,62 +4136,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_9</Name>
           <P>101325</P>
           <T>298.790323263509</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4199,62 +4199,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_10</Name>
           <P>101325</P>
           <T>299.081041307814</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4262,62 +4262,62 @@
           </F>
         </Stage>
         <Stage>
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Stage</Type>
+          <Type>DWSIM.Auxiliary.SepOps.Stage</Type>
           <Name>Stage_11</Name>
           <P>101325</P>
           <T>299.66295059863</T>
           <Efficiency>1</Efficiency>
           <Q>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Q>
           <Vss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vss>
           <Lss>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lss>
           <Vout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vout>
           <Vin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Vin>
           <Lout>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lout>
           <Lin>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
             <ParamType>Fixed</ParamType>
           </Lin>
           <F>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4327,9 +4327,9 @@
       </Stages>
       <MaterialStreams>
         <MaterialStream ID="4de99781-c69c-4b2d-8b21-3d6fff97f319">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.StreamInformation</Type>
+          <Type>DWSIM.Auxiliary.SepOps.StreamInformation</Type>
           <FlowRate>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4345,9 +4345,9 @@
           <AssociatedStage>0</AssociatedStage>
         </MaterialStream>
         <MaterialStream ID="220cc93f-44fb-4588-94c1-0d0f789ff6ea">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.StreamInformation</Type>
+          <Type>DWSIM.Auxiliary.SepOps.StreamInformation</Type>
           <FlowRate>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4363,9 +4363,9 @@
           <AssociatedStage>0</AssociatedStage>
         </MaterialStream>
         <MaterialStream ID="eb864f15-c744-4b1b-9d52-1cfea1321ba5">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.StreamInformation</Type>
+          <Type>DWSIM.Auxiliary.SepOps.StreamInformation</Type>
           <FlowRate>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4381,9 +4381,9 @@
           <AssociatedStage>Stage_0</AssociatedStage>
         </MaterialStream>
         <MaterialStream ID="5dcce3f1-6d09-42cc-90c4-a0a130a49b27">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.StreamInformation</Type>
+          <Type>DWSIM.Auxiliary.SepOps.StreamInformation</Type>
           <FlowRate>
-            <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.Parameter</Type>
+            <Type>DWSIM.Auxiliary.SepOps.Parameter</Type>
             <MaxVal>0</MaxVal>
             <MinVal>0</MinVal>
             <Value>0</Value>
@@ -4402,7 +4402,7 @@
       <EnergyStreams />
       <Specs>
         <Spec ID="C">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.ColumnSpec</Type>
+          <Type>DWSIM.Auxiliary.SepOps.ColumnSpec</Type>
           <SpecUnit></SpecUnit>
           <SpecValue>5</SpecValue>
           <ComponentID></ComponentID>
@@ -4411,7 +4411,7 @@
           <SType>Stream_Ratio</SType>
         </Spec>
         <Spec ID="R">
-          <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Auxiliary.SepOps.ColumnSpec</Type>
+          <Type>DWSIM.Auxiliary.SepOps.ColumnSpec</Type>
           <SpecUnit>mol/s</SpecUnit>
           <SpecValue>7.79678460602847</SpecValue>
           <ComponentID></ComponentID>
@@ -4426,7 +4426,7 @@
       <ReboiledSideStrippers />
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>
@@ -5445,7 +5445,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>

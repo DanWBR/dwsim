@@ -1,8 +1,8 @@
 ﻿Imports com.ggasoftware.indigo
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.SimulationObjects.Streams
 Imports System.IO
 Imports DWSIM.SharedClasses
+Imports DWSIM.Thermodynamics.Streams
 
 '    Copyright 2008-2014 Daniel Wagner O. de Medeiros
 '              2013-2014 Gregor Reichert
@@ -26,7 +26,7 @@ Public Class FormPureComp
 
     Inherits System.Windows.Forms.Form
 
-    Dim MatStream As DWSIM.SimulationObjects.Streams.MaterialStream
+    Dim MatStream As Streams.MaterialStream
 
     Public Flowsheet As FormFlowsheet
 
@@ -858,7 +858,7 @@ Public Class FormPureComp
         constprop.IsModified = True
         SetCompStatus()
 
-        For Each mat As DWSIM.SimulationObjects.Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
+        For Each mat As Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
             For Each p As BaseClasses.Phase In mat.Phases.Values
                 For Each subst As BaseClasses.Compound In p.Compounds.Values
                     If subst.ConstantProperties.Name = constprop.Name Then
@@ -978,7 +978,7 @@ Public Class FormPureComp
                 End Try
         End Select
 
-        For Each mat As DWSIM.SimulationObjects.Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
+        For Each mat As Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
             For Each p As BaseClasses.Phase In mat.Phases.Values
                 For Each subst As BaseClasses.Compound In p.Compounds.Values
                     subst.ConstantProperties = constprop

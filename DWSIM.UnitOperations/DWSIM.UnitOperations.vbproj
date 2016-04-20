@@ -61,8 +61,23 @@
     <Reference Include="GemBox.Spreadsheet">
       <HintPath>..\packages\GemBox.Spreadsheet.39.3.30.1037\lib\net30\GemBox.Spreadsheet.dll</HintPath>
     </Reference>
+    <Reference Include="IronPython">
+      <HintPath>..\DWSIM\References\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules">
+      <HintPath>..\DWSIM\References\IronPython.Modules.dll</HintPath>
+    </Reference>
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic">
+      <HintPath>..\DWSIM\References\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting">
+      <HintPath>..\DWSIM\References\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata">
+      <HintPath>..\DWSIM\References\Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="NetOffice">
       <HintPath>..\DWSIM\References\NetOffice.dll</HintPath>
@@ -135,6 +150,7 @@
     <Compile Include="Reactors\Gibbs.vb" />
     <Compile Include="Reactors\PFR.vb" />
     <Compile Include="Support Classes\RigorousColumnSolver.vb" />
+    <Compile Include="Unit Operations\CustomUO.vb" />
     <Compile Include="Unit Operations\FlowsheetUO.vb" />
     <Compile Include="Unit Operations\OrificePlate.vb" />
     <Compile Include="Support Classes\BaseClass.vb" />

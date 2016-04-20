@@ -218,21 +218,21 @@ Namespace UnitOperations
                 End If
             End If
 
-            Dim fpp As DWSIM.FlowPackages.FPBaseClass
+            Dim fpp As FlowPackages.FPBaseClass
 
             Select Case Me.SelectedFlowPackage
                 Case FlowPackage.Lockhart_Martinelli
-                    fpp = New DWSIM.FlowPackages.LockhartMartinelli
+                    fpp = New FlowPackages.LockhartMartinelli
                 Case FlowPackage.Petalas_Aziz
                     If Not Environment.Is64BitProcess Then
-                        fpp = New DWSIM.FlowPackages.PetalasAziz
+                        fpp = New FlowPackages.PetalasAziz
                         Calculator.CheckParallelPInvoke()
                     Else
                         FlowSheet.ShowMessage("'Petalas-Aziz' model not available in 64-bit mode. Falling back to 'Beggs & Brill'...", IFlowsheet.MessageType.Warning)
-                        fpp = New DWSIM.FlowPackages.BeggsBrill
+                        fpp = New FlowPackages.BeggsBrill
                     End If
                 Case Else
-                    fpp = New DWSIM.FlowPackages.BeggsBrill
+                    fpp = New FlowPackages.BeggsBrill
             End Select
 
             Dim oms As MaterialStream

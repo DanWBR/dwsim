@@ -98,7 +98,7 @@
   </Settings>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>
@@ -714,7 +714,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>
@@ -1332,7 +1332,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.UnitOperations.Vessel</Type>
+      <Type>DWSIM.Vessel</Type>
       <FlashSpecification>PH</FlashSpecification>
       <PressureCalculation>Minimum</PressureCalculation>
       <OpMode>TwoPhase</OpMode>
@@ -1367,7 +1367,7 @@
       <PropertyPackage></PropertyPackage>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <CompositionBasis>Molar_Fractions</CompositionBasis>
       <Calculated>true</Calculated>

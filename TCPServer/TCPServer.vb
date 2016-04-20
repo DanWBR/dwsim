@@ -172,10 +172,10 @@ Module TCPServer
     Sub ProcessData(bytes As Byte(), sessionid As Integer, datachannel As Byte)
         Dim errmsg As String = ""
         Using bytestream As New MemoryStream(bytes)
-            Using form As FormFlowsheet = DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream)
+            Using form As FormFlowsheet = DWSIM.UnitOperations.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream)
                 If Not solutions.ContainsKey(form.Options.Key) Then
-                    DWSIM.DWSIM.Flowsheet.FlowsheetSolver.CalculateAll2(form, 1, ts)
-                    Dim retbytes As MemoryStream = DWSIM.DWSIM.SimulationObjects.UnitOperations.Flowsheet.ReturnProcessData(form)
+                    DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, 1, ts)
+                    Dim retbytes As MemoryStream = DWSIM.UnitOperations.UnitOperations.Flowsheet.ReturnProcessData(form)
                     Using retbytes
                         Dim uncompressedbytes As Byte() = retbytes.ToArray
                         Using compressedstream As New MemoryStream()

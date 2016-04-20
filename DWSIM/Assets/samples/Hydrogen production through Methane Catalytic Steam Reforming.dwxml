@@ -8,7 +8,7 @@
   </GeneralInfo>
   <SimulationObjects>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent>Methane</ReferenceSolvent>
@@ -889,7 +889,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Reactors.Reactor_PFR</Type>
+      <Type>DWSIM.Reactor_PFR</Type>
       <ReactorOperationMode>Isothermic</ReactorOperationMode>
       <dV>0.05</dV>
       <CatalystVoidFraction>0.4</CatalystVoidFraction>
@@ -945,7 +945,7 @@
       </CompoundConversions>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.MaterialStream</Type>
+      <Type>DWSIM.Streams.MaterialStream</Type>
       <SpecType>Temperature_and_Pressure</SpecType>
       <IsElectrolyteStream>false</IsElectrolyteStream>
       <ReferenceSolvent></ReferenceSolvent>
@@ -1827,7 +1827,7 @@
       </Phases>
     </SimulationObject>
     <SimulationObject>
-      <Type>DWSIM.DWSIM.SimulationObjects.Streams.EnergyStream</Type>
+      <Type>DWSIM.Streams.EnergyStream</Type>
       <EnergyFlow>151482.307329</EnergyFlow>
       <ComponentDescription>EN-bfaa2be1-1e89-4683-b51b-ef145653d863</ComponentDescription>
       <ComponentName>ESTR-000</ComponentName>
