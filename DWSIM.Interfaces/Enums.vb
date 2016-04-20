@@ -7,6 +7,22 @@
         GlobalBroyden
     End Enum
 
+    Public Enum FlashMethod
+        GlobalSetting = 2
+        DWSIMDefault = 0
+        InsideOut = 1
+        InsideOut3P = 3
+        GibbsMin2P = 4
+        GibbsMin3P = 5
+        NestedLoops3P = 6
+        NestedLoopsSLE = 7
+        NestedLoopsImmiscible = 8
+        SimpleLLE = 9
+        NestedLoopsSLE_SS = 10
+        NestedLoops3PV2 = 11
+        NestedLoops3PV3 = 12
+    End Enum
+
     Public Enum FlashCalculationType
         PressureTemperature = 0
         PressureEnthalpy = 1

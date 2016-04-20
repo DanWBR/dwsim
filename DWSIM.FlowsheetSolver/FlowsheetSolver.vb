@@ -68,14 +68,17 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         Else
                             If objArgs.Calculated = True Then
                                 gobj = myUnitOp.GraphicObject
-                                gobj.Calculated = True
+                                gobj.Calculated = False
+                                myUnitOp.Calculated = False
                                 myUnitOp.Calculate()
+                                myUnitOp.Calculated = True
                                 gobj.Status = Status.Calculated
                                 If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myUnitOp.AttachedSpecId).Calculate()
                                 fgui.ShowMessage(gobj.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
                             Else
                                 myUnitOp.DeCalculate()
                                 gobj = myUnitOp.GraphicObject
+                                myUnitOp.Calculated = False
                                 gobj.Calculated = False
                             End If
                         End If
@@ -91,7 +94,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         Dim myUnitOp = fbag.SimulationObjects(myObj.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                         If objArgs.Calculated = True Then
                             myUnitOp.GraphicObject.Calculated = False
+                            myUnitOp.Calculated = True
                             myUnitOp.Calculate()
+                            myUnitOp.Calculated = False
                             fgui.ShowMessage(gobj.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
                             myUnitOp.GraphicObject.Calculated = True
                             If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myUnitOp.AttachedSpecId).Calculate()
@@ -100,6 +105,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         Else
                             myUnitOp.DeCalculate()
                             myUnitOp.GraphicObject.Calculated = False
+                            myUnitOp.Calculated = False
                         End If
                     End If
                     If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Calculate()
@@ -108,7 +114,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 If objArgs.Sender = "Adjust" Or objArgs.Sender = "FlowsheetSolver" Then
                     Dim myObj As ISimulationObject = fbag.SimulationObjects(objArgs.Name)
                     myObj.GraphicObject.Calculated = False
+                    myObj.Calculated = False
                     myObj.Calculate()
+                    myObj.Calculated = True
                     fgui.ShowMessage(objArgs.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
                     myObj.GraphicObject.Calculated = True
                     If myObj.IsSpecAttached = True And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Calculate()
@@ -121,7 +129,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                 Dim obj = fbag.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                                 If obj.GraphicObject.ObjectType = ObjectType.MaterialStream Then
                                     obj.GraphicObject.Calculated = False
+                                    obj.Calculated = False
                                     obj.Calculate()
+                                    obj.Calculated = True
                                     obj.GraphicObject.Calculated = True
                                 End If
                             End If
@@ -168,6 +178,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     Dim myObj As ISimulationObject = fbag.SimulationObjects(objArgs.Name)
                     RaiseEvent UnitOpCalculationStarted(fobj, New System.EventArgs(), objArgs)
                     myObj.Calculate()
+                    myObj.Calculated = True
                     If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Calculate()
                     RaiseEvent UnitOpCalculationFinished(fobj, New System.EventArgs(), objArgs)
             End Select
@@ -333,6 +344,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                             End If
                         End If
                         myobj.GraphicObject.Calculated = True
+                        myobj.LastUpdated = Date.Now
                     End If
                 Catch ex As AggregateException
                     myobj.ErrorMessage = ""
@@ -394,6 +406,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         CalculateFlowsheetAsync(fobj, myinfo, ct)
                     End If
                     myobj.GraphicObject.Calculated = True
+                    myobj.LastUpdated = Date.Now
                 End If
             Catch ex As AggregateException
                 'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
@@ -465,6 +478,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                                                  CalculateFlowsheetAsync(fobj, myinfo, ct)
                                                              End If
                                                              myobj.GraphicObject.Calculated = True
+                                                             myobj.LastUpdated = Date.Now
                                                          End If
                                                      Catch ex As AggregateException
                                                          'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)

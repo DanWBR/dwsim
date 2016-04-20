@@ -90,9 +90,11 @@ Public Class frmSurface
 
         If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
+            If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
 
-        Else
+                Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).UpdateEditForm()
 
+            End If
 
         End If
 
@@ -193,15 +195,25 @@ Public Class frmSurface
             If Not e.SelectedObject.IsConnector Then
 
                 If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
+
                     If Me.FlowsheetDesignSurface.SelectedObject.IsConnector = False Then
-                        
+
+                        If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
+
+                            Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
+
+                        End If
+
                     Else
+
                         Me.FlowsheetDesignSurface.SelectedObject = Nothing
+
                     End If
+
                 Else
-                    
+
                 End If
-               
+
                 Flowsheet.ChangeEditMenuStatus(True)
 
             Else
@@ -2630,7 +2642,7 @@ Public Class frmSurface
 
         If Not gObj Is Nothing Then
             Me.FlowsheetDesignSurface.drawingObjects.Add(gObj)
-            gObj.Draw(Me.FlowsheetDesignSurface.CreateGraphics)
+            'gObj.Draw(Me.FlowsheetDesignSurface.CreateGraphics)
             Me.FlowsheetDesignSurface.SelectedObject = gObj
             Me.FlowsheetDesignSurface.Invalidate()
             Application.DoEvents()

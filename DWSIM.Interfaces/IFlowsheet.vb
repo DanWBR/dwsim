@@ -48,6 +48,8 @@
 
     Sub AddCompoundsToMaterialStream(stream As IMaterialStream)
 
+    Function AddObject(t As Enums.GraphicObjects.ObjectType, xcoord As Integer, ycoord As Integer, tag As String) As ISimulationObject
+
 End Interface
 
 Public Interface IFlowsheetBag

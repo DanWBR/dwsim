@@ -9860,6 +9860,8 @@ Final3:
             Return Clone()
         End Function
 
+        Public Property PreferredFlashAlgorithm As Enums.FlashMethod Implements IPropertyPackage.PreferredFlashAlgorithm
+
     End Class
 
     ''' <summary>

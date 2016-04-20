@@ -28,6 +28,8 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
+        Private f As EF_Mixer
+
         Public Enum PressureBehavior
             Average
             Maximum
@@ -54,9 +56,6 @@ Namespace UnitOperations
             MyBase.CreateNew()
             Me.ComponentName = name
             Me.ComponentDescription = description
-
-
-
 
         End Sub
 
@@ -208,7 +207,7 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
-            Dim f As New EF_Mixer() With {.Text = Me.GraphicObject.Tag}
+            f = New EF_Mixer With {.MixerObject = Me}
 
             Me.FlowSheet.DisplayForm(f)
 

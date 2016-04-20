@@ -6,6 +6,8 @@
 
     Property Tag As String
 
+    Property PreferredFlashAlgorithm As Enums.FlashMethod
+
     Property CurrentMaterialStream As IMaterialStream
 
     Function CalculateEquilibrium(calctype As Enums.FlashCalculationType,

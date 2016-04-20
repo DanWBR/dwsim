@@ -3007,4 +3007,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
+    Public Function AddObject(t As ObjectType, xcoord As Integer, ycoord As Integer, tag As String) As Interfaces.ISimulationObject Implements IFlowsheet.AddObject
+        Return Me.SimulationObjects(Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, tag))
+    End Function
+
 End Class

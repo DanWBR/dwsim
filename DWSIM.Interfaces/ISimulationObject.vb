@@ -4,6 +4,8 @@
 
     Sub UpdateEditForm()
 
+    Property PreferredFlashAlgorithm As Enums.FlashMethod
+
     Property ErrorMessage() As String
 
     Function GetDebugReport() As String
