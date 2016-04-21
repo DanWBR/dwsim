@@ -436,7 +436,7 @@ Namespace ExcelAddIn
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
             If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
 
-            Dim iplist As List(Of BaseClasses.InteractionParameter) = DWSIM.Databases.UserIPDB.GetStoredIPsets(Compound1, Compound2, Model)
+            Dim iplist As New List(Of BaseClasses.InteractionParameter) '= UserIPDB.GetStoredIPsets(Compound1, Compound2, Model)
 
             Dim ipdata(iplist.Count, 9) As Object
 

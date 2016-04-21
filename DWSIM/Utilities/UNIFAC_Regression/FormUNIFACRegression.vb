@@ -990,7 +990,7 @@ Public Class FormUNIFACRegression
 
         If Me.tbIPDBName.Text <> "" Then
             Try
-                DWSIM.Databases.UserIPDB.AddInteractionParameters(New BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
+                Databases.UserIPDB.AddInteractionParameters(New BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
                 MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)

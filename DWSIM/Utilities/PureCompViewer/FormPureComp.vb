@@ -901,7 +901,7 @@ Public Class FormPureComp
                 Try
                     'load DWSIM database, if existent
                     If File.Exists(filename) Then
-                        Dim dwdb As New DWSIM.Databases.DWSIM
+                        Dim dwdb As New Databases.DWSIM
                         dwdb.Load(filename)
                         cpa = dwdb.Transfer(constprop.Name)
                         If cpa.Length = 1 Then
@@ -917,7 +917,7 @@ Public Class FormPureComp
                 Try
                     'load chempsep database, if existent
                     If File.Exists(My.Settings.ChemSepDatabasePath) Then
-                        Dim csdb As New DWSIM.Databases.ChemSep
+                        Dim csdb As New Databases.ChemSep
                         csdb.Load(My.Settings.ChemSepDatabasePath)
                         cpa = csdb.Transfer(constprop.Name)
                         If cpa.Length = 1 Then
@@ -933,7 +933,7 @@ Public Class FormPureComp
                 'find database of component
                 Dim componentes As ConstantProperties()
                 For Each fpath As String In My.Settings.UserDatabases
-                    componentes = DWSIM.Databases.UserDB.ReadComps(fpath)
+                    componentes = Databases.UserDB.ReadComps(fpath)
                     For Each cp As ConstantProperties In componentes
                         If cp.Name = constprop.Name Then
                             constprop = cp
@@ -947,7 +947,7 @@ Public Class FormPureComp
                 Try
                     'load electrolytes database, if existent
                     If File.Exists(filename) Then
-                        Dim edb As New DWSIM.Databases.Electrolyte
+                        Dim edb As New Databases.Electrolyte
                         edb.Load(filename)
                         cpa = edb.Transfer(constprop.Name)
                         If cpa.Length = 1 Then
@@ -964,7 +964,7 @@ Public Class FormPureComp
                 Try
                     'load electrolytes database, if existent
                     If File.Exists(filename) Then
-                        Dim bddb As New DWSIM.Databases.Biodiesel
+                        Dim bddb As New Databases.Biodiesel
                         bddb.Load(filename)
                         cpa = bddb.Transfer(constprop.Name)
                         If cpa.Length = 1 Then

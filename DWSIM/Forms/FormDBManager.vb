@@ -53,7 +53,7 @@ Public Class FormDBManager
         LblDBPath.Text = DBPath
 
         'write components to table
-        componentes = DWSIM.Databases.UserDB.ReadComps(DBPath)
+        componentes = Databases.UserDB.ReadComps(DBPath)
         DGrComps.Rows.Clear()
         For Each cp As ConstantProperties In componentes
             DGrComps.Rows.Add(cp.ID, cp.Name, cp.CompCreatorStudyFile)
@@ -61,17 +61,17 @@ Public Class FormDBManager
     End Sub
    
     Private Sub BtnDelComponent_Click(sender As System.Object, e As System.EventArgs) Handles BtnDelComponent.Click
-        componentes = DWSIM.Databases.UserDB.ReadComps(DBPath)
+        componentes = Databases.UserDB.ReadComps(DBPath)
         Dim idx As String = DGrComps.CurrentRow.Index
         Dim CompID As String = DGrComps.Rows(idx).Cells("ID").Value
         Dim CompName As String = DGrComps.Rows(idx).Cells("CompName").Value
 
         Dim result = MessageBox.Show("Delete component " & CompName & " ?", "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
         If result = DialogResult.OK Then
-            DWSIM.Databases.UserDB.RemoveCompound(DBPath, CompID)
+            Databases.UserDB.RemoveCompound(DBPath, CompID)
 
             DGrComps.Rows.Clear()
-            componentes = DWSIM.Databases.UserDB.ReadComps(DBPath)
+            componentes = Databases.UserDB.ReadComps(DBPath)
             For Each cp As ConstantProperties In componentes
                 DGrComps.Rows.Add(cp.ID, cp.Name, cp.CompCreatorStudyFile)
             Next

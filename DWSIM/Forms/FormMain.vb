@@ -711,7 +711,7 @@ Public Class FormMain
         For Each fpath As String In My.Settings.UserDatabases
             Try
                 Dim componentes As ConstantProperties()
-                componentes = DWSIM.Databases.UserDB.ReadComps(fpath)
+                componentes = Databases.UserDB.ReadComps(fpath)
                 If componentes.Length > 0 Then
                     If My.Settings.ReplaceComps Then
                         For Each c As ConstantProperties In componentes
@@ -745,7 +745,7 @@ Public Class FormMain
 
     Public Sub LoadCSDB(ByVal filename As String)
         If File.Exists(filename) Then
-            Dim csdb As New DWSIM.Databases.ChemSep
+            Dim csdb As New Databases.ChemSep
             Dim cpa() As BaseClasses.ConstantProperties
             csdb.Load(filename)
             cpa = csdb.Transfer()
@@ -761,7 +761,7 @@ Public Class FormMain
 
     Public Sub LoadDWSIMDB(ByVal filename As String)
         If File.Exists(filename) Then
-            Dim dwdb As New DWSIM.Databases.DWSIM
+            Dim dwdb As New Databases.DWSIM
             Dim cpa() As BaseClasses.ConstantProperties
             dwdb.Load(filename)
             cpa = dwdb.Transfer()
@@ -774,7 +774,7 @@ Public Class FormMain
 
     Public Sub LoadBDDB(ByVal filename As String)
         If File.Exists(filename) Then
-            Dim bddb As New DWSIM.Databases.Biodiesel
+            Dim bddb As New Databases.Biodiesel
             Dim cpa() As BaseClasses.ConstantProperties
             bddb.Load(filename)
             cpa = bddb.Transfer()
@@ -786,7 +786,7 @@ Public Class FormMain
 
     Public Sub LoadEDB(ByVal filename As String)
         If File.Exists(filename) Then
-            Dim edb As New DWSIM.Databases.Electrolyte
+            Dim edb As New Databases.Electrolyte
             Dim cpa() As BaseClasses.ConstantProperties
             edb.Load(filename)
             cpa = edb.Transfer()
@@ -798,7 +798,7 @@ Public Class FormMain
 
     Public Sub LoadCPDB(ByVal filename As String)
         If File.Exists(filename) Then
-            Dim cpdb As New DWSIM.Databases.CoolProp
+            Dim cpdb As New Databases.CoolProp
             Dim cpa() As BaseClasses.ConstantProperties
             cpdb.Load(filename)
             Try

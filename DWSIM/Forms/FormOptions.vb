@@ -226,7 +226,7 @@ Public Class FormOptions
             Dim path = Me.OpenFileDialog1.FileName
             Try
                 Dim componentes As ConstantProperties()
-                componentes = DWSIM.Databases.UserDB.ReadComps(path)
+                componentes = Databases.UserDB.ReadComps(path)
                 If componentes.Length > 0 Then
                     If Me.cbudb.Checked Then
                         For Each c As ConstantProperties In componentes

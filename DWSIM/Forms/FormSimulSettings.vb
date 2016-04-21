@@ -1402,7 +1402,7 @@ Public Class FormSimulSettings
             For Each lvi As ListViewItem In Me.ListViewA.SelectedItems
                 comps.Add(FrmChild.Options.SelectedComponents(lvi.Tag))
             Next
-            DWSIM.Databases.UserDB.AddCompounds(comps.ToArray, sfdxml1.FileName, True)
+            Databases.UserDB.AddCompounds(comps.ToArray, sfdxml1.FileName, True)
         End If
     End Sub
 
