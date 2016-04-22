@@ -1177,6 +1177,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_co_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo para simulação de operações unitárias CAPE-OPEN"
+            Else
+                Return "Model for utilization of a CAPE-OPEN Unit Operation in the flowsheet"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Operação Unitária CAPE-OPEN"
+            Else
+                Return "CAPE-OPEN Unit Operation"
+            End If
+        End Function
     End Class
 
 End Namespace

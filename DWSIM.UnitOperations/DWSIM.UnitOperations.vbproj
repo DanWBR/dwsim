@@ -244,6 +244,222 @@
   <ItemGroup>
     <None Include="Resources\bullet_tick.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_abs_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_abs_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_dc_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_dc_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_rebabs_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_rebabs_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_rflabs_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_rflabs_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_sc_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\col_sc_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lo_adjust_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lo_adjust_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lo_enrecy_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lo_enrecy_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lo_recy_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lo_recy_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lo_spec_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lo_spec_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_conv_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_conv_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_cstr_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_cstr_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_equi_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_equi_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_gibbs_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_gibbs_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_pfr_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\re_pfr_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stream_en_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stream_en_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stream_mat_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stream_mat_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_co_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_co_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_compr_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_compr_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_compsep_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_compsep_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_cooler_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_cooler_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_custom_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_custom_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_excel_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_excel_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_expan_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_expan_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_filter_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_filter_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_flash_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_flash_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_fs_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_fs_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_heater_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_heater_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_hx_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_hx_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_mixer_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_mixer_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_orifice_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_orifice_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_pipe_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_pipe_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_pump_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_pump_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_solidsep_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_solidsep_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_split_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_split_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_tank_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_tank_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_valve_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uo_valve_32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

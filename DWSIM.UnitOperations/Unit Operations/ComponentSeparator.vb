@@ -466,6 +466,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_compsep_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo para separação hipotética de substâncias"
+            Else
+                Return "Model for a hypothetical compound separation process"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Separador de Substâncias"
+            Else
+                Return "Compound Separator"
+            End If
+        End Function
     End Class
 
 End Namespace

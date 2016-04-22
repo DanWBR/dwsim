@@ -478,6 +478,26 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_compr_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo para um compressor isentrópico"
+            Else
+                Return "Model for an adiabatic (isentropic) compressor"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Compressor Adiabático"
+            Else
+                Return "Adiabatic Compressor"
+            End If
+        End Function
     End Class
 
 End Namespace

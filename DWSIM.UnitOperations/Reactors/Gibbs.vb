@@ -1759,6 +1759,26 @@ Namespace Reactors
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.re_gibbs_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Calcula o equilíbrio químico de átomos em uma Corrente de Matéria"
+            Else
+                Return "Calculates chemical/atomic equilibrium for a Material Stream"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Reator de Gibbs"
+            Else
+                Return "Gibbs Reactor"
+            End If
+        End Function
     End Class
 
 End Namespace

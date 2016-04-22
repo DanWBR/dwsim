@@ -1033,16 +1033,17 @@ Public Class FormMain
 
     Function ReturnForm(ByVal str As String) As IDockContent
         Select Case str
-            Case "DWSIM.frmProps"
-            Case "DWSIM.frmLog"
+            Case "DWSIM.SimulationObjectsPanel"
+                Return Me.tmpform2.FormObjects
+            Case "DWSIM.LogPanel"
                 Return Me.tmpform2.FormLog
-            Case "DWSIM.frmMatList"
+            Case "DWSIM.MaterialStreamPanel"
                 Return Me.tmpform2.FormMatList
-            Case "DWSIM.frmSurface"
+            Case "DWSIM.FlowsheetSurface"
                 Return Me.tmpform2.FormSurface
             Case "DWSIM.SpreadsheetForm"
                 Return Me.tmpform2.FormSpreadsheet
-            Case "DWSIM.frmWatch"
+            Case "DWSIM.WatchPanel"
                 Return Me.tmpform2.FormWatch
         End Select
         Return Nothing
@@ -1671,6 +1672,7 @@ Public Class FormMain
             form.FormSpreadsheet.DockPanel = Nothing
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
+            form.FormObjects.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
@@ -1689,6 +1691,7 @@ Public Class FormMain
                 form.FormSpreadsheet.Show(form.dckPanel)
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
+                form.FormObjects.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception

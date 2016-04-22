@@ -268,6 +268,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_solidsep_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Separa a fase sólida das demais em uma Corrente de Matéria"
+            Else
+                Return "Separates a solid phase from the others in a Material Stream"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Separador de Sólidos"
+            Else
+                Return "Solids Separator"
+            End If
+        End Function
     End Class
 
 End Namespace

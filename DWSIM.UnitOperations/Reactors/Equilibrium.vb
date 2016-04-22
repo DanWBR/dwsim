@@ -1161,6 +1161,26 @@ Namespace Reactors
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.re_equi_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Suporta reações definidas por constantes de equilíbrio"
+            Else
+                Return "Supports equilibrium constant-defined reactions"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Reator de Equilíbrio"
+            Else
+                Return "Equilibrium Reactor"
+            End If
+        End Function
     End Class
 
 End Namespace

@@ -469,6 +469,26 @@ Namespace SpecialOps
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.lo_spec_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Define uma variável como função de outra"
+            Else
+                Return "Defines a dependent variable/object from other variables/objects"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Especificação"
+            Else
+                Return "Specification Block"
+            End If
+        End Function
     End Class
 
 End Namespace

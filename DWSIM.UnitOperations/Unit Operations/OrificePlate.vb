@@ -404,6 +404,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_orifice_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Dimensiona ou avalia uma placa de orifício"
+            Else
+                Return "Sizes or evaluates an orifice plate"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Placa de Orifício"
+            Else
+                Return "Orifice Plate"
+            End If
+        End Function
     End Class
 
 End Namespace

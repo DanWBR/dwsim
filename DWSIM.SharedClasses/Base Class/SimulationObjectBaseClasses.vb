@@ -241,7 +241,7 @@ Namespace UnitOperations
         ''' <remarks>This property is the same as the graphic object 'Name' property.</remarks>
         Public Property Name() As String Implements Interfaces.ISimulationObject.Name
             Get
-                Return Componentname
+                Return ComponentName
             End Get
             Set(value As String)
                 ComponentName = value
@@ -513,6 +513,12 @@ Namespace UnitOperations
         End Property
 
 #End Region
+
+        Public MustOverride Function GetDisplayName() As String Implements ISimulationObject.GetDisplayName
+
+        Public MustOverride Function GetDisplayDescription() As String Implements ISimulationObject.GetDisplayDescription
+
+        Public MustOverride Function GetIconBitmap() As Object Implements ISimulationObject.GetIconBitmap
 
     End Class
 

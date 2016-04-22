@@ -406,6 +406,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_filter_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo de filtro de sólidos"
+            Else
+                Return "Solids Filter model"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Filtro"
+            Else
+                Return "Filter"
+            End If
+        End Function
     End Class
 
 End Namespace

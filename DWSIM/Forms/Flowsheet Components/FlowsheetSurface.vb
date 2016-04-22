@@ -2633,8 +2633,8 @@ Public Class FlowsheetSurface
     Private Sub FlowsheetDesignSurface_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles FlowsheetDesignSurface.DragEnter
         Dim i As Integer
         For i = 0 To e.Data.GetFormats().Length - 1
-            If e.Data.GetFormats()(i).Equals _
-               ("System.Windows.Forms.DataGridViewRow") Then
+            Dim format = e.Data.GetFormats()(i)
+            If format.Equals("System.RuntimeType") Then
                 'The data from the drag source is moved to the target.
                 e.Effect = DragDropEffects.Copy
             End If
@@ -2644,57 +2644,56 @@ Public Class FlowsheetSurface
     Private Sub FlowsheetDesignSurface_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles FlowsheetDesignSurface.DragDrop
 
         If e.Effect = DragDropEffects.Copy Then
-            Dim obj As DataGridViewRow = e.Data.GetData("System.Windows.Forms.DataGridViewRow")
+            Dim obj As Type = e.Data.GetData("System.RuntimeType")
             Dim tobj As ObjectType = ObjectType.Nenhum
             Dim p As Drawing.Point = Me.FlowsheetDesignSurface.PointToClient(New Drawing.Point(e.X, e.Y))
             Dim mousePT As Drawing.Point = Flowsheet.gscTogoc(p.X, p.Y)
-            Dim mpx = mousePT.X
-            Dim mpy = mousePT.Y
-            'Dim text As String = Flowsheet.FormObjListView.DataGridView1.Rows(obj.Index).Cells(0).Value.ToString.TrimEnd(" ")
-            Select Case Text
-                Case "Ajuste"
+            Dim mpx = mousePT.X - 40
+            Dim mpy = mousePT.Y - 40
+            Select Case obj.Name
+                Case "Adjust"
                     tobj = ObjectType.OT_Adjust
-                Case "Especificao"
+                Case "Spec"
                     tobj = ObjectType.OT_Spec
-                Case "Reciclo"
+                Case "Recycle"
                     tobj = ObjectType.OT_Recycle
                 Case "EnergyRecycle"
                     tobj = ObjectType.OT_EnergyRecycle
-                Case "Misturador"
+                Case "Mixer"
                     tobj = ObjectType.NodeIn
-                Case "Divisor"
+                Case "Splitter"
                     tobj = ObjectType.NodeOut
-                Case "Bomba"
+                Case "Pump"
                     tobj = ObjectType.Pump
-                Case "Tanque"
+                Case "Tank"
                     tobj = ObjectType.Tank
-                Case "VasoSeparadorGL"
+                Case "SeparatorVessel"
                     tobj = ObjectType.Vessel
-                Case "CorrentedeMatria"
+                Case "MaterialStream"
                     tobj = ObjectType.MaterialStream
-                Case "CorrentedeEnergia"
+                Case "EnergyStream"
                     tobj = ObjectType.EnergyStream
-                Case "CompressorAdiabtico"
+                Case "Compressor"
                     tobj = ObjectType.Compressor
-                Case "TurbinaAdiabtica"
+                Case "Expander"
                     tobj = ObjectType.Expander
-                Case "Resfriador"
+                Case "Cooler"
                     tobj = ObjectType.Cooler
-                Case "Aquecedor"
+                Case "Heater"
                     tobj = ObjectType.Heater
-                Case "Tubulao"
+                Case "Pipe"
                     tobj = ObjectType.Pipe
-                Case "Vlvula"
+                Case "Valve"
                     tobj = ObjectType.Valve
-                Case "ReatorConversao"
+                Case "Reactor_Conversion"
                     tobj = ObjectType.RCT_Conversion
-                Case "ReatorEquilibrio"
+                Case "Reactor_Equilibrium"
                     tobj = ObjectType.RCT_Equilibrium
-                Case "ReatorGibbs"
+                Case "Reactor_Gibbs"
                     tobj = ObjectType.RCT_Gibbs
-                Case "ReatorCSTR"
+                Case "Reactor_CSTR"
                     tobj = ObjectType.RCT_CSTR
-                Case "ReatorPFR"
+                Case "Reactor_PFR"
                     tobj = ObjectType.RCT_PFR
                 Case "HeatExchanger"
                     tobj = ObjectType.HeatExchanger

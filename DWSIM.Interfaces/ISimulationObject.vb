@@ -123,4 +123,10 @@
 
     Sub SetFlowsheet(fobj As Object)
 
+    Function GetIconBitmap() As Object
+
+    Function GetDisplayName() As String
+
+    Function GetDisplayDescription() As String
+
 End Interface

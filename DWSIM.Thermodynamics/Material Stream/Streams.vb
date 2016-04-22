@@ -5029,6 +5029,26 @@ Namespace Streams
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.stream_mat_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Carrega informações sobre substâncias e condições de fluxo de matéria"
+            Else
+                Return "Contains information about compounds flowing at specified state conditions"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Corrente de Matéria"
+            Else
+                Return "Material Stream"
+            End If
+        End Function
     End Class
 
 End Namespace

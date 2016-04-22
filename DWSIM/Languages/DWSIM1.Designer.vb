@@ -2711,7 +2711,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Corrente de EnergyFlow.
+        '''  Looks up a localized string similar to Corrente de Energia.
         '''</summary>
         Friend Shared ReadOnly Property CorrentedeEnergia() As String
             Get
@@ -2729,7 +2729,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Corrente de EnergyFlow (Entrada).
+        '''  Looks up a localized string similar to Corrente de Energia (Entrada).
         '''</summary>
         Friend Shared ReadOnly Property CorrentedeEnergyFlowE() As String
             Get
@@ -2738,7 +2738,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Corrente de EnergyFlow (Saída).
+        '''  Looks up a localized string similar to Corrente de Energia (Saída).
         '''</summary>
         Friend Shared ReadOnly Property CorrentedeEnergyFlowS() As String
             Get
@@ -2990,7 +2990,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Correntes de EnergyFlow só podem se conectar a (sentido &apos;corrente de EnergyFlow&apos; -&gt; &apos;objeto&apos;):.
+        '''  Looks up a localized string similar to Correntes de Energia só podem se conectar a (sentido &apos;corrente de energia&apos;-&gt; &apos;objeto&apos;):.
         '''</summary>
         Friend Shared ReadOnly Property CorrentesdeEnergyFlowsp() As String
             Get
@@ -2999,7 +2999,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Correntes de EnergyFlow só podem se conectar a (sentido &apos;objeto&apos; -&gt; &apos;corrente de EnergyFlow&apos;):.
+        '''  Looks up a localized string similar to Correntes de Energia só podem se conectar a (sentido &apos;objeto&apos; -&gt; &apos;corrente de energia&apos;):.
         '''</summary>
         Friend Shared ReadOnly Property CorrentesdeEnergyFlowsp2() As String
             Get
@@ -3098,7 +3098,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Balanço de EnergyFlow.
+        '''  Looks up a localized string similar to Balanço de Energia.
         '''</summary>
         Friend Shared ReadOnly Property CSepEnergyImbalance() As String
             Get

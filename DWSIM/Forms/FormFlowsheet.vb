@@ -67,6 +67,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public FormLog As New LogPanel
     Public FormMatList As New MaterialStreamPanel
     Public FormSpreadsheet As New SpreadsheetForm
+    Public FormObjects As New SimulationObjectsPanel With {.Flowsheet = Me}
 
     Public FormOutput As New ConsoleOutput
     Public FormCOReports As New COReportsPanel
@@ -216,10 +217,12 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             FormSpreadsheet.DockPanel = Nothing
             FormWatch.DockPanel = Nothing
             FormSurface.DockPanel = Nothing
+            FormObjects.DockPanel = Nothing
 
             FormSpreadsheet.Show(dckPanel)
             FormMatList.Show(FormSpreadsheet.Pane, FormSpreadsheet)
             FormSurface.Show(FormSpreadsheet.Pane, Nothing)
+            FormObjects.Show(dckPanel)
             FormLog.Show(FormSurface.Pane, DockAlignment.Bottom, 0.2)
 
             dckPanel.BringToFront()

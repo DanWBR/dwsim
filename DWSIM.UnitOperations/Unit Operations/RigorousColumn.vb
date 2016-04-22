@@ -899,6 +899,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.col_dc_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo rigoroso para simulação de colunas de destilação"
+            Else
+                Return "Rigorous model for simulation of distillation columns"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Coluna de Destilação"
+            Else
+                Return "Distillation Column"
+            End If
+        End Function
     End Class
 
     <Serializable()> Public Class AbsorptionColumn
@@ -1035,6 +1055,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.col_abs_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo para simulação rigorosa de colunas de absorção"
+            Else
+                Return "Model for rigorous simulation of absorption columns"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Coluna de Absorção"
+            Else
+                Return "Absorption Column"
+            End If
+        End Function
     End Class
 
     <Serializable()> Public Class ReboiledAbsorber
@@ -1166,6 +1206,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.col_rebabs_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo rigoroso de absorvedora com refervedor"
+            Else
+                Return "Rigorous reboiled absorber model"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Absorvedora com Refervedor"
+            Else
+                Return "Reboiled Absorber"
+            End If
+        End Function
     End Class
 
     <Serializable()> Public Class RefluxedAbsorber
@@ -1303,6 +1363,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.col_rflabs_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo rigoroso de uma coluna de absorção com refluxo"
+            Else
+                Return "Rigorous Refluxed Absorber model"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Absorvedora com Refluxo"
+            Else
+                Return "Refluxed Absorber"
+            End If
+        End Function
     End Class
 
     <System.Serializable()> Public MustInherit Class Column

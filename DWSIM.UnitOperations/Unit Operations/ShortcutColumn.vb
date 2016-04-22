@@ -627,6 +627,26 @@ restart:    B = F - D
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.col_sc_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo para dimensionamento rápido de colunas de destilação"
+            Else
+                Return "Model for quick sizing of distillation columns"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Coluna Shortcut"
+            Else
+                Return "Shortcut Column"
+            End If
+        End Function
     End Class
 
 End Namespace

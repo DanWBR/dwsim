@@ -216,6 +216,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_mixer_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Mistura múltiplas Correntes de Matéria em uma"
+            Else
+                Return "Mixes multiple Material Streams into a single one"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Misturador de Correntes"
+            Else
+                Return "Stream Mixer"
+            End If
+        End Function
     End Class
 
 End Namespace

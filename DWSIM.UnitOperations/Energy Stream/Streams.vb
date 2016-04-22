@@ -183,6 +183,26 @@ Namespace Streams
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.stream_en_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Representa o fluxo de energia entrando e saindo das operações unitárias"
+            Else
+                Return "Represents energy flowing in and out of unit operations"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Corrente de Energia"
+            Else
+                Return "Energy Stream"
+            End If
+        End Function
     End Class
 
 End Namespace

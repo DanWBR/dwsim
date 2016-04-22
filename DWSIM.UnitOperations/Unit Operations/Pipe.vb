@@ -1559,6 +1559,26 @@ Final3:     T = bbb
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_pipe_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Define um segmento de tubulação e acessórios para cálculo de perda de carga"
+            Else
+                Return "Defines a piping segment for pressure drop calculations"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Segmento de Tubulação"
+            Else
+                Return "Piping Segment"
+            End If
+        End Function
     End Class
 
 End Namespace

@@ -405,6 +405,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_split_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Divide uma Corrente de Matéria em outras correntes"
+            Else
+                Return "Splits a single Material Stream into multiple ones"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Divisor de Correntes"
+            Else
+                Return "Stream Splitter"
+            End If
+        End Function
     End Class
 
 End Namespace

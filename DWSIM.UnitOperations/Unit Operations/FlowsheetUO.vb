@@ -892,6 +892,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_fs_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo para utilização de uma simulação existente como um bloco no fluxograma"
+            Else
+                Return "Model for using an existing simulation as a flowsheet block"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Fluxograma"
+            Else
+                Return "Flowsheet"
+            End If
+        End Function
     End Class
 
 End Namespace

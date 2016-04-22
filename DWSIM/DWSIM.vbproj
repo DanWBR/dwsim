@@ -317,6 +317,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ListItem.Designer.vb">
+      <DependentUpon>ListItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ListItem.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ScriptEditorControl.designer.vb">
       <DependentUpon>ScriptEditorControl.vb</DependentUpon>
     </Compile>
@@ -333,6 +339,12 @@
       <DependentUpon>AboutBoxMono.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\AboutBoxMono.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.Designer.vb">
+      <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormAdditionalTasks.Designer.vb">
@@ -743,6 +755,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ListItem.resx">
+      <DependentUpon>ListItem.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ScriptEditorControl.en.resx">
       <DependentUpon>ScriptEditorControl.vb</DependentUpon>
     </EmbeddedResource>
@@ -769,6 +784,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBoxNET.es.resx">
       <DependentUpon>AboutBoxNET.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.resx">
+      <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAdditionalTasks.de.resx">
       <DependentUpon>FormAdditionalTasks.vb</DependentUpon>

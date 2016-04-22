@@ -475,6 +475,7 @@ Partial Class FlowsheetSurface
         '
         'FlowsheetSurface
         '
+        Me.AllowDrop = True
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CloseButton = False

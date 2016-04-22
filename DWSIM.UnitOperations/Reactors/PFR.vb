@@ -969,6 +969,26 @@ Namespace Reactors
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.re_pfr_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo de um PFR, suporta reações Cinéticas e Catalíticas Heterogêneas"
+            Else
+                Return "Plug-Flow Reactor model, supports Kinetic and HetCat reactions"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Reator Plug-Flow (PFR)"
+            Else
+                Return "Plug-Flow Reactor (PFR)"
+            End If
+        End Function
     End Class
 
 End Namespace

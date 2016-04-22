@@ -390,6 +390,26 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.lo_enrecy_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Bloco lógico para reciclo de correntes de energia"
+            Else
+                Return "Logical block for ter energy streams"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Reciclo de Energia"
+            Else
+                Return "Energy Recycle"
+            End If
+        End Function
     End Class
 
 End Namespace

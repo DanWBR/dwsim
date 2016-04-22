@@ -545,6 +545,27 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_flash_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Separador de fases fluidas (vapor/líquido)"
+            Else
+                Return "Fluid phase separator (vapor/liquid)"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Vaso Separador Gás-Líquido"
+            Else
+                Return "Gas-Liquid Separator"
+            End If
+        End Function
+
     End Class
 
 End Namespace

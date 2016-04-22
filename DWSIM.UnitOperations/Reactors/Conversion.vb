@@ -575,6 +575,26 @@ Namespace Reactors
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.re_conv_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Suporta reações definidas por uma taxa de conversão de reagentes"
+            Else
+                Return "Supports reactant conversion rate-defined reactions"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Reator de Conversão"
+            Else
+                Return "Conversion Reactor"
+            End If
+        End Function
     End Class
 
 End Namespace

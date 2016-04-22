@@ -645,6 +645,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_custom_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Operação unitária definida por um script IronPython"
+            Else
+                Return "IronPython script-defined Unit Operation"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Script IronPython"
+            Else
+                Return "IronPython Script"
+            End If
+        End Function
     End Class
 
 End Namespace

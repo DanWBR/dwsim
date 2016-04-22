@@ -376,6 +376,26 @@ Namespace SpecialOps
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.lo_adjust_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Bloco lógico para controle de variáveis"
+            Else
+                Return "Logical block for controlling a variable in the flowsheet"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Controlador"
+            Else
+                Return "Controller Block"
+            End If
+        End Function
     End Class
 
 End Namespace

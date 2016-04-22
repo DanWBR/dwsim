@@ -951,6 +951,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_pump_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo de bomba centrífuga"
+            Else
+                Return "Centrifugal Pump model"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Bomba Centrífuga"
+            Else
+                Return "Centrifugal Pump"
+            End If
+        End Function
     End Class
 
 End Namespace

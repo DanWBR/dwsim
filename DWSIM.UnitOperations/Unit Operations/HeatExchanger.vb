@@ -1343,6 +1343,26 @@ Namespace UnitOperations
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.uo_hx_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo de trocador de calor rigoroso"
+            Else
+                Return "Rigorous Heat Exchanger model"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Trocador de Calor Rigoroso"
+            Else
+                Return "Heat Exchanger"
+            End If
+        End Function
     End Class
 
 End Namespace

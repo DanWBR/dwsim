@@ -868,6 +868,26 @@ Namespace Reactors
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.re_cstr_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Modelo de um CSTR, suporta reações Cinéticas e Catalíticas Heterogêneas"
+            Else
+                Return "CSTR model, supports Kinetic and HetCat reactions"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Continous Stirred Tank Reactor (CSTR)"
+            Else
+                Return "Continous Stirred Tank Reactor (CSTR)"
+            End If
+        End Function
     End Class
 
 End Namespace

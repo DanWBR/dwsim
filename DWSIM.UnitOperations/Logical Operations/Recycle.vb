@@ -583,6 +583,26 @@ Namespace SpecialOps
         Public Overrides Sub UpdateEditForm()
 
         End Sub
+
+        Public Overrides Function GetIconBitmap() As Object
+            Return My.Resources.lo_recy_32
+        End Function
+
+        Public Overrides Function GetDisplayDescription() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Bloco para conexão de Correntes de Matéria de corte"
+            Else
+                Return "Block for connecting tear Material Streams"
+            End If
+        End Function
+
+        Public Overrides Function GetDisplayName() As String
+            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                Return "Reciclo"
+            Else
+                Return "Recycle Block"
+            End If
+        End Function
     End Class
 
 End Namespace

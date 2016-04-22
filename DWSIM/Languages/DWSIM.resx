@@ -763,7 +763,7 @@
     <value>Corrente</value>
   </data>
   <data name="CorrentedeEnergia" xml:space="preserve">
-    <value>Corrente de EnergyFlow</value>
+    <value>Corrente de Energia</value>
   </data>
   <data name="Correntedeentrada" xml:space="preserve">
     <value>Corrente de entrada</value>
@@ -802,10 +802,10 @@
     <value>Corrente de saída (3)</value>
   </data>
   <data name="CorrentesdeEnergyFlowsp" xml:space="preserve">
-    <value>Correntes de EnergyFlow só podem se conectar a (sentido 'corrente de EnergyFlow' -&gt; 'objeto'):</value>
+    <value>Correntes de Energia só podem se conectar a (sentido 'corrente de energia'-&gt; 'objeto'):</value>
   </data>
   <data name="CorrentesdeEnergyFlowsp2" xml:space="preserve">
-    <value>Correntes de EnergyFlow só podem se conectar a (sentido 'objeto' -&gt; 'corrente de EnergyFlow'):</value>
+    <value>Correntes de Energia só podem se conectar a (sentido 'objeto' -&gt; 'corrente de energia'):</value>
   </data>
   <data name="Corsemgradiente" xml:space="preserve">
     <value>Cor (sem gradiente)</value>
@@ -4202,7 +4202,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Editar Especificações</value>
   </data>
   <data name="CSepEnergyImbalance" xml:space="preserve">
-    <value>Balanço de EnergyFlow</value>
+    <value>Balanço de Energia</value>
   </data>
   <data name="CSepSeparationSpecs" xml:space="preserve">
     <value>Especificações de separação</value>
@@ -4424,10 +4424,10 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Pacote de Propriedades que utiliza o método COSMO-SAC implementado na biblioteca JCOSMO por Rafael Soares e Renan Gerber para a predição do coeficiente de atividade dos componentes na Phase líquida. As Entalpias, Entropias e Capacidades Caloríficas residuais são calculadas a partir do modelo de Lee-Kesler. A Phase vapor é modelada através da EDE Peng-Robinson.</value>
   </data>
   <data name="CorrentedeEnergyFlowE" xml:space="preserve">
-    <value>Corrente de EnergyFlow (Entrada)</value>
+    <value>Corrente de Energia (Entrada)</value>
   </data>
   <data name="CorrentedeEnergyFlowS" xml:space="preserve">
-    <value>Corrente de EnergyFlow (Saída)</value>
+    <value>Corrente de Energia (Saída)</value>
   </data>
   <data name="UO_ScriptLanguage" xml:space="preserve">
     <value>Linguagem do Script</value>
