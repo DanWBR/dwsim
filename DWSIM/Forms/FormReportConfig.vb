@@ -299,11 +299,13 @@ Public Class FormReportConfig
         Dim MyReport As New NeoDataType.MyNeoReport.Report
         Select Case My.Settings.CultureInfo
             Case "pt-BR"
-                MyReport.LoadFrom(My.Application.Info.DirectoryPath & "\data\report_pt-BR.mr6")
-            Case "en"
-                MyReport.LoadFrom(My.Application.Info.DirectoryPath & "\data\report_en-US.mr6")
+                Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_pt-BR.mr6")
+                    MyReport.LoadFrom(filestr)
+                End Using
             Case Else
-                MyReport.LoadFrom(My.Application.Info.DirectoryPath & "\data\report_en-US.mr6")
+                Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_en-US.mr6")
+                    MyReport.LoadFrom(filestr)
+                End Using
         End Select
 
         Dim ds As NeoDataType.MyNeoReport.TableDataSource = MyReport.Page.Sections(2).DataSource
@@ -332,11 +334,13 @@ Public Class FormReportConfig
         Dim MyReport As New NeoDataType.MyNeoReport.Report
         Select Case My.Settings.CultureInfo
             Case "pt-BR"
-                MyReport.LoadFrom(My.Application.Info.DirectoryPath & "\data\report_pt-BR.mr6")
-            Case "en"
-                MyReport.LoadFrom(My.Application.Info.DirectoryPath & "\data\report_en-US.mr6")
+                Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_pt-BR.mr6")
+                    MyReport.LoadFrom(filestr)
+                End Using
             Case Else
-                MyReport.LoadFrom(My.Application.Info.DirectoryPath & "\data\report_en-US.mr6")
+                Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_en-US.mr6")
+                    MyReport.LoadFrom(filestr)
+                End Using
         End Select
 
         Dim ds As NeoDataType.MyNeoReport.TableDataSource = CType(MyReport.Page.Sections(2).DataSource, NeoDataType.MyNeoReport.TableDataSource)
@@ -372,9 +376,8 @@ Public Class FormReportConfig
                         Me.DT.WriteXml(sri)
                         sri.Position = 0
                         ' xslInput is a string that contains xsl
-                        Using srt As New StringReader(File.ReadAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "data" & Path.DirectorySeparatorChar & "report_transform.xsl"))
-                            ' xmlInput is a string that contains xml
-                            Using xrt As XmlReader = XmlReader.Create(srt)
+                        Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_transform.xsl")
+                            Using xrt As XmlReader = XmlReader.Create(filestr)
                                 Using xri As XmlReader = XmlReader.Create(sri)
                                     Dim xslt As New XslCompiledTransform()
                                     xslt.Load(xrt)

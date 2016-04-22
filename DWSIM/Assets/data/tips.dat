@@ -1,4 +1,0 @@
-SEMPRE verifique se o DWSIM possui parâmetros de interação binária para as substâncias utilizadas na sua simulação! Dependendo das substâncias envolvidas e do pacote de propriedades (modelo termodinâmico) utilizado, parâmetros de interação adequados são necessários para garantir a exatidão dos resultados.
-Quando o Calculador é ativado, isto não significa que as correntes serão automaticamente recalculadas. Para que isto ocorra, você deve inserir uma pequena perturbação em algum valor modificável de uma corrente, como por exemplo, modificar o valor da pressão de 200 para 200,01 kPa.
-Execute a simulação mais de uma vez para garantir a coerência dos resultados obtidos.
-Se o arquivo no qual a simulação é salva já existe, é feito um backup do mesmo com a extensão ".dwbak". Para usá-lo novamente como um arquivo de simulação do DWSIM, renomeie-o para a extensão ".dwsim".

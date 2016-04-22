@@ -23,6 +23,7 @@ Imports System.IO
 Imports CProp = CoolProp
 Imports System.Linq
 Imports DWSIM.Thermodynamics
+Imports System.Reflection
 
 <DelimitedRecord(";")> <IgnoreFirst()> <System.Serializable()> _
 Public Class ChemSepNameIDPair
@@ -67,7 +68,12 @@ End Class
         Dim csidc() As ChemSepNameIDPair
         Dim fh1 As New FileHelperEngine(Of ChemSepNameIDPair)
         With fh1
-            csidc = .ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "csid.dat")
+            'csidc = .ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "csid.dat")
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.csid.dat")
+                Using t As New StreamReader(filestr)
+                    csidc = .ReadStream(t)
+                End Using
+            End Using
         End With
 
         For Each csid In csidc
@@ -100,10 +106,15 @@ End Class
 
     End Function
 
-    Public Sub Load(ByVal filename As String)
+    Public Sub Load()
 
         Dim mytxt As String = ""
-        mytxt = File.ReadAllText(filename)
+
+        Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.chemsep1.xml")
+            Using t As New StreamReader(filestr)
+                mytxt = t.ReadToEnd()
+            End Using
+        End Using
 
         xmldoc = New XmlDocument
         xmldoc.LoadXml(mytxt)
@@ -487,7 +498,7 @@ End Class
 
     End Sub
 
-    Public Sub Load(ByVal filename As String)
+    Public Sub Load()
         Dim pathsep As Char = Path.DirectorySeparatorChar
 
         Dim settings As New XmlReaderSettings()
@@ -495,11 +506,15 @@ End Class
         settings.IgnoreWhitespace = True
         settings.IgnoreComments = True
         settings.CheckCharacters = False
-        Dim reader As XmlReader = XmlReader.Create(filename)
-        reader.Read()
 
-        xmldoc = New XmlDocument
-        xmldoc.Load(reader)
+        Dim reader As XmlReader
+
+        Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.dwsim.xml")
+            reader = XmlReader.Create(filestr)
+            reader.Read()
+            xmldoc = New XmlDocument
+            xmldoc.Load(reader)
+        End Using
 
     End Sub
 
@@ -663,7 +678,7 @@ Public Class Biodiesel
 
     End Sub
 
-    Public Sub Load(ByVal filename As String)
+    Public Sub Load()
         Dim pathsep As Char = Path.DirectorySeparatorChar
 
         Dim settings As New XmlReaderSettings()
@@ -671,11 +686,15 @@ Public Class Biodiesel
         settings.IgnoreWhitespace = True
         settings.IgnoreComments = True
         settings.CheckCharacters = False
-        Dim reader As XmlReader = XmlReader.Create(filename)
-        reader.Read()
 
-        xmldoc = New XmlDocument
-        xmldoc.Load(reader)
+        Dim reader As XmlReader
+
+        Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.biod_db.xml")
+            reader = XmlReader.Create(filestr)
+            reader.Read()
+            xmldoc = New XmlDocument
+            xmldoc.Load(reader)
+        End Using
 
     End Sub
 
@@ -1471,7 +1490,7 @@ Public Class Electrolyte
 
     End Sub
 
-    Public Sub Load(ByVal filename As String)
+    Public Sub Load()
         Dim pathsep As Char = Path.DirectorySeparatorChar
 
         Dim settings As New XmlReaderSettings()
@@ -1479,11 +1498,14 @@ Public Class Electrolyte
         settings.IgnoreWhitespace = True
         settings.IgnoreComments = True
         settings.CheckCharacters = False
-        Dim reader As XmlReader = XmlReader.Create(filename)
-        reader.Read()
 
-        xmldoc = New XmlDocument
-        xmldoc.Load(reader)
+        Dim reader As XmlReader
+
+        Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.electrolyte.xml")
+            reader = XmlReader.Create(filestr)
+            xmldoc = New XmlDocument
+            xmldoc.Load(reader)
+        End Using
 
     End Sub
 
@@ -1595,9 +1617,13 @@ Public Class CoolProp
 
     End Sub
 
-    Public Sub Load(ByVal filename As String)
+    Public Sub Load()
 
-        text = File.ReadAllLines(filename)
+        Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.coolprop.txt")
+            Using t As New StreamReader(filestr)
+                text = t.ReadToEnd().Split(vbCrLf)
+            End Using
+        End Using
 
     End Sub
 

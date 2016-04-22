@@ -16,6 +16,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Linq
+
 Namespace DWSIM.Utilities.HYD
 
     Public Class AuxMethods
@@ -107,22 +109,28 @@ Namespace DWSIM.Utilities.HYD
 
         Function READ_CHENGUO()
 
+
             Dim l, k As Integer
             Dim linha_atual As String() = New String() {}
-            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(My.Application.Info.DirectoryPath & "\data\hid_chenguo.dat", System.Text.Encoding.Default, True)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(";")
-                l = 0
-                While Not MyReader.EndOfData
-                    linha_atual = MyReader.ReadFields()
-                    k = 0
-                    Do
-                        MAT_CHENGUO(l, k) = Val(linha_atual(k))
-                        k = k + 1
-                    Loop Until k = 7
-                    l = l + 1
-                End While
+
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.hid_chenguo.dat")
+                Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
+                    MyReader.TextFieldType = FileIO.FieldType.Delimited
+                    MyReader.SetDelimiters(";")
+                    l = 0
+                    While Not MyReader.EndOfData
+                        linha_atual = MyReader.ReadFields()
+                        k = 0
+                        Do
+                            MAT_CHENGUO(l, k) = Val(linha_atual(k))
+                            k = k + 1
+                        Loop Until k = 7
+                        l = l + 1
+                    End While
+                End Using
             End Using
+
 
             READ_CHENGUO = 1
 
@@ -132,19 +140,22 @@ Namespace DWSIM.Utilities.HYD
 
             Dim l, k As Integer
             Dim linha_atual As String() = New String() {}
-            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(My.Application.Info.DirectoryPath & "\data\hid_klaudasandler.dat", System.Text.Encoding.Default, True)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(";")
-                l = 0
-                While Not MyReader.EndOfData
-                    linha_atual = MyReader.ReadFields()
-                    k = 0
-                    Do
-                        MAT_KLAUDASANDLER(l, k) = Val(linha_atual(k))
-                        k = k + 1
-                    Loop Until k = 8
-                    l = l + 1
-                End While
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.hid_klaudasandler.dat")
+                Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
+                    MyReader.TextFieldType = FileIO.FieldType.Delimited
+                    MyReader.SetDelimiters(";")
+                    l = 0
+                    While Not MyReader.EndOfData
+                        linha_atual = MyReader.ReadFields()
+                        k = 0
+                        Do
+                            MAT_KLAUDASANDLER(l, k) = Val(linha_atual(k))
+                            k = k + 1
+                        Loop Until k = 8
+                        l = l + 1
+                    End While
+                End Using
             End Using
 
             READ_KLAUDASANDLER = 1
@@ -155,19 +166,22 @@ Namespace DWSIM.Utilities.HYD
 
             Dim l, k As Integer
             Dim linha_atual As String() = New String() {}
-            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(My.Application.Info.DirectoryPath & "\data\hid_vdwp_pp.dat", System.Text.Encoding.Default, True)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(";")
-                l = 0
-                While Not MyReader.EndOfData
-                    linha_atual = MyReader.ReadFields()
-                    k = 0
-                    Do
-                        MAT_VDWP_PP(l, k) = Val(linha_atual(k))
-                        k = k + 1
-                    Loop Until k = 8
-                    l = l + 1
-                End While
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.hid_vdwp_pp.dat")
+                Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
+                    MyReader.TextFieldType = FileIO.FieldType.Delimited
+                    MyReader.SetDelimiters(";")
+                    l = 0
+                    While Not MyReader.EndOfData
+                        linha_atual = MyReader.ReadFields()
+                        k = 0
+                        Do
+                            MAT_VDWP_PP(l, k) = Val(linha_atual(k))
+                            k = k + 1
+                        Loop Until k = 8
+                        l = l + 1
+                    End While
+                End Using
             End Using
 
             READ_VDWP_PP = 1
@@ -179,19 +193,22 @@ Namespace DWSIM.Utilities.HYD
             Dim l, j As Integer
             Dim linha_atual As String() = New String() {}
 
-            Using MyReader2 As New Microsoft.VisualBasic.FileIO.TextFieldParser(My.Application.Info.DirectoryPath & "\data\diel.dat")
-                MyReader2.TextFieldType = FileIO.FieldType.Delimited
-                MyReader2.SetDelimiters(";")
-                l = 0
-                While Not MyReader2.EndOfData
-                    linha_atual = MyReader2.ReadFields()
-                    j = 0
-                    Do
-                        MAT_DIEL(l, j) = Val(linha_atual(j))
-                        j = j + 1
-                    Loop Until j = 3
-                    l = l + 1
-                End While
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.diel.dat")
+                Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
+                    MyReader.TextFieldType = FileIO.FieldType.Delimited
+                    MyReader.SetDelimiters(";")
+                    l = 0
+                    While Not MyReader.EndOfData
+                        linha_atual = MyReader.ReadFields()
+                        j = 0
+                        Do
+                            MAT_DIEL(l, j) = Val(linha_atual(j))
+                            j = j + 1
+                        Loop Until j = 3
+                        l = l + 1
+                    End While
+                End Using
             End Using
 
             READ_DIEL = 1
@@ -203,19 +220,22 @@ Namespace DWSIM.Utilities.HYD
             Dim l, j As Integer
             Dim linha_atual As String() = New String() {}
 
-            Using MyReader2 As New Microsoft.VisualBasic.FileIO.TextFieldParser(My.Application.Info.DirectoryPath & "\data\inib.dat", System.Text.Encoding.Default)
-                MyReader2.TextFieldType = FileIO.FieldType.Delimited
-                MyReader2.SetDelimiters(";")
-                l = 0
-                While Not MyReader2.EndOfData
-                    linha_atual = MyReader2.ReadFields()
-                    j = 0
-                    Do
-                        MAT_INIB(l, j) = Val(linha_atual(j))
-                        j = j + 1
-                    Loop Until j = 3
-                    l = l + 1
-                End While
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.inib.dat")
+                Using MyReader2 As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
+                    MyReader2.TextFieldType = FileIO.FieldType.Delimited
+                    MyReader2.SetDelimiters(";")
+                    l = 0
+                    While Not MyReader2.EndOfData
+                        linha_atual = MyReader2.ReadFields()
+                        j = 0
+                        Do
+                            MAT_INIB(l, j) = Val(linha_atual(j))
+                            j = j + 1
+                        Loop Until j = 3
+                        l = l + 1
+                    End While
+                End Using
             End Using
 
             READ_INIB = 1

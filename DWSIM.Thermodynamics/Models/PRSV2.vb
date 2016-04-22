@@ -78,9 +78,12 @@ Namespace PropertyPackages.Auxiliary
             Dim prsv2data As PRSV2Param
             Dim prsv2datac() As PRSV2Param
             Dim fh0 As New FileHelperEngine(Of PRSV2Param)
-            With fh0
-                prsv2datac = .ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "prsv2.dat")
-            End With
+     
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.prsv2.dat")
+                Using t As New IO.StreamReader(filestr)
+                    prsv2datac = fh0.ReadStream(t)
+                End Using
+            End Using
 
             For Each prsv2data In prsv2datac
                 If Not _data.ContainsKey(prsv2data.compound.ToLower) Then _data.Add(prsv2data.compound.ToLower, prsv2data)
@@ -91,7 +94,12 @@ Namespace PropertyPackages.Auxiliary
             Dim prip As PRSV2_IPData
             Dim pripc() As PRSV2_IPData
             Dim fh1 As New FileHelperEngine(Of PRSV2_IPData)
-            pripc = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "prsv2_ip.dat")
+
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.prsv2_ip.dat")
+                Using t As New IO.StreamReader(filestr)
+                    pripc = fh1.ReadStream(t)
+                End Using
+            End Using
 
             For Each prip In pripc
                 If Me.InteractionParameters.ContainsKey(prip.id1.ToLower) Then

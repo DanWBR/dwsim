@@ -895,32 +895,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\data\bd.dat" />
-    <None Include="Assets\data\biod_intparm_nrtl.dat" />
-    <None Include="Assets\data\csid.dat" />
-    <None Include="Assets\data\diel.dat" />
-    <None Include="Assets\data\gsw_data_v3_0.dat" />
-    <None Include="Assets\data\hid_chenguo.dat" />
-    <None Include="Assets\data\hid_klaudasandler.dat" />
-    <None Include="Assets\data\hid_vdwp_pp.dat" />
-    <None Include="Assets\data\inib.dat" />
-    <None Include="Assets\data\kij_pr.dat" />
-    <None Include="Assets\data\kij_srk.dat" />
-    <None Include="Assets\data\lkp_ip.dat" />
-    <None Include="Assets\data\nrtl.dat" />
-    <None Include="Assets\data\pcsaft.dat" />
-    <None Include="Assets\data\pcsaft_ip.dat" />
-    <None Include="Assets\data\prsv2.dat" />
-    <None Include="Assets\data\prsv2_ip.dat" />
-    <None Include="Assets\data\prsv2_ip_vl.dat" />
-    <None Include="Assets\data\pr_ip.dat" />
-    <None Include="Assets\data\report_en-US.mr6" />
-    <None Include="Assets\data\report_pt-BR.mr6" />
-    <None Include="Assets\data\srk_ip.dat" />
-    <None Include="Assets\data\tips.dat" />
-    <None Include="Assets\data\tips_en.dat" />
-    <None Include="Assets\data\uniquac.dat" />
-    <None Include="Assets\data\uniquacip.dat" />
     <None Include="Assets\default.ini" />
     <None Include="Assets\docs\cape_open_reference3.pdf" />
     <None Include="Assets\docs\command_line_mode.pdf" />
@@ -1003,6 +977,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report Files\report_en-US.mr6" />
+    <EmbeddedResource Include="Report Files\report_pt-BR.mr6" />
     <None Include="Resources\node_in copy.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1571,29 +1547,6 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\data\cosmo.txt" />
-    <Content Include="Assets\data\databases\Artistic_license_2_0.txt" />
-    <Content Include="Assets\data\databases\biod_db.xml" />
-    <Content Include="Assets\data\databases\chemsep1.xml" />
-    <Content Include="Assets\data\databases\coolprop.txt" />
-    <Content Include="Assets\data\databases\dwsim.xml" />
-    <Content Include="Assets\data\databases\electrolyte.xml" />
-    <Content Include="Assets\data\DielectricConstants.txt" />
-    <Content Include="Assets\data\Elements.txt" />
-    <Content Include="Assets\data\estrutura.txt" />
-    <Content Include="Assets\data\ExUNIQUAC_RiQi.txt" />
-    <Content Include="Assets\data\ExUNIQUAC_uij.txt" />
-    <Content Include="Assets\data\Henry.txt" />
-    <Content Include="Assets\data\JobackGroups.txt" />
-    <Content Include="Assets\data\kij_srk.txt" />
-    <Content Include="Assets\data\LIQUAC2_IP.txt" />
-    <Content Include="Assets\data\LIQUAC2_RiQi.txt" />
-    <Content Include="Assets\data\modfac.txt" />
-    <Content Include="Assets\data\modfac_ip.txt" />
-    <Content Include="Assets\data\NIST-MODFAC_IP.txt" />
-    <Content Include="Assets\data\NIST-MODFAC_RiQi.txt" />
-    <Content Include="Assets\data\report_transform.xsl" />
-    <Content Include="Assets\data\unifac.txt" />
     <Content Include="Assets\data\unifac\1,2-Dimethylpiperidine.png" />
     <Content Include="Assets\data\unifac\1-1-1-Trifluoroethane.png" />
     <Content Include="Assets\data\unifac\1-1-Dichloroethane.png" />
@@ -1825,8 +1778,6 @@
     <Content Include="Assets\data\unifac\Trimethylamine.png" />
     <Content Include="Assets\data\unifac\Trimethyloxirane.png" />
     <Content Include="Assets\data\unifac\Water.png" />
-    <Content Include="Assets\data\unifac_ip.txt" />
-    <Content Include="Assets\data\unifac_ll_ip.txt" />
     <Content Include="Assets\help\0 Welcome.htm" />
     <Content Include="Assets\help\1 Disclaimer.htm" />
     <Content Include="Assets\help\1 GPL_v3_License.htm" />
@@ -2147,6 +2098,7 @@
     <None Include="Resources\bullet_delete.png" />
     <None Include="Resources\application_xp_terminal.png" />
     <None Include="Resources\application_osx_terminal.png" />
+    <EmbeddedResource Include="Report Files\report_transform.xsl" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />

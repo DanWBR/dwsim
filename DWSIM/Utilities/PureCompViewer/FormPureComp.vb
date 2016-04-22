@@ -899,15 +899,12 @@ Public Class FormPureComp
             Case "DWSIM"
                 Dim filename As String = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "data" & Path.DirectorySeparatorChar & "databases" & Path.DirectorySeparatorChar & "dwsim.xml"
                 Try
-                    'load DWSIM database, if existent
-                    If File.Exists(filename) Then
-                        Dim dwdb As New Databases.DWSIM
-                        dwdb.Load(filename)
-                        cpa = dwdb.Transfer(constprop.Name)
-                        If cpa.Length = 1 Then
-                            constprop = cpa(0)
-                            Me.Flowsheet.Options.SelectedComponents(constprop.Name) = constprop
-                        End If
+                    Dim dwdb As New Databases.DWSIM
+                    dwdb.Load()
+                    cpa = dwdb.Transfer(constprop.Name)
+                    If cpa.Length = 1 Then
+                        constprop = cpa(0)
+                        Me.Flowsheet.Options.SelectedComponents(constprop.Name) = constprop
                     End If
                 Catch ex As Exception
                     ex.Data.Add("Reason", "Error loading component from DWSIM database")
@@ -915,15 +912,12 @@ Public Class FormPureComp
                 End Try
             Case "ChemSep"
                 Try
-                    'load chempsep database, if existent
-                    If File.Exists(My.Settings.ChemSepDatabasePath) Then
-                        Dim csdb As New Databases.ChemSep
-                        csdb.Load(My.Settings.ChemSepDatabasePath)
-                        cpa = csdb.Transfer(constprop.Name)
-                        If cpa.Length = 1 Then
-                            constprop = cpa(0)
-                            Me.Flowsheet.Options.SelectedComponents(constprop.Name) = constprop
-                        End If
+                    Dim csdb As New Databases.ChemSep
+                    csdb.Load()
+                    cpa = csdb.Transfer(constprop.Name)
+                    If cpa.Length = 1 Then
+                        constprop = cpa(0)
+                        Me.Flowsheet.Options.SelectedComponents(constprop.Name) = constprop
                     End If
                 Catch ex As Exception
                     ex.Data.Add("Reason", "Error loading component from ChemSep database")
@@ -945,15 +939,12 @@ Public Class FormPureComp
             Case "Electrolytes"
                 Dim filename As String = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "data" & Path.DirectorySeparatorChar & "databases" & Path.DirectorySeparatorChar & "electrolyte.xml"
                 Try
-                    'load electrolytes database, if existent
-                    If File.Exists(filename) Then
-                        Dim edb As New Databases.Electrolyte
-                        edb.Load(filename)
-                        cpa = edb.Transfer(constprop.Name)
-                        If cpa.Length = 1 Then
-                            constprop = cpa(0)
-                            Me.Flowsheet.Options.SelectedComponents(constprop.Name) = constprop
-                        End If
+                    Dim edb As New Databases.Electrolyte
+                    edb.Load()
+                    cpa = edb.Transfer(constprop.Name)
+                    If cpa.Length = 1 Then
+                        constprop = cpa(0)
+                        Me.Flowsheet.Options.SelectedComponents(constprop.Name) = constprop
                     End If
                 Catch ex As Exception
                     ex.Data.Add("Reason", "Error loading component from Electrolytes database")
@@ -962,15 +953,12 @@ Public Class FormPureComp
             Case "Biodiesel"
                 Dim filename As String = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "data" & Path.DirectorySeparatorChar & "databases" & Path.DirectorySeparatorChar & "biod_db.xml"
                 Try
-                    'load electrolytes database, if existent
-                    If File.Exists(filename) Then
-                        Dim bddb As New Databases.Biodiesel
-                        bddb.Load(filename)
-                        cpa = bddb.Transfer(constprop.Name)
-                        If cpa.Length = 1 Then
-                            constprop = cpa(0)
-                            Me.Flowsheet.Options.SelectedComponents(constprop.Name) = constprop
-                        End If
+                    Dim bddb As New Databases.Biodiesel
+                    bddb.Load()
+                    cpa = bddb.Transfer(constprop.Name)
+                    If cpa.Length = 1 Then
+                        constprop = cpa(0)
+                        Me.Flowsheet.Options.SelectedComponents(constprop.Name) = constprop
                     End If
                 Catch ex As Exception
                     ex.Data.Add("Reason", "Error loading component from Biodiesel database")

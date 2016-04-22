@@ -752,47 +752,49 @@ Namespace PropertyPackages.Auxiliary
 
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-            Dim filename As String = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "unifac.txt"
             Dim fields As String()
             Dim delimiter As String = ","
-            Using parser As New TextFieldParser(filename)
-                parser.SetDelimiters(delimiter)
-                fields = parser.ReadFields()
-                fields = parser.ReadFields()
-                While Not parser.EndOfData
-                    fields = parser.ReadFields()
-                    Me.Groups.Add(fields(1), New UnifacGroup(fields(2), fields(3), fields(0), fields(1), Double.Parse(fields(4), cult), Double.Parse(fields(5), cult)))
-                End While
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.unifac.txt")
+                    Using parser As New TextFieldParser(filestr)
+                        parser.SetDelimiters(delimiter)
+                        fields = parser.ReadFields()
+                        fields = parser.ReadFields()
+                        While Not parser.EndOfData
+                            fields = parser.ReadFields()
+                            Me.Groups.Add(fields(1), New UnifacGroup(fields(2), fields(3), fields(0), fields(1), Double.Parse(fields(4), cult), Double.Parse(fields(5), cult)))
+                        End While
+                    End Using
             End Using
 
-            filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "unifac_ip.txt"
-            Using parser As New TextFieldParser(filename)
-                delimiter = vbTab
-                parser.SetDelimiters(delimiter)
-                fields = parser.ReadFields()
-                While Not parser.EndOfData
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.unifac_ip.txt")
+                Using parser As New TextFieldParser(filestr)
+                    delimiter = vbTab
+                    parser.SetDelimiters(delimiter)
                     fields = parser.ReadFields()
-                    If Not Me.InteracParam.ContainsKey(fields(0)) Then
-                        Me.InteracParam.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
-                        Me.InteracParam(fields(0)).Add(fields(2), Double.Parse(fields(4), cult))
-                    Else
-                        If Not Me.InteracParam(fields(0)).ContainsKey(fields(2)) Then
+                    While Not parser.EndOfData
+                        fields = parser.ReadFields()
+                        If Not Me.InteracParam.ContainsKey(fields(0)) Then
+                            Me.InteracParam.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
                             Me.InteracParam(fields(0)).Add(fields(2), Double.Parse(fields(4), cult))
                         Else
-                            Me.InteracParam(fields(0))(fields(2)) = Double.Parse(fields(4), cult)
+                            If Not Me.InteracParam(fields(0)).ContainsKey(fields(2)) Then
+                                Me.InteracParam(fields(0)).Add(fields(2), Double.Parse(fields(4), cult))
+                            Else
+                                Me.InteracParam(fields(0))(fields(2)) = Double.Parse(fields(4), cult)
+                            End If
                         End If
-                    End If
-                    If Not Me.InteracParam.ContainsKey(fields(2)) Then
-                        Me.InteracParam.Add(fields(2), New System.Collections.Generic.Dictionary(Of Integer, Double))
-                        Me.InteracParam(fields(2)).Add(fields(0), Double.Parse(fields(5), cult))
-                    Else
-                        If Not Me.InteracParam(fields(2)).ContainsKey(fields(0)) Then
+                        If Not Me.InteracParam.ContainsKey(fields(2)) Then
+                            Me.InteracParam.Add(fields(2), New System.Collections.Generic.Dictionary(Of Integer, Double))
                             Me.InteracParam(fields(2)).Add(fields(0), Double.Parse(fields(5), cult))
                         Else
-                            Me.InteracParam(fields(2))(fields(0)) = Double.Parse(fields(5), cult)
+                            If Not Me.InteracParam(fields(2)).ContainsKey(fields(0)) Then
+                                Me.InteracParam(fields(2)).Add(fields(0), Double.Parse(fields(5), cult))
+                            Else
+                                Me.InteracParam(fields(2))(fields(0)) = Double.Parse(fields(5), cult)
+                            End If
                         End If
-                    End If
-                End While
+                    End While
+                End Using
             End Using
 
         End Sub
@@ -819,49 +821,49 @@ Namespace PropertyPackages.Auxiliary
 
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-            Dim filename As String = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "unifac.txt"
             Dim fields As String()
             Dim delimiter As String = ","
-            Using parser As New TextFieldParser(filename)
-                parser.SetDelimiters(delimiter)
-                fields = parser.ReadFields()
-                fields = parser.ReadFields()
-                While Not parser.EndOfData
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.unifac.txt")
+                Using parser As New TextFieldParser(filestr)
+                    parser.SetDelimiters(delimiter)
                     fields = parser.ReadFields()
-                    Me.Groups.Add(fields(1), New UnifacGroup(fields(2), fields(3), fields(0), fields(1), Double.Parse(fields(4), cult), Double.Parse(fields(5), cult)))
-                End While
+                    fields = parser.ReadFields()
+                    While Not parser.EndOfData
+                        fields = parser.ReadFields()
+                        Me.Groups.Add(fields(1), New UnifacGroup(fields(2), fields(3), fields(0), fields(1), Double.Parse(fields(4), cult), Double.Parse(fields(5), cult)))
+                    End While
+                End Using
             End Using
 
-            filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "unifac_ll_ip.txt"
-            Using parser As New TextFieldParser(filename)
-                delimiter = ","
-                parser.SetDelimiters(delimiter)
-                While Not parser.EndOfData
-                    fields = parser.ReadFields()
-                    If Not Me.InteracParam.ContainsKey(fields(0)) Then
-                        Me.InteracParam.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
-                        Me.InteracParam(fields(0)).Add(fields(2), Double.Parse(fields(4), cult))
-                    Else
-                        If Not Me.InteracParam(fields(0)).ContainsKey(fields(2)) Then
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.unifac_ll_ip.txt")
+                Using parser As New TextFieldParser(filestr)
+                    delimiter = ","
+                    parser.SetDelimiters(delimiter)
+                    While Not parser.EndOfData
+                        fields = parser.ReadFields()
+                        If Not Me.InteracParam.ContainsKey(fields(0)) Then
+                            Me.InteracParam.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
                             Me.InteracParam(fields(0)).Add(fields(2), Double.Parse(fields(4), cult))
                         Else
-                            Me.InteracParam(fields(0))(fields(2)) = Double.Parse(fields(4), cult)
+                            If Not Me.InteracParam(fields(0)).ContainsKey(fields(2)) Then
+                                Me.InteracParam(fields(0)).Add(fields(2), Double.Parse(fields(4), cult))
+                            Else
+                                Me.InteracParam(fields(0))(fields(2)) = Double.Parse(fields(4), cult)
+                            End If
                         End If
-                    End If
-                    If Not Me.InteracParam.ContainsKey(fields(2)) Then
-                        Me.InteracParam.Add(fields(2), New System.Collections.Generic.Dictionary(Of Integer, Double))
-                        Me.InteracParam(fields(2)).Add(fields(0), Double.Parse(fields(5), cult))
-                    Else
-                        If Not Me.InteracParam(fields(2)).ContainsKey(fields(0)) Then
+                        If Not Me.InteracParam.ContainsKey(fields(2)) Then
+                            Me.InteracParam.Add(fields(2), New System.Collections.Generic.Dictionary(Of Integer, Double))
                             Me.InteracParam(fields(2)).Add(fields(0), Double.Parse(fields(5), cult))
                         Else
-                            Me.InteracParam(fields(2))(fields(0)) = Double.Parse(fields(5), cult)
+                            If Not Me.InteracParam(fields(2)).ContainsKey(fields(0)) Then
+                                Me.InteracParam(fields(2)).Add(fields(0), Double.Parse(fields(5), cult))
+                            Else
+                                Me.InteracParam(fields(2))(fields(0)) = Double.Parse(fields(5), cult)
+                            End If
                         End If
-                    End If
-                End While
+                    End While
+                End Using
             End Using
-
-
 
         End Sub
 

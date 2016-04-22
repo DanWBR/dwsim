@@ -90,9 +90,12 @@ Namespace PropertyPackages.Auxiliary
             Dim pcsaftdata As PCSParam
             Dim pcsaftdatac() As PCSParam
             Dim fh1 As New FileHelperEngine(Of PCSParam)
-            With fh1
-                pcsaftdatac = .ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "pcsaft.dat")
-            End With
+
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.pcsaft.dat")
+                Using t As New IO.StreamReader(filestr)
+                    pcsaftdatac = fh1.ReadStream(t)
+                End Using
+            End Using
 
             For Each pcsaftdata In pcsaftdatac
                 If Not _data.ContainsKey(pcsaftdata.casno) Then _data.Add(pcsaftdata.casno, pcsaftdata)
@@ -103,7 +106,12 @@ Namespace PropertyPackages.Auxiliary
             Dim prip As PCSIP
             Dim pripc() As PCSIP
             Dim fh2 As New FileHelperEngine(Of PCSIP)
-            pripc = fh2.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "pcsaft_ip.dat")
+
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.pcsaft_ip.dat")
+                Using t As New IO.StreamReader(filestr)
+                    pripc = fh2.ReadStream(t)
+                End Using
+            End Using
 
             For Each prip In pripc
                 If Me.InteractionParameters.ContainsKey(prip.casno1) Then

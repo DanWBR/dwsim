@@ -7,7 +7,7 @@ Public Class Settings
     Public Shared Property gpu As Cudafy.Host.GPGPU
     Public Shared Property gpumod As CudafyModule
     Public Shared Property prevlang As Integer = 0 '0 = CUDA, 1 = OpenCL
-    Public Shared Property TaskCancellationTokenSource As CancellationTokenSource
+    Public Shared Property TaskCancellationTokenSource As New CancellationTokenSource
     Public Shared Property CAPEOPENMode As Boolean
     Public Shared Property MaxDegreeOfParallelism As Integer = -1
     Public Shared Property UseSIMDExtensions As Boolean = True

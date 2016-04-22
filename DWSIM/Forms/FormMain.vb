@@ -681,29 +681,19 @@ Public Class FormMain
 
         'try to find chemsep xml database
 
-        If Not File.Exists(My.Settings.ChemSepDatabasePath) Then My.Settings.ChemSepDatabasePath = ""
-
-        If File.Exists(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "databases" & pathsep & "chemsep1.xml") Then
-            If My.Settings.ChemSepDatabasePath = "" Then My.Settings.ChemSepDatabasePath = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "databases" & pathsep & "chemsep1.xml"
-        End If
-
-        Try
-            'load chempsep database, if existent
-            If File.Exists(My.Settings.ChemSepDatabasePath) Then Me.LoadCSDB(My.Settings.ChemSepDatabasePath)
-        Catch ex As Exception
-        End Try
+        Me.LoadCSDB()
 
         'load DWSIM XML database
-        Me.LoadDWSIMDB(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "databases" & pathsep & "dwsim.xml")
+        Me.LoadDWSIMDB()
 
         'load CoolProp list of compounds
-        Me.LoadCPDB(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "databases" & pathsep & "coolprop.txt")
+        Me.LoadCPDB()
 
         'load Electrolyte XML database
-        Me.LoadEDB(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "databases" & pathsep & "electrolyte.xml")
+        Me.LoadEDB()
 
         'load Biodiesel XML database
-        Me.LoadBDDB(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "databases" & pathsep & "biod_db.xml")
+        Me.LoadBDDB()
 
         Dim invaliddbs As New List(Of String)
 
@@ -743,76 +733,66 @@ Public Class FormMain
 
     End Function
 
-    Public Sub LoadCSDB(ByVal filename As String)
-        If File.Exists(filename) Then
-            Dim csdb As New Databases.ChemSep
-            Dim cpa() As BaseClasses.ConstantProperties
-            csdb.Load(filename)
-            cpa = csdb.Transfer()
+    Public Sub LoadCSDB()
+        Dim csdb As New Databases.ChemSep
+        Dim cpa() As BaseClasses.ConstantProperties
+        csdb.Load()
+        cpa = csdb.Transfer()
+        For Each cp As BaseClasses.ConstantProperties In cpa
+            cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
+            If Not Me.AvailableComponents.ContainsKey(cp.Name) Then
+                Me.AvailableComponents.Add(cp.Name, cp)
+            End If
+        Next
+        loadedCSDB = True
+    End Sub
+
+    Public Sub LoadDWSIMDB()
+        Dim dwdb As New Databases.DWSIM
+        Dim cpa() As BaseClasses.ConstantProperties
+        dwdb.Load()
+        cpa = dwdb.Transfer()
+        For Each cp As BaseClasses.ConstantProperties In cpa
+            cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
+            If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
+        Next
+    End Sub
+
+    Public Sub LoadBDDB()
+        Dim bddb As New Databases.Biodiesel
+        Dim cpa() As BaseClasses.ConstantProperties
+        bddb.Load()
+        cpa = bddb.Transfer()
+        For Each cp As BaseClasses.ConstantProperties In cpa
+            If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
+        Next
+    End Sub
+
+    Public Sub LoadEDB()
+        Dim edb As New Databases.Electrolyte
+        Dim cpa() As BaseClasses.ConstantProperties
+        edb.Load()
+        cpa = edb.Transfer()
+        For Each cp As BaseClasses.ConstantProperties In cpa
+            If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
+        Next
+    End Sub
+
+    Public Sub LoadCPDB()
+        Dim cpdb As New Databases.CoolProp
+        Dim cpa() As BaseClasses.ConstantProperties
+        cpdb.Load()
+        Try
+            cpa = cpdb.Transfer()
             For Each cp As BaseClasses.ConstantProperties In cpa
-                cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
                 If Not Me.AvailableComponents.ContainsKey(cp.Name) Then
                     Me.AvailableComponents.Add(cp.Name, cp)
+                Else
+                    Me.AvailableComponents(cp.Name).IsCOOLPROPSupported = True
                 End If
             Next
-            loadedCSDB = True
-        End If
-    End Sub
-
-    Public Sub LoadDWSIMDB(ByVal filename As String)
-        If File.Exists(filename) Then
-            Dim dwdb As New Databases.DWSIM
-            Dim cpa() As BaseClasses.ConstantProperties
-            dwdb.Load(filename)
-            cpa = dwdb.Transfer()
-            For Each cp As BaseClasses.ConstantProperties In cpa
-                cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
-                If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
-            Next
-        End If
-    End Sub
-
-    Public Sub LoadBDDB(ByVal filename As String)
-        If File.Exists(filename) Then
-            Dim bddb As New Databases.Biodiesel
-            Dim cpa() As BaseClasses.ConstantProperties
-            bddb.Load(filename)
-            cpa = bddb.Transfer()
-            For Each cp As BaseClasses.ConstantProperties In cpa
-                If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
-            Next
-        End If
-    End Sub
-
-    Public Sub LoadEDB(ByVal filename As String)
-        If File.Exists(filename) Then
-            Dim edb As New Databases.Electrolyte
-            Dim cpa() As BaseClasses.ConstantProperties
-            edb.Load(filename)
-            cpa = edb.Transfer()
-            For Each cp As BaseClasses.ConstantProperties In cpa
-                If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
-            Next
-        End If
-    End Sub
-
-    Public Sub LoadCPDB(ByVal filename As String)
-        If File.Exists(filename) Then
-            Dim cpdb As New Databases.CoolProp
-            Dim cpa() As BaseClasses.ConstantProperties
-            cpdb.Load(filename)
-            Try
-                cpa = cpdb.Transfer()
-                For Each cp As BaseClasses.ConstantProperties In cpa
-                    If Not Me.AvailableComponents.ContainsKey(cp.Name) Then
-                        Me.AvailableComponents.Add(cp.Name, cp)
-                    Else
-                        Me.AvailableComponents(cp.Name).IsCOOLPROPSupported = True
-                    End If
-                Next
-            Catch ex As Exception
-            End Try
-        End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     Public Function CopyPropertyPackages() As Object

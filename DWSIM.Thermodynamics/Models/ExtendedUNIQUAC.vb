@@ -117,9 +117,21 @@ Namespace PropertyPackages.Auxiliary
             Dim fh2 As New FileHelperEngine(Of ExUNIQUAC_IPData)
             Dim fh3 As New FileHelperEngine(Of ExUNIQUAC_RiQiData)
             Dim fh4 As New FileHelperEngine(Of DielectricConstants)
-            exuniquacc = fh2.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "ExUNIQUAC_uij.txt")
-            exuniquacrqc = fh3.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "ExUNIQUAC_RiQi.txt")
-            exuniquacdcc = fh4.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "DielectricConstants.txt")
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.ExUNIQUAC_uij.txt")
+                Using t As New IO.StreamReader(filestr)
+                    exuniquacc = fh2.ReadStream(t)
+                End Using
+            End Using
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.ExUNIQUAC_RiQi.txt")
+                Using t As New IO.StreamReader(filestr)
+                    exuniquacrqc = fh3.ReadStream(t)
+                End Using
+            End Using
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.dielectricconstants.txt")
+                Using t As New IO.StreamReader(filestr)
+                    exuniquacdcc = fh4.ReadStream(t)
+                End Using
+            End Using
 
             Dim csdb As New ChemSepHelper.ChemSepIDConverter
 

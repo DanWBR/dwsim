@@ -408,55 +408,57 @@ Namespace PropertyPackages.Auxiliary
 
             Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-            Dim filename As String = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "NIST-MODFAC_RiQi.txt"
             Dim fields As String()
             Dim delimiter As String = vbTab
             Dim maingroup As Integer = 1
             Dim mainname As String = ""
-            Using parser As New TextFieldParser(filename)
-                parser.SetDelimiters(delimiter)
-                parser.ReadLine()
-                parser.ReadLine()
-                Dim i As Integer = 1
-                While Not parser.EndOfData
-                    fields = parser.ReadFields()
-                    If fields(0).StartsWith("(") Then
-                        maingroup = fields(0).Split(")")(0).Substring(1)
-                        mainname = fields(0).Trim().Split(")")(1).Trim
-                    Else
-                        'Me.Groups.Add(i, New ModfacGroup(fields(1), mainname, maingroup, fields(0), Double.Parse(fields(3), cult), Double.Parse(fields(2), cult)))
-                        Me.Groups.Add(fields(0), New ModfacGroup(fields(1), mainname, maingroup, fields(0), Double.Parse(fields(2), cult), Double.Parse(fields(3), cult)))
-                        i += 1
-                    End If
-                End While
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.NIST-MODFAC_RiQi.txt")
+                Using parser As New TextFieldParser(filestr)
+                    parser.SetDelimiters(delimiter)
+                    parser.ReadLine()
+                    parser.ReadLine()
+                    Dim i As Integer = 1
+                    While Not parser.EndOfData
+                        fields = parser.ReadFields()
+                        If fields(0).StartsWith("(") Then
+                            maingroup = fields(0).Split(")")(0).Substring(1)
+                            mainname = fields(0).Trim().Split(")")(1).Trim
+                        Else
+                            'Me.Groups.Add(i, New ModfacGroup(fields(1), mainname, maingroup, fields(0), Double.Parse(fields(3), cult), Double.Parse(fields(2), cult)))
+                            Me.Groups.Add(fields(0), New ModfacGroup(fields(1), mainname, maingroup, fields(0), Double.Parse(fields(2), cult), Double.Parse(fields(3), cult)))
+                            i += 1
+                        End If
+                    End While
+                End Using
             End Using
 
-            filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "NIST-MODFAC_IP.txt"
-            Using parser As New TextFieldParser(filename)
-                delimiter = vbTab
-                parser.SetDelimiters(delimiter)
-                fields = parser.ReadFields()
-                While Not parser.EndOfData
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.NIST-MODFAC_IP.txt")
+                Using parser As New TextFieldParser(filestr)
+                    delimiter = vbTab
+                    parser.SetDelimiters(delimiter)
                     fields = parser.ReadFields()
-                    If Not Me.InteracParam_aij.ContainsKey(fields(0)) Then
-                        Me.InteracParam_aij.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
-                        Me.InteracParam_aij(fields(0)).Add(fields(1), Double.Parse(fields(2), cult))
-                        Me.InteracParam_bij.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
-                        Me.InteracParam_bij(fields(0)).Add(fields(1), Double.Parse(fields(3), cult))
-                        Me.InteracParam_cij.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
-                        Me.InteracParam_cij(fields(0)).Add(fields(1), Double.Parse(fields(4), cult) / 1000)
-                    Else
-                        If Not Me.InteracParam_aij(fields(0)).ContainsKey(fields(1)) Then
+                    While Not parser.EndOfData
+                        fields = parser.ReadFields()
+                        If Not Me.InteracParam_aij.ContainsKey(fields(0)) Then
+                            Me.InteracParam_aij.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
                             Me.InteracParam_aij(fields(0)).Add(fields(1), Double.Parse(fields(2), cult))
+                            Me.InteracParam_bij.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
                             Me.InteracParam_bij(fields(0)).Add(fields(1), Double.Parse(fields(3), cult))
+                            Me.InteracParam_cij.Add(fields(0), New System.Collections.Generic.Dictionary(Of Integer, Double))
                             Me.InteracParam_cij(fields(0)).Add(fields(1), Double.Parse(fields(4), cult) / 1000)
                         Else
-                            Me.InteracParam_aij(fields(0))(fields(1)) = Double.Parse(fields(2), cult)
-                            Me.InteracParam_bij(fields(0))(fields(1)) = Double.Parse(fields(3), cult)
-                            Me.InteracParam_cij(fields(0))(fields(1)) = Double.Parse(fields(4), cult) / 1000
+                            If Not Me.InteracParam_aij(fields(0)).ContainsKey(fields(1)) Then
+                                Me.InteracParam_aij(fields(0)).Add(fields(1), Double.Parse(fields(2), cult))
+                                Me.InteracParam_bij(fields(0)).Add(fields(1), Double.Parse(fields(3), cult))
+                                Me.InteracParam_cij(fields(0)).Add(fields(1), Double.Parse(fields(4), cult) / 1000)
+                            Else
+                                Me.InteracParam_aij(fields(0))(fields(1)) = Double.Parse(fields(2), cult)
+                                Me.InteracParam_bij(fields(0))(fields(1)) = Double.Parse(fields(3), cult)
+                                Me.InteracParam_cij(fields(0))(fields(1)) = Double.Parse(fields(4), cult) / 1000
+                            End If
                         End If
-                    End If
-                End While
+                    End While
+                End Using
             End Using
 
         End Sub

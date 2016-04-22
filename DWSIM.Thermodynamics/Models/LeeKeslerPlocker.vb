@@ -67,7 +67,11 @@ Namespace PropertyPackages.Auxiliary
             Dim lkpip As LKP_IPData
             Dim lkpipc() As LKP_IPData
             Dim fh1 As New FileHelperEngine(Of LKP_IPData)
-            lkpipc = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "lkp_ip.dat")
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.lkp_ip.dat")
+                Using t As New IO.StreamReader(filestr)
+                    lkpipc = fh1.ReadStream(t)
+                End Using
+            End Using
 
             Dim csdb As New ChemSepHelper.ChemSepIDConverter
             For Each lkpip In lkpipc

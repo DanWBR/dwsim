@@ -66,7 +66,12 @@ Namespace PropertyPackages.Auxiliary
             Dim prip As PR_IPData
             Dim pripc() As PR_IPData
             Dim fh1 As New FileHelperEngine(Of PR_IPData)
-            pripc = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "pr_ip.dat")
+
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.pr_ip.dat")
+                Using t As New IO.StreamReader(filestr)
+                    pripc = fh1.ReadStream(t)
+                End Using
+            End Using
 
             Dim csdb As New ChemSepHelper.ChemSepIDConverter
             For Each prip In pripc

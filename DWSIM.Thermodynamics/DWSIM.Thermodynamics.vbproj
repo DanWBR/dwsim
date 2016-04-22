@@ -21,8 +21,8 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>DWSIM.Thermodynamics.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
-    <RemoveIntegerChecks>true</RemoveIntegerChecks>
-    <Optimize>true</Optimize>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -208,6 +208,27 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\biod_intparm_nrtl.dat" />
+    <EmbeddedResource Include="Assets\csid.dat" />
+    <EmbeddedResource Include="Assets\diel.dat" />
+    <EmbeddedResource Include="Assets\gsw_data_v3_0.dat" />
+    <EmbeddedResource Include="Assets\hid_chenguo.dat" />
+    <EmbeddedResource Include="Assets\hid_klaudasandler.dat" />
+    <EmbeddedResource Include="Assets\hid_vdwp_pp.dat" />
+    <EmbeddedResource Include="Assets\inib.dat" />
+    <EmbeddedResource Include="Assets\kij_pr.dat" />
+    <EmbeddedResource Include="Assets\kij_srk.dat" />
+    <EmbeddedResource Include="Assets\lkp_ip.dat" />
+    <EmbeddedResource Include="Assets\nrtl.dat" />
+    <EmbeddedResource Include="Assets\pcsaft.dat" />
+    <EmbeddedResource Include="Assets\pcsaft_ip.dat" />
+    <EmbeddedResource Include="Assets\prsv2.dat" />
+    <EmbeddedResource Include="Assets\prsv2_ip.dat" />
+    <EmbeddedResource Include="Assets\prsv2_ip_vl.dat" />
+    <EmbeddedResource Include="Assets\pr_ip.dat" />
+    <EmbeddedResource Include="Assets\srk_ip.dat" />
+    <EmbeddedResource Include="Assets\uniquac.dat" />
+    <EmbeddedResource Include="Assets\uniquacip.dat" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -246,7 +267,24 @@
       <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\dielectricconstants.txt" />
+    <EmbeddedResource Include="Assets\elements.txt" />
+    <EmbeddedResource Include="Assets\ExUNIQUAC_RiQi.txt" />
+    <EmbeddedResource Include="Assets\ExUNIQUAC_uij.txt" />
+    <EmbeddedResource Include="Assets\henry.txt" />
+    <EmbeddedResource Include="Assets\jobackgroups.txt" />
+    <EmbeddedResource Include="Assets\kij_srk.txt" />
+    <EmbeddedResource Include="Assets\LIQUAC2_IP.txt" />
+    <EmbeddedResource Include="Assets\LIQUAC2_RiQi.txt" />
+    <EmbeddedResource Include="Assets\modfac.txt" />
+    <EmbeddedResource Include="Assets\modfac_ip.txt" />
+    <EmbeddedResource Include="Assets\NIST-MODFAC_IP.txt" />
+    <EmbeddedResource Include="Assets\NIST-MODFAC_RiQi.txt" />
+    <EmbeddedResource Include="Assets\unifac.txt" />
+    <EmbeddedResource Include="Assets\unifac_ip.txt" />
+    <EmbeddedResource Include="Assets\unifac_ll_ip.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

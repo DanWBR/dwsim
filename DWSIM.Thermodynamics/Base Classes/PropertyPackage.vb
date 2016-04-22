@@ -32,6 +32,7 @@ Imports DWSIM.MathOps.MathEx
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
+Imports System.Reflection
 
 Namespace PropertyPackages
 
@@ -8893,8 +8894,14 @@ Final3:
 
             'load Henry Coefficients
             Dim pathsep = IO.Path.DirectorySeparatorChar
-            Dim filename As String = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "Henry.txt"
-            Dim HenryLines() As String = IO.File.ReadAllLines(filename)
+
+            Dim HenryLines() As String
+
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.henry.txt")
+                Using t As New StreamReader(filestr)
+                    HenryLines = t.ReadToEnd().Split(vbLf)
+                End Using
+            End Using
 
             For i = 2 To HenryLines.Length - 1
                 Dim HP As New HenryParam

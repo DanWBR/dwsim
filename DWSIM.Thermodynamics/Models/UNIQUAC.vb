@@ -19,6 +19,7 @@
 Imports System.Collections.Generic
 Imports FileHelpers
 Imports System.Threading.Tasks
+Imports System.IO
 
 Namespace PropertyPackages.Auxiliary
 
@@ -92,8 +93,18 @@ Namespace PropertyPackages.Auxiliary
             Dim uniquacipc() As UNIQUAC_IPData
             Dim uniquacipc2() As UNIQUAC_IPData
             Dim fh1 As New FileHelperEngine(Of UNIQUAC_IPData)
-            uniquacipc = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "uniquac.dat")
-            uniquacipc2 = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "uniquacip.dat")
+
+            Using filestr As Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.uniquac.dat")
+                Using t As New StreamReader(filestr)
+                    uniquacipc = fh1.ReadStream(t)
+                End Using
+            End Using
+
+            Using filestr As Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.uniquacip.dat")
+                Using t As New StreamReader(filestr)
+                    uniquacipc2 = fh1.ReadStream(t)
+                End Using
+            End Using
 
             Dim csdb As New ChemSepHelper.ChemSepIDConverter
 

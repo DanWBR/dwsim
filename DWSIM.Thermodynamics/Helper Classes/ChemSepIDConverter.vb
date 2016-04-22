@@ -43,9 +43,11 @@ Namespace ChemSepHelper
             Dim csid As ChemSepNameIDPair
             Dim csidc() As ChemSepNameIDPair
             Dim fh1 As New FileHelperEngine(Of ChemSepNameIDPair)
-            With fh1
-                csidc = .ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "csid.dat")
-            End With
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.csid.dat")
+                Using t As New IO.StreamReader(filestr)
+                    csidc = fh1.ReadStream(t)
+                End Using
+            End Using
 
             For Each csid In csidc
                 Me.IDs.Add(csid.ID, csid.Clone)

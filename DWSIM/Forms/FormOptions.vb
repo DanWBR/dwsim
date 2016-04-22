@@ -267,26 +267,6 @@ Public Class FormOptions
 
     End Sub
 
-    Private Sub Button11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button11.Click
-        'Add ChemSep component database
-        With Me.ofdcs
-            If .ShowDialog = Windows.Forms.DialogResult.OK Then
-                Dim filename As String = .FileName
-                FormMain.LoadCSDB(filename)
-                'chemsep database
-                If FormMain.loadedCSDB Then
-                    My.Settings.ChemSepDatabasePath = filename
-                    Dim name, path2 As String
-                    name = "ChemSep   "
-                    path2 = My.Settings.ChemSepDatabasePath
-                    Me.dgvdb.Rows.Add(New Object() {dgvdb.Rows.Count + 1, name, path2, My.Resources.disconnect, My.Resources.cross})
-                    Me.dgvdb.Rows(Me.dgvdb.Rows.Count - 1).Cells(3).ReadOnly = True
-                    Me.dgvdb.Rows(Me.dgvdb.Rows.Count - 1).Cells(3).ToolTipText = DWSIM.App.GetLocalString("Remove")
-                End If
-            End If
-        End With
-    End Sub
-
     Sub AddDatabase(ByVal name As String, ByVal path As String)
         If Not My.Settings.UserDatabases.Contains(path) And File.Exists(path) Then
             My.Settings.UserDatabases.Add(path)
@@ -475,38 +455,6 @@ Public Class FormOptions
             End If
         End If
     End Sub
-
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        With Me.ofdcs
-            If .ShowDialog = Windows.Forms.DialogResult.OK Then
-                Dim filename As String = .FileName
-                FormMain.LoadCSDB(filename)
-                'chemsep database
-                If FormMain.loadedCSDB Then
-                    My.Settings.ChemSepDatabasePath = filename
-                    Dim name, path2 As String
-                    name = "ChemSep"
-                    path2 = My.Settings.ChemSepDatabasePath
-                    Me.dgvdb.Rows.Add(New Object() {dgvdb.Rows.Count + 1, My.Resources.information, name, path2, DWSIM.App.GetLocalString("Remove")})
-                    Me.dgvdb.Rows(Me.dgvdb.Rows.Count - 1).Cells(4).ReadOnly = True
-                End If
-                MessageBox.Show(DWSIM.App.GetLocalString("NextStartupOnly"))
-            End If
-        End With
-    End Sub
-
-    'Private Sub btnaddpath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '    My.Settings.ScriptPaths.Add(Me.tbaddpath.Text)
-    '    Me.lbpaths.Items.Add(Me.tbaddpath.Text)
-    '    Me.tbaddpath.Text = ""
-    'End Sub
-
-    'Private Sub btnrmpath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    '    If Me.lbpaths.SelectedItems.Count > 0 Then
-    '        My.Settings.ScriptPaths.Remove(Me.lbpaths.SelectedItem)
-    '        Me.lbpaths.Items.Remove(Me.lbpaths.SelectedItem)
-    '    End If
-    'End Sub
 
     Private Sub chkconsole_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkconsole.CheckedChanged
         My.Settings.RedirectOutput = chkconsole.Checked
