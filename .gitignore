@@ -160,7 +160,6 @@ obj
 /DWSIM/version.txt
 /DWSIM/Resources/Thumbs.db
 /DWSIM/bin/Release
-*.config
 *.pdb
 DWSIM/bin/x86/Release/Jolt.Testing.GeneratedTypes.xml
 DWSIM/bin/x86/Release/Jolt.xml
