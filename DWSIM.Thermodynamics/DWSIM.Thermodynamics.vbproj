@@ -211,7 +211,6 @@
     <EmbeddedResource Include="Assets\biod_intparm_nrtl.dat" />
     <EmbeddedResource Include="Assets\csid.dat" />
     <EmbeddedResource Include="Assets\diel.dat" />
-    <EmbeddedResource Include="Assets\gsw_data_v3_0.dat" />
     <EmbeddedResource Include="Assets\hid_chenguo.dat" />
     <EmbeddedResource Include="Assets\hid_klaudasandler.dat" />
     <EmbeddedResource Include="Assets\hid_vdwp_pp.dat" />

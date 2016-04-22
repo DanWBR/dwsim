@@ -437,28 +437,22 @@
     <Compile Include="Forms\FormCapeOpenUnitSelector.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmCOReports.Designer.vb">
-      <DependentUpon>frmCOReports.vb</DependentUpon>
+    <Compile Include="Forms\Flowsheet Components\COReportsPanel.Designer.vb">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmCOReports.vb">
+    <Compile Include="Forms\Flowsheet Components\COReportsPanel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmOutput.Designer.vb">
-      <DependentUpon>frmOutput.vb</DependentUpon>
+    <Compile Include="Forms\Flowsheet Components\ConsoleOutput.Designer.vb">
+      <DependentUpon>ConsoleOutput.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmOutput.vb">
+    <Compile Include="Forms\Flowsheet Components\ConsoleOutput.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmQueue.Designer.vb">
-      <DependentUpon>frmQueue.vb</DependentUpon>
+    <Compile Include="Forms\Flowsheet Components\WatchPanel.Designer.vb">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmQueue.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmWatch.Designer.vb">
-      <DependentUpon>frmWatch.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmWatch.vb">
+    <Compile Include="Forms\Flowsheet Components\WatchPanel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormOptimization.Designer.vb">
@@ -507,10 +501,10 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Objects\Classes\General\TableGraphic.vb" />
     <Compile Include="Objects\Classes\General\Generic.vb" />
-    <Compile Include="Forms\Flowsheet Forms\frmMatList.Designer.vb">
-      <DependentUpon>frmMatList.vb</DependentUpon>
+    <Compile Include="Forms\Flowsheet Components\MaterialStreamPanel.Designer.vb">
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmMatList.vb">
+    <Compile Include="Forms\Flowsheet Components\MaterialStreamPanel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormOptions.Designer.vb">
@@ -538,16 +532,16 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Objects\Classes\Flowsheet\FlowsheetClasses.vb" />
-    <Compile Include="Forms\Flowsheet Forms\frmLog.Designer.vb">
-      <DependentUpon>frmLog.vb</DependentUpon>
+    <Compile Include="Forms\Flowsheet Components\LogPanel.Designer.vb">
+      <DependentUpon>LogPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmLog.vb">
+    <Compile Include="Forms\Flowsheet Components\LogPanel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmSurface.Designer.vb">
-      <DependentUpon>frmSurface.vb</DependentUpon>
+    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface.Designer.vb">
+      <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Forms\frmSurface.vb">
+    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormFlowsheet.Designer.vb">
@@ -842,9 +836,6 @@
     <EmbeddedResource Include="Forms\FormDBManager.resx">
       <DependentUpon>FormDBManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmQueue.es.resx">
-      <DependentUpon>frmQueue.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormMain.vb</DependentUpon>
@@ -1119,25 +1110,25 @@
     <None Include="Resources\CSL2094_LoRes copy.png" />
     <None Include="Resources\CB058398_LoRes copy.png" />
     <None Include="Resources\CB058398_LoRes.jpg" />
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmLog.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Components\LogPanel.en.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>frmLog.vb</DependentUpon>
+      <DependentUpon>LogPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmMatList.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Components\MaterialStreamPanel.en.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>frmMatList.vb</DependentUpon>
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmSurface.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface.en.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>frmSurface.vb</DependentUpon>
+      <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmMatList.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Components\MaterialStreamPanel.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>frmMatList.vb</DependentUpon>
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLoadSave.en.resx">
       <SubType>Designer</SubType>
@@ -1175,13 +1166,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmLog.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Components\LogPanel.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>frmLog.vb</DependentUpon>
+      <DependentUpon>LogPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmSurface.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>frmSurface.vb</DependentUpon>
+      <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormFlowsheet.resx">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
@@ -2219,29 +2210,29 @@
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmCOReports.de.resx">
-      <DependentUpon>frmCOReports.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\COReportsPanel.de.resx">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmCOReports.en.resx">
-      <DependentUpon>frmCOReports.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\COReportsPanel.en.resx">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmCOReports.es.resx">
-      <DependentUpon>frmCOReports.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\COReportsPanel.es.resx">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmCOReports.resx">
-      <DependentUpon>frmCOReports.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\COReportsPanel.resx">
+      <DependentUpon>COReportsPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmWatch.de.resx">
-      <DependentUpon>frmWatch.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\WatchPanel.de.resx">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmWatch.en.resx">
-      <DependentUpon>frmWatch.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\WatchPanel.en.resx">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmWatch.es.resx">
-      <DependentUpon>frmWatch.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\WatchPanel.es.resx">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmWatch.resx">
-      <DependentUpon>frmWatch.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\WatchPanel.resx">
+      <DependentUpon>WatchPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.de.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
@@ -2270,44 +2261,32 @@
     <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.resx">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmLog.de.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\LogPanel.de.resx">
+      <DependentUpon>LogPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmLog.es.resx">
-      <DependentUpon>frmLog.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\LogPanel.es.resx">
+      <DependentUpon>LogPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmMatList.de.resx">
-      <DependentUpon>frmMatList.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\MaterialStreamPanel.de.resx">
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmMatList.es.resx">
-      <DependentUpon>frmMatList.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\MaterialStreamPanel.es.resx">
+      <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmOutput.de.resx">
-      <DependentUpon>frmOutput.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\ConsoleOutput.de.resx">
+      <DependentUpon>ConsoleOutput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmOutput.en.resx">
-      <DependentUpon>frmOutput.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\ConsoleOutput.en.resx">
+      <DependentUpon>ConsoleOutput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmOutput.es.resx">
-      <DependentUpon>frmOutput.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\ConsoleOutput.es.resx">
+      <DependentUpon>ConsoleOutput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmOutput.resx">
-      <DependentUpon>frmOutput.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\Flowsheet Components\ConsoleOutput.resx">
+      <DependentUpon>ConsoleOutput.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmQueue.de.resx">
-      <DependentUpon>frmQueue.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmQueue.en.resx">
-      <DependentUpon>frmQueue.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmQueue.resx">
-      <DependentUpon>frmQueue.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmSurface.de.resx">
-      <DependentUpon>frmSurface.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Forms\frmSurface.es.resx">
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface.de.resx">
+      <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLoadSave.de.resx">
       <DependentUpon>FormLoadSave.vb</DependentUpon>

@@ -1127,6 +1127,13 @@ Public Class FormSimulSettings
                 Me.FrmChild.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
                 Me.FrmChild.Options.NotSelectedComponents.Remove(tmpcomp.Name)
 
+                For Each mstr In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+                    For Each phase In mstr.Phases.Values
+                        phase.Compounds.Add(tmpcomp.Name, New Compound(tmpcomp.Name, ""))
+                        phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
+                    Next
+                Next
+
                 Me.ListViewA.Items.Add(tmpcomp.Name, DWSIM.App.GetComponentName(tmpcomp.Name) & " (" & tmpcomp.OriginalDB & ")", 0).Tag = tmpcomp.Name
 
                 If Not DWSIM.App.IsRunningOnMono Then Me.ogc1.Rows.RemoveAt(index)
@@ -1169,8 +1176,8 @@ Public Class FormSimulSettings
         Dim ms As Streams.MaterialStream
         Dim proplist As New ArrayList
 
-        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
-            For Each phase As BaseClasses.Phase In ms.Phases.Values
+        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+            For Each phase In ms.Phases.Values
                 phase.Compounds.Remove(tmpcomp.Name)
             Next
         Next

@@ -368,7 +368,7 @@ Namespace GraphicObjects
 
         Public Property AutoSize As Boolean = False Implements IGraphicObject.AutoSize
 
-        Public Property Height As Integer = 0 Implements IGraphicObject.Height
+        Public Property Height As Integer = 20 Implements IGraphicObject.Height
 
         Public Property IsConnector As Boolean = False Implements IGraphicObject.IsConnector
 
@@ -376,7 +376,7 @@ Namespace GraphicObjects
 
         Public Property Tag As String = "" Implements IGraphicObject.Tag
 
-        Public Property Width As Integer = 0 Implements IGraphicObject.Width
+        Public Property Width As Integer = 20 Implements IGraphicObject.Width
 
         Public Property X As Integer = 0 Implements IGraphicObject.X
 

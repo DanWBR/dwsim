@@ -472,7 +472,7 @@ Namespace PropertyPackages.Auxiliary
             'sa = (35.16504 / 35#) * sp + gsw_delta_sa(longs0, lats0, P0)
 
             'version 3.0:
-            saar = gsw_saar(lon0, lat0, p_dbar)
+            saar = 0.0# 'gsw_saar(lon0, lat0, p_dbar)
             If saar = ErrorReturn Then Exit Function
 
             sa = (35.16504 / 35.0#) * sp * (1.0# + saar)
@@ -534,7 +534,7 @@ Errortrap:
             'psal = (35# / 35.16504) * (sa - gsw_delta_sa(longs0, lats0, P0))
 
             'version 3.0:
-            saar = gsw_saar(lon0, lat0, p_dbar)
+            saar = 0.0# ' gsw_saar(lon0, lat0, p_dbar)
             If saar = ErrorReturn Then Exit Function
 
             sp = (35.0# / 35.16504) * sa / (1.0# + saar)
@@ -547,169 +547,169 @@ Errortrap:
         End Function
 
 
-        Private Function gsw_saar(ByVal lon0_in As Double, _
-                                ByVal lat0 As Double, _
-                                ByVal P0 As Double) As Double
+        '        Private Function gsw_saar(ByVal lon0_in As Double, _
+        '                                ByVal lat0 As Double, _
+        '                                ByVal P0 As Double) As Double
 
 
 
-            ' SIA Version 3.0:
-            ' code translated to VB by R. Feistel, 22 Feb 2011,
-            ' from:
-            ' F90 code modified 1st February 2011, by Paul Barker.
-            ' This version of the GSW software is comparible to the
-            ' GSW Oceanographic Toolbox version 3.0
+        '            ' SIA Version 3.0:
+        '            ' code translated to VB by R. Feistel, 22 Feb 2011,
+        '            ' from:
+        '            ' F90 code modified 1st February 2011, by Paul Barker.
+        '            ' This version of the GSW software is comparible to the
+        '            ' GSW Oceanographic Toolbox version 3.0
 
 
-            ' CALCULATE THE ABSOLUTE SALINITY ANOMALY RATIO
-            '
-            ' P0                  : ABSOLUTE pressure                  [DBAR]
-            ' LON0                : LONGITUDE                          [DEG E]
-            ' LAT0                : LATITUDE                           [DEG N]
-            '
-            ' RESULT              : ABSOLUTE SALINITY ANOMALY RATIO    [unitless]
+        '            ' CALCULATE THE ABSOLUTE SALINITY ANOMALY RATIO
+        '            '
+        '            ' P0                  : ABSOLUTE pressure                  [DBAR]
+        '            ' LON0                : LONGITUDE                          [DEG E]
+        '            ' LAT0                : LATITUDE                           [DEG N]
+        '            '
+        '            ' RESULT              : ABSOLUTE SALINITY ANOMALY RATIO    [unitless]
 
-            Const nx = 91, ny = 45, nz = 45
+        '            Const nx = 91, ny = 45, nz = 45
 
-            Dim indx0&, indy0&, indz0&, i&, j&
-            Dim k&, deli&(4), delj&(4), nmean&
-            Dim p0_original#, lon0#, lonint&, sa_upper#, sa_lower#
-            Dim dlon#, dlat#, r1#, s1#, t1#, saar_mean#, saar#(4), ndepth_max#
+        '            Dim indx0&, indy0&, indz0&, i&, j&
+        '            Dim k&, deli&(4), delj&(4), nmean&
+        '            Dim p0_original#, lon0#, lonint&, sa_upper#, sa_lower#
+        '            Dim dlon#, dlat#, r1#, s1#, t1#, saar_mean#, saar#(4), ndepth_max#
 
-            Static lons#(nx), lats#(ny), p#(nz), saar_ref#(nz, ny, nx), ndepth#(ny, nx), icalled
+        '            Static lons#(nx), lats#(ny), p#(nz), saar_ref#(nz, ny, nx), ndepth#(ny, nx), icalled
 
-            On Error GoTo Errortrap
+        '            On Error GoTo Errortrap
 
-            'data deli/0,1,1,0/, delj/0,0,1,1/
-            deli(2) = 1
-            deli(3) = 1
-            delj(3) = 1
-            delj(4) = 1
+        '            'data deli/0,1,1,0/, delj/0,0,1,1/
+        '            deli(2) = 1
+        '            deli(3) = 1
+        '            delj(3) = 1
+        '            delj(4) = 1
 
-            'data icalled/0/
-            'icalled = 0
+        '            'data icalled/0/
+        '            'icalled = 0
 
-            'save icalled, lons, lats, p, ndepth, saar_ref
+        '            'save icalled, lons, lats, p, ndepth, saar_ref
 
-            gsw_saar = 0.0#
+        '            gsw_saar = 0.0#
 
-            If (lat0 < -82.0# Or lat0 > 90.0#) Then Return Nothing
-            lonint = Int(lon0_in)                       'integer part
-            lon0 = lon0_in - lonint                     'fraction part
-            lonint = ((lonint Mod 360) + 360) Mod 360  'results in 0 <= lonint < 360
-            lon0 = lon0 + lonint
-            If (lon0 >= 360.0#) Then lon0 = lon0 - 360.0# 'this should never happen, actually
-            If (lon0 = 0.0#) Then lon0 = 0.000000000000001
+        '            If (lat0 < -82.0# Or lat0 > 90.0#) Then Return Nothing
+        '            lonint = Int(lon0_in)                       'integer part
+        '            lon0 = lon0_in - lonint                     'fraction part
+        '            lonint = ((lonint Mod 360) + 360) Mod 360  'results in 0 <= lonint < 360
+        '            lon0 = lon0 + lonint
+        '            If (lon0 >= 360.0#) Then lon0 = lon0 - 360.0# 'this should never happen, actually
+        '            If (lon0 = 0.0#) Then lon0 = 0.000000000000001
 
-            If (icalled = 0) Then
-                icalled = 1
-                If Read_gsw_data(nx, ny, nz, lons, lats, p, ndepth, saar_ref) = ErrorReturn Then
-                    gsw_saar = 0
-                    icalled = 0
-                    'saar_ref = 0#
-                    Exit Function
-                End If
-                'open(10,file='gsw_data_v3_0.dat',status='old',err=1)
-                'flag_saar = 1
-                'read(10,*) (lons(i), i=1,nx)
-                'read(10,*) (lats(i), i=1,ny)
-                'read(10,*) (p(i), i=1,nz)
-                'read(10,*) ((ndepth(j,i), j=1,ny), i=1,nx)
-                'read(10,*) (((saar_ref(k,j,i), k=1,nz), j=1,ny), i=1,nx)
-                'Close (10)
-                '   GoTo 2
-                '1  saar_ref = 0#
-                '   flag_saar = 0
-                '2  continue
-            End If
+        '            If (icalled = 0) Then
+        '                icalled = 1
+        '                If Read_gsw_data(nx, ny, nz, lons, lats, p, ndepth, saar_ref) = ErrorReturn Then
+        '                    gsw_saar = 0
+        '                    icalled = 0
+        '                    'saar_ref = 0#
+        '                    Exit Function
+        '                End If
+        '                'open(10,file='gsw_data_v3_0.dat',status='old',err=1)
+        '                'flag_saar = 1
+        '                'read(10,*) (lons(i), i=1,nx)
+        '                'read(10,*) (lats(i), i=1,ny)
+        '                'read(10,*) (p(i), i=1,nz)
+        '                'read(10,*) ((ndepth(j,i), j=1,ny), i=1,nx)
+        '                'read(10,*) (((saar_ref(k,j,i), k=1,nz), j=1,ny), i=1,nx)
+        '                'Close (10)
+        '                '   GoTo 2
+        '                '1  saar_ref = 0#
+        '                '   flag_saar = 0
+        '                '2  continue
+        '            End If
 
-            'if (flag_saar.eq.0) then
-            '   write(*,*) "*** gsw_data_v3_0.dat is missing ''' ***"
-            '   write(*,*) "Set the full path of gsw_data_v3_0.dat in Convert_0.F90 on line 290"
-            'End If
+        '            'if (flag_saar.eq.0) then
+        '            '   write(*,*) "*** gsw_data_v3_0.dat is missing ''' ***"
+        '            '   write(*,*) "Set the full path of gsw_data_v3_0.dat in Convert_0.F90 on line 290"
+        '            'End If
 
-            'SET GSW_SAAR = 0 AND RETURN IF THERE IS NO DATA FILE PRESENT
-            'if(flag_saar == 0) then; gsw_saar = 0d0; return; endif
+        '            'SET GSW_SAAR = 0 AND RETURN IF THERE IS NO DATA FILE PRESENT
+        '            'if(flag_saar == 0) then; gsw_saar = 0d0; return; endif
 
-            dlon = lons(2) - lons(1)
-            dlat = lats(2) - lats(1)
+        '            dlon = lons(2) - lons(1)
+        '            dlat = lats(2) - lats(1)
 
-            If lons(nx) = lons(1) Then Exit Function
-            indx0 = Int(1 + (nx - 1) * (lon0 - lons(1)) / (lons(nx) - lons(1)))
-            If (indx0 = nx) Then
-                indx0 = nx - 1
-            End If
+        '            If lons(nx) = lons(1) Then Exit Function
+        '            indx0 = Int(1 + (nx - 1) * (lon0 - lons(1)) / (lons(nx) - lons(1)))
+        '            If (indx0 = nx) Then
+        '                indx0 = nx - 1
+        '            End If
 
-            If lats(ny) = lats(1) Then Exit Function
-            indy0 = Int(1 + (ny - 1) * (lat0 - lats(1)) / (lats(ny) - lats(1)))
-            If (indy0 = ny) Then
-                indy0 = ny - 1
-            End If
+        '            If lats(ny) = lats(1) Then Exit Function
+        '            indy0 = Int(1 + (ny - 1) * (lat0 - lats(1)) / (lats(ny) - lats(1)))
+        '            If (indy0 = ny) Then
+        '                indy0 = ny - 1
+        '            End If
 
-            ndepth_max = -1
-            For k = 1 To 4
-                If (ndepth(indy0 + delj(k), indx0 + deli(k)) > 0) Then
-                    ndepth_max = max(ndepth_max, ndepth(indy0 + delj(k), indx0 + deli(k)))
-                End If
-            Next k
+        '            ndepth_max = -1
+        '            For k = 1 To 4
+        '                If (ndepth(indy0 + delj(k), indx0 + deli(k)) > 0) Then
+        '                    ndepth_max = max(ndepth_max, ndepth(indy0 + delj(k), indx0 + deli(k)))
+        '                End If
+        '            Next k
 
-            If (ndepth_max = -1.0#) Then
-                gsw_saar = 0.0#
-                Exit Function
-            End If
+        '            If (ndepth_max = -1.0#) Then
+        '                gsw_saar = 0.0#
+        '                Exit Function
+        '            End If
 
-            p0_original = P0
-            If (P0 > p(Int(ndepth_max))) Then P0 = p(Int(ndepth_max))
-            Call indx(p, nz, P0, indz0)
+        '            p0_original = P0
+        '            If (P0 > p(Int(ndepth_max))) Then P0 = p(Int(ndepth_max))
+        '            Call indx(p, nz, P0, indz0)
 
-            r1 = (lon0 - lons(indx0)) / (lons(indx0 + 1) - lons(indx0))
-            s1 = (lat0 - lats(indy0)) / (lats(indy0 + 1) - lats(indy0))
-            t1 = (P0 - p(indz0)) / (p(indz0 + 1) - p(indz0))
+        '            r1 = (lon0 - lons(indx0)) / (lons(indx0 + 1) - lons(indx0))
+        '            s1 = (lat0 - lats(indy0)) / (lats(indy0 + 1) - lats(indy0))
+        '            t1 = (P0 - p(indz0)) / (p(indz0 + 1) - p(indz0))
 
-            For k = 1 To 4
-                saar(k) = saar_ref(indz0, indy0 + delj(k), indx0 + deli(k))
-            Next k
+        '            For k = 1 To 4
+        '                saar(k) = saar_ref(indz0, indy0 + delj(k), indx0 + deli(k))
+        '            Next k
 
-            If (260.0# <= lon0 And lon0 <= 291.999 And _
-                3.4 <= lat0 And lat0 <= 19.55) Then
-                Call add_barrier(saar, saar, lon0, lat0, lons(indx0), lats(indy0), dlon, dlat)
-            ElseIf (Abs(sum(saar)) >= 10000000000.0#) Then
-                Call saar_add_mean(saar, lon0, lat0)
-            End If
+        '            If (260.0# <= lon0 And lon0 <= 291.999 And _
+        '                3.4 <= lat0 And lat0 <= 19.55) Then
+        '                Call add_barrier(saar, saar, lon0, lat0, lons(indx0), lats(indy0), dlon, dlat)
+        '            ElseIf (Abs(sum(saar)) >= 10000000000.0#) Then
+        '                Call saar_add_mean(saar, lon0, lat0)
+        '            End If
 
-            sa_upper = (1.0# - s1) * (saar(1) + r1 * (saar(2) - saar(1))) + _
-                                s1 * (saar(4) + r1 * (saar(3) - saar(4)))
+        '            sa_upper = (1.0# - s1) * (saar(1) + r1 * (saar(2) - saar(1))) + _
+        '                                s1 * (saar(4) + r1 * (saar(3) - saar(4)))
 
-            For k = 1 To 4
-                saar(k) = saar_ref(indz0 + 1, indy0 + delj(k), indx0 + deli(k))
-            Next k
+        '            For k = 1 To 4
+        '                saar(k) = saar_ref(indz0 + 1, indy0 + delj(k), indx0 + deli(k))
+        '            Next k
 
-            If (260.0# <= lon0 And lon0 <= 291.999 And _
-                3.4 <= lat0 And lat0 <= 19.55) Then
-                Call add_barrier(saar, saar, lon0, lat0, lons(indx0), lats(indy0), dlon, dlat)
-            ElseIf (Abs(sum(saar)) >= 10000000000.0#) Then
-                Call saar_add_mean(saar, lon0, lat0)
-            End If
+        '            If (260.0# <= lon0 And lon0 <= 291.999 And _
+        '                3.4 <= lat0 And lat0 <= 19.55) Then
+        '                Call add_barrier(saar, saar, lon0, lat0, lons(indx0), lats(indy0), dlon, dlat)
+        '            ElseIf (Abs(sum(saar)) >= 10000000000.0#) Then
+        '                Call saar_add_mean(saar, lon0, lat0)
+        '            End If
 
-            sa_lower = (1.0# - s1) * (saar(1) + r1 * (saar(2) - saar(1))) + _
-                                s1 * (saar(4) + r1 * (saar(3) - saar(4)))
-            If (Abs(sa_lower) >= 10000000000.0#) Then sa_lower = sa_upper
-            gsw_saar = sa_upper + t1 * (sa_lower - sa_upper)
+        '            sa_lower = (1.0# - s1) * (saar(1) + r1 * (saar(2) - saar(1))) + _
+        '                                s1 * (saar(4) + r1 * (saar(3) - saar(4)))
+        '            If (Abs(sa_lower) >= 10000000000.0#) Then sa_lower = sa_upper
+        '            gsw_saar = sa_upper + t1 * (sa_lower - sa_upper)
 
-            'dbg
-            If (Abs(gsw_saar) >= 10000000000.0#) Then
-                'write(*,*)"gsw_saar = errorreturn has been replaced by 0"
-                gsw_saar = 0.0#
-            End If
-            'dbg
-            P0 = p0_original
+        '            'dbg
+        '            If (Abs(gsw_saar) >= 10000000000.0#) Then
+        '                'write(*,*)"gsw_saar = errorreturn has been replaced by 0"
+        '                gsw_saar = 0.0#
+        '            End If
+        '            'dbg
+        '            P0 = p0_original
 
-            Exit Function
+        '            Exit Function
 
-Errortrap:
-            gsw_saar = ErrorReturn
+        'Errortrap:
+        '            gsw_saar = ErrorReturn
 
-        End Function
+        '        End Function
 
 
         Private Function gsw_adjust_baltic(ByVal sa As Double, _
@@ -1051,62 +1051,69 @@ Errortrap:
         End Function
 
 
-        Private Function Read_gsw_data(ByVal nx As Long, _
-                                    ByVal ny As Long, _
-                                    ByVal nz As Long, _
-                                    ByRef lon() As Double, _
-                                    ByRef lat() As Double, _
-                                    ByRef pres() As Double, _
-                                    ByRef ndpt(,) As Double, _
-                                    ByRef dels(,,) As Double) As Double
+        'Private Function Read_gsw_data(ByVal nx As Long, _
+        '                            ByVal ny As Long, _
+        '                            ByVal nz As Long, _
+        '                            ByRef lon() As Double, _
+        '                            ByRef lat() As Double, _
+        '                            ByRef pres() As Double, _
+        '                            ByRef ndpt(,) As Double, _
+        '                            ByRef dels(,,) As Double) As Double
 
-            Dim i&, j&, k&
+        '    Dim i&, j&, k&
 
-            'SIA version 3.0:
-            'f = f + "gsw_data_v3_0.dat"
+        '    'SIA version 3.0:
+        '    'f = f + "gsw_data_v3_0.dat"
 
-            'SIA version 1.0 and 2.0 (SIA 2.0 is identical with SIA 1.1)
-            'f = f + "gsw_data.dat"
+        '    'SIA version 1.0 and 2.0 (SIA 2.0 is identical with SIA 1.1)
+        '    'f = f + "gsw_data.dat"
 
-            Dim pathsep As Char = System.IO.Path.DirectorySeparatorChar
-            Dim filecontents As String() = IO.File.ReadAllLines(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "gsw_data_v3_0.dat")
+        '    Dim pathsep As Char = System.IO.Path.DirectorySeparatorChar
 
-            j = 0
+        '    Dim filecontents As String()
 
-            For i = 1 To nx
-                lon(i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
-                j += 1
-            Next i
+        '    Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.gsw_data_v3_0.dat")
+        '        Using t As New IO.StreamReader(filestr)
+        '            filecontents = t.ReadToEnd.Split(vbLf)
+        '        End Using
+        '    End Using
 
-            For i = 1 To ny
-                lat(i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
-                j += 1
-            Next i
+        '    j = 0
 
-            For i = 1 To nz
-                pres(i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
-                j += 1
-            Next i
+        '    For i = 1 To nx
+        '        lon(i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
+        '        j += 1
+        '    Next i
 
-            For i = 1 To nx
-                For j = 1 To ny
-                    ndpt(j, i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
-                    j += 1
-                Next j
-            Next i
+        '    For i = 1 To ny
+        '        lat(i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
+        '        j += 1
+        '    Next i
 
-            For i = 1 To nx
-                For j = 1 To ny
-                    For k = 1 To nz
-                        dels(k, j, i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
-                        j += 1
-                    Next k
-                Next j
-            Next i
+        '    For i = 1 To nz
+        '        pres(i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
+        '        j += 1
+        '    Next i
 
-            Return Nothing
+        '    For i = 1 To nx
+        '        For j = 1 To ny
+        '            ndpt(j, i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
+        '            j += 1
+        '        Next j
+        '    Next i
 
-        End Function
+        '    For i = 1 To nx
+        '        For j = 1 To ny
+        '            For k = 1 To nz
+        '                dels(k, j, i) = Double.Parse(filecontents(j), System.Globalization.CultureInfo.InvariantCulture)
+        '                j += 1
+        '            Next k
+        '        Next j
+        '    Next i
+
+        '    Return Nothing
+
+        'End Function
 
 #End Region
 

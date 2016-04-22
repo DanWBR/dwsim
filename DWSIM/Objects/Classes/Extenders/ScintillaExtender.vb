@@ -143,19 +143,23 @@ Module scintillaExtender
 
         Dim netprops As String = ""
 
-        Dim props = Type.GetType("DWSIM.Streams.MaterialStream").GetProperties()
+        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).SingleOrDefault
+        Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver")).SingleOrDefault
+
+        Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties()
         For Each p In props
             netprops += p.Name + " "
         Next
-        Dim methods = Type.GetType("DWSIM.Streams.MaterialStream").GetMethods()
+        Dim methods = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetMethods()
         For Each m In methods
             netprops += m.Name + " "
         Next
-        props = Type.GetType("DWSIM.Streams.EnergyStream").GetProperties()
+        props = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetProperties()
         For Each p In props
             netprops += p.Name + " "
         Next
-        methods = Type.GetType("DWSIM.Streams.EnergyStream").GetMethods()
+        methods = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetMethods()
         For Each m In methods
             netprops += m.Name + " "
         Next
@@ -175,11 +179,11 @@ Module scintillaExtender
         For Each m In methods
             netprops += m.Name + " "
         Next
-        props = Type.GetType("PropertyPackages.PropertyPackage").GetProperties()
+        props = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetProperties()
         For Each p In props
             If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
         Next
-        methods = Type.GetType("PropertyPackages.PropertyPackage").GetMethods()
+        methods = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetMethods()
         For Each m In methods
             netprops += m.Name + " "
         Next
@@ -188,11 +192,11 @@ Module scintillaExtender
 
         If scintilla.Tag = 1 Then
             'editor is being used at flowsheet level.
-            props = Type.GetType("DWSIM.DWSIM.Flowsheet.FlowsheetSolver").GetProperties()
+            props = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetProperties()
             For Each p In props
                 If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
             Next
-            methods = Type.GetType("DWSIM.DWSIM.Flowsheet.FlowsheetSolver").GetMethods()
+            methods = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMethods()
             For Each m In methods
                 netprops += m.Name + " "
             Next

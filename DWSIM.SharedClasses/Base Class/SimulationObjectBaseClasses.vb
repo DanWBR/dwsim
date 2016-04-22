@@ -239,7 +239,14 @@ Namespace UnitOperations
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks>This property is the same as the graphic object 'Name' property.</remarks>
-        Public Property Name() As String = "" Implements Interfaces.ISimulationObject.Name
+        Public Property Name() As String Implements Interfaces.ISimulationObject.Name
+            Get
+                Return Componentname
+            End Get
+            Set(value As String)
+                ComponentName = value
+            End Set
+        End Property
 
         Public MustOverride Function GetProperties(proptype As PropertyType) As String() Implements Interfaces.ISimulationObject.GetProperties
 

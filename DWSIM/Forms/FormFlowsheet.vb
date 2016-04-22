@@ -63,15 +63,14 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public m_overrideCloseQuestion As Boolean = False
     Public m_simultadjustsolverenabled As Boolean = True
 
-    Public FormSurface As New frmSurface
-    Public FormLog As New frmLog
-    Public FormMatList As New frmMatList
+    Public FormSurface As New FlowsheetSurface
+    Public FormLog As New LogPanel
+    Public FormMatList As New MaterialStreamPanel
     Public FormSpreadsheet As New SpreadsheetForm
 
-    Public FormOutput As New frmOutput
-    Public FormQueue As New frmQueue
-    Public FormCOReports As New frmCOReports
-    Public FormWatch As New frmWatch
+    Public FormOutput As New ConsoleOutput
+    Public FormCOReports As New COReportsPanel
+    Public FormWatch As New WatchPanel
 
     Public FormCritPt As New FrmCritpt
     Public FormStabAn As New FrmStabAn
@@ -1212,15 +1211,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             FormOutput.Hide()
         End If
         Me.Options.FlowsheetShowConsoleWindow = consoletsmi.Checked
-    End Sub
-
-    Private Sub ExibirListaDeItensACalcularToolStripMenuItem_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ExibirListaDeItensACalcularToolStripMenuItem.CheckedChanged
-        If ExibirListaDeItensACalcularToolStripMenuItem.Checked Then
-            FormQueue.Show(dckPanel)
-        Else
-            FormQueue.Hide()
-        End If
-        Me.Options.FlowsheetShowCalculationQueue = ExibirListaDeItensACalcularToolStripMenuItem.Checked
     End Sub
 
     Private Sub ExibirRelatoriosDosObjetosCAPEOPENToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles COObjTSMI.CheckedChanged

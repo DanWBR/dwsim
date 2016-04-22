@@ -195,3 +195,4 @@ TCPServer/bin/Debug/*
 /DWSIM.GlobalSettings/bin/Debug
 /DWSIM.Math/bin/Debug
 /DWSIM.FlowsheetSolver/bin/Debug
+/DWSIM.Compounds/bin/Debug

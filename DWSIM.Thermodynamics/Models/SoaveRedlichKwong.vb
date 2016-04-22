@@ -40,7 +40,7 @@ Namespace PropertyPackages.Auxiliary
             Dim srkip As PR_IPData
             Dim srkipc() As PR_IPData
             Dim fh1 As New FileHelperEngine(Of PR_IPData)
-         
+
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.srk_ip.dat")
                 Using t As New IO.StreamReader(filestr)
                     srkipc = fh1.ReadStream(t)

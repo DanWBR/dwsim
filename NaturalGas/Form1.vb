@@ -31,7 +31,7 @@ Public Class Form1
 
         'remove SelectedObjectChanged event handler
 
-        Dim eventhandler As DWSIM.frmSurface.ObjectSelectedEventHandler = AddressOf SelectedObjectChanged
+        Dim eventhandler As DWSIM.FlowsheetSurface.ObjectSelectedEventHandler = AddressOf SelectedObjectChanged
 
         RemoveHandler fsheet.FormSurface.ObjectSelected, eventhandler
 
@@ -63,7 +63,7 @@ Public Class Form1
 
         'add SelectedObjectChanged event handler
 
-        Dim eventhandler As DWSIM.frmSurface.ObjectSelectedEventHandler = AddressOf SelectedObjectChanged
+        Dim eventhandler As DWSIM.FlowsheetSurface.ObjectSelectedEventHandler = AddressOf SelectedObjectChanged
 
         AddHandler fsheet.FormSurface.ObjectSelected, eventhandler
 
