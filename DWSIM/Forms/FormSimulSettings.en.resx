@@ -213,7 +213,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAAfABBwHwAQcBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAAfgBBwH4AQcBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -679,7 +679,7 @@
     <value>325, 21</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Flash Algorithm</value>
+    <value>Default Flash Algorithm</value>
   </data>
   <data name="CheckBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>477, 17</value>
@@ -688,7 +688,7 @@
     <value>Force Pressure-Enthalpy (PH) flash calculations (recommended for single-compound simulations)</value>
   </data>
   <data name="gb1.Text" xml:space="preserve">
-    <value>Global Settings (except for CAPE-OPEN and Electrolyte Property Packages)</value>
+    <value>Global Settings</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
     <value>XML File|*.xml|All files|*.*</value>

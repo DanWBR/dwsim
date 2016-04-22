@@ -24,13 +24,6 @@ Partial Class EF_Mixer
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EF_Mixer))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnect6 = New System.Windows.Forms.Button()
-        Me.btnDisconnect5 = New System.Windows.Forms.Button()
-        Me.btnDisconnect4 = New System.Windows.Forms.Button()
-        Me.btnDisconnect3 = New System.Windows.Forms.Button()
-        Me.btnDisconnect2 = New System.Windows.Forms.Button()
-        Me.btnDisconnect1 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -63,6 +56,14 @@ Partial Class EF_Mixer
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.chkActive = New System.Windows.Forms.CheckBox()
+        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnDisconnect6 = New System.Windows.Forms.Button()
+        Me.btnDisconnect5 = New System.Windows.Forms.Button()
+        Me.btnDisconnect4 = New System.Windows.Forms.Button()
+        Me.btnDisconnect3 = New System.Windows.Forms.Button()
+        Me.btnDisconnect2 = New System.Windows.Forms.Button()
+        Me.btnDisconnect1 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -97,55 +98,6 @@ Partial Class EF_Mixer
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
-        '
-        'btnDisconnectOutlet1
-        '
-        resources.ApplyResources(Me.btnDisconnectOutlet1, "btnDisconnectOutlet1")
-        Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
-        Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect6
-        '
-        resources.ApplyResources(Me.btnDisconnect6, "btnDisconnect6")
-        Me.btnDisconnect6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect6.Name = "btnDisconnect6"
-        Me.btnDisconnect6.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect5
-        '
-        resources.ApplyResources(Me.btnDisconnect5, "btnDisconnect5")
-        Me.btnDisconnect5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect5.Name = "btnDisconnect5"
-        Me.btnDisconnect5.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect4
-        '
-        resources.ApplyResources(Me.btnDisconnect4, "btnDisconnect4")
-        Me.btnDisconnect4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect4.Name = "btnDisconnect4"
-        Me.btnDisconnect4.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect3
-        '
-        resources.ApplyResources(Me.btnDisconnect3, "btnDisconnect3")
-        Me.btnDisconnect3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect3.Name = "btnDisconnect3"
-        Me.btnDisconnect3.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect2
-        '
-        resources.ApplyResources(Me.btnDisconnect2, "btnDisconnect2")
-        Me.btnDisconnect2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect2.Name = "btnDisconnect2"
-        Me.btnDisconnect2.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect1
-        '
-        resources.ApplyResources(Me.btnDisconnect1, "btnDisconnect1")
-        Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect1.Name = "btnDisconnect1"
-        Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
         'Label7
         '
@@ -265,6 +217,7 @@ Partial Class EF_Mixer
         'GroupBox5
         '
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
+        Me.GroupBox5.Controls.Add(Me.chkActive)
         Me.GroupBox5.Controls.Add(Me.lblConnectedTo)
         Me.GroupBox5.Controls.Add(Me.lblStatus)
         Me.GroupBox5.Controls.Add(Me.lblObject)
@@ -354,6 +307,62 @@ Partial Class EF_Mixer
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         '
+        'chkActive
+        '
+        resources.ApplyResources(Me.chkActive, "chkActive")
+        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        Me.chkActive.Name = "chkActive"
+        Me.chkActive.UseVisualStyleBackColor = True
+        '
+        'btnDisconnectOutlet1
+        '
+        resources.ApplyResources(Me.btnDisconnectOutlet1, "btnDisconnectOutlet1")
+        Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
+        Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect6
+        '
+        resources.ApplyResources(Me.btnDisconnect6, "btnDisconnect6")
+        Me.btnDisconnect6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect6.Name = "btnDisconnect6"
+        Me.btnDisconnect6.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect5
+        '
+        resources.ApplyResources(Me.btnDisconnect5, "btnDisconnect5")
+        Me.btnDisconnect5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect5.Name = "btnDisconnect5"
+        Me.btnDisconnect5.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect4
+        '
+        resources.ApplyResources(Me.btnDisconnect4, "btnDisconnect4")
+        Me.btnDisconnect4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect4.Name = "btnDisconnect4"
+        Me.btnDisconnect4.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect3
+        '
+        resources.ApplyResources(Me.btnDisconnect3, "btnDisconnect3")
+        Me.btnDisconnect3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect3.Name = "btnDisconnect3"
+        Me.btnDisconnect3.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect2
+        '
+        resources.ApplyResources(Me.btnDisconnect2, "btnDisconnect2")
+        Me.btnDisconnect2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect2.Name = "btnDisconnect2"
+        Me.btnDisconnect2.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect1
+        '
+        resources.ApplyResources(Me.btnDisconnect1, "btnDisconnect1")
+        Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect1.Name = "btnDisconnect1"
+        Me.btnDisconnect1.UseVisualStyleBackColor = True
+        '
         'EF_Mixer
         '
         resources.ApplyResources(Me, "$this")
@@ -414,4 +423,5 @@ Partial Class EF_Mixer
     Friend WithEvents btnDisconnect4 As System.Windows.Forms.Button
     Friend WithEvents btnDisconnect3 As System.Windows.Forms.Button
     Friend WithEvents btnDisconnect2 As System.Windows.Forms.Button
+    Friend WithEvents chkActive As System.Windows.Forms.CheckBox
 End Class

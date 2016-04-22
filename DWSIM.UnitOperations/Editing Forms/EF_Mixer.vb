@@ -13,6 +13,8 @@ Public Class EF_Mixer
 
         With MixerObject
 
+            chkActive.Checked = MixerObject.GraphicObject.Active
+
             Me.Text = .GraphicObject.Tag
 
             lblObject.Text = .GraphicObject.Tag & " (" & .FlowSheet.GetTranslatedString(.ComponentDescription) & ")"

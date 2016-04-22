@@ -8,19 +8,17 @@
     End Enum
 
     Public Enum FlashMethod
-        GlobalSetting = 2
-        DWSIMDefault = 0
-        InsideOut = 1
-        InsideOut3P = 3
-        GibbsMin2P = 4
-        GibbsMin3P = 5
-        NestedLoops3P = 6
-        NestedLoopsSLE = 7
-        NestedLoopsImmiscible = 8
-        SimpleLLE = 9
-        NestedLoopsSLE_SS = 10
-        NestedLoops3PV2 = 11
-        NestedLoops3PV3 = 12
+        Default_Algorithm = 0
+        Nested_Loops_VLE = 1
+        Nested_Loops_VLLE = 2
+        Nested_Loops_Immiscible_VLLE = 3
+        Inside_Out_VLE = 4
+        Inside_Out_VLLE = 5
+        Gibbs_VLE = 6
+        Gibbs_VLLE = 7
+        Simple_LLE = 8
+        Nested_Loops_SLE = 9
+        Nested_Loops_SLE_SolidSolution = 10
     End Enum
 
     Public Enum FlashCalculationType

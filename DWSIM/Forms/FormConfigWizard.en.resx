@@ -174,8 +174,17 @@ Click "Next" to continue.</value>
   <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
     <value>Click here to learn which methods and correlations are being used by the packages to calculate fluid properties.</value>
   </data>
+  <data name="Button8.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Available Property Packages</value>
+  </data>
+  <data name="Column16.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Column17.HeaderText" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="GroupBox12.Text" xml:space="preserve">
     <value>Added Property Packages</value>
@@ -213,8 +222,11 @@ Click "Next" to continue.</value>
   <data name="ListBoxPP.Items8" xml:space="preserve">
     <value>Nested Loops (VLLE - Immiscible Liquids)</value>
   </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 15</value>
+  </data>
   <data name="Label6.Text" xml:space="preserve">
-    <value>Flash Algorithm</value>
+    <value>Default Flash Algorithm</value>
   </data>
   <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>407, 15</value>
@@ -223,9 +235,31 @@ Click "Next" to continue.</value>
     <value>Click here to learn more about the flash algorithms implemented in DWSIM.</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Select a suitable  Flash Algorithm for your simulation. If your system can show instabilities in the liquid phase (immiscible compounds), select an algorithm to predict the equilibrium with two liquid phases (VLLE). To calculate equilibrium including a solid phase, select the corresponding algorithm. For complex systems, use one of the two Gibbs Minimization algorithms.
+    <value>Select a Default Flash Algorithm for your simulation. If your system can show instabilities in the liquid phase (immiscible compounds), select an algorithm to predict the equilibrium with two liquid phases (VLLE). To calculate equilibrium including a solid phase, select the corresponding algorithm. For complex systems, use one of the two Gibbs Minimization algorithms.
 
 Click "Next" to continue.</value>
+  </data>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 15</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>System of Units</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Select the desired System of Units for your simulation. You can change the units of existing systems, include new systems and perform other operations in the simulation setup window anytime after finishing this wizard.
+Click "Finish" to exit the wizard and start simulating.</value>
   </data>
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>System of Units</value>
@@ -371,36 +405,5 @@ Click "Next" to continue.</value>
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
-  </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="Column16.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Column17.HeaderText" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Unit</value>
-  </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Unit</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 15</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>System of Units</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Select the desired System of Units for your simulation. You can change the units of existing systems, include new systems and perform other operations in the simulation setup window anytime after finishing this wizard.
-Click "Finish" to exit the wizard and start simulating.</value>
   </data>
 </root>

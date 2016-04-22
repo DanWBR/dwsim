@@ -64,7 +64,7 @@ Namespace UnitOperations
 
 #Region "    ISimulationObject"
 
-        Public Property PreferredFlashAlgorithm As FlashMethod = FlashMethod.DWSIMDefault Implements ISimulationObject.PreferredFlashAlgorithm
+        Public Property PreferredFlashAlgorithm As FlashMethod = FlashMethod.Default_Algorithm Implements ISimulationObject.PreferredFlashAlgorithm
         Public Property Calculated As Boolean = False Implements Interfaces.ISimulationObject.Calculated
 
         Public Property DebugMode As Boolean = False Implements Interfaces.ISimulationObject.DebugMode
