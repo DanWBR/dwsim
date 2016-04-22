@@ -886,6 +886,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Assets\default.ini" />
     <None Include="Assets\docs\cape_open_reference3.pdf" />
     <None Include="Assets\docs\command_line_mode.pdf" />
@@ -904,17 +905,6 @@
     <None Include="Assets\help\ExcelAddInHelp\Log1.log" />
     <None Include="Assets\help\ExcelAddInHelp\Table of Contents.hhc" />
     <None Include="Assets\licenses\WindowsAzureClientLibraries_License.rtf" />
-    <None Include="Assets\linux\Cureos.Numerics.dll.config" />
-    <None Include="Assets\linux\DWSIM.exe.config" />
-    <None Include="Assets\linux\linux32\libfprops_ascend.so" />
-    <None Include="Assets\linux\linux32\libipopt_mono_dwsim_ubuntu_11.10_32.tar.gz" />
-    <None Include="Assets\linux\linux32\liblpsolve55.so" />
-    <None Include="Assets\linux\linux32\libPC_SAFT_PROP.so" />
-    <None Include="Assets\linux\linux64\libCoolProp.so" />
-    <None Include="Assets\linux\linux64\libfprops_ascend.so" />
-    <None Include="Assets\linux\linux64\libipopt_mono_dwsim_ubuntu_15.10_64.tar.gz" />
-    <None Include="Assets\linux\linux64\liblpsolve55.so" />
-    <None Include="Assets\linux\linux64\libPC_SAFT_PROP.so" />
     <None Include="Assets\reactions\Sour Water Reaction Set.dwrxm" />
     <None Include="Assets\reactions\Water Self-Ionization.dwrxm" />
     <None Include="Assets\samples\1,2-Dichloroethane-N-Heptane-LKP.dwrsd" />
@@ -956,7 +946,6 @@
     <None Include="Assets\TemplateExcelUO.ods" />
     <None Include="Assets\TemplateExcelUO.xls" />
     <None Include="Assets\TemplateExcelUO.xlsx" />
-    <None Include="Assets\windows\DWSIM.exe.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -2039,19 +2028,6 @@
     <Content Include="Assets\licenses\myneoreport.txt" />
     <Content Include="Assets\licenses\perl artistic license v2.txt" />
     <Content Include="Assets\licenses\zedgraph.txt" />
-    <Content Include="Assets\windows\win32\CoolProp.dll" />
-    <Content Include="Assets\windows\win32\fprops_ascend.dll" />
-    <Content Include="Assets\windows\win32\Ipopt39.dll" />
-    <Content Include="Assets\windows\win32\IpOptFSS39.dll" />
-    <Content Include="Assets\windows\win32\lpsolve55.dll" />
-    <Content Include="Assets\windows\win32\PC_SAFT_PROP.dll" />
-    <Content Include="Assets\windows\win32\PetAz.dll" />
-    <Content Include="Assets\windows\win64\CoolProp.dll" />
-    <Content Include="Assets\windows\win64\fprops_ascend.dll" />
-    <Content Include="Assets\windows\win64\Ipopt39.dll" />
-    <Content Include="Assets\windows\win64\IpOptFSS39.dll" />
-    <Content Include="Assets\windows\win64\lpsolve55.dll" />
-    <Content Include="Assets\windows\win64\PC_SAFT_PROP.dll" />
     <Content Include="DWSIM4 icon.ico" />
     <None Include="Resources\shape_align_middle1.png" />
     <None Include="Resources\shape_align_center1.png" />

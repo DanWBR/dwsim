@@ -126,12 +126,6 @@
     <Setting Name="ShowUnitsToolStrip" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="CurrentPlatform" Type="System.String" Scope="User">
-      <Value Profile="(Default)">None</Value>
-    </Setting>
-    <Setting Name="CurrentEnvironment" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="ClipboardCopyMode_Compounds" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>

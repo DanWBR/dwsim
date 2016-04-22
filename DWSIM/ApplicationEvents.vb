@@ -131,6 +131,8 @@ Namespace My
 
             If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
+            Calculator.InitLibraries()
+
         End Sub
 
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException

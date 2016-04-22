@@ -322,9 +322,6 @@ Namespace DWSIM
             My.Settings.TaskScheduler = source.Configs("Misc").GetInt("TaskScheduler", 0)
             My.Settings.UseSIMDExtensions = source.Configs("Misc").GetBoolean("UseSIMDExtensions", 300)
 
-            My.Settings.CurrentPlatform = source.Configs("Misc").GetString("CurrentPlatform", "None")
-            My.Settings.CurrentEnvironment = source.Configs("Misc").GetInt("CurrentEnvironment", 0)
-
         End Sub
 
         Shared Sub SaveSettings(Optional ByVal configfile As String = "")
@@ -390,9 +387,6 @@ Namespace DWSIM
             source.Configs("Misc").Set("MaxThreadMultiplier", My.Settings.MaxThreadMultiplier)
             source.Configs("Misc").Set("TaskScheduler", My.Settings.TaskScheduler)
             source.Configs("Misc").Set("UseSIMDExtensions", My.Settings.UseSIMDExtensions)
-
-            source.Configs("Misc").Set("CurrentPlatform", My.Settings.CurrentPlatform)
-            source.Configs("Misc").Set("CurrentEnvironment", My.Settings.CurrentEnvironment)
 
             source.Save(configfile)
 

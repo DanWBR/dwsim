@@ -813,38 +813,7 @@ Public Class FormMain
 
     Sub CheckAdditionalFileTasks()
 
-        Dim plat As String, envir As Integer
-
-        If Environment.Is64BitProcess Then
-            envir = 64
-        Else
-            envir = 32
-        End If
-
-        If DWSIM.App.RunningPlatform = DWSIM.App.Platform.Windows Then
-            plat = "Windows"
-        ElseIf DWSIM.App.RunningPlatform = DWSIM.App.Platform.Linux Then
-            plat = "Linux"
-        Else
-            plat = "None"
-        End If
-
-        Dim openform As Boolean = False
-
-        If My.Settings.CurrentEnvironment <> envir Then
-            openform = True
-            My.Settings.CurrentEnvironment = envir
-        End If
-
-        If My.Settings.CurrentPlatform <> plat Then
-            openform = True
-            My.Settings.CurrentPlatform = plat
-        End If
-
-        If openform And plat <> "None" Then
-            Dim frm As New FormAdditionalTasks
-            frm.ShowDialog(Me)
-        End If
+   
 
     End Sub
 

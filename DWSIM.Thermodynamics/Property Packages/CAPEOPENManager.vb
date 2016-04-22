@@ -112,7 +112,15 @@ Public Class CAPEOPENManager
     End Sub
 
     Public Sub Initialize() Implements ICapeUtilities.Initialize
+
         _params = New ParameterCollection()
+
+        Dim exlist As List(Of Exception) = Calculator.InitLibraries()
+
+        For Each ex In exlist
+            Throw New CapeFailedInitialisationException(ex.Message.ToString, ex)
+        Next
+
     End Sub
 
     Public ReadOnly Property parameters() As Object Implements ICapeUtilities.parameters
@@ -174,7 +182,7 @@ Public Class CAPEOPENManager
         key.SetValue("ComponentVersion", My.Application.Info.Version.ToString)
         key.SetValue("VendorURL", "http://dwsim.inforside.com.br")
         key.SetValue("HelpURL", "http://dwsim.inforside.com.br")
-        key.SetValue("About", "DWSIM is open-source software, released under the GPL v3 license. (c) 2011-2015 Daniel Medeiros.")
+        key.SetValue("About", "DWSIM is open-source software, released under the GPL v3 license. (c) 2011-2016 Daniel Medeiros.")
         key.Close()
 
     End Sub
