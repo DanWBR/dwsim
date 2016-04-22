@@ -173,23 +173,25 @@ Public Class Calculator
                 dlist.Add("Cureos.Numerics.dll.config")
                 dlist.Add("DWSIM.exe.config")
                 dlist.Add("libfprops_ascend.so")
-                dlist.Add("liblpsolve55")
-                dlist.Add("libPC_SAFT_PROP")
+                dlist.Add("liblpsolve55.so")
+                dlist.Add("libPC_SAFT_PROP.so")
                 If envir = 32 Then
                     dlist.Add("libipopt_mono_dwsim_ubuntu_11.10_32.tar.gz")
                 Else
                     dlist.Add("libipopt_mono_dwsim_ubuntu_15.10_64.tar.gz")
+                    dlist.Add("libCoolProp.so")
                 End If
 
-                alist.Add("L" + envir.ToString + "_" + "Cureos.Numerics.dll.config")
-                alist.Add("L" + envir.ToString + "_" + "DWSIM.exe.config")
+                alist.Add("L_" + "Cureos.Numerics.dll.config")
+                alist.Add("L_" + "DWSIM.exe.config")
                 alist.Add("L" + envir.ToString + "_" + "libfprops_ascend.so")
-                alist.Add("L" + envir.ToString + "_" + "liblpsolve55")
-                alist.Add("L" + envir.ToString + "_" + "libPC_SAFT_PROP")
+                alist.Add("L" + envir.ToString + "_" + "liblpsolve55.so")
+                alist.Add("L" + envir.ToString + "_" + "libPC_SAFT_PROP.so")
                 If envir = 32 Then
                     alist.Add("L" + envir.ToString + "_" + "libipopt_mono_dwsim_ubuntu_11.10_32.tar.gz")
                 Else
                     alist.Add("L" + envir.ToString + "_" + "libipopt_mono_dwsim_ubuntu_15.10_64.tar.gz")
+                    alist.Add("L" + envir.ToString + "_" + "libCoolProp.so")
                 End If
 
             End If
