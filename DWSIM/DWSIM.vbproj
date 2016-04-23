@@ -785,6 +785,9 @@
     <EmbeddedResource Include="Forms\AboutBoxNET.es.resx">
       <DependentUpon>AboutBoxNET.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.en.resx">
+      <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </EmbeddedResource>
