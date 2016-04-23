@@ -1930,7 +1930,6 @@ Public Class FlowsheetSurface
                 Dim myADJ As Adjust = New Adjust(myNode.Name, "Ajuste")
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
-
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("ADJT001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
             Case ObjectType.OT_Spec
@@ -2388,7 +2387,7 @@ Public Class FlowsheetSurface
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As DistillationColumn = New DistillationColumn(mySC.Name, "DistillationColumn")
+                Dim myCOSC As DistillationColumn = New DistillationColumn(mySC.Name, "DistillationColumn", Flowsheet)
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
 
@@ -2410,7 +2409,7 @@ Public Class FlowsheetSurface
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(mySC.Name, "AbsorptionColumn")
+                Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(mySC.Name, "AbsorptionColumn", Flowsheet)
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
 
@@ -2432,7 +2431,7 @@ Public Class FlowsheetSurface
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As ReboiledAbsorber = New ReboiledAbsorber(mySC.Name, "ReboiledAbsorber")
+                Dim myCOSC As ReboiledAbsorber = New ReboiledAbsorber(mySC.Name, "ReboiledAbsorber", Flowsheet)
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
 
@@ -2454,7 +2453,7 @@ Public Class FlowsheetSurface
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As RefluxedAbsorber = New RefluxedAbsorber(mySC.Name, "RefluxedAbsorber")
+                Dim myCOSC As RefluxedAbsorber = New RefluxedAbsorber(mySC.Name, "RefluxedAbsorber", Flowsheet)
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
 
@@ -2613,9 +2612,10 @@ Public Class FlowsheetSurface
         End Select
 
         If Not gObj Is Nothing Then
+            Me.Flowsheet.SimulationObjects(gObj.Name).SetFlowsheet(Flowsheet)
             Me.FlowsheetDesignSurface.drawingObjects.Add(gObj)
             'gObj.Draw(Me.FlowsheetDesignSurface.CreateGraphics)
-            Me.FlowsheetDesignSurface.SelectedObject = gObj
+            'Me.FlowsheetDesignSurface.SelectedObject = gObj
             Me.FlowsheetDesignSurface.Invalidate()
             Application.DoEvents()
             If My.Application.PushUndoRedoAction Then Flowsheet.AddUndoRedoAction(New DWSIM.Flowsheet.UndoRedoAction() With {.AType = DWSIM.Flowsheet.UndoRedoActionType.ObjectAdded,
@@ -2667,7 +2667,7 @@ Public Class FlowsheetSurface
                     tobj = ObjectType.Pump
                 Case "Tank"
                     tobj = ObjectType.Tank
-                Case "SeparatorVessel"
+                Case "Vessel"
                     tobj = ObjectType.Vessel
                 Case "MaterialStream"
                     tobj = ObjectType.MaterialStream
@@ -2711,17 +2711,17 @@ Public Class FlowsheetSurface
                     tobj = ObjectType.ComponentSeparator
                 Case "OrificePlate"
                     tobj = ObjectType.OrificePlate
-                Case "CustomUnitOp"
+                Case "CustomUO"
                     tobj = ObjectType.CustomUO
-                Case "ExcelUnitOp"
+                Case "ExcelUO"
                     tobj = ObjectType.ExcelUO
-                Case "CapeOpenUnitOperation"
+                Case "CapeOpenUO"
                     tobj = ObjectType.CapeOpenUO
                 Case "SolidsSeparator"
                     tobj = ObjectType.SolidSeparator
                 Case "Filter"
                     tobj = ObjectType.Filter
-                Case "FlowsheetUnitOp"
+                Case "Flowsheet"
                     tobj = ObjectType.FlowsheetUO
             End Select
 

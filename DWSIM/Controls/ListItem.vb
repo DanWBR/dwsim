@@ -12,9 +12,11 @@
         g.DrawImage(arrow, New Drawing.Point(0, 0))
         Dim cur As New Cursor(bmp.GetHicon())
         Cursor.Current = cur
+        Me.BackColor = Color.SteelBlue
     End Sub
 
     Private Sub ListItem_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp, lblDescription.MouseUp, lblName.MouseUp, Image.MouseUp
+        Me.BackColor = Color.White
         Me.DoDragDrop(ObjectTypeInfo, DragDropEffects.Copy)
     End Sub
 

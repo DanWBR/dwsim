@@ -399,7 +399,7 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
             If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
                 Return "Bloco lógico para reciclo de correntes de energia"
             Else
-                Return "Logical block for ter energy streams"
+                Return "Logical block for Energy Streams"
             End If
         End Function
 
@@ -407,7 +407,7 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
             If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
                 Return "Reciclo de Energia"
             Else
-                Return "Energy Recycle"
+                Return "Energy Recycle Block"
             End If
         End Function
     End Class
