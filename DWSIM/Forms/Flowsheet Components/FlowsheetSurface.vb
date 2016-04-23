@@ -108,7 +108,7 @@ Public Class FlowsheetSurface
             If My.Computer.Keyboard.ShiftKeyDown Then
                 Flowsheet.tsbDesat.Checked = False
                 Flowsheet.tsbAtivar.Checked = True
-                Flowsheet.Options.CalculatorActivated = True
+                GlobalSettings.Settings.CalculatorActivated = True
             End If
             FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me.Flowsheet, My.Settings.SolverMode)
         ElseIf e.KeyCode = Keys.F6 Then
@@ -116,12 +116,12 @@ Public Class FlowsheetSurface
         ElseIf e.KeyCode = Keys.D And e.Control Then
             Flowsheet.tsbAtivar.Checked = False
             Flowsheet.tsbDesat.Checked = True
-            Flowsheet.Options.CalculatorActivated = False
+            GlobalSettings.Settings.CalculatorActivated = False
             Flowsheet.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorDesativado1")
         ElseIf e.KeyCode = Keys.A And e.Control Then
             Flowsheet.tsbDesat.Checked = False
             Flowsheet.tsbAtivar.Checked = True
-            Flowsheet.Options.CalculatorActivated = True
+            GlobalSettings.Settings.CalculatorActivated = True
             Flowsheet.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorOcioso")
             Flowsheet.WriteToLog(DWSIM.App.GetLocalString("Calculadorativado"), Color.DimGray, DWSIM.Flowsheet.MessageType.Information)
         ElseIf e.KeyCode = Keys.X And e.Control Then

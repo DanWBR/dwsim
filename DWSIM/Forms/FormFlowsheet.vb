@@ -168,7 +168,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
 
-        If Me.Options.CalculatorActivated Then
+        If GlobalSettings.Settings.CalculatorActivated Then
             Me.tsbAtivar.Checked = True
             Me.tsbDesat.Checked = False
         Else
@@ -1021,7 +1021,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Private Sub tsbAtivar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbAtivar.Click
         Me.tsbDesat.Checked = False
         Me.tsbAtivar.Checked = True
-        Me.Options.CalculatorActivated = True
+        GlobalSettings.Settings.CalculatorActivated = True
         Me.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorOcioso")
         Me.WriteToLog(DWSIM.App.GetLocalString("Calculadorativado"), Color.DimGray, DWSIM.Flowsheet.MessageType.Information)
         If Not Me.CalculationQueue Is Nothing Then Me.CalculationQueue.Clear()
@@ -1030,7 +1030,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Private Sub tsbDesat_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbDesat.Click
         Me.tsbAtivar.Checked = False
         Me.tsbDesat.Checked = True
-        Me.Options.CalculatorActivated = False
+        GlobalSettings.Settings.CalculatorActivated = False
         Me.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorDesativado1")
     End Sub
 
@@ -1069,7 +1069,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Private Sub ToolStripButton14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton14.Click
-        My.Application.CalculatorStopRequested = True
+        GlobalSettings.Settings.CalculatorStopRequested = True
         If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
             GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
         End If

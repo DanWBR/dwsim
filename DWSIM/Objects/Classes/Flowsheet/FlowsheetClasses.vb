@@ -172,8 +172,6 @@ Namespace DWSIM.Flowsheet
 
         Public Property CalculateBubbleAndDewPoints As Boolean = False Implements Interfaces.IFlowsheetOptions.CalculateBubbleAndDewPoints
 
-        Public Property CalculatorActivated As Boolean = False Implements Interfaces.IFlowsheetOptions.CalculatorActivated
-
         Public Property FilePath As String = "" Implements Interfaces.IFlowsheetOptions.FilePath
 
         Public Property FlashValidationDGETolerancePct As Double = 0.01 Implements Interfaces.IFlowsheetOptions.FlashValidationDGETolerancePct

@@ -47,7 +47,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <param name="objArgs">A CalculationArgs object containing information about the object to be calculated and its current status.</param>
     ''' <param name="sender"></param>
     ''' <remarks></remarks>
-    Public Shared Sub CalculateFlowsheet(ByVal fobj As Object, ByVal objArgs As CalculationArgs, ByVal sender As Object, Optional ByVal OnlyMe As Boolean = False)
+    Public Shared Sub CalculateObject(ByVal fobj As Object, ByVal objArgs As CalculationArgs, ByVal sender As Object, Optional ByVal OnlyMe As Boolean = False)
 
         Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
@@ -225,7 +225,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 .Name = ms.Name
                 .ObjectType = ObjectType.MaterialStream
             End With
-            CalculateFlowsheet(fobj, objargs, Nothing)
+            CalculateObject(fobj, objargs, Nothing)
         End If
 
     End Sub
@@ -333,14 +333,14 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                 If myinfo.ObjectType = ObjectType.MaterialStream Then
                                     CalculateMaterialStream(fobj, fbag.SimulationObjects(myinfo.Name), , Isolated)
                                 Else
-                                    CalculateFlowsheet(fobj, myinfo, Nothing, Isolated)
+                                    CalculateObject(fobj, myinfo, Nothing, Isolated)
                                 End If
                             End If
                         Else
                             If myinfo.ObjectType = ObjectType.MaterialStream Then
                                 CalculateMaterialStream(fobj, fbag.SimulationObjects(myinfo.Name), , Isolated)
                             Else
-                                CalculateFlowsheet(fobj, myinfo, Nothing, Isolated)
+                                CalculateObject(fobj, myinfo, Nothing, Isolated)
                             End If
                         End If
                         myobj.GraphicObject.Calculated = True
@@ -778,6 +778,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <param name="ts">CancellationTokenSource instance from main flowsheet when calculating subflowsheets.</param>
     ''' <remarks></remarks>
     Public Shared Sub SolveFlowsheet(ByVal fobj As Object, mode As Integer, Optional ByVal ts As CancellationTokenSource = Nothing, Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False)
+
+        If GlobalSettings.Settings.CalculatorActivated Then
 
         Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
@@ -1267,6 +1269,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         'fobj.ProcessScripts(Script.EventType.SolverFinished, Script.ObjectType.Solver)
 
         RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), Nothing)
+
+        End If
 
     End Sub
 

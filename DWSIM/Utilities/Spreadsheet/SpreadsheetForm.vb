@@ -695,7 +695,7 @@ Public Class SpreadsheetForm
 
             If Not formc Is Nothing Then
 
-                If formc.Options.CalculatorActivated Then
+                If GlobalSettings.Settings.CalculatorActivated Then
 
                     StopWriting = True
                     Dim forcestop As Boolean = False
