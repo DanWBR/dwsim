@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("DWSIM Math Library")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyDescription("Math Library for DWSIM Simulator")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.Math")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 

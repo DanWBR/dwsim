@@ -811,17 +811,17 @@ Public Class FormMain
 
     Function ReturnForm(ByVal str As String) As IDockContent
         Select Case str
-            Case "DWSIM.SimulationObjectsPanel"
+            Case "DWSIM.SimulationObjectsPanel", "DWSIM.frmObjListView"
                 Return Me.tmpform2.FormObjects
-            Case "DWSIM.LogPanel"
+            Case "DWSIM.LogPanel", "DWSIM.frmLog"
                 Return Me.tmpform2.FormLog
-            Case "DWSIM.MaterialStreamPanel"
+            Case "DWSIM.MaterialStreamPanel", "DWSIM.frmMatList"
                 Return Me.tmpform2.FormMatList
-            Case "DWSIM.FlowsheetSurface"
+            Case "DWSIM.FlowsheetSurface", "DWSIM.frmSurface"
                 Return Me.tmpform2.FormSurface
             Case "DWSIM.SpreadsheetForm"
                 Return Me.tmpform2.FormSpreadsheet
-            Case "DWSIM.WatchPanel"
+            Case "DWSIM.WatchPanel", "DWSIM.frmWatch"
                 Return Me.tmpform2.FormWatch
         End Select
         Return Nothing

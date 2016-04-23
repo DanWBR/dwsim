@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("DWSIM Interface Definitions")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyDescription("Interface Library for DWSIM Simulator")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.Interfaces")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 

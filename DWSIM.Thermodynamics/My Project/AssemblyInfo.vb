@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("DWSIM Thermodynamics Library")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyDescription("Thermodynamics Library for DWSIM Simulator")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.Thermodynamics")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 
