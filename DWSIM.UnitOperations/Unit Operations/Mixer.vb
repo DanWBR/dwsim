@@ -207,9 +207,17 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
-            f = New EF_Mixer With {.MixerObject = Me}
-
-            Me.FlowSheet.DisplayForm(f)
+            If f Is Nothing Then
+                f = New EF_Mixer With {.MixerObject = Me}
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EF_Mixer With {.MixerObject = Me}
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Select()
+                End If
+            End If
 
         End Sub
 

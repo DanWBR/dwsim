@@ -92,10 +92,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public Property CalculationQueue As Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
-    Public FlowsheetStates As Dictionary(Of Date, FlowsheetState)
-
-    Public PreviousSolutions As Dictionary(Of String, FlowsheetSolution)
-
     Public ScriptCollection As Dictionary(Of String, Script)
 
     Public CheckedToolstripButton As ToolStripButton
@@ -893,7 +889,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Private Sub showsimulationtoolstripmenuitem_Click(sender As Object, e As EventArgs) Handles showsimulationtoolstripmenuitem.Click
         ToolStripSimulation.Visible = showsimulationtoolstripmenuitem.Checked
         ToolStripCalculator.Visible = showsimulationtoolstripmenuitem.Checked
-        ToolStripStates.Visible = showsimulationtoolstripmenuitem.Checked
         My.Settings.ShowSimulationToolStrip = showsimulationtoolstripmenuitem.Checked
     End Sub
 
@@ -929,48 +924,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End If
 
         Me.FormSurface.FlowsheetDesignSurface.AlignSelectedObjects(direction)
-
-    End Sub
-
-    Private Sub InserObjectTSMIClick(ByVal sender As System.Object, ByVal e As EventArgs) Handles _
-    TSMIAdjust.Click, TSMIColAbs.Click, TSMIColAbsCond.Click, TSMIColAbsReb.Click, TSMIColDist.Click, _
-     TSMIColShortcut.Click, TSMIComponentSeparator.Click, TSMICompressor.Click, TSMICooler.Click, _
-     TSMIEnergyRecycle.Click, TSMIEnergyStream.Click, TSMIExpander.Click, TSMIHeater.Click, _
-     TSMIHeatExchanger.Click, TSMIMaterialStream.Click, TSMIMixer.Click, TSMIOrificePlate.Click, _
-     TSMIPipe.Click, TSMIPump.Click, TSMIReactorConv.Click, TSMIReactorCSTR.Click, TSMIReactorEquilibrium.Click, _
-     TSMIReactorGibbs.Click, TSMIReactorPFR.Click, TSMIRecycle.Click, TSMISeparator.Click, _
-     TSMISpecification.Click, TSMISplitter.Click, TSMITank.Click, TSMIValve.Click, TSMICUO.Click, TSMICOUO.Click, _
-     TSMISolidsSeparator.Click, TSMIFilter.Click, TSMIExcelUO.Click, TSMIFlowsheet.Click
-
-        Me.InsertingObjectToPFD = True
-        Me.FormSurface.FlowsheetDesignSurface.Cursor = Cursors.Hand
-
-        Me.ClickedToolStripMenuItem = sender
-
-    End Sub
-
-    Private Sub InsertObjectButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        If Not Me.CheckedToolstripButton Is Nothing Then
-            Try
-                Me.CheckedToolstripButton.Checked = False
-            Catch ex As Exception
-
-            End Try
-        End If
-
-        Me.CheckedToolstripButton = sender
-
-        If Me.CheckedToolstripButton.Name = "TSBSelect" Then
-            Me.InsertingObjectToPFD = False
-            Me.FormSurface.FlowsheetDesignSurface.Cursor = Cursors.Default
-        ElseIf Me.CheckedToolstripButton.Checked = True Then
-            Me.InsertingObjectToPFD = True
-            Me.FormSurface.FlowsheetDesignSurface.Cursor = Cursors.Hand
-        Else
-            Me.InsertingObjectToPFD = False
-            Me.FormSurface.FlowsheetDesignSurface.Cursor = Cursors.Default
-        End If
 
     End Sub
 
@@ -1063,10 +1016,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Private Sub PontoCriticoRealToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PontoCriticoRealToolStripMenuItem.Click
         Me.FormCritPt.ShowDialog(Me)
-    End Sub
-
-    Private Sub DiagramaDePhasesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.FormStabAn.ShowDialog(Me)
     End Sub
 
     Private Sub tsbAtivar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbAtivar.Click
@@ -1352,118 +1301,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Catch ex As Exception
 
         End Try
-    End Sub
-
-    Private Sub ToolStripButton21_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSaveState.Click
-
-        FormMain.SaveState(Me)
-
-    End Sub
-
-    Private Sub RestoreState_ItemClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        Dim tsmi As ToolStripMenuItem = sender
-
-        FormMain.RestoreState(Me, FlowsheetStates(tsmi.Tag))
-
-    End Sub
-
-    Private Sub RemoveState_ItemClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        Dim tsmi As ToolStripMenuItem = sender
-
-        FlowsheetStates.Remove(tsmi.Tag)
-
-        UpdateStateList()
-
-    End Sub
-
-    Private Sub RestoreSolution_ItemClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        Dim tsmi As ToolStripMenuItem = sender
-
-        Dim solutionkey As String = tsmi.Tag
-
-        Using ms As New MemoryStream(Me.PreviousSolutions(solutionkey).Solution)
-            Using decompressedstream As New IO.MemoryStream
-                Using gzs As New IO.BufferedStream(New Compression.GZipStream(ms, Compression.CompressionMode.Decompress, True), 64 * 1024)
-                    gzs.CopyTo(decompressedstream)
-                    gzs.Close()
-                    Me.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatingData") & " " & Math.Round(decompressedstream.Length / 1024).ToString & " KB", Color.Brown, MessageType.Information)
-                    decompressedstream.Position = 0
-                    Dim xdoc As XDocument = XDocument.Load(decompressedstream)
-                    Flowsheet.UpdateProcessData(Me, xdoc)
-                    FlowsheetSolver.FlowsheetSolver.UpdateDisplayStatus(Me)
-                    Me.WriteToLog(DWSIM.App.GetLocalString("ClientUpdatedDataOK"), Color.Brown, MessageType.Information)
-                End Using
-            End Using
-        End Using
-
-    End Sub
-
-    Sub UpdateSolutionsList()
-
-        With Me.tsbRestoreSolutions.DropDownItems
-
-            .Clear()
-
-            While Me.PreviousSolutions.Count > 15
-                Dim idtoremove As String = ""
-                For Each s In Me.PreviousSolutions.Values
-                    idtoremove = s.ID
-                    Exit For
-                Next
-                If Me.PreviousSolutions.ContainsKey(idtoremove) Then Me.PreviousSolutions.Remove(idtoremove)
-            End While
-
-            For Each k As Long In Me.PreviousSolutions.Keys
-
-                Dim tsmi As ToolStripMenuItem = .Add(Me.PreviousSolutions(k).SaveDate.ToString)
-                tsmi.Tag = k
-                AddHandler tsmi.Click, AddressOf RestoreSolution_ItemClick
-
-            Next
-
-        End With
-
-    End Sub
-
-    Sub UpdateStateList()
-
-        With Me.tsbRestoreStates.DropDownItems
-
-            .Clear()
-
-            For Each k As Date In Me.FlowsheetStates.Keys
-
-                Dim tsmi As ToolStripMenuItem = .Add(Me.FlowsheetStates(k).Description & " (" & k.ToString & ")")
-                tsmi.Tag = k
-                tsmi.Image = Me.FlowsheetStates(k).Snapshot
-                AddHandler tsmi.Click, AddressOf RestoreState_ItemClick
-
-                Dim tsmiR As ToolStripMenuItem = tsmi.DropDownItems.Add(DWSIM.App.GetLocalString("RestoreState"))
-                tsmiR.Tag = k
-                tsmiR.Image = My.Resources.arrow_in
-                AddHandler tsmiR.Click, AddressOf RestoreState_ItemClick
-
-                Dim tsmiE As ToolStripMenuItem = tsmi.DropDownItems.Add(DWSIM.App.GetLocalString("Excluir"))
-                tsmiE.Tag = k
-                tsmiE.Image = My.Resources.cross
-                AddHandler tsmiE.Click, AddressOf RemoveState_ItemClick
-
-            Next
-
-        End With
-
-    End Sub
-
-    Private Sub ToolStripButton21_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbClearStates.Click
-
-        If Not Me.FlowsheetStates Is Nothing Then
-            Me.FlowsheetStates.Clear()
-            UpdateStateList()
-        End If
-
     End Sub
 
     Private Sub tsbSimultAdjustSolver_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSimultAdjustSolver.CheckedChanged
@@ -2829,7 +2666,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
-    Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs)
+    Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs) Handles tsbUndo.MouseEnter
 
         Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
 
@@ -2844,7 +2681,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
-    Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs)
+    Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs) Handles tsbRedo.MouseEnter
 
         Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
 

@@ -196,21 +196,11 @@ Public Class FlowsheetSurface
 
                 If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
-                    If Me.FlowsheetDesignSurface.SelectedObject.IsConnector = False Then
-
-                        If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
-
-                            Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
-
-                        End If
-
-                    Else
+                    If Me.FlowsheetDesignSurface.SelectedObject.IsConnector Then
 
                         Me.FlowsheetDesignSurface.SelectedObject = Nothing
 
                     End If
-
-                Else
 
                 End If
 
@@ -225,11 +215,6 @@ Public Class FlowsheetSurface
         Else
 
             Flowsheet.ChangeEditMenuStatus(False)
-
-        End If
-
-        If Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
-
 
         End If
 
@@ -430,36 +415,19 @@ Public Class FlowsheetSurface
 
             End If
 
-            'If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
+            If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
-            '    If Me.FlowsheetDesignSurface.SelectedObject.IsConnector = False Then
+                If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
 
-            '        Flowsheet.PopulatePGEx2(Me.FlowsheetDesignSurface.SelectedObject)
-            '        Try
-            '            Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.SelectedObject.Name).PopulatePropertyGrid(PGEx1, Flowsheet.Options.SelectedUnitSystem)
-            '            Flowsheet.FormProps.ResumeLayout()
-            '        Catch ex As Exception
-            '            PGEx1.SelectedObject = Nothing
-            '            'MessageBox.Show(ex.Message & " - " & ex.StackTrace, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            '        Finally
-            '            Flowsheet.FormSurface.Select()
-            '        End Try
+                    Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
 
-            '    Else
+                Else
 
-            '        Me.FlowsheetDesignSurface.SelectedObject = Nothing
+                    Me.FlowsheetDesignSurface.SelectedObject = Nothing
 
-            '    End If
+                End If
 
-
-            'Else
-
-            '    PGEx2.SelectedObject = Nothing
-            '    PGEx1.SelectedObject = Nothing
-
-            'End If
-            'PGEx2.Refresh()
-            'PGEx1.Refresh()
+            End If
 
         ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
 
