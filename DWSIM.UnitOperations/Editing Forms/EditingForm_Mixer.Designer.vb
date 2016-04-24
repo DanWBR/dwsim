@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class EF_Mixer
+Partial Class EditingForm_Mixer
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class EF_Mixer
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EF_Mixer))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Mixer))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
         Me.btnDisconnect6 = New System.Windows.Forms.Button()

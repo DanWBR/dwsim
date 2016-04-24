@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 
-Public Class EF_Mixer
+Public Class EditingForm_Mixer
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 

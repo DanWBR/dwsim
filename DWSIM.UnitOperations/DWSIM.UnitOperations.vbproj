@@ -115,10 +115,22 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Editing Forms\EF_Mixer.Designer.vb">
-      <DependentUpon>EF_Mixer.vb</DependentUpon>
+    <Compile Include="Editing Forms\EditingForm_Mixer.Designer.vb">
+      <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EF_Mixer.vb">
+    <Compile Include="Editing Forms\EditingForm_Mixer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Form_CapeOpenSelector.designer.vb">
+      <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Form_CapeOpenSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Form_LoadSave.designer.vb">
+      <DependentUpon>Form_LoadSave.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Form_LoadSave.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
@@ -180,11 +192,32 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Editing Forms\EF_Mixer.en.resx">
-      <DependentUpon>EF_Mixer.vb</DependentUpon>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.en.resx">
+      <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EF_Mixer.resx">
-      <DependentUpon>EF_Mixer.vb</DependentUpon>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.resx">
+      <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Form_CapeOpenSelector.en.resx">
+      <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Form_CapeOpenSelector.es.resx">
+      <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Form_CapeOpenSelector.resx">
+      <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Form_LoadSave.de.resx">
+      <DependentUpon>Form_LoadSave.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Form_LoadSave.en.resx">
+      <DependentUpon>Form_LoadSave.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Form_LoadSave.es.resx">
+      <DependentUpon>Form_LoadSave.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Form_LoadSave.resx">
+      <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

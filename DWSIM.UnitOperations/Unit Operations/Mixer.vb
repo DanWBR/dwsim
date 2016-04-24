@@ -28,7 +28,7 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
-        Private f As EF_Mixer
+        Private f As EditingForm_Mixer
 
         Public Enum PressureBehavior
             Average
@@ -208,11 +208,11 @@ Namespace UnitOperations
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
-                f = New EF_Mixer With {.MixerObject = Me}
+                f = New EditingForm_Mixer With {.MixerObject = Me}
                 Me.FlowSheet.DisplayForm(f)
             Else
                 If f.IsDisposed Then
-                    f = New EF_Mixer With {.MixerObject = Me}
+                    f = New EditingForm_Mixer With {.MixerObject = Me}
                     Me.FlowSheet.DisplayForm(f)
                 Else
                     f.Select()
