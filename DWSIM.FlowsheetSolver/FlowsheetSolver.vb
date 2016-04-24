@@ -345,6 +345,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         End If
                         myobj.GraphicObject.Calculated = True
                         myobj.LastUpdated = Date.Now
+                        myobj.UpdateEditForm()
                     End If
                 Catch ex As AggregateException
                     myobj.ErrorMessage = ""
@@ -407,6 +408,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     End If
                     myobj.GraphicObject.Calculated = True
                     myobj.LastUpdated = Date.Now
+                    myobj.UpdateEditForm()
                 End If
             Catch ex As AggregateException
                 'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
@@ -479,6 +481,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                                              End If
                                                              myobj.GraphicObject.Calculated = True
                                                              myobj.LastUpdated = Date.Now
+                                                             myobj.UpdateEditForm()
                                                          End If
                                                      Catch ex As AggregateException
                                                          'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)

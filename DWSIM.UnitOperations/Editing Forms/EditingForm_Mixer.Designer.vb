@@ -406,12 +406,12 @@ Partial Class EditingForm_Mixer
         Me.Label9.Name = "Label9"
         Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
-        'EF_Mixer
+        'EditingForm_Mixer
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "EF_Mixer"
+        Me.Name = "EditingForm_Mixer"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox1.ResumeLayout(False)
