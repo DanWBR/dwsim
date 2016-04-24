@@ -781,7 +781,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Public Shared Sub SolveFlowsheet(ByVal fobj As Object, mode As Integer, Optional ByVal ts As CancellationTokenSource = Nothing, Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False)
 
-        If GlobalSettings.Settings.CalculatorActivated Then
+        If GlobalSettings.Settings.CalculatorActivated And Not GlobalSettings.Settings.CalculatorBusy Then
+
+            GlobalSettings.Settings.CalculatorBusy = True
 
             Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
             Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
@@ -1100,9 +1102,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                     'disposes the cancellation token source.
 
-                    'If fobj.Visible Then ts.Dispose()
+                    ts.Dispose()
 
-                    'Settings.TaskCancellationTokenSource = Nothing
+                    GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
 
                     'clears the object lists.
 
@@ -1263,7 +1265,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             'End If
 
-            'fobj.ProcessScripts(Script.EventType.SolverFinished, Script.ObjectType.Solver)
+            'ProcessScripts(Script.EventType.SolverFinished, Script.ObjectType.Solver)
+
+            GlobalSettings.Settings.CalculatorBusy = False
 
             RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), Nothing)
 

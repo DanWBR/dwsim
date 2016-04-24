@@ -25,6 +25,7 @@ Public Class Settings
     Public Shared Property ServiceBusConnectionString As String
     Public Shared Property CalculatorStopRequested As Boolean
     Public Shared Property CalculatorActivated As Boolean
+    Public Shared Property CalculatorBusy As Boolean
     Public Shared Property ServerIPAddress As String
     Public Shared Property ServerPort As Integer
     Public Shared Property CurrentCulture As String = "en"
