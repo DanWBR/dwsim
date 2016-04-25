@@ -138,7 +138,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAUwBAAFMAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAWQBAAFkAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -273,10 +273,7 @@
     <value>Unterstützen des Projekts</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
-    <value>DWSIM ist eine Open-Source-Software und wird dies immer bleiben. Allerdings gibt es Kosten für Entwicklung (Kauf der Bücher und Fachartikel) und Wartung (Web-Server, Hardware), die erforderlich sind, um das Projekt am Leben zu halten und wachsen zu lassen. Wenn DWSIM in irgendeiner Weise für Sie nützlich war, erwägen Sie bitte eine Spende via PayPal. Jeder Betrag wird sehr willkommen sein. Wenn Sie es wünschen, wird Ihr Name in der Liste der Spender auf der Projekt Wiki-Seite angezeigt.</value>
-  </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Jetzt spenden</value>
+    <value>DWSIM ist eine Open-Source-Software und wird dies immer bleiben. Allerdings gibt es Kosten für Entwicklung (Kauf der Bücher und Fachartikel) und Wartung (Web-Server, Hardware), die erforderlich sind, um das Projekt am Leben zu halten und wachsen zu lassen. Wenn DWSIM in irgendeiner Weise für Sie nützlich war, erwägen Sie bitte eine Spende via PayPal. Jeder Betrag wird sehr willkommen sein.</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>58, 237</value>

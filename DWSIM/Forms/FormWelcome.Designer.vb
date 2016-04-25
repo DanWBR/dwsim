@@ -219,6 +219,7 @@ Partial Class FormWelcome
         'Button8
         '
         resources.ApplyResources(Me.Button8, "Button8")
+        Me.Button8.BackgroundImage = Global.DWSIM.My.Resources.Resources.paypal_donate
         Me.Button8.ForeColor = System.Drawing.Color.Black
         Me.Button8.Name = "Button8"
         Me.Button8.UseVisualStyleBackColor = True
