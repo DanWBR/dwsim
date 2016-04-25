@@ -881,13 +881,6 @@ alt:
 
             If Settings.EnableParallelProcessing Then
 
-                If Settings.EnableGPUProcessing Then
-                    'If Not Settings.gpu.IsMultithreadingEnabled Then
-                    '    Settings.gpu.EnableMultithreading()
-                    'Else
-                    '    alreadymt = True
-                    'End If
-                End If
                 Dim task1 As Task = New Task(Sub()
                                                  If V > 0 Then _Hv = proppack.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
                                              End Sub)
@@ -1926,9 +1919,6 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
                         If Settings.EnableParallelProcessing Then
 
-                            If Settings.EnableGPUProcessing Then
-                                'Settings.gpu.EnableMultithreading()
-                            End If
                             Dim task1 As Task = New Task(Sub()
                                                              fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                                                          End Sub)
@@ -2016,9 +2006,6 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
                     If Settings.EnableParallelProcessing Then
 
-                        If Settings.EnableGPUProcessing Then
-                            'Settings.gpu.EnableMultithreading()
-                        End If
                         Dim task1 As Task = New Task(Sub()
                                                          fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                                                      End Sub)
@@ -2216,9 +2203,6 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
                     If Settings.EnableParallelProcessing Then
 
-                        If Settings.EnableGPUProcessing Then
-                            'Settings.gpu.EnableMultithreading()
-                        End If
                         Dim task1 As Task = New Task(Sub()
                                                          fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                                                      End Sub)

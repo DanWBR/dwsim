@@ -131,8 +131,9 @@ Public Class FormOptions
                                                                      End If
                                                                  Next
                                                              Else
-                                                                 If Me.cbGPU.Items.Count > 0 Then Me.cbGPU.SelectedIndex = 0
+                                                                 'If Me.cbGPU.Items.Count > 0 Then Me.cbGPU.SelectedIndex = 0
                                                              End If
+                                                             loaded = True
                                                          End Sub, TaskScheduler.FromCurrentSynchronizationContext)
 
         Select Case My.Settings.CultureInfo
@@ -145,8 +146,6 @@ Public Class FormOptions
             Case "es"
                 Me.ComboBoxUILanguage.SelectedIndex = 3
         End Select
-
-        loaded = True
 
     End Sub
 
@@ -513,6 +512,8 @@ Public Class FormOptions
             If Not Settings.gpu Is Nothing Then
                 Settings.gpu.Dispose()
                 Settings.gpu = Nothing
+            Else
+                Calculator.InitComputeDevice()
             End If
         End If
     End Sub
@@ -522,6 +523,7 @@ Public Class FormOptions
         Me.tbGPUCaps.Enabled = chkEnableGPUProcessing.Checked
         My.Settings.EnableGPUProcessing = chkEnableGPUProcessing.Checked
         Settings.EnableGPUProcessing = My.Settings.EnableGPUProcessing
+        If loaded And chkEnableGPUProcessing.Checked Then cbGPU_SelectedIndexChanged(sender, e)
     End Sub
 
     Private Sub cbSolverMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolverMode.SelectedIndexChanged

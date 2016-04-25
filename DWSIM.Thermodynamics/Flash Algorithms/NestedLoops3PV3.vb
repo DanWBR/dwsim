@@ -596,13 +596,6 @@ out:
 
                 If Settings.EnableParallelProcessing Then
 
-                    If Settings.EnableGPUProcessing Then
-                        'If Not Settings.gpu.IsMultithreadingEnabled Then
-                        '    Settings.gpu.EnableMultithreading()
-                        'Else
-                        '    alreadymt = True
-                        'End If
-                    End If
                     Dim task1 As Task = New Task(Sub()
                                                      CFL1 = proppack.DW_CalcFugCoeff(Vx1, T, P, State.Liquid)
                                                  End Sub)

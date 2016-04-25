@@ -18,8 +18,6 @@
 
     Property BackupFileName As String
 
-    Property CalculatorActivated As Boolean
-
     Property ThreePhaseFlashStabTestSeverity As Integer
     Property ThreePhaseFlashStabTestCompIds As String()
 

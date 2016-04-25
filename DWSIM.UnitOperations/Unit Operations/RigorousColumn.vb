@@ -688,8 +688,8 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Sub New(ByVal name As String, ByVal description As String)
-            MyBase.New(name, description)
+        Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
+            MyBase.New(name, description, fs)
             Me.ColumnType = ColType.DistillationColumn
             MyBase.AddStages()
             For k2 = 0 To Me.Stages.Count - 1
@@ -956,8 +956,8 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Sub New(ByVal name As String, ByVal description As String)
-            MyBase.New(name, description)
+        Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
+            MyBase.New(name, description, fs)
             Me.ColumnType = ColType.AbsorptionColumn
             MyBase.AddStages()
             For k2 = 0 To Me.Stages.Count - 1
@@ -1098,8 +1098,8 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Sub New(ByVal name As String, ByVal description As String)
-            MyBase.New(name, description)
+        Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
+            MyBase.New(name, description, fs)
             Me.ColumnType = ColType.ReboiledAbsorber
             MyBase.AddStages()
             For k2 = 0 To Me.Stages.Count - 1
@@ -1249,8 +1249,8 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Sub New(ByVal name As String, ByVal description As String)
-            MyBase.New(name, description)
+        Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
+            MyBase.New(name, description, fs)
             Me.ColumnType = ColType.RefluxedAbsorber
             MyBase.AddStages()
             For k2 = 0 To Me.Stages.Count - 1
@@ -1440,7 +1440,7 @@ Namespace UnitOperations
         Private _condp As Double = 101325
         Private _rebp As Double = 101325
         Private _conddp, _drate, _vrate, _condd, _rebd As Double
-        Private _st As New System.Collections.Generic.List(Of Auxiliary.SepOps.Stage)
+        Private _st As New List(Of Auxiliary.SepOps.Stage)
         Public Property CondenserType As condtype = condtype.Total_Condenser
         Private m_specs As New Collections.Generic.Dictionary(Of String, Auxiliary.SepOps.ColumnSpec)
         Private m_jac As Object
@@ -1617,9 +1617,11 @@ Namespace UnitOperations
             MyBase.New()
         End Sub
 
-        Public Sub New(ByVal name As String, ByVal description As String)
+        Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
 
             MyBase.CreateNew()
+
+            SetFlowsheet(fs)
 
             ComponentName = name
             ComponentDescription = description
@@ -1649,33 +1651,9 @@ Namespace UnitOperations
         End Function
 
         Sub AddStages()
-            Dim i As Integer
-            For i = 0 To Me.NumberOfStages - 1
-                _st.Add(New Stage(Guid.NewGuid().ToString))
-                Select Case Me.ColumnType
-                    Case ColType.DistillationColumn
-                        If i = 0 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCCondenser")
-                        ElseIf i = Me.NumberOfStages - 1 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
-                        Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & "_" & _st.Count - 1
-                        End If
-                    Case ColType.AbsorptionColumn
-                        _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & "_" & _st.Count - 1
-                    Case ColType.ReboiledAbsorber
-                        If i = Me.NumberOfStages - 1 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
-                        Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & "_" & _st.Count - 1
-                        End If
-                    Case ColType.RefluxedAbsorber
-                        If i = 0 Then
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCCondenser")
-                        Else
-                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & "_" & _st.Count - 1
-                        End If
-                End Select
+
+            For i As Integer = 0 To Me.NumberOfStages - 1
+                _st.Add(New Stage(Guid.NewGuid().ToString) With {.Name = "S" & (i + 1)})
             Next
 
             RebuildEstimates()

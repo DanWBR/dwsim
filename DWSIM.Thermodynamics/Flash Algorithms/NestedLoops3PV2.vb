@@ -801,10 +801,7 @@ out:
                 Do
 
                     If Settings.EnableParallelProcessing Then
-                        
-                        If Settings.EnableGPUProcessing Then
-                            Settings.gpu.EnableMultithreading()
-                        End If
+                    
                         Try
                             Dim task1 As Task = New Task(Sub()
                                                              fx = Herror(x1, {P, Vz, PP})
@@ -817,11 +814,6 @@ out:
                             Task.WaitAll(task1, task2)
                         Catch ae As AggregateException
                             Throw ae.Flatten().InnerException
-                        Finally
-                            If Settings.EnableGPUProcessing Then
-                                Settings.gpu.DisableMultithreading()
-                                Settings.gpu.FreeAll()
-                            End If
                         End Try
 
                     Else
@@ -935,9 +927,6 @@ alt:
 
                     If Settings.EnableParallelProcessing Then
 
-                        If Settings.EnableGPUProcessing Then
-                            Settings.gpu.EnableMultithreading()
-                        End If
                         Try
                             Dim task1 As Task = New Task(Sub()
                                                              fx = Serror(x1, {P, Vz, PP})
@@ -950,11 +939,6 @@ alt:
                             Task.WaitAll(task1, task2)
                         Catch ae As AggregateException
                             Throw ae.Flatten().InnerException
-                        Finally
-                            If Settings.EnableGPUProcessing Then
-                                Settings.gpu.DisableMultithreading()
-                                Settings.gpu.FreeAll()
-                            End If
                         End Try
 
                     Else

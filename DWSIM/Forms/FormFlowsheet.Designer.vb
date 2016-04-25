@@ -77,14 +77,6 @@ Partial Class FormFlowsheet
         Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
-        Me.ToolStripStates = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel8 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbSaveState = New System.Windows.Forms.ToolStripButton()
-        Me.tsbRestoreStates = New System.Windows.Forms.ToolStripSplitButton()
-        Me.tsbClearStates = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabel5 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbRestoreSolutions = New System.Windows.Forms.ToolStripDropDownButton()
         Me.ToolStripUnits = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripComboBoxUnitSystem = New System.Windows.Forms.ToolStripComboBox()
@@ -111,48 +103,6 @@ Partial Class FormFlowsheet
         Me.tsmiExportData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsmiConfigSimulation = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InserirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CorrentesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIMaterialStream = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIEnergyStream = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OperacoesUnitariasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIMixer = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMISplitter = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMICompressor = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIExpander = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIPump = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIPipe = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIValve = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMISeparator = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIHeater = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMICooler = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIOrificePlate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIComponentSeparator = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIHeatExchanger = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMITank = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIExcelUO = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMICUO = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMICOUO = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMISolidsSeparator = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIFilter = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIFlowsheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColunasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIColShortcut = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIColDist = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIColAbs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIColAbsReb = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIColAbsCond = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReatoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIReactorConv = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIReactorEquilibrium = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIReactorGibbs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIReactorCSTR = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIReactorPFR = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OperacoesLogicasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIRecycle = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIEnergyRecycle = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMIAdjust = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TSMISpecification = New System.Windows.Forms.ToolStripMenuItem()
         Me.FerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -213,7 +163,6 @@ Partial Class FormFlowsheet
         Me.ToolStripSimulation.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TSTable.SuspendLayout()
-        Me.ToolStripStates.SuspendLayout()
         Me.ToolStripUnits.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
@@ -607,56 +556,6 @@ Partial Class FormFlowsheet
         Me.TSTable.Name = "TSTable"
         resources.ApplyResources(Me.TSTable, "TSTable")
         '
-        'ToolStripStates
-        '
-        resources.ApplyResources(Me.ToolStripStates, "ToolStripStates")
-        Me.ToolStripStates.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel8, Me.tsbSaveState, Me.tsbRestoreStates, Me.tsbClearStates, Me.ToolStripSeparator7, Me.ToolStripLabel5, Me.tsbRestoreSolutions})
-        Me.ToolStripStates.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.ToolStripStates.Name = "ToolStripStates"
-        '
-        'ToolStripLabel8
-        '
-        resources.ApplyResources(Me.ToolStripLabel8, "ToolStripLabel8")
-        Me.ToolStripLabel8.Name = "ToolStripLabel8"
-        '
-        'tsbSaveState
-        '
-        Me.tsbSaveState.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbSaveState.Image = Global.DWSIM.My.Resources.Resources.bullet_arrow_bottom
-        resources.ApplyResources(Me.tsbSaveState, "tsbSaveState")
-        Me.tsbSaveState.Name = "tsbSaveState"
-        '
-        'tsbRestoreStates
-        '
-        Me.tsbRestoreStates.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbRestoreStates.Image = Global.DWSIM.My.Resources.Resources.bullet_arrow_top
-        resources.ApplyResources(Me.tsbRestoreStates, "tsbRestoreStates")
-        Me.tsbRestoreStates.Name = "tsbRestoreStates"
-        '
-        'tsbClearStates
-        '
-        Me.tsbClearStates.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbClearStates.Image = Global.DWSIM.My.Resources.Resources.bullet_delete
-        resources.ApplyResources(Me.tsbClearStates, "tsbClearStates")
-        Me.tsbClearStates.Name = "tsbClearStates"
-        '
-        'ToolStripSeparator7
-        '
-        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        resources.ApplyResources(Me.ToolStripSeparator7, "ToolStripSeparator7")
-        '
-        'ToolStripLabel5
-        '
-        resources.ApplyResources(Me.ToolStripLabel5, "ToolStripLabel5")
-        Me.ToolStripLabel5.Name = "ToolStripLabel5"
-        '
-        'tsbRestoreSolutions
-        '
-        Me.tsbRestoreSolutions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbRestoreSolutions.Image = Global.DWSIM.My.Resources.Resources.bullet_arrow_top
-        resources.ApplyResources(Me.tsbRestoreSolutions, "tsbRestoreSolutions")
-        Me.tsbRestoreSolutions.Name = "tsbRestoreSolutions"
-        '
         'ToolStripUnits
         '
         resources.ApplyResources(Me.ToolStripUnits, "ToolStripUnits")
@@ -722,7 +621,7 @@ Partial Class FormFlowsheet
         '
         Me.MenuStrip1.AllowItemReorder = True
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.InserirToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.SuplementosToolStripMenuItem, Me.OtimizaToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.SuplementosToolStripMenuItem, Me.OtimizaToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
         '
@@ -845,260 +744,6 @@ Partial Class FormFlowsheet
         Me.tsmiConfigSimulation.MergeIndex = 11
         Me.tsmiConfigSimulation.Name = "tsmiConfigSimulation"
         resources.ApplyResources(Me.tsmiConfigSimulation, "tsmiConfigSimulation")
-        '
-        'InserirToolStripMenuItem
-        '
-        Me.InserirToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CorrentesToolStripMenuItem, Me.OperacoesUnitariasToolStripMenuItem, Me.ColunasToolStripMenuItem, Me.ReatoresToolStripMenuItem, Me.OperacoesLogicasToolStripMenuItem})
-        Me.InserirToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.InserirToolStripMenuItem.MergeIndex = 2
-        Me.InserirToolStripMenuItem.Name = "InserirToolStripMenuItem"
-        resources.ApplyResources(Me.InserirToolStripMenuItem, "InserirToolStripMenuItem")
-        '
-        'CorrentesToolStripMenuItem
-        '
-        Me.CorrentesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMIMaterialStream, Me.TSMIEnergyStream})
-        Me.CorrentesToolStripMenuItem.Name = "CorrentesToolStripMenuItem"
-        resources.ApplyResources(Me.CorrentesToolStripMenuItem, "CorrentesToolStripMenuItem")
-        '
-        'TSMIMaterialStream
-        '
-        Me.TSMIMaterialStream.Image = Global.DWSIM.My.Resources.Resources.stream_mat_16
-        resources.ApplyResources(Me.TSMIMaterialStream, "TSMIMaterialStream")
-        Me.TSMIMaterialStream.Name = "TSMIMaterialStream"
-        '
-        'TSMIEnergyStream
-        '
-        Me.TSMIEnergyStream.Image = Global.DWSIM.My.Resources.Resources.stream_en_16
-        resources.ApplyResources(Me.TSMIEnergyStream, "TSMIEnergyStream")
-        Me.TSMIEnergyStream.Name = "TSMIEnergyStream"
-        '
-        'OperacoesUnitariasToolStripMenuItem
-        '
-        Me.OperacoesUnitariasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMIMixer, Me.TSMISplitter, Me.TSMICompressor, Me.TSMIExpander, Me.TSMIPump, Me.TSMIPipe, Me.TSMIValve, Me.TSMISeparator, Me.TSMIHeater, Me.TSMICooler, Me.TSMIOrificePlate, Me.TSMIComponentSeparator, Me.TSMIHeatExchanger, Me.TSMITank, Me.TSMIExcelUO, Me.TSMICUO, Me.TSMICOUO, Me.TSMISolidsSeparator, Me.TSMIFilter, Me.TSMIFlowsheet})
-        Me.OperacoesUnitariasToolStripMenuItem.Name = "OperacoesUnitariasToolStripMenuItem"
-        resources.ApplyResources(Me.OperacoesUnitariasToolStripMenuItem, "OperacoesUnitariasToolStripMenuItem")
-        '
-        'TSMIMixer
-        '
-        Me.TSMIMixer.Image = Global.DWSIM.My.Resources.Resources.uo_mixer_16
-        resources.ApplyResources(Me.TSMIMixer, "TSMIMixer")
-        Me.TSMIMixer.Name = "TSMIMixer"
-        '
-        'TSMISplitter
-        '
-        Me.TSMISplitter.Image = Global.DWSIM.My.Resources.Resources.uo_split_16
-        resources.ApplyResources(Me.TSMISplitter, "TSMISplitter")
-        Me.TSMISplitter.Name = "TSMISplitter"
-        '
-        'TSMICompressor
-        '
-        Me.TSMICompressor.Image = Global.DWSIM.My.Resources.Resources.uo_compr_16
-        resources.ApplyResources(Me.TSMICompressor, "TSMICompressor")
-        Me.TSMICompressor.Name = "TSMICompressor"
-        '
-        'TSMIExpander
-        '
-        Me.TSMIExpander.Image = Global.DWSIM.My.Resources.Resources.uo_expan_16
-        resources.ApplyResources(Me.TSMIExpander, "TSMIExpander")
-        Me.TSMIExpander.Name = "TSMIExpander"
-        '
-        'TSMIPump
-        '
-        Me.TSMIPump.Image = Global.DWSIM.My.Resources.Resources.uo_pump_16
-        resources.ApplyResources(Me.TSMIPump, "TSMIPump")
-        Me.TSMIPump.Name = "TSMIPump"
-        '
-        'TSMIPipe
-        '
-        Me.TSMIPipe.Image = Global.DWSIM.My.Resources.Resources.uo_pipe_16
-        resources.ApplyResources(Me.TSMIPipe, "TSMIPipe")
-        Me.TSMIPipe.Name = "TSMIPipe"
-        '
-        'TSMIValve
-        '
-        Me.TSMIValve.Image = Global.DWSIM.My.Resources.Resources.uo_valve_16
-        resources.ApplyResources(Me.TSMIValve, "TSMIValve")
-        Me.TSMIValve.Name = "TSMIValve"
-        '
-        'TSMISeparator
-        '
-        Me.TSMISeparator.Image = Global.DWSIM.My.Resources.Resources.uo_flash_16
-        resources.ApplyResources(Me.TSMISeparator, "TSMISeparator")
-        Me.TSMISeparator.Name = "TSMISeparator"
-        '
-        'TSMIHeater
-        '
-        Me.TSMIHeater.Image = Global.DWSIM.My.Resources.Resources.uo_heater_16
-        resources.ApplyResources(Me.TSMIHeater, "TSMIHeater")
-        Me.TSMIHeater.Name = "TSMIHeater"
-        '
-        'TSMICooler
-        '
-        Me.TSMICooler.Image = Global.DWSIM.My.Resources.Resources.uo_cooler_16
-        resources.ApplyResources(Me.TSMICooler, "TSMICooler")
-        Me.TSMICooler.Name = "TSMICooler"
-        '
-        'TSMIOrificePlate
-        '
-        Me.TSMIOrificePlate.Image = Global.DWSIM.My.Resources.Resources.uo_orifice_16
-        resources.ApplyResources(Me.TSMIOrificePlate, "TSMIOrificePlate")
-        Me.TSMIOrificePlate.Name = "TSMIOrificePlate"
-        '
-        'TSMIComponentSeparator
-        '
-        Me.TSMIComponentSeparator.Image = Global.DWSIM.My.Resources.Resources.uo_compsep_16
-        resources.ApplyResources(Me.TSMIComponentSeparator, "TSMIComponentSeparator")
-        Me.TSMIComponentSeparator.Name = "TSMIComponentSeparator"
-        '
-        'TSMIHeatExchanger
-        '
-        Me.TSMIHeatExchanger.Image = Global.DWSIM.My.Resources.Resources.uo_hx_16
-        resources.ApplyResources(Me.TSMIHeatExchanger, "TSMIHeatExchanger")
-        Me.TSMIHeatExchanger.Name = "TSMIHeatExchanger"
-        '
-        'TSMITank
-        '
-        Me.TSMITank.Image = Global.DWSIM.My.Resources.Resources.uo_tank_16
-        resources.ApplyResources(Me.TSMITank, "TSMITank")
-        Me.TSMITank.Name = "TSMITank"
-        '
-        'TSMIExcelUO
-        '
-        Me.TSMIExcelUO.Image = Global.DWSIM.My.Resources.Resources.uo_excel_16
-        Me.TSMIExcelUO.Name = "TSMIExcelUO"
-        resources.ApplyResources(Me.TSMIExcelUO, "TSMIExcelUO")
-        '
-        'TSMICUO
-        '
-        Me.TSMICUO.Image = Global.DWSIM.My.Resources.Resources.uo_custom_16
-        Me.TSMICUO.Name = "TSMICUO"
-        resources.ApplyResources(Me.TSMICUO, "TSMICUO")
-        '
-        'TSMICOUO
-        '
-        Me.TSMICOUO.Image = Global.DWSIM.My.Resources.Resources.uo_co_16
-        Me.TSMICOUO.Name = "TSMICOUO"
-        resources.ApplyResources(Me.TSMICOUO, "TSMICOUO")
-        '
-        'TSMISolidsSeparator
-        '
-        Me.TSMISolidsSeparator.Image = Global.DWSIM.My.Resources.Resources.uo_solidsep_16
-        Me.TSMISolidsSeparator.Name = "TSMISolidsSeparator"
-        resources.ApplyResources(Me.TSMISolidsSeparator, "TSMISolidsSeparator")
-        '
-        'TSMIFilter
-        '
-        Me.TSMIFilter.Image = Global.DWSIM.My.Resources.Resources.uo_filter_16
-        Me.TSMIFilter.Name = "TSMIFilter"
-        resources.ApplyResources(Me.TSMIFilter, "TSMIFilter")
-        '
-        'TSMIFlowsheet
-        '
-        Me.TSMIFlowsheet.Image = Global.DWSIM.My.Resources.Resources.uo_fs_16
-        Me.TSMIFlowsheet.Name = "TSMIFlowsheet"
-        resources.ApplyResources(Me.TSMIFlowsheet, "TSMIFlowsheet")
-        '
-        'ColunasToolStripMenuItem
-        '
-        Me.ColunasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMIColShortcut, Me.TSMIColDist, Me.TSMIColAbs, Me.TSMIColAbsReb, Me.TSMIColAbsCond})
-        Me.ColunasToolStripMenuItem.Name = "ColunasToolStripMenuItem"
-        resources.ApplyResources(Me.ColunasToolStripMenuItem, "ColunasToolStripMenuItem")
-        '
-        'TSMIColShortcut
-        '
-        Me.TSMIColShortcut.Image = Global.DWSIM.My.Resources.Resources.col_sc_16
-        resources.ApplyResources(Me.TSMIColShortcut, "TSMIColShortcut")
-        Me.TSMIColShortcut.Name = "TSMIColShortcut"
-        '
-        'TSMIColDist
-        '
-        Me.TSMIColDist.Image = Global.DWSIM.My.Resources.Resources.col_dc_16
-        resources.ApplyResources(Me.TSMIColDist, "TSMIColDist")
-        Me.TSMIColDist.Name = "TSMIColDist"
-        '
-        'TSMIColAbs
-        '
-        Me.TSMIColAbs.Image = Global.DWSIM.My.Resources.Resources.col_abs_16
-        resources.ApplyResources(Me.TSMIColAbs, "TSMIColAbs")
-        Me.TSMIColAbs.Name = "TSMIColAbs"
-        '
-        'TSMIColAbsReb
-        '
-        Me.TSMIColAbsReb.Image = Global.DWSIM.My.Resources.Resources.col_rebabs_16
-        resources.ApplyResources(Me.TSMIColAbsReb, "TSMIColAbsReb")
-        Me.TSMIColAbsReb.Name = "TSMIColAbsReb"
-        '
-        'TSMIColAbsCond
-        '
-        Me.TSMIColAbsCond.Image = Global.DWSIM.My.Resources.Resources.col_rflabs_16
-        resources.ApplyResources(Me.TSMIColAbsCond, "TSMIColAbsCond")
-        Me.TSMIColAbsCond.Name = "TSMIColAbsCond"
-        '
-        'ReatoresToolStripMenuItem
-        '
-        Me.ReatoresToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMIReactorConv, Me.TSMIReactorEquilibrium, Me.TSMIReactorGibbs, Me.TSMIReactorCSTR, Me.TSMIReactorPFR})
-        Me.ReatoresToolStripMenuItem.Name = "ReatoresToolStripMenuItem"
-        resources.ApplyResources(Me.ReatoresToolStripMenuItem, "ReatoresToolStripMenuItem")
-        '
-        'TSMIReactorConv
-        '
-        Me.TSMIReactorConv.Image = Global.DWSIM.My.Resources.Resources.re_conv_16
-        resources.ApplyResources(Me.TSMIReactorConv, "TSMIReactorConv")
-        Me.TSMIReactorConv.Name = "TSMIReactorConv"
-        '
-        'TSMIReactorEquilibrium
-        '
-        Me.TSMIReactorEquilibrium.Image = Global.DWSIM.My.Resources.Resources.re_equi_16
-        resources.ApplyResources(Me.TSMIReactorEquilibrium, "TSMIReactorEquilibrium")
-        Me.TSMIReactorEquilibrium.Name = "TSMIReactorEquilibrium"
-        '
-        'TSMIReactorGibbs
-        '
-        Me.TSMIReactorGibbs.Image = Global.DWSIM.My.Resources.Resources.re_gibbs_16
-        resources.ApplyResources(Me.TSMIReactorGibbs, "TSMIReactorGibbs")
-        Me.TSMIReactorGibbs.Name = "TSMIReactorGibbs"
-        '
-        'TSMIReactorCSTR
-        '
-        Me.TSMIReactorCSTR.Image = Global.DWSIM.My.Resources.Resources.re_cstr_16
-        resources.ApplyResources(Me.TSMIReactorCSTR, "TSMIReactorCSTR")
-        Me.TSMIReactorCSTR.Name = "TSMIReactorCSTR"
-        '
-        'TSMIReactorPFR
-        '
-        Me.TSMIReactorPFR.Image = Global.DWSIM.My.Resources.Resources.re_pfr_16
-        resources.ApplyResources(Me.TSMIReactorPFR, "TSMIReactorPFR")
-        Me.TSMIReactorPFR.Name = "TSMIReactorPFR"
-        '
-        'OperacoesLogicasToolStripMenuItem
-        '
-        Me.OperacoesLogicasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMIRecycle, Me.TSMIEnergyRecycle, Me.TSMIAdjust, Me.TSMISpecification})
-        Me.OperacoesLogicasToolStripMenuItem.Name = "OperacoesLogicasToolStripMenuItem"
-        resources.ApplyResources(Me.OperacoesLogicasToolStripMenuItem, "OperacoesLogicasToolStripMenuItem")
-        '
-        'TSMIRecycle
-        '
-        Me.TSMIRecycle.Image = Global.DWSIM.My.Resources.Resources.lo_recy_16
-        resources.ApplyResources(Me.TSMIRecycle, "TSMIRecycle")
-        Me.TSMIRecycle.Name = "TSMIRecycle"
-        '
-        'TSMIEnergyRecycle
-        '
-        Me.TSMIEnergyRecycle.Image = Global.DWSIM.My.Resources.Resources.lo_enrecy_16
-        resources.ApplyResources(Me.TSMIEnergyRecycle, "TSMIEnergyRecycle")
-        Me.TSMIEnergyRecycle.Name = "TSMIEnergyRecycle"
-        '
-        'TSMIAdjust
-        '
-        Me.TSMIAdjust.Image = Global.DWSIM.My.Resources.Resources.lo_adjust_16
-        resources.ApplyResources(Me.TSMIAdjust, "TSMIAdjust")
-        Me.TSMIAdjust.Name = "TSMIAdjust"
-        '
-        'TSMISpecification
-        '
-        Me.TSMISpecification.Image = Global.DWSIM.My.Resources.Resources.lo_spec_16
-        resources.ApplyResources(Me.TSMISpecification, "TSMISpecification")
-        Me.TSMISpecification.Name = "TSMISpecification"
         '
         'FerramentasToolStripMenuItem
         '
@@ -1370,7 +1015,6 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.FlowLayoutPanel1, "FlowLayoutPanel1")
         Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripSimulation)
         Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripCalculator)
-        Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripStates)
         Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripFlowsheet)
         Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripUnits)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
@@ -1459,8 +1103,6 @@ Partial Class FormFlowsheet
         Me.ToolStripSimulation.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TSTable.ResumeLayout(False)
-        Me.ToolStripStates.ResumeLayout(False)
-        Me.ToolStripStates.PerformLayout()
         Me.ToolStripUnits.ResumeLayout(False)
         Me.ToolStripUnits.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
@@ -1524,42 +1166,6 @@ Partial Class FormFlowsheet
     Public WithEvents ToolStripButton15 As System.Windows.Forms.ToolStripButton
     Public WithEvents MultivariateOptimizerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents dckPanel As WeifenLuo.WinFormsUI.Docking.DockPanel
-    Public WithEvents InserirToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents CorrentesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIMaterialStream As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIEnergyStream As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents OperacoesUnitariasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIMixer As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMISplitter As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMICompressor As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIExpander As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents OperacoesLogicasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents ReatoresToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIPump As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIPipe As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIValve As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMISeparator As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIHeater As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMICooler As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIOrificePlate As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIComponentSeparator As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents ColunasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIColShortcut As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIColDist As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIColAbs As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIColAbsReb As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIColAbsCond As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIReactorConv As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIReactorEquilibrium As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIReactorGibbs As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIReactorCSTR As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIReactorPFR As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIHeatExchanger As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMITank As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIRecycle As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIEnergyRecycle As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMIAdjust As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMISpecification As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents FerramentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1577,11 +1183,9 @@ Partial Class FormFlowsheet
     Public WithEvents PluginsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ScriptsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents IronRubyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents TSMICUO As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripButton16 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripButton17 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents TSMICOUO As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents consoletsmi As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExibirListaDeItensACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1593,28 +1197,16 @@ Partial Class FormFlowsheet
     Friend WithEvents ToolStripButton19 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton20 As System.Windows.Forms.ToolStripButton
     Friend WithEvents GerenciadorDeAmostrasDePetroleoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripStates As System.Windows.Forms.ToolStrip
-    Friend WithEvents ToolStripLabel8 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents tsbSaveState As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbRestoreStates As System.Windows.Forms.ToolStripSplitButton
-    Friend WithEvents tsbClearStates As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbSimultAdjustSolver As System.Windows.Forms.ToolStripButton
     Friend WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
-    Friend WithEvents TSMISolidsSeparator As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TSMIFilter As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
     Public WithEvents OpenFileName As System.Windows.Forms.OpenFileDialog
     Friend WithEvents LLEDiagramToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TSMIExcelUO As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TSMIFlowsheet As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TimerScripts1 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts5 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts15 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts30 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts60 As System.Windows.Forms.Timer
-    Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripLabel5 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents tsbRestoreSolutions As System.Windows.Forms.ToolStripDropDownButton
     Friend WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
     Friend WithEvents QuestionBox_Panel As System.Windows.Forms.Panel
     Friend WithEvents QuestionBox_Button2 As System.Windows.Forms.Button

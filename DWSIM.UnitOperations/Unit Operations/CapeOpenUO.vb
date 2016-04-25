@@ -48,6 +48,7 @@ Namespace UnitOperations
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
         <System.NonSerialized()> Private _couo As Object
+        <System.NonSerialized()> Private _form As Form_CapeOpenSelector
 
         Private m_reactionSetID As String = "DefaultSet"
         Private m_reactionSetName As String = ""
@@ -95,7 +96,9 @@ Namespace UnitOperations
             Me.ComponentName = name
             Me.ComponentDescription = description
 
-            If Not Type.GetType("Mono.Runtime") Is Nothing Then
+            If Type.GetType("Mono.Runtime") Is Nothing Then
+
+                ShowForm()
 
                 If Not _seluo Is Nothing Then
                     Try
@@ -285,6 +288,15 @@ Namespace UnitOperations
                     End If
                 End If
             End If
+
+        End Sub
+
+
+        Sub ShowForm()
+
+            _form = New Form_CapeOpenSelector
+            _form.ShowDialog(Me.FlowSheet)
+            Me._seluo = _form._seluo
 
         End Sub
 

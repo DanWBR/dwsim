@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("DWSIM 2D Drawing Tools")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyDescription("Drawing Tools for DWSIM Simulator")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.Drawing")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 

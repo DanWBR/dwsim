@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 
-Public Class EF_Mixer
+Public Class EditingForm_Mixer
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
@@ -10,6 +10,14 @@ Public Class EF_Mixer
     Public Loaded As Boolean = False
 
     Private Sub EF_Mixer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        UpdateInfo()
+
+    End Sub
+
+    Sub UpdateInfo()
+
+        Loaded = False
 
         With MixerObject
 
@@ -33,11 +41,20 @@ Public Class EF_Mixer
                     lblStatus.ForeColor = Drawing.Color.Black
                 End If
             End If
+
             lblConnectedTo.Text = ""
+
             If .IsSpecAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedSpecId).GraphicObject.Tag
             If .IsAdjustAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedAdjustId).GraphicObject.Tag
 
             Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).ToArray
+
+            cbInlet1.Items.Clear()
+            cbInlet2.Items.Clear()
+            cbInlet3.Items.Clear()
+            cbInlet4.Items.Clear()
+            cbInlet5.Items.Clear()
+            cbInlet6.Items.Clear()
 
             cbInlet1.Items.AddRange(mslist)
             cbInlet2.Items.AddRange(mslist)
@@ -45,6 +62,8 @@ Public Class EF_Mixer
             cbInlet4.Items.AddRange(mslist)
             cbInlet5.Items.AddRange(mslist)
             cbInlet6.Items.AddRange(mslist)
+
+            cbOutlet1.Items.Clear()
 
             cbOutlet1.Items.AddRange(mslist)
 
@@ -68,11 +87,15 @@ Public Class EF_Mixer
 
             Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
 
+            cbPropPack.Items.Clear()
+
             cbPropPack.Items.AddRange(proppacks)
 
             cbPropPack.SelectedItem = .PropertyPackage.Tag
 
             Dim flashalgos As String() = [Enum].GetNames(.PreferredFlashAlgorithm.GetType)
+
+            cbFlashAlg.Items.Clear()
 
             cbFlashAlg.Items.AddRange(flashalgos)
 
@@ -184,4 +207,11 @@ Public Class EF_Mixer
 
     End Sub
 
+    Private Sub cbPropPack_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPropPack.SelectedIndexChanged
+        If Loaded Then MixerObject.PropertyPackage = MixerObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
+    End Sub
+
+    Private Sub cbFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlashAlg.SelectedIndexChanged
+        If Loaded Then MixerObject.PreferredFlashAlgorithm = cbFlashAlg.SelectedIndex
+    End Sub
 End Class

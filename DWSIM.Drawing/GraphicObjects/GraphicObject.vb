@@ -156,9 +156,10 @@ Namespace GraphicObjects
             Y = Value.Y
         End Sub
 
-
         Public Overridable Sub SetSize(ByVal Value As Size)
             _Size = Value
+            Width = Value.Width
+            Height = Value.Height
         End Sub
 
         Public Overridable Function GetSize() As Size

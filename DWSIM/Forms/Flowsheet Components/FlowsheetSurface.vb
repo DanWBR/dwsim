@@ -108,7 +108,7 @@ Public Class FlowsheetSurface
             If My.Computer.Keyboard.ShiftKeyDown Then
                 Flowsheet.tsbDesat.Checked = False
                 Flowsheet.tsbAtivar.Checked = True
-                Flowsheet.Options.CalculatorActivated = True
+                GlobalSettings.Settings.CalculatorActivated = True
             End If
             FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me.Flowsheet, My.Settings.SolverMode)
         ElseIf e.KeyCode = Keys.F6 Then
@@ -116,12 +116,12 @@ Public Class FlowsheetSurface
         ElseIf e.KeyCode = Keys.D And e.Control Then
             Flowsheet.tsbAtivar.Checked = False
             Flowsheet.tsbDesat.Checked = True
-            Flowsheet.Options.CalculatorActivated = False
+            GlobalSettings.Settings.CalculatorActivated = False
             Flowsheet.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorDesativado1")
         ElseIf e.KeyCode = Keys.A And e.Control Then
             Flowsheet.tsbDesat.Checked = False
             Flowsheet.tsbAtivar.Checked = True
-            Flowsheet.Options.CalculatorActivated = True
+            GlobalSettings.Settings.CalculatorActivated = True
             Flowsheet.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorOcioso")
             Flowsheet.WriteToLog(DWSIM.App.GetLocalString("Calculadorativado"), Color.DimGray, DWSIM.Flowsheet.MessageType.Information)
         ElseIf e.KeyCode = Keys.X And e.Control Then
@@ -196,21 +196,11 @@ Public Class FlowsheetSurface
 
                 If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
-                    If Me.FlowsheetDesignSurface.SelectedObject.IsConnector = False Then
-
-                        If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
-
-                            Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
-
-                        End If
-
-                    Else
+                    If Me.FlowsheetDesignSurface.SelectedObject.IsConnector Then
 
                         Me.FlowsheetDesignSurface.SelectedObject = Nothing
 
                     End If
-
-                Else
 
                 End If
 
@@ -225,11 +215,6 @@ Public Class FlowsheetSurface
         Else
 
             Flowsheet.ChangeEditMenuStatus(False)
-
-        End If
-
-        If Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
-
 
         End If
 
@@ -430,36 +415,19 @@ Public Class FlowsheetSurface
 
             End If
 
-            'If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
+            If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
-            '    If Me.FlowsheetDesignSurface.SelectedObject.IsConnector = False Then
+                If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
 
-            '        Flowsheet.PopulatePGEx2(Me.FlowsheetDesignSurface.SelectedObject)
-            '        Try
-            '            Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.SelectedObject.Name).PopulatePropertyGrid(PGEx1, Flowsheet.Options.SelectedUnitSystem)
-            '            Flowsheet.FormProps.ResumeLayout()
-            '        Catch ex As Exception
-            '            PGEx1.SelectedObject = Nothing
-            '            'MessageBox.Show(ex.Message & " - " & ex.StackTrace, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            '        Finally
-            '            Flowsheet.FormSurface.Select()
-            '        End Try
+                    Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
 
-            '    Else
+                Else
 
-            '        Me.FlowsheetDesignSurface.SelectedObject = Nothing
+                    Me.FlowsheetDesignSurface.SelectedObject = Nothing
 
-            '    End If
+                End If
 
-
-            'Else
-
-            '    PGEx2.SelectedObject = Nothing
-            '    PGEx1.SelectedObject = Nothing
-
-            'End If
-            'PGEx2.Refresh()
-            'PGEx1.Refresh()
+            End If
 
         ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
 
@@ -1930,7 +1898,6 @@ Public Class FlowsheetSurface
                 Dim myADJ As Adjust = New Adjust(myNode.Name, "Ajuste")
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
-
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("ADJT001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
             Case ObjectType.OT_Spec
@@ -2388,7 +2355,7 @@ Public Class FlowsheetSurface
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As DistillationColumn = New DistillationColumn(mySC.Name, "DistillationColumn")
+                Dim myCOSC As DistillationColumn = New DistillationColumn(mySC.Name, "DistillationColumn", Flowsheet)
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
 
@@ -2410,7 +2377,7 @@ Public Class FlowsheetSurface
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(mySC.Name, "AbsorptionColumn")
+                Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(mySC.Name, "AbsorptionColumn", Flowsheet)
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
 
@@ -2432,7 +2399,7 @@ Public Class FlowsheetSurface
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As ReboiledAbsorber = New ReboiledAbsorber(mySC.Name, "ReboiledAbsorber")
+                Dim myCOSC As ReboiledAbsorber = New ReboiledAbsorber(mySC.Name, "ReboiledAbsorber", Flowsheet)
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
 
@@ -2454,7 +2421,7 @@ Public Class FlowsheetSurface
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
                 'OBJETO DWSIM
-                Dim myCOSC As RefluxedAbsorber = New RefluxedAbsorber(mySC.Name, "RefluxedAbsorber")
+                Dim myCOSC As RefluxedAbsorber = New RefluxedAbsorber(mySC.Name, "RefluxedAbsorber", Flowsheet)
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
 
@@ -2613,9 +2580,10 @@ Public Class FlowsheetSurface
         End Select
 
         If Not gObj Is Nothing Then
+            Me.Flowsheet.SimulationObjects(gObj.Name).SetFlowsheet(Flowsheet)
             Me.FlowsheetDesignSurface.drawingObjects.Add(gObj)
             'gObj.Draw(Me.FlowsheetDesignSurface.CreateGraphics)
-            Me.FlowsheetDesignSurface.SelectedObject = gObj
+            'Me.FlowsheetDesignSurface.SelectedObject = gObj
             Me.FlowsheetDesignSurface.Invalidate()
             Application.DoEvents()
             If My.Application.PushUndoRedoAction Then Flowsheet.AddUndoRedoAction(New DWSIM.Flowsheet.UndoRedoAction() With {.AType = DWSIM.Flowsheet.UndoRedoActionType.ObjectAdded,
@@ -2667,7 +2635,7 @@ Public Class FlowsheetSurface
                     tobj = ObjectType.Pump
                 Case "Tank"
                     tobj = ObjectType.Tank
-                Case "SeparatorVessel"
+                Case "Vessel"
                     tobj = ObjectType.Vessel
                 Case "MaterialStream"
                     tobj = ObjectType.MaterialStream
@@ -2711,17 +2679,17 @@ Public Class FlowsheetSurface
                     tobj = ObjectType.ComponentSeparator
                 Case "OrificePlate"
                     tobj = ObjectType.OrificePlate
-                Case "CustomUnitOp"
+                Case "CustomUO"
                     tobj = ObjectType.CustomUO
-                Case "ExcelUnitOp"
+                Case "ExcelUO"
                     tobj = ObjectType.ExcelUO
-                Case "CapeOpenUnitOperation"
+                Case "CapeOpenUO"
                     tobj = ObjectType.CapeOpenUO
                 Case "SolidsSeparator"
                     tobj = ObjectType.SolidSeparator
                 Case "Filter"
                     tobj = ObjectType.Filter
-                Case "FlowsheetUnitOp"
+                Case "Flowsheet"
                     tobj = ObjectType.FlowsheetUO
             End Select
 

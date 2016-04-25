@@ -577,6 +577,54 @@ Namespace My
                 Me("MostRecentFiles") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("351")>  _
+        Public Property ObjectSelectorSplitterDistance1() As Integer
+            Get
+                Return CType(Me("ObjectSelectorSplitterDistance1"),Integer)
+            End Get
+            Set
+                Me("ObjectSelectorSplitterDistance1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("86")>  _
+        Public Property ObjectSelectorSplitterDistance2() As Integer
+            Get
+                Return CType(Me("ObjectSelectorSplitterDistance2"),Integer)
+            End Get
+            Set
+                Me("ObjectSelectorSplitterDistance2") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("84")>  _
+        Public Property ObjectSelectorSplitterDistance3() As Integer
+            Get
+                Return CType(Me("ObjectSelectorSplitterDistance3"),Integer)
+            End Get
+            Set
+                Me("ObjectSelectorSplitterDistance3") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Setting() As String
+            Get
+                Return CType(Me("Setting"),String)
+            End Get
+            Set
+                Me("Setting") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

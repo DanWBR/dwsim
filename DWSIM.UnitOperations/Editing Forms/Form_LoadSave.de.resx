@@ -117,95 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Outlet Stream</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Inlet Stream 6</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Inlet Stream 5</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Inlet Stream 4</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Inlet Stream 3</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
-  </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Inlet Stream 2</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
+    <value>Die DWSIM ist im Moment damit beschäftigt...</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Inlet Stream 1</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Connections</value>
-  </data>
-  <data name="cbPressureCalcMode.Items" xml:space="preserve">
-    <value>Inlet Minimum</value>
-  </data>
-  <data name="cbPressureCalcMode.Items1" xml:space="preserve">
-    <value>Inlet Average</value>
-  </data>
-  <data name="cbPressureCalcMode.Items2" xml:space="preserve">
-    <value>Inlet Maximum</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Pressure Calculation</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
-  </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Notes</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Property Package Settings</value>
-  </data>
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 13</value>
-  </data>
-  <data name="Label13.Text" xml:space="preserve">
-    <value>Connected to</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Object</value>
-  </data>
-  <data name="Label10.Text" xml:space="preserve">
-    <value>Flash Algorithm</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
-  </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Property Package</value>
+    <value>Bitte warten</value>
   </data>
 </root>

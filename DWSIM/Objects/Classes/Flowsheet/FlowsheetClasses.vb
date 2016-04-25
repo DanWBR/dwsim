@@ -172,8 +172,6 @@ Namespace DWSIM.Flowsheet
 
         Public Property CalculateBubbleAndDewPoints As Boolean = False Implements Interfaces.IFlowsheetOptions.CalculateBubbleAndDewPoints
 
-        Public Property CalculatorActivated As Boolean = False Implements Interfaces.IFlowsheetOptions.CalculatorActivated
-
         Public Property FilePath As String = "" Implements Interfaces.IFlowsheetOptions.FilePath
 
         Public Property FlashValidationDGETolerancePct As Double = 0.01 Implements Interfaces.IFlowsheetOptions.FlashValidationDGETolerancePct
@@ -226,40 +224,6 @@ Namespace DWSIM.Flowsheet
                 Me.SelectedUnitSystem = value
             End Set
         End Property
-
-    End Class
-
-    <System.Serializable()> Public Class FlowsheetState
-
-        Public Collections As Byte()
-        Public GraphicObjects As Byte()
-        Public Options As Byte()
-        Public WatchItems As Byte()
-        Public TreeViewObjects As Byte()
-        Public SpreadsheetDT1 As Byte()
-        Public SpreadsheetDT2 As Byte()
-
-        Public Snapshot As Bitmap
-        Public Description As String = ""
-        Public SaveDate As Date
-
-    End Class
-
-    <System.Serializable()> Public Class FlowsheetSolution
-
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
-
-        Public Solution As Byte()
-        Public ID As String = ""
-        Public SaveDate As Date
-
-        Public Function LoadData(data As List(Of XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
-            XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
-        End Function
-
-        Public Function SaveData() As List(Of XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
-            Return XMLSerializer.XMLSerializer.Serialize(Me, True)
-        End Function
 
     End Class
 

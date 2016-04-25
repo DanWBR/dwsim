@@ -44,7 +44,7 @@ Partial Class ListItem
         Me.lblName.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblName.Location = New System.Drawing.Point(59, 3)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(236, 19)
+        Me.lblName.Size = New System.Drawing.Size(201, 19)
         Me.lblName.TabIndex = 1
         Me.lblName.Text = "Label1"
         Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -55,7 +55,7 @@ Partial Class ListItem
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblDescription.Location = New System.Drawing.Point(59, 22)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(236, 31)
+        Me.lblDescription.Size = New System.Drawing.Size(201, 31)
         Me.lblDescription.TabIndex = 2
         Me.lblDescription.Text = "Label2"
         '
@@ -70,7 +70,7 @@ Partial Class ListItem
         Me.DoubleBuffered = True
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ListItem"
-        Me.Size = New System.Drawing.Size(298, 57)
+        Me.Size = New System.Drawing.Size(263, 57)
         CType(Me.Image, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
