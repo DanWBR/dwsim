@@ -1870,18 +1870,6 @@ simx2:              Dim myStream As System.IO.FileStream
                         Me.LoadAndExtractXMLZIP(Me.filename)
                     End If
                 Case 3
-                    'sim:                Dim myStream As System.IO.FileStream
-                    '                    myStream = Me.OpenFileDialog1.OpenFile()
-                    '                    If Not (myStream Is Nothing) Then
-                    '                        Dim nome = myStream.Name
-                    '                        myStream.Close()
-                    '                        Me.filename = name
-                    '                        Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
-                    '                        Application.DoEvents()
-                    '                        Application.DoEvents()
-                    '                        Me.LoadF(Me.filename)
-                    '                    End If
-                Case 4
 csd:                Application.DoEvents()
                     Dim NewMDIChild As New FormCompoundCreator()
                     NewMDIChild.MdiParent = Me
@@ -1897,7 +1885,7 @@ csd:                Application.DoEvents()
                         Me.UpdateMRUList()
                     End If
                     NewMDIChild.Activate()
-                Case 5
+                Case 4
 rsd:                Application.DoEvents()
                     Dim NewMDIChild As New FormDataRegression()
                     NewMDIChild.MdiParent = Me
@@ -1913,7 +1901,7 @@ rsd:                Application.DoEvents()
                         Me.UpdateMRUList()
                     End If
                     NewMDIChild.Activate()
-                Case 6
+                Case 5
 ruf:                Application.DoEvents()
                     Dim NewMDIChild As New FormUNIFACRegression()
                     NewMDIChild.MdiParent = Me
@@ -1929,14 +1917,12 @@ ruf:                Application.DoEvents()
                         Me.UpdateMRUList()
                     End If
                     NewMDIChild.Activate()
-                Case 7
+                Case 6
                     Select Case Path.GetExtension(Me.OpenFileDialog1.FileName).ToLower()
                         Case ".dwxml"
                             GoTo simx
                         Case ".dwxmz"
                             GoTo simx2
-                        Case ".dwsim"
-                            'GoTo sim
                         Case ".dwcsd"
                             GoTo csd
                         Case ".dwrsd"

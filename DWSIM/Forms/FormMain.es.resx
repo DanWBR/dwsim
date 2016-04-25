@@ -446,13 +446,13 @@
     <value>Acerca de DWSIM</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
-    <value>Simulaciones DWSIM (XML) (*.dwxml)|*.dwxml|Simulaciones DWSIM (XML Comprimido) (*.dwxmz)|*.dwxmz|Simulaciones DWSIM (*.dwsim)|*.dwsim|Estudio de Creador de Componentes|*.dwcsd|Estudio de Regresión de Datos |*.dwrsd|Estudio de Regresión de UNIFAC IPs|*.dwruf|Todos los Archivos DWSIM|*.dwxml;*.dwxmz;*.dwsim;*.dwcsd;*.dwrsd;*.dwruf </value>
+    <value>Simulaciones DWSIM (XML) (*.dwxml)|*.dwxml|Simulaciones DWSIM (XML Comprimido) (*.dwxmz)|*.dwxmz|Estudio de Creador de Componentes|*.dwcsd|Estudio de Regresión de Datos |*.dwrsd|Estudio de Regresión de UNIFAC IPs|*.dwruf|Todos los Archivos DWSIM|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf </value>
   </data>
   <data name="OpenFileDialog1.Title" xml:space="preserve">
     <value>Abrir Simulación existente</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>Simulaciones DWSIM (XML) (*.dwxml)|*.dwxml|Simulaciones DWSIM (XML Comprimido) (*.dwxmz)|*.dwxmz|Simulaciones DWSIM (*.dwsim)|*.dwsim</value>
+    <value>Simulaciones DWSIM (XML) (*.dwxml)|*.dwxml|Simulaciones DWSIM (XML Comprimido) (*.dwxmz)|*.dwxmz</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Guardar simulación Actual</value>

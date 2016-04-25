@@ -473,13 +473,13 @@
     <value>Über DWSIM</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
-    <value>Steady-state Simulation (XML) (*.dwxml)|*.dwxml|Steady-state Simulation (Komprimiertes XML) (*.dwxmz)|*.dwxmz|Steady-state Simulation (*.dwsim)|*.dwsim|Compound Creator Studie (*.dwcsd)|*.dwcsd|Daten Regression Studie (*.dwrsd)|*.dwrsd|UNIFAC IPs Regression Studie (*.dwruf)|*.dwruf|Alle DWSIM Files|*.dwxml;*.dwxmz;*.dwsim;*.dwcsd;*.dwrsd;*.dwruf</value>
+    <value>Steady-state Simulation (XML) (*.dwxml)|*.dwxml|Steady-state Simulation (Komprimiertes XML) (*.dwxmz)|*.dwxmz|Compound Creator Studie (*.dwcsd)|*.dwcsd|Daten Regression Studie (*.dwrsd)|*.dwrsd|UNIFAC IPs Regression Studie (*.dwruf)|*.dwruf|Alle DWSIM Files|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf</value>
   </data>
   <data name="OpenFileDialog1.Title" xml:space="preserve">
     <value>Öffnen einer existierenden Simulation</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>Steady-state simulation (XML) (*.dwxml)|*.dwxml|Steady-state simulation (Compressed XML) (*.dwxmz)|*.dwxmz|Steady-state simulation (*.dwsim)|*.dwsim</value>
+    <value>Steady-state simulation (XML) (*.dwxml)|*.dwxml|Steady-state simulation (Compressed XML) (*.dwxmz)|*.dwxmz</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Aktive Simularion speichern</value>
