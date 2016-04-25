@@ -103,6 +103,8 @@ Public Class EditingForm_Mixer
 
             rtbAnnotations.Rtf = .Annotation
 
+            chkActive.Checked = .GraphicObject.Active
+
         End With
 
         Loaded = True
@@ -219,5 +221,9 @@ Public Class EditingForm_Mixer
 
     Private Sub rtbAnnotations_RtfChanged(sender As Object, e As EventArgs) Handles rtbAnnotations.RtfChanged
         If Loaded Then MixerObject.Annotation = rtbAnnotations.Rtf
+    End Sub
+
+    Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
+        If Loaded Then MixerObject.GraphicObject.Active = chkActive.Checked
     End Sub
 End Class
