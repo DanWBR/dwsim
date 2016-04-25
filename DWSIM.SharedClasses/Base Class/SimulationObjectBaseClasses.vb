@@ -175,7 +175,7 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Property Annotation() As String Implements Interfaces.ISimulationObject.Annotation
+        Public Property Annotation() As String = "" Implements Interfaces.ISimulationObject.Annotation
 
         ''' <summary>
         ''' Checks if an Adjust operation is attached to this object.

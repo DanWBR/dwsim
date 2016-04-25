@@ -101,6 +101,8 @@ Public Class EditingForm_Mixer
 
             cbFlashAlg.SelectedItem = .PreferredFlashAlgorithm.ToString
 
+            rtbAnnotations.Rtf = .Annotation
+
         End With
 
         Loaded = True
@@ -213,5 +215,9 @@ Public Class EditingForm_Mixer
 
     Private Sub cbFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlashAlg.SelectedIndexChanged
         If Loaded Then MixerObject.PreferredFlashAlgorithm = cbFlashAlg.SelectedIndex
+    End Sub
+
+    Private Sub rtbAnnotations_RtfChanged(sender As Object, e As EventArgs) Handles rtbAnnotations.RtfChanged
+        If Loaded Then MixerObject.Annotation = rtbAnnotations.Rtf
     End Sub
 End Class

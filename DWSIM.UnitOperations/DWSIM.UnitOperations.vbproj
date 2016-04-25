@@ -121,16 +121,16 @@
     <Compile Include="Editing Forms\EditingForm_Mixer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Form_CapeOpenSelector.designer.vb">
+    <Compile Include="Editing Forms\Other\Form_CapeOpenSelector.designer.vb">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Form_CapeOpenSelector.vb">
+    <Compile Include="Editing Forms\Other\Form_CapeOpenSelector.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Form_LoadSave.designer.vb">
+    <Compile Include="Editing Forms\Other\Form_LoadSave.designer.vb">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Form_LoadSave.vb">
+    <Compile Include="Editing Forms\Other\Form_LoadSave.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
@@ -198,25 +198,25 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Form_CapeOpenSelector.en.resx">
+    <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.en.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Form_CapeOpenSelector.es.resx">
+    <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.es.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Form_CapeOpenSelector.resx">
+    <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Form_LoadSave.de.resx">
+    <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.de.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Form_LoadSave.en.resx">
+    <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.en.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Form_LoadSave.es.resx">
+    <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.es.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Form_LoadSave.resx">
+    <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
