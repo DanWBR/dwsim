@@ -43,6 +43,10 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.MathOps", "DWSIM.Math
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Databases", "DWSIM.Compounds\DWSIM.Databases.vbproj", "{C0EA3CC7-7EC4-4FF9-AB3D-802727D62327}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.SwarmOps", "SwarmOps\DWSIM.MathOps.SwarmOps.csproj", "{8F45EFAA-9EAC-403F-B2B0-123F0321056E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.RandomOps", "RandomOps\DWSIM.MathOps.RandomOps.csproj", "{F5DFAFED-C786-4DC3-9818-16C992DE3990}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -255,6 +259,26 @@ Global
 		{C0EA3CC7-7EC4-4FF9-AB3D-802727D62327}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C0EA3CC7-7EC4-4FF9-AB3D-802727D62327}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C0EA3CC7-7EC4-4FF9-AB3D-802727D62327}.Release|x86.ActiveCfg = Release|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8F45EFAA-9EAC-403F-B2B0-123F0321056E}.Release|x86.ActiveCfg = Release|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F5DFAFED-C786-4DC3-9818-16C992DE3990}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

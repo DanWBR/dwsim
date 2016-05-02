@@ -27,6 +27,20 @@ Imports System.Linq
 
 Namespace DWSIM.Optimization
 
+    Public Enum OptimizationMethod
+        Limited_Memory_BGFS = 0
+        Truncated_Newton = 1
+        Simplex = 2
+        IPOPT = 3
+        ParticleSwarm = 4
+        LocalUnimodalSampling = 5
+        GradientDescent = 6
+        DifferentialEvolution = 7
+        ParticleSwarmOptimization = 8
+        ManyOptimizingLiaisons = 9
+        Mesh = 10
+    End Enum
+
     <System.Serializable()> Public Class OptimizationCase
 
         Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization

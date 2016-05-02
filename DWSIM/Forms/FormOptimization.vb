@@ -459,8 +459,7 @@ Public Class FormOptimization
             form.WriteToLog("Optimization finished successfully.", Color.SeaGreen, DWSIM.Flowsheet.MessageType.Information)
         Catch ex As Exception
             form.WriteToLog("Optimization error: " & ex.Message, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation, DWSIM.App.GetLocalString("Erro"))
-        Finally
+       Finally
             Me.btnRun.Enabled = True
             Me.btnAbort.Enabled = False
             Me.btnRestore.Enabled = True
@@ -469,6 +468,10 @@ Public Class FormOptimization
     End Sub
 
     Public Function CalcFuncVal_Brent(ByVal t As Double) As Double
+
+        If Me.abortCalc Then
+            Throw New Exception("Optimization aborted")
+        End If
 
         Dim objID, objProp, objName As String
         Dim AobjID(Me.keysaux.Count), AobjProp(Me.keysaux.Count), AobjName(Me.keysaux.Count) As String
@@ -814,7 +817,7 @@ Public Class FormOptimization
         Application.DoEvents()
 
         If Me.abortCalc Then
-            Return f
+            Throw New Exception("Optimization aborted")
         End If
 
         Dim varID(x.Length), objID(x.Length), objProp(x.Length), objName(x.Length), FobjID, FobjProp As String
@@ -909,7 +912,7 @@ Public Class FormOptimization
         Application.DoEvents()
 
         If Me.abortCalc Then
-            Return g
+            Throw New Exception("Optimization aborted")
         End If
 
         Dim varID(x.Length - 1), objID(x.Length - 1), objProp(x.Length - 1), objName(x.Length - 1), FobjID, FobjProp As String
@@ -1346,6 +1349,7 @@ Public Class FormOptimization
                     dgrow.Cells(1).Value = .name
                     If .objectID = "SpreadsheetCell" Then
                         dgrow.Cells(3).Value = DWSIM.App.GetLocalString(.objectID)
+                        dgrow.Cells(4).Value = .propID
                     Else
                         If form.Collections.FlowsheetObjectCollection.ContainsKey(.objectID) Then
                             dgrow.Cells(3).Value = form.Collections.FlowsheetObjectCollection(.objectID).GraphicObject.Tag

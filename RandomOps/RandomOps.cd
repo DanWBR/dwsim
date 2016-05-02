@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RandomOps.ThreadSafe.CMWC4096" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAACAAAQAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>ThreadSafe\CMWC4096.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.ThreadSafe.Independent" Collapsed="true">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhA=</HashCode>
+      <FileName>ThreadSafe\Independent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.ThreadSafe.MWC256" Collapsed="true">
+    <Position X="7" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAACAAAQAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>ThreadSafe\MWC256.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.ThreadSafe.Wrapper" Collapsed="true">
+    <Position X="9.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAQADAAEAAAAIAAIAAAAAhA=</HashCode>
+      <FileName>ThreadSafe\Wrapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.ByteStream" Collapsed="true">
+    <Position X="12.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIACAAIgAAgSAAABgAARAACAAAAAAAIJIAAAgA=</HashCode>
+      <FileName>ByteStream.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.XorShift" Collapsed="true">
+    <Position X="11.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAAAAAAAAAAAAAAEAAAAQAAAAAAAAACAgIAAAYYAE=</HashCode>
+      <FileName>XorShift.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.ByteStreamAsync" Collapsed="true">
+    <Position X="11.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAggAQAAACAIAAIAABAAAAAABAAAAAAAAkAIAMAAAAA=</HashCode>
+      <FileName>ByteStreamAsync.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RandomOps.Random" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQCAAAAAgQAQAAAQABAgAAAAAAAEIAEAAQhA=</HashCode>
+      <FileName>Circle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.CMWC4096" Collapsed="true">
+    <Position X="9.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAAAAAAAAAAAAAAEAAAAQAAQAAAAAACAgAgAAgAAA=</HashCode>
+      <FileName>CMWC4096.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.HtmlDownload" Collapsed="true">
+    <Position X="13.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>HtmlDownload.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.IndexDistribution" Collapsed="true">
+    <Position X="9.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAACACAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>IndexDistribution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.KISS" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAAAAAAAAAAAAAAEAAAAQAAAAAAAAACAgIgAAAYAE=</HashCode>
+      <FileName>KISS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.MersenneTwister" Collapsed="true">
+    <Position X="16" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAECAAIAAAAAAAAAgEAAAAQAAAAAAAAACAAAABIAAAA=</HashCode>
+      <FileName>MersenneTwister.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.Multi" Collapsed="true">
+    <Position X="19.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAIAgAAACAAQABAQAAAAAAAAIAAAAAgA=</HashCode>
+      <FileName>Multi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.MWC256" Collapsed="true">
+    <Position X="11.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAAAAAAAAAAAAAAEAAAAQAAQAAAAAACAgAgAAgAAA=</HashCode>
+      <FileName>MWC256.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.Ran2" Collapsed="true">
+    <Position X="19.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAQCEQAEAAAAAAAEEQAAQAAAACAAAACAABAAQAIAA=</HashCode>
+      <FileName>Ran2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.RandomDotOrg" Collapsed="true">
+    <Position X="13.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAAABACAAAA=</HashCode>
+      <FileName>RandomDotOrg.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.RandomDotOrgAsync" Collapsed="true">
+    <Position X="9.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>RandomDotOrgAsync.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.RanInt32" Collapsed="true">
+    <Position X="19.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAAAAAAAAAAgAgAEAAAAAABAAAAAAAAAAAAAAACgA=</HashCode>
+      <FileName>RanInt32.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.RanQD" Collapsed="true">
+    <Position X="16" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAAAAAAAAAAAAAAGAAABQAAAAAAAgACAAAAAAAAAA=</HashCode>
+      <FileName>RanQD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.RanSystem" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAgAAAAAAQABAAAAAAAAAEIAAAAAgA=</HashCode>
+      <FileName>RanSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.RanUInt32" Collapsed="true">
+    <Position X="17" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAAAAAAAAAAgAgAEAAAAAABAAAAAAAAAAAAAAACgA=</HashCode>
+      <FileName>RanUInt32.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.RanUInt32Array" Collapsed="true">
+    <Position X="16" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>RanUInt32Array.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.Set" Collapsed="true">
+    <Position X="11.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAEAAAAAhgAAAAAARAACAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Set.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.SumUInt32" Collapsed="true">
+    <Position X="16" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAEAAAAAAAAAAAAAAAAAAAQAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SumUInt32.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomOps.Switcher" Collapsed="true">
+    <Position X="19.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACgAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Switcher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.5" />
+</ClassDiagram>

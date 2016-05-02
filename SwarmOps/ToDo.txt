@@ -1,0 +1,20 @@
+﻿/// ------------------------------------------------------
+/// SwarmOps - Numeric and heuristic optimization for C#
+/// Copyright (C) 2003-2011 Magnus Erik Hvass Pedersen.
+/// Please see the file license.txt for license details.
+/// SwarmOps on the internet: http://www.Hvass-Labs.org/
+/// ------------------------------------------------------
+
+Ideas for extensions to SwarmOps:
+
+- Add State-class which is persistent and used for holding
+  the state of an optimizer and problem. An optimizer-object
+  created with a state-object resumes execution, and if the
+  state-object is not supplied then execution is started again.
+  A state-object can also be created by supplying a position
+  in the search-space and a radius so that all agents are
+  initialized in a limited region of the search-space holding
+  a known good solution. This can be used for chaining optimization
+  of e.g. first PS, then PSO, then DE, then LUS.
+- Add namespaces SwarmOps.MultiObjective and .SingleObjective
+- Add multi-objective optimizers NSGA-II, MO-GA, MO-DE

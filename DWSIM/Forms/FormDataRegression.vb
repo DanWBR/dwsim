@@ -25,7 +25,6 @@ Imports DotNumerics
 Imports Cureos.Numerics
 Imports DWSIM.DWSIM.Optimization.DatRegression
 Imports DWSIM.Thermodynamics.PropertyPackages
-Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports System.Threading.Tasks
 Imports System.Linq
 Imports System.IO
@@ -34,7 +33,6 @@ Public Class FormDataRegression
 
     Inherits Form
 
-    Public cv As SystemsOfUnits.Converter
     Public fmin As Double
     Public info As Integer
     Public cancel As Boolean = False
@@ -46,7 +44,7 @@ Public Class FormDataRegression
     Private forceclose As Boolean = False
 
     Public currcase As RegressionCase
-    Public IP As BaseClasses.InteractionParameter
+    Public IP As InteractionParameter
 
     Public proppack As PropertyPackage
     Public ppname As String = ""
@@ -58,13 +56,11 @@ Public Class FormDataRegression
 
     Private Sub FormDataRegression_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        cv = New SystemsOfUnits.Converter
-        IP = New BaseClasses.InteractionParameter
+         IP = New InteractionParameter
 
         'get list of compounds
         Dim compounds As New ArrayList
         For Each c As ConstantProperties In FormMain.AvailableComponents.Values
-            'compounds.Add(DWSIM.App.GetComponentName(c.Name))
             compounds.Add(c.Name)
         Next
 
@@ -144,23 +140,37 @@ Public Class FormDataRegression
             Next
             Select Case cbModel.SelectedItem.ToString()
                 Case "Peng-Robinson", "Soave-Redlich-Kwong"
-                    .iepar1 = gridInEst.Rows(0).Cells(1).Value
-                    .fixed1 = gridInEst.Rows(0).Cells(2).Value
+                    .iepar1 = gridInEst.Rows(0).Cells(2).Value
+                    .fixed1 = gridInEst.Rows(0).Cells(4).Value
+                    .llim1 = gridInEst.Rows(0).Cells(1).Value
+                    .ulim1 = gridInEst.Rows(0).Cells(3).Value
                 Case "PC-SAFT", "Lee-Kesler-Plöcker"
-                    .iepar1 = gridInEst.Rows(0).Cells(1).Value
-                    .fixed1 = gridInEst.Rows(0).Cells(2).Value
+                    .iepar1 = gridInEst.Rows(0).Cells(2).Value
+                    .fixed1 = gridInEst.Rows(0).Cells(4).Value
+                    .llim1 = gridInEst.Rows(0).Cells(1).Value
+                    .ulim1 = gridInEst.Rows(0).Cells(3).Value
                 Case "UNIQUAC", "PRSV2-M", "PRSV2-VL"
-                    .iepar1 = gridInEst.Rows(0).Cells(1).Value
-                    .iepar2 = gridInEst.Rows(1).Cells(1).Value
-                    .fixed1 = gridInEst.Rows(0).Cells(2).Value
-                    .fixed2 = gridInEst.Rows(1).Cells(2).Value
+                    .iepar1 = gridInEst.Rows(0).Cells(2).Value
+                    .iepar2 = gridInEst.Rows(1).Cells(2).Value
+                    .fixed1 = gridInEst.Rows(0).Cells(4).Value
+                    .fixed2 = gridInEst.Rows(1).Cells(4).Value
+                    .llim1 = gridInEst.Rows(0).Cells(1).Value
+                    .ulim1 = gridInEst.Rows(0).Cells(3).Value
+                    .llim2 = gridInEst.Rows(1).Cells(1).Value
+                    .ulim2 = gridInEst.Rows(1).Cells(3).Value
                 Case "NRTL"
-                    .iepar1 = gridInEst.Rows(0).Cells(1).Value
-                    .iepar2 = gridInEst.Rows(1).Cells(1).Value
-                    .iepar3 = gridInEst.Rows(2).Cells(1).Value
-                    .fixed1 = gridInEst.Rows(0).Cells(2).Value
-                    .fixed2 = gridInEst.Rows(1).Cells(2).Value
-                    .fixed3 = gridInEst.Rows(2).Cells(2).Value
+                    .iepar1 = gridInEst.Rows(0).Cells(2).Value
+                    .iepar2 = gridInEst.Rows(1).Cells(2).Value
+                    .iepar3 = gridInEst.Rows(2).Cells(2).Value
+                    .fixed1 = gridInEst.Rows(0).Cells(4).Value
+                    .fixed2 = gridInEst.Rows(1).Cells(4).Value
+                    .fixed3 = gridInEst.Rows(2).Cells(4).Value
+                    .llim1 = gridInEst.Rows(0).Cells(1).Value
+                    .ulim1 = gridInEst.Rows(0).Cells(3).Value
+                    .llim2 = gridInEst.Rows(1).Cells(1).Value
+                    .ulim2 = gridInEst.Rows(1).Cells(3).Value
+                    .llim3 = gridInEst.Rows(2).Cells(1).Value
+                    .ulim3 = gridInEst.Rows(2).Cells(3).Value
             End Select
 
         End With
@@ -183,24 +193,43 @@ Public Class FormDataRegression
             Select Case cbModel.SelectedItem.ToString()
                 Case "Peng-Robinson", "Soave-Redlich-Kwong"
                     gridInEst.Rows.Clear()
-                    gridInEst.Rows.Add(New Object() {"kij", .iepar1, .fixed1})
+                    If .llim1 = 0.0# Then .llim1 = -0.5#
+                    If .ulim1 = 0.0# Then .ulim1 = 0.5#
+                    gridInEst.Rows.Add(New Object() {"kij", .llim1, .iepar1, .ulim1, .fixed1})
                 Case "PC-SAFT", "Lee-Kesler-Plöcker"
                     gridInEst.Rows.Clear()
-                    gridInEst.Rows.Add(New Object() {"kij", .iepar1, .fixed1})
+                    If .llim1 = 0.0# Then .llim1 = 0.5#
+                    If .ulim1 = 0.0# Then .ulim1 = 1.5#
+                    gridInEst.Rows.Add(New Object() {"kij", .llim1, .iepar1, .ulim1, .fixed1})
                 Case "UNIQUAC"
                     gridInEst.Rows.Clear()
-                    gridInEst.Rows.Add(New Object() {"A12 (cal/mol)", .iepar1, .fixed1})
-                    gridInEst.Rows.Add(New Object() {"A21 (cal/mol)", .iepar2, .fixed2})
+                    If .llim1 = 0.0# Then .llim1 = -5000.0#
+                    If .ulim1 = 0.0# Then .ulim1 = 5000.0#
+                    If .llim2 = 0.0# Then .llim2 = -5000.0#
+                    If .ulim2 = 0.0# Then .ulim2 = 5000.0#
+                    gridInEst.Rows.Add(New Object() {"A12 (cal/mol)", .llim1, .iepar1, .ulim1, .fixed1})
+                    gridInEst.Rows.Add(New Object() {"A21 (cal/mol)", .llim2, .iepar2, .ulim2, .fixed2})
                 Case "PRSV2-M", "PRSV2-VL"
                     gridInEst.Rows.Clear()
-                    gridInEst.Rows.Add(New Object() {"kij", .iepar1, .fixed1})
-                    gridInEst.Rows.Add(New Object() {"kji", .iepar2, .fixed2})
+                    If .llim1 = 0.0# Then .llim1 = -0.5#
+                    If .ulim1 = 0.0# Then .ulim1 = 0.5#
+                    If .llim2 = 0.0# Then .llim2 = -0.5#
+                    If .ulim2 = 0.0# Then .ulim2 = 0.5#
+                    gridInEst.Rows.Add(New Object() {"kij", .llim1, .iepar1, .ulim1, .fixed1})
+                    gridInEst.Rows.Add(New Object() {"kji", .llim2, .iepar2, .ulim2, .fixed2})
                 Case "NRTL"
                     gridInEst.Rows.Clear()
-                    gridInEst.Rows.Add(New Object() {"A12 (cal/mol)", .iepar1, .fixed1})
-                    gridInEst.Rows.Add(New Object() {"A21 (cal/mol)", .iepar2, .fixed2})
-                    gridInEst.Rows.Add(New Object() {"alpha12", .iepar3, .fixed3})
+                    If .llim1 = 0.0# Then .llim1 = -5000.0#
+                    If .ulim1 = 0.0# Then .ulim1 = 5000.0#
+                    If .llim2 = 0.0# Then .llim2 = -5000.0#
+                    If .ulim2 = 0.0# Then .ulim2 = 5000.0#
+                    If .llim3 = 0.0# Then .llim3 = 0.0#
+                    If .ulim3 = 0.0# Then .ulim3 = 0.8#
+                    gridInEst.Rows.Add(New Object() {"A12 (cal/mol)", .llim1, .iepar1, .ulim1, .fixed1})
+                    gridInEst.Rows.Add(New Object() {"A21 (cal/mol)", .llim2, .iepar2, .ulim2, .fixed2})
+                    gridInEst.Rows.Add(New Object() {"alpha12", .llim3, .iepar3, .ulim3, .fixed3})
             End Select
+
             Me.chkTL.Checked = .useTLdata
             Me.chkTS.Checked = .useTSdata
             Me.chkIdealVaporPhase.Checked = .idealvapormodel
@@ -212,8 +241,11 @@ Public Class FormDataRegression
             Me.tbTitle.Text = .title
             Me.tbDescription.Text = .description
             Me.tbIPDBName.Text = .databasepath
+
             Dim val0 As Boolean, val1, val2, val3, val4, val5, val6, val7 As String, i As Integer
+
             If .checkp Is Nothing Then .checkp = New ArrayList
+
             For i = 0 To .x1p.Count - 1
                 If .checkp.Count - 1 >= i Then val0 = .checkp(i) Else val0 = True
                 If Double.TryParse(.x1p(i), New Double) Then val1 = Double.Parse(.x1p(i)).ToString() Else val1 = ""
@@ -316,7 +348,7 @@ Public Class FormDataRegression
         End Select
     End Sub
 
-    Private Function FunctionValue(ByVal x() As Double) As Double
+    Public Function FunctionValue(ByVal x() As Double) As Double
 
         Application.DoEvents()
         If cancel Then Exit Function
@@ -448,7 +480,7 @@ Public Class FormDataRegression
                     Select Case currcase.model
                         Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"
                             If PVF Then
-                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -474,7 +506,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -506,7 +538,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                         Case "UNIQUAC"
                             If PVF Then
-                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -532,7 +564,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -565,7 +597,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("A12", x(0))
                             regressedparameters.Add("A21", x(1))
                         Case "PRSV2-M", "PRSV2-VL"
-                            proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
+                            proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
                             ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                             ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             If PVF Then
@@ -592,7 +624,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -625,7 +657,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                             regressedparameters.Add("kji", x(1))
                         Case "NRTL"
-                            proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
+                            proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
                             ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                             ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                             If PVF Then
@@ -652,7 +684,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -738,8 +770,8 @@ Public Class FormDataRegression
                 Case DataType.TPxy
                 Case DataType.Pxx, DataType.Txx
                     proppack.Parameters("PP_FLASHALGORITHM") = 9
-                    proppack.FlashAlgorithm = FlashMethod.SimpleLLE
-                    Dim flashinstance As FlashAlgorithms.SimpleLLE = TryCast(proppack.FlashBase, FlashAlgorithms.SimpleLLE)
+                    proppack.FlashAlgorithm = PropertyPackages.FlashMethod.SimpleLLE
+                    Dim flashinstance As PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE = TryCast(proppack.FlashBase, PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE)
                     If Not flashinstance Is Nothing Then
                         With flashinstance
                             .UseInitialEstimatesForPhase1 = True
@@ -1020,10 +1052,10 @@ Public Class FormDataRegression
                 Case DataType.TTxSE, DataType.TTxSS
                     If currcase.datatype = DataType.TTxSE Then
                         proppack.Parameters("PP_FLASHALGORITHM") = 7
-                        proppack.FlashAlgorithm = FlashMethod.NestedLoopsSLE
+                        proppack.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE
                     Else
                         proppack.Parameters("PP_FLASHALGORITHM") = 10
-                        proppack.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS
+                        proppack.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE_SS
                     End If
                     proppack.Parameters("PP_PTFELT") = 0.001
                     proppack.Parameters("PP_PTFMEI") = 1000
@@ -1252,7 +1284,9 @@ Public Class FormDataRegression
         Catch ex As Exception
 
             itn += 1
-            Me.tbRegResults.AppendText("Iteration #" & itn & ", Exception: " & ex.ToString & vbCrLf)
+            Me.tbRegResults.AppendText("Iteration #" & itn & ", Exception: " & ex.Message.ToString & vbCrLf)
+
+            f = Double.MaxValue
 
         End Try
 
@@ -1260,7 +1294,7 @@ Public Class FormDataRegression
 
     End Function
 
-    Private Function FunctionGradient(ByVal x() As Double) As Double()
+    Public Function FunctionGradient(ByVal x() As Double) As Double()
 
         Application.DoEvents()
         If cancel Then
@@ -1270,7 +1304,7 @@ Public Class FormDataRegression
 
         Dim g(x.Length - 1) As Double
 
-        Dim epsilon As Double = 0.00001
+        Dim epsilon As Double = 0.01
 
         Dim f2(x.Length - 1), f3(x.Length - 1) As Double
         Dim x2(x.Length - 1), x3(x.Length - 1) As Double
@@ -1281,14 +1315,42 @@ Public Class FormDataRegression
                 x2(j) = x(j)
                 x3(j) = x(j)
             Next
-            x2(i) = x(i) + epsilon
-            x3(i) = x(i) - epsilon
+            If x(i) <> 0.0# Then
+                x2(i) = x(i) * (1 + epsilon)
+                x3(i) = x(i) * (1 - epsilon)
+            Else
+                x2(i) = x(i) + epsilon / 1000
+                x3(i) = x(i) - epsilon / 1000
+            End If
             f2(i) = FunctionValue(x2)
             f3(i) = FunctionValue(x3)
             g(i) = (f2(i) - f3(i)) / (x2(i) - x3(i))
         Next
 
         Return g
+
+    End Function
+
+    Private Function GetSolver(solver As String) As SwarmOps.Optimizer
+
+        Select Case solver
+            Case "Differential Evolution"
+                Return New SwarmOps.Optimizers.DE()
+            Case "Gradient Descent"
+                Return New SwarmOps.Optimizers.GD()
+            Case "Local Unimodal Sampling"
+                Return New SwarmOps.Optimizers.LUS()
+            Case "Many Optimizing Liaisons"
+                Return New SwarmOps.Optimizers.MOL()
+            Case "Mesh"
+                Return New SwarmOps.Optimizers.MESH()
+            Case "Particle Swarm"
+                Return New SwarmOps.Optimizers.PS()
+            Case "Particle Swarm Optimization"
+                Return New SwarmOps.Optimizers.PSO()
+            Case Else
+                Return Nothing
+        End Select
 
     End Function
 
@@ -2571,7 +2633,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong"
                 With gridInEst.Rows
                     .Clear()
-                    .Add(New Object() {"kij", 0.0#, False})
+                    .Add(New Object() {"kij", -0.5, 0.0#, 0.5, False})
                 End With
                 Button1.Enabled = False
                 Button2.Enabled = False
@@ -2582,7 +2644,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "Lee-Kesler-Plöcker"
                 With gridInEst.Rows
                     .Clear()
-                    .Add(New Object() {"kij", 1.0#, False})
+                    .Add(New Object() {"kij", 0.9, 1.0#, 1.1, False})
                 End With
                 Button1.Enabled = False
                 Button2.Enabled = False
@@ -2593,8 +2655,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "PRSV2-M"
                 With gridInEst.Rows
                     .Clear()
-                    .Add(New Object() {"kij", 0.0#, False})
-                    .Add(New Object() {"kji", 0.0#, False})
+                    .Add(New Object() {"kij", -0.5, 0.0#, 0.5, False})
+                    .Add(New Object() {"kji", -0.5, 0.0#, 0.5, False})
                 End With
                 Button1.Enabled = False
                 Button2.Enabled = False
@@ -2605,8 +2667,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "PRSV2-VL"
                 With gridInEst.Rows
                     .Clear()
-                    .Add(New Object() {"kij", 0.001#, False})
-                    .Add(New Object() {"kji", 0.001#, False})
+                    .Add(New Object() {"kij", -0.5, 0.0#, 0.5, False})
+                    .Add(New Object() {"kji", -0.5, 0.0#, 0.5, False})
                 End With
                 Button1.Enabled = False
                 Button2.Enabled = False
@@ -2617,8 +2679,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "UNIQUAC"
                 With gridInEst.Rows
                     .Clear()
-                    .Add(New Object() {"A12 (cal/mol)", 0.0#, False})
-                    .Add(New Object() {"A21 (cal/mol)", 0.0#, False})
+                    .Add(New Object() {"A12 (cal/mol)", -5000, 0.0#, 5000, False})
+                    .Add(New Object() {"A21 (cal/mol)", -5000, 0.0#, 5000, False})
                 End With
                 Button1.Enabled = True
                 Button2.Enabled = True
@@ -2628,9 +2690,9 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "NRTL"
                 With gridInEst.Rows
                     .Clear()
-                    .Add(New Object() {"A12 (cal/mol)", 0.0#, False})
-                    .Add(New Object() {"A21 (cal/mol)", 0.0#, False})
-                    .Add(New Object() {"alpha12", 0.3#, False})
+                    .Add(New Object() {"A12 (cal/mol)", -5000, 0.0#, 5000, False})
+                    .Add(New Object() {"A21 (cal/mol)", -5000, 0.0#, 5000, False})
+                    .Add(New Object() {"alpha12", 0.0#, 0.3#, 0.8#, False})
                 End With
                 Button1.Enabled = True
                 Button2.Enabled = True
@@ -2651,9 +2713,9 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 If cbDataType.SelectedItem.ToString.Contains("LL") Then
                     Try
                         Dim estimates As Double() = EstimateNRTL(cbCompound1.SelectedItem.ToString, cbCompound2.SelectedItem.ToString, "UNIFAC-LL")
-                        Me.gridInEst.Rows(0).Cells(1).Value = estimates(0)
-                        Me.gridInEst.Rows(1).Cells(1).Value = estimates(1)
-                        Me.gridInEst.Rows(2).Cells(1).Value = estimates(2)
+                        Me.gridInEst.Rows(0).Cells(2).Value = estimates(0)
+                        Me.gridInEst.Rows(1).Cells(2).Value = estimates(1)
+                        Me.gridInEst.Rows(2).Cells(2).Value = estimates(2)
                     Catch ex As Exception
                         MessageBox.Show(ex.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Finally
@@ -2662,9 +2724,9 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 Else
                     Try
                         Dim estimates As Double() = EstimateNRTL(cbCompound1.SelectedItem.ToString, cbCompound2.SelectedItem.ToString, "UNIFAC")
-                        Me.gridInEst.Rows(0).Cells(1).Value = estimates(0)
-                        Me.gridInEst.Rows(1).Cells(1).Value = estimates(1)
-                        Me.gridInEst.Rows(2).Cells(1).Value = estimates(2)
+                        Me.gridInEst.Rows(0).Cells(2).Value = estimates(0)
+                        Me.gridInEst.Rows(1).Cells(2).Value = estimates(1)
+                        Me.gridInEst.Rows(2).Cells(2).Value = estimates(2)
                     Catch ex As Exception
                         MessageBox.Show(ex.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Finally
@@ -2675,8 +2737,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 If cbDataType.SelectedItem.ToString.Contains("LL") Then
                     Try
                         Dim estimates As Double() = EstimateUNIQUAC(cbCompound1.SelectedItem.ToString, cbCompound2.SelectedItem.ToString, "UNIFAC-LL")
-                        Me.gridInEst.Rows(0).Cells(1).Value = estimates(0)
-                        Me.gridInEst.Rows(1).Cells(1).Value = estimates(1)
+                        Me.gridInEst.Rows(0).Cells(2).Value = estimates(0)
+                        Me.gridInEst.Rows(1).Cells(2).Value = estimates(1)
                     Catch ex As Exception
                         MessageBox.Show(ex.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Finally
@@ -2685,8 +2747,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 Else
                     Try
                         Dim estimates As Double() = EstimateUNIQUAC(cbCompound1.SelectedItem.ToString, cbCompound2.SelectedItem.ToString, "UNIFAC")
-                        Me.gridInEst.Rows(0).Cells(1).Value = estimates(0)
-                        Me.gridInEst.Rows(1).Cells(1).Value = estimates(1)
+                        Me.gridInEst.Rows(0).Cells(2).Value = estimates(0)
+                        Me.gridInEst.Rows(1).Cells(2).Value = estimates(1)
                     Catch ex As Exception
                         MessageBox.Show(ex.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Finally
@@ -2699,9 +2761,9 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
     Dim actu(5), actn(5) As Double
     Dim ppu As PropertyPackages.UNIQUACPropertyPackage
-    Dim uniquac As UNIQUAC
+    Dim uniquac As PropertyPackages.Auxiliary.UNIQUAC
     Dim ppn As PropertyPackages.NRTLPropertyPackage
-    Dim nrtl As NRTL
+    Dim nrtl As PropertyPackages.Auxiliary.NRTL
     Dim ms As Streams.MaterialStream
 
     Private Function FunctionValueNRTL(ByVal x() As Double) As Double
@@ -2709,8 +2771,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim a1(1), a2(1), a3(1) As Double
 
         nrtl.InteractionParameters.Clear()
-        nrtl.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, NRTL_IPData))
-        nrtl.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New NRTL_IPData())
+        nrtl.InteractionParameters.Add(ppn.RET_VIDS()(0), New Dictionary(Of String, PropertyPackages.Auxiliary.NRTL_IPData))
+        nrtl.InteractionParameters(ppn.RET_VIDS()(0)).Add(ppn.RET_VIDS()(1), New PropertyPackages.Auxiliary.NRTL_IPData())
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A12 = x(0)
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).A21 = x(1)
         nrtl.InteractionParameters(ppn.RET_VIDS()(0))(ppn.RET_VIDS()(1)).alpha12 = 0.2
@@ -2762,8 +2824,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim a1(1), a2(1), a3(1) As Double
 
         uniquac.InteractionParameters.Clear()
-        uniquac.InteractionParameters.Add(ppu.RET_VIDS()(0), New Dictionary(Of String, UNIQUAC_IPData))
-        uniquac.InteractionParameters(ppu.RET_VIDS()(0)).Add(ppu.RET_VIDS()(1), New UNIQUAC_IPData())
+        uniquac.InteractionParameters.Add(ppu.RET_VIDS()(0), New Dictionary(Of String, PropertyPackages.Auxiliary.UNIQUAC_IPData))
+        uniquac.InteractionParameters(ppu.RET_VIDS()(0)).Add(ppu.RET_VIDS()(1), New PropertyPackages.Auxiliary.UNIQUAC_IPData())
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A12 = x(0)
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A21 = x(1)
 
@@ -2816,7 +2878,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Cursor = Cursors.WaitCursor
 
         ppu = New PropertyPackages.UNIQUACPropertyPackage(True)
-        uniquac = New UNIQUAC
+        uniquac = New PropertyPackages.Auxiliary.UNIQUAC
 
         ms = New Streams.MaterialStream("", "")
 
@@ -2825,11 +2887,11 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         comp2 = FormMain.AvailableComponents(id2)
 
         With ms
-            For Each phase As BaseClasses.Phase In ms.Phases.Values
+            For Each phase In ms.Phases.Values
                 With phase
-                    .Compounds.Add(comp1.Name, New BaseClasses.Compound(comp1.Name, ""))
+                    .Compounds.Add(comp1.Name, New Compound(comp1.Name, ""))
                     .Compounds(comp1.Name).ConstantProperties = comp1
-                    .Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
+                    .Compounds.Add(comp2.Name, New Compound(comp2.Name, ""))
                     .Compounds(comp2.Name).ConstantProperties = comp2
                 End With
             Next
@@ -2841,28 +2903,28 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim ppufll As UNIFACLLPropertyPackage = Nothing
         Dim ppmu As MODFACPropertyPackage = Nothing
         Dim ppmun As NISTMFACPropertyPackage = Nothing
-        Dim unif As Unifac = Nothing
-        Dim unifll As UnifacLL = Nothing
-        Dim modf As Modfac = Nothing
-        Dim nmodf As NISTMFAC = Nothing
+        Dim unif As PropertyPackages.Auxiliary.Unifac = Nothing
+        Dim unifll As PropertyPackages.Auxiliary.UnifacLL = Nothing
+        Dim modf As PropertyPackages.Auxiliary.Modfac = Nothing
+        Dim nmodf As PropertyPackages.Auxiliary.NISTMFAC = Nothing
 
         Select Case model
             Case "UNIFAC"
                 ppuf = New PropertyPackages.UNIFACPropertyPackage(True)
                 ppuf.CurrentMaterialStream = ms
-                unif = New Unifac
+                unif = New PropertyPackages.Auxiliary.Unifac
             Case "UNIFAC-LL"
                 ppufll = New PropertyPackages.UNIFACLLPropertyPackage(True)
                 ppufll.CurrentMaterialStream = ms
-                unifll = New UnifacLL
+                unifll = New PropertyPackages.Auxiliary.UnifacLL
             Case "MODFAC"
                 ppmu = New PropertyPackages.MODFACPropertyPackage(True)
                 ppmu.CurrentMaterialStream = ms
-                modf = New Modfac
+                modf = New PropertyPackages.Auxiliary.Modfac
             Case Else
                 ppmun = New PropertyPackages.NISTMFACPropertyPackage(True)
                 ppmun.CurrentMaterialStream = ms
-                nmodf = New NISTMFAC
+                nmodf = New PropertyPackages.Auxiliary.NISTMFAC
         End Select
 
         Dim T1 = 298.15
@@ -2873,7 +2935,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         If My.Settings.EnableParallelProcessing Then
 
-            If My.Settings.EnableGPUProcessing Then Settings.gpu.EnableMultithreading()
+            If My.Settings.EnableGPUProcessing Then GlobalSettings.Settings.gpu.EnableMultithreading()
             Try
                 Dim task1 As Task = New Task(Sub()
                                                  Select Case model
@@ -2919,8 +2981,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 Throw ae.Flatten().InnerException
             Finally
                 If My.Settings.EnableGPUProcessing Then
-                    Settings.gpu.DisableMultithreading()
-                    Settings.gpu.FreeAll()
+                    GlobalSettings.Settings.gpu.DisableMultithreading()
+                    GlobalSettings.Settings.gpu.FreeAll()
                 End If
             End Try
 
@@ -2996,7 +3058,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Cursor = Cursors.WaitCursor
 
         ppn = New PropertyPackages.NRTLPropertyPackage(True)
-        nrtl = New NRTL
+        nrtl = New PropertyPackages.Auxiliary.NRTL
 
         ms = New Streams.MaterialStream("", "")
 
@@ -3005,11 +3067,11 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         comp2 = FormMain.AvailableComponents(id2)
 
         With ms
-            For Each phase As BaseClasses.Phase In ms.Phases.Values
+            For Each phase In ms.Phases.Values
                 With phase
-                    .Compounds.Add(comp1.Name, New BaseClasses.Compound(comp1.Name, ""))
+                    .Compounds.Add(comp1.Name, New Compound(comp1.Name, ""))
                     .Compounds(comp1.Name).ConstantProperties = comp1
-                    .Compounds.Add(comp2.Name, New BaseClasses.Compound(comp2.Name, ""))
+                    .Compounds.Add(comp2.Name, New Compound(comp2.Name, ""))
                     .Compounds(comp2.Name).ConstantProperties = comp2
                 End With
             Next
@@ -3021,28 +3083,28 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim ppufll As UNIFACLLPropertyPackage = Nothing
         Dim ppmu As MODFACPropertyPackage = Nothing
         Dim ppmun As NISTMFACPropertyPackage = Nothing
-        Dim unif As Unifac = Nothing
-        Dim unifll As UnifacLL = Nothing
-        Dim modf As Modfac = Nothing
-        Dim nmodf As NISTMFAC = Nothing
+        Dim unif As PropertyPackages.Auxiliary.Unifac = Nothing
+        Dim unifll As PropertyPackages.Auxiliary.UnifacLL = Nothing
+        Dim modf As PropertyPackages.Auxiliary.Modfac = Nothing
+        Dim nmodf As PropertyPackages.Auxiliary.NISTMFAC = Nothing
 
         Select Case model
             Case "UNIFAC"
                 ppuf = New PropertyPackages.UNIFACPropertyPackage(True)
                 ppuf.CurrentMaterialStream = ms
-                unif = New Unifac
+                unif = New PropertyPackages.Auxiliary.Unifac
             Case "UNIFAC-LL"
                 ppufll = New PropertyPackages.UNIFACLLPropertyPackage(True)
                 ppufll.CurrentMaterialStream = ms
-                unifll = New UnifacLL
+                unifll = New PropertyPackages.Auxiliary.UnifacLL
             Case "MODFAC"
                 ppmu = New PropertyPackages.MODFACPropertyPackage(True)
                 ppmu.CurrentMaterialStream = ms
-                modf = New Modfac
+                modf = New PropertyPackages.Auxiliary.Modfac
             Case Else
                 ppmun = New PropertyPackages.NISTMFACPropertyPackage(True)
                 ppmun.CurrentMaterialStream = ms
-                nmodf = New NISTMFAC
+                nmodf = New PropertyPackages.Auxiliary.NISTMFAC
         End Select
 
         Dim T1 = 298.15
@@ -3053,7 +3115,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         If My.Settings.EnableParallelProcessing Then
 
-            If My.Settings.EnableGPUProcessing Then Settings.gpu.EnableMultithreading()
+            If My.Settings.EnableGPUProcessing Then GlobalSettings.Settings.gpu.EnableMultithreading()
             Try
                 Dim task1 As Task = New Task(Sub()
                                                  Select Case model
@@ -3099,8 +3161,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 Throw ae.Flatten().InnerException
             Finally
                 If My.Settings.EnableGPUProcessing Then
-                    Settings.gpu.DisableMultithreading()
-                    Settings.gpu.FreeAll()
+                    GlobalSettings.Settings.gpu.DisableMultithreading()
+                    GlobalSettings.Settings.gpu.FreeAll()
                 End If
             End Try
 
@@ -3175,9 +3237,9 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "NRTL"
                 Try
                     Dim estimates As Double() = EstimateNRTL(cbCompound1.SelectedItem.ToString, cbCompound2.SelectedItem.ToString, "MODFAC")
-                    Me.gridInEst.Rows(0).Cells(1).Value = estimates(0)
-                    Me.gridInEst.Rows(1).Cells(1).Value = estimates(1)
-                    Me.gridInEst.Rows(2).Cells(1).Value = estimates(2)
+                    Me.gridInEst.Rows(0).Cells(2).Value = estimates(0)
+                    Me.gridInEst.Rows(1).Cells(2).Value = estimates(1)
+                    Me.gridInEst.Rows(2).Cells(2).Value = estimates(2)
                 Catch ex As Exception
                     MessageBox.Show(ex.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Finally
@@ -3186,8 +3248,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "UNIQUAC"
                 Try
                     Dim estimates As Double() = EstimateUNIQUAC(cbCompound1.SelectedItem.ToString, cbCompound2.SelectedItem.ToString, "MODFAC")
-                    Me.gridInEst.Rows(0).Cells(1).Value = estimates(0)
-                    Me.gridInEst.Rows(1).Cells(1).Value = estimates(1)
+                    Me.gridInEst.Rows(0).Cells(2).Value = estimates(0)
+                    Me.gridInEst.Rows(1).Cells(2).Value = estimates(1)
                 Catch ex As Exception
                     MessageBox.Show(ex.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Finally
@@ -3391,7 +3453,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
             Me.tbRegResults.AppendText("Starting one-time calc for " & currcase.model & " model parameter estimation..." & vbCrLf)
 
-            Dim ppm As New CAPEOPENManager()
+            Dim ppm As New Thermodynamics.CAPEOPENManager()
 
             Select Case currcase.model
                 Case "PC-SAFT"
@@ -3455,44 +3517,44 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Select Case currcase.model
             Case "PC-SAFT"
                 initval2 = initval
-                lconstr2 = New Double() {-0.5#}
-                uconstr2 = New Double() {0.5#}
+                lconstr2 = New Double() {currcase.llim1}
+                uconstr2 = New Double() {currcase.ulim1}
                 fixed = New Boolean() {currcase.fixed1}
                 nvar = 1
             Case "Peng-Robinson"
                 initval2 = initval
-                lconstr2 = New Double() {-0.5#}
-                uconstr2 = New Double() {0.5#}
+                lconstr2 = New Double() {currcase.llim1}
+                uconstr2 = New Double() {currcase.ulim1}
                 fixed = New Boolean() {currcase.fixed1}
                 nvar = 1
             Case "PRSV2-M", "PRSV2-VL"
                 nvar = 2
                 initval2 = initval
-                lconstr2 = New Double() {-0.5#, -0.5#}
-                uconstr2 = New Double() {0.5#, 0.5#}
+                lconstr2 = New Double() {currcase.llim1, currcase.llim2}
+                uconstr2 = New Double() {currcase.ulim1, currcase.ulim2}
                 fixed = New Boolean() {currcase.fixed1, currcase.fixed2}
             Case "Soave-Redlich-Kwong"
                 initval2 = initval
-                lconstr2 = New Double() {-0.5#}
-                uconstr2 = New Double() {0.5#}
+                lconstr2 = New Double() {currcase.llim1}
+                uconstr2 = New Double() {currcase.ulim1}
                 nvar = 1
                 fixed = New Boolean() {currcase.fixed1}
             Case "UNIQUAC"
                 nvar = 2
                 initval2 = initval
-                lconstr2 = New Double() {-3000000.0#, -3000000.0#}
-                uconstr2 = New Double() {3000000.0#, 3000000.0#}
+                lconstr2 = New Double() {currcase.llim1, currcase.llim2}
+                uconstr2 = New Double() {currcase.ulim1, currcase.ulim2}
                 fixed = New Boolean() {currcase.fixed1, currcase.fixed2}
             Case "NRTL"
                 nvar = 3
                 initval2 = initval
-                lconstr2 = New Double() {-3000000.0#, -3000000.0#, 0.0#}
-                uconstr2 = New Double() {3000000.0#, 3000000.0#, 0.8#}
+                lconstr2 = New Double() {currcase.llim1, currcase.llim2, currcase.llim3}
+                uconstr2 = New Double() {currcase.ulim1, currcase.ulim2, currcase.ulim3}
                 fixed = New Boolean() {currcase.fixed1, currcase.fixed2, currcase.fixed3}
             Case "Lee-Kesler-Plöcker"
                 initval2 = initval
-                lconstr2 = New Double() {0.9#}
-                uconstr2 = New Double() {1.1#}
+                lconstr2 = New Double() {currcase.llim1}
+                uconstr2 = New Double() {currcase.ulim1}
                 nvar = 1
                 fixed = New Boolean() {currcase.fixed1}
         End Select
@@ -3501,7 +3563,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         Me.tbRegResults.AppendText("Starting experimental data regression for " & currcase.model & " model parameter estimation..." & vbCrLf)
 
-        Dim ppm As New CAPEOPENManager()
+        Dim ppm As New Thermodynamics.CAPEOPENManager()
 
         Select Case currcase.model
             Case "PC-SAFT"
@@ -3580,6 +3642,32 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                     'solve the problem 
                     status = problem.SolveProblem(initval2, obj, Nothing, Nothing, Nothing, Nothing)
                 End Using
+
+            Case "Particle Swarm", "Local Unimodal Sampling", "Gradient Descent", "Differential Evolution",
+                "Particle Swarm Optimization", "Many Optimizing Liaisons", "Mesh"
+
+                SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
+
+                For i = 0 To nvar - 1
+                    If fixed(i) Then
+                        lconstr2(i) = initval2(i)
+                        uconstr2(i) = initval2(i)
+                    End If
+                Next
+
+                Dim sproblem As New RegressionProblem(Me) With {._Dim = initval2.Length, ._LB = lconstr2, ._UB = uconstr2, ._INIT = initval2, ._Name = "Regression"}
+                sproblem.MaxIterations = currcase.maxits * initval2.Length
+                sproblem.MinIterations = currcase.maxits
+                sproblem.Tolerance = currcase.tolerance
+                Dim opt As SwarmOps.Optimizer = GetSolver(currcase.method)
+                opt.Problem = sproblem
+                opt.RequireFeasible = True
+                Dim sresult = opt.Optimize(opt.DefaultParameters)
+
+                If Not sresult.Feasible Then Throw New Exception("Error: Feasible solution not found after " & sresult.Iterations & " iterations.")
+
+                'initval2 = sresult.Parameters
+
         End Select
 
         Me.tbRegResults.AppendText("Finished!")
@@ -3617,7 +3705,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             End With
             If Me.tbIPDBName.Text <> "" Then
                 Try
-                    Databases.UserIPDB.AddInteractionParameters(New BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
+                    Global.DWSIM.Databases.UserIPDB.AddInteractionParameters(New InteractionParameter() {IP}, tbIPDBName.Text, True)
                     MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
                 Catch ex As Exception
                     MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -3641,9 +3729,9 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "NRTL"
                 Try
                     Dim estimates As Double() = EstimateNRTL(cbCompound1.SelectedItem.ToString, cbCompound2.SelectedItem.ToString, "MODFAC-NIST")
-                    Me.gridInEst.Rows(0).Cells(1).Value = estimates(0)
-                    Me.gridInEst.Rows(1).Cells(1).Value = estimates(1)
-                    Me.gridInEst.Rows(2).Cells(1).Value = estimates(2)
+                    Me.gridInEst.Rows(0).Cells(2).Value = estimates(0)
+                    Me.gridInEst.Rows(1).Cells(2).Value = estimates(1)
+                    Me.gridInEst.Rows(2).Cells(2).Value = estimates(2)
                 Catch ex As Exception
                     MessageBox.Show(ex.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Finally
@@ -3652,8 +3740,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Case "UNIQUAC"
                 Try
                     Dim estimates As Double() = EstimateUNIQUAC(cbCompound1.SelectedItem.ToString, cbCompound2.SelectedItem.ToString, "MODFAC-NIST")
-                    Me.gridInEst.Rows(0).Cells(1).Value = estimates(0)
-                    Me.gridInEst.Rows(1).Cells(1).Value = estimates(1)
+                    Me.gridInEst.Rows(0).Cells(2).Value = estimates(0)
+                    Me.gridInEst.Rows(1).Cells(2).Value = estimates(1)
                 Catch ex As Exception
                     MessageBox.Show(ex.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Finally
@@ -3663,6 +3751,83 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
     End Sub
 
 End Class
+
+Public Class RegressionProblem
+
+    Inherits SwarmOps.Problem
+
+    Public _Dim As Integer, _LB(), _UB(), _INIT() As Double, _Name As String
+
+    Private _f As FormDataRegression
+    Private _fit As Double
+
+    Sub New(f As FormDataRegression)
+        _f = f
+    End Sub
+
+    Public Overrides ReadOnly Property Dimensionality As Integer
+        Get
+            Return _Dim
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property LowerBound As Double()
+        Get
+            Return _LB
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property LowerInit As Double()
+        Get
+            Return _INIT
+        End Get
+    End Property
+    Public Overrides ReadOnly Property UpperInit As Double()
+        Get
+            Return _INIT
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property MinFitness As Double
+        Get
+            Return Double.MinValue
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property Name As String
+        Get
+            Return _Name
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property UpperBound As Double()
+        Get
+            Return _UB
+        End Get
+    End Property
+
+    Public Overrides ReadOnly Property HasGradient As Boolean
+        Get
+            Return True
+        End Get
+    End Property
+
+    Public Overrides Function Gradient(x() As Double, ByRef v() As Double) As Integer
+
+        v = _f.FunctionGradient(x)
+
+        Return 0
+
+    End Function
+
+    Public Overrides Function Fitness(parameters() As Double) As Double
+
+        Return _f.FunctionValue(parameters)
+
+    End Function
+
+End Class
+
 
 Namespace DWSIM.Optimization.DatRegression
 
@@ -3674,7 +3839,7 @@ Namespace DWSIM.Optimization.DatRegression
         Public model As String = "Peng-Robinson"
         Public datatype As DataType = DataType.Pxy
         Public tp, x1p, x2p, yp, pp, calct, calcp, calcy, calcx1l1, calcx1l2, checkp, ts, tl, calcts, calctl As New ArrayList
-        Public method As String = "IPOPT"
+        Public method As String = "Local Unimodal Sampling"
         Public objfunction As String = "Least Squares (min T/P)"
         Public includesd As Boolean = False
         Public results As String = ""
@@ -3687,6 +3852,12 @@ Namespace DWSIM.Optimization.DatRegression
         Public iepar1 As Double = 0.0#
         Public iepar2 As Double = 0.0#
         Public iepar3 As Double = 0.0#
+        Public llim1 As Double = 0.0#
+        Public llim2 As Double = 0.0#
+        Public llim3 As Double = 0.0#
+        Public ulim1 As Double = 0.0#
+        Public ulim2 As Double = 0.0#
+        Public ulim3 As Double = 0.0#
         Public fixed1 As Boolean = False
         Public fixed2 As Boolean = False
         Public fixed3 As Boolean = False

@@ -1,0 +1,10 @@
+﻿/// ------------------------------------------------------
+/// RandomOps - (Pseudo) Random Number Generator For C#
+/// Copyright (C) 2003-2010 Magnus Erik Hvass Pedersen.
+/// Please see the file license.txt for license details.
+/// RandomOps on the internet: http://www.Hvass-Labs.org/
+/// ------------------------------------------------------
+
+Ideas for extensions to RandomOps:
+
+- OnFallback events in ByteStream.

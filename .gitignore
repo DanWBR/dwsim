@@ -195,3 +195,6 @@ TCPServer/bin/Debug/*
 /DWSIM.Math/bin/Debug
 /DWSIM.FlowsheetSolver/bin/Debug
 /DWSIM.Compounds/bin/Debug
+/RandomOps/bin
+/SwarmOps/bin/Debug
+/SwarmOps/bin/Release
