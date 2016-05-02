@@ -25,6 +25,7 @@ Imports Cureos.Numerics
 Imports DotNumerics.Optimization
 Imports System.Threading.Tasks
 Imports DotNumerics
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -37,7 +38,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public ForceTwoPhaseOnly As Boolean = False
         Public L1sat As Double = 0.0#
-        Dim ThreePhase As Boolean = False
+        Public ThreePhase As Boolean = False
         Dim n, ecount As Integer
         Dim etol As Double = 0.01
         Dim itol As Double = 0.01
@@ -66,7 +67,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IPOPT = 3
         End Enum
 
-        Public Property Solver As numsolver = numsolver.IPOPT
+        Public Property Solver As OptimizationMethod = OptimizationMethod.IPOPT
 
         Public Enum ObjFuncType As Integer
             MinGibbs = 0
@@ -77,6 +78,50 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Enum
 
         Dim objfunc As ObjFuncType = ObjFuncType.MinGibbs
+
+        Public Function CheckSolution() As Boolean
+
+            If V < 0.0# Then Return False
+            If L < 0.0# Then Return False
+            If L1 < 0.0# Then Return False
+            If L2 < 0.0# Then Return False
+
+            If ThreePhase Then
+                For i As Integer = 0 To n
+                    If (fi(i) * F - Vy(i) * V - Vx1(i) * L1 - Vx2(i) * L2) / F > 0.01 Then Return False
+                Next
+            Else
+                For i As Integer = 0 To n
+                    If (fi(i) * F - Vy(i) * V - Vx1(i) * L) / F > 0.01 Then Return False
+                Next
+            End If
+
+            Return True
+
+        End Function
+
+        Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
+
+            Select Case solver
+                Case OptimizationMethod.DifferentialEvolution
+                    Return New SwarmOps.Optimizers.DE()
+                Case OptimizationMethod.GradientDescent
+                    Return New SwarmOps.Optimizers.GD()
+                Case OptimizationMethod.LocalUnimodalSampling
+                    Return New SwarmOps.Optimizers.LUS()
+                Case OptimizationMethod.ManyOptimizingLiaisons
+                    Return New SwarmOps.Optimizers.MOL()
+                Case OptimizationMethod.Mesh
+                    Return New SwarmOps.Optimizers.MESH()
+                Case OptimizationMethod.ParticleSwarm
+                    Return New SwarmOps.Optimizers.PS()
+                Case OptimizationMethod.ParticleSwarmOptimization
+                    Return New SwarmOps.Optimizers.PSO()
+                Case Else
+                    Return Nothing
+            End Select
+
+        End Function
 
         Public Overrides Function Flash_PT(ByVal Vz() As Double, ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi() As Double = Nothing) As Object
 
@@ -256,19 +301,72 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             objval0 = 0.0#
 
             Dim obj As Double
-            Dim status As IpoptReturnCode
-            Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, _
-             0, 0, AddressOf eval_f, AddressOf eval_g, _
-             AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                problem.AddOption("tol", etol)
-                problem.AddOption("max_iter", maxit_e)
-                problem.AddOption("mu_strategy", "adaptive")
-                problem.AddOption("hessian_approximation", "limited-memory")
-                'problem.AddOption("hessian_approximation", "exact")
-                'problem.SetIntermediateCallback(AddressOf intermediate)
-                'solve the problem 
-                status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
-            End Using
+            Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
+
+            objval = 0.0#
+            objval0 = 0.0#
+
+            Select Case Me.Solver
+                Case OptimizationMethod.Limited_Memory_BGFS
+                    Dim variables(n) As OptBoundVariable
+                    For i = 0 To n
+                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i), False, lconstr(i), uconstr(i))
+                    Next
+                    Dim solver As New L_BFGS_B
+                    solver.Tolerance = etol
+                    solver.MaxFunEvaluations = maxit_e
+                    initval = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
+                    solver = Nothing
+                Case OptimizationMethod.Truncated_Newton
+                    Dim variables(n) As OptBoundVariable
+                    For i = 0 To n
+                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i), False, lconstr(i), uconstr(i))
+                    Next
+                    Dim solver As New TruncatedNewton
+                    solver.Tolerance = etol
+                    solver.MaxFunEvaluations = maxit_e
+                    initval = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
+                    solver = Nothing
+                Case OptimizationMethod.Simplex
+                    Dim variables(n) As OptBoundVariable
+                    For i = 0 To n
+                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i), False, lconstr(i), uconstr(i))
+                    Next
+                    Dim solver As New Simplex
+                    solver.Tolerance = etol
+                    solver.MaxFunEvaluations = maxit_e
+                    initval = solver.ComputeMin(AddressOf FunctionValue, variables)
+                    solver = Nothing
+                Case OptimizationMethod.IPOPT
+                    Calculator.CheckParallelPInvoke()
+                    Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, _
+                           0, 0, AddressOf eval_f, AddressOf eval_g, _
+                           AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                        problem.AddOption("tol", etol)
+                        problem.AddOption("max_iter", maxit_e)
+                        problem.AddOption("mu_strategy", "adaptive")
+                        problem.AddOption("hessian_approximation", "limited-memory")
+                        status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
+                    End Using
+                Case OptimizationMethod.DifferentialEvolution, OptimizationMethod.GradientDescent, OptimizationMethod.LocalUnimodalSampling,
+                    OptimizationMethod.ManyOptimizingLiaisons, OptimizationMethod.Mesh, OptimizationMethod.ParticleSwarm, OptimizationMethod.ParticleSwarmOptimization
+
+                    SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
+
+                    Dim sproblem As New GibbsProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "Gibbs"}
+                    sproblem.MaxIterations = maxit_e * initval.Length * 10
+                    sproblem.MinIterations = maxit_e * 10
+                    sproblem.Tolerance = 0.0000000000000001
+                    Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
+                    opt.Problem = sproblem
+                    opt.RequireFeasible = True
+                    Dim sresult = opt.Optimize(opt.DefaultParameters)
+
+                    If Not sresult.Feasible Or Not CheckSolution() Then Throw New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
+
+                    initval = sresult.Parameters
+
+            End Select
 
             For i = 0 To initval.Length - 1
                 If Double.IsNaN(initval(i)) Then initval(i) = 0.0#
@@ -440,10 +538,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             objval = 0.0#
                             objval0 = 0.0#
 
-                            Solver = numsolver.IPOPT
+                            status = IpoptReturnCode.Invalid_Problem_Definition
 
                             Select Case Me.Solver
-                                Case numsolver.Limited_Memory_BGFS
+                                Case OptimizationMethod.Limited_Memory_BGFS
                                     Dim variables(2 * n + 1) As OptBoundVariable
                                     For i = 0 To 2 * n + 1
                                         variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
@@ -453,7 +551,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                     solver.MaxFunEvaluations = maxit_e
                                     initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                                     solver = Nothing
-                                Case numsolver.Truncated_Newton
+                                Case OptimizationMethod.Truncated_Newton
                                     Dim variables(2 * n + 1) As OptBoundVariable
                                     For i = 0 To 2 * n + 1
                                         variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
@@ -463,7 +561,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                     solver.MaxFunEvaluations = maxit_e
                                     initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                                     solver = Nothing
-                                Case numsolver.Simplex
+                                Case OptimizationMethod.Simplex
                                     Dim variables(2 * n + 1) As OptBoundVariable
                                     For i = 0 To 2 * n + 1
                                         variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
@@ -473,7 +571,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                     solver.MaxFunEvaluations = maxit_e
                                     initval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
                                     solver = Nothing
-                                Case numsolver.IPOPT
+                                Case OptimizationMethod.IPOPT
                                     Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0, _
                                             AddressOf eval_f, AddressOf eval_g, _
                                             AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
@@ -486,6 +584,24 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                         'solve the problem 
                                         status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
                                     End Using
+                                Case OptimizationMethod.DifferentialEvolution, OptimizationMethod.GradientDescent, OptimizationMethod.LocalUnimodalSampling,
+                                        OptimizationMethod.ManyOptimizingLiaisons, OptimizationMethod.Mesh, OptimizationMethod.ParticleSwarm, OptimizationMethod.ParticleSwarmOptimization
+
+                                    SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
+
+                                    Dim sproblem As New GibbsProblem(Me) With {._Dim = initval2.Length, ._LB = lconstr2, ._UB = uconstr2, ._INIT = initval2, ._Name = "Gibbs3P"}
+                                    sproblem.MaxIterations = maxit_e * initval2.Length * 10
+                                    sproblem.MinIterations = maxit_e * 10
+                                    sproblem.Tolerance = 1.0E-20
+                                    Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
+                                    opt.Problem = sproblem
+                                    opt.RequireFeasible = True
+                                    Dim sresult = opt.Optimize(opt.DefaultParameters)
+
+                                    If Not sresult.Feasible Or Not CheckSolution() Then Throw New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
+
+                                    initval2 = sresult.Parameters
+
                             End Select
 
                             For i = 0 To initval2.Length - 1
@@ -1834,7 +1950,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
         'Function Values
 
-        Private Function FunctionValue(ByVal x() As Double) As Double
+        Public Function FunctionValue(ByVal x() As Double) As Double
 
             proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
@@ -2047,7 +2163,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
         End Function
 
-        Private Function FunctionGradient(ByVal x() As Double) As Double()
+        Public Function FunctionGradient(ByVal x() As Double) As Double()
 
             Dim g(x.Length - 1) As Double
             Dim epsilon As Double = 0.000001
@@ -2384,6 +2500,103 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
             objval0 = objval
             objval = obj_value
             Return True
+        End Function
+
+    End Class
+
+    Public Class GibbsProblem
+
+        Inherits SwarmOps.Problem
+
+        Public _Dim As Integer, _LB(), _UB(), _INIT() As Double, _Name As String
+
+        Private _gf As GibbsMinimization3P
+        Private _fit As Double
+
+        Sub New(gf As GibbsMinimization3P)
+            _gf = gf
+        End Sub
+
+        Public Overrides ReadOnly Property Dimensionality As Integer
+            Get
+                Return _Dim
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property LowerBound As Double()
+            Get
+                Return _LB
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property LowerInit As Double()
+            Get
+                Return _INIT
+            End Get
+        End Property
+        Public Overrides ReadOnly Property UpperInit As Double()
+            Get
+                Return _INIT
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MinFitness As Double
+            Get
+                Return Double.MinValue
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return _Name
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property UpperBound As Double()
+            Get
+                Return _UB
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property HasGradient As Boolean
+            Get
+                Return True
+            End Get
+        End Property
+
+        Public Overrides Function Gradient(x() As Double, ByRef v() As Double) As Integer
+
+            v = _gf.FunctionGradient(x)
+
+            Return 0
+
+        End Function
+
+        Public Overrides Function Fitness(parameters() As Double) As Double
+
+            Return _gf.FunctionValue(parameters)
+
+        End Function
+
+        Public Overrides Function Feasible(parameters() As Double) As Boolean
+
+            Dim n = parameters.Length / 2 - 1
+
+            If _gf.threephase Then
+                Dim constraints(n) As Double
+                _gf.eval_g(n + 1, parameters, False, n + 1, constraints)
+                Dim valid As Boolean = True
+                For i = 0 To n
+                    If constraints(i) < 0.0# Or constraints(i) > 1000.0# Then
+                        valid = False
+                        Exit For
+                    End If
+                Next
+                Return MyBase.Feasible(parameters) And valid
+            Else
+                Return MyBase.Feasible(parameters)
+            End If
+
         End Function
 
     End Class

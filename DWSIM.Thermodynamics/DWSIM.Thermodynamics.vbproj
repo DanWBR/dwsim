@@ -277,6 +277,14 @@
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RandomOps\DWSIM.MathOps.RandomOps.csproj">
+      <Project>{f5dfafed-c786-4dc3-9818-16c992de3990}</Project>
+      <Name>DWSIM.MathOps.RandomOps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SwarmOps\DWSIM.MathOps.SwarmOps.csproj">
+      <Project>{8f45efaa-9eac-403f-b2b0-123f0321056e}</Project>
+      <Name>DWSIM.MathOps.SwarmOps</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\dielectricconstants.txt" />

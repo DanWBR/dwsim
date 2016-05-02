@@ -941,6 +941,29 @@ End Class
                 .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_N", "")).InnerText = comp.BO_PNA_N.ToString(cult)
                 .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "BlackOil_PNA_P", "")).InnerText = comp.BO_PNA_P.ToString(cult)
 
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Ion", "")).InnerText = comp.IsIon
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Salt", "")).InnerText = comp.IsSalt
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "HydratedSalt", "")).InnerText = comp.IsHydratedSalt
+
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "HydrationNumber", "")).InnerText = comp.HydrationNumber.ToString(cult)
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Charge", "")).InnerText = comp.Charge.ToString(cult)
+
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PositiveIon", "")).InnerText = comp.PositiveIon
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "NegativeIon", "")).InnerText = comp.NegativeIon
+
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "PositiveIonStoichCoeff", "")).InnerText = comp.PositiveIonStoichCoeff.ToString(cult)
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "NegativeIonStoichCoeff", "")).InnerText = comp.NegativeIonStoichCoeff.ToString(cult)
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "StoichSum", "")).InnerText = comp.StoichSum.ToString(cult)
+
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DelGF_kJ_mol", "")).InnerText = comp.Electrolyte_DelGF.ToString(cult)
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DelHf_kJ_mol", "")).InnerText = comp.Electrolyte_DelHF.ToString(cult)
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Cp_J_mol_K", "")).InnerText = comp.Electrolyte_Cp0.ToString(cult)
+
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Tf_C", "")).InnerText = comp.TemperatureOfFusion.ToString(cult)
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Hfus_at_Tf_kJ_mol", "")).InnerText = comp.EnthalpyOfFusionAtTf.ToString(cult)
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DenS_T_C", "")).InnerText = comp.SolidTs.ToString(cult)
+                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DenS_g_mL", "")).InnerText = comp.SolidDensityAtTs.ToString(cult)
+
                 If comp.UNIFACGroups.Count > 0 Then
                     With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "UNIFAC", ""))
                         For Each kvp As DictionaryEntry In comp.UNIFACGroups
@@ -1263,6 +1286,46 @@ End Class
                             .BO_PNA_P = Double.Parse(node2.InnerText, nf)
                         Case "IsBlackOil"
                             .IsBlackOil = Boolean.Parse(node2.InnerText)
+
+                            'electrolyte
+
+                        Case "Ion"
+                            .IsIon = node2.InnerText
+                        Case "Salt"
+                            .IsSalt = node2.InnerText
+                        Case "HydratedSalt"
+                            .IsHydratedSalt = node2.InnerText
+                        Case "HydrationNumber"
+                            .HydrationNumber = Double.Parse(node2.InnerText, nf)
+                        Case "Charge"
+                            .Charge = node2.InnerText
+                        Case "PositiveIon"
+                            .PositiveIon = node2.InnerText
+                        Case "NegativeIon"
+                            .NegativeIon = node2.InnerText
+                        Case "PositiveIonStoichCoeff"
+                            .PositiveIonStoichCoeff = node2.InnerText
+                        Case "NegativeIonStoichCoeff"
+                            .NegativeIonStoichCoeff = node2.InnerText
+                        Case "StoichSum"
+                            .StoichSum = node2.InnerText
+                        Case "DelGF_kJ_mol"
+                            .Electrolyte_DelGF = Double.Parse(node2.InnerText, nf) 'kJ/mol
+                            .IG_Gibbs_Energy_of_Formation_25C = Double.Parse(node2.InnerText, nf) * 1000 / .Molar_Weight 'kJ/kg
+                        Case "DelHf_kJ_mol"
+                            .Electrolyte_DelHF = Double.Parse(node2.InnerText, nf) 'kJ/mol
+                            .IG_Enthalpy_of_Formation_25C = Double.Parse(node2.InnerText, nf) * 1000 / .Molar_Weight 'kJ/kg
+                        Case "Cp_J_mol_K"
+                            .Electrolyte_Cp0 = Double.Parse(node2.InnerText, nf) 'kJ/mol.K
+                        Case "Tf_C"
+                            .TemperatureOfFusion = Double.Parse(node2.InnerText, nf) 'K
+                        Case "Hfus_at_Tf_kJ_mol"
+                            .EnthalpyOfFusionAtTf = Double.Parse(node2.InnerText, nf) 'kJ/mol
+                        Case "DenS_T_C"
+                            .SolidTs = Double.Parse(node2.InnerText, nf) 'K
+                        Case "DenS_g_mL"
+                            .SolidDensityAtTs = Double.Parse(node2.InnerText, nf)  'kg/m3
+
                     End Select
                 Next
             End With

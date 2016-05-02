@@ -17,7 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Xml
-Imports DWSIM.Thermodynamics.PropertyPackages 
+Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
@@ -26,20 +26,6 @@ Imports Ciloci.Flee
 Imports System.Linq
 
 Namespace DWSIM.Optimization
-
-    Public Enum OptimizationMethod
-        Limited_Memory_BGFS = 0
-        Truncated_Newton = 1
-        Simplex = 2
-        IPOPT = 3
-        ParticleSwarm = 4
-        LocalUnimodalSampling = 5
-        GradientDescent = 6
-        DifferentialEvolution = 7
-        ParticleSwarmOptimization = 8
-        ManyOptimizingLiaisons = 9
-        Mesh = 10
-    End Enum
 
     <System.Serializable()> Public Class OptimizationCase
 
