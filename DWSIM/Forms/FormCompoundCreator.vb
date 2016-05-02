@@ -18,25 +18,24 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
+Imports DWSIM.Thermodynamics.Utilities.Hypos.Methods
 Imports DWSIM.MathOps.MathEx.Common
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Math
 Imports Microsoft.VisualBasic.FileIO
 Imports System.Globalization
-Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
-Imports System.Linq
 
 Public Class FormCompoundCreator
 
     Inherits Form
 
     Public su As New SystemsOfUnits.Units
-    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
-    Public methods As Utilities.Hypos.Methods.HYP
-    Public jb As Utilities.Hypos.Methods.Joback
+    Public methods As HYP
+    Public jb As Joback
     Friend m_props As PROPS
 
     Friend mycase As New CompoundGeneratorCase
@@ -52,23 +51,19 @@ Public Class FormCompoundCreator
 
     Private Sub FormCompoundCreator_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
-
         'Grid UNIFAC
 
         Dim pathsep = System.IO.Path.DirectorySeparatorChar
         Dim picpath As String = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "unifac" & pathsep
+        Dim filename As String = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "unifac.txt"
 
         Dim i As Integer
         Dim ID, GroupType, GroupName, S, TT As String
         Dim L As Boolean = True
-        L = True
 
-        Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.unifac.txt")
-            Using t As New IO.StreamReader(filestr)
-                UNIFAClines = t.ReadToEnd().Split(vbLf)
-            End Using
-        End Using
+
+        L = True
+        UNIFAClines = IO.File.ReadAllLines(filename)
         GroupName = UNIFAClines(2).Split(",")(2)
         With Me.GridUNIFAC.Rows
             .Clear()
@@ -76,7 +71,7 @@ Public Class FormCompoundCreator
                 S = picpath & UNIFAClines(i).Split(",")(7) & ".png"
                 If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
 
-                .Add(New Object() {" ", " ", Convert.ToInt32(0), Image.FromFile(S)})
+                .Add(New Object() {" ", " ", CInt(0), Image.FromFile(S)})
                 .Item(.Count - 1).HeaderCell.Value = "ID " & UNIFAClines(i).Split(",")(1) 'SubGroup
                 .Item(.Count - 1).Cells(0).Value = UNIFAClines(i).Split(",")(2) 'MainGroup
                 .Item(.Count - 1).Cells(1).Value = UNIFAClines(i).Split(",")(3) 'SubGroup
@@ -101,12 +96,8 @@ Public Class FormCompoundCreator
 
         'Grid MODFAC
         L = True
-        Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.modfac.txt")
-            Using t As New IO.StreamReader(filestr)
-                MODFACLines = t.ReadToEnd().Split(vbLf)
-            End Using
-        End Using
-
+        filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "modfac.txt"
+        MODFACLines = IO.File.ReadAllLines(filename)
         Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
         Dim fields As String()
         Dim delimiter As String = ";"
@@ -115,26 +106,69 @@ Public Class FormCompoundCreator
 
         Me.GridMODFAC.Rows.Clear()
 
-        Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.modfac.txt")
-            Using parser As New TextFieldParser(filestr)
-                parser.SetDelimiters(delimiter)
-                parser.ReadLine()
+        Using parser As New TextFieldParser(filename)
+            parser.SetDelimiters(delimiter)
+            parser.ReadLine()
 
-                While Not parser.EndOfData
-                    fields = parser.ReadFields()
-                    With Me.GridMODFAC.Rows
-                        S = picpath & fields(6) & ".png"
+            While Not parser.EndOfData
+                fields = parser.ReadFields()
+                With Me.GridMODFAC.Rows
+                    S = picpath & fields(6) & ".png"
+                    If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
+
+                    .Add(New Object() {CInt(0), CInt(0), CInt(0), Image.FromFile(S)})
+                    .Item(.Count - 1).HeaderCell.Value = "ID " & fields(3)
+                    .Item(.Count - 1).Cells(0).Value = fields(1)
+                    .Item(.Count - 1).Cells(1).Value = fields(2)
+                    .Item(.Count - 1).Cells(2).Value = 0
+                    TT = "Rk / Qk: " & fields(4) & " / " & fields(5) & vbCrLf & _
+                                                             "Example Compound: " & fields(6) & vbCrLf & fields(7)
+
+                    .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(3)}
+
+                    If L Then
+                        .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(230, 230, 200)
+                        .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(230, 230, 200)
+                    Else
+                        .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(200, 230, 230)
+                        .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(200, 230, 230)
+                    End If
+                End With
+            End While
+        End Using
+
+
+        'Grid NIST-MODFAC
+        L = True
+        filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "NIST-MODFAC_RiQi.txt"
+        MODFACLines = IO.File.ReadAllLines(filename)
+        delimiter = vbTab
+        Me.GridNISTMODFAC.Rows.Clear()
+
+        Using parser As New TextFieldParser(filename)
+            parser.SetDelimiters(delimiter)
+            parser.ReadLine()
+            parser.ReadLine()
+
+            While Not parser.EndOfData
+                fields = parser.ReadFields()
+                If fields(0).StartsWith("(") Then
+                    maingroup = fields(0).Split(")")(0).Substring(1)
+                    mainname = fields(0).Trim().Split(")")(1).Trim
+                    L = Not L
+                Else
+                    With Me.GridNISTMODFAC.Rows
+                        S = picpath & fields(4) & ".png"
                         If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
 
-                        .Add(New Object() {Convert.ToInt32(0), Convert.ToInt32(0), Convert.ToInt32(0), Image.FromFile(S)})
-                        .Item(.Count - 1).HeaderCell.Value = "ID " & fields(3)
-                        .Item(.Count - 1).Cells(0).Value = fields(1)
-                        .Item(.Count - 1).Cells(1).Value = fields(2)
+                        .Add(New Object() {CInt(0), CInt(0), CInt(0), Image.FromFile(S)})
+                        .Item(.Count - 1).HeaderCell.Value = "ID " & fields(0)
+                        .Item(.Count - 1).Cells(0).Value = mainname
+                        .Item(.Count - 1).Cells(1).Value = fields(1)
                         .Item(.Count - 1).Cells(2).Value = 0
-                        TT = "Rk / Qk: " & fields(4) & " / " & fields(5) & vbCrLf & _
-                                                                 "Example Compound: " & fields(6) & vbCrLf & fields(7)
-
-                        .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(3)}
+                        TT = "Rk / Qk: " & fields(2) & " / " & fields(3) & vbCrLf & _
+                                                                 "Example Compound: " & fields(4) & vbCrLf & fields(5)
+                        .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(0)}
 
                         If L Then
                             .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(230, 230, 200)
@@ -144,66 +178,14 @@ Public Class FormCompoundCreator
                             .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(200, 230, 230)
                         End If
                     End With
-                End While
-            End Using
+                End If
+            End While
         End Using
 
-        'Grid NIST-MODFAC
-        L = True
-        Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.NIST-MODFAC_RiQi.txt")
-            Using t As New IO.StreamReader(filestr)
-                MODFACLines = t.ReadToEnd().Split(vbLf)
-            End Using
-        End Using
-
-        delimiter = vbTab
-        Me.GridNISTMODFAC.Rows.Clear()
-
-        Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.NIST-MODFAC_RiQi.txt")
-            Using parser As New TextFieldParser(filestr)
-                parser.SetDelimiters(delimiter)
-                parser.ReadLine()
-                parser.ReadLine()
-
-                While Not parser.EndOfData
-                    fields = parser.ReadFields()
-                    If fields(0).StartsWith("(") Then
-                        maingroup = fields(0).Split(")")(0).Substring(1)
-                        mainname = fields(0).Trim().Split(")")(1).Trim
-                        L = Not L
-                    Else
-                        With Me.GridNISTMODFAC.Rows
-                            S = picpath & fields(4) & ".png"
-                            If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
-
-                            .Add(New Object() {Convert.ToInt32(0), Convert.ToInt32(0), Convert.ToInt32(0), Image.FromFile(S)})
-                            .Item(.Count - 1).HeaderCell.Value = "ID " & fields(0)
-                            .Item(.Count - 1).Cells(0).Value = mainname
-                            .Item(.Count - 1).Cells(1).Value = fields(1)
-                            .Item(.Count - 1).Cells(2).Value = 0
-                            TT = "Rk / Qk: " & fields(2) & " / " & fields(3) & vbCrLf & _
-                                                                     "Example Compound: " & fields(4) & vbCrLf & fields(5)
-                            .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(0)}
-
-                            If L Then
-                                .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(230, 230, 200)
-                                .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(230, 230, 200)
-                            Else
-                                .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(200, 230, 230)
-                                .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(200, 230, 230)
-                            End If
-                        End With
-                    End If
-                End While
-            End Using
-        End Using
 
         'Grid Joback
-        Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.jobackgroups.txt")
-            Using t As New IO.StreamReader(filestr)
-                JOBACKlines = t.ReadToEnd().Split(vbLf)
-            End Using
-        End Using
+        filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "JobackGroups.txt"
+        JOBACKlines = IO.File.ReadAllLines(filename)
 
         GroupType = ""
 
@@ -234,11 +216,8 @@ Public Class FormCompoundCreator
         End With
 
         'Grid addition Elements
-        Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.elements.txt")
-            Using t As New IO.StreamReader(filestr)
-                ElementLines = t.ReadToEnd().Split(vbLf)
-            End Using
-        End Using
+        filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "Elements.txt"
+        ElementLines = IO.File.ReadAllLines(filename)
         With Me.AddAtomDataGrid.Rows
             .Clear()
             For i = 1 To ElementLines.Length - 1
@@ -389,6 +368,42 @@ Public Class FormCompoundCreator
                 tbBOPNAP.Text = .cp.BO_PNA_P
                 tbBOPNAN.Text = .cp.BO_PNA_N
                 tbBOPNAA.Text = .cp.BO_PNA_A
+
+            ElseIf .cp.IsIon Or .cp.IsSalt Or .cp.IsHydratedSalt Then
+
+                'electrolyte
+
+                RadioButton3.Checked = True
+
+                .cp.IsBlackOil = False
+
+                TextBoxCAS.Text = .cp.CAS_Number
+                TextBoxFormula.Text = .cp.Formula
+                TextBoxMW.Text = .cp.Molar_Weight
+                TextBoxSMILES.Text = .cp.SMILES
+
+                If Not .cp.SMILES = "" Then
+                    RenderSMILES()
+                End If
+
+                rbIon.Checked = .cp.IsIon
+                rbSalt.Checked = .cp.IsSalt
+                rbHydratedSalt.Checked = .cp.IsHydratedSalt
+                tbPositiveIonFormula.Text = .cp.PositiveIon
+                tbNegativeIonFormula.Text = .cp.NegativeIon
+                tbEsteqCoeffPosIon.Text = .cp.PositiveIonStoichCoeff
+                tbEsteqCoeffNegIon.Text = .cp.NegativeIonStoichCoeff
+                tbElecIonCharge.Text = .cp.Charge
+                tbHydrNumber.Text = .cp.HydrationNumber
+
+                tbElecGibbsEnergyForm.Text = .cp.Electrolyte_DelGF
+                tbElecEnthForm.Text = .cp.Electrolyte_DelHF
+                tbElecHeatCapacityForm.Text = .cp.Electrolyte_Cp0
+
+                tbElecSolidDensT.Text = .cp.SolidTs
+                tbElecSolidDens.Text = .cp.SolidDensityAtTs
+                tbElecSolidTf.Text = .cp.TemperatureOfFusion
+                tbElecEnthFusion.Text = .cp.EnthalpyOfFusionAtTf
 
             Else
 
@@ -573,7 +588,9 @@ Public Class FormCompoundCreator
                     End If
                 Next
 
-                If .cp.NISTMODFACGroups Is Nothing Then .cp.NISTMODFACGroups = New SortedList()
+                If .cp.NISTMODFACGroups Is Nothing Then
+                    .cp.NISTMODFACGroups = New SortedList
+                End If
 
                 For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
                     If .cp.NISTMODFACGroups(r.Cells(1).Value) <> "" Then r.Cells(2).Value = .cp.NISTMODFACGroups(r.Cells(1).Value) 'old file format - Subgroup name
@@ -806,17 +823,17 @@ Public Class FormCompoundCreator
 
                 .cp.UNIFACGroups.Clear()
                 For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
-                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.UNIFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
+                    If CInt(r.Cells(2).Value) <> 0 Then .cp.UNIFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
                 Next
 
                 .cp.MODFACGroups.Clear()
                 For Each r As DataGridViewRow In Me.GridMODFAC.Rows
-                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.MODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
+                    If CInt(r.Cells(2).Value) <> 0 Then .cp.MODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
                 Next
 
                 .cp.NISTMODFACGroups.Clear()
                 For Each r As DataGridViewRow In Me.GridNISTMODFAC.Rows
-                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
+                    If CInt(r.Cells(2).Value) <> 0 Then .cp.NISTMODFACGroups(r.Cells(3).Tag(2)) = r.Cells(2).Value
                 Next
 
                 Dim JC As Integer
@@ -875,9 +892,11 @@ Public Class FormCompoundCreator
                     If row.Index < Me.GridExpDataCpS.Rows.Count - 1 Then mycase.DataCpS.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * .cp.Molar_Weight})
                 Next
 
-            Else
+            ElseIf RadioButton2.Checked Then
 
                 .cp.IsBlackOil = True
+
+                .cp.CompCreatorStudyFile = .Filename
 
                 .cp.BO_GOR = SystemsOfUnits.Converter.ConvertToSI(su.gor, CheckEmptyTextBox(tbBOGOR))
                 .cp.BO_BSW = CheckEmptyTextBox(tbBOBSW)
@@ -892,6 +911,38 @@ Public Class FormCompoundCreator
                 .cp.BO_PNA_P = CheckEmptyTextBox(tbBOPNAP)
                 .cp.BO_PNA_N = CheckEmptyTextBox(tbBOPNAN)
                 .cp.BO_PNA_A = CheckEmptyTextBox(tbBOPNAA)
+
+            Else
+
+                'electrolyte
+
+                .cp.IsBlackOil = False
+
+                .cp.CAS_Number = TextBoxCAS.Text
+                .cp.CompCreatorStudyFile = .Filename
+                .cp.Formula = TextBoxFormula.Text
+                .cp.Molar_Weight = CheckEmptyTextBox(TextBoxMW)
+                .cp.SMILES = TextBoxSMILES.Text
+
+                .cp.IsIon = rbIon.Checked
+                .cp.IsSalt = rbSalt.Checked
+                .cp.IsHydratedSalt = rbHydratedSalt.Checked
+                .cp.PositiveIon = tbPositiveIonFormula.Text
+                .cp.NegativeIon = tbNegativeIonFormula.Text
+                .cp.PositiveIonStoichCoeff = CheckEmptyTextBox(tbEsteqCoeffPosIon)
+                .cp.NegativeIonStoichCoeff = CheckEmptyTextBox(tbEsteqCoeffNegIon)
+                .cp.Charge = CheckEmptyTextBox(tbElecIonCharge)
+                .cp.HydrationNumber = CheckEmptyTextBox(tbHydrNumber)
+                .cp.StoichSum = .cp.PositiveIonStoichCoeff + .cp.NegativeIonStoichCoeff
+
+                .cp.Electrolyte_DelGF = CheckEmptyTextBox(tbElecGibbsEnergyForm)
+                .cp.Electrolyte_DelHF = CheckEmptyTextBox(tbElecEnthForm)
+                .cp.Electrolyte_Cp0 = CheckEmptyTextBox(tbElecHeatCapacityForm)
+
+                .cp.SolidTs = CheckEmptyTextBox(tbElecSolidDensT)
+                .cp.SolidDensityAtTs = CheckEmptyTextBox(tbElecSolidDens)
+                .cp.TemperatureOfFusion = CheckEmptyTextBox(tbElecSolidTf)
+                .cp.EnthalpyOfFusionAtTf = CheckEmptyTextBox(tbElecEnthFusion)
 
             End If
 
@@ -929,8 +980,8 @@ Public Class FormCompoundCreator
 
             loaded = False 'prevent recalculation due to edit field event procedures
 
-            jb = New Utilities.Hypos.Methods.Joback
-            methods = New Utilities.Hypos.Methods.HYP()
+            jb = New Joback
+            methods = New HYP()
 
             'get UNIFAC group amounts
             Dim vn As New ArrayList
@@ -959,7 +1010,7 @@ Public Class FormCompoundCreator
             Dim JGD As Int32() = JG.ToArray(Type.GetType("System.Int32"))
 
             'Calculate atoms list
-            Dim ACL As New System.Collections.Generic.Dictionary(Of String, Integer) ' => Atom Count List
+            Dim ACL As New Dictionary(Of String, Integer) ' => Atom Count List
             Dim Sy As String 'Element Symbol
             Dim AC As Integer 'Atom count
             Dim Formula As String
@@ -1099,8 +1150,8 @@ Public Class FormCompoundCreator
 
                 If Tc > 0 And Pc > 0 And Tb > 0 And MM > 0 And w > 0 Then
                     Hvb = methods.DHvb_Vetere(Tc, Pc, Tb) / MM
-                    If CheckBoxCSSP.Checked Then Me.TextBoxCSSP.Text = Format(((Hvb * MM - 8.314 * Tb) * 238.846 * Thermodynamics.PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(Tb, Tc, Pc, w, MM) / MM / 1000000.0) ^ 0.5, "N")
-                    If CheckBoxCSLV.Checked Then Me.TextBoxCSLV.Text = Format(1 / Thermodynamics.PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(Tb, Tc, Pc, w, MM) * MM / 1000 * 1000000.0, "N")
+                    If CheckBoxCSSP.Checked Then Me.TextBoxCSSP.Text = Format(((Hvb * MM - 8.314 * Tb) * 238.846 * PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(Tb, Tc, Pc, w, MM) / MM / 1000000.0) ^ 0.5, "N")
+                    If CheckBoxCSLV.Checked Then Me.TextBoxCSLV.Text = Format(1 / PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(Tb, Tc, Pc, w, MM) * MM / 1000 * 1000000.0, "N")
                 Else
                     If CheckBoxCSSP.Checked Then Me.TextBoxCSSP.Text = ""
                     If CheckBoxCSLV.Checked Then Me.TextBoxCSLV.Text = ""
@@ -1134,7 +1185,7 @@ Public Class FormCompoundCreator
                 'estimate solid density - DWSIM-Method
                 If rbEstimateSolidDens.Checked Then
                     Dim RoSMP, RoLMP As Double 'solid+liquid density at melting point
-                    RoLMP = Thermodynamics.PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(Tf, Tc, Pc, w, MM, ZRa, 101325, Thermodynamics.PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(Tf, Tc, Pc, w))
+                    RoLMP = PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(Tf, Tc, Pc, w, MM, ZRa, 101325, PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(Tf, Tc, Pc, w))
                     RoSMP = RoLMP * 1.0933 + 0.000037886 * RoLMP ^ 2
                     tbRoS_A.Text = RoSMP / MM + 0.005 * Tf
                     tbRoS_B.Text = -0.005
@@ -1183,7 +1234,7 @@ Public Class FormCompoundCreator
             End If
             For Each r As DataGridViewRow In Me.GridUNIFAC.Rows
                 If Not r.Cells(2).Value Is Nothing Then
-                    If Convert.ToInt32(r.Cells(2).Value) <> 0 Then
+                    If CInt(r.Cells(2).Value) <> 0 Then
                         If Not populating Then
                             mycase.cp.UNIFACGroups.Add(r.Cells(3).Tag(2), r.Cells(2).Value)
                             r.Cells(2).Style.BackColor = Color.PaleGreen
@@ -1234,7 +1285,7 @@ Public Class FormCompoundCreator
     Private Sub SalvarNoBancoDeDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Try
-            Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
+            Global.DWSIM.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
             MessageBox.Show("Compound added to the database.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             MessageBox.Show("Error adding compound to the database: " & ex.Message.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1284,7 +1335,7 @@ Public Class FormCompoundCreator
         Dim obj As Object = Nothing
         Dim lmfit As New DWSIM.Utilities.PetroleumCharacterization.LMFit
 
-        jb = New Utilities.Hypos.Methods.Joback
+        jb = New Joback
 
         m_props = New PROPS()
 
@@ -1334,7 +1385,7 @@ Public Class FormCompoundCreator
 
         Select Case tipo
             Case 0
-                'regressao dos dados
+                'regressão dos dados
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataPVAP, 0), CopyToVector(mycase.DataPVAP, 1), c_pv.Clone, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Pvap, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_pv = obj(0)
                 r_pv = obj(2)
@@ -1358,7 +1409,7 @@ Public Class FormCompoundCreator
                     c_cp(3) = Me.jb.CalcCpD(JGD)
                     obj = New Integer() {0, 0, 0, 10}
                 Else
-                    'regressao dos dados
+                    'regressão dos dados
                     obj = lmfit.GetCoeffs(CopyToVector(mycase.DataCPIG, 0), CopyToVector(mycase.DataCPIG, 1), c_cp, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     c_cp = obj(0)
                     r_cp = obj(2)
@@ -1366,7 +1417,7 @@ Public Class FormCompoundCreator
                 End If
 
             Case 2
-                'regressao dos dados
+                'regressão dos dados
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataLVISC, 0), CopyToVector(mycase.DataLVISC, 1), c_vi, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.LiqVisc, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_vi = obj(0)
                 r_vi = obj(2)
@@ -1391,27 +1442,27 @@ Public Class FormCompoundCreator
                 c_de(1) = 1 / Exp(Exp(bl))
                 c_de(0) = c_de(1) * rhoc
 
-                'regressao dos dados
+                'regressão dos dados
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataLDENS, 0), CopyToVector(mycase.DataLDENS, 1), c_de, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.LiqDens, 0.00001, 0.00001, 0.00001, 10000)
                 c_de = obj(0)
                 r_de = obj(2)
                 n_de = obj(3)
 
             Case 4
-                'regressao dos dados - solid density
+                'regressão dos dados - solid density
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataRoS, 0), CopyToVector(mycase.DataRoS, 1), c_sd, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000000001, 0.0000000000001, 0.0000000000001, 10000)
                 c_sd = obj(0)
                 r_sd = obj(2)
                 n_sd = obj(3)
 
             Case 5
-                'regressao dos dados - solid heat capacity
+                'regressão dos dados - solid heat capacity
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataCpS, 0), CopyToVector(mycase.DataCpS, 1), c_scp, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_scp = obj(0)
                 r_scp = obj(2)
                 n_scp = obj(3)
             Case 6
-                'regressao dos dados - liquid heat capacity
+                'regressão dos dados - liquid heat capacity
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataCPLiquid, 0), CopyToVector(mycase.DataCPLiquid, 1), c_cpl, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_cpl = obj(0)
                 r_cpl = obj(2)
@@ -1822,7 +1873,7 @@ Public Class FormCompoundCreator
         'Add calculated Lee-Kesler Data
         For k2 = 0 To px.Count - 1
             T = SystemsOfUnits.Converter.ConvertToSI(su.temperature, px(k2))
-            y = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Thermodynamics.PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text))
+            y = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text))
             Select Case CurveCount
                 Case 0
                     py1.Add(y)
@@ -1996,8 +2047,8 @@ Public Class FormCompoundCreator
         'Add calculated Rackett Data
         For k2 = 0 To px.Count - 1
             T = SystemsOfUnits.Converter.ConvertToSI(su.temperature, px(k2))
-            PV = Thermodynamics.PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text)
-            y = SystemsOfUnits.Converter.ConvertFromSI(su.density, Thermodynamics.PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text, TextBoxZRa.Text, 101325, PV))
+            PV = PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text)
+            y = SystemsOfUnits.Converter.ConvertFromSI(su.density, PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text, TextBoxZRa.Text, 101325, PV))
 
             Select Case CurveCount
                 Case 0
@@ -2248,7 +2299,7 @@ Public Class FormCompoundCreator
         'Add calculated Letsou-Stiel Data
         For k2 = 0 To px.Count - 1
             T = SystemsOfUnits.Converter.ConvertToSI(su.temperature, px(k2))
-            y = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Thermodynamics.PropertyPackages.Auxiliary.PROPS.viscl_letsti(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text))
+            y = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, PropertyPackages.Auxiliary.PROPS.viscl_letsti(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text))
             Select Case CurveCount
                 Case 0
                     py1.Add(y)
@@ -2734,7 +2785,7 @@ Public Class FormCompoundCreator
                 mycase.cp.NISTMODFACGroups.Clear()
             End If
 
-            Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
+            Global.DWSIM.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
             SetUserDBSaveStatus(True)
         Catch ex As Exception
             MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -2753,7 +2804,15 @@ Public Class FormCompoundCreator
                 tbPVAP_B.TextChanged, tbPVAP_A.TextChanged, tbPVAP_E.TextChanged, _
                  tbLIQVISC_E.TextChanged, tbLIQVISC_D.TextChanged, tbLIQVISC_C.TextChanged, tbLIQVISC_B.TextChanged, tbLIQVISC_A.TextChanged, _
                 tbLIQDENS_E.TextChanged, tbLIQDENS_D.TextChanged, tbLIQDENS_C.TextChanged, tbLIQDENS_B.TextChanged, tbLIQDENS_A.TextChanged, _
-                tbRoS_A.TextChanged, tbRoS_E.TextChanged, tbRoS_D.TextChanged, tbRoS_C.TextChanged, tbRoS_B.TextChanged, tbCpS_E.TextChanged, tbCpS_D.TextChanged, tbCpS_C.TextChanged, tbCpS_B.TextChanged, tbCpS_A.TextChanged, cbEqSolidDENS.SelectedIndexChanged, cbEqCpS.SelectedIndexChanged, tbCPLiquid_E.TextChanged, tbCPLiquid_D.TextChanged, tbCPLiquid_C.TextChanged, tbCPLiquid_B.TextChanged, tbCPLiquid_A.TextChanged, tbCPIG_E.TextChanged, tbCPIG_D.TextChanged, tbCPIG_C.TextChanged, tbCPIG_B.TextChanged, tbCPIG_A.TextChanged
+                tbRoS_A.TextChanged, tbRoS_E.TextChanged, tbRoS_D.TextChanged, tbRoS_C.TextChanged, tbRoS_B.TextChanged, tbCpS_E.TextChanged,
+                tbCpS_D.TextChanged, tbCpS_C.TextChanged, tbCpS_B.TextChanged, tbCpS_A.TextChanged, cbEqSolidDENS.SelectedIndexChanged, cbEqCpS.SelectedIndexChanged,
+                tbCPLiquid_E.TextChanged, tbCPLiquid_D.TextChanged, tbCPLiquid_C.TextChanged, tbCPLiquid_B.TextChanged, tbCPLiquid_A.TextChanged, tbCPIG_E.TextChanged,
+                tbCPIG_D.TextChanged, tbCPIG_C.TextChanged, tbCPIG_B.TextChanged, tbCPIG_A.TextChanged,
+                tbElecEnthForm.TextChanged, tbElecEnthFusion.TextChanged, tbElecGibbsEnergyForm.TextChanged, tbElecHeatCapacityForm.TextChanged,
+                tbElecIonCharge.TextChanged, tbElecSolidDens.TextChanged, tbElecSolidDensT.TextChanged, tbElecSolidTf.TextChanged,
+                tbPositiveIonFormula.TextChanged, tbNegativeIonFormula.TextChanged, tbEsteqCoeffNegIon.TextChanged, tbEsteqCoeffPosIon.TextChanged,
+                tbHydrNumber.TextChanged
+
         If loaded Then
             SetCompCreatorSaveStatus(False)
             SetUserDBSaveStatus(False)
@@ -2958,7 +3017,7 @@ Public Class FormCompoundCreator
 
     End Sub
 
-    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged, RadioButton2.CheckedChanged
+    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged, RadioButton2.CheckedChanged, RadioButton3.CheckedChanged
 
         If RadioButton1.Checked Then
             Me.FaTabStripItem1.Visible = True
@@ -2972,10 +3031,11 @@ Public Class FormCompoundCreator
             Me.FaTabStripItem9.Visible = True
             Me.FaTabStripItem10.Visible = True
             Me.FaTabStripItem11.Visible = True
-            Me.FaTabStripItemBO.Visible = False
             Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem1
             Me.FaTabStripItem1.Selected = True
-        Else
+            Me.FaTabStripItemBO.Visible = False
+            Me.FaTabStripItemEL.Visible = False
+        ElseIf RadioButton2.Checked Then
             Me.FaTabStripItem1.Visible = False
             Me.FaTabStripItem2.Visible = False
             Me.FaTabStripItem3.Visible = False
@@ -2990,13 +3050,41 @@ Public Class FormCompoundCreator
             Me.FaTabStripItemBO.Visible = True
             Me.FaTabStrip2.SelectedItem = Me.FaTabStripItemBO
             Me.FaTabStripItemBO.Selected = True
+            Me.FaTabStripItemEL.Visible = False
+        Else
+            Me.FaTabStripItem1.Visible = True
+            Me.FaTabStripItem2.Visible = False
+            Me.FaTabStripItem3.Visible = False
+            Me.FaTabStripItem4.Visible = False
+            Me.FaTabStripItem5.Visible = False
+            Me.FaTabStripItem6.Visible = False
+            Me.FaTabStripItem7.Visible = False
+            Me.FaTabStripItem8.Visible = False
+            Me.FaTabStripItem9.Visible = False
+            Me.FaTabStripItem10.Visible = False
+            Me.FaTabStripItem11.Visible = False
+            Me.FaTabStripItemBO.Visible = False
+            Me.FaTabStripItemEL.Visible = True
+            Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem1
         End If
+
         Me.FaTabStrip2.Refresh()
 
     End Sub
 
     Private Sub tbDBPath_TextChanged(sender As Object, e As EventArgs) Handles tbDBPath.TextChanged
         If tbDBPath.Text <> "" Then btnSaveToDB.Enabled = True Else btnSaveToDB.Enabled = False
+    End Sub
+
+    Private Sub rbIon_CheckedChanged(sender As Object, e As EventArgs) Handles rbIon.CheckedChanged, rbSalt.CheckedChanged, rbHydratedSalt.CheckedChanged
+
+        tbHydrNumber.Enabled = rbHydratedSalt.Checked
+        tbPositiveIonFormula.Enabled = Not rbIon.Checked
+        tbNegativeIonFormula.Enabled = Not rbIon.Checked
+        tbEsteqCoeffNegIon.Enabled = Not rbIon.Checked
+        tbEsteqCoeffPosIon.Enabled = Not rbIon.Checked
+        tbElecIonCharge.Enabled = rbIon.Checked
+
     End Sub
 
 End Class
