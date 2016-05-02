@@ -331,6 +331,7 @@ Namespace PropertyPackages
                      Case FlashMethod.InsideOut3P
                         Return New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P With
                                                     {.StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
+                    Case FlashMethod.GibbsMin2P
                         Dim optm As Enums.OptimizationMethod = Enums.OptimizationMethod.IPOPT
                         If Not Me.CurrentMaterialStream Is Nothing Then
                             If Not Me.CurrentMaterialStream.Flowsheet Is Nothing Then

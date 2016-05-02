@@ -42,8 +42,9 @@ Namespace Reactors
         Dim Kf, Kr As ArrayList
         Dim DN As Dictionary(Of String, Double)
         Dim N00 As Dictionary(Of String, Double)
-        Dim Rxi As Dictionary(Of String, Double)
-        Dim DHRi As Dictionary(Of String, Double)
+        Dim Rxi As New Dictionary(Of String, Double)
+        Dim RxiT As New Dictionary(Of String, Double)
+        Dim DHRi As New Dictionary(Of String, Double)
 
         Dim activeAL As Integer = 0
 
@@ -110,6 +111,8 @@ Namespace Reactors
             Kr = New ArrayList
 
         End Sub
+
+        Private Property ResidenceTime As Double
 
         Public Sub ODEFunc(ByVal y As Double(), ByRef dy As Double())
 
@@ -372,40 +375,48 @@ Namespace Reactors
                     'process reaction i
                     rxn = FlowSheet.Reactions(ar(i))
 
+                    Dim m0 As Double = 0.0#
+
                     'initial mole flows
                     For Each sb As ReactionStoichBase In rxn.Components.Values
 
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Liquid
+                                m0 = ims.Phases(3).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
+                                If m0 = 0.0# Then m0 = 0.0000000001
                                 If Not N0.ContainsKey(sb.CompName) Then
-                                    N0.Add(sb.CompName, ims.Phases(3).Compounds(sb.CompName).MolarFlow.GetValueOrDefault)
+                                    N0.Add(sb.CompName, m0)
                                     N00.Add(sb.CompName, N0(sb.CompName))
                                     N.Add(sb.CompName, N0(sb.CompName))
                                     C0.Add(sb.CompName, N0(sb.CompName) / ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault)
                                 Else
-                                    N0(sb.CompName) = ims.Phases(3).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
+                                    N0(sb.CompName) = m0
                                     N(sb.CompName) = N0(sb.CompName)
                                     C0(sb.CompName) = N0(sb.CompName) / ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault
                                 End If
                             Case PhaseName.Vapor
+                                m0 = ims.Phases(2).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
+                                If m0 = 0.0# Then m0 = 0.0000000001
                                 If Not N0.ContainsKey(sb.CompName) Then
-                                    N0.Add(sb.CompName, ims.Phases(2).Compounds(sb.CompName).MolarFlow.GetValueOrDefault)
+                                    N0.Add(sb.CompName, m0)
                                     N00.Add(sb.CompName, N0(sb.CompName))
                                     N.Add(sb.CompName, N0(sb.CompName))
                                     C0.Add(sb.CompName, N0(sb.CompName) / ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault)
                                 Else
-                                    N0(sb.CompName) = ims.Phases(2).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
+                                    N0(sb.CompName) = m0
                                     N(sb.CompName) = N0(sb.CompName)
                                     C0(sb.CompName) = N0(sb.CompName) / ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault
                                 End If
                             Case PhaseName.Mixture
+                                m0 = ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
+                                If m0 = 0.0# Then m0 = 0.0000000001
                                 If Not N0.ContainsKey(sb.CompName) Then
-                                    N0.Add(sb.CompName, ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault)
+                                    N0.Add(sb.CompName, m0)
                                     N00.Add(sb.CompName, N0(sb.CompName))
                                     N.Add(sb.CompName, N0(sb.CompName))
                                     C0.Add(sb.CompName, N0(sb.CompName) / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault)
                                 Else
-                                    N0(sb.CompName) = ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
+                                    N0(sb.CompName) = m0
                                     N(sb.CompName) = N0(sb.CompName)
                                     C0(sb.CompName) = N0(sb.CompName) / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
                                 End If
@@ -714,6 +725,28 @@ Namespace Reactors
 
             Next
 
+            RxiT.Clear()
+            DHRi.Clear()
+
+            For Each ar As ArrayList In Me.ReactionsSequence.Values
+
+                i = 0
+                Do
+
+                    'process reaction i
+                    rxn = FlowSheet.Reactions(ar(i))
+
+                    RxiT.Add(rxn.ID, (N(rxn.BaseReactant) - N00(rxn.BaseReactant)) / rxn.Components(rxn.BaseReactant).StoichCoeff / 1000)
+                    DHRi.Add(rxn.ID, rxn.ReactionHeat * RxiT(rxn.ID) * rxn.Components(rxn.BaseReactant).StoichCoeff / 1000)
+
+                    i += 1
+
+                Loop Until i = ar.Count
+
+            Next
+
+            ResidenceTime = Volume / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+
             If Me.ReactorOperationMode = OperationMode.Isothermic Or Me.ReactorOperationMode = OperationMode.OutletTemperature Then
 
                 'Products Enthalpy (kJ/kg * kg/s = kW)
@@ -798,11 +831,16 @@ Namespace Reactors
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
-
                 Case 0
-                    'PROP_HT_0	Pressure Drop
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
-
+                Case 1
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.ResidenceTime)
+                Case 2
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.volume, Me.Volume)
+                Case 3
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
+                Case 4
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
             End Select
 
             Return value
@@ -813,15 +851,15 @@ Namespace Reactors
             Dim proplist As New ArrayList
             Select Case proptype
                 Case PropertyType.RW
-                    For i = 0 To 0
+                    For i = 0 To 4
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 0
+                    For i = 0 To 4
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                 Case PropertyType.ALL
-                    For i = 0 To 0
+                    For i = 0 To 4
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
             End Select
@@ -835,11 +873,14 @@ Namespace Reactors
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
-
                 Case 0
-                    'PROP_HT_0	Pressure Drop
                     Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
-
+                Case 1
+                    Me.ResidenceTime = SystemsOfUnits.Converter.ConvertToSI(su.time, propval)
+                Case 2
+                    Me.Volume = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
+                Case 3
+                    Me.DeltaT = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
             End Select
             Return 1
         End Function
@@ -851,11 +892,16 @@ Namespace Reactors
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
             Select Case propidx
-
                 Case 0
-                    'PROP_HT_0	Pressure Drop
                     value = su.deltaP
-
+                Case 1
+                    value = su.time
+                Case 2
+                    value = su.volume
+                Case 3
+                    value = su.deltaT
+                Case 4
+                    value = su.heatflow
             End Select
 
             Return value
