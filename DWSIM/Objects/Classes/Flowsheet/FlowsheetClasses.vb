@@ -141,6 +141,8 @@ Namespace DWSIM.Flowsheet
 
         End Sub
 
+        Property PreferredGibbsMinimizationMethod As Interfaces.Enums.OptimizationMethod = OptimizationMethod.IPOPT Implements Interfaces.IFlowsheetOptions.PreferredFlashAlgorithmOptimizer
+
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
 
             Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "ThreePhaseFlashStabTestCompIds").SingleOrDefault

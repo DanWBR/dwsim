@@ -95,7 +95,7 @@ Public Class FormSimulSettings
             MessageBox.Show(DWSIM.App.GetLocalString("NoexistemPacotesdePr"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             'e.Cancel = True
         Else
-           
+
         End If
 
     End Sub
@@ -204,6 +204,8 @@ Public Class FormSimulSettings
             Case Else
                 ComboBoxFlashAlg.SelectedIndex = 0
         End Select
+
+        ComboBoxMinMethod.SelectedIndex = FrmChild.Options.PreferredGibbsMinimizationMethod
 
         FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.NumberFormat
         FrmChild.ToolStripComboBoxNumberFractionFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
@@ -1244,6 +1246,7 @@ Public Class FormSimulSettings
 
     Private Sub ComboBoxFlashAlg_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBoxFlashAlg.SelectedIndexChanged
         Me.chkValidateEqCalc.Enabled = True
+        Me.ComboBoxMinMethod.Enabled = False
         Select Case ComboBoxFlashAlg.SelectedIndex
             Case 0
                 Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.DWSIMDefault
@@ -1260,9 +1263,11 @@ Public Class FormSimulSettings
             Case 4
                 Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin2P
                 Me.GroupBox11.Enabled = False
+                Me.ComboBoxMinMethod.Enabled = True
             Case 5
                 Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin3P
                 Me.GroupBox11.Enabled = True
+                Me.ComboBoxMinMethod.Enabled = True
             Case 6
                 Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsSLE
                 Me.GroupBox11.Enabled = False
@@ -1498,5 +1503,8 @@ Public Class FormSimulSettings
 
     End Sub
 
+    Private Sub ComboBoxMinMethod_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxMinMethod.SelectedIndexChanged
+        FrmChild.Options.PreferredGibbsMinimizationMethod = ComboBoxMinMethod.SelectedIndex
+    End Sub
 
 End Class

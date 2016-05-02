@@ -40,5 +40,6 @@
     Property PropertyPackageFlashAlgorithm As Integer
 
     Property SelectedUnitSystem As IUnitsOfMeasure
+    Property PreferredFlashAlgorithmOptimizer As Enums.OptimizationMethod
 
 End Interface

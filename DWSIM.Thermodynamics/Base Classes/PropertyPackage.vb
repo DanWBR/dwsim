@@ -325,112 +325,55 @@ Namespace PropertyPackages
                 End If
                 Select Case FlashAlgorithm
                     Case FlashMethod.DWSIMDefault
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.DWSIMDefault
-                        'Else
-                        '    If _dwdf Is Nothing Then _dwdf = New Auxiliary.FlashAlgorithms.DWSIMDefault
-                        '    Return _dwdf
-                        'End If
                     Case FlashMethod.InsideOut
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
-                        Return New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                        'Else
-                        '    If _bbio Is Nothing Then _bbio = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                        '    Return _bbio
-                        'End If
-                    Case FlashMethod.InsideOut3P
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                         Return New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                     Case FlashMethod.InsideOut3P
                         Return New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P With
                                                     {.StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
-                        'Else
-                        'If _brio3 Is Nothing Then _brio3 = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
-                        '_brio3.StabSearchCompIDs = _tpcompids
-                        '_brio3.StabSearchSeverity = _tpseverity
-                        'Return _brio3
-                        'End If
-                    Case FlashMethod.GibbsMin2P
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        Dim optm As Enums.OptimizationMethod = Enums.OptimizationMethod.IPOPT
+                        If Not Me.CurrentMaterialStream Is Nothing Then
+                            If Not Me.CurrentMaterialStream.Flowsheet Is Nothing Then
+                                optm = CurrentMaterialStream.Flowsheet.FlowsheetOptions.PreferredFlashAlgorithmOptimizer
+                            End If
+                        End If
                         Return New Auxiliary.FlashAlgorithms.GibbsMinimization3P With
-                                                    {.ForceTwoPhaseOnly = True}
-                        'Else
-                        'If _gm3 Is Nothing Then _gm3 = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
-                        'Return _gm3
-                        'End If
+                                                    {.ForceTwoPhaseOnly = True, .Solver = optm}
                     Case FlashMethod.GibbsMin3P
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
+                        Dim optm As Enums.OptimizationMethod = Enums.OptimizationMethod.IPOPT
+                        If Not Me.CurrentMaterialStream Is Nothing Then
+                            If Not Me.CurrentMaterialStream.Flowsheet Is Nothing Then
+                                optm = CurrentMaterialStream.Flowsheet.FlowsheetOptions.PreferredFlashAlgorithmOptimizer
+                            End If
+                        End If
                         Return New Auxiliary.FlashAlgorithms.GibbsMinimization3P With
-                                                    {.ForceTwoPhaseOnly = False, .StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
-                        'Else
-                        'If _gm3 Is Nothing Then _gm3 = New Auxiliary.FlashAlgorithms.GibbsMinimization3P
-                        '_gm3.ForceTwoPhaseOnly = False
-                        '_gm3.StabSearchCompIDs = _tpcompids
-                        '_gm3.StabSearchSeverity = _tpseverity
-                        'Return _gm3
-                        'End If
+                                                    {.ForceTwoPhaseOnly = False, .StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity, .Solver = optm}
                     Case FlashMethod.NestedLoops3P, FlashMethod.NestedLoops3PV2, FlashMethod.NestedLoops3PV3
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.NestedLoops3PV3 With
                                                     {.StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
-                        'Else
-                        'If _nl3 Is Nothing Then _nl3 = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
-                        '_nl3.StabSearchCompIDs = _tpcompids
-                        '_nl3.StabSearchSeverity = _tpseverity
-                        'Return _nl3
-                        'End If
                     Case FlashMethod.NestedLoopsSLE
                         Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
                         For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
-                        Return New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.CompoundProperties = constprops}
-                        'Else
-                        'If _nlsle Is Nothing Then _nlsle = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
-                        '_nlsle.CompoundProperties = constprops
-                        'Return _nlsle
-                        'End If
+                       Return New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.CompoundProperties = constprops}
                     Case FlashMethod.NestedLoopsSLE_SS
                         Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
                         For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.CompoundProperties = constprops, .SolidSolution = True}
-                        'Else
-                        'If _nlsle Is Nothing Then _nlsle = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
-                        '_nlsle.CompoundProperties = constprops
-                        '_nlsle.SolidSolution = True
-                        'Return _nlsle
-                        'End If
                     Case FlashMethod.NestedLoopsImmiscible
                         Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
                         For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible With
                                                     {.CompoundProperties = constprops, .StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
-                        'Else
-                        'If _nli Is Nothing Then _nli = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
-                        '_nli.CompoundProperties = constprops
-                        '_nli.StabSearchCompIDs = _tpcompids
-                        '_nli.StabSearchSeverity = _tpseverity
-                        'Return _nli
-                        'End If
                     Case FlashMethod.SimpleLLE
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.SimpleLLE
-                        'Else
-                        'If _simplelle Is Nothing Then _simplelle = New Auxiliary.FlashAlgorithms.SimpleLLE
-                        'Return _simplelle
-                        'End If
                     Case Else
-                        'If Calculator.IsRunningParallelTasks Or ForceNewFlashAlgorithmInstance Then
                         Return New Auxiliary.FlashAlgorithms.DWSIMDefault
-                        'Else
-                        'If _dwdf Is Nothing Then _dwdf = New Auxiliary.FlashAlgorithms.DWSIMDefault
-                        'Return _dwdf
-                        'End If
                 End Select
             End Get
         End Property
