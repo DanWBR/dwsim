@@ -116,9 +116,9 @@
     <Content Include="ThemeVS2012Light\Resources\LostFocusTab_Close.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="DockPanel.WinFormsUI.csproj">
+    <ProjectReference Include="DWSIM.Controls.DockPanel.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
-      <Name>DockPanel.WinFormsUI</Name>
+      <Name>DWSIM.Controls.DockPanel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

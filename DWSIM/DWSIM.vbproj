@@ -1020,21 +1020,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoolPropInterface\Extras.CoolPropInterface.csproj">
+    <ProjectReference Include="..\CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj">
       <Project>{a5f6e7cc-0710-4129-9faa-9fbe9bc4ffcf}</Project>
-      <Name>Extras.CoolPropInterface</Name>
+      <Name>DWSIM.Thermodynamics.CoolPropInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.CustomXMLSerializer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DockPanel.ThemeVS2012Light.csproj">
+    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.ThemeVS2012Light.csproj">
       <Project>{4ed4fdb5-9fd0-49e6-876d-1635f727c755}</Project>
-      <Name>DockPanel.ThemeVS2012Light</Name>
+      <Name>DWSIM.Controls.DockPanel.ThemeVS2012Light</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DockPanel.WinFormsUI.csproj">
+    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
-      <Name>DockPanel.WinFormsUI</Name>
+      <Name>DWSIM.Controls.DockPanel</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Compounds\DWSIM.Databases.vbproj">
       <Project>{c0ea3cc7-7ec4-4ff9-ab3d-802727d62327}</Project>
@@ -1080,9 +1080,9 @@
       <Project>{8f45efaa-9eac-403f-b2b0-123f0321056e}</Project>
       <Name>DWSIM.MathOps.SwarmOps</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TabStrip\Controls.TabStrip.csproj">
+    <ProjectReference Include="..\TabStrip\DWSIM.Controls.TabStrip.csproj">
       <Project>{f929ca6a-87bd-42c8-8d0a-6455db6f55dc}</Project>
-      <Name>Controls.TabStrip</Name>
+      <Name>DWSIM.Controls.TabStrip</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

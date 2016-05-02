@@ -251,9 +251,9 @@
     <None Include="Unmanaged Libraries\Linux\L_DWSIM.exe.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoolPropInterface\Extras.CoolPropInterface.csproj">
+    <ProjectReference Include="..\CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj">
       <Project>{a5f6e7cc-0710-4129-9faa-9fbe9bc4ffcf}</Project>
-      <Name>Extras.CoolPropInterface</Name>
+      <Name>DWSIM.Thermodynamics.CoolPropInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>

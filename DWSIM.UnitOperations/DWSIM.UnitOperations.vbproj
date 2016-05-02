@@ -242,9 +242,9 @@
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.CustomXMLSerializer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DockPanel.WinFormsUI.csproj">
+    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
-      <Name>DockPanel.WinFormsUI</Name>
+      <Name>DWSIM.Controls.DockPanel</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>

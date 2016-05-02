@@ -104,9 +104,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoolPropInterface\Extras.CoolPropInterface.csproj">
+    <ProjectReference Include="..\CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj">
       <Project>{a5f6e7cc-0710-4129-9faa-9fbe9bc4ffcf}</Project>
-      <Name>Extras.CoolPropInterface</Name>
+      <Name>DWSIM.Thermodynamics.CoolPropInterface</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
