@@ -73,16 +73,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public FormCOReports As New COReportsPanel
     Public FormWatch As New WatchPanel
 
-    Public FormCritPt As New FrmCritpt
-    Public FormStabAn As New FrmStabAn
-    Public FormHid As New FormHYD
-    Public FormPE As New FormPhEnv
-    Public FormLLEDiag As New FormLLEDiagram
-    Public FormBE As New FormBinEnv
-    Public FormPSVS As New FrmPsvSize
-    Public FormVS As New FrmDAVP
-    Public FormColdP As New FrmColdProperties
-
     Public FormSensAnalysis0 As New FormSensAnalysis
     Public FormOptimization0 As New FormOptimization
 
@@ -93,6 +83,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public Property CalculationQueue As Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
     Public ScriptCollection As Dictionary(Of String, Script)
+
+    Public Property AttachedUtils As New Dictionary(Of Integer, IAttachedUtility)
 
     Public CheckedToolstripButton As ToolStripButton
     Public ClickedToolStripMenuItem As ToolStripMenuItem
@@ -1009,15 +1001,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.TSBtabela.Checked = False
     End Sub
 
-    Private Sub PropriedadesDosComponentesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PropriedadesDosComponentesToolStripMenuItem.Click
-        Dim frmpc As New FormPureComp
-        frmpc.ShowDialog(Me)
-    End Sub
-
-    Private Sub PontoCriticoRealToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PontoCriticoRealToolStripMenuItem.Click
-        Me.FormCritPt.ShowDialog(Me)
-    End Sub
-
     Private Sub tsbAtivar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbAtivar.Click
         Me.tsbDesat.Checked = False
         Me.tsbAtivar.Checked = True
@@ -1034,38 +1017,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorDesativado1")
     End Sub
 
-    Private Sub HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem.Click
-        Me.FormHid = New FormHYD
-        Me.FormHid.Show(Me.dckPanel)
-    End Sub
-
-    Private Sub DiagramaDePhasesToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiagramaDePhasesToolStripMenuItem1.Click
-        Me.FormPE = New FormPhEnv
-        Me.FormPE.Show(Me.dckPanel)
-    End Sub
-    Private Sub LLEDiagramToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LLEDiagramToolStripMenuItem.Click
-        Me.FormLLEDiag = New FormLLEDiagram
-        Me.FormLLEDiag.Show(Me.dckPanel)
-    End Sub
-    Private Sub DiagramaBinarioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiagramaBinarioToolStripMenuItem.Click
-        Me.FormBE = New FormBinEnv
-        Me.FormBE.Show(Me.dckPanel)
-    End Sub
     Private Sub FecharSimulacaoAtualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
-    End Sub
-
-    Private Sub PSVSizingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PSVSizingToolStripMenuItem.Click
-        Me.FormPSVS.ShowDialog(Me)
-    End Sub
-
-    Private Sub FlashVesselSizingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FlashVesselSizingToolStripMenuItem.Click
-        Me.FormVS.ShowDialog(Me)
-    End Sub
-
-    Private Sub PropriedadesDePetroleosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PropriedadesDePetroleosToolStripMenuItem.Click
-        Me.FormColdP = New FrmColdProperties
-        Me.FormColdP.Show(Me.dckPanel)
     End Sub
 
     Private Sub ToolStripButton14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton14.Click
@@ -2842,4 +2795,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Return Me.SimulationObjects(Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, tag))
     End Function
 
+    Public ReadOnly Property AttachedUtilities As Dictionary(Of Integer, IAttachedUtility) Implements IFlowsheet.AttachedUtilities
+        Get
+            Return AttachedUtils
+        End Get
+    End Property
 End Class

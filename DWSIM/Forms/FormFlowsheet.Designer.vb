@@ -109,16 +109,6 @@ Partial Class FormFlowsheet
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerenciadorDeReacoesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
-        Me.SuplementosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PontoCriticoRealToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PropriedadesDosComponentesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DiagramaDePhasesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DiagramaBinarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LLEDiagramToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PSVSizingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FlashVesselSizingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PropriedadesDePetroleosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OtimizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnaliseDeSensibilidadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultivariateOptimizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -621,7 +611,7 @@ Partial Class FormFlowsheet
         '
         Me.MenuStrip1.AllowItemReorder = True
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.SuplementosToolStripMenuItem, Me.OtimizaToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.OtimizaToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
         '
@@ -791,65 +781,6 @@ Partial Class FormFlowsheet
         Me.ToolStripSeparator15.MergeIndex = 4
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
         resources.ApplyResources(Me.ToolStripSeparator15, "ToolStripSeparator15")
-        '
-        'SuplementosToolStripMenuItem
-        '
-        Me.SuplementosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PontoCriticoRealToolStripMenuItem, Me.HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem, Me.PropriedadesDosComponentesToolStripMenuItem, Me.DiagramaDePhasesToolStripMenuItem1, Me.DiagramaBinarioToolStripMenuItem, Me.LLEDiagramToolStripMenuItem, Me.PSVSizingToolStripMenuItem, Me.FlashVesselSizingToolStripMenuItem, Me.PropriedadesDePetroleosToolStripMenuItem})
-        Me.SuplementosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.SuplementosToolStripMenuItem.MergeIndex = 4
-        Me.SuplementosToolStripMenuItem.Name = "SuplementosToolStripMenuItem"
-        resources.ApplyResources(Me.SuplementosToolStripMenuItem, "SuplementosToolStripMenuItem")
-        '
-        'PontoCriticoRealToolStripMenuItem
-        '
-        Me.PontoCriticoRealToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cog1
-        Me.PontoCriticoRealToolStripMenuItem.Name = "PontoCriticoRealToolStripMenuItem"
-        resources.ApplyResources(Me.PontoCriticoRealToolStripMenuItem, "PontoCriticoRealToolStripMenuItem")
-        '
-        'HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem
-        '
-        Me.HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cog
-        Me.HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem.Name = "HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem"
-        resources.ApplyResources(Me.HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem, "HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem")
-        '
-        'PropriedadesDosComponentesToolStripMenuItem
-        '
-        resources.ApplyResources(Me.PropriedadesDosComponentesToolStripMenuItem, "PropriedadesDosComponentesToolStripMenuItem")
-        Me.PropriedadesDosComponentesToolStripMenuItem.Name = "PropriedadesDosComponentesToolStripMenuItem"
-        '
-        'DiagramaDePhasesToolStripMenuItem1
-        '
-        Me.DiagramaDePhasesToolStripMenuItem1.Image = Global.DWSIM.My.Resources.Resources.cog
-        Me.DiagramaDePhasesToolStripMenuItem1.Name = "DiagramaDePhasesToolStripMenuItem1"
-        resources.ApplyResources(Me.DiagramaDePhasesToolStripMenuItem1, "DiagramaDePhasesToolStripMenuItem1")
-        '
-        'DiagramaBinarioToolStripMenuItem
-        '
-        Me.DiagramaBinarioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cog1
-        Me.DiagramaBinarioToolStripMenuItem.Name = "DiagramaBinarioToolStripMenuItem"
-        resources.ApplyResources(Me.DiagramaBinarioToolStripMenuItem, "DiagramaBinarioToolStripMenuItem")
-        '
-        'LLEDiagramToolStripMenuItem
-        '
-        Me.LLEDiagramToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cog
-        Me.LLEDiagramToolStripMenuItem.Name = "LLEDiagramToolStripMenuItem"
-        resources.ApplyResources(Me.LLEDiagramToolStripMenuItem, "LLEDiagramToolStripMenuItem")
-        '
-        'PSVSizingToolStripMenuItem
-        '
-        resources.ApplyResources(Me.PSVSizingToolStripMenuItem, "PSVSizingToolStripMenuItem")
-        Me.PSVSizingToolStripMenuItem.Name = "PSVSizingToolStripMenuItem"
-        '
-        'FlashVesselSizingToolStripMenuItem
-        '
-        resources.ApplyResources(Me.FlashVesselSizingToolStripMenuItem, "FlashVesselSizingToolStripMenuItem")
-        Me.FlashVesselSizingToolStripMenuItem.Name = "FlashVesselSizingToolStripMenuItem"
-        '
-        'PropriedadesDePetroleosToolStripMenuItem
-        '
-        Me.PropriedadesDePetroleosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cog
-        Me.PropriedadesDePetroleosToolStripMenuItem.Name = "PropriedadesDePetroleosToolStripMenuItem"
-        resources.ApplyResources(Me.PropriedadesDePetroleosToolStripMenuItem, "PropriedadesDePetroleosToolStripMenuItem")
         '
         'OtimizaToolStripMenuItem
         '
@@ -1123,9 +1054,6 @@ Partial Class FormFlowsheet
     Public WithEvents TSTable As FarsiLibrary.Win.FATabStripItem
     Public WithEvents BGLoadComp As System.ComponentModel.BackgroundWorker
     Public WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
-    Public WithEvents SuplementosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents PontoCriticoRealToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ResultadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents GerarRelatorioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripSimulation As System.Windows.Forms.ToolStrip
@@ -1134,7 +1062,6 @@ Partial Class FormFlowsheet
     Public WithEvents ToolStripButton8 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripLabel2 As System.Windows.Forms.ToolStripLabel
     Public WithEvents bgCalc As System.ComponentModel.BackgroundWorker
-    Public WithEvents PropriedadesDosComponentesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents OtimizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents AnaliseDeSensibilidadeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripFlowsheet As System.Windows.Forms.ToolStrip
@@ -1154,13 +1081,8 @@ Partial Class FormFlowsheet
     Public WithEvents tsbAtivar As System.Windows.Forms.ToolStripButton
     Public WithEvents tsbDesat As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Public WithEvents DiagramaDePhasesToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents DiagramaBinarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ArquivoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents CloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents PSVSizingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents FlashVesselSizingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents PropriedadesDePetroleosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripButton13 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton14 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton15 As System.Windows.Forms.ToolStripButton
@@ -1201,7 +1123,6 @@ Partial Class FormFlowsheet
     Friend WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
     Public WithEvents OpenFileName As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents LLEDiagramToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TimerScripts1 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts5 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts15 As System.Windows.Forms.Timer

@@ -532,7 +532,7 @@
     <value>126, 0</value>
   </data>
   <data name="ToolStripCalculator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 25</value>
+    <value>214, 25</value>
   </data>
   <data name="ToolStripCalculator.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -646,7 +646,7 @@
     <value>TSTable</value>
   </data>
   <data name="&gt;&gt;TSTable.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5953.35067, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5966.28322, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <metadata name="ToolStripUnits.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>421, 17</value>
@@ -838,7 +838,7 @@
     <value>Ctrl+Z</value>
   </data>
   <data name="tsmiUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiUndo.Text" xml:space="preserve">
     <value>Desfazer</value>
@@ -850,34 +850,34 @@
     <value>Ctrl+Y</value>
   </data>
   <data name="tsmiRedo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiRedo.Text" xml:space="preserve">
     <value>Refazer</value>
   </data>
   <data name="ToolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>373, 6</value>
   </data>
   <data name="tsmiCut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiCut.Text" xml:space="preserve">
     <value>Cortar objetos selecionados</value>
   </data>
   <data name="tsmiCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiCopy.Text" xml:space="preserve">
     <value>Copiar objetos selecionados</value>
   </data>
   <data name="tsmiPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiPaste.Text" xml:space="preserve">
     <value>Colar objetos</value>
   </data>
   <data name="tsmiRemoveSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiRemoveSelected.Text" xml:space="preserve">
     <value>Remover objetos selecionados</value>
@@ -886,7 +886,7 @@
     <value>Ctrl+Shift+C</value>
   </data>
   <data name="tsmiCloneSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiCloneSelected.Text" xml:space="preserve">
     <value>Clonar objetos selecionados</value>
@@ -895,7 +895,7 @@
     <value>Ctrl+R</value>
   </data>
   <data name="tsmiRecalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiRecalc.Text" xml:space="preserve">
     <value>Recalcular objeto</value>
@@ -904,19 +904,19 @@
     <value>Ctrl+Shift+E</value>
   </data>
   <data name="tsmiExportData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiExportData.Text" xml:space="preserve">
     <value>Exportar dados para a Área de Transferência</value>
   </data>
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>373, 6</value>
   </data>
   <data name="tsmiConfigSimulation.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Alt+S</value>
   </data>
   <data name="tsmiConfigSimulation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>376, 22</value>
   </data>
   <data name="tsmiConfigSimulation.Text" xml:space="preserve">
     <value>Configurações da Simulação</value>
@@ -959,117 +959,6 @@
   </data>
   <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Ferramentas</value>
-  </data>
-  <data name="PontoCriticoRealToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="PontoCriticoRealToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ponto Crítico Verdadeiro</value>
-  </data>
-  <data name="HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Formação de Hidratos</value>
-  </data>
-  <data name="PropriedadesDosComponentesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
-        Qd1EtdEEMalok6Qk9mcISWiRLkqJorKoBA0slMpSUytHU1SKrIV/GBJy5Xbm/u59oGX0E67DzHvn3HPO
-        fU8GAH/W09PTZDabTaTT6QT+Jv/aQzX0UiqVVIVCQYFgOYI77XYbWq0WnJ2ddS4uLuTn5+eKUCik+on5
-        CfYjWHx8fBQymYwymUwKHx8f8P7+DggUIpGIEomEo6MjcX9/3z9E8Pz87KjX6/D19QVvb2+A4N7NzY1U
-        q9WgUqlAOByWENxDZSAIAlxeXsL6+rpjQIBdF9GrRCQEeH19ZUR9Anovl8tABLlcDhYWFqS5ubnFAQHV
-        /f09R5vz+Tw8PDxAPB6HQCAAe3t7pAjQFtzd3bHubreb6+NkyMhj9+bt7W335eUFeJ6Hq6srWF5ezths
-        NrXT6VRvbGxkUqkUI6J1j8fTXVtba66srPAyBIufn59MLnXGIOHw8BBWV1fV/S7b29tqzABwL1NGaihc
-        q9UqynDGYqPRYB5pgTpg4rC5uTkg8Pl86uPjY6aALKBatt9gMIgyHAmPEpu7u7vdYrHISCiHnZ2dzNbW
-        ltrr9TIL5J+sxWIxMJlM3dHR0aZer+cHIaJEDoNkQdETDxKcnJwAzp19w7FCNBpl3ywWy3eI9Hd6eroY
-        DAalarXKwDQuPFgsEyIiRfT9+vqarc3MzEhms/l7jAcHBw6SRycPiQDT7XEcJ1Fo5Ht6elpCUI/WyLvL
-        5QKdTvd9kKiWlpb8s7OzIvoT5ufnlUgiUDdSYDQahbGxMSX6FjQajTgyMjJ8lPuFBKqpqSmF3W6XI2GH
-        JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="PropriedadesDosComponentesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="PropriedadesDosComponentesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Propriedades dos Componentes Puros</value>
-  </data>
-  <data name="DiagramaDePhasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="DiagramaDePhasesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Diagrama de Fases</value>
-  </data>
-  <data name="DiagramaBinarioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="DiagramaBinarioToolStripMenuItem.Text" xml:space="preserve">
-    <value>Diagrama Binário</value>
-  </data>
-  <data name="LLEDiagramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="LLEDiagramToolStripMenuItem.Text" xml:space="preserve">
-    <value>Diagrama de Phases Triangular (ELL)</value>
-  </data>
-  <data name="PSVSizingToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
-        Qd1EtdEEMalok6Qk9mcISWiRLkqJorKoBA0slMpSUytHU1SKrIV/GBJy5Xbm/u59oGX0E67DzHvn3HPO
-        fU8GAH/W09PTZDabTaTT6QT+Jv/aQzX0UiqVVIVCQYFgOYI77XYbWq0WnJ2ddS4uLuTn5+eKUCik+on5
-        CfYjWHx8fBQymYwymUwKHx8f8P7+DggUIpGIEomEo6MjcX9/3z9E8Pz87KjX6/D19QVvb2+A4N7NzY1U
-        q9WgUqlAOByWENxDZSAIAlxeXsL6+rpjQIBdF9GrRCQEeH19ZUR9Anovl8tABLlcDhYWFqS5ubnFAQHV
-        /f09R5vz+Tw8PDxAPB6HQCAAe3t7pAjQFtzd3bHubreb6+NkyMhj9+bt7W335eUFeJ6Hq6srWF5ezths
-        NrXT6VRvbGxkUqkUI6J1j8fTXVtba66srPAyBIufn59MLnXGIOHw8BBWV1fV/S7b29tqzABwL1NGaihc
-        q9UqynDGYqPRYB5pgTpg4rC5uTkg8Pl86uPjY6aALKBatt9gMIgyHAmPEpu7u7vdYrHISCiHnZ2dzNbW
-        ltrr9TIL5J+sxWIxMJlM3dHR0aZer+cHIaJEDoNkQdETDxKcnJwAzp19w7FCNBpl3ywWy3eI9Hd6eroY
-        DAalarXKwDQuPFgsEyIiRfT9+vqarc3MzEhms/l7jAcHBw6SRycPiQDT7XEcJ1Fo5Ht6elpCUI/WyLvL
-        5QKdTvd9kKiWlpb8s7OzIvoT5ufnlUgiUDdSYDQahbGxMSX6FjQajTgyMjJ8lPuFBKqpqSmF3W6XI2GH
-        JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="PSVSizingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="PSVSizingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dimensionamento de PSVs</value>
-  </data>
-  <data name="FlashVesselSizingToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
-        Qd1EtdEEMalok6Qk9mcISWiRLkqJorKoBA0slMpSUytHU1SKrIV/GBJy5Xbm/u59oGX0E67DzHvn3HPO
-        fU8GAH/W09PTZDabTaTT6QT+Jv/aQzX0UiqVVIVCQYFgOYI77XYbWq0WnJ2ddS4uLuTn5+eKUCik+on5
-        CfYjWHx8fBQymYwymUwKHx8f8P7+DggUIpGIEomEo6MjcX9/3z9E8Pz87KjX6/D19QVvb2+A4N7NzY1U
-        q9WgUqlAOByWENxDZSAIAlxeXsL6+rpjQIBdF9GrRCQEeH19ZUR9Anovl8tABLlcDhYWFqS5ubnFAQHV
-        /f09R5vz+Tw8PDxAPB6HQCAAe3t7pAjQFtzd3bHubreb6+NkyMhj9+bt7W335eUFeJ6Hq6srWF5ezths
-        NrXT6VRvbGxkUqkUI6J1j8fTXVtba66srPAyBIufn59MLnXGIOHw8BBWV1fV/S7b29tqzABwL1NGaihc
-        q9UqynDGYqPRYB5pgTpg4rC5uTkg8Pl86uPjY6aALKBatt9gMIgyHAmPEpu7u7vdYrHISCiHnZ2dzNbW
-        ltrr9TIL5J+sxWIxMJlM3dHR0aZer+cHIaJEDoNkQdETDxKcnJwAzp19w7FCNBpl3ywWy3eI9Hd6eroY
-        DAalarXKwDQuPFgsEyIiRfT9+vqarc3MzEhms/l7jAcHBw6SRycPiQDT7XEcJ1Fo5Ht6elpCUI/WyLvL
-        5QKdTvd9kKiWlpb8s7OzIvoT5ufnlUgiUDdSYDQahbGxMSX6FjQajTgyMjJ8lPuFBKqpqSmF3W6XI2GH
-        JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="FlashVesselSizingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="FlashVesselSizingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dimensionamento de Vasos Separadores</value>
-  </data>
-  <data name="PropriedadesDePetroleosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
-  </data>
-  <data name="PropriedadesDePetroleosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Propriedades de Correntes de Petróleo</value>
-  </data>
-  <data name="SuplementosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 20</value>
-  </data>
-  <data name="SuplementosToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Utilitários</value>
   </data>
   <data name="AnaliseDeSensibilidadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 22</value>
@@ -2710,66 +2599,6 @@
   </data>
   <data name="&gt;&gt;ToolStripSeparator15.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SuplementosToolStripMenuItem.Name" xml:space="preserve">
-    <value>SuplementosToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;SuplementosToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PontoCriticoRealToolStripMenuItem.Name" xml:space="preserve">
-    <value>PontoCriticoRealToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;PontoCriticoRealToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem.Name" xml:space="preserve">
-    <value>HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;HYDVerificacaoDasCondicoesDeFormacaoDeHidratosToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PropriedadesDosComponentesToolStripMenuItem.Name" xml:space="preserve">
-    <value>PropriedadesDosComponentesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;PropriedadesDosComponentesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DiagramaDePhasesToolStripMenuItem1.Name" xml:space="preserve">
-    <value>DiagramaDePhasesToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;DiagramaDePhasesToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DiagramaBinarioToolStripMenuItem.Name" xml:space="preserve">
-    <value>DiagramaBinarioToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;DiagramaBinarioToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LLEDiagramToolStripMenuItem.Name" xml:space="preserve">
-    <value>LLEDiagramToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;LLEDiagramToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PSVSizingToolStripMenuItem.Name" xml:space="preserve">
-    <value>PSVSizingToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;PSVSizingToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FlashVesselSizingToolStripMenuItem.Name" xml:space="preserve">
-    <value>FlashVesselSizingToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;FlashVesselSizingToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PropriedadesDePetroleosToolStripMenuItem.Name" xml:space="preserve">
-    <value>PropriedadesDePetroleosToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;PropriedadesDePetroleosToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;OtimizaToolStripMenuItem.Name" xml:space="preserve">
     <value>OtimizaToolStripMenuItem</value>
