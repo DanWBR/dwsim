@@ -255,9 +255,9 @@
       <Project>{a5f6e7cc-0710-4129-9faa-9fbe9bc4ffcf}</Project>
       <Name>DWSIM.Thermodynamics.CoolPropInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
+    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
-      <Name>DWSIM.CustomXMLSerializer</Name>
+      <Name>DWSIM.XMLSerializer</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">

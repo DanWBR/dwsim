@@ -6,13 +6,13 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM", "DWSIM\DWSIM.vbproj
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Plugins.NaturalGas", "NaturalGas\DWSIM.Plugins.NaturalGas.vbproj", "{B8715C47-862B-46CF-8784-573B40407E4D}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.CustomXMLSerializer", "CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj", "{6C232866-A87B-409A-8A02-39F2FF218561}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.XMLSerializer", "CustomXMLSerializer\DWSIM.XMLSerializer.vbproj", "{6C232866-A87B-409A-8A02-39F2FF218561}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Thermodynamics.CoolPropInterface", "CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj", "{A5F6E7CC-0710-4129-9FAA-9FBE9BC4FFCF}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.AzureServer", "AzureServer\DWSIM.AzureServer.vbproj", "{A7FB4DBF-4EBF-4004-9819-F26E791AAA60}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Apps.AzureServer", "AzureServer\DWSIM.Apps.AzureServer.vbproj", "{A7FB4DBF-4EBF-4004-9819-F26E791AAA60}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.TCPServer", "TCPServer\DWSIM.TCPServer.vbproj", "{DBB0E704-7E7B-4DDA-AAC2-A00F7168FDC3}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Apps.TCPServer", "TCPServer\DWSIM.Apps.TCPServer.vbproj", "{DBB0E704-7E7B-4DDA-AAC2-A00F7168FDC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.DockPanel", "DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj", "{C75532C4-765B-418E-B09B-46D36B2ABDB1}"
 EndProject
@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.DockPanel.Th
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.TabStrip", "TabStrip\DWSIM.Controls.TabStrip.csproj", "{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.RunAsx86", "RunAsx86\DWSIM.RunAsx86.csproj", "{CAA85A70-4427-4075-A894-8EDDCA42DDD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Apps.RunAsx86", "RunAsx86\DWSIM.Apps.RunAsx86.csproj", "{CAA85A70-4427-4075-A894-8EDDCA42DDD4}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Interfaces", "DWSIM.Interfaces\DWSIM.Interfaces.vbproj", "{50BFD69A-487E-4B38-86EA-48ACD85A0EB1}"
 EndProject

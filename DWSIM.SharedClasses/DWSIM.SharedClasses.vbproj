@@ -124,9 +124,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
+    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
-      <Name>DWSIM.CustomXMLSerializer</Name>
+      <Name>DWSIM.XMLSerializer</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj">

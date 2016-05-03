@@ -1024,9 +1024,9 @@
       <Project>{a5f6e7cc-0710-4129-9faa-9fbe9bc4ffcf}</Project>
       <Name>DWSIM.Thermodynamics.CoolPropInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
+    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
-      <Name>DWSIM.CustomXMLSerializer</Name>
+      <Name>DWSIM.XMLSerializer</Name>
     </ProjectReference>
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.ThemeVS2012Light.csproj">
       <Project>{4ed4fdb5-9fd0-49e6-876d-1635f727c755}</Project>

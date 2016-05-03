@@ -113,9 +113,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.CustomXMLSerializer.vbproj">
+    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
-      <Name>DWSIM.CustomXMLSerializer</Name>
+      <Name>DWSIM.XMLSerializer</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
