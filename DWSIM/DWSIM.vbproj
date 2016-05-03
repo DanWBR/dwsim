@@ -2038,7 +2038,6 @@
     <None Include="Resources\text_padding_left1.png" />
     <None Include="Resources\text_padding_left.png" />
     <None Include="Resources\undo_162.png" />
-    <None Include="Assets\jcosmo.jar" />
     <Content Include="Assets\licenses\chemsep_database.txt" />
     <Content Include="Assets\licenses\dockpanel.txt" />
     <Content Include="Assets\licenses\epl-v1.txt" />
