@@ -84,8 +84,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public ScriptCollection As Dictionary(Of String, Script)
 
-    Public Property AttachedUtils As New Dictionary(Of Integer, IAttachedUtility)
-
     Public CheckedToolstripButton As ToolStripButton
     Public ClickedToolStripMenuItem As ToolStripMenuItem
     Public InsertingObjectToPFD As Boolean = False
@@ -2795,9 +2793,4 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Return Me.SimulationObjects(Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, tag))
     End Function
 
-    Public ReadOnly Property AttachedUtilities As Dictionary(Of Integer, IAttachedUtility) Implements IFlowsheet.AttachedUtilities
-        Get
-            Return AttachedUtils
-        End Get
-    End Property
 End Class

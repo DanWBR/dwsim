@@ -8,8 +8,6 @@
         Other
     End Enum
 
-    ReadOnly Property AttachedUtilities As Dictionary(Of Integer, IAttachedUtility)
-
     ReadOnly Property Reactions As Dictionary(Of String, IReaction)
 
     ReadOnly Property ReactionSets As Dictionary(Of String, IReactionSet)

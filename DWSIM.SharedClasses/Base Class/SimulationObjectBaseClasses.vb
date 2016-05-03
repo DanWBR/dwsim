@@ -64,6 +64,14 @@ Namespace UnitOperations
 
 #Region "    ISimulationObject"
 
+        Public MustOverride Function GetDisplayName() As String Implements ISimulationObject.GetDisplayName
+
+        Public MustOverride Function GetDisplayDescription() As String Implements ISimulationObject.GetDisplayDescription
+
+        Public MustOverride Function GetIconBitmap() As Object Implements ISimulationObject.GetIconBitmap
+
+        Public Property AttachedUtilities As New Dictionary(Of Integer, IAttachedUtility) Implements ISimulationObject.AttachedUtilities
+
         Public Property PreferredFlashAlgorithm As FlashMethod = FlashMethod.Default_Algorithm Implements ISimulationObject.PreferredFlashAlgorithm
         Public Property Calculated As Boolean = False Implements Interfaces.ISimulationObject.Calculated
 
@@ -513,12 +521,6 @@ Namespace UnitOperations
         End Property
 
 #End Region
-
-        Public MustOverride Function GetDisplayName() As String Implements ISimulationObject.GetDisplayName
-
-        Public MustOverride Function GetDisplayDescription() As String Implements ISimulationObject.GetDisplayDescription
-
-        Public MustOverride Function GetIconBitmap() As Object Implements ISimulationObject.GetIconBitmap
 
     End Class
 
