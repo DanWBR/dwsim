@@ -16,6 +16,7 @@ Public Class MaterialStreamEditor
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.Width = 427
+        If Me.DockPanel IsNot Nothing Then Me.DockPanel.DockLeftPortion = 420
 
         units = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         nf = MatStream.FlowSheet.FlowsheetOptions.NumberFormat
@@ -127,7 +128,7 @@ Public Class MaterialStreamEditor
             gridInputComposition.Rows.Clear()
             gridInputComposition.Columns(1).CellTemplate.Style.Format = nff
             For Each comp In .Phases(0).Compounds.Values
-                gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction})
+                gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
             Next
 
             'property package
@@ -614,22 +615,21 @@ Public Class MaterialStreamEditor
         Select Case cbCompBasis.SelectedIndex
             Case 0
                 For Each row In Me.gridInputComposition.Rows
-                    row.Cells(0).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction
+                    row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction
                 Next
             Case 1
                 For Each row In Me.gridInputComposition.Rows
-                    row.Cells(0).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction
+                    row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction
                 Next
             Case 2
-
                 For Each row In Me.gridInputComposition.Rows
-                    row.Cells(0).Value = Converter.ConvertFromSI(units.molarflow, MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q)
+                    row.Cells(1).Value = Converter.ConvertFromSI(units.molarflow, MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q)
                 Next
             Case 3
                 For Each row In Me.gridInputComposition.Rows
-                    row.Cells(0).Value = Converter.ConvertFromSI(units.massflow, MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W)
+                    row.Cells(1).Value = Converter.ConvertFromSI(units.massflow, MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W)
                 Next
-            Case 4
+            Case 5
                 'molarity = mol solute per liter solution
                 Dim n As Integer = MatStream.Phases(0).Compounds.Count
                 Dim liqdens(n - 1), nbp(n - 1) As Double
@@ -648,22 +648,22 @@ Public Class MaterialStreamEditor
                 i = 0
                 For Each row In Me.gridInputComposition.Rows
                     If row.Cells(0).Value.ToString.Contains("Water") Then
-                        row.Cells(0).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q * MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / 1000 / liqdens(i) * 1000
+                        row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q * MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / 1000 / liqdens(i) * 1000
                     Else
-                        row.Cells(0).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
+                        row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
                     End If
                     i += 1
                 Next
-            Case 5
+            Case 6
                 'molarity = mol solute per kg solvent
                 For Each row In Me.gridInputComposition.Rows
                     If row.Cells(0).Value.ToString.Contains("Water") Then
-                        row.Cells(0).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W
+                        row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W
                     Else
-                        row.Cells(0).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
+                        row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
                     End If
                 Next
-            Case 6
+            Case 4
                 'liquid vol. frac
                 Dim n As Integer = MatStream.Phases(0).Compounds.Count
                 Dim liqdens(n - 1), nbp(n - 1), volfrac(n - 1), totalvol As Double
@@ -683,7 +683,7 @@ Public Class MaterialStreamEditor
                 Next
                 i = 0
                 For Each row In Me.gridInputComposition.Rows
-                    row.Cells(0).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction * MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / liqdens(i) / totalvol
+                    row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction * MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / liqdens(i) / totalvol
                     i += 1
                 Next
                 ipp = Nothing
@@ -717,6 +717,8 @@ Public Class MaterialStreamEditor
             End If
 
             RequestCalc()
+
+            DirectCast(sender, TextBox).SelectAll()
 
         End If
 
