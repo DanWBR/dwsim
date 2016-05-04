@@ -1,5 +1,74 @@
 ﻿Namespace Enums
 
+    Public Enum UnitOfMeasure
+
+        accel
+        activity
+        activityCoefficient
+        area
+        boilingPointTemperature
+        cakeresistance
+        cinematic_viscosity
+        compressibility
+        compressibilityFactor
+        deltaP
+        deltaT
+        density
+        diameter
+        distance
+        enthalpy
+        entropy
+        excessEnthalpy
+        excessEntropy
+        force
+        foulingfactor
+        fugacity
+        fugacityCoefficient
+        gor
+        head
+        heat_transf_coeff
+        heatCapacityCp
+        heatCapacityCv
+        heatflow
+        idealGasHeatCapacity
+        jouleThomsonCoefficient
+        kvalue
+        logFugacityCoefficient
+        logKvalue
+        mass
+        mass_conc
+        massflow
+        massfraction
+        mediumresistance
+        meltingTemperature
+        molar_conc
+        molar_enthalpy
+        molar_entropy
+        molar_volume
+        molarflow
+        molarfraction
+        molecularWeight
+        pressure
+        reac_rate
+        reac_rate_heterog
+        spec_vol
+        speedOfSound
+        surfaceTension
+        temperature
+        thermalConductivity
+        thermalConductivityOfLiquid
+        thermalConductivityOfVapor
+        thickness
+        time
+        vaporPressure
+        velocity
+        viscosity
+        viscosityOfLiquid
+        viscosityOfVapor
+        volume
+        volumetricFlow
+
+    End Enum
     Public Enum OptimizationMethod
         Limited_Memory_BGFS = 0
         Truncated_Newton = 1

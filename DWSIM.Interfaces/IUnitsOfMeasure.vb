@@ -1,5 +1,7 @@
 ﻿Public Interface IUnitsOfMeasure
 
+    Function GetUnitSet(measureID As Enums.UnitOfMeasure) As List(Of String)
+
     Property Name As String
 
     Property mass As String

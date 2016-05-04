@@ -168,6 +168,91 @@ Namespace SystemsOfUnits
         Public Property volume As String Implements Interfaces.IUnitsOfMeasure.volume
 
         Public Property volumetricFlow As String Implements Interfaces.IUnitsOfMeasure.volumetricFlow
+
+        Public Function GetUnitSet(measureID As Enums.UnitOfMeasure) As List(Of String) Implements IUnitsOfMeasure.GetUnitSet
+
+            Dim units As New List(Of String)
+
+            Select Case measureID
+                Case Enums.UnitOfMeasure.temperature
+                    units.AddRange(New String() {"K", "R", "C", "F"})
+                Case Enums.UnitOfMeasure.pressure
+                    units.AddRange(New String() {"Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
+                Case Enums.UnitOfMeasure.massflow
+                    units.AddRange(New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"})
+                Case Enums.UnitOfMeasure.molarflow
+                    units.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"})
+                Case Enums.UnitOfMeasure.volumetricFlow
+                    units.AddRange(New String() {"m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s"})
+                Case Enums.UnitOfMeasure.enthalpy
+                    units.AddRange(New String() {"kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"})
+                Case Enums.UnitOfMeasure.entropy
+                    units.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
+                Case Enums.UnitOfMeasure.molecularWeight
+                    units.AddRange(New String() {"kg/kmol", "g/mol", "lbm/lbmol"})
+                Case Enums.UnitOfMeasure.surfaceTension
+                    units.AddRange(New String() {"N/m", "dyn/cm", "lbf/in"})
+                Case Enums.UnitOfMeasure.density
+                    units.AddRange(New String() {"kg/m3", "g/cm3", "lbm/ft3"})
+                Case Enums.UnitOfMeasure.heatCapacityCp
+                    units.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
+                Case Enums.UnitOfMeasure.thermalConductivity
+                    units.AddRange(New String() {"W/[m.K]", "cal/[cm.s.C]", "BTU/[ft.h.R]"})
+                Case Enums.UnitOfMeasure.cinematic_viscosity
+                    units.AddRange(New String() {"m2/s", "cSt", "ft2/s", "mm2/s"})
+                Case Enums.UnitOfMeasure.viscosity
+                    units.AddRange(New String() {"kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"})
+                Case Enums.UnitOfMeasure.deltaP
+                    units.AddRange(New String() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kPa", "bar", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi"})
+                Case Enums.UnitOfMeasure.deltaT
+                    units.AddRange(New String() {"C.", "K.", "F.", "R."})
+                Case Enums.UnitOfMeasure.distance
+                    units.AddRange(New String() {"m", "ft", "cm"})
+                Case Enums.UnitOfMeasure.heatflow
+                    units.AddRange(New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"})
+                Case Enums.UnitOfMeasure.time
+                    units.AddRange(New String() {"s", "min.", "h"})
+                Case Enums.UnitOfMeasure.volume
+                    units.AddRange(New String() {"m3", "cm3", "L", "ft3"})
+                Case Enums.UnitOfMeasure.molar_volume
+                    units.AddRange(New String() {"m3/kmol", "cm3/mmol", "ft3/lbmol"})
+                Case Enums.UnitOfMeasure.area
+                    units.AddRange(New String() {"m2", "cm2", "ft2"})
+                Case Enums.UnitOfMeasure.diameter
+                    units.AddRange(New String() {"m", "mm", "cm", "in", "ft"})
+                Case Enums.UnitOfMeasure.force
+                    units.AddRange(New String() {"N", "dyn", "kgf", "lbf"})
+                Case Enums.UnitOfMeasure.heat_transf_coeff
+                    units.AddRange(New String() {"W/[m2.K]", "cal/[cm2.s.C]", "BTU/[ft2.h.R]"})
+                Case Enums.UnitOfMeasure.accel
+                    units.AddRange(New String() {"m/s2", "cm/s2", "ft/s2"})
+                Case Enums.UnitOfMeasure.spec_vol
+                    units.AddRange(New String() {"m3/kg", "cm3/g", "ft3/lbm"})
+                Case Enums.UnitOfMeasure.molar_conc
+                    units.AddRange(New String() {"kmol/m3", "mol/m3", "mol/L", "mol/cm3", "mol/mL", "lbmol/ft3"})
+                Case Enums.UnitOfMeasure.mass_conc
+                    units.AddRange(New String() {"kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"})
+                Case Enums.UnitOfMeasure.reac_rate
+                    units.AddRange(New String() {"kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol.[ft3.h]"})
+                Case Enums.UnitOfMeasure.molar_enthalpy
+                    units.AddRange(New String() {"kJ/kmol", "cal/mol", "BTU/lbmol"})
+                Case Enums.UnitOfMeasure.molar_entropy
+                    units.AddRange(New String() {"kJ/[kmol.K]", "cal/[mol.C]", "BTU/[lbmol.R]"})
+                Case Enums.UnitOfMeasure.velocity
+                    units.AddRange(New String() {"m/s", "cm/s", "mm/s", "km/h", "ft/h", "ft/min", "ft/s", "in/s"})
+                Case Enums.UnitOfMeasure.foulingfactor
+                    units.AddRange(New String() {"K.m2/W", "C.cm2.s/cal", "ft2.h.F/BTU"})
+                Case Enums.UnitOfMeasure.cakeresistance
+                    units.AddRange(New String() {"m/kg", "ft/lbm", "cm/g"})
+                Case Enums.UnitOfMeasure.mediumresistance
+                    units.AddRange(New String() {"m-1", "cm-1", "ft-1"})
+
+            End Select
+
+            Return units
+
+        End Function
+
     End Class
 
     <System.Serializable()> Public Class SI
