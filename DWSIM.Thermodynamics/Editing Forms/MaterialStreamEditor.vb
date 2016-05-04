@@ -316,42 +316,46 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub cbSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSpec.SelectedIndexChanged
-        If Loaded Then
-            tbTemp.Enabled = False
-            tbPressure.Enabled = False
-            tbMassFlow.Enabled = False
-            tbMoleFlow.Enabled = False
-            tbVolFlow.Enabled = False
-            tbEnth.Enabled = False
-            tbEntr.Enabled = False
-            tbFracSpec.Enabled = False
-            rbSpecVapor.Enabled = False
-            rbSpecLiquid.Enabled = False
-            rbSpecSolid.Enabled = False
-            Select Case cbSpec.SelectedIndex
-                Case 0
-                    tbTemp.Enabled = True
-                    tbPressure.Enabled = True
-                Case 1
-                    tbPressure.Enabled = True
-                    tbEnth.Enabled = True
-                Case 2
-                    tbPressure.Enabled = True
-                    tbEntr.Enabled = True
-                Case 3
-                    tbPressure.Enabled = True
-                    tbFracSpec.Enabled = True
-                    rbSpecVapor.Enabled = True
-                Case 4
-                    tbTemp.Enabled = True
-                    tbFracSpec.Enabled = True
-                Case 5
-                    tbPressure.Enabled = True
-                    tbFracSpec.Enabled = True
-                    rbSpecSolid.Enabled = True
-            End Select
-            RequestCalc()
-        End If
+
+        tbTemp.Enabled = False
+        tbPressure.Enabled = False
+        tbMassFlow.Enabled = False
+        tbMoleFlow.Enabled = False
+        tbVolFlow.Enabled = False
+        tbEnth.Enabled = False
+        tbEntr.Enabled = False
+        tbFracSpec.Enabled = False
+        rbSpecVapor.Enabled = False
+        rbSpecLiquid.Enabled = False
+        rbSpecSolid.Enabled = False
+
+        MatStream.SpecType = cbSpec.SelectedIndex
+
+        Select Case cbSpec.SelectedIndex
+            Case 0
+                tbTemp.Enabled = True
+                tbPressure.Enabled = True
+            Case 1
+                tbPressure.Enabled = True
+                tbEnth.Enabled = True
+            Case 2
+                tbPressure.Enabled = True
+                tbEntr.Enabled = True
+            Case 3
+                tbPressure.Enabled = True
+                tbFracSpec.Enabled = True
+                rbSpecVapor.Enabled = True
+            Case 4
+                tbTemp.Enabled = True
+                tbFracSpec.Enabled = True
+            Case 5
+                tbPressure.Enabled = True
+                tbFracSpec.Enabled = True
+                rbSpecSolid.Enabled = True
+        End Select
+
+        If Loaded Then RequestCalc()
+
     End Sub
 
     Private Sub btnNormalizeInput_Click(sender As Object, e As EventArgs) Handles btnNormalizeInput.Click

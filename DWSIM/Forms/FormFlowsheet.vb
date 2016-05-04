@@ -2619,7 +2619,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs) Handles tsbUndo.MouseEnter
 
-        Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+        Dim hovereditem As ToolStripSplitButton = DirectCast(sender, ToolStripSplitButton)
 
         For Each tsmi As ToolStripMenuItem In tsbUndo.DropDownItems
             tsmi.Checked = False
@@ -2634,7 +2634,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs) Handles tsbRedo.MouseEnter
 
-        Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+        Dim hovereditem As ToolStripSplitButton = DirectCast(sender, ToolStripSplitButton)
 
         For Each tsmi As ToolStripMenuItem In tsbRedo.DropDownItems
             tsmi.Checked = False
