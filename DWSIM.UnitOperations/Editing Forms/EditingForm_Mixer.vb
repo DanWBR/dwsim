@@ -23,7 +23,7 @@ Public Class EditingForm_Mixer
 
             chkActive.Checked = MixerObject.GraphicObject.Active
 
-            Me.Text = .GraphicObject.Tag
+            Me.Text = .GetDisplayName() & ": " & .GraphicObject.Tag
 
             lblObject.Text = .GraphicObject.Tag & " (" & .FlowSheet.GetTranslatedString(.ComponentDescription) & ")"
             If .Calculated Then

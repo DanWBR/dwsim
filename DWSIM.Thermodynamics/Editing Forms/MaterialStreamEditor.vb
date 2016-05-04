@@ -36,7 +36,7 @@ Public Class MaterialStreamEditor
 
             chkActive.Checked = MatStream.GraphicObject.Active
 
-            Me.Text = .GraphicObject.Tag
+            Me.Text = .GetDisplayName() & ": " & .GraphicObject.Tag
 
             lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
@@ -298,7 +298,7 @@ Public Class MaterialStreamEditor
 
         End With
 
-        For Each row In grid.Rows
+        For Each row As DataGridViewRow In grid.Rows
             row.Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
             row.Cells(2).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
         Next
@@ -361,23 +361,23 @@ Public Class MaterialStreamEditor
 
     Private Sub btnNormalizeInput_Click(sender As Object, e As EventArgs) Handles btnNormalizeInput.Click
         Dim total As Double = 0
-        For Each row In gridInputComposition.Rows
+        For Each row As DataGridViewRow In gridInputComposition.Rows
             total += row.Cells(1).Value
         Next
-        For Each row In gridInputComposition.Rows
+        For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = row.Cells(1).Value / total
         Next
     End Sub
 
     Private Sub btnEqualizeInput_Click(sender As Object, e As EventArgs) Handles btnEqualizeInput.Click
         Dim total As Double = 0
-        For Each row In gridInputComposition.Rows
+        For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = 1 / gridInputComposition.Rows.Count
         Next
     End Sub
 
     Private Sub btnEraseInput_Click(sender As Object, e As EventArgs) Handles btnEraseInput.Click
-        For Each row In gridInputComposition.Rows
+        For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = 0
         Next
     End Sub
@@ -396,7 +396,7 @@ Public Class MaterialStreamEditor
                 Case 0
 
                     btnNormalizeInput_Click(sender, e)
-                    For Each row In Me.gridInputComposition.Rows
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value
                     Next
                     For Each comp In MatStream.Phases(0).Compounds.Values
@@ -409,7 +409,7 @@ Public Class MaterialStreamEditor
                 Case 1
 
                     btnNormalizeInput_Click(sender, e)
-                    For Each row In Me.gridInputComposition.Rows
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction = row.Cells(1).Value
                     Next
                     For Each comp In MatStream.Phases(0).Compounds.Values
@@ -422,12 +422,12 @@ Public Class MaterialStreamEditor
                 Case 2
 
                     Dim total As Double = 0
-                    For Each row In gridInputComposition.Rows
+                    For Each row As DataGridViewRow In gridInputComposition.Rows
                         total += row.Cells(1).Value
                     Next
                     Q = Converter.ConvertToSI(units.molarflow, total)
-                    For Each row In Me.gridInputComposition.Rows
-                        MatStream.Phases(0).Compounds(row.cells(0).value).MoleFraction = row.Cells(1).Value / total
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
+                        MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value / total
                     Next
                     For Each comp In MatStream.Phases(0).Compounds.Values
                         mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
@@ -441,11 +441,11 @@ Public Class MaterialStreamEditor
                 Case 3
 
                     Dim total As Double = 0
-                    For Each row In gridInputComposition.Rows
+                    For Each row As DataGridViewRow In gridInputComposition.Rows
                         total += row.Cells(0).Value
                     Next
                     W = Converter.ConvertToSI(units.massflow, total)
-                    For Each row In Me.gridInputComposition.Rows
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction = row.Cells(1).Value / total
                     Next
                     For Each comp In MatStream.Phases(0).Compounds.Values
@@ -478,7 +478,7 @@ Public Class MaterialStreamEditor
                     Dim total As Double = 0
                     Dim val As Double = 0
                     i = 0
-                    For Each row In Me.gridInputComposition.Rows
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         If row.Cells(0).Value.ToString.Contains("Water") Then
                             total += row.Cells(1).Value / 1000 * liqdens(i) / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000
                         Else
@@ -490,7 +490,7 @@ Public Class MaterialStreamEditor
                     Q = total
 
                     i = 0
-                    For Each row In Me.gridInputComposition.Rows
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         If row.Cells(0).Value.ToString.Contains("Water") Then
                             MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value / 1000 * liqdens(i) / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000 / total
                         Else
@@ -517,7 +517,7 @@ Public Class MaterialStreamEditor
 
                     Dim total As Double = 0
                     Dim val As Double = 0
-                    For Each row In Me.gridInputComposition.Rows
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         If row.Cells(0).Value.ToString.Contains("Water") Then
                             total += row.Cells(1).Value / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000
                         Else
@@ -527,7 +527,7 @@ Public Class MaterialStreamEditor
 
                     Q = total
 
-                    For Each row In Me.gridInputComposition.Rows
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         If row.Cells(0).Value.ToString.Contains("Water") Then
                             MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000 / total
                         Else
@@ -566,12 +566,12 @@ Public Class MaterialStreamEditor
                     Next
                     mtotal = 0.0#
                     i = 0
-                    For Each row In Me.gridInputComposition.Rows
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         mtotal += row.Cells(1).Value * liqdens(i)
                         i += 1
                     Next
                     i = 0
-                    For Each row In Me.gridInputComposition.Rows
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction = row.Cells(1).Value * liqdens(i) / mtotal
                         i += 1
                     Next
@@ -598,8 +598,7 @@ Public Class MaterialStreamEditor
 
     Function ValidateData() As Boolean
 
-        Dim row As DataGridViewRow
-        For Each row In Me.gridInputComposition.Rows
+        For Each row As DataGridViewRow In Me.gridInputComposition.Rows
             If Not Double.TryParse(row.Cells(1).Value, New Double) Then
                 Return False
             End If
@@ -614,19 +613,19 @@ Public Class MaterialStreamEditor
         Q = MatStream.Phases(0).Properties.molarflow.GetValueOrDefault
         Select Case cbCompBasis.SelectedIndex
             Case 0
-                For Each row In Me.gridInputComposition.Rows
+                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                     row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction
                 Next
             Case 1
-                For Each row In Me.gridInputComposition.Rows
+                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                     row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction
                 Next
             Case 2
-                For Each row In Me.gridInputComposition.Rows
+                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                     row.Cells(1).Value = Converter.ConvertFromSI(units.molarflow, MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q)
                 Next
             Case 3
-                For Each row In Me.gridInputComposition.Rows
+                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                     row.Cells(1).Value = Converter.ConvertFromSI(units.massflow, MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W)
                 Next
             Case 5
@@ -646,7 +645,7 @@ Public Class MaterialStreamEditor
                     i += 1
                 Next
                 i = 0
-                For Each row In Me.gridInputComposition.Rows
+                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                     If row.Cells(0).Value.ToString.Contains("Water") Then
                         row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q * MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / 1000 / liqdens(i) * 1000
                     Else
@@ -656,7 +655,7 @@ Public Class MaterialStreamEditor
                 Next
             Case 6
                 'molarity = mol solute per kg solvent
-                For Each row In Me.gridInputComposition.Rows
+                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                     If row.Cells(0).Value.ToString.Contains("Water") Then
                         row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W
                     Else
@@ -682,7 +681,7 @@ Public Class MaterialStreamEditor
                     i += 1
                 Next
                 i = 0
-                For Each row In Me.gridInputComposition.Rows
+                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                     row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction * MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / liqdens(i) / totalvol
                     i += 1
                 Next
