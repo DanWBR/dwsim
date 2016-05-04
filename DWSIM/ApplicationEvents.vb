@@ -129,6 +129,8 @@ Namespace My
             GlobalSettings.Settings.UseSIMDExtensions = My.Settings.UseSIMDExtensions
             GlobalSettings.Settings.DebugLevel = My.Settings.DebugLevel
 
+            GlobalSettings.Settings.CalculatorActivated = True
+
             If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
             Calculator.InitLibraries()

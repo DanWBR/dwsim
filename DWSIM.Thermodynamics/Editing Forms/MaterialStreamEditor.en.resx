@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblTag.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="chkActive.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblConnectedTo.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblStatus.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -136,23 +124,11 @@
   <data name="Label13.Text" xml:space="preserve">
     <value>Linked to</value>
   </data>
-  <data name="Label13.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label12.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
-  <data name="Label11.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
-  </data>
-  <data name="GroupBox5.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="btnDisconnectO.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -172,9 +148,6 @@
         zOkK4KcZzaFJBk/wOb2/r5f+DTi/AcFGp9AV5agvAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnDisconnectO.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnDisconnectI.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
@@ -193,23 +166,11 @@
         zOkK4KcZzaFJBk/wOb2/r5f+DTi/AcFGp9AV5agvAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnDisconnectI.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbOutlet.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Downstream</value>
-  </data>
-  <data name="Label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbInlet.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -217,26 +178,11 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Upstream</value>
   </data>
-  <data name="Label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
-  <data name="GroupBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbFlashAlg.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Flash Algorithm</value>
-  </data>
-  <data name="Label10.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbPropPack.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -244,23 +190,14 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
-  <data name="Label9.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Property Package Settings</value>
-  </data>
-  <data name="GroupBox3.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="tbFracSpec.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 232</value>
   </data>
   <data name="tbFracSpec.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 20</value>
-  </data>
-  <data name="tbFracSpec.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="rbSpecSolid.Location" type="System.Drawing.Point, System.Drawing">
     <value>207, 233</value>
@@ -271,20 +208,11 @@
   <data name="rbSpecSolid.Text" xml:space="preserve">
     <value>Solid</value>
   </data>
-  <data name="rbSpecSolid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="rbSpecLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 17</value>
   </data>
   <data name="rbSpecLiquid.Text" xml:space="preserve">
     <value>Liquid</value>
-  </data>
-  <data name="rbSpecLiquid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rbSpecVapor.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
@@ -292,17 +220,11 @@
   <data name="Label17.Text" xml:space="preserve">
     <value>Mole Fraction</value>
   </data>
-  <data name="Label17.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Button1.ToolTip" xml:space="preserve">
     <value>Discard Changes</value>
   </data>
   <data name="btnCompAcceptChanges.ToolTip" xml:space="preserve">
     <value>Accept Changes</value>
-  </data>
-  <data name="lblInputAmount.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="btnEraseInput.ToolTip" xml:space="preserve">
     <value>Erase</value>
@@ -318,9 +240,6 @@
   </data>
   <data name="compamount.HeaderText" xml:space="preserve">
     <value>Amount</value>
-  </data>
-  <data name="gridInputComposition.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="cbCompBasis.Items" xml:space="preserve">
     <value>Mole Fractions</value>
@@ -343,29 +262,14 @@
   <data name="cbCompBasis.Items6" xml:space="preserve">
     <value>Molalities</value>
   </data>
-  <data name="cbCompBasis.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Basis</value>
   </data>
-  <data name="Label16.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Composition</value>
-  </data>
-  <data name="GroupBox6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbUnitsS.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbEntr.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
@@ -373,47 +277,11 @@
   <data name="Label15.Text" xml:space="preserve">
     <value>Specific Entropy</value>
   </data>
-  <data name="Label15.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbUnitsH.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbEnth.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 13</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Specific Enthalpy</value>
-  </data>
-  <data name="Label14.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbUnitsQ.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbVolFlow.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbUnitsM.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbMoleFlow.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbUnitsW.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbMassFlow.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbUnitsP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbPressure.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
@@ -421,23 +289,11 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Volumetric Flow</value>
   </data>
-  <data name="Label7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Molar Flow</value>
-  </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbUnitsT.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbTemp.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -445,23 +301,14 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Mass Flow</value>
   </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Pressure</value>
   </data>
-  <data name="Label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Temperature</value>
-  </data>
-  <data name="Label3.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="cbSpec.Items" xml:space="preserve">
     <value>Temperature and Pressure (TP)</value>
@@ -481,35 +328,17 @@
   <data name="cbSpec.Items5" xml:space="preserve">
     <value>Pressure and Solid Fraction (PSF)</value>
   </data>
-  <data name="cbSpec.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Flash Spec</value>
   </data>
-  <data name="Label8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Input Parameters</value>
   </data>
-  <data name="GroupBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Panel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rtbAnnotations.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>General Notes</value>
-  </data>
-  <data name="GroupBox4.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 13</value>
@@ -517,20 +346,14 @@
   <data name="Label18.Text" xml:space="preserve">
     <value>Click to expand and view calculated properties -&gt;</value>
   </data>
-  <data name="Label18.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnExpand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>339, 844</value>
+    <value>336, 844</value>
   </data>
   <data name="btnExpand.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 23</value>
   </data>
   <data name="btnExpand.Text" xml:space="preserve">
     <value>Expand &gt;&gt;</value>
-  </data>
-  <data name="btnExpand.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -541,14 +364,8 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesMixture.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabPropsMix.Text" xml:space="preserve">
     <value>Mixture</value>
-  </data>
-  <data name="tabPropsMix.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -559,14 +376,8 @@
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesVapor.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabPropsVapor.Text" xml:space="preserve">
     <value>Vapor</value>
-  </data>
-  <data name="tabPropsVapor.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -577,14 +388,8 @@
   <data name="DataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesLiqMix.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabPropsLiqMix.Text" xml:space="preserve">
     <value>Overall Liquid</value>
-  </data>
-  <data name="tabPropsLiqMix.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -595,14 +400,8 @@
   <data name="DataGridViewTextBoxColumn11.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesLiq1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabPropsLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
-  </data>
-  <data name="tabPropsLiq1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn12.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -613,14 +412,8 @@
   <data name="DataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesLiq2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabPropsLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
-  </data>
-  <data name="tabPropsLiq2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn15.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -631,23 +424,11 @@
   <data name="DataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesSolid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabPropsSolid.Text" xml:space="preserve">
     <value>Solid</value>
   </data>
-  <data name="tabPropsSolid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TabControl1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Phase Properties</value>
-  </data>
-  <data name="GroupBox7.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="cbCalculatedAmountsBasis.Items" xml:space="preserve">
     <value>Mole Fractions</value>
@@ -673,17 +454,11 @@
   <data name="cbCalculatedAmountsBasis.Size" type="System.Drawing.Size, System.Drawing">
     <value>266, 21</value>
   </data>
-  <data name="cbCalculatedAmountsBasis.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Basis</value>
-  </data>
-  <data name="Label19.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -691,14 +466,8 @@
   <data name="DataGridViewTextBoxColumn19.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompMixture.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabCompMix.Text" xml:space="preserve">
     <value>Mixture</value>
-  </data>
-  <data name="tabCompMix.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn20.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -706,14 +475,8 @@
   <data name="DataGridViewTextBoxColumn21.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompVapor.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabCompVapor.Text" xml:space="preserve">
     <value>Vapor</value>
-  </data>
-  <data name="tabCompVapor.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn22.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -721,14 +484,8 @@
   <data name="DataGridViewTextBoxColumn23.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompLiqMix.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabCompLiqMix.Text" xml:space="preserve">
     <value>Overall Liquid</value>
-  </data>
-  <data name="tabCompLiqMix.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn24.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -736,14 +493,8 @@
   <data name="DataGridViewTextBoxColumn25.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompLiq1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabCompLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
-  </data>
-  <data name="tabCompLiq1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn26.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -751,14 +502,8 @@
   <data name="DataGridViewTextBoxColumn27.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompLiq2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabCompLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
-  </data>
-  <data name="tabCompLiq2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="DataGridViewTextBoxColumn28.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -766,29 +511,10 @@
   <data name="DataGridViewTextBoxColumn29.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompSolid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tabCompSolid.Text" xml:space="preserve">
     <value>Solid</value>
   </data>
-  <data name="tabCompSolid.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TabControl2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Phase Composition</value>
-  </data>
-  <data name="GroupBox8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>
