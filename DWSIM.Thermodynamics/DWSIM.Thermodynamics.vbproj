@@ -113,7 +113,7 @@
     <Compile Include="Editing Forms\MaterialStreamEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Material Stream\Streams.vb" />
+    <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Extensions\GeneralExtenders.vb" />
@@ -210,6 +210,9 @@
     <Compile Include="Property Packages\UNIQUAC.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\MaterialStreamEditor.en.resx">
+      <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\MaterialStreamEditor.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
@@ -352,6 +355,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\disconnect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet_cross.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

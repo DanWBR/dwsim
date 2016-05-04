@@ -2748,9 +2748,15 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Function
 
     Public Sub DisplayForm(form As Object) Implements IFlowsheet.DisplayForm
-        Dim dpanel = TryCast(form, DockContent)
-        If Not dpanel Is Nothing Then
-            dpanel.Show(Me.dckPanel)
+        Dim cnt = TryCast(form, DockContent)
+        If Not cnt Is Nothing Then
+            cnt.Show(Me.dckPanel)
+            If cnt.ShowHint = DockState.DockLeft Or cnt.ShowHint = DockState.DockLeftAutoHide Then
+                dckPanel.DockLeftPortion = cnt.Width
+            End If
+            If cnt.ShowHint = DockState.DockRight Or cnt.ShowHint = DockState.DockRightAutoHide Then
+                dckPanel.DockRightPortion = cnt.Width
+            End If
         Else
             DirectCast(form, Form).Show(Me)
         End If
@@ -2792,5 +2798,15 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public Function AddObject(t As ObjectType, xcoord As Integer, ycoord As Integer, tag As String) As Interfaces.ISimulationObject Implements IFlowsheet.AddObject
         Return Me.SimulationObjects(Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, tag))
     End Function
+
+    Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing) Implements IFlowsheet.RequestCalculation
+
+        If Not sender Is Nothing Then
+            FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
+        Else
+            FlowsheetSolver.FlowsheetSolver.CalculateAll(Me)
+        End If
+
+    End Sub
 
 End Class

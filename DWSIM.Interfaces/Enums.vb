@@ -69,6 +69,7 @@
         volumetricFlow
 
     End Enum
+
     Public Enum OptimizationMethod
         Limited_Memory_BGFS = 0
         Truncated_Newton = 1
@@ -97,10 +98,10 @@
         Nested_Loops_Immiscible_VLLE = 3
         Inside_Out_VLE = 4
         Inside_Out_VLLE = 5
-        Gibbs_VLE = 6
-        Gibbs_VLLE = 7
+        Gibbs_Minimization_VLE = 6
+        Gibbs_Minimization_VLLE = 7
         Simple_LLE = 8
-        Nested_Loops_SLE = 9
+        Nested_Loops_SLE_Eutectic = 9
         Nested_Loops_SLE_SolidSolution = 10
     End Enum
 
@@ -142,6 +143,7 @@
         Pressure_and_Entropy = 2
         Pressure_and_VaporFraction = 3
         Temperature_and_VaporFraction = 4
+        Pressure_and_SolidFraction = 5
     End Enum
 
     Public Enum CompositionBasis

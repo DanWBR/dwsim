@@ -48,6 +48,8 @@ Namespace Streams
 
         Implements Interfaces.IMaterialStream
 
+        Private f As MaterialStreamEditor
+
         Public _pp As PropertyPackages.PropertyPackage
         Public _ppid As String = ""
 
@@ -5024,10 +5026,26 @@ Namespace Streams
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New MaterialStreamEditor With {.MatStream = Me}
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New MaterialStreamEditor With {.MatStream = Me}
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Select()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object

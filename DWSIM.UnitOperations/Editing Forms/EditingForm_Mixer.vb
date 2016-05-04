@@ -103,8 +103,6 @@ Public Class EditingForm_Mixer
 
             rtbAnnotations.Rtf = .Annotation
 
-            chkActive.Checked = .GraphicObject.Active
-
         End With
 
         Loaded = True

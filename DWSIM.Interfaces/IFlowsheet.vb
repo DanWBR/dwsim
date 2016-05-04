@@ -28,6 +28,8 @@
 
     Sub CheckStatus()
 
+    Sub RequestCalculation(Optional ByVal sender As ISimulationObject = Nothing)
+
     Function GetTranslatedString(text As String, locale As String) As String
 
     Function GetTranslatedString(text As String) As String
