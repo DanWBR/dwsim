@@ -136,6 +136,7 @@ Partial Class MaterialStreamEditor
         Me.DataGridViewTextBoxColumn16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.lblAmountTotal = New System.Windows.Forms.Label()
         Me.cbCalculatedAmountsBasis = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
@@ -164,7 +165,6 @@ Partial Class MaterialStreamEditor
         Me.DataGridViewTextBoxColumn28 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn29 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lblAmountTotal = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -997,6 +997,12 @@ Partial Class MaterialStreamEditor
         Me.GroupBox8.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox8, resources.GetString("GroupBox8.ToolTip"))
         '
+        'lblAmountTotal
+        '
+        resources.ApplyResources(Me.lblAmountTotal, "lblAmountTotal")
+        Me.lblAmountTotal.Name = "lblAmountTotal"
+        Me.ToolTip1.SetToolTip(Me.lblAmountTotal, resources.GetString("lblAmountTotal.ToolTip"))
+        '
         'cbCalculatedAmountsBasis
         '
         resources.ApplyResources(Me.cbCalculatedAmountsBasis, "cbCalculatedAmountsBasis")
@@ -1222,12 +1228,6 @@ Partial Class MaterialStreamEditor
         Me.DataGridViewTextBoxColumn29.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn29, "DataGridViewTextBoxColumn29")
         Me.DataGridViewTextBoxColumn29.Name = "DataGridViewTextBoxColumn29"
-        '
-        'lblAmountTotal
-        '
-        resources.ApplyResources(Me.lblAmountTotal, "lblAmountTotal")
-        Me.lblAmountTotal.Name = "lblAmountTotal"
-        Me.ToolTip1.SetToolTip(Me.lblAmountTotal, resources.GetString("lblAmountTotal.ToolTip"))
         '
         'MaterialStreamEditor
         '

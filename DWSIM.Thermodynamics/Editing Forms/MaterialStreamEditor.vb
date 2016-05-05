@@ -131,6 +131,13 @@ Public Class MaterialStreamEditor
                 gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
             Next
 
+            Dim sum As Double = 0.0#
+            For Each row As DataGridViewRow In gridInputComposition.Rows
+                sum += Double.Parse(row.Cells(1).Value)
+            Next
+            lblInputAmount.Text = "Total: " & sum.ToString(nf)
+            Me.lblInputAmount.ForeColor = Drawing.Color.Blue
+
             'property package
 
             Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
@@ -721,36 +728,42 @@ Public Class MaterialStreamEditor
     End Sub
 
 
-    Private Sub tbTemp_KeyDown(sender As Object, e As KeyEventArgs) Handles tbTemp.KeyDown, tbPressure.KeyDown, tbEnth.KeyDown, tbEntr.KeyDown,
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbTemp.KeyDown, tbPressure.KeyDown, tbEnth.KeyDown, tbEntr.KeyDown,
                                                                             tbFracSpec.KeyDown, tbMassFlow.KeyDown, tbMoleFlow.KeyDown, tbVolFlow.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
-            With MatStream.Phases(0).Properties
-
-                If sender Is tbTemp Then .temperature = Converter.ConvertToSI(cbUnitsT.SelectedItem.ToString, Double.Parse(tbTemp.Text))
-                If sender Is tbPressure Then .pressure = Converter.ConvertToSI(cbUnitsP.SelectedItem.ToString, Double.Parse(tbPressure.Text))
-                If sender Is tbMassFlow Then .massflow = Converter.ConvertToSI(cbUnitsW.SelectedItem.ToString, Double.Parse(tbMassFlow.Text))
-                If sender Is tbMoleFlow Then .molarflow = Converter.ConvertToSI(cbUnitsM.SelectedItem.ToString, Double.Parse(tbMoleFlow.Text))
-                If sender Is tbVolFlow Then .volumetric_flow = Converter.ConvertToSI(cbUnitsQ.SelectedItem.ToString, Double.Parse(tbVolFlow.Text))
-                If sender Is tbEnth Then .enthalpy = Converter.ConvertToSI(cbUnitsH.SelectedItem.ToString, Double.Parse(tbEnth.Text))
-                If sender Is tbEntr Then .entropy = Converter.ConvertToSI(cbUnitsS.SelectedItem.ToString, Double.Parse(tbEntr.Text))
-
-            End With
-
-            If sender Is tbFracSpec And rbSpecVapor.Checked Then
-                MatStream.Phases(2).Properties.molarfraction = Double.Parse(tbFracSpec.Text)
-            ElseIf sender Is tbFracSpec And rbSpecLiquid.Checked Then
-                MatStream.Phases(2).Properties.molarfraction = 1.0# - Double.Parse(tbFracSpec.Text)
-            ElseIf sender Is tbFracSpec And rbSpecSolid.Checked Then
-                MatStream.Phases(7).Properties.molarfraction = Double.Parse(tbFracSpec.Text)
-            End If
-
-            RequestCalc()
+            UpdateProps(sender)
 
             DirectCast(sender, TextBox).SelectAll()
 
         End If
+
+    End Sub
+
+    Sub UpdateProps(sender As Object)
+
+        With MatStream.Phases(0).Properties
+
+            If sender Is tbTemp Then .temperature = Converter.ConvertToSI(cbUnitsT.SelectedItem.ToString, Double.Parse(tbTemp.Text))
+            If sender Is tbPressure Then .pressure = Converter.ConvertToSI(cbUnitsP.SelectedItem.ToString, Double.Parse(tbPressure.Text))
+            If sender Is tbMassFlow Then .massflow = Converter.ConvertToSI(cbUnitsW.SelectedItem.ToString, Double.Parse(tbMassFlow.Text))
+            If sender Is tbMoleFlow Then .molarflow = Converter.ConvertToSI(cbUnitsM.SelectedItem.ToString, Double.Parse(tbMoleFlow.Text))
+            If sender Is tbVolFlow Then .volumetric_flow = Converter.ConvertToSI(cbUnitsQ.SelectedItem.ToString, Double.Parse(tbVolFlow.Text))
+            If sender Is tbEnth Then .enthalpy = Converter.ConvertToSI(cbUnitsH.SelectedItem.ToString, Double.Parse(tbEnth.Text))
+            If sender Is tbEntr Then .entropy = Converter.ConvertToSI(cbUnitsS.SelectedItem.ToString, Double.Parse(tbEntr.Text))
+
+        End With
+
+        If sender Is tbFracSpec And rbSpecVapor.Checked Then
+            MatStream.Phases(2).Properties.molarfraction = Double.Parse(tbFracSpec.Text)
+        ElseIf sender Is tbFracSpec And rbSpecLiquid.Checked Then
+            MatStream.Phases(2).Properties.molarfraction = 1.0# - Double.Parse(tbFracSpec.Text)
+        ElseIf sender Is tbFracSpec And rbSpecSolid.Checked Then
+            MatStream.Phases(7).Properties.molarfraction = Double.Parse(tbFracSpec.Text)
+        End If
+
+        RequestCalc()
 
     End Sub
 
@@ -795,6 +808,143 @@ Public Class MaterialStreamEditor
         UpdateCompBasis(cbCalculatedAmountsBasis, gridCompLiq1, MatStream.Phases(3))
         UpdateCompBasis(cbCalculatedAmountsBasis, gridCompLiq2, MatStream.Phases(4))
         UpdateCompBasis(cbCalculatedAmountsBasis, gridCompSolid, MatStream.Phases(7))
+
+    End Sub
+
+    Private Sub gridInputComposition_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridInputComposition.CellValueChanged
+
+        If Loaded Then
+            Try
+                Dim sum As Double = 0.0#
+                For Each row As DataGridViewRow In gridInputComposition.Rows
+                    sum += Double.Parse(row.Cells(1).Value)
+                Next
+                lblInputAmount.Text = "Total: " & sum.ToString(nf)
+                Me.lblInputAmount.ForeColor = Drawing.Color.Blue
+            Catch ex As Exception
+                Me.lblInputAmount.ForeColor = Drawing.Color.Red
+            End Try
+        End If
+
+    End Sub
+
+    Private Sub cbInlet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbInlet.SelectedIndexChanged
+        If Loaded Then UpdateInletConnection(sender)
+    End Sub
+
+    Private Sub cbOutlet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutlet.SelectedIndexChanged
+        If Loaded Then UpdateOutletConnection(sender)
+    End Sub
+
+    Private Sub btnDisconnectI_Click(sender As Object, e As EventArgs) Handles btnDisconnectI.Click
+
+        If cbInlet.SelectedItem IsNot Nothing Then
+            MatStream.FlowSheet.DisconnectObjects(MatStream.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom, MatStream.GraphicObject)
+            cbInlet.SelectedItem = Nothing
+        End If
+
+    End Sub
+
+    Private Sub btnDisconnectO_Click(sender As Object, e As EventArgs) Handles btnDisconnectO.Click
+
+        If cbOutlet.SelectedItem IsNot Nothing Then
+            MatStream.FlowSheet.DisconnectObjects(MatStream.GraphicObject, MatStream.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo)
+            cbOutlet.SelectedItem = Nothing
+        End If
+
+    End Sub
+
+    Sub UpdateInletConnection(cb As ComboBox)
+
+        Dim text As String = cb.Text
+
+        If text <> "" Then
+
+            Dim gobj = MatStream.GraphicObject
+            Dim flowsheet = MatStream.FlowSheet
+
+            Dim i As Integer = 0
+            For Each oc As Interfaces.IConnectionPoint In flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.OutputConnectors
+                If Not oc.IsAttached Then
+                    If gobj.InputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(0).AttachedConnector.AttachedFrom, gobj)
+                    flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, i, 0)
+                    Exit Sub
+                End If
+                i += 1
+            Next
+
+            MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End If
+
+    End Sub
+
+    Sub UpdateOutletConnection(cb As ComboBox)
+
+        Dim text As String = cb.Text
+
+        If text <> "" Then
+
+            Dim gobj = MatStream.GraphicObject
+            Dim flowsheet = MatStream.FlowSheet
+
+            Dim i As Integer = 0
+            For Each ic As Interfaces.IConnectionPoint In flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors
+                If Not ic.IsAttached Then
+                    If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
+                    flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, i)
+                    Exit Sub
+                End If
+                i += 1
+            Next
+
+            MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End If
+
+    End Sub
+
+    Private Sub cbUnitsT_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbUnitsT.SelectedIndexChanged, cbUnitsP.SelectedIndexChanged,
+                                                                                        cbUnitsW.SelectedIndexChanged, cbUnitsM.SelectedIndexChanged,
+                                                                                        cbUnitsQ.SelectedIndexChanged, cbUnitsH.SelectedIndexChanged,
+                                                                                        cbUnitsS.SelectedIndexChanged
+
+        If Loaded Then
+            Try
+                If sender Is cbUnitsT Then
+                    tbTemp.Text = Converter.Convert(cbUnitsT.SelectedItem.ToString, units.temperature, Double.Parse(tbTemp.Text)).ToString(nf)
+                    cbUnitsT.SelectedItem = units.temperature
+                    UpdateProps(tbTemp)
+                ElseIf sender Is cbUnitsP Then
+                    tbPressure.Text = Converter.Convert(cbUnitsP.SelectedItem.ToString, units.pressure, Double.Parse(tbPressure.Text)).ToString(nf)
+                    cbUnitsP.SelectedItem = units.pressure
+                    UpdateProps(tbPressure)
+                ElseIf sender Is cbUnitsW Then
+                    tbMassFlow.Text = Converter.Convert(cbUnitsW.SelectedItem.ToString, units.massflow, Double.Parse(tbMassFlow.Text)).ToString(nf)
+                    cbUnitsW.SelectedItem = units.massflow
+                    UpdateProps(tbMassFlow)
+                ElseIf sender Is cbUnitsM Then
+                    tbMoleFlow.Text = Converter.Convert(cbUnitsM.SelectedItem.ToString, units.molarflow, Double.Parse(tbMoleFlow.Text)).ToString(nf)
+                    cbUnitsM.SelectedItem = units.molarflow
+                    UpdateProps(tbMoleFlow)
+                ElseIf sender Is cbUnitsQ Then
+                    tbVolFlow.Text = Converter.Convert(cbUnitsQ.SelectedItem.ToString, units.volumetricFlow, Double.Parse(tbVolFlow.Text)).ToString(nf)
+                    cbUnitsQ.SelectedItem = units.volumetricFlow
+                    UpdateProps(tbVolFlow)
+                ElseIf sender Is cbUnitsH Then
+                    tbEnth.Text = Converter.Convert(cbUnitsH.SelectedItem.ToString, units.enthalpy, Double.Parse(tbEnth.Text)).ToString(nf)
+                    cbUnitsH.SelectedItem = units.enthalpy
+                    UpdateProps(tbEnth)
+                ElseIf sender Is cbUnitsS Then
+                    tbEntr.Text = Converter.Convert(cbUnitsS.SelectedItem.ToString, units.entropy, Double.Parse(tbEntr.Text)).ToString(nf)
+                    cbUnitsS.SelectedItem = units.entropy
+                    UpdateProps(tbEntr)
+                End If
+
+            Catch ex As Exception
+                MatStream.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
+            End Try
+        End If
 
     End Sub
 

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="chkActive.ToolTip" xml:space="preserve">
+    <value>Active/Inactive</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -148,6 +151,9 @@
         zOkK4KcZzaFJBk/wOb2/r5f+DTi/AcFGp9AV5agvAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="btnDisconnectO.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="btnDisconnectI.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
@@ -165,6 +171,9 @@
         OFvYi+NZRoSJmhByRoe9UQ+cdOM+0xk4MUX9ZqF8EOdvPsfhS62ekHhSciD2kSAoWs1j9kw37udL9MKJ
         zOkK4KcZzaFJBk/wOb2/r5f+DTi/AcFGp9AV5agvAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="btnDisconnectI.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
@@ -426,9 +435,6 @@
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Phase Properties</value>
-  </data>
-  <data name="lblAmountTotal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
   </data>
   <data name="cbCalculatedAmountsBasis.Items" xml:space="preserve">
     <value>Mole Fractions</value>
