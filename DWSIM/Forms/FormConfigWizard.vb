@@ -64,7 +64,7 @@ Public Class FormConfigWizard
 
             Me.ListViewA.Items.Clear()
             For Each comp In Me.FrmChild.Options.SelectedComponents.Values
-                Me.ListViewA.Items.Add(comp.Name, DWSIM.App.GetComponentName(comp.Name), 0).Tag = comp.Name
+                Me.ListViewA.Items.Add(comp.Name, comp.Name, 0).Tag = comp.Name
             Next
             For Each comp In Me.FrmChild.Options.NotSelectedComponents.Values
                 Dim idx As Integer = Me.AddCompToGrid(comp)
@@ -188,7 +188,7 @@ Public Class FormConfigWizard
         If Not contains Then
             Try
                 Dim r As New OutlookGridRow
-                translatedname = DWSIM.App.GetComponentName(comp.Name)
+                translatedname = comp.Name
                 r.CreateCells(ogc1, New Object() {comp.Name, translatedname, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported, comp.IsFPROPSSupported})
                 ogc1.Rows.Add(r)
                 Return ogc1.Rows.Count - 1
@@ -282,7 +282,7 @@ Public Class FormConfigWizard
                     Next
                 Next
 
-                Me.ListViewA.Items.Add(tmpcomp.Name, DWSIM.App.GetComponentName(tmpcomp.Name) & " (" & tmpcomp.OriginalDB & ")", 0).Tag = tmpcomp.Name
+                Me.ListViewA.Items.Add(tmpcomp.Name, tmpcomp.Name & " (" & tmpcomp.OriginalDB & ")", 0).Tag = tmpcomp.Name
                 Me.ogc1.Rows.RemoveAt(index)
             End If
         End If

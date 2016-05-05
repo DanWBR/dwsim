@@ -46,7 +46,7 @@ Public Class FormReacKinetic
         'populate datagrid
         For Each subs As ConstantProperties In fc.Options.SelectedComponents.Values
             With Me.KryptonDataGridView1
-                .Rows.Add(New Object() {DWSIM.App.GetComponentName(subs.Name), Format(subs.Molar_Weight, nf), False, False, 0, 0, 0, subs.Name})
+                .Rows.Add(New Object() {(subs.Name), Format(subs.Molar_Weight, nf), False, False, 0, 0, 0, subs.Name})
             End With
         Next
 
@@ -135,7 +135,7 @@ Public Class FormReacKinetic
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
                 If row.Cells(3).Value = True Then
                     rc.BaseReactant = row.Cells(7).Value
-                    Me.tbCompBase.Text = Global.DWSIM.DWSIM.App.GetComponentName(rc.BaseReactant)
+                    Me.tbCompBase.Text = (rc.BaseReactant)
                     Exit For
                 End If
             Next

@@ -98,7 +98,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaMistura"), "", ""})
                         For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(0).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -114,7 +114,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseVapor"), "", ""})
                         For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(2).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -130,7 +130,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                         For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(1).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -146,7 +146,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                         For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(3).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -162,7 +162,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                         For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(4).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If
@@ -178,7 +178,7 @@ Public Class FormReportConfig
                     If inclcomp Then
                         DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
                         For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(6).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetComponentName(subst.Name), Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                         Next
                     End If
                 End If

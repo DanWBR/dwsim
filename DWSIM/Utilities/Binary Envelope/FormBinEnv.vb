@@ -52,8 +52,8 @@ Public Class FormBinEnv
             Me.cbComp1.Items.Clear()
             Me.cbComp2.Items.Clear()
             For Each co As ConstantProperties In Frm.Options.SelectedComponents.Values
-                Me.cbComp1.Items.Add(DWSIM.App.GetComponentName(co.Name))
-                Me.cbComp2.Items.Add(DWSIM.App.GetComponentName(co.Name))
+                Me.cbComp1.Items.Add((co.Name))
+                Me.cbComp2.Items.Add((co.Name))
             Next
 
             Me.cbPropPack.Items.Clear()
@@ -117,7 +117,7 @@ Public Class FormBinEnv
 
             For Each phase As BaseClasses.Phase In mat.Phases.Values
                 For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
-                    If DWSIM.App.GetComponentName(cp.Name) = cbComp1.SelectedItem.ToString Then
+                    If (cp.Name) = cbComp1.SelectedItem.ToString Then
                         With phase
                             .Compounds.Add(cp.Name, New BaseClasses.Compound(cp.Name, ""))
                             .Compounds(cp.Name).ConstantProperties = cp
@@ -130,7 +130,7 @@ Public Class FormBinEnv
 
             For Each phase As BaseClasses.Phase In mat.Phases.Values
                 For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
-                    If DWSIM.App.GetComponentName(cp.Name) = cbComp2.SelectedItem.ToString Then
+                    If (cp.Name) = cbComp2.SelectedItem.ToString Then
                         With phase
                             .Compounds.Add(cp.Name, New BaseClasses.Compound(cp.Name, ""))
                             .Compounds(cp.Name).ConstantProperties = cp

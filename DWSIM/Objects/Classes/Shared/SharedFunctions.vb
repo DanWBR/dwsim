@@ -136,7 +136,7 @@ Namespace DWSIM
                 Dim sname As String = ""
                 If PropID.Split(",").Length = 2 Then
                     sname = PropID.Split(",")(1)
-                    retstr = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo) + " - " + DWSIM.App.GetComponentName(sname, fp)
+                    retstr = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo) + " - " + sname
                     If retstr Is Nothing Then Return PropID Else Return retstr
                 Else
                     retstr = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo)
@@ -148,49 +148,6 @@ Namespace DWSIM
 
             Return Nothing
 
-        End Function
-
-        Public Shared Function GetComponentName(ByVal UniqueName As String, Optional ByRef fp As FormMain = Nothing, Optional ByVal COmode As Boolean = False) As String
-            If COmode Then
-                Dim str As String = GetLocalString("_" + UniqueName)
-                If str(0) = "_" Then
-                    Return UniqueName
-                Else
-                    Return str
-                End If
-            Else
-                If Not UniqueName = "" Then
-                    If fp Is Nothing Then Return UniqueName
-                    If fp.AvailableComponents.ContainsKey(UniqueName) Then
-                        Dim str As String = GetLocalString("_" + UniqueName)
-                        If UniqueName Is Nothing Then
-                            Return fp.AvailableComponents.Item(UniqueName).Name
-                        Else
-                            If str(0) = "_" Then
-                                Return UniqueName
-                            Else
-                                Return str
-                            End If
-                        End If
-                    Else
-                        Dim frmc As FormFlowsheet = My.Application.ActiveSimulation
-                        If Not frmc Is Nothing Then
-                            If frmc.Options.SelectedComponents.ContainsKey(UniqueName) Then
-                                Return frmc.Options.SelectedComponents(UniqueName).Name
-                            ElseIf frmc.Options.NotSelectedComponents.ContainsKey(UniqueName) Then
-                                Return frmc.Options.NotSelectedComponents(UniqueName).Name
-                            Else
-                                Return UniqueName
-                            End If
-                        Else
-                            Return UniqueName
-                        End If
-                    End If
-                Else
-                    Return UniqueName
-                End If
-                Return UniqueName
-            End If
         End Function
 
         Public Shared Function GetComponentType(ByRef comp As BaseClasses.ConstantProperties) As String

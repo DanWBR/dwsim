@@ -113,7 +113,7 @@ Public Class FormSimulSettings
 
             Me.ListViewA.Items.Clear()
             For Each comp In Me.FrmChild.Options.SelectedComponents.Values
-                Me.ListViewA.Items.Add(comp.Name, DWSIM.App.GetComponentName(comp.Name) & " (" & comp.OriginalDB & ")", 0).Tag = comp.Name
+                Me.ListViewA.Items.Add(comp.Name, comp.Name & " (" & comp.OriginalDB & ")", 0).Tag = comp.Name
             Next
             For Each comp In Me.FrmChild.Options.NotSelectedComponents.Values
                 Dim idx As Integer = Me.AddCompToGrid(comp)
@@ -262,7 +262,7 @@ Public Class FormSimulSettings
         Dim i, n As Integer
         n = comps.Count - 1
         For i = 0 To n
-            With Me.ListView2.Items.Add(DWSIM.App.GetComponentName(comps(i)))
+            With Me.ListView2.Items.Add(comps(i))
                 For Each s As String In selected
                     If s = comps(i) Then
                         .Checked = True
@@ -939,7 +939,7 @@ Public Class FormSimulSettings
         If Not contains Then
             Try
                 Dim r As New OutlookGridRow
-                translatedname = DWSIM.App.GetComponentName(comp.Name)
+                translatedname = comp.Name
                 r.CreateCells(ogc1, New Object() {comp.Name, translatedname, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported, comp.IsFPROPSSupported})
                 ogc1.Rows.Add(r)
                 Return ogc1.Rows.Count - 1
@@ -1136,7 +1136,7 @@ Public Class FormSimulSettings
                     Next
                 Next
 
-                Me.ListViewA.Items.Add(tmpcomp.Name, DWSIM.App.GetComponentName(tmpcomp.Name) & " (" & tmpcomp.OriginalDB & ")", 0).Tag = tmpcomp.Name
+                Me.ListViewA.Items.Add(tmpcomp.Name, tmpcomp.Name & " (" & tmpcomp.OriginalDB & ")", 0).Tag = tmpcomp.Name
 
                 If Not DWSIM.App.IsRunningOnMono Then Me.ogc1.Rows.RemoveAt(index)
 
@@ -1144,7 +1144,7 @@ Public Class FormSimulSettings
 
                 If My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundAdded,
                           .ObjID = tmpcomp.Name,
-                          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundAdded"), DWSIM.App.GetComponentName(tmpcomp.Name))})
+                          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundAdded"), tmpcomp.Name)})
 
 
             End If
@@ -1186,7 +1186,7 @@ Public Class FormSimulSettings
         SetupKeyCompounds()
         If My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundRemoved,
           .ObjID = tmpcomp.Name,
-          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundRemoved"), DWSIM.App.GetComponentName(tmpcomp.Name))})
+          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundRemoved"), tmpcomp.Name)})
 
     End Sub
 

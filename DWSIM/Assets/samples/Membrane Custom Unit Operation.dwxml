@@ -4863,7 +4863,7 @@ Flowsheet.WriteMessage("[Membrane UO] Number of units: " + str(Nu))
 Flowsheet.WriteMessage("[Membrane UO] Ready to calculate!")
 
 for i in range(0, n):
-	Flowsheet.WriteMessage("[Membrane UO] " + DWSIM.App.GetComponentName(ids[i]) + " permeability value: " + str(pmi[i]) + "  mol.m/[s.m2.Pa]")
+	Flowsheet.WriteMessage("[Membrane UO] " + (ids[i]) + " permeability value: " + str(pmi[i]) + "  mol.m/[s.m2.Pa]")
 
 
 while (error &gt;= 0.000001) and (count &lt; 1000): 

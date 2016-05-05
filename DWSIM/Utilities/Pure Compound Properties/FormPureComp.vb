@@ -48,7 +48,7 @@ Public Class FormPureComp
                 Dim subst As BaseClasses.ConstantProperties
                 Me.ComboBox1.Items.Clear()
                 For Each subst In .Options.SelectedComponents.Values
-                    Me.ComboBox1.Items.Add(DWSIM.App.GetComponentName(subst.Name) + " [" + subst.Name + "]")
+                    Me.ComboBox1.Items.Add((subst.Name) + " [" + subst.Name + "]")
                 Next
             End With
         End If

@@ -176,7 +176,7 @@ Public Class FormUNIFACRegression
         'Fill table with subgoup list of components
         k = 0
         For Each cp As ConstantProperties In _comps.Values
-            IPGrid.Item(0, k).Value = DWSIM.App.GetComponentName(cp.Name)
+            IPGrid.Item(0, k).Value = cp.Name
             IPGrid.Item(0, k).Style.BackColor = Color.CadetBlue
             IPGrid.Item(0, k).Style.ForeColor = Color.White
             IPGrid.Item(0, k).Style.Alignment = DataGridViewContentAlignment.MiddleRight

@@ -547,9 +547,9 @@ Public Class FormLLEDiagram
             cbComp3.Items.Clear()
 
             For Each co As ConstantProperties In Frm.Options.SelectedComponents.Values
-                cbComp1.Items.Add(DWSIM.App.GetComponentName(co.Name))
-                cbComp2.Items.Add(DWSIM.App.GetComponentName(co.Name))
-                cbComp3.Items.Add(DWSIM.App.GetComponentName(co.Name))
+                cbComp1.Items.Add((co.Name))
+                cbComp2.Items.Add((co.Name))
+                cbComp3.Items.Add((co.Name))
                 Names(i) = co.Name
                 i += 1
             Next

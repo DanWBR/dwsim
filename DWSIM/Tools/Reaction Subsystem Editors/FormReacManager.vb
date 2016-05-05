@@ -216,7 +216,7 @@ Public Class FormReacManager
                     Dim str3 As String = vbCrLf & DWSIM.App.GetLocalString("Vocedeveadicionar1")
                     Dim i As Integer = 0, idx As Integer
                     Do
-                        str2 += "- " & DWSIM.App.GetComponentName(CStr(carray(i))) & vbCrLf
+                        str2 += "- " & (CStr(carray(i))) & vbCrLf
                         i += 1
                     Loop Until i = carray.Count
                     Dim res As MsgBoxResult = MessageBox.Show(str + str2 + str3, DWSIM.App.GetLocalString("Aviso"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning)

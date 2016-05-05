@@ -66,7 +66,7 @@ Public Class FormHYD_DET
         i = 0
         Do
             Grid1.Rows.Add()
-            Grid1.Rows(i).Cells(0).Value = DWSIM.App.GetComponentName(nomes(i))
+            Grid1.Rows(i).Cells(0).Value = (nomes(i))
             i = i + 1
         Loop Until i = n
 
