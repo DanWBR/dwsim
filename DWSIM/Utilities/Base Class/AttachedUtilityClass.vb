@@ -8,20 +8,26 @@
 
     Public Property ID As Integer Implements Interfaces.IAttachedUtility.ID
 
-    Public Property Name1 As String Implements Interfaces.IAttachedUtility.Name
+    Public Property UtilityName As String Implements Interfaces.IAttachedUtility.Name
 
-    Public Property GetPropertyList As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
-
-    Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
-        Return Nothing
+    Public Overridable Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
+        Throw New NotImplementedException
     End Function
 
-    Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
-        Return Nothing
+    Public Overridable Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
+        Throw New NotImplementedException
     End Function
 
-    Public Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
+    Public Overridable Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
+        Throw New NotImplementedException
+    End Sub
 
+    Public Overridable Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
+        Throw New NotImplementedException
+    End Function
+
+    Public Overridable Sub UpdateResults() Implements Interfaces.IAttachedUtility.Update
+        Throw New NotImplementedException
     End Sub
 
 End Class

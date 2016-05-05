@@ -405,6 +405,8 @@ Namespace GraphicObjects
 
         Public Property Selected As Boolean = False Implements IGraphicObject.Selected
 
+        <Xml.Serialization.XmlIgnore> Property Owner As ISimulationObject Implements IGraphicObject.Owner
+
     End Class
 
 End Namespace

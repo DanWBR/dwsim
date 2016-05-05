@@ -58,6 +58,8 @@ Public Interface IGraphicObject
 
     Property Selected As Boolean
 
+    Property Owner As ISimulationObject
+
 End Interface
 
 Public Interface IConnectionPoint
