@@ -694,8 +694,6 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
         Inherits ShapeGraphic
 
-        Public BaseOwner As SharedClasses.UnitOperations.BaseClass
-
         Protected m_Font_Col1 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
         Protected m_Font_Col2 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
         Protected m_Font_Col3 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
@@ -724,10 +722,6 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
 
-            With elements
-                If BaseOwner IsNot Nothing Then .Add(New XElement("Owner", BaseOwner.Name))
-            End With
-
             Return elements
 
         End Function
@@ -739,22 +733,17 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
         End Function
 
 #Region "Constructors"
-        Public Sub New(ByRef owner As SharedClasses.UnitOperations.BaseClass)
+        Public Sub New()
             Me.ObjectType = ObjectType.GO_Table
-            Me.BaseOwner = owner
         End Sub
 
-        Public Sub New(ByRef owner As SharedClasses.UnitOperations.BaseClass, ByVal graphicPosition As Drawing.Point)
-            Me.New(owner)
+        Public Sub New(ByVal graphicPosition As Drawing.Point)
+            Me.New()
             Me.SetPosition(graphicPosition.ToDTPoint)
         End Sub
 
-        Public Sub New(ByRef owner As SharedClasses.UnitOperations.BaseClass, ByVal posX As Integer, ByVal posY As Integer)
-            Me.New(owner, New Drawing.Point(posX, posY))
-        End Sub
-
-        Public Sub New()
-            Me.ObjectType = ObjectType.GO_Table
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer)
+            Me.New(New Drawing.Point(posX, posY))
         End Sub
 
 #End Region
@@ -799,15 +788,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
         Public Property HeaderText() As String
             Get
-                If Not Me.BaseOwner Is Nothing Then
-                    If Not Me.BaseOwner.GraphicObject Is Nothing Then
-                        Return Me.BaseOwner.GraphicObject.Tag
-                    Else
-                        Return m_Text
-                    End If
-                Else
-                    Return m_Text
-                End If
+                Return m_Text
             End Get
             Set(ByVal Value As String)
                 m_Text = Value
@@ -1686,6 +1667,5 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
         End Sub
 
     End Class
-
 
 End Namespace

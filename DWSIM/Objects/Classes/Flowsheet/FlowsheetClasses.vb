@@ -227,6 +227,8 @@ Namespace DWSIM.Flowsheet
             End Set
         End Property
 
+        Public Property VisibleProperties As New Dictionary(Of ObjectType, String) Implements Interfaces.IFlowsheetOptions.VisibleProperties
+
     End Class
 
 End Namespace

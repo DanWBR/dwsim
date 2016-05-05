@@ -1299,21 +1299,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 End If
                 If msgresult = MsgBoxResult.Yes Then
 
-                    'remove object property table, if it exists
-                    Dim tables As List(Of GraphicObject) = (From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.drawingObjects
-                                                                      Select t Where t.ObjectType = ObjectType.GO_Table).ToList
-                    Dim tablelist As List(Of TableGraphic) = (From t As TableGraphic In tables
-                                                                      Select t Where t.BaseOwner.Name = gobj.Name).ToList
-                    If Not tablelist Is Nothing Then
-                        For Each table As TableGraphic In tablelist
-                            Try
-                                Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(table)
-                            Catch ex As Exception
-
-                            End Try
-                        Next
-                    End If
-
                     If SelectedObj.IsEnergyStream Then
 
                         Dim InCon, OutCon As ConnectionPoint

@@ -42,4 +42,6 @@
     Property SelectedUnitSystem As IUnitsOfMeasure
     Property PreferredFlashAlgorithmOptimizer As Enums.OptimizationMethod
 
+    Property VisibleProperties As Dictionary(Of Enums.GraphicObjects.ObjectType, String)
+
 End Interface
