@@ -5067,6 +5067,11 @@ Namespace Streams
                 Return "Material Stream"
             End If
         End Function
+
+        Public Overrides Function GetDefaultProperties() As String()
+            Return New String() {"PROP_MS_0", "PROP_MS_1", "PROP_MS_2", "PROP_MS_3", "PROP_MS_4"}
+        End Function
+
     End Class
 
 End Namespace

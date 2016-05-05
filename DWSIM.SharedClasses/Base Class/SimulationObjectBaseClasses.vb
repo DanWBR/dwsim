@@ -264,7 +264,15 @@ Namespace UnitOperations
 
         Public MustOverride Function SetPropertyValue(prop As String, propval As Object, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean Implements Interfaces.ISimulationObject.SetPropertyValue
 
+        Public Overridable Function GetDefaultProperties() As String() Implements ISimulationObject.GetDefaultProperties
+            Return GetProperties(PropertyType.ALL)
+        End Function
+
         Public Overridable Property PropertyPackage As IPropertyPackage Implements ISimulationObject.PropertyPackage
+
+        Public Function GetFlowsheet() As IFlowsheet Implements ISimulationObject.GetFlowsheet
+            Return FlowSheet
+        End Function
 
 #End Region
 

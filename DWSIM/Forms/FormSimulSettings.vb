@@ -36,6 +36,10 @@ Public Class FormSimulSettings
     Public initialized As Boolean = False
     Public supports As Boolean = True
 
+    Private availableproperties As New Dictionary(Of String, String())
+    Private aTypeList As New List(Of Type)
+    Private aTypeRefs As New Dictionary(Of String, String)
+
     Private prevsort As System.ComponentModel.ListSortDirection = System.ComponentModel.ListSortDirection.Ascending
     Private prevcol As Integer = 1
     Private prevgroup As IOutlookGridGroup
@@ -152,6 +156,31 @@ Public Class FormSimulSettings
             Next
 
         End If
+
+        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).FirstOrDefault
+        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
+
+        aTypeList.Clear()
+        aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("ISimulationObject", True) IsNot Nothing, True, False)))
+        aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("ISimulationObject", True) IsNot Nothing, True, False)))
+
+        FrmChild.FlowsheetOptions.VisibleProperties.Clear()
+
+        cbObjectType.Items.Clear()
+        availableproperties.Clear()
+        aTypeRefs.Clear()
+        For Each item In aTypeList.OrderBy(Function(x) x.Name)
+            If Not item.IsAbstract Then
+                Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
+                obj.SetFlowsheet(FrmChild)
+                cbObjectType.Items.Add(obj.GetDisplayName)
+                availableproperties.Add(obj.GetDisplayName, obj.GetProperties(PropertyType.ALL))
+                aTypeRefs.Add(obj.GetDisplayName, item.Name)
+                FrmChild.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
+                obj = Nothing
+            End If
+        Next
+        cbObjectType.SelectedIndex = 0
 
         With Me.dgvpp.Rows
             .Clear()
@@ -1505,6 +1534,34 @@ Public Class FormSimulSettings
 
     Private Sub ComboBoxMinMethod_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxMinMethod.SelectedIndexChanged
         FrmChild.Options.PreferredGibbsMinimizationMethod = ComboBoxMinMethod.SelectedIndex
+    End Sub
+
+    Private Sub cbObjectType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbObjectType.SelectedIndexChanged
+        PropertyListView.Items.Clear()
+        For Each item In availableproperties(cbObjectType.SelectedItem)
+            PropertyListView.Items.Add(item, DWSIM.App.GetPropertyName(item), 0).Tag = item
+        Next
+
+        For Each item In availableproperties(cbObjectType.SelectedItem)
+            If FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Contains(item) Then
+                PropertyListView.Items(item).Checked = True
+            End If
+        Next
+
+    End Sub
+
+    Private Sub PropertyListView_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles PropertyListView.ItemChecked
+        If loaded Then
+            If e.Item.Checked Then
+                If Not FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Contains(e.Item.Tag) Then
+                    FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Add(e.Item.Tag)
+                End If
+            Else
+                If FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Contains(e.Item.Tag) Then
+                    FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Remove(e.Item.Tag)
+                End If
+            End If
+        End If
     End Sub
 
 End Class

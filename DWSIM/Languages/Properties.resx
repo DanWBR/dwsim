@@ -174,7 +174,7 @@
     <comment>1</comment>
   </data>
   <data name="PROP_CP_0" xml:space="preserve">
-    <value>Balanço de EnergyFlow</value>
+    <value>Balanço de Energia</value>
     <comment>0</comment>
   </data>
   <data name="PROP_CR_0" xml:space="preserve">
@@ -226,7 +226,7 @@
     <comment>1</comment>
   </data>
   <data name="PROP_ER_1" xml:space="preserve">
-    <value>Tolerância para EnergyFlow/Tempo</value>
+    <value>Tolerância para Energia/Tempo</value>
     <comment>1</comment>
   </data>
   <data name="PROP_ER_2" xml:space="preserve">
@@ -234,11 +234,11 @@
     <comment>0</comment>
   </data>
   <data name="PROP_ES_0" xml:space="preserve">
-    <value>Fluxo de EnergyFlow</value>
+    <value>Fluxo de Energia</value>
     <comment>1</comment>
   </data>
   <data name="PROP_FT_0" xml:space="preserve">
-    <value>Balanço de EnergyFlow</value>
+    <value>Balanço de energia</value>
   </data>
   <data name="PROP_FT_1" xml:space="preserve">
     <value>Área Total de Filtragem</value>
@@ -361,11 +361,11 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_100" xml:space="preserve">
-    <value>Fração Mássica da Phase Aquosa</value>
+    <value>Fração Mássica da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_101" xml:space="preserve">
-    <value>Fração Volumétrica da Phase Aquosa</value>
+    <value>Fração Volumétrica da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_102" xml:space="preserve">
@@ -385,19 +385,19 @@
     <comment>1</comment>
   </data>
   <data name="PROP_MS_106" xml:space="preserve">
-    <value>Fração Molar (Phase Vapor)</value>
+    <value>Fração Molar (Fase Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_107" xml:space="preserve">
-    <value>Fração Molar (Phase Líquida - Total)</value>
+    <value>Fração Molar (Fase Líquida - Total)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_108" xml:space="preserve">
-    <value>Fração Molar (Phase Líquida 1)</value>
+    <value>Fração Molar (Fase Líquida 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_109" xml:space="preserve">
-    <value>Fração Molar (Phase Líquida 2)</value>
+    <value>Fração Molar (Fase Líquida 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_11" xml:space="preserve">
@@ -405,71 +405,71 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_110" xml:space="preserve">
-    <value>Fração Molar (Phase Aquosa)</value>
+    <value>Fração Molar (Fase Aquosa)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_111" xml:space="preserve">
-    <value>Fração Mássica (Phase Vapor)</value>
+    <value>Fração Mássica (Fase Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_112" xml:space="preserve">
-    <value>Fração Mássica (Phase Líquida - Total)</value>
+    <value>Fração Mássica (Fase Líquida - Total)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_113" xml:space="preserve">
-    <value>Fração Mássica (Phase Líquida 1)</value>
+    <value>Fração Mássica (Fase Líquida 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_114" xml:space="preserve">
-    <value>Fração Mássica (Phase Líquida 2)</value>
+    <value>Fração Mássica (Fase Líquida 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_115" xml:space="preserve">
-    <value>Fração Mássica (Phase Aquosa)</value>
+    <value>Fração Mássica (Fase Aquosa)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_116" xml:space="preserve">
-    <value>Fluxo Molar (Phase Vapor)</value>
+    <value>Fluxo Molar (Fase Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_117" xml:space="preserve">
-    <value>Fluxo Molar (Phase Líquida - Total)</value>
+    <value>Fluxo Molar (Fase Líquida - Total)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_118" xml:space="preserve">
-    <value>Fluxo Molar (Phase Líquida 1)</value>
+    <value>Fluxo Molar (Fase Líquida 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_119" xml:space="preserve">
-    <value>Fluxo Molar (Phase Líquida 2)</value>
+    <value>Fluxo Molar (Fase Líquida 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_12" xml:space="preserve">
-    <value>Massa Específica da Phase Vapor</value>
+    <value>Massa Específica da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_120" xml:space="preserve">
-    <value>Fluxo Molar (Phase Aquosa)</value>
+    <value>Fluxo Molar (Fase Aquosa)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_121" xml:space="preserve">
-    <value>Fluxo Mássico (Phase Vapor)</value>
+    <value>Fluxo Mássico (Fase Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_122" xml:space="preserve">
-    <value>Fluxo Mássico (Phase Líquida - Total)</value>
+    <value>Fluxo Mássico (Fase Líquida - Total)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_123" xml:space="preserve">
-    <value>Fluxo Mássico (Phase Líquida 1)</value>
+    <value>Fluxo Mássico (Fase Líquida 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_124" xml:space="preserve">
-    <value>Fluxo Mássico (Phase Líquida 2)</value>
+    <value>Fluxo Mássico (Fase Líquida 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_125" xml:space="preserve">
-    <value>Fluxo Mássico (Phase Aquosa)</value>
+    <value>Fluxo Mássico (Fase Aquosa)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_126" xml:space="preserve">
@@ -485,100 +485,100 @@
     <value>Temperatura de Orvalho na Pressão da Corrente</value>
   </data>
   <data name="PROP_MS_13" xml:space="preserve">
-    <value>Massa Molar da Phase Vapor</value>
+    <value>Massa Molar da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_130" xml:space="preserve">
-    <value>Phase(s)</value>
+    <value>Fase(s)</value>
   </data>
   <data name="PROP_MS_131" xml:space="preserve">
-    <value>Massa Específica da Phase Sólida</value>
+    <value>Massa Específica da Fase Sólida</value>
   </data>
   <data name="PROP_MS_132" xml:space="preserve">
-    <value>Massa Molar da Phase Sólida</value>
+    <value>Massa Molar da Fase Sólida</value>
   </data>
   <data name="PROP_MS_133" xml:space="preserve">
-    <value>Entalpia Específica da Phase Sólida</value>
+    <value>Entalpia Específica da Fase Sólida</value>
   </data>
   <data name="PROP_MS_134" xml:space="preserve">
-    <value>Entropia Especifica da Phase Sólida</value>
+    <value>Entropia Especifica da Fase Sólida</value>
   </data>
   <data name="PROP_MS_135" xml:space="preserve">
-    <value>Entalpia Molar da Phase Sólida</value>
+    <value>Entalpia Molar da Fase Sólida</value>
   </data>
   <data name="PROP_MS_136" xml:space="preserve">
-    <value>Entropia Molar da Phase Sólida</value>
+    <value>Entropia Molar da Fase Sólida</value>
   </data>
   <data name="PROP_MS_137" xml:space="preserve">
-    <value>Condutividade Térmica da Phase Sólida</value>
+    <value>Condutividade Térmica da Fase Sólida</value>
   </data>
   <data name="PROP_MS_138" xml:space="preserve">
-    <value>Viscosidade Cinemática da Phase Sólida</value>
+    <value>Viscosidade Cinemática da Fase Sólida</value>
   </data>
   <data name="PROP_MS_139" xml:space="preserve">
-    <value>Viscosidade Dinâmica da Phase Sólida</value>
+    <value>Viscosidade Dinâmica da Fase Sólida</value>
   </data>
   <data name="PROP_MS_14" xml:space="preserve">
-    <value>Entalpia Específica da Phase Vapor</value>
+    <value>Entalpia Específica da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_140" xml:space="preserve">
-    <value>Capacidade Calorífica (Cp) da Phase Sólida</value>
+    <value>Capacidade Calorífica (Cp) da Fase Sólida</value>
   </data>
   <data name="PROP_MS_141" xml:space="preserve">
-    <value>Razão entre as Capacidades Caloríficas da Phase Sólida</value>
+    <value>Razão entre as Capacidades Caloríficas da Fase Sólida</value>
   </data>
   <data name="PROP_MS_142" xml:space="preserve">
-    <value>Vazão Mássica da Phase Sólida</value>
+    <value>Vazão Mássica da Fase Sólida</value>
   </data>
   <data name="PROP_MS_143" xml:space="preserve">
-    <value>Vazão Molar da Phase Sólida</value>
+    <value>Vazão Molar da Fase Sólida</value>
   </data>
   <data name="PROP_MS_144" xml:space="preserve">
-    <value>Vazão Volumétrica da Phase Sólida</value>
+    <value>Vazão Volumétrica da Fase Sólida</value>
   </data>
   <data name="PROP_MS_145" xml:space="preserve">
-    <value>Fator de Compressibilidade da Phase Sólida</value>
+    <value>Fator de Compressibilidade da Fase Sólida</value>
   </data>
   <data name="PROP_MS_146" xml:space="preserve">
-    <value>Fração Molar da Phase Sólida</value>
+    <value>Fração Molar da Fase Sólida</value>
   </data>
   <data name="PROP_MS_147" xml:space="preserve">
-    <value>Fração Mássica da Phase Sólida</value>
+    <value>Fração Mássica da Fase Sólida</value>
   </data>
   <data name="PROP_MS_148" xml:space="preserve">
-    <value>Fração Volumétrica da Phase Sólida</value>
+    <value>Fração Volumétrica da Fase Sólida</value>
   </data>
   <data name="PROP_MS_149" xml:space="preserve">
-    <value>Fração Molar (Phase Sólida)</value>
+    <value>Fração Molar (Fase Sólida)</value>
   </data>
   <data name="PROP_MS_15" xml:space="preserve">
-    <value>Entropia Especifica da Phase Vapor</value>
+    <value>Entropia Especifica da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_150" xml:space="preserve">
-    <value>Fração Mássica (Phase Sólida)</value>
+    <value>Fração Mássica (Fase Sólida)</value>
   </data>
   <data name="PROP_MS_151" xml:space="preserve">
-    <value>Fluxo Molar (Phase Sólida)</value>
+    <value>Fluxo Molar (Fase Sólida)</value>
   </data>
   <data name="PROP_MS_152" xml:space="preserve">
-    <value>Fluxo Mássico (Phase Sólida)</value>
+    <value>Fluxo Mássico (Fase Sólida)</value>
   </data>
   <data name="PROP_MS_16" xml:space="preserve">
-    <value>Entalpia Molar da Phase Vapor</value>
+    <value>Entalpia Molar da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_17" xml:space="preserve">
-    <value>Entropia Molar da Phase Vapor</value>
+    <value>Entropia Molar da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_18" xml:space="preserve">
-    <value>Condutividade Térmica da Phase Vapor</value>
+    <value>Condutividade Térmica da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_19" xml:space="preserve">
-    <value>Viscosidade Cinemática da Phase Vapor</value>
+    <value>Viscosidade Cinemática da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_2" xml:space="preserve">
@@ -586,43 +586,43 @@
     <comment>1</comment>
   </data>
   <data name="PROP_MS_20" xml:space="preserve">
-    <value>Viscosidade Dinâmica da Phase Vapor</value>
+    <value>Viscosidade Dinâmica da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_21" xml:space="preserve">
-    <value>Capacidade Calorífica (Cp) da Phase Vapor</value>
+    <value>Capacidade Calorífica (Cp) da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_22" xml:space="preserve">
-    <value>Razão entre as Capacidades Caloríficas da Phase Vapor</value>
+    <value>Razão entre as Capacidades Caloríficas da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_23" xml:space="preserve">
-    <value>Vazão Mássica da Phase Vapor</value>
+    <value>Vazão Mássica da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_24" xml:space="preserve">
-    <value>Vazão Molar da Phase Vapor</value>
+    <value>Vazão Molar da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_25" xml:space="preserve">
-    <value>Vazão Volumétrica da Phase Vapor</value>
+    <value>Vazão Volumétrica da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_26" xml:space="preserve">
-    <value>Fator de Compressibilidade da Phase Vapor</value>
+    <value>Fator de Compressibilidade da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_27" xml:space="preserve">
-    <value>Fração Molar da Phase Vapor</value>
+    <value>Fração Molar da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_28" xml:space="preserve">
-    <value>Fração Mássica da Phase Vapor</value>
+    <value>Fração Mássica da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_29" xml:space="preserve">
-    <value>Fração Volumétrica da Phase Vapor</value>
+    <value>Fração Volumétrica da Fase Vapor</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_3" xml:space="preserve">
@@ -630,43 +630,43 @@
     <comment>1</comment>
   </data>
   <data name="PROP_MS_30" xml:space="preserve">
-    <value>Massa Específica da Phase Líquida (Mistura)</value>
+    <value>Massa Específica da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_31" xml:space="preserve">
-    <value>Massa Molar da Phase Líquida (Mistura)</value>
+    <value>Massa Molar da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_32" xml:space="preserve">
-    <value>Entalpia Específica da Phase Líquida (Mistura)</value>
+    <value>Entalpia Específica da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_33" xml:space="preserve">
-    <value>Entropia Especifica da Phase Líquida (Mistura)</value>
+    <value>Entropia Especifica da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_34" xml:space="preserve">
-    <value>Entalpia Molar da Phase Líquida (Mistura)</value>
+    <value>Entalpia Molar da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_35" xml:space="preserve">
-    <value>Entropia Molar da Phase Líquida (Mistura)</value>
+    <value>Entropia Molar da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_36" xml:space="preserve">
-    <value>Condutividade Térmica da Phase Líquida (Mistura)</value>
+    <value>Condutividade Térmica da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_37" xml:space="preserve">
-    <value>Viscosidade Cinemática da Phase Líquida (Mistura)</value>
+    <value>Viscosidade Cinemática da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_38" xml:space="preserve">
-    <value>Viscosidade Dinâmica da Phase Líquida (Mistura)</value>
+    <value>Viscosidade Dinâmica da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_39" xml:space="preserve">
-    <value>Capacidade Calorífica (Cp) da Phase Líquida (Mistura)</value>
+    <value>Capacidade Calorífica (Cp) da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_4" xml:space="preserve">
@@ -674,43 +674,43 @@
     <comment>1</comment>
   </data>
   <data name="PROP_MS_40" xml:space="preserve">
-    <value>Razão entre as Capacidades Caloríficas da Phase Líquida (Mistura)</value>
+    <value>Razão entre as Capacidades Caloríficas da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_41" xml:space="preserve">
-    <value>Vazão Mássica da Phase Líquida (Mistura)</value>
+    <value>Vazão Mássica da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_42" xml:space="preserve">
-    <value>Vazão Molar da Phase Líquida (Mistura)</value>
+    <value>Vazão Molar da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_43" xml:space="preserve">
-    <value>Vazão Volumétrica da Phase Líquida (Mistura)</value>
+    <value>Vazão Volumétrica da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_44" xml:space="preserve">
-    <value>Fator de Compressibilidade da Phase Líquida (Mistura)</value>
+    <value>Fator de Compressibilidade da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_45" xml:space="preserve">
-    <value>Fração Molar da Phase Líquida (Mistura)</value>
+    <value>Fração Molar da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_46" xml:space="preserve">
-    <value>Fração Mássica da Phase Líquida (Mistura)</value>
+    <value>Fração Mássica da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_47" xml:space="preserve">
-    <value>Fração Volumétrica da Phase Líquida (Mistura)</value>
+    <value>Fração Volumétrica da Fase Líquida (Mistura)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_48" xml:space="preserve">
-    <value>Massa Específica da Phase Líquida (1)</value>
+    <value>Massa Específica da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_49" xml:space="preserve">
-    <value>Massa Molar da Phase Líquida (1)</value>
+    <value>Massa Molar da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_5" xml:space="preserve">
@@ -718,43 +718,43 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_50" xml:space="preserve">
-    <value>Entalpia Específica da Phase Líquida (1)</value>
+    <value>Entalpia Específica da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_51" xml:space="preserve">
-    <value>Entropia Especifica da Phase Líquida (1)</value>
+    <value>Entropia Especifica da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_52" xml:space="preserve">
-    <value>Entalpia Molar da Phase Líquida (1)</value>
+    <value>Entalpia Molar da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_53" xml:space="preserve">
-    <value>Entropia Molar da Phase Líquida (1)</value>
+    <value>Entropia Molar da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_54" xml:space="preserve">
-    <value>Condutividade Térmica da Phase Líquida (1)</value>
+    <value>Condutividade Térmica da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_55" xml:space="preserve">
-    <value>Viscosidade Cinemática da Phase Líquida (1)</value>
+    <value>Viscosidade Cinemática da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_56" xml:space="preserve">
-    <value>Viscosidade Dinâmica da Phase Líquida (1)</value>
+    <value>Viscosidade Dinâmica da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_57" xml:space="preserve">
-    <value>Capacidade Calorífica (Cp) da Phase Líquida (1)</value>
+    <value>Capacidade Calorífica (Cp) da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_58" xml:space="preserve">
-    <value>Razão entre as Capacidades Caloríficas da Phase Líquida (1)</value>
+    <value>Razão entre as Capacidades Caloríficas da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_59" xml:space="preserve">
-    <value>Vazão Mássica da Phase Líquida (1)</value>
+    <value>Vazão Mássica da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_6" xml:space="preserve">
@@ -762,43 +762,43 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_60" xml:space="preserve">
-    <value>Vazão Molar da Phase Líquida (1)</value>
+    <value>Vazão Molar da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_61" xml:space="preserve">
-    <value>Vazão Volumétrica da Phase Líquida (1)</value>
+    <value>Vazão Volumétrica da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_62" xml:space="preserve">
-    <value>Fator de Compressibilidade da Phase Líquida (1)</value>
+    <value>Fator de Compressibilidade da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_63" xml:space="preserve">
-    <value>Fração Molar da Phase Líquida (1)</value>
+    <value>Fração Molar da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_64" xml:space="preserve">
-    <value>Fração Mássica da Phase Líquida (1)</value>
+    <value>Fração Mássica da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_65" xml:space="preserve">
-    <value>Fração Volumétrica da Phase Líquida (1)</value>
+    <value>Fração Volumétrica da Fase Líquida (1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_66" xml:space="preserve">
-    <value>Massa Específica da Phase Líquida (2)</value>
+    <value>Massa Específica da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_67" xml:space="preserve">
-    <value>Massa Molar da Phase Líquida (2)</value>
+    <value>Massa Molar da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_68" xml:space="preserve">
-    <value>Entalpia Específica da Phase Líquida (2)</value>
+    <value>Entalpia Específica da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_69" xml:space="preserve">
-    <value>Entropia Especifica da Phase Líquida (2)</value>
+    <value>Entropia Especifica da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_7" xml:space="preserve">
@@ -806,43 +806,43 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_70" xml:space="preserve">
-    <value>Entalpia Molar da Phase Líquida (2)</value>
+    <value>Entalpia Molar da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_71" xml:space="preserve">
-    <value>Entropia Molar da Phase Líquida (2)</value>
+    <value>Entropia Molar da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_72" xml:space="preserve">
-    <value>Condutividade Térmica da Phase Líquida (2)</value>
+    <value>Condutividade Térmica da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_73" xml:space="preserve">
-    <value>Viscosidade Cinemática da Phase Líquida (2)</value>
+    <value>Viscosidade Cinemática da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_74" xml:space="preserve">
-    <value>Viscosidade Dinâmica da Phase Líquida (2)</value>
+    <value>Viscosidade Dinâmica da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_75" xml:space="preserve">
-    <value>Capacidade Calorífica (Cp) da Phase Líquida (2)</value>
+    <value>Capacidade Calorífica (Cp) da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_76" xml:space="preserve">
-    <value>Razão entre as Capacidades Caloríficas da Phase Líquida (2)</value>
+    <value>Razão entre as Capacidades Caloríficas da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_77" xml:space="preserve">
-    <value>Vazão Mássica da Phase Líquida (2)</value>
+    <value>Vazão Mássica da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_78" xml:space="preserve">
-    <value>Vazão Molar da Phase Líquida (2)</value>
+    <value>Vazão Molar da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_79" xml:space="preserve">
-    <value>Vazão Volumétrica da Phase Líquida (2)</value>
+    <value>Vazão Volumétrica da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_8" xml:space="preserve">
@@ -850,43 +850,43 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_80" xml:space="preserve">
-    <value>Fator de Compressibilidade da Phase Líquida (2)</value>
+    <value>Fator de Compressibilidade da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_81" xml:space="preserve">
-    <value>Fração Molar da Phase Líquida (2)</value>
+    <value>Fração Molar da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_82" xml:space="preserve">
-    <value>Fração Mássica da Phase Líquida (2)</value>
+    <value>Fração Mássica da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_83" xml:space="preserve">
-    <value>Fração Volumétrica da Phase Líquida (2)</value>
+    <value>Fração Volumétrica da Fase Líquida (2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_84" xml:space="preserve">
-    <value>Massa Específica da Phase Aquosa</value>
+    <value>Massa Específica da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_85" xml:space="preserve">
-    <value>Massa Molar da Phase Aquosa</value>
+    <value>Massa Molar da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_86" xml:space="preserve">
-    <value>Entalpia Específica da Phase Aquosa</value>
+    <value>Entalpia Específica da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_87" xml:space="preserve">
-    <value>Entropia Especifica da Phase Aquosa</value>
+    <value>Entropia Especifica da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_88" xml:space="preserve">
-    <value>Entalpia Molar da Phase Aquosa</value>
+    <value>Entalpia Molar da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_89" xml:space="preserve">
-    <value>Entropia Molar da Phase Aquosa</value>
+    <value>Entropia Molar da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_9" xml:space="preserve">
@@ -894,43 +894,43 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_90" xml:space="preserve">
-    <value>Condutividade Térmica da Phase Aquosa</value>
+    <value>Condutividade Térmica da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_91" xml:space="preserve">
-    <value>Viscosidade Cinemática da Phase Aquosa</value>
+    <value>Viscosidade Cinemática da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_92" xml:space="preserve">
-    <value>Viscosidade Dinâmica da Phase Aquosa</value>
+    <value>Viscosidade Dinâmica da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_93" xml:space="preserve">
-    <value>Capacidade Calorífica (Cp) da Phase Aquosa</value>
+    <value>Capacidade Calorífica (Cp) da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_94" xml:space="preserve">
-    <value>Razão entre as Capacidades Caloríficas da Phase Aquosa</value>
+    <value>Razão entre as Capacidades Caloríficas da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_95" xml:space="preserve">
-    <value>Vazão Mássica da Phase Aquosa</value>
+    <value>Vazão Mássica da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_96" xml:space="preserve">
-    <value>Vazão Molar da Phase Aquosa</value>
+    <value>Vazão Molar da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_97" xml:space="preserve">
-    <value>Vazão Volumétrica da Phase Aquosa</value>
+    <value>Vazão Volumétrica da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_98" xml:space="preserve">
-    <value>Fator de Compressibilidade da Phase Aquosa</value>
+    <value>Fator de Compressibilidade da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_99" xml:space="preserve">
-    <value>Fração Molar da Phase Aquosa</value>
+    <value>Fração Molar da Fase Aquosa</value>
     <comment>0</comment>
   </data>
   <data name="PROP_OP_0" xml:space="preserve">
@@ -1132,7 +1132,7 @@
     <value>Especificação de Vazão (2)</value>
   </data>
   <data name="PROP_SS_0" xml:space="preserve">
-    <value>Balanço de EnergyFlow</value>
+    <value>Balanço de Energia</value>
     <comment>0</comment>
   </data>
   <data name="PROP_SS_1" xml:space="preserve">
@@ -1239,9 +1239,45 @@
     <value>Valor máximo de troca térmica</value>
   </data>
   <data name="PROP_MS_153" xml:space="preserve">
-    <value>pH da Phase Líquida 1</value>
+    <value>pH da Fase Líquida 1</value>
   </data>
   <data name="PROP_MS_154" xml:space="preserve">
-    <value>Fluxo de EnergyFlow</value>
+    <value>Fluxo de Energia</value>
+  </data>
+  <data name="PROP_CS_1" xml:space="preserve">
+    <value>Tempo de residência</value>
+  </data>
+  <data name="PROP_CS_2" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="PROP_CS_3" xml:space="preserve">
+    <value>Variação de temperatura</value>
+  </data>
+  <data name="PROP_PF_1" xml:space="preserve">
+    <value>Tempo de residência</value>
+  </data>
+  <data name="PROP_PF_2" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="PROP_PF_3" xml:space="preserve">
+    <value>Comprimento</value>
+  </data>
+  <data name="PROP_PF_4" xml:space="preserve">
+    <value>Carga de catalisador</value>
+  </data>
+  <data name="PROP_PF_5" xml:space="preserve">
+    <value>Diâmetro do catalisador</value>
+  </data>
+  <data name="PROP_PF_6" xml:space="preserve">
+    <value>Fração de vazios do catalisador</value>
+  </data>
+  <data name="PROP_PF_7" xml:space="preserve">
+    <value>Variação de temperatura</value>
+  </data>
+  <data name="PROP_CS_4" xml:space="preserve">
+    <value>Carga térmica</value>
+  </data>
+  <data name="PROP_PF_8" xml:space="preserve">
+    <value>Carga térmica</value>
   </data>
 </root>

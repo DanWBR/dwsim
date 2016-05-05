@@ -64,6 +64,8 @@
     ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
     Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As IUnitsOfMeasure = Nothing) As Boolean
 
+    Function GetDefaultProperties() As String()
+
     Property Name() As String
 
     Property GraphicObject() As IGraphicObject
@@ -124,6 +126,8 @@
     Property PropertyPackage As IPropertyPackage
 
     Sub SetFlowsheet(fobj As Object)
+
+    Function GetFlowsheet() As IFlowsheet
 
     Function GetIconBitmap() As Object
 

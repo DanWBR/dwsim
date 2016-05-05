@@ -481,11 +481,44 @@ Public Class FlowsheetSurface
 
                         If Flowsheet.Collections.FlowsheetObjectCollection.ContainsKey(gobj.Name) Then
 
-                            Dim obj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(gobj.Name)
+                            Dim obj = Flowsheet.SimulationObjects(gobj.Name)
+
+                            Dim tabela As New QuickTableGraphic(obj, px2.X + 5, px2.Y + 5)
+                            tabela.Owner = obj
+                            tabela.Tag = obj.Name
+                            tabela.Name = "QTAB-" & Guid.NewGuid.ToString
+                            tabela.HeaderText = gobj.Tag
+                            tabela.AdditionalInfo = Me.FlowsheetDesignSurface.Zoom
+                            Me.m_qt = tabela
+                            If Not Me.m_qt Is Nothing Then
+                                If FlowsheetDesignSurface.AutoScrollPosition.X + px2.X * FlowsheetDesignSurface.Zoom + m_qt.Width * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Width Then
+                                    px2.X -= 50 + m_qt.Width / FlowsheetDesignSurface.Zoom
+                                End If
+                                If FlowsheetDesignSurface.AutoScrollPosition.Y + px2.Y * FlowsheetDesignSurface.Zoom + m_qt.Height * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Height Then
+                                    px2.Y -= 50 + m_qt.Height / FlowsheetDesignSurface.Zoom
+                                End If
+                                Me.m_qt.SetPosition(px2.ToDTPoint)
+                            End If
+                            Me.FlowsheetDesignSurface.drawingObjects.Add(tabela)
+                            Me.ticks = 0
+
+                        Else
+
+                            Me.m_qt.AdditionalInfo = Me.FlowsheetDesignSurface.Zoom
+
+                            If Not Me.m_qt Is Nothing Then
+                                If FlowsheetDesignSurface.AutoScrollPosition.X + px2.X * FlowsheetDesignSurface.Zoom + m_qt.Width * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Width Then
+                                    px2.X -= 50 + m_qt.Width / FlowsheetDesignSurface.Zoom
+                                End If
+                                If FlowsheetDesignSurface.AutoScrollPosition.Y + px2.Y * FlowsheetDesignSurface.Zoom + m_qt.Height * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Height Then
+                                    px2.Y -= 50 + m_qt.Height / FlowsheetDesignSurface.Zoom
+                                End If
+                                Me.m_qt.SetPosition(px2.ToDTPoint)
+                            End If
 
                         End If
 
-                    End If
+                End If
 
                 ElseIf gobj.ObjectType = ObjectType.GO_FloatingTable Then
 

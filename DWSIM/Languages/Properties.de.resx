@@ -185,6 +185,18 @@
     <value>Druckverlust</value>
     <comment>1</comment>
   </data>
+  <data name="PROP_CS_1" xml:space="preserve">
+    <value>Residence time</value>
+  </data>
+  <data name="PROP_CS_2" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="PROP_CS_3" xml:space="preserve">
+    <value>Temperature delta</value>
+  </data>
+  <data name="PROP_CS_4" xml:space="preserve">
+    <value>Heat load</value>
+  </data>
   <data name="PROP_DC_0" xml:space="preserve">
     <value>Kondensatordruck</value>
     <comment>1</comment>
@@ -1004,6 +1016,30 @@
   <data name="PROP_PF_0" xml:space="preserve">
     <value>Druckverlust</value>
     <comment>1</comment>
+  </data>
+  <data name="PROP_PF_1" xml:space="preserve">
+    <value>Residence time</value>
+  </data>
+  <data name="PROP_PF_2" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="PROP_PF_3" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="PROP_PF_4" xml:space="preserve">
+    <value>Catalyst loading</value>
+  </data>
+  <data name="PROP_PF_5" xml:space="preserve">
+    <value>Catalyst diameter</value>
+  </data>
+  <data name="PROP_PF_6" xml:space="preserve">
+    <value>Catalyst void fraction</value>
+  </data>
+  <data name="PROP_PF_7" xml:space="preserve">
+    <value>Temperature delta</value>
+  </data>
+  <data name="PROP_PF_8" xml:space="preserve">
+    <value>Heat load</value>
   </data>
   <data name="PROP_PS_0" xml:space="preserve">
     <value>Druckverlust</value>

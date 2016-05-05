@@ -1192,35 +1192,6 @@ Public Class FormMain
 
         Dim fsuocount = (From go As GraphicObjects.GraphicObject In form.Collections.GraphicObjectCollection.Values Where go.ObjectType = ObjectType.FlowsheetUO).Count
 
-        'If fsuocount = 0 Then
-
-        '    Parallel.ForEach(data, Sub(xel)
-        '                               Try
-        '                                   Dim id As String = xel.<Name>.Value
-        '                                   Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-        '                                   Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
-        '                                   Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
-        '                                                       form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
-        '                                   obj.GraphicObject = gobj
-        '                                   obj.SetFlowsheet(form)
-        '                                   If Not gobj Is Nothing Then
-        '                                       obj.LoadData(xel.Elements.ToList)
-        '                                       If TypeOf obj Is Streams.MaterialStream Then
-        '                                           For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
-        '                                               For Each c As ConstantProperties In form.Options.SelectedComponents.Values
-        '                                                   phase.Compounds(c.Name).ConstantProperties = c
-        '                                               Next
-        '                                           Next
-        '                                       End If
-        '                                   End If
-        '                                   objlist.Add(obj)
-        '                               Catch ex As Exception
-        '                                   excs.Add(New Exception("Error Loading Unit Operation Information", ex))
-        '                               End Try
-        '                           End Sub)
-
-        'Else
-
         For Each xel In data
             Try
                 Dim id As String = xel.<Name>.Value
@@ -1233,6 +1204,7 @@ Public Class FormMain
                 Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
                                     form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
                 obj.GraphicObject = gobj
+                gobj.Owner = obj
                 obj.SetFlowsheet(form)
                 If Not gobj Is Nothing Then
                     obj.LoadData(xel.Elements.ToList)
@@ -1249,8 +1221,6 @@ Public Class FormMain
                 excs.Add(New Exception("Error Loading Unit Operation Information", ex))
             End Try
         Next
-
-        'End If
 
         'reorder compound lists in streams
 
