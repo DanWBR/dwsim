@@ -334,9 +334,6 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Flash Spec</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Input Parameters</value>
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>General Notes</value>
   </data>
@@ -430,6 +427,9 @@
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Phase Properties</value>
   </data>
+  <data name="lblAmountTotal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
   <data name="cbCalculatedAmountsBasis.Items" xml:space="preserve">
     <value>Mole Fractions</value>
   </data>
@@ -450,9 +450,6 @@
   </data>
   <data name="cbCalculatedAmountsBasis.Items6" xml:space="preserve">
     <value>Molalities</value>
-  </data>
-  <data name="cbCalculatedAmountsBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 21</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>

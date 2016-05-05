@@ -62,7 +62,7 @@ Public Class MaterialStreamEditor
 
             'connections
 
-            Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass).Select(Function(m) m.GraphicObject.Tag).ToArray
+            Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass Or x.GraphicObject.ObjectType = ObjectType.OT_Recycle).Select(Function(m) m.GraphicObject.Tag).ToArray
 
             cbInlet.Items.Clear()
             cbInlet.Items.AddRange(objlist)
@@ -203,6 +203,17 @@ Public Class MaterialStreamEditor
 
             End If
 
+            If .GraphicObject.InputConnectors(0).IsAttached Then
+                If .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
+                    GroupBoxInput.Enabled = True
+                Else
+                    GroupBoxInput.Enabled = False
+                End If
+                GroupBoxInput.Enabled = False
+            Else
+                GroupBoxInput.Enabled = True
+            End If
+
         End With
 
         Loaded = True
@@ -224,7 +235,7 @@ Public Class MaterialStreamEditor
 
         grid.ReadOnly = True
         grid.Rows.Clear()
-        grid.Columns(1).CellTemplate.Style.Format = nff
+        grid.Columns(1).CellTemplate.Style.Format = nf
 
         Dim refval As Nullable(Of Double), val As Double
 
@@ -608,34 +619,43 @@ Public Class MaterialStreamEditor
     End Function
 
     Private Sub cbCompBasis_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCompBasis.SelectedIndexChanged
-        Dim W, Q As Double
-        W = MatStream.Phases(0).Properties.massflow.GetValueOrDefault
-        Q = MatStream.Phases(0).Properties.molarflow.GetValueOrDefault
-        Select Case cbCompBasis.SelectedIndex
+
+        UpdateCompBasis(cbCompBasis, gridInputComposition, MatStream.Phases(0))
+
+    End Sub
+
+    Sub UpdateCompBasis(cb As ComboBox, grid As DataGridView, phase As Interfaces.IPhase)
+
+        Dim W, Q As Double, suffix As String = ""
+        W = phase.Properties.massflow.GetValueOrDefault
+        Q = phase.Properties.molarflow.GetValueOrDefault
+        Select Case cb.SelectedIndex
             Case 0
-                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                    row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction
                 Next
             Case 1
-                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                    row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MassFraction
                 Next
             Case 2
-                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                    row.Cells(1).Value = Converter.ConvertFromSI(units.molarflow, MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q)
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = Converter.ConvertFromSI(units.molarflow, phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q)
                 Next
+                suffix = units.molarflow
             Case 3
-                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                    row.Cells(1).Value = Converter.ConvertFromSI(units.massflow, MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W)
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = Converter.ConvertFromSI(units.massflow, phase.Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W)
                 Next
+                suffix = units.massflow
             Case 5
                 'molarity = mol solute per liter solution
-                Dim n As Integer = MatStream.Phases(0).Compounds.Count
+                Dim n As Integer = phase.Compounds.Count
                 Dim liqdens(n - 1), nbp(n - 1) As Double
                 Dim ipp As New Thermodynamics.PropertyPackages.RaoultPropertyPackage()
                 ipp.CurrentMaterialStream = MatStream
                 Dim i As Integer = 0
-                For Each s In MatStream.Phases(0).Compounds.Values
+                For Each s In phase.Compounds.Values
                     nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                     If 298.15 > nbp(i) Then
                         liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -645,32 +665,34 @@ Public Class MaterialStreamEditor
                     i += 1
                 Next
                 i = 0
-                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
+                For Each row As DataGridViewRow In grid.Rows
                     If row.Cells(0).Value.ToString.Contains("Water") Then
-                        row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q * MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / 1000 / liqdens(i) * 1000
+                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q * phase.Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / 1000 / liqdens(i) * 1000
                     Else
-                        row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
+                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
                     End If
                     i += 1
                 Next
+                suffix = "mol/L"
             Case 6
                 'molarity = mol solute per kg solvent
-                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
+                For Each row As DataGridViewRow In grid.Rows
                     If row.Cells(0).Value.ToString.Contains("Water") Then
-                        row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W
+                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W
                     Else
-                        row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
+                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
                     End If
                 Next
+                suffix = "mol/kg"
             Case 4
                 'liquid vol. frac
-                Dim n As Integer = MatStream.Phases(0).Compounds.Count
+                Dim n As Integer = phase.Compounds.Count
                 Dim liqdens(n - 1), nbp(n - 1), volfrac(n - 1), totalvol As Double
                 Dim ipp As New Thermodynamics.PropertyPackages.RaoultPropertyPackage()
                 ipp.CurrentMaterialStream = MatStream
                 Dim i As Integer = 0
                 totalvol = 0.0#
-                For Each s In MatStream.Phases(0).Compounds.Values
+                For Each s In phase.Compounds.Values
                     nbp(i) = s.ConstantProperties.Normal_Boiling_Point
                     If 298.15 > nbp(i) Then
                         liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
@@ -681,12 +703,21 @@ Public Class MaterialStreamEditor
                     i += 1
                 Next
                 i = 0
-                For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                    row.Cells(1).Value = MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction * MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / liqdens(i) / totalvol
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction * phase.Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / liqdens(i) / totalvol
                     i += 1
                 Next
                 ipp = Nothing
         End Select
+
+        Dim sum As Double = 0.0#
+        For Each row As DataGridViewRow In grid.Rows
+            sum += Double.Parse(row.Cells(1).Value)
+        Next
+
+        If cb Is cbCompBasis Then lblInputAmount.Text = "Total: " & sum.ToString(nf) & " " & suffix
+        If cb Is cbCalculatedAmountsBasis Then lblAmountTotal.Text = suffix
+
     End Sub
 
 
@@ -753,6 +784,17 @@ Public Class MaterialStreamEditor
         Else
             tbox.ForeColor = Drawing.Color.Red
         End If
+
+    End Sub
+
+    Private Sub cbCalculatedAmountsBasis_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalculatedAmountsBasis.SelectedIndexChanged
+
+        UpdateCompBasis(cbCalculatedAmountsBasis, gridCompMixture, MatStream.Phases(0))
+        UpdateCompBasis(cbCalculatedAmountsBasis, gridCompVapor, MatStream.Phases(2))
+        UpdateCompBasis(cbCalculatedAmountsBasis, gridCompLiqMix, MatStream.Phases(1))
+        UpdateCompBasis(cbCalculatedAmountsBasis, gridCompLiq1, MatStream.Phases(3))
+        UpdateCompBasis(cbCalculatedAmountsBasis, gridCompLiq2, MatStream.Phases(4))
+        UpdateCompBasis(cbCalculatedAmountsBasis, gridCompSolid, MatStream.Phases(7))
 
     End Sub
 

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <components>
   <component>
-    <Name>Metano</Name>
+    <Name>Methane</Name>
     <CAS_Number>74-82-8</CAS_Number>
     <Formula>CH4</Formula>
     <Molar_Weight>16.043</Molar_Weight>
@@ -59,7 +59,7 @@
     <COSMODBName>METHANE</COSMODBName>
   </component>
   <component>
-    <Name>Etano</Name>
+    <Name>Ethane</Name>
     <CAS_Number>74-84-0</CAS_Number>
     <Formula>C2H6</Formula>
     <Molar_Weight>30.07</Molar_Weight>
@@ -117,7 +117,7 @@
     <COSMODBName>ETHANE</COSMODBName>
   </component>
   <component>
-    <Name>Propano</Name>
+    <Name>Propane</Name>
     <CAS_Number>74-98-6</CAS_Number>
     <Formula>C3H8</Formula>
     <Molar_Weight>44.097</Molar_Weight>
@@ -176,7 +176,7 @@
     <COSMODBName>PROPANE</COSMODBName>
   </component>
   <component>
-    <Name>nButano</Name>
+    <Name>N-butane</Name>
     <CAS_Number>106-97-8</CAS_Number>
     <Formula>C4H10</Formula>
     <Molar_Weight>58.123</Molar_Weight>
@@ -235,7 +235,7 @@
     <COSMODBName>N-BUTANE</COSMODBName>
   </component>
   <component>
-    <Name>iButano</Name>
+    <Name>Isobutane</Name>
     <CAS_Number>75-28-5</CAS_Number>
     <Formula>C4H10</Formula>
     <Molar_Weight>58.123</Molar_Weight>
@@ -294,7 +294,7 @@
     <COSMODBName>ISOBUTANE</COSMODBName>
   </component>
   <component>
-    <Name>nPentano</Name>
+    <Name>N-pentane</Name>
     <CAS_Number>109-66-0</CAS_Number>
     <Formula>C5H12</Formula>
     <Molar_Weight>72.15</Molar_Weight>
@@ -353,7 +353,7 @@
     <COSMODBName>N-PENTANE</COSMODBName>
   </component>
   <component>
-    <Name>iPentano</Name>
+    <Name>Isopentane</Name>
     <CAS_Number>78-78-4</CAS_Number>
     <Formula>C5H12</Formula>
     <Molar_Weight>72.15</Molar_Weight>
@@ -413,7 +413,7 @@
     <COSMODBName>2-METHYL-BUTANE</COSMODBName>
   </component>
   <component>
-    <Name>nHexano</Name>
+    <Name>N-hexane</Name>
     <CAS_Number>110-54-3</CAS_Number>
     <Formula>C6H14</Formula>
     <Molar_Weight>86.177</Molar_Weight>
@@ -472,7 +472,7 @@
     <COSMODBName>N-HEXANE</COSMODBName>
   </component>
   <component>
-    <Name>nHeptano</Name>
+    <Name>N-heptane</Name>
     <CAS_Number>142-82-5</CAS_Number>
     <Formula>C7H16</Formula>
     <Molar_Weight>100.204</Molar_Weight>
@@ -531,7 +531,7 @@
     <COSMODBName>N-HEPTANE</COSMODBName>
   </component>
   <component>
-    <Name>nOctano</Name>
+    <Name>N-octane</Name>
     <CAS_Number>111-65-9</CAS_Number>
     <Formula>C8H18</Formula>
     <Molar_Weight>114.231</Molar_Weight>
@@ -590,7 +590,7 @@
     <COSMODBName>N-OCTANE</COSMODBName>
   </component>
   <component>
-    <Name>nNonano</Name>
+    <Name>N-nonane</Name>
     <CAS_Number>111-84-2</CAS_Number>
     <Formula>C9H20</Formula>
     <Molar_Weight>128.258</Molar_Weight>
@@ -649,7 +649,7 @@
     <COSMODBName>N-NONANE</COSMODBName>
   </component>
   <component>
-    <Name>nDecano</Name>
+    <Name>N-decane</Name>
     <CAS_Number>124-18-5</CAS_Number>
     <Formula>C10H22</Formula>
     <Molar_Weight>142.285</Molar_Weight>
@@ -708,7 +708,7 @@
     <COSMODBName>N-DECANE</COSMODBName>
   </component>
   <component>
-    <Name>Oxigenio</Name>
+    <Name>Oxygen</Name>
     <CAS_Number>7782-44-7</CAS_Number>
     <Formula>O2</Formula>
     <Molar_Weight>31.999</Molar_Weight>
@@ -763,7 +763,7 @@
     <COSMODBName>OXYGEN</COSMODBName>
   </component>
   <component>
-    <Name>Nitrogenio</Name>
+    <Name>Nitrogen</Name>
     <CAS_Number>7727-37-9</CAS_Number>
     <Formula>N2</Formula>
     <Molar_Weight>28.014</Molar_Weight>
@@ -820,7 +820,7 @@
     <COSMODBName>NITROGEN</COSMODBName>
   </component>
   <component>
-    <Name>Hidrogenio</Name>
+    <Name>Hydrogen</Name>
     <CAS_Number>1333-74-0</CAS_Number>
     <Formula>H2</Formula>
     <Molar_Weight>2.016</Molar_Weight>
@@ -875,7 +875,7 @@
     <COSMODBName>HYDROGEN</COSMODBName>
   </component>
   <component>
-    <Name>Agua</Name>
+    <Name>Water</Name>
     <CAS_Number>7732-18-5</CAS_Number>
     <Formula>H2O</Formula>
     <Molar_Weight>18.015</Molar_Weight>
@@ -931,7 +931,7 @@
     <COSMODBName>WATER</COSMODBName>
   </component>
   <component>
-    <Name>DioxidoDeCarbono</Name>
+    <Name>Carbon dioxide</Name>
     <CAS_Number>124-38-9</CAS_Number>
     <Formula>CO2</Formula>
     <Molar_Weight>44.01</Molar_Weight>
@@ -988,7 +988,7 @@
     </elements>
   </component>
   <component>
-    <Name>SulfetoDeHidrogenio</Name>
+    <Name>Hydrogen sulfide</Name>
     <CAS_Number>7783-06-4</CAS_Number>
     <Formula>H2S</Formula>
     <Molar_Weight>34.082</Molar_Weight>
@@ -1046,7 +1046,7 @@
     <COSMODBName>HYDROGEN-SULFIDE</COSMODBName>
   </component>
   <component>
-    <Name>Benzeno</Name>
+    <Name>Benzene</Name>
     <CAS_Number>71-43-2</CAS_Number>
     <Formula>C6H6</Formula>
     <Molar_Weight>78.114</Molar_Weight>
@@ -1102,7 +1102,7 @@
     <COSMODBName>BENZENE</COSMODBName>
   </component>
   <component>
-    <Name>Tolueno</Name>
+    <Name>Toluene</Name>
     <CAS_Number>108-88-3</CAS_Number>
     <Formula>C7H8</Formula>
     <Molar_Weight>92.141</Molar_Weight>
@@ -1159,7 +1159,7 @@
     <COSMODBName>TOLUENE</COSMODBName>
   </component>
   <component>
-    <Name>Oxileno</Name>
+    <Name>O-xylene</Name>
     <CAS_Number>95-47-6</CAS_Number>
     <Formula>C8H10</Formula>
     <Molar_Weight>106.168</Molar_Weight>
@@ -1216,7 +1216,7 @@
     <COSMODBName>O-XYLENE</COSMODBName>
   </component>
   <component>
-    <Name>Mxileno</Name>
+    <Name>M-xylene</Name>
     <CAS_Number>108-38-3</CAS_Number>
     <Formula>C8H10</Formula>
     <Molar_Weight>106.168</Molar_Weight>
@@ -1273,7 +1273,7 @@
     <COSMODBName>M-XYLENE</COSMODBName>
   </component>
   <component>
-    <Name>Pxileno</Name>
+    <Name>P-xylene</Name>
     <CAS_Number>106-42-3</CAS_Number>
     <Formula>C8H10</Formula>
     <Molar_Weight>106.168</Molar_Weight>
@@ -1330,7 +1330,7 @@
     <COSMODBName>P-XYLENE</COSMODBName>
   </component>
   <component>
-    <Name>Etilbenzeno</Name>
+    <Name>Ethylbenzene</Name>
     <CAS_Number>100-41-4</CAS_Number>
     <Formula>C8H10</Formula>
     <Molar_Weight>106.168</Molar_Weight>
@@ -1388,7 +1388,7 @@
     <COSMODBName>ETHYLBENZENE</COSMODBName>
   </component>
   <component>
-    <Name>Fenol</Name>
+    <Name>Phenol</Name>
     <CAS_Number>108-95-2</CAS_Number>
     <Formula>C6H5OH</Formula>
     <Molar_Weight>94.113</Molar_Weight>
@@ -1446,7 +1446,7 @@
     <COSMODBName>PHENOL</COSMODBName>
   </component>
   <component>
-    <Name>Glicerol</Name>
+    <Name>Glycerol</Name>
     <CAS_Number>56-81-5</CAS_Number>
     <Formula>C3H8O3</Formula>
     <Molar_Weight>92.095</Molar_Weight>
@@ -1505,7 +1505,7 @@
     <COSMODBName>GLYCEROL</COSMODBName>
   </component>
   <component>
-    <Name>Metanol</Name>
+    <Name>Methanol</Name>
     <CAS_Number>67-56-1</CAS_Number>
     <Formula>CH3OH</Formula>
     <Molar_Weight>32.042</Molar_Weight>
@@ -1563,7 +1563,7 @@
     <COSMODBName>METHANOL</COSMODBName>
   </component>
   <component>
-    <Name>Etanol</Name>
+    <Name>Ethanol</Name>
     <CAS_Number>64-17-5</CAS_Number>
     <Formula>C2H5OH</Formula>
     <Molar_Weight>46.069</Molar_Weight>
@@ -1681,7 +1681,7 @@
     <COSMODBName>ISOPROPANOL</COSMODBName>
   </component>
   <component>
-    <Name>1Pentanol</Name>
+    <Name>1-pentanol</Name>
     <CAS_Number>71-41-0</CAS_Number>
     <Formula>C5H11OH</Formula>
     <Molar_Weight>88.15</Molar_Weight>
@@ -1740,7 +1740,7 @@
     <COSMODBName>1-PENTANOL</COSMODBName>
   </component>
   <component>
-    <Name>1Hexanol</Name>
+    <Name>1-hexanol</Name>
     <CAS_Number>111-27-3</CAS_Number>
     <Formula>C6H13OH</Formula>
     <Molar_Weight>102.177</Molar_Weight>
@@ -1799,7 +1799,7 @@
     <COSMODBName>1-HEXANOL</COSMODBName>
   </component>
   <component>
-    <Name>1Heptanol</Name>
+    <Name>1-heptanol</Name>
     <CAS_Number>111-70-6</CAS_Number>
     <Formula>C7H15OH</Formula>
     <Molar_Weight>116.204</Molar_Weight>
@@ -1858,7 +1858,7 @@
     <COSMODBName>1-HEPTANOL</COSMODBName>
   </component>
   <component>
-    <Name>1Octanol</Name>
+    <Name>1-octanol</Name>
     <CAS_Number>111-87-5</CAS_Number>
     <Formula>C8H17OH</Formula>
     <Molar_Weight>130.231</Molar_Weight>
@@ -1917,7 +1917,7 @@
     <COSMODBName>1-OCTANOL</COSMODBName>
   </component>
   <component>
-    <Name>1Decanol</Name>
+    <Name>1-decanol</Name>
     <CAS_Number>112-30-1</CAS_Number>
     <Formula>C10H21OH</Formula>
     <Molar_Weight>158.285</Molar_Weight>
@@ -1976,7 +1976,7 @@
     <COSMODBName>1-DECANOL</COSMODBName>
   </component>
   <component>
-    <Name>3Metil1Butanol</Name>
+    <Name>3-methyl-1-butanol</Name>
     <CAS_Number>123-51-3</CAS_Number>
     <Formula>C5H11OH</Formula>
     <Molar_Weight>88.15</Molar_Weight>
@@ -2036,7 +2036,7 @@
     <COSMODBName>3-METHYL-1-BUTANOL</COSMODBName>
   </component>
   <component>
-    <Name>12Propanodiol</Name>
+    <Name>1,2-propanediol</Name>
     <CAS_Number>57-55-6</CAS_Number>
     <Formula>C3H8O2</Formula>
     <Molar_Weight>76.096</Molar_Weight>
@@ -2096,7 +2096,7 @@
     <COSMODBName>PROPANEDIOL-1,2</COSMODBName>
   </component>
   <component>
-    <Name>MetilEtilCetona</Name>
+    <Name>Methyl ethyl ketone</Name>
     <CAS_Number>78-93-3</CAS_Number>
     <Formula>C4H8O</Formula>
     <Molar_Weight>72.107</Molar_Weight>
