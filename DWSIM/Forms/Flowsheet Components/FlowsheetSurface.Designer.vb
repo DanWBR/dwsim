@@ -22,7 +22,7 @@ Partial Class FlowsheetSurface
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FlowsheetSurface))
-        Me.FlowsheetDesignSurface = New GraphicsSurface()
+        Me.FlowsheetDesignSurface = New DrawingTools.GraphicsSurface()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.LabelCalculator = New System.Windows.Forms.Label()
         Me.LabelTime = New System.Windows.Forms.Label()
@@ -497,7 +497,7 @@ Partial Class FlowsheetSurface
         Me.PerformLayout()
 
     End Sub
-    Public WithEvents FlowsheetDesignSurface As GraphicsSurface
+    Public WithEvents FlowsheetDesignSurface As DrawingTools.GraphicsSurface
     Public WithEvents CMS_NoSel As System.Windows.Forms.ContextMenuStrip
     Public WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem

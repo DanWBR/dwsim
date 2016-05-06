@@ -33,7 +33,7 @@ Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Globalization
 Imports DWSIM.DrawingTools
 Imports System.Reflection
-Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
+Imports DWSIM.GraphicObjects
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
 Imports DWSIM.Interfaces.Enums.GraphicObjects
@@ -2156,7 +2156,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             Dim id As String = pkey & xel.<Name>.Value
             Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
             Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
-            Dim gobj As GraphicObjects.GraphicObject = (From go As GraphicObjects.GraphicObject In
+            Dim gobj As GraphicObject = (From go As GraphicObject In
                                 FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
             obj.GraphicObject = gobj
             obj.SetFlowsheet(Me)

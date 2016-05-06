@@ -1,6 +1,6 @@
 ﻿Public Class FormConfigureSpreadsheetTable
 
-    Public Table As DWSIM.DrawingTools.GraphicObjects2.SpreadsheetTableGraphic
+    Public Table As GraphicObjects.SpreadsheetTableGraphic
 
     Private Sub FormConfigureSpreadsheetTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

@@ -61,6 +61,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <Optimize>false</Optimize>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>Full</DebugType>
@@ -291,8 +292,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Import Include="DWSIM.DrawingTools" />
-    <Import Include="DWSIM.DrawingTools.GraphicObjects" />
     <Import Include="DWSIM.FlowsheetSolver" />
     <Import Include="DWSIM.GlobalSettings" />
     <Import Include="DWSIM.Interfaces.Enums" />
@@ -407,10 +406,10 @@
     <Compile Include="Forms\FormPassword.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormSelectProperties.Designer.vb">
-      <DependentUpon>FormSelectProperties.vb</DependentUpon>
+    <Compile Include="Forms\FormConfigurePropertyTable.Designer.vb">
+      <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormSelectProperties.vb">
+    <Compile Include="Forms\FormConfigurePropertyTable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormState.Designer.vb">
@@ -833,6 +832,9 @@
     <EmbeddedResource Include="Forms\FormCompoundCreator.es.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureMasterTable.en.resx">
+      <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureMasterTable.resx">
       <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
     </EmbeddedResource>
@@ -887,11 +889,11 @@
     <EmbeddedResource Include="Forms\FormPassword.es.resx">
       <DependentUpon>FormPassword.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormSelectProperties.en.resx">
-      <DependentUpon>FormSelectProperties.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\FormConfigurePropertyTable.en.resx">
+      <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormSelectProperties.resx">
-      <DependentUpon>FormSelectProperties.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\FormConfigurePropertyTable.resx">
+      <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormState.de.resx">
       <DependentUpon>FormState.vb</DependentUpon>

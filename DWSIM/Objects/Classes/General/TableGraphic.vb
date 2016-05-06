@@ -23,7 +23,7 @@ Imports DWSIM.DWSIM.Extras
 Imports System.Linq
 Imports DWSIM.DrawingTools
 
-Namespace DWSIM.DrawingTools.GraphicObjects2
+Namespace GraphicObjects
 
     <Serializable()> Public Class MasterTableGraphic
 
@@ -336,17 +336,17 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
         End Property
 #End Region
 
-        Public Sub Update(ByRef form As FormFlowsheet)
+        Public Sub Update()
 
-            Dim su As SystemsOfUnits.Units = form.Options.SelectedUnitSystem
-            Dim nf As String = form.Options.NumberFormat
+            Dim su As SystemsOfUnits.Units = Flowsheet.FlowsheetOptions.SelectedUnitSystem
+            Dim nf As String = Flowsheet.FlowsheetOptions.NumberFormat
 
             m_items = New Dictionary(Of String, List(Of DWSIM.Extras.NodeItem))
 
             Dim objectstoremove As New ArrayList
 
             For Each kvp As KeyValuePair(Of String, Boolean) In m_objectlist
-                If form.GetFlowsheetGraphicObject(kvp.Key) Is Nothing Then
+                If Flowsheet.GetFlowsheetSimulationObject(kvp.Key) Is Nothing Then
                     objectstoremove.Add(kvp.Key)
                 End If
             Next
@@ -357,10 +357,10 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
             For Each kvp As KeyValuePair(Of String, Boolean) In m_objectlist
                 If kvp.Value = True Then
-                    Dim myobj As SharedClasses.UnitOperations.BaseClass = form.GetFlowsheetSimulationObject(kvp.Key)
+                    Dim myobj As SharedClasses.UnitOperations.BaseClass = Flowsheet.GetFlowsheetSimulationObject(kvp.Key)
                     m_items.Add(kvp.Key, New List(Of NodeItem))
                     m_items(kvp.Key).Add(New NodeItem(DWSIM.App.GetLocalString("Objeto"), kvp.Key, "", 0, 0, ""))
-                    If Me.HeaderText = "" Then Me.HeaderText = DWSIM.App.GetLocalString("MasterTable") & " - " & DWSIM.App.GetLocalString(myobj.ComponentDescription)
+                    If Me.HeaderText = "" Then Me.HeaderText = DWSIM.App.GetLocalString("MasterTable")
                     Dim mypropid As String = ""
                     Dim props() As String = myobj.GetProperties(Interfaces.Enums.PropertyType.ALL)
                     For Each kvp2 As KeyValuePair(Of String, Boolean) In m_propertylist
@@ -1442,7 +1442,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
                     DrawRoundRect(g, Me.m_BorderPen, Me.X, Me.Y, Me.Width, Me.Height, 3, Brushes.Transparent)
                     g.DrawLine(Me.m_BorderPen, X + Padding + 3, Y + 2 * maxH - Padding, X + Width - Padding - 3, Y + 2 * maxH - Padding)
-                
+
                     g.EndContainer(gContainer)
 
                 End If

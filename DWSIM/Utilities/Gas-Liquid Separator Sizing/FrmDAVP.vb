@@ -48,7 +48,7 @@
 
         If Not Me.ComboBox1.SelectedItem Is Nothing Then
 
-            Dim gobj As GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox1.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
+            Dim gobj As DrawingTools.GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox1.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
             Me.vessel = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
 
             Dim msv, msl As Streams.MaterialStream

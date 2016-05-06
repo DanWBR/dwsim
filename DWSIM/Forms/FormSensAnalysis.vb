@@ -397,7 +397,7 @@ Public Class FormSensAnalysis
             With sacase.iv1
                 If Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
                     .objectTAG = Me.cbObjIndVar1.SelectedItem.ToString
-                    .objectID = CType(FormFlowsheet.SearchSurfaceObjectsByTag(.objectTAG, form.FormSurface.FlowsheetDesignSurface), GraphicObjects.GraphicObject).Name
+                    .objectID = CType(FormFlowsheet.SearchSurfaceObjectsByTag(.objectTAG, form.FormSurface.FlowsheetDesignSurface), DrawingTools.GraphicObjects.GraphicObject).Name
                 Else
                     .objectTAG = Me.cbObjIndVar1.SelectedItem.ToString
                     .objectID = "SpreadsheetCell"
@@ -417,7 +417,7 @@ Public Class FormSensAnalysis
                 With sacase.iv2
                     If Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
                         .objectTAG = Me.cbObjIndVar2.SelectedItem
-                        .objectID = CType(FormFlowsheet.SearchSurfaceObjectsByTag(.objectTAG, form.FormSurface.FlowsheetDesignSurface), GraphicObjects.GraphicObject).Name
+                        .objectID = CType(FormFlowsheet.SearchSurfaceObjectsByTag(.objectTAG, form.FormSurface.FlowsheetDesignSurface), DrawingTools.GraphicObjects.GraphicObject).Name
                     Else
                         .objectTAG = Me.cbObjIndVar2.SelectedItem.ToString
                         .objectID = "SpreadsheetCell"

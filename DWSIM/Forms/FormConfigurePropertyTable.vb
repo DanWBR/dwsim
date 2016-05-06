@@ -1,6 +1,6 @@
-﻿Public Class FormSelectProperties
+﻿Public Class FormConfigurePropertyTable
 
-    Public Table As DWSIM.DrawingTools.GraphicObjects2.TableGraphic
+    Public Table As GraphicObjects.TableGraphic
 
     Private loaded As Boolean = False
 

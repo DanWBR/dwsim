@@ -7,7 +7,7 @@ Imports DWSIM.FlowsheetSolver
 Imports System.Drawing.Drawing2D
 Imports System.Linq
 Imports System.Threading.Tasks
-Imports DWSIM.DWSIM.DrawingTools.GraphicObjects2
+Imports DWSIM.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.UnitOperations
 
@@ -188,7 +188,7 @@ Public Class FlowsheetSurface
     End Sub
 
     Private Sub FlowsheetDesignSurface_SelectionChanged(ByVal sender As Object, _
-            ByVal e As SelectionChangedEventArgs) Handles FlowsheetDesignSurface.SelectionChanged
+            ByVal e As DrawingTools.SelectionChangedEventArgs) Handles FlowsheetDesignSurface.SelectionChanged
 
         If Not e.SelectedObject Is Nothing Then
 
@@ -259,7 +259,7 @@ Public Class FlowsheetSurface
         End If
     End Sub
 
-    Private Sub FlowsheetDesignSurface_StatusUpdate(ByVal sender As Object, ByVal e As StatusUpdateEventArgs) Handles FlowsheetDesignSurface.StatusUpdate
+    Private Sub FlowsheetDesignSurface_StatusUpdate(ByVal sender As Object, ByVal e As DrawingTools.StatusUpdateEventArgs) Handles FlowsheetDesignSurface.StatusUpdate
         Flowsheet.TSTBZoom.Text = Format(FlowsheetDesignSurface.Zoom, "#%")
     End Sub
 
@@ -3244,7 +3244,7 @@ Public Class FlowsheetSurface
         If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
             Select Case Me.FlowsheetDesignSurface.SelectedObject.ObjectType
                 Case ObjectType.GO_Table
-                    Dim f As New FormSelectProperties() With {.Table = Me.FlowsheetDesignSurface.SelectedObject}
+                    Dim f As New FormConfigurePropertyTable() With {.Table = Me.FlowsheetDesignSurface.SelectedObject}
                     f.ShowDialog(Me)
                 Case ObjectType.GO_SpreadsheetTable
                     Dim f As New FormConfigureSpreadsheetTable() With {.Table = Me.FlowsheetDesignSurface.SelectedObject}
