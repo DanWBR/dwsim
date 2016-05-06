@@ -694,6 +694,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
         Inherits ShapeGraphic
 
+        Protected m_Font_Col0 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
         Protected m_Font_Col1 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
         Protected m_Font_Col2 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
         Protected m_Font_Col3 As Font = New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
@@ -710,14 +711,14 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
         Protected m_IsGradientBg As Boolean = False
 
         Protected m_BorderThickness As Integer = 1
-        Protected m_Padding As Integer = 2
+        Protected m_Padding As Integer = 4
 
-        <System.NonSerialized()> Protected m_BorderPen As Drawing.Pen = New Drawing.Pen(Color.SteelBlue)
+        <System.NonSerialized()> Protected m_BorderPen As Drawing.Pen = New Drawing.Pen(Color.Black)
         Protected m_BorderStyle As Drawing2D.DashStyle = DashStyle.Solid
 
-        Protected m_BorderColor As Color = Color.SteelBlue
+        Protected m_BorderColor As Color = Color.Black
 
-        Protected m_FontColor As Color = Color.SteelBlue
+        Protected m_FontColor As Color = Color.Black
 
         Protected m_TextRenderStyle As Drawing2D.SmoothingMode = Drawing2D.SmoothingMode.Default
 
@@ -729,11 +730,36 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
 
+            elements.Add(New XElement("VisibleProperties"))
+
+            For Each item In VisibleProperties
+                Dim xel2 = New XElement("Object", New XAttribute("Value", item.Key))
+                elements(elements.Count - 1).Add(xel2)
+                For Each item2 In item.Value
+                    xel2.Add(New XElement("PropertyID", New XAttribute("Value", item2)))
+                Next
+            Next
+
             Return elements
 
         End Function
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
+
+            Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "VisibleProperties").SingleOrDefault
+
+            If Not el Is Nothing Then
+
+                VisibleProperties.Clear()
+
+                For Each xel2 As XElement In el.Elements
+                    VisibleProperties.Add(xel2.@Value, New List(Of String))
+                    For Each xel3 In xel2.Elements
+                        VisibleProperties(xel2.@Value).Add(xel3.@Value)
+                    Next
+                Next
+
+            End If
 
             Return MyBase.LoadData(data)
 
@@ -763,6 +789,15 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             End Get
             Set(ByVal Value As Font)
                 m_HeaderFont = Value
+            End Set
+        End Property
+
+        Public Property FontCol0() As Font
+            Get
+                Return m_Font_Col0
+            End Get
+            Set(ByVal Value As Font)
+                m_Font_Col0 = Value
             End Set
         End Property
 
@@ -945,108 +980,136 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
             Dim propstring, propval, propunit As String, pval0 As Object
 
+            Dim toremove As New List(Of String)
             For Each item In VisibleProperties
-                For Each value In item.Value
-
-                    size = g.MeasureString(Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag, Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-
-                    If size.Width > maxL0 Then maxL0 = size.Width
-                    If size.Height > maxH Then maxH = size.Height
-
-                    propstring = Me.Flowsheet.GetTranslatedString(value)
-                    pval0 = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyValue(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
-                    If TypeOf pval0 Is Double Then
-                        propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
-                    Else
-                        propval = pval0.ToString
-                    End If
-                    propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-
-                    size = g.MeasureString(DWSIM.App.GetPropertyName(propstring), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-                    If size.Width > maxL1 Then maxL1 = size.Width
-                    If size.Height > maxH Then maxH = size.Height
-
-                    size = g.MeasureString(propval, Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
-                    If size.Width > maxL2 Then maxL2 = size.Width
-                    If size.Height > maxH Then maxH = size.Height
-
-                    size = g.MeasureString(propunit, Me.FontCol3, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-                    If size.Width > maxL3 Then maxL3 = size.Width
-                    If size.Height > maxH Then maxH = size.Height
-
-                    count += 1
-
-                Next
+                If Not Me.Flowsheet.SimulationObjects.ContainsKey(item.Key) Then toremove.Add(item.Key)
             Next
 
-            size = g.MeasureString(Me.HeaderText, Me.HeaderFont, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-            If size.Width > maxL0 Then maxL0 = size.Width
-            If size.Height > maxH Then maxH = size.Height
+            For Each item In toremove
+                VisibleProperties.Remove(item)
+            Next
 
-            Me.Height = (count) * (maxH + 2 * Me.Padding)
-            Me.Width = 6 * Me.Padding + maxL0 + maxL1 + maxL2 + maxL3
+            toremove.Clear()
+            toremove = Nothing
 
-            maxL0 = maxL0 + 2 * Padding
-            maxL1 = maxL1 + 2 * Padding
-            maxL2 = maxL2 + 2 * Padding
-            maxL3 = maxL3 + 2 * Padding
-            maxH = maxH + 2 * Padding
+            If VisibleProperties.Count > 0 Then
 
-            If m_BorderPen Is Nothing Then m_BorderPen = New Drawing.Pen(Color.FromArgb(iopacity, Color.Black))
+                For Each item In VisibleProperties
+                    For Each value In item.Value
 
-            With Me.m_BorderPen
-                .Color = Color.FromArgb(iopacity, Me.BorderColor)
-                .DashStyle = Me.BorderStyle
-            End With
+                        size = g.MeasureString(Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag, Me.FontCol0, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
 
-            Dim rect As New Rectangle(X, Y, Width, Height)
-            If Me.IsGradientBackground = False Then
-                g.FillRectangle(New SolidBrush(Color.FromArgb(iopacity, Me.BackgroundColor)), rect)
+                        If size.Width > maxL0 Then maxL0 = size.Width
+                        If size.Height > maxH Then maxH = size.Height
+
+                        propstring = Me.Flowsheet.GetTranslatedString(value)
+                        pval0 = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyValue(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+                        If TypeOf pval0 Is Double Then
+                            propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
+                        Else
+                            propval = pval0.ToString
+                        End If
+                        propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+
+                        size = g.MeasureString(DWSIM.App.GetPropertyName(propstring), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                        If size.Width > maxL1 Then maxL1 = size.Width
+                        If size.Height > maxH Then maxH = size.Height
+
+                        size = g.MeasureString(propval, Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
+                        If size.Width > maxL2 Then maxL2 = size.Width
+                        If size.Height > maxH Then maxH = size.Height
+
+                        size = g.MeasureString(propunit, Me.FontCol3, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                        If size.Width > maxL3 Then maxL3 = size.Width
+                        If size.Height > maxH Then maxH = size.Height
+
+                        count += 1
+
+                    Next
+                Next
+
+                size = g.MeasureString(Me.HeaderText, Me.HeaderFont, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                If size.Width > maxL0 Then maxL0 = size.Width
+                If size.Height > maxH Then maxH = size.Height
+
+                Me.Height = (count) * (maxH + 2 * Me.Padding)
+                Me.Width = 8 * Me.Padding + maxL0 + maxL1 + maxL2 + maxL3
+
+                maxL0 = maxL0 + 2 * Padding
+                maxL1 = maxL1 + 2 * Padding
+                maxL2 = maxL2 + 2 * Padding
+                maxL3 = maxL3 + 2 * Padding
+                maxH = maxH + 2 * Padding
+
+                If m_BorderPen Is Nothing Then m_BorderPen = New Drawing.Pen(Color.FromArgb(iopacity, Color.Black))
+
+                With Me.m_BorderPen
+                    .Color = Color.FromArgb(iopacity, Me.BorderColor)
+                    .DashStyle = Me.BorderStyle
+                End With
+
+                Dim rect As New Rectangle(X, Y, Width, Height)
+                If Me.IsGradientBackground = False Then
+                    g.FillRectangle(New SolidBrush(Color.FromArgb(iopacity, Me.BackgroundColor)), rect)
+                Else
+                    g.FillRectangle(New Drawing2D.LinearGradientBrush(rect, Color.FromArgb(iopacity, Me.BackgroundGradientColor2), Color.FromArgb(iopacity, Me.BackgroundGradientColor1), LinearGradientMode.Vertical), rect)
+                End If
+
+                Dim format1 As New StringFormat(StringFormatFlags.NoClip)
+                With format1
+                    .Alignment = StringAlignment.Far
+                End With
+
+                'desenhar textos e retangulos
+
+                g.DrawString(Me.HeaderText, Me.HeaderFont, New SolidBrush(Color.FromArgb(iopacity, Me.FontColor)), X + Padding, Y + Padding)
+                Dim n As Integer = 1
+
+                For Each item In VisibleProperties
+                    For Each value In item.Value
+
+                        g.DrawString(Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag, Me.FontCol0, New SolidBrush(Color.FromArgb(iopacity, Me.FontColor)), X + Padding, Y + n * maxH + Padding)
+
+                        propstring = Me.Flowsheet.GetTranslatedString(value)
+                        pval0 = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyValue(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+                        If TypeOf pval0 Is Double Then
+                            propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
+                        Else
+                            propval = pval0.ToString
+                        End If
+                        propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+
+                        g.DrawString(propstring, Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.FontColor)), X + maxL0 + Padding, Y + n * maxH + Padding)
+
+                        g.DrawString(propval, Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.FontColor)), X + maxL0 + maxL1 + maxL2 - Padding / 2, Y + n * maxH + Padding, format1)
+
+                        g.DrawString(propunit, Me.FontCol3, New SolidBrush(Color.FromArgb(iopacity, Me.FontColor)), X + maxL0 + maxL1 + maxL2 + Padding, Y + n * maxH + Padding)
+
+                        g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
+
+                        n += 1
+
+                    Next
+                Next
+
+                g.DrawRectangle(Me.m_BorderPen, New Rectangle(Me.X, Me.Y, Me.Width, Me.Height))
+                g.DrawLine(Me.m_BorderPen, X + maxL0, Y + maxH, X + maxL0, Y + Height)
+                g.DrawLine(Me.m_BorderPen, X + maxL0 + maxL1, Y + maxH, X + maxL0 + maxL1, Y + Height)
+                g.DrawLine(Me.m_BorderPen, X + maxL0 + maxL1 + maxL2, Y + maxH, X + maxL0 + maxL1 + maxL2, Y + Height)
+
             Else
-                g.FillRectangle(New Drawing2D.LinearGradientBrush(rect, Color.FromArgb(iopacity, Me.BackgroundGradientColor2), Color.FromArgb(iopacity, Me.BackgroundGradientColor1), LinearGradientMode.Vertical), rect)
+
+                Dim format1 As New StringFormat(StringFormatFlags.NoClip)
+                size = g.MeasureString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
+                g.DrawString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.FontColor)), X + 10, Y + 40, format1)
+
+                Me.Width = 20 + size.Width
+                Me.Height = 80 + size.Height
+
+                g.DrawRectangle(Me.m_BorderPen, New Rectangle(X, Y, Width, Height))
+
             End If
 
-            Dim format1 As New StringFormat(StringFormatFlags.NoClip)
-            With format1
-                .Alignment = StringAlignment.Far
-            End With
-
-            'desenhar textos e retangulos
-
-            g.DrawString(Me.HeaderText, Me.HeaderFont, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + Padding)
-            Dim n As Integer = 1
-
-            For Each item In VisibleProperties
-                For Each value In item.Value
-
-                   g.DrawString(Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag, Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
-
-                    propstring = Me.Flowsheet.GetTranslatedString(value)
-                    pval0 = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyValue(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
-                    If TypeOf pval0 Is Double Then
-                        propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
-                    Else
-                        propval = pval0.ToString
-                    End If
-                    propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-
-                    g.DrawString(propstring, Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
-
-                    g.DrawString(propval, Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2, Y + n * maxH + Padding, format1)
-
-                    g.DrawString(propunit, Me.FontCol3, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2 + Padding, Y + n * maxH + Padding)
-
-                    g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
-
-                    n += 1
-
-                Next
-            Next
-
-            g.DrawRectangle(Me.m_BorderPen, New Rectangle(Me.X, Me.Y, Me.Width, Me.Height))
-            g.DrawLine(Me.m_BorderPen, X + maxL0, Y + maxH, X + maxL0, Y + Height)
-            g.DrawLine(Me.m_BorderPen, X + maxL1, Y + maxH, X + maxL1, Y + Height)
-            g.DrawLine(Me.m_BorderPen, X + maxL1 + maxL2, Y + maxH, X + maxL1 + maxL2, Y + Height)
 
             g.EndContainer(gContainer)
 

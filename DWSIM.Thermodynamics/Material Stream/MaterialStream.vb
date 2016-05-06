@@ -1421,6 +1421,7 @@ Namespace Streams
                 End Select
 
                 Return value
+
             Else
 
                 Return ""

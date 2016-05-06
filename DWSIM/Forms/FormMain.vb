@@ -864,10 +864,12 @@ Public Class FormMain
                         If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     End If
                     If Not TypeOf obj Is TableGraphic Then
-                        form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
-                        form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
                         obj.CreateConnectors(0, 0)
+                    Else
+                        DirectCast(obj, TableGraphic).Flowsheet = form
                     End If
+                    form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
+                    form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
                 End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Flowsheet Graphic Objects", ex))

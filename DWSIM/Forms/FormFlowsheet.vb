@@ -2808,4 +2808,16 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
+        Dim myPropertyTable As New TableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
+         -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
+        Dim gObj As GraphicObject = Nothing
+        myPropertyTable.Flowsheet = Me
+        gObj = myPropertyTable
+        gObj.Tag = "PROPERTYTABLE-" & Guid.NewGuid.ToString
+        gObj.AutoSize = True
+        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
+    End Sub
+
 End Class

@@ -423,7 +423,7 @@ Public Class FlowsheetSurface
 
                 Else
 
-                    Me.FlowsheetDesignSurface.SelectedObject = Nothing
+                    'Me.FlowsheetDesignSurface.SelectedObject = Nothing
 
                 End If
 
@@ -3240,4 +3240,13 @@ Public Class FlowsheetSurface
         End If
     End Sub
 
+    Private Sub FlowsheetDesignSurface_MouseDoubleClick(sender As Object, e As Windows.Forms.MouseEventArgs) Handles FlowsheetDesignSurface.MouseDoubleClick
+        If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
+            Select Case Me.FlowsheetDesignSurface.SelectedObject.ObjectType
+                Case ObjectType.GO_Table
+                    Dim f As New FormSelectProperties() With {.Table = Me.FlowsheetDesignSurface.SelectedObject}
+                    f.ShowDialog(Me)
+            End Select
+        End If
+    End Sub
 End Class
