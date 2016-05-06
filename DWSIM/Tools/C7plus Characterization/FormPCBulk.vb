@@ -424,16 +424,7 @@ Public Class FormPCBulk
                     ._pp = pp
                     ._ms = tms
                     ._idx = i
-                    Dim fwait As New FormLS
-                    With fwait
-                        .Text = "DWSIM"
-                        .Label1.Text = DWSIM.App.GetLocalString("CalculandoFatordeAjuste")
-                        .TopMost = True
-                        .StartPosition = FormStartPosition.CenterScreen
-                    End With
-                    fwait.Show()
                     fw = .MinimizeError()
-                    fwait.Close()
                 End With
                 With c.ConstantProperties
                     c.ConstantProperties.Acentric_Factor *= fw
@@ -449,16 +440,7 @@ Public Class FormPCBulk
             If Me.CheckBoxADJZRA.Checked Then
                 With dfit
                     ._comp = c
-                    Dim fwait As New FormLS
-                    With fwait
-                        .Text = "DWSIM"
-                        .Label1.Text = DWSIM.App.GetLocalString("CalculandoFatordeAjuste")
-                        .TopMost = True
-                        .StartPosition = FormStartPosition.CenterScreen
-                    End With
-                    fwait.Show()
                     fzra = .MinimizeError()
-                    fwait.Close()
                 End With
                 With c.ConstantProperties
                     .Z_Rackett *= fzra

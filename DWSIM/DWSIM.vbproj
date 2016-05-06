@@ -172,13 +172,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ExcelDna.Integration.0.33.9\lib\ExcelDna.Integration.dll</HintPath>
     </Reference>
-    <Reference Include="FileHelpers, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\FileHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="GemBox.Spreadsheet">
-      <HintPath>..\packages\GemBox.Spreadsheet.39.3.30.1037\lib\net30\GemBox.Spreadsheet.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -206,33 +199,18 @@
       <HintPath>References\IronPython.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="IronPython.Modules, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\IronPython.Modules.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Jolt">
       <HintPath>References\Jolt.dll</HintPath>
-    </Reference>
-    <Reference Include="Jolt.Testing.GeneratedTypes">
-      <HintPath>References\Jolt.Testing.GeneratedTypes.dll</HintPath>
     </Reference>
     <Reference Include="LabelWithDivider, Version=1.1.0.1, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\LabelWithDivider.dll</HintPath>
-    </Reference>
-    <Reference Include="Mapack, Version=1.0.9.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\Mapack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Dynamic">
       <HintPath>References\Microsoft.Dynamic.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Scripting">
       <HintPath>References\Microsoft.Scripting.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ServiceBus">
-      <HintPath>..\AzureServer\References\Microsoft.ServiceBus.dll</HintPath>
     </Reference>
     <Reference Include="NeoDataType.MyNeoReport, Version=1.4.0.0, Culture=neutral, PublicKeyToken=cc45d3430ba4f561, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -246,43 +224,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Nini.dll</HintPath>
     </Reference>
-    <Reference Include="OfficeApi">
-      <HintPath>References\OfficeApi.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="OutlookGrid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\OutlookGrid.dll</HintPath>
-    </Reference>
-    <Reference Include="RichTextBoxExtended, Version=2.0.2954.894, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\RichTextBoxExtended.dll</HintPath>
-    </Reference>
     <Reference Include="ScintillaNET">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.5.1\lib\net40\ScintillaNET.dll</HintPath>
-    </Reference>
-    <Reference Include="SpinningProgress, Version=1.0.2444.27714, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\SpinningProgress.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TcpComm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\TCPServer\References\TcpComm.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="VBIDEApi">
-      <HintPath>References\VBIDEApi.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Yeppp.CLR.Bundle">
       <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
     </Reference>
@@ -454,12 +406,6 @@
     <Compile Include="Forms\AboutBoxNET.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormCLM.Designer.vb">
-      <DependentUpon>FormCLM.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormCLM.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\FormCapeOpenUnitSelector.Designer.vb">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
     </Compile>
@@ -546,12 +492,6 @@
       <DependentUpon>FormRecoverFiles.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormRecoverFiles.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormLoadSave.Designer.vb">
-      <DependentUpon>FormLoadSave.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormLoadSave.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSimulSettings.Designer.vb">
@@ -1051,10 +991,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj">
-      <Project>{a5f6e7cc-0710-4129-9faa-9fbe9bc4ffcf}</Project>
-      <Name>DWSIM.Thermodynamics.CoolPropInterface</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CustomXMLSerializer\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
@@ -1179,10 +1115,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormLoadSave.en.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormLoadSave.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormOptions.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormOptions.vb</DependentUpon>
@@ -1190,10 +1122,6 @@
     <EmbeddedResource Include="Forms\FormRecoverFiles.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormRecoverFiles.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormLoadSave.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FormLoadSave.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSimulSettings.en.resx">
       <SubType>Designer</SubType>
@@ -2276,18 +2204,6 @@
     <EmbeddedResource Include="Forms\AboutBoxNET.resx">
       <DependentUpon>AboutBoxNET.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCLM.de.resx">
-      <DependentUpon>FormCLM.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCLM.en.resx">
-      <DependentUpon>FormCLM.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCLM.es.resx">
-      <DependentUpon>FormCLM.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCLM.resx">
-      <DependentUpon>FormCLM.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.en.resx">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
     </EmbeddedResource>
@@ -2320,12 +2236,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface.de.resx">
       <DependentUpon>FlowsheetSurface.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormLoadSave.de.resx">
-      <DependentUpon>FormLoadSave.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormLoadSave.es.resx">
-      <DependentUpon>FormLoadSave.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormOptimization.de.resx">
       <DependentUpon>FormOptimization.vb</DependentUpon>

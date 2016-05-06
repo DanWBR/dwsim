@@ -9,24 +9,13 @@ Public Class FormCapeOpenUnitSelector
 
         Me.BackgroundWorker1.RunWorkerAsync()
 
-        Dim frmwait As New FormLS
-
-        frmwait.Text = "CAPE-OPEN Unit Operation Socket"
-        frmwait.Label1.Text = "Scanning Registry for CAPE-OPEN Unit Operations"
-        frmwait.StartPosition = FormStartPosition.CenterScreen
-        frmwait.Opacity = 1.0#
-
         Me.Enabled = False
 
         Application.DoEvents()
 
-        frmwait.Show(Me)
-
         While Me.BackgroundWorker1.IsBusy
             Application.DoEvents()
         End While
-
-        frmwait.Close()
 
         Me.Enabled = True
 

@@ -17,7 +17,6 @@
 
 'Imports DWSIM.SimulationObjects
 Imports System.ComponentModel
-Imports FileHelpers
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters
 Imports System.Runtime.Serialization
@@ -55,7 +54,6 @@ Public Class FormMain
     Public loadedCSDB As Boolean = False
     Public pathsep As Char
 
-    Public WithEvents FrmLoadSave As New FormLS
     Public FrmOptions As FormOptions
     Public FrmRec As FormRecoverFiles
 

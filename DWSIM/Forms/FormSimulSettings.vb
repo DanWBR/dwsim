@@ -15,7 +15,6 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports OutlookStyleControls
 Imports System.Xml.Serialization
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
@@ -42,7 +41,6 @@ Public Class FormSimulSettings
 
     Private prevsort As System.ComponentModel.ListSortDirection = System.ComponentModel.ListSortDirection.Ascending
     Private prevcol As Integer = 1
-    Private prevgroup As IOutlookGridGroup
 
     'Public ComponentDataSet As DataSet
     'Public ComponentBindingSource As BindingSource
@@ -957,7 +955,7 @@ Public Class FormSimulSettings
 
         Dim contains As Boolean = False
         Dim index As Integer = -1
-        For Each r As OutlookGridRow In ogc1.Rows
+        For Each r As DataGridViewRow In ogc1.Rows
             If r.Cells(0).Value = comp.Name Then
                 contains = True
                 index = r.Index
@@ -968,7 +966,7 @@ Public Class FormSimulSettings
 
         If Not contains Then
             Try
-                Dim r As New OutlookGridRow
+                Dim r As New DataGridViewRow
                 translatedname = comp.Name
                 r.CreateCells(ogc1, New Object() {comp.Name, translatedname, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported, comp.IsFPROPSSupported})
                 ogc1.Rows.Add(r)
@@ -991,7 +989,7 @@ Public Class FormSimulSettings
 
     Public Function GetCompRowIndex(ByRef comp As BaseClasses.ConstantProperties) As Integer
 
-        For Each r As OutlookGridRow In ogc1.Rows
+        For Each r As DataGridViewRow In ogc1.Rows
 
             If r.Cells(0).Value = comp.Name Then Return r.Index Else Return -1
 

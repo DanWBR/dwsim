@@ -76,8 +76,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public FormSensAnalysis0 As New FormSensAnalysis
     Public FormOptimization0 As New FormOptimization
 
-    Public FormCL As FormCLM
-
     Public WithEvents Options As New DWSIM.Flowsheet.FlowsheetVariables
 
     Public Property CalculationQueue As Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
@@ -637,12 +635,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                                                          If DWSIM.App.IsRunningOnMono Then
                                                              frlog.Grid1.Rows.Add(New Object() {img, frlog.GridDT.Rows.Count, Date.Now, strtipo, texto})
-                                                         End If
-
-                                                     Else
-
-                                                         If Not frsht.FormCL Is Nothing Then
-                                                             frsht.FormCL.LBLogMsg.Items.Insert(0, Date.Now.ToString & " " & texto)
                                                          End If
 
                                                      End If

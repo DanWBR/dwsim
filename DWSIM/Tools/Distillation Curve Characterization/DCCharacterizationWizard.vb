@@ -610,20 +610,11 @@ Public Class DCCharacterizationWizard
                     ._pp = pp
                     ._ms = tms
                     ._idx = i
-                    Dim fwait As New FormLS
-                    With fwait
-                        .Text = "DWSIM"
-                        .Label1.Text = DWSIM.App.GetLocalString("CalculandoFatordeAjuste")
-                        .TopMost = True
-                        .StartPosition = FormStartPosition.CenterScreen
-                    End With
-                    fwait.Show()
                     Try
                         fw = .MinimizeError()
                     Catch ex As Exception
                         MessageBox.Show(ex.Message.ToString, "Error fitting Acentric Factors", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End Try
-                    fwait.Close()
                 End With
                 With c.ConstantProperties
                     c.ConstantProperties.Acentric_Factor *= fw
@@ -639,20 +630,11 @@ Public Class DCCharacterizationWizard
             If Me.CheckBoxADJZRA.Checked Then
                 With dfit
                     ._comp = c
-                    Dim fwait As New FormLS
-                    With fwait
-                        .Text = "DWSIM"
-                        .Label1.Text = DWSIM.App.GetLocalString("CalculandoFatordeAjuste")
-                        .TopMost = True
-                        .StartPosition = FormStartPosition.CenterScreen
-                    End With
-                    fwait.Show()
                     Try
                         fzra = .MinimizeError()
                     Catch ex As Exception
                         MessageBox.Show(ex.Message.ToString, "Error fitting Rackett Parameters", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End Try
-                    fwait.Close()
                 End With
                 With c.ConstantProperties
                     .Z_Rackett *= fzra
