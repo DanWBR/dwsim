@@ -1,6 +1,6 @@
 ﻿Public Class FrmDAVP
 
-    Inherits AttachedUtilityClass
+    Inherits UserControl
 
     Dim vessel As Vessel
     Dim entmat As Streams.MaterialStream

@@ -23,7 +23,7 @@ Imports DWSIM.DrawingTools.GraphicObjects
 
 Public Class FrmColdProperties
 
-    Inherits AttachedUtilityClass
+    Inherits UserControl
 
     Dim mat As Streams.MaterialStream
     Dim frm As FormFlowsheet

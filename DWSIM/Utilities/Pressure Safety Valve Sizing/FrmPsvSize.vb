@@ -3,7 +3,7 @@ Public Delegate Function SFL(ByVal Tref As Double, ByVal S As Double, ByVal P As
 
 Public Class FrmPsvSize
 
-    Inherits AttachedUtilityClass
+    Inherits UserControl
 
     Dim valve As Valve
     Dim entmat As Streams.MaterialStream

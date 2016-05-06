@@ -24,7 +24,7 @@ Imports DWSIM.Thermodynamics.Streams
 
 Public Class FormPureComp
 
-    Inherits AttachedUtilityClass
+    Inherits UserControl
 
     Dim MatStream As Streams.MaterialStream
 

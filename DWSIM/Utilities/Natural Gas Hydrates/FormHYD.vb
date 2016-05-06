@@ -19,7 +19,7 @@ Imports System.Linq
 
 Public Class FormHYD
 
-    Inherits AttachedUtilityClass
+    Inherits UserControl
 
     Public m_aux As DWSIM.Utilities.HYD.AuxMethods
 

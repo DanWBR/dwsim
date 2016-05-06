@@ -22,7 +22,7 @@ Imports DWSIM.Thermodynamics
 
 Public Class FrmCritpt
 
-    Inherits AttachedUtilityClass
+    Inherits UserControl
 
     Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet

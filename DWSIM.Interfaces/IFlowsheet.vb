@@ -52,6 +52,8 @@
 
     Function AddObject(t As Enums.GraphicObjects.ObjectType, xcoord As Integer, ycoord As Integer, tag As String) As ISimulationObject
 
+    Function GetUtility(uttype As Enums.FlowsheetUtility) As IAttachedUtility
+
 End Interface
 
 Public Interface IFlowsheetBag

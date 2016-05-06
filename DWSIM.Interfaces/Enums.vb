@@ -1,5 +1,17 @@
 ﻿Namespace Enums
 
+    Public Enum FlowsheetUtility
+        PhaseEnvelope = 0
+        PhaseEnvelopeBinary = 1
+        PhaseEnvelopeTernary = 2
+        NaturalGasHydrates = 3
+        TrueCriticalPoint = 4
+        PSVSizing = 5
+        SeparatorSizing = 6
+        PetroleumProperties = 7
+        PureCompoundProperties = 8
+    End Enum
+
     Public Enum UnitOfMeasure
 
         accel

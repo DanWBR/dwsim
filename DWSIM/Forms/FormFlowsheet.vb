@@ -2819,4 +2819,28 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
+    Public Function GetUtility(uttype As Enums.FlowsheetUtility) As IAttachedUtility Implements IFlowsheet.GetUtility
+        Select Case uttype
+            Case FlowsheetUtility.NaturalGasHydrates
+                Return New AttachedUtilityClass() With {.InternalUtility = New FormHYD}
+            Case FlowsheetUtility.PetroleumProperties
+                Return New AttachedUtilityClass() With {.InternalUtility = New FrmColdProperties}
+            Case FlowsheetUtility.PhaseEnvelope
+                Return New AttachedUtilityClass() With {.InternalUtility = New FormPhEnv}
+            Case FlowsheetUtility.PhaseEnvelopeBinary
+                Return New AttachedUtilityClass() With {.InternalUtility = New FormBinEnv}
+            Case FlowsheetUtility.PhaseEnvelopeTernary
+                Return New AttachedUtilityClass() With {.InternalUtility = New FormLLEDiagram}
+            Case FlowsheetUtility.PSVSizing
+                Return New AttachedUtilityClass() With {.InternalUtility = New FrmPsvSize}
+            Case FlowsheetUtility.PureCompoundProperties
+                Return New AttachedUtilityClass() With {.InternalUtility = New FormPureComp}
+            Case FlowsheetUtility.SeparatorSizing
+                Return New AttachedUtilityClass() With {.InternalUtility = New FrmDAVP}
+            Case FlowsheetUtility.TrueCriticalPoint
+                Return New AttachedUtilityClass() With {.InternalUtility = New FrmCritpt}
+        End Select
+        Throw New ArgumentException
+    End Function
+
 End Class

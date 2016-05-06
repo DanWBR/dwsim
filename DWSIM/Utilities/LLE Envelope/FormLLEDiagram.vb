@@ -22,7 +22,7 @@ Imports DWSIM.Thermodynamics.Streams
 
 Public Class FormLLEDiagram
 
-    Inherits AttachedUtilityClass
+    Inherits UserControl
 
     Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet

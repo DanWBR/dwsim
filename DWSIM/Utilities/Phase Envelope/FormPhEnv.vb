@@ -19,7 +19,7 @@ Imports System.Linq
 
 Public Class FormPhEnv
 
-    Inherits AttachedUtilityClass
+    Inherits UserControl
 
     Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet

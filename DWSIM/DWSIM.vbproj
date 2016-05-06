@@ -597,7 +597,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utilities\Base Class\AttachedUtilityClass.vb">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utilities\Petroleum Cold Flow Properties\FrmColdProperties.Designer.vb">
       <DependentUpon>FrmColdProperties.vb</DependentUpon>
@@ -1222,6 +1222,9 @@
     <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacSetEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacSetEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\Base Class\AttachedUtilityClass.resx">
+      <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utilities\Binary Envelope\FormBinEnv.en.resx">
       <DependentUpon>FormBinEnv.vb</DependentUpon>
