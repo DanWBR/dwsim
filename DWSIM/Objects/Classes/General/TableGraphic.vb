@@ -45,7 +45,7 @@ Namespace GraphicObjects
         Protected m_IsGradientBg As Boolean = False
 
         Protected m_BorderThickness As Integer = 1
-        Protected m_Padding As Integer = 2
+        Protected m_Padding As Integer = 4
 
         <System.NonSerialized()> Protected m_BorderPen As Drawing.Pen = New Drawing.Pen(Color.Black)
         Protected m_BorderStyle As Drawing2D.DashStyle = DashStyle.Solid
@@ -1333,7 +1333,7 @@ Namespace GraphicObjects
                     If size.Width > maxL1 Then maxL1 = size.Width
                     If size.Height > maxH Then maxH = size.Height
 
-                    Dim props = Owner.GetFlowsheet.FlowsheetOptions.VisibleProperties(Owner.GetType.Name).OrderBy(Function(x) Owner.GetFlowsheet.GetTranslatedString(x))
+                    Dim props = Owner.GetFlowsheet.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
 
                     Dim propstring, propval, propunit As String, pval0 As Object
 

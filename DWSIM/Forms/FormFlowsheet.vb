@@ -968,7 +968,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Dim gObj As GraphicObject = Nothing
         myMasterTable.Flowsheet = Me
         gObj = myMasterTable
-        gObj.Tag = "MASTERTABLE-" & Guid.NewGuid.ToString
+        gObj.Name = "MASTERTABLE-" & Guid.NewGuid.ToString
         gObj.AutoSize = True
         gObj.ObjectType = ObjectType.GO_MasterTable
         Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
@@ -983,7 +983,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Dim gObj As GraphicObject = Nothing
         mySpreadsheetTable.Flowsheet = Me
         gObj = mySpreadsheetTable
-        gObj.Tag = "SHEETTABLE-" & Guid.NewGuid.ToString
+        gObj.Name = "STABLE-" & Guid.NewGuid.ToString
+        gObj.Tag = "Spreadsheet Table"
         gObj.AutoSize = True
         gObj.ObjectType = ObjectType.GO_SpreadsheetTable
         Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
@@ -1305,10 +1306,12 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 If confirmation Then
                     If SelectedObj.ObjectType = ObjectType.GO_Image Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluirafiguraseleci"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                    ElseIf SelectedObj.ObjectType = ObjectType.GO_Table Then
-                        MessageBox.Show(DWSIM.App.GetLocalString("Atabelapodeseroculta") & vbCrLf & DWSIM.App.GetLocalString("doobjetoqualelaperte"), DWSIM.App.GetLocalString("Nopossvelexcluirtabe"), MessageBoxButtons.OK, MessageBoxIcon.Information)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
+                        msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluir") & DirectCast(gobj, MasterTableGraphic).HeaderText & "?", DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    ElseIf SelectedObj.ObjectType = ObjectType.GO_Table Then
+                        msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluir") & DirectCast(gobj, TableGraphic).HeaderText & "?", DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     Else
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluir") & gobj.Tag & "?", DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     End If
@@ -1343,7 +1346,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                         If SelectedObj.ObjectType = ObjectType.GO_Image Then
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Table Then
-                            'Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
@@ -2816,6 +2819,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Dim gObj As GraphicObject = Nothing
         myPropertyTable.Flowsheet = Me
         gObj = myPropertyTable
+        gObj.Name = "PROPERTYTABLE-" & Guid.NewGuid.ToString
         gObj.Tag = "PROPERTYTABLE-" & Guid.NewGuid.ToString
         gObj.AutoSize = True
         Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
