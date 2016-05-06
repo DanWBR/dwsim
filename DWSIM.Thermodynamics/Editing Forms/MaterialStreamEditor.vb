@@ -151,7 +151,11 @@ Public Class MaterialStreamEditor
 
             'annotation
 
-            rtbAnnotations.Rtf = .Annotation
+            Try
+                rtbAnnotations.Rtf = .Annotation
+            Catch ex As Exception
+
+            End Try
 
             btnExpand.Enabled = .Calculated
 
