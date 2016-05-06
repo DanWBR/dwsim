@@ -498,6 +498,10 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 Return "Adiabatic Compressor"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
 End Namespace

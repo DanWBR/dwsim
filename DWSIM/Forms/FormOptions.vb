@@ -64,13 +64,14 @@ Public Class FormOptions
 
         Me.chkconsole.Checked = My.Settings.RedirectOutput
 
-        Me.chkLoadLegacyFiles.Checked = My.Settings.LegacyBinaryFileLoading
-
         Me.chkUpdates.Checked = My.Settings.CheckForUpdates
 
         Me.chkShowWhatsNew.Checked = My.Settings.ShowWhatsNew
 
         Me.cbudb.Checked = My.Settings.ReplaceComps
+
+        cbDefaultLocation.Items.AddRange([Enum].GetNames(FlowsheetSurface.DockState.GetType))
+        cbDefaultLocation.SelectedIndex = My.Settings.DefaultEditorLocation
 
         If TrackBar1.Value = 1 Then
             Me.KryptonLabel3.Text = DWSIM.App.GetLocalString("minuto1")
@@ -88,6 +89,8 @@ Public Class FormOptions
         tbServerPort.Text = My.Settings.ServerPort
         chkSolverBreak.Checked = My.Settings.SolverBreakOnException
         chkStorePreviousSolutions.Checked = My.Settings.StorePreviousSolutions
+
+        chkCloseFormsOnDeselect.Checked = My.Settings.CloseFormsOnDeselecting
 
         'databases
 
@@ -629,10 +632,6 @@ Public Class FormOptions
         My.Settings.SaveBackupFile = chkSaveBackupFile.Checked
     End Sub
 
-    Private Sub chkLoadLegacyFiles_CheckedChanged(sender As Object, e As EventArgs) Handles chkLoadLegacyFiles.CheckedChanged
-        My.Settings.LegacyBinaryFileLoading = Me.chkLoadLegacyFiles.Checked
-    End Sub
-
     Private Sub cbTaskScheduler_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTaskScheduler.SelectedIndexChanged
         If cbTaskScheduler.SelectedIndex = 0 Then tbMaxThreadMultiplier.Enabled = False Else tbMaxThreadMultiplier.Enabled = True
         My.Settings.TaskScheduler = cbTaskScheduler.SelectedIndex
@@ -657,5 +656,14 @@ Public Class FormOptions
 
     Private Sub CheckBoxUndoRedoRecalc_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxUndoRedoRecalc.CheckedChanged
         My.Settings.UndoRedo_RecalculateFlowsheet = CheckBoxUndoRedoRecalc.Checked
+    End Sub
+
+    Private Sub chkCloseFormsOnDeselect_CheckedChanged(sender As Object, e As EventArgs) Handles chkCloseFormsOnDeselect.CheckedChanged
+        My.Settings.CloseFormsOnDeselecting = chkCloseFormsOnDeselect.Checked
+    End Sub
+
+    Private Sub cbDefaultLocation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDefaultLocation.SelectedIndexChanged
+        My.Settings.DefaultEditorLocation = cbDefaultLocation.SelectedIndex
+        GlobalSettings.Settings.DefaultEditFormLocation = cbDefaultLocation.SelectedIndex
     End Sub
 End Class

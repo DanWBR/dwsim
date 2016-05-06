@@ -135,4 +135,6 @@
 
     Function GetDisplayDescription() As String
 
+    Sub CloseEditForm()
+
 End Interface

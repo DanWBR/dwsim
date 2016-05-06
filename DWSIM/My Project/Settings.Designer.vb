@@ -447,18 +447,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property LegacyBinaryFileLoading() As Boolean
-            Get
-                Return CType(Me("LegacyBinaryFileLoading"),Boolean)
-            End Get
-            Set
-                Me("LegacyBinaryFileLoading") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("8")>  _
         Public Property MaxThreadMultiplier() As Integer
             Get
@@ -623,6 +611,30 @@ Namespace My
             End Get
             Set
                 Me("Setting") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CloseFormsOnDeselecting() As Boolean
+            Get
+                Return CType(Me("CloseFormsOnDeselecting"),Boolean)
+            End Get
+            Set
+                Me("CloseFormsOnDeselecting") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property DefaultEditorLocation() As Integer
+            Get
+                Return CType(Me("DefaultEditorLocation"),Integer)
+            End Get
+            Set
+                Me("DefaultEditorLocation") = value
             End Set
         End Property
     End Class

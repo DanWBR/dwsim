@@ -11,6 +11,8 @@ Public Class EditingForm_Mixer
 
     Private Sub EF_Mixer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+
         UpdateInfo()
 
     End Sub

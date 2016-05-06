@@ -711,6 +711,10 @@ Namespace UnitOperations
                 Return "Spreadsheet"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
 End Namespace

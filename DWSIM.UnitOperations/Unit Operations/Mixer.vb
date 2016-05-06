@@ -248,6 +248,15 @@ Namespace UnitOperations
                 Return "Stream Mixer"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
+        End Sub
     End Class
 
 End Namespace

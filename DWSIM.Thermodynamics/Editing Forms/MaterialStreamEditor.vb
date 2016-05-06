@@ -15,6 +15,8 @@ Public Class MaterialStreamEditor
 
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+
         Me.Width = 427
         If Me.DockPanel IsNot Nothing Then Me.DockPanel.DockLeftPortion = 420
 

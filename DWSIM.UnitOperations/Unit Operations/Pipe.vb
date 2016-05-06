@@ -1579,6 +1579,10 @@ Final3:     T = bbb
                 Return "Piping Segment"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
 End Namespace

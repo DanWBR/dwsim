@@ -647,6 +647,10 @@ restart:    B = F - D
                 Return "Shortcut Column"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
 End Namespace

@@ -530,6 +530,8 @@ Namespace UnitOperations
 
 #End Region
 
+        Public MustOverride Sub CloseEditForm() Implements ISimulationObject.CloseEditForm
+
     End Class
 
     <System.Serializable()> <ComVisible(True)> Public MustInherit Class UnitOpBaseClass

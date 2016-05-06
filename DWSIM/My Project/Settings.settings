@@ -101,9 +101,6 @@
     <Setting Name="SaveBackupFile" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="LegacyBinaryFileLoading" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="MaxThreadMultiplier" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8</Value>
     </Setting>
@@ -146,6 +143,12 @@
     </Setting>
     <Setting Name="Setting" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CloseFormsOnDeselecting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DefaultEditorLocation" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -595,6 +595,10 @@ Namespace Reactors
                 Return "Conversion Reactor"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
 End Namespace

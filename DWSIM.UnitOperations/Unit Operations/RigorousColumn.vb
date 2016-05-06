@@ -919,6 +919,10 @@ Namespace UnitOperations
                 Return "Distillation Column"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
     <Serializable()> Public Class AbsorptionColumn
@@ -1075,6 +1079,10 @@ Namespace UnitOperations
                 Return "Absorption Column"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
     <Serializable()> Public Class ReboiledAbsorber
@@ -1226,6 +1234,10 @@ Namespace UnitOperations
                 Return "Reboiled Absorber"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
     <Serializable()> Public Class RefluxedAbsorber
@@ -1383,6 +1395,10 @@ Namespace UnitOperations
                 Return "Refluxed Absorber"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
     <System.Serializable()> Public MustInherit Class Column

@@ -1181,6 +1181,10 @@ Namespace Reactors
                 Return "Equilibrium Reactor"
             End If
         End Function
+
+        Public Overrides Sub CloseEditForm()
+
+        End Sub
     End Class
 
 End Namespace

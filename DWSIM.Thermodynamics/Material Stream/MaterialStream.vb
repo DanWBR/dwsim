@@ -5073,6 +5073,14 @@ Namespace Streams
             Return New String() {"PROP_MS_0", "PROP_MS_1", "PROP_MS_2", "PROP_MS_3", "PROP_MS_4"}
         End Function
 
+        Public Overrides Sub CloseEditForm()
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
+        End Sub
     End Class
 
 End Namespace

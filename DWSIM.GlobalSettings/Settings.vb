@@ -30,6 +30,8 @@ Public Class Settings
     Public Shared Property ServerPort As Integer
     Public Shared Property CurrentCulture As String = "en"
 
+    Public Shared DefaultEditFormLocation As Integer = 3
+
 End Class
 
 
