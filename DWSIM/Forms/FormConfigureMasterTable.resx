@@ -145,8 +145,8 @@
   <data name="lvObjects.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;cbObjectType.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="cbObjectType.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -157,6 +157,9 @@
   </data>
   <data name="&gt;&gt;lvProps.Name" xml:space="preserve">
     <value>lvProps</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormConfigureMasterTable</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -219,11 +222,14 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;cbObjectType.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;lvProps.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lvObjects.Name" xml:space="preserve">
+    <value>lvObjects</value>
   </data>
   <data name="&gt;&gt;lvObjects.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -297,20 +303,14 @@
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 82</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;lvObjects.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormConfigureMasterTable</value>
-  </data>
-  <data name="cbOrderBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>454, 44</value>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -327,8 +327,8 @@
   <data name="&gt;&gt;cbObjectType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lvObjects.Name" xml:space="preserve">
-    <value>lvObjects</value>
+  <data name="cbOrderBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>454, 44</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 13</value>
