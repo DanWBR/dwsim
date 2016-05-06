@@ -113,6 +113,7 @@
     <Compile Include="Editing Forms\MaterialStreamEditor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Interface\Thermodynamics.vb" />
     <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />

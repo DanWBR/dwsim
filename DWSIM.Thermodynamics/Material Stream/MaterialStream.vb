@@ -5083,6 +5083,42 @@ Namespace Streams
                 End If
             End If
         End Sub
+
+        Public Sub CalcPhaseMassComposition(dwp As PropertyPackages.Phase)
+    
+            Dim idx As Integer = 0
+
+            Select Case dwp
+                Case PropertyPackages.Phase.Aqueous
+                    idx = 2
+                Case PropertyPackages.Phase.Liquid
+                    idx = 1
+                Case PropertyPackages.Phase.Liquid1
+                    idx = 3
+                Case PropertyPackages.Phase.Liquid2
+                    idx = 4
+                Case PropertyPackages.Phase.Liquid3
+                    idx = 5
+                Case PropertyPackages.Phase.Mixture
+                    idx = 0
+                Case PropertyPackages.Phase.Solid
+                    idx = 7
+                Case PropertyPackages.Phase.Vapor
+                    idx = 2
+            End Select
+
+            Dim mol_x_mm As Double
+
+            For Each sub1 In Phases(idx).Compounds.Values
+                mol_x_mm += sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight
+            Next
+
+            For Each sub1 In Phases(idx).Compounds.Values
+                sub1.MassFraction = sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight / mol_x_mm
+            Next
+
+        End Sub
+
     End Class
 
 End Namespace
