@@ -149,6 +149,21 @@ Namespace DWSIM.Flowsheet
 
             If Not el Is Nothing Then Me.ThreePhaseFlashStabTestCompIds = el.Value.Split(",")
 
+            el = (From xel As XElement In data Select xel Where xel.Name = "VisibleProperties").SingleOrDefault
+
+            If Not el Is Nothing Then
+
+                VisibleProperties.Clear()
+
+                For Each xel2 As XElement In el.Elements
+                    VisibleProperties.Add(xel2.@Value, New List(Of String))
+                    For Each xel3 In xel2.Elements
+                        VisibleProperties(xel2.@Value).Add(xel3.@Value)
+                    Next
+                Next
+
+            End If
+
             Return XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
 
         End Function
@@ -164,6 +179,17 @@ Namespace DWSIM.Flowsheet
                 comps = comps.Remove(comps.Length - 1, 1)
                 elements.Add(New XElement("ThreePhaseFlashStabTestCompIds", comps))
             End If
+
+            elements.Add(New XElement("VisibleProperties"))
+
+            For Each item In VisibleProperties
+                Dim xel2 = New XElement("ObjectType", New XAttribute("Value", item.Key))
+                elements(elements.Count - 1).Add(xel2)
+                For Each item2 In item.Value
+                    xel2.Add(New XElement("PropertyID", New XAttribute("Value", item2)))
+                Next
+            Next
+
             Return elements
 
         End Function
