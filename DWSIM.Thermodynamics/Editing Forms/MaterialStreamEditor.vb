@@ -959,4 +959,7 @@ Public Class MaterialStreamEditor
 
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnUtils.Click
+        UtilitiesCtxMenu.Show(btnUtils, New Drawing.Point(20, 0))
+    End Sub
 End Class

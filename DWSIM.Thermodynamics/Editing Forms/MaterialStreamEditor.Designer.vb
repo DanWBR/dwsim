@@ -39,6 +39,7 @@ Partial Class MaterialStreamEditor
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.btnUtils = New System.Windows.Forms.Button()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.lblConnectedTo = New System.Windows.Forms.Label()
@@ -99,6 +100,15 @@ Partial Class MaterialStreamEditor
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbSpec = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.UtilitiesCtxMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddUtilityTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DiagramaDeFasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DiagramaDeFasesBinárioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DiagramaDeFasesLLEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PropriedadesDePetróleoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HidratosDeGásNaturalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PontoCríticoVerdadeiroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -172,6 +182,7 @@ Partial Class MaterialStreamEditor
         Me.GroupBoxInput.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.gridInputComposition, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.UtilitiesCtxMenu.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -216,6 +227,7 @@ Partial Class MaterialStreamEditor
         'GroupBox5
         '
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
+        Me.GroupBox5.Controls.Add(Me.btnUtils)
         Me.GroupBox5.Controls.Add(Me.lblTag)
         Me.GroupBox5.Controls.Add(Me.chkActive)
         Me.GroupBox5.Controls.Add(Me.lblConnectedTo)
@@ -226,6 +238,14 @@ Partial Class MaterialStreamEditor
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
+        '
+        'btnUtils
+        '
+        resources.ApplyResources(Me.btnUtils, "btnUtils")
+        Me.btnUtils.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_sparkle
+        Me.btnUtils.Name = "btnUtils"
+        Me.ToolTip1.SetToolTip(Me.btnUtils, resources.GetString("btnUtils.ToolTip"))
+        Me.btnUtils.UseVisualStyleBackColor = True
         '
         'lblTag
         '
@@ -697,6 +717,61 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
         Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
+        '
+        'UtilitiesCtxMenu
+        '
+        resources.ApplyResources(Me.UtilitiesCtxMenu, "UtilitiesCtxMenu")
+        Me.UtilitiesCtxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUtilityTSMI, Me.ToolStripSeparator1})
+        Me.UtilitiesCtxMenu.Name = "ContextMenuStrip1"
+        Me.ToolTip1.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip"))
+        '
+        'AddUtilityTSMI
+        '
+        resources.ApplyResources(Me.AddUtilityTSMI, "AddUtilityTSMI")
+        Me.AddUtilityTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DiagramaDeFasesToolStripMenuItem, Me.DiagramaDeFasesBinárioToolStripMenuItem, Me.DiagramaDeFasesLLEToolStripMenuItem, Me.PropriedadesDePetróleoToolStripMenuItem, Me.HidratosDeGásNaturalToolStripMenuItem, Me.PontoCríticoVerdadeiroToolStripMenuItem})
+        Me.AddUtilityTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.add
+        Me.AddUtilityTSMI.Name = "AddUtilityTSMI"
+        '
+        'DiagramaDeFasesToolStripMenuItem
+        '
+        resources.ApplyResources(Me.DiagramaDeFasesToolStripMenuItem, "DiagramaDeFasesToolStripMenuItem")
+        Me.DiagramaDeFasesToolStripMenuItem.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
+        Me.DiagramaDeFasesToolStripMenuItem.Name = "DiagramaDeFasesToolStripMenuItem"
+        '
+        'DiagramaDeFasesBinárioToolStripMenuItem
+        '
+        resources.ApplyResources(Me.DiagramaDeFasesBinárioToolStripMenuItem, "DiagramaDeFasesBinárioToolStripMenuItem")
+        Me.DiagramaDeFasesBinárioToolStripMenuItem.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
+        Me.DiagramaDeFasesBinárioToolStripMenuItem.Name = "DiagramaDeFasesBinárioToolStripMenuItem"
+        '
+        'DiagramaDeFasesLLEToolStripMenuItem
+        '
+        resources.ApplyResources(Me.DiagramaDeFasesLLEToolStripMenuItem, "DiagramaDeFasesLLEToolStripMenuItem")
+        Me.DiagramaDeFasesLLEToolStripMenuItem.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
+        Me.DiagramaDeFasesLLEToolStripMenuItem.Name = "DiagramaDeFasesLLEToolStripMenuItem"
+        '
+        'PropriedadesDePetróleoToolStripMenuItem
+        '
+        resources.ApplyResources(Me.PropriedadesDePetróleoToolStripMenuItem, "PropriedadesDePetróleoToolStripMenuItem")
+        Me.PropriedadesDePetróleoToolStripMenuItem.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
+        Me.PropriedadesDePetróleoToolStripMenuItem.Name = "PropriedadesDePetróleoToolStripMenuItem"
+        '
+        'HidratosDeGásNaturalToolStripMenuItem
+        '
+        resources.ApplyResources(Me.HidratosDeGásNaturalToolStripMenuItem, "HidratosDeGásNaturalToolStripMenuItem")
+        Me.HidratosDeGásNaturalToolStripMenuItem.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
+        Me.HidratosDeGásNaturalToolStripMenuItem.Name = "HidratosDeGásNaturalToolStripMenuItem"
+        '
+        'PontoCríticoVerdadeiroToolStripMenuItem
+        '
+        resources.ApplyResources(Me.PontoCríticoVerdadeiroToolStripMenuItem, "PontoCríticoVerdadeiroToolStripMenuItem")
+        Me.PontoCríticoVerdadeiroToolStripMenuItem.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
+        Me.PontoCríticoVerdadeiroToolStripMenuItem.Name = "PontoCríticoVerdadeiroToolStripMenuItem"
+        '
+        'ToolStripSeparator1
+        '
+        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         '
         'GroupBox4
         '
@@ -1243,51 +1318,52 @@ Partial Class MaterialStreamEditor
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.Panel1.ResumeLayout(False)
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBoxInput.ResumeLayout(False)
-        Me.GroupBoxInput.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
-        CType(Me.gridInputComposition, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox7.ResumeLayout(False)
-        Me.TabControl1.ResumeLayout(False)
-        Me.tabPropsMix.ResumeLayout(False)
-        CType(Me.gridPropertiesMixture, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabPropsVapor.ResumeLayout(False)
-        CType(Me.gridPropertiesVapor, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabPropsLiqMix.ResumeLayout(False)
-        CType(Me.gridPropertiesLiqMix, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabPropsLiq1.ResumeLayout(False)
-        CType(Me.gridPropertiesLiq1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabPropsLiq2.ResumeLayout(False)
-        CType(Me.gridPropertiesLiq2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabPropsSolid.ResumeLayout(False)
-        CType(Me.gridPropertiesSolid, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
-        Me.TabControl2.ResumeLayout(False)
-        Me.tabCompMix.ResumeLayout(False)
-        CType(Me.gridCompMixture, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabCompVapor.ResumeLayout(False)
-        CType(Me.gridCompVapor, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabCompLiqMix.ResumeLayout(False)
-        CType(Me.gridCompLiqMix, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabCompLiq1.ResumeLayout(False)
-        CType(Me.gridCompLiq1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabCompLiq2.ResumeLayout(False)
-        CType(Me.gridCompLiq2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabCompSolid.ResumeLayout(False)
-        CType(Me.gridCompSolid, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.GroupBox5.ResumeLayout(false)
+        Me.GroupBox5.PerformLayout
+        Me.GroupBox1.ResumeLayout(false)
+        Me.GroupBox1.PerformLayout
+        Me.GroupBox3.ResumeLayout(false)
+        Me.GroupBox3.PerformLayout
+        Me.GroupBoxInput.ResumeLayout(false)
+        Me.GroupBoxInput.PerformLayout
+        Me.GroupBox6.ResumeLayout(false)
+        Me.GroupBox6.PerformLayout
+        CType(Me.gridInputComposition,System.ComponentModel.ISupportInitialize).EndInit
+        Me.UtilitiesCtxMenu.ResumeLayout(false)
+        Me.GroupBox4.ResumeLayout(false)
+        Me.GroupBox7.ResumeLayout(false)
+        Me.TabControl1.ResumeLayout(false)
+        Me.tabPropsMix.ResumeLayout(false)
+        CType(Me.gridPropertiesMixture,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPropsVapor.ResumeLayout(false)
+        CType(Me.gridPropertiesVapor,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPropsLiqMix.ResumeLayout(false)
+        CType(Me.gridPropertiesLiqMix,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPropsLiq1.ResumeLayout(false)
+        CType(Me.gridPropertiesLiq1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPropsLiq2.ResumeLayout(false)
+        CType(Me.gridPropertiesLiq2,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabPropsSolid.ResumeLayout(false)
+        CType(Me.gridPropertiesSolid,System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox8.ResumeLayout(false)
+        Me.GroupBox8.PerformLayout
+        Me.TabControl2.ResumeLayout(false)
+        Me.tabCompMix.ResumeLayout(false)
+        CType(Me.gridCompMixture,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabCompVapor.ResumeLayout(false)
+        CType(Me.gridCompVapor,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabCompLiqMix.ResumeLayout(false)
+        CType(Me.gridCompLiqMix,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabCompLiq1.ResumeLayout(false)
+        CType(Me.gridCompLiq1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabCompLiq2.ResumeLayout(false)
+        CType(Me.gridCompLiq2,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabCompSolid.ResumeLayout(false)
+        CType(Me.gridCompSolid,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
@@ -1418,4 +1494,14 @@ Partial Class MaterialStreamEditor
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents btnCompAcceptChanges As System.Windows.Forms.Button
     Friend WithEvents lblAmountTotal As System.Windows.Forms.Label
+    Friend WithEvents UtilitiesCtxMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents AddUtilityTSMI As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents DiagramaDeFasesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DiagramaDeFasesBinárioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DiagramaDeFasesLLEToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PropriedadesDePetróleoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HidratosDeGásNaturalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PontoCríticoVerdadeiroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnUtils As System.Windows.Forms.Button
 End Class

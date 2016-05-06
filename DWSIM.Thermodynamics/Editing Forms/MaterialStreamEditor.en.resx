@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnUtils.ToolTip" xml:space="preserve">
+    <value>Attach/View Attached Utilities</value>
+  </data>
   <data name="lblTag.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -497,6 +500,57 @@
     <value />
   </data>
   <data name="Panel1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DiagramaDeFasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="DiagramaDeFasesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Phase Envelope</value>
+  </data>
+  <data name="DiagramaDeFasesBinárioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="DiagramaDeFasesBinárioToolStripMenuItem.Text" xml:space="preserve">
+    <value>Binary Envelope (VLE/VLLE/SLE)</value>
+  </data>
+  <data name="DiagramaDeFasesLLEToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="DiagramaDeFasesLLEToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ternary Envelope (LLE)</value>
+  </data>
+  <data name="PropriedadesDePetróleoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="PropriedadesDePetróleoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Petroleum Properties</value>
+  </data>
+  <data name="HidratosDeGásNaturalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="HidratosDeGásNaturalToolStripMenuItem.Text" xml:space="preserve">
+    <value>Natural Gas Hydrates</value>
+  </data>
+  <data name="PontoCríticoVerdadeiroToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="PontoCríticoVerdadeiroToolStripMenuItem.Text" xml:space="preserve">
+    <value>True Critical Point</value>
+  </data>
+  <data name="AddUtilityTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="AddUtilityTSMI.Text" xml:space="preserve">
+    <value>Attach Utility</value>
+  </data>
+  <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 6</value>
+  </data>
+  <data name="UtilitiesCtxMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 32</value>
+  </data>
+  <data name="UtilitiesCtxMenu.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="rtbAnnotations.ToolTip" xml:space="preserve">
