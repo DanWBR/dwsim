@@ -2613,10 +2613,9 @@ Public Class FlowsheetSurface
         End Select
 
         If Not gObj Is Nothing Then
+            gObj.Owner = Me.Flowsheet.SimulationObjects(gObj.Name)
             Me.Flowsheet.SimulationObjects(gObj.Name).SetFlowsheet(Flowsheet)
             Me.FlowsheetDesignSurface.drawingObjects.Add(gObj)
-            'gObj.Draw(Me.FlowsheetDesignSurface.CreateGraphics)
-            'Me.FlowsheetDesignSurface.SelectedObject = gObj
             Me.FlowsheetDesignSurface.Invalidate()
             Application.DoEvents()
             If My.Application.PushUndoRedoAction Then Flowsheet.AddUndoRedoAction(New DWSIM.Flowsheet.UndoRedoAction() With {.AType = DWSIM.Flowsheet.UndoRedoActionType.ObjectAdded,

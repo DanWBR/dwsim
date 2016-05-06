@@ -3847,7 +3847,7 @@
     <value>Visc 2</value>
   </data>
   <data name="Viscosidadecinemtica" xml:space="preserve">
-    <value>Kinematic viscosity</value>
+    <value>Kinematic Viscosity</value>
   </data>
   <data name="Viscosidadecinemtica1" xml:space="preserve">
     <value>Kinematic viscosity (Vapor Phase)</value>
@@ -3859,7 +3859,7 @@
     <value>Kinematic viscosity (Liquid Phase)</value>
   </data>
   <data name="Viscosidadedinmica" xml:space="preserve">
-    <value>Dynamic viscosity</value>
+    <value>Dynamic Viscosity</value>
   </data>
   <data name="ViscosidadeDinmica1" xml:space="preserve">
     <value>Dynamic Viscosity</value>
