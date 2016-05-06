@@ -863,10 +863,14 @@ Public Class FormMain
                         objcount = (From go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects Select go Where go.Tag.Equals(obj.Tag)).Count
                         If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     End If
-                    If Not TypeOf obj Is TableGraphic Then
-                        obj.CreateConnectors(0, 0)
-                    Else
+                    If TypeOf obj Is TableGraphic Then
                         DirectCast(obj, TableGraphic).Flowsheet = form
+                    ElseIf TypeOf obj Is MasterTableGraphic Then
+                        DirectCast(obj, MasterTableGraphic).Flowsheet = form
+                    ElseIf TypeOf obj Is SpreadsheetTableGraphic Then
+                        DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = form
+                    Else
+                        obj.CreateConnectors(0, 0)
                     End If
                     form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
                     form.Collections.GraphicObjectCollection.Add(obj.Name, obj)

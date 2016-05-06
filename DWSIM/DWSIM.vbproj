@@ -353,6 +353,18 @@
     <Compile Include="Forms\FormAdditionalTasks.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormConfigureMasterTable.Designer.vb">
+      <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormConfigureMasterTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormConfigureSpreadsheetTable.Designer.vb">
+      <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormConfigureSpreadsheetTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormConfigWizard.Designer.vb">
       <DependentUpon>FormConfigWizard.vb</DependentUpon>
     </Compile>
@@ -820,6 +832,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCompoundCreator.es.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureMasterTable.resx">
+      <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.en.resx">
+      <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.resx">
+      <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigWizard.de.resx">
       <DependentUpon>FormConfigWizard.vb</DependentUpon>

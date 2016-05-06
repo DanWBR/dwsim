@@ -62,6 +62,8 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
         Protected m_items As Dictionary(Of String, List(Of DWSIM.Extras.NodeItem))
 
+        <Xml.Serialization.XmlIgnore> Public Property Flowsheet As Interfaces.IFlowsheet
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
@@ -550,139 +552,147 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
                 .Alignment = StringAlignment.Far
             End With
 
-            'determinar comprimento das colunas e altura das linhas
-            maxL1 = 0
-            maxL3 = 0
-            maxH = 0
-            Dim size As SizeF
-            Dim ni As NodeItem
-            If Not m_items Is Nothing Then
-                i = 0
-                If Not m_sortedlist Is Nothing Then
-                    For Each s As String In m_sortedlist
-                        maxL2(i) = 0
-                        count = 1
-                        For Each ni In m_items(s)
-                            size = g.MeasureString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-                            If size.Width > maxL1 Then maxL1 = size.Width
-                            If size.Height > maxH Then maxH = size.Height
-                            size = g.MeasureString(ni.Value, Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-                            If size.Width > maxL2(i) Then maxL2(i) = size.Width
-                            If size.Height > maxH Then maxH = size.Height
-                            size = g.MeasureString(ni.Unit, Me.FontCol3, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-                            If size.Width > maxL3 Then maxL3 = size.Width
-                            If size.Height > maxH Then maxH = size.Height
-                            count += 1
+            If SortedList.Count > 0 Then
+
+                'determinar comprimento das colunas e altura das linhas
+                maxL1 = 0
+                maxL3 = 0
+                maxH = 0
+                Dim size As SizeF
+                Dim ni As NodeItem
+                If Not m_items Is Nothing Then
+                    i = 0
+                    If Not m_sortedlist Is Nothing Then
+                        For Each s As String In m_sortedlist
+                            maxL2(i) = 0
+                            count = 1
+                            For Each ni In m_items(s)
+                                size = g.MeasureString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                                If size.Width > maxL1 Then maxL1 = size.Width
+                                If size.Height > maxH Then maxH = size.Height
+                                size = g.MeasureString(ni.Value, Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                                If size.Width > maxL2(i) Then maxL2(i) = size.Width
+                                If size.Height > maxH Then maxH = size.Height
+                                size = g.MeasureString(ni.Unit, Me.FontCol3, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                                If size.Width > maxL3 Then maxL3 = size.Width
+                                If size.Height > maxH Then maxH = size.Height
+                                count += 1
+                            Next
+                            i += 1
                         Next
-                        i += 1
-                    Next
+                    Else
+                        For Each s As String In m_items.Keys
+                            maxL2(i) = 0
+                            count = 1
+                            For Each ni In m_items(s)
+                                size = g.MeasureString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                                If size.Width > maxL1 Then maxL1 = size.Width
+                                If size.Height > maxH Then maxH = size.Height
+                                size = g.MeasureString(ni.Value, Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
+                                If size.Width > maxL2(i) Then maxL2(i) = size.Width
+                                If size.Height > maxH Then maxH = size.Height
+                                size = g.MeasureString(ni.Unit, Me.FontCol3, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                                If size.Width > maxL3 Then maxL3 = size.Width
+                                If size.Height > maxH Then maxH = size.Height
+                                count += 1
+                            Next
+                            i += 1
+                        Next
+                    End If
                 Else
-                    For Each s As String In m_items.Keys
-                        maxL2(i) = 0
-                        count = 1
-                        For Each ni In m_items(s)
-                            size = g.MeasureString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-                            If size.Width > maxL1 Then maxL1 = size.Width
-                            If size.Height > maxH Then maxH = size.Height
-                            size = g.MeasureString(ni.Value, Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
-                            If size.Width > maxL2(i) Then maxL2(i) = size.Width
-                            If size.Height > maxH Then maxH = size.Height
-                            size = g.MeasureString(ni.Unit, Me.FontCol3, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-                            If size.Width > maxL3 Then maxL3 = size.Width
-                            If size.Height > maxH Then maxH = size.Height
-                            count += 1
-                        Next
-                        i += 1
-                    Next
+
                 End If
-            Else
 
-            End If
-            'size = g.MeasureString(Me.HeaderText, Me.HeaderFont, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-            'If size.Width > maxL1 Then maxL1 = size.Width
-            'If size.Height > maxH Then maxH = size.Height
-
-            Me.Height = (count) * (maxH + 2 * Me.Padding)
-            If Not m_items Is Nothing Then
-                If maxL2.Length > 0 Then
-                    maxL2a = MathEx.Common.Max(maxL2) + 3 * Padding
-                    Me.Width = (4 + 2 * m_items.Count) * Me.Padding + maxL1 + (k) * maxL2a + maxL3
+                Me.Height = (count) * (maxH + 2 * Me.Padding)
+                If Not m_items Is Nothing Then
+                    If maxL2.Length > 0 Then
+                        maxL2a = MathEx.Common.Max(maxL2) + 3 * Padding
+                        Me.Width = (4 + 2 * m_items.Count) * Me.Padding + maxL1 + (k) * maxL2a + maxL3
+                    Else
+                        Me.Width = 100
+                        maxL2a = 50
+                    End If
                 Else
                     Me.Width = 100
                     maxL2a = 50
                 End If
-            Else
-                Me.Width = 100
-                maxL2a = 50
-            End If
 
-            maxL1 = maxL1 + 2 * Padding
-            maxL3 = maxL3 + 2 * Padding
-            maxH = maxH + 2 * Padding
+                maxL1 = maxL1 + 2 * Padding
+                maxL3 = maxL3 + 2 * Padding
+                maxH = maxH + 2 * Padding
 
-            If m_BorderPen Is Nothing Then m_BorderPen = New Drawing.Pen(Color.FromArgb(iopacity, Color.Black))
+                If m_BorderPen Is Nothing Then m_BorderPen = New Drawing.Pen(Color.FromArgb(iopacity, Color.Black))
 
-            With Me.m_BorderPen
-                .Color = Color.FromArgb(iopacity, Me.BorderColor)
-                .DashStyle = Me.BorderStyle
-            End With
+                With Me.m_BorderPen
+                    .Color = Color.FromArgb(iopacity, Me.BorderColor)
+                    .DashStyle = Me.BorderStyle
+                End With
 
-            If Width = 0 Then Width = 100
-            If Height = 0 Then Height = 100
+                Dim rect As New Rectangle(X, Y, Width, Height)
+                If Me.IsGradientBackground = False Then
+                    g.FillRectangle(New SolidBrush(Color.FromArgb(iopacity, Me.BackgroundColor)), rect)
+                Else
+                    g.FillRectangle(New Drawing2D.LinearGradientBrush(rect, Color.FromArgb(iopacity, Me.BackgroundGradientColor2), Color.FromArgb(iopacity, Me.BackgroundGradientColor1), LinearGradientMode.Vertical), rect)
+                End If
 
-            Dim rect As New Rectangle(X, Y, Width, Height)
-            If Me.IsGradientBackground = False Then
-                g.FillRectangle(New SolidBrush(Color.FromArgb(iopacity, Me.BackgroundColor)), rect)
-            Else
-                g.FillRectangle(New Drawing2D.LinearGradientBrush(rect, Color.FromArgb(iopacity, Me.BackgroundGradientColor2), Color.FromArgb(iopacity, Me.BackgroundGradientColor1), LinearGradientMode.Vertical), rect)
-            End If
-
-            'desenhar textos e retangulos
-            g.DrawString(Me.HeaderText, Me.HeaderFont, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + Padding)
-            If Not m_items Is Nothing Then
-                If maxL2.Length > 0 Then
-                    i = 0
-                    If Not m_sortedlist Is Nothing Then
-                        For Each s As String In m_sortedlist
-                            g.DrawLine(Me.m_BorderPen, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + Height)
-                            n = 1
-                            For Each ni In m_items(s)
-                                If i = 0 Then g.DrawString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
-                                g.DrawString(ni.Value, Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding, format1)
-                                If i = m_items.Count - 1 Then g.DrawString(ni.Unit, Me.FontCol3, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding)
-                                n += 1
+                'desenhar textos e retangulos
+                g.DrawString(Me.HeaderText, Me.HeaderFont, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + Padding)
+                If Not m_items Is Nothing Then
+                    If maxL2.Length > 0 Then
+                        i = 0
+                        If Not m_sortedlist Is Nothing Then
+                            For Each s As String In m_sortedlist
+                                g.DrawLine(Me.m_BorderPen, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + Height)
+                                n = 1
+                                For Each ni In m_items(s)
+                                    If i = 0 Then g.DrawString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
+                                    g.DrawString(ni.Value, Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding, format1)
+                                    If i = m_items.Count - 1 Then g.DrawString(ni.Unit, Me.FontCol3, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding)
+                                    n += 1
+                                Next
+                                i += 1
                             Next
-                            i += 1
-                        Next
-                        For n = 1 To count - 1
-                            g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
-                        Next
+                            For n = 1 To count - 1
+                                g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
+                            Next
+                        Else
+                            For Each s As String In m_items.Keys
+                                g.DrawLine(Me.m_BorderPen, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + Height)
+                                n = 1
+                                For Each ni In m_items(s)
+                                    If i = 0 Then g.DrawString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
+                                    g.DrawString(ni.Value, Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding, format1)
+                                    If i = m_items.Count - 1 Then g.DrawString(ni.Unit, Me.FontCol3, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding)
+                                    n += 1
+                                Next
+                                i += 1
+                            Next
+                            For n = 1 To count - 1
+                                g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
+                            Next
+                        End If
                     Else
-                        For Each s As String In m_items.Keys
-                            g.DrawLine(Me.m_BorderPen, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + Height)
-                            n = 1
-                            For Each ni In m_items(s)
-                                If i = 0 Then g.DrawString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
-                                g.DrawString(ni.Value, Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding, format1)
-                                If i = m_items.Count - 1 Then g.DrawString(ni.Unit, Me.FontCol3, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding)
-                                n += 1
-                            Next
-                            i += 1
-                        Next
-                        For n = 1 To count - 1
-                            g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
-                        Next
+                        Me.Height = 40
                     End If
                 Else
                     Me.Height = 40
                 End If
-            Else
-                Me.Height = 40
-            End If
 
-            g.DrawRectangle(Me.m_BorderPen, New Rectangle(Me.X, Me.Y, Me.Width, Me.Height))
-            'g.DrawLine(Me.m_BorderPen, X, Y + maxH, X + Width, Y + maxH)
-            g.DrawLine(Me.m_BorderPen, X + maxL1, Y + maxH, X + maxL1, Y + Height)
+                g.DrawRectangle(Me.m_BorderPen, New Rectangle(Me.X, Me.Y, Me.Width, Me.Height))
+                'g.DrawLine(Me.m_BorderPen, X, Y + maxH, X + Width, Y + maxH)
+                g.DrawLine(Me.m_BorderPen, X + maxL1, Y + maxH, X + maxL1, Y + Height)
+
+            Else
+
+                Dim Size = g.MeasureString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
+                g.DrawString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + 10, Y + 40, format1)
+
+                Me.Width = 20 + Size.Width
+                Me.Height = 80 + Size.Height
+
+                g.DrawRectangle(Me.m_BorderPen, New Rectangle(X, Y, Width, Height))
+
+            End If
 
             g.EndContainer(gContainer)
 
@@ -1468,6 +1478,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
         Protected m_BorderColor As Color = Color.Black
 
         Protected m_TextRenderStyle As Drawing2D.SmoothingMode = Drawing2D.SmoothingMode.Default
+        <Xml.Serialization.XmlIgnore> Public Property Flowsheet As Interfaces.IFlowsheet
 
         Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
 
@@ -1777,11 +1788,14 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
             Else
 
-                g.DrawString("NO_DATA_TO_SHOW", Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X, Y)
-                Dim size = g.MeasureString("NO_DATA_TO_SHOW", Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                Dim format1 As New StringFormat(StringFormatFlags.NoClip)
+                Dim Size = g.MeasureString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
+                g.DrawString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + 10, Y + 40, format1)
 
-                Me.Height = size.Height
-                Me.Width = size.Width
+                Me.Width = 20 + Size.Width
+                Me.Height = 80 + Size.Height
+
+                g.DrawRectangle(Me.m_BorderPen, New Rectangle(X, Y, Width, Height))
 
             End If
 

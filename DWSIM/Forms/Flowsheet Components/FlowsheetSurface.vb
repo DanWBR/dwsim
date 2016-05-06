@@ -3246,6 +3246,12 @@ Public Class FlowsheetSurface
                 Case ObjectType.GO_Table
                     Dim f As New FormSelectProperties() With {.Table = Me.FlowsheetDesignSurface.SelectedObject}
                     f.ShowDialog(Me)
+                Case ObjectType.GO_SpreadsheetTable
+                    Dim f As New FormConfigureSpreadsheetTable() With {.Table = Me.FlowsheetDesignSurface.SelectedObject}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_MasterTable
+                    Dim f As New FormConfigureMasterTable() With {.Table = Me.FlowsheetDesignSurface.SelectedObject}
+                    f.ShowDialog(Me)
             End Select
         End If
     End Sub

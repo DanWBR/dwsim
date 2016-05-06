@@ -966,6 +966,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Dim myMasterTable As New MasterTableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
         Dim gObj As GraphicObject = Nothing
+        myMasterTable.Flowsheet = Me
         gObj = myMasterTable
         gObj.Tag = "MASTERTABLE-" & Guid.NewGuid.ToString
         gObj.AutoSize = True
@@ -980,6 +981,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
             -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
         Dim gObj As GraphicObject = Nothing
+        mySpreadsheetTable.Flowsheet = Me
         gObj = mySpreadsheetTable
         gObj.Tag = "SHEETTABLE-" & Guid.NewGuid.ToString
         gObj.AutoSize = True
