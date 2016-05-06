@@ -164,6 +164,9 @@ Public Class FormSimulSettings
         aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("ISimulationObject", True) IsNot Nothing, True, False)))
         aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("ISimulationObject", True) IsNot Nothing, True, False)))
 
+        Dim add As Boolean = False
+        If FrmChild.FlowsheetOptions.VisibleProperties.Count = 0 Then add = True
+
         cbObjectType.Items.Clear()
         availableproperties.Clear()
         aTypeRefs.Clear()
@@ -174,6 +177,7 @@ Public Class FormSimulSettings
                 cbObjectType.Items.Add(obj.GetDisplayName)
                 availableproperties.Add(obj.GetDisplayName, obj.GetProperties(PropertyType.ALL))
                 aTypeRefs.Add(obj.GetDisplayName, item.Name)
+                If add Then FrmChild.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
                 obj = Nothing
             End If
         Next

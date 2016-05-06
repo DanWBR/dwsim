@@ -702,8 +702,8 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
         Protected m_Text As String = ""
 
         Protected m_Color_Bg As Color = Drawing.Color.White
-        Protected m_Color_Gradient_1 As Color = Drawing.Color.LightGray
-        Protected m_Color_Gradient_2 As Color = Drawing.Color.WhiteSmoke
+        Protected m_Color_Gradient_1 As Color = Drawing.Color.White
+        Protected m_Color_Gradient_2 As Color = Drawing.Color.White
 
         Protected m_bgOpacity As Integer = 255
 
@@ -712,11 +712,18 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
         Protected m_BorderThickness As Integer = 1
         Protected m_Padding As Integer = 2
 
-        <System.NonSerialized()> Protected m_BorderPen As Drawing.Pen = New Drawing.Pen(Color.Black)
+        <System.NonSerialized()> Protected m_BorderPen As Drawing.Pen = New Drawing.Pen(Color.SteelBlue)
         Protected m_BorderStyle As Drawing2D.DashStyle = DashStyle.Solid
-        Protected m_BorderColor As Color = Color.Black
+
+        Protected m_BorderColor As Color = Color.SteelBlue
+
+        Protected m_FontColor As Color = Color.SteelBlue
 
         Protected m_TextRenderStyle As Drawing2D.SmoothingMode = Drawing2D.SmoothingMode.Default
+
+        Public Property VisibleProperties As New Dictionary(Of String, List(Of String))
+
+        <Xml.Serialization.XmlIgnore> Public Property Flowsheet As Interfaces.IFlowsheet
 
         Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
 
@@ -822,6 +829,15 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             End Set
         End Property
 
+        Public Property FontColor() As System.Drawing.Color
+            Get
+                Return m_FontColor
+            End Get
+            Set(ByVal Value As System.Drawing.Color)
+                m_FontColor = Value
+            End Set
+        End Property
+
         Public Property BackgroundColor() As System.Drawing.Color
             Get
                 Return m_Color_Bg
@@ -915,10 +931,11 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
             If Not Me.TextRenderStyle = -1 Then g.TextRenderingHint = Me.TextRenderStyle
 
-            Dim maxL1, maxL2, maxL3, count As Integer
+            Dim maxL0, maxL1, maxL2, maxL3, count As Integer
             Dim maxH As Integer
 
             'determinar comprimento das colunas e altura das linhas
+            maxL0 = 0
             maxL1 = 0
             maxL2 = 0
             maxL3 = 0
@@ -926,33 +943,50 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             count = 1
             Dim size As SizeF
 
-            'For Each ni In Me.BaseOwner.NodeTableItems.Values
-            '    If ni.Checked = True Then
-            '        If ni.Level = 0 And ni.ParentNode = "" Or ni.Level > 0 And ni.ParentNode <> "" Then
-            '            size = g.MeasureString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-            '            If size.Width > maxL1 Then maxL1 = size.Width
-            '            If size.Height > maxH Then maxH = size.Height
-            '            If Double.TryParse(ni.Value, New Double) Then
-            '                size = g.MeasureString(Format(Convert.ToDouble(ni.Value), Me.BaseOwner.FlowSheet.Options.NumberFormat), Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
-            '            Else
-            '                size = g.MeasureString(ni.Value, Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
-            '            End If
-            '            If size.Width > maxL2 Then maxL2 = size.Width
-            '            If size.Height > maxH Then maxH = size.Height
-            '            size = g.MeasureString(ni.Unit, Me.FontCol3, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-            '            If size.Width > maxL3 Then maxL3 = size.Width
-            '            If size.Height > maxH Then maxH = size.Height
-            '            count += 1
-            '        End If
-            '    End If
-            'Next
+            Dim propstring, propval, propunit As String, pval0 As Object
+
+            For Each item In VisibleProperties
+                For Each value In item.Value
+
+                    size = g.MeasureString(Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag, Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+
+                    If size.Width > maxL0 Then maxL0 = size.Width
+                    If size.Height > maxH Then maxH = size.Height
+
+                    propstring = Me.Flowsheet.GetTranslatedString(value)
+                    pval0 = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyValue(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    If TypeOf pval0 Is Double Then
+                        propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
+                    Else
+                        propval = pval0.ToString
+                    End If
+                    propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+
+                    size = g.MeasureString(DWSIM.App.GetPropertyName(propstring), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                    If size.Width > maxL1 Then maxL1 = size.Width
+                    If size.Height > maxH Then maxH = size.Height
+
+                    size = g.MeasureString(propval, Me.FontCol2, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
+                    If size.Width > maxL2 Then maxL2 = size.Width
+                    If size.Height > maxH Then maxH = size.Height
+
+                    size = g.MeasureString(propunit, Me.FontCol3, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                    If size.Width > maxL3 Then maxL3 = size.Width
+                    If size.Height > maxH Then maxH = size.Height
+
+                    count += 1
+
+                Next
+            Next
+
             size = g.MeasureString(Me.HeaderText, Me.HeaderFont, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-            If size.Width > maxL1 Then maxL1 = size.Width
+            If size.Width > maxL0 Then maxL0 = size.Width
             If size.Height > maxH Then maxH = size.Height
 
             Me.Height = (count) * (maxH + 2 * Me.Padding)
-            Me.Width = 6 * Me.Padding + maxL1 + maxL2 + maxL3
+            Me.Width = 6 * Me.Padding + maxL0 + maxL1 + maxL2 + maxL3
 
+            maxL0 = maxL0 + 2 * Padding
             maxL1 = maxL1 + 2 * Padding
             maxL2 = maxL2 + 2 * Padding
             maxL3 = maxL3 + 2 * Padding
@@ -975,29 +1009,42 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             Dim format1 As New StringFormat(StringFormatFlags.NoClip)
             With format1
                 .Alignment = StringAlignment.Far
-                '.LineAlignment = StringAlignment.Far
             End With
 
             'desenhar textos e retangulos
+
             g.DrawString(Me.HeaderText, Me.HeaderFont, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + Padding)
             Dim n As Integer = 1
-            'For Each ni In Me.BaseOwner.NodeTableItems.Values
-            '    If ni.Checked = True Then
-            '        If ni.Level = 0 And ni.ParentNode = "" Or ni.Level > 0 And ni.ParentNode <> "" Then
-            '            g.DrawString(DWSIM.App.GetPropertyName(ni.Text), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
-            '            If Double.TryParse(ni.Value, New Double) Then
-            '                g.DrawString(Format(Convert.ToDouble(ni.Value), Me.BaseOwner.FlowSheet.Options.NumberFormat), Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2, Y + n * maxH + Padding, format1)
-            '            Else
-            '                g.DrawString(ni.Value, Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2, Y + n * maxH + Padding, format1)
-            '            End If
-            '            g.DrawString(ni.Unit, Me.FontCol3, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2 + Padding, Y + n * maxH + Padding)
-            '            g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
-            '            n += 1
-            '        End If
-            '    End If
-            'Next
+
+            For Each item In VisibleProperties
+                For Each value In item.Value
+
+                   g.DrawString(Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag, Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
+
+                    propstring = Me.Flowsheet.GetTranslatedString(value)
+                    pval0 = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyValue(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    If TypeOf pval0 Is Double Then
+                        propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
+                    Else
+                        propval = pval0.ToString
+                    End If
+                    propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+
+                    g.DrawString(propstring, Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + Padding, Y + n * maxH + Padding)
+
+                    g.DrawString(propval, Me.FontCol2, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2, Y + n * maxH + Padding, format1)
+
+                    g.DrawString(propunit, Me.FontCol3, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + maxL1 + maxL2 + Padding, Y + n * maxH + Padding)
+
+                    g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
+
+                    n += 1
+
+                Next
+            Next
 
             g.DrawRectangle(Me.m_BorderPen, New Rectangle(Me.X, Me.Y, Me.Width, Me.Height))
+            g.DrawLine(Me.m_BorderPen, X + maxL0, Y + maxH, X + maxL0, Y + Height)
             g.DrawLine(Me.m_BorderPen, X + maxL1, Y + maxH, X + maxL1, Y + Height)
             g.DrawLine(Me.m_BorderPen, X + maxL1 + maxL2, Y + maxH, X + maxL1 + maxL2, Y + Height)
 
@@ -1014,20 +1061,24 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
         Protected m_Text As String = ""
 
-        Protected m_Color_Bg As Color = Drawing.Color.Black
+
+        Protected m_Color_Bg As Color = Drawing.Color.White
         Protected m_Color_Gradient_1 As Color = Drawing.Color.White
         Protected m_Color_Gradient_2 As Color = Drawing.Color.White
 
-        Protected m_bgOpacity As Integer = 140
+        Protected m_bgOpacity As Integer = 255
 
-        Protected m_IsGradientBg As Boolean = True
+        Protected m_IsGradientBg As Boolean = False
 
-        Protected m_BorderThickness As Integer = 2
+        Protected m_BorderThickness As Integer = 1
         Protected m_Padding As Integer = 2
 
-        <System.NonSerialized()> Protected m_BorderPen As Drawing.Pen = New Drawing.Pen(Color.RoyalBlue)
+        <System.NonSerialized()> Protected m_BorderPen As Drawing.Pen = New Drawing.Pen(Color.SteelBlue)
         Protected m_BorderStyle As Drawing2D.DashStyle = DashStyle.Solid
-        Protected m_BorderColor As Color = Drawing.Color.RoyalBlue
+
+        Protected m_BorderColor As Color = Color.SteelBlue
+
+        Protected m_FontColor As Color = Color.SteelBlue
 
         Protected m_TextRenderStyle As Drawing2D.SmoothingMode = Drawing2D.SmoothingMode.Default
 
@@ -1099,6 +1150,15 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
             End Set
         End Property
 
+        Public Property FontColor() As System.Drawing.Color
+            Get
+                Return m_FontColor
+            End Get
+            Set(ByVal Value As System.Drawing.Color)
+                m_FontColor = Value
+            End Set
+        End Property
+
         Public Property BackgroundColor() As System.Drawing.Color
             Get
                 Return m_Color_Bg
@@ -1161,6 +1221,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
                 m_IsGradientBg = value
             End Set
         End Property
+
 #End Region
 
         Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)
@@ -1171,15 +1232,11 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
                     Me.Opacity = 225
 
-                    'g.ScaleTransform(1 / Me.AdditionalInfo, 1 / Me.AdditionalInfo)
-
                     Dim gContainer As System.Drawing.Drawing2D.GraphicsContainer
                     Dim myMatrix As Drawing2D.Matrix
                     gContainer = g.BeginContainer()
                     SetQuality(g)
                     myMatrix = g.Transform()
-
-                    'If Not Me.TextRenderStyle = -1 Then g.TextRenderingHint = Me.TextRenderStyle
 
                     Dim maxL1, maxL2, maxL3, count As Integer
                     Dim maxH As Integer
@@ -1189,6 +1246,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
                     g.TextRenderingHint = Text.TextRenderingHint.SystemDefault
 
                     'determinar comprimento das colunas e altura das linhas
+
                     maxL1 = 0
                     maxL2 = 0
                     maxL3 = 0
@@ -1263,37 +1321,32 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
                         .DashStyle = Me.BorderStyle
                     End With
 
+                    'draw shadow
+
                     Dim rect0 As New Rectangle(X + 4, Y + 4, Width, Height)
                     DrawRoundRect(g, Pens.Transparent, rect0.X, rect0.Y, rect0.Width, rect0.Height, 10, New SolidBrush(Color.FromArgb(100, Color.Gray)))
                     g.FillRectangle(New SolidBrush(Color.FromArgb(50, Color.DimGray)), rect0)
                     Me.DrawRoundRect(g, New Pen(Color.Transparent), X + 4, Y + 4, Width, Height, 10, New SolidBrush(Color.FromArgb(50, Color.DimGray)))
 
 
-                    m_Color_Gradient_1 = Color.FromArgb(255, Drawing.Color.White)
-                    m_Color_Gradient_2 = Color.FromArgb(255, Drawing.Color.White) 'Color.FromArgb(255, 29, 80, 132)
-                    Opacity = 255
-
-                    'm_Color_Gradient_1 = Drawing.Color.WhiteSmoke
-                    'm_Color_Gradient_2 = Drawing.Color.Gainsboro
+                    m_Color_Gradient_1 = Color.FromArgb(255, BackgroundGradientColor1)
+                    m_Color_Gradient_2 = Color.FromArgb(255, BackgroundGradientColor2)
 
                     Dim rect As New Rectangle(X, Y, Width, Height)
                     If Me.IsGradientBackground = False Then
-                        'g.FillRectangle(New SolidBrush(Color.FromArgb(Me.Opacity, Me.FillColor)), rect)
-                        DrawRoundRect(g, Pens.Transparent, rect.X, rect.Y, rect.Width, rect.Height, 6, New SolidBrush(Color.FromArgb(Me.Opacity, Me.FillColor)))
+                        DrawRoundRect(g, Pens.Transparent, rect.X, rect.Y, rect.Width, rect.Height, 6, New SolidBrush(Color.FromArgb(Me.Opacity, Me.BackgroundColor)))
                     Else
-                        'g.FillRectangle(New Drawing2D.LinearGradientBrush(rect, Color.FromArgb(Me.Opacity, Me.BackgroundGradientColor1), Color.FromArgb(Me.Opacity, Me.BackgroundGradientColor2), LinearGradientMode.Vertical), rect)
                         DrawRoundRect(g, Pens.Transparent, rect.X, rect.Y, rect.Width, rect.Height, 6, New Drawing2D.LinearGradientBrush(rect, Me.m_Color_Gradient_1, Me.m_Color_Gradient_2, LinearGradientMode.Vertical))
                     End If
 
                     Dim format1 As New StringFormat(StringFormatFlags.NoClip)
                     With format1
                         .Alignment = StringAlignment.Far
-                        '.LineAlignment = StringAlignment.Far
                     End With
 
                     'desenhar textos e retangulos
-                    g.DrawString(Me.Owner.GraphicObject.Tag.ToUpper, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(Color.SteelBlue), X + Padding + 3, Y + Padding)
-                    g.DrawString(DWSIM.App.GetLocalString(Me.Owner.GraphicObject.Description), Me.HeaderFont, New SolidBrush(Color.SteelBlue), X + Padding + 3, Y + maxH)
+                    g.DrawString(Me.Owner.GraphicObject.Tag.ToUpper, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + Padding + 3, Y + Padding)
+                    g.DrawString(DWSIM.App.GetLocalString(Me.Owner.GraphicObject.Description), Me.HeaderFont, New SolidBrush(FontColor), X + Padding + 3, Y + maxH)
                     Dim n As Integer = 1
                     For Each prop In props
                         propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
@@ -1304,22 +1357,18 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
                             propval = pval0.ToString
                         End If
                         propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                        g.DrawString(propstring, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(Color.SteelBlue), X + Padding + 3, Y + (n + 1) * maxH + Padding)
-                        g.DrawString(propval, Me.HeaderFont, New SolidBrush(Color.SteelBlue), X + maxL1 + maxL2 + 3, Y + (n + 1) * maxH + Padding, format1)
-                        g.DrawString(propunit, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(Color.SteelBlue), X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding)
+                        g.DrawString(propstring, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + Padding + 3, Y + (n + 1) * maxH + Padding)
+                        g.DrawString(propval, Me.HeaderFont, New SolidBrush(FontColor), X + maxL1 + maxL2 + 3, Y + (n + 1) * maxH + Padding, format1)
+                        g.DrawString(propunit, New Font(Me.HeaderFont, FontStyle.Bold), New SolidBrush(FontColor), X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding)
                         'g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
                         n += 1
                     Next
 
                     Me.m_BorderPen.Width = 1 / Me.AdditionalInfo
 
-                    'g.DrawRectangle(Me.m_BorderPen, New Rectangle(Me.X, Me.Y, Me.Width, Me.Height))
                     DrawRoundRect(g, Me.m_BorderPen, Me.X, Me.Y, Me.Width, Me.Height, 3, Brushes.Transparent)
-                    'Me.DrawRoundRect(g, Me.m_BorderPen, X, Y, Width, Height, 5, New SolidBrush(Color.FromArgb(Me.Opacity, Color.GhostWhite)))
                     g.DrawLine(Me.m_BorderPen, X + Padding + 3, Y + 2 * maxH - Padding, X + Width - Padding - 3, Y + 2 * maxH - Padding)
-                    'g.DrawLine(Me.m_BorderPen, X + maxL1, Y + maxH, X + maxL1, Y + Height)
-                    'g.DrawLine(Me.m_BorderPen, X + maxL1 + maxL2, Y + maxH, X + maxL1 + maxL2, Y + Height)
-
+                
                     g.EndContainer(gContainer)
 
                 End If

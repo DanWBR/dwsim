@@ -633,7 +633,6 @@
     <Compile Include="Tools\Reaction Subsystem Editors\FormReacSetEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\Classes\General\TreeViewDataAccess.vb" />
     <Compile Include="Tools\Distillation Curve Characterization\DCCharacterizationWizard.Designer.vb">
       <DependentUpon>DCCharacterizationWizard.vb</DependentUpon>
     </Compile>
