@@ -209,10 +209,12 @@ Namespace UnitOperations
 
             If f Is Nothing Then
                 f = New EditingForm_Mixer With {.MixerObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                 Me.FlowSheet.DisplayForm(f)
             Else
                 If f.IsDisposed Then
                     f = New EditingForm_Mixer With {.MixerObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                     Me.FlowSheet.DisplayForm(f)
                 Else
                     f.Select()

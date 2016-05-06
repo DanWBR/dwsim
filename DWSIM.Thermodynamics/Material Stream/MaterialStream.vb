@@ -5029,10 +5029,12 @@ Namespace Streams
 
             If f Is Nothing Then
                 f = New MaterialStreamEditor With {.MatStream = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                 Me.FlowSheet.DisplayForm(f)
             Else
                 If f.IsDisposed Then
                     f = New MaterialStreamEditor With {.MatStream = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                     Me.FlowSheet.DisplayForm(f)
                 Else
                     f.Select()

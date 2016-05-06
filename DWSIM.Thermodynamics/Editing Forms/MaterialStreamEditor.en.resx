@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>General Info</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Connections</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Property Package Settings</value>
+  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
@@ -129,9 +138,6 @@
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
-  </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>General Info</value>
   </data>
   <data name="btnDisconnectO.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -187,9 +193,6 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Upstream</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Connections</value>
-  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Flash Algorithm</value>
   </data>
@@ -198,9 +201,6 @@
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Property Package Settings</value>
   </data>
   <data name="tbFracSpec.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 232</value>
@@ -228,6 +228,9 @@
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Mole Fraction</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Composition</value>
   </data>
   <data name="Button1.ToolTip" xml:space="preserve">
     <value>Discard Changes</value>
@@ -276,9 +279,6 @@
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Basis</value>
-  </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Composition</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
@@ -361,6 +361,12 @@
   <data name="btnExpand.Text" xml:space="preserve">
     <value>Expand &gt;&gt;</value>
   </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Phase Properties</value>
+  </data>
+  <data name="tabPropsMix.Text" xml:space="preserve">
+    <value>Mixture</value>
+  </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>
@@ -370,8 +376,8 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="tabPropsMix.Text" xml:space="preserve">
-    <value>Mixture</value>
+  <data name="tabPropsVapor.Text" xml:space="preserve">
+    <value>Vapor</value>
   </data>
   <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -382,8 +388,8 @@
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="tabPropsVapor.Text" xml:space="preserve">
-    <value>Vapor</value>
+  <data name="tabPropsLiqMix.Text" xml:space="preserve">
+    <value>Overall Liquid</value>
   </data>
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -394,8 +400,8 @@
   <data name="DataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="tabPropsLiqMix.Text" xml:space="preserve">
-    <value>Overall Liquid</value>
+  <data name="tabPropsLiq1.Text" xml:space="preserve">
+    <value>Liquid 1</value>
   </data>
   <data name="DataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -406,8 +412,8 @@
   <data name="DataGridViewTextBoxColumn11.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="tabPropsLiq1.Text" xml:space="preserve">
-    <value>Liquid 1</value>
+  <data name="tabPropsLiq2.Text" xml:space="preserve">
+    <value>Liquid 2</value>
   </data>
   <data name="DataGridViewTextBoxColumn12.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -418,8 +424,8 @@
   <data name="DataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="tabPropsLiq2.Text" xml:space="preserve">
-    <value>Liquid 2</value>
+  <data name="tabPropsSolid.Text" xml:space="preserve">
+    <value>Solid</value>
   </data>
   <data name="DataGridViewTextBoxColumn15.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -430,11 +436,8 @@
   <data name="DataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="tabPropsSolid.Text" xml:space="preserve">
-    <value>Solid</value>
-  </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Phase Properties</value>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Phase Composition</value>
   </data>
   <data name="cbCalculatedAmountsBasis.Items" xml:space="preserve">
     <value>Mole Fractions</value>
@@ -463,14 +466,17 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Basis</value>
   </data>
+  <data name="tabCompMix.Text" xml:space="preserve">
+    <value>Mixture</value>
+  </data>
   <data name="DataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
     <value>Compound</value>
   </data>
   <data name="DataGridViewTextBoxColumn19.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="tabCompMix.Text" xml:space="preserve">
-    <value>Mixture</value>
+  <data name="tabCompVapor.Text" xml:space="preserve">
+    <value>Vapor</value>
   </data>
   <data name="DataGridViewTextBoxColumn20.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -478,8 +484,8 @@
   <data name="DataGridViewTextBoxColumn21.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="tabCompVapor.Text" xml:space="preserve">
-    <value>Vapor</value>
+  <data name="tabCompLiqMix.Text" xml:space="preserve">
+    <value>Overall Liquid</value>
   </data>
   <data name="DataGridViewTextBoxColumn22.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -487,8 +493,8 @@
   <data name="DataGridViewTextBoxColumn23.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="tabCompLiqMix.Text" xml:space="preserve">
-    <value>Overall Liquid</value>
+  <data name="tabCompLiq1.Text" xml:space="preserve">
+    <value>Liquid 1</value>
   </data>
   <data name="DataGridViewTextBoxColumn24.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -496,8 +502,8 @@
   <data name="DataGridViewTextBoxColumn25.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="tabCompLiq1.Text" xml:space="preserve">
-    <value>Liquid 1</value>
+  <data name="tabCompLiq2.Text" xml:space="preserve">
+    <value>Liquid 2</value>
   </data>
   <data name="DataGridViewTextBoxColumn26.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -505,8 +511,8 @@
   <data name="DataGridViewTextBoxColumn27.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="tabCompLiq2.Text" xml:space="preserve">
-    <value>Liquid 2</value>
+  <data name="tabCompSolid.Text" xml:space="preserve">
+    <value>Solid</value>
   </data>
   <data name="DataGridViewTextBoxColumn28.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -514,10 +520,8 @@
   <data name="DataGridViewTextBoxColumn29.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="tabCompSolid.Text" xml:space="preserve">
-    <value>Solid</value>
-  </data>
-  <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Phase Composition</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
 </root>

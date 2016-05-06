@@ -15,10 +15,7 @@ Public Class MaterialStreamEditor
 
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
-
-        Me.Width = 427
-        If Me.DockPanel IsNot Nothing Then Me.DockPanel.DockLeftPortion = 420
+        Me.Width = 420
 
         units = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         nf = MatStream.FlowSheet.FlowsheetOptions.NumberFormat
@@ -326,9 +323,15 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub btnExpand_CheckedChanged(sender As Object, e As EventArgs) Handles btnExpand.CheckedChanged
-        If btnExpand.Checked Then Me.Width = 859 Else Me.Width = 427
+        If btnExpand.Checked Then Me.Width = 860 Else Me.Width = 428
         If Me.DockPanel IsNot Nothing Then
-            If btnExpand.Checked Then Me.DockPanel.DockLeftPortion = 850 Else Me.DockPanel.DockLeftPortion = 414
+            If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeftAutoHide Or
+                     Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide Then
+                If btnExpand.Checked Then Me.AutoHidePortion = 850 Else Me.AutoHidePortion = 414
+            ElseIf Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft Or
+                     Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight Then
+                If btnExpand.Checked Then Me.DockPanel.DockLeftPortion = 850 Else Me.DockPanel.DockLeftPortion = 414
+            End If
         End If
     End Sub
 

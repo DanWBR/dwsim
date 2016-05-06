@@ -2754,13 +2754,14 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public Sub DisplayForm(form As Object) Implements IFlowsheet.DisplayForm
         Dim cnt = TryCast(form, DockContent)
         If Not cnt Is Nothing Then
-            cnt.Show(Me.dckPanel)
             If cnt.ShowHint = DockState.DockLeft Or cnt.ShowHint = DockState.DockLeftAutoHide Then
                 dckPanel.DockLeftPortion = cnt.Width
-            End If
-            If cnt.ShowHint = DockState.DockRight Or cnt.ShowHint = DockState.DockRightAutoHide Then
+            ElseIf cnt.ShowHint = DockState.DockRight Or cnt.ShowHint = DockState.DockRightAutoHide Then
                 dckPanel.DockRightPortion = cnt.Width
+            ElseIf cnt.ShowHint = DockState.Float Then
+                dckPanel.DefaultFloatWindowSize = New Size(cnt.Width, cnt.Height)
             End If
+            cnt.Show(Me.dckPanel)
         Else
             DirectCast(form, Form).Show(Me)
         End If

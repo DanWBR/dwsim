@@ -70,6 +70,7 @@ Public Class FormOptions
 
         Me.cbudb.Checked = My.Settings.ReplaceComps
 
+        cbDefaultLocation.Items.Clear()
         cbDefaultLocation.Items.AddRange([Enum].GetNames(FlowsheetSurface.DockState.GetType))
         cbDefaultLocation.SelectedIndex = My.Settings.DefaultEditorLocation
 
