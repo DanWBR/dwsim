@@ -684,8 +684,9 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
 
             Else
 
-                Dim Size = g.MeasureString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
-                g.DrawString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + 10, Y + 40, format1)
+                Dim format10 As New StringFormat(StringFormatFlags.NoClip)
+                Dim Size = g.MeasureString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                g.DrawString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), Me.FontCol1, New SolidBrush(Color.FromArgb(iopacity, Me.LineColor)), X + 10, Y + 40, format10)
 
                 Me.Width = 20 + Size.Width
                 Me.Height = 80 + Size.Height
@@ -1039,7 +1040,7 @@ Namespace DWSIM.DrawingTools.GraphicObjects2
                 Next
 
                 size = g.MeasureString(Me.HeaderText, Me.HeaderFont, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-                If size.Width > maxL0 Then maxL0 = size.Width
+                If size.Width > maxL0 + maxL1 + maxL2 + maxL3 Then maxL1 = size.Width - maxL0 - maxL2 - maxL3
                 If size.Height > maxH Then maxH = size.Height
 
                 Me.Height = (count) * (maxH + 2 * Me.Padding)
