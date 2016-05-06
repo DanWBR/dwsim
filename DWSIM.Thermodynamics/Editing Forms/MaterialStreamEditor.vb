@@ -323,7 +323,7 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub btnExpand_CheckedChanged(sender As Object, e As EventArgs) Handles btnExpand.CheckedChanged
-        If btnExpand.Checked Then Me.Width = 860 Else Me.Width = 428
+        If btnExpand.Checked Then Me.Width = 850 Else Me.Width = 414
         If Me.DockPanel IsNot Nothing Then
             If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeftAutoHide Or
                      Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide Then
@@ -331,6 +331,8 @@ Public Class MaterialStreamEditor
             ElseIf Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft Or
                      Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight Then
                 If btnExpand.Checked Then Me.DockPanel.DockLeftPortion = 850 Else Me.DockPanel.DockLeftPortion = 414
+            ElseIf Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
+                If btnExpand.Checked Then Me.FloatPane.FloatWindow.Width = 850 Else Me.FloatPane.FloatWindow.Width = 414
             End If
         End If
     End Sub
