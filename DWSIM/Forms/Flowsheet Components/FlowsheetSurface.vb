@@ -2642,17 +2642,21 @@ Public Class FlowsheetSurface
         Dim i As Integer
         For i = 0 To e.Data.GetFormats().Length - 1
             Dim format = e.Data.GetFormats()(i)
-            If format.Equals("System.RuntimeType") Then
-                'The data from the drag source is moved to the target.
-                e.Effect = DragDropEffects.Copy
+            If format.Equals("System.RuntimeType") Or format.Equals("System.MonoType") Then
+                e.Effect = DragDropEffects.All
             End If
         Next
     End Sub
 
     Private Sub FlowsheetDesignSurface_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles FlowsheetDesignSurface.DragDrop
 
-        If e.Effect = DragDropEffects.Copy Then
-            Dim obj As Type = e.Data.GetData("System.RuntimeType")
+        If e.Effect = DragDropEffects.All Then
+            Dim obj As Type = Nothing
+            If DWSIM.App.IsRunningOnMono Then
+                obj = e.Data.GetData("System.MonoType")
+            Else
+                obj = e.Data.GetData("System.RuntimeType")
+            End If
             Dim tobj As ObjectType = ObjectType.Nenhum
             Dim p As Drawing.Point = Me.FlowsheetDesignSurface.PointToClient(New Drawing.Point(e.X, e.Y))
             Dim mousePT As Drawing.Point = Flowsheet.gscTogoc(p.X, p.Y)

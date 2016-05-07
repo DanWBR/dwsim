@@ -665,8 +665,14 @@ Partial Class FormMain
             DWSIM.App.LoadSettings()
 
             'remove user.config file
-            Dim config = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoaming)
-            If File.Exists(config.FilePath) Then File.Delete(config.FilePath)
+            Try
+                Dim config = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoaming)
+                If File.Exists(config.FilePath) Then File.Delete(config.FilePath)
+            Catch ex As Exception
+
+            End Try
+
+            My.Application.InitializeSettings()
 
             'loads the current language
             My.Application.ChangeUICulture(My.Settings.CultureInfo)

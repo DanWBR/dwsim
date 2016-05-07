@@ -116,6 +116,10 @@ Namespace My
                 Console.SetOut(standardOutput)
             End If
 
+        End Sub
+
+        Public Sub InitializeSettings()
+
             'set CUDA params
             CudafyModes.Compiler = eGPUCompiler.All
             CudafyModes.Target = My.Settings.CudafyTarget

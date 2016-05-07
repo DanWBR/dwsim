@@ -125,7 +125,7 @@ Namespace SystemsOfUnits
 
         Public Property molecularWeight As String Implements Interfaces.IUnitsOfMeasure.molecularWeight
 
-        Public Property Name As String Implements Interfaces.IUnitsOfMeasure.Name
+        Public Property Name As String = "" Implements Interfaces.IUnitsOfMeasure.Name
 
         Public Property pdp_boilingPointTemperature As String Implements Interfaces.IUnitsOfMeasure.pdp_boilingPointTemperature
 

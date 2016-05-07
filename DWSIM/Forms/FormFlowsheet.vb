@@ -175,8 +175,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
 
             Dim aTypeList As New List(Of Type)
-            aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("ISimulationObject", True) IsNot Nothing, True, False)))
-            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("ISimulationObject", True) IsNot Nothing, True, False)))
+            aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
 
             For Each item In aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then
@@ -243,11 +243,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End If
 
         Me.UpdateFormText()
-
-        Dim array1(FormMain.AvailableUnitSystems.Count - 1) As String
-        FormMain.AvailableUnitSystems.Keys.CopyTo(array1, 0)
         Me.ToolStripComboBoxUnitSystem.Items.Clear()
-        Me.ToolStripComboBoxUnitSystem.Items.AddRange(array1)
+        Me.ToolStripComboBoxUnitSystem.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
 
         If Me.Options.SelectedUnitSystem.Name <> "" Then
             Me.ToolStripComboBoxUnitSystem.SelectedItem = Me.Options.SelectedUnitSystem.Name
@@ -297,10 +294,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Else
 
-            Dim array1(FormMain.AvailableUnitSystems.Count - 1) As String
-            FormMain.AvailableUnitSystems.Keys.CopyTo(array1, 0)
             Me.ToolStripComboBoxUnitSystem.Items.Clear()
-            Me.ToolStripComboBoxUnitSystem.Items.AddRange(array1)
+            Me.ToolStripComboBoxUnitSystem.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
 
             If Me.ToolStripComboBoxUnitSystem.Items.Contains(Me.Options.SelectedUnitSystem.Name) Then
                 Me.ToolStripComboBoxUnitSystem.SelectedItem = Me.Options.SelectedUnitSystem.Name

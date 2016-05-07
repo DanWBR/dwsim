@@ -159,8 +159,20 @@ Public Class FormSimulSettings
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
 
         aTypeList.Clear()
-        aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("ISimulationObject", True) IsNot Nothing, True, False)))
-        aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("ISimulationObject", True) IsNot Nothing, True, False)))
+        aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x)
+                                                                   If x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing Then
+                                                                       Return True
+                                                                   Else
+                                                                       Return False
+                                                                   End If
+                                                               End Function))
+        aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x)
+                                                               If x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing Then
+                                                                   Return True
+                                                               Else
+                                                                   Return False
+                                                               End If
+                                                           End Function))
 
         Dim add As Boolean = False
         If FrmChild.FlowsheetOptions.VisibleProperties.Count = 0 Then add = True
@@ -188,12 +200,10 @@ Public Class FormSimulSettings
             Next
         End With
 
-        Dim array1(FormMain.AvailableUnitSystems.Count - 1) As String
-        FormMain.AvailableUnitSystems.Keys.CopyTo(array1, 0)
         Me.ComboBox2.Items.Clear()
-        Me.ComboBox2.Items.AddRange(array1)
+        Me.ComboBox2.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
         FrmChild.ToolStripComboBoxUnitSystem.Items.Clear()
-        FrmChild.ToolStripComboBoxUnitSystem.Items.AddRange(array1)
+        FrmChild.ToolStripComboBoxUnitSystem.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
 
         ComboBox1.SelectedItem = Me.FrmChild.Options.NumberFormat
         ComboBox3.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
@@ -818,7 +828,7 @@ Public Class FormSimulSettings
                     su.mediumresistance = cell.Value
             End Select
 
-            If initialized Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,
+            If initialized And Not DWSIM.App.IsRunningOnMono Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,
                          .ObjID = su.Name,
                          .ObjID2 = member,
                          .NewValue = cell.Value,
