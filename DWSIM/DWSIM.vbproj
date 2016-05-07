@@ -2015,6 +2015,7 @@
     <Content Include="Assets\data\licenses\myneoreport.txt" />
     <Content Include="Assets\data\licenses\perl artistic license v2.txt" />
     <Content Include="Assets\data\licenses\zedgraph.txt" />
+    <Content Include="DWSIM4 icon small.ico" />
     <Content Include="DWSIM4 icon.ico" />
     <None Include="Resources\shape_align_middle1.png" />
     <None Include="Resources\shape_align_center1.png" />
