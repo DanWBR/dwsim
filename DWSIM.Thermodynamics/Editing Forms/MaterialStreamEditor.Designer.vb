@@ -24,19 +24,19 @@ Partial Class MaterialStreamEditor
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MaterialStreamEditor))
-        Dim DataGridViewCellStyle79 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle80 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle81 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle82 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle83 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle84 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle85 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle86 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle87 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle88 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle89 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle90 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle91 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.btnUtils = New System.Windows.Forms.Button()
@@ -534,8 +534,8 @@ Partial Class MaterialStreamEditor
         '
         'compamount
         '
-        DataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.compamount.DefaultCellStyle = DataGridViewCellStyle79
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.compamount.DefaultCellStyle = DataGridViewCellStyle1
         Me.compamount.FillWeight = 40.0!
         resources.ApplyResources(Me.compamount, "compamount")
         Me.compamount.Name = "compamount"
@@ -848,8 +848,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle80
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -887,8 +887,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle81
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn4.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
@@ -926,8 +926,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle82.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle82
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn7.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn7, "DataGridViewTextBoxColumn7")
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
@@ -965,8 +965,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn10
         '
-        DataGridViewCellStyle83.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn10.DefaultCellStyle = DataGridViewCellStyle83
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn10.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn10.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn10, "DataGridViewTextBoxColumn10")
         Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
@@ -1004,8 +1004,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn13
         '
-        DataGridViewCellStyle84.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle84
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewTextBoxColumn13.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn13, "DataGridViewTextBoxColumn13")
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
@@ -1043,8 +1043,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn16
         '
-        DataGridViewCellStyle85.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle85
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewTextBoxColumn16.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn16, "DataGridViewTextBoxColumn16")
         Me.DataGridViewTextBoxColumn16.Name = "DataGridViewTextBoxColumn16"
@@ -1127,8 +1127,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn19
         '
-        DataGridViewCellStyle86.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn19.DefaultCellStyle = DataGridViewCellStyle86
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn19.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridViewTextBoxColumn19.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn19, "DataGridViewTextBoxColumn19")
         Me.DataGridViewTextBoxColumn19.Name = "DataGridViewTextBoxColumn19"
@@ -1160,8 +1160,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn21
         '
-        DataGridViewCellStyle87.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn21.DefaultCellStyle = DataGridViewCellStyle87
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn21.DefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridViewTextBoxColumn21.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn21, "DataGridViewTextBoxColumn21")
         Me.DataGridViewTextBoxColumn21.Name = "DataGridViewTextBoxColumn21"
@@ -1193,8 +1193,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn23
         '
-        DataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn23.DefaultCellStyle = DataGridViewCellStyle88
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn23.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridViewTextBoxColumn23.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn23, "DataGridViewTextBoxColumn23")
         Me.DataGridViewTextBoxColumn23.Name = "DataGridViewTextBoxColumn23"
@@ -1226,8 +1226,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn25
         '
-        DataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn25.DefaultCellStyle = DataGridViewCellStyle89
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn25.DefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridViewTextBoxColumn25.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn25, "DataGridViewTextBoxColumn25")
         Me.DataGridViewTextBoxColumn25.Name = "DataGridViewTextBoxColumn25"
@@ -1259,8 +1259,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn27
         '
-        DataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn27.DefaultCellStyle = DataGridViewCellStyle90
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn27.DefaultCellStyle = DataGridViewCellStyle12
         Me.DataGridViewTextBoxColumn27.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn27, "DataGridViewTextBoxColumn27")
         Me.DataGridViewTextBoxColumn27.Name = "DataGridViewTextBoxColumn27"
@@ -1292,8 +1292,8 @@ Partial Class MaterialStreamEditor
         '
         'DataGridViewTextBoxColumn29
         '
-        DataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn29.DefaultCellStyle = DataGridViewCellStyle91
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn29.DefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridViewTextBoxColumn29.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn29, "DataGridViewTextBoxColumn29")
         Me.DataGridViewTextBoxColumn29.Name = "DataGridViewTextBoxColumn29"

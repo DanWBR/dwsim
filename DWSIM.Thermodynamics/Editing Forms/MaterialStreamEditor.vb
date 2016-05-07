@@ -1005,4 +1005,15 @@ Public Class MaterialStreamEditor
 
     End Sub
 
+    Private Sub UtilitiesCtxMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles UtilitiesCtxMenu.Opening
+
+        For Each item In MatStream.AttachedUtilities
+            Dim ts As New ToolStripMenuItem(item.Name)
+            AddHandler ts.Click, Sub() DirectCast(item, Form).Select()
+            UtilitiesCtxMenu.Items.Add(ts)
+            AddHandler UtilitiesCtxMenu.Closed, Sub() If UtilitiesCtxMenu.Items.Contains(ts) Then UtilitiesCtxMenu.Items.Remove(ts)
+        Next
+
+    End Sub
+
 End Class
