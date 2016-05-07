@@ -1,6 +1,6 @@
 ﻿Public Interface ISimulationObject
 
-    Property AttachedUtilities As Dictionary(Of Integer, IAttachedUtility)
+    Property AttachedUtilities As List(Of IAttachedUtility)
 
     Sub DisplayEditForm()
 

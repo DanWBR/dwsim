@@ -24,6 +24,8 @@ Public Class FormBinEnv
 
     Inherits UserControl
 
+    Implements Interfaces.IAttachedUtility
+
     Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
@@ -1111,5 +1113,31 @@ Public Class FormBinEnv
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         My.Application.CalculatorStopRequested = True
         If Not bw Is Nothing Then bw.CancelAsync()
+    End Sub
+
+    Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
+
+    Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
+
+    End Function
+
+    Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
+
+    End Function
+
+    Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
+
+    End Function
+
+    Public Property ID As Integer Implements Interfaces.IAttachedUtility.ID
+
+    Public Property Name1 As String Implements Interfaces.IAttachedUtility.Name
+
+    Public Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
+
+    End Sub
+
+    Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
+
     End Sub
 End Class

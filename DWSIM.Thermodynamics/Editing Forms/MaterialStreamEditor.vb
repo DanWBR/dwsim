@@ -1,6 +1,7 @@
 ﻿Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports System.Windows.Forms
 Imports Converter = DWSIM.SharedClasses.SystemsOfUnits.Converter
+Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class MaterialStreamEditor
 
@@ -75,7 +76,7 @@ Public Class MaterialStreamEditor
             'conditions
 
             cbSpec.SelectedIndex = .SpecType
-         
+
             cbUnitsT.Items.Clear()
             cbUnitsT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.temperature).ToArray)
             cbUnitsT.SelectedItem = .FlowSheet.FlowsheetOptions.SelectedUnitSystem.temperature
@@ -962,4 +963,46 @@ Public Class MaterialStreamEditor
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnUtils.Click
         UtilitiesCtxMenu.Show(btnUtils, New Drawing.Point(20, 0))
     End Sub
+
+    Private Sub DiagramaDeFasesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiagramaDeFasesToolStripMenuItem.Click
+
+        Dim utility = MatStream.FlowSheet.GetUtility(Interfaces.Enums.FlowsheetUtility.PhaseEnvelope)
+
+        utility.Name = "PhaseEnvelope" & (MatStream.AttachedUtilities.Count + 1).ToString
+        utility.AttachedTo = MatStream
+
+        With DirectCast(utility, DockContent)
+            .ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+        End With
+
+        MatStream.AttachedUtilities.Add(utility)
+        MatStream.FlowSheet.DisplayForm(utility)
+
+        AddHandler DirectCast(utility, Form).FormClosed, Sub()
+                                                             utility.AttachedTo = Nothing
+                                                             MatStream.AttachedUtilities.Remove(utility)
+                                                         End Sub
+
+    End Sub
+
+    Private Sub BinaryTSMI_Click(sender As Object, e As EventArgs) Handles BinaryTSMI.Click
+
+    End Sub
+
+    Private Sub TernaryTSMI_Click(sender As Object, e As EventArgs) Handles TernaryTSMI.Click
+
+    End Sub
+
+    Private Sub PetroleumPropsTSMI_Click(sender As Object, e As EventArgs) Handles PetroleumPropsTSMI.Click
+
+    End Sub
+
+    Private Sub HydratesTSMI_Click(sender As Object, e As EventArgs) Handles HydratesTSMI.Click
+
+    End Sub
+
+    Private Sub TCPTSMI_Click(sender As Object, e As EventArgs) Handles TCPTSMI.Click
+
+    End Sub
+
 End Class

@@ -70,7 +70,7 @@ Namespace UnitOperations
 
         Public MustOverride Function GetIconBitmap() As Object Implements ISimulationObject.GetIconBitmap
 
-        Public Property AttachedUtilities As New Dictionary(Of Integer, IAttachedUtility) Implements ISimulationObject.AttachedUtilities
+        Public Property AttachedUtilities As New List(Of IAttachedUtility) Implements ISimulationObject.AttachedUtilities
 
         Public Property PreferredFlashAlgorithm As FlashMethod = FlashMethod.Default_Algorithm Implements ISimulationObject.PreferredFlashAlgorithm
         Public Property Calculated As Boolean = False Implements Interfaces.ISimulationObject.Calculated

@@ -21,6 +21,8 @@ Public Class FormPhEnv
 
     Inherits UserControl
 
+    Implements Interfaces.IAttachedUtility
+
     Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
@@ -58,13 +60,6 @@ Public Class FormPhEnv
         Me.su = Frm.Options.SelectedUnitSystem
         Me.nf = Frm.Options.NumberFormat
 
-        Me.ComboBox3.Items.Clear()
-        For Each mat2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
-            If mat2.GraphicObject.Calculated Then Me.ComboBox3.Items.Add(mat2.GraphicObject.Tag.ToString)
-        Next
-
-        If Me.ComboBox3.Items.Count > 0 Then Me.ComboBox3.SelectedIndex = 0
-
         Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosDiagr1")
 
         Try
@@ -96,7 +91,7 @@ Public Class FormPhEnv
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
-        If Not Me.ComboBox3.SelectedItem Is Nothing Then
+        If Not Me.AttachedTo Is Nothing Then
 
             Dim x As Double
 
@@ -881,10 +876,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
 
-        Dim gobj As DrawingTools.GraphicObjects.GraphicObject = Nothing
-        gobj = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
-        Me.mat = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
-        Me.strname = gobj.Tag
+        Me.mat = AttachedTo
+        Me.strname = AttachedTo.GraphicObject.Tag
 
         If Me.showoppoint Then
             ot = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, mat.Phases(0).Properties.temperature.GetValueOrDefault)
@@ -894,11 +887,9 @@ exec:       With Me.GraphControl.GraphPane.Legend
             os = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, mat.Phases(0).Properties.entropy.GetValueOrDefault)
         End If
 
-        Dim pp As PropertyPackages.PropertyPackage = Frm.Options.SelectedPropertyPackage
+        mat.PropertyPackage.CurrentMaterialStream = mat
 
-        pp.CurrentMaterialStream = mat
-
-        Dim diagdata As Object = pp.DW_ReturnPhaseEnvelope(e.Argument, Me.BackgroundWorker1)
+        Dim diagdata As Object = mat.PropertyPackage.DW_ReturnPhaseEnvelope(e.Argument, Me.BackgroundWorker1)
 
         PC = diagdata(15)
 
@@ -911,8 +902,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
             Pmin = 101325
             Pmax = PC(0)(1) * 1.3
             Dim i As Integer = 0
-            Vz = pp.RET_VMOL(PropertyPackages.Phase.Mixture)
-            Vn = pp.RET_VNAMES
+            Vz = mat.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture)
+            Vn = mat.PropertyPackage.RET_VNAMES
 
             Dim m_aux As New DWSIM.Utilities.HYD.AuxMethods
 
@@ -1147,5 +1138,31 @@ exec:       With Me.GraphControl.GraphPane.Legend
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         My.Application.CalculatorStopRequested = True
         If Not bw Is Nothing Then bw.CancelAsync()
+    End Sub
+
+    Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
+
+    Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
+
+    End Function
+
+    Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
+
+    End Function
+
+    Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
+
+    End Function
+
+    Public Property ID As Integer Implements Interfaces.IAttachedUtility.ID
+
+    Public Property Name1 As String Implements Interfaces.IAttachedUtility.Name
+
+    Public Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
+
+    End Sub
+
+    Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
+
     End Sub
 End Class

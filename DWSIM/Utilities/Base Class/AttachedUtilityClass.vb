@@ -1,9 +1,15 @@
 ﻿Public Class AttachedUtilityClass
+
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Implements Interfaces.IAttachedUtility
 
     Friend WithEvents PanelUtility As System.Windows.Forms.Panel
+    Friend WithEvents chkAutoUpdate As System.Windows.Forms.CheckBox
+    Friend WithEvents tbAttachedTo As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents tbName As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents PanelHeader As System.Windows.Forms.Panel
 
     Public Property InternalUtility As Interfaces.IAttachedUtility
@@ -35,40 +41,104 @@
     End Sub
 
     Private Sub AttachedUtilityClass_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        tbName.Text = UtilityName
+        tbAttachedTo.Text = AttachedTo.GraphicObject.Tag
+        InternalUtility.AttachedTo = AttachedTo
+
+        Me.Size = DirectCast(InternalUtility, UserControl).Size
+
+        If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
+            Me.FloatPane.Size = DirectCast(InternalUtility, UserControl).Size
+        End If
+
         PanelUtility.Controls.Add(InternalUtility)
+        DirectCast(InternalUtility, UserControl).Dock = DockStyle.Fill
+      
+    End Sub
+
+    Sub New()
+
+        InitializeComponent()
+
     End Sub
 
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AttachedUtilityClass))
         Me.PanelHeader = New System.Windows.Forms.Panel()
+        Me.chkAutoUpdate = New System.Windows.Forms.CheckBox()
+        Me.tbAttachedTo = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.tbName = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.PanelUtility = New System.Windows.Forms.Panel()
+        Me.PanelHeader.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelHeader
         '
         Me.PanelHeader.BackColor = System.Drawing.Color.SteelBlue
-        Me.PanelHeader.Dock = System.Windows.Forms.DockStyle.Top
-        Me.PanelHeader.Location = New System.Drawing.Point(0, 0)
+        Me.PanelHeader.Controls.Add(Me.chkAutoUpdate)
+        Me.PanelHeader.Controls.Add(Me.tbAttachedTo)
+        Me.PanelHeader.Controls.Add(Me.Label2)
+        Me.PanelHeader.Controls.Add(Me.tbName)
+        Me.PanelHeader.Controls.Add(Me.Label1)
+        resources.ApplyResources(Me.PanelHeader, "PanelHeader")
         Me.PanelHeader.Name = "PanelHeader"
-        Me.PanelHeader.Size = New System.Drawing.Size(617, 78)
-        Me.PanelHeader.TabIndex = 0
+        '
+        'chkAutoUpdate
+        '
+        resources.ApplyResources(Me.chkAutoUpdate, "chkAutoUpdate")
+        Me.chkAutoUpdate.ForeColor = System.Drawing.Color.White
+        Me.chkAutoUpdate.Name = "chkAutoUpdate"
+        Me.chkAutoUpdate.UseVisualStyleBackColor = True
+        '
+        'tbAttachedTo
+        '
+        resources.ApplyResources(Me.tbAttachedTo, "tbAttachedTo")
+        Me.tbAttachedTo.Name = "tbAttachedTo"
+        Me.tbAttachedTo.ReadOnly = True
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.ForeColor = System.Drawing.Color.White
+        Me.Label2.Name = "Label2"
+        '
+        'tbName
+        '
+        resources.ApplyResources(Me.tbName, "tbName")
+        Me.tbName.Name = "tbName"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Name = "Label1"
         '
         'PanelUtility
         '
-        Me.PanelUtility.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelUtility.Location = New System.Drawing.Point(0, 78)
+        resources.ApplyResources(Me.PanelUtility, "PanelUtility")
         Me.PanelUtility.Name = "PanelUtility"
-        Me.PanelUtility.Size = New System.Drawing.Size(617, 279)
-        Me.PanelUtility.TabIndex = 1
         '
         'AttachedUtilityClass
         '
-        Me.ClientSize = New System.Drawing.Size(617, 357)
+        resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.PanelUtility)
         Me.Controls.Add(Me.PanelHeader)
-        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "AttachedUtilityClass"
+        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+        Me.ShowIcon = False
+        Me.PanelHeader.ResumeLayout(False)
+        Me.PanelHeader.PerformLayout()
         Me.ResumeLayout(False)
 
+    End Sub
+
+    Private Sub tbName_TextChanged(sender As Object, e As EventArgs) Handles tbName.TextChanged
+        Me.UtilityName = tbName.Text
+        Me.Text = tbName.Text
+        Me.TabText = tbName.Text
     End Sub
 
 End Class

@@ -21,6 +21,8 @@ Public Class FormHYD
 
     Inherits UserControl
 
+    Implements Interfaces.IAttachedUtility
+
     Public m_aux As DWSIM.Utilities.HYD.AuxMethods
 
     Dim mat As Streams.MaterialStream
@@ -274,12 +276,12 @@ Public Class FormHYD
             End If
 
 
-            Else
+        Else
 
-                Me.mat = Nothing
-                Me.LblSelected.Text = ""
+            Me.mat = Nothing
+            Me.LblSelected.Text = ""
 
-            End If
+        End If
 
     End Sub
 
@@ -321,4 +323,29 @@ Public Class FormHYD
         If ComboBox1.SelectedIndex = 2 Then CheckBox1.Enabled = False Else CheckBox1.Enabled = True
     End Sub
 
+    Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
+
+    Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
+
+    End Function
+
+    Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
+
+    End Function
+
+    Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
+
+    End Function
+
+    Public Property ID As Integer Implements Interfaces.IAttachedUtility.ID
+
+    Public Property Name1 As String Implements Interfaces.IAttachedUtility.Name
+
+    Public Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
+
+    End Sub
+
+    Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
+
+    End Sub
 End Class

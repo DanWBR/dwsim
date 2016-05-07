@@ -1223,6 +1223,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormReacSetEditor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\Base Class\AttachedUtilityClass.en.resx">
+      <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Utilities\Base Class\AttachedUtilityClass.resx">
       <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
     </EmbeddedResource>
