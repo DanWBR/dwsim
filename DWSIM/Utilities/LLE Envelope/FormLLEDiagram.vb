@@ -384,8 +384,6 @@ Public Class FormLLEDiagram
         InitialPoints.Add(New PointF With {.X = 0.625, .Y = 0.375})
         InitialPoints.Add(New PointF With {.X = 0.875, .Y = 0.125})
 
-        Me.Cursor = Cursors.WaitCursor
-
         '==========================
         ' assign property package
         '==========================
@@ -504,7 +502,6 @@ Public Class FormLLEDiagram
                 final = True
             End If
         Loop
-        Me.Cursor = Cursors.Default
 
         PanelDiag.Refresh() 'redraw Diagram
 
