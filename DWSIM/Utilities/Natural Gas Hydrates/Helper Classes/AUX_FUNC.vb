@@ -113,7 +113,7 @@ Namespace DWSIM.Utilities.HYD
             Dim l, k As Integer
             Dim linha_atual As String() = New String() {}
 
-            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).FirstOrDefault
             Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.hid_chenguo.dat")
                 Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
                     MyReader.TextFieldType = FileIO.FieldType.Delimited
@@ -140,7 +140,7 @@ Namespace DWSIM.Utilities.HYD
 
             Dim l, k As Integer
             Dim linha_atual As String() = New String() {}
-            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).FirstOrDefault
             Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.hid_klaudasandler.dat")
                 Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
                     MyReader.TextFieldType = FileIO.FieldType.Delimited
@@ -166,7 +166,7 @@ Namespace DWSIM.Utilities.HYD
 
             Dim l, k As Integer
             Dim linha_atual As String() = New String() {}
-            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).FirstOrDefault
             Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.hid_vdwp_pp.dat")
                 Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
                     MyReader.TextFieldType = FileIO.FieldType.Delimited
@@ -193,7 +193,7 @@ Namespace DWSIM.Utilities.HYD
             Dim l, j As Integer
             Dim linha_atual As String() = New String() {}
 
-            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).FirstOrDefault
             Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.diel.dat")
                 Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
                     MyReader.TextFieldType = FileIO.FieldType.Delimited
@@ -220,7 +220,7 @@ Namespace DWSIM.Utilities.HYD
             Dim l, j As Integer
             Dim linha_atual As String() = New String() {}
 
-            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).SingleOrDefault
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).FirstOrDefault
             Using filestr As IO.Stream = calculatorassembly.GetManifestResourceStream("DWSIM.Thermodynamics.inib.dat")
                 Using MyReader2 As New Microsoft.VisualBasic.FileIO.TextFieldParser(filestr)
                     MyReader2.TextFieldType = FileIO.FieldType.Delimited

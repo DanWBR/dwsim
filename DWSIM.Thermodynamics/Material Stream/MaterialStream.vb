@@ -48,9 +48,9 @@ Namespace Streams
 
         Implements Interfaces.IMaterialStream
 
-        Private f As MaterialStreamEditor
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Private f As MaterialStreamEditor
 
-        Public _pp As PropertyPackages.PropertyPackage
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public _pp As PropertyPackages.PropertyPackage
         Public _ppid As String = ""
 
         Protected m_Phases As New Dictionary(Of Integer, IPhase)

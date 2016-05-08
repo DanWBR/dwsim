@@ -28,7 +28,7 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
-        Private f As EditingForm_Mixer
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Mixer
 
         Public Enum PressureBehavior
             Average

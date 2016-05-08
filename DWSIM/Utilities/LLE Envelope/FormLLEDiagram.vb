@@ -535,8 +535,8 @@ Public Class FormLLEDiagram
 
         Dim i As Integer
 
-        Frm = My.Application.ActiveSimulation
-        mat = New MaterialStream("", "")
+        Frm = AttachedTo.GetFlowsheet
+        mat = New MaterialStream("", "", Frm, Nothing)
 
         If Me.Frm.Options.SelectedComponents.Count > 2 Then
             ReDim Names(Me.Frm.Options.SelectedComponents.Count - 1)
@@ -609,10 +609,17 @@ Public Class FormLLEDiagram
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
 
     End Sub
+
+    Public Function GetUtilityType() As FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return FlowsheetUtility.PhaseEnvelopeTernary
+    End Function
+
 End Class
+
 Public Class Rec
     Public Left, Right, Top, Bottom As UInteger
 End Class
+
 Public Class Konode
     Public X11, X12, X21, X22 As Double
     Public Function copy() As Konode

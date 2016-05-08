@@ -136,7 +136,7 @@
     <value>2</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
-    <value>Selecionar</value>
+    <value>Calcular</value>
   </data>
   <data name="&gt;&gt;Button1.Name" xml:space="preserve">
     <value>Button1</value>
@@ -208,7 +208,7 @@
     <value>6, 4</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>469, 52</value>
+    <value>466, 52</value>
   </data>
   <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -227,6 +227,9 @@
   </data>
   <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="LabelU8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -958,7 +961,7 @@
     <value>6, 57</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>469, 297</value>
+    <value>466, 311</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1095,17 +1098,11 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>481, 361</value>
-  </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>DWSIM - Propriedades de Escoamento a Frio de Petróleos</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>478, 375</value>
   </data>
   <data name="&gt;&gt;FloatToolStripMenuItem.Name" xml:space="preserve">
     <value>FloatToolStripMenuItem</value>
@@ -1177,6 +1174,6 @@
     <value>FrmColdProperties</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.7.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

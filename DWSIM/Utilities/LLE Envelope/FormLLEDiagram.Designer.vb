@@ -101,9 +101,9 @@ Partial Class FormLLEDiagram
         '
         'TabControl1
         '
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
@@ -116,8 +116,8 @@ Partial Class FormLLEDiagram
         '
         'PanelDiag
         '
-        resources.ApplyResources(Me.PanelDiag, "PanelDiag")
         Me.PanelDiag.BackColor = System.Drawing.Color.WhiteSmoke
+        resources.ApplyResources(Me.PanelDiag, "PanelDiag")
         Me.PanelDiag.Name = "PanelDiag"
         '
         'TabPage2
@@ -133,10 +133,10 @@ Partial Class FormLLEDiagram
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeColumns = False
         Me.DataGridView1.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.X11, Me.X12, Me.X21, Me.X22})
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         '

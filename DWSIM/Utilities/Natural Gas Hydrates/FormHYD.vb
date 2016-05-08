@@ -43,17 +43,15 @@ Public Class FormHYD
 
         Me.m_aux = New DWSIM.Utilities.HYD.AuxMethods
 
-        Me.Frm = My.Application.ActiveSimulation
+        Me.Frm = AttachedTo.GetFlowsheet
 
         Me.su = Frm.Options.SelectedUnitSystem
         Me.nf = Frm.Options.NumberFormat
 
         Me.ComboBox3.Items.Clear()
-        For Each mat2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
-            If mat2.GraphicObject.Calculated Then Me.ComboBox3.Items.Add(mat2.GraphicObject.Tag.ToString)
-        Next
-
-        If Me.ComboBox3.Items.Count > 0 Then Me.ComboBox3.SelectedIndex = 0
+        Me.ComboBox3.Items.Add(AttachedTo.GraphicObject.Tag.ToString)
+        Me.ComboBox3.SelectedIndex = 0
+        Me.ComboBox3.Enabled = False
 
     End Sub
 
@@ -348,4 +346,8 @@ Public Class FormHYD
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
 
     End Sub
+
+    Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return FlowsheetUtility.NaturalGasHydrates
+    End Function
 End Class

@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -153,7 +157,6 @@
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>Zc</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Grid1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -162,7 +165,7 @@
     <value>3, 16</value>
   </data>
   <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>469, 169</value>
+    <value>482, 237</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Grid1.TabIndex" type="System.Int32, mscorlib">
@@ -184,7 +187,7 @@
     <value>4, 50</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 188</value>
+    <value>488, 256</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -207,6 +210,9 @@
   <metadata name="BackgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="GroupBox6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="LblSelected.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -231,8 +237,11 @@
   <data name="&gt;&gt;LblSelected.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>354, 15</value>
+    <value>362, 15</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 23</value>
@@ -255,6 +264,9 @@
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ComboBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="ComboBox3.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
@@ -262,7 +274,7 @@
     <value>112, 16</value>
   </data>
   <data name="ComboBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 21</value>
+    <value>244, 21</value>
   </data>
   <data name="ComboBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -310,7 +322,7 @@
     <value>4, 1</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 47</value>
+    <value>488, 47</value>
   </data>
   <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -336,14 +348,8 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>485, 242</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Ponto Crítico Termodinâmico</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 310</value>
   </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
@@ -391,6 +397,6 @@
     <value>FrmCritpt</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

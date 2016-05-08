@@ -964,11 +964,31 @@ Public Class MaterialStreamEditor
         UtilitiesCtxMenu.Show(btnUtils, New Drawing.Point(20, 0))
     End Sub
 
-    Private Sub DiagramaDeFasesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiagramaDeFasesToolStripMenuItem.Click
+    Private Sub DiagramaDeFasesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DiagramaDeFasesToolStripMenuItem.Click, BinaryTSMI.Click, TernaryTSMI.Click,
+                                                                                                PetroleumPropsTSMI.Click, HydratesTSMI.Click, TCPTSMI.Click
 
-        Dim utility = MatStream.FlowSheet.GetUtility(Interfaces.Enums.FlowsheetUtility.PhaseEnvelope)
+        Dim utility As Interfaces.IAttachedUtility = Nothing
 
-        utility.Name = "PhaseEnvelope" & (MatStream.AttachedUtilities.Count + 1).ToString
+        If sender Is DiagramaDeFasesToolStripMenuItem Then
+            utility = MatStream.FlowSheet.GetUtility(Interfaces.Enums.FlowsheetUtility.PhaseEnvelope)
+            utility.Name = "PhaseEnvelope" & (MatStream.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.PhaseEnvelope).Count + 1).ToString
+        ElseIf sender Is BinaryTSMI Then
+            utility = MatStream.FlowSheet.GetUtility(Interfaces.Enums.FlowsheetUtility.PhaseEnvelopeBinary)
+            utility.Name = "BinaryEnvelope" & (MatStream.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.PhaseEnvelopeBinary).Count + 1).ToString
+        ElseIf sender Is TernaryTSMI Then
+            utility = MatStream.FlowSheet.GetUtility(Interfaces.Enums.FlowsheetUtility.PhaseEnvelopeTernary)
+            utility.Name = "TernaryEnvelope" & (MatStream.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.PhaseEnvelopeTernary).Count + 1).ToString
+        ElseIf sender Is PetroleumPropsTSMI Then
+            utility = MatStream.FlowSheet.GetUtility(Interfaces.Enums.FlowsheetUtility.PetroleumProperties)
+            utility.Name = "PetroleumProperties" & (MatStream.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.PetroleumProperties).Count + 1).ToString
+        ElseIf sender Is HydratesTSMI Then
+            utility = MatStream.FlowSheet.GetUtility(Interfaces.Enums.FlowsheetUtility.NaturalGasHydrates)
+            utility.Name = "NaturalGasHydrates" & (MatStream.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.NaturalGasHydrates).Count + 1).ToString
+        ElseIf sender Is TCPTSMI Then
+            utility = MatStream.FlowSheet.GetUtility(Interfaces.Enums.FlowsheetUtility.TrueCriticalPoint)
+            utility.Name = "TrueCriticalPoint" & (MatStream.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.TrueCriticalPoint).Count + 1).ToString
+        End If
+
         utility.AttachedTo = MatStream
 
         With DirectCast(utility, DockContent)
@@ -982,26 +1002,6 @@ Public Class MaterialStreamEditor
                                                              utility.AttachedTo = Nothing
                                                              MatStream.AttachedUtilities.Remove(utility)
                                                          End Sub
-
-    End Sub
-
-    Private Sub BinaryTSMI_Click(sender As Object, e As EventArgs) Handles BinaryTSMI.Click
-
-    End Sub
-
-    Private Sub TernaryTSMI_Click(sender As Object, e As EventArgs) Handles TernaryTSMI.Click
-
-    End Sub
-
-    Private Sub PetroleumPropsTSMI_Click(sender As Object, e As EventArgs) Handles PetroleumPropsTSMI.Click
-
-    End Sub
-
-    Private Sub HydratesTSMI_Click(sender As Object, e As EventArgs) Handles HydratesTSMI.Click
-
-    End Sub
-
-    Private Sub TCPTSMI_Click(sender As Object, e As EventArgs) Handles TCPTSMI.Click
 
     End Sub
 

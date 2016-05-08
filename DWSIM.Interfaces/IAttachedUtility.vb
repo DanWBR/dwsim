@@ -16,4 +16,6 @@
 
     Sub Update()
 
+    Function GetUtilityType() As Enums.FlowsheetUtility
+
 End Interface

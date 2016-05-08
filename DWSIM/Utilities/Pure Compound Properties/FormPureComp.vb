@@ -40,7 +40,7 @@ Public Class FormPureComp
 
     Private Sub FormPureComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.Flowsheet = My.Application.ActiveSimulation
+        Me.Flowsheet = AttachedTo.GetFlowsheet
 
         OnlyViewing = False
         If constprop Is Nothing Then
@@ -64,7 +64,7 @@ Public Class FormPureComp
         Dim nf As String = Flowsheet.Options.NumberFormat
         Dim pp As PropertyPackages.PropertyPackage = Flowsheet.Options.SelectedPropertyPackage
 
-        Me.MatStream = New MaterialStream("", "")
+        Me.MatStream = New MaterialStream("", "", Flowsheet, Flowsheet.PropertyPackages(0))
 
         'add simulation compounds to the dummy material stream
         Me.Flowsheet.AddComponentsRows(Me.MatStream)
@@ -1025,4 +1025,8 @@ Public Class FormPureComp
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
 
     End Sub
+
+    Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return FlowsheetUtility.PureCompoundProperties
+    End Function
 End Class

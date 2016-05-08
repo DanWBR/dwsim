@@ -1165,4 +1165,9 @@ exec:       With Me.GraphControl.GraphPane.Legend
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
 
     End Sub
+
+    Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return FlowsheetUtility.PhaseEnvelope
+    End Function
+
 End Class

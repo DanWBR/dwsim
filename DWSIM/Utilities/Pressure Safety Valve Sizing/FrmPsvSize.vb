@@ -21,7 +21,7 @@ Public Class FrmPsvSize
 
     Private Sub Form4_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.Frm = My.Application.ActiveSimulation
+        Me.Frm = AttachedTo.GetFlowsheet
 
         Me.sz = New DWSIM.Utilities.PSV.Sizing
         Me.ev = New DWSIM.Utilities.PSV.Evaluation
@@ -30,12 +30,10 @@ Public Class FrmPsvSize
         Me.nf = Frm.Options.NumberFormat
 
         Me.ComboBox3.Items.Clear()
-        For Each valve2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
-            Me.ComboBox3.Items.Add(valve2.GraphicObject.Tag.ToString)
-        Next
+        Me.ComboBox3.Items.Add(AttachedTo.GraphicObject.Tag.ToString)
+        Me.ComboBox3.SelectedIndex = 0
+        Me.ComboBox3.Enabled = False
 
-        If Me.ComboBox3.Items.Count > 0 Then Me.ComboBox3.SelectedIndex = 0
-        'Me.ComboBox1.SelectedIndex = 0
         Me.ComboBox2.SelectedIndex = 0
 
         Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosDimen")
@@ -260,4 +258,9 @@ Public Class FrmPsvSize
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
 
     End Sub
+
+    Public Function GetUtilityType() As FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return FlowsheetUtility.PSVSizing
+    End Function
+
 End Class

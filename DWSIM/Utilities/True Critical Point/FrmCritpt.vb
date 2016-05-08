@@ -38,7 +38,7 @@ Public Class FrmCritpt
 
     Private Sub FrmCritpt_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.Frm = My.Application.ActiveSimulation
+        Me.Frm = AttachedTo.GetFlowsheet
 
         Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosPonto")
 
@@ -169,11 +169,9 @@ Public Class FrmCritpt
             Me.nf = Frm.Options.NumberFormat
 
             Me.ComboBox3.Items.Clear()
-            For Each mat2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
-                Me.ComboBox3.Items.Add(mat2.GraphicObject.Tag.ToString)
-            Next
-
-            If Me.ComboBox3.Items.Count > 0 Then Me.ComboBox3.SelectedIndex = 0
+            Me.ComboBox3.Items.Add(AttachedTo.GraphicObject.Tag.ToString)
+            Me.ComboBox3.SelectedIndex = 0
+            Me.ComboBox3.Enabled = False
 
             With Me.Grid1.Columns
                 .Item(2).HeaderText = "Tc (" & su.temperature & ")"
@@ -209,4 +207,9 @@ Public Class FrmCritpt
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
 
     End Sub
+
+    Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return FlowsheetUtility.TrueCriticalPoint
+    End Function
+
 End Class

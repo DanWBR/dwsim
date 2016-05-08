@@ -547,7 +547,7 @@ Namespace UnitOperations
         'CAPE-OPEN Error Interfaces
         Implements ECapeUser, ECapeUnknown, ECapeRoot
 
-        Public _pp As Interfaces.IPropertyPackage
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public _pp As Interfaces.IPropertyPackage
         Public _ppid As String = ""
 
         Protected _capeopenmode As Boolean = False

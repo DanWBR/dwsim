@@ -26,9 +26,6 @@ Public Class FormBinEnv
 
     Implements Interfaces.IAttachedUtility
 
-    Dim mat As Streams.MaterialStream
-    Dim Frm As FormFlowsheet
-
     Public su As New SystemsOfUnits.Units
     Public cv As New SystemsOfUnits.Converter
     Public nf As String
@@ -40,26 +37,29 @@ Public Class FormBinEnv
 
     Dim P, T As Double
 
+    Private Flowsheet As Interfaces.IFlowsheet
+    Private mat As MaterialStream
+
     Private Sub FormBinEnv_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        Flowsheet = AttachedTo.GetFlowsheet
 
         Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosDiagr")
 
-        Me.Frm = My.Application.ActiveSimulation
+        If Flowsheet.SelectedCompounds.Count > 1 Then
 
-        If Me.Frm.Options.SelectedComponents.Count > 1 Then
-
-            Me.su = Frm.Options.SelectedUnitSystem
-            Me.nf = Frm.Options.NumberFormat
+            Me.su = Flowsheet.FlowsheetOptions.SelectedUnitSystem
+            Me.nf = Flowsheet.FlowsheetOptions.NumberFormat
 
             Me.cbComp1.Items.Clear()
             Me.cbComp2.Items.Clear()
-            For Each co As ConstantProperties In Frm.Options.SelectedComponents.Values
+            For Each co As ConstantProperties In Flowsheet.SelectedCompounds.Values
                 Me.cbComp1.Items.Add((co.Name))
                 Me.cbComp2.Items.Add((co.Name))
             Next
 
             Me.cbPropPack.Items.Clear()
-            For Each pp As PropertyPackage In Me.Frm.Options.PropertyPackages.Values
+            For Each pp As PropertyPackage In Flowsheet.PropertyPackages.Values
                 Me.cbPropPack.Items.Add(pp.Tag & " (" & pp.ComponentName & ")")
             Next
 
@@ -84,14 +84,10 @@ Public Class FormBinEnv
             Me.GridExpData.Columns(4).HeaderText = "P (" & su.pressure & ")"
 
             Try
-                If Frm.Options.BinaryEnvelopeExpData <> "" Then Me.GridExpData.PasteData2(Frm.Options.BinaryEnvelopeExpData)
+                If Flowsheet.FlowsheetOptions.BinaryEnvelopeExpData <> "" Then Me.GridExpData.PasteData2(Flowsheet.FlowsheetOptions.BinaryEnvelopeExpData)
             Catch ex As Exception
 
             End Try
-
-            Frm.WriteToLog(DWSIM.App.GetLocalTipString("BENV001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-            Frm.WriteToLog(DWSIM.App.GetLocalTipString("BENV002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-            Frm.WriteToLog(DWSIM.App.GetLocalTipString("BENV003"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
             If DWSIM.App.IsRunningOnMono Then GroupBox2.Width -= 80
 
@@ -118,7 +114,7 @@ Public Class FormBinEnv
             Me.mat = New MaterialStream("", "")
 
             For Each phase As BaseClasses.Phase In mat.Phases.Values
-                For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
+                For Each cp As ConstantProperties In Flowsheet.SelectedCompounds.Values
                     If (cp.Name) = cbComp1.SelectedItem.ToString Then
                         With phase
                             .Compounds.Add(cp.Name, New BaseClasses.Compound(cp.Name, ""))
@@ -131,7 +127,7 @@ Public Class FormBinEnv
             Next
 
             For Each phase As BaseClasses.Phase In mat.Phases.Values
-                For Each cp As ConstantProperties In Me.Frm.Options.SelectedComponents.Values
+                For Each cp As ConstantProperties In Flowsheet.SelectedCompounds.Values
                     If (cp.Name) = cbComp2.SelectedItem.ToString Then
                         With phase
                             .Compounds.Add(cp.Name, New BaseClasses.Compound(cp.Name, ""))
@@ -203,12 +199,12 @@ Public Class FormBinEnv
 
         If Not compare Then
 
-            For Each pp1 As PropertyPackage In Frm.Options.PropertyPackages.Values
+            For Each pp1 As PropertyPackage In Flowsheet.PropertyPackages.Values
                 If k = cbPropPack.SelectedIndex Then pp = pp1
                 k += 1
             Next
 
-            mat.SetFlowsheet(Me.Frm)
+            mat.SetFlowsheet(Flowsheet)
             pp.CurrentMaterialStream = mat
             results.Add(New Object() {pp.DW_ReturnBinaryEnvelope(e.Argument, Me.BackgroundWorker1), pp.ComponentName})
 
@@ -217,8 +213,8 @@ Public Class FormBinEnv
             ' get results from all property packages
 
 
-            For Each pp1 As PropertyPackage In Frm.Options.PropertyPackages.Values
-                mat.SetFlowsheet(Me.Frm)
+            For Each pp1 As PropertyPackage In Flowsheet.PropertyPackages.Values
+                mat.SetFlowsheet(Flowsheet)
                 pp1.CurrentMaterialStream = mat
                 results.Add(New Object() {pp1.DW_ReturnBinaryEnvelope(e.Argument, Me.BackgroundWorker1), pp1.ComponentName})
             Next
@@ -1140,4 +1136,9 @@ Public Class FormBinEnv
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
 
     End Sub
+
+    Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return FlowsheetUtility.PhaseEnvelopeBinary
+    End Function
+
 End Class

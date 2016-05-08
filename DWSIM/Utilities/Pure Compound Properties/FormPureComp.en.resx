@@ -117,12 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="BtnRestaurar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>663, 15</value>
+  </data>
   <data name="BtnRestaurar.Text" xml:space="preserve">
     <value>Restore Defaults</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkEnableEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>594, 19</value>
+    <value>453, 19</value>
   </data>
   <data name="chkEnableEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 17</value>
@@ -145,8 +148,17 @@
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Unit</value>
   </data>
+  <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>772, 356</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>778, 376</value>
+  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Properties</value>
+  </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>793, 390</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Constants</value>
@@ -310,10 +322,16 @@
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Comments</value>
   </data>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>795, 411</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>802, 457</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>View</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>DWSIM - Utilities: Pure Component Properties</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>802, 457</value>
   </data>
 </root>

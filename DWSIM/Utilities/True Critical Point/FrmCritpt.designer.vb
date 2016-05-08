@@ -41,8 +41,8 @@ Partial Class FrmCritpt
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Grid1)
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Grid1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
@@ -110,11 +110,11 @@ Partial Class FrmCritpt
         '
         'GroupBox6
         '
+        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
         Me.GroupBox6.Controls.Add(Me.LblSelected)
         Me.GroupBox6.Controls.Add(Me.Button1)
         Me.GroupBox6.Controls.Add(Me.ComboBox3)
         Me.GroupBox6.Controls.Add(Me.Label23)
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
         '
@@ -130,9 +130,9 @@ Partial Class FrmCritpt
         '
         'ComboBox3
         '
+        resources.ApplyResources(Me.ComboBox3, "ComboBox3")
         Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox3.DropDownWidth = 120
-        resources.ApplyResources(Me.ComboBox3, "ComboBox3")
         Me.ComboBox3.Name = "ComboBox3"
         '
         'Label23

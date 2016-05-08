@@ -102,6 +102,7 @@ Partial Class FrmColdProperties
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.LabelU8)
         Me.GroupBox1.Controls.Add(Me.LabelU7)
         Me.GroupBox1.Controls.Add(Me.LabelU6)
@@ -130,7 +131,6 @@ Partial Class FrmColdProperties
         Me.GroupBox1.Controls.Add(Me.LabelU1)
         Me.GroupBox1.Controls.Add(Me.TextBox1)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '

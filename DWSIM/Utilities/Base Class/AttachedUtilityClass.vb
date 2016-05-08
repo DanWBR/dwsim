@@ -54,7 +54,7 @@
 
         PanelUtility.Controls.Add(InternalUtility)
         DirectCast(InternalUtility, UserControl).Dock = DockStyle.Fill
-      
+
     End Sub
 
     Sub New()
@@ -140,5 +140,9 @@
         Me.Text = tbName.Text
         Me.TabText = tbName.Text
     End Sub
+
+    Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return InternalUtility.GetUtilityType
+    End Function
 
 End Class

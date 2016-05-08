@@ -142,7 +142,7 @@
     <value>127, 45</value>
   </data>
   <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 21</value>
+    <value>434, 21</value>
   </data>
   <data name="ComboBox1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -244,7 +244,7 @@
     <value>Top, Right</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>420, 73</value>
+    <value>474, 73</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 23</value>
@@ -277,7 +277,7 @@
     <value>127, 18</value>
   </data>
   <data name="ComboBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 21</value>
+    <value>434, 21</value>
   </data>
   <data name="ComboBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -325,7 +325,7 @@
     <value>5, 1</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 104</value>
+    <value>571, 104</value>
   </data>
   <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -355,7 +355,7 @@
     <value>Top, Right</value>
   </data>
   <data name="KryptonButton3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 64</value>
+    <value>460, 64</value>
   </data>
   <data name="KryptonButton3.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 23</value>
@@ -466,7 +466,7 @@
     <value>6, 68</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 13</value>
+    <value>108, 13</value>
   </data>
   <data name="Label11.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -598,7 +598,7 @@
     <value>6, 189</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 100</value>
+    <value>558, 104</value>
   </data>
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -625,7 +625,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="KryptonButton2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 58</value>
+    <value>460, 58</value>
   </data>
   <data name="KryptonButton2.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 23</value>
@@ -736,7 +736,7 @@
     <value>6, 68</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 13</value>
+    <value>108, 13</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -868,7 +868,7 @@
     <value>6, 100</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 88</value>
+    <value>558, 88</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1003,7 +1003,7 @@
     <value>6, 14</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 85</value>
+    <value>558, 85</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1030,7 +1030,7 @@
     <value>5, 106</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 297</value>
+    <value>571, 301</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1144,7 +1144,7 @@
     <value>Document</value>
   </data>
   <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 246</value>
+    <value>197, 224</value>
   </data>
   <data name="&gt;&gt;dckMenu.Name" xml:space="preserve">
     <value>dckMenu</value>
@@ -1158,17 +1158,11 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>528, 409</value>
-  </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>FrmHYD</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>582, 413</value>
   </data>
   <data name="&gt;&gt;FloatToolStripMenuItem.Name" xml:space="preserve">
     <value>FloatToolStripMenuItem</value>
@@ -1234,6 +1228,6 @@
     <value>FormHYD</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.7.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

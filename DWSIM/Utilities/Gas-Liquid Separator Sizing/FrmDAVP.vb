@@ -16,16 +16,13 @@
 
     Private Sub FrmDAVP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-
-        Me.Frm = My.Application.ActiveSimulation
+        Me.Frm = AttachedTo.GetFlowsheet
 
         Me.ComboBox1.Items.Clear()
+        Me.ComboBox1.Items.Add(AttachedTo.GraphicObject.Tag.ToString)
+        Me.ComboBox1.SelectedIndex = 0
+        Me.ComboBox1.Enabled = False
 
-        For Each vessel2 In Me.Frm.Collections.FlowsheetObjectCollection.Values
-            Me.ComboBox1.Items.Add(vessel2.GraphicObject.Tag.ToString)
-        Next
-
-        If Me.ComboBox1.Items.Count > 0 Then Me.ComboBox1.SelectedIndex = 0
         Me.ComboBoxTipoVaso.SelectedIndex = 0
 
         Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosDAVP")
@@ -251,4 +248,9 @@
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
 
     End Sub
+
+    Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return FlowsheetUtility.SeparatorSizing
+    End Function
+
 End Class

@@ -2655,6 +2655,8 @@ ruf:                Application.DoEvents()
 
     Private Sub bgUpdater_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgUpdater.DoWork
 
+        Directory.CreateDirectory(My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM")
+
         Dim myfile As String = My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM" & Path.DirectorySeparatorChar & "dwsim.txt"
         Dim webcl As New System.Net.WebClient()
 

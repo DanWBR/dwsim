@@ -36,16 +36,12 @@ Public Class FrmColdProperties
 
     Private Sub FrmColdProperties_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        frm = My.Application.ActiveSimulation
+        frm = AttachedTo.GetFlowsheet
 
         Me.ComboBox3.Items.Clear()
-        For Each mat2 In Me.frm.Collections.FlowsheetObjectCollection.Values
-            If mat2.GraphicObject.Calculated Then Me.ComboBox3.Items.Add(mat2.GraphicObject.Tag.ToString)
-        Next
-
+        Me.ComboBox3.Items.Add(AttachedTo.GraphicObject.Tag.ToString)
         Me.ComboBox3.SelectedIndex = 0
-
-        Me.frm = My.Application.ActiveSimulation
+        Me.ComboBox3.Enabled = False
 
         Me.su = frm.Options.SelectedUnitSystem
         Me.nf = frm.Options.NumberFormat
@@ -279,4 +275,9 @@ Public Class FrmColdProperties
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
 
     End Sub
+
+    Public Function GetUtilityType() As FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
+        Return FlowsheetUtility.PetroleumProperties
+    End Function
+
 End Class
