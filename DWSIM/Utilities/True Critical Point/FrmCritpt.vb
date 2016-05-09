@@ -36,6 +36,16 @@ Public Class FrmCritpt
     Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
+    Public Property CriticalPressure As Double
+    Public Property CriticalTemperature As Double
+    Public Property CriticalVolume As Double
+    Public Property CriticalCompressibility As Double
+
+    Public Property PseudoCriticalPressure As Double
+    Public Property PseudoCriticalTemperature As Double
+    Public Property PseudoCriticalVolume As Double
+    Public Property PseudoCriticalCompressibility As Double
+
     Private Sub FrmCritpt_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Me.Frm = AttachedTo.GetFlowsheet
@@ -129,12 +139,21 @@ Public Class FrmCritpt
             pvc = Format(SystemsOfUnits.Converter.ConvertFromSI(su.molar_volume, pr.AUX_VCM(PropertyPackages.Phase.Mixture) * 1000), nf)
             pzc = Format(pr.AUX_ZCM(PropertyPackages.Phase.Mixture), nf)
 
-            Grid1.Rows.Add(New Object() {Grid1.Rows.Count + 1, "PCP", ptc, ppc, pvc, pzc})
+            PseudoCriticalTemperature = pr.AUX_TCM(PropertyPackages.Phase.Mixture)
+            PseudoCriticalPressure = pr.AUX_PCM(PropertyPackages.Phase.Mixture)
+            PseudoCriticalVolume = pr.AUX_VCM(PropertyPackages.Phase.Mixture) * 1000
+            PseudoCriticalCompressibility = pr.AUX_ZCM(PropertyPackages.Phase.Mixture)
 
+            Grid1.Rows.Add(New Object() {Grid1.Rows.Count + 1, "PCP", ptc, ppc, pvc, pzc})
 
             If pc.Count > 0 Then
 
                 tmp = pc(0)
+
+                CriticalTemperature = tmp(0)
+                CriticalPressure = tmp(1)
+                CriticalVolume = tmp(2) * 1000
+                CriticalCompressibility = tmp(1) * tmp(2) / (8.314 * tmp(0))
 
                 For Each tmp In pc
                     ttc = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, tmp(0)), nf)
@@ -186,14 +205,56 @@ Public Class FrmCritpt
 
     Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
 
+        Dim plist As New List(Of String)
+
+        plist.Add(Me.Name1 + "_" + "Critical Pressure")
+        plist.Add(Me.Name1 + "_" + "Critical Temperature")
+        plist.Add(Me.Name1 + "_" + "Critical Volume")
+        plist.Add(Me.Name1 + "_" + "Critical Compressibility")
+        plist.Add(Me.Name1 + "_" + "Pseudo-Critical Pressure")
+        plist.Add(Me.Name1 + "_" + "Pseudo-Critical Temperature")
+        plist.Add(Me.Name1 + "_" + "Pseudo-Critical Volume")
+        plist.Add(Me.Name1 + "_" + "Pseudo-Critical Compressibility")
+
+        Return plist
+
     End Function
 
     Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
-
+        Select Case pname
+            Case Me.Name1 + "_" + "Critical Pressure", Me.Name1 + "_" + "Pseudo-Critical Pressure"
+                Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.pressure
+            Case Me.Name1 + "_" + "Critical Temperature", Me.Name1 + "_" + "Pseudo-Critical Temperature"
+                Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.temperature
+            Case Me.Name1 + "_" + "Critical Volume", Me.Name1 + "_" + "Pseudo-Critical Volume"
+                Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.molar_volume
+            Case Else
+                Return ""
+        End Select
     End Function
 
     Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
-
+        Dim units = AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem
+        Select Case pname
+            Case Me.Name1 + "_" + "Critical Pressure"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.pressure, CriticalPressure)
+            Case Me.Name1 + "_" + "Critical Temperature"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, CriticalTemperature)
+            Case Me.Name1 + "_" + "Critical Volume"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.molar_volume, CriticalVolume)
+            Case Me.Name1 + "_" + "Critical Compressibility"
+                Return CriticalCompressibility
+            Case Me.Name1 + "_" + "Pseudo-Critical Pressure"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.pressure, PseudoCriticalPressure)
+            Case Me.Name1 + "_" + "Pseudo-Critical Temperature"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, PseudoCriticalTemperature)
+            Case Me.Name1 + "_" + "Pseudo-Critical Volume"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.molar_volume, PseudoCriticalVolume)
+            Case Me.Name1 + "_" + "Pseudo-Critical Compressibility"
+                Return PseudoCriticalCompressibility
+            Case Else
+                Return ""
+        End Select
     End Function
 
     Public Property ID As Integer Implements Interfaces.IAttachedUtility.ID

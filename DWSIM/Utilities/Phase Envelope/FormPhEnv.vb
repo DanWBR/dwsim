@@ -1004,7 +1004,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
         If PC.Count > 0 Then
             CriticalPressure = PC(0)(1)
             CriticalTemperature = PC(0)(0)
-            CriticalVolume = PC(0)(2)
+            CriticalVolume = PC(0)(2) * 1000
         End If
 
         calculated = True

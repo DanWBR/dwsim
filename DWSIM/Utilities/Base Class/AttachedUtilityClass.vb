@@ -281,4 +281,9 @@
 
     Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
 
+    Private Sub chkAutoUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoUpdate.CheckedChanged
+        AutoUpdate = chkAutoUpdate.Checked
+        InternalUtility.AutoUpdate = chkAutoUpdate.Checked
+    End Sub
+
 End Class
