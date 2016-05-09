@@ -158,7 +158,7 @@ Public Class Calculator
                 dlist.Add("IpOptFSS39.dll")
                 dlist.Add("lpsolve55.dll")
                 dlist.Add("PC_SAFT_PROP.dll")
-                dlist.Add("PetAz.dll")
+                If envir = 32 Then dlist.Add("PetAz.dll")
 
                 alist.Add("W" + envir.ToString + "_" + "CoolProp.dll")
                 alist.Add("W" + envir.ToString + "_" + "fprops_ascend.dll")
@@ -166,7 +166,7 @@ Public Class Calculator
                 alist.Add("W" + envir.ToString + "_" + "IpOptFSS39.dll")
                 alist.Add("W" + envir.ToString + "_" + "lpsolve55.dll")
                 alist.Add("W" + envir.ToString + "_" + "PC_SAFT_PROP.dll")
-                alist.Add("W" + envir.ToString + "_" + "PetAz.dll")
+                If envir = 32 Then alist.Add("W" + envir.ToString + "_" + "PetAz.dll")
 
             ElseIf plat = "Linux" Then
 
@@ -268,7 +268,7 @@ Public Class Calculator
                 dlist.Add("IpOptFSS39.dll")
                 dlist.Add("lpsolve55.dll")
                 dlist.Add("PC_SAFT_PROP.dll")
-                dlist.Add("PetAz.dll")
+                If envir = 32 Then dlist.Add("PetAz.dll")
 
             ElseIf plat = "Linux" Then
 

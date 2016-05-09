@@ -344,7 +344,6 @@
     <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_IpOptFSS39.dll" />
     <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_lpsolve55.dll" />
     <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_PC_SAFT_PROP.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_PetAz.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\stream_mat_16.png" />

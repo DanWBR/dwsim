@@ -48,17 +48,15 @@ Module StreamListExtender
 
     <System.Runtime.CompilerServices.Extension()> _
     Public Function GetEnergyStream(ByVal unitop As SharedClasses.UnitOperations.UnitOpBaseClass) As Streams.EnergyStream
-        For Each obj In unitop.GraphicObject.OutputConnectors
-            If obj.IsAttached Then
-                If obj.AttachedConnector.AttachedTo.ObjectType = Enums.GraphicObjects.ObjectType.EnergyStream Then
-                    Return unitop.FlowSheet.SimulationObjects(obj.AttachedConnector.AttachedTo.Name)
-                Else
-                    Return Nothing
-                End If
+        If unitop.GraphicObject.EnergyConnector.IsAttached Then
+            If unitop.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.ObjectType = Enums.GraphicObjects.ObjectType.EnergyStream Then
+                Return unitop.FlowSheet.SimulationObjects(unitop.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
             Else
                 Return Nothing
             End If
-        Next
+        Else
+            Return Nothing
+        End If
         Return Nothing
     End Function
 
