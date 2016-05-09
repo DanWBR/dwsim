@@ -13456,6 +13456,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Atualizando utilitário {0} ligado a {1}....
+        '''</summary>
+        Friend Shared ReadOnly Property SolvingUtility() As String
+            Get
+                Return ResourceManager.GetString("SolvingUtility", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Águas Ácidas.
         '''</summary>
         Friend Shared ReadOnly Property SourWaterPP() As String

@@ -431,7 +431,6 @@ Public Class FormConfigWizard
             For Each lvi2 In Me.ListViewA.Items
                 If Not lvi2 Is Nothing Then sel.Add(lvi2.Tag)
             Next
-            FrmChild.Options.ThreePhaseFlashStabTestCompIds = sel.ToArray(Type.GetType("System.String"))
         Catch ex As Exception
 
         End Try

@@ -303,20 +303,20 @@ Public Class MaterialStreamEditor
             If refval.HasValue Then val = Converter.ConvertFromSI(units.viscosity, refval)
             .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Viscosidadedinmica"), val, units.viscosity})
 
-            If MatStream.FlowSheet.FlowsheetOptions.CalculateBubbleAndDewPoints And p.Name = "Mixture" Then
-                refval = p.Properties.bubblePressure.GetValueOrDefault
-                If refval.HasValue Then val = Converter.ConvertFromSI(units.pressure, refval)
-                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("BubblePress"), val, units.pressure})
-                refval = p.Properties.dewPressure.GetValueOrDefault
-                If refval.HasValue Then val = Converter.ConvertFromSI(units.pressure, refval)
-                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewPress"), val, units.pressure})
-                refval = p.Properties.bubbleTemperature.GetValueOrDefault
-                If refval.HasValue Then val = Converter.ConvertFromSI(units.temperature, refval)
-                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("BubbleTemp"), val, units.pressure})
-                refval = p.Properties.dewTemperature.GetValueOrDefault
-                If refval.HasValue Then val = Converter.ConvertFromSI(units.temperature, refval)
-                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewTemp"), val, units.pressure})
-            End If
+            'If MatStream.Me.FlashBase.FlashSettings("CalculateBubbleAndDewPoints") And p.Name = "Mixture" Then
+            '    refval = p.Properties.bubblePressure.GetValueOrDefault
+            '    If refval.HasValue Then val = Converter.ConvertFromSI(units.pressure, refval)
+            '    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("BubblePress"), val, units.pressure})
+            '    refval = p.Properties.dewPressure.GetValueOrDefault
+            '    If refval.HasValue Then val = Converter.ConvertFromSI(units.pressure, refval)
+            '    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewPress"), val, units.pressure})
+            '    refval = p.Properties.bubbleTemperature.GetValueOrDefault
+            '    If refval.HasValue Then val = Converter.ConvertFromSI(units.temperature, refval)
+            '    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("BubbleTemp"), val, units.pressure})
+            '    refval = p.Properties.dewTemperature.GetValueOrDefault
+            '    If refval.HasValue Then val = Converter.ConvertFromSI(units.temperature, refval)
+            '    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewTemp"), val, units.pressure})
+            'End If
 
         End With
 

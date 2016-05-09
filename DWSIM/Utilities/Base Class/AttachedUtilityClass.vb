@@ -31,24 +31,27 @@
 
     Public Property UtilityName As String Implements Interfaces.IAttachedUtility.Name
 
-    Public Overridable Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
+    Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
         Return InternalUtility.GetPropertyUnits(pname)
     End Function
 
-    Public Overridable Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
+    Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
         Return InternalUtility.GetPropertyValue(pname)
     End Function
 
-    Public Overridable Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
+    Public Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
         InternalUtility.SetPropertyValue(pname, pvalue)
     End Sub
 
-    Public Overridable Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
+    Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
         Return InternalUtility.GetPropertyList()
     End Function
 
-    Public Overridable Sub UpdateResults() Implements Interfaces.IAttachedUtility.Update
-        InternalUtility.Update()
+    Public Sub UpdateResults() Implements Interfaces.IAttachedUtility.Update
+        If AutoUpdate Then
+            AttachedTo.GetFlowsheet.ShowMessage(String.Format(DWSIM.App.GetLocalString("SolvingUtility"), Me.UtilityName, Me.AttachedTo.GraphicObject.Tag), Interfaces.IFlowsheet.MessageType.Information)
+            InternalUtility.Update()
+        End If
     End Sub
 
     Private Sub AttachedUtilityClass_Load(sender As Object, e As EventArgs) Handles MyBase.Load

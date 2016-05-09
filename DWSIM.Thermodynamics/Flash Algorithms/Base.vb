@@ -30,12 +30,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     ''' <remarks></remarks>
     <System.Serializable()> Public MustInherit Class FlashAlgorithm
 
+        Public Property FlashSettings As New Dictionary(Of String, String)
+
         Public Property StabSearchSeverity As Integer = 0
         Public Property StabSearchCompIDs As String() = New String() {}
 
         Private _P As Double, _Vz, _Vx1est, _Vx2est As Double(), _pp As PropertyPackage
 
         Sub New()
+
+            FlashSettings.Add("ThreePhaseFlashStabTestSeverity", "0")
+            FlashSettings.Add("ThreePhaseFlashStabTestCompIds", "")
+            FlashSettings.Add("CalculateBubbleAndDewPoints", "False")
+            FlashSettings.Add("ValidateEquilibriumCalc", "False")
+            FlashSettings.Add("UsePhaseIdentificationAlgorithm", "False")
+            FlashSettings.Add("FlashValidationDGETolerancePct", "1")
 
         End Sub
 

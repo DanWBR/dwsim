@@ -212,11 +212,17 @@ Public Class EditingForm_Mixer
     End Sub
 
     Private Sub cbPropPack_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPropPack.SelectedIndexChanged
-        If Loaded Then MixerObject.PropertyPackage = MixerObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
+        If Loaded Then
+            MixerObject.PropertyPackage = MixerObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
+            RequestCalc()
+        End If
     End Sub
 
     Private Sub cbFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlashAlg.SelectedIndexChanged
-        If Loaded Then MixerObject.PreferredFlashAlgorithm = cbFlashAlg.SelectedIndex
+        If Loaded Then
+            MixerObject.PreferredFlashAlgorithm = cbFlashAlg.SelectedIndex
+            RequestCalc()
+        End If
     End Sub
 
     Private Sub rtbAnnotations_RtfChanged(sender As Object, e As EventArgs) Handles rtbAnnotations.RtfChanged
@@ -226,4 +232,30 @@ Public Class EditingForm_Mixer
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
         If Loaded Then MixerObject.GraphicObject.Active = chkActive.Checked
     End Sub
+
+    Private Sub cbPressureCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPressureCalcMode.SelectedIndexChanged
+
+        If Loaded Then
+
+            Select Case cbPressureCalcMode.SelectedIndex
+                Case 0
+                    MixerObject.PressureCalculation = UnitOperations.Mixer.PressureBehavior.Minimum
+                Case 1
+                    MixerObject.PressureCalculation = UnitOperations.Mixer.PressureBehavior.Average
+                Case 2
+                    MixerObject.PressureCalculation = UnitOperations.Mixer.PressureBehavior.Maximum
+            End Select
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Sub RequestCalc()
+
+        MixerObject.FlowSheet.RequestCalculation(MixerObject)
+
+    End Sub
+
 End Class

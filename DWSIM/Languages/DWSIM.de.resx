@@ -5333,4 +5333,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DoubleClickToEdit" xml:space="preserve">
     <value>Double-click to edit</value>
   </data>
+  <data name="SolvingUtility" xml:space="preserve">
+    <value>Updating utility {0} attached to {1}...</value>
+  </data>
 </root>

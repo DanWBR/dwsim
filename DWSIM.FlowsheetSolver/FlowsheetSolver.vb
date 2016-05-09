@@ -71,6 +71,11 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                 gobj.Calculated = False
                                 myUnitOp.Calculated = False
                                 myUnitOp.Calculate()
+
+                                For Each utility In myUnitOp.AttachedUtilities
+                                    If utility.AutoUpdate Then utility.Update()
+                                Next
+
                                 myUnitOp.Calculated = True
                                 gobj.Status = Status.Calculated
                                 If myUnitOp.IsSpecAttached = True And myUnitOp.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myUnitOp.AttachedSpecId).Calculate()
@@ -96,6 +101,11 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                             myUnitOp.GraphicObject.Calculated = False
                             myUnitOp.Calculated = True
                             myUnitOp.Calculate()
+
+                            For Each utility In myUnitOp.AttachedUtilities
+                                If utility.AutoUpdate Then utility.Update()
+                            Next
+
                             myUnitOp.Calculated = False
                             fgui.ShowMessage(gobj.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
                             myUnitOp.GraphicObject.Calculated = True
@@ -116,6 +126,11 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     myObj.GraphicObject.Calculated = False
                     myObj.Calculated = False
                     myObj.Calculate()
+
+                    For Each utility In myObj.AttachedUtilities
+                        If utility.AutoUpdate Then utility.Update()
+                    Next
+
                     myObj.Calculated = True
                     fgui.ShowMessage(objArgs.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
                     myObj.GraphicObject.Calculated = True
@@ -154,7 +169,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <param name="objArgs">A CalculationArgs object containing information about the object to be calculated and its current status.</param>
     ''' <param name="ct">The cancellation token, used to listen for calculation cancellation requests from the user.</param>
     ''' <remarks></remarks>
-    Public Shared Sub CalculateFlowsheetAsync(ByVal fobj As Object, ByVal objArgs As CalculationArgs, ct As Threading.CancellationToken)
+    Public Shared Sub CalculateObjectAsync(ByVal fobj As Object, ByVal objArgs As CalculationArgs, ct As Threading.CancellationToken)
 
         Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
@@ -178,6 +193,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     Dim myObj As ISimulationObject = fbag.SimulationObjects(objArgs.Name)
                     RaiseEvent UnitOpCalculationStarted(fobj, New System.EventArgs(), objArgs)
                     myObj.Calculate()
+                    For Each utility In myObj.AttachedUtilities
+                        If utility.AutoUpdate Then utility.Update()
+                    Next
                     myObj.Calculated = True
                     If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Calculate()
                     RaiseEvent UnitOpCalculationFinished(fobj, New System.EventArgs(), objArgs)
@@ -208,6 +226,10 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         ms.GraphicObject.Calculated = False
 
         ms.Calculate()
+
+        For Each utility In ms.AttachedUtilities
+            If utility.AutoUpdate Then utility.Update()
+        Next
 
         fgui.ShowMessage(ms.GraphicObject.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
 
@@ -251,6 +273,10 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         'fobj.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, ms.Name)
 
         ms.Calculate()
+
+        For Each utility In ms.AttachedUtilities
+            If utility.AutoUpdate Then utility.Update()
+        Next
 
         'fobj.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, ms.Name)
 
@@ -404,7 +430,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     If myinfo.ObjectType = ObjectType.MaterialStream Then
                         CalculateMaterialStreamAsync(fobj, myobj, ct)
                     Else
-                        CalculateFlowsheetAsync(fobj, myinfo, ct)
+                        CalculateObjectAsync(fobj, myinfo, ct)
                     End If
                     myobj.GraphicObject.Calculated = True
                     myobj.LastUpdated = Date.Now
@@ -477,7 +503,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                                              If myinfo.ObjectType = ObjectType.MaterialStream Then
                                                                  CalculateMaterialStreamAsync(fobj, myobj, ct)
                                                              Else
-                                                                 CalculateFlowsheetAsync(fobj, myinfo, ct)
+                                                                 CalculateObjectAsync(fobj, myinfo, ct)
                                                              End If
                                                              myobj.GraphicObject.Calculated = True
                                                              myobj.LastUpdated = Date.Now

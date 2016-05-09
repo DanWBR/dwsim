@@ -303,4 +303,34 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Chemical Reactions Manager</value>
   </data>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Docking</value>
+  </data>
+  <data name="tsbClose.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="tsbDockingBottom.Text" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="tsbDockingDocument.Text" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="tsbDockingFloat.Text" xml:space="preserve">
+    <value>Floating</value>
+  </data>
+  <data name="tsbDockingLeft.Text" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="tsbDockingLeftAutoHide.Text" xml:space="preserve">
+    <value>Left Auto-Hide</value>
+  </data>
+  <data name="tsbDockingRight.Text" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
+    <value>Right Auto-Hide</value>
+  </data>
+  <data name="tsbDockingTop.Text" xml:space="preserve">
+    <value>Top</value>
+  </data>
 </root>

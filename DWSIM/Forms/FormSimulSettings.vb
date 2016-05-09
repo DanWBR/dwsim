@@ -208,42 +208,11 @@ Public Class FormSimulSettings
         ComboBox1.SelectedItem = Me.FrmChild.Options.NumberFormat
         ComboBox3.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
 
-        CheckBox1.Checked = Me.FrmChild.Options.CalculateBubbleAndDewPoints
+        Dim flashalgos As String() = [Enum].GetNames(FrmChild.FlowsheetOptions.PropertyPackageFlashAlgorithm.GetType)
+        ComboBoxFlashAlg.Items.Clear()
+        ComboBoxFlashAlg.Items.AddRange(flashalgos)
 
-        chkValidateEqCalc.Checked = Me.FrmChild.Options.ValidateEquilibriumCalc
-
-        chkDoPhaseId.Checked = Me.FrmChild.Options.UsePhaseIdentificationAlgorithm
-
-        tbFlashValidationTolerance.Enabled = chkValidateEqCalc.Checked
-
-        tbFlashValidationTolerance.Text = Me.FrmChild.Options.FlashValidationDGETolerancePct
-
-        Select Case Me.FrmChild.Options.PropertyPackageFlashAlgorithm
-            Case FlashMethod.DWSIMDefault
-                ComboBoxFlashAlg.SelectedIndex = 0
-            Case FlashMethod.NestedLoops3P,
-                    FlashMethod.NestedLoops3PV2,
-                    FlashMethod.NestedLoops3PV3
-                ComboBoxFlashAlg.SelectedIndex = 1
-            Case FlashMethod.InsideOut
-                ComboBoxFlashAlg.SelectedIndex = 2
-            Case FlashMethod.InsideOut3P
-                ComboBoxFlashAlg.SelectedIndex = 3
-            Case FlashMethod.GibbsMin2P
-                ComboBoxFlashAlg.SelectedIndex = 4
-            Case FlashMethod.GibbsMin3P
-                ComboBoxFlashAlg.SelectedIndex = 5
-            Case FlashMethod.NestedLoopsSLE
-                ComboBoxFlashAlg.SelectedIndex = 6
-            Case FlashMethod.NestedLoopsSLE_SS
-                ComboBoxFlashAlg.SelectedIndex = 7
-            Case FlashMethod.NestedLoopsImmiscible
-                ComboBoxFlashAlg.SelectedIndex = 8
-            Case Else
-                ComboBoxFlashAlg.SelectedIndex = 0
-        End Select
-
-        ComboBoxMinMethod.SelectedIndex = FrmChild.Options.PreferredGibbsMinimizationMethod
+        ComboBoxFlashAlg.SelectedIndex = Me.FrmChild.Options.PropertyPackageFlashAlgorithm
 
         FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.NumberFormat
         FrmChild.ToolStripComboBoxNumberFractionFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
@@ -256,22 +225,9 @@ Public Class FormSimulSettings
             FrmChild.ToolStripComboBoxUnitSystem.SelectedIndex = 0
         End If
 
-        CheckBox3.Checked = FrmChild.Options.SempreCalcularFlashPH
-
         Me.TBaut.Text = Me.FrmChild.Options.SimulationAuthor
         Me.TBdesc.Text = Me.FrmChild.Options.SimulationComments
         Me.TBtit.Text = Me.FrmChild.Options.SimulationName
-
-        SetupKeyCompounds()
-
-        Select Case FrmChild.Options.ThreePhaseFlashStabTestSeverity
-            Case 0
-                Me.RadioButton1.Checked = True
-            Case 1
-                Me.RadioButton2.Checked = True
-            Case 2
-                Me.RadioButton3.Checked = True
-        End Select
 
         Me.tbPassword.Text = FrmChild.Options.Password
         Me.chkUsePassword.Checked = FrmChild.Options.UsePassword
@@ -282,36 +238,6 @@ Public Class FormSimulSettings
 
     End Sub
 
-    Private Sub SetupKeyCompounds()
-        Dim comps, selected As New ArrayList
-        If FrmChild.Options.ThreePhaseFlashStabTestCompIds Is Nothing Then FrmChild.Options.ThreePhaseFlashStabTestCompIds = New String() {}
-        For Each c As ConstantProperties In FrmChild.Options.SelectedComponents.Values
-            comps.Add(c.Name)
-            For Each s As String In FrmChild.Options.ThreePhaseFlashStabTestCompIds
-                If s = c.Name Then
-                    selected.Add(c.Name)
-                    Exit For
-                End If
-            Next
-        Next
-
-        Me.ListView2.Items.Clear()
-
-        Dim i, n As Integer
-        n = comps.Count - 1
-        For i = 0 To n
-            With Me.ListView2.Items.Add(comps(i))
-                For Each s As String In selected
-                    If s = comps(i) Then
-                        .Checked = True
-                        Exit For
-                    End If
-                Next
-                .Tag = comps(i)
-            End With
-        Next
-    End Sub
-
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Me.Close()
@@ -320,10 +246,6 @@ Public Class FormSimulSettings
 
     Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
         FrmChild.Options.NumberFormat = Me.ComboBox1.SelectedItem
-    End Sub
-
-    Private Sub CheckBox3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox3.CheckedChanged
-        FrmChild.Options.SempreCalcularFlashPH = CheckBox3.Checked
     End Sub
 
     Private Sub TBtit_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBtit.TextChanged
@@ -1178,8 +1100,6 @@ Public Class FormSimulSettings
 
                 If Not DWSIM.App.IsRunningOnMono Then Me.ogc1.Rows.RemoveAt(index)
 
-                SetupKeyCompounds()
-
                 If My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundAdded,
                           .ObjID = tmpcomp.Name,
                           .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundAdded"), tmpcomp.Name)})
@@ -1221,7 +1141,6 @@ Public Class FormSimulSettings
                 phase.Compounds.Remove(tmpcomp.Name)
             Next
         Next
-        SetupKeyCompounds()
         If My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundRemoved,
           .ObjID = tmpcomp.Name,
           .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundRemoved"), tmpcomp.Name)})
@@ -1282,79 +1201,6 @@ Public Class FormSimulSettings
         FrmChild.Options.FractionNumberFormat = Me.ComboBox3.SelectedItem
     End Sub
 
-    Private Sub ComboBoxFlashAlg_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBoxFlashAlg.SelectedIndexChanged
-        Me.chkValidateEqCalc.Enabled = True
-        Me.ComboBoxMinMethod.Enabled = False
-        Select Case ComboBoxFlashAlg.SelectedIndex
-            Case 0
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.DWSIMDefault
-                Me.GroupBox11.Enabled = False
-            Case 1
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoops3PV3
-                Me.GroupBox11.Enabled = True
-            Case 2
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.InsideOut
-                Me.GroupBox11.Enabled = False
-            Case 3
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.InsideOut3P
-                Me.GroupBox11.Enabled = True
-            Case 4
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin2P
-                Me.GroupBox11.Enabled = False
-                Me.ComboBoxMinMethod.Enabled = True
-            Case 5
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin3P
-                Me.GroupBox11.Enabled = True
-                Me.ComboBoxMinMethod.Enabled = True
-            Case 6
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsSLE
-                Me.GroupBox11.Enabled = False
-                Me.chkValidateEqCalc.Enabled = False
-            Case 7
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsSLE_SS
-                Me.GroupBox11.Enabled = False
-                Me.chkValidateEqCalc.Enabled = False
-            Case 8
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsImmiscible
-                Me.GroupBox11.Enabled = True
-        End Select
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox1.CheckedChanged
-        Me.FrmChild.Options.CalculateBubbleAndDewPoints = Me.CheckBox1.Checked
-    End Sub
-
-    Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton1.CheckedChanged, RadioButton2.CheckedChanged, RadioButton3.CheckedChanged
-
-        If Me.RadioButton1.Checked Then FrmChild.Options.ThreePhaseFlashStabTestSeverity = 0
-        If Me.RadioButton2.Checked Then FrmChild.Options.ThreePhaseFlashStabTestSeverity = 1
-        If Me.RadioButton3.Checked Then FrmChild.Options.ThreePhaseFlashStabTestSeverity = 2
-
-    End Sub
-
-    Private Sub ListView2_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles ListView2.ItemChecked
-
-        If loaded Then
-
-            Try
-                Dim i As Integer = 0
-                Dim sel As New ArrayList
-                Dim lvi2 As ListViewItem
-                For Each lvi2 In Me.ListView2.Items
-                    If Not lvi2 Is Nothing Then
-                        If lvi2.Checked Then sel.Add(lvi2.Tag)
-                    End If
-                Next
-                FrmChild.Options.ThreePhaseFlashStabTestCompIds = sel.ToArray(Type.GetType("System.String"))
-            Catch ex As Exception
-
-            End Try
-
-
-        End If
-
-    End Sub
-
     Private Sub TextBox1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
         If e.KeyCode = Keys.Enter Then
             Call Button7_Click(sender, e)
@@ -1411,20 +1257,6 @@ Public Class FormSimulSettings
         frmam.Close()
     End Sub
 
-    Private Sub chkValidateEqCalc_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkValidateEqCalc.CheckedChanged
-        Me.FrmChild.Options.ValidateEquilibriumCalc = Me.chkValidateEqCalc.Checked
-        Me.tbFlashValidationTolerance.Enabled = Me.chkValidateEqCalc.Checked
-    End Sub
-
-    Private Sub tbFlashValidationTolerance_TextChanged(sender As System.Object, e As System.EventArgs) Handles tbFlashValidationTolerance.TextChanged
-        Try
-            Me.FrmChild.Options.FlashValidationDGETolerancePct = Me.tbFlashValidationTolerance.Text
-            Me.tbFlashValidationTolerance.ForeColor = Color.Blue
-        Catch ex As Exception
-            Me.tbFlashValidationTolerance.ForeColor = Color.Red
-        End Try
-    End Sub
-
     Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabelPropertyMethods.LinkClicked
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
@@ -1439,10 +1271,6 @@ Public Class FormSimulSettings
         If Me.DataGridViewPP.SelectedRows.Count = 1 Then
             Button8.PerformClick()
         End If
-    End Sub
-
-    Private Sub chkDoPhaseId_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkDoPhaseId.CheckedChanged
-        Me.FrmChild.Options.UsePhaseIdentificationAlgorithm = Me.chkDoPhaseId.Checked
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -1492,7 +1320,6 @@ Public Class FormSimulSettings
                 Me.FrmChild.Options.SelectedComponents.Add(toreplace.Name, toreplace)
                 Me.ListViewA.SelectedItems(0).Tag = toreplace.Name
                 Me.ListViewA.SelectedItems(0).Text = DWSIM.App.GetLocalString(toreplace.Name)
-                SetupKeyCompounds()
             End If
         End If
 
@@ -1500,49 +1327,6 @@ Public Class FormSimulSettings
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
         TextBox1.Text = ""
-    End Sub
-
-    Private Sub FloatToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FloatToolStripMenuItem.Click, DocumentToolStripMenuItem.Click,
-                                                               DockLeftToolStripMenuItem.Click, DockLeftAutoHideToolStripMenuItem.Click,
-                                                               DockRightAutoHideToolStripMenuItem.Click, DockRightToolStripMenuItem.Click,
-                                                               DockTopAutoHideToolStripMenuItem.Click, DockTopToolStripMenuItem.Click,
-                                                               DockBottomAutoHideToolStripMenuItem.Click, DockBottomToolStripMenuItem.Click
-
-        For Each ts As ToolStripMenuItem In dckMenu.Items
-            ts.Checked = False
-        Next
-
-        sender.Checked = True
-
-        Select Case sender.Name
-            Case "FloatToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float
-            Case "DocumentToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Document
-            Case "DockLeftToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
-            Case "DockLeftAutoHideToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeftAutoHide
-            Case "DockRightAutoHideToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide
-            Case "DockRightToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
-            Case "DockBottomAutoHideToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottomAutoHide
-            Case "DockBottomToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
-            Case "DockTopAutoHideToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockTopAutoHide
-            Case "DockTopToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockTop
-            Case "HiddenToolStripMenuItem"
-                Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Hidden
-        End Select
-
-    End Sub
-
-    Private Sub ComboBoxMinMethod_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxMinMethod.SelectedIndexChanged
-        FrmChild.Options.PreferredGibbsMinimizationMethod = ComboBoxMinMethod.SelectedIndex
     End Sub
 
     Private Sub cbObjectType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbObjectType.SelectedIndexChanged
@@ -1571,6 +1355,57 @@ Public Class FormSimulSettings
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub tsbClose_Click(sender As Object, e As EventArgs) Handles tsbClose.Click
+        Me.Close()
+    End Sub
+
+    Public Sub DockingHandler(sender As Object, e As EventArgs) Handles tsbDockingLeft.Click, tsbDockingBottom.Click, tsbDockingDocument.Click,
+                                                                        tsbDockingFloat.Click, tsbDockingLeftAutoHide.Click, tsbDockingRight.Click,
+                                                                        tsbDockingRightAutoHide.Click, tsbDockingTop.Click
+
+        If sender Is tsbDockingLeft Then
+            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
+        ElseIf sender Is tsbDockingLeftAutoHide Then
+            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeftAutoHide
+        ElseIf sender Is tsbDockingRight Then
+            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+        ElseIf sender Is tsbDockingRightAutoHide Then
+            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide
+        ElseIf sender Is tsbDockingTop Then
+            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockTop
+        ElseIf sender Is tsbDockingBottom Then
+            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
+        ElseIf sender Is tsbDockingDocument Then
+            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Document
+        ElseIf sender Is tsbDockingFloat Then
+            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float
+        End If
+
+    End Sub
+
+    Private Sub ComboBoxFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxFlashAlg.SelectedIndexChanged
+        Select Case ComboBoxFlashAlg.SelectedIndex
+            Case 0
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
+            Case 1
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.NestedLoops3PV3
+            Case 2
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.InsideOut
+            Case 3
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.InsideOut3P
+            Case 4
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.GibbsMin2P
+            Case 5
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.GibbsMin3P
+            Case 6
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE
+            Case 7
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE_SS
+            Case 8
+                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsImmiscible
+        End Select
     End Sub
 
 End Class

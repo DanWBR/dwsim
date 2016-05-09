@@ -317,38 +317,26 @@ Namespace PropertyPackages
         ''' <remarks></remarks>
         Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
-                If Not Settings.CAPEOPENMode Then
-                    If Not Me.Parameters.ContainsKey("PP_FLASHALGORITHM") Then
-                        Me.Parameters.Add("PP_FLASHALGORITHM", 2)
-                    End If
-                    Me.FlashAlgorithm = Me.Parameters("PP_FLASHALGORITHM")
+                Dim fswitch As FlashMethod
+                If PreferredFlashAlgorithm = Enums.FlashMethod.Default_Algorithm Then
+                    fswitch = FlashAlgorithm
+                Else
+                    fswitch = PreferredFlashAlgorithm
                 End If
-                Select Case FlashAlgorithm
+                Select Case fswitch
                     Case FlashMethod.DWSIMDefault
                         Return New Auxiliary.FlashAlgorithms.DWSIMDefault
                     Case FlashMethod.InsideOut
-                         Return New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                     Case FlashMethod.InsideOut3P
+                        Return New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                    Case FlashMethod.InsideOut3P
                         Return New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P With
                                                     {.StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
                     Case FlashMethod.GibbsMin2P
-                        Dim optm As Enums.OptimizationMethod = Enums.OptimizationMethod.IPOPT
-                        If Not Me.CurrentMaterialStream Is Nothing Then
-                            If Not Me.CurrentMaterialStream.Flowsheet Is Nothing Then
-                                optm = CurrentMaterialStream.Flowsheet.FlowsheetOptions.PreferredFlashAlgorithmOptimizer
-                            End If
-                        End If
                         Return New Auxiliary.FlashAlgorithms.GibbsMinimization3P With
-                                                    {.ForceTwoPhaseOnly = True, .Solver = optm}
+                                                    {.ForceTwoPhaseOnly = True}
                     Case FlashMethod.GibbsMin3P
-                        Dim optm As Enums.OptimizationMethod = Enums.OptimizationMethod.IPOPT
-                        If Not Me.CurrentMaterialStream Is Nothing Then
-                            If Not Me.CurrentMaterialStream.Flowsheet Is Nothing Then
-                                optm = CurrentMaterialStream.Flowsheet.FlowsheetOptions.PreferredFlashAlgorithmOptimizer
-                            End If
-                        End If
                         Return New Auxiliary.FlashAlgorithms.GibbsMinimization3P With
-                                                    {.ForceTwoPhaseOnly = False, .StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity, .Solver = optm}
+                                                    {.ForceTwoPhaseOnly = False, .StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
                     Case FlashMethod.NestedLoops3P, FlashMethod.NestedLoops3PV2, FlashMethod.NestedLoops3PV3
                         Return New Auxiliary.FlashAlgorithms.NestedLoops3PV3 With
                                                     {.StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
@@ -357,7 +345,7 @@ Namespace PropertyPackages
                         For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                             constprops.Add(su.ConstantProperties)
                         Next
-                       Return New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.CompoundProperties = constprops}
+                        Return New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.CompoundProperties = constprops}
                     Case FlashMethod.NestedLoopsSLE_SS
                         Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
                         For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -377,6 +365,7 @@ Namespace PropertyPackages
                         Return New Auxiliary.FlashAlgorithms.DWSIMDefault
                 End Select
             End Get
+
         End Property
 
         Public Property UniqueID() As String Implements IPropertyPackage.UniqueID
@@ -963,7 +952,7 @@ Namespace PropertyPackages
             Dim T As Double = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
 
             If Not Settings.CAPEOPENMode Then
-                If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.CalculateBubbleAndDewPoints _
+                If Me.FlashBase.FlashSettings("CalculateBubbleAndDewPoints") _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
                     Try
@@ -1337,8 +1326,8 @@ Namespace PropertyPackages
 
             If Not Settings.CAPEOPENMode Then
                 Try
-                    Me._tpseverity = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestSeverity
-                    Me._tpcompids = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestCompIds
+                    Me._tpseverity = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestSeverity")
+                    Me._tpcompids = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestCompIds").ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
                 Catch ex As Exception
                     Me._tpseverity = 0
                     Me._tpcompids = New String() {}
@@ -1391,7 +1380,7 @@ Namespace PropertyPackages
                             Dim dge As Double = 0
 
                             If Not Settings.CAPEOPENMode Then
-                                If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc _
+                                If Me.FlashBase.FlashSettings("ValidateEquilibriumCalc") = True _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -1422,7 +1411,7 @@ Namespace PropertyPackages
                             If Not Settings.CAPEOPENMode Then
 
                                 'identify phase
-                                If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.UsePhaseIdentificationAlgorithm Then
+                                If Me.FlashBase.FlashSettings("UsePhaseIdentificationAlgorithm") Then
                                     If Me.ComponentName.Contains("SRK") Or Me.ComponentName.Contains("PR") Then
                                         If Not Me.AUX_IS_SINGLECOMP(Phase.Mixture) Then
                                             Dim newphase, eos As String
@@ -1471,7 +1460,7 @@ Namespace PropertyPackages
                                     End If
                                 End If
 
-                                If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc _
+                                If Me.FlashBase.FlashSettings("ValidateEquilibriumCalc") = True _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -1481,7 +1470,7 @@ Namespace PropertyPackages
 
                                     dge = fge - ige
 
-                                    Dim dgtol As Double = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.FlashValidationDGETolerancePct
+                                    Dim dgtol As Double = Me.FlashBase.FlashSettings("FlashValidationDGETolerancePct")
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
                                         Throw New Exception(Calculator.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
@@ -2438,8 +2427,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Overridable Function DW_CalcEquilibrio_ISOL(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec, ByVal val1 As Double, ByVal val2 As Double, ByVal estimate As Double) As Object
 
             Try
-                Me._tpseverity = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestSeverity
-                Me._tpcompids = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestCompIds
+                Me._tpseverity = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestSeverity")
+                Me._tpcompids = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestCompIds").ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
             Catch ex As Exception
                 Me._tpseverity = 0
                 Me._tpcompids = New String() {}
@@ -2471,7 +2460,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Dim fge As Double = 0.0#
                             Dim dge As Double = 0.0#
 
-                            If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc Then
+                            If Me.FlashBase.FlashSettings("ValidateEquilibriumCalc") Then
 
                                 ige = Me.DW_CalcGibbsEnergy(RET_VMOL(Phase.Mixture), T, P)
 
@@ -2490,7 +2479,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Vs = result(8)
 
                             If Not Settings.CAPEOPENMode Then
-                                If Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ValidateEquilibriumCalc _
+                                If Me.FlashBase.FlashSettings("ValidateEquilibriumCalc") _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -2500,7 +2489,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                                     dge = fge - ige
 
-                                    Dim dgtol As Double = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.FlashValidationDGETolerancePct
+                                    Dim dgtol As Double = Me.FlashBase.FlashSettings("FlashValidationDGETolerancePct")
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
                                         Throw New Exception(Calculator.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
@@ -3289,8 +3278,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             If Not Settings.CAPEOPENMode Then
                 Try
-                    Me._tpseverity = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestSeverity
-                    Me._tpcompids = Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.ThreePhaseFlashStabTestCompIds
+                    Me._tpseverity = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestSeverity")
+                    Me._tpcompids = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestCompIds").ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
                 Catch ex As Exception
                     Me._tpseverity = 0
                     Me._tpcompids = New String() {}
@@ -9811,7 +9800,7 @@ Final3:
             Return Clone()
         End Function
 
-        Public Property PreferredFlashAlgorithm As Enums.FlashMethod Implements IPropertyPackage.PreferredFlashAlgorithm
+        Public Property PreferredFlashAlgorithm As Enums.FlashMethod = Enums.FlashMethod.Default_Algorithm Implements IPropertyPackage.PreferredFlashAlgorithm
 
     End Class
 

@@ -138,7 +138,7 @@
     <value>27, 16</value>
   </data>
   <data name="GridRSets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 211</value>
+    <value>553, 152</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GridRSets.TabIndex" type="System.Int32, mscorlib">
@@ -166,7 +166,7 @@
     <value>3, 16</value>
   </data>
   <data name="ToolStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 211</value>
+    <value>24, 152</value>
   </data>
   <data name="ToolStrip2.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -187,10 +187,10 @@
     <value>1</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 217</value>
+    <value>5, 177</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 230</value>
+    <value>583, 171</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -208,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -304,10 +304,10 @@
     <value>1</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 2</value>
+    <value>5, 31</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 210</value>
+    <value>583, 140</value>
   </data>
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -325,7 +325,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="DataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -346,7 +346,7 @@
     <value>27, 16</value>
   </data>
   <data name="GridRxns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 191</value>
+    <value>553, 121</value>
   </data>
   <data name="GridRxns.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -400,7 +400,7 @@
     <value>3, 16</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 191</value>
+    <value>24, 121</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -429,29 +429,17 @@
   <data name="ToolStripDropDownButton1.Text" xml:space="preserve">
     <value>Adicionar Reação</value>
   </data>
-  <data name="ConversãoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
+  <data name="ConversaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 22</value>
   </data>
-  <data name="ConversãoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Conversão</value>
+  <data name="EquilibrioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 22</value>
   </data>
-  <data name="EquilíbrioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
+  <data name="CineticaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 22</value>
   </data>
-  <data name="EquilíbrioToolStripMenuItem.Text" xml:space="preserve">
-    <value>Equilíbrio</value>
-  </data>
-  <data name="CinéticaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="CinéticaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Cinética</value>
-  </data>
-  <data name="HeterogêneaCatalíticaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="HeterogêneaCatalíticaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Heterogênea (Catalítica)</value>
+  <data name="HeterogeneaCataliticaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 22</value>
   </data>
   <data name="ToolStripButton6.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -561,6 +549,126 @@
   <data name="DocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 22</value>
   </data>
+  <metadata name="ToolStrip3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>927, 17</value>
+  </metadata>
+  <data name="ToolStrip3.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 25</value>
+  </data>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Encaixe</value>
+  </data>
+  <data name="tsbDockingLeft.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbDockingLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="tsbDockingLeft.Text" xml:space="preserve">
+    <value>Esquerda</value>
+  </data>
+  <data name="tsbDockingLeftAutoHide.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbDockingLeftAutoHide.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="tsbDockingLeftAutoHide.Text" xml:space="preserve">
+    <value>Esquerda Auto-Ocultar</value>
+  </data>
+  <data name="tsbDockingRightAutoHide.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbDockingRightAutoHide.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
+    <value>Direita Auto-Ocultar</value>
+  </data>
+  <data name="tsbDockingRight.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbDockingRight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="tsbDockingRight.Text" xml:space="preserve">
+    <value>Direita</value>
+  </data>
+  <data name="tsbDockingTop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbDockingTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="tsbDockingTop.Text" xml:space="preserve">
+    <value>Topo</value>
+  </data>
+  <data name="tsbDockingBottom.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbDockingBottom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="tsbDockingBottom.Text" xml:space="preserve">
+    <value>Fundo</value>
+  </data>
+  <data name="tsbDockingDocument.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbDockingDocument.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="tsbDockingDocument.Text" xml:space="preserve">
+    <value>Documento</value>
+  </data>
+  <data name="tsbDockingFloat.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbDockingFloat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="tsbDockingFloat.Text" xml:space="preserve">
+    <value>Janela Flutuante</value>
+  </data>
+  <data name="tsbClose.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 25</value>
+  </data>
+  <data name="tsbClose.Text" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="ToolStrip3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ToolStrip3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 0, 5, 0</value>
+  </data>
+  <data name="ToolStrip3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>595, 28</value>
+  </data>
+  <data name="ToolStrip3.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ToolStrip3.Text" xml:space="preserve">
+    <value>ToolStrip3</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip3.Name" xml:space="preserve">
+    <value>ToolStrip3</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -571,13 +679,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>422, 450</value>
+    <value>595, 351</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -657,28 +762,28 @@
   <data name="&gt;&gt;ToolStripDropDownButton1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ConversãoToolStripMenuItem.Name" xml:space="preserve">
-    <value>ConversãoToolStripMenuItem</value>
+  <data name="&gt;&gt;ConversaoToolStripMenuItem.Name" xml:space="preserve">
+    <value>ConversaoToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;ConversãoToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ConversaoToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;EquilíbrioToolStripMenuItem.Name" xml:space="preserve">
-    <value>EquilíbrioToolStripMenuItem</value>
+  <data name="&gt;&gt;EquilibrioToolStripMenuItem.Name" xml:space="preserve">
+    <value>EquilibrioToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;EquilíbrioToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;EquilibrioToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CinéticaToolStripMenuItem.Name" xml:space="preserve">
-    <value>CinéticaToolStripMenuItem</value>
+  <data name="&gt;&gt;CineticaToolStripMenuItem.Name" xml:space="preserve">
+    <value>CineticaToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;CinéticaToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;CineticaToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;HeterogêneaCatalíticaToolStripMenuItem.Name" xml:space="preserve">
-    <value>HeterogêneaCatalíticaToolStripMenuItem</value>
+  <data name="&gt;&gt;HeterogeneaCataliticaToolStripMenuItem.Name" xml:space="preserve">
+    <value>HeterogeneaCataliticaToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;HeterogêneaCatalíticaToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;HeterogeneaCataliticaToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripButton6.Name" xml:space="preserve">
@@ -782,6 +887,66 @@
   </data>
   <data name="&gt;&gt;DocumentToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripLabel1.Name" xml:space="preserve">
+    <value>ToolStripLabel1</value>
+  </data>
+  <data name="&gt;&gt;ToolStripLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingLeft.Name" xml:space="preserve">
+    <value>tsbDockingLeft</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingLeft.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingLeftAutoHide.Name" xml:space="preserve">
+    <value>tsbDockingLeftAutoHide</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingLeftAutoHide.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingRightAutoHide.Name" xml:space="preserve">
+    <value>tsbDockingRightAutoHide</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingRightAutoHide.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingRight.Name" xml:space="preserve">
+    <value>tsbDockingRight</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingRight.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingTop.Name" xml:space="preserve">
+    <value>tsbDockingTop</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingTop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingBottom.Name" xml:space="preserve">
+    <value>tsbDockingBottom</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingBottom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingDocument.Name" xml:space="preserve">
+    <value>tsbDockingDocument</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingDocument.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingFloat.Name" xml:space="preserve">
+    <value>tsbDockingFloat</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingFloat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsbClose.Name" xml:space="preserve">
+    <value>tsbClose</value>
+  </data>
+  <data name="&gt;&gt;tsbClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormReacManager</value>

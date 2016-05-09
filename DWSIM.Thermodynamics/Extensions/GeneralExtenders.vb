@@ -1,6 +1,54 @@
 Imports System.Windows.Forms
+Imports System.Globalization
 
 Module Extensions
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Function ToString(sourcearray As String(), ci As CultureInfo) As String
+
+        Dim sb As String = ""
+
+        If Not sourcearray Is Nothing Then
+            If sourcearray.Length > 0 Then
+
+                For Each obj As Object In sourcearray
+                    If TypeOf obj Is Double Then
+                        sb += Double.Parse(obj).ToString(ci) + ","
+                    Else
+                        sb += obj.ToString + ","
+                    End If
+                Next
+
+                sb = sb.Remove(sb.Length - 1)
+
+            End If
+        End If
+
+        Return sb
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Function ToArray(ByVal text As String, ci As CultureInfo, arraytype As Type) As Array
+
+        If Not text Is Nothing Then
+            Dim values() As String = text.Split(",")
+            Dim myarr As New ArrayList
+
+            For Each s As String In values
+                If Double.TryParse(s, New Double) Then
+                    myarr.Add(Double.Parse(s, ci))
+                Else
+                    myarr.Add(s)
+                End If
+            Next
+
+            Return myarr.ToArray(arraytype)
+        Else
+            Return New ArrayList().ToArray(arraytype)
+        End If
+
+    End Function
 
     <System.Runtime.CompilerServices.Extension()> _
     Public Function GetUnits(control As System.Windows.Forms.GridItem) As String

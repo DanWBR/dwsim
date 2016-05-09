@@ -19,9 +19,12 @@ Public Class MaterialStreamPanel
 
     End Function
 
-    Private Sub frmMatList_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Enter
+    Private Sub UpdateTable()
+
         Me.Flowsheet = My.Application.ActiveSimulation
+
         ToolStripLabel1.Text = ""
+
         If Not Flowsheet Is Nothing Then
             'TABELA DE CORRENTES
             Dim ms As Streams.MaterialStream
@@ -36,19 +39,19 @@ Public Class MaterialStreamPanel
                 i += 1
             Next
         End If
+
         ToolStripLabel1.Text = ""
+
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
 
-        frmMatList_Enter(sender, e)
+        UpdateTable()
 
     End Sub
 
 
     Private Sub frmMatList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        ToolStrip1.Visible = DWSIM.App.IsRunningOnMono
 
         Me.Flowsheet = My.Application.ActiveSimulation
 

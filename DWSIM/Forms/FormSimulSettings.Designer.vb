@@ -96,6 +96,10 @@ Partial Class FormSimulSettings
         Me.tbPassword = New System.Windows.Forms.TextBox()
         Me.chkUsePassword = New System.Windows.Forms.CheckBox()
         Me.PanelPP = New System.Windows.Forms.Panel()
+        Me.GroupBox15 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.ComboBoxFlashAlg = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.KryptonButton7 = New System.Windows.Forms.Button()
         Me.LinkLabelPropertyMethods = New System.Windows.Forms.LinkLabel()
@@ -113,26 +117,6 @@ Partial Class FormSimulSettings
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Button8 = New System.Windows.Forms.Button()
-        Me.PanelPPAdv = New System.Windows.Forms.Panel()
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.ListView2 = New System.Windows.Forms.ListView()
-        Me.gb1 = New System.Windows.Forms.GroupBox()
-        Me.ComboBoxMinMethod = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.chkDoPhaseId = New System.Windows.Forms.CheckBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.tbFlashValidationTolerance = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.chkValidateEqCalc = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.ComboBoxFlashAlg = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.PanelUnits = New System.Windows.Forms.Panel()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -143,7 +127,6 @@ Partial Class FormSimulSettings
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -153,17 +136,17 @@ Partial Class FormSimulSettings
         Me.Label15 = New System.Windows.Forms.Label()
         Me.cbObjectType = New System.Windows.Forms.ComboBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.dckMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.FloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockLeftToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockRightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockBottomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockLeftAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockRightAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockTopAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DockBottomAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.tsbDockingLeft = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDockingLeftAutoHide = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDockingRightAutoHide = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDockingRight = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDockingTop = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDockingBottom = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDockingDocument = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDockingFloat = New System.Windows.Forms.ToolStripButton()
+        Me.tsbClose = New System.Windows.Forms.ToolStripButton()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -175,26 +158,23 @@ Partial Class FormSimulSettings
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.PanelPP.SuspendLayout()
+        Me.GroupBox15.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox6.SuspendLayout()
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PanelPPAdv.SuspendLayout()
-        Me.GroupBox11.SuspendLayout()
-        Me.gb1.SuspendLayout()
         Me.PanelUnits.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TabPage6.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
-        Me.dckMenu.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button9
@@ -666,11 +646,40 @@ Partial Class FormSimulSettings
         'PanelPP
         '
         resources.ApplyResources(Me.PanelPP, "PanelPP")
+        Me.PanelPP.Controls.Add(Me.GroupBox15)
         Me.PanelPP.Controls.Add(Me.GroupBox13)
         Me.PanelPP.Controls.Add(Me.LinkLabelPropertyMethods)
         Me.PanelPP.Controls.Add(Me.GroupBox12)
         Me.PanelPP.Controls.Add(Me.GroupBox6)
         Me.PanelPP.Name = "PanelPP"
+        '
+        'GroupBox15
+        '
+        resources.ApplyResources(Me.GroupBox15, "GroupBox15")
+        Me.GroupBox15.Controls.Add(Me.Button1)
+        Me.GroupBox15.Controls.Add(Me.ComboBoxFlashAlg)
+        Me.GroupBox15.Controls.Add(Me.Label10)
+        Me.GroupBox15.Name = "GroupBox15"
+        Me.GroupBox15.TabStop = False
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        '
+        'ComboBoxFlashAlg
+        '
+        resources.ApplyResources(Me.ComboBoxFlashAlg, "ComboBoxFlashAlg")
+        Me.ComboBoxFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxFlashAlg.DropDownWidth = 250
+        Me.ComboBoxFlashAlg.FormattingEnabled = True
+        Me.ComboBoxFlashAlg.Items.AddRange(New Object() {resources.GetString("ComboBoxFlashAlg.Items"), resources.GetString("ComboBoxFlashAlg.Items1"), resources.GetString("ComboBoxFlashAlg.Items2"), resources.GetString("ComboBoxFlashAlg.Items3"), resources.GetString("ComboBoxFlashAlg.Items4"), resources.GetString("ComboBoxFlashAlg.Items5"), resources.GetString("ComboBoxFlashAlg.Items6"), resources.GetString("ComboBoxFlashAlg.Items7"), resources.GetString("ComboBoxFlashAlg.Items8")})
+        Me.ComboBoxFlashAlg.Name = "ComboBoxFlashAlg"
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
         '
         'GroupBox13
         '
@@ -809,142 +818,6 @@ Partial Class FormSimulSettings
         resources.ApplyResources(Me.Button8, "Button8")
         Me.Button8.Name = "Button8"
         '
-        'PanelPPAdv
-        '
-        resources.ApplyResources(Me.PanelPPAdv, "PanelPPAdv")
-        Me.PanelPPAdv.Controls.Add(Me.GroupBox11)
-        Me.PanelPPAdv.Controls.Add(Me.gb1)
-        Me.PanelPPAdv.Name = "PanelPPAdv"
-        '
-        'GroupBox11
-        '
-        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
-        Me.GroupBox11.Controls.Add(Me.RadioButton3)
-        Me.GroupBox11.Controls.Add(Me.RadioButton2)
-        Me.GroupBox11.Controls.Add(Me.RadioButton1)
-        Me.GroupBox11.Controls.Add(Me.Label4)
-        Me.GroupBox11.Controls.Add(Me.Label6)
-        Me.GroupBox11.Controls.Add(Me.ListView2)
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.TabStop = False
-        '
-        'RadioButton3
-        '
-        resources.ApplyResources(Me.RadioButton3, "RadioButton3")
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.UseVisualStyleBackColor = True
-        '
-        'RadioButton2
-        '
-        resources.ApplyResources(Me.RadioButton2, "RadioButton2")
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.UseVisualStyleBackColor = True
-        '
-        'RadioButton1
-        '
-        resources.ApplyResources(Me.RadioButton1, "RadioButton1")
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
-        '
-        'ListView2
-        '
-        resources.ApplyResources(Me.ListView2, "ListView2")
-        Me.ListView2.CheckBoxes = True
-        Me.ListView2.Name = "ListView2"
-        Me.ListView2.UseCompatibleStateImageBehavior = False
-        Me.ListView2.View = System.Windows.Forms.View.List
-        '
-        'gb1
-        '
-        resources.ApplyResources(Me.gb1, "gb1")
-        Me.gb1.Controls.Add(Me.ComboBoxMinMethod)
-        Me.gb1.Controls.Add(Me.Label10)
-        Me.gb1.Controls.Add(Me.chkDoPhaseId)
-        Me.gb1.Controls.Add(Me.Label13)
-        Me.gb1.Controls.Add(Me.tbFlashValidationTolerance)
-        Me.gb1.Controls.Add(Me.Label12)
-        Me.gb1.Controls.Add(Me.chkValidateEqCalc)
-        Me.gb1.Controls.Add(Me.CheckBox1)
-        Me.gb1.Controls.Add(Me.ComboBoxFlashAlg)
-        Me.gb1.Controls.Add(Me.Label2)
-        Me.gb1.Controls.Add(Me.CheckBox3)
-        Me.gb1.Name = "gb1"
-        Me.gb1.TabStop = False
-        '
-        'ComboBoxMinMethod
-        '
-        resources.ApplyResources(Me.ComboBoxMinMethod, "ComboBoxMinMethod")
-        Me.ComboBoxMinMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxMinMethod.FormattingEnabled = True
-        Me.ComboBoxMinMethod.Items.AddRange(New Object() {resources.GetString("ComboBoxMinMethod.Items"), resources.GetString("ComboBoxMinMethod.Items1"), resources.GetString("ComboBoxMinMethod.Items2"), resources.GetString("ComboBoxMinMethod.Items3"), resources.GetString("ComboBoxMinMethod.Items4"), resources.GetString("ComboBoxMinMethod.Items5"), resources.GetString("ComboBoxMinMethod.Items6"), resources.GetString("ComboBoxMinMethod.Items7"), resources.GetString("ComboBoxMinMethod.Items8"), resources.GetString("ComboBoxMinMethod.Items9"), resources.GetString("ComboBoxMinMethod.Items10")})
-        Me.ComboBoxMinMethod.Name = "ComboBoxMinMethod"
-        '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Name = "Label10"
-        '
-        'chkDoPhaseId
-        '
-        resources.ApplyResources(Me.chkDoPhaseId, "chkDoPhaseId")
-        Me.chkDoPhaseId.Name = "chkDoPhaseId"
-        '
-        'Label13
-        '
-        resources.ApplyResources(Me.Label13, "Label13")
-        Me.Label13.Name = "Label13"
-        '
-        'tbFlashValidationTolerance
-        '
-        resources.ApplyResources(Me.tbFlashValidationTolerance, "tbFlashValidationTolerance")
-        Me.tbFlashValidationTolerance.Name = "tbFlashValidationTolerance"
-        '
-        'Label12
-        '
-        resources.ApplyResources(Me.Label12, "Label12")
-        Me.Label12.Name = "Label12"
-        '
-        'chkValidateEqCalc
-        '
-        resources.ApplyResources(Me.chkValidateEqCalc, "chkValidateEqCalc")
-        Me.chkValidateEqCalc.Name = "chkValidateEqCalc"
-        '
-        'CheckBox1
-        '
-        resources.ApplyResources(Me.CheckBox1, "CheckBox1")
-        Me.CheckBox1.Name = "CheckBox1"
-        '
-        'ComboBoxFlashAlg
-        '
-        resources.ApplyResources(Me.ComboBoxFlashAlg, "ComboBoxFlashAlg")
-        Me.ComboBoxFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxFlashAlg.FormattingEnabled = True
-        Me.ComboBoxFlashAlg.Items.AddRange(New Object() {resources.GetString("ComboBoxFlashAlg.Items"), resources.GetString("ComboBoxFlashAlg.Items1"), resources.GetString("ComboBoxFlashAlg.Items2"), resources.GetString("ComboBoxFlashAlg.Items3"), resources.GetString("ComboBoxFlashAlg.Items4"), resources.GetString("ComboBoxFlashAlg.Items5"), resources.GetString("ComboBoxFlashAlg.Items6"), resources.GetString("ComboBoxFlashAlg.Items7"), resources.GetString("ComboBoxFlashAlg.Items8")})
-        Me.ComboBoxFlashAlg.Name = "ComboBoxFlashAlg"
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        '
-        'CheckBox3
-        '
-        resources.ApplyResources(Me.CheckBox3, "CheckBox3")
-        Me.CheckBox3.Name = "CheckBox3"
-        '
         'PanelUnits
         '
         resources.ApplyResources(Me.PanelUnits, "PanelUnits")
@@ -982,7 +855,6 @@ Partial Class FormSimulSettings
         resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage6)
@@ -1012,13 +884,6 @@ Partial Class FormSimulSettings
         Me.TabPage2.Controls.Add(Me.PanelPP)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'TabPage3
-        '
-        resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Controls.Add(Me.PanelPPAdv)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.UseVisualStyleBackColor = True
         '
         'TabPage4
         '
@@ -1092,66 +957,90 @@ Partial Class FormSimulSettings
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
         '
-        'dckMenu
+        'ToolStrip1
         '
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
-        Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
-        Me.dckMenu.Name = "dckMenu"
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.BackColor = System.Drawing.Color.SteelBlue
+        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.tsbDockingLeft, Me.tsbDockingLeftAutoHide, Me.tsbDockingRightAutoHide, Me.tsbDockingRight, Me.tsbDockingTop, Me.tsbDockingBottom, Me.tsbDockingDocument, Me.tsbDockingFloat, Me.tsbClose})
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         '
-        'FloatToolStripMenuItem
+        'ToolStripLabel1
         '
-        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
-        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
+        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
+        Me.ToolStripLabel1.ForeColor = System.Drawing.Color.White
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
         '
-        'DockLeftToolStripMenuItem
+        'tsbDockingLeft
         '
-        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
-        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
+        resources.ApplyResources(Me.tsbDockingLeft, "tsbDockingLeft")
+        Me.tsbDockingLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDockingLeft.Image = Global.DWSIM.My.Resources.Resources.arrow_left1
+        Me.tsbDockingLeft.Name = "tsbDockingLeft"
         '
-        'DockRightToolStripMenuItem
+        'tsbDockingLeftAutoHide
         '
-        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
-        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
+        resources.ApplyResources(Me.tsbDockingLeftAutoHide, "tsbDockingLeftAutoHide")
+        Me.tsbDockingLeftAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDockingLeftAutoHide.Image = Global.DWSIM.My.Resources.Resources.rewind
+        Me.tsbDockingLeftAutoHide.Name = "tsbDockingLeftAutoHide"
         '
-        'DockTopToolStripMenuItem
+        'tsbDockingRightAutoHide
         '
-        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
-        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
+        resources.ApplyResources(Me.tsbDockingRightAutoHide, "tsbDockingRightAutoHide")
+        Me.tsbDockingRightAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDockingRightAutoHide.Image = Global.DWSIM.My.Resources.Resources.fast_forward
+        Me.tsbDockingRightAutoHide.Name = "tsbDockingRightAutoHide"
         '
-        'DockBottomToolStripMenuItem
+        'tsbDockingRight
         '
-        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
-        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
+        resources.ApplyResources(Me.tsbDockingRight, "tsbDockingRight")
+        Me.tsbDockingRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDockingRight.Image = Global.DWSIM.My.Resources.Resources.arrow_right
+        Me.tsbDockingRight.Name = "tsbDockingRight"
         '
-        'DockLeftAutoHideToolStripMenuItem
+        'tsbDockingTop
         '
-        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
-        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.tsbDockingTop, "tsbDockingTop")
+        Me.tsbDockingTop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDockingTop.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
+        Me.tsbDockingTop.Name = "tsbDockingTop"
         '
-        'DockRightAutoHideToolStripMenuItem
+        'tsbDockingBottom
         '
-        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
-        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.tsbDockingBottom, "tsbDockingBottom")
+        Me.tsbDockingBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDockingBottom.Image = Global.DWSIM.My.Resources.Resources.arrow_down1
+        Me.tsbDockingBottom.Name = "tsbDockingBottom"
         '
-        'DockTopAutoHideToolStripMenuItem
+        'tsbDockingDocument
         '
-        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
-        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.tsbDockingDocument, "tsbDockingDocument")
+        Me.tsbDockingDocument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDockingDocument.Image = Global.DWSIM.My.Resources.Resources.arrows_4_way
+        Me.tsbDockingDocument.Name = "tsbDockingDocument"
         '
-        'DockBottomAutoHideToolStripMenuItem
+        'tsbDockingFloat
         '
-        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
-        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.tsbDockingFloat, "tsbDockingFloat")
+        Me.tsbDockingFloat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDockingFloat.Image = Global.DWSIM.My.Resources.Resources._new
+        Me.tsbDockingFloat.Name = "tsbDockingFloat"
         '
-        'DocumentToolStripMenuItem
+        'tsbClose
         '
-        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
-        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
+        resources.ApplyResources(Me.tsbClose, "tsbClose")
+        Me.tsbClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.tsbClose.ForeColor = System.Drawing.Color.White
+        Me.tsbClose.Image = Global.DWSIM.My.Resources.Resources.no
+        Me.tsbClose.Name = "tsbClose"
         '
         'FormSimulSettings
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.TabControl1)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -1160,7 +1049,6 @@ Partial Class FormSimulSettings
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.TabPageContextMenuStrip = Me.dckMenu
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
@@ -1176,23 +1064,19 @@ Partial Class FormSimulSettings
         Me.GroupBox9.ResumeLayout(False)
         Me.PanelPP.ResumeLayout(False)
         Me.PanelPP.PerformLayout()
+        Me.GroupBox15.ResumeLayout(False)
+        Me.GroupBox15.PerformLayout()
         Me.GroupBox13.ResumeLayout(False)
         Me.GroupBox12.ResumeLayout(False)
         Me.GroupBox12.PerformLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox6.ResumeLayout(False)
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelPPAdv.ResumeLayout(False)
-        Me.GroupBox11.ResumeLayout(False)
-        Me.GroupBox11.PerformLayout()
-        Me.gb1.ResumeLayout(False)
-        Me.gb1.PerformLayout()
         Me.PanelUnits.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage5.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
@@ -1200,7 +1084,8 @@ Partial Class FormSimulSettings
         Me.TabPage6.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
         Me.GroupBox14.PerformLayout()
-        Me.dckMenu.ResumeLayout(False)
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1261,34 +1146,16 @@ Partial Class FormSimulSettings
     Public WithEvents Button11 As System.Windows.Forms.Button
     Public WithEvents Button10 As System.Windows.Forms.Button
     Public WithEvents Button7 As System.Windows.Forms.Button
-    Public WithEvents CheckBox3 As System.Windows.Forms.CheckBox
     Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Public WithEvents Button8 As System.Windows.Forms.Button
     Public WithEvents ComboBox3 As System.Windows.Forms.ComboBox
     Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents gb1 As System.Windows.Forms.GroupBox
-    Public WithEvents ComboBoxFlashAlg As System.Windows.Forms.ComboBox
-    Public WithEvents Label2 As System.Windows.Forms.Label
-    Public WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Public WithEvents ImageList1 As System.Windows.Forms.ImageList
-    Public WithEvents PanelPPAdv As System.Windows.Forms.Panel
-    Friend WithEvents GroupBox11 As System.Windows.Forms.GroupBox
-    Friend WithEvents RadioButton3 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents ListView2 As System.Windows.Forms.ListView
     Friend WithEvents chkUsePassword As System.Windows.Forms.CheckBox
     Public WithEvents tbPassword As System.Windows.Forms.TextBox
     Public WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Public WithEvents chkValidateEqCalc As System.Windows.Forms.CheckBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents tbFlashValidationTolerance As System.Windows.Forms.TextBox
-    Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents LinkLabelPropertyMethods As System.Windows.Forms.LinkLabel
-    Public WithEvents chkDoPhaseId As System.Windows.Forms.CheckBox
     Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents casno As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1305,21 +1172,9 @@ Partial Class FormSimulSettings
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents dckMenu As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents FloatToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockLeftToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockRightToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockTopToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockBottomToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockLeftAutoHideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockRightAutoHideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockTopAutoHideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DockBottomAutoHideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DocumentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1331,12 +1186,25 @@ Partial Class FormSimulSettings
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents ComboBoxMinMethod As System.Windows.Forms.ComboBox
-    Public WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox14 As System.Windows.Forms.GroupBox
     Public WithEvents Label15 As System.Windows.Forms.Label
     Public WithEvents cbObjectType As System.Windows.Forms.ComboBox
     Public WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents PropertyListView As System.Windows.Forms.ListView
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents tsbDockingLeft As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbDockingLeftAutoHide As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbDockingRightAutoHide As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbDockingRight As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbDockingTop As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbDockingBottom As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbDockingDocument As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbDockingFloat As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbClose As System.Windows.Forms.ToolStripButton
+    Public WithEvents GroupBox15 As System.Windows.Forms.GroupBox
+    Public WithEvents Button1 As System.Windows.Forms.Button
+    Public WithEvents ComboBoxFlashAlg As System.Windows.Forms.ComboBox
+    Public WithEvents Label10 As System.Windows.Forms.Label
 End Class

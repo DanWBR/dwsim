@@ -141,15 +141,9 @@ Namespace DWSIM.Flowsheet
 
         End Sub
 
-        Property PreferredGibbsMinimizationMethod As Interfaces.Enums.OptimizationMethod = OptimizationMethod.IPOPT Implements Interfaces.IFlowsheetOptions.PreferredFlashAlgorithmOptimizer
-
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
 
-            Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "ThreePhaseFlashStabTestCompIds").SingleOrDefault
-
-            If Not el Is Nothing Then Me.ThreePhaseFlashStabTestCompIds = el.Value.Split(",")
-
-            el = (From xel As XElement In data Select xel Where xel.Name = "VisibleProperties").SingleOrDefault
+            Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "VisibleProperties").SingleOrDefault
 
             If Not el Is Nothing Then
 
@@ -171,14 +165,6 @@ Namespace DWSIM.Flowsheet
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me, True)
-            Dim comps As String = ""
-            For Each s As String In Me.ThreePhaseFlashStabTestCompIds
-                comps += s + ","
-            Next
-            If comps <> "" Then
-                comps = comps.Remove(comps.Length - 1, 1)
-                elements.Add(New XElement("ThreePhaseFlashStabTestCompIds", comps))
-            End If
 
             elements.Add(New XElement("VisibleProperties"))
 
@@ -198,11 +184,7 @@ Namespace DWSIM.Flowsheet
 
         Public Property BinaryEnvelopeExpData As String = "" Implements Interfaces.IFlowsheetOptions.BinaryEnvelopeExpData
 
-        Public Property CalculateBubbleAndDewPoints As Boolean = False Implements Interfaces.IFlowsheetOptions.CalculateBubbleAndDewPoints
-
         Public Property FilePath As String = "" Implements Interfaces.IFlowsheetOptions.FilePath
-
-        Public Property FlashValidationDGETolerancePct As Double = 0.01 Implements Interfaces.IFlowsheetOptions.FlashValidationDGETolerancePct
 
         Public Property FlowsheetQuickConnect As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetQuickConnect
 
@@ -224,9 +206,7 @@ Namespace DWSIM.Flowsheet
 
         Public Property Password As String = "" Implements Interfaces.IFlowsheetOptions.Password
 
-        Public Property PropertyPackageFlashAlgorithm As Integer = 0 Implements Interfaces.IFlowsheetOptions.PropertyPackageFlashAlgorithm
-
-        Public Property SempreCalcularFlashPH As Boolean = False Implements Interfaces.IFlowsheetOptions.SempreCalcularFlashPH
+        Public Property PropertyPackageFlashAlgorithm As Interfaces.Enums.FlashMethod = FlashMethod.Default_Algorithm Implements Interfaces.IFlowsheetOptions.PropertyPackageFlashAlgorithm
 
         Public Property SimulationAuthor As String = "" Implements Interfaces.IFlowsheetOptions.SimulationAuthor
 
@@ -234,15 +214,7 @@ Namespace DWSIM.Flowsheet
 
         Public Property SimulationName As String = "" Implements Interfaces.IFlowsheetOptions.SimulationName
 
-        Public Property ThreePhaseFlashStabTestCompIds As String() = New String() {} Implements Interfaces.IFlowsheetOptions.ThreePhaseFlashStabTestCompIds
-
-        Public Property ThreePhaseFlashStabTestSeverity As Integer = 0 Implements Interfaces.IFlowsheetOptions.ThreePhaseFlashStabTestSeverity
-
         Public Property UsePassword As Boolean = False Implements Interfaces.IFlowsheetOptions.UsePassword
-
-        Public Property UsePhaseIdentificationAlgorithm As Boolean = False Implements Interfaces.IFlowsheetOptions.UsePhaseIdentificationAlgorithm
-
-        Public Property ValidateEquilibriumCalc As Boolean = False Implements Interfaces.IFlowsheetOptions.ValidateEquilibriumCalc
 
         Public Property SelectedUnitSystem1 As Interfaces.IUnitsOfMeasure Implements Interfaces.IFlowsheetOptions.SelectedUnitSystem
             Get
