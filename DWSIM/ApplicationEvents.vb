@@ -57,7 +57,10 @@ Namespace My
                 End Using
             End Using
 
-            If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
+            If Not DWSIM.App.IsRunningOnMono Then
+                My.Settings.Save()
+                Calculator.RemoveLibraries()
+            End If
 
         End Sub
 

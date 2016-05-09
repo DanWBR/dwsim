@@ -145,10 +145,11 @@ Public Class FormMain
             'Check if DWSIM is running in Portable/Mono mode, then save settings to file.
             If File.Exists(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "default.ini") Or DWSIM.App.IsRunningOnMono Then
                 DWSIM.App.SaveSettings()
+                If DWSIM.App.IsRunningOnMono Then Calculator.RemoveLibraries()
             End If
             If Not DWSIM.App.IsRunningOnMono Then
                 My.Application.SaveMySettingsOnExit = True
-                If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
+                My.Settings.Save()
             End If
             'save an ini file for Excel/CAPE-OPEN compatibility purposes
             Try

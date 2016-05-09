@@ -232,4 +232,79 @@ Public Class Calculator
 
     End Function
 
+    Shared Function RemoveLibraries() As List(Of Exception)
+
+        Dim plat As String, envir As Integer
+
+        If Environment.Is64BitProcess Then
+            envir = 64
+        Else
+            envir = 32
+        End If
+
+        If RunningPlatform() = Platform.Windows Then
+            plat = "Windows"
+        ElseIf RunningPlatform() = Platform.Linux Then
+            plat = "Linux"
+        Else
+            plat = "None"
+        End If
+
+        Dim deletefiles As Boolean = False
+
+        If My.Settings.CurrentEnvironment = envir And My.Settings.CurrentPlatform = plat Then deletefiles = True
+
+        Dim exlist As New List(Of Exception)
+
+        If deletefiles And plat <> "None" Then
+
+            Dim dlist As New List(Of String)
+
+            If plat = "Windows" Then
+
+                dlist.Add("CoolProp.dll")
+                dlist.Add("fprops_ascend.dll")
+                dlist.Add("Ipopt39.dll")
+                dlist.Add("IpOptFSS39.dll")
+                dlist.Add("lpsolve55.dll")
+                dlist.Add("PC_SAFT_PROP.dll")
+                dlist.Add("PetAz.dll")
+
+            ElseIf plat = "Linux" Then
+
+                dlist.Add("Cureos.Numerics.dll.config")
+                dlist.Add("DWSIM.exe.config")
+                dlist.Add("libfprops_ascend.so")
+                dlist.Add("liblpsolve55.so")
+                dlist.Add("libPC_SAFT_PROP.so")
+                If envir = 32 Then
+                    dlist.Add("libipopt_mono_dwsim_ubuntu_11.10_32.tar.gz")
+                Else
+                    dlist.Add("libipopt_mono_dwsim_ubuntu_15.10_64.tar.gz")
+                    dlist.Add("libCoolProp.so")
+                End If
+
+            End If
+
+            'delete files
+
+            For i As Integer = 0 To dlist.Count - 1
+
+                ' Copy the assembly to the temporary file
+
+                Try
+                    File.Delete(Path.Combine(Environment.CurrentDirectory, dlist(i)))
+                Catch ex As Exception
+                    Console.WriteLine(dlist(i) & ": " & ex.Message.ToString)
+                    exlist.Add(ex)
+                End Try
+
+            Next
+
+        End If
+
+        Return exlist
+
+    End Function
+
 End Class

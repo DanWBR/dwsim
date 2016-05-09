@@ -136,7 +136,11 @@ Public Class CAPEOPENManager
     End Property
 
     Public Sub Terminate() Implements ICapeUtilities.Terminate
+
+        Dim exlist As List(Of Exception) = Calculator.RemoveLibraries()
+
         Me.Dispose()
+
     End Sub
 
     Private disposedValue As Boolean = False        ' To detect redundant calls
@@ -147,9 +151,6 @@ Public Class CAPEOPENManager
             If disposing Then
                 ' TODO: free other state (managed objects).
             End If
-
-            ' TODO: free your own state (unmanaged objects).
-            ' TODO: set large fields to null.
         End If
         Me.disposedValue = True
     End Sub
