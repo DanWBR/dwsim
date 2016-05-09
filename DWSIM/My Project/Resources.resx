@@ -661,9 +661,6 @@
   <data name="Vector Badge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Vector Badge.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arrow-up" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-up.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="siderectifier" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\siderectifier.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -919,9 +916,6 @@
   <data name="uo_orifice_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_orifice_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arrow_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="uo_cooler_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_cooler_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -954,9 +948,6 @@
   </data>
   <data name="font" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\font.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="arrow-left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-left.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="uo_mixer_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_mixer_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -993,9 +984,6 @@
   </data>
   <data name="Widgets Alt Badge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Widgets Alt Badge.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="arrow-down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow-down.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="application_tile_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application_tile_horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
