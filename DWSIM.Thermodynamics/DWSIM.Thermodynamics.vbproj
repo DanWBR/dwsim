@@ -101,16 +101,17 @@
     <Import Include="System.Data" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Linq" />
+    <Import Include="System.Windows.Forms" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ThermodynamicsBase.vb" />
-    <Compile Include="Editing Forms\MaterialStreamEditor.Designer.vb">
+    <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.Designer.vb">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\MaterialStreamEditor.vb">
+    <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\Thermodynamics.vb" />
@@ -211,10 +212,10 @@
     <Compile Include="Property Packages\UNIQUAC.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Editing Forms\MaterialStreamEditor.en.resx">
+    <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.en.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\MaterialStreamEditor.resx">
+    <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
