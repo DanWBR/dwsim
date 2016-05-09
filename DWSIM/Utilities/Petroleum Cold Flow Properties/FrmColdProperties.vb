@@ -280,4 +280,6 @@ Public Class FrmColdProperties
         Return FlowsheetUtility.PetroleumProperties
     End Function
 
+    Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
+
 End Class

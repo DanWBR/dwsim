@@ -256,13 +256,54 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public MustOverride Function GetProperties(proptype As PropertyType) As String() Implements Interfaces.ISimulationObject.GetProperties
+        Public Overridable Function GetProperties(proptype As PropertyType) As String() Implements Interfaces.ISimulationObject.GetProperties
 
-        Public MustOverride Function GetPropertyUnit(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As String Implements Interfaces.ISimulationObject.GetPropertyUnit
+            For Each item In AttachedUtilities
+                Return item.GetPropertyList().ToArray
+            Next
 
-        Public MustOverride Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
+            Return New String() {}
 
-        Public MustOverride Function SetPropertyValue(prop As String, propval As Object, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean Implements Interfaces.ISimulationObject.SetPropertyValue
+        End Function
+
+        Public Overridable Function GetPropertyUnit(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As String Implements Interfaces.ISimulationObject.GetPropertyUnit
+
+            For Each item In AttachedUtilities
+                For Each prop1 In item.GetPropertyList()
+                    If prop1 = prop Then Return item.GetPropertyUnits(prop)
+                Next
+            Next
+
+            Return "NF"
+
+        End Function
+
+        Public Overridable Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
+
+            For Each item In AttachedUtilities
+                For Each prop1 In item.GetPropertyList()
+                    If prop1 = prop Then Return item.GetPropertyValue(prop)
+                Next
+            Next
+
+            Return Nothing
+
+        End Function
+
+        Public Overridable Function SetPropertyValue(prop As String, propval As Object, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean Implements Interfaces.ISimulationObject.SetPropertyValue
+
+            For Each item In AttachedUtilities
+                For Each prop1 In item.GetPropertyList()
+                    If prop1 = prop Then
+                        item.SetPropertyValue(prop, propval)
+                        Exit For
+                    End If
+                Next
+            Next
+
+            Return False
+
+        End Function
 
         Public Overridable Function GetDefaultProperties() As String() Implements ISimulationObject.GetDefaultProperties
             Return GetProperties(PropertyType.ALL)

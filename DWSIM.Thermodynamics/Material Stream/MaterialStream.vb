@@ -799,640 +799,651 @@ Namespace Streams
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Object = ""
-            Dim sname As String = ""
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            If prop <> "" Then
+            If val0 Is Nothing Then
 
-                Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
-                If prop.Split(",").Length = 2 Then
-                    sname = prop.Split(",")(1)
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Object = ""
+                Dim sname As String = ""
+
+                If prop <> "" Then
+
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
+                    If prop.Split(",").Length = 2 Then
+                        sname = prop.Split(",")(1)
+                    End If
+
+                    Select Case propidx
+
+                        Case 0
+                            'PROP_MS_0 Temperature
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.temperature.GetValueOrDefault)
+                        Case 1
+                            'PROP_MS_1 Pressure
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.pressure.GetValueOrDefault)
+                        Case 2
+                            'PROP_MS_2	Mass Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(0).Properties.massflow.GetValueOrDefault)
+                        Case 3
+                            'PROP_MS_3	Molar Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Properties.molarflow.GetValueOrDefault)
+                        Case 4
+                            'PROP_MS_4	Volumetric Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault)
+                        Case 5
+                            'PROP_MS_5	Mixture Density
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(0).Properties.density.GetValueOrDefault)
+                        Case 6
+                            'PROP_MS_6	Mixture Molar Weight
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(0).Properties.molecularWeight.GetValueOrDefault)
+                        Case 7
+                            'PROP_MS_7	Mixture Specific Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(0).Properties.enthalpy.GetValueOrDefault)
+                        Case 8
+                            'PROP_MS_8	Mixture Specific Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(0).Properties.entropy.GetValueOrDefault)
+                        Case 9
+                            'PROP_MS_9	Mixture Molar Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(0).Properties.molar_enthalpy.GetValueOrDefault)
+                        Case 10
+                            'PROP_MS_10	Mixture Molar Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(0).Properties.molar_entropy.GetValueOrDefault)
+                        Case 11
+                            'PROP_MS_11	Mixture Thermal Conductivity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(0).Properties.thermalConductivity.GetValueOrDefault)
+                        Case 12
+                            'PROP_MS_12	Vapor Phase Density
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(2).Properties.density.GetValueOrDefault)
+                        Case 13
+                            'PROP_MS_13	Vapor Phase Molar Weight
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(2).Properties.molecularWeight.GetValueOrDefault)
+                        Case 14
+                            'PROP_MS_14	Vapor Phase Specific Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(2).Properties.enthalpy.GetValueOrDefault)
+                        Case 15
+                            'PROP_MS_15	Vapor Phase Specific Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(2).Properties.entropy.GetValueOrDefault)
+                        Case 16
+                            'PROP_MS_16	Vapor Phase Molar Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(2).Properties.molar_enthalpy.GetValueOrDefault)
+                        Case 17
+                            'PROP_MS_17	Vapor Phase Molar Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(2).Properties.molar_entropy.GetValueOrDefault)
+                        Case 18
+                            'PROP_MS_18	Vapor Phase Thermal Conductivity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(2).Properties.thermalConductivity.GetValueOrDefault)
+                        Case 19
+                            'PROP_MS_19	Vapor Phase Kinematic Viscosity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(2).Properties.kinematic_viscosity.GetValueOrDefault)
+                        Case 20
+                            'PROP_MS_20	Vapor Phase Dynamic Viscosity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(2).Properties.viscosity.GetValueOrDefault)
+                        Case 21
+                            'PROP_MS_21	Vapor Phase Heat Capacity (Cp)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault)
+                        Case 22
+                            'PROP_MS_22	Vapor Phase Heat Capacity Ratio (Cp/Cv)
+                            value = Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(2).Properties.heatCapacityCv.GetValueOrDefault
+                        Case 23
+                            'PROP_MS_23	Vapor Phase Mass Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(2).Properties.massflow.GetValueOrDefault)
+                        Case 24
+                            'PROP_MS_24	Vapor Phase Molar Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Properties.molarflow.GetValueOrDefault)
+                        Case 25
+                            'PROP_MS_25	Vapor Phase Volumetric Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(2).Properties.volumetric_flow.GetValueOrDefault)
+                        Case 26
+                            'PROP_MS_26	Vapor Phase Compressibility Factor
+                            value = Me.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
+                        Case 27
+                            'PROP_MS_27	Vapor Phase Molar Fraction
+                            value = Me.Phases(2).Properties.molarfraction.GetValueOrDefault
+                        Case 28
+                            'PROP_MS_28	Vapor Phase Mass Fraction
+                            value = Me.Phases(2).Properties.massfraction.GetValueOrDefault
+                        Case 29
+                            'PROP_MS_29	Vapor Phase Volumetric Fraction
+                            value = Me.Phases(2).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                        Case 30
+                            'PROP_MS_30	Liquid Phase (Mixture) Density
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(1).Properties.density.GetValueOrDefault)
+                        Case 31
+                            'PROP_MS_31	Liquid Phase (Mixture) Molar Weight
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(1).Properties.molecularWeight.GetValueOrDefault)
+                        Case 32
+                            'PROP_MS_32	Liquid Phase (Mixture) Specific Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(1).Properties.enthalpy.GetValueOrDefault)
+                        Case 33
+                            'PROP_MS_33	Liquid Phase (Mixture) Specific Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(1).Properties.entropy.GetValueOrDefault)
+                        Case 34
+                            'PROP_MS_34	Liquid Phase (Mixture) Molar Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(1).Properties.molar_enthalpy.GetValueOrDefault)
+                        Case 35
+                            'PROP_MS_35	Liquid Phase (Mixture) Molar Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(1).Properties.molar_entropy.GetValueOrDefault)
+                        Case 36
+                            'PROP_MS_36	Liquid Phase (Mixture) Thermal Conductivity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(1).Properties.thermalConductivity.GetValueOrDefault)
+                        Case 37
+                            'PROP_MS_37	Liquid Phase (Mixture) Kinematic Viscosity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(1).Properties.kinematic_viscosity.GetValueOrDefault)
+                        Case 38
+                            'PROP_MS_38	Liquid Phase (Mixture) Dynamic Viscosity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(1).Properties.viscosity.GetValueOrDefault)
+                        Case 39
+                            'PROP_MS_39	Liquid Phase (Mixture) Heat Capacity (Cp)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault)
+                        Case 40
+                            'PROP_MS_40	Liquid Phase (Mixture) Heat Capacity Ratio (Cp/Cv)
+                            value = Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(1).Properties.heatCapacityCv.GetValueOrDefault
+                        Case 41
+                            'PROP_MS_41	Liquid Phase (Mixture) Mass Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(1).Properties.massflow.GetValueOrDefault)
+                        Case 42
+                            'PROP_MS_42	Liquid Phase (Mixture) Molar Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Properties.molarflow.GetValueOrDefault)
+                        Case 43
+                            'PROP_MS_43	Liquid Phase (Mixture) Volumetric Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(1).Properties.volumetric_flow.GetValueOrDefault)
+                        Case 44
+                            'PROP_MS_44	Liquid Phase (Mixture) Compressibility Factor
+                            value = Me.Phases(1).Properties.compressibilityFactor.GetValueOrDefault
+                        Case 45
+                            'PROP_MS_45	Liquid Phase (Mixture) Molar Fraction
+                            value = Me.Phases(1).Properties.molarfraction.GetValueOrDefault
+                        Case 46
+                            'PROP_MS_46	Liquid Phase (Mixture) Mass Fraction
+                            value = Me.Phases(1).Properties.massfraction.GetValueOrDefault
+                        Case 47
+                            'PROP_MS_47	Liquid Phase (Mixture) Volumetric Fraction
+                            value = Me.Phases(1).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                        Case 48
+                            'PROP_MS_48	Liquid Phase (1) Density
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(3).Properties.density.GetValueOrDefault)
+                        Case 49
+                            'PROP_MS_49	Liquid Phase (1) Molar Weight
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(3).Properties.molecularWeight.GetValueOrDefault)
+                        Case 50
+                            'PROP_MS_50	Liquid Phase (1) Specific Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(3).Properties.enthalpy.GetValueOrDefault)
+                        Case 51
+                            'PROP_MS_51	Liquid Phase (1) Specific Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(3).Properties.entropy.GetValueOrDefault)
+                        Case 52
+                            'PROP_MS_52	Liquid Phase (1) Molar Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(3).Properties.molar_enthalpy.GetValueOrDefault)
+                        Case 53
+                            'PROP_MS_53	Liquid Phase (1) Molar Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(3).Properties.molar_entropy.GetValueOrDefault)
+                        Case 54
+                            'PROP_MS_54	Liquid Phase (1) Thermal Conductivity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(3).Properties.thermalConductivity.GetValueOrDefault)
+                        Case 55
+                            'PROP_MS_55	Liquid Phase (1) Kinematic Viscosity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault)
+                        Case 56
+                            'PROP_MS_56	Liquid Phase (1) Dynamic Viscosity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(3).Properties.viscosity.GetValueOrDefault)
+                        Case 57
+                            'PROP_MS_57	Liquid Phase (1) Heat Capacity (Cp)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault)
+                        Case 58
+                            'PROP_MS_58	Liquid Phase (1) Heat Capacity Ratio (Cp/Cv)
+                            value = Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(3).Properties.heatCapacityCv.GetValueOrDefault
+                        Case 59
+                            'PROP_MS_59	Liquid Phase (1) Mass Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(3).Properties.massflow.GetValueOrDefault)
+                        Case 60
+                            'PROP_MS_60	Liquid Phase (1) Molar Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Properties.molarflow.GetValueOrDefault)
+                        Case 61
+                            'PROP_MS_61	Liquid Phase (1) Volumetric Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(3).Properties.volumetric_flow.GetValueOrDefault)
+                        Case 62
+                            'PROP_MS_62	Liquid Phase (1) Compressibility Factor
+                            value = Me.Phases(3).Properties.compressibilityFactor.GetValueOrDefault
+                        Case 63
+                            'PROP_MS_63	Liquid Phase (1) Molar Fraction
+                            value = Me.Phases(3).Properties.molarfraction.GetValueOrDefault
+                        Case 64
+                            'PROP_MS_64	Liquid Phase (1) Mass Fraction
+                            value = Me.Phases(3).Properties.massfraction.GetValueOrDefault
+                        Case 65
+                            'PROP_MS_65	Liquid Phase (1) Volumetric Fraction
+                            value = Me.Phases(3).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                        Case 66
+                            'PROP_MS_66	Liquid Phase (2) Density
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(4).Properties.density.GetValueOrDefault)
+                        Case 67
+                            'PROP_MS_67	Liquid Phase (2) Molar Weight
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(4).Properties.molecularWeight.GetValueOrDefault)
+                        Case 68
+                            'PROP_MS_68	Liquid Phase (2) Specific Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(4).Properties.enthalpy.GetValueOrDefault)
+                        Case 69
+                            'PROP_MS_69	Liquid Phase (2) Specific Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(4).Properties.entropy.GetValueOrDefault)
+                        Case 70
+                            'PROP_MS_70	Liquid Phase (2) Molar Enthalpy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(4).Properties.molar_enthalpy.GetValueOrDefault)
+                        Case 71
+                            'PROP_MS_71	Liquid Phase (2) Molar Entropy
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(4).Properties.molar_entropy.GetValueOrDefault)
+                        Case 72
+                            'PROP_MS_72	Liquid Phase (2) Thermal Conductivity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(4).Properties.thermalConductivity.GetValueOrDefault)
+                        Case 73
+                            'PROP_MS_73	Liquid Phase (2) Kinematic Viscosity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(4).Properties.kinematic_viscosity.GetValueOrDefault)
+                        Case 74
+                            'PROP_MS_74	Liquid Phase (2) Dynamic Viscosity
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(4).Properties.viscosity.GetValueOrDefault)
+                        Case 75
+                            'PROP_MS_75	Liquid Phase (2) Heat Capacity (Cp)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault)
+                        Case 76
+                            'PROP_MS_76	Liquid Phase (2) Heat Capacity Ratio (Cp/Cv)
+                            value = Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(4).Properties.heatCapacityCv.GetValueOrDefault
+                        Case 77
+                            'PROP_MS_77	Liquid Phase (2) Mass Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(4).Properties.massflow.GetValueOrDefault)
+                        Case 78
+                            'PROP_MS_78	Liquid Phase (2) Molar Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Properties.molarflow.GetValueOrDefault)
+                        Case 79
+                            'PROP_MS_79	Liquid Phase (2) Volumetric Flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(4).Properties.volumetric_flow.GetValueOrDefault)
+                        Case 80
+                            'PROP_MS_80	Liquid Phase (2) Compressibility Factor
+                            value = Me.Phases(4).Properties.compressibilityFactor.GetValueOrDefault
+                        Case 81
+                            'PROP_MS_81	Liquid Phase (2) Molar Fraction
+                            value = Me.Phases(4).Properties.molarfraction.GetValueOrDefault
+                        Case 82
+                            'PROP_MS_82	Liquid Phase (2) Mass Fraction
+                            value = Me.Phases(4).Properties.massfraction.GetValueOrDefault
+                        Case 83
+                            'PROP_MS_83	Liquid Phase (2) Volumetric Fraction
+                            value = Me.Phases(4).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                        Case 84
+                            'PROP_MS_84	Aqueous Phase Density
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(6).Properties.density.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 85
+                            'PROP_MS_85	Aqueous Phase Molar Weight
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(6).Properties.molecularWeight.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 86
+                            'PROP_MS_86	Aqueous Phase Specific Enthalpy
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(6).Properties.enthalpy.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 87
+                            'PROP_MS_87	Aqueous Phase Specific Entropy
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(6).Properties.entropy.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 88
+                            'PROP_MS_88	Aqueous Phase Molar Enthalpy
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(6).Properties.molar_enthalpy.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 89
+                            'PROP_MS_89	Aqueous Phase Molar Entropy
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(6).Properties.molar_entropy.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 90
+                            'PROP_MS_90	Aqueous Phase Thermal Conductivity
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(6).Properties.thermalConductivity.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 91
+                            'PROP_MS_91	Aqueous Phase Kinematic Viscosity
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(6).Properties.kinematic_viscosity.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 92
+                            'PROP_MS_92	Aqueous Phase Dynamic Viscosity
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(6).Properties.viscosity.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 93
+                            'PROP_MS_93	Aqueous Phase Heat Capacity (Cp)
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 94
+                            'PROP_MS_94	Aqueous Phase Heat Capacity Ratio (Cp/Cv)
+                            If Me.Phases.ContainsKey(6) Then
+                                value = Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(6).Properties.heatCapacityCv.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 95
+                            'PROP_MS_95	Aqueous Phase Mass Flow
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(6).Properties.massflow.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 96
+                            'PROP_MS_96	Aqueous Phase Molar Flow
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(6).Properties.molarflow.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 97
+                            'PROP_MS_97	Aqueous Phase Volumetric Flow
+                            If Me.Phases.ContainsKey(6) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(6).Properties.volumetric_flow.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 98
+                            'PROP_MS_98	Aqueous Phase Compressibility Factor
+                            If Me.Phases.ContainsKey(6) Then
+                                value = Me.Phases(6).Properties.compressibilityFactor.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 99
+                            'PROP_MS_99	Aqueous Phase Molar Fraction
+                            If Me.Phases.ContainsKey(6) Then
+                                value = Me.Phases(6).Properties.molarfraction.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 100
+                            'PROP_MS_100	Aqueous Phase Mass Fraction
+                            If Me.Phases.ContainsKey(6) Then
+                                value = Me.Phases(6).Properties.massfraction.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 101
+                            'PROP_MS_101	Aqueous Phase Volumetric Fraction
+                            If Me.Phases.ContainsKey(6) Then
+                                value = Me.Phases(6).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 131
+                            'PROP_MS_131	Solid Phase Density
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(7).Properties.density.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 132
+                            'PROP_MS_132	Solid Phase Molar Weight
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(7).Properties.molecularWeight.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 133
+                            'PROP_MS_133	Solid Phase Specific Enthalpy
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(7).Properties.enthalpy.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 134
+                            'PROP_MS_134	Solid Phase Specific Entropy
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(7).Properties.entropy.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 135
+                            'PROP_MS_135	Solid Phase Molar Enthalpy
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(7).Properties.molar_enthalpy.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 136
+                            'PROP_MS_136	Solid Phase Molar Entropy
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(7).Properties.molar_entropy.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 137
+                            'PROP_MS_137	Solid Phase Thermal Conductivity
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(7).Properties.thermalConductivity.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 138
+                            'PROP_MS_138	Solid Phase Kinematic Viscosity
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(7).Properties.kinematic_viscosity.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 139
+                            'PROP_MS_139	Solid Phase Dynamic Viscosity
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(7).Properties.viscosity.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 140
+                            'PROP_MS_140	Solid Phase Heat Capacity (Cp)
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 141
+                            'PROP_MS_141	Solid Phase Heat Capacity Ratio (Cp/Cv)
+                            If Me.Phases.ContainsKey(7) Then
+                                value = Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(7).Properties.heatCapacityCv.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 142
+                            'PROP_MS_142	Solid Phase Mass Flow
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(7).Properties.massflow.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 143
+                            'PROP_MS_143	Solid Phase Molar Flow
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Properties.molarflow.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 144
+                            'PROP_MS_144	Solid Phase Volumetric Flow
+                            If Me.Phases.ContainsKey(7) Then
+                                value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(7).Properties.volumetric_flow.GetValueOrDefault)
+                            Else
+                                value = 0
+                            End If
+                        Case 145
+                            'PROP_MS_145	Solid Phase Compressibility Factor
+                            If Me.Phases.ContainsKey(7) Then
+                                value = Me.Phases(7).Properties.compressibilityFactor.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 146
+                            'PROP_MS_146	Solid Phase Molar Fraction
+                            If Me.Phases.ContainsKey(7) Then
+                                value = Me.Phases(7).Properties.molarfraction.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 147
+                            'PROP_MS_147	Solid Phase Mass Fraction
+                            If Me.Phases.ContainsKey(7) Then
+                                value = Me.Phases(7).Properties.massfraction.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 148
+                            'PROP_MS_148	Solid Phase Volumetric Fraction
+                            If Me.Phases.ContainsKey(7) Then
+                                value = Me.Phases(7).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                            Else
+                                value = 0
+                            End If
+                        Case 103, 111, 112, 113, 114, 115, 150
+                            If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                                If propidx = 103 Then
+                                    value = Me.Phases(0).Compounds(sname).MassFraction.GetValueOrDefault
+                                ElseIf propidx = 111 Then
+                                    value = Me.Phases(2).Compounds(sname).MassFraction.GetValueOrDefault
+                                ElseIf propidx = 112 Then
+                                    value = Me.Phases(1).Compounds(sname).MassFraction.GetValueOrDefault
+                                ElseIf propidx = 113 Then
+                                    value = Me.Phases(3).Compounds(sname).MassFraction.GetValueOrDefault
+                                ElseIf propidx = 114 Then
+                                    value = Me.Phases(4).Compounds(sname).MassFraction.GetValueOrDefault
+                                ElseIf propidx = 115 Then
+                                    value = Me.Phases(5).Compounds(sname).MassFraction.GetValueOrDefault
+                                ElseIf propidx = 150 Then
+                                    value = Me.Phases(7).Compounds(sname).MassFraction.GetValueOrDefault
+                                End If
+                            Else
+                                value = 0
+                            End If
+                        Case 102, 106, 107, 108, 109, 110, 149
+                            If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                                If propidx = 102 Then
+                                    value = Me.Phases(0).Compounds(sname).MoleFraction.GetValueOrDefault
+                                ElseIf propidx = 106 Then
+                                    value = Me.Phases(2).Compounds(sname).MoleFraction.GetValueOrDefault
+                                ElseIf propidx = 107 Then
+                                    value = Me.Phases(1).Compounds(sname).MoleFraction.GetValueOrDefault
+                                ElseIf propidx = 108 Then
+                                    value = Me.Phases(3).Compounds(sname).MoleFraction.GetValueOrDefault
+                                ElseIf propidx = 109 Then
+                                    value = Me.Phases(4).Compounds(sname).MoleFraction.GetValueOrDefault
+                                ElseIf propidx = 110 Then
+                                    value = Me.Phases(5).Compounds(sname).MoleFraction.GetValueOrDefault
+                                ElseIf propidx = 149 Then
+                                    value = Me.Phases(7).Compounds(sname).MoleFraction.GetValueOrDefault
+                                End If
+                            Else
+                                value = 0
+                            End If
+                        Case 104, 116, 117, 118, 119, 151
+                            If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                                If propidx = 104 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                ElseIf propidx = 116 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                ElseIf propidx = 117 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                ElseIf propidx = 118 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                ElseIf propidx = 119 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                ElseIf propidx = 120 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(5).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                ElseIf propidx = 151 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Compounds(sname).MolarFlow.GetValueOrDefault)
+                                End If
+                            Else
+                                value = 0
+                            End If
+                        Case 105, 121, 122, 123, 124, 125, 152
+                            If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                                If propidx = 105 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(0).Compounds(sname).MassFlow.GetValueOrDefault)
+                                ElseIf propidx = 121 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(2).Compounds(sname).MassFlow.GetValueOrDefault)
+                                ElseIf propidx = 122 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(1).Compounds(sname).MassFlow.GetValueOrDefault)
+                                ElseIf propidx = 123 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(3).Compounds(sname).MassFlow.GetValueOrDefault)
+                                ElseIf propidx = 124 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(4).Compounds(sname).MassFlow.GetValueOrDefault)
+                                ElseIf propidx = 125 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(5).Compounds(sname).MassFlow.GetValueOrDefault)
+                                ElseIf propidx = 152 Then
+                                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(7).Compounds(sname).MassFlow.GetValueOrDefault)
+                                End If
+                            Else
+                                value = 0
+                            End If
+                        Case 126
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.bubblePressure.GetValueOrDefault)
+                        Case 127
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.dewPressure.GetValueOrDefault)
+                        Case 128
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.bubbleTemperature.GetValueOrDefault)
+                        Case 129
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.dewTemperature.GetValueOrDefault)
+                        Case 130
+                            If Me.Phases(1).Properties.molarfraction.GetValueOrDefault = 1.0# Then
+                                value = "Liquid Only"
+                            ElseIf Me.Phases(2).Properties.molarfraction.GetValueOrDefault = 1.0# Then
+                                value = "Vapor Only"
+                            Else
+                                value = "Mixed"
+                            End If
+                        Case 153
+                            value = Me.Phases(3).Properties.pH
+                        Case 154
+                            'total energy flow
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Phases(0).Properties.enthalpy.GetValueOrDefault * Phases(0).Properties.massflow.GetValueOrDefault)
+                    End Select
+
+                    Return value
+
+                Else
+
+                    Return ""
+
                 End If
-
-                Select Case propidx
-
-                    Case 0
-                        'PROP_MS_0 Temperature
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.temperature.GetValueOrDefault)
-                    Case 1
-                        'PROP_MS_1 Pressure
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.pressure.GetValueOrDefault)
-                    Case 2
-                        'PROP_MS_2	Mass Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(0).Properties.massflow.GetValueOrDefault)
-                    Case 3
-                        'PROP_MS_3	Molar Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Properties.molarflow.GetValueOrDefault)
-                    Case 4
-                        'PROP_MS_4	Volumetric Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault)
-                    Case 5
-                        'PROP_MS_5	Mixture Density
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(0).Properties.density.GetValueOrDefault)
-                    Case 6
-                        'PROP_MS_6	Mixture Molar Weight
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(0).Properties.molecularWeight.GetValueOrDefault)
-                    Case 7
-                        'PROP_MS_7	Mixture Specific Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(0).Properties.enthalpy.GetValueOrDefault)
-                    Case 8
-                        'PROP_MS_8	Mixture Specific Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(0).Properties.entropy.GetValueOrDefault)
-                    Case 9
-                        'PROP_MS_9	Mixture Molar Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(0).Properties.molar_enthalpy.GetValueOrDefault)
-                    Case 10
-                        'PROP_MS_10	Mixture Molar Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(0).Properties.molar_entropy.GetValueOrDefault)
-                    Case 11
-                        'PROP_MS_11	Mixture Thermal Conductivity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(0).Properties.thermalConductivity.GetValueOrDefault)
-                    Case 12
-                        'PROP_MS_12	Vapor Phase Density
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(2).Properties.density.GetValueOrDefault)
-                    Case 13
-                        'PROP_MS_13	Vapor Phase Molar Weight
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(2).Properties.molecularWeight.GetValueOrDefault)
-                    Case 14
-                        'PROP_MS_14	Vapor Phase Specific Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(2).Properties.enthalpy.GetValueOrDefault)
-                    Case 15
-                        'PROP_MS_15	Vapor Phase Specific Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(2).Properties.entropy.GetValueOrDefault)
-                    Case 16
-                        'PROP_MS_16	Vapor Phase Molar Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(2).Properties.molar_enthalpy.GetValueOrDefault)
-                    Case 17
-                        'PROP_MS_17	Vapor Phase Molar Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(2).Properties.molar_entropy.GetValueOrDefault)
-                    Case 18
-                        'PROP_MS_18	Vapor Phase Thermal Conductivity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(2).Properties.thermalConductivity.GetValueOrDefault)
-                    Case 19
-                        'PROP_MS_19	Vapor Phase Kinematic Viscosity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(2).Properties.kinematic_viscosity.GetValueOrDefault)
-                    Case 20
-                        'PROP_MS_20	Vapor Phase Dynamic Viscosity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(2).Properties.viscosity.GetValueOrDefault)
-                    Case 21
-                        'PROP_MS_21	Vapor Phase Heat Capacity (Cp)
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault)
-                    Case 22
-                        'PROP_MS_22	Vapor Phase Heat Capacity Ratio (Cp/Cv)
-                        value = Me.Phases(2).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(2).Properties.heatCapacityCv.GetValueOrDefault
-                    Case 23
-                        'PROP_MS_23	Vapor Phase Mass Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(2).Properties.massflow.GetValueOrDefault)
-                    Case 24
-                        'PROP_MS_24	Vapor Phase Molar Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Properties.molarflow.GetValueOrDefault)
-                    Case 25
-                        'PROP_MS_25	Vapor Phase Volumetric Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(2).Properties.volumetric_flow.GetValueOrDefault)
-                    Case 26
-                        'PROP_MS_26	Vapor Phase Compressibility Factor
-                        value = Me.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
-                    Case 27
-                        'PROP_MS_27	Vapor Phase Molar Fraction
-                        value = Me.Phases(2).Properties.molarfraction.GetValueOrDefault
-                    Case 28
-                        'PROP_MS_28	Vapor Phase Mass Fraction
-                        value = Me.Phases(2).Properties.massfraction.GetValueOrDefault
-                    Case 29
-                        'PROP_MS_29	Vapor Phase Volumetric Fraction
-                        value = Me.Phases(2).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
-                    Case 30
-                        'PROP_MS_30	Liquid Phase (Mixture) Density
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(1).Properties.density.GetValueOrDefault)
-                    Case 31
-                        'PROP_MS_31	Liquid Phase (Mixture) Molar Weight
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(1).Properties.molecularWeight.GetValueOrDefault)
-                    Case 32
-                        'PROP_MS_32	Liquid Phase (Mixture) Specific Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(1).Properties.enthalpy.GetValueOrDefault)
-                    Case 33
-                        'PROP_MS_33	Liquid Phase (Mixture) Specific Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(1).Properties.entropy.GetValueOrDefault)
-                    Case 34
-                        'PROP_MS_34	Liquid Phase (Mixture) Molar Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(1).Properties.molar_enthalpy.GetValueOrDefault)
-                    Case 35
-                        'PROP_MS_35	Liquid Phase (Mixture) Molar Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(1).Properties.molar_entropy.GetValueOrDefault)
-                    Case 36
-                        'PROP_MS_36	Liquid Phase (Mixture) Thermal Conductivity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(1).Properties.thermalConductivity.GetValueOrDefault)
-                    Case 37
-                        'PROP_MS_37	Liquid Phase (Mixture) Kinematic Viscosity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(1).Properties.kinematic_viscosity.GetValueOrDefault)
-                    Case 38
-                        'PROP_MS_38	Liquid Phase (Mixture) Dynamic Viscosity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(1).Properties.viscosity.GetValueOrDefault)
-                    Case 39
-                        'PROP_MS_39	Liquid Phase (Mixture) Heat Capacity (Cp)
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault)
-                    Case 40
-                        'PROP_MS_40	Liquid Phase (Mixture) Heat Capacity Ratio (Cp/Cv)
-                        value = Me.Phases(1).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(1).Properties.heatCapacityCv.GetValueOrDefault
-                    Case 41
-                        'PROP_MS_41	Liquid Phase (Mixture) Mass Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(1).Properties.massflow.GetValueOrDefault)
-                    Case 42
-                        'PROP_MS_42	Liquid Phase (Mixture) Molar Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Properties.molarflow.GetValueOrDefault)
-                    Case 43
-                        'PROP_MS_43	Liquid Phase (Mixture) Volumetric Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(1).Properties.volumetric_flow.GetValueOrDefault)
-                    Case 44
-                        'PROP_MS_44	Liquid Phase (Mixture) Compressibility Factor
-                        value = Me.Phases(1).Properties.compressibilityFactor.GetValueOrDefault
-                    Case 45
-                        'PROP_MS_45	Liquid Phase (Mixture) Molar Fraction
-                        value = Me.Phases(1).Properties.molarfraction.GetValueOrDefault
-                    Case 46
-                        'PROP_MS_46	Liquid Phase (Mixture) Mass Fraction
-                        value = Me.Phases(1).Properties.massfraction.GetValueOrDefault
-                    Case 47
-                        'PROP_MS_47	Liquid Phase (Mixture) Volumetric Fraction
-                        value = Me.Phases(1).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
-                    Case 48
-                        'PROP_MS_48	Liquid Phase (1) Density
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(3).Properties.density.GetValueOrDefault)
-                    Case 49
-                        'PROP_MS_49	Liquid Phase (1) Molar Weight
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(3).Properties.molecularWeight.GetValueOrDefault)
-                    Case 50
-                        'PROP_MS_50	Liquid Phase (1) Specific Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(3).Properties.enthalpy.GetValueOrDefault)
-                    Case 51
-                        'PROP_MS_51	Liquid Phase (1) Specific Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(3).Properties.entropy.GetValueOrDefault)
-                    Case 52
-                        'PROP_MS_52	Liquid Phase (1) Molar Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(3).Properties.molar_enthalpy.GetValueOrDefault)
-                    Case 53
-                        'PROP_MS_53	Liquid Phase (1) Molar Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(3).Properties.molar_entropy.GetValueOrDefault)
-                    Case 54
-                        'PROP_MS_54	Liquid Phase (1) Thermal Conductivity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(3).Properties.thermalConductivity.GetValueOrDefault)
-                    Case 55
-                        'PROP_MS_55	Liquid Phase (1) Kinematic Viscosity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(3).Properties.kinematic_viscosity.GetValueOrDefault)
-                    Case 56
-                        'PROP_MS_56	Liquid Phase (1) Dynamic Viscosity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(3).Properties.viscosity.GetValueOrDefault)
-                    Case 57
-                        'PROP_MS_57	Liquid Phase (1) Heat Capacity (Cp)
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault)
-                    Case 58
-                        'PROP_MS_58	Liquid Phase (1) Heat Capacity Ratio (Cp/Cv)
-                        value = Me.Phases(3).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(3).Properties.heatCapacityCv.GetValueOrDefault
-                    Case 59
-                        'PROP_MS_59	Liquid Phase (1) Mass Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(3).Properties.massflow.GetValueOrDefault)
-                    Case 60
-                        'PROP_MS_60	Liquid Phase (1) Molar Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Properties.molarflow.GetValueOrDefault)
-                    Case 61
-                        'PROP_MS_61	Liquid Phase (1) Volumetric Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(3).Properties.volumetric_flow.GetValueOrDefault)
-                    Case 62
-                        'PROP_MS_62	Liquid Phase (1) Compressibility Factor
-                        value = Me.Phases(3).Properties.compressibilityFactor.GetValueOrDefault
-                    Case 63
-                        'PROP_MS_63	Liquid Phase (1) Molar Fraction
-                        value = Me.Phases(3).Properties.molarfraction.GetValueOrDefault
-                    Case 64
-                        'PROP_MS_64	Liquid Phase (1) Mass Fraction
-                        value = Me.Phases(3).Properties.massfraction.GetValueOrDefault
-                    Case 65
-                        'PROP_MS_65	Liquid Phase (1) Volumetric Fraction
-                        value = Me.Phases(3).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
-                    Case 66
-                        'PROP_MS_66	Liquid Phase (2) Density
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(4).Properties.density.GetValueOrDefault)
-                    Case 67
-                        'PROP_MS_67	Liquid Phase (2) Molar Weight
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(4).Properties.molecularWeight.GetValueOrDefault)
-                    Case 68
-                        'PROP_MS_68	Liquid Phase (2) Specific Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(4).Properties.enthalpy.GetValueOrDefault)
-                    Case 69
-                        'PROP_MS_69	Liquid Phase (2) Specific Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(4).Properties.entropy.GetValueOrDefault)
-                    Case 70
-                        'PROP_MS_70	Liquid Phase (2) Molar Enthalpy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(4).Properties.molar_enthalpy.GetValueOrDefault)
-                    Case 71
-                        'PROP_MS_71	Liquid Phase (2) Molar Entropy
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(4).Properties.molar_entropy.GetValueOrDefault)
-                    Case 72
-                        'PROP_MS_72	Liquid Phase (2) Thermal Conductivity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(4).Properties.thermalConductivity.GetValueOrDefault)
-                    Case 73
-                        'PROP_MS_73	Liquid Phase (2) Kinematic Viscosity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(4).Properties.kinematic_viscosity.GetValueOrDefault)
-                    Case 74
-                        'PROP_MS_74	Liquid Phase (2) Dynamic Viscosity
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(4).Properties.viscosity.GetValueOrDefault)
-                    Case 75
-                        'PROP_MS_75	Liquid Phase (2) Heat Capacity (Cp)
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault)
-                    Case 76
-                        'PROP_MS_76	Liquid Phase (2) Heat Capacity Ratio (Cp/Cv)
-                        value = Me.Phases(4).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(4).Properties.heatCapacityCv.GetValueOrDefault
-                    Case 77
-                        'PROP_MS_77	Liquid Phase (2) Mass Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(4).Properties.massflow.GetValueOrDefault)
-                    Case 78
-                        'PROP_MS_78	Liquid Phase (2) Molar Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Properties.molarflow.GetValueOrDefault)
-                    Case 79
-                        'PROP_MS_79	Liquid Phase (2) Volumetric Flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(4).Properties.volumetric_flow.GetValueOrDefault)
-                    Case 80
-                        'PROP_MS_80	Liquid Phase (2) Compressibility Factor
-                        value = Me.Phases(4).Properties.compressibilityFactor.GetValueOrDefault
-                    Case 81
-                        'PROP_MS_81	Liquid Phase (2) Molar Fraction
-                        value = Me.Phases(4).Properties.molarfraction.GetValueOrDefault
-                    Case 82
-                        'PROP_MS_82	Liquid Phase (2) Mass Fraction
-                        value = Me.Phases(4).Properties.massfraction.GetValueOrDefault
-                    Case 83
-                        'PROP_MS_83	Liquid Phase (2) Volumetric Fraction
-                        value = Me.Phases(4).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
-                    Case 84
-                        'PROP_MS_84	Aqueous Phase Density
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(6).Properties.density.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 85
-                        'PROP_MS_85	Aqueous Phase Molar Weight
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(6).Properties.molecularWeight.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 86
-                        'PROP_MS_86	Aqueous Phase Specific Enthalpy
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(6).Properties.enthalpy.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 87
-                        'PROP_MS_87	Aqueous Phase Specific Entropy
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(6).Properties.entropy.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 88
-                        'PROP_MS_88	Aqueous Phase Molar Enthalpy
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(6).Properties.molar_enthalpy.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 89
-                        'PROP_MS_89	Aqueous Phase Molar Entropy
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(6).Properties.molar_entropy.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 90
-                        'PROP_MS_90	Aqueous Phase Thermal Conductivity
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(6).Properties.thermalConductivity.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 91
-                        'PROP_MS_91	Aqueous Phase Kinematic Viscosity
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(6).Properties.kinematic_viscosity.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 92
-                        'PROP_MS_92	Aqueous Phase Dynamic Viscosity
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(6).Properties.viscosity.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 93
-                        'PROP_MS_93	Aqueous Phase Heat Capacity (Cp)
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 94
-                        'PROP_MS_94	Aqueous Phase Heat Capacity Ratio (Cp/Cv)
-                        If Me.Phases.ContainsKey(6) Then
-                            value = Me.Phases(6).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(6).Properties.heatCapacityCv.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 95
-                        'PROP_MS_95	Aqueous Phase Mass Flow
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(6).Properties.massflow.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 96
-                        'PROP_MS_96	Aqueous Phase Molar Flow
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(6).Properties.molarflow.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 97
-                        'PROP_MS_97	Aqueous Phase Volumetric Flow
-                        If Me.Phases.ContainsKey(6) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(6).Properties.volumetric_flow.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 98
-                        'PROP_MS_98	Aqueous Phase Compressibility Factor
-                        If Me.Phases.ContainsKey(6) Then
-                            value = Me.Phases(6).Properties.compressibilityFactor.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 99
-                        'PROP_MS_99	Aqueous Phase Molar Fraction
-                        If Me.Phases.ContainsKey(6) Then
-                            value = Me.Phases(6).Properties.molarfraction.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 100
-                        'PROP_MS_100	Aqueous Phase Mass Fraction
-                        If Me.Phases.ContainsKey(6) Then
-                            value = Me.Phases(6).Properties.massfraction.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 101
-                        'PROP_MS_101	Aqueous Phase Volumetric Fraction
-                        If Me.Phases.ContainsKey(6) Then
-                            value = Me.Phases(6).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 131
-                        'PROP_MS_131	Solid Phase Density
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.density, Me.Phases(7).Properties.density.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 132
-                        'PROP_MS_132	Solid Phase Molar Weight
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molecularWeight, Me.Phases(7).Properties.molecularWeight.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 133
-                        'PROP_MS_133	Solid Phase Specific Enthalpy
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Phases(7).Properties.enthalpy.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 134
-                        'PROP_MS_134	Solid Phase Specific Entropy
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, Me.Phases(7).Properties.entropy.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 135
-                        'PROP_MS_135	Solid Phase Molar Enthalpy
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_enthalpy, Me.Phases(7).Properties.molar_enthalpy.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 136
-                        'PROP_MS_136	Solid Phase Molar Entropy
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molar_entropy, Me.Phases(7).Properties.molar_entropy.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 137
-                        'PROP_MS_137	Solid Phase Thermal Conductivity
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, Me.Phases(7).Properties.thermalConductivity.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 138
-                        'PROP_MS_138	Solid Phase Kinematic Viscosity
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, Me.Phases(7).Properties.kinematic_viscosity.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 139
-                        'PROP_MS_139	Solid Phase Dynamic Viscosity
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, Me.Phases(7).Properties.viscosity.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 140
-                        'PROP_MS_140	Solid Phase Heat Capacity (Cp)
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 141
-                        'PROP_MS_141	Solid Phase Heat Capacity Ratio (Cp/Cv)
-                        If Me.Phases.ContainsKey(7) Then
-                            value = Me.Phases(7).Properties.heatCapacityCp.GetValueOrDefault / Me.Phases(7).Properties.heatCapacityCv.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 142
-                        'PROP_MS_142	Solid Phase Mass Flow
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(7).Properties.massflow.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 143
-                        'PROP_MS_143	Solid Phase Molar Flow
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Properties.molarflow.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 144
-                        'PROP_MS_144	Solid Phase Volumetric Flow
-                        If Me.Phases.ContainsKey(7) Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, Me.Phases(7).Properties.volumetric_flow.GetValueOrDefault)
-                        Else
-                            value = 0
-                        End If
-                    Case 145
-                        'PROP_MS_145	Solid Phase Compressibility Factor
-                        If Me.Phases.ContainsKey(7) Then
-                            value = Me.Phases(7).Properties.compressibilityFactor.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 146
-                        'PROP_MS_146	Solid Phase Molar Fraction
-                        If Me.Phases.ContainsKey(7) Then
-                            value = Me.Phases(7).Properties.molarfraction.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 147
-                        'PROP_MS_147	Solid Phase Mass Fraction
-                        If Me.Phases.ContainsKey(7) Then
-                            value = Me.Phases(7).Properties.massfraction.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 148
-                        'PROP_MS_148	Solid Phase Volumetric Fraction
-                        If Me.Phases.ContainsKey(7) Then
-                            value = Me.Phases(7).Properties.volumetric_flow.GetValueOrDefault / Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault
-                        Else
-                            value = 0
-                        End If
-                    Case 103, 111, 112, 113, 114, 115, 150
-                        If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                            If propidx = 103 Then
-                                value = Me.Phases(0).Compounds(sname).MassFraction.GetValueOrDefault
-                            ElseIf propidx = 111 Then
-                                value = Me.Phases(2).Compounds(sname).MassFraction.GetValueOrDefault
-                            ElseIf propidx = 112 Then
-                                value = Me.Phases(1).Compounds(sname).MassFraction.GetValueOrDefault
-                            ElseIf propidx = 113 Then
-                                value = Me.Phases(3).Compounds(sname).MassFraction.GetValueOrDefault
-                            ElseIf propidx = 114 Then
-                                value = Me.Phases(4).Compounds(sname).MassFraction.GetValueOrDefault
-                            ElseIf propidx = 115 Then
-                                value = Me.Phases(5).Compounds(sname).MassFraction.GetValueOrDefault
-                            ElseIf propidx = 150 Then
-                                value = Me.Phases(7).Compounds(sname).MassFraction.GetValueOrDefault
-                            End If
-                        Else
-                            value = 0
-                        End If
-                    Case 102, 106, 107, 108, 109, 110, 149
-                        If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                            If propidx = 102 Then
-                                value = Me.Phases(0).Compounds(sname).MoleFraction.GetValueOrDefault
-                            ElseIf propidx = 106 Then
-                                value = Me.Phases(2).Compounds(sname).MoleFraction.GetValueOrDefault
-                            ElseIf propidx = 107 Then
-                                value = Me.Phases(1).Compounds(sname).MoleFraction.GetValueOrDefault
-                            ElseIf propidx = 108 Then
-                                value = Me.Phases(3).Compounds(sname).MoleFraction.GetValueOrDefault
-                            ElseIf propidx = 109 Then
-                                value = Me.Phases(4).Compounds(sname).MoleFraction.GetValueOrDefault
-                            ElseIf propidx = 110 Then
-                                value = Me.Phases(5).Compounds(sname).MoleFraction.GetValueOrDefault
-                            ElseIf propidx = 149 Then
-                                value = Me.Phases(7).Compounds(sname).MoleFraction.GetValueOrDefault
-                            End If
-                        Else
-                            value = 0
-                        End If
-                    Case 104, 116, 117, 118, 119, 151
-                        If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                            If propidx = 104 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(0).Compounds(sname).MolarFlow.GetValueOrDefault)
-                            ElseIf propidx = 116 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(2).Compounds(sname).MolarFlow.GetValueOrDefault)
-                            ElseIf propidx = 117 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(1).Compounds(sname).MolarFlow.GetValueOrDefault)
-                            ElseIf propidx = 118 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(3).Compounds(sname).MolarFlow.GetValueOrDefault)
-                            ElseIf propidx = 119 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(4).Compounds(sname).MolarFlow.GetValueOrDefault)
-                            ElseIf propidx = 120 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(5).Compounds(sname).MolarFlow.GetValueOrDefault)
-                            ElseIf propidx = 151 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Compounds(sname).MolarFlow.GetValueOrDefault)
-                            End If
-                        Else
-                            value = 0
-                        End If
-                    Case 105, 121, 122, 123, 124, 125, 152
-                        If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                            If propidx = 105 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(0).Compounds(sname).MassFlow.GetValueOrDefault)
-                            ElseIf propidx = 121 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(2).Compounds(sname).MassFlow.GetValueOrDefault)
-                            ElseIf propidx = 122 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(1).Compounds(sname).MassFlow.GetValueOrDefault)
-                            ElseIf propidx = 123 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(3).Compounds(sname).MassFlow.GetValueOrDefault)
-                            ElseIf propidx = 124 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(4).Compounds(sname).MassFlow.GetValueOrDefault)
-                            ElseIf propidx = 125 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(5).Compounds(sname).MassFlow.GetValueOrDefault)
-                            ElseIf propidx = 152 Then
-                                value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(7).Compounds(sname).MassFlow.GetValueOrDefault)
-                            End If
-                        Else
-                            value = 0
-                        End If
-                    Case 126
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.bubblePressure.GetValueOrDefault)
-                    Case 127
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.dewPressure.GetValueOrDefault)
-                    Case 128
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.bubbleTemperature.GetValueOrDefault)
-                    Case 129
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.dewTemperature.GetValueOrDefault)
-                    Case 130
-                        If Me.Phases(1).Properties.molarfraction.GetValueOrDefault = 1.0# Then
-                            value = "Liquid Only"
-                        ElseIf Me.Phases(2).Properties.molarfraction.GetValueOrDefault = 1.0# Then
-                            value = "Vapor Only"
-                        Else
-                            value = "Mixed"
-                        End If
-                    Case 153
-                        value = Me.Phases(3).Properties.pH
-                    Case 154
-                        'total energy flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Phases(0).Properties.enthalpy.GetValueOrDefault * Phases(0).Properties.massflow.GetValueOrDefault)
-                End Select
-
-                Return value
 
             Else
 
-                Return ""
+                Return val0
 
             End If
 
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
+
             Dim i As Integer = 0
-            Dim proplist As New ArrayList
+            Dim proplist As New List(Of String)
             Select Case proptype
                 Case PropertyType.RW
                     For i = 0 To 4
@@ -1540,11 +1551,16 @@ Namespace Streams
                     proplist.Add("PROP_MS_153")
                     proplist.Add("PROP_MS_154")
             End Select
-            Return proplist.ToArray(GetType(System.String))
-            proplist = Nothing
+
+            proplist.AddRange(MyBase.GetProperties(proptype))
+
+            Return proplist.ToArray
+
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            MyBase.SetPropertyValue(prop, propval)
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
@@ -1661,363 +1677,372 @@ Namespace Streams
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim value As String = ""
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            If prop <> "" Then
+            If u0 = "NF" Then
 
-                Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim value As String = ""
 
-                Select Case propidx
+                If prop <> "" Then
 
-                    Case 0
-                        'PROP_MS_0 Temperature
-                        value = su.temperature
-                    Case 1
-                        'PROP_MS_1 Pressure
-                        value = su.pressure
-                    Case 2
-                        'PROP_MS_2	Mass Flow
-                        value = su.massflow
-                    Case 3
-                        'PROP_MS_3	Molar Flow
-                        value = su.molarflow
-                    Case 4
-                        'PROP_MS_4	Volumetric Flow
-                        value = su.volumetricFlow
-                    Case 5
-                        'PROP_MS_5	Mixture Density
-                        value = su.density
-                    Case 6
-                        'PROP_MS_6	Mixture Molar Weight
-                        value = su.molecularWeight
-                    Case 7
-                        'PROP_MS_7	Mixture Specific Enthalpy
-                        value = su.enthalpy
-                    Case 8
-                        'PROP_MS_8	Mixture Specific Entropy
-                        value = su.entropy
-                    Case 9
-                        'PROP_MS_9	Mixture Molar Enthalpy
-                        value = su.molar_enthalpy
-                    Case 10
-                        'PROP_MS_10	Mixture Molar Entropy
-                        value = su.molar_entropy
-                    Case 11
-                        'PROP_MS_11	Mixture Thermal Conductivity
-                        value = su.thermalConductivity
-                    Case 12
-                        'PROP_MS_12	Vapor Phase Density
-                        value = su.density
-                    Case 13
-                        'PROP_MS_13	Vapor Phase Molar Weight
-                        value = su.molecularWeight
-                    Case 14
-                        'PROP_MS_14	Vapor Phase Specific Enthalpy
-                        value = su.enthalpy
-                    Case 15
-                        'PROP_MS_15	Vapor Phase Specific Entropy
-                        value = su.entropy
-                    Case 16
-                        'PROP_MS_16	Vapor Phase Molar Enthalpy
-                        value = su.molar_enthalpy
-                    Case 17
-                        'PROP_MS_17	Vapor Phase Molar Entropy
-                        value = su.molar_entropy
-                    Case 18
-                        'PROP_MS_18	Vapor Phase Thermal Conductivity
-                        value = su.thermalConductivity
-                    Case 19
-                        'PROP_MS_19	Vapor Phase Kinematic Viscosity
-                        value = su.cinematic_viscosity
-                    Case 20
-                        'PROP_MS_20	Vapor Phase Dynamic Viscosity
-                        value = su.viscosity
-                    Case 21
-                        'PROP_MS_21	Vapor Phase Heat Capacity (Cp)
-                        value = su.heatCapacityCp
-                    Case 22
-                        'PROP_MS_22	Vapor Phase Heat Capacity Ratio (Cp/Cv)
-                        value = ""
-                    Case 23
-                        'PROP_MS_23	Vapor Phase Mass Flow
-                        value = su.massflow
-                    Case 24
-                        'PROP_MS_24	Vapor Phase Molar Flow
-                        value = su.molarflow
-                    Case 25
-                        'PROP_MS_25	Vapor Phase Volumetric Flow
-                        value = su.volumetricFlow
-                    Case 26
-                        'PROP_MS_26	Vapor Phase Compressibility Factor
-                        value = ""
-                    Case 27
-                        'PROP_MS_27	Vapor Phase Molar Fraction
-                        value = ""
-                    Case 28
-                        'PROP_MS_28	Vapor Phase Mass Fraction
-                        value = ""
-                    Case 29
-                        'PROP_MS_29	Vapor Phase Volumetric Fraction
-                        value = ""
-                    Case 30
-                        'PROP_MS_30	Liquid Phase (Mixture) Density
-                        value = su.density
-                    Case 31
-                        'PROP_MS_31	Liquid Phase (Mixture) Molar Weight
-                        value = su.molecularWeight
-                    Case 32
-                        'PROP_MS_32	Liquid Phase (Mixture) Specific Enthalpy
-                        value = su.enthalpy
-                    Case 33
-                        'PROP_MS_33	Liquid Phase (Mixture) Specific Entropy
-                        value = su.entropy
-                    Case 34
-                        'PROP_MS_34	Liquid Phase (Mixture) Molar Enthalpy
-                        value = su.molar_enthalpy
-                    Case 35
-                        'PROP_MS_35	Liquid Phase (Mixture) Molar Entropy
-                        value = su.molar_entropy
-                    Case 36
-                        'PROP_MS_36	Liquid Phase (Mixture) Thermal Conductivity
-                        value = su.thermalConductivity
-                    Case 37
-                        'PROP_MS_37	Liquid Phase (Mixture) Kinematic Viscosity
-                        value = su.cinematic_viscosity
-                    Case 38
-                        'PROP_MS_38	Liquid Phase (Mixture) Dynamic Viscosity
-                        value = su.viscosity
-                    Case 39
-                        'PROP_MS_39	Liquid Phase (Mixture) Heat Capacity (Cp)
-                        value = su.heatCapacityCp
-                    Case 40
-                        'PROP_MS_40	Liquid Phase (Mixture) Heat Capacity Ratio (Cp/Cv)
-                        value = ""
-                    Case 41
-                        'PROP_MS_41	Liquid Phase (Mixture) Mass Flow
-                        value = su.massflow
-                    Case 42
-                        'PROP_MS_42	Liquid Phase (Mixture) Molar Flow
-                        value = su.molarflow
-                    Case 43
-                        'PROP_MS_43	Liquid Phase (Mixture) Volumetric Flow
-                        value = su.volumetricFlow
-                    Case 44
-                        'PROP_MS_44	Liquid Phase (Mixture) Compressibility Factor
-                        value = ""
-                    Case 45
-                        'PROP_MS_45	Liquid Phase (Mixture) Molar Fraction
-                        value = ""
-                    Case 46
-                        'PROP_MS_46	Liquid Phase (Mixture) Mass Fraction
-                        value = ""
-                    Case 47
-                        'PROP_MS_47	Liquid Phase (Mixture) Volumetric Fraction
-                        value = ""
-                    Case 48
-                        'PROP_MS_48	Liquid Phase (1) Density
-                        value = su.density
-                    Case 49
-                        'PROP_MS_49	Liquid Phase (1) Molar Weight
-                        value = su.molecularWeight
-                    Case 50
-                        'PROP_MS_50	Liquid Phase (1) Specific Enthalpy
-                        value = su.enthalpy
-                    Case 51
-                        'PROP_MS_51	Liquid Phase (1) Specific Entropy
-                        value = su.entropy
-                    Case 52
-                        'PROP_MS_52	Liquid Phase (1) Molar Enthalpy
-                        value = su.molar_enthalpy
-                    Case 53
-                        'PROP_MS_53	Liquid Phase (1) Molar Entropy
-                        value = su.molar_entropy
-                    Case 54
-                        'PROP_MS_54	Liquid Phase (1) Thermal Conductivity
-                        value = su.thermalConductivity
-                    Case 55
-                        'PROP_MS_55	Liquid Phase (1) Kinematic Viscosity
-                        value = su.cinematic_viscosity
-                    Case 56
-                        'PROP_MS_56	Liquid Phase (1) Dynamic Viscosity
-                        value = su.viscosity
-                    Case 57
-                        'PROP_MS_57	Liquid Phase (1) Heat Capacity (Cp)
-                        value = su.heatCapacityCp
-                    Case 58
-                        'PROP_MS_58	Liquid Phase (1) Heat Capacity Ratio (Cp/Cv)
-                        value = ""
-                    Case 59
-                        'PROP_MS_59	Liquid Phase (1) Mass Flow
-                        value = su.massflow
-                    Case 60
-                        'PROP_MS_60	Liquid Phase (1) Molar Flow
-                        value = su.molarflow
-                    Case 61
-                        'PROP_MS_61	Liquid Phase (1) Volumetric Flow
-                        value = su.volumetricFlow
-                    Case 62
-                        'PROP_MS_62	Liquid Phase (1) Compressibility Factor
-                        value = ""
-                    Case 63
-                        'PROP_MS_63	Liquid Phase (1) Molar Fraction
-                        value = ""
-                    Case 64
-                        'PROP_MS_64	Liquid Phase (1) Mass Fraction
-                        value = ""
-                    Case 65
-                        'PROP_MS_65	Liquid Phase (1) Volumetric Fraction
-                        value = ""
-                    Case 66
-                        'PROP_MS_66	Liquid Phase (2) Density
-                        value = su.density
-                    Case 67
-                        'PROP_MS_67	Liquid Phase (2) Molar Weight
-                        value = su.molecularWeight
-                    Case 68
-                        'PROP_MS_68	Liquid Phase (2) Specific Enthalpy
-                        value = su.enthalpy
-                    Case 69
-                        'PROP_MS_69	Liquid Phase (2) Specific Entropy
-                        value = su.entropy
-                    Case 70
-                        'PROP_MS_70	Liquid Phase (2) Molar Enthalpy
-                        value = su.molar_enthalpy
-                    Case 71
-                        'PROP_MS_71	Liquid Phase (2) Molar Entropy
-                        value = su.molar_entropy
-                    Case 72
-                        'PROP_MS_72	Liquid Phase (2) Thermal Conductivity
-                        value = su.thermalConductivity
-                    Case 73
-                        'PROP_MS_73	Liquid Phase (2) Kinematic Viscosity
-                        value = su.cinematic_viscosity
-                    Case 74
-                        'PROP_MS_74	Liquid Phase (2) Dynamic Viscosity
-                        value = su.viscosity
-                    Case 75
-                        'PROP_MS_75	Liquid Phase (2) Heat Capacity (Cp)
-                        value = su.heatCapacityCp
-                    Case 76
-                        'PROP_MS_76	Liquid Phase (2) Heat Capacity Ratio (Cp/Cv)
-                        value = ""
-                    Case 77
-                        'PROP_MS_77	Liquid Phase (2) Mass Flow
-                        value = su.massflow
-                    Case 78
-                        'PROP_MS_78	Liquid Phase (2) Molar Flow
-                        value = su.molarflow
-                    Case 79
-                        'PROP_MS_79	Liquid Phase (2) Volumetric Flow
-                        value = su.volumetricFlow
-                    Case 80
-                        'PROP_MS_80	Liquid Phase (2) Compressibility Factor
-                        value = ""
-                    Case 81
-                        'PROP_MS_81	Liquid Phase (2) Molar Fraction
-                        value = ""
-                    Case 82
-                        'PROP_MS_82	Liquid Phase (2) Mass Fraction
-                        value = ""
-                    Case 83
-                        'PROP_MS_83	Liquid Phase (2) Volumetric Fraction
-                        value = ""
-                    Case 84, 131
-                        'PROP_MS_84	    Aqueous Phase Density
-                        'PROP_MS_131	Solid Phase Density
-                        value = su.density
-                    Case 85, 132
-                        'PROP_MS_85	    Aqueous Phase Molar Weight
-                        'PROP_MS_132	Solid Phase Molar Weight
-                        value = su.molecularWeight
-                    Case 86, 133
-                        'PROP_MS_86	    Aqueous Phase Specific Enthalpy
-                        'PROP_MS_133	Solid Phase Specific Enthalpy
-                        value = su.enthalpy
-                    Case 87, 134
-                        'PROP_MS_87	    Aqueous Phase Specific Entropy
-                        'PROP_MS_134	Solid Phase Specific Entropy
-                        value = su.entropy
-                    Case 88, 135
-                        'PROP_MS_88	    Aqueous Phase Molar Enthalpy
-                        'PROP_MS_135	Solid Phase Molar Enthalpy
-                        value = su.molar_enthalpy
-                    Case 89, 136
-                        'PROP_MS_89	    Aqueous Phase Molar Entropy
-                        'PROP_MS_136	Solid Phase Molar Entropy
-                        value = su.molar_entropy
-                    Case 90, 137
-                        'PROP_MS_90	    Aqueous Phase Thermal Conductivity
-                        'PROP_MS_137	Solid Phase Thermal Conductivity
-                        value = su.thermalConductivity
-                    Case 91, 138
-                        'PROP_MS_91	    Aqueous Phase Kinematic Viscosity
-                        'PROP_MS_138	Solid Phase Kinematic Viscosity
-                        value = su.cinematic_viscosity
-                    Case 92, 139
-                        'PROP_MS_92	    Aqueous Phase Dynamic Viscosity
-                        'PROP_MS_139	Solid Phase Dynamic Viscosity
-                        value = su.viscosity
-                    Case 93, 140
-                        'PROP_MS_93	    Aqueous Phase Heat Capacity (Cp)
-                        'PROP_MS_140    Solid Phase Heat Capacity (Cp)
-                        value = su.heatCapacityCp
-                    Case 94, 141
-                        'PROP_MS_94	    Aqueous Phase Heat Capacity Ratio (Cp/Cv)
-                        'PROP_MS_141	Solid Phase Heat Capacity Ratio (Cp/Cv)
-                        value = ""
-                    Case 95, 142
-                        'PROP_MS_95	    Aqueous Phase Mass Flow
-                        'PROP_MS_142	Solid Phase Mass Flow
-                        value = su.massflow
-                    Case 96, 143
-                        'PROP_MS_96	    Aqueous Phase Molar Flow
-                        'PROP_MS_143	Solid Phase Molar Flow
-                        value = su.molarflow
-                    Case 97, 144
-                        'PROP_MS_97	    Aqueous Phase Volumetric Flow
-                        'PROP_MS_144	Solid Phase Volumetric Flow
-                        value = su.volumetricFlow
-                    Case 98, 145
-                        'PROP_MS_98	    Aqueous Phase Compressibility Factor
-                        'PROP_MS_145	Solid Phase Compressibility Factor
-                        value = ""
-                    Case 99, 146
-                        'PROP_MS_99	    Aqueous Phase Molar Fraction
-                        'PROP_MS_146    Solid Phase Molar Fraction
-                        value = ""
-                    Case 100, 147
-                        'PROP_MS_100	Aqueous Phase Mass Fraction
-                        'PROP_MS_147	Solid Phase Mass Fraction
-                        value = ""
-                    Case 101, 148
-                        'PROP_MS_101	Aqueous Phase Volumetric Fraction
-                        'PROP_MS_148	Solid Phase Volumetric Fraction
-                        value = ""
-                    Case 102, 103, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 149, 150
-                        value = ""
-                    Case 104, 116, 117, 118, 119, 120, 151
-                        value = su.molarflow
-                    Case 105, 121, 122, 123, 124, 125, 152
-                        value = su.massflow
-                    Case 126, 127
-                        value = su.pressure
-                    Case 128, 129
-                        value = su.temperature
-                    Case 154
-                        value = su.heatflow
-                    Case Else
-                        value = ""
-                End Select
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
 
-                Return value
+                    Select Case propidx
+
+                        Case 0
+                            'PROP_MS_0 Temperature
+                            value = su.temperature
+                        Case 1
+                            'PROP_MS_1 Pressure
+                            value = su.pressure
+                        Case 2
+                            'PROP_MS_2	Mass Flow
+                            value = su.massflow
+                        Case 3
+                            'PROP_MS_3	Molar Flow
+                            value = su.molarflow
+                        Case 4
+                            'PROP_MS_4	Volumetric Flow
+                            value = su.volumetricFlow
+                        Case 5
+                            'PROP_MS_5	Mixture Density
+                            value = su.density
+                        Case 6
+                            'PROP_MS_6	Mixture Molar Weight
+                            value = su.molecularWeight
+                        Case 7
+                            'PROP_MS_7	Mixture Specific Enthalpy
+                            value = su.enthalpy
+                        Case 8
+                            'PROP_MS_8	Mixture Specific Entropy
+                            value = su.entropy
+                        Case 9
+                            'PROP_MS_9	Mixture Molar Enthalpy
+                            value = su.molar_enthalpy
+                        Case 10
+                            'PROP_MS_10	Mixture Molar Entropy
+                            value = su.molar_entropy
+                        Case 11
+                            'PROP_MS_11	Mixture Thermal Conductivity
+                            value = su.thermalConductivity
+                        Case 12
+                            'PROP_MS_12	Vapor Phase Density
+                            value = su.density
+                        Case 13
+                            'PROP_MS_13	Vapor Phase Molar Weight
+                            value = su.molecularWeight
+                        Case 14
+                            'PROP_MS_14	Vapor Phase Specific Enthalpy
+                            value = su.enthalpy
+                        Case 15
+                            'PROP_MS_15	Vapor Phase Specific Entropy
+                            value = su.entropy
+                        Case 16
+                            'PROP_MS_16	Vapor Phase Molar Enthalpy
+                            value = su.molar_enthalpy
+                        Case 17
+                            'PROP_MS_17	Vapor Phase Molar Entropy
+                            value = su.molar_entropy
+                        Case 18
+                            'PROP_MS_18	Vapor Phase Thermal Conductivity
+                            value = su.thermalConductivity
+                        Case 19
+                            'PROP_MS_19	Vapor Phase Kinematic Viscosity
+                            value = su.cinematic_viscosity
+                        Case 20
+                            'PROP_MS_20	Vapor Phase Dynamic Viscosity
+                            value = su.viscosity
+                        Case 21
+                            'PROP_MS_21	Vapor Phase Heat Capacity (Cp)
+                            value = su.heatCapacityCp
+                        Case 22
+                            'PROP_MS_22	Vapor Phase Heat Capacity Ratio (Cp/Cv)
+                            value = ""
+                        Case 23
+                            'PROP_MS_23	Vapor Phase Mass Flow
+                            value = su.massflow
+                        Case 24
+                            'PROP_MS_24	Vapor Phase Molar Flow
+                            value = su.molarflow
+                        Case 25
+                            'PROP_MS_25	Vapor Phase Volumetric Flow
+                            value = su.volumetricFlow
+                        Case 26
+                            'PROP_MS_26	Vapor Phase Compressibility Factor
+                            value = ""
+                        Case 27
+                            'PROP_MS_27	Vapor Phase Molar Fraction
+                            value = ""
+                        Case 28
+                            'PROP_MS_28	Vapor Phase Mass Fraction
+                            value = ""
+                        Case 29
+                            'PROP_MS_29	Vapor Phase Volumetric Fraction
+                            value = ""
+                        Case 30
+                            'PROP_MS_30	Liquid Phase (Mixture) Density
+                            value = su.density
+                        Case 31
+                            'PROP_MS_31	Liquid Phase (Mixture) Molar Weight
+                            value = su.molecularWeight
+                        Case 32
+                            'PROP_MS_32	Liquid Phase (Mixture) Specific Enthalpy
+                            value = su.enthalpy
+                        Case 33
+                            'PROP_MS_33	Liquid Phase (Mixture) Specific Entropy
+                            value = su.entropy
+                        Case 34
+                            'PROP_MS_34	Liquid Phase (Mixture) Molar Enthalpy
+                            value = su.molar_enthalpy
+                        Case 35
+                            'PROP_MS_35	Liquid Phase (Mixture) Molar Entropy
+                            value = su.molar_entropy
+                        Case 36
+                            'PROP_MS_36	Liquid Phase (Mixture) Thermal Conductivity
+                            value = su.thermalConductivity
+                        Case 37
+                            'PROP_MS_37	Liquid Phase (Mixture) Kinematic Viscosity
+                            value = su.cinematic_viscosity
+                        Case 38
+                            'PROP_MS_38	Liquid Phase (Mixture) Dynamic Viscosity
+                            value = su.viscosity
+                        Case 39
+                            'PROP_MS_39	Liquid Phase (Mixture) Heat Capacity (Cp)
+                            value = su.heatCapacityCp
+                        Case 40
+                            'PROP_MS_40	Liquid Phase (Mixture) Heat Capacity Ratio (Cp/Cv)
+                            value = ""
+                        Case 41
+                            'PROP_MS_41	Liquid Phase (Mixture) Mass Flow
+                            value = su.massflow
+                        Case 42
+                            'PROP_MS_42	Liquid Phase (Mixture) Molar Flow
+                            value = su.molarflow
+                        Case 43
+                            'PROP_MS_43	Liquid Phase (Mixture) Volumetric Flow
+                            value = su.volumetricFlow
+                        Case 44
+                            'PROP_MS_44	Liquid Phase (Mixture) Compressibility Factor
+                            value = ""
+                        Case 45
+                            'PROP_MS_45	Liquid Phase (Mixture) Molar Fraction
+                            value = ""
+                        Case 46
+                            'PROP_MS_46	Liquid Phase (Mixture) Mass Fraction
+                            value = ""
+                        Case 47
+                            'PROP_MS_47	Liquid Phase (Mixture) Volumetric Fraction
+                            value = ""
+                        Case 48
+                            'PROP_MS_48	Liquid Phase (1) Density
+                            value = su.density
+                        Case 49
+                            'PROP_MS_49	Liquid Phase (1) Molar Weight
+                            value = su.molecularWeight
+                        Case 50
+                            'PROP_MS_50	Liquid Phase (1) Specific Enthalpy
+                            value = su.enthalpy
+                        Case 51
+                            'PROP_MS_51	Liquid Phase (1) Specific Entropy
+                            value = su.entropy
+                        Case 52
+                            'PROP_MS_52	Liquid Phase (1) Molar Enthalpy
+                            value = su.molar_enthalpy
+                        Case 53
+                            'PROP_MS_53	Liquid Phase (1) Molar Entropy
+                            value = su.molar_entropy
+                        Case 54
+                            'PROP_MS_54	Liquid Phase (1) Thermal Conductivity
+                            value = su.thermalConductivity
+                        Case 55
+                            'PROP_MS_55	Liquid Phase (1) Kinematic Viscosity
+                            value = su.cinematic_viscosity
+                        Case 56
+                            'PROP_MS_56	Liquid Phase (1) Dynamic Viscosity
+                            value = su.viscosity
+                        Case 57
+                            'PROP_MS_57	Liquid Phase (1) Heat Capacity (Cp)
+                            value = su.heatCapacityCp
+                        Case 58
+                            'PROP_MS_58	Liquid Phase (1) Heat Capacity Ratio (Cp/Cv)
+                            value = ""
+                        Case 59
+                            'PROP_MS_59	Liquid Phase (1) Mass Flow
+                            value = su.massflow
+                        Case 60
+                            'PROP_MS_60	Liquid Phase (1) Molar Flow
+                            value = su.molarflow
+                        Case 61
+                            'PROP_MS_61	Liquid Phase (1) Volumetric Flow
+                            value = su.volumetricFlow
+                        Case 62
+                            'PROP_MS_62	Liquid Phase (1) Compressibility Factor
+                            value = ""
+                        Case 63
+                            'PROP_MS_63	Liquid Phase (1) Molar Fraction
+                            value = ""
+                        Case 64
+                            'PROP_MS_64	Liquid Phase (1) Mass Fraction
+                            value = ""
+                        Case 65
+                            'PROP_MS_65	Liquid Phase (1) Volumetric Fraction
+                            value = ""
+                        Case 66
+                            'PROP_MS_66	Liquid Phase (2) Density
+                            value = su.density
+                        Case 67
+                            'PROP_MS_67	Liquid Phase (2) Molar Weight
+                            value = su.molecularWeight
+                        Case 68
+                            'PROP_MS_68	Liquid Phase (2) Specific Enthalpy
+                            value = su.enthalpy
+                        Case 69
+                            'PROP_MS_69	Liquid Phase (2) Specific Entropy
+                            value = su.entropy
+                        Case 70
+                            'PROP_MS_70	Liquid Phase (2) Molar Enthalpy
+                            value = su.molar_enthalpy
+                        Case 71
+                            'PROP_MS_71	Liquid Phase (2) Molar Entropy
+                            value = su.molar_entropy
+                        Case 72
+                            'PROP_MS_72	Liquid Phase (2) Thermal Conductivity
+                            value = su.thermalConductivity
+                        Case 73
+                            'PROP_MS_73	Liquid Phase (2) Kinematic Viscosity
+                            value = su.cinematic_viscosity
+                        Case 74
+                            'PROP_MS_74	Liquid Phase (2) Dynamic Viscosity
+                            value = su.viscosity
+                        Case 75
+                            'PROP_MS_75	Liquid Phase (2) Heat Capacity (Cp)
+                            value = su.heatCapacityCp
+                        Case 76
+                            'PROP_MS_76	Liquid Phase (2) Heat Capacity Ratio (Cp/Cv)
+                            value = ""
+                        Case 77
+                            'PROP_MS_77	Liquid Phase (2) Mass Flow
+                            value = su.massflow
+                        Case 78
+                            'PROP_MS_78	Liquid Phase (2) Molar Flow
+                            value = su.molarflow
+                        Case 79
+                            'PROP_MS_79	Liquid Phase (2) Volumetric Flow
+                            value = su.volumetricFlow
+                        Case 80
+                            'PROP_MS_80	Liquid Phase (2) Compressibility Factor
+                            value = ""
+                        Case 81
+                            'PROP_MS_81	Liquid Phase (2) Molar Fraction
+                            value = ""
+                        Case 82
+                            'PROP_MS_82	Liquid Phase (2) Mass Fraction
+                            value = ""
+                        Case 83
+                            'PROP_MS_83	Liquid Phase (2) Volumetric Fraction
+                            value = ""
+                        Case 84, 131
+                            'PROP_MS_84	    Aqueous Phase Density
+                            'PROP_MS_131	Solid Phase Density
+                            value = su.density
+                        Case 85, 132
+                            'PROP_MS_85	    Aqueous Phase Molar Weight
+                            'PROP_MS_132	Solid Phase Molar Weight
+                            value = su.molecularWeight
+                        Case 86, 133
+                            'PROP_MS_86	    Aqueous Phase Specific Enthalpy
+                            'PROP_MS_133	Solid Phase Specific Enthalpy
+                            value = su.enthalpy
+                        Case 87, 134
+                            'PROP_MS_87	    Aqueous Phase Specific Entropy
+                            'PROP_MS_134	Solid Phase Specific Entropy
+                            value = su.entropy
+                        Case 88, 135
+                            'PROP_MS_88	    Aqueous Phase Molar Enthalpy
+                            'PROP_MS_135	Solid Phase Molar Enthalpy
+                            value = su.molar_enthalpy
+                        Case 89, 136
+                            'PROP_MS_89	    Aqueous Phase Molar Entropy
+                            'PROP_MS_136	Solid Phase Molar Entropy
+                            value = su.molar_entropy
+                        Case 90, 137
+                            'PROP_MS_90	    Aqueous Phase Thermal Conductivity
+                            'PROP_MS_137	Solid Phase Thermal Conductivity
+                            value = su.thermalConductivity
+                        Case 91, 138
+                            'PROP_MS_91	    Aqueous Phase Kinematic Viscosity
+                            'PROP_MS_138	Solid Phase Kinematic Viscosity
+                            value = su.cinematic_viscosity
+                        Case 92, 139
+                            'PROP_MS_92	    Aqueous Phase Dynamic Viscosity
+                            'PROP_MS_139	Solid Phase Dynamic Viscosity
+                            value = su.viscosity
+                        Case 93, 140
+                            'PROP_MS_93	    Aqueous Phase Heat Capacity (Cp)
+                            'PROP_MS_140    Solid Phase Heat Capacity (Cp)
+                            value = su.heatCapacityCp
+                        Case 94, 141
+                            'PROP_MS_94	    Aqueous Phase Heat Capacity Ratio (Cp/Cv)
+                            'PROP_MS_141	Solid Phase Heat Capacity Ratio (Cp/Cv)
+                            value = ""
+                        Case 95, 142
+                            'PROP_MS_95	    Aqueous Phase Mass Flow
+                            'PROP_MS_142	Solid Phase Mass Flow
+                            value = su.massflow
+                        Case 96, 143
+                            'PROP_MS_96	    Aqueous Phase Molar Flow
+                            'PROP_MS_143	Solid Phase Molar Flow
+                            value = su.molarflow
+                        Case 97, 144
+                            'PROP_MS_97	    Aqueous Phase Volumetric Flow
+                            'PROP_MS_144	Solid Phase Volumetric Flow
+                            value = su.volumetricFlow
+                        Case 98, 145
+                            'PROP_MS_98	    Aqueous Phase Compressibility Factor
+                            'PROP_MS_145	Solid Phase Compressibility Factor
+                            value = ""
+                        Case 99, 146
+                            'PROP_MS_99	    Aqueous Phase Molar Fraction
+                            'PROP_MS_146    Solid Phase Molar Fraction
+                            value = ""
+                        Case 100, 147
+                            'PROP_MS_100	Aqueous Phase Mass Fraction
+                            'PROP_MS_147	Solid Phase Mass Fraction
+                            value = ""
+                        Case 101, 148
+                            'PROP_MS_101	Aqueous Phase Volumetric Fraction
+                            'PROP_MS_148	Solid Phase Volumetric Fraction
+                            value = ""
+                        Case 102, 103, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 149, 150
+                            value = ""
+                        Case 104, 116, 117, 118, 119, 120, 151
+                            value = su.molarflow
+                        Case 105, 121, 122, 123, 124, 125, 152
+                            value = su.massflow
+                        Case 126, 127
+                            value = su.pressure
+                        Case 128, 129
+                            value = su.temperature
+                        Case 154
+                            value = su.heatflow
+                        Case Else
+                            value = ""
+                    End Select
+
+                    Return value
+
+                Else
+
+                    Return ""
+
+                End If
 
             Else
 
-                Return ""
+                Return u0
 
             End If
-
 
         End Function
 

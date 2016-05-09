@@ -212,4 +212,6 @@ Public Class FrmCritpt
         Return FlowsheetUtility.TrueCriticalPoint
     End Function
 
+    Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
+
 End Class

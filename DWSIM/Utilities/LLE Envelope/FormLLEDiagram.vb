@@ -611,6 +611,8 @@ Public Class FormLLEDiagram
         Return FlowsheetUtility.PhaseEnvelopeTernary
     End Function
 
+    Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
+
 End Class
 
 Public Class Rec

@@ -263,7 +263,7 @@ Partial Class FormReacManager
         'ToolStripButton4
         '
         Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton4.Image = Global.DWSIM.My.Resources.Resources.arrow_left
+        Me.ToolStripButton4.Image = Global.DWSIM.My.Resources.Resources.arrow_left1
         resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.Name = "ToolStripButton4"
         '

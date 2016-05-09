@@ -46,6 +46,12 @@ Public Class FormPhEnv
     Dim ot, op, ov, oh, os As Double
     Dim strname As String = ""
 
+    Public Property Cricondentherm As Double
+    Public Property Cricondenbar As Double
+    Public Property CriticalPressure As Double
+    Public Property CriticalTemperature As Double
+    Public Property CriticalVolume As Double
+
     Public bw As System.ComponentModel.BackgroundWorker
 
     Private Sub FormPhEnv_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -992,6 +998,15 @@ exec:       With Me.GraphControl.GraphPane.Legend
         SOWF = r(23)
         VOWF = r(24)
 
+        Cricondentherm = TVD.ToArray().Max
+        Cricondenbar = PB.ToArray().Max
+        If PO.ToArray.Max > Cricondenbar Then Cricondenbar = PO.ToArray.Max
+        If PC.Count > 0 Then
+            CriticalPressure = PC(0)(1)
+            CriticalTemperature = PC(0)(0)
+            CriticalVolume = PC(0)(2)
+        End If
+
         calculated = True
 
         With Me.Grid1.Columns
@@ -1144,14 +1159,51 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
 
+        Dim plist As New List(Of String)
+
+        plist.Add(Me.Name1 + "_" + "Cricondentherm")
+        plist.Add(Me.Name1 + "_" + "Cricondenbar")
+        plist.Add(Me.Name1 + "_" + "Critical Pressure")
+        plist.Add(Me.Name1 + "_" + "Critical Temperature")
+        plist.Add(Me.Name1 + "_" + "Critical Volume")
+
+        Return plist
+
     End Function
 
     Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
-
+        Select Case pname
+            Case Me.Name1 + "_" + "Cricondentherm"
+                Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.temperature
+            Case Me.Name1 + "_" + "Cricondenbar"
+                Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.pressure
+            Case Me.Name1 + "_" + "Critical Pressure"
+                Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.pressure
+            Case Me.Name1 + "_" + "Critical Temperature"
+                Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.temperature
+            Case Me.Name1 + "_" + "Critical Volume"
+                Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.molar_volume
+            Case Else
+                Return ""
+        End Select
     End Function
 
     Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
-
+        Dim units = AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem
+         Select pname
+            Case Me.Name1 + "_" + "Cricondentherm"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, Cricondentherm)
+            Case Me.Name1 + "_" + "Cricondenbar"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.pressure, Cricondenbar)
+            Case Me.Name1 + "_" + "Critical Pressure"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.pressure, CriticalPressure)
+            Case Me.Name1 + "_" + "Critical Temperature"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, CriticalTemperature)
+            Case Me.Name1 + "_" + "Critical Volume"
+                Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.molar_volume, CriticalVolume)
+            Case Else
+                Return ""
+        End Select
     End Function
 
     Public Property ID As Integer Implements Interfaces.IAttachedUtility.ID
@@ -1169,5 +1221,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
     Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
         Return FlowsheetUtility.PhaseEnvelope
     End Function
+
+    Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
 
 End Class

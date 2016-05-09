@@ -725,7 +725,7 @@ Partial Class FormAssayManager
         resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.BackgroundImage = Nothing
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.arrow_down
+        Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.arrow_down1
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton2
@@ -736,7 +736,7 @@ Partial Class FormAssayManager
         resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.BackgroundImage = Nothing
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.arrow_up
+        Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'Button1

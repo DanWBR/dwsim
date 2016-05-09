@@ -1029,4 +1029,7 @@ Public Class FormPureComp
     Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
         Return FlowsheetUtility.PureCompoundProperties
     End Function
+
+    Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
+
 End Class

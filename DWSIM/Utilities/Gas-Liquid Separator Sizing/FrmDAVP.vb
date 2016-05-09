@@ -253,4 +253,6 @@
         Return FlowsheetUtility.SeparatorSizing
     End Function
 
+    Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
+
 End Class

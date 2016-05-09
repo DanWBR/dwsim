@@ -350,4 +350,7 @@ Public Class FormHYD
     Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
         Return FlowsheetUtility.NaturalGasHydrates
     End Function
+
+    Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
+
 End Class

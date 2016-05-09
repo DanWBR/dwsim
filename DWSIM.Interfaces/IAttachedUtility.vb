@@ -18,4 +18,6 @@
 
     Function GetUtilityType() As Enums.FlowsheetUtility
 
+    Property AutoUpdate As Boolean
+
 End Interface

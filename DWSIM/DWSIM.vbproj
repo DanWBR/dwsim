@@ -2057,6 +2057,13 @@
     <None Include="Resources\application_xp_terminal.png" />
     <None Include="Resources\application_osx_terminal.png" />
     <EmbeddedResource Include="Report Files\report_transform.xsl" />
+    <None Include="Resources\arrow_down.png" />
+    <None Include="Resources\arrow_left.png" />
+    <None Include="Resources\arrow_up.png" />
+    <None Include="Resources\arrows_4_way.png" />
+    <None Include="Resources\arrow_left1.png" />
+    <None Include="Resources\arrow_up1.png" />
+    <None Include="Resources\arrow_down1.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -2089,6 +2096,7 @@
     <Content Include="Resources\es.png" />
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />
+    <None Include="Resources\fast_forward.png" />
     <Content Include="Resources\fr.png" />
     <None Include="Resources\green_down.png" />
     <None Include="Resources\orifice.png" />
@@ -2136,6 +2144,9 @@
     <None Include="Resources\re_gibbs_16.png" />
     <None Include="Resources\Lab-icon.png" />
     <None Include="Resources\paypal_donate.jpg" />
+    <None Include="Resources\new.png" />
+    <None Include="Resources\no.png" />
+    <None Include="Resources\rewind.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

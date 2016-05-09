@@ -1141,4 +1141,6 @@ Public Class FormBinEnv
         Return FlowsheetUtility.PhaseEnvelopeBinary
     End Function
 
+    Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
+
 End Class
