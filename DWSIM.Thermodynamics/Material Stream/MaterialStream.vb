@@ -808,7 +808,7 @@ Namespace Streams
                 Dim value As Object = ""
                 Dim sname As String = ""
 
-                If prop <> "" Then
+                If prop.StartsWith("PROP_MS") Then
 
                     Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
                     If prop.Split(",").Length = 2 Then
@@ -1560,119 +1560,127 @@ Namespace Streams
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
 
-            MyBase.SetPropertyValue(prop, propval)
+            If Not prop.StartsWith("PROP_MS") Then
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
-            Dim sname As String = ""
-            If prop.Split(",").Length = 2 Then
-                sname = prop.Split(",")(1)
+                MyBase.SetPropertyValue(prop, propval)
+
+            Else
+
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
+                Dim sname As String = ""
+                If prop.Split(",").Length = 2 Then
+                    sname = prop.Split(",")(1)
+                End If
+
+                Me.PropertyPackage.CurrentMaterialStream = Me
+
+                Select Case propidx
+                    Case 0
+                        'PROP_MS_0 Temperature
+                        Me.Phases(0).Properties.temperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
+                    Case 1
+                        'PROP_MS_1 Pressure
+                        Me.Phases(0).Properties.pressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Case 2
+                        'PROP_MS_2	Mass Flow
+                        Me.Phases(0).Properties.massflow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
+                        Me.PropertyPackage.DW_CalcVazaoMolar()
+                        Me.PropertyPackage.DW_CalcVazaoVolumetrica()
+                    Case 3
+                        'PROP_MS_3	Molar Flow
+                        Me.Phases(0).Properties.molarflow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval)
+                        Me.PropertyPackage.DW_CalcVazaoMassica()
+                        Me.PropertyPackage.DW_CalcVazaoVolumetrica()
+                    Case 4
+                        'PROP_MS_4	Volumetric Flow
+                        Me.Phases(0).Properties.volumetric_flow = SystemsOfUnits.Converter.ConvertToSI(su.volumetricFlow, propval)
+                        Me.Phases(0).Properties.massflow = Me.Phases(0).Properties.volumetric_flow * Me.Phases(0).Properties.density.GetValueOrDefault
+                        Me.PropertyPackage.DW_CalcVazaoMolar()
+                    Case 7
+                        'PROP_MS_7	Specific Enthalpy
+                        Me.Phases(0).Properties.enthalpy = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, propval)
+                    Case 8
+                        'PROP_MS_8	Specific Entropy
+                        Me.Phases(0).Properties.entropy = SystemsOfUnits.Converter.ConvertToSI(su.entropy, propval)
+                    Case 27
+                        'PROP_MS_27	Molar fraction vapour phase
+                        Me.Phases(2).Properties.molarfraction = propval
+                    Case 102
+                        If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                            Me.Phases(0).Compounds(sname).MoleFraction = propval
+                            Dim mtotal As Double = 0
+                            Me.PropertyPackage.DW_CalcCompMolarFlow(0)
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
+                            Next
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                comp.MassFraction = comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
+                            Next
+                            Me.PropertyPackage.DW_CalcCompMassFlow(0)
+                        End If
+                    Case 103
+                        If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                            Me.Phases(0).Compounds(sname).MassFraction = propval
+                            Dim mtotal As Double = 0
+                            Me.PropertyPackage.DW_CalcCompMassFlow(0)
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                mtotal += comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight
+                            Next
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                comp.MoleFraction = comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / mtotal
+                            Next
+                            Me.PropertyPackage.DW_CalcCompMolarFlow(0)
+                        End If
+                    Case 104
+                        If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                            Me.Phases(0).Compounds(sname).MolarFlow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval)
+                            Me.Phases(0).Compounds(sname).MassFlow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval) / 1000 * Me.Phases(0).Compounds(sname).ConstantProperties.Molar_Weight
+                            Dim summ As Double = 0
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                summ += comp.MolarFlow
+                            Next
+                            Me.Phases(0).Properties.molarflow = summ
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                comp.MoleFraction = comp.MolarFlow / summ
+                            Next
+                            Dim mtotal As Double = 0
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
+                            Next
+                            Me.Phases(0).Properties.massflow = mtotal * summ / 1000
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                comp.MassFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.massflow.GetValueOrDefault
+                            Next
+                        End If
+                    Case 105
+                        If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                            Me.Phases(0).Compounds(sname).MassFlow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
+                            Me.Phases(0).Compounds(sname).MolarFlow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval) / Me.Phases(0).Compounds(sname).ConstantProperties.Molar_Weight * 1000
+                            Dim mtotal As Double = 0
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                mtotal += comp.MassFlow
+                            Next
+                            Me.Phases(0).Properties.massflow = mtotal
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                comp.MassFraction = comp.MassFlow / mtotal
+                            Next
+                            Dim summ As Double = 0
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                summ += comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / 1000
+                            Next
+                            Me.Phases(0).Properties.molarflow = mtotal / summ
+                            For Each comp As Compound In Me.Phases(0).Compounds.Values
+                                comp.MoleFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.molarflow.GetValueOrDefault
+                            Next
+                        End If
+                End Select
+
             End If
 
-            Me.PropertyPackage.CurrentMaterialStream = Me
+            Return True
 
-            Select Case propidx
-                Case 0
-                    'PROP_MS_0 Temperature
-                    Me.Phases(0).Properties.temperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
-                Case 1
-                    'PROP_MS_1 Pressure
-                    Me.Phases(0).Properties.pressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 2
-                    'PROP_MS_2	Mass Flow
-                    Me.Phases(0).Properties.massflow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
-                    Me.PropertyPackage.DW_CalcVazaoMolar()
-                    Me.PropertyPackage.DW_CalcVazaoVolumetrica()
-                Case 3
-                    'PROP_MS_3	Molar Flow
-                    Me.Phases(0).Properties.molarflow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval)
-                    Me.PropertyPackage.DW_CalcVazaoMassica()
-                    Me.PropertyPackage.DW_CalcVazaoVolumetrica()
-                Case 4
-                    'PROP_MS_4	Volumetric Flow
-                    Me.Phases(0).Properties.volumetric_flow = SystemsOfUnits.Converter.ConvertToSI(su.volumetricFlow, propval)
-                    Me.Phases(0).Properties.massflow = Me.Phases(0).Properties.volumetric_flow * Me.Phases(0).Properties.density.GetValueOrDefault
-                    Me.PropertyPackage.DW_CalcVazaoMolar()
-                Case 7
-                    'PROP_MS_7	Specific Enthalpy
-                    Me.Phases(0).Properties.enthalpy = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, propval)
-                Case 8
-                    'PROP_MS_8	Specific Entropy
-                    Me.Phases(0).Properties.entropy = SystemsOfUnits.Converter.ConvertToSI(su.entropy, propval)
-                Case 27
-                    'PROP_MS_27	Molar fraction vapour phase
-                    Me.Phases(2).Properties.molarfraction = propval
-                Case 102
-                    If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                        Me.Phases(0).Compounds(sname).MoleFraction = propval
-                        Dim mtotal As Double = 0
-                        Me.PropertyPackage.DW_CalcCompMolarFlow(0)
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
-                        Next
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.MassFraction = comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
-                        Next
-                        Me.PropertyPackage.DW_CalcCompMassFlow(0)
-                    End If
-                Case 103
-                    If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                        Me.Phases(0).Compounds(sname).MassFraction = propval
-                        Dim mtotal As Double = 0
-                        Me.PropertyPackage.DW_CalcCompMassFlow(0)
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            mtotal += comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight
-                        Next
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.MoleFraction = comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / mtotal
-                        Next
-                        Me.PropertyPackage.DW_CalcCompMolarFlow(0)
-                    End If
-                Case 104
-                    If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                        Me.Phases(0).Compounds(sname).MolarFlow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval)
-                        Me.Phases(0).Compounds(sname).MassFlow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval) / 1000 * Me.Phases(0).Compounds(sname).ConstantProperties.Molar_Weight
-                        Dim summ As Double = 0
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            summ += comp.MolarFlow
-                        Next
-                        Me.Phases(0).Properties.molarflow = summ
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.MoleFraction = comp.MolarFlow / summ
-                        Next
-                        Dim mtotal As Double = 0
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
-                        Next
-                        Me.Phases(0).Properties.massflow = mtotal * summ / 1000
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.MassFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.massflow.GetValueOrDefault
-                        Next
-                    End If
-                Case 105
-                    If Me.Phases(0).Compounds.ContainsKey(sname) Then
-                        Me.Phases(0).Compounds(sname).MassFlow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
-                        Me.Phases(0).Compounds(sname).MolarFlow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval) / Me.Phases(0).Compounds(sname).ConstantProperties.Molar_Weight * 1000
-                        Dim mtotal As Double = 0
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            mtotal += comp.MassFlow
-                        Next
-                        Me.Phases(0).Properties.massflow = mtotal
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.MassFraction = comp.MassFlow / mtotal
-                        Next
-                        Dim summ As Double = 0
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            summ += comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / 1000
-                        Next
-                        Me.Phases(0).Properties.molarflow = mtotal / summ
-                        For Each comp As Compound In Me.Phases(0).Compounds.Values
-                            comp.MoleFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.molarflow.GetValueOrDefault
-                        Next
-                    End If
-            End Select
-            Return 1
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
@@ -1684,7 +1692,7 @@ Namespace Streams
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim value As String = ""
 
-                If prop <> "" Then
+                If prop.StartsWith("PROP_MS") Then
 
                     Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
 

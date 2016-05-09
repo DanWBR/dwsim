@@ -116,6 +116,8 @@ Namespace My
                 Console.SetOut(standardOutput)
             End If
 
+            InitializeSettings()
+
         End Sub
 
         Public Sub InitializeSettings()

@@ -12,7 +12,7 @@ Public Class Settings
     Public Shared Property MaxDegreeOfParallelism As Integer = -1
     Public Shared Property UseSIMDExtensions As Boolean = True
     Public Shared Property EnableParallelProcessing As Boolean = True
-    Public Shared Property EnableGPUProcessing As Boolean = True
+    Public Shared Property EnableGPUProcessing As Boolean = False
     Public Shared Property CudafyTarget As Integer = 0
     Public Shared Property CudafyDeviceID As Integer = 0
     Public Shared Property DebugLevel As Integer = 0

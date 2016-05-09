@@ -134,7 +134,7 @@
     <value>Name</value>
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 22</value>
+    <value>51, 25</value>
   </data>
   <data name="ToolStripLabel1.Text" xml:space="preserve">
     <value>Docking</value>
@@ -164,9 +164,16 @@
     <value>Floating</value>
   </data>
   <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 22</value>
+    <value>56, 25</value>
   </data>
   <data name="tsbClose.Text" xml:space="preserve">
     <value>Close</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PanelUtility.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="PanelUtility.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>800, 370</value>
   </data>
 </root>
