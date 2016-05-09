@@ -646,10 +646,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         WriteToLog(message, Color.Black, DWSIM.Flowsheet.MessageType.Information)
     End Sub
 
-    Public Sub UpdateStatusLabel(ByVal message As String)
-        Me.FormSurface.LabelCalculator.Text = message
-    End Sub
-
     Public Sub CheckCollections()
 
         If Collections.GraphicObjectCollection Is Nothing Then Collections.GraphicObjectCollection = New Dictionary(Of String, GraphicObject)
@@ -1009,7 +1005,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.tsbDesat.Checked = False
         Me.tsbAtivar.Checked = True
         GlobalSettings.Settings.CalculatorActivated = True
-        Me.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorOcioso")
         Me.WriteToLog(DWSIM.App.GetLocalString("Calculadorativado"), Color.DimGray, DWSIM.Flowsheet.MessageType.Information)
         If Not Me.CalculationQueue Is Nothing Then Me.CalculationQueue.Clear()
     End Sub
@@ -1018,7 +1013,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.tsbAtivar.Checked = False
         Me.tsbDesat.Checked = True
         GlobalSettings.Settings.CalculatorActivated = False
-        Me.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorDesativado1")
     End Sub
 
     Private Sub FecharSimulacaoAtualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseToolStripMenuItem.Click

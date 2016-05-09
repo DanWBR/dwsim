@@ -77,11 +77,6 @@ Public Class FlowsheetSurface
             Flowsheet = My.Application.ActiveSimulation
         End If
 
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FlowLayoutPanel1.AutoSize = False
-            Me.FlowLayoutPanel1.Height = 25
-        End If
-
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 
     End Sub
@@ -117,12 +112,10 @@ Public Class FlowsheetSurface
             Flowsheet.tsbAtivar.Checked = False
             Flowsheet.tsbDesat.Checked = True
             GlobalSettings.Settings.CalculatorActivated = False
-            Flowsheet.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorDesativado1")
-        ElseIf e.KeyCode = Keys.A And e.Control Then
+         ElseIf e.KeyCode = Keys.A And e.Control Then
             Flowsheet.tsbDesat.Checked = False
             Flowsheet.tsbAtivar.Checked = True
             GlobalSettings.Settings.CalculatorActivated = True
-            Flowsheet.FormSurface.LabelCalculator.Text = DWSIM.App.GetLocalString("CalculadorOcioso")
             Flowsheet.WriteToLog(DWSIM.App.GetLocalString("Calculadorativado"), Color.DimGray, DWSIM.Flowsheet.MessageType.Information)
         ElseIf e.KeyCode = Keys.X And e.Control Then
             Flowsheet.tsmiCut_Click(Me, New EventArgs)
@@ -1887,14 +1880,6 @@ Public Class FlowsheetSurface
 
     End Function
 
-    Private Sub LabelSimMode_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LabelCalculator.TextChanged
-        If Me.LabelCalculator.Text.Contains(DWSIM.App.GetLocalString("Calculando")) Then
-            Me.PictureBox3.Image = My.Resources.weather_lightning
-        Else
-            Me.PictureBox3.Image = My.Resources.tick
-        End If
-    End Sub
-
     Private Sub ExcluirToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExcluirToolStripMenuItem.Click
         Call Me.Flowsheet.DeleteSelectedObject(sender, e, Me.FlowsheetDesignSurface.SelectedObject)
     End Sub
@@ -2748,14 +2733,6 @@ Public Class FlowsheetSurface
     End Sub
 
     Public calcstart As Date
-
-    Private Sub Timer2_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer2.Tick
-
-        Dim ts As TimeSpan = Date.Now - calcstart
-
-        Me.LabelTime.Text = ts.ToString("g")
-
-    End Sub
 
     Public Sub RecalcularToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecalcularToolStripMenuItem.Click
 

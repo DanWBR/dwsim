@@ -102,21 +102,6 @@ Namespace PropertyPackages
         NestedLoops3PV3 = 12
     End Enum
 
-    Public Enum Parameter
-        PHFlash_Internal_Loop_Tolerance = 0
-        PSFlash_Internal_Loop_Tolerance = 1
-        PHFlash_External_Loop_Tolerance = 2
-        PSFlash_External_Loop_Tolerance = 3
-        PHFlash_Maximum_Number_Of_External_Iterations = 4
-        PSFlash_Maximum_Number_Of_External_Iterations = 5
-        PHFlash_Maximum_Number_Of_Internal_Iterations = 6
-        PSFlash_Maximum_Number_Of_Internal_Iterations = 7
-        PTFlash_Maximum_Number_Of_External_Iterations = 8
-        PTFlash_Maximum_Number_Of_Internal_Iterations = 9
-        PTFlash_External_Loop_Tolerance = 10
-        PTFlash_Internal_Loop_Tolerance = 11
-    End Enum
-
 #End Region
 
     ''' <summary>
@@ -952,7 +937,7 @@ Namespace PropertyPackages
             Dim T As Double = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
 
             If Not Settings.CAPEOPENMode Then
-                If Me.FlashBase.FlashSettings("CalculateBubbleAndDewPoints") _
+                If Me.FlashBase.FlashSettings(Enums.FlashSetting.CalculateBubbleAndDewPoints) _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
                     Try
@@ -1326,8 +1311,8 @@ Namespace PropertyPackages
 
             If Not Settings.CAPEOPENMode Then
                 Try
-                    Me._tpseverity = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestSeverity")
-                    Me._tpcompids = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestCompIds").ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
+                    Me._tpseverity = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestSeverity)
+                    Me._tpcompids = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
                 Catch ex As Exception
                     Me._tpseverity = 0
                     Me._tpcompids = New String() {}
@@ -1380,7 +1365,7 @@ Namespace PropertyPackages
                             Dim dge As Double = 0
 
                             If Not Settings.CAPEOPENMode Then
-                                If Me.FlashBase.FlashSettings("ValidateEquilibriumCalc") = True _
+                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) = True _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -1411,7 +1396,7 @@ Namespace PropertyPackages
                             If Not Settings.CAPEOPENMode Then
 
                                 'identify phase
-                                If Me.FlashBase.FlashSettings("UsePhaseIdentificationAlgorithm") Then
+                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.UsePhaseIdentificationAlgorithm) Then
                                     If Me.ComponentName.Contains("SRK") Or Me.ComponentName.Contains("PR") Then
                                         If Not Me.AUX_IS_SINGLECOMP(Phase.Mixture) Then
                                             Dim newphase, eos As String
@@ -1460,7 +1445,7 @@ Namespace PropertyPackages
                                     End If
                                 End If
 
-                                If Me.FlashBase.FlashSettings("ValidateEquilibriumCalc") = True _
+                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) = True _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -1470,7 +1455,7 @@ Namespace PropertyPackages
 
                                     dge = fge - ige
 
-                                    Dim dgtol As Double = Me.FlashBase.FlashSettings("FlashValidationDGETolerancePct")
+                                    Dim dgtol As Double = Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidationGibbsTolerance)
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
                                         Throw New Exception(Calculator.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
@@ -2427,8 +2412,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Overridable Function DW_CalcEquilibrio_ISOL(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec, ByVal val1 As Double, ByVal val2 As Double, ByVal estimate As Double) As Object
 
             Try
-                Me._tpseverity = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestSeverity")
-                Me._tpcompids = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestCompIds").ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
+                Me._tpseverity = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestSeverity)
+                Me._tpcompids = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
             Catch ex As Exception
                 Me._tpseverity = 0
                 Me._tpcompids = New String() {}
@@ -2460,7 +2445,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Dim fge As Double = 0.0#
                             Dim dge As Double = 0.0#
 
-                            If Me.FlashBase.FlashSettings("ValidateEquilibriumCalc") Then
+                            If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) Then
 
                                 ige = Me.DW_CalcGibbsEnergy(RET_VMOL(Phase.Mixture), T, P)
 
@@ -2479,7 +2464,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Vs = result(8)
 
                             If Not Settings.CAPEOPENMode Then
-                                If Me.FlashBase.FlashSettings("ValidateEquilibriumCalc") _
+                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
                                 And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
 
@@ -2489,7 +2474,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                                     dge = fge - ige
 
-                                    Dim dgtol As Double = Me.FlashBase.FlashSettings("FlashValidationDGETolerancePct")
+                                    Dim dgtol As Double = Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidationGibbsTolerance)
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
                                         Throw New Exception(Calculator.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
@@ -3278,8 +3263,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             If Not Settings.CAPEOPENMode Then
                 Try
-                    Me._tpseverity = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestSeverity")
-                    Me._tpcompids = Me.FlashBase.FlashSettings("ThreePhaseFlashStabTestCompIds").ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
+                    Me._tpseverity = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestSeverity)
+                    Me._tpcompids = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
                 Catch ex As Exception
                     Me._tpseverity = 0
                     Me._tpcompids = New String() {}

@@ -117,6 +117,37 @@
         Nested_Loops_SLE_SolidSolution = 10
     End Enum
 
+    Public Enum FlashSetting
+
+        PTFlash_External_Loop_Tolerance = 0
+        PTFlash_Internal_Loop_Tolerance = 1
+        PTFlash_Maximum_Number_Of_External_Iterations = 2
+        PTFlash_Maximum_Number_Of_Internal_Iterations = 3
+
+        PHFlash_Internal_Loop_Tolerance = 4
+        PHFlash_External_Loop_Tolerance = 5
+        PHFlash_Maximum_Number_Of_Internal_Iterations = 6
+        PHFlash_Maximum_Number_Of_External_Iterations = 7
+    
+        PSFlash_Internal_Loop_Tolerance = 8
+        PSFlash_External_Loop_Tolerance = 9
+        PSFlash_Maximum_Number_Of_Internal_Iterations = 10
+        PSFlash_Maximum_Number_Of_External_Iterations = 11
+
+        ThreePhaseFlashStabTestSeverity = 12
+        ThreePhaseFlashStabTestCompIds = 13
+
+        CalculateBubbleAndDewPoints = 14
+
+        ValidateEquilibriumCalc = 15
+        ValidationGibbsTolerance = 16
+
+        UsePhaseIdentificationAlgorithm = 17
+
+        OptimizationMethod = 18
+
+    End Enum
+
     Public Enum FlashCalculationType
         PressureTemperature = 0
         PressureEnthalpy = 1

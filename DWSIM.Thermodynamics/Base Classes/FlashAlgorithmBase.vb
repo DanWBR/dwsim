@@ -19,7 +19,7 @@
 Imports System.Math
 Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.PropertyPackages.ThermoPlugs
-
+Imports DWSIM.Interfaces.Enums.FlashSetting
 Imports System.Linq
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
@@ -30,7 +30,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     ''' <remarks></remarks>
     <System.Serializable()> Public MustInherit Class FlashAlgorithm
 
-        Public Property FlashSettings As New Dictionary(Of String, String)
+        Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
         Public Property StabSearchSeverity As Integer = 0
         Public Property StabSearchCompIDs As String() = New String() {}
@@ -39,12 +39,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
 
-            FlashSettings.Add("ThreePhaseFlashStabTestSeverity", "0")
-            FlashSettings.Add("ThreePhaseFlashStabTestCompIds", "")
-            FlashSettings.Add("CalculateBubbleAndDewPoints", "False")
-            FlashSettings.Add("ValidateEquilibriumCalc", "False")
-            FlashSettings.Add("UsePhaseIdentificationAlgorithm", "False")
-            FlashSettings.Add("FlashValidationDGETolerancePct", "1")
+            FlashSettings.Add(ThreePhaseFlashStabTestSeverity, "0")
+            FlashSettings.Add(ThreePhaseFlashStabTestCompIds, "")
+            FlashSettings.Add(CalculateBubbleAndDewPoints, "False")
+            FlashSettings.Add(ValidateEquilibriumCalc, "False")
+            FlashSettings.Add(UsePhaseIdentificationAlgorithm, "False")
+            FlashSettings.Add(ValidationGibbsTolerance, "1")
 
         End Sub
 

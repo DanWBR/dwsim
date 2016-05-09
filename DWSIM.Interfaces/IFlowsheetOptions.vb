@@ -31,4 +31,6 @@
 
     Property VisibleProperties As Dictionary(Of String, List(Of String))
 
+    Property FlashSettings As Dictionary(Of Enums.FlashMethod, Dictionary(Of Enums.FlashSetting, String))
+
 End Interface

@@ -94,6 +94,8 @@ Namespace DWSIM.Flowsheet
 
         Implements Interfaces.IFlowsheetOptions
 
+        Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashMethod, Dictionary(Of Interfaces.Enums.FlashSetting, String)) Implements Interfaces.IFlowsheetOptions.FlashSettings
+
         Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
 
         Public PropertyPackages As Dictionary(Of String, PropertyPackages.PropertyPackage)
@@ -158,6 +160,23 @@ Namespace DWSIM.Flowsheet
 
             End If
 
+            el = (From xel As XElement In data Select xel Where xel.Name = "FlashSettings").SingleOrDefault
+
+            If Not el Is Nothing Then
+
+                FlashSettings.Clear()
+
+                For Each xel2 As XElement In el.Elements
+                    Dim etype = [Enum].Parse(Type.GetType("Interfaces.Enums.FlashMethod"), xel2.@Value)
+                    FlashSettings.Add(etype, New Dictionary(Of Interfaces.Enums.FlashSetting, String))
+                    For Each xel3 In xel2.Elements
+                        Dim esname = [Enum].Parse(Type.GetType("Interfaces.Enums.FlashSetting"), xel2.@Value)
+                        FlashSettings(etype).Add(esname, xel3.@Value)
+                    Next
+                Next
+
+            End If
+
             Return XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
 
         End Function
@@ -173,6 +192,16 @@ Namespace DWSIM.Flowsheet
                 elements(elements.Count - 1).Add(xel2)
                 For Each item2 In item.Value
                     xel2.Add(New XElement("PropertyID", New XAttribute("Value", item2)))
+                Next
+            Next
+
+            elements.Add(New XElement("FlashSettings"))
+
+            For Each item In FlashSettings
+                Dim xel2 = New XElement("FlashType", New XAttribute("Value", item.Key.ToString))
+                elements(elements.Count - 1).Add(xel2)
+                For Each item2 In item.Value
+                    xel2.Add(New XElement("Setting", New XAttribute("Name", item2.Key), New XAttribute("Value", item2.Value)))
                 Next
             Next
 

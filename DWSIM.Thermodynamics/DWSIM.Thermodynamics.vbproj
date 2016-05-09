@@ -130,7 +130,7 @@
     <Compile Include="Base Classes\MichelsenBase.vb" />
     <Compile Include="Base Classes\PropertyPackage.vb" />
     <Compile Include="Models\FluidProperties.vb" />
-    <Compile Include="Flash Algorithms\Base.vb" />
+    <Compile Include="Base Classes\FlashAlgorithmBase.vb" />
     <Compile Include="Flash Algorithms\BlackOil.vb" />
     <Compile Include="Flash Algorithms\BostonBrittInsideOut.vb" />
     <Compile Include="Flash Algorithms\BostonFournierInsideOut3P.vb" />
