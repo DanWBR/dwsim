@@ -32,7 +32,6 @@ Partial Class FormConfigPropertyPackage
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.KryptonDataGridView2 = New System.Windows.Forms.DataGridView()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -68,7 +67,7 @@ Partial Class FormConfigPropertyPackage
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem2, Me.FaTabStripItem1, Me.TabStripUNIFAC})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem2
         '
         'FaTabStripItem2
         '
@@ -77,23 +76,17 @@ Partial Class FormConfigPropertyPackage
         Me.FaTabStripItem2.Controls.Add(Me.Label2)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        Me.FaTabStripItem2.Selected = True
         resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.Button2)
         Me.GroupBox2.Controls.Add(Me.Button3)
         Me.GroupBox2.Controls.Add(Me.KryptonDataGridView2)
         Me.GroupBox2.Controls.Add(Me.LabelWithDivider2)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -156,7 +149,6 @@ Partial Class FormConfigPropertyPackage
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GroupBox1
@@ -230,14 +222,14 @@ Partial Class FormConfigPropertyPackage
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
-        'FormConfigPP
+        'FormConfigPropertyPackage
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.FaTabStrip1)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
-        Me.Name = "FormConfigPP"
+        Me.Name = "FormConfigPropertyPackage"
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem2.ResumeLayout(False)
@@ -268,7 +260,6 @@ Partial Class FormConfigPropertyPackage
     Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Button3 As System.Windows.Forms.Button
-    Public WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents IPGrid As System.Windows.Forms.DataGridView
     Private WithEvents TabStripUNIFAC As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn

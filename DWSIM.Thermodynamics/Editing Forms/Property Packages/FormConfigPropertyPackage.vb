@@ -613,7 +613,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim ppu As Object = _pp
         If ppu.ComponentName.Contains("SRK") Then
             Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "data" & Path.DirectorySeparatorChar & "srk_ip.dat")

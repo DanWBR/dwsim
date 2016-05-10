@@ -120,9 +120,6 @@
   <data name="Button5.Text" xml:space="preserve">
     <value>Estimate (UNIFAC-LL)</value>
   </data>
-  <data name="Button4.Text" xml:space="preserve">
-    <value>Open IPD File</value>
-  </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Estimate (Modified UNIFAC)</value>
   </data>

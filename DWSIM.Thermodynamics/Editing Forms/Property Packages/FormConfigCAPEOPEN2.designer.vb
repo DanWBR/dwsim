@@ -119,7 +119,7 @@ Partial Class FormConfigCAPEOPEN2
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem3, Me.FaTabStripItem7, Me.FaTabStripItem4, Me.FaTabStripItem6})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem6
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
@@ -127,6 +127,7 @@ Partial Class FormConfigCAPEOPEN2
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
+        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GroupBox2
@@ -467,7 +468,6 @@ Partial Class FormConfigCAPEOPEN2
         Me.FaTabStripItem6.Controls.Add(Me.Label8)
         Me.FaTabStripItem6.IsDrawn = True
         Me.FaTabStripItem6.Name = "FaTabStripItem6"
-        Me.FaTabStripItem6.Selected = True
         resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         '
         'lblDescription

@@ -1890,6 +1890,6 @@
     <value>FormConfigCAPEOPEN2</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=4.0.5974.20846, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=4.0.5974.22224, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

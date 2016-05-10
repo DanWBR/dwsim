@@ -969,11 +969,7 @@ Public Class FormSimulSettings
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
         End If
         Dim pp As PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
-        pp.ReconfigureConfigForm()
-        'pp.ConfigForm._pp = pp
-        'pp.ConfigForm._comps = FrmChild.Options.SelectedComponents
-        'pp.ConfigForm._form = FrmChild
-        'pp.ShowConfigForm(FrmChild)
+        pp.DisplayEditingForm()
     End Sub
 
     Private Sub btnDeletePP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeletePP.Click

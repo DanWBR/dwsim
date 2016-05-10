@@ -35,7 +35,6 @@ Partial Class FormConfigExUNIQUAC
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.dgvu1 = New System.Windows.Forms.DataGridView()
@@ -93,7 +92,6 @@ Partial Class FormConfigExUNIQUAC
         '
         resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Controls.Add(Me.Button5)
-        Me.GroupBox3.Controls.Add(Me.Button4)
         Me.GroupBox3.Controls.Add(Me.Button2)
         Me.GroupBox3.Controls.Add(Me.Button1)
         Me.GroupBox3.Controls.Add(Me.dgvu1)
@@ -106,12 +104,6 @@ Partial Class FormConfigExUNIQUAC
         resources.ApplyResources(Me.Button5, "Button5")
         Me.Button5.Name = "Button5"
         Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'Button2
         '
@@ -325,7 +317,6 @@ Partial Class FormConfigExUNIQUAC
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents Button1 As System.Windows.Forms.Button
-    Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
