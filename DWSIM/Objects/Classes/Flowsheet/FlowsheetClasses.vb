@@ -141,6 +141,12 @@ Namespace DWSIM.Flowsheet
                 .Add("DefaultSet", New ReactionSet("DefaultSet", DWSIM.App.GetLocalString("Rxn_DefaultSetName"), DWSIM.App.GetLocalString("Rxn_DefaultSetDesc")))
             End With
 
+            Dim defaultsettings = Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm.GetDefaultSettings
+
+            For Each item In [Enum].GetValues(PropertyPackageFlashAlgorithm.GetType)
+                FlashSettings.Add(item, defaultsettings)
+            Next
+
         End Sub
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData

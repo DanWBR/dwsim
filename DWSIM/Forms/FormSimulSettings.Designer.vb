@@ -97,7 +97,7 @@ Partial Class FormSimulSettings
         Me.chkUsePassword = New System.Windows.Forms.CheckBox()
         Me.PanelPP = New System.Windows.Forms.Panel()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnConfigureFlashAlgo = New System.Windows.Forms.Button()
         Me.ComboBoxFlashAlg = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
@@ -656,16 +656,16 @@ Partial Class FormSimulSettings
         'GroupBox15
         '
         resources.ApplyResources(Me.GroupBox15, "GroupBox15")
-        Me.GroupBox15.Controls.Add(Me.Button1)
+        Me.GroupBox15.Controls.Add(Me.btnConfigureFlashAlgo)
         Me.GroupBox15.Controls.Add(Me.ComboBoxFlashAlg)
         Me.GroupBox15.Controls.Add(Me.Label10)
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.TabStop = False
         '
-        'Button1
+        'btnConfigureFlashAlgo
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
+        resources.ApplyResources(Me.btnConfigureFlashAlgo, "btnConfigureFlashAlgo")
+        Me.btnConfigureFlashAlgo.Name = "btnConfigureFlashAlgo"
         '
         'ComboBoxFlashAlg
         '
@@ -1204,7 +1204,7 @@ Partial Class FormSimulSettings
     Friend WithEvents tsbDockingFloat As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbClose As System.Windows.Forms.ToolStripButton
     Public WithEvents GroupBox15 As System.Windows.Forms.GroupBox
-    Public WithEvents Button1 As System.Windows.Forms.Button
+    Public WithEvents btnConfigureFlashAlgo As System.Windows.Forms.Button
     Public WithEvents ComboBoxFlashAlg As System.Windows.Forms.ComboBox
     Public WithEvents Label10 As System.Windows.Forms.Label
 End Class

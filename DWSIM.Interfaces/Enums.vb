@@ -144,7 +144,11 @@
 
         UsePhaseIdentificationAlgorithm = 17
 
-        OptimizationMethod = 18
+        Replace_PTFlash = 18
+
+        GM_OptimizationMethod = 19
+        IO_FastMode = 20
+        NL_FastMode = 21
 
     End Enum
 

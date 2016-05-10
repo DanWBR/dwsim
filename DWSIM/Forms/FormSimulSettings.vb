@@ -1386,26 +1386,20 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub ComboBoxFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxFlashAlg.SelectedIndexChanged
-        Select Case ComboBoxFlashAlg.SelectedIndex
-            Case 0
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
-            Case 1
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.NestedLoops3PV3
-            Case 2
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.InsideOut
-            Case 3
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.InsideOut3P
-            Case 4
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.GibbsMin2P
-            Case 5
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.GibbsMin3P
-            Case 6
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE
-            Case 7
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE_SS
-            Case 8
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsImmiscible
-        End Select
+
+        Me.FrmChild.Options.PropertyPackageFlashAlgorithm = [Enum].Parse(Me.FrmChild.Options.PropertyPackageFlashAlgorithm.GetType, ComboBoxFlashAlg.SelectedItem)
+
+    End Sub
+
+    Private Sub btnConfigureFlashAlgo_Click(sender As Object, e As EventArgs) Handles btnConfigureFlashAlgo.Click
+
+        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = Me.FrmChild.Options.FlashSettings(Me.FrmChild.Options.PropertyPackageFlashAlgorithm),
+                                                                .AvailableCompounds = Me.FrmChild.Options.SelectedComponents.Values.Select(Function(x) x.Name).ToList,
+                                                                 .FlashAlgo = Me.FrmChild.Options.PropertyPackageFlashAlgorithm}
+        f.ShowDialog(Me)
+
+        Me.FrmChild.Options.FlashSettings(Me.FrmChild.Options.PropertyPackageFlashAlgorithm) = f.Settings
+
     End Sub
 
 End Class

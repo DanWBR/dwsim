@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CheckBox3.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkReplaceFlashPT.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CheckBox3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="chkReplaceFlashPT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="CheckBox3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="chkReplaceFlashPT.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 25</value>
   </data>
-  <data name="CheckBox3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="chkReplaceFlashPT.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 17</value>
   </data>
-  <data name="CheckBox3.TabIndex" type="System.Int32, mscorlib">
+  <data name="chkReplaceFlashPT.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <data name="CheckBox3.Text" xml:space="preserve">
+  <data name="chkReplaceFlashPT.Text" xml:space="preserve">
     <value>Substituir Flash PT por Flash PH</value>
   </data>
-  <data name="&gt;&gt;CheckBox3.Name" xml:space="preserve">
-    <value>CheckBox3</value>
+  <data name="&gt;&gt;chkReplaceFlashPT.Name" xml:space="preserve">
+    <value>chkReplaceFlashPT</value>
   </data>
-  <data name="&gt;&gt;CheckBox3.Type" xml:space="preserve">
+  <data name="&gt;&gt;chkReplaceFlashPT.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CheckBox3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chkReplaceFlashPT.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;CheckBox3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chkReplaceFlashPT.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
@@ -234,34 +234,34 @@
   <data name="&gt;&gt;tbFlashValidationTolerance.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="CheckBox1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkCalcBubbleDew.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CheckBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="chkCalcBubbleDew.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CheckBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="chkCalcBubbleDew.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 48</value>
   </data>
-  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="chkCalcBubbleDew.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 17</value>
   </data>
-  <data name="CheckBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="chkCalcBubbleDew.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="CheckBox1.Text" xml:space="preserve">
+  <data name="chkCalcBubbleDew.Text" xml:space="preserve">
     <value>Calcular pontos de bolha e orvalho</value>
   </data>
-  <data name="&gt;&gt;CheckBox1.Name" xml:space="preserve">
-    <value>CheckBox1</value>
+  <data name="&gt;&gt;chkCalcBubbleDew.Name" xml:space="preserve">
+    <value>chkCalcBubbleDew</value>
   </data>
-  <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;chkCalcBubbleDew.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chkCalcBubbleDew.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;CheckBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chkCalcBubbleDew.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="chkValidateEqCalc.AutoSize" type="System.Boolean, mscorlib">
@@ -382,7 +382,7 @@
     <value>100, 20</value>
   </data>
   <data name="tbPHExtMaxIt.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>8</value>
   </data>
   <data name="tbPHExtMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -409,7 +409,7 @@
     <value>100, 20</value>
   </data>
   <data name="tbPHIntMaxIt.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>7</value>
   </data>
   <data name="tbPHIntMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -436,7 +436,7 @@
     <value>100, 20</value>
   </data>
   <data name="tbPHExtMaxTol.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>6</value>
   </data>
   <data name="tbPHExtMaxTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -463,7 +463,7 @@
     <value>100, 20</value>
   </data>
   <data name="tbPHintMaxTol.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>5</value>
   </data>
   <data name="tbPHintMaxTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -490,7 +490,7 @@
     <value>100, 20</value>
   </data>
   <data name="tbPTExtMaxIt.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>4</value>
   </data>
   <data name="tbPTExtMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -517,7 +517,7 @@
     <value>100, 20</value>
   </data>
   <data name="tbPTintMaxIt.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>3</value>
   </data>
   <data name="tbPTintMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -544,7 +544,7 @@
     <value>100, 20</value>
   </data>
   <data name="tbPTExtTol.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>2</value>
   </data>
   <data name="tbPTExtTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -876,31 +876,31 @@
   <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="chkFastMode.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkFastModeNL.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkFastMode.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="chkFastModeNL.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 25</value>
   </data>
-  <data name="chkFastMode.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="chkFastModeNL.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 17</value>
   </data>
-  <data name="chkFastMode.TabIndex" type="System.Int32, mscorlib">
+  <data name="chkFastModeNL.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="chkFastMode.Text" xml:space="preserve">
+  <data name="chkFastModeNL.Text" xml:space="preserve">
     <value>Usar algoritmo rápido para Flash PH/PS</value>
   </data>
-  <data name="&gt;&gt;chkFastMode.Name" xml:space="preserve">
-    <value>chkFastMode</value>
+  <data name="&gt;&gt;chkFastModeNL.Name" xml:space="preserve">
+    <value>chkFastModeNL</value>
   </data>
-  <data name="&gt;&gt;chkFastMode.Type" xml:space="preserve">
+  <data name="&gt;&gt;chkFastModeNL.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;chkFastMode.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chkFastModeNL.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;chkFastMode.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chkFastModeNL.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
@@ -954,41 +954,41 @@
   <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="CheckBox2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkUseBroydenIO.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CheckBox2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="chkUseBroydenIO.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CheckBox2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="chkUseBroydenIO.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 25</value>
   </data>
-  <data name="CheckBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="chkUseBroydenIO.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 17</value>
   </data>
-  <data name="CheckBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="chkUseBroydenIO.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="CheckBox2.Text" xml:space="preserve">
+  <data name="chkUseBroydenIO.Text" xml:space="preserve">
     <value>Usar método de Broyden para acelerar convergência</value>
   </data>
-  <data name="&gt;&gt;CheckBox2.Name" xml:space="preserve">
-    <value>CheckBox2</value>
+  <data name="&gt;&gt;chkUseBroydenIO.Name" xml:space="preserve">
+    <value>chkUseBroydenIO</value>
   </data>
-  <data name="&gt;&gt;CheckBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;chkUseBroydenIO.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CheckBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chkUseBroydenIO.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="&gt;&gt;CheckBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;chkUseBroydenIO.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 6</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 122</value>
+    <value>493, 60</value>
   </data>
   <data name="GroupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1032,25 +1032,58 @@
   <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cbMinMethodGM.Items" xml:space="preserve">
+    <value>Limited Memory BGFS</value>
+  </data>
+  <data name="cbMinMethodGM.Items1" xml:space="preserve">
+    <value>Truncated Newton</value>
+  </data>
+  <data name="cbMinMethodGM.Items2" xml:space="preserve">
+    <value>Simplex</value>
+  </data>
+  <data name="cbMinMethodGM.Items3" xml:space="preserve">
+    <value>IPOPT</value>
+  </data>
+  <data name="cbMinMethodGM.Items4" xml:space="preserve">
+    <value>Particle Swarm</value>
+  </data>
+  <data name="cbMinMethodGM.Items5" xml:space="preserve">
+    <value>Local Unimodal Sampling</value>
+  </data>
+  <data name="cbMinMethodGM.Items6" xml:space="preserve">
+    <value>Gradient Descent</value>
+  </data>
+  <data name="cbMinMethodGM.Items7" xml:space="preserve">
+    <value>Differential Evolution</value>
+  </data>
+  <data name="cbMinMethodGM.Items8" xml:space="preserve">
+    <value>Particle Swarm Optimization</value>
+  </data>
+  <data name="cbMinMethodGM.Items9" xml:space="preserve">
+    <value>Many Optimizing Liaisons</value>
+  </data>
+  <data name="cbMinMethodGM.Items10" xml:space="preserve">
+    <value>Mesh</value>
+  </data>
+  <data name="cbMinMethodGM.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 21</value>
   </data>
-  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cbMinMethodGM.Size" type="System.Drawing.Size, System.Drawing">
     <value>328, 21</value>
   </data>
-  <data name="ComboBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="cbMinMethodGM.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
+  <data name="&gt;&gt;cbMinMethodGM.Name" xml:space="preserve">
+    <value>cbMinMethodGM</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;cbMinMethodGM.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cbMinMethodGM.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cbMinMethodGM.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
@@ -1131,103 +1164,103 @@
   <data name="GroupBox11.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="RadioButton3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="rbHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="RadioButton3.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rbHigh.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="RadioButton3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rbHigh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="RadioButton3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rbHigh.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 215</value>
   </data>
-  <data name="RadioButton3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rbHigh.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 17</value>
   </data>
-  <data name="RadioButton3.TabIndex" type="System.Int32, mscorlib">
+  <data name="rbHigh.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="RadioButton3.Text" xml:space="preserve">
+  <data name="rbHigh.Text" xml:space="preserve">
     <value>Alto</value>
   </data>
-  <data name="&gt;&gt;RadioButton3.Name" xml:space="preserve">
-    <value>RadioButton3</value>
+  <data name="&gt;&gt;rbHigh.Name" xml:space="preserve">
+    <value>rbHigh</value>
   </data>
-  <data name="&gt;&gt;RadioButton3.Type" xml:space="preserve">
+  <data name="&gt;&gt;rbHigh.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;RadioButton3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rbHigh.Parent" xml:space="preserve">
     <value>GroupBox11</value>
   </data>
-  <data name="&gt;&gt;RadioButton3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rbHigh.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="RadioButton2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="rbMedium.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="RadioButton2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rbMedium.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="RadioButton2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rbMedium.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="RadioButton2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rbMedium.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 215</value>
   </data>
-  <data name="RadioButton2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rbMedium.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 17</value>
   </data>
-  <data name="RadioButton2.TabIndex" type="System.Int32, mscorlib">
+  <data name="rbMedium.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="RadioButton2.Text" xml:space="preserve">
+  <data name="rbMedium.Text" xml:space="preserve">
     <value>Médio</value>
   </data>
-  <data name="&gt;&gt;RadioButton2.Name" xml:space="preserve">
-    <value>RadioButton2</value>
+  <data name="&gt;&gt;rbMedium.Name" xml:space="preserve">
+    <value>rbMedium</value>
   </data>
-  <data name="&gt;&gt;RadioButton2.Type" xml:space="preserve">
+  <data name="&gt;&gt;rbMedium.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;RadioButton2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rbMedium.Parent" xml:space="preserve">
     <value>GroupBox11</value>
   </data>
-  <data name="&gt;&gt;RadioButton2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rbMedium.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="RadioButton1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="rbLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="RadioButton1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="rbLow.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="RadioButton1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rbLow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="RadioButton1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rbLow.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 215</value>
   </data>
-  <data name="RadioButton1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rbLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 17</value>
   </data>
-  <data name="RadioButton1.TabIndex" type="System.Int32, mscorlib">
+  <data name="rbLow.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="RadioButton1.Text" xml:space="preserve">
+  <data name="rbLow.Text" xml:space="preserve">
     <value>Baixo</value>
   </data>
-  <data name="&gt;&gt;RadioButton1.Name" xml:space="preserve">
-    <value>RadioButton1</value>
+  <data name="&gt;&gt;rbLow.Name" xml:space="preserve">
+    <value>rbLow</value>
   </data>
-  <data name="&gt;&gt;RadioButton1.Type" xml:space="preserve">
+  <data name="&gt;&gt;rbLow.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;RadioButton1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rbLow.Parent" xml:space="preserve">
     <value>GroupBox11</value>
   </data>
-  <data name="&gt;&gt;RadioButton1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rbLow.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="Label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1293,28 +1326,28 @@
   <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ListView2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="lvKeyComp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="ListView2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lvKeyComp.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 43</value>
   </data>
-  <data name="ListView2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lvKeyComp.Size" type="System.Drawing.Size, System.Drawing">
     <value>474, 166</value>
   </data>
-  <data name="ListView2.TabIndex" type="System.Int32, mscorlib">
+  <data name="lvKeyComp.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;ListView2.Name" xml:space="preserve">
-    <value>ListView2</value>
+  <data name="&gt;&gt;lvKeyComp.Name" xml:space="preserve">
+    <value>lvKeyComp</value>
   </data>
-  <data name="&gt;&gt;ListView2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lvKeyComp.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ListView2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lvKeyComp.Parent" xml:space="preserve">
     <value>GroupBox11</value>
   </data>
-  <data name="&gt;&gt;ListView2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lvKeyComp.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="GroupBox11.Location" type="System.Drawing.Point, System.Drawing">
@@ -1400,6 +1433,9 @@
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configurações do Algoritmo Flash</value>

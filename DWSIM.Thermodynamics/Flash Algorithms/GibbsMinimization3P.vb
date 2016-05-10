@@ -60,13 +60,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Vant, T, Tant, P As Double
         Dim Ki1(n) As Double
 
-        Public Enum numsolver
-            Limited_Memory_BGFS = 0
-            Truncated_Newton = 1
-            Simplex = 2
-            IPOPT = 3
-        End Enum
-
         Public Property Solver As OptimizationMethod = OptimizationMethod.IPOPT
 
         Public Enum ObjFuncType As Integer

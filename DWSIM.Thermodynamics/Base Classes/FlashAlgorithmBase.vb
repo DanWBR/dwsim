@@ -48,6 +48,42 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Sub
 
+        Public Shared Function GetDefaultSettings() As Dictionary(Of Interfaces.Enums.FlashSetting, String)
+
+            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+
+            Dim settings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
+
+            settings(Interfaces.Enums.FlashSetting.Replace_PTFlash) = False
+            settings(Interfaces.Enums.FlashSetting.ValidateEquilibriumCalc) = False
+            settings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm) = False
+            settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = False
+
+            settings(Interfaces.Enums.FlashSetting.ValidationGibbsTolerance) = (0.01).ToString(ci)
+
+            settings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations) = Integer.Parse(100).ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance) = Double.Parse(0.0001).ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations) = Double.Parse(100).ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance) = Double.Parse(0.0001).ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations) = Double.Parse(100).ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance) = Double.Parse(0.0001).ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations) = Double.Parse(100).ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance) = Double.Parse(0.0001).ToString(ci)
+
+            settings(Interfaces.Enums.FlashSetting.NL_FastMode) = True
+
+            settings(Interfaces.Enums.FlashSetting.IO_FastMode) = True
+
+            settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod) = "IPOPT"
+
+            settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 0
+           
+            settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = ""
+
+            Return settings
+
+        End Function
+
         Public Sub WriteDebugInfo(text As String)
 
             Calculator.WriteToConsole(text, 1)

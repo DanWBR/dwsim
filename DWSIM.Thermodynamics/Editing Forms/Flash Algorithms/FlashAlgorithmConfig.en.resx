@@ -117,39 +117,208 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>522, 350</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
+  <data name="TabPage6.Text" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 417</value>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Convergence</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Nested Loops</value>
   </data>
-  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 417</value>
-  </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 417</value>
-  </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Gibbs Minimization</value>
-  </data>
-  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 417</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Three-Phase (VLLE)</value>
   </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>530, 376</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>General</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>530, 376</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkReplaceFlashPT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 17</value>
+  </data>
+  <data name="chkReplaceFlashPT.Text" xml:space="preserve">
+    <value>Replace PT flash calls by PH flash calls</value>
+  </data>
+  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>279, 97</value>
+  </data>
+  <data name="chkDoPhaseId.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 17</value>
+  </data>
+  <data name="chkDoPhaseId.Text" xml:space="preserve">
+    <value>Apply a phase identification algorithm after equilibrium calculations</value>
+  </data>
+  <data name="tbFlashValidationTolerance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 94</value>
+  </data>
+  <data name="chkCalcBubbleDew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 17</value>
+  </data>
+  <data name="chkCalcBubbleDew.Text" xml:space="preserve">
+    <value>Calculate bubble and dew points</value>
+  </data>
+  <data name="chkValidateEqCalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 17</value>
+  </data>
+  <data name="chkValidateEqCalc.Text" xml:space="preserve">
+    <value>Validate flash calculation results</value>
+  </data>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 13</value>
+  </data>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>Gibbs Free Energy variation tolerance</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Convergence loops</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbPHExtMaxIt.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="tbPHIntMaxIt.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="tbPHExtMaxTol.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tbPHintMaxTol.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tbPTExtMaxIt.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tbPTintMaxIt.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tbPTExtTol.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>309, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Flash PH/PS - maximum number of iterations on the internal loop</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>312, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Flash PH/PS - maximum number of iterations on the external loop</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 13</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Flash PH/PS - external loop convergence tolerance (absolute)</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 13</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Flash PH/PS - internal loop convergence tolerance (absolute)</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>308, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Flash PT/PV - maximum number of iterations on the internal loop</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>311, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Flash PT/PV - maximum number of iterations on the external loop</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>299, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Flash PT/PV - external loop convergence tolerance (absolute)</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>296, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Flash PT/PV - internal loop convergence tolerance (absolute)</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>General options</value>
+  </data>
+  <data name="chkFastModeNL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 17</value>
+  </data>
+  <data name="chkFastModeNL.Text" xml:space="preserve">
+    <value>Enable fast mode for PH/PS Flash</value>
+  </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>General options</value>
+  </data>
+  <data name="chkUseBroydenIO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 17</value>
+  </data>
+  <data name="chkUseBroydenIO.Text" xml:space="preserve">
+    <value>Enable Broyden convergence acceleration</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>General options</value>
+  </data>
+  <data name="cbMinMethodGM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 21</value>
+  </data>
+  <data name="cbMinMethodGM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>316, 21</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 13</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Gibbs minimization method</value>
+  </data>
+  <data name="GroupBox11.Text" xml:space="preserve">
+    <value>Liquid phase stability test</value>
+  </data>
+  <data name="rbHigh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 215</value>
+  </data>
+  <data name="rbHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="rbHigh.Text" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="rbMedium.Location" type="System.Drawing.Point, System.Drawing">
+    <value>236, 215</value>
+  </data>
+  <data name="rbMedium.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="rbMedium.Text" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="rbLow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 215</value>
+  </data>
+  <data name="rbLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
+  </data>
+  <data name="rbLow.Text" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 13</value>
+  </data>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>Phase composition search severity</value>
+  </data>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 13</value>
+  </data>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Key compounds for the second liquid phase:</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Flash Algorithm Settings</value>
