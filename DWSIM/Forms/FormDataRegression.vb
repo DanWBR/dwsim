@@ -3678,7 +3678,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         If chkDoTDepRegression.Checked Then
             If cbModel.SelectedItem.ToString = "NRTL" Then
-                gridInEst.Rows(2).Cells(2).Value = True
+                gridInEst.Rows(2).Cells(4).Value = True
             End If
         End If
 
