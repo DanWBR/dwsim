@@ -21,7 +21,7 @@ Imports DWSIM.DWSIM.Extras
 Imports DWSIM.FlowsheetSolver
 Imports DWSIM.Thermodynamics.PropertyPackages
 
-Public Class FormConfigWizard
+Public Class FormSimulWizard
 
     Private FrmChild As FormFlowsheet
     Dim loaded As Boolean = False
@@ -331,6 +331,7 @@ Public Class FormConfigWizard
         With pp
             pp.Tag = "PP_" & CStr(Me.dgvpp.Rows.Count + 1)
             pp.UniqueID = "PP-" & Guid.NewGuid.ToString
+            pp.Flowsheet = FrmChild
         End With
         FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})

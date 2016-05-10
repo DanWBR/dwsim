@@ -1187,6 +1187,7 @@ Public Class FormMain
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
                 If form.Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
+                obj.Flowsheet = form
                 form.Options.PropertyPackages.Add(obj.UniqueID, obj)
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Property Package Information", ex))

@@ -44,21 +44,11 @@ Namespace PropertyPackages
 
             MyBase.New(comode)
 
-            'With Me.Parameters
-            '    .Add("PP_USE_EOS_LIQDENS", 0)
-            '    .Add("PP_USE_EOS_VOLUME_SHIFT", 0)
-            'End With
-
         End Sub
 
         Public Sub New()
 
             MyBase.New()
-
-            'With Me.Parameters
-            '    .Add("PP_USE_EOS_LIQDENS", 0)
-            '    .Add("PP_USE_EOS_VOLUME_SHIFT", 0)
-            'End With
 
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.EOS
@@ -71,20 +61,6 @@ Namespace PropertyPackages
 
             With Me.Parameters
                 .Clear()
-                .Add("PP_PHFILT", 0.001)
-                .Add("PP_PSFILT", 0.001)
-                .Add("PP_PHFELT", 0.001)
-                .Add("PP_PSFELT", 0.001)
-                .Add("PP_PHFMEI", 50)
-                .Add("PP_PSFMEI", 50)
-                .Add("PP_PHFMII", 100)
-                .Add("PP_PSFMII", 100)
-                .Add("PP_PTFMEI", 100)
-                .Add("PP_PTFMII", 100)
-                .Add("PP_PTFILT", 0.001)
-                .Add("PP_PTFELT", 0.001)
-                .Add("PP_FLASHALGORITHM", 2)
-                .Add("PP_FLASHALGORITHMFASTMODE", 1)
                 .Add("PP_IDEAL_MIXRULE_LIQDENS", 0)
                 .Add("PP_USEEXPLIQDENS", 0)
                 .Add("PP_USE_EOS_LIQDENS", 0)
@@ -99,16 +75,16 @@ Namespace PropertyPackages
      
         End Sub
 
-        'Public Overrides Function Clone() As PropertyPackage
+        Public Overrides Sub DisplayEditingForm()
 
-        '    Return New PengRobinsonPropertyPackage() With {.ip = Me.ip,
-        '                                                   .ip_hash = Me.ip_hash,
-        '                                                   .m_pr = Me.m_pr,
-        '                                                   .m_par = Me.m_par,
-        '                                                   .ComponentName = Me.ComponentName,
-        '                                                   .ComponentDescription = Me.ComponentDescription}
+            If Not Flowsheet Is Nothing Then
+                Dim f As New FormConfigPropertyPackage() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+                f.ShowDialog(Flowsheet)
+            Else
+                MyBase.DisplayEditingForm()
+            End If
 
-        'End Function
+        End Sub
 
 #Region "    DWSIM Functions"
 

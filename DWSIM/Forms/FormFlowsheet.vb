@@ -271,7 +271,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             Application.DoEvents()
 
             If Not DWSIM.App.IsRunningOnMono Then
-                Dim fw As New FormConfigWizard
+                Dim fw As New FormSimulWizard
                 With fw
                     .StartPosition = FormStartPosition.CenterScreen
                     .WindowState = FormWindowState.Normal

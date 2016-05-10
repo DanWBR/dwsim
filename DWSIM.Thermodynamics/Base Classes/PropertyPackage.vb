@@ -143,18 +143,9 @@ Namespace PropertyPackages
 
         <NonSerialized> Private m_ip As DataTable
 
-        Private _flashalgorithm As FlashMethod
+        Private _flashalgorithm As FlashMethod = FlashMethod.DWSIMDefault
 
         Public _packagetype As PackageType
-
-        <System.NonSerialized()> Public _brio3 As Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
-        <System.NonSerialized()> Public _bbio As Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-        <System.NonSerialized()> Public _dwdf As Auxiliary.FlashAlgorithms.DWSIMDefault
-        <System.NonSerialized()> Public _gm3 As Auxiliary.FlashAlgorithms.GibbsMinimization3P
-        <System.NonSerialized()> Public _nl3 As Auxiliary.FlashAlgorithms.NestedLoops3PV3
-        <System.NonSerialized()> Public _nlsle As Auxiliary.FlashAlgorithms.NestedLoopsSLE
-        <System.NonSerialized()> Public _nli As Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
-        <System.NonSerialized()> Public _simplelle As Auxiliary.FlashAlgorithms.SimpleLLE
 
         Public _tpseverity As Integer = 0
         Public _tpcompids As String() = New String() {}
@@ -168,8 +159,6 @@ Namespace PropertyPackages
         Public Property ForceNewFlashAlgorithmInstance As Boolean = False
 
         <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
-
-        '<System.NonSerialized()> Public ConfigForm As FormConfigBase 'System.Windows.Forms.Form
 
 #Region "   Constructor"
 
@@ -9772,9 +9761,11 @@ Final3:
 
         Public Property PreferredFlashAlgorithm As Enums.FlashMethod = Enums.FlashMethod.Default_Algorithm Implements IPropertyPackage.PreferredFlashAlgorithm
 
-        Sub DisplayEditingForm()
-            Throw New NotImplementedException
+        Public Overridable Sub DisplayEditingForm()
+
         End Sub
+
+        <Xml.Serialization.XmlIgnore> Property Flowsheet As IFlowsheet Implements IPropertyPackage.Flowsheet
 
     End Class
 

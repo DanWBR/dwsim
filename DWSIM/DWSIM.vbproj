@@ -316,10 +316,10 @@
     <Compile Include="Forms\FormConfigureSpreadsheetTable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormConfigWizard.Designer.vb">
-      <DependentUpon>FormConfigWizard.vb</DependentUpon>
+    <Compile Include="Forms\FormSimulWizard.Designer.vb">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormConfigWizard.vb">
+    <Compile Include="Forms\FormSimulWizard.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormCoolPropWarning.Designer.vb">
@@ -784,18 +784,18 @@
     <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.resx">
       <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormConfigWizard.de.resx">
-      <DependentUpon>FormConfigWizard.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\FormSimulWizard.de.resx">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormConfigWizard.en.resx">
-      <DependentUpon>FormConfigWizard.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\FormSimulWizard.en.resx">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormConfigWizard.es.resx">
-      <DependentUpon>FormConfigWizard.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\FormSimulWizard.es.resx">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormConfigWizard.resx">
-      <DependentUpon>FormConfigWizard.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\FormSimulWizard.resx">
+      <DependentUpon>FormSimulWizard.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCoolPropWarning.de.resx">

@@ -28,4 +28,6 @@
 
     Function Clone() As IPropertyPackage
 
+    Property Flowsheet As IFlowsheet
+
 End Interface
