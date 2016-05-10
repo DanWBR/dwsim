@@ -12,6 +12,35 @@
 
     Private Sub FlashAlgorithmConfig_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Select Case FlashAlgo
+            Case Interfaces.Enums.FlashMethod.Default_Algorithm, Interfaces.Enums.FlashMethod.Nested_Loops_VLE
+                TabControl1.TabPages.Remove(TabPageGM)
+                TabControl1.TabPages.Remove(TabPageIO)
+                TabControl1.TabPages.Remove(TabPageVLLE)
+            Case Interfaces.Enums.FlashMethod.Nested_Loops_VLLE, Interfaces.Enums.FlashMethod.Nested_Loops_Immiscible_VLLE
+                TabControl1.TabPages.Remove(TabPageGM)
+                TabControl1.TabPages.Remove(TabPageIO)
+            Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLE
+                TabControl1.TabPages.Remove(TabPageNL)
+                TabControl1.TabPages.Remove(TabPageIO)
+                TabControl1.TabPages.Remove(TabPageVLLE)
+            Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE
+                TabControl1.TabPages.Remove(TabPageNL)
+                TabControl1.TabPages.Remove(TabPageIO)
+            Case Interfaces.Enums.FlashMethod.Inside_Out_VLE
+                TabControl1.TabPages.Remove(TabPageGM)
+                TabControl1.TabPages.Remove(TabPageNL)
+                TabControl1.TabPages.Remove(TabPageVLLE)
+            Case Interfaces.Enums.FlashMethod.Inside_Out_VLLE
+                TabControl1.TabPages.Remove(TabPageGM)
+                TabControl1.TabPages.Remove(TabPageNL)
+            Case Interfaces.Enums.FlashMethod.Nested_Loops_SLE_Eutectic, Interfaces.Enums.FlashMethod.Nested_Loops_SLE_SolidSolution, Interfaces.Enums.FlashMethod.Simple_LLE
+                TabControl1.TabPages.Remove(TabPageGM)
+                TabControl1.TabPages.Remove(TabPageNL)
+                TabControl1.TabPages.Remove(TabPageIO)
+                TabControl1.TabPages.Remove(TabPageVLLE)
+        End Select
+
         ci = Globalization.CultureInfo.InvariantCulture
 
         chkReplaceFlashPT.Checked = Settings(Interfaces.Enums.FlashSetting.Replace_PTFlash)

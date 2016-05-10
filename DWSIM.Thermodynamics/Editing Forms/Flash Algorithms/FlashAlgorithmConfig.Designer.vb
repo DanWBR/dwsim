@@ -24,7 +24,7 @@ Partial Class FlashAlgorithmConfig
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FlashAlgorithmConfig))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.TabPageGeneral = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.chkReplaceFlashPT = New System.Windows.Forms.CheckBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -33,7 +33,7 @@ Partial Class FlashAlgorithmConfig
         Me.chkCalcBubbleDew = New System.Windows.Forms.CheckBox()
         Me.chkValidateEqCalc = New System.Windows.Forms.CheckBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPageConvPars = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.tbPHExtMaxIt = New System.Windows.Forms.TextBox()
         Me.tbPHIntMaxIt = New System.Windows.Forms.TextBox()
@@ -51,17 +51,17 @@ Partial Class FlashAlgorithmConfig
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbPTIntTol = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPageNL = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.chkFastModeNL = New System.Windows.Forms.CheckBox()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TabPageIO = New System.Windows.Forms.TabPage()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.chkUseBroydenIO = New System.Windows.Forms.CheckBox()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TabPageGM = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.cbMinMethodGM = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.TabPageVLLE = New System.Windows.Forms.TabPage()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
         Me.rbHigh = New System.Windows.Forms.RadioButton()
         Me.rbMedium = New System.Windows.Forms.RadioButton()
@@ -70,41 +70,42 @@ Partial Class FlashAlgorithmConfig
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lvKeyComp = New System.Windows.Forms.ListView()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage6.SuspendLayout()
+        Me.TabPageGeneral.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
+        Me.TabPageConvPars.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
+        Me.TabPageNL.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
+        Me.TabPageIO.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
+        Me.TabPageGM.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.TabPage5.SuspendLayout()
+        Me.TabPageVLLE.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.TabPage6)
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage5)
         resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Controls.Add(Me.TabPageGeneral)
+        Me.TabControl1.Controls.Add(Me.TabPageConvPars)
+        Me.TabControl1.Controls.Add(Me.TabPageNL)
+        Me.TabControl1.Controls.Add(Me.TabPageIO)
+        Me.TabControl1.Controls.Add(Me.TabPageGM)
+        Me.TabControl1.Controls.Add(Me.TabPageVLLE)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
-        'TabPage6
+        'TabPageGeneral
         '
-        Me.TabPage6.Controls.Add(Me.GroupBox4)
-        resources.ApplyResources(Me.TabPage6, "TabPage6")
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageGeneral, "TabPageGeneral")
+        Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
+        Me.TabPageGeneral.Name = "TabPageGeneral"
+        Me.TabPageGeneral.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.chkReplaceFlashPT)
         Me.GroupBox4.Controls.Add(Me.Label13)
         Me.GroupBox4.Controls.Add(Me.chkDoPhaseId)
@@ -112,7 +113,6 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.chkCalcBubbleDew)
         Me.GroupBox4.Controls.Add(Me.chkValidateEqCalc)
         Me.GroupBox4.Controls.Add(Me.Label12)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
@@ -151,15 +151,16 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
         '
-        'TabPage1
+        'TabPageConvPars
         '
-        Me.TabPage1.Controls.Add(Me.GroupBox1)
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageConvPars, "TabPageConvPars")
+        Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
+        Me.TabPageConvPars.Name = "TabPageConvPars"
+        Me.TabPageConvPars.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.tbPHExtMaxIt)
         Me.GroupBox1.Controls.Add(Me.tbPHIntMaxIt)
         Me.GroupBox1.Controls.Add(Me.tbPHExtMaxTol)
@@ -176,7 +177,6 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.tbPTIntTol)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -260,17 +260,17 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
         '
-        'TabPage2
+        'TabPageNL
         '
-        Me.TabPage2.Controls.Add(Me.GroupBox2)
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageNL, "TabPageNL")
+        Me.TabPageNL.Controls.Add(Me.GroupBox2)
+        Me.TabPageNL.Name = "TabPageNL"
+        Me.TabPageNL.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.chkFastModeNL)
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.chkFastModeNL)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
@@ -280,17 +280,17 @@ Partial Class FlashAlgorithmConfig
         Me.chkFastModeNL.Name = "chkFastModeNL"
         Me.chkFastModeNL.UseVisualStyleBackColor = True
         '
-        'TabPage3
+        'TabPageIO
         '
-        Me.TabPage3.Controls.Add(Me.GroupBox5)
-        resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageIO, "TabPageIO")
+        Me.TabPageIO.Controls.Add(Me.GroupBox5)
+        Me.TabPageIO.Name = "TabPageIO"
+        Me.TabPageIO.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '
-        Me.GroupBox5.Controls.Add(Me.chkUseBroydenIO)
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
+        Me.GroupBox5.Controls.Add(Me.chkUseBroydenIO)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
         '
@@ -300,27 +300,27 @@ Partial Class FlashAlgorithmConfig
         Me.chkUseBroydenIO.Name = "chkUseBroydenIO"
         Me.chkUseBroydenIO.UseVisualStyleBackColor = True
         '
-        'TabPage4
+        'TabPageGM
         '
-        Me.TabPage4.Controls.Add(Me.GroupBox3)
-        resources.ApplyResources(Me.TabPage4, "TabPage4")
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageGM, "TabPageGM")
+        Me.TabPageGM.Controls.Add(Me.GroupBox3)
+        Me.TabPageGM.Name = "TabPageGM"
+        Me.TabPageGM.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
+        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Controls.Add(Me.cbMinMethodGM)
         Me.GroupBox3.Controls.Add(Me.Label9)
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
         '
         'cbMinMethodGM
         '
+        resources.ApplyResources(Me.cbMinMethodGM, "cbMinMethodGM")
         Me.cbMinMethodGM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMinMethodGM.FormattingEnabled = True
         Me.cbMinMethodGM.Items.AddRange(New Object() {resources.GetString("cbMinMethodGM.Items"), resources.GetString("cbMinMethodGM.Items1"), resources.GetString("cbMinMethodGM.Items2"), resources.GetString("cbMinMethodGM.Items3"), resources.GetString("cbMinMethodGM.Items4"), resources.GetString("cbMinMethodGM.Items5"), resources.GetString("cbMinMethodGM.Items6"), resources.GetString("cbMinMethodGM.Items7"), resources.GetString("cbMinMethodGM.Items8"), resources.GetString("cbMinMethodGM.Items9"), resources.GetString("cbMinMethodGM.Items10")})
-        resources.ApplyResources(Me.cbMinMethodGM, "cbMinMethodGM")
         Me.cbMinMethodGM.Name = "cbMinMethodGM"
         '
         'Label9
@@ -328,12 +328,12 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         '
-        'TabPage5
+        'TabPageVLLE
         '
-        Me.TabPage5.Controls.Add(Me.GroupBox11)
-        resources.ApplyResources(Me.TabPage5, "TabPage5")
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageVLLE, "TabPageVLLE")
+        Me.TabPageVLLE.Controls.Add(Me.GroupBox11)
+        Me.TabPageVLLE.Name = "TabPageVLLE"
+        Me.TabPageVLLE.UseVisualStyleBackColor = True
         '
         'GroupBox11
         '
@@ -396,33 +396,33 @@ Partial Class FlashAlgorithmConfig
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
         Me.ShowIcon = False
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage6.ResumeLayout(False)
+        Me.TabPageGeneral.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
-        Me.TabPage1.ResumeLayout(False)
+        Me.TabPageConvPars.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.TabPage2.ResumeLayout(False)
+        Me.TabPageNL.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.TabPage3.ResumeLayout(False)
+        Me.TabPageIO.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.TabPage4.ResumeLayout(False)
+        Me.TabPageGM.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.TabPage5.ResumeLayout(False)
+        Me.TabPageVLLE.ResumeLayout(False)
         Me.GroupBox11.ResumeLayout(False)
         Me.GroupBox11.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageConvPars As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageNL As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageIO As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageGM As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageVLLE As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents tbPHExtMaxIt As System.Windows.Forms.TextBox
     Friend WithEvents tbPHIntMaxIt As System.Windows.Forms.TextBox
@@ -452,7 +452,7 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents lvKeyComp As System.Windows.Forms.ListView
-    Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageGeneral As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Public WithEvents chkReplaceFlashPT As System.Windows.Forms.CheckBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
