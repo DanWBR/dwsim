@@ -121,6 +121,60 @@
     <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.designer.vb">
+      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.designer.vb">
+      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.designer.vb">
+      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigLKP.designer.vb">
+      <DependentUpon>FormConfigLKP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigLKP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.designer.vb">
+      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.designer.vb">
+      <DependentUpon>FormConfigPropertyPackageBase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.designer.vb">
+      <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.designer.vb">
+      <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.designer.vb">
+      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interface\Thermodynamics.vb" />
     <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
@@ -230,6 +284,99 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.de.resx">
+      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.en.resx">
+      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.es.resx">
+      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.resx">
+      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.de.resx">
+      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.en.resx">
+      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.es.resx">
+      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.resx">
+      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.de.resx">
+      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.en.resx">
+      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.es.resx">
+      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.resx">
+      <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLKP.de.resx">
+      <DependentUpon>FormConfigLKP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLKP.en.resx">
+      <DependentUpon>FormConfigLKP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLKP.es.resx">
+      <DependentUpon>FormConfigLKP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLKP.resx">
+      <DependentUpon>FormConfigLKP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigNRTL.de.resx">
+      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigNRTL.en.resx">
+      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigNRTL.es.resx">
+      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigNRTL.resx">
+      <DependentUpon>FormConfigNRTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.de.resx">
+      <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.en.resx">
+      <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.es.resx">
+      <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.resx">
+      <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.en.resx">
+      <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.es.resx">
+      <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.resx">
+      <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.de.resx">
+      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.en.resx">
+      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.es.resx">
+      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.resx">
+      <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -382,9 +529,7 @@
   <ItemGroup>
     <None Include="Resources\cog.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Editing Forms\Property Packages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
