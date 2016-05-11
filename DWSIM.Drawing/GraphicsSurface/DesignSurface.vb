@@ -167,6 +167,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #End Region
 
+    Public Property ResizingMode As Boolean = False
+    Public Property ResizingMode_KeepAR As Boolean = True
+
     Public Property QuickConnect() As Boolean
         Get
             Return m_quickconnectmode

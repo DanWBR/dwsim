@@ -2846,4 +2846,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(myobj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
+
+    Private Sub tsbResizeModeKeepAR_Click(sender As Object, e As EventArgs) Handles tsbResizeModeKeepAR.Click
+        Me.FormSurface.FlowsheetDesignSurface.ResizingMode_KeepAR = tsbResizeModeKeepAR.Checked
+    End Sub
+
+    Private Sub tsbResizeMode_Click(sender As Object, e As EventArgs) Handles tsbResizeMode.Click
+        Me.FormSurface.FlowsheetDesignSurface.ResizingMode = tsbResizeMode.Checked
+    End Sub
+
 End Class

@@ -1977,6 +1977,7 @@
     <Content Include="Assets\help\UT_Triangular_LLE.htm" />
     <Content Include="Assets\help\UT_TrueCriticalPoint.htm" />
     <Content Include="Assets\help\UT_VesselSizing.htm" />
+    <None Include="Resources\shape_handles.png" />
     <None Include="Resources\table_lightning.png" />
     <None Include="Resources\splashWelcome_Background.png" />
     <None Include="Resources\splashScreen2.png" />
@@ -2064,6 +2065,7 @@
     <None Include="Resources\arrow_left1.png" />
     <None Include="Resources\arrow_up1.png" />
     <None Include="Resources\arrow_down1.png" />
+    <None Include="Resources\arrow_nw_se.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
