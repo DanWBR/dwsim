@@ -7210,6 +7210,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Cor 1 do gradiente.
+        '''</summary>
+        Friend Shared ReadOnly Property Gradiente_Cor1() As String
+            Get
+                Return ResourceManager.GetString("Gradiente_Cor1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Cor 2 do gradiente.
+        '''</summary>
+        Friend Shared ReadOnly Property Gradiente_Cor2() As String
+            Get
+                Return ResourceManager.GetString("Gradiente_Cor2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Gradiente.
         '''</summary>
         Friend Shared ReadOnly Property Gradiente2() As String

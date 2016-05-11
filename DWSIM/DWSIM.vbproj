@@ -230,6 +230,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
@@ -314,6 +315,12 @@
       <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormConfigureSpreadsheetTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEditGraphicObject.Designer.vb">
+      <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEditGraphicObject.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSimulWizard.Designer.vb">
@@ -784,6 +791,12 @@
     <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.resx">
       <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditGraphicObject.en.resx">
+      <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditGraphicObject.resx">
+      <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSimulWizard.de.resx">
       <DependentUpon>FormSimulWizard.vb</DependentUpon>
     </EmbeddedResource>
@@ -1038,6 +1051,10 @@
     <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
       <Name>DWSIM.UnitOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
+      <Project>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</Project>
+      <Name>DWSIM.Controls.PropertyGridEx</Name>
     </ProjectReference>
     <ProjectReference Include="..\RandomOps\DWSIM.MathOps.RandomOps.csproj">
       <Project>{f5dfafed-c786-4dc3-9818-16c992de3990}</Project>
@@ -1977,6 +1994,7 @@
     <Content Include="Assets\help\UT_Triangular_LLE.htm" />
     <Content Include="Assets\help\UT_TrueCriticalPoint.htm" />
     <Content Include="Assets\help\UT_VesselSizing.htm" />
+    <None Include="Resources\shape_square_edit.png" />
     <None Include="Resources\shape_handles.png" />
     <None Include="Resources\table_lightning.png" />
     <None Include="Resources\splashWelcome_Background.png" />

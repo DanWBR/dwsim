@@ -118,23 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="LabelCalculator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 17</value>
-  </data>
-  <data name="LabelCalculator.Text" xml:space="preserve">
-    <value>Calculator Status: Idle</value>
-  </data>
-  <data name="LabelSimultAdjustStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 17</value>
-  </data>
-  <data name="LabelSimultAdjustStatus.Text" xml:space="preserve">
-    <value>The Simultaneous Adjust Solver is working, please wait...</value>
-  </data>
-  <data name="LabelSimultAdjInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 25</value>
-  </data>
-  <data name="LabelTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 5</value>
+  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 164</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 22</value>
@@ -181,9 +166,6 @@
   <data name="CentralizarToolStripMenuItem.Text" xml:space="preserve">
     <value>Center</value>
   </data>
-  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 164</value>
-  </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 22</value>
   </data>
@@ -225,6 +207,54 @@
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 6</value>
+  </data>
+  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="TSMI_Girar.Text" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="HorizontalmenteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Invert Horizontally</value>
+  </data>
+  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 6</value>
+  </data>
+  <data name="ClonarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="ClonarToolStripMenuItem.Text" xml:space="preserve">
+    <value>Clone</value>
+  </data>
+  <data name="ClonarToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Creates an exact copy of the selected object.</value>
+  </data>
+  <data name="ExcluirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="ExcluirToolStripMenuItem.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 6</value>
+  </data>
+  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy Process Data to Clipboard</value>
+  </data>
+  <data name="ToolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 6</value>
+  </data>
+  <data name="EditAppearanceToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit Appearance</value>
+  </data>
+  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 326</value>
   </data>
   <data name="BToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -315,48 +345,6 @@
         iao/E1UHFhRoeFMXF+cpc/79kGJwn99Eh+c+WlxClI0Wo0RdiKtD+UcFj3PPf8pJOLqStEn/D9ZgDDJp
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 22</value>
-  </data>
-  <data name="TSMI_Girar.Text" xml:space="preserve">
-    <value>Rotate</value>
-  </data>
-  <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 22</value>
-  </data>
-  <data name="HorizontalmenteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Invert Horizontally</value>
-  </data>
-  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 6</value>
-  </data>
-  <data name="ClonarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 22</value>
-  </data>
-  <data name="ClonarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Clone</value>
-  </data>
-  <data name="ClonarToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Creates an exact copy of the selected object.</value>
-  </data>
-  <data name="ExcluirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 22</value>
-  </data>
-  <data name="ExcluirToolStripMenuItem.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 6</value>
-  </data>
-  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 22</value>
-  </data>
-  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copy Process Data to Clipboard</value>
-  </data>
-  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 276</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
