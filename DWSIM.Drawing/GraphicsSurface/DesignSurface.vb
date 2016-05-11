@@ -89,6 +89,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Private rectp0 As New Point
     Private hoverRect As Rectangle
     Private hoverrotation As Integer = 0
+    Private Size0 As Size
 
     Private justselected As Boolean = False
 
@@ -529,7 +530,42 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         'Throw New System.ApplicationException("Error Drawing Graphics Surface", ex)
         ' End Try
 
+        If ResizingMode Then
+            For Each obj In drawingObjects
+                If obj.ObjectType <> ObjectType.Nenhum And obj.ObjectType <> ObjectType.GO_FloatingTable And
+                    obj.ObjectType <> ObjectType.GO_MasterTable And obj.ObjectType <> ObjectType.GO_SpreadsheetTable And
+                    obj.ObjectType <> ObjectType.GO_Table Then
+                    DrawResizingAnchors(g, Me.Zoom, obj)
+                End If
+            Next
+        End If
+
     End Sub
+
+    Sub DrawResizingAnchors(g As Graphics, Scale As Single, gobj As GraphicObject)
+
+        Dim gCon As Drawing2D.GraphicsContainer
+
+        Dim myOriginalMatrix As Drawing2D.Matrix
+        myOriginalMatrix = g.Transform()
+
+        gCon = g.BeginContainer()
+
+        g.PageUnit = GraphicsUnit.Pixel
+        g.ScaleTransform(Scale, Scale)
+
+        g.DrawRectangle(New Pen(Brushes.SteelBlue, 2), gobj.GetBoundsRectangle)
+
+        g.DrawRectangle(New Pen(Brushes.SteelBlue, 2), gobj.X - 2, gobj.Y - 2, 4, 4)
+        g.DrawRectangle(New Pen(Brushes.SteelBlue, 2), gobj.X + gobj.Width - 2, gobj.Y - 2, 4, 4)
+        g.DrawRectangle(New Pen(Brushes.SteelBlue, 2), gobj.X - 2, gobj.Y + gobj.Height - 2, 4, 4)
+        g.DrawRectangle(New Pen(Brushes.SteelBlue, 2), gobj.X + gobj.Width - 2, gobj.Y + gobj.Height - 2, 4, 4)
+
+        g.EndContainer(gCon)
+        g.Transform = myOriginalMatrix
+
+    End Sub
+
 
     Protected Overrides Function IsInputKey(ByVal keyData As Keys) As Boolean
         Select Case keyData
@@ -699,50 +735,63 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.Invalidate()
 
         Dim mousePT As Point = gscTogoc(e.X, e.Y)
-        dragStart = New Point(e.X, e.Y)
-        Me.SelectedObject = Me.drawingObjects.FindObjectAtPoint(mousePT)
-        If Me.SelectedObject Is Nothing Then
-            Me.SelectedObjects.Clear()
-            justselected = False
-            If My.Computer.Keyboard.ShiftKeyDown Then
-                draggingfs = True
-            End If
-        Else
-            If My.Computer.Keyboard.CtrlKeyDown Then
-                If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
-                    Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
-                Else
-                    Me.SelectedObjects.Remove(Me.SelectedObject.Name)
-                End If
-                justselected = True
-            Else
-                If Not justselected Then Me.SelectedObjects.Clear()
-                If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
-                    Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
-                End If
-                justselected = False
-            End If
-        End If
 
-        If Not m_SelectedObject Is Nothing Then
-            If e.Button And Windows.Forms.MouseButtons.Right Then
-                'rotating = True
-                dragging = True
-                startingRotation = AngleToPoint(m_SelectedObject.GetPosition, mousePT)
-                originalRotation = m_SelectedObject.Rotation
+        dragStart = New Point(e.X, e.Y)
+
+        Me.SelectedObject = Me.drawingObjects.FindObjectAtPoint(mousePT)
+
+        If Not SelectedObject Is Nothing Then Size0 = SelectedObject.GetSize
+
+        If Not ResizingMode Then
+
+            If Me.SelectedObject Is Nothing Then
+                Me.SelectedObjects.Clear()
+                justselected = False
+                If My.Computer.Keyboard.ShiftKeyDown Then
+                    draggingfs = True
+                End If
             Else
-                dragging = True
-                dragOffset.X = m_SelectedObject.X - mousePT.X
-                dragOffset.Y = m_SelectedObject.Y - mousePT.Y
+                If My.Computer.Keyboard.CtrlKeyDown Then
+                    If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
+                        Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
+                    Else
+                        Me.SelectedObjects.Remove(Me.SelectedObject.Name)
+                    End If
+                    justselected = True
+                Else
+                    If Not justselected Then Me.SelectedObjects.Clear()
+                    If Not Me.SelectedObjects.ContainsKey(Me.SelectedObject.Name) Then
+                        Me.SelectedObjects.Add(Me.SelectedObject.Name, Me.SelectedObject)
+                    End If
+                    justselected = False
+                End If
             End If
+
+            If Not m_SelectedObject Is Nothing Then
+                If e.Button And Windows.Forms.MouseButtons.Right Then
+                    'rotating = True
+                    dragging = True
+                    startingRotation = AngleToPoint(m_SelectedObject.GetPosition, mousePT)
+                    originalRotation = m_SelectedObject.Rotation
+                Else
+                    dragging = True
+                    dragOffset.X = m_SelectedObject.X - mousePT.X
+                    dragOffset.Y = m_SelectedObject.Y - mousePT.Y
+                End If
+            Else
+                If e.Button And Windows.Forms.MouseButtons.Left And Me.SelectRectangle And Not My.Computer.Keyboard.ShiftKeyDown Then
+                    selectionDragging = True
+                    rectp0.X = mousePT.X * Me.Zoom
+                    rectp0.Y = mousePT.Y * Me.Zoom
+                    selectionRect.Height = 0
+                    selectionRect.Width = 0
+                End If
+            End If
+
         Else
-            If e.Button And Windows.Forms.MouseButtons.Left And Me.SelectRectangle And Not My.Computer.Keyboard.ShiftKeyDown Then
-                selectionDragging = True
-                rectp0.X = mousePT.X * Me.Zoom
-                rectp0.Y = mousePT.Y * Me.Zoom
-                selectionRect.Height = 0
-                selectionRect.Width = 0
-            End If
+
+            Cursor = Cursors.SizeNWSE
+
         End If
 
     End Sub
@@ -829,207 +878,248 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Private Sub GraphicsSurface_MouseMove(ByVal sender As Object, _
             ByVal e As MouseEventArgs) Handles MyBase.MouseMove
 
-        If draggingfs Then
-            If Not My.Computer.Keyboard.ShiftKeyDown Then
-                draggingfs = False
-                Cursor.Current = Cursors.Default
-            Else
-                Cursor.Current = Cursors.Hand
-            End If
+        Dim dx As Integer = -(e.X - dragStart.X)
+        Dim dy As Integer = -(e.Y - dragStart.Y)
 
-            Dim dx As Integer = -(e.X - dragStart.X)
-            Dim dy As Integer = -(e.Y - dragStart.Y)
-            If Me.HorizontalScroll.Value + dx > Me.HorizontalScroll.Minimum Then
-                Me.HorizontalScroll.Value += dx
-            Else
-                Me.HorizontalScroll.Value += Me.HorizontalScroll.Minimum
-            End If
-            If Me.VerticalScroll.Value + dy > Me.VerticalScroll.Minimum Then
-                Me.VerticalScroll.Value += dy
-            Else
-                Me.VerticalScroll.Value += Me.VerticalScroll.Minimum
-            End If
-            dragStart = New Point(e.X, e.Y)
-        Else
-            'Cursor.Current = Cursors.Default
-            If Not Me.QuickConnect Or Not My.Computer.Keyboard.CtrlKeyDown Then
-                Dim dragPoint As Point = gscTogoc(e.X, e.Y)
+        If Not ResizingMode Then
 
-                Dim obj As GraphicObject = Me.drawingObjects.FindObjectAtPoint(dragPoint)
-
-                If Not obj Is Nothing Then
-                    If obj.ObjectType <> ObjectType.GO_FloatingTable And obj.ObjectType <> ObjectType.GO_Text _
-                    And obj.ObjectType <> ObjectType.GO_Image And obj.ObjectType <> ObjectType.GO_Table _
-                    And obj.ObjectType <> ObjectType.Nenhum And obj.ObjectType <> ObjectType.GO_SpreadsheetTable _
-                    And obj.ObjectType <> ObjectType.GO_MasterTable And obj.ObjectType <> ObjectType.GO_Rectangle Then
-                        With Me.hoverRect
-                            hoverrotation = obj.Rotation
-                            .X = obj.X - 10
-                            .Y = obj.Y - 10
-                            Select Case obj.ObjectType
-                                Case ObjectType.GO_Animation, ObjectType.GO_Image, ObjectType.GO_Table, ObjectType.GO_FloatingTable, ObjectType.GO_Text, ObjectType.GO_MasterTable, ObjectType.GO_SpreadsheetTable, ObjectType.GO_Rectangle
-                                    .Height = obj.Height + 20
-                                    .Width = obj.Width + 20
-                                Case Else
-                                    .Height = obj.Height + 30
-                                    .Width = obj.Width + 20
-                                    Dim g As Drawing.Graphics = Drawing.Graphics.FromHwnd(Me.Handle)
-                                    Dim strdist As SizeF = g.MeasureString(obj.Tag, New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-                                    If strdist.Width > obj.Width Then
-                                        .X = obj.X + (obj.Width - strdist.Width) / 2 - 10
-                                        .Width = strdist.Width + 20
-                                    End If
-                            End Select
-                        End With
-                        hoverdraw = True
-                    End If
+            If draggingfs Then
+                If Not My.Computer.Keyboard.ShiftKeyDown Then
+                    draggingfs = False
+                    Cursor.Current = Cursors.Default
                 Else
-                    hoverdraw = False
+                    Cursor.Current = Cursors.Hand
                 End If
 
-                If Not m_SelectedObject Is Nothing Then
 
-                    If Not m_SelectedObject.IsConnector And SelectRectangle Then
+                If Me.HorizontalScroll.Value + dx > Me.HorizontalScroll.Minimum Then
+                    Me.HorizontalScroll.Value += dx
+                Else
+                    Me.HorizontalScroll.Value += Me.HorizontalScroll.Minimum
+                End If
+                If Me.VerticalScroll.Value + dy > Me.VerticalScroll.Minimum Then
+                    Me.VerticalScroll.Value += dy
+                Else
+                    Me.VerticalScroll.Value += Me.VerticalScroll.Minimum
+                End If
+                dragStart = New Point(e.X, e.Y)
+            Else
+                'Cursor.Current = Cursors.Default
+                If Not Me.QuickConnect Or Not My.Computer.Keyboard.CtrlKeyDown Then
+                    Dim dragPoint As Point = gscTogoc(e.X, e.Y)
 
-                        If dragging Then
+                    Dim obj As GraphicObject = Me.drawingObjects.FindObjectAtPoint(dragPoint)
 
-                            Cursor.Current = Cursors.Hand
+                    If Not obj Is Nothing Then
+                        If obj.ObjectType <> ObjectType.GO_FloatingTable And obj.ObjectType <> ObjectType.GO_Text _
+                        And obj.ObjectType <> ObjectType.GO_Image And obj.ObjectType <> ObjectType.GO_Table _
+                        And obj.ObjectType <> ObjectType.Nenhum And obj.ObjectType <> ObjectType.GO_SpreadsheetTable _
+                        And obj.ObjectType <> ObjectType.GO_MasterTable And obj.ObjectType <> ObjectType.GO_Rectangle Then
+                            With Me.hoverRect
+                                hoverrotation = obj.Rotation
+                                .X = obj.X - 10
+                                .Y = obj.Y - 10
+                                Select Case obj.ObjectType
+                                    Case ObjectType.GO_Animation, ObjectType.GO_Image, ObjectType.GO_Table, ObjectType.GO_FloatingTable, ObjectType.GO_Text, ObjectType.GO_MasterTable, ObjectType.GO_SpreadsheetTable, ObjectType.GO_Rectangle
+                                        .Height = obj.Height + 20
+                                        .Width = obj.Width + 20
+                                    Case Else
+                                        .Height = obj.Height + 30
+                                        .Width = obj.Width + 20
+                                        Dim g As Drawing.Graphics = Drawing.Graphics.FromHwnd(Me.Handle)
+                                        Dim strdist As SizeF = g.MeasureString(obj.Tag, New Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Pixel, 0, False), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                                        If strdist.Width > obj.Width Then
+                                            .X = obj.X + (obj.Width - strdist.Width) / 2 - 10
+                                            .Width = strdist.Width + 20
+                                        End If
+                                End Select
+                            End With
+                            hoverdraw = True
+                        End If
+                    Else
+                        hoverdraw = False
+                    End If
 
-                            dragPoint.Offset(dragOffset.X, dragOffset.Y)
-                            'm_SelectedObject.SetPosition(dragPoint)
+                    If Not m_SelectedObject Is Nothing Then
 
-                            For Each gr As GraphicObject In Me.SelectedObjects.Values
-                                Dim p As Point = New Point(gr.X, gr.Y)
-                                p.Offset((e.X - dragStart.X) / Me.Zoom, (e.Y - dragStart.Y) / Me.Zoom)
-                                gr.SetPosition(p)
-                            Next
+                        If Not m_SelectedObject.IsConnector And SelectRectangle Then
 
-                            dragStart = New Point(e.X, e.Y)
+                            If dragging Then
 
-                            RaiseEvent StatusUpdate(Me, _
-                                New StatusUpdateEventArgs(StatusUpdateType.ObjectMoved, _
-                                    Me.SelectedObject, _
-                                    String.Format("Object Moved to {0}, {1}", dragPoint.X, dragPoint.Y), _
-                                    dragPoint, 0))
+                                Cursor.Current = Cursors.Hand
 
-                        ElseIf rotating Then
+                                dragPoint.Offset(dragOffset.X, dragOffset.Y)
+                                'm_SelectedObject.SetPosition(dragPoint)
 
-                            Cursor.Current = Cursors.SizeAll
+                                For Each gr As GraphicObject In Me.SelectedObjects.Values
+                                    Dim p As Point = New Point(gr.X, gr.Y)
+                                    p.Offset((e.X - dragStart.X) / Me.Zoom, (e.Y - dragStart.Y) / Me.Zoom)
+                                    gr.SetPosition(p)
+                                Next
 
-                            Dim currentRotation As Single
+                                dragStart = New Point(e.X, e.Y)
 
-                            currentRotation = _
-                                AngleToPoint(m_SelectedObject.GetPosition, dragPoint)
-                            currentRotation = _
-                                Convert.ToInt32((currentRotation - startingRotation + originalRotation) Mod 360)
-
-                            m_SelectedObject.Rotation = currentRotation
-
-                            RaiseEvent StatusUpdate(Me, _
-                                New StatusUpdateEventArgs(StatusUpdateType.ObjectRotated, _
+                                RaiseEvent StatusUpdate(Me, _
+                                    New StatusUpdateEventArgs(StatusUpdateType.ObjectMoved, _
                                         Me.SelectedObject, _
-                                        String.Format("Object Rotated to {0} degrees", currentRotation), _
-                                        Nothing, currentRotation))
+                                        String.Format("Object Moved to {0}, {1}", dragPoint.X, dragPoint.Y), _
+                                        dragPoint, 0))
 
+                            ElseIf rotating Then
+
+                                Cursor.Current = Cursors.SizeAll
+
+                                Dim currentRotation As Single
+
+                                currentRotation = _
+                                    AngleToPoint(m_SelectedObject.GetPosition, dragPoint)
+                                currentRotation = _
+                                    Convert.ToInt32((currentRotation - startingRotation + originalRotation) Mod 360)
+
+                                m_SelectedObject.Rotation = currentRotation
+
+                                RaiseEvent StatusUpdate(Me, _
+                                    New StatusUpdateEventArgs(StatusUpdateType.ObjectRotated, _
+                                            Me.SelectedObject, _
+                                            String.Format("Object Rotated to {0} degrees", currentRotation), _
+                                            Nothing, currentRotation))
+
+
+                            Else
+
+                                Cursor.Current = Cursors.Default
+
+                            End If
 
                         Else
 
                             Cursor.Current = Cursors.Default
 
                         End If
-
                     Else
 
-                        Cursor.Current = Cursors.Default
+                        If selectionDragging And SelectRectangle Then
 
+                            Dim x0, y0, x1, y1 As Integer
+
+                            x0 = rectp0.X
+                            y0 = rectp0.Y
+                            x1 = dragPoint.X * Me.Zoom
+                            y1 = dragPoint.Y * Me.Zoom
+
+                            If x1 > x0 Then
+                                selectionRect.X = x0
+                            Else
+                                selectionRect.X = x1
+                            End If
+
+                            If y1 > y0 Then
+                                selectionRect.Y = y0
+                            Else
+                                selectionRect.Y = y1
+                            End If
+
+                            selectionRect.Width = Math.Abs(x1 - x0)
+                            selectionRect.Height = Math.Abs(y1 - y0)
+
+                            Cursor.Current = Cursors.Default
+
+                        Else
+
+                            Cursor.Current = Cursors.Default
+
+                        End If
                     End If
+
                 Else
 
-                    If selectionDragging And SelectRectangle Then
+                    Cursor.Current = Cursors.Default
 
-                        Dim x0, y0, x1, y1 As Integer
-
-                        x0 = rectp0.X
-                        y0 = rectp0.Y
-                        x1 = dragPoint.X * Me.Zoom
-                        y1 = dragPoint.Y * Me.Zoom
-
-                        If x1 > x0 Then
-                            selectionRect.X = x0
-                        Else
-                            selectionRect.X = x1
-                        End If
-
-                        If y1 > y0 Then
-                            selectionRect.Y = y0
-                        Else
-                            selectionRect.Y = y1
-                        End If
-
-                        selectionRect.Width = Math.Abs(x1 - x0)
-                        selectionRect.Height = Math.Abs(y1 - y0)
-
-                        Cursor.Current = Cursors.Default
-
-                    Else
-
-                        Cursor.Current = Cursors.Default
-
-                    End If
                 End If
-
-            Else
-
-                Cursor.Current = Cursors.Default
 
             End If
 
-        End If
+        Else
 
-        'Me.Invalidate()
+            If Not Me.SelectedObject Is Nothing And Cursor = Cursors.SizeNWSE Then
+
+                Dim neww, newh As Integer
+
+                If ResizingMode_KeepAR Then
+                    neww = Size0.Width - Convert.ToDouble(Size0.Width / Size0.Height) * Math.Min(dx, dy)
+                    newh = Size0.Height - Math.Min(dx, dy)
+                Else
+                    neww = Size0.Width - dx
+                    newh = Size0.Height - dy
+                End If
+
+                If neww > 10 And newh > 10 Then
+                    Me.SelectedObject.Width = neww
+                    Me.SelectedObject.Height = newh
+                Else
+                    Me.SelectedObject.Width = 10
+                    Me.SelectedObject.Height = 10
+                End If
+
+            End If
+
+                Me.Invalidate()
+
+            End If
 
     End Sub
 
     Private Sub GraphicsSurface_MouseUp(ByVal sender As Object, _
             ByVal e As MouseEventArgs) Handles MyBase.MouseUp
-        draggingfs = False
-        If dragging And SnapToGrid Then
-            Dim horizGridSize As Integer = ConvertToHPixels(GridSize / 100) * Me.Zoom
-            Dim vertGridSize As Integer = ConvertToVPixels(GridSize / 100) * Me.Zoom
-            Dim bounds As Rectangle = ConvertToPixels(SurfaceBounds)
-            bounds = ZoomRectangle(bounds)
-            Dim oc As Point
-            Dim nlh, nlv, snapx, snapy As Integer
-            nlh = bounds.Width / horizGridSize
-            nlv = bounds.Height / vertGridSize
-            For Each go As GraphicObject In Me.SelectedObjects.Values
-                oc = New Point(go.X + go.Width / 2, go.Y + go.Height / 2)
-                snapx = Math.Round(oc.X / horizGridSize) * horizGridSize - go.Width / 2
-                snapy = Math.Round(oc.Y / vertGridSize) * vertGridSize - go.Height / 2
-                go.SetPosition(New Point(snapx, snapy))
-            Next
-        End If
-        dragging = False
-        rotating = False
-        If selectionDragging Then
-            'TODO: Rewrite to handle multiple selections
-            'really just need to change from m_SelectedObject to a collection
-            'add each found object in this loop, removing the Exit For
-            Dim zoomedSelection As Rectangle = DeZoomRectangle(selectionRect)
-            Dim graphicObj As GraphicObject
-            For Each graphicObj In Me.drawingObjects
-                If graphicObj.HitTest(zoomedSelection) Then
-                    Me.SelectedObject = graphicObj
-                    Exit For
-                End If
-            Next
-            For Each graphicObj In Me.drawingObjects
-                If graphicObj.HitTest(zoomedSelection) Then
-                    If Not Me.SelectedObjects.ContainsKey(graphicObj.Name) Then Me.SelectedObjects.Add(graphicObj.Name, graphicObj)
-                End If
-            Next
-            selectionDragging = False
-            justselected = True
+
+        If Not ResizingMode Then
+
+            draggingfs = False
+
+            If dragging And SnapToGrid Then
+                Dim horizGridSize As Integer = ConvertToHPixels(GridSize / 100) * Me.Zoom
+                Dim vertGridSize As Integer = ConvertToVPixels(GridSize / 100) * Me.Zoom
+                Dim bounds As Rectangle = ConvertToPixels(SurfaceBounds)
+                bounds = ZoomRectangle(bounds)
+                Dim oc As Point
+                Dim nlh, nlv, snapx, snapy As Integer
+                nlh = bounds.Width / horizGridSize
+                nlv = bounds.Height / vertGridSize
+                For Each go As GraphicObject In Me.SelectedObjects.Values
+                    oc = New Point(go.X + go.Width / 2, go.Y + go.Height / 2)
+                    snapx = Math.Round(oc.X / horizGridSize) * horizGridSize - go.Width / 2
+                    snapy = Math.Round(oc.Y / vertGridSize) * vertGridSize - go.Height / 2
+                    go.SetPosition(New Point(snapx, snapy))
+                Next
+            End If
+            dragging = False
+            rotating = False
+            If selectionDragging Then
+                'TODO: Rewrite to handle multiple selections
+                'really just need to change from m_SelectedObject to a collection
+                'add each found object in this loop, removing the Exit For
+                Dim zoomedSelection As Rectangle = DeZoomRectangle(selectionRect)
+                Dim graphicObj As GraphicObject
+                For Each graphicObj In Me.drawingObjects
+                    If graphicObj.HitTest(zoomedSelection) Then
+                        Me.SelectedObject = graphicObj
+                        Exit For
+                    End If
+                Next
+                For Each graphicObj In Me.drawingObjects
+                    If graphicObj.HitTest(zoomedSelection) Then
+                        If Not Me.SelectedObjects.ContainsKey(graphicObj.Name) Then Me.SelectedObjects.Add(graphicObj.Name, graphicObj)
+                    End If
+                Next
+                selectionDragging = False
+                justselected = True
+            End If
+
+        Else
+
+            Cursor = Cursors.Default
+            Size0 = Nothing
+
         End If
 
         Me.Invalidate()

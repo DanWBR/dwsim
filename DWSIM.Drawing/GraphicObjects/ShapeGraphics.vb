@@ -885,14 +885,14 @@ Namespace GraphicObjects
 
         Public Function GetEndPosition() As Point
             Dim endPosition As New Point(Me.X, Me.Y)
-            endPosition.X += Me._Size.Width
-            endPosition.Y += Me._Size.Height
+            endPosition.X += Me.Width
+            endPosition.Y += Me.Height
             Return endPosition
         End Function
 
         Public Sub SetEndPosition(ByVal Value As Point)
-            _Size.Width = Value.X - Me.X
-            _Size.Height = Value.Y - Me.Y
+            Width = Value.X - Me.X
+            Height = Value.Y - Me.Y
         End Sub
 
         Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)
@@ -3795,14 +3795,14 @@ Namespace GraphicObjects
 
         Public Function GetEndPosition() As Point
             Dim endPosition As New Point(Me.X, Me.Y)
-            endPosition.X += Me._Size.Width
-            endPosition.Y += Me._Size.Height
+            endPosition.X += Me.Width
+            endPosition.Y += Me.Height
             Return endPosition
         End Function
 
         Public Sub SetEndPosition(ByVal Value As Point)
-            _Size.Width = Value.X - Me.X
-            _Size.Height = Value.Y - Me.Y
+            Width = Value.X - Me.X
+            Height = Value.Y - Me.Y
         End Sub
 
         Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)

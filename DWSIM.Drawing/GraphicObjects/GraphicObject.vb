@@ -24,11 +24,14 @@ Namespace GraphicObjects
 
         Implements IGraphicObject
 
-        Friend _Size As Size
         Friend m_Rotation As Single
 
         Public Function IsRunningOnMono() As Boolean
             Return Not Type.GetType("Mono.Runtime") Is Nothing
+        End Function
+
+        Public Function GetBoundsRectangle() As Rectangle
+            Return New Rectangle(X, Y, Width, Height)
         End Function
 
         Public Shared Function ReturnInstance(typename As String) As IGraphicObject
@@ -157,13 +160,12 @@ Namespace GraphicObjects
         End Sub
 
         Public Overridable Sub SetSize(ByVal Value As Size)
-            _Size = Value
             Width = Value.Width
             Height = Value.Height
         End Sub
 
         Public Overridable Function GetSize() As Size
-            Dim mySize As New Size(_Size.Width, _Size.Height)
+            Dim mySize As New Size(Width, Height)
             Return mySize
         End Function
 
