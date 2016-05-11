@@ -69,12 +69,6 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Overrides Sub ReconfigureConfigForm()
-
-            MyBase.ReconfigureConfigForm()
-     
-        End Sub
-
         Public Overrides Sub DisplayEditingForm()
 
             If Not Flowsheet Is Nothing Then

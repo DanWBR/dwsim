@@ -52,10 +52,6 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Overrides Sub ReconfigureConfigForm()
-            MyBase.ReconfigureConfigForm()
-        End Sub
-
 #Region "    DWSIM Functions"
 
         Private Sub WriteWarningMessage(message As String)

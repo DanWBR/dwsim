@@ -1026,10 +1026,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim i, j As Integer
 
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PHFMII"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PHFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PHFILT"))
-            etol = Convert.ToDouble(PP.Parameters("PP_PHFELT"))
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             n = UBound(Vz)
 
@@ -1163,7 +1163,7 @@ restart:    Do
                     x(i) = ui2(i - n - 1)
                 Next
 
-                If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 1 Then
+                If Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode) = True Then
 
                     fx(2 * n + 2) = (A - Ac)
                     fx(2 * n + 3) = (B - Bc)
@@ -1294,10 +1294,10 @@ restart:    Do
 
             Dim i, j As Integer
 
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PSFMII"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PSFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PSFILT"))
-            etol = Convert.ToDouble(PP.Parameters("PP_PSFELT"))
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             n = UBound(Vz)
 
@@ -1427,7 +1427,7 @@ restart:    Do
                     x(i) = ui2(i - n - 1)
                 Next
 
-                If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 1 Then
+                If Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode) = True Then
 
                     fx(2 * n + 2) = (A - Ac)
                     fx(2 * n + 3) = (B - Bc)
@@ -1563,10 +1563,10 @@ restart:    Do
 
             Dim i, j As Integer
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = UBound(Vz)
 
@@ -1707,7 +1707,7 @@ restart:    Do
                     x(i) = ui2(i - n - 1)
                 Next
 
-                If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 1 Then
+                If Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode) = True Then
 
                     If ecount = 0 Then
                         For i = 0 To 2 * n + 1
@@ -1866,10 +1866,10 @@ out:
 
             Dim i, j As Integer
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = UBound(Vz)
 
@@ -2030,7 +2030,7 @@ out:
                 x(2 * n + 2) = A
                 x(2 * n + 3) = B
 
-                If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 1 Then
+                If Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode) = True Then
 
                     If ecount = 0 Then
                         For i = 0 To 2 * n + 3
@@ -2089,8 +2089,8 @@ out:
 
             Dim i, j As Integer
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
 
             n = UBound(Vz)
 

@@ -54,10 +54,14 @@ Namespace PropertyPackages
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
 
         End Sub
+        Public Overrides Sub DisplayEditingForm()
 
-        Public Overrides Sub ReconfigureConfigForm()
-
-            MyBase.ReconfigureConfigForm()
+            If Not Flowsheet Is Nothing Then
+                Dim f As New FormConfigNRTL() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+                f.ShowDialog(Flowsheet)
+            Else
+                MyBase.DisplayEditingForm()
+            End If
 
         End Sub
 

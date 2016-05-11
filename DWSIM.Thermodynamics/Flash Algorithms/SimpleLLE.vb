@@ -55,10 +55,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim e1, e2 As Double
             d1 = Date.Now
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             If UseInitialEstimatesForPhase1 And UseInitialEstimatesForPhase2 Then
                 L1 = 0
@@ -227,10 +227,10 @@ out:        d2 = Date.Now
             Vn = PP.RET_VNAMES()
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = Convert.ToInt32(PP.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = Convert.ToInt32(PP.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = Convert.ToDouble(PP.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = Convert.ToDouble(PP.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            Dim maxitEXT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             Dim Tsup, Tinf ', Hsup, Hinf
 
@@ -255,7 +255,7 @@ out:        d2 = Date.Now
             x1 = Tref
             Do
                 If Settings.EnableParallelProcessing Then
-                    
+
                     Dim task1 As Task = New Task(Sub()
                                                      fx = Herror(x1, {P, Vz, PP})
                                                  End Sub)
@@ -265,7 +265,7 @@ out:        d2 = Date.Now
                     task1.Start()
                     task2.Start()
                     Task.WaitAll(task1, task2)
-                    
+
                 Else
                     fx = Herror(x1, {P, Vz, PP})
                     fx2 = Herror(x1 + 1, {P, Vz, PP})
@@ -328,10 +328,10 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             Vn = PP.RET_VNAMES()
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = Convert.ToInt32(PP.Parameters("PP_PSFMII"))
-            Dim maxitEXT As Integer = Convert.ToInt32(PP.Parameters("PP_PSFMEI"))
-            Dim tolINT As Double = Convert.ToDouble(PP.Parameters("PP_PSFILT"))
-            Dim tolEXT As Double = Convert.ToDouble(PP.Parameters("PP_PSFELT"))
+            Dim maxitINT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            Dim maxitEXT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             Dim Tsup, Tinf ', Ssup, Sinf
 
@@ -355,7 +355,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             x1 = Tref
             Do
                 If Settings.EnableParallelProcessing Then
-                    
+
                     Dim task1 As Task = New Task(Sub()
                                                      fx = Serror(x1, {P, Vz, PP})
                                                  End Sub)
@@ -365,7 +365,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
                     task1.Start()
                     task2.Start()
                     Task.WaitAll(task1, task2)
-                    
+
                 Else
                     fx = Serror(x1, {P, Vz, PP})
                     fx2 = Serror(x1 + 1, {P, Vz, PP})
@@ -414,10 +414,10 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
             d1 = Date.Now
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = UBound(Vz)
 
@@ -744,10 +744,10 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
             d1 = Date.Now
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = UBound(Vz)
 

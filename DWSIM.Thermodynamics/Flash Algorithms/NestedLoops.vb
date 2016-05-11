@@ -52,10 +52,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = UBound(Vz)
 
@@ -291,7 +291,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
         End Function
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
-            If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 1 Then
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = True Then
                 Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
             Else
                 Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
@@ -299,7 +299,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
-            If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 1 Then
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = True Then
                 Return Flash_PS_1(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
             Else
                 Return Flash_PS_2(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
@@ -327,10 +327,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Vn = PP.RET_VNAMES()
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = Convert.ToInt32(PP.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = Convert.ToInt32(PP.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = Convert.ToDouble(PP.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = Convert.ToDouble(PP.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            Dim maxitEXT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             Dim Tmin, Tmax, epsilon(4), maxDT As Double
 
@@ -456,10 +456,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Vn = PP.RET_VNAMES()
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = Convert.ToInt32(PP.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = Convert.ToInt32(PP.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = Convert.ToDouble(PP.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = Convert.ToDouble(PP.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            Dim maxitEXT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             Dim Tmin, Tmax As Double
 
@@ -628,10 +628,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Vn = PP.RET_VNAMES()
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = Convert.ToInt32(PP.Parameters("PP_PSFMII"))
-            Dim maxitEXT As Integer = Convert.ToInt32(PP.Parameters("PP_PSFMEI"))
-            Dim tolINT As Double = Convert.ToDouble(PP.Parameters("PP_PSFILT"))
-            Dim tolEXT As Double = Convert.ToDouble(PP.Parameters("PP_PSFELT"))
+            Dim maxitINT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            Dim maxitEXT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             Dim Tmin, Tmax, epsilon(4) As Double
 
@@ -758,10 +758,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Vn = PP.RET_VNAMES()
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = Convert.ToInt32(PP.Parameters("PP_PSFMII"))
-            Dim maxitEXT As Integer = Convert.ToInt32(PP.Parameters("PP_PSFMEI"))
-            Dim tolINT As Double = Convert.ToDouble(PP.Parameters("PP_PSFILT"))
-            Dim tolEXT As Double = Convert.ToDouble(PP.Parameters("PP_PSFELT"))
+            Dim maxitINT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            Dim maxitEXT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             Dim Tmin, Tmax As Double
 
@@ -916,10 +916,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             d1 = Date.Now
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = UBound(Vz)
 
@@ -1280,10 +1280,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             d1 = Date.Now
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = UBound(Vz)
 

@@ -778,10 +778,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             fi = Vz.Clone
 
-            Dim maxitINT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = 100
+            Dim maxitEXT As Integer = 100
+            Dim tolINT As Double = 0.00001
+            Dim tolEXT As Double = 0.00001
+
 
             Dim Tmin, Tmax, epsilon(4), maxDT As Double
 
@@ -931,10 +932,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            Dim maxitINT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = 100
+            Dim maxitEXT As Integer = 100
+            Dim tolINT As Double = 0.00001
+            Dim tolEXT As Double = 0.00001
 
             n = UBound(Vz)
 
@@ -1015,10 +1016,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            Dim maxitINT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMII"))
-            Dim maxitEXT As Integer = Convert.ToInt32(proppack.Parameters("PP_PHFMEI"))
-            Dim tolINT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFILT"))
-            Dim tolEXT As Double = Convert.ToDouble(proppack.Parameters("PP_PHFELT"))
+            Dim maxitINT As Integer = 100
+            Dim maxitEXT As Integer = 100
+            Dim tolINT As Double = 0.00001
+            Dim tolEXT As Double = 0.00001
 
             n = UBound(Vz)
 

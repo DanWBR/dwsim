@@ -53,11 +53,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
-            fastmode = Convert.ToInt32(PP.Parameters("PP_FLASHALGORITHMFASTMODE"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
+            fastmode = Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode)
 
             n = UBound(Vz)
 
@@ -353,10 +353,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
 
             d1 = Date.Now
 
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PHFMII"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PHFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PHFILT"))
-            etol = Convert.ToDouble(PP.Parameters("PP_PHFELT"))
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             n = UBound(Vz)
 
@@ -691,7 +691,7 @@ restart:    Do
                 x(n + 5) = E
                 x(n + 6) = F
 
-                If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 0 Then
+                If Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode) = False Then
 
                     For i = 0 To n
                         ui(i) = uic(i)
@@ -826,10 +826,10 @@ restart:    Do
 
             d1 = Date.Now
 
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PSFMII"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PSFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PSFILT"))
-            etol = Convert.ToDouble(PP.Parameters("PP_PSFELT"))
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
             n = UBound(Vz)
 
@@ -1159,7 +1159,7 @@ restart:    Do
                 x(n + 5) = E
                 x(n + 6) = F
 
-                If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 0 Then
+                If Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode) = False Then
 
                     For i = 0 To n
                         ui(i) = uic(i)
@@ -1284,10 +1284,10 @@ restart:    Do
 
             d1 = Date.Now
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
-            itol = Convert.ToDouble(PP.Parameters("PP_PTFILT"))
-            maxit_i = Convert.ToInt32(PP.Parameters("PP_PTFMII"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = UBound(Vz)
 
@@ -1527,7 +1527,7 @@ restart:    Do
                 refx(n + 2) = Bc
 
                 err = 0
-                If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 0 Then err = bo2.brentoptimize(0, 2, 0.0001, alpha)
+                If Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode) = False Then err = bo2.brentoptimize(0, 2, 0.0001, alpha)
 
                 For i = 0 To n
                     ui(i) = ui(i) + alpha * dx(i)
@@ -1576,8 +1576,8 @@ final:      d2 = Date.Now
 
             d1 = Date.Now
 
-            etol = Convert.ToDouble(PP.Parameters("PP_PTFELT"))
-            maxit_e = Convert.ToInt32(PP.Parameters("PP_PTFMEI"))
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
 
             n = UBound(Vz)
 
@@ -1815,7 +1815,7 @@ final:      d2 = Date.Now
                 refx(n + 2) = Bc
 
                 err = 0
-                If PP.Parameters("PP_FLASHALGORITHMFASTMODE") = 0 Then err = bo2.brentoptimize(0, 2, 0.0001, alpha)
+                If Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode) = False Then err = bo2.brentoptimize(0, 2, 0.0001, alpha)
 
                 For i = 0 To n
                     ui(i) = ui(i) + alpha * dx(i)

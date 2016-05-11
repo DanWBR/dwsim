@@ -93,33 +93,36 @@ Namespace PropertyPackages
 
         End Sub
 
-        'Public Overrides Sub ShowConfigForm(Optional ByVal owner As IWin32Window = Nothing)
+        Public Overrides Sub DisplayEditingForm()
 
-        '    If Me._phasemappings Is Nothing Then CreatePhaseMappings()
+            If Me._phasemappings Is Nothing Then CreatePhaseMappings()
 
-        '    CType(Me.ConfigForm, FormConfigCAPEOPEN)._copp = Me._copp
-        '    CType(Me.ConfigForm, FormConfigCAPEOPEN)._pptpl = Me._pptpl
-        '    CType(Me.ConfigForm, FormConfigCAPEOPEN)._coversion = Me._coversion
-        '    CType(Me.ConfigForm, FormConfigCAPEOPEN)._selts = Me._selts
-        '    CType(Me.ConfigForm, FormConfigCAPEOPEN)._ppname = Me._ppname
-        '    CType(Me.ConfigForm, FormConfigCAPEOPEN)._mappings = Me._mappings
-        '    CType(Me.ConfigForm, FormConfigCAPEOPEN)._phasemappings = Me._phasemappings
+            Dim f As New FormConfigCAPEOPEN
 
-        '    If Not owner Is Nothing Then Me.ConfigForm.ShowDialog(owner) Else Me.ConfigForm.ShowDialog()
+            f._copp = Me._copp
+            f._pptpl = Me._pptpl
+            f._coversion = Me._coversion
+            f._selts = Me._selts
+            f._ppname = Me._ppname
+            f._mappings = Me._mappings
+            f._phasemappings = Me._phasemappings
 
-        '    If Me.ConfigForm.DialogResult = DialogResult.OK Then
-        '        Me._copp = CType(Me.ConfigForm, FormConfigCAPEOPEN)._copp
-        '        Me._pptpl = CType(Me.ConfigForm, FormConfigCAPEOPEN)._pptpl
-        '        Me._coversion = CType(Me.ConfigForm, FormConfigCAPEOPEN)._coversion
-        '        Me._selts = CType(Me.ConfigForm, FormConfigCAPEOPEN)._selts
-        '        Me._ppname = CType(Me.ConfigForm, FormConfigCAPEOPEN)._ppname
-        '        Me._mappings = CType(Me.ConfigForm, FormConfigCAPEOPEN)._mappings
-        '        Me._phasemappings = CType(Me.ConfigForm, FormConfigCAPEOPEN)._phasemappings
-        '    End If
+            f.ShowDialog()
 
-        '    Me.ConfigForm = Nothing
+            If f.DialogResult = DialogResult.OK Then
+                Me._copp = f._copp
+                Me._pptpl = f._pptpl
+                Me._coversion = f._coversion
+                Me._selts = f._selts
+                Me._ppname = f._ppname
+                Me._mappings = f._mappings
+                Me._phasemappings = f._phasemappings
+            End If
 
-        'End Sub
+            f.Dispose()
+            f = Nothing
+
+        End Sub
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
             'do nothing

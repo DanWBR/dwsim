@@ -128,27 +128,24 @@
         PHFlash_External_Loop_Tolerance = 5
         PHFlash_Maximum_Number_Of_Internal_Iterations = 6
         PHFlash_Maximum_Number_Of_External_Iterations = 7
-    
-        PSFlash_Internal_Loop_Tolerance = 8
-        PSFlash_External_Loop_Tolerance = 9
-        PSFlash_Maximum_Number_Of_Internal_Iterations = 10
-        PSFlash_Maximum_Number_Of_External_Iterations = 11
 
-        ThreePhaseFlashStabTestSeverity = 12
-        ThreePhaseFlashStabTestCompIds = 13
+        ThreePhaseFlashStabTestSeverity = 8
+        ThreePhaseFlashStabTestCompIds = 9
 
-        CalculateBubbleAndDewPoints = 14
+        CalculateBubbleAndDewPoints = 10
 
-        ValidateEquilibriumCalc = 15
-        ValidationGibbsTolerance = 16
+        ValidateEquilibriumCalc = 11
+        ValidationGibbsTolerance = 12
 
-        UsePhaseIdentificationAlgorithm = 17
+        UsePhaseIdentificationAlgorithm = 13
 
-        Replace_PTFlash = 18
+        Replace_PTFlash = 14
 
-        GM_OptimizationMethod = 19
-        IO_FastMode = 20
-        NL_FastMode = 21
+        GM_OptimizationMethod = 15
+
+        IO_FastMode = 16
+
+        NL_FastMode = 17
 
     End Enum
 

@@ -198,7 +198,6 @@
     <Compile Include="Flash Algorithms\ElectrolyteSVLE.vb" />
     <Compile Include="Flash Algorithms\GibbsMinimization3P.vb" />
     <Compile Include="Flash Algorithms\NestedLoops.vb" />
-    <Compile Include="Flash Algorithms\NestedLoops3P.vb" />
     <Compile Include="Flash Algorithms\NestedLoops3PV2.vb" />
     <Compile Include="Flash Algorithms\NestedLoops3PV3.vb" />
     <Compile Include="Flash Algorithms\NestedLoopsImmiscible.vb" />

@@ -51,27 +51,11 @@ Namespace PropertyPackages
             m_par = New System.Collections.Generic.Dictionary(Of String, Double)
             With Me.Parameters
                 .Clear()
-                .Add("PP_PHFILT", 0.001)
-                .Add("PP_PSFILT", 0.001)
-                .Add("PP_PHFELT", 0.001)
-                .Add("PP_PSFELT", 0.001)
-                .Add("PP_PHFMEI", 50)
-                .Add("PP_PSFMEI", 50)
-                .Add("PP_PHFMII", 100)
-                .Add("PP_PSFMII", 100)
-                .Add("PP_PTFMEI", 100)
-                .Add("PP_PTFMII", 100)
-                .Add("PP_PTFILT", 0.001)
-                .Add("PP_PTFELT", 0.001)
-                .Add("PP_FLASHALGORITHM", 2)
-                .Add("PP_FLASHALGORITHMFASTMODE", 1)
-                .Add("PP_IDEAL_MIXRULE_LIQDENS", 0)
-                .Add("PP_USEEXPLIQDENS", 0)
+                .Add("PP_IDEAL_MIXRULE_LIQDENS", 1)
+                .Add("PP_USEEXPLIQDENS", 1)
                 .Add("PP_USE_EOS_LIQDENS", 0)
                 .Add("PP_IDEAL_VAPOR_PHASE_FUG", 1)
                 .Add("PP_ENTH_CP_CALC_METHOD", 1)
-                .Item("PP_IDEAL_MIXRULE_LIQDENS") = 1
-                .Item("PP_USEEXPLIQDENS") = 1
             End With
         End Sub
 
@@ -86,6 +70,17 @@ Namespace PropertyPackages
             End If
 
         End Function
+
+        Public Overrides Sub DisplayEditingForm()
+
+            If Not Flowsheet Is Nothing Then
+                Dim f As New FormConfigPropertyPackage() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+                f.ShowDialog(Flowsheet)
+            Else
+                MyBase.DisplayEditingForm()
+            End If
+
+        End Sub
 
 #End Region
 

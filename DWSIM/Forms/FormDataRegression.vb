@@ -769,7 +769,6 @@ Public Class FormDataRegression
                     Next
                 Case DataType.TPxy
                 Case DataType.Pxx, DataType.Txx
-                    proppack.Parameters("PP_FLASHALGORITHM") = 9
                     proppack.FlashAlgorithm = PropertyPackages.FlashMethod.SimpleLLE
                     Dim flashinstance As PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE = TryCast(proppack.FlashBase, PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE)
                     If Not flashinstance Is Nothing Then
@@ -1051,14 +1050,10 @@ Public Class FormDataRegression
                     Next
                 Case DataType.TTxSE, DataType.TTxSS
                     If currcase.datatype = DataType.TTxSE Then
-                        proppack.Parameters("PP_FLASHALGORITHM") = 7
                         proppack.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE
                     Else
-                        proppack.Parameters("PP_FLASHALGORITHM") = 10
                         proppack.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE_SS
                     End If
-                    proppack.Parameters("PP_PTFELT") = 0.001
-                    proppack.Parameters("PP_PTFMEI") = 1000
                     ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                     Select Case currcase.model
                         Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"

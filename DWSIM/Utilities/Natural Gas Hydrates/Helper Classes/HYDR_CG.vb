@@ -161,8 +161,6 @@ Namespace DWSIM.Utilities.HYD
 
             'CALCULAR EQUILIBRIO L-V
 
-            prPP.Parameters("PP_FLASHALGORITHM") = FlashMethod.DWSIMDefault
-
             Dim eqtmp = prPP.FlashBase.Flash_PT(Vz, P, T, prPP)
 
             Dim L = eqtmp(0)
@@ -827,7 +825,6 @@ STEP2:
 
             'CALCULAR EQUILIBRIO L-V
 
-            prPP.Parameters("PP_FLASHALGORITHM") = FlashMethod.DWSIMDefault
             Dim eqtmp = prPP.FlashBase.Flash_PT(Vz, P, T, prPP)
 
             Dim L = eqtmp(0)

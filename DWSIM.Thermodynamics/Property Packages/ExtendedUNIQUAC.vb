@@ -52,8 +52,15 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Overrides Sub ReconfigureConfigForm()
-            MyBase.ReconfigureConfigForm()
+        Public Overrides Sub DisplayEditingForm()
+
+            If Not Flowsheet Is Nothing Then
+                Dim f As New FormConfigExUNIQUAC() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+                f.ShowDialog(Flowsheet)
+            Else
+                MyBase.DisplayEditingForm()
+            End If
+
         End Sub
 
 #Region "    DWSIM Functions"
@@ -549,7 +556,7 @@ Namespace PropertyPackages
             Dim val0 As Double() = MyBase.DW_CalcKvalue(Vx, Vy, T, P, type)
 
             Dim cprops = Me.DW_GetConstantProperties
-  
+
             Dim i As Integer = 0
             For Each cp In cprops
                 If cp.IsIon Or cp.IsSalt Or cp.IsHydratedSalt Then val0(i) = 1.0E-30

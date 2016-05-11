@@ -58,18 +58,6 @@ Namespace PropertyPackages
             m_par = New System.Collections.Generic.Dictionary(Of String, Double)
             With Me.Parameters
                 .Clear()
-                .Add("PP_PHFILT", 0.001)
-                .Add("PP_PSFILT", 0.001)
-                .Add("PP_PHFELT", 0.001)
-                .Add("PP_PSFELT", 0.001)
-                .Add("PP_PHFMEI", 50)
-                .Add("PP_PSFMEI", 50)
-                .Add("PP_PHFMII", 100)
-                .Add("PP_PSFMII", 100)
-                .Add("PP_PTFMEI", 100)
-                .Add("PP_PTFMII", 100)
-                .Add("PP_PTFILT", 0.001)
-                .Add("PP_PTFELT", 0.001)
                 .Add("PP_IGNORE_SALINITY_LIMIT", 0)
             End With
         End Sub
