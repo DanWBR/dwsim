@@ -44,7 +44,7 @@ Namespace GraphicObjects
                 Dim hoverRect As New Rectangle
                 With hoverRect
                     Select Case selectedObject.ObjectType
-                        Case ObjectType.GO_Animation, ObjectType.GO_MasterTable, ObjectType.GO_Image, ObjectType.GO_Table, ObjectType.GO_FloatingTable, ObjectType.GO_Text, ObjectType.GO_SpreadsheetTable
+                        Case ObjectType.GO_Animation, ObjectType.GO_MasterTable, ObjectType.GO_Image, ObjectType.GO_Table, ObjectType.GO_FloatingTable, ObjectType.GO_Text, ObjectType.GO_SpreadsheetTable, ObjectType.GO_Rectangle
                             .X = selectedObject.X - 10
                             .Y = selectedObject.Y - 10
                             .Height = selectedObject.Height + 20
@@ -129,6 +129,32 @@ Namespace GraphicObjects
             If Not Me.InnerList Is Nothing AndAlso Me.InnerList.Count > 0 Then
                 For i = 0 To Me.InnerList.Count - 1
                     drawObj = CType(Me.InnerList(i), GraphicObject)
+                    If drawObj.ObjectType = ObjectType.GO_Rectangle Then
+                        If transparent And Not drawObj.Selected Then
+                            With DirectCast(drawObj, RectangleGraphic)
+                                oldlinecolor = .LineColor
+                                oldfillcolor = .FillColor
+                                oldgradcolor1 = .GradientColor1
+                                oldgradcolor2 = .GradientColor2
+                                .LineColor = Color.FromArgb(50, .LineColor)
+                                .FillColor = Color.FromArgb(50, .FillColor)
+                                .GradientColor1 = Color.FromArgb(50, .GradientColor1)
+                                .GradientColor2 = Color.FromArgb(50, .GradientColor2)
+                            End With
+                        End If
+                        drawObj.Draw(g)
+                        If transparent And Not drawObj.Selected Then
+                            With DirectCast(drawObj, RectangleGraphic)
+                                .LineColor = oldlinecolor
+                                .FillColor = oldfillcolor
+                                .GradientColor1 = oldgradcolor1
+                                .GradientColor2 = oldgradcolor2
+                            End With
+                        End If
+                    End If
+                Next
+                For i = 0 To Me.InnerList.Count - 1
+                    drawObj = CType(Me.InnerList(i), GraphicObject)
                     If drawObj.ObjectType = ObjectType.Nenhum Then
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
@@ -143,7 +169,7 @@ Namespace GraphicObjects
                                 .SemiTransparent = True
                             End With
                         End If
-                        drawObj.Draw(g)
+                        If drawObj.ObjectType <> ObjectType.GO_Rectangle Then drawObj.Draw(g)
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
                                 .LineColor = oldlinecolor
@@ -167,7 +193,7 @@ Namespace GraphicObjects
                                 .SemiTransparent = True
                             End With
                         End If
-                        drawObj.Draw(g)
+                        If drawObj.ObjectType <> ObjectType.GO_Rectangle Then drawObj.Draw(g)
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
                                 .LineColor = oldlinecolor

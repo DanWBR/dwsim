@@ -1684,7 +1684,7 @@ Public Class CoolProp
 
         Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.coolprop.txt")
             Using t As New StreamReader(filestr)
-                text = t.ReadToEnd().Split(vbCrLf)
+                text = t.ReadToEnd().Split(vbLf)
             End Using
         End Using
 
@@ -1693,7 +1693,7 @@ Public Class CoolProp
     Public Function Transfer() As Thermodynamics.BaseClasses.ConstantProperties()
 
         Dim cp As Thermodynamics.BaseClasses.ConstantProperties
-        Dim cpa As New ArrayList()
+        Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
         Dim i As Integer = 300000
         For Each s As String In text
             cp = New Thermodynamics.BaseClasses.ConstantProperties
@@ -1717,7 +1717,7 @@ Public Class CoolProp
             i += 1
         Next
 
-        Return cpa.ToArray(Type.GetType("DWSIM.BaseClasses.ConstantProperties"))
+        Return cpa.ToArray
 
     End Function
 

@@ -1287,6 +1287,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 If confirmation Then
                     If SelectedObj.ObjectType = ObjectType.GO_Image Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluirafiguraseleci"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    ElseIf SelectedObj.ObjectType = ObjectType.GO_Rectangle Then
+                        msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Deleterectangle"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
@@ -1325,6 +1327,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     Else
 
                         If SelectedObj.ObjectType = ObjectType.GO_Image Then
+                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                        ElseIf SelectedObj.ObjectType = ObjectType.GO_Rectangle Then
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Table Then
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
@@ -2832,4 +2836,14 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Throw New ArgumentException
     End Function
 
+    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles ToolStripButton12.Click
+        Dim myobj As New RectangleGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
+          -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), DWSIM.App.GetLocalString("rectangletext"))
+        myobj.Name = "RECT-" & Guid.NewGuid.ToString
+        myobj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.drawingObjects Select t Where t.ObjectType = ObjectType.GO_Rectangle).Count + 1).ToString
+        myobj.Height = 200
+        myobj.Width = 200
+        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(myobj)
+        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
+    End Sub
 End Class

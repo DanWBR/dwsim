@@ -173,10 +173,10 @@ Namespace DWSIM.Flowsheet
                 FlashSettings.Clear()
 
                 For Each xel2 As XElement In el.Elements
-                    Dim etype = [Enum].Parse(Type.GetType("Interfaces.Enums.FlashMethod"), xel2.@Value)
+                    Dim etype = [Enum].Parse(PropertyPackageFlashAlgorithm.GetType, xel2.@Value)
                     FlashSettings.Add(etype, New Dictionary(Of Interfaces.Enums.FlashSetting, String))
                     For Each xel3 In xel2.Elements
-                        Dim esname = [Enum].Parse(Type.GetType("Interfaces.Enums.FlashSetting"), xel2.@Value)
+                        Dim esname = [Enum].Parse(FlashSettings(etype).GetType, xel2.@Value)
                         FlashSettings(etype).Add(esname, xel3.@Value)
                     Next
                 Next

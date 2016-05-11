@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GraphicObjects\ConnectorClass.vb" />
+    <Compile Include="GraphicObjects\RectangleGraphic.vb" />
     <Compile Include="GraphicsSurface\DesignSurface.vb">
       <SubType>UserControl</SubType>
     </Compile>

@@ -307,6 +307,7 @@ Namespace Enums.GraphicObjects
         SolidSeparator
         Filter
         GO_SpreadsheetTable
+        GO_Rectangle
 
     End Enum
 

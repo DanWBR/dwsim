@@ -470,13 +470,14 @@ Public Class FlowsheetSurface
             If Not gobj Is Nothing Then
 
                 If Me.m_qt Is Nothing And Not _
-                    gobj.ObjectType = ObjectType.GO_FloatingTable And Not _
-                    gobj.ObjectType = ObjectType.GO_MasterTable And Not _
-                    gobj.ObjectType = ObjectType.GO_SpreadsheetTable And Not _
-                    gobj.ObjectType = ObjectType.GO_Table And Not _
-                    gobj.ObjectType = ObjectType.GO_Image And Not _
-                    gobj.ObjectType = ObjectType.GO_Text And Not _
-                    gobj.ObjectType = ObjectType.Nenhum Then
+                        gobj.ObjectType = ObjectType.GO_FloatingTable And Not _
+                        gobj.ObjectType = ObjectType.GO_MasterTable And Not _
+                        gobj.ObjectType = ObjectType.GO_SpreadsheetTable And Not _
+                        gobj.ObjectType = ObjectType.GO_Table And Not _
+                        gobj.ObjectType = ObjectType.GO_Image And Not _
+                        gobj.ObjectType = ObjectType.GO_Text And Not _
+                        gobj.ObjectType = ObjectType.GO_Rectangle And Not _
+                        gobj.ObjectType = ObjectType.Nenhum Then
 
                     If gobj.Calculated Then
 
@@ -519,7 +520,7 @@ Public Class FlowsheetSurface
 
                         End If
 
-                End If
+                    End If
 
                 ElseIf gobj.ObjectType = ObjectType.GO_FloatingTable Then
 
@@ -586,8 +587,9 @@ Public Class FlowsheetSurface
             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.GO_FloatingTable And _
             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.DistillationColumn And _
             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.AbsorptionColumn And _
-             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.ReboiledAbsorber And _
-             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.RefluxedAbsorber And _
+            Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.ReboiledAbsorber And _
+            Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.RefluxedAbsorber And _
+            Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.GO_Rectangle And _
             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.GO_Text Then
 
             Me.RecalcularToolStripMenuItem.Visible = True
@@ -709,7 +711,7 @@ Public Class FlowsheetSurface
             Me.ExcluirToolStripMenuItem.Visible = False
             Me.RecalcularToolStripMenuItem.Visible = False
             Me.ToolStripSeparator6.Visible = False
-         
+
         End If
         'Me.InverterToolStripMenuItem.Visible = False
 
@@ -1785,6 +1787,7 @@ Public Class FlowsheetSurface
                     obj.GraphicObject.ObjectType <> ObjectType.GO_MasterTable And _
                     obj.GraphicObject.ObjectType <> ObjectType.GO_SpreadsheetTable And _
                     obj.GraphicObject.ObjectType <> ObjectType.GO_Table And _
+                    obj.GraphicObject.ObjectType <> ObjectType.GO_Rectangle And _
                     obj.GraphicObject.ObjectType <> ObjectType.OT_Adjust And _
                     obj.GraphicObject.ObjectType <> ObjectType.OT_Spec And _
                     obj.GraphicObject.ObjectType <> ObjectType.DistillationColumn And _

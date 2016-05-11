@@ -858,13 +858,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     If obj.ObjectType <> ObjectType.GO_FloatingTable And obj.ObjectType <> ObjectType.GO_Text _
                     And obj.ObjectType <> ObjectType.GO_Image And obj.ObjectType <> ObjectType.GO_Table _
                     And obj.ObjectType <> ObjectType.Nenhum And obj.ObjectType <> ObjectType.GO_SpreadsheetTable _
-                    And obj.ObjectType <> ObjectType.GO_MasterTable Then
+                    And obj.ObjectType <> ObjectType.GO_MasterTable And obj.ObjectType <> ObjectType.GO_Rectangle Then
                         With Me.hoverRect
                             hoverrotation = obj.Rotation
                             .X = obj.X - 10
                             .Y = obj.Y - 10
                             Select Case obj.ObjectType
-                                Case ObjectType.GO_Animation, ObjectType.GO_Image, ObjectType.GO_Table, ObjectType.GO_FloatingTable, ObjectType.GO_Text, ObjectType.GO_MasterTable, ObjectType.GO_SpreadsheetTable
+                                Case ObjectType.GO_Animation, ObjectType.GO_Image, ObjectType.GO_Table, ObjectType.GO_FloatingTable, ObjectType.GO_Text, ObjectType.GO_MasterTable, ObjectType.GO_SpreadsheetTable, ObjectType.GO_Rectangle
                                     .Height = obj.Height + 20
                                     .Width = obj.Width + 20
                                 Case Else

@@ -4043,6 +4043,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Excluir o retângulo selecionado?.
+        '''</summary>
+        Friend Shared ReadOnly Property Deleterectangle() As String
+            Get
+                Return ResourceManager.GetString("Deleterectangle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Delta-G/RT.
         '''</summary>
         Friend Shared ReadOnly Property DeltaGRT() As String
@@ -12021,6 +12030,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Recomendadoparausoco2() As String
             Get
                 Return ResourceManager.GetString("Recomendadoparausoco2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to DESCRIÇÃO.
+        '''</summary>
+        Friend Shared ReadOnly Property rectangletext() As String
+            Get
+                Return ResourceManager.GetString("rectangletext", resourceCulture)
             End Get
         End Property
         
