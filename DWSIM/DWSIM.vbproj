@@ -299,10 +299,10 @@
     <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormAdditionalTasks.Designer.vb">
-      <DependentUpon>FormAdditionalTasks.vb</DependentUpon>
+    <Compile Include="Forms\FormAddFlowsheetObject.Designer.vb">
+      <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormAdditionalTasks.vb">
+    <Compile Include="Forms\FormAddFlowsheetObject.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormConfigureMasterTable.Designer.vb">
@@ -751,17 +751,11 @@
     <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormAdditionalTasks.de.resx">
-      <DependentUpon>FormAdditionalTasks.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\FormAddFlowsheetObject.en.resx">
+      <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormAdditionalTasks.en.resx">
-      <DependentUpon>FormAdditionalTasks.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormAdditionalTasks.es.resx">
-      <DependentUpon>FormAdditionalTasks.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormAdditionalTasks.resx">
-      <DependentUpon>FormAdditionalTasks.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\FormAddFlowsheetObject.resx">
+      <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.es.resx">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>

@@ -48,7 +48,6 @@ Partial Class FormMain
         Me.PreferenciasDoDWSIMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatabaseManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiAdditionalConfig = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowsMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.CascadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TileVerticalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -224,7 +223,7 @@ Partial Class FormMain
         '
         'FerramentasToolStripMenuItem
         '
-        Me.FerramentasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseManagerToolStripMenuItem, Me.tsmiAdditionalConfig})
+        Me.FerramentasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseManagerToolStripMenuItem})
         Me.FerramentasToolStripMenuItem.Name = "FerramentasToolStripMenuItem"
         resources.ApplyResources(Me.FerramentasToolStripMenuItem, "FerramentasToolStripMenuItem")
         '
@@ -233,12 +232,6 @@ Partial Class FormMain
         Me.DatabaseManagerToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.application_form_edit
         Me.DatabaseManagerToolStripMenuItem.Name = "DatabaseManagerToolStripMenuItem"
         resources.ApplyResources(Me.DatabaseManagerToolStripMenuItem, "DatabaseManagerToolStripMenuItem")
-        '
-        'tsmiAdditionalConfig
-        '
-        Me.tsmiAdditionalConfig.Image = Global.DWSIM.My.Resources.Resources.copy
-        Me.tsmiAdditionalConfig.Name = "tsmiAdditionalConfig"
-        resources.ApplyResources(Me.tsmiAdditionalConfig, "tsmiAdditionalConfig")
         '
         'WindowsMenu
         '
@@ -825,6 +818,5 @@ Partial Class FormMain
     Public WithEvents MostrarBarraDeFerramentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FerramentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DatabaseManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tsmiAdditionalConfig As System.Windows.Forms.ToolStripMenuItem
 
 End Class

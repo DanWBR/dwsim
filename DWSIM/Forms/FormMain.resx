@@ -261,15 +261,6 @@
   <data name="DatabaseManagerToolStripMenuItem.Text" xml:space="preserve">
     <value>Gerenciador de Bancos de Dados</value>
   </data>
-  <data name="tsmiAdditionalConfig.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Alt+A</value>
-  </data>
-  <data name="tsmiAdditionalConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 22</value>
-  </data>
-  <data name="tsmiAdditionalConfig.Text" xml:space="preserve">
-    <value>Configurações Adicionais</value>
-  </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 20</value>
   </data>
@@ -319,13 +310,13 @@
     <value>&amp;Mostrar Ajuda</value>
   </data>
   <data name="ManualTecnicoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>159, 22</value>
   </data>
   <data name="ManualTecnicoToolStripMenuItem.Text" xml:space="preserve">
     <value>Manual Técnico</value>
   </data>
   <data name="GuiaDoUsuarioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>159, 22</value>
   </data>
   <data name="GuiaDoUsuarioToolStripMenuItem.Text" xml:space="preserve">
     <value>Guia do Usuário</value>
@@ -361,7 +352,7 @@
 </value>
   </data>
   <data name="DownloadsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 22</value>
+    <value>409, 22</value>
   </data>
   <data name="DownloadsToolStripMenuItem.Text" xml:space="preserve">
     <value>Downloads</value>
@@ -388,13 +379,13 @@
 </value>
   </data>
   <data name="WikiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 22</value>
+    <value>409, 22</value>
   </data>
   <data name="WikiToolStripMenuItem.Text" xml:space="preserve">
     <value>Wiki</value>
   </data>
   <data name="ForumToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 22</value>
+    <value>409, 22</value>
   </data>
   <data name="ForumToolStripMenuItem.Text" xml:space="preserve">
     <value>Fórums</value>
@@ -421,7 +412,7 @@
 </value>
   </data>
   <data name="RastreamentoDeBugsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 22</value>
+    <value>409, 22</value>
   </data>
   <data name="RastreamentoDeBugsToolStripMenuItem.Text" xml:space="preserve">
     <value>Rastreamento de Bugs / Pedidos de Recursos e Suporte Técnico</value>
@@ -1683,12 +1674,6 @@
     <value>DatabaseManagerToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;DatabaseManagerToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiAdditionalConfig.Name" xml:space="preserve">
-    <value>tsmiAdditionalConfig</value>
-  </data>
-  <data name="&gt;&gt;tsmiAdditionalConfig.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;WindowsMenu.Name" xml:space="preserve">

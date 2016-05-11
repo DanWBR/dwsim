@@ -64,6 +64,10 @@ Namespace UnitOperations
 
 #Region "    ISimulationObject"
 
+        Public Overridable Function GetVersion() As Version Implements ISimulationObject.GetVersion
+            Return Me.GetType.Assembly.GetName.Version
+        End Function
+
         Public MustOverride Function GetDisplayName() As String Implements ISimulationObject.GetDisplayName
 
         Public MustOverride Function GetDisplayDescription() As String Implements ISimulationObject.GetDisplayDescription

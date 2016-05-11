@@ -26,6 +26,8 @@
 
     Sub CheckSpec(val As Double, onlypositive As Boolean, paramname As String)
 
+    Function GetVersion() As Version
+
     Sub Validate()
 
     ''' <summary>

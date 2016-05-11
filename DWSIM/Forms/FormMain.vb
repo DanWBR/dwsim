@@ -2002,11 +2002,6 @@ ruf:                Application.DoEvents()
         If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
     End Sub
 
-    Private Sub ConfiguracoesAdicionaisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsmiAdditionalConfig.Click
-        Dim frma As New FormAdditionalTasks
-        frma.ShowDialog(Me)
-    End Sub
-
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
         Me.OpenFileDialog1.InitialDirectory = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "samples"
         LoadFileDialog()

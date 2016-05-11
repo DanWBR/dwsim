@@ -2786,7 +2786,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Public Function AddObject(t As ObjectType, xcoord As Integer, ycoord As Integer, tag As String) As Interfaces.ISimulationObject Implements IFlowsheet.AddObject
-        Return Me.SimulationObjects(Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, tag))
+        Dim id = Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, tag)
+        Return Me.SimulationObjects(id)
     End Function
 
     Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing) Implements IFlowsheet.RequestCalculation
@@ -2856,7 +2857,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Private Sub BlocoDeSimulacaoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlocoDeSimulacaoToolStripMenuItem.Click
-
+        Dim f As New FormAddFlowsheetObject() With {.Flowsheet = Me}
+        f.ShowDialog(Me)
     End Sub
 
 End Class
