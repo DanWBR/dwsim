@@ -120,6 +120,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Calculator.CheckParallelPInvoke()
 
+            Me.Solver = [Enum].Parse(Me.Solver.GetType, Me.FlashSettings(FlashSetting.GM_OptimizationMethod))
+
             Dim i, j, k As Integer
 
             Dim d1, d2 As Date, dt As TimeSpan
