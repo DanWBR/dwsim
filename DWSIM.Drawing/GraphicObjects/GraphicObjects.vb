@@ -231,17 +231,27 @@ Namespace GraphicObjects
 
         Public Function FindObjectAtPoint(ByVal pt As Point) As GraphicObject
 
+            Dim objlist As New List(Of GraphicObject)
+
             Dim drawObj As GraphicObject
             Dim i As Integer
-            If Not Me.InnerList Is Nothing AndAlso _
-                    Me.InnerList.Count > 0 Then
+            If Not Me.InnerList Is Nothing AndAlso Me.InnerList.Count > 0 Then
                 For i = Me.InnerList.Count - 1 To 0 Step -1
                     drawObj = CType(Me.InnerList(i), GraphicObject)
                     If drawObj.HitTest(pt.ToSDPoint) Then
-                        Return drawObj
-                        Exit For
+                        objlist.Add(drawObj)
                     End If
                 Next
+            End If
+
+            If objlist.Count > 1 Then
+                For Each obj In objlist
+                    If obj.ObjectType <> ObjectType.GO_Rectangle Then Return obj
+                Next
+            ElseIf objlist.Count = 1 Then
+                Return objlist(0)
+            Else
+                Return Nothing
             End If
             Return Nothing
 

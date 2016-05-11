@@ -118,20 +118,44 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 9</value>
+  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Select an object type to add to the flowsheet.</value>
   </data>
+  <data name="txtAbout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 209</value>
+  </data>
+  <data name="txtAbout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 63</value>
+  </data>
+  <data name="txtDesc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 137</value>
+  </data>
+  <data name="txtDesc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 63</value>
+  </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>575, 280</value>
+    <value>527, 278</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 278</value>
+  </data>
   <data name="btnOK.Text" xml:space="preserve">
     <value>Add</value>
+  </data>
+  <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>376, 59</value>
+  </data>
+  <data name="lblName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>376, 34</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>About:</value>
@@ -151,6 +175,9 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Name:</value>
   </data>
+  <data name="lblLibrary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>376, 84</value>
+  </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
   </data>
@@ -163,8 +190,14 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Library Version:</value>
   </data>
+  <data name="lblLibVersion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>376, 109</value>
+  </data>
+  <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>621, 34</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>731, 311</value>
+    <value>682, 311</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Add Object/Block</value>

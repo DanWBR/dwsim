@@ -50,8 +50,8 @@ Partial Class FormAddFlowsheetObject
         '
         'ListBox1
         '
-        Me.ListBox1.FormattingEnabled = True
         resources.ApplyResources(Me.ListBox1, "ListBox1")
+        Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.Name = "ListBox1"
         '
         'txtAbout

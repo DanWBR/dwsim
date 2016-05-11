@@ -179,7 +179,7 @@ Partial Class FormEditGraphicObject
         Me.Controls.Add(Me.ToolStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "FormEditGraphicObject"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
         Me.ShowIcon = False
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
