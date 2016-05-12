@@ -1,4 +1,7 @@
-﻿Module SIMDExtenders
+﻿Imports DWSIM.GlobalSettings
+Imports DWSIM.MathOps
+
+Public Module SIMDExtenders
 
     ''' <summary>
     ''' Computes the exponential of each vector element.

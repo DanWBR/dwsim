@@ -245,6 +245,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Import Include="DWSIM.ExtensionMethods" />
     <Import Include="DWSIM.FlowsheetSolver" />
     <Import Include="DWSIM.GlobalSettings" />
     <Import Include="DWSIM.Interfaces.Enums" />
@@ -475,10 +476,8 @@
     </Compile>
     <Compile Include="Objects\Classes\Pipe\PipeHydraulicProfile.vb" />
     <Compile Include="Interfaces\IUtilityPlugin.vb" />
-    <Compile Include="Objects\Classes\Extenders\ExtensionMethods.vb" />
     <Compile Include="Objects\Classes\TaskSchedulers\LimitedConcurrencyLevelTaskScheduler.vb" />
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
-    <Compile Include="Objects\Classes\Extenders\SimplexExtender.vb" />
     <Compile Include="Objects\Classes\TaskSchedulers\STATaskScheduler.vb" />
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Objects\Classes\General\TableGraphic.vb" />
@@ -1017,6 +1016,10 @@
     <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
       <Name>DWSIM.DrawingTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
       <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>

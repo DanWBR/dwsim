@@ -1,7 +1,8 @@
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms
 Imports System.Globalization
 
-Module Extensions
+Public Module General
+
 
     <System.Runtime.CompilerServices.Extension()> _
     Public Function ToString(sourcearray As String(), ci As CultureInfo) As String
@@ -51,6 +52,29 @@ Module Extensions
     End Function
 
     <System.Runtime.CompilerServices.Extension()> _
+    Public Sub UIThread(control As Control, code As Action)
+        If control.InvokeRequired Then
+            control.BeginInvoke(code)
+        Else
+            code.Invoke()
+        End If
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Sub UIThreadInvoke(control As Control, code As Action)
+        If control.InvokeRequired Then
+            control.Invoke(code)
+        Else
+            code.Invoke()
+        End If
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Function ToDTPoint(pt As System.Drawing.Point) As DrawingTools.Point
+        Return New DrawingTools.Point(pt.X, pt.Y)
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> _
     Public Function GetUnits(control As System.Windows.Forms.GridItem) As String
         If control.Value.ToString().Split(" ").Length > 1 Then
             Return control.Value.ToString.Substring(control.Value.ToString.IndexOf(" "c) + 1, control.Value.ToString.Length - control.Value.ToString.IndexOf(" "c) - 1)
@@ -79,6 +103,28 @@ Module Extensions
         Else
             Return Double.NaN
         End If
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Function DropDownWidth(control As ListView) As Integer
+        Dim maxWidth As Integer = 0, temp As Integer = 0
+        For Each obj As Object In control.Items
+            temp = TextRenderer.MeasureText(obj.ToString(), control.Font).Width
+            If temp > maxWidth Then
+                maxWidth = temp
+            End If
+        Next
+        Return maxWidth
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Function DropDownHeight(control As ListView) As Integer
+        Dim Height As Integer = 0, temp As Integer = 0
+        For Each obj As Object In control.Items
+            temp = TextRenderer.MeasureText(obj.ToString(), control.Font).Height
+            Height += temp
+        Next
+        Return Height
     End Function
 
     <System.Runtime.CompilerServices.Extension()> _
@@ -175,6 +221,78 @@ Module Extensions
         retstr += "}"
 
         Return retstr
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Sub PasteData(dgv As DataGridView)
+
+        PasteData2(dgv, Clipboard.GetText())
+
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Sub PasteData2(dgv As DataGridView, data As String)
+
+        Dim tArr() As String
+        Dim arT() As String
+        Dim i, ii As Integer
+        Dim c, cc, r As Integer
+
+        tArr = data.Split(New Char() {vbLf, vbCr, vbCrLf})
+
+        If dgv.SelectedCells.Count > 0 Then
+            r = dgv.SelectedCells(0).RowIndex
+            c = dgv.SelectedCells(0).ColumnIndex
+        Else
+            r = 0
+            c = 0
+        End If
+        For i = 0 To tArr.Length - 1
+            If tArr(i) <> "" Then
+                arT = tArr(i).Split(Char.ConvertFromUtf32(9))
+                For ii = 0 To arT.Length - 1
+                    If r > dgv.Rows.Count - 1 Then
+                        dgv.Rows.Add()
+                    End If
+                Next
+                r = r + 1
+            End If
+        Next
+        If dgv.SelectedCells.Count > 0 Then
+            r = dgv.SelectedCells(0).RowIndex
+            c = dgv.SelectedCells(0).ColumnIndex
+        Else
+            r = 0
+            c = 0
+        End If
+        For i = 0 To tArr.Length - 1
+            If tArr(i) <> "" Then
+                arT = tArr(i).Split(Char.ConvertFromUtf32(9))
+                cc = c
+                If r <= dgv.Rows.Count - 1 Then
+                    For ii = 0 To arT.Length - 1
+                        cc = GetNextVisibleCol(dgv, cc)
+                        If cc > dgv.ColumnCount - 1 Then Exit For
+                        dgv.Item(cc, r).Value = arT(ii).TrimStart
+                        cc = cc + 1
+                    Next
+                End If
+                r = r + 1
+            End If
+        Next
+
+    End Sub
+
+    Function GetNextVisibleCol(dgv As DataGridView, stidx As Integer) As Integer
+
+        Dim i As Integer
+
+        For i = stidx To dgv.ColumnCount - 1
+            If dgv.Columns(i).Visible Then Return i
+        Next
+
+        Return Nothing
 
     End Function
 
@@ -293,3 +411,4 @@ Module Extensions
     End Function
 
 End Module
+

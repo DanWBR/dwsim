@@ -88,11 +88,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Yeppp.CLR.Bundle">
-      <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Import Include="DWSIM.ExtensionMethods" />
     <Import Include="DWSIM.GlobalSettings" />
     <Import Include="DWSIM.MathOps" />
     <Import Include="Microsoft.VisualBasic" />
@@ -179,8 +177,6 @@
     <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
-    <Compile Include="Extensions\GeneralExtenders.vb" />
-    <Compile Include="Extensions\SIMDExtenders.vb" />
     <Compile Include="Flash Algorithms\PointF.vb" />
     <Compile Include="Main\Calculator.vb" />
     <Compile Include="Helper Classes\ChemSepIDConverter.vb" />
@@ -440,6 +436,10 @@
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>DWSIM.Controls.DockPanel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
