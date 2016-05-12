@@ -769,7 +769,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Hf = H
             Pf = P
@@ -888,7 +888,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim L, V, S, Vx(), Vy(), Vs(), sumN, _Hv, _Hl, _Hs As Double
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             sumN = tmp("MoleSum")
             L = tmp("LiquidPhaseMoleFraction")
@@ -937,7 +937,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim tolINT As Double = 0.00001
             Dim tolEXT As Double = 0.00001
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Vx(n), Vy(n), Vp(n), Vcalc, Vspec, P, x, x0, x00, fx, fx0, fx00, Pmin, Pmax As Double
 
@@ -1021,7 +1021,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim tolINT As Double = 0.00001
             Dim tolEXT As Double = 0.00001
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Vx(n), Vy(n), Vp(n), Vcalc, Vspec, T, x, x0, x00, fx, fx0, fx00, Tmin, Tmax As Double
 

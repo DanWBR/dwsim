@@ -62,7 +62,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim i, m, k As Integer
 
-            Dim n = UBound(Vx)
+            Dim n = Vx.Length - 1
 
             Dim Vgammac(n), Vgammar(n), Vgamma(n) As Double
             Dim Q(n), R(n), j(n), L(n), val As Double
@@ -375,7 +375,7 @@ Namespace PropertyPackages.Auxiliary
             Dim Q(), R(), j(), L()
             Dim i, k, m As Integer
 
-            Dim n = UBound(Vx)
+            Dim n = Vx.Length - 1
             Dim n2 = UBound(VEKI, 2)
 
             Dim beta(,), teta(n2), s(n2), Vgammac(), Vgammar(), Vgamma(), b(,)
@@ -463,7 +463,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim i, k, m As Integer
 
-            Dim n = UBound(Vx)
+            Dim n = Vx.Length - 1
             Dim n2 = UBound(VEKI, 2)
 
             Dim teta(n2), s(n2) As Double

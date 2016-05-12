@@ -59,7 +59,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
             fastmode = Me.FlashSettings(Interfaces.Enums.FlashSetting.IO_FastMode)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
 
@@ -358,7 +358,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Hf = H * PP.AUX_MMM(Vz)
@@ -831,7 +831,7 @@ restart:    Do
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Sf = S * PP.AUX_MMM(Vz)
@@ -1289,7 +1289,7 @@ restart:    Do
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Vf = V
@@ -1579,7 +1579,7 @@ final:      d2 = Date.Now
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Vf = V

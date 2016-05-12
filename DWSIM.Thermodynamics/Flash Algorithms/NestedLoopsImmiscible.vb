@@ -59,7 +59,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Vn(n) As String, Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), Ki_ant(n), fi(n) As Double
 
@@ -160,7 +160,7 @@ out:        Return New Object() {xl1, V, Vx1, Vy, ecount, xl2, Vx2, 0.0#, PP.RET
 
             d1 = Date.Now
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             PP = PP
             Hf = H
@@ -265,7 +265,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
             d1 = Date.Now
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             PP = PP
             Sf = S
@@ -369,7 +369,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             PP = PP
             Vf = V
@@ -699,7 +699,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             PP = PP
             Vf = V
@@ -1013,7 +1013,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             tmp = Me.Flash_PT(Vz, P, T, pp)
             Dim L1, L2, V, Vx1(), Vx2(), Vy(), _Hv, _Hl1, _Hl2 As Double
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             L1 = tmp(0)
             V = tmp(1)
@@ -1046,7 +1046,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             Dim tmp = Me.Flash_PT(Vz, P, T, pp)
             Dim L1, L2, V, Vx1(), Vx2(), Vy(), _Sv, _Sl, _Sl2 As Double
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             L1 = tmp(0)
             V = tmp(1)

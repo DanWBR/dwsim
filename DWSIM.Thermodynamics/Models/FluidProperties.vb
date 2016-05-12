@@ -326,7 +326,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim i, n As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             i = 0
 
@@ -346,7 +346,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim i, n As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             i = 0
 
@@ -366,7 +366,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim i, j, n As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             i = 0
             Vcm = 0.0#
@@ -385,7 +385,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim i, n As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             i = 0
 
@@ -405,7 +405,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim i, n As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             i = 0
 
@@ -425,7 +425,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim i, n As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             i = 0
 
@@ -482,7 +482,7 @@ Namespace PropertyPackages.Auxiliary
 
         Shared Function condlm_li(ByVal VVl, ByVal Vcondl, ByVal Vz) As Double
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             Dim phi(n), somaz As Double, i, j As Integer
 
@@ -566,7 +566,7 @@ Namespace PropertyPackages.Auxiliary
             Dim dadt, n, R, Z As Double
             Dim i, j As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim ai(n), bi(n), ci(n), a(n, n), b(n, n) As Double
             Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), m(n), Tr(n) As Double
@@ -768,7 +768,7 @@ Namespace PropertyPackages.Auxiliary
             Dim vetor(8) As Double
             Dim Tc(), Pc(), Vc(), W(), Zc(), a, b, c, Tr() As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             ReDim Zc(n), Tc(n), Pc(n), Vc(n), W(n), Tr(n)
 

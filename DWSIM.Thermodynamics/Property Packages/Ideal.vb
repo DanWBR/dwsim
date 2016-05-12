@@ -399,7 +399,7 @@ Namespace PropertyPackages
         Function dfidRbb_H(ByVal Rbb, ByVal Kb0, ByVal Vz, ByVal Vu, ByVal sum_Hvi0, ByVal DHv, ByVal DHl, ByVal HT) As Double
 
             Dim i As Integer = 0
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             Dim Vpbb2(n), L2, V2, Kb2 As Double
 
@@ -424,7 +424,7 @@ Namespace PropertyPackages
         Function dfidRbb_S(ByVal Rbb, ByVal Kb0, ByVal Vz, ByVal Vu, ByVal sum_Hvi0, ByVal DHv, ByVal DHl, ByVal ST) As Double
 
             Dim i As Integer = 0
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             Dim Vpbb2(n), L, V As Double
 
@@ -655,7 +655,7 @@ Namespace PropertyPackages
             Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
             Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim fugcoeff(n) As Double
 

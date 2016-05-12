@@ -403,7 +403,7 @@ Namespace PropertyPackages
 
             Dim prn As New PropertyPackages.ThermoPlugs.PR
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim lnfug(n), ativ(n) As Double
             Dim fugcoeff(n) As Double
             Dim i As Integer

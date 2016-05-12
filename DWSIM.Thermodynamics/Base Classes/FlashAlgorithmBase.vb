@@ -270,7 +270,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim _Hv, _Hl, _Hl2, _Hs As Double
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
 
             _Hv = 0
             _Hl = 0
@@ -301,7 +301,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim _Sv, _Sl, _Sl2 As Double
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
 
             _Sv = 0
             _Sl = 0
@@ -439,7 +439,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             WriteDebugInfo("Starting Liquid Phase Stability Test @ T = " & T & " K & P = " & P & " Pa for the following trial phases:")
 
             Dim i, j, c, n, o, l, nt, maxits As Integer
-            n = UBound(Vz)
+            n = Vz.Length - 1
             nt = UBound(VzArray, 1)
 
             Dim Y, K As Double(,), tol As Double
@@ -1168,7 +1168,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Private Function ConvertToMassFractions(ByVal Vz As Double()) As Double() Implements Interfaces.IFlashCalculationResult.ConvertToMassFractions
 
-            Dim Vwe(UBound(Vz)) As Double
+            Dim Vwe(Vz.Length - 1) As Double
             Dim mol_x_mm As Double = 0
             Dim i As Integer = 0
             For Each sub1 As Interfaces.ICompoundConstantProperties In CompoundProperties

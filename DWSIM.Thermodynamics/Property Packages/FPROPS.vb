@@ -171,7 +171,7 @@ Namespace PropertyPackages
 
             If m_uni Is Nothing Then m_uni = New PropertyPackages.Auxiliary.UNIQUAC
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim lnfug(n), ativ(n) As Double
             Dim fugcoeff(n) As Double
             Dim i As Integer

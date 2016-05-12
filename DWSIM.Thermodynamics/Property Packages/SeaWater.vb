@@ -578,7 +578,7 @@ Namespace PropertyPackages
                 constprops.Add(s.ConstantProperties)
             Next
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i, j As Integer
             Dim fugcoeff(n) As Double
 

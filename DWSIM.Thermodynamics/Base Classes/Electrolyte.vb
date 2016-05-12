@@ -28,7 +28,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function FreezingPointDepression(ByVal Vx As Double(), activcoeff As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double()
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim wid As Integer = cprops.IndexOf((From c As Interfaces.ICompoundConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
             Dim Tnfp, DHm, DT, Td As Double
 
@@ -44,7 +44,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function OsmoticCoeff(Vx As Double(), activcoeff As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim molality(n), summ As Double
 
@@ -79,7 +79,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function pH(Vx As Double(), T As Double, activcoeff As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim molality(n), summ As Double
 
@@ -117,7 +117,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function pH(Vx As Double(), T As Double, cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim molality(n), summ As Double
 
@@ -155,7 +155,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function SolidEnthalpy(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim HS As Double = 0.0#
             Dim MW As Double = 0.0#
@@ -173,7 +173,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim T0, Cp0, CpT As Double
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
 
             T0 = 298.15
             Cp0 = HeatCapacityCp(T0, Vx, cprops)
@@ -207,7 +207,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim wid As Integer = cprops.IndexOf((From c2 As Interfaces.ICompoundConstantProperties In cprops Select c2 Where c2.Name = "Water").SingleOrDefault)
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim Cp As Double = 0.0#
             Dim MW As Double = 0.0#
@@ -238,7 +238,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim wid As Integer = cprops.IndexOf((From c As Interfaces.ICompoundConstantProperties In cprops Select c Where c.Name = "Water").SingleOrDefault)
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim molality(n) As Double
             Dim i As Integer
             Dim vol As Double = 0.0#

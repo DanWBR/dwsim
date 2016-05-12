@@ -534,8 +534,6 @@ Namespace PropertyPackages
             Dim fugvap As Double() = Nothing
             Dim fugliq As Double() = Nothing
 
-            Dim alreadymt As Boolean = False
-
             If Settings.EnableParallelProcessing Then
 
                 Dim task1 = Task.Factory.StartNew(Sub()
@@ -565,52 +563,51 @@ Namespace PropertyPackages
                 End If
             End If
 
-            Dim n As Integer = UBound(fugvap)
+            Dim n As Integer = fugvap.Length - 1
             Dim i As Integer
             Dim K(n) As Double
 
             K = fugliq.DivideY(fugvap)
 
-            Dim cprops As List(Of Interfaces.ICompoundConstantProperties) = Nothing
-
-            If cprops Is Nothing Then cprops = DW_GetConstantProperties()
-
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(ii)
-                                           Dim Pc, Tc, w As Double
-                                           If K(ii) = 0.0# Or Double.IsInfinity(K(ii)) Or Double.IsNaN(K(ii)) Then
-                                               Pc = cprops(ii).Critical_Pressure
-                                               Tc = cprops(ii).Critical_Temperature
-                                               w = cprops(ii).Acentric_Factor
-                                               If type = "LV" Then
-                                                   K(ii) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
-                                               Else
-                                                   K(ii) = 1.0#
+          
+            If Double.IsNaN(K.Sum) Or Double.IsInfinity(K.Sum) Then
+                Dim cprops  = DW_GetConstantProperties()
+                If Settings.EnableParallelProcessing Then
+                    Parallel.For(0, n + 1, Sub(ii)
+                                               Dim Pc, Tc, w As Double
+                                               If K(ii) = 0.0# Or Double.IsInfinity(K(ii)) Or Double.IsNaN(K(ii)) Then
+                                                   Pc = cprops(ii).Critical_Pressure
+                                                   Tc = cprops(ii).Critical_Temperature
+                                                   w = cprops(ii).Acentric_Factor
+                                                   If type = "LV" Then
+                                                       K(ii) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
+                                                   Else
+                                                       K(ii) = 1.0#
+                                                   End If
                                                End If
-                                           End If
-                                       End Sub)
-            Else
-                Dim Pc, Tc, w As Double
-                For i = 0 To n
-                    If K(i) = 0.0# Or Double.IsInfinity(K(i)) Or Double.IsNaN(K(i)) Then
-                        Pc = cprops(i).Critical_Pressure
-                        Tc = cprops(i).Critical_Temperature
-                        w = cprops(i).Acentric_Factor
-                        If type = "LV" Then
-                            K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
-                        Else
-                            K(i) = 1.0#
+                                           End Sub)
+                Else
+                    Dim Pc, Tc, w As Double
+                    For i = 0 To n
+                        If K(i) = 0.0# Or Double.IsInfinity(K(i)) Or Double.IsNaN(K(i)) Then
+                            Pc = cprops(i).Critical_Pressure
+                            Tc = cprops(i).Critical_Temperature
+                            w = cprops(i).Acentric_Factor
+                            If type = "LV" Then
+                                K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
+                            Else
+                                K(i) = 1.0#
+                            End If
                         End If
-                    End If
-                Next
+                    Next
+                End If
             End If
-
 
             If Me.AUX_CheckTrivial(K) Then
                 Dim Pc, Tc, w As Double
                 If Not Parameters.ContainsKey("PP_FLASHALGORITHMIDEALKFALLBACK") Then Parameters.Add("PP_FLASHALGORITHMIDEALKFALLBACK", 1)
                 If Parameters("PP_FLASHALGORITHMIDEALKFALLBACK") = 1 Then
-                    If cprops Is Nothing Then cprops = DW_GetConstantProperties()
+                    Dim cprops = DW_GetConstantProperties()
                     For i = 0 To n
                         Pc = cprops(i).Critical_Pressure
                         Tc = cprops(i).Critical_Temperature
@@ -640,7 +637,7 @@ Namespace PropertyPackages
 
             Dim i As Integer
             Dim result = Me.FlashBase.Flash_PT(Vx, P, T, Me)
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim K(n) As Double
 
             i = 0
@@ -663,7 +660,7 @@ Namespace PropertyPackages
             Next
 
             If Me.AUX_CheckTrivial(K) Then
-                For i = 0 To UBound(Vx)
+                For i = 0 To Vx.Length - 1
                     K(i) = Me.AUX_PVAPi(i, T) / P
                     i += 1
                 Next
@@ -787,7 +784,7 @@ Namespace PropertyPackages
                 fugvap = Me.DW_CalcFugCoeff(Vx, T, P, State.Vapor)
             End If
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i As Integer
 
             Dim g, gid, gexv, gexl As Double
@@ -2856,7 +2853,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Loop Until i = n + 1
 
             Dim VTc(n), Vpc(n), Vw(n), VVc(n), VKij(n, n) As Double
-            Dim Vm2(UBound(Vz) - j), VPc2(UBound(Vz) - j), VTc2(UBound(Vz) - j), VVc2(UBound(Vz) - j), Vw2(UBound(Vz) - j), VKij2(UBound(Vz) - j, UBound(Vz) - j)
+            Dim Vm2(Vz.Length - 1 - j), VPc2(Vz.Length - 1 - j), VTc2(Vz.Length - 1 - j), VVc2(Vz.Length - 1 - j), Vw2(Vz.Length - 1 - j), VKij2(Vz.Length - 1 - j, Vz.Length - 1 - j)
 
             VTc = Me.RET_VTC()
             Vpc = Me.RET_VPC()
@@ -5657,7 +5654,7 @@ Final3:
 
         Public Overridable Function DW_CalcSolidEnthalpy(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim HS As Double = 0.0#
             Dim Cpi As Double
@@ -5700,7 +5697,7 @@ Final3:
 
         Public Overridable Function DW_CalcSolidHeatCapacityCp(ByVal T As Double, ByVal Vx As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
             Dim i As Integer
             Dim Cp As Double = 0.0#
             Dim Cpi As Double
@@ -6262,7 +6259,7 @@ Final3:
             Dim sum As Double = 0
             Dim i, n As Integer
 
-            n = UBound(Vx)
+            n = Vx.Length - 1
 
             Dim Vxnew(n) As Double
 
@@ -6283,7 +6280,7 @@ Final3:
 
             Dim i, n As Integer
 
-            n = UBound(Vx)
+            n = Vx.Length - 1
 
             Dim Vx2(n) As Double
 
@@ -6299,7 +6296,7 @@ Final3:
 
             Dim i, n As Integer
 
-            n = UBound(Vx)
+            n = Vx.Length - 1
 
             For i = 0 To n
                 If Vx(i) <> 0 Then Return i
@@ -6328,7 +6325,7 @@ Final3:
 
             Dim i, c, n As Integer, bo As Boolean
 
-            n = UBound(Vx)
+            n = Vx.Length - 1
 
             bo = False
             c = 0
@@ -6404,7 +6401,7 @@ Final3:
 
         Public Overridable Function AUX_CONVERT_MOL_TO_MASS(ByVal Vz As Double()) As Double()
 
-            Dim Vwe(UBound(Vz)) As Double
+            Dim Vwe(Vz.Length - 1) As Double
             Dim mol_x_mm As Double = 0
             Dim i As Integer = 0
             Dim sub1 As Interfaces.ICompound
@@ -6429,7 +6426,7 @@ Final3:
 
         Public Overridable Function AUX_CONVERT_MASS_TO_MOL(ByVal Vz As Double()) As Double()
 
-            Dim Vw(UBound(Vz)) As Double
+            Dim Vw(Vz.Length - 1) As Double
             Dim mass_div_mm As Double
             Dim i As Integer = 0
             Dim sub1 As Interfaces.ICompound
@@ -6452,7 +6449,7 @@ Final3:
 
             Dim isTrivial As Boolean = True
             Dim n, i As Integer
-            n = UBound(KI)
+            n = KI.Length - 1
 
             For i = 0 To n
                 If Abs(KI(i) - 1) > 0.01 Then isTrivial = False

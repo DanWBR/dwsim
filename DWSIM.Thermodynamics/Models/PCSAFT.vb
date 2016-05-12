@@ -144,7 +144,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function CalcZ(ByVal Vx As Double(), ByVal VKij As Double(,), ByVal T As Double, ByVal P As Double, ByVal casnos() As String, ByVal state As String) As Double
 
-            Dim ncomp As Integer = UBound(Vx)
+            Dim ncomp As Integer = Vx.Length - 1
             Dim phi(ncomp) As Double, h_res, s_res, g_res, zges, parame(ncomp, 2), kij(ncomp, ncomp), densta, dense As Double
             
             Dim i, j As Integer
@@ -179,7 +179,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function CalcLnFugCoeff(ByVal Vx As Double(), ByVal VKij As Double(,), ByVal T As Double, ByVal P As Double, ByVal casnos() As String, ByVal state As String) As Double()
 
-            Dim ncomp As Integer = UBound(Vx)
+            Dim ncomp As Integer = Vx.Length - 1
             Dim phi(ncomp) As Double, h_res, s_res, g_res, zges, parame(ncomp, 2), kij(ncomp, ncomp), densta, dense As Double
 
             Dim i, j As Integer
@@ -220,7 +220,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function CalcHRES(ByVal state As String, ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VMM As Double(), ByVal casnos() As String, ByVal Hid As Double) As Double
 
-            Dim ncomp As Integer = UBound(Vx)
+            Dim ncomp As Integer = Vx.Length - 1
             Dim phi(ncomp) As Double, h_res, s_res, g_res, zges, parame(ncomp, 2), kij(ncomp, ncomp), densta, dense As Double
 
             Dim i, j As Integer
@@ -262,7 +262,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function CalcSRES(ByVal state As String, ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VMM As Double(), ByVal casnos() As String, ByVal Sid As Double) As Double
 
-            Dim ncomp As Integer = UBound(Vx)
+            Dim ncomp As Integer = Vx.Length - 1
             Dim phi(ncomp) As Double, h_res, s_res, g_res, zges, parame(ncomp, 2), kij(ncomp, ncomp), densta, dense As Double
 
             Dim i, j As Integer
@@ -329,7 +329,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function CalcCp(ByVal state As String, ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VMM As Double(), ByVal casnos() As String, ByVal Cpid As Double) As Double
 
-            Dim ncomp As Integer = UBound(Vx)
+            Dim ncomp As Integer = Vx.Length - 1
             Dim phi(ncomp) As Double, h_res1, h_res2, s_res, g_res, zges, parame(ncomp, 2), kij(ncomp, ncomp), densta, dense, t2 As Double
 
             Dim i, j As Integer
@@ -375,7 +375,7 @@ Namespace PropertyPackages.Auxiliary
 
         Function CalcCv(ByVal state As String, ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VMM As Double(), ByVal casnos() As String, ByVal Cpid As Double) As Double
 
-            Dim ncomp As Integer = UBound(Vx)
+            Dim ncomp As Integer = Vx.Length - 1
             Dim phi(ncomp) As Double, h_res1, h_res2, s_res, g_res, zges, parame(ncomp, 2), kij(ncomp, ncomp), densta, dense, t2 As Double
 
             Dim i, j As Integer

@@ -94,7 +94,7 @@ Namespace PropertyPackages.Auxiliary
         Function MixCritProp_LK(ByVal Vz As Object, ByVal VTc As Object, ByVal VPc As Object, ByVal Vw As Object, ByVal VVc As Object, ByVal VKij(,) As Double)
 
             Dim Pcm, Tcm, Vcm, wm As Double
-            Dim n As Integer = UBound(Vz)
+            Dim n As Integer = Vz.Length - 1
 
             Dim vcjk(n, n), tcjk(n, n) As Double
 
@@ -153,7 +153,7 @@ Namespace PropertyPackages.Auxiliary
             Dim Tc(), Pc(), w(), Tr() As Double
             Dim i As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             ReDim Tc(n), Pc(n), w(n), Tr(n)
 
@@ -197,7 +197,7 @@ Namespace PropertyPackages.Auxiliary
             Dim Tc(), Pc(), w(), Tr() As Double
             Dim i As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             ReDim Tc(n), Pc(n), w(n), Tr(n)
 
@@ -639,7 +639,7 @@ Final3:
             Dim Tc(), Pc(), Vc(), w(), Tr() As Double
             Dim i
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             ReDim Tc(n), Pc(n), Vc(n), w(n), Tr(n)
 
@@ -776,7 +776,7 @@ Final3:
 
             Dim i, j, l, n As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             i = 0
             Dim MMm = 0.0#
@@ -872,7 +872,7 @@ Final3:
 
             Dim i, n As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             i = 0
             Dim MMm = 0.0#

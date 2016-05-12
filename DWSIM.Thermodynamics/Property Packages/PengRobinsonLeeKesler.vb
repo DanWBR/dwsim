@@ -460,7 +460,7 @@ Namespace PropertyPackages
         Function dfidRbb_H(ByVal Rbb, ByVal Kb0, ByVal Vz, ByVal Vu, ByVal sum_Hvi0, ByVal DHv, ByVal DHl, ByVal HT) As Double
 
             Dim i As Integer = 0
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             Dim Vpbb2(n), L2, V2, Kb2 As Double
 
@@ -485,7 +485,7 @@ Namespace PropertyPackages
         Function dfidRbb_S(ByVal Rbb, ByVal Kb0, ByVal Vz, ByVal Vu, ByVal sum_Hvi0, ByVal DHv, ByVal DHl, ByVal ST) As Double
 
             Dim i As Integer = 0
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             Dim Vpbb2(n), L, V As Double
 

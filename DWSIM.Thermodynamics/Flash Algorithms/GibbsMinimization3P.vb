@@ -133,7 +133,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
 
@@ -397,7 +397,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'End If
 
                     Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                    Dim nc As Integer = UBound(Vz)
+                    Dim nc As Integer = Vz.Length - 1
 
                     If nt = -1 Then nt = nc
 
@@ -456,11 +456,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                     k = j
                                 End If
                             Next
-                            For i = 0 To UBound(Vz)
+                            For i = 0 To Vz.Length - 1
                                 vx2est(i) = stresult(1)(k, i)
                             Next
                         Else
-                            For i = 0 To UBound(Vz)
+                            For i = 0 To Vz.Length - 1
                                 vx2est(i) = stresult(1)(m, i)
                             Next
                         End If
@@ -658,7 +658,7 @@ out:        Return result
 
             d1 = Date.Now
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Hf = H
@@ -843,7 +843,7 @@ out:        Return result
 
             d1 = Date.Now
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Sf = S
@@ -959,7 +959,7 @@ alt:
 
         Function OBJ_FUNC_PH_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
             Dim L1, L2, V, Vx1(), Vx2(), Vy() As Double
 
             If Type = "PT" Then
@@ -1028,7 +1028,7 @@ alt:
 
             Dim tmp = Me.Flash_PT(Vz, Pf, T, proppack)
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             Dim L1, L2, V, Vx1(), Vx2(), Vy() As Double
 
@@ -1166,7 +1166,7 @@ alt:
             If result(0) > 0 And Not ForceTwoPhaseOnly Then
 
                 Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                Dim nc As Integer = UBound(Vz)
+                Dim nc As Integer = Vz.Length - 1
 
                 If nt = -1 Then nt = nc
                 n = nc
@@ -1222,11 +1222,11 @@ alt:
                                 k = j
                             End If
                         Next
-                        For i = 0 To UBound(Vz)
+                        For i = 0 To Vz.Length - 1
                             vx2est(i) = stresult(1)(k, i)
                         Next
                     Else
-                        For i = 0 To UBound(Vz)
+                        For i = 0 To Vz.Length - 1
                             vx2est(i) = stresult(1)(m, i)
                         Next
                     End If
@@ -1287,7 +1287,7 @@ alt:
             If result(0) > 0 And Not ForceTwoPhaseOnly Then
 
                 Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                Dim nc As Integer = UBound(Vz)
+                Dim nc As Integer = Vz.Length - 1
 
                 If nt = -1 Then nt = nc
                 n = nc
@@ -1343,11 +1343,11 @@ alt:
                                 k = j
                             End If
                         Next
-                        For i = 0 To UBound(Vz)
+                        For i = 0 To Vz.Length - 1
                             vx2est(i) = stresult(1)(k, i)
                         Next
                     Else
-                        For i = 0 To UBound(Vz)
+                        For i = 0 To Vz.Length - 1
                             vx2est(i) = stresult(1)(m, i)
                         Next
                     End If
@@ -1400,7 +1400,7 @@ alt:
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
 
@@ -1677,7 +1677,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, 0.0#, 
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
 

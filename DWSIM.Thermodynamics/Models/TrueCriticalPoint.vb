@@ -37,7 +37,7 @@ Namespace Utilities.TCP
             Dim n, R As Double
             Dim i As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Tc(n), Pc(n)
             Dim b As Double
@@ -206,7 +206,7 @@ Final2:
 
             Dim am, bm, R As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim ai(n), b(n), c(n), tmp(2, n + 1), a(n, n), am2(n)
             Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), Tr(n)
@@ -386,7 +386,7 @@ Final2:
 
             Dim am, bm, R As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Dn(n)
 
@@ -685,7 +685,7 @@ Final2:
 
             Dim n As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Dn(n)
 
@@ -797,7 +797,7 @@ Final2:
             Dim n, R, P, coeff(3), tmp() As Double
             Dim Tc(), Pc(), W(), alpha(), Vant(0, 4), m(), a(,), b(,), Tr() As Double
 
-            n = UBound(Vx)
+            n = Vx.Length - 1
 
             ReDim ai(n), bi(n), tmp(n + 1), a(n, n), b(n, n)
             ReDim Tc(n), Pc(n), W(n), alpha(n), m(n), Tr(n)
@@ -866,7 +866,7 @@ Final2:
             Dim n, R, P, T As Double
             Dim i As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Tc(n), Pc(n)
             Dim b As Double
@@ -923,7 +923,7 @@ Final2:
 
             Dim n As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Dn(n)
 
@@ -1048,7 +1048,7 @@ Final2:
             Dim n, R As Double
             Dim i As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Tc(n), Pc(n)
             Dim b As Double
@@ -1218,7 +1218,7 @@ Final2:
 
             Dim am, bm, R As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim ai(n), b(n), c(n), tmp(2, n + 1), a(n, n), am2(n)
             Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), Tr(n)
@@ -1399,7 +1399,7 @@ Final2:
 
             Dim am, bm, R As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Dn(n)
 
@@ -1701,7 +1701,7 @@ Final2:
 
             Dim n As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Dn(n)
 
@@ -1813,7 +1813,7 @@ Final2:
             Dim n, R, P, coeff(3), tmp() As Double
             Dim Tc(), Pc(), W(), alpha(), Vant(0, 4), m(), a(,), b(,), Tr() As Double
 
-            n = UBound(Vx)
+            n = Vx.Length - 1
 
             ReDim ai(n), bi(n), tmp(n + 1), a(n, n), b(n, n)
             ReDim Tc(n), Pc(n), W(n), alpha(n), m(n), Tr(n)
@@ -1882,7 +1882,7 @@ Final2:
             Dim n, R, P, T As Double
             Dim i As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Tc(n), Pc(n)
             Dim b As Double
@@ -1939,7 +1939,7 @@ Final2:
 
             Dim n As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Dn(n)
 

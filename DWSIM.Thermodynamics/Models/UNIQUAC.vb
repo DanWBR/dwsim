@@ -199,7 +199,7 @@ Namespace PropertyPackages.Auxiliary
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
             Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
-            Dim n As Integer = UBound(Vx)
+            Dim n As Integer = Vx.Length - 1
 
             Dim tau_ij(n)(), tau_ji(n)(), a12(n)(), a21(n)(), b12(n)(), b21(n)(), c12(n)(), c21(n)() As Double
             Dim teta(n), fi(n), l(n), S(n), lngc(n), lngr(n), lng(n), g(n), sum1(n), sum2 As Double

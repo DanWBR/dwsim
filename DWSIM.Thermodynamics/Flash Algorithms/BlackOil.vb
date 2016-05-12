@@ -45,7 +45,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim L, V As Double
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
 
             Dim Vx(n), Vy(n) As Double
       
@@ -91,7 +91,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
             d1 = Date.Now
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             PP = PP
             Hf = H
@@ -209,7 +209,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
             d1 = Date.Now
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             PP = PP
             Sf = S
@@ -319,7 +319,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
             Dim d1, d2 As Date, dt As TimeSpan
             Dim L, P As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Vf = V
 
@@ -409,7 +409,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
             Dim d1, d2 As Date, dt As TimeSpan
             Dim L, T As Double
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Vf = V
 
@@ -495,7 +495,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
         Function OBJ_FUNC_PH_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
             Dim L, V, Vx(), Vy(), _Hl, _Hv, T As Double
 
             If Type = "PT" Then
@@ -532,7 +532,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
 
         Function OBJ_FUNC_PS_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
             Dim L, V, Vx(), Vy(), _Sl, _Sv, T As Double
 
             If Type = "PT" Then
@@ -568,7 +568,7 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
         End Function
         Function OBJ_FUNC_PV_FLASH(ByVal Type As String, ByVal T As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
             Dim L, V, Vx(), Vy() As Double
 
             Dim tmp = Me.Flash_PT(Vz, P, T, PP)

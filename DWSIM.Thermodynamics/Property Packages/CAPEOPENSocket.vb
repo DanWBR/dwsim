@@ -501,7 +501,7 @@ Namespace PropertyPackages
                 i += 1
             Next
             i = 0
-            For i = 0 To UBound(Vx)
+            For i = 0 To Vx.Length - 1
                 Ki(i) = Vy(i) / Vx(i)
             Next
 
@@ -1095,14 +1095,14 @@ Namespace PropertyPackages
             Dim mw As Object = Nothing
             Me.GetCompoundList(complist, Nothing, Nothing, Nothing, mw, Nothing)
 
-            Dim Vwe(UBound(Vz)) As Double
+            Dim Vwe(Vz.Length - 1) As Double
             Dim mol_x_mm As Double = 0.0#
             Dim i As Integer = 0
-            For i = 0 To UBound(Vz)
+            For i = 0 To Vz.Length - 1
                 mol_x_mm += Vz(i) * mw(i)
             Next
 
-            For i = 0 To UBound(Vz)
+            For i = 0 To Vz.Length - 1
                 If mol_x_mm <> 0 Then
                     Vwe(i) = Vz(i) * mw(i) / mol_x_mm
                 Else
@@ -1120,14 +1120,14 @@ Namespace PropertyPackages
             Me.GetCompoundList(complist, Nothing, Nothing, Nothing, Nothing, Nothing)
             Dim mw = DirectCast(Me.CurrentMaterialStream, ICapeThermoCompounds).GetCompoundConstant(New String() {"molecularWeight"}, complist)
 
-            Dim Vw(UBound(Vz)) As Double
+            Dim Vw(Vz.Length - 1) As Double
             Dim mass_div_mm As Double
             Dim i As Integer = 0
-            For i = 0 To UBound(Vz)
+            For i = 0 To Vz.Length - 1
                 mass_div_mm += Vz(i) / mw(i)
             Next
 
-            For i = 0 To UBound(Vz)
+            For i = 0 To Vz.Length - 1
                 Vw(i) = Vz(i) / mw(i) / mass_div_mm
             Next
 

@@ -120,7 +120,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim n, R, coeff(3) As Double
 
-            n = UBound(Vx)
+            n = Vx.Length - 1
 
             Dim ai(n), bi(n), tmp(n + 1), a(n, n), b(n, n) As Double
             Dim aml2(n), amv2(n) As Double
@@ -307,7 +307,7 @@ Namespace PropertyPackages.Auxiliary
             Dim n As Integer, R, Z, dadT As Double
             Dim i As Integer
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim ai(n), bi(n), ci(n), a(n, n), b(n, n) As Double
             Dim Vc(n), Zc(n), alpha(n), m(n), Tr(n) As Double
@@ -390,7 +390,7 @@ Namespace PropertyPackages.Auxiliary
             Dim Tc(), Pc(), Vc(), w(), Zc(), alpha(), m(), a(,), b(,), Z, Tr() As Double
             Dim i, j, dadT
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             ReDim ai(n), bi(n), ci(n), a(n, n), b(n, n)
             ReDim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), m(n), Tr(n)
@@ -561,7 +561,7 @@ Namespace PropertyPackages.Auxiliary
             Dim AG, BG, aml, bml As Double
             Dim t1, t2, t3, t4, t5 As Double
 
-            n = UBound(Vx)
+            n = Vx.Length - 1
 
             Dim ai(n), bi(n), tmp(n + 1), a(n, n), b(n, n) As Double
             Dim aml2(n), amv2(n), LN_CF(n), PHI(n) As Double

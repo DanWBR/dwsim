@@ -124,7 +124,7 @@ Namespace PropertyPackages.Auxiliary
             Dim AG, BG, aml, bml As Double
             Dim t1, t2, t3, t4 As Double
 
-            n = UBound(Vx)
+            n = Vx.Length - 1
 
             Dim ai(n), bi(n), tmp(n + 1), a(n, n), b(n, n)
             Dim LN_CF(n), PHI(n) As Double

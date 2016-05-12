@@ -50,7 +50,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim i, j, k As Integer
 
             Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-            Dim nc As Integer = UBound(Vz)
+            Dim nc As Integer = Vz.Length - 1
 
             d1 = Date.Now
 
@@ -126,11 +126,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 k = j
                             End If
                         Next
-                        For i = 0 To UBound(Vz)
+                        For i = 0 To Vz.Length - 1
                             vx2est(i) = stresult(1)(k, i)
                         Next
                     Else
-                        For i = 0 To UBound(Vz)
+                        For i = 0 To Vz.Length - 1
                             vx2est(i) = stresult(1)(m, i)
                         Next
                     End If
@@ -147,7 +147,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     If gl < gv Then 'test phase is liquid-like.
 
-                        Dim vx1e(UBound(Vz)), vx2e(UBound(Vz)) As Double
+                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
 
                         Dim maxl As Double = MathEx.Common.Max(vx2est)
                         Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
@@ -216,7 +216,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If result(0) > 0 Then
 
                 Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                Dim nc As Integer = UBound(Vz)
+                Dim nc As Integer = Vz.Length - 1
 
                 If nt = -1 Then nt = nc
 
@@ -292,7 +292,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     If Abs((gl - gv) / gl) > 0.05 Then 'liquid-like
 
-                        Dim vx1e(UBound(Vz)), vx2e(UBound(Vz)) As Double
+                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
 
                         Dim maxl As Double = MathEx.Common.Max(vx2est)
                         Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
@@ -353,7 +353,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If result(0) > 0 Then
 
                 Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                Dim nc As Integer = UBound(Vz)
+                Dim nc As Integer = Vz.Length - 1
 
                 If nt = -1 Then nt = nc
 
@@ -429,7 +429,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     If Abs((gl - gv) / gl) > 0.05 Then 'liquid-like
 
-                        Dim vx1e(UBound(Vz)), vx2e(UBound(Vz)) As Double
+                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
 
                         Dim maxl As Double = MathEx.Common.Max(vx2est)
                         Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
@@ -492,7 +492,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If result(0) > 0 Then
 
                 Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                Dim nc As Integer = UBound(Vz)
+                Dim nc As Integer = Vz.Length - 1
 
                 If nt = -1 Then nt = nc
 
@@ -611,7 +611,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If result(0) > 0 Then
 
                 Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                Dim nc As Integer = UBound(Vz)
+                Dim nc As Integer = Vz.Length - 1
 
                 If nt = -1 Then nt = nc
 
@@ -1031,7 +1031,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Hf = H * PP.AUX_MMM(Vz)
@@ -1299,7 +1299,7 @@ restart:    Do
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Sf = S * PP.AUX_MMM(Vz)
@@ -1568,7 +1568,7 @@ restart:    Do
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
 
@@ -1871,7 +1871,7 @@ out:
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Vf = V
@@ -2092,7 +2092,7 @@ out:
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             proppack = PP
             Vf = V

@@ -531,7 +531,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             PP = PP
             Hf = H
@@ -645,7 +645,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             PP = PP
             Sf = S
@@ -753,7 +753,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Function OBJ_FUNC_PH_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 
-            Dim n As Integer = UBound(Vz)
+            Dim n As Integer = Vz.Length - 1
             Dim L, V, Vx(), Vy(), _Hl, _Hv, T As Double
 
             If Type = "PT" Then
@@ -792,7 +792,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Function OBJ_FUNC_PS_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 
-            Dim n = UBound(Vz)
+            Dim n = Vz.Length - 1
             Dim L, V, Vx(), Vy(), _Sl, _Sv, T As Double
 
             If Type = "PT" Then
@@ -850,7 +850,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Vx(n), Vy(n), Vp(n), L, Vcalc, Vspec, P, x, x0, x00, fx, fx0, fx00, Pmin, Pmax As Double
             Dim result As Object
@@ -945,7 +945,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = UBound(Vz)
+            n = Vz.Length - 1
 
             Dim Vx(n), Vnl(n), Vy(n), Vp(n), Ki(n), Hi(n), L, Vcalc, Vspec, T, T0, x, x0, x00, fx, fx0, fx00, Tmin, Tmax, totalkg, Pcalc, Pspec As Double
 
