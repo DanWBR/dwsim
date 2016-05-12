@@ -155,6 +155,7 @@ Namespace PropertyPackages
         Public IsElectrolytePP As Boolean = False
 
         Private LoopVarF, LoopVarX As Double, LoopVarState As State
+        <System.NonSerialized()> Dim m_Flowsheet As IFlowsheet
 
         Public Property ForceNewFlashAlgorithmInstance As Boolean = False
 
@@ -405,7 +406,9 @@ Namespace PropertyPackages
             ObjectCopy = objBinaryFormatter.Deserialize(objMemStream)
 
             objMemStream.Close()
+
         End Function
+
 #End Region
 
 #Region "   Must Override or Overridable Functions"
@@ -9766,6 +9769,14 @@ Final3:
         End Sub
 
         <Xml.Serialization.XmlIgnore> Property Flowsheet As IFlowsheet Implements IPropertyPackage.Flowsheet
+            Get
+                Return m_Flowsheet
+            End Get
+            Set(value As IFlowsheet)
+                m_Flowsheet = value
+            End Set
+        End Property
+
 
     End Class
 

@@ -312,12 +312,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             exlist = ProcessQueueInternalAsync(fobj, ct)
             If Not Adjusting Then SolveSimultaneousAdjustsAsync(fobj, ct)
         ElseIf mode = 2 Then
-            'bg parallel thread
-            'Dim prevset As Boolean = My.Settings.EnableParallelProcessing
-            'My.Settings.EnableParallelProcessing = False
+            'bg parallel threads
             exlist = ProcessQueueInternalAsyncParallel(fobj, orderedlist, ct)
             If Not Adjusting Then SolveSimultaneousAdjustsAsync(fobj, ct)
-            'My.Settings.EnableParallelProcessing = prevset
         End If
 
         Return exlist
@@ -476,13 +473,14 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         Dim loopex As New Concurrent.ConcurrentBag(Of Exception)
 
         For Each obj In fbag.SimulationObjects.Values
-            If TypeOf obj Is ISimulationObject Then
-                DirectCast(obj, ISimulationObject).PropertyPackage = Nothing
-                DirectCast(obj, ISimulationObject).PropertyPackage = DirectCast(obj, ISimulationObject).PropertyPackage.Clone
-            ElseIf TypeOf obj Is IMaterialStream Then
-                DirectCast(obj, ISimulationObject).PropertyPackage = Nothing
-                DirectCast(obj, ISimulationObject).PropertyPackage = DirectCast(obj, ISimulationObject).PropertyPackage.Clone
-                DirectCast(obj, ISimulationObject).PropertyPackage.CurrentMaterialStream = obj
+            If TypeOf obj Is IMaterialStream Then
+                DirectCast(obj, IMaterialStream).SetPropertyPackageObject(DirectCast(obj, IMaterialStream).GetPropertyPackageObjectCopy)
+                DirectCast(obj, IMaterialStream).SetCurrentMaterialStream(obj)
+            ElseIf TypeOf obj Is ISimulationObject Then
+                If Not obj.PropertyPackage Is Nothing Then
+                    obj.PropertyPackage = Nothing
+                    obj.PropertyPackage = DirectCast(obj, ISimulationObject).PropertyPackage.Clone
+                End If
             End If
         Next
 

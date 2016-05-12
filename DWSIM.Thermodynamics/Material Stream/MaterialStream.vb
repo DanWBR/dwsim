@@ -160,6 +160,22 @@ Namespace Streams
 
         Public Property AtEquilibrium() As Boolean = False Implements IMaterialStream.AtEquilibrium
 
+        Public Function GetPropertyPackageObject() As Object Implements IMaterialStream.GetPropertyPackageObject
+            Return PropertyPackage
+        End Function
+
+        Public Function GetPropertyPackageObjectCopy() As Object Implements IMaterialStream.GetPropertyPackageObjectCopy
+            Return PropertyPackage.Clone
+        End Function
+
+        Sub SetPropertyPackage(pp As Object) Implements IMaterialStream.SetPropertyPackageObject
+            PropertyPackage = pp
+        End Sub
+
+        Sub SetCurrentMaterialStream(ms As Object) Implements IMaterialStream.SetCurrentMaterialStream
+            PropertyPackage.CurrentMaterialStream = ms
+        End Sub
+
         ''' <summary>
         ''' Gets or sets the associated Property Package for this stream.
         ''' </summary>
@@ -5118,7 +5134,7 @@ Namespace Streams
         End Sub
 
         Public Sub CalcPhaseMassComposition(dwp As PropertyPackages.Phase)
-    
+
             Dim idx As Integer = 0
 
             Select Case dwp

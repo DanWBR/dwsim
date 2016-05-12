@@ -26,4 +26,12 @@
 
     Sub ClearAllProps()
 
+    Function GetPropertyPackageObject() As Object
+
+    Function GetPropertyPackageObjectCopy() As Object
+
+    Sub SetPropertyPackageObject(pp As Object)
+
+    Sub SetCurrentMaterialStream(ms As Object)
+
 End Interface
