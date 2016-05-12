@@ -611,7 +611,7 @@ Public Class FormSensAnalysis
                         End If
                     End If
                     'run simulation
-                    FlowsheetSolver.FlowsheetSolver.CalculateAll(form)
+                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, Settings.SolverMode)
                     'get the value of the dependent variable
                     If rbExp.Checked Then
                         Me.selectedsacase.econtext = New ExpressionContext
@@ -687,7 +687,7 @@ Public Class FormSensAnalysis
                     form.FormSpreadsheet.SetCellValue(iv2prop, iv2val0)
                 End If
             End If
-            FlowsheetSolver.FlowsheetSolver.CalculateAll(form)
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, Settings.SolverMode)
             Me.tbStats.Text += "Done!" & vbCrLf
             Me.tbStats.SelectionStart = Me.tbStats.Text.Length - 1
             Me.tbStats.SelectionLength = 1

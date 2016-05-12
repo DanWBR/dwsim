@@ -1460,7 +1460,7 @@ Public Class FormOptimization
         For Each var In Me.selectedoptcase.variables.Values
             form.Collections.FlowsheetObjectCollection(var.objectID).SetPropertyValue(var.propID, var.initialvalue)
         Next
-        FlowsheetSolver.FlowsheetSolver.CalculateAll(form)
+        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, Settings.SolverMode)
 
     End Sub
 

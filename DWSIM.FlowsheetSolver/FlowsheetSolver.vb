@@ -376,11 +376,11 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         myobj.ErrorMessage += iex.Message.ToString & vbCrLf
                         loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
                     Next
-                    'If My.Settings.SolverBreakOnException Then Exit While
+                    If GlobalSettings.Settings.SolverBreakOnException Then Exit While
                 Catch ex As Exception
                     myobj.ErrorMessage = ex.Message.ToString & vbCrLf
                     loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
-                    'If My.Settings.SolverBreakOnException Then Exit While
+                    If GlobalSettings.Settings.SolverBreakOnException Then Exit While
                 End Try
 
             End If
@@ -440,12 +440,12 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     myobj.ErrorMessage += iex.Message.ToString & vbCrLf
                     loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
                 Next
-                'If My.Settings.SolverBreakOnException Then Exit While
+                If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Catch ex As Exception
                 'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ex.Message.ToString
                 loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
-                'If My.Settings.SolverBreakOnException Then Exit While
+                If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Finally
                 'fobj.UIThread(Sub() UpdateDisplayStatus(fobj, New String() {myinfo.Name}))
             End Try
@@ -514,12 +514,12 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                                              myobj.ErrorMessage += iex.Message.ToString & vbCrLf
                                                              loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
                                                          Next
-                                                         'If My.Settings.SolverBreakOnException Then state.Break()
+                                                         If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                                      Catch ex As Exception
                                                          'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
                                                          myobj.ErrorMessage = ex.Message.ToString
                                                          loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
-                                                         'If My.Settings.SolverBreakOnException Then state.Break()
+                                                         If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                                      Finally
                                                          'fobj.UIThread(Sub() UpdateDisplayStatus(fobj, New String() {myinfo.Name}))
                                                      End Try
@@ -983,7 +983,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                                                      'throws exceptions if any
 
-                                                     'If My.Settings.SolverBreakOnException And exlist.Count > 0 Then Throw New AggregateException(exlist)
+                                                     If GlobalSettings.Settings.SolverBreakOnException And exlist.Count > 0 Then Throw New AggregateException(exlist)
 
                                                      'checks for recycle convergence.
 
@@ -1195,34 +1195,6 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 fgui.ShowMessage(fgui.GetTranslatedString("FSfinishedsolvingok"), IFlowsheet.MessageType.Information)
                 fgui.ShowMessage(fgui.GetTranslatedString("Runtime") & ": " & (Date.Now - d1).ToString("g"), IFlowsheet.MessageType.Information)
 
-                'If Settings.StorePreviousSolutions Then
-
-                '    'adds the current solution to the valid solution list.
-                '    'the XML data is converted to a compressed byte array before being added to the collection.
-
-                '    Dim stask As Task = Task.Factory.StartNew(Sub()
-                '                                                  Try
-                '                                                      Dim retbytes As MemoryStream = DWSIM.SimulationObjects.UnitOperations.Flowsheet.ReturnProcessData(fobj)
-                '                                                      Using retbytes
-                '                                                          Dim uncompressedbytes As Byte() = retbytes.ToArray
-                '                                                          Using compressedstream As New MemoryStream()
-                '                                                              Using gzs As New BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Compress, True), 64 * 1024)
-                '                                                                  gzs.Write(uncompressedbytes, 0, uncompressedbytes.Length)
-                '                                                                  gzs.Close()
-                '                                                                  Dim id As String = Date.Now.ToBinary.ToString
-                '                                                                  If fobj.PreviousSolutions Is Nothing Then fobj.PreviousSolutions = New Dictionary(Of String, Flowsheet.FlowsheetSolution)
-                '                                                                  fobj.PreviousSolutions.Add(id, New DWSIM.Flowsheet.FlowsheetSolution() With {.ID = id, .SaveDate = Date.Now, .Solution = compressedstream.ToArray})
-                '                                                              End Using
-                '                                                          End Using
-                '                                                      End Using
-                '                                                  Catch ex As Exception
-                '                                                  End Try
-                '                                              End Sub).ContinueWith(Sub(t)
-                '                                                                        fobj.UpdateSolutionsList()
-                '                                                                    End Sub, TaskContinuationOptions.ExecuteSynchronously)
-
-                'End If
-
             Else
 
                 Dim baseexception As Exception = Nothing
@@ -1296,17 +1268,6 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), Nothing)
 
         End If
-
-    End Sub
-
-    ''' <summary>
-    ''' Calculate all objects in the Flowsheet.
-    ''' </summary>
-    ''' <param name="fobj">Flowsheet to be calculated (FormChild object)</param>
-    ''' <remarks></remarks>
-    Public Shared Sub CalculateAll(ByVal fobj As Object)
-
-        SolveFlowsheet(fobj, Settings.SolverMode)
 
     End Sub
 

@@ -31,6 +31,7 @@ Public Class Settings
     Public Shared Property CurrentCulture As String = "en"
 
     Public Shared DefaultEditFormLocation As Integer = 8
+    Public Shared SolverBreakOnException As Boolean = False
 
 End Class
 

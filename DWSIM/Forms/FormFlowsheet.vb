@@ -1027,11 +1027,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton13.Click
-        If My.Computer.Keyboard.ShiftKeyDown Then
-            FlowsheetSolver.FlowsheetSolver.CalculateAll(Me)
-        Else
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
-        End If
+        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
     End Sub
 
     Private Sub ToolStripButton15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton15.Click
@@ -2795,7 +2791,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         If Not sender Is Nothing Then
             FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
         Else
-            FlowsheetSolver.FlowsheetSolver.CalculateAll(Me)
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode)
         End If
 
     End Sub

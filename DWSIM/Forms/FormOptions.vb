@@ -619,6 +619,7 @@ Public Class FormOptions
 
     Private Sub chkSolverBreak_CheckedChanged(sender As Object, e As EventArgs) Handles chkSolverBreak.CheckedChanged
         My.Settings.SolverBreakOnException = chkSolverBreak.Checked
+        Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
     End Sub
 
     Private Sub chkStorePreviousSolutions_CheckedChanged(sender As Object, e As EventArgs) Handles chkStorePreviousSolutions.CheckedChanged
