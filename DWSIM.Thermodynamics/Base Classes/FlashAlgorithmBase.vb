@@ -39,12 +39,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
 
-            FlashSettings.Add(ThreePhaseFlashStabTestSeverity, "0")
-            FlashSettings.Add(ThreePhaseFlashStabTestCompIds, "")
-            FlashSettings.Add(CalculateBubbleAndDewPoints, "False")
-            FlashSettings.Add(ValidateEquilibriumCalc, "False")
-            FlashSettings.Add(UsePhaseIdentificationAlgorithm, "False")
-            FlashSettings.Add(ValidationGibbsTolerance, "1")
+            FlashSettings = GetDefaultSettings()
 
         End Sub
 
