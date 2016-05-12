@@ -788,7 +788,7 @@ Public Class MaterialStreamEditor
 
     Private Sub cbFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlashAlg.SelectedIndexChanged
         If Loaded Then
-            MatStream.PreferredFlashAlgorithm = cbFlashAlg.SelectedIndex
+            MatStream.PreferredFlashAlgorithm = [Enum].Parse(MatStream.PreferredFlashAlgorithm.GetType, cbFlashAlg.SelectedItem)
             RequestCalc()
         End If
     End Sub
@@ -1013,6 +1013,23 @@ Public Class MaterialStreamEditor
             UtilitiesCtxMenu.Items.Add(ts)
             AddHandler UtilitiesCtxMenu.Closed, Sub() If UtilitiesCtxMenu.Items.Contains(ts) Then UtilitiesCtxMenu.Items.Remove(ts)
         Next
+
+    End Sub
+
+    Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
+        MatStream.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayEditingForm()
+    End Sub
+
+    Private Sub btnConfigureFlashAlg_Click(sender As Object, e As EventArgs) Handles btnConfigureFlashAlg.Click
+
+        Dim fa As Interfaces.Enums.FlashMethod = [Enum].Parse(MatStream.PreferredFlashAlgorithm.GetType, cbFlashAlg.SelectedItem)
+
+        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = MatStream.FlowSheet.FlowsheetOptions.FlashSettings(fa),
+                                                                .AvailableCompounds = MatStream.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
+                                                                 .FlashAlgo = fa}
+        f.ShowDialog(Me)
+
+        MatStream.FlowSheet.FlowsheetOptions.FlashSettings(fa) = f.Settings
 
     End Sub
 

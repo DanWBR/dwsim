@@ -24,11 +24,11 @@ Partial Class FormSimulSettings
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSimulSettings))
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -204,17 +204,17 @@ Partial Class FormSimulSettings
         '
         'ComboBox3
         '
-        resources.ApplyResources(Me.ComboBox3, "ComboBox3")
         Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox3.DropDownWidth = 226
         Me.ComboBox3.Items.AddRange(New Object() {resources.GetString("ComboBox3.Items"), resources.GetString("ComboBox3.Items1"), resources.GetString("ComboBox3.Items2"), resources.GetString("ComboBox3.Items3"), resources.GetString("ComboBox3.Items4"), resources.GetString("ComboBox3.Items5"), resources.GetString("ComboBox3.Items6"), resources.GetString("ComboBox3.Items7"), resources.GetString("ComboBox3.Items8"), resources.GetString("ComboBox3.Items9"), resources.GetString("ComboBox3.Items10"), resources.GetString("ComboBox3.Items11"), resources.GetString("ComboBox3.Items12")})
+        resources.ApplyResources(Me.ComboBox3, "ComboBox3")
         Me.ComboBox3.Name = "ComboBox3"
         '
         'ComboBox1
         '
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.DropDownWidth = 226
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3"), resources.GetString("ComboBox1.Items4"), resources.GetString("ComboBox1.Items5"), resources.GetString("ComboBox1.Items6"), resources.GetString("ComboBox1.Items7"), resources.GetString("ComboBox1.Items8"), resources.GetString("ComboBox1.Items9"), resources.GetString("ComboBox1.Items10"), resources.GetString("ComboBox1.Items11"), resources.GetString("ComboBox1.Items12")})
         Me.ComboBox1.Name = "ComboBox1"
         '
@@ -295,9 +295,9 @@ Partial Class FormSimulSettings
         '
         'DataGridView1
         '
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -309,8 +309,8 @@ Partial Class FormSimulSettings
         '
         'Column1
         '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -323,8 +323,8 @@ Partial Class FormSimulSettings
         '
         'Column3
         '
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle7
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -337,9 +337,9 @@ Partial Class FormSimulSettings
         '
         'ComboBox2
         '
-        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.DropDownWidth = 205
+        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.Name = "ComboBox2"
         '
         'Label7
@@ -417,8 +417,8 @@ Partial Class FormSimulSettings
         '
         'ListViewA
         '
-        resources.ApplyResources(Me.ListViewA, "ListViewA")
         Me.ListViewA.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
+        resources.ApplyResources(Me.ListViewA, "ListViewA")
         Me.ListViewA.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.ListViewA.HideSelection = False
         Me.ListViewA.Name = "ListViewA"
@@ -463,12 +463,12 @@ Partial Class FormSimulSettings
         '
         'ogc1
         '
-        resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
+        resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5, Me.Column10})
@@ -552,9 +552,9 @@ Partial Class FormSimulSettings
         '
         'TextBox2
         '
-        resources.ApplyResources(Me.TextBox2, "TextBox2")
         Me.TextBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.TextBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        resources.ApplyResources(Me.TextBox2, "TextBox2")
         Me.TextBox2.Name = "TextBox2"
         '
         'Label9
@@ -564,26 +564,26 @@ Partial Class FormSimulSettings
         '
         'GroupBox7
         '
-        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
         Me.GroupBox7.Controls.Add(Me.ListBox3)
+        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.TabStop = False
         '
         'ListBox3
         '
-        resources.ApplyResources(Me.ListBox3, "ListBox3")
         Me.ListBox3.BackColor = System.Drawing.SystemColors.Control
+        resources.ApplyResources(Me.ListBox3, "ListBox3")
         Me.ListBox3.FormattingEnabled = True
         Me.ListBox3.Name = "ListBox3"
         '
         'GroupBox8
         '
-        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
         Me.GroupBox8.Controls.Add(Me.KryptonButton2)
         Me.GroupBox8.Controls.Add(Me.KryptonButton3)
         Me.GroupBox8.Controls.Add(Me.KryptonButton4)
         Me.GroupBox8.Controls.Add(Me.KryptonButton5)
         Me.GroupBox8.Controls.Add(Me.KryptonButton6)
+        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.TabStop = False
         '
@@ -614,15 +614,15 @@ Partial Class FormSimulSettings
         '
         'GroupBox9
         '
-        resources.ApplyResources(Me.GroupBox9, "GroupBox9")
         Me.GroupBox9.Controls.Add(Me.ListBox4)
+        resources.ApplyResources(Me.GroupBox9, "GroupBox9")
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.TabStop = False
         '
         'ListBox4
         '
-        resources.ApplyResources(Me.ListBox4, "ListBox4")
         Me.ListBox4.BackColor = System.Drawing.SystemColors.Control
+        resources.ApplyResources(Me.ListBox4, "ListBox4")
         Me.ListBox4.FormattingEnabled = True
         Me.ListBox4.Name = "ListBox4"
         Me.ListBox4.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
@@ -645,12 +645,12 @@ Partial Class FormSimulSettings
         '
         'PanelPP
         '
-        resources.ApplyResources(Me.PanelPP, "PanelPP")
         Me.PanelPP.Controls.Add(Me.GroupBox15)
         Me.PanelPP.Controls.Add(Me.GroupBox13)
         Me.PanelPP.Controls.Add(Me.LinkLabelPropertyMethods)
         Me.PanelPP.Controls.Add(Me.GroupBox12)
         Me.PanelPP.Controls.Add(Me.GroupBox6)
+        resources.ApplyResources(Me.PanelPP, "PanelPP")
         Me.PanelPP.Name = "PanelPP"
         '
         'GroupBox15
@@ -728,9 +728,9 @@ Partial Class FormSimulSettings
         '
         'dgvpp
         '
-        resources.ApplyResources(Me.dgvpp, "dgvpp")
         Me.dgvpp.AllowUserToAddRows = False
         Me.dgvpp.AllowUserToDeleteRows = False
+        resources.ApplyResources(Me.dgvpp, "dgvpp")
         Me.dgvpp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvpp.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvpp.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
@@ -770,9 +770,9 @@ Partial Class FormSimulSettings
         '
         'DataGridViewPP
         '
-        resources.ApplyResources(Me.DataGridViewPP, "DataGridViewPP")
         Me.DataGridViewPP.AllowUserToAddRows = False
         Me.DataGridViewPP.AllowUserToDeleteRows = False
+        resources.ApplyResources(Me.DataGridViewPP, "DataGridViewPP")
         Me.DataGridViewPP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DataGridViewPP.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DataGridViewPP.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
@@ -797,8 +797,8 @@ Partial Class FormSimulSettings
         'DataGridViewTextBoxColumn2
         '
         Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -807,8 +807,8 @@ Partial Class FormSimulSettings
         'DataGridViewTextBoxColumn3
         '
         Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle10
         resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.ReadOnly = True
@@ -820,8 +820,8 @@ Partial Class FormSimulSettings
         '
         'PanelUnits
         '
-        resources.ApplyResources(Me.PanelUnits, "PanelUnits")
         Me.PanelUnits.Controls.Add(Me.GroupBox5)
+        resources.ApplyResources(Me.PanelUnits, "PanelUnits")
         Me.PanelUnits.Name = "PanelUnits"
         '
         'OpenFileDialog1
@@ -863,9 +863,9 @@ Partial Class FormSimulSettings
         '
         'TabPage1
         '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.GroupBox10)
         Me.TabPage1.Controls.Add(Me.GroupBox2)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
@@ -880,23 +880,23 @@ Partial Class FormSimulSettings
         '
         'TabPage2
         '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Controls.Add(Me.PanelPP)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'TabPage4
         '
-        resources.ApplyResources(Me.TabPage4, "TabPage4")
         Me.TabPage4.Controls.Add(Me.PanelUnits)
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
         'TabPage5
         '
-        resources.ApplyResources(Me.TabPage5, "TabPage5")
         Me.TabPage5.Controls.Add(Me.GroupBox3)
         Me.TabPage5.Controls.Add(Me.GroupBox1)
+        resources.ApplyResources(Me.TabPage5, "TabPage5")
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
@@ -916,8 +916,8 @@ Partial Class FormSimulSettings
         '
         'TabPage6
         '
-        resources.ApplyResources(Me.TabPage6, "TabPage6")
         Me.TabPage6.Controls.Add(Me.GroupBox14)
+        resources.ApplyResources(Me.TabPage6, "TabPage6")
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.UseVisualStyleBackColor = True
         '
@@ -947,9 +947,9 @@ Partial Class FormSimulSettings
         '
         'cbObjectType
         '
-        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbObjectType.DropDownWidth = 205
+        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.Name = "cbObjectType"
         '
         'Label14
@@ -968,72 +968,72 @@ Partial Class FormSimulSettings
         '
         'ToolStripLabel1
         '
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         Me.ToolStripLabel1.ForeColor = System.Drawing.Color.White
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         '
         'tsbDockingLeft
         '
-        resources.ApplyResources(Me.tsbDockingLeft, "tsbDockingLeft")
         Me.tsbDockingLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingLeft.Image = Global.DWSIM.My.Resources.Resources.arrow_left1
+        resources.ApplyResources(Me.tsbDockingLeft, "tsbDockingLeft")
         Me.tsbDockingLeft.Name = "tsbDockingLeft"
         '
         'tsbDockingLeftAutoHide
         '
-        resources.ApplyResources(Me.tsbDockingLeftAutoHide, "tsbDockingLeftAutoHide")
         Me.tsbDockingLeftAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingLeftAutoHide.Image = Global.DWSIM.My.Resources.Resources.rewind
+        resources.ApplyResources(Me.tsbDockingLeftAutoHide, "tsbDockingLeftAutoHide")
         Me.tsbDockingLeftAutoHide.Name = "tsbDockingLeftAutoHide"
         '
         'tsbDockingRightAutoHide
         '
-        resources.ApplyResources(Me.tsbDockingRightAutoHide, "tsbDockingRightAutoHide")
         Me.tsbDockingRightAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingRightAutoHide.Image = Global.DWSIM.My.Resources.Resources.fast_forward
+        resources.ApplyResources(Me.tsbDockingRightAutoHide, "tsbDockingRightAutoHide")
         Me.tsbDockingRightAutoHide.Name = "tsbDockingRightAutoHide"
         '
         'tsbDockingRight
         '
-        resources.ApplyResources(Me.tsbDockingRight, "tsbDockingRight")
         Me.tsbDockingRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingRight.Image = Global.DWSIM.My.Resources.Resources.arrow_right
+        resources.ApplyResources(Me.tsbDockingRight, "tsbDockingRight")
         Me.tsbDockingRight.Name = "tsbDockingRight"
         '
         'tsbDockingTop
         '
-        resources.ApplyResources(Me.tsbDockingTop, "tsbDockingTop")
         Me.tsbDockingTop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingTop.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
+        resources.ApplyResources(Me.tsbDockingTop, "tsbDockingTop")
         Me.tsbDockingTop.Name = "tsbDockingTop"
         '
         'tsbDockingBottom
         '
-        resources.ApplyResources(Me.tsbDockingBottom, "tsbDockingBottom")
         Me.tsbDockingBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingBottom.Image = Global.DWSIM.My.Resources.Resources.arrow_down1
+        resources.ApplyResources(Me.tsbDockingBottom, "tsbDockingBottom")
         Me.tsbDockingBottom.Name = "tsbDockingBottom"
         '
         'tsbDockingDocument
         '
-        resources.ApplyResources(Me.tsbDockingDocument, "tsbDockingDocument")
         Me.tsbDockingDocument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingDocument.Image = Global.DWSIM.My.Resources.Resources.arrows_4_way
+        resources.ApplyResources(Me.tsbDockingDocument, "tsbDockingDocument")
         Me.tsbDockingDocument.Name = "tsbDockingDocument"
         '
         'tsbDockingFloat
         '
-        resources.ApplyResources(Me.tsbDockingFloat, "tsbDockingFloat")
         Me.tsbDockingFloat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDockingFloat.Image = Global.DWSIM.My.Resources.Resources._new
+        resources.ApplyResources(Me.tsbDockingFloat, "tsbDockingFloat")
         Me.tsbDockingFloat.Name = "tsbDockingFloat"
         '
         'tsbClose
         '
-        resources.ApplyResources(Me.tsbClose, "tsbClose")
         Me.tsbClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.tsbClose.ForeColor = System.Drawing.Color.White
         Me.tsbClose.Image = Global.DWSIM.My.Resources.Resources.no
+        resources.ApplyResources(Me.tsbClose, "tsbClose")
         Me.tsbClose.Name = "tsbClose"
         '
         'FormSimulSettings

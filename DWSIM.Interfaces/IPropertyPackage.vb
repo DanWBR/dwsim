@@ -30,4 +30,6 @@
 
     Property Flowsheet As IFlowsheet
 
+    Sub DisplayEditingForm()
+
 End Interface

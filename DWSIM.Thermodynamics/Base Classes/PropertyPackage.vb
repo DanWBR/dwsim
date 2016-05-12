@@ -9761,7 +9761,7 @@ Final3:
 
         Public Property PreferredFlashAlgorithm As Enums.FlashMethod = Enums.FlashMethod.Default_Algorithm Implements IPropertyPackage.PreferredFlashAlgorithm
 
-        Public Overridable Sub DisplayEditingForm()
+        Public Overridable Sub DisplayEditingForm() Implements IPropertyPackage.DisplayEditingForm
 
         End Sub
 
