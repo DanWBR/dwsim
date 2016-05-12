@@ -22,7 +22,7 @@
     <DocumentationFile>DWSIM.Thermodynamics.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -63,6 +63,9 @@
     </Reference>
     <Reference Include="DotNumerics">
       <HintPath>..\DWSIM\References\DotNumerics.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDna.Integration">
+      <HintPath>..\DWSIM\References\ExcelDna.Integration.dll</HintPath>
     </Reference>
     <Reference Include="FileHelpers">
       <HintPath>..\DWSIM\References\FileHelpers.dll</HintPath>
@@ -173,7 +176,8 @@
     <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interface\Thermodynamics.vb" />
+    <Compile Include="Interfaces\Excel.vb" />
+    <Compile Include="Interfaces\Thermodynamics.vb" />
     <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />

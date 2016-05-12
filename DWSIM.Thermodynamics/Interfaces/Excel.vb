@@ -38,7 +38,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim pp As New RaoultPropertyPackage(True)
 
@@ -85,7 +85,7 @@ Namespace ExcelAddIn
             <ExcelArgument("Pressure in Pa, if needed. Set as zero for a constant or T-dep property.")> ByVal pressure As Double) As Object
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
             Try
 
@@ -134,7 +134,7 @@ Namespace ExcelAddIn
         Public Shared Function GetCompoundPropList() As Object(,)
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
             Dim pp As New RaoultPropertyPackage(True)
 
@@ -212,7 +212,7 @@ Namespace ExcelAddIn
             <ExcelArgument("The name of the second compound.")> ByVal Compound2 As String) As Object(,)
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
             Dim ipdata(1, 8) As Object
 
@@ -434,7 +434,7 @@ Namespace ExcelAddIn
             <ExcelArgument("The name of the second compound.")> ByVal Compound2 As String) As Object(,)
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
             Dim iplist As New List(Of BaseClasses.InteractionParameter) '= UserIPDB.GetStoredIPsets(Compound1, Compound2, Model)
 
@@ -544,7 +544,7 @@ Namespace ExcelAddIn
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
             Dim ppm As New CAPEOPENManager()
 
@@ -601,7 +601,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -639,7 +639,7 @@ Namespace ExcelAddIn
                 ms._pp = pp
                 pp.SetMaterial(ms)
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
@@ -648,7 +648,7 @@ Namespace ExcelAddIn
                     pp.CalcSinglePhaseProp(New Object() {prop}, phaselabel)
                 End If
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -716,7 +716,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -761,14 +761,14 @@ Namespace ExcelAddIn
                 Next
                 pp._tpcompids = comps
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TP", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -924,7 +924,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -971,14 +971,14 @@ Namespace ExcelAddIn
 
                 ms.Phases(0).Properties.temperature = InitialEstimate
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PH", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -1048,7 +1048,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -1095,14 +1095,14 @@ Namespace ExcelAddIn
 
                 ms.Phases(0).Properties.temperature = InitialEstimate
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PS", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -1172,7 +1172,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -1219,14 +1219,14 @@ Namespace ExcelAddIn
 
                 ms.Phases(0).Properties.temperature = InitialEstimate
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PVF", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -1296,7 +1296,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -1343,14 +1343,14 @@ Namespace ExcelAddIn
 
                 ms.Phases(0).Properties.pressure = InitialEstimate
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TVF", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -1750,7 +1750,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -1795,14 +1795,14 @@ Namespace ExcelAddIn
                 Next
                 pp._tpcompids = comps
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TP", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -1863,7 +1863,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -1908,14 +1908,14 @@ Namespace ExcelAddIn
                 Next
                 pp._tpcompids = comps
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PH", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -1978,7 +1978,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -2023,14 +2023,14 @@ Namespace ExcelAddIn
                 Next
                 pp._tpcompids = comps
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PS", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -2093,7 +2093,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -2138,14 +2138,14 @@ Namespace ExcelAddIn
                 Next
                 pp._tpcompids = comps
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "PVF", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If
@@ -2208,7 +2208,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then DWSIM.App.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -2253,14 +2253,14 @@ Namespace ExcelAddIn
                 Next
                 pp._tpcompids = comps
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
 
                 pp.CalcEquilibrium(ms, "TVF", "UNDEFINED")
 
-                If My.Settings.EnableGPUProcessing Then
+                If GlobalSettings.Settings.EnableGPUProcessing Then
                     Settings.gpu.DisableMultithreading()
                     Settings.gpu.FreeAll()
                 End If

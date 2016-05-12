@@ -1,4 +1,6 @@
-﻿'Natural Gas Properties Plugin for DWSIM
+﻿Imports DWSIM.Interfaces
+
+'Natural Gas Properties Plugin for DWSIM
 'Copyright 2010 Daniel Medeiros
 
 <System.Serializable()> Public Class Plugin
@@ -20,7 +22,7 @@
         End Get
     End Property
 
-    Public ReadOnly Property CurrentFlowsheet() As DWSIM.FormFlowsheet Implements DWSIM.Interfaces.IUtilityPlugin.CurrentFlowsheet
+    Public ReadOnly Property CurrentFlowsheet() As IFlowsheet Implements DWSIM.Interfaces.IUtilityPlugin.CurrentFlowsheet
         Get
             Return fsheet
         End Get
@@ -44,7 +46,7 @@
         End Get
     End Property
 
-    Public Function SetFlowsheet(ByRef form As DWSIM.FormFlowsheet) As Boolean Implements DWSIM.Interfaces.IUtilityPlugin.SetFlowsheet
+    Public Function SetFlowsheet(form As IFlowsheet) As Boolean Implements DWSIM.Interfaces.IUtilityPlugin.SetFlowsheet
         fsheet = form
         Return True
     End Function
@@ -56,7 +58,7 @@
     End Property
 
     'this is called by DWSIM to open the form, so we need to pass the reference to the flowsheet to the form BEFORE returning it.
-    Public ReadOnly Property UtilityForm() As System.Windows.Forms.Form Implements DWSIM.Interfaces.IUtilityPlugin.UtilityForm
+    Public ReadOnly Property UtilityForm() As Object Implements DWSIM.Interfaces.IUtilityPlugin.UtilityForm
         Get
             Dim f As New Form1
             f.fsheet = Me.fsheet

@@ -20,38 +20,34 @@
 '27/09/2010 - added new property - Display Mode 
 '20/08/2010 - initial release
 
-Namespace Interfaces
+Public Interface IUtilityPlugin
 
-    Public Interface IUtilityPlugin
+    ReadOnly Property Name() As String
+    ReadOnly Property Description() As String
+    ReadOnly Property Author() As String
+    ReadOnly Property ContactInfo() As String
+    ReadOnly Property WebSite() As String
+    ReadOnly Property UniqueID() As String
 
-        ReadOnly Property Name() As String
-        ReadOnly Property Description() As String
-        ReadOnly Property Author() As String
-        ReadOnly Property ContactInfo() As String
-        ReadOnly Property WebSite() As String
-        ReadOnly Property UniqueID() As String
+    ReadOnly Property UtilityForm() As Object
+    ReadOnly Property CurrentFlowsheet() As IFlowsheet
 
-        ReadOnly Property UtilityForm() As Form
-        ReadOnly Property CurrentFlowsheet() As FormFlowsheet
+    Function SetFlowsheet(form As IFlowsheet) As Boolean
 
-        Function SetFlowsheet(ByRef form As FormFlowsheet) As Boolean
+    ReadOnly Property DisplayMode() As DispMode
 
-        ReadOnly Property DisplayMode() As DispMode
+    Enum DispMode
+        Modal = 0
+        Normal = 1
+        Dockable = 2
+    End Enum
 
-        Enum DispMode
-            Modal = 0
-            Normal = 1
-            Dockable = 2
-        End Enum
+End Interface
 
-    End Interface
+Public Interface IUtilityPlugin2
 
-    Public Interface IUtilityPlugin2
+    Inherits IUtilityPlugin
 
-        Inherits IUtilityPlugin
+    Function Run(args As Object) As Object
 
-        Function Run(args As Object) As Object
-
-    End Interface
-
-End Namespace
+End Interface

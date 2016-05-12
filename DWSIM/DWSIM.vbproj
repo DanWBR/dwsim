@@ -390,7 +390,6 @@
     <Compile Include="Forms\FormWhatsNew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interfaces\Excel.vb" />
     <Compile Include="Languages\DWSIM1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -475,7 +474,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Objects\Classes\Pipe\PipeHydraulicProfile.vb" />
-    <Compile Include="Interfaces\IUtilityPlugin.vb" />
     <Compile Include="Objects\Classes\TaskSchedulers\LimitedConcurrencyLevelTaskScheduler.vb" />
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
     <Compile Include="Objects\Classes\TaskSchedulers\STATaskScheduler.vb" />

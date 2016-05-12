@@ -1,4 +1,3 @@
 <DnaLibrary Name="DWSIM" Description="DWSIM Excel Add-In for Thermodynamic Calculations" RuntimeVersion="v4.0">
-	<ExternalLibrary ExplicitExports="true" Path="DWSIM.exe"/>
-
+	<ExternalLibrary ExplicitExports="true" Path="DWSIM.Thermodynamics.dll"/>
 </DnaLibrary>
