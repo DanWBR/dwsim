@@ -700,7 +700,7 @@ Namespace UnitOperations
             If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
                 Return "Modelo para utilização de uma planilha como um bloco no fluxograma"
             Else
-                Return "Use an Spreadsheet file as a flowsheet block"
+                Return "Use a spreadsheet file as a flowsheet block"
             End If
         End Function
 
