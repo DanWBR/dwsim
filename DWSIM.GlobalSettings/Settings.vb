@@ -19,7 +19,6 @@ Public Class Settings
     Public Shared Property MaxThreadMultiplier As Integer = 8
     Public Shared Property TaskScheduler As Integer = 0
     Public Shared Property SolverTimeoutSeconds As Integer = 300
-    Public Shared Property StorePreviousSolutions As Boolean = False
     Public Shared Property SolverMode As Integer = 0
     Public Shared Property SimultaneousAdjustEnabled As Boolean
     Public Shared Property ServiceBusConnectionString As String

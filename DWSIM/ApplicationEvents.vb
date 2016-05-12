@@ -138,6 +138,7 @@ Namespace My
             GlobalSettings.Settings.UseSIMDExtensions = My.Settings.UseSIMDExtensions
             GlobalSettings.Settings.DebugLevel = My.Settings.DebugLevel
             GlobalSettings.Settings.DefaultEditFormLocation = My.Settings.DefaultEditorLocation
+            GlobalSettings.Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
 
             GlobalSettings.Settings.CalculatorActivated = True
 
