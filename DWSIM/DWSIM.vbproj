@@ -474,9 +474,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Objects\Classes\Pipe\PipeHydraulicProfile.vb" />
-    <Compile Include="Objects\Classes\TaskSchedulers\LimitedConcurrencyLevelTaskScheduler.vb" />
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
-    <Compile Include="Objects\Classes\TaskSchedulers\STATaskScheduler.vb" />
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Objects\Classes\General\TableGraphic.vb" />
     <Compile Include="Objects\Classes\General\Generic.vb" />
