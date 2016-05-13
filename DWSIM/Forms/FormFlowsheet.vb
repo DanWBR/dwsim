@@ -994,7 +994,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Private Sub tsbAtivar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbAtivar.Click
         GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
-        If Not Me.CalculationQueue Is Nothing Then Me.CalculationQueue.Clear()
+        tsbCalc.Enabled = tsbAtivar.Checked
+        tsbAbortCalc.Enabled = tsbAtivar.Checked
+        tsbClearQueue.Enabled = tsbAtivar.Checked
+        tsbSimultAdjustSolver.Enabled = tsbAtivar.Checked
     End Sub
 
     Private Sub tsbDesat_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -1005,18 +1008,19 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.Close()
     End Sub
 
-    Private Sub ToolStripButton14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton14.Click
+    Private Sub ToolStripButton14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbAbortCalc.Click
         GlobalSettings.Settings.CalculatorStopRequested = True
         If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
             GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
         End If
     End Sub
 
-    Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton13.Click
+    Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCalc.Click
+        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
         FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
     End Sub
 
-    Private Sub ToolStripButton15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton15.Click
+    Private Sub ToolStripButton15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbClearQueue.Click
         Me.CalculationQueue.Clear()
     End Sub
 

@@ -237,10 +237,6 @@
   <data name="tsbSimultAdjustSolver.Text" xml:space="preserve">
     <value>Activate the Simultaneous Adjust Solver</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ToolStripCalculator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 25</value>
-  </data>
   <data name="ToolStripComboBoxUnitSystem.ToolTipText" xml:space="preserve">
     <value>System of Units</value>
   </data>
@@ -256,6 +252,7 @@
   <data name="ToolStripComboBoxNumberFractionFormatting.ToolTipText" xml:space="preserve">
     <value>Composition/Fraction Number Formatting</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CloseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
   </data>
@@ -539,10 +536,6 @@
         liTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliQAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Simulation</value>
