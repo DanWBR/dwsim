@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ThermodynamicsBase.vb" />
+    <Compile Include="Databases\Databases.vb" />
     <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.Designer.vb">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </Compile>
@@ -532,7 +533,13 @@
   <ItemGroup>
     <None Include="Resources\cog.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Databases\biod_db.xml" />
+    <EmbeddedResource Include="Assets\Databases\chemsep1.xml" />
+    <EmbeddedResource Include="Assets\Databases\coolprop.txt" />
+    <EmbeddedResource Include="Assets\Databases\dwsim.xml" />
+    <EmbeddedResource Include="Assets\Databases\electrolyte.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

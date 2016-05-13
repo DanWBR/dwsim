@@ -3700,7 +3700,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             End With
             If Me.tbIPDBName.Text <> "" Then
                 Try
-                    Global.DWSIM.Databases.UserIPDB.AddInteractionParameters(New InteractionParameter() {IP}, tbIPDBName.Text, True)
+                    Global.DWSIM.Thermodynamics.Databases.UserIPDB.AddInteractionParameters(New InteractionParameter() {IP}, tbIPDBName.Text, True)
                     MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
                 Catch ex As Exception
                     MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)

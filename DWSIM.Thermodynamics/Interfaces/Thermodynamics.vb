@@ -48,10 +48,10 @@ Namespace CalculatorInterface
             _availablecomps = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
             ''ChemSep
-            'Me.LoadCSDB()
+            Me.LoadCSDB()
 
             ''load DWSIM XML database
-            'Me.LoadDWSIMDB()
+            Me.LoadDWSIMDB()
 
         End Sub
 
@@ -64,11 +64,92 @@ Namespace CalculatorInterface
 
             Initialize()
 
+            For Each db As String In userdbs
+                LoadUserDB(db)
+            Next
+
         End Sub
+
         Private Sub TransferComps(ByRef pp As PropertyPackage)
 
             pp._availablecomps = _availablecomps
 
+        End Sub
+
+        ''' <summary>
+        ''' Enables CPU parallel processing for some tasks.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Runtime.InteropServices.DispId(3)> Sub EnableParallelProcessing()
+
+            GlobalSettings.Settings.EnableParallelProcessing = True
+
+        End Sub
+
+        ''' <summary>
+        ''' Disables CPU parallel processing.
+        ''' </summary>
+        ''' <remarks></remarks>
+        <Runtime.InteropServices.DispId(4)> Sub DisableParallelProcessing()
+
+            GlobalSettings.Settings.EnableParallelProcessing = False
+
+        End Sub
+
+        ''' <summary>
+        ''' Sets the debug level, which controls the amount of information which is written to the screen.
+        ''' </summary>
+        ''' <param name="level">Debug level: 0 = none, 1 = low, 2 = medium, 3 = high</param>
+        ''' <remarks></remarks>
+        <Runtime.InteropServices.DispId(38)> Public Sub SetDebugLevel(level As Integer)
+
+            GlobalSettings.Settings.DebugLevel = level
+
+        End Sub
+
+        ''' <summary>
+        ''' Activates CPU-accelerated SIMD vector operations.
+        ''' </summary>
+        ''' <remarks>This uses the routines implemented in the Yeppp! (http://www.yeppp.info) library, which must be in the same directory as DTL's.</remarks>
+        <Runtime.InteropServices.DispId(40)> Public Sub EnableSIMDExtensions()
+            GlobalSettings.Settings.UseSIMDExtensions = True
+        End Sub
+
+        ''' <summary>
+        ''' Deactivates CPU-accelerated SIMD vector operations.
+        ''' </summary>
+        ''' <remarks>This uses the routines implemented in the Yeppp! (http://www.yeppp.info) library, which must be in the same directory as DTL's.</remarks>
+        <Runtime.InteropServices.DispId(41)> Public Sub DisableSIMDExtensions()
+            GlobalSettings.Settings.UseSIMDExtensions = False
+        End Sub
+
+        Private Sub LoadUserDB(ByVal path As String)
+            Dim cpa() As ConstantProperties
+            cpa = Databases.UserDB.ReadComps(path)
+            For Each cp As ConstantProperties In cpa
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
+        End Sub
+
+        Private Sub LoadCSDB()
+            Dim csdb As New Databases.ChemSep
+            Dim cpa() As ConstantProperties
+            'Try
+            csdb.Load()
+            cpa = csdb.Transfer()
+            For Each cp As ConstantProperties In cpa
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
+        End Sub
+
+        Private Sub LoadDWSIMDB()
+            Dim dwdb As New Databases.DWSIM
+            Dim cpa() As ConstantProperties
+            dwdb.Load()
+            cpa = dwdb.Transfer()
+            For Each cp As ConstantProperties In cpa
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
         End Sub
 
         Friend Sub SetIP(ByVal proppack As String, ByRef pp As PropertyPackage, ByVal compounds As Object, ByVal ip1 As Object, ByVal ip2 As Object, ByVal ip3 As Object, ByVal ip4 As Object)
@@ -2467,6 +2548,71 @@ Namespace CalculatorInterface
             Return results
 
         End Function
+
+        ''' <summary>
+        ''' Setups a Material Stream with the specified compounds and associated it with the property package.
+        ''' </summary>
+        ''' <param name="proppack">Property Package instance</param>
+        ''' <param name="compounds">Compounds to add</param>
+        ''' <param name="molefractions">Compound mole fractions</param>
+        ''' <remarks></remarks>
+        <Runtime.InteropServices.DispId(40)> Public Sub SetupPropertyPackage(
+            ByVal proppack As PropertyPackage,
+            ByVal compounds As String(),
+            ByVal molefractions As Double())
+
+            Dim pp As PropertyPackage
+
+            pp = proppack
+            TransferComps(pp)
+
+            Dim ms As New Streams.MaterialStream("", "")
+
+            For Each phase In ms.Phases.Values
+                For Each c As String In compounds
+                    phase.Compounds.Add(c, New Compound(c, ""))
+                    phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
+                Next
+            Next
+
+            For Each c As String In compounds
+                Dim tmpcomp As ConstantProperties = pp._availablecomps(c)
+                If Not pp._selectedcomps.ContainsKey(c) Then pp._selectedcomps.Add(c, tmpcomp)
+            Next
+
+            ms.SetOverallComposition(molefractions)
+
+            ms._pp = pp
+            pp.SetMaterial(ms)
+
+        End Sub
+
+        ''' <summary>
+        ''' Setups a Material Stream with the specified compounds.
+        ''' </summary>
+        ''' <param name="compounds">Compounds to add</param>
+        ''' <param name="molefractions">Compound mole fractions</param>
+        ''' <remarks></remarks>
+        <Runtime.InteropServices.DispId(40)> Public Function CreateMaterialStream(
+            ByVal compounds As String(),
+            ByVal molefractions As Double()) As Streams.MaterialStream
+
+            Dim ms As New Streams.MaterialStream("", "")
+
+            For Each phase In ms.Phases.Values
+                For Each c As String In compounds
+                    phase.Compounds.Add(c, New Compound(c, ""))
+                    phase.Compounds(c).ConstantProperties = _availablecomps(c)
+                Next
+            Next
+
+            ms.SetOverallComposition(molefractions)
+
+            Return ms
+
+        End Function
+
+
     End Class
 
 End Namespace

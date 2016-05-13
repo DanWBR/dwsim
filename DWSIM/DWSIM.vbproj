@@ -1007,10 +1007,6 @@
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>DWSIM.Controls.DockPanel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Compounds\DWSIM.Databases.vbproj">
-      <Project>{c0ea3cc7-7ec4-4ff9-ab3d-802727d62327}</Project>
-      <Name>DWSIM.Databases</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
       <Name>DWSIM.DrawingTools</Name>

@@ -21,7 +21,6 @@ Imports System.Math
 Imports DWSIM.MathOps.MathEx
 
 Imports System.Runtime.InteropServices
-Imports CoolProp
 Imports System.Linq
 
 Namespace PropertyPackages

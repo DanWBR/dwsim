@@ -1285,7 +1285,7 @@ Public Class FormCompoundCreator
     Private Sub SalvarNoBancoDeDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Try
-            Global.DWSIM.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
+            Global.DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
             MessageBox.Show("Compound added to the database.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             MessageBox.Show("Error adding compound to the database: " & ex.Message.ToString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -2785,7 +2785,7 @@ Public Class FormCompoundCreator
                 mycase.cp.NISTMODFACGroups.Clear()
             End If
 
-            Global.DWSIM.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
+            Global.DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
             SetUserDBSaveStatus(True)
         Catch ex As Exception
             MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
