@@ -427,6 +427,7 @@ Namespace UnitOperations
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
                                         ElseIf Me.ThermalProfile.Tipo = ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
+                                            Tpe = Tin + (Tout - Tin) / 2
                                             Dim resultU As Double() = CalcOverallHeatTransferCoefficient(.Material, holdup, .Comprimento / .Incrementos, _
                                                                                 .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material), Tpe, results.VapVel, results.LiqVel, _
                                                                                 results.Cpl, results.Cpv, results.Kl, results.Kv, _
@@ -1053,7 +1054,7 @@ Namespace UnitOperations
             If material = FlowSheet.GetTranslatedString("AoComum") Then kp = -0.000000004 * T ^ 3 - 0.00002 * T ^ 2 + 0.021 * T + 33.743
             If material = FlowSheet.GetTranslatedString("AoCarbono") Then kp = 0.000000007 * T ^ 3 - 0.00002 * T ^ 2 - 0.0291 * T + 70.765
             If material = FlowSheet.GetTranslatedString("FerroBottomido") Then kp = -0.00000008 * T ^ 3 + 0.0002 * T ^ 2 - 0.211 * T + 127.99
-            If material = FlowSheet.GetTranslatedString("AoInoxidvel") Then kp = 0.000000005 * T ^ 3 - 0.00001 * T ^ 2 + 0.024 * T ^ +8.6226
+            If material = FlowSheet.GetTranslatedString("AoInoxidvel") Then kp = 14.6 + 0.0127 * (T - 273.15)
             If material = "PVC" Then kp = 0.16
             If material = "PVC+PFRV" Then kp = 0.16
 
