@@ -139,7 +139,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End If
 
         showflowsheettoolstripmenuitem.Checked = My.Settings.ShowFlowsheetToolStrip
-        showsimulationtoolstripmenuitem.Checked = My.Settings.ShowSimulationToolStrip
         showunitstoolstripmenuitem.Checked = My.Settings.ShowUnitsToolStrip
 
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
@@ -158,10 +157,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         If GlobalSettings.Settings.CalculatorActivated Then
             Me.tsbAtivar.Checked = True
-            Me.tsbDesat.Checked = False
         Else
             Me.tsbAtivar.Checked = False
-            Me.tsbDesat.Checked = True
         End If
 
         Me.ToolStripButton16.Checked = Me.Options.FlowsheetSnapToGrid
@@ -875,12 +872,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         My.Settings.ShowFlowsheetToolStrip = showflowsheettoolstripmenuitem.Checked
     End Sub
 
-    Private Sub showsimulationtoolstripmenuitem_Click(sender As Object, e As EventArgs) Handles showsimulationtoolstripmenuitem.Click
-        ToolStripSimulation.Visible = showsimulationtoolstripmenuitem.Checked
-        ToolStripCalculator.Visible = showsimulationtoolstripmenuitem.Checked
-        My.Settings.ShowSimulationToolStrip = showsimulationtoolstripmenuitem.Checked
-    End Sub
-
     Private Sub showunitstoolstripmenuitem_Click(sender As Object, e As EventArgs) Handles showunitstoolstripmenuitem.Click
         ToolStripUnits.Visible = showunitstoolstripmenuitem.Checked
         My.Settings.ShowUnitsToolStrip = showunitstoolstripmenuitem.Checked
@@ -1002,17 +993,12 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Private Sub tsbAtivar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbAtivar.Click
-        Me.tsbDesat.Checked = False
-        Me.tsbAtivar.Checked = True
-        GlobalSettings.Settings.CalculatorActivated = True
-        Me.WriteToLog(DWSIM.App.GetLocalString("Calculadorativado"), Color.DimGray, DWSIM.Flowsheet.MessageType.Information)
+        GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
         If Not Me.CalculationQueue Is Nothing Then Me.CalculationQueue.Clear()
     End Sub
 
-    Private Sub tsbDesat_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbDesat.Click
-        Me.tsbAtivar.Checked = False
-        Me.tsbDesat.Checked = True
-        GlobalSettings.Settings.CalculatorActivated = False
+    Private Sub tsbDesat_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
     End Sub
 
     Private Sub FecharSimulacaoAtualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseToolStripMenuItem.Click
@@ -1160,11 +1146,11 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End If
     End Sub
 
-    Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
+    Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Call Me.SimulationConfig_Click(sender, e)
     End Sub
 
-    Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton8.Click
+    Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Call Me.GerarRelatorioToolStripMenuItem_Click(sender, e)
     End Sub
 

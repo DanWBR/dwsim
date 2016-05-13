@@ -117,13 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 22</value>
-  </data>
-  <data name="ToolStripLabel4.Text" xml:space="preserve">
-    <value>Flowsheet</value>
-  </data>
   <data name="tsbUndo.Text" xml:space="preserve">
     <value>Undo</value>
   </data>
@@ -229,23 +222,11 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Make horizontal spacing equal</value>
   </data>
-  <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>899, 25</value>
-  </data>
-  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 22</value>
-  </data>
-  <data name="ToolStripLabel1.Text" xml:space="preserve">
-    <value>Calculator</value>
-  </data>
   <data name="tsbAtivar.Text" xml:space="preserve">
-    <value>Activate</value>
-  </data>
-  <data name="tsbDesat.Text" xml:space="preserve">
-    <value>Deactivate</value>
+    <value>Enable/Disable Flowsheet Calculator</value>
   </data>
   <data name="ToolStripButton13.Text" xml:space="preserve">
-    <value>Recalculate All</value>
+    <value>Calculate Flowsheet</value>
   </data>
   <data name="ToolStripButton14.Text" xml:space="preserve">
     <value>Abort Calculation</value>
@@ -256,50 +237,24 @@
   <data name="tsbSimultAdjustSolver.Text" xml:space="preserve">
     <value>Activate the Simultaneous Adjust Solver</value>
   </data>
-  <data name="ToolStripCalculator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 0</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ToolStripCalculator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 25</value>
+    <value>158, 25</value>
   </data>
-  <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 22</value>
-  </data>
-  <data name="ToolStripLabel2.Text" xml:space="preserve">
-    <value>Simulation</value>
-  </data>
-  <data name="ToolStripButton5.Text" xml:space="preserve">
-    <value>Configure Simulation</value>
-  </data>
-  <data name="ToolStripButton8.Text" xml:space="preserve">
-    <value>Results - Report</value>
-  </data>
-  <data name="ToolStripSimulation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 25</value>
-  </data>
-  <data name="ToolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 22</value>
-  </data>
-  <data name="ToolStripLabel3.Text" xml:space="preserve">
-    <value>Units</value>
+  <data name="ToolStripComboBoxUnitSystem.ToolTipText" xml:space="preserve">
+    <value>System of Units</value>
   </data>
   <data name="ToolStripButton7.Text" xml:space="preserve">
     <value>Add Unit System</value>
   </data>
-  <data name="ToolStripLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 22</value>
+  <data name="ToolStripButton7.ToolTipText" xml:space="preserve">
+    <value>Add System of Units</value>
   </data>
-  <data name="ToolStripLabel6.Text" xml:space="preserve">
-    <value>Number Format</value>
+  <data name="ToolStripComboBoxNumberFormatting.ToolTipText" xml:space="preserve">
+    <value>Number Formatting</value>
   </data>
-  <data name="ToolStripLabel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 22</value>
-  </data>
-  <data name="ToolStripLabel7.Text" xml:space="preserve">
-    <value>Fraction Format</value>
-  </data>
-  <data name="ToolStripUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 25</value>
+  <data name="ToolStripComboBoxNumberFractionFormatting.ToolTipText" xml:space="preserve">
+    <value>Composition/Fraction Number Formatting</value>
   </data>
   <data name="CloseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
@@ -386,43 +341,43 @@
     <value>E&amp;dit</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.Text" xml:space="preserve">
     <value>Flowsheet Object</value>
   </data>
   <data name="TabelaDePropriedadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="TabelaDePropriedadesToolStripMenuItem.Text" xml:space="preserve">
     <value>Property Table</value>
   </data>
   <data name="TabelaDePropriedatesMestraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="TabelaDePropriedatesMestraToolStripMenuItem.Text" xml:space="preserve">
     <value>Master Property Table</value>
   </data>
   <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Text" xml:space="preserve">
     <value>Linked Spreadsheet Table</value>
   </data>
   <data name="FiguraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="FiguraToolStripMenuItem.Text" xml:space="preserve">
     <value>Image</value>
   </data>
   <data name="TextoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="TextoToolStripMenuItem.Text" xml:space="preserve">
     <value>Text</value>
   </data>
   <data name="RectangleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="RectangleToolStripMenuItem.Text" xml:space="preserve">
     <value>Rectangle</value>
@@ -461,7 +416,7 @@
     <value>321, 6</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 20</value>
+    <value>48, 20</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Tools</value>
@@ -532,12 +487,6 @@
   <data name="ToolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
     <value>236, 6</value>
   </data>
-  <data name="showsimulationtoolstripmenuitem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 22</value>
-  </data>
-  <data name="showsimulationtoolstripmenuitem.Text" xml:space="preserve">
-    <value>Simulation Toolstrip</value>
-  </data>
   <data name="showflowsheettoolstripmenuitem.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 22</value>
   </data>
@@ -590,6 +539,10 @@
         liTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliTAliQAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Simulation</value>

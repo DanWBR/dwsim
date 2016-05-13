@@ -749,14 +749,14 @@ Partial Class FormMain
 
         With Me.AvailableUnitSystems
 
-            .Add(DWSIM.App.GetLocalString("SistemaSI"), New SystemsOfUnits.SI)
-            .Add(DWSIM.App.GetLocalString("SistemaCGS"), New SystemsOfUnits.CGS)
-            .Add(DWSIM.App.GetLocalString("SistemaIngls"), New SystemsOfUnits.English)
-            .Add(DWSIM.App.GetLocalString("Personalizado1BR"), New SystemsOfUnits.SIUnits_Custom1)
-            .Add(DWSIM.App.GetLocalString("Personalizado2SC"), New SystemsOfUnits.SIUnits_Custom2)
-            .Add(DWSIM.App.GetLocalString("Personalizado3CNTP"), New SystemsOfUnits.SIUnits_Custom3)
-            .Add(DWSIM.App.GetLocalString("Personalizado4"), New SystemsOfUnits.SIUnits_Custom4)
-            .Add(DWSIM.App.GetLocalString("Personalizado5"), New SystemsOfUnits.SIUnits_Custom5)
+            .Add("SI", New SystemsOfUnits.SI)
+            .Add("CGS", New SystemsOfUnits.CGS)
+            .Add("ENG", New SystemsOfUnits.English)
+            .Add("C1", New SystemsOfUnits.SIUnits_Custom1)
+            .Add("C2", New SystemsOfUnits.SIUnits_Custom2)
+            .Add("C3", New SystemsOfUnits.SIUnits_Custom3)
+            .Add("C4", New SystemsOfUnits.SIUnits_Custom4)
+            .Add("C5", New SystemsOfUnits.SIUnits_Custom5)
 
             If Not My.Application.UserUnitSystems Is Nothing Then
                 If My.Application.UserUnitSystems.Count > 0 Then

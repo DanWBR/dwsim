@@ -100,23 +100,9 @@ Public Class FlowsheetSurface
         If e.KeyCode = Keys.E And e.Control Then
 
         ElseIf e.KeyCode = Keys.F5 Then
-            If My.Computer.Keyboard.ShiftKeyDown Then
-                Flowsheet.tsbDesat.Checked = False
-                Flowsheet.tsbAtivar.Checked = True
-                GlobalSettings.Settings.CalculatorActivated = True
-            End If
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me.Flowsheet, My.Settings.SolverMode)
-        ElseIf e.KeyCode = Keys.F6 Then
-            If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then RecalcularToolStripMenuItem_Click(sender, e)
-        ElseIf e.KeyCode = Keys.D And e.Control Then
-            Flowsheet.tsbAtivar.Checked = False
-            Flowsheet.tsbDesat.Checked = True
-            GlobalSettings.Settings.CalculatorActivated = False
-         ElseIf e.KeyCode = Keys.A And e.Control Then
-            Flowsheet.tsbDesat.Checked = False
             Flowsheet.tsbAtivar.Checked = True
             GlobalSettings.Settings.CalculatorActivated = True
-            Flowsheet.WriteToLog(DWSIM.App.GetLocalString("Calculadorativado"), Color.DimGray, DWSIM.Flowsheet.MessageType.Information)
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me.Flowsheet, My.Settings.SolverMode)
         ElseIf e.KeyCode = Keys.X And e.Control Then
             Flowsheet.tsmiCut_Click(Me, New EventArgs)
         ElseIf e.KeyCode = Keys.C And e.Control Then
@@ -3249,6 +3235,11 @@ Public Class FlowsheetSurface
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
         Dim f As New FormEditGraphicObject() With {.gobj = Me.FlowsheetDesignSurface.SelectedObject}
+        f.Show(Flowsheet.dckPanel)
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+        Dim f As New FormEditGraphicObject() With {.fs = Me.FlowsheetDesignSurface}
         f.Show(Flowsheet.dckPanel)
     End Sub
 

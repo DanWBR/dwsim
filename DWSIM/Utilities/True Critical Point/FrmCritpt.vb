@@ -46,14 +46,6 @@ Public Class FrmCritpt
     Public Property PseudoCriticalVolume As Double
     Public Property PseudoCriticalCompressibility As Double
 
-    Private Sub FrmCritpt_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        Me.Frm = AttachedTo.GetFlowsheet
-
-        Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosPonto")
-
-    End Sub
-
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
 
         Grid1.Rows.Clear()
@@ -181,8 +173,13 @@ Public Class FrmCritpt
     End Sub
 
     Private Sub FrmCritpt_Shown(sender As Object, e As EventArgs) Handles Me.Load
-        If Frm.Options.SelectedPropertyPackage.ComponentName.Contains("Peng-Robinson (PR)") Or _
-      Frm.Options.SelectedPropertyPackage.ComponentName.Contains("SRK") Then
+
+        Me.Frm = AttachedTo.GetFlowsheet
+        mat = AttachedTo
+
+        Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosPonto")
+
+        If mat.PropertyPackage.ComponentName.Contains("Peng-Robinson (PR)") Or mat.PropertyPackage.ComponentName.Contains("SRK") Then
 
             Me.su = Frm.Options.SelectedUnitSystem
             Me.nf = Frm.Options.NumberFormat

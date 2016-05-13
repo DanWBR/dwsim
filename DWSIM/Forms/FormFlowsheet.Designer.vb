@@ -25,7 +25,6 @@ Partial Class FormFlowsheet
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ToolStripFlowsheet = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel4 = New System.Windows.Forms.ToolStripLabel()
         Me.tsbUndo = New System.Windows.Forms.ToolStripSplitButton()
         Me.tsbRedo = New System.Windows.Forms.ToolStripSplitButton()
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
@@ -67,29 +66,19 @@ Partial Class FormFlowsheet
         Me.tsbAlignVertical = New System.Windows.Forms.ToolStripButton()
         Me.tsbAlignHorizontal = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripCalculator = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.tsbAtivar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDesat = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton13 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton14 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton15 = New System.Windows.Forms.ToolStripButton()
         Me.tsbSimultAdjustSolver = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSimulation = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
         Me.ToolStripUnits = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripComboBoxUnitSystem = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabel6 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripComboBoxNumberFormatting = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabel7 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripComboBoxNumberFractionFormatting = New System.Windows.Forms.ToolStripComboBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ArquivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -136,7 +125,6 @@ Partial Class FormFlowsheet
         Me.varpaneltsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.COObjTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
-        Me.showsimulationtoolstripmenuitem = New System.Windows.Forms.ToolStripMenuItem()
         Me.showflowsheettoolstripmenuitem = New System.Windows.Forms.ToolStripMenuItem()
         Me.showunitstoolstripmenuitem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
@@ -162,7 +150,6 @@ Partial Class FormFlowsheet
         Me.QuestionBox_Label1 = New System.Windows.Forms.Label()
         Me.ToolStripFlowsheet.SuspendLayout()
         Me.ToolStripCalculator.SuspendLayout()
-        Me.ToolStripSimulation.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TSTable.SuspendLayout()
         Me.ToolStripUnits.SuspendLayout()
@@ -175,15 +162,9 @@ Partial Class FormFlowsheet
         'ToolStripFlowsheet
         '
         resources.ApplyResources(Me.ToolStripFlowsheet, "ToolStripFlowsheet")
-        Me.ToolStripFlowsheet.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel4, Me.tsbUndo, Me.tsbRedo, Me.ToolStripSeparator13, Me.tsbCutObj, Me.tsbCopyObj, Me.tsbPasteObj, Me.ToolStripSeparator12, Me.ToolStripButton12, Me.TSBtabela, Me.TSBTexto, Me.ToolStripButton4, Me.ToolStripButton6, Me.ToolStripButton19, Me.ToolStripSeparator5, Me.ToolStripButton1, Me.TSTBZoom, Me.ToolStripButton2, Me.ToolStripButton20, Me.ToolStripButton3, Me.ToolStripSeparator6, Me.tsbResizeMode, Me.tsbResizeModeKeepAR, Me.ToolStripSeparator7, Me.ToolStripButton16, Me.ToolStripButton17, Me.ToolStripSeparator4, Me.ToolStripButton18, Me.tsbConfigPage, Me.tsbConfigPrinter, Me.tsbPrint, Me.ToolStripSeparator8, Me.tsbAlignLefts, Me.tsbAlignCenters, Me.tsbAlignRights, Me.tsbAlignTops, Me.tsbAlignMiddles, Me.tsbAlignBottoms, Me.ToolStripSeparator9, Me.tsbAlignVertical, Me.tsbAlignHorizontal})
+        Me.ToolStripFlowsheet.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbUndo, Me.tsbRedo, Me.ToolStripSeparator13, Me.tsbCutObj, Me.tsbCopyObj, Me.tsbPasteObj, Me.ToolStripSeparator12, Me.ToolStripButton12, Me.TSBtabela, Me.TSBTexto, Me.ToolStripButton4, Me.ToolStripButton6, Me.ToolStripButton19, Me.ToolStripSeparator5, Me.ToolStripButton1, Me.TSTBZoom, Me.ToolStripButton2, Me.ToolStripButton20, Me.ToolStripButton3, Me.ToolStripSeparator6, Me.tsbResizeMode, Me.tsbResizeModeKeepAR, Me.ToolStripSeparator7, Me.ToolStripButton16, Me.ToolStripButton17, Me.ToolStripSeparator4, Me.ToolStripButton18, Me.tsbConfigPage, Me.tsbConfigPrinter, Me.tsbPrint, Me.ToolStripSeparator8, Me.tsbAlignLefts, Me.tsbAlignCenters, Me.tsbAlignRights, Me.tsbAlignTops, Me.tsbAlignMiddles, Me.tsbAlignBottoms, Me.ToolStripSeparator9, Me.tsbAlignVertical, Me.tsbAlignHorizontal})
         Me.ToolStripFlowsheet.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStripFlowsheet.Name = "ToolStripFlowsheet"
-        '
-        'ToolStripLabel4
-        '
-        resources.ApplyResources(Me.ToolStripLabel4, "ToolStripLabel4")
-        Me.ToolStripLabel4.Name = "ToolStripLabel4"
-        Me.ToolStripLabel4.Padding = New System.Windows.Forms.Padding(0, 0, 5, 0)
         '
         'tsbUndo
         '
@@ -330,7 +311,9 @@ Partial Class FormFlowsheet
         'tsbResizeModeKeepAR
         '
         resources.ApplyResources(Me.tsbResizeModeKeepAR, "tsbResizeModeKeepAR")
+        Me.tsbResizeModeKeepAR.Checked = True
         Me.tsbResizeModeKeepAR.CheckOnClick = True
+        Me.tsbResizeModeKeepAR.CheckState = System.Windows.Forms.CheckState.Checked
         Me.tsbResizeModeKeepAR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbResizeModeKeepAR.Image = Global.DWSIM.My.Resources.Resources.arrow_nw_se
         Me.tsbResizeModeKeepAR.Name = "tsbResizeModeKeepAR"
@@ -458,14 +441,9 @@ Partial Class FormFlowsheet
         'ToolStripCalculator
         '
         resources.ApplyResources(Me.ToolStripCalculator, "ToolStripCalculator")
-        Me.ToolStripCalculator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.tsbAtivar, Me.tsbDesat, Me.ToolStripButton13, Me.ToolStripButton14, Me.ToolStripButton15, Me.tsbSimultAdjustSolver})
+        Me.ToolStripCalculator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbAtivar, Me.ToolStripButton13, Me.ToolStripButton14, Me.ToolStripButton15, Me.tsbSimultAdjustSolver})
         Me.ToolStripCalculator.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStripCalculator.Name = "ToolStripCalculator"
-        '
-        'ToolStripLabel1
-        '
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
         '
         'tsbAtivar
         '
@@ -474,22 +452,14 @@ Partial Class FormFlowsheet
         Me.tsbAtivar.CheckOnClick = True
         Me.tsbAtivar.CheckState = System.Windows.Forms.CheckState.Checked
         Me.tsbAtivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAtivar.Image = Global.DWSIM.My.Resources.Resources.control_play
+        Me.tsbAtivar.Image = Global.DWSIM.My.Resources.Resources.accept
         Me.tsbAtivar.Name = "tsbAtivar"
-        '
-        'tsbDesat
-        '
-        resources.ApplyResources(Me.tsbDesat, "tsbDesat")
-        Me.tsbDesat.CheckOnClick = True
-        Me.tsbDesat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDesat.Image = Global.DWSIM.My.Resources.Resources.control_stop
-        Me.tsbDesat.Name = "tsbDesat"
         '
         'ToolStripButton13
         '
         resources.ApplyResources(Me.ToolStripButton13, "ToolStripButton13")
         Me.ToolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton13.Image = Global.DWSIM.My.Resources.Resources.control_repeat_blue
+        Me.ToolStripButton13.Image = Global.DWSIM.My.Resources.Resources.control_play_blue
         Me.ToolStripButton13.Name = "ToolStripButton13"
         '
         'ToolStripButton14
@@ -515,37 +485,6 @@ Partial Class FormFlowsheet
         Me.tsbSimultAdjustSolver.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbSimultAdjustSolver.Image = Global.DWSIM.My.Resources.Resources.control_equalizer
         Me.tsbSimultAdjustSolver.Name = "tsbSimultAdjustSolver"
-        '
-        'ToolStripSimulation
-        '
-        resources.ApplyResources(Me.ToolStripSimulation, "ToolStripSimulation")
-        Me.ToolStripSimulation.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.ToolStripButton5, Me.ToolStripSeparator1, Me.ToolStripButton8})
-        Me.ToolStripSimulation.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.ToolStripSimulation.Name = "ToolStripSimulation"
-        '
-        'ToolStripLabel2
-        '
-        resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
-        Me.ToolStripLabel2.Name = "ToolStripLabel2"
-        '
-        'ToolStripButton5
-        '
-        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
-        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton5.Image = Global.DWSIM.My.Resources.Resources.brick
-        Me.ToolStripButton5.Name = "ToolStripButton5"
-        '
-        'ToolStripSeparator1
-        '
-        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        '
-        'ToolStripButton8
-        '
-        resources.ApplyResources(Me.ToolStripButton8, "ToolStripButton8")
-        Me.ToolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton8.Image = Global.DWSIM.My.Resources.Resources.report
-        Me.ToolStripButton8.Name = "ToolStripButton8"
         '
         'DataGridView1
         '
@@ -588,19 +527,15 @@ Partial Class FormFlowsheet
         'ToolStripUnits
         '
         resources.ApplyResources(Me.ToolStripUnits, "ToolStripUnits")
-        Me.ToolStripUnits.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel3, Me.ToolStripComboBoxUnitSystem, Me.ToolStripButton7, Me.ToolStripSeparator2, Me.ToolStripLabel6, Me.ToolStripComboBoxNumberFormatting, Me.ToolStripSeparator3, Me.ToolStripLabel7, Me.ToolStripComboBoxNumberFractionFormatting})
+        Me.ToolStripUnits.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBoxUnitSystem, Me.ToolStripButton7, Me.ToolStripSeparator2, Me.ToolStripComboBoxNumberFormatting, Me.ToolStripSeparator3, Me.ToolStripComboBoxNumberFractionFormatting})
         Me.ToolStripUnits.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStripUnits.Name = "ToolStripUnits"
-        '
-        'ToolStripLabel3
-        '
-        resources.ApplyResources(Me.ToolStripLabel3, "ToolStripLabel3")
-        Me.ToolStripLabel3.Name = "ToolStripLabel3"
         '
         'ToolStripComboBoxUnitSystem
         '
         resources.ApplyResources(Me.ToolStripComboBoxUnitSystem, "ToolStripComboBoxUnitSystem")
         Me.ToolStripComboBoxUnitSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ToolStripComboBoxUnitSystem.DropDownWidth = 60
         Me.ToolStripComboBoxUnitSystem.Name = "ToolStripComboBoxUnitSystem"
         '
         'ToolStripButton7
@@ -615,11 +550,6 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         '
-        'ToolStripLabel6
-        '
-        resources.ApplyResources(Me.ToolStripLabel6, "ToolStripLabel6")
-        Me.ToolStripLabel6.Name = "ToolStripLabel6"
-        '
         'ToolStripComboBoxNumberFormatting
         '
         resources.ApplyResources(Me.ToolStripComboBoxNumberFormatting, "ToolStripComboBoxNumberFormatting")
@@ -632,11 +562,6 @@ Partial Class FormFlowsheet
         '
         resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        '
-        'ToolStripLabel7
-        '
-        resources.ApplyResources(Me.ToolStripLabel7, "ToolStripLabel7")
-        Me.ToolStripLabel7.Name = "ToolStripLabel7"
         '
         'ToolStripComboBoxNumberFractionFormatting
         '
@@ -936,7 +861,7 @@ Partial Class FormFlowsheet
         'ExibirToolStripMenuItem
         '
         resources.ApplyResources(Me.ExibirToolStripMenuItem, "ExibirToolStripMenuItem")
-        Me.ExibirToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.consoletsmi, Me.ExibirListaDeItensACalcularToolStripMenuItem, Me.varpaneltsmi, Me.COObjTSMI, Me.ToolStripSeparator10, Me.showsimulationtoolstripmenuitem, Me.showflowsheettoolstripmenuitem, Me.showunitstoolstripmenuitem, Me.ToolStripSeparator11, Me.RestoreLayoutTSMI})
+        Me.ExibirToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.consoletsmi, Me.ExibirListaDeItensACalcularToolStripMenuItem, Me.varpaneltsmi, Me.COObjTSMI, Me.ToolStripSeparator10, Me.showflowsheettoolstripmenuitem, Me.showunitstoolstripmenuitem, Me.ToolStripSeparator11, Me.RestoreLayoutTSMI})
         Me.ExibirToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ExibirToolStripMenuItem.MergeIndex = 8
         Me.ExibirToolStripMenuItem.Name = "ExibirToolStripMenuItem"
@@ -969,12 +894,6 @@ Partial Class FormFlowsheet
         '
         resources.ApplyResources(Me.ToolStripSeparator10, "ToolStripSeparator10")
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        '
-        'showsimulationtoolstripmenuitem
-        '
-        resources.ApplyResources(Me.showsimulationtoolstripmenuitem, "showsimulationtoolstripmenuitem")
-        Me.showsimulationtoolstripmenuitem.CheckOnClick = True
-        Me.showsimulationtoolstripmenuitem.Name = "showsimulationtoolstripmenuitem"
         '
         'showflowsheettoolstripmenuitem
         '
@@ -1033,7 +952,6 @@ Partial Class FormFlowsheet
         'FlowLayoutPanel1
         '
         resources.ApplyResources(Me.FlowLayoutPanel1, "FlowLayoutPanel1")
-        Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripSimulation)
         Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripCalculator)
         Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripFlowsheet)
         Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripUnits)
@@ -1123,8 +1041,6 @@ Partial Class FormFlowsheet
         Me.ToolStripFlowsheet.PerformLayout()
         Me.ToolStripCalculator.ResumeLayout(False)
         Me.ToolStripCalculator.PerformLayout()
-        Me.ToolStripSimulation.ResumeLayout(False)
-        Me.ToolStripSimulation.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TSTable.ResumeLayout(False)
         Me.ToolStripUnits.ResumeLayout(False)
@@ -1149,16 +1065,10 @@ Partial Class FormFlowsheet
     Public WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Public WithEvents ResultadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents GerarRelatorioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents ToolStripSimulation As System.Windows.Forms.ToolStrip
-    Public WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Public WithEvents ToolStripButton8 As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripLabel2 As System.Windows.Forms.ToolStripLabel
     Public WithEvents bgCalc As System.ComponentModel.BackgroundWorker
     Public WithEvents OtimizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents AnaliseDeSensibilidadeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripFlowsheet As System.Windows.Forms.ToolStrip
-    Public WithEvents ToolStripLabel4 As System.Windows.Forms.ToolStripLabel
     Public WithEvents TSBTexto As System.Windows.Forms.ToolStripButton
     Public WithEvents TSBtabela As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton12 As System.Windows.Forms.ToolStripButton
@@ -1172,8 +1082,6 @@ Partial Class FormFlowsheet
     Public WithEvents tsbPrint As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripCalculator As System.Windows.Forms.ToolStrip
     Public WithEvents tsbAtivar As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbDesat As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Public WithEvents ArquivoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents CloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripButton13 As System.Windows.Forms.ToolStripButton
@@ -1186,13 +1094,10 @@ Partial Class FormFlowsheet
     Public WithEvents CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents GerenciadorDeReacoesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripUnits As System.Windows.Forms.ToolStrip
-    Public WithEvents ToolStripLabel3 As System.Windows.Forms.ToolStripLabel
     Public WithEvents ToolStripComboBoxUnitSystem As System.Windows.Forms.ToolStripComboBox
     Public WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Public WithEvents ToolStripLabel6 As System.Windows.Forms.ToolStripLabel
     Public WithEvents ToolStripComboBoxNumberFormatting As System.Windows.Forms.ToolStripComboBox
     Public WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
-    Public WithEvents ToolStripLabel7 As System.Windows.Forms.ToolStripLabel
     Public WithEvents ToolStripComboBoxNumberFractionFormatting As System.Windows.Forms.ToolStripComboBox
     Public WithEvents ToolStripButton7 As System.Windows.Forms.ToolStripButton
     Public WithEvents PluginsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1238,7 +1143,6 @@ Partial Class FormFlowsheet
     Friend WithEvents tsbAlignVertical As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbAlignHorizontal As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator10 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents showsimulationtoolstripmenuitem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents showflowsheettoolstripmenuitem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents showunitstoolstripmenuitem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator

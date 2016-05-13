@@ -123,14 +123,17 @@
   <data name="&gt;&gt;ZoomPadrao100ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 22</value>
+  <data name="&gt;&gt;CMS_NoSel.Name" xml:space="preserve">
+    <value>CMS_NoSel</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem14.Name" xml:space="preserve">
+    <value>ToolStripMenuItem14</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FlowsheetDesignSurface.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 22</value>
   </data>
@@ -140,8 +143,8 @@
   <data name="ToolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 6</value>
   </data>
-  <data name="ToolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 22</value>
+  <data name="ExcluirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 22</value>
   </data>
   <data name="&gt;&gt;EditAppearanceToolStripMenuItem.Name" xml:space="preserve">
     <value>EditAppearanceToolStripMenuItem</value>
@@ -170,14 +173,14 @@
   <data name="&gt;&gt;DepurarObjetoToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;FlowsheetDesignSurface.Name" xml:space="preserve">
-    <value>FlowsheetDesignSurface</value>
-  </data>
-  <data name="DockRightAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;ToolStripMenuItem7.Name" xml:space="preserve">
+    <value>ToolStripMenuItem7</value>
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>287, 22</value>
+  </data>
+  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copiar dados para Área de Transferência</value>
   </data>
   <data name="DockTopToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -191,6 +194,9 @@
   <data name="&gt;&gt;ConectarAToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;CopyFromTSMI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
     <value>287, 22</value>
   </data>
@@ -200,8 +206,8 @@
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 304</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem4.Name" xml:space="preserve">
-    <value>ToolStripMenuItem4</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>977, 601</value>
   </data>
   <data name="FloatToolStripMenuItem.Text" xml:space="preserve">
     <value>Float</value>
@@ -210,7 +216,7 @@
     <value>System.Windows.Forms.PrintDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FlowsheetDesignSurface.Type" xml:space="preserve">
-    <value>DWSIM.DrawingTools.GraphicsSurface, DWSIM.DrawingTools, Version=4.0.5975.23403, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.DrawingTools.GraphicsSurface, DWSIM.DrawingTools, Version=4.0.5977.23132, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -218,8 +224,8 @@
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;ToolStripSeparator2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 22</value>
   </data>
   <data name="&gt;&gt;ZoomPadrao100ToolStripMenuItem.Name" xml:space="preserve">
     <value>ZoomPadrao100ToolStripMenuItem</value>
@@ -227,8 +233,8 @@
   <data name="RecalcularToolStripMenuItem.Text" xml:space="preserve">
     <value>Recalcular</value>
   </data>
-  <data name="FloatToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;BToolStripMenuItem.Name" xml:space="preserve">
+    <value>BToolStripMenuItem</value>
   </data>
   <data name="ToolStripMenuItem13.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 22</value>
@@ -236,8 +242,14 @@
   <data name="&gt;&gt;CMS_Sel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem10.Name" xml:space="preserve">
-    <value>ToolStripMenuItem10</value>
+  <data name="&gt;&gt;CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 164</value>
+  </data>
+  <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>284, 6</value>
   </data>
   <data name="CopyFromTSMI.Text" xml:space="preserve">
     <value>Copiar de...</value>
@@ -247,9 +259,6 @@
   </data>
   <data name="PreviewDialog.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="&gt;&gt;dckMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator6.Name" xml:space="preserve">
     <value>ToolStripSeparator6</value>
@@ -288,9 +297,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="PreviewDialog.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>400, 300</value>
-  </data>
   <data name="&gt;&gt;EditarAparênciaToolStripMenuItem.Name" xml:space="preserve">
     <value>EditarAparênciaToolStripMenuItem</value>
   </data>
@@ -300,14 +306,14 @@
   <data name="DockLeftToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Left</value>
   </data>
-  <data name="PreviewDialog.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
   <data name="ToolStripMenuItem13.Text" xml:space="preserve">
     <value>-&gt; 180 °</value>
   </data>
   <data name="ToolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 6</value>
+  </data>
+  <data name="CopyFromTSMI.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem1.Name" xml:space="preserve">
     <value>ToolStripMenuItem1</value>
@@ -333,9 +339,6 @@
   <data name="CopiarParaAareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
     <value>Copiar para Área de Transferência</value>
   </data>
-  <data name="ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>50%</value>
-  </data>
   <data name="&gt;&gt;ToolStripSeparator7.Name" xml:space="preserve">
     <value>ToolStripSeparator7</value>
   </data>
@@ -345,11 +348,11 @@
   <data name="ToolStripMenuItem14.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 22</value>
   </data>
-  <data name="&gt;&gt;CopiarParaAareaDeTransferenciaToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStripMenuItem2.Text" xml:space="preserve">
+    <value>Configurar Aparência</value>
   </data>
-  <data name="DockLeftAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;ClonarToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;designSurfacePrintDocument.Type" xml:space="preserve">
     <value>System.Drawing.Printing.PrintDocument, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -375,26 +378,29 @@
   <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockBottomAutoHideToolStripMenuItem</value>
   </data>
+  <data name="&gt;&gt;Timer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="CopiarParaAareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 22</value>
   </data>
-  <data name="&gt;&gt;BToolStripMenuItem.Name" xml:space="preserve">
-    <value>BToolStripMenuItem</value>
+  <data name="PreviewDialog.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>400, 300</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem12.Name" xml:space="preserve">
     <value>ToolStripMenuItem12</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem7.Name" xml:space="preserve">
-    <value>ToolStripMenuItem7</value>
+  <data name="&gt;&gt;ExcluirToolStripMenuItem.Name" xml:space="preserve">
+    <value>ExcluirToolStripMenuItem</value>
   </data>
   <data name="ExcluirToolStripMenuItem.Text" xml:space="preserve">
     <value>Excluir</value>
   </data>
-  <data name="&gt;&gt;ClonarToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PreviewDialog.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="TSMI_Label.Text" xml:space="preserve">
-    <value>ToolStripMenuItem1</value>
+  <data name="&gt;&gt;DockLeftToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -426,17 +432,8 @@
   <data name="TSMI_Label.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="ToolStripMenuItem7.Text" xml:space="preserve">
-    <value>+ 270°</value>
-  </data>
   <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 224</value>
-  </data>
-  <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 6</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItem11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem13.Name" xml:space="preserve">
     <value>ToolStripMenuItem13</value>
@@ -446,6 +443,9 @@
   </data>
   <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
     <value>ToolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 6</value>
@@ -468,9 +468,6 @@
   <data name="DockBottomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem3.Name" xml:space="preserve">
-    <value>ToolStripMenuItem3</value>
-  </data>
   <data name="ToolStripMenuItem3.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -492,26 +489,23 @@
   <data name="ExibirTudoToolStripMenuItem.Text" xml:space="preserve">
     <value>Exibir tudo</value>
   </data>
-  <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Right Auto-Hide</value>
+  <data name="DockTopAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;pageSetup.Type" xml:space="preserve">
     <value>System.Windows.Forms.PageSetupDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+  <data name="&gt;&gt;FlowsheetDesignSurface.Name" xml:space="preserve">
+    <value>FlowsheetDesignSurface</value>
   </data>
-  <data name="DockTopAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="PreviewDialog.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 22</value>
   </data>
   <data name="&gt;&gt;TSMI_Label.Name" xml:space="preserve">
     <value>TSMI_Label</value>
-  </data>
-  <data name="DockBottomAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Bottom Auto-Hide</value>
   </data>
   <data name="&gt;&gt;setupPrint.Name" xml:space="preserve">
     <value>setupPrint</value>
@@ -524,6 +518,9 @@
   </data>
   <data name="&gt;&gt;DockTopToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CMS_NoSel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CMS_ItemsToConnect.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -540,8 +537,9 @@
   <data name="ToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 22</value>
   </data>
-  <data name="ConectarAToolStripMenuItem.Text" xml:space="preserve">
-    <value>Conectar a...</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FlowsheetDesignSurface.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="RecalcularToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>287, 22</value>
@@ -552,17 +550,23 @@
   <data name="ToolStripMenuItem8.Text" xml:space="preserve">
     <value>200%</value>
   </data>
+  <data name="&gt;&gt;DocumentToolStripMenuItem.Name" xml:space="preserve">
+    <value>DocumentToolStripMenuItem</value>
+  </data>
   <data name="&gt;&gt;TSMI_Girar.Name" xml:space="preserve">
     <value>TSMI_Girar</value>
   </data>
   <data name="ToolStripMenuItem12.Text" xml:space="preserve">
     <value>-&gt; 90°</value>
   </data>
+  <data name="DockLeftAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="CMS_ItemsToConnect.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
-  <data name="&gt;&gt;EditAppearanceToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>287, 22</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Fluxograma</value>
@@ -615,9 +619,6 @@
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 22</value>
-  </data>
   <data name="HorizontalmenteToolStripMenuItem.Text" xml:space="preserve">
     <value>Inverter Horizontalmente</value>
   </data>
@@ -630,11 +631,11 @@
   <data name="&gt;&gt;DocumentToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ToolStripMenuItem3.Text" xml:space="preserve">
-    <value>Fluxograma</value>
-  </data>
-  <data name="&gt;&gt;Timer1.Type" xml:space="preserve">
+  <data name="&gt;&gt;Timer2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 22</value>
   </data>
   <data name="&gt;&gt;dckMenu.Name" xml:space="preserve">
     <value>dckMenu</value>
@@ -654,23 +655,17 @@
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="&gt;&gt;ToolStripSeparator4.Name" xml:space="preserve">
-    <value>ToolStripSeparator4</value>
+  <data name="ToolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 22</value>
   </data>
-  <data name="&gt;&gt;Timer2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="DockBottomAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="ToolStripMenuItem3.Text" xml:space="preserve">
+    <value>Fluxograma</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ClonarToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Cria uma cópia exata do objeto selecionado.</value>
-  </data>
-  <data name="ClonarToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>White</value>
+  <data name="DockBottomAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
   <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
@@ -699,17 +694,20 @@
   <data name="&gt;&gt;ToolStripMenuItem2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CopyFromTSMI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 22</value>
   </data>
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="ToolStripMenuItem4.Text" xml:space="preserve">
+    <value>100%</value>
+  </data>
   <data name="&gt;&gt;ToolStripSeparator5.Name" xml:space="preserve">
     <value>ToolStripSeparator5</value>
   </data>
-  <data name="ToolStripMenuItem4.Text" xml:space="preserve">
-    <value>100%</value>
+  <data name="TSMI_Label.Text" xml:space="preserve">
+    <value>ToolStripMenuItem1</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
@@ -723,14 +721,14 @@
   <data name="ToolStripMenuItem14.Text" xml:space="preserve">
     <value>-&gt; 270 °</value>
   </data>
-  <data name="&gt;&gt;ExcluirToolStripMenuItem.Name" xml:space="preserve">
-    <value>ExcluirToolStripMenuItem</value>
+  <data name="ToolStripMenuItem1.Text" xml:space="preserve">
+    <value>50%</value>
   </data>
   <data name="&gt;&gt;CopyFromTSMI.Name" xml:space="preserve">
     <value>CopyFromTSMI</value>
   </data>
-  <data name="&gt;&gt;CMS_NoSel.Name" xml:space="preserve">
-    <value>CMS_NoSel</value>
+  <data name="&gt;&gt;ToolStripMenuItem4.Name" xml:space="preserve">
+    <value>ToolStripMenuItem4</value>
   </data>
   <data name="&gt;&gt;pageSetup.Name" xml:space="preserve">
     <value>pageSetup</value>
@@ -753,8 +751,8 @@
   <data name="&gt;&gt;ToolStripMenuItem10.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="&gt;&gt;ToolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockRightAutoHideToolStripMenuItem</value>
@@ -771,23 +769,11 @@
   <data name="&gt;&gt;CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Name" xml:space="preserve">
     <value>CopiarDadosParaareaDeTransferenciaToolStripMenuItem</value>
   </data>
-  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 164</value>
+  <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
-  <data name="BToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
-        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIFSURBVDhPpZJ/T1JRGMd9Hb4DZzq1zKaOrBaaP5CJ
-        mPgL9DpKENJS0UE4LzAkKSkLJIQgiwZMW21aOadoKipOZVrdN8O+HWCgyC3n/OOzc87znO/3uc9zTxaA
-        S8EavAisQWWQkvcuS5ieHx2QLrSC+tLMiOeEcra7aYe+9e5s5WpX2LitgefICj/jxqffLtj3LRhe6kPz
-        bH248V1N9mlNmoGCiM27NAKMB++P7fD+msGHYwcch6/gilgx8r0ffHtl+LTmRLzSJTeE1PD9SVR1R2wY
-        C6qgXR6Ebe8FHAdTmCZf0hPoROVkRaqdlIFsScw4I69JVWf8crtfEBV5+XSTp45umKmOWnZMMG8boA8+
-        xR1TOZNhIF1sA/VVBMl8E9p8Aog+8lXJHM/GpR99foDJnfG4CUd/g4TPGJxF6K4lS2J/7+VtWhag8Cyk
-        w/gmjVLttVQuTZSETBr8t1VkGxPf8t41c6L6NQ20ayqovvXj+khBZgtJBK4a9M5TeOiXoMpSgc7ZFhg3
-        x2DY0IJe16DRykPRQF7mEONiZzVkcxTp1YiJkAGmLRrGjVFoVgeJWI1WpxCFT66w/8YYvGkupD4xJrZ0
-        iao/E1UHFhRoeFMXF+cpc/79kGJwn99Eh+c+WlxClI0Wo0RdiKtD+UcFj3PPf8pJOLqStEn/D9ZgDDJp
-        srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
-</value>
+  <data name="FloatToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -825,7 +811,7 @@
   <data name="&gt;&gt;FloatToolStripMenuItem.Name" xml:space="preserve">
     <value>FloatToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;DockLeftToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItem11.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CentralizarToolStripMenuItem.Type" xml:space="preserve">
@@ -834,14 +820,17 @@
   <data name="ToolStripSeparator6.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Right Auto-Hide</value>
+  </data>
   <data name="&gt;&gt;CentralizarToolStripMenuItem.Name" xml:space="preserve">
     <value>CentralizarToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem8.Name" xml:space="preserve">
     <value>ToolStripMenuItem8</value>
   </data>
-  <data name="ExcluirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+  <data name="ConectarAToolStripMenuItem.Text" xml:space="preserve">
+    <value>Conectar a...</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -849,11 +838,14 @@
   <data name="&gt;&gt;DockLeftToolStripMenuItem.Name" xml:space="preserve">
     <value>DockLeftToolStripMenuItem</value>
   </data>
+  <data name="&gt;&gt;ToolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ExibirTudoToolStripMenuItem.Name" xml:space="preserve">
     <value>ExibirTudoToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;DocumentToolStripMenuItem.Name" xml:space="preserve">
-    <value>DocumentToolStripMenuItem</value>
+  <data name="DockBottomAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Bottom Auto-Hide</value>
   </data>
   <data name="&gt;&gt;EditarAparênciaToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -861,14 +853,17 @@
   <data name="CentralizarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 22</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>977, 601</value>
+  <data name="&gt;&gt;dckMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CMS_ItemsToDisconnect.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
   <data name="&gt;&gt;FloatToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem10.Name" xml:space="preserve">
+    <value>ToolStripMenuItem10</value>
   </data>
   <data name="PreviewDialog.Enabled" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -894,8 +889,8 @@
   <data name="&gt;&gt;ToolStripMenuItem12.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem14.Name" xml:space="preserve">
-    <value>ToolStripMenuItem14</value>
+  <data name="ClonarToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Cria uma cópia exata do objeto selecionado.</value>
   </data>
   <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
@@ -909,27 +904,32 @@
   <data name="&gt;&gt;ToolStripMenuItem6.Name" xml:space="preserve">
     <value>ToolStripMenuItem6</value>
   </data>
-  <data name="ToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Configurar Aparência</value>
+  <data name="BToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIFSURBVDhPpZJ/T1JRGMd9Hb4DZzq1zKaOrBaaP5CJ
+        mPgL9DpKENJS0UE4LzAkKSkLJIQgiwZMW21aOadoKipOZVrdN8O+HWCgyC3n/OOzc87znO/3uc9zTxaA
+        S8EavAisQWWQkvcuS5ieHx2QLrSC+tLMiOeEcra7aYe+9e5s5WpX2LitgefICj/jxqffLtj3LRhe6kPz
+        bH248V1N9mlNmoGCiM27NAKMB++P7fD+msGHYwcch6/gilgx8r0ffHtl+LTmRLzSJTeE1PD9SVR1R2wY
+        C6qgXR6Ebe8FHAdTmCZf0hPoROVkRaqdlIFsScw4I69JVWf8crtfEBV5+XSTp45umKmOWnZMMG8boA8+
+        xR1TOZNhIF1sA/VVBMl8E9p8Aog+8lXJHM/GpR99foDJnfG4CUd/g4TPGJxF6K4lS2J/7+VtWhag8Cyk
+        w/gmjVLttVQuTZSETBr8t1VkGxPf8t41c6L6NQ20ayqovvXj+khBZgtJBK4a9M5TeOiXoMpSgc7ZFhg3
+        x2DY0IJe16DRykPRQF7mEONiZzVkcxTp1YiJkAGmLRrGjVFoVgeJWI1WpxCFT66w/8YYvGkupD4xJrZ0
+        iao/E1UHFhRoeFMXF+cpc/79kGJwn99Eh+c+WlxClI0Wo0RdiKtD+UcFj3PPf8pJOLqStEn/D9ZgDDJp
+        srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
+</value>
   </data>
-  <data name="&gt;&gt;ToolStripSeparator5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;CopiarParaAareaDeTransferenciaToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FlowsheetDesignSurface.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="ClonarToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>White</value>
   </data>
-  <data name="&gt;&gt;CMS_NoSel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ToolStripSeparator4.Name" xml:space="preserve">
+    <value>ToolStripSeparator4</value>
   </data>
-  <data name="PreviewDialog.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copiar dados para Área de Transferência</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator2.Name" xml:space="preserve">
-    <value>ToolStripSeparator2</value>
+  <data name="&gt;&gt;ToolStripMenuItem3.Name" xml:space="preserve">
+    <value>ToolStripMenuItem3</value>
   </data>
   <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -955,7 +955,7 @@
   <data name="&gt;&gt;FlowsheetDesignSurface.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem13.Type" xml:space="preserve">
+  <data name="&gt;&gt;EditAppearanceToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -986,17 +986,17 @@
   <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockTopAutoHideToolStripMenuItem</value>
   </data>
-  <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+  <data name="DockRightAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStripMenuItem7.Text" xml:space="preserve">
+    <value>+ 270°</value>
   </data>
-  <data name="CopyFromTSMI.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;ToolStripSeparator2.Name" xml:space="preserve">
+    <value>ToolStripSeparator2</value>
   </data>
   <metadata name="PreviewDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>771, 17</value>
