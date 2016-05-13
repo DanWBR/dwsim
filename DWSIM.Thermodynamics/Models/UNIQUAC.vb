@@ -33,10 +33,10 @@ Namespace PropertyPackages.Auxiliary
         Public A12 As Double = 0
         Public A21 As Double = 0
         Public comment As String = ""
-        <FieldIgnored()> Public B12 As Double = 0
-        <FieldIgnored()> Public B21 As Double = 0
-        <FieldIgnored()> Public C12 As Double = 0
-        <FieldIgnored()> Public C21 As Double = 0
+        <FieldNotInFile()> Public B12 As Double = 0
+        <FieldNotInFile()> Public B21 As Double = 0
+        <FieldNotInFile()> Public C12 As Double = 0
+        <FieldNotInFile()> Public C21 As Double = 0
 
         Public Function Clone() As Object Implements System.ICloneable.Clone
 

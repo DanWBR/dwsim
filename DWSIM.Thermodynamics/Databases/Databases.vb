@@ -71,7 +71,7 @@ Namespace Databases
             Dim fh1 As New FileHelperEngine(Of ChemSepNameIDPair)
             With fh1
                 'csidc = .ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "csid.dat")
-                Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.csid.dat")
+                Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.csid.dat")
                     Using t As New StreamReader(filestr)
                         csidc = .ReadStream(t)
                     End Using
@@ -112,7 +112,7 @@ Namespace Databases
 
             Dim mytxt As String = ""
 
-            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.chemsep1.xml")
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.chemsep1.xml")
                 Using t As New StreamReader(filestr)
                     mytxt = t.ReadToEnd()
                 End Using
@@ -511,7 +511,7 @@ Namespace Databases
 
             Dim reader As XmlReader
 
-            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.dwsim.xml")
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.dwsim.xml")
                 reader = XmlReader.Create(filestr)
                 reader.Read()
                 xmldoc = New XmlDocument
@@ -691,7 +691,7 @@ Namespace Databases
 
             Dim reader As XmlReader
 
-            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.biod_db.xml")
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.biod_db.xml")
                 reader = XmlReader.Create(filestr)
                 reader.Read()
                 xmldoc = New XmlDocument
@@ -1566,7 +1566,7 @@ Namespace Databases
 
             Dim reader As XmlReader
 
-            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.electrolyte.xml")
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.electrolyte.xml")
                 reader = XmlReader.Create(filestr)
                 xmldoc = New XmlDocument
                 xmldoc.Load(reader)
@@ -1684,7 +1684,7 @@ Namespace Databases
 
         Public Sub Load()
 
-            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Databases.coolprop.txt")
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.coolprop.txt")
                 Using t As New StreamReader(filestr)
                     text = t.ReadToEnd().Split(vbLf)
                 End Using
