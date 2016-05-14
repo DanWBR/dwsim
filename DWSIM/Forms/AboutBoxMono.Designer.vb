@@ -69,6 +69,7 @@ Partial Class AboutBoxMONO
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.AssemblyNamesComboBox = New System.Windows.Forms.ComboBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
@@ -76,6 +77,7 @@ Partial Class AboutBoxMONO
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem3.SuspendLayout()
         Me.FaTabStripItem4.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -410,11 +412,19 @@ Partial Class AboutBoxMONO
         Me.AssemblyNamesComboBox.Name = "AssemblyNamesComboBox"
         Me.AssemblyNamesComboBox.Sorted = True
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.DWSIM4_icon
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.TabStop = False
+        '
         'AboutBoxMONO
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ControlBox = False
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.FaTabStrip1)
         Me.Controls.Add(Me.Copyright)
         Me.Controls.Add(Me.Version)
@@ -433,6 +443,7 @@ Partial Class AboutBoxMONO
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem3.ResumeLayout(False)
         Me.FaTabStripItem4.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -482,4 +493,5 @@ Partial Class AboutBoxMONO
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewLinkColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewLinkColumn
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
 End Class

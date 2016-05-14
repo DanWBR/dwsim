@@ -34,6 +34,8 @@ Public Class Settings
     Public Shared DefaultEditFormLocation As Integer = 8
     Public Shared SolverBreakOnException As Boolean = False
 
+    Shared Property SelectedGPU As String
+
     Shared Sub LoadSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"

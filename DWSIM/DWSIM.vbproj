@@ -2103,6 +2103,7 @@
     <None Include="Resources\DWSIM-branco.png" />
     <None Include="Resources\dwsim 3 bg.png" />
     <None Include="Resources\delete2.png" />
+    <None Include="Resources\DWSIM4 icon.png" />
     <Content Include="Resources\es.png" />
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />

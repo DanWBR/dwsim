@@ -159,6 +159,8 @@ Namespace PropertyPackages
 
         Public Property ForceNewFlashAlgorithmInstance As Boolean = False
 
+        Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
+
         <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
 
 #Region "   Constructor"
@@ -177,15 +179,42 @@ Namespace PropertyPackages
 
                 'initialize collections
 
-                _selectedcomps = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
-                _availablecomps = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+                _selectedcomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
+                _availablecomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
 
-                'load databases
+                'load chempsep database if existent
+
+                Me.LoadCSDB()
+
+                'load DWSIM XML database
+
+                'Me.LoadDWSIMDB()
 
             End If
 
             Initialize()
 
+        End Sub
+
+        Public Sub LoadCSDB()
+            Dim csdb As New Databases.ChemSep
+            Dim cpa() As BaseClasses.ConstantProperties
+            'Try
+            csdb.Load()
+            cpa = csdb.Transfer()
+            For Each cp As BaseClasses.ConstantProperties In cpa
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
+        End Sub
+
+        Public Sub LoadDWSIMDB()
+            Dim dwdb As New Databases.DWSIM
+            Dim cpa() As BaseClasses.ConstantProperties
+            dwdb.Load()
+            cpa = dwdb.Transfer()
+            For Each cp As BaseClasses.ConstantProperties In cpa
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
         End Sub
 
         Public Shared Function ReturnInstance(typename As String) As Object
@@ -8745,8 +8774,8 @@ Final3:
 
 #Region "   CAPE-OPEN ICapeUtilities Implementation"
 
-        Public _availablecomps As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
-        Public _selectedcomps As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+        Public _availablecomps As Dictionary(Of String, BaseClasses.ConstantProperties)
+        Public _selectedcomps As Dictionary(Of String, BaseClasses.ConstantProperties)
 
         <System.NonSerialized()> Friend _pme As Object
 
@@ -8755,15 +8784,11 @@ Final3:
         ''' available it returns an error.</summary>
         ''' <remarks></remarks>
         Public Overridable Sub Edit() Implements CapeOpen.ICapeUtilities.Edit
-            'Dim cf As New FormConfigCAPEOPEN2
-            'With cf
-            '    ._pp = Me
-            '    ._selcomps = _selectedcomps
-            '    ._availcomps = _availablecomps
-            '    .Show()
-            '    _selectedcomps = ._selcomps
-            '    _availablecomps = ._availcomps
-            'End With
+            Dim cf As New FormConfigCAPEOPEN2
+            With cf
+                ._pp = Me
+                .Show()
+            End With
         End Sub
 
         ''' <summary>
@@ -8782,9 +8807,13 @@ Final3:
         Public Overridable Sub Initialize() Implements CapeOpen.ICapeUtilities.Initialize
 
             Me.m_ip = New DataTable
+
             ConfigParameters()
 
+            Me.FlashSettings = Auxiliary.FlashAlgorithms.FlashAlgorithm.GetDefaultSettings()
+
             'load Henry Coefficients
+
             Dim pathsep = IO.Path.DirectorySeparatorChar
 
             Dim HenryLines() As String
@@ -8801,7 +8830,7 @@ Final3:
                 HP.CAS = HenryLines(i).Split(";")(2)
                 HP.KHcp = Val(HenryLines(i).Split(";")(3))
                 HP.C = Val(HenryLines(i).Split(";")(4))
-                m_Henry.Add(HP.CAS, HP)
+                If Not m_Henry.ContainsKey(HP.CAS) Then m_Henry.Add(HP.CAS, HP)
             Next
 
         End Sub

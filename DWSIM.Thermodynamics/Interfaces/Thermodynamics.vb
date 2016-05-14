@@ -32,7 +32,7 @@ Namespace CalculatorInterface
         Public Const InterfaceId As String = "0EA44EDE-AD65-435c-B8CC-0D1146BD182B"
         Public Const EventsId As String = "0817BD3F-5278-4e49-A7FB-92416A8A7E4E"
 
-        Private _availablecomps As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+        Private _availablecomps As Dictionary(Of String, BaseClasses.ConstantProperties)
 
         Sub New()
 
@@ -45,13 +45,13 @@ Namespace CalculatorInterface
         <Runtime.InteropServices.DispId(1)> Sub Initialize()
 
             'load databases
-            _availablecomps = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+            _availablecomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
 
             ''ChemSep
             Me.LoadCSDB()
 
             ''load DWSIM XML database
-            Me.LoadDWSIMDB()
+            'Me.LoadDWSIMDB()
 
         End Sub
 

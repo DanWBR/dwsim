@@ -117,24 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Compounds</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Flash Settings</value>
-  </data>
-  <data name="FaTabStripItem7.Title" xml:space="preserve">
-    <value>Calculation Engine</value>
-  </data>
-  <data name="FaTabStripItem4.Title" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="FaTabStripItem6.Title" xml:space="preserve">
-    <value>Package Information</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Compounds</value>
-  </data>
   <data name="Button6.Text" xml:space="preserve">
     <value>&lt; Ungroup</value>
   </data>
@@ -169,41 +151,23 @@
   <data name="Column9.HeaderText" xml:space="preserve">
     <value>Formula</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Compounds</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Stability Test (VLLE Flash only)</value>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Compounds</value>
   </data>
-  <data name="RadioButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 17</value>
+  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>393, 51</value>
   </data>
-  <data name="RadioButton3.Text" xml:space="preserve">
-    <value>High</value>
+  <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 23</value>
   </data>
-  <data name="RadioButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 17</value>
-  </data>
-  <data name="RadioButton2.Text" xml:space="preserve">
-    <value>Medium</value>
-  </data>
-  <data name="RadioButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 17</value>
-  </data>
-  <data name="RadioButton1.Text" xml:space="preserve">
-    <value>Low</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
+  <data name="Button5.Text" xml:space="preserve">
+    <value>Configure</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
-    <value>Search severity:</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 13</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Key compounds for the second liquid phase:</value>
+    <value>Flash Algorithm</value>
   </data>
   <data name="ComboBoxFlashAlg.Items" xml:space="preserve">
     <value>Nested Loops (VLE)</value>
@@ -232,14 +196,24 @@
   <data name="ComboBoxFlashAlg.Items8" xml:space="preserve">
     <value>Nested Loops (VLLE - Immiscible Liquids)</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Flash Algorithm</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button3.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>284, 23</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Open Property Package Configuration Window</value>
   </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Calculation Engine</value>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Property Package</value>
+  </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Selected CUDA/OpenCL Device Information</value>
@@ -283,6 +257,12 @@
   <data name="chkEnableParallelCalcs.Text" xml:space="preserve">
     <value>Enable Parallel CPU Calculations</value>
   </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Calculation Engine</value>
+  </data>
+  <data name="FaTabStripItem7.Title" xml:space="preserve">
+    <value>Calculation Engine</value>
+  </data>
   <data name="ListView1.Items" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
@@ -319,39 +299,8 @@
         AwAAAAMAAAAL
 </value>
   </data>
-  <data name="ListView1.Items2" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
-        ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2Vu
-        PWIwM2Y1ZjdmMTFkNTBhM2EFAQAAACFTeXN0ZW0uV2luZG93cy5Gb3Jtcy5MaXN0Vmlld0l0ZW0HAAAA
-        BFRleHQKSW1hZ2VJbmRleAlCYWNrQ29sb3IHQ2hlY2tlZARGb250CUZvcmVDb2xvchdVc2VJdGVtU3R5
-        bGVGb3JTdWJJdGVtcwEABAAEBAAIFFN5c3RlbS5EcmF3aW5nLkNvbG9yAwAAAAETU3lzdGVtLkRyYXdp
-        bmcuRm9udAMAAAAUU3lzdGVtLkRyYXdpbmcuQ29sb3IDAAAAAQIAAAAGBAAAAAdTcGFuaXNoBAAAAAX7
-        ////FFN5c3RlbS5EcmF3aW5nLkNvbG9yBAAAAARuYW1lBXZhbHVlCmtub3duQ29sb3IFc3RhdGUBAAAA
-        CQcHAwAAAAoAAAAAAAAAABgAAQAACQYAAAAB+f////v///8KAAAAAAAAAAAaAAEAAQUGAAAAE1N5c3Rl
-        bS5EcmF3aW5nLkZvbnQEAAAABE5hbWUEU2l6ZQVTdHlsZQRVbml0AQAEBAsYU3lzdGVtLkRyYXdpbmcu
-        Rm9udFN0eWxlAwAAABtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQDAAAAAwAAAAYIAAAABlRhaG9t
-        YQAABEEF9////xhTeXN0ZW0uRHJhd2luZy5Gb250U3R5bGUBAAAAB3ZhbHVlX18ACAMAAAAAAAAABfb/
-        //8bU3lzdGVtLkRyYXdpbmcuR3JhcGhpY3NVbml0AQAAAAd2YWx1ZV9fAAgDAAAAAwAAAAs=
-</value>
-  </data>
-  <data name="ListView1.Items3" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkMAwAAAFFTeXN0
-        ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2Vu
-        PWIwM2Y1ZjdmMTFkNTBhM2EFAQAAACFTeXN0ZW0uV2luZG93cy5Gb3Jtcy5MaXN0Vmlld0l0ZW0HAAAA
-        BFRleHQKSW1hZ2VJbmRleAlCYWNrQ29sb3IHQ2hlY2tlZARGb250CUZvcmVDb2xvchdVc2VJdGVtU3R5
-        bGVGb3JTdWJJdGVtcwEABAAEBAAIFFN5c3RlbS5EcmF3aW5nLkNvbG9yAwAAAAETU3lzdGVtLkRyYXdp
-        bmcuRm9udAMAAAAUU3lzdGVtLkRyYXdpbmcuQ29sb3IDAAAAAQIAAAAGBAAAAAZHZXJtYW4HAAAABfv/
-        //8UU3lzdGVtLkRyYXdpbmcuQ29sb3IEAAAABG5hbWUFdmFsdWUKa25vd25Db2xvcgVzdGF0ZQEAAAAJ
-        BwcDAAAACgAAAAAAAAAAGAABAAAJBgAAAAH5////+////woAAAAAAAAAABoAAQABBQYAAAATU3lzdGVt
-        LkRyYXdpbmcuRm9udAQAAAAETmFtZQRTaXplBVN0eWxlBFVuaXQBAAQECxhTeXN0ZW0uRHJhd2luZy5G
-        b250U3R5bGUDAAAAG1N5c3RlbS5EcmF3aW5nLkdyYXBoaWNzVW5pdAMAAAADAAAABggAAAAGVGFob21h
-        AAAEQQX3////GFN5c3RlbS5EcmF3aW5nLkZvbnRTdHlsZQEAAAAHdmFsdWVfXwAIAwAAAAAAAAAF9v//
-        /xtTeXN0ZW0uRHJhd2luZy5HcmFwaGljc1VuaXQBAAAAB3ZhbHVlX18ACAMAAAADAAAACw==
-</value>
+  <data name="FaTabStripItem4.Title" xml:space="preserve">
+    <value>Language</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
@@ -364,6 +313,9 @@
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Name:</value>
+  </data>
+  <data name="FaTabStripItem6.Title" xml:space="preserve">
+    <value>Package Information</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

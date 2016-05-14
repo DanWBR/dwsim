@@ -1,12 +1,16 @@
 ﻿Imports CapeOpen
 Imports DWSIM.Thermodynamics.PropertyPackages
 
-<System.Serializable()> _
-<System.Runtime.InteropServices.Guid("FB964392-7410-432d-A650-C611D09A0C62")> _
+<System.Serializable()>
+<ComClass(CAPEOPENManager.ClassId, CAPEOPENManager.InterfaceId, CAPEOPENManager.EventsId)>
 Public Class CAPEOPENManager
 
     Implements ICapeIdentification, ICapeThermoPropertyPackageManager, ICapeUtilities
     Implements IDisposable
+
+    Public Const ClassId As String = "7f5822f2-098d-46dd-9b89-0189d666edb1"
+    Public Const InterfaceId As String = "54dd580a-9931-48f9-b139-e6279a4bfc06"
+    Public Const EventsId As String = "cc6f7907-aad1-41a5-adab-24825cd73c05"
 
     Private _name, _description As String
     Private _params As ParameterCollection
@@ -86,7 +90,7 @@ Public Class CAPEOPENManager
     Public Function GetPropertyPackageList() As Object Implements ICapeThermoPropertyPackageManager.GetPropertyPackageList
         Return New String() {"FPROPS", "CoolProp", "PC-SAFT", "Peng-Robinson (PR)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)", "Soave-Redlich-Kwong (SRK)", "Peng-Robinson / Lee-Kesler (PR/LK)", _
                              "UNIFAC", "UNIFAC-LL", "Modified UNIFAC (Dortmund)", "Modified UNIFAC (NIST)", "NRTL", "UNIQUAC", _
-                            "Chao-Seader", "Grayson-Streed", "Lee-Kesler-Plöcker", "Raoult's Law", "COSMO-SAC (JCOSMO)", "IAPWS-IF97 Steam Tables"}
+                            "Chao-Seader", "Grayson-Streed", "Lee-Kesler-Plöcker", "Raoult's Law", "IAPWS-IF97 Steam Tables"}
     End Function
 
     Public Property ComponentDescription() As String Implements ICapeIdentification.ComponentDescription

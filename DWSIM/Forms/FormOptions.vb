@@ -504,6 +504,7 @@ Public Class FormOptions
                 If Me.cbGPU.SelectedItem.ToString.Split("|")(1).Contains(prop.Name) Then
                     My.Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
                     My.Settings.CudafyDeviceID = prop.DeviceId
+                    Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
                     Settings.CudafyDeviceID = My.Settings.CudafyDeviceID
                     GetCUDACaps(prop)
                     Exit For

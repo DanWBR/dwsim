@@ -24,6 +24,7 @@
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
     <Optimize>false</Optimize>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,6 +34,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>DWSIM.Thermodynamics.xml</DocumentationFile>
     <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -540,6 +542,11 @@
     <EmbeddedResource Include="Assets\Databases\coolprop.txt" />
     <EmbeddedResource Include="Assets\Databases\dwsim.xml" />
     <EmbeddedResource Include="Assets\Databases\electrolyte.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\chemsep_database_license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

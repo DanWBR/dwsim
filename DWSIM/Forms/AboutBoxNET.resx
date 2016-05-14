@@ -125,8 +125,12 @@
   <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 8</value>
+    <value>72, 11</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>404, 13</value>
@@ -147,10 +151,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="LinkLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 79</value>
@@ -176,6 +183,9 @@
   <data name="&gt;&gt;LinkLabel1.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="Button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>722, 592</value>
   </data>
@@ -198,13 +208,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="Version.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Version.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Version.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 29</value>
+    <value>72, 32</value>
   </data>
   <data name="Version.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 13</value>
@@ -225,13 +238,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Version.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="Copyright.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Copyright.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Copyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 50</value>
+    <value>72, 53</value>
   </data>
   <data name="Copyright.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -252,10 +268,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Copyright.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 79</value>
@@ -284,6 +303,9 @@
   <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="LinkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>289, 79</value>
   </data>
@@ -311,6 +333,9 @@
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 33</value>
   </data>
@@ -337,6 +362,9 @@
   </data>
   <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 33</value>
@@ -367,6 +395,9 @@
   </data>
   <data name="LabelLicense.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="LabelLicense.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="LabelLicense.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 281</value>
@@ -401,7 +432,6 @@
   <data name="TextBox1.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TextBox1.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
@@ -617,6 +647,9 @@ END OF TERMS AND CONDITIONS</value>
   <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 104</value>
   </data>
@@ -643,6 +676,9 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="LblOSInfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="LblOSInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="LblOSInfo.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 104</value>
@@ -671,6 +707,9 @@ END OF TERMS AND CONDITIONS</value>
   <data name="LblCLRInfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="LblCLRInfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="LblCLRInfo.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 130</value>
   </data>
@@ -697,6 +736,9 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 130</value>
@@ -725,6 +767,9 @@ END OF TERMS AND CONDITIONS</value>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 56</value>
   </data>
@@ -751,6 +796,9 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 56</value>
@@ -779,6 +827,9 @@ END OF TERMS AND CONDITIONS</value>
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 10</value>
   </data>
@@ -805,6 +856,9 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 10</value>
@@ -890,6 +944,9 @@ END OF TERMS AND CONDITIONS</value>
   <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="Lblcpusimd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Lblcpusimd.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 208</value>
   </data>
@@ -916,6 +973,9 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="Lblcpuinfo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Lblcpuinfo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Lblcpuinfo.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 182</value>
@@ -944,6 +1004,9 @@ END OF TERMS AND CONDITIONS</value>
   <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 208</value>
   </data>
@@ -970,6 +1033,9 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 182</value>
@@ -998,6 +1064,9 @@ END OF TERMS AND CONDITIONS</value>
   <data name="Lblmem.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Lblmem.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Lblmem.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 156</value>
   </data>
@@ -1024,6 +1093,9 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 156</value>
@@ -1062,7 +1134,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>FaTabStripItem1</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5952.16842, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5975.33876, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1170,7 +1242,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>FaTabStripItem2</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5952.16842, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5975.33876, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1239,7 +1311,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>FaTabStripItem3</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5952.16842, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5975.33876, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1320,7 +1392,7 @@ END OF TERMS AND CONDITIONS</value>
     <value>FaTabStripItem4</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5952.16842, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5975.33876, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1344,13 +1416,40 @@ END OF TERMS AND CONDITIONS</value>
     <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.5952.16842, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.5975.33876, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="PictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="PictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 60</value>
+  </data>
+  <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="PictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
+    <value>PictureBox1</value>
+  </data>
+  <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PictureBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1363,6 +1462,9 @@ END OF TERMS AND CONDITIONS</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>809, 627</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

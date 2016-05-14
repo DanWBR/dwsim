@@ -3471,7 +3471,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
             proppack = ppm.GetPropertyPackage(ppname)
             proppack.ComponentName = ppname
-            proppack._availablecomps = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+            proppack._availablecomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
             For Each kvp In FormMain.AvailableComponents
                 proppack._availablecomps.Add(kvp.Key, kvp.Value)
             Next
@@ -3581,7 +3581,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         proppack = ppm.GetPropertyPackage(ppname)
         proppack.ComponentName = ppname
-        proppack._availablecomps = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+        proppack._availablecomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
         For Each kvp In FormMain.AvailableComponents
             proppack._availablecomps.Add(kvp.Key, kvp.Value)
         Next

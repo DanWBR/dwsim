@@ -7,13 +7,7 @@ Public Class FormConfigCAPEOPEN2
 
     Inherits FormConfigPropertyPackageBase
 
-    Public _selcomps As Dictionary(Of String, ConstantProperties)
-    Public _availcomps As Dictionary(Of String, ConstantProperties)
-
     Public loaded As Boolean = False
-
-    Private prevsort As System.ComponentModel.ListSortDirection = System.ComponentModel.ListSortDirection.Ascending
-    Private prevcol As Integer = 1
 
     Dim ACSC1 As AutoCompleteStringCollection
 
@@ -78,10 +72,10 @@ Public Class FormConfigCAPEOPEN2
 
             ACSC1 = New AutoCompleteStringCollection
 
-            For Each comp In _selcomps.Values
+            For Each comp In _pp._selectedcomps.Values
                 Me.ListViewA.Items.Add(comp.Name, comp.Name, 0).Tag = comp.Name
             Next
-            For Each comp In _availcomps.Values
+            For Each comp In _pp._availablecomps.Values
                 Dim idx As Integer = Me.AddCompToGrid(comp)
                 If Not idx = -1 Then
                     For Each c As DataGridViewCell In Me.ogc1.Rows(idx).Cells
@@ -103,8 +97,8 @@ Public Class FormConfigCAPEOPEN2
         Else
 
             For Each r As DataGridViewRow In ogc1.Rows
-                If _availcomps.ContainsKey(r.Cells(0).Value) Then
-                    comp = _availcomps(r.Cells(0).Value)
+                If _pp._availablecomps.ContainsKey(r.Cells(0).Value) Then
+                    comp = _pp._availablecomps(r.Cells(0).Value)
                     For Each c As DataGridViewCell In r.Cells
                         If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
                             c.Style.ForeColor = Color.Red
@@ -121,110 +115,18 @@ Public Class FormConfigCAPEOPEN2
 
         End If
 
-        Select Case _pp.FlashAlgorithm
-            Case PropertyPackages.FlashMethod.DWSIMDefault
-                ComboBoxFlashAlg.SelectedIndex = 0
-            Case PropertyPackages.FlashMethod.NestedLoops3P,
-                    PropertyPackages.FlashMethod.NestedLoops3PV2,
-                    PropertyPackages.FlashMethod.NestedLoops3PV3
-                ComboBoxFlashAlg.SelectedIndex = 1
-            Case PropertyPackages.FlashMethod.InsideOut
-                ComboBoxFlashAlg.SelectedIndex = 2
-            Case PropertyPackages.FlashMethod.InsideOut3P
-                ComboBoxFlashAlg.SelectedIndex = 3
-            Case PropertyPackages.FlashMethod.GibbsMin2P
-                ComboBoxFlashAlg.SelectedIndex = 4
-            Case PropertyPackages.FlashMethod.GibbsMin3P
-                ComboBoxFlashAlg.SelectedIndex = 5
-            Case PropertyPackages.FlashMethod.NestedLoopsSLE
-                ComboBoxFlashAlg.SelectedIndex = 6
-            Case PropertyPackages.FlashMethod.NestedLoopsSLE_SS
-                ComboBoxFlashAlg.SelectedIndex = 7
-            Case PropertyPackages.FlashMethod.NestedLoopsImmiscible
-                ComboBoxFlashAlg.SelectedIndex = 8
-            Case Else
-                ComboBoxFlashAlg.SelectedIndex = 0
-        End Select
+        Dim flashalgos As String() = [Enum].GetNames(_pp.PreferredFlashAlgorithm.GetType)
+        ComboBoxFlashAlg.Items.Clear()
+        ComboBoxFlashAlg.Items.AddRange(flashalgos)
 
-        Dim comps, selected As New ArrayList
-        If _pp._tpcompids Is Nothing Then _pp._tpcompids = New String() {}
-        For Each c As ConstantProperties In _selcomps.Values
-            comps.Add(c.Name)
-            For Each s As String In _pp._tpcompids
-                If s = c.Name Then
-                    selected.Add(c.Name)
-                    Exit For
-                End If
-            Next
-        Next
-
-        Me.ListView2.Items.Clear()
-
-        Dim n As Integer
-        n = comps.Count - 1
-        For i = 0 To n
-            With Me.ListView2.Items.Add(comps(i), comps(i))
-                For Each s As String In selected
-                    If s = comps(i) Then
-                        .Checked = True
-                        Exit For
-                    End If
-                Next
-                .Tag = comps(i)
-            End With
-        Next
-
-        Select Case _pp._tpseverity
-            Case 0
-                Me.RadioButton1.Checked = True
-            Case 1
-                Me.RadioButton2.Checked = True
-            Case 2
-                Me.RadioButton3.Checked = True
-        End Select
+        ComboBoxFlashAlg.SelectedIndex = _pp.PreferredFlashAlgorithm
 
         Me.loaded = True
 
     End Sub
 
     Private Sub ComboBoxFlashAlg_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBoxFlashAlg.SelectedIndexChanged
-        Select Case ComboBoxFlashAlg.SelectedIndex
-            Case 0
-                Me._pp.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
-                Me.GroupBox11.Enabled = False
-            Case 1
-                Me._pp.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoops3PV3
-                Me.GroupBox11.Enabled = True
-            Case 2
-                Me._pp.FlashAlgorithm = PropertyPackages.FlashMethod.InsideOut
-                Me.GroupBox11.Enabled = False
-            Case 3
-                Me._pp.FlashAlgorithm = PropertyPackages.FlashMethod.InsideOut3P
-                Me.GroupBox11.Enabled = True
-            Case 4
-                Me._pp.FlashAlgorithm = PropertyPackages.FlashMethod.GibbsMin2P
-                Me.GroupBox11.Enabled = False
-            Case 5
-                Me._pp.FlashAlgorithm = PropertyPackages.FlashMethod.GibbsMin3P
-                Me.GroupBox11.Enabled = True
-            Case 6
-                Me._pp.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE
-                Me.GroupBox11.Enabled = False
-            Case 7
-                Me._pp.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE_SS
-                Me.GroupBox11.Enabled = False
-            Case 8
-                Me._pp.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsImmiscible
-                Me.GroupBox11.Enabled = True
-        End Select
-    End Sub
-
-    Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton1.CheckedChanged, RadioButton2.CheckedChanged, RadioButton3.CheckedChanged
-
-        If Me.RadioButton1.Checked Then _pp._tpseverity = 0
-        If Me.RadioButton2.Checked Then _pp._tpseverity = 1
-        If Me.RadioButton3.Checked Then _pp._tpseverity = 2
-
+        _pp.PreferredFlashAlgorithm = [Enum].Parse(_pp.PreferredFlashAlgorithm.GetType, ComboBoxFlashAlg.SelectedItem)
     End Sub
 
     Public Function AddCompToGrid(ByRef comp As ConstantProperties) As Integer
@@ -264,15 +166,15 @@ Public Class FormConfigCAPEOPEN2
     End Sub
 
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
-         Me.ogc1.Sort(ogc1.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+        Me.ogc1.Sort(ogc1.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 
     Sub AddComponent(ByVal compID As String)
-        If Not _selcomps.ContainsKey(compID) Then
+        If Not _pp._selectedcomps.ContainsKey(compID) Then
             Dim tmpcomp As New ConstantProperties
-            tmpcomp = _availcomps(compID)
-            _selcomps.Add(tmpcomp.Name, tmpcomp)
-            _availcomps.Remove(tmpcomp.Name)
+            tmpcomp = _pp._availablecomps(compID)
+            _pp._selectedcomps.Add(tmpcomp.Name, tmpcomp)
+            _pp._availablecomps.Remove(tmpcomp.Name)
             Me.ListViewA.Items.Add(tmpcomp.Name, (tmpcomp.Name), 0).Tag = tmpcomp.Name
         End If
     End Sub
@@ -284,11 +186,11 @@ Public Class FormConfigCAPEOPEN2
     Sub AddCompToSimulation(ByVal index As Integer)
 
         If Me.loaded Then
-            If Not _selcomps.ContainsKey(ogc1.Rows(index).Cells(0).Value) Then
+            If Not _pp._selectedcomps.ContainsKey(ogc1.Rows(index).Cells(0).Value) Then
                 Dim tmpcomp As New ConstantProperties
-                tmpcomp = _availcomps(ogc1.Rows(index).Cells(0).Value)
-                _selcomps.Add(tmpcomp.Name, tmpcomp)
-                _availcomps.Remove(tmpcomp.Name)
+                tmpcomp = _pp._availablecomps(ogc1.Rows(index).Cells(0).Value)
+                _pp._selectedcomps.Add(tmpcomp.Name, tmpcomp)
+                _pp._availablecomps.Remove(tmpcomp.Name)
                 Me.ListViewA.Items.Add(tmpcomp.Name, tmpcomp.Name).Tag = tmpcomp.Name
                 Me.ogc1.Rows.RemoveAt(index)
             End If
@@ -300,10 +202,10 @@ Public Class FormConfigCAPEOPEN2
 
         Dim tmpcomp As New ConstantProperties
         Dim nm As String = compid
-        tmpcomp = _selcomps(nm)
-        _selcomps.Remove(tmpcomp.Name)
+        tmpcomp = _pp._selectedcomps(nm)
+        _pp._selectedcomps.Remove(tmpcomp.Name)
         Me.ListViewA.Items.RemoveByKey(tmpcomp.Name)
-        _availcomps.Add(tmpcomp.Name, tmpcomp)
+        _pp._availablecomps.Add(tmpcomp.Name, tmpcomp)
         Me.AddCompToGrid(tmpcomp)
 
     End Sub
@@ -329,25 +231,6 @@ Public Class FormConfigCAPEOPEN2
                 r.Selected = False
             Next
         End If
-    End Sub
-
-    Private Sub ListView2_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles ListView2.ItemChecked
-
-        If loaded Then
-
-            Try
-                Dim i As Integer = 0
-                Dim sel As New ArrayList
-                For Each lvi2 As ListViewItem In Me.ListView2.Items
-                    If lvi2.Checked Then sel.Add(lvi2.Tag)
-                Next
-                _pp._tpcompids = sel.ToArray(Type.GetType("System.String"))
-            Catch ex As Exception
-
-            End Try
-
-        End If
-
     End Sub
 
     Private Sub TextBox1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
@@ -414,7 +297,7 @@ Public Class FormConfigCAPEOPEN2
             End If
             For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
                 If Me.cbGPU.SelectedItem.ToString.Split("|")(1).Contains(prop.Name) Then
-                    'GlobalSettings.Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
+                    GlobalSettings.Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
                     GlobalSettings.Settings.CudafyDeviceID = prop.DeviceId
                     GetCUDACaps(prop)
                     Exit For
@@ -428,6 +311,14 @@ Public Class FormConfigCAPEOPEN2
         Me.cbGPU.Enabled = chkEnableGPUProcessing.Checked
         Me.tbGPUCaps.Enabled = chkEnableGPUProcessing.Checked
         GlobalSettings.Settings.EnableGPUProcessing = chkEnableGPUProcessing.Checked
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = _pp.FlashSettings,
+                                                               .AvailableCompounds = _pp._selectedcomps.Values.Select(Function(x) x.Name).ToList,
+                                                               .FlashAlgo = _pp.PreferredFlashAlgorithm}
+        f.ShowDialog(Me)
+
     End Sub
 
 End Class
