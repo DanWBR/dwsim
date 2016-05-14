@@ -183,14 +183,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 i += 1
             Loop Until i = n + 1
 
-            Vy_ant = Vy.Clone
-            Vx_ant = Vx.Clone
-
-            Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))
-            Vx = Vy.DivideY(Ki)
-
-            Vx = Vx.NormalizeY
-            Vy = Vy.NormalizeY
+            Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
+            Vx = Vy.DivideY(Ki).NormalizeY
 
             ecount = 0
             Dim converged As Integer = 0
@@ -206,15 +200,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If V = 1.0# Then
                     Vy = Vz
-                    Vx = Vy.DivideY(Ki)
+                    Vx = Vy.DivideY(Ki).NormalizeY
                 ElseIf V = 0.0# Then
                     Vx = Vz
-                    Vy = Vx.MultiplyY(Ki)
+                    Vy = Vx.MultiplyY(Ki).NormalizeY
                 Else
-                    Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))
-                    Vx = Vy.DivideY(Ki)
-                    Vx = Vx.NormalizeY
-                    Vy = Vy.NormalizeY
+                    Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
+                    Vx = Vy.DivideY(Ki).NormalizeY
                 End If
 
                 e1 = Vx.SubtractY(Vx_ant).AbsSumY

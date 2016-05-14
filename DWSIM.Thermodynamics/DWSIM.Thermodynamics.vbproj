@@ -67,8 +67,9 @@
     <Reference Include="ExcelDna.Integration">
       <HintPath>..\DWSIM\References\ExcelDna.Integration.dll</HintPath>
     </Reference>
-    <Reference Include="FileHelpers">
-      <HintPath>..\..\DTL\DWSIM\References\FileHelpers.dll</HintPath>
+    <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
+      <HintPath>..\packages\FileHelpers.3.1.5\lib\net40\FileHelpers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Interop.CAPEOPEN110">
       <HintPath>..\DWSIM\References\Interop.CAPEOPEN110.dll</HintPath>
@@ -424,6 +425,7 @@
     <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libipopt_mono_dwsim_ubuntu_15.10_64.tar.gz" />
     <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_liblpsolve55.so" />
     <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libPC_SAFT_PROP.so" />
+    <None Include="packages.config" />
     <None Include="Unmanaged Libraries\Linux\L_Cureos.Numerics.dll.config" />
     <None Include="Unmanaged Libraries\Linux\L_DWSIM.exe.config" />
   </ItemGroup>
