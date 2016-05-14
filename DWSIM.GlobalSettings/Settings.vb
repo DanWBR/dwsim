@@ -36,6 +36,8 @@ Public Class Settings
 
     Shared Property SelectedGPU As String
 
+    Shared Property CultureInfo As String
+
     Shared Sub LoadSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"

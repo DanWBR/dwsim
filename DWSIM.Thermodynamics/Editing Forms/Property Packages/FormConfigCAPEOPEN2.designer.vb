@@ -108,7 +108,7 @@ Partial Class FormConfigCAPEOPEN2
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem7, Me.FaTabStripItem4, Me.FaTabStripItem6})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem7
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem4
         '
         'FaTabStripItem1
         '
@@ -248,7 +248,6 @@ Partial Class FormConfigCAPEOPEN2
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
-        Me.FaTabStripItem7.Selected = True
         '
         'GroupBox5
         '
@@ -358,6 +357,7 @@ Partial Class FormConfigCAPEOPEN2
         Me.FaTabStripItem4.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem4.IsDrawn = True
         Me.FaTabStripItem4.Name = "FaTabStripItem4"
+        Me.FaTabStripItem4.Selected = True
         '
         'GroupBox6
         '

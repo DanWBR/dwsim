@@ -1,5 +1,6 @@
 ﻿Imports CapeOpen
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports Cudafy
 
 <System.Serializable()>
 <ComClass(CAPEOPENManager.ClassId, CAPEOPENManager.InterfaceId, CAPEOPENManager.EventsId)>
@@ -119,11 +120,15 @@ Public Class CAPEOPENManager
 
         _params = New ParameterCollection()
 
+        'set CUDA params
+        CudafyModes.Compiler = eGPUCompiler.All
+        CudafyModes.Target = GlobalSettings.Settings.CudafyTarget
+
         Dim exlist As List(Of Exception) = Calculator.InitLibraries()
 
-        For Each ex In exlist
-            Throw New CapeFailedInitialisationException(ex.Message.ToString, ex)
-        Next
+        'For Each ex In exlist
+        'Throw New CapeFailedInitialisationException(ex.Message.ToString, ex)
+        'Next
 
     End Sub
 

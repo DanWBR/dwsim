@@ -19,16 +19,18 @@ Public Class FormConfigCAPEOPEN2
         Me.cbGPU.Items.Clear()
 
         CudafyModes.Target = eGPUType.Emulator
-        For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
-            Me.cbGPU.Items.Add("Emulator | " & prop.Name & " (" & prop.DeviceId & ")")
-        Next
+        Try
+            For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
+                Me.cbGPU.Items.Add("Emulator | " & prop.Name & " (" & prop.DeviceId & ")")
+            Next
+        Catch ex As Exception
+        End Try
         Try
             CudafyModes.Target = eGPUType.Cuda
             For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
                 Me.cbGPU.Items.Add("CUDA | " & prop.Name & " (" & prop.DeviceId & ")")
             Next
         Catch ex As Exception
-
         End Try
         Try
             CudafyModes.Target = eGPUType.OpenCL
@@ -36,7 +38,6 @@ Public Class FormConfigCAPEOPEN2
                 Me.cbGPU.Items.Add("OpenCL | " & prop.Name & " (" & prop.DeviceId & ")")
             Next
         Catch ex As Exception
-
         End Try
 
         CudafyModes.Target = GlobalSettings.Settings.CudafyTarget
@@ -78,12 +79,6 @@ Public Class FormConfigCAPEOPEN2
             For Each comp In _pp._availablecomps.Values
                 Dim idx As Integer = Me.AddCompToGrid(comp)
                 If Not idx = -1 Then
-                    For Each c As DataGridViewCell In Me.ogc1.Rows(idx).Cells
-                        If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
-                            c.Style.ForeColor = Color.Red
-                            c.ToolTipText = _form.GetTranslatedString("CompMissingData")
-                        End If
-                    Next
                     ACSC1.Add(comp.Name)
                 End If
             Next
@@ -99,12 +94,6 @@ Public Class FormConfigCAPEOPEN2
             For Each r As DataGridViewRow In ogc1.Rows
                 If _pp._availablecomps.ContainsKey(r.Cells(0).Value) Then
                     comp = _pp._availablecomps(r.Cells(0).Value)
-                    For Each c As DataGridViewCell In r.Cells
-                        If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
-                            c.Style.ForeColor = Color.Red
-                            c.ToolTipText = _form.GetTranslatedString("CompMissingData")
-                        End If
-                    Next
                 End If
             Next
 
@@ -303,7 +292,7 @@ Public Class FormConfigCAPEOPEN2
                     Exit For
                 End If
             Next
-            MessageBox.Show(_form.GetTranslatedString("NextStartupOnly"))
+            MessageBox.Show("Changes will be effective upon restart.")
         End If
     End Sub
 
@@ -321,4 +310,19 @@ Public Class FormConfigCAPEOPEN2
 
     End Sub
 
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        If Me.ListView1.SelectedIndices.Count > 0 Then
+            Select Case Me.ListView1.SelectedIndices.Item(0)
+                Case 0
+                    GlobalSettings.Settings.CultureInfo = "pt-BR"
+                Case 1
+                    GlobalSettings.Settings.CultureInfo = "en"
+                Case 2
+                    GlobalSettings.Settings.CultureInfo = "es"
+                Case 3
+                    GlobalSettings.Settings.CultureInfo = "de"
+            End Select
+            My.Application.ChangeUICulture(GlobalSettings.Settings.CultureInfo)
+        End If
+    End Sub
 End Class
