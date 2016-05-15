@@ -243,8 +243,7 @@ Public Class FormConfigPropertyPackage
         End If
         Me.KryptonDataGridView2.Rows.Clear()
 
-        Dim nf As String = "0.####"
-
+        Dim nf As String = "N6"
 
         If TypeOf _pp Is SRKPropertyPackage Then
 
@@ -532,7 +531,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
                 End Select
             ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
                 Dim ppu As PropertyPackages.PengRobinsonPropertyPackage = _pp
@@ -543,7 +542,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
                 End Select
             ElseIf TypeOf _pp Is UNIFACPropertyPackage Then
                 Dim ppu As PropertyPackages.UNIFACPropertyPackage = _pp
@@ -554,7 +553,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
                 End Select
             ElseIf TypeOf _pp Is UNIFACLLPropertyPackage Then
                 Dim ppu As PropertyPackages.UNIFACLLPropertyPackage = _pp
@@ -565,7 +564,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
                 End Select
             ElseIf TypeOf _pp Is MODFACPropertyPackage Then
                 Dim ppu As PropertyPackages.MODFACPropertyPackage = _pp
@@ -576,7 +575,7 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = Convert.ToDouble(value)
-                        ppu.m_pr.InteractionParameters(id1)(id2).kij = CDbl(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
                 End Select
             End If
             'If Not _form Is Nothing Then
@@ -645,12 +644,6 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
 
         Next
 
-    End Sub
-
-    Private Sub KryptonDataGridView2_KeyDown(sender As Object, e As KeyEventArgs) Handles KryptonDataGridView2.KeyDown
-        'If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
-        '    PasteData(KryptonDataGridView2)
-        'End If
     End Sub
 
 End Class
