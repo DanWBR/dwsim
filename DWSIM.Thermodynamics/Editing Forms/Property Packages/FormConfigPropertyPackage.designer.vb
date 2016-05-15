@@ -230,6 +230,7 @@ Partial Class FormConfigPropertyPackage
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "FormConfigPropertyPackage"
+        Me.TopMost = True
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem2.ResumeLayout(False)

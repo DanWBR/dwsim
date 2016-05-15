@@ -399,6 +399,7 @@ Partial Class FormConfigUNIQUAC
         Me.Controls.Add(Me.FaTabStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormConfigUNIQUAC"
+        Me.TopMost = True
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem2.ResumeLayout(False)

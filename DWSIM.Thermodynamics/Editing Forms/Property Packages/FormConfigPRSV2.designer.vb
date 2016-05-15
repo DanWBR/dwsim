@@ -298,6 +298,7 @@ Partial Class FormConfigPRSV2
         Me.Controls.Add(Me.FaTabStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormConfigPRSV2"
+        Me.TopMost = True
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem3.ResumeLayout(False)
