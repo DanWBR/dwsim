@@ -337,7 +337,7 @@ Namespace UnitOperations
 
         Public Overrides Sub Initialize()
 
-            My.Application.ChangeUICulture("en-US")
+            My.Application.ChangeUICulture("en")
 
             'set CAPE-OPEN Mode 
             _capeopenmode = True
@@ -603,13 +603,13 @@ Namespace UnitOperations
             key.CreateSubKey("{678C09A1-7D66-11D2-A67D-00105A42887F}") ' CAPE-OPEN Object 
             keyname = String.Concat("CLSID\\{", t.GUID.ToString, "}\\CapeDescription")
             key = Microsoft.Win32.Registry.ClassesRoot.CreateSubKey(keyname)
-            key.SetValue("Name", "IronPython/Lua Scripting Unit Operation")
-            key.SetValue("Description", "DWSIM IronPython/Lua Scripting Unit Operation CAPE-OPEN Wrapper")
+            key.SetValue("Name", "IronPython Scripting Unit Operation")
+            key.SetValue("Description", "DWSIM IronPython Scripting Unit Operation CAPE-OPEN Wrapper")
             key.SetValue("CapeVersion", "1.0")
             key.SetValue("ComponentVersion", My.Application.Info.Version.ToString)
             key.SetValue("VendorURL", "http://dwsim.inforside.com.br")
             key.SetValue("HelpURL", "http://dwsim.inforside.com.br")
-            key.SetValue("About", "DWSIM is open-source software, released under the GPL v3 license. (c) 2011-2015 Daniel Medeiros.")
+            key.SetValue("About", "DWSIM is open-source software, released under the GPL v3 license. (c) 2011-2016 Daniel Medeiros.")
             key.Close()
 
         End Sub
@@ -669,6 +669,7 @@ Namespace UnitOperations
         Public Overrides Sub CloseEditForm()
 
         End Sub
+
     End Class
 
 End Namespace
