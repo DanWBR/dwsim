@@ -54,11 +54,11 @@ Namespace PropertyPackages
 
         Public Overrides Sub DisplayEditingForm()
 
-            If Not Flowsheet Is Nothing Then
+            If GlobalSettings.Settings.CAPEOPENMode Then
+            
+            Else
                 Dim f As New FormConfigExUNIQUAC() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
                 f.ShowDialog(Flowsheet)
-            Else
-                MyBase.DisplayEditingForm()
             End If
 
         End Sub

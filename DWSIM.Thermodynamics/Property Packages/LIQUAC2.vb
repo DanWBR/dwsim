@@ -51,10 +51,6 @@ Namespace PropertyPackages
   
         End Sub
 
-        Public Overrides Sub ReconfigureConfigForm()
-            MyBase.ReconfigureConfigForm()
-        End Sub
-
 #Region "    DWSIM Functions"
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)

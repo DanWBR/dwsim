@@ -56,10 +56,6 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Overrides Sub ReconfigureConfigForm()
-            MyBase.ReconfigureConfigForm()
-       End Sub
-
 #Region "    Auxiliary Functions"
 
         Public Function RET_VN(ByVal subst As Interfaces.ICompound) As Object

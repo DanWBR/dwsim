@@ -89,10 +89,6 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Overrides Sub ReconfigureConfigForm()
-
-        End Sub
-
         Public Overrides Sub DisplayEditingForm()
 
             If Me._phasemappings Is Nothing Then CreatePhaseMappings()
@@ -106,6 +102,7 @@ Namespace PropertyPackages
             f._ppname = Me._ppname
             f._mappings = Me._mappings
             f._phasemappings = Me._phasemappings
+            f._form = Me.Flowsheet
 
             f.ShowDialog()
 

@@ -33,12 +33,12 @@ Public Class FormConfigExUNIQUAC
 
         Loaded = False
 
-        Me.Text = _form.GetTranslatedString("ConfigurarPacotedePropriedades") & _pp.Tag & ")"
+        Me.Text = Calculator.GetLocalString("ConfigurarPacotedePropriedades") & _pp.Tag & ")"
 
         With Me.KryptonDataGridView1.Rows
             .Clear()
             For Each kvp As KeyValuePair(Of String, Double) In _pp.Parameters
-                .Add(New Object() {kvp.Key, _form.GetTranslatedString(kvp.Key), kvp.Value})
+                .Add(New Object() {kvp.Key, Calculator.GetLocalString(kvp.Key), kvp.Value})
             Next
         End With
 
@@ -124,7 +124,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
         _pp.Parameters(parid) = newvalue
         'If Not _form Is Nothing Then
         '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
-        '                                                       .Name = String.Format(_form.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, parname, oldvalue, newvalue),
+        '                                                       .Name = String.Format(Calculator.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, parname, oldvalue, newvalue),
         '                                                       .OldValue = oldvalue, .NewValue = newvalue, .Tag = _pp, .ObjID = parid, .PropertyName = "PARAM"})
         'End If
 

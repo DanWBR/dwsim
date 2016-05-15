@@ -187,6 +187,11 @@
     </Compile>
     <Compile Include="Interfaces\Excel.vb" />
     <Compile Include="Interfaces\Thermodynamics.vb" />
+    <Compile Include="Languages\Strings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
@@ -388,6 +393,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Strings.en.resx" />
+    <EmbeddedResource Include="Languages\Strings.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

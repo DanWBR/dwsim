@@ -202,16 +202,16 @@ Public Class FormConfigPropertyPackage
         With Me.KryptonDataGridView1.Rows
             .Clear()
             For Each kvp As KeyValuePair(Of String, Double) In _pp.Parameters
-                .Add(New Object() {kvp.Key, _form.GetTranslatedString(kvp.Key), kvp.Value})
+                .Add(New Object() {kvp.Key, Calculator.GetLocalString(kvp.Key), kvp.Value})
             Next
         End With
 
         Me.KryptonDataGridView2.DataSource = Nothing
 
         If _pp.ComponentName.ToString.Contains("Raoult") Or _
-           _pp.ComponentName.ToString.Contains(_form.GetTranslatedString("Vapor")) Or _
-           _pp.ComponentName.ToString.Contains(_form.GetTranslatedString("Chao-Seader")) Or _
-           _pp.ComponentName.ToString.Contains(_form.GetTranslatedString("Grayson-Streed")) Or _
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Vapor")) Or _
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Chao-Seader")) Or _
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Grayson-Streed")) Or _
            _pp.ComponentName.ToString.Contains("CoolProp") Then
             Me.FaTabStripItem2.Visible = False
             Me.FaTabStripItem1.Selected = True

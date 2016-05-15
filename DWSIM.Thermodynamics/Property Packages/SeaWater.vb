@@ -62,8 +62,16 @@ Namespace PropertyPackages
             End With
         End Sub
 
-        Public Overrides Sub ReconfigureConfigForm()
-            MyBase.ReconfigureConfigForm()
+        Public Overrides Sub DisplayEditingForm()
+
+            If GlobalSettings.Settings.CAPEOPENMode Then
+                Dim f As New FormConfigPropertyPackage() With {._pp = Me, ._comps = _selectedcomps.ToDictionary(Of String, Interfaces.ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)}
+                f.ShowDialog(Flowsheet)
+            Else
+                Dim f As New FormConfigPropertyPackage() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+                f.ShowDialog(Flowsheet)
+            End If
+
         End Sub
 
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm

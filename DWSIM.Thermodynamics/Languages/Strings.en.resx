@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DescBOPP" xml:space="preserve">
+    <value>A simplified Property Package for quick process calculations involving petroleum fluids characterized by simple properties like specific gravities and gas-oil ratio.</value>
+  </data>
+  <data name="DescCOPP" xml:space="preserve">
+    <value>A CAPE-OPEN Property Package is a complete, consistent, reusable, ready-to-use collection of methods, Compounds and model parameters for calculating any of a set of known Physical Properties for the Phases of a Material. It includes all the pure Compound methods and data, together with the relevant mixing rules and interaction parameters. A Property Package normally covers only a small subset of the Compounds and methods accessible through a Physical Properties System.</value>
+  </data>
+  <data name="DescCPPP" xml:space="preserve">
+    <value>CoolProp is an open-source database of fluid and humid air properties, formulated based on the most accurate formulations in open literature. It has been validated against the most accurate data available from the relevant references.</value>
+  </data>
+  <data name="DescCSLKPP" xml:space="preserve">
+    <value>Uses the empirical model of Chao and Seader for the calculation of VLE K-values. All other thermodynamic properties are calculated by the Lee-Kesler model.</value>
+  </data>
+  <data name="DescCSPP" xml:space="preserve">
+    <value>Liquid Phase Activity Coefficients are predicted by the COSMO-SAC JCOSMO implementation of Rafael Soares and Renan Gerber. Enthalpies, Entropies and Heat Capacities (both phases) are calculated by the Lee-Kesler method. The remaining properties, including vapor phase Fugacity Coefficients (optionally), are calculated using the Peng-Robinson EOS.</value>
+  </data>
+  <data name="DescEUPP" xml:space="preserve">
+    <value>This model is a combination of the extended UNIQUAC model for electrolytes and the Soave–Redlich–Kwong cubic equation of state. The model has been applied to aqueous systems containing ammonia and/or carbon dioxide along with various salts. Model parameters valid in the temperature range 0–110°C, the pressure range from 0–100 bar, and the concentration range up to approximately 80 molal ammonia are given. The model parameters were evaluated on the basis of more than 7000 experimental data points.</value>
+  </data>
+  <data name="DescFPP" xml:space="preserve">
+    <value>FPROPS is a free open-source C-based library for high-accuracy evaluation of thermodynamic properties for a number of pure substances. It makes use of published data for the Helmholtz fundamental equation for those substances.
+
+FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
+  </data>
+  <data name="DescGSLKPP" xml:space="preserve">
+    <value>Uses the empirical model of Grayson and Streed for the calculation of VLE K-values. All remaining thermodynamic properties are calculated by the Lee-Kesler model.</value>
+  </data>
+  <data name="DescLKPPP" xml:space="preserve">
+    <value>Based on the Corresponding States Theory, the Lee-Kesler equation was enhanced by Plöcker to calculate component fugacities in asymmetric mixtures. In this Property Package, all thermodynamic properties - including K-values - are calculated by the LKP equation.</value>
+  </data>
+  <data name="DescMUPP" xml:space="preserve">
+    <value>Liquid phase Activity Coefficients are calculated by the Modified UNIFAC (Dortmund) method. Enthalpies, Entropies and Heat Capacities (both phases) are calculated by the Lee-Kesler method. The remaining properties, including vapor phase Fugacity Coefficients (optionally), are calculated using the Peng-Robinson EOS.</value>
+  </data>
+  <data name="DescNRTLPP" xml:space="preserve">
+    <value>In this Property Package, the NRTL (Non-Random Two-Liquid) model is used to calculate liquid-phase activity coefficients. Enthalpies are calculated by the Lee-Kesler model, while vapor-phase fugacities (optionally) and other thermodynamic properties (both phases) are calculated by the Peng-Robinson EOS.</value>
+  </data>
+  <data name="DescNUPP" xml:space="preserve">
+    <value>New modified UNIFAC property prediction model parameters are reported for 89 main groups and 984 group–group interactions by using critically evaluated phase equilibrium data including vapor–liquid equilibrium (VLE), liquid–liquid equilibrium (LLE), solid–liquid equilibrium (SLE), excess enthalpy (HE), infinite dilution activity coefficient (AINF) and excess heat capacity (CPE) data. Obtained parameters are recommended primarily for correlations of the VLE data.</value>
+  </data>
+  <data name="DescPCSAFTPP" xml:space="preserve">
+    <value>The Perturbed Chain SAFT model is a state-of-the-art, engineering-like equation of state. It is designed for modelling mixtures of all types of substances: gases, solvents and polymers.
+
+Perturbed-Chain SAFT is suitable for the calculation of phase equilibria and thermophysical properties of pure components and mixtures. It has been tested against experimental data for numerous systems and found to give excellent results. When compared to other equations of state, we find Perturbed-Chain SAFT to be more precise for correlation of experimental data and more predictive when applied to mixtures. It is very reliable for extrapolations over the regions where parameters were fitted.
+
+* General Info *
+
+DWSIM's implementation is based on the FORTRAN program which can be downloaded at http://www.th.bci.tu-dortmund.de/de/forschung/pc-saft. 
+
+*** Important ***
+
+- This implementation doesn't contain the association term!
+- The calculated Cp/Cv is actually Cp/(Cp-R)</value>
+  </data>
+  <data name="DescPengRobinsonIWVTPP" xml:space="preserve">
+    <value>This Property Package uses the Peng-Robinson EOS taking water as an immiscible component. Also takes into account the volume translation coefficient for a better prediction of liquid volume densities, when applicable. Recommended only for water-hydrocarbon systems.</value>
+  </data>
+  <data name="DescPengRobinsonMP" xml:space="preserve">
+    <value>Peng-Robinson Property Package with support for more than one liquid phase.</value>
+  </data>
+  <data name="DescPengRobinsonPP" xml:space="preserve">
+    <value>Property Package that uses the Peng-Robinson Cubic Equation of State. Recommended for use with hydrocarbons and non-condensables.</value>
+  </data>
+  <data name="DescPRLK" xml:space="preserve">
+    <value>In this Property Package, Enthalpies, Entropies and Heat Capacities are calculated from the Lee-Kesler model.</value>
+  </data>
+  <data name="DescPRSV2PP" xml:space="preserve">
+    <value>PRSV2 EOS with three pure compound parameters (k1, k2 and k3) and two Margules-type binary interaction parameters (kij and kji).
+
+A modification to the attraction term in the Peng-Robinson equation of state published by Stryjek and Vera in 1986 (PRSV) significantly improved the model's accuracy by introducing an adjustable pure component parameter and by modifying the polynomial fit of the acentric factor. A subsequent modification published in 1986 (PRSV2) further improved the model's accuracy by introducing two additional pure component parameters to the previous attraction term modification.
+
+PRSV2 is particularly advantageous for VLE calculations. While PRSV1 does offer an advantage over the Peng-Robinson model for describing thermodynamic behavior, it is still not accurate enough, in general, for phase equilibrium calculations.</value>
+  </data>
+  <data name="DescPRSV2VLPP" xml:space="preserve">
+    <value>PRSV2 EOS with three pure compound parameters (k1, k2 and k3) and two Van Laar-type binary interaction parameters (kij and kji).
+
+A modification to the attraction term in the Peng-Robinson equation of state published by Stryjek and Vera in 1986 (PRSV) significantly improved the model's accuracy by introducing an adjustable pure component parameter and by modifying the polynomial fit of the acentric factor. A subsequent modification published in 1986 (PRSV2) further improved the model's accuracy by introducing two additional pure component parameters to the previous attraction term modification.
+
+PRSV2 is particularly advantageous for VLE calculations. While PRSV1 does offer an advantage over the Peng-Robinson model for describing thermodynamic behavior, it is still not accurate enough, in general, for phase equilibrium calculations.</value>
+  </data>
+  <data name="DescPRWSPP" xml:space="preserve">
+    <value>Uses the Peng-Robinson EOS with Wong-Sandler mixing rule. The excess Gibbs energy (GE/RT) is calculated from the UNIFAC model. Recommended for use with binary or ternary mixtures of polar components at high pressures and temperatures.</value>
+  </data>
+  <data name="Descrio1" xml:space="preserve">
+    <value>1. Description</value>
+  </data>
+  <data name="DescRPP" xml:space="preserve">
+    <value>Reference Property Package (Ideal Gas/Solution).</value>
+  </data>
+  <data name="DescSEAPP" xml:space="preserve">
+    <value>This Property Package contains routines to calculate seawater properties using the procedures of the IAPWS-08 specification ("Release on the IAPWS Formulation 2008 for the Thermodynamic Properties of Seawater").</value>
+  </data>
+  <data name="DescSoaveRedlichKwongSRK" xml:space="preserve">
+    <value>Property Package that uses the Soave-Redlich-Kwong Cubic Equation of State. Recommended for use with hydrocarbons and non-condensables.</value>
+  </data>
+  <data name="DescSourWaterPP" xml:space="preserve">
+    <value>The Sour Water Property Package is based on the SWEQ model described in the USEPA Report EPA-600/2-80-067: 'A new correlation of NH3, CO2, and H2S volatility data from aqueous sour water systems', by Wilson, Grant M., available online at http://nepis.epa.gov/Exe/ZyPDF.cgi?Dockey=9101B309.PDF  
+
+In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour water systems including the effects of release by caustic (NaOH) addition are considered. The original model is applicable for temperatures between 20°C (68°F) and 140°C (285°F), and pressures up to 50 psi. in DWSIM, use of the PR EOS to correct vapour phase non-idealities extends this range but, due to lack of experimental data, exact ranges cannot be specified.</value>
+  </data>
+  <data name="DescSRKMP" xml:space="preserve">
+    <value>Soave-Redlich-Kwong Property Package with support for more than one liquid phase.</value>
+  </data>
+  <data name="DescSteamTablesPP" xml:space="preserve">
+    <value>Property Package for Water using IAPWS-97 property tables.</value>
+  </data>
+  <data name="DescUNIQUACPP" xml:space="preserve">
+    <value>In this Property Package, the UNIQUAC model is used to calculate liquid-phase activity coefficients. Enthalpies are calculated by the Lee-Kesler model, while vapor-phase fugacities (optionally) and other thermodynamic properties (both phases) are calculated by the Peng-Robinson EOS.</value>
+  </data>
+  <data name="DescUPP" xml:space="preserve">
+    <value>Property Package that uses the UNIFAC Group Contribution Method for equilibrium calculations. Recommended for use with Hypotheticals.</value>
+  </data>
+  <data name="PP_ENTH_CP_CALC_METHOD" xml:space="preserve">
+    <value>Enthalpy/Entropy/Cp calculation method (0 = Lee-Kesler, 1 = Ideal, 2 = Excess)</value>
+  </data>
+  <data name="PP_FLASHALGORITHM" xml:space="preserve">
+    <value>Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE)</value>
+  </data>
+  <data name="PP_FLASHALGORITHMFASTMODE" xml:space="preserve">
+    <value>Enable Flash Algorithm Fast Mode</value>
+  </data>
+  <data name="PP_FLASHALGORITHMIDEALKFALLBACK" xml:space="preserve">
+    <value>Fallback to ideal K on trivial solution</value>
+  </data>
+  <data name="PP_IDEAL_MIXRULE_LIQDENS" xml:space="preserve">
+    <value>Use Ideal Mixing Rule for Liquid Phase Density (0 = Disable, 1 = Enable)</value>
+  </data>
+  <data name="PP_IDEAL_VAPOR_PHASE_FUG" xml:space="preserve">
+    <value>Use Ideal Vapor Phase Fugacity Model (0 = Disable, 1 = Enable)</value>
+  </data>
+  <data name="PP_IGNORE_SALINITY_LIMIT" xml:space="preserve">
+    <value>Ignore maximum salinity limit</value>
+  </data>
+  <data name="PP_PHFELT" xml:space="preserve">
+    <value>PH Flash - External Loop Tolerance</value>
+  </data>
+  <data name="PP_PHFILT" xml:space="preserve">
+    <value>PH Flash - Internal Loop Tolerance</value>
+  </data>
+  <data name="PP_PHFMEI" xml:space="preserve">
+    <value>PH Flash - Maximum External Iterations </value>
+  </data>
+  <data name="PP_PHFMII" xml:space="preserve">
+    <value>PH Flash - Maximum Internal Iterations </value>
+  </data>
+  <data name="PP_PSFELT" xml:space="preserve">
+    <value>PS Flash - External Loop Tolerance</value>
+  </data>
+  <data name="PP_PSFILT" xml:space="preserve">
+    <value>PS Flash - Internal Loop Tolerance</value>
+  </data>
+  <data name="PP_PSFMEI" xml:space="preserve">
+    <value>PS Flash - Maximum External Iterations</value>
+  </data>
+  <data name="PP_PSFMII" xml:space="preserve">
+    <value>PS Flash - Maximum Internal Iterations</value>
+  </data>
+  <data name="PP_PTFELT" xml:space="preserve">
+    <value>PT/PV Flash - External Loop Tolerance</value>
+  </data>
+  <data name="PP_PTFILT" xml:space="preserve">
+    <value>PT/PV Flash - Internal Loop Tolerance</value>
+  </data>
+  <data name="PP_PTFMEI" xml:space="preserve">
+    <value>PT/PV Flash - Maximum External Iterations</value>
+  </data>
+  <data name="PP_PTFMII" xml:space="preserve">
+    <value>PT/PV Flash - Maximum Internal Iterations</value>
+  </data>
+  <data name="PP_RIG_BUB_DEW_FLASH_INIT" xml:space="preserve">
+    <value>Use Rigorous Bubble and Dew Points for TP Flash Vapor Fraction Initialization (0 = Disable, 1 = Enable)</value>
+  </data>
+  <data name="PP_USEEXPLIQDENS" xml:space="preserve">
+    <value>Use Experimental Liquid Density Data (0 = Disable, 1 = Enable)</value>
+  </data>
+  <data name="PP_USEEXPLIQTHERMALCOND" xml:space="preserve">
+    <value>Use Experimental Liquid Thermal Conductivity Data (0 = Disable, 1 = Enable)</value>
+  </data>
+  <data name="PP_USE_EOS_LIQDENS" xml:space="preserve">
+    <value>Use EOS for Liquid Density (0 = Disable, 1 = Enable)</value>
+  </data>
+  <data name="PP_USE_EOS_VOLUME_SHIFT" xml:space="preserve">
+    <value>Use Peneloux Volume Translation correction (0 = Disable, 1 = Enable)</value>
+  </data>
+</root>

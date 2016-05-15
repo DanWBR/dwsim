@@ -57,10 +57,6 @@ Namespace PropertyPackages
             End With
         End Sub
 
-        Public Overrides Sub ReconfigureConfigForm()
-            MyBase.ReconfigureConfigForm()
-        End Sub
-
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
                 Return New Auxiliary.FlashAlgorithms.BlackOil

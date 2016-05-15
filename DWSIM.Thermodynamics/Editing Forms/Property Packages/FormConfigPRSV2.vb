@@ -30,12 +30,12 @@ Public Class FormConfigPRSV2
 
         Loaded = False
 
-        Me.Text = _form.GetTranslatedString("ConfigurarPacotedePropriedades") & _pp.Tag & ")"
+        Me.Text = Calculator.GetLocalString("ConfigurarPacotedePropriedades") & _pp.Tag & ")"
 
         With Me.KryptonDataGridView1.Rows
             .Clear()
             For Each kvp As KeyValuePair(Of String, Double) In _pp.Parameters
-                .Add(New Object() {kvp.Key, _form.GetTranslatedString(kvp.Key), kvp.Value})
+                .Add(New Object() {kvp.Key, Calculator.GetLocalString(kvp.Key), kvp.Value})
             Next
         End With
 
@@ -164,7 +164,7 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
         _pp.Parameters(parid) = newvalue
         'If Not _form Is Nothing Then
         '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
-        '                                                       .Name = String.Format(_form.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, parname, oldvalue, newvalue),
+        '                                                       .Name = String.Format(Calculator.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, parname, oldvalue, newvalue),
         '                                                       .OldValue = oldvalue, .NewValue = newvalue, .Tag = _pp, .ObjID = parid, .PropertyName = "PARAM"})
         'End If
 
@@ -177,7 +177,7 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
     Private Sub KryptonDataGridView2_CellValidating(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellValidatingEventArgs)
         If e.FormattedValue <> Nothing Then
             If Double.TryParse(e.FormattedValue, New Double) = False Then
-                MessageBox.Show(_form.GetTranslatedString("Ovalorinseridoinvlid"), _form.GetTranslatedString("Parmetroinvlido"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(Calculator.GetLocalString("Ovalorinseridoinvlid"), Calculator.GetLocalString("Parmetroinvlido"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 e.Cancel = True
             End If
         End If
@@ -233,7 +233,7 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
                 End Select
                 'If Not _form Is Nothing Then
                 '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
-                '                                                       .Name = String.Format(_form.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
+                '                                                       .Name = String.Format(Calculator.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
                 '                                                       .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
                 '                                                       .Tag = _pp, .PropertyName = tp})
                 'End If
@@ -254,7 +254,7 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
                 End Select
                 'If Not _form Is Nothing Then
                 '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
-                '                                                       .Name = String.Format(_form.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
+                '                                                       .Name = String.Format(Calculator.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
                 '                                                       .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
                 '                                                       .Tag = _pp, .PropertyName = tp})
                 'End If

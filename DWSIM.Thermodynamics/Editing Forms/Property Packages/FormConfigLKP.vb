@@ -31,21 +31,21 @@ Public Class FormConfigLKP
 
     Private Sub FormConfigPR_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.Text = _form.GetTranslatedString("ConfigurarPacotedePropriedades") & _pp.ComponentName
+        Me.Text = _pp.ComponentName
 
         With Me.KryptonDataGridView1.Rows
             .Clear()
             For Each kvp As KeyValuePair(Of String, Double) In _pp.Parameters
-                .Add(New Object() {kvp.Key, _form.GetTranslatedString(kvp.Key), kvp.Value})
+                .Add(New Object() {kvp.Key, Calculator.GetLocalString(kvp.Key), kvp.Value})
             Next
         End With
 
         Me.KryptonDataGridView2.DataSource = Nothing
 
         If _pp.ComponentName.ToString.Contains("Raoult") Or _
-           _pp.ComponentName.ToString.Contains(_form.GetTranslatedString("Vapor")) Or _
-           _pp.ComponentName.ToString.Contains(_form.GetTranslatedString("Chao-Seader")) Or _
-           _pp.ComponentName.ToString.Contains(_form.GetTranslatedString("Grayson-Streed")) Then
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Vapor")) Or _
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Chao-Seader")) Or _
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Grayson-Streed")) Then
             Me.FaTabStripItem2.Visible = False
             Me.FaTabStripItem1.Selected = True
             Exit Sub
@@ -107,7 +107,7 @@ gt1:        If ppu.m_lk.InteractionParameters.ContainsKey(cp.Name) Then
         _pp.Parameters(parid) = newvalue
         'If Not _form Is Nothing Then
         '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
-        '                                                       .Name = String.Format(_form.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, parname, oldvalue, newvalue),
+        '                                                       .Name = String.Format(Calculator.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, parname, oldvalue, newvalue),
         '                                                       .OldValue = oldvalue, .NewValue = newvalue, .Tag = _pp, .ObjID = parid, .PropertyName = "PARAM"})
         'End If
 
@@ -149,7 +149,7 @@ gt1:        If ppu.m_lk.InteractionParameters.ContainsKey(cp.Name) Then
                     ppu.m_lk.InteractionParameters(id1)(id2).kij = CDbl(value)
             End Select
             'If Not _form Is Nothing Then
-            '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged, .Name = _form.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"),
+            '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged, .Name = Calculator.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"),
             '                                                           .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
             '                                                           .Tag = _pp, .PropertyName = "LK_IP"})
             'End If

@@ -337,11 +337,7 @@ Public Class FormSimulWizard
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
         Me.dgvpp.Rows(Me.dgvpp.Rows.Count - 1).Selected = True
         If TypeOf pp Is PropertyPackages.CAPEOPENPropertyPackage Then
-            pp.ReconfigureConfigForm()
-            'pp.ConfigForm._pp = pp
-            'pp.ConfigForm._comps = FrmChild.Options.SelectedComponents
-            'pp.ConfigForm._form = FrmChild
-            'pp.ShowConfigForm(FrmChild)
+            pp.DisplayEditingForm()
         End If
     End Sub
 

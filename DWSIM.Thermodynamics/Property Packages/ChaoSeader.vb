@@ -57,10 +57,6 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Overrides Sub ReconfigureConfigForm()
-            MyBase.ReconfigureConfigForm()
-        End Sub
-
         Public Overrides Sub ConfigParameters()
             m_par = New System.Collections.Generic.Dictionary(Of String, Double)
             With Me.Parameters

@@ -444,10 +444,6 @@ Namespace PropertyPackages
 
 #Region "   Must Override or Overridable Functions"
 
-        Public Overridable Sub ReconfigureConfigForm()
-
-        End Sub
-
         ''' <summary>
         ''' Provides a wrapper function for CAPE-OPEN CalcProp/CalcSingleProp functions.
         ''' </summary>
@@ -8793,11 +8789,8 @@ Final3:
         ''' available it returns an error.</summary>
         ''' <remarks></remarks>
         Public Overridable Sub Edit() Implements CapeOpen.ICapeUtilities.Edit
-            Dim cf As New FormConfigCAPEOPEN2
-            With cf
-                ._pp = Me
-                .Show()
-            End With
+            Dim cf As New FormConfigCAPEOPEN2 With {._pp = Me}
+            cf.ShowDialog()
         End Sub
 
         ''' <summary>

@@ -54,13 +54,15 @@ Namespace PropertyPackages
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
 
         End Sub
+
         Public Overrides Sub DisplayEditingForm()
 
-            If Not Flowsheet Is Nothing Then
-                Dim f As New FormConfigNRTL() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+            If GlobalSettings.Settings.CAPEOPENMode Then
+                Dim f As New FormConfigNRTL() With {._pp = Me, ._comps = _selectedcomps.ToDictionary(Of String, Interfaces.ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)}
                 f.ShowDialog(Flowsheet)
             Else
-                MyBase.DisplayEditingForm()
+                Dim f As New FormConfigNRTL() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+                f.ShowDialog(Flowsheet)
             End If
 
         End Sub

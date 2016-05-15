@@ -56,12 +56,8 @@ Namespace PropertyPackages
 
         Public Overrides Sub DisplayEditingForm()
 
-            If Not Flowsheet Is Nothing Then
-                Dim f As New FormConfigUNIQUAC() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
-                f.ShowDialog(Flowsheet)
-            Else
-                MyBase.DisplayEditingForm()
-            End If
+            Dim f As New FormConfigUNIQUAC() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+            f.ShowDialog(Flowsheet)
 
         End Sub
 
