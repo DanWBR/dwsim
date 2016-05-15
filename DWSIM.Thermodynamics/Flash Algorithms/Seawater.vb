@@ -190,7 +190,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ecount += 1
 
-                PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop
 

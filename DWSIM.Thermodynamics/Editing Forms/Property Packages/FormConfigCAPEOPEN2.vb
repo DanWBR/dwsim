@@ -60,11 +60,12 @@ Public Class FormConfigCAPEOPEN2
         Me.cbGPU.Enabled = Me.chkEnableGPUProcessing.Checked
         Me.tbGPUCaps.Enabled = Me.chkEnableGPUProcessing.Checked
         Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
+        Me.cbSIMD.Checked = GlobalSettings.Settings.UseSIMDExtensions
 
         Me.TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource
 
         Me.lblName.Text = _pp.ComponentName
-        Me.lblDescription.Text = _pp.ComponentDescription
+        Me.tbErrorLog.Text = _pp.ExceptionLog
 
         Dim comp As ConstantProperties
 
@@ -307,6 +308,10 @@ Public Class FormConfigCAPEOPEN2
                                                                .FlashAlgo = _pp.PreferredFlashAlgorithm}
         f.ShowDialog(Me)
 
+    End Sub
+
+    Private Sub cbSIMD_CheckedChanged(sender As Object, e As EventArgs) Handles cbSIMD.CheckedChanged
+        GlobalSettings.Settings.UseSIMDExtensions = Me.cbSIMD.Checked
     End Sub
 
 End Class

@@ -305,7 +305,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 WriteDebugInfo("PT Flash [NL]: Iteration #" & ecount & ", VF = " & V)
 
-                PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until convergiu = 1
 

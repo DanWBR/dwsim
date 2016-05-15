@@ -564,7 +564,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("TV Flash [NL-I]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(P - Pant) < 1 Or Double.IsNaN(P) = True Or ecount > maxit_e Or Double.IsNaN(P) Or Double.IsInfinity(P)
 
@@ -668,7 +668,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("TV Flash [NL-I]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -889,7 +889,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("PV Flash [NL-I]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(T - Tant) < 0.1 Or Double.IsNaN(T) = True Or ecount > maxit_e Or Double.IsNaN(T) Or Double.IsInfinity(T)
 
@@ -991,7 +991,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("PV Flash [NL-I]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 

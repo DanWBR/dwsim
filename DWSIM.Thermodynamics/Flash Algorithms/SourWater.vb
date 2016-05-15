@@ -492,7 +492,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         End If
                     End If
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                     icount += 1
 
@@ -604,7 +604,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     maxDT *= 0.95
                     cnt += 1
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until cnt > maxitEXT Or Double.IsNaN(x1) Or x1 < 0.0#
 
@@ -715,7 +715,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     cnt += 1
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until cnt > maxitEXT Or Double.IsNaN(x1)
 
@@ -786,7 +786,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             WriteDebugInfo("PH Flash [Sour Water]: Current T = " & T & ", Current H Error = " & herr)
 
-            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
         End Function
 
@@ -825,7 +825,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             WriteDebugInfo("PS Flash [Sour Water]: Current T = " & T & ", Current S Error = " & serr)
 
-            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
         End Function
 
@@ -913,7 +913,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
-                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop
 
@@ -1086,7 +1086,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
                         End If
 
-                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                     Loop
 
@@ -1127,7 +1127,7 @@ fallback:           Vx = Vz.Clone
                             Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
                         End If
 
-                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                     Loop
 
@@ -1172,7 +1172,7 @@ fallback:           Vx = Vz.Clone
 
                     If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop
 

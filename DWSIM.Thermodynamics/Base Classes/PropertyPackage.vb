@@ -161,6 +161,8 @@ Namespace PropertyPackages
 
         Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
+        Friend Property ExceptionLog As String = ""
+
         <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
 
 #Region "   Constructor"
@@ -8582,6 +8584,13 @@ Final3:
 
             Dim ms As New Streams.MaterialStream("", "")
 
+            For Each phase In ms.Phases.Values
+                For Each tmpcomp In _selectedcomps.Values
+                    phase.Compounds.Add(tmpcomp.Name, New BaseClasses.Compound(tmpcomp.Name, ""))
+                    phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
+                Next
+            Next
+
             'transfer values
 
             Dim mys As ICapeThermoMaterial = material
@@ -9113,6 +9122,8 @@ Final3:
             _moreinfo = moreinfo
             _operation = operation
             _scope = scope
+
+            ExceptionLog += Date.Now + ": " + vbCrLf + vbCrLf + ex.ToString + vbCrLf + vbCrLf
 
             Throw ex
 

@@ -246,7 +246,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 WriteDebugInfo("PT Flash [NL-SLE]: Iteration #" & ecount & ", LF = " & L)
 
-                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until convergiu = 1
 
@@ -672,7 +672,7 @@ out:        d2 = Date.Now
 
                     WriteDebugInfo("PT Flash [NL-SLE]: Iteration #" & ecount & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until convergiu = 1
 
@@ -815,7 +815,7 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
 
                 ecount += 1
 
-                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop
 
@@ -1323,7 +1323,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                     WriteDebugInfo("PV Flash [SLE]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1433,7 +1433,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                         WriteDebugInfo("PV Flash [SLE]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                     Loop Until (Math.Abs(fval) < etol And e1 < etol) Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1725,7 +1725,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
                 WriteDebugInfo("PV Flash [NL-SLE]: Iteration #" & ecount & ", T = " & T & ", LF = " & L)
 
-                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until Math.Abs(T - Tant) < 0.01 Or Double.IsNaN(T) = True Or ecount > maxit_e Or Double.IsNaN(T) Or Double.IsInfinity(T)
 

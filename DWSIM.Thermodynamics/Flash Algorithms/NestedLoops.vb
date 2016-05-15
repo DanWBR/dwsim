@@ -255,7 +255,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 WriteDebugInfo("PT Flash [NL]: Iteration #" & ecount & ", VF = " & V)
 
-                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until converged = 1
 
@@ -1128,7 +1128,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -1243,7 +1243,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("TV Flash [NL]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(P) = True Or ecount > maxit_e
 
@@ -1447,7 +1447,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1520,7 +1520,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     WriteDebugInfo("PV Flash [NL]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop Until (Math.Abs(fval) < etol And e1 < etol) Or Double.IsNaN(T) = True Or ecount > maxit_e
 
@@ -1575,7 +1575,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             WriteDebugInfo("PH Flash [NL]: Current T = " & T & ", Current H Error = " & herr)
 
-            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
         End Function
 
@@ -1614,7 +1614,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             WriteDebugInfo("PS Flash [NL]: Current T = " & T & ", Current S Error = " & serr)
 
-            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
         End Function
 
