@@ -327,12 +327,6 @@
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Database</value>
   </data>
-  <metadata name="Column8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Column8.HeaderText" xml:space="preserve">
-    <value>Type</value>
-  </data>
   <metadata name="Column9.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -400,7 +394,7 @@
     <value>FaTabStripItem1</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5979.17488, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5979.32260, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -892,12 +886,69 @@
     <value>FaTabStripItem7</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5979.17488, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5979.32260, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblDescription.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 45</value>
+  </data>
+  <data name="lblDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 75</value>
+  </data>
+  <data name="lblDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblDescription.Text" xml:space="preserve">
+    <value>tttt</value>
+  </data>
+  <data name="&gt;&gt;lblDescription.Name" xml:space="preserve">
+    <value>lblDescription</value>
+  </data>
+  <data name="&gt;&gt;lblDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDescription.Parent" xml:space="preserve">
+    <value>FaTabStripItem6</value>
+  </data>
+  <data name="&gt;&gt;lblDescription.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 45</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 13</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Package Description:</value>
+  </data>
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
+  </data>
+  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>FaTabStripItem6</value>
+  </data>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tbErrorLog.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -916,7 +967,7 @@
     <value>Vertical</value>
   </data>
   <data name="tbErrorLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>663, 267</value>
+    <value>663, 196</value>
   </data>
   <data name="tbErrorLog.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -934,10 +985,10 @@
     <value>0</value>
   </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 49</value>
+    <value>11, 120</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 287</value>
+    <value>669, 216</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -955,13 +1006,13 @@
     <value>FaTabStripItem6</value>
   </data>
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="lblName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 21</value>
+    <value>123, 21</value>
   </data>
   <data name="lblName.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -982,7 +1033,7 @@
     <value>FaTabStripItem6</value>
   </data>
   <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1009,7 +1060,7 @@
     <value>FaTabStripItem6</value>
   </data>
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
     <value>691, 347</value>
@@ -1024,7 +1075,7 @@
     <value>FaTabStripItem6</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5979.17488, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5979.32260, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1048,7 +1099,7 @@
     <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.5979.17488, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.5979.32260, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1200,26 +1251,17 @@
   <data name="Column12.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Column12.Width" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <metadata name="Column13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column13.HeaderText" xml:space="preserve">
     <value>Column13</value>
   </data>
-  <data name="Column13.Width" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <metadata name="Column14.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column14.HeaderText" xml:space="preserve">
     <value>Column14</value>
-  </data>
-  <data name="Column14.Width" type="System.Int32, mscorlib">
-    <value>5</value>
   </data>
   <metadata name="Column15.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1232,9 +1274,6 @@
   </metadata>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Column1</value>
-  </data>
-  <data name="Column1.Width" type="System.Int32, mscorlib">
-    <value>5</value>
   </data>
   <data name="dgvdb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -1300,7 +1339,7 @@
     <value>FaTabStripItem5</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5979.17488, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5979.32260, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1447,36 +1486,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM CAPE-OPEN Property Package Configuration</value>
   </data>
-  <data name="&gt;&gt;Column11.Name" xml:space="preserve">
-    <value>Column11</value>
-  </data>
-  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column6.Name" xml:space="preserve">
-    <value>Column6</value>
-  </data>
-  <data name="&gt;&gt;Column6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column7.Name" xml:space="preserve">
-    <value>Column7</value>
-  </data>
-  <data name="&gt;&gt;Column7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column8.Name" xml:space="preserve">
-    <value>Column8</value>
-  </data>
-  <data name="&gt;&gt;Column8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column9.Name" xml:space="preserve">
-    <value>Column9</value>
-  </data>
-  <data name="&gt;&gt;Column9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Column12.Name" xml:space="preserve">
     <value>Column12</value>
   </data>
@@ -1507,10 +1516,34 @@
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Column11.Name" xml:space="preserve">
+    <value>Column11</value>
+  </data>
+  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column6.Name" xml:space="preserve">
+    <value>Column6</value>
+  </data>
+  <data name="&gt;&gt;Column6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column7.Name" xml:space="preserve">
+    <value>Column7</value>
+  </data>
+  <data name="&gt;&gt;Column7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column9.Name" xml:space="preserve">
+    <value>Column9</value>
+  </data>
+  <data name="&gt;&gt;Column9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormConfigCAPEOPEN2</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=4.0.5979.17963, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=4.0.5979.32532, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

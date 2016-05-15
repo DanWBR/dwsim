@@ -36,11 +36,6 @@ Partial Class FormConfigCAPEOPEN2
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ogc1 = New System.Windows.Forms.DataGridView()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FaTabStripItem7 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -49,6 +44,7 @@ Partial Class FormConfigCAPEOPEN2
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.cbSIMD = New System.Windows.Forms.CheckBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.tbGPUCaps = New System.Windows.Forms.TextBox()
         Me.cbGPU = New System.Windows.Forms.ComboBox()
@@ -58,6 +54,8 @@ Partial Class FormConfigCAPEOPEN2
         Me.Label11 = New System.Windows.Forms.Label()
         Me.chkEnableParallelCalcs = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem6 = New FarsiLibrary.Win.FATabStripItem()
+        Me.lblDescription = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.tbErrorLog = New System.Windows.Forms.TextBox()
         Me.lblName = New System.Windows.Forms.Label()
@@ -75,29 +73,32 @@ Partial Class FormConfigCAPEOPEN2
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.cbSIMD = New System.Windows.Forms.CheckBox()
-        CType(Me.FaTabStrip1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.FaTabStrip1.SuspendLayout
-        Me.FaTabStripItem1.SuspendLayout
-        Me.GroupBox2.SuspendLayout
-        Me.GroupBox4.SuspendLayout
-        CType(Me.ogc1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.FaTabStripItem7.SuspendLayout
-        Me.GroupBox5.SuspendLayout
-        Me.GroupBox7.SuspendLayout
-        Me.GroupBox8.SuspendLayout
-        Me.FaTabStripItem6.SuspendLayout
-        Me.GroupBox3.SuspendLayout
-        Me.FaTabStripItem5.SuspendLayout
-        Me.GroupBox11.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        CType(Me.dgvdb,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.FaTabStrip1.SuspendLayout()
+        Me.FaTabStripItem1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        CType(Me.ogc1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.FaTabStripItem7.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
+        Me.FaTabStripItem6.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.FaTabStripItem5.SuspendLayout()
+        Me.GroupBox11.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'FaTabStrip1
         '
-        Me.FaTabStrip1.AlwaysShowClose = false
-        Me.FaTabStrip1.AlwaysShowMenuGlyph = false
+        Me.FaTabStrip1.AlwaysShowClose = False
+        Me.FaTabStrip1.AlwaysShowMenuGlyph = False
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem7, Me.FaTabStripItem6})
         Me.FaTabStrip1.Name = "FaTabStrip1"
@@ -184,7 +185,7 @@ Partial Class FormConfigCAPEOPEN2
         Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.Column7, Me.Column8, Me.Column9})
+        Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.Column7, Me.Column9})
         resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.Name = "ogc1"
         Me.ogc1.RowHeadersVisible = False
@@ -192,6 +193,280 @@ Partial Class FormConfigCAPEOPEN2
         Me.ogc1.ShowCellErrors = False
         Me.ogc1.ShowEditingIcon = False
         Me.ogc1.ShowRowErrors = False
+        '
+        'FaTabStripItem7
+        '
+        Me.FaTabStripItem7.CanClose = False
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox5)
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox7)
+        Me.FaTabStripItem7.IsDrawn = True
+        Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.Button5)
+        Me.GroupBox5.Controls.Add(Me.Label4)
+        Me.GroupBox5.Controls.Add(Me.ComboBoxFlashAlg)
+        Me.GroupBox5.Controls.Add(Me.Button3)
+        Me.GroupBox5.Controls.Add(Me.Label1)
+        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.TabStop = False
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.Name = "Button5"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        '
+        'ComboBoxFlashAlg
+        '
+        Me.ComboBoxFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxFlashAlg.FormattingEnabled = True
+        Me.ComboBoxFlashAlg.Items.AddRange(New Object() {resources.GetString("ComboBoxFlashAlg.Items"), resources.GetString("ComboBoxFlashAlg.Items1"), resources.GetString("ComboBoxFlashAlg.Items2"), resources.GetString("ComboBoxFlashAlg.Items3"), resources.GetString("ComboBoxFlashAlg.Items4"), resources.GetString("ComboBoxFlashAlg.Items5"), resources.GetString("ComboBoxFlashAlg.Items6"), resources.GetString("ComboBoxFlashAlg.Items7"), resources.GetString("ComboBoxFlashAlg.Items8")})
+        resources.ApplyResources(Me.ComboBoxFlashAlg, "ComboBoxFlashAlg")
+        Me.ComboBoxFlashAlg.Name = "ComboBoxFlashAlg"
+        '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'GroupBox7
+        '
+        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
+        Me.GroupBox7.Controls.Add(Me.cbSIMD)
+        Me.GroupBox7.Controls.Add(Me.GroupBox8)
+        Me.GroupBox7.Controls.Add(Me.cbGPU)
+        Me.GroupBox7.Controls.Add(Me.Label9)
+        Me.GroupBox7.Controls.Add(Me.chkEnableGPUProcessing)
+        Me.GroupBox7.Controls.Add(Me.cbParallelism)
+        Me.GroupBox7.Controls.Add(Me.Label11)
+        Me.GroupBox7.Controls.Add(Me.chkEnableParallelCalcs)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.TabStop = False
+        '
+        'cbSIMD
+        '
+        resources.ApplyResources(Me.cbSIMD, "cbSIMD")
+        Me.cbSIMD.Name = "cbSIMD"
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.Controls.Add(Me.tbGPUCaps)
+        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.TabStop = False
+        '
+        'tbGPUCaps
+        '
+        resources.ApplyResources(Me.tbGPUCaps, "tbGPUCaps")
+        Me.tbGPUCaps.Name = "tbGPUCaps"
+        Me.tbGPUCaps.ReadOnly = True
+        '
+        'cbGPU
+        '
+        Me.cbGPU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbGPU.FormattingEnabled = True
+        resources.ApplyResources(Me.cbGPU, "cbGPU")
+        Me.cbGPU.Name = "cbGPU"
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
+        '
+        'chkEnableGPUProcessing
+        '
+        resources.ApplyResources(Me.chkEnableGPUProcessing, "chkEnableGPUProcessing")
+        Me.chkEnableGPUProcessing.Name = "chkEnableGPUProcessing"
+        '
+        'cbParallelism
+        '
+        Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbParallelism.FormattingEnabled = True
+        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
+        Me.cbParallelism.Name = "cbParallelism"
+        '
+        'Label11
+        '
+        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.Name = "Label11"
+        '
+        'chkEnableParallelCalcs
+        '
+        resources.ApplyResources(Me.chkEnableParallelCalcs, "chkEnableParallelCalcs")
+        Me.chkEnableParallelCalcs.Name = "chkEnableParallelCalcs"
+        '
+        'FaTabStripItem6
+        '
+        Me.FaTabStripItem6.CanClose = False
+        Me.FaTabStripItem6.Controls.Add(Me.lblDescription)
+        Me.FaTabStripItem6.Controls.Add(Me.Label5)
+        Me.FaTabStripItem6.Controls.Add(Me.GroupBox3)
+        Me.FaTabStripItem6.Controls.Add(Me.lblName)
+        Me.FaTabStripItem6.Controls.Add(Me.Label8)
+        Me.FaTabStripItem6.IsDrawn = True
+        Me.FaTabStripItem6.Name = "FaTabStripItem6"
+        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
+        '
+        'lblDescription
+        '
+        resources.ApplyResources(Me.lblDescription, "lblDescription")
+        Me.lblDescription.Name = "lblDescription"
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.tbErrorLog)
+        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.TabStop = False
+        '
+        'tbErrorLog
+        '
+        resources.ApplyResources(Me.tbErrorLog, "tbErrorLog")
+        Me.tbErrorLog.Name = "tbErrorLog"
+        Me.tbErrorLog.ReadOnly = True
+        '
+        'lblName
+        '
+        resources.ApplyResources(Me.lblName, "lblName")
+        Me.lblName.Name = "lblName"
+        '
+        'Label8
+        '
+        resources.ApplyResources(Me.Label8, "Label8")
+        Me.Label8.Name = "Label8"
+        '
+        'FaTabStripItem5
+        '
+        Me.FaTabStripItem5.Controls.Add(Me.GroupBox11)
+        Me.FaTabStripItem5.Controls.Add(Me.GroupBox1)
+        Me.FaTabStripItem5.IsDrawn = True
+        Me.FaTabStripItem5.Name = "FaTabStripItem5"
+        resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
+        '
+        'GroupBox11
+        '
+        Me.GroupBox11.Controls.Add(Me.cbudb)
+        Me.GroupBox11.Controls.Add(Me.Button1)
+        Me.GroupBox11.Controls.Add(Me.Button2)
+        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.TabStop = False
+        '
+        'cbudb
+        '
+        resources.ApplyResources(Me.cbudb, "cbudb")
+        Me.cbudb.Name = "cbudb"
+        Me.cbudb.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.dgvdb)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        '
+        'dgvdb
+        '
+        Me.dgvdb.AllowUserToAddRows = False
+        Me.dgvdb.AllowUserToDeleteRows = False
+        Me.dgvdb.AllowUserToResizeColumns = False
+        Me.dgvdb.AllowUserToResizeRows = False
+        Me.dgvdb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvdb.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.dgvdb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgvdb.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvdb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvdb.ColumnHeadersVisible = False
+        Me.dgvdb.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column1})
+        resources.ApplyResources(Me.dgvdb, "dgvdb")
+        Me.dgvdb.GridColor = System.Drawing.SystemColors.Control
+        Me.dgvdb.Name = "dgvdb"
+        Me.dgvdb.ReadOnly = True
+        Me.dgvdb.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvdb.RowHeadersVisible = False
+        Me.dgvdb.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvdb.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvdb.ShowCellErrors = False
+        '
+        'Column12
+        '
+        Me.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column12.FillWeight = 10.0!
+        resources.ApplyResources(Me.Column12, "Column12")
+        Me.Column12.Name = "Column12"
+        Me.Column12.ReadOnly = True
+        Me.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Column13
+        '
+        Me.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column13.FillWeight = 10.0!
+        resources.ApplyResources(Me.Column13, "Column13")
+        Me.Column13.Name = "Column13"
+        Me.Column13.ReadOnly = True
+        Me.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Column14
+        '
+        Me.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column14.FillWeight = 30.0!
+        resources.ApplyResources(Me.Column14, "Column14")
+        Me.Column14.Name = "Column14"
+        Me.Column14.ReadOnly = True
+        Me.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Column15
+        '
+        Me.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        resources.ApplyResources(Me.Column15, "Column15")
+        Me.Column15.Name = "Column15"
+        Me.Column15.ReadOnly = True
+        Me.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Column1
+        '
+        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        resources.ApplyResources(Me.Column1, "Column1")
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
         '
         'Column11
         '
@@ -213,13 +488,6 @@ Partial Class FormConfigCAPEOPEN2
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
         '
-        'Column8
-        '
-        Me.Column8.FillWeight = 15.0!
-        resources.ApplyResources(Me.Column8, "Column8")
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        '
         'Column9
         '
         Me.Column9.FillWeight = 20.0!
@@ -227,303 +495,41 @@ Partial Class FormConfigCAPEOPEN2
         Me.Column9.Name = "Column9"
         Me.Column9.ReadOnly = True
         '
-        'FaTabStripItem7
-        '
-        Me.FaTabStripItem7.CanClose = False
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox5)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox7)
-        Me.FaTabStripItem7.IsDrawn = True
-        Me.FaTabStripItem7.Name = "FaTabStripItem7"
-        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.Button5)
-        Me.GroupBox5.Controls.Add(Me.Label4)
-        Me.GroupBox5.Controls.Add(Me.ComboBoxFlashAlg)
-        Me.GroupBox5.Controls.Add(Me.Button3)
-        Me.GroupBox5.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.TabStop = false
-        '
-        'Button5
-        '
-        resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.Name = "Button5"
-        Me.Button5.UseVisualStyleBackColor = true
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        '
-        'ComboBoxFlashAlg
-        '
-        Me.ComboBoxFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxFlashAlg.FormattingEnabled = true
-        Me.ComboBoxFlashAlg.Items.AddRange(New Object() {resources.GetString("ComboBoxFlashAlg.Items"), resources.GetString("ComboBoxFlashAlg.Items1"), resources.GetString("ComboBoxFlashAlg.Items2"), resources.GetString("ComboBoxFlashAlg.Items3"), resources.GetString("ComboBoxFlashAlg.Items4"), resources.GetString("ComboBoxFlashAlg.Items5"), resources.GetString("ComboBoxFlashAlg.Items6"), resources.GetString("ComboBoxFlashAlg.Items7"), resources.GetString("ComboBoxFlashAlg.Items8")})
-        resources.ApplyResources(Me.ComboBoxFlashAlg, "ComboBoxFlashAlg")
-        Me.ComboBoxFlashAlg.Name = "ComboBoxFlashAlg"
-        '
-        'Button3
-        '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = true
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
-        'GroupBox7
-        '
-        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
-        Me.GroupBox7.Controls.Add(Me.cbSIMD)
-        Me.GroupBox7.Controls.Add(Me.GroupBox8)
-        Me.GroupBox7.Controls.Add(Me.cbGPU)
-        Me.GroupBox7.Controls.Add(Me.Label9)
-        Me.GroupBox7.Controls.Add(Me.chkEnableGPUProcessing)
-        Me.GroupBox7.Controls.Add(Me.cbParallelism)
-        Me.GroupBox7.Controls.Add(Me.Label11)
-        Me.GroupBox7.Controls.Add(Me.chkEnableParallelCalcs)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.TabStop = false
-        '
-        'GroupBox8
-        '
-        Me.GroupBox8.Controls.Add(Me.tbGPUCaps)
-        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.TabStop = false
-        '
-        'tbGPUCaps
-        '
-        resources.ApplyResources(Me.tbGPUCaps, "tbGPUCaps")
-        Me.tbGPUCaps.Name = "tbGPUCaps"
-        Me.tbGPUCaps.ReadOnly = true
-        '
-        'cbGPU
-        '
-        Me.cbGPU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbGPU.FormattingEnabled = true
-        resources.ApplyResources(Me.cbGPU, "cbGPU")
-        Me.cbGPU.Name = "cbGPU"
-        '
-        'Label9
-        '
-        resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.Name = "Label9"
-        '
-        'chkEnableGPUProcessing
-        '
-        resources.ApplyResources(Me.chkEnableGPUProcessing, "chkEnableGPUProcessing")
-        Me.chkEnableGPUProcessing.Name = "chkEnableGPUProcessing"
-        '
-        'cbParallelism
-        '
-        Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbParallelism.FormattingEnabled = true
-        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
-        Me.cbParallelism.Name = "cbParallelism"
-        '
-        'Label11
-        '
-        resources.ApplyResources(Me.Label11, "Label11")
-        Me.Label11.Name = "Label11"
-        '
-        'chkEnableParallelCalcs
-        '
-        resources.ApplyResources(Me.chkEnableParallelCalcs, "chkEnableParallelCalcs")
-        Me.chkEnableParallelCalcs.Name = "chkEnableParallelCalcs"
-        '
-        'FaTabStripItem6
-        '
-        Me.FaTabStripItem6.CanClose = false
-        Me.FaTabStripItem6.Controls.Add(Me.GroupBox3)
-        Me.FaTabStripItem6.Controls.Add(Me.lblName)
-        Me.FaTabStripItem6.Controls.Add(Me.Label8)
-        Me.FaTabStripItem6.IsDrawn = true
-        Me.FaTabStripItem6.Name = "FaTabStripItem6"
-        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.tbErrorLog)
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.TabStop = false
-        '
-        'tbErrorLog
-        '
-        resources.ApplyResources(Me.tbErrorLog, "tbErrorLog")
-        Me.tbErrorLog.Name = "tbErrorLog"
-        Me.tbErrorLog.ReadOnly = true
-        '
-        'lblName
-        '
-        resources.ApplyResources(Me.lblName, "lblName")
-        Me.lblName.Name = "lblName"
-        '
-        'Label8
-        '
-        resources.ApplyResources(Me.Label8, "Label8")
-        Me.Label8.Name = "Label8"
-        '
-        'FaTabStripItem5
-        '
-        Me.FaTabStripItem5.Controls.Add(Me.GroupBox11)
-        Me.FaTabStripItem5.Controls.Add(Me.GroupBox1)
-        Me.FaTabStripItem5.IsDrawn = true
-        Me.FaTabStripItem5.Name = "FaTabStripItem5"
-        resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
-        '
-        'GroupBox11
-        '
-        Me.GroupBox11.Controls.Add(Me.cbudb)
-        Me.GroupBox11.Controls.Add(Me.Button1)
-        Me.GroupBox11.Controls.Add(Me.Button2)
-        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.TabStop = false
-        '
-        'cbudb
-        '
-        resources.ApplyResources(Me.cbudb, "cbudb")
-        Me.cbudb.Name = "cbudb"
-        Me.cbudb.UseVisualStyleBackColor = true
-        '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        Me.Button1.UseVisualStyleBackColor = true
-        '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = true
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.dgvdb)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = false
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        '
-        'dgvdb
-        '
-        Me.dgvdb.AllowUserToAddRows = false
-        Me.dgvdb.AllowUserToDeleteRows = false
-        Me.dgvdb.AllowUserToResizeColumns = false
-        Me.dgvdb.AllowUserToResizeRows = false
-        Me.dgvdb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvdb.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.dgvdb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.dgvdb.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
-        Me.dgvdb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvdb.ColumnHeadersVisible = false
-        Me.dgvdb.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column1})
-        resources.ApplyResources(Me.dgvdb, "dgvdb")
-        Me.dgvdb.GridColor = System.Drawing.SystemColors.Control
-        Me.dgvdb.Name = "dgvdb"
-        Me.dgvdb.ReadOnly = true
-        Me.dgvdb.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        Me.dgvdb.RowHeadersVisible = false
-        Me.dgvdb.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvdb.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvdb.ShowCellErrors = false
-        '
-        'Column12
-        '
-        Me.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column12.FillWeight = 10!
-        resources.ApplyResources(Me.Column12, "Column12")
-        Me.Column12.Name = "Column12"
-        Me.Column12.ReadOnly = true
-        Me.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Column13
-        '
-        Me.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column13.FillWeight = 10!
-        resources.ApplyResources(Me.Column13, "Column13")
-        Me.Column13.Name = "Column13"
-        Me.Column13.ReadOnly = true
-        Me.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Column14
-        '
-        Me.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column14.FillWeight = 30!
-        resources.ApplyResources(Me.Column14, "Column14")
-        Me.Column14.Name = "Column14"
-        Me.Column14.ReadOnly = true
-        Me.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Column15
-        '
-        Me.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        resources.ApplyResources(Me.Column15, "Column15")
-        Me.Column15.Name = "Column15"
-        Me.Column15.ReadOnly = true
-        Me.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Column1
-        '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        resources.ApplyResources(Me.Column1, "Column1")
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = true
-        '
-        'cbSIMD
-        '
-        resources.ApplyResources(Me.cbSIMD, "cbSIMD")
-        Me.cbSIMD.Name = "cbSIMD"
-        '
         'FormConfigCAPEOPEN2
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.FaTabStrip1)
-        Me.DoubleBuffered = true
+        Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormConfigCAPEOPEN2"
-        CType(Me.FaTabStrip1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.FaTabStrip1.ResumeLayout(false)
-        Me.FaTabStripItem1.ResumeLayout(false)
-        Me.GroupBox2.ResumeLayout(false)
-        Me.GroupBox2.PerformLayout
-        Me.GroupBox4.ResumeLayout(false)
-        CType(Me.ogc1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.FaTabStripItem7.ResumeLayout(false)
-        Me.GroupBox5.ResumeLayout(false)
-        Me.GroupBox5.PerformLayout
-        Me.GroupBox7.ResumeLayout(false)
-        Me.GroupBox7.PerformLayout
-        Me.GroupBox8.ResumeLayout(false)
-        Me.GroupBox8.PerformLayout
-        Me.FaTabStripItem6.ResumeLayout(false)
-        Me.FaTabStripItem6.PerformLayout
-        Me.GroupBox3.ResumeLayout(false)
-        Me.GroupBox3.PerformLayout
-        Me.FaTabStripItem5.ResumeLayout(false)
-        Me.GroupBox11.ResumeLayout(false)
-        Me.GroupBox11.PerformLayout
-        Me.GroupBox1.ResumeLayout(false)
-        Me.GroupBox1.PerformLayout
-        CType(Me.dgvdb,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
+        CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.FaTabStrip1.ResumeLayout(False)
+        Me.FaTabStripItem1.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        CType(Me.ogc1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.FaTabStripItem7.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
+        Me.FaTabStripItem6.ResumeLayout(False)
+        Me.FaTabStripItem6.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.FaTabStripItem5.ResumeLayout(False)
+        Me.GroupBox11.ResumeLayout(False)
+        Me.GroupBox11.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
 
-End Sub
+    End Sub
     Friend WithEvents FaTabStrip1 As FarsiLibrary.Win.FATabStrip
     Friend WithEvents FaTabStripItem1 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents FaTabStripItem5 As FarsiLibrary.Win.FATabStripItem
@@ -567,12 +573,13 @@ End Sub
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Public WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents tbErrorLog As System.Windows.Forms.TextBox
     Public WithEvents cbSIMD As System.Windows.Forms.CheckBox
+    Friend WithEvents lblDescription As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

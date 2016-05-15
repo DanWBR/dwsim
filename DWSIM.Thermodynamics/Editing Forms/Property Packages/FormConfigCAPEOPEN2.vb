@@ -65,6 +65,7 @@ Public Class FormConfigCAPEOPEN2
         Me.TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource
 
         Me.lblName.Text = _pp.ComponentName
+        Me.lblDescription.Text = _pp.ComponentDescription
         Me.tbErrorLog.Text = _pp.ExceptionLog
 
         Dim comp As ConstantProperties
@@ -127,7 +128,7 @@ Public Class FormConfigCAPEOPEN2
 
         If Not contains Then
             Dim r As New DataGridViewRow
-            r.CreateCells(ogc1, New Object() {comp.Name, comp.Name, comp.OriginalDB, "", comp.Formula})
+            r.CreateCells(ogc1, New Object() {comp.Name, comp.Name, comp.OriginalDB, comp.Formula})
             ogc1.Rows.Add(r)
             Return ogc1.Rows.Count - 1
         Else
@@ -312,6 +313,10 @@ Public Class FormConfigCAPEOPEN2
 
     Private Sub cbSIMD_CheckedChanged(sender As Object, e As EventArgs) Handles cbSIMD.CheckedChanged
         GlobalSettings.Settings.UseSIMDExtensions = Me.cbSIMD.Checked
+    End Sub
+
+    Private Sub ogc1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles ogc1.CellDoubleClick
+        If e.RowIndex > -1 Then AddCompToSimulation(e.RowIndex)
     End Sub
 
 End Class
