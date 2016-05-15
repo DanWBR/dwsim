@@ -87,6 +87,7 @@
     <Compile Include="Misc\CCapeCollection.vb" />
     <Compile Include="Misc\ComIStreamWrapper.vb" />
     <Compile Include="Misc\ExtensionMethods.vb" />
+    <Compile Include="Misc\MAPI.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

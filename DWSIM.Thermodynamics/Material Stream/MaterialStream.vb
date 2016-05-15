@@ -227,14 +227,14 @@ Namespace Streams
             Me.ComponentName = name
             Me.ComponentDescription = description
 
-            Me.Phases.Add(0, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Mistura"), ""))
-            Me.Phases.Add(1, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("OverallLiquid"), ""))
-            Me.Phases.Add(2, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Vapor"), ""))
-            Me.Phases.Add(3, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Liquid1"), ""))
-            Me.Phases.Add(4, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Liquid2"), ""))
-            Me.Phases.Add(5, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Liquid3"), ""))
-            Me.Phases.Add(6, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Aqueous"), ""))
-            Me.Phases.Add(7, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Solid"), ""))
+            Me.Phases.Add(0, New BaseClasses.Phase("Mixture", ""))
+            Me.Phases.Add(1, New BaseClasses.Phase(("OverallLiquid"), ""))
+            Me.Phases.Add(2, New BaseClasses.Phase(("Vapor"), ""))
+            Me.Phases.Add(3, New BaseClasses.Phase(("Liquid1"), ""))
+            Me.Phases.Add(4, New BaseClasses.Phase(("Liquid2"), ""))
+            Me.Phases.Add(5, New BaseClasses.Phase(("Liquid3"), ""))
+            Me.Phases.Add(6, New BaseClasses.Phase(("Aqueous"), ""))
+            Me.Phases.Add(7, New BaseClasses.Phase(("Solid"), ""))
 
             'Me.PropertyPackage = FlowSheet.Options.PropertyPackages(0)
 
@@ -242,9 +242,6 @@ Namespace Streams
             Me.Phases(0).Properties.temperature = 298.15
             Me.Phases(0).Properties.pressure = 101325
             Me.Phases(0).Properties.massflow = 1
-
-
-
 
         End Sub
 
@@ -255,14 +252,14 @@ Namespace Streams
             Me.ComponentName = name
             Me.ComponentDescription = description
 
-            Me.Phases.Add(0, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Mistura"), ""))
-            Me.Phases.Add(1, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("OverallLiquid"), ""))
-            Me.Phases.Add(2, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Vapor"), ""))
-            Me.Phases.Add(3, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Liquid1"), ""))
-            Me.Phases.Add(4, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Liquid2"), ""))
-            Me.Phases.Add(5, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Liquid3"), ""))
-            Me.Phases.Add(6, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Aqueous"), ""))
-            Me.Phases.Add(7, New BaseClasses.Phase(Me.FlowSheet.GetTranslatedString("Solid"), ""))
+            Me.Phases.Add(0, New BaseClasses.Phase("Mixture", ""))
+            Me.Phases.Add(1, New BaseClasses.Phase(("OverallLiquid"), ""))
+            Me.Phases.Add(2, New BaseClasses.Phase(("Vapor"), ""))
+            Me.Phases.Add(3, New BaseClasses.Phase(("Liquid1"), ""))
+            Me.Phases.Add(4, New BaseClasses.Phase(("Liquid2"), ""))
+            Me.Phases.Add(5, New BaseClasses.Phase(("Liquid3"), ""))
+            Me.Phases.Add(6, New BaseClasses.Phase(("Aqueous"), ""))
+            Me.Phases.Add(7, New BaseClasses.Phase(("Solid"), ""))
 
             If Not Settings.CAPEOPENMode And Not Me.FlowSheet Is Nothing Then
 

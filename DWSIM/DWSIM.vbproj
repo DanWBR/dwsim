@@ -405,7 +405,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Classes\MAPI\MAPI.vb" />
     <Compile Include="Objects\Classes\Optimization\Optimization.vb" />
     <Compile Include="Forms\AboutBoxNET.Designer.vb">
       <DependentUpon>AboutBoxNET.vb</DependentUpon>

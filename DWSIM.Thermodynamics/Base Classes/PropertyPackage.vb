@@ -8580,7 +8580,7 @@ Final3:
         ''' <remarks>This function is called by SetMaterial when DWSIM Property Packages are working in outside environments (CAPE-OPEN COSEs) like COCO/COFE.</remarks>
         Public Function COMaterialtoDWMaterial(ByVal material As Object) As Interfaces.IMaterialStream
 
-            Dim ms As Interfaces.IMaterialStream = DirectCast(Me.CurrentMaterialStream.Flowsheet, CapeOpen.ICapeMaterialTemplateSystem).CreateMaterialTemplate(CType(material, ICapeIdentification).ComponentName)
+            Dim ms As New Streams.MaterialStream("", "")
 
             'transfer values
 

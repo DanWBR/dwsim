@@ -13,7 +13,6 @@ Public Class FormConfigCAPEOPEN2
 
     Private Sub FormConfigCAPEOPEN2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Application.EnableVisualStyles()
         Application.DoEvents()
 
         Me.cbGPU.Items.Clear()
@@ -154,7 +153,7 @@ Public Class FormConfigCAPEOPEN2
         Next
     End Sub
 
-    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.ogc1.Sort(ogc1.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 
@@ -310,19 +309,4 @@ Public Class FormConfigCAPEOPEN2
 
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If Me.ListView1.SelectedIndices.Count > 0 Then
-            Select Case Me.ListView1.SelectedIndices.Item(0)
-                Case 0
-                    GlobalSettings.Settings.CultureInfo = "pt-BR"
-                Case 1
-                    GlobalSettings.Settings.CultureInfo = "en"
-                Case 2
-                    GlobalSettings.Settings.CultureInfo = "es"
-                Case 3
-                    GlobalSettings.Settings.CultureInfo = "de"
-            End Select
-            My.Application.ChangeUICulture(GlobalSettings.Settings.CultureInfo)
-        End If
-    End Sub
 End Class

@@ -118,11 +118,23 @@ Public Class CAPEOPENManager
 
     Public Sub Initialize() Implements ICapeUtilities.Initialize
 
+        Application.EnableVisualStyles()
+
+        My.Application.ChangeCulture("en")
+        My.Application.ChangeUICulture("en")
+
         _params = New ParameterCollection()
 
         'set CUDA params
+
         CudafyModes.Compiler = eGPUCompiler.All
         CudafyModes.Target = GlobalSettings.Settings.CudafyTarget
+
+        'handler for unhandled exceptions
+
+        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
+        AddHandler Application.ThreadException, AddressOf UnhandledException
+        AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
 
         Dim exlist As List(Of Exception) = Calculator.InitLibraries()
 
@@ -132,6 +144,27 @@ Public Class CAPEOPENManager
 
     End Sub
 
+    Private Sub UnhandledException(ByVal sender As Object, ByVal e As System.Threading.ThreadExceptionEventArgs)
+        Try
+            Dim frmEx As New FormUnhandledException
+            frmEx.TextBox1.Text = e.Exception.ToString
+            frmEx.ex = e.Exception
+            frmEx.ShowDialog()
+        Finally
+
+        End Try
+    End Sub
+
+    Private Sub UnhandledException2(ByVal sender As Object, ByVal e As System.UnhandledExceptionEventArgs)
+        Try
+            Dim frmEx As New FormUnhandledException
+            frmEx.TextBox1.Text = e.ExceptionObject.ToString
+            frmEx.ex = e.ExceptionObject
+            frmEx.ShowDialog()
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Public ReadOnly Property parameters() As Object Implements ICapeUtilities.parameters
         Get
             Return _params

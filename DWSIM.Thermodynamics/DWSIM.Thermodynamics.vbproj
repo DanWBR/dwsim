@@ -179,6 +179,12 @@
     <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.designer.vb">
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interfaces\Excel.vb" />
     <Compile Include="Interfaces\Thermodynamics.vb" />
     <Compile Include="Material Stream\MaterialStream.vb" />
@@ -225,7 +231,7 @@
     </Compile>
     <Compile Include="Models\BlackOilProperties.vb" />
     <Compile Include="Property Packages\BlackOil.vb" />
-    <Compile Include="Property Packages\CAPEOPENManager.vb" />
+    <Compile Include="Interfaces\CAPE-OPEN.vb" />
     <Compile Include="Property Packages\CAPEOPENSocket.vb" />
     <Compile Include="Property Packages\ChaoSeader.vb" />
     <Compile Include="Property Packages\CoolProp.vb" />
@@ -299,15 +305,6 @@
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.resx">
       <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.de.resx">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.en.resx">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.es.resx">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.resx">
       <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
     </EmbeddedResource>
@@ -379,6 +376,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.de.resx">
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.en.resx">
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.es.resx">
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.resx">
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -547,6 +556,7 @@
     <Content Include="Assets\chemsep_database_license.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\emblem-important.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

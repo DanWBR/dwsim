@@ -2,6 +2,7 @@
 Imports System.Net
 Imports System.Globalization
 Imports System.Text
+Imports DWSIM.SharedClasses
 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
@@ -44,7 +45,6 @@ Public Class FormUnhandledException
 
     Private Sub FormUnhandledException_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        If DWSIM.App.IsRunningOnMono Then Console.WriteLine(ex.ToString)
         Me.TextBox1.Text = ex.Message.ToString
         Me.TextBox2.Text = ex.ToString
         Button4.Enabled = False
@@ -129,12 +129,12 @@ Public Class FormUnhandledException
                     Next
                     Dim strb As New StringBuilder()
                     With strb
-                        .AppendLine(DWSIM.App.GetLocalString("BuildNumber") & ": " & build & vbCrLf)
-                        .AppendLine(DWSIM.App.GetLocalString("BuildDate") & ": " & bdate.ToString(My.Application.Culture.DateTimeFormat.ShortDatePattern, My.Application.Culture) & vbCrLf)
-                        .AppendLine(DWSIM.App.GetLocalString("Changes") & ": " & vbCrLf & changelog & vbCrLf)
-                        .AppendLine(DWSIM.App.GetLocalString("DownloadQuestion"))
+                        .AppendLine("Build Number" & ": " & build & vbCrLf)
+                        .AppendLine("Build Date" & ": " & bdate.ToString(My.Application.Culture.DateTimeFormat.ShortDatePattern, My.Application.Culture) & vbCrLf)
+                        .AppendLine("Changes" & ": " & vbCrLf & changelog & vbCrLf)
+                        .AppendLine("Do you want to go to the Downloads page?")
                     End With
-                    Dim msgresult As MsgBoxResult = MessageBox.Show(strb.ToString, DWSIM.App.GetLocalString("NewVersionAvailable"), MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+                    Dim msgresult As MsgBoxResult = MessageBox.Show(strb.ToString, "A new version is available", MessageBoxButtons.YesNo, MessageBoxIcon.Information)
                     If msgresult = MsgBoxResult.Yes Then Process.Start(dlpath)
                 Else
                     MessageBox.Show("DWSIM is already up-to-date.", "Checking for updates...", MessageBoxButtons.OK, MessageBoxIcon.Information)
