@@ -564,9 +564,6 @@
     <EmbeddedResource Include="Assets\Databases\electrolyte.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\chemsep_database_license.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\emblem-important.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
