@@ -90,36 +90,26 @@ Partial Class FormReportConfig
         'CheckBox8
         '
         resources.ApplyResources(Me.CheckBox8, "CheckBox8")
-        Me.CheckBox8.Checked = True
-        Me.CheckBox8.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox8.Name = "CheckBox8"
         '
         'CheckBox7
         '
         resources.ApplyResources(Me.CheckBox7, "CheckBox7")
-        Me.CheckBox7.Checked = True
-        Me.CheckBox7.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox7.Name = "CheckBox7"
         '
         'CheckBox6
         '
         resources.ApplyResources(Me.CheckBox6, "CheckBox6")
-        Me.CheckBox6.Checked = True
-        Me.CheckBox6.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox6.Name = "CheckBox6"
         '
         'CheckBox5
         '
         resources.ApplyResources(Me.CheckBox5, "CheckBox5")
-        Me.CheckBox5.Checked = True
-        Me.CheckBox5.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox5.Name = "CheckBox5"
         '
         'CheckBox4
         '
         resources.ApplyResources(Me.CheckBox4, "CheckBox4")
-        Me.CheckBox4.Checked = True
-        Me.CheckBox4.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox4.Name = "CheckBox4"
         '
         'CheckBox3
@@ -132,8 +122,6 @@ Partial Class FormReportConfig
         'CheckBox2
         '
         resources.ApplyResources(Me.CheckBox2, "CheckBox2")
-        Me.CheckBox2.Checked = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox2.Name = "CheckBox2"
         '
         'CheckBox1
@@ -147,6 +135,7 @@ Partial Class FormReportConfig
         '
         Me.SaveFileDialog1.DefaultExt = "xml"
         resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
+        Me.SaveFileDialog1.FilterIndex = 5
         Me.SaveFileDialog1.RestoreDirectory = True
         '
         'TreeViewObj

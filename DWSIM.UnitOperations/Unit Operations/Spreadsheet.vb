@@ -77,10 +77,11 @@ Namespace UnitOperations
         End Property
 
         Public Sub New(ByVal name As String, ByVal description As String)
+
             MyBase.CreateNew()
+
             Me.ComponentName = name
             Me.ComponentDescription = description
-
 
         End Sub
 

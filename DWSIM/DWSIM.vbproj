@@ -143,6 +143,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\AeroWizard.dll</HintPath>
     </Reference>
+    <Reference Include="AODL, Version=1.2.0.1, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\AODL.dll</HintPath>
+    </Reference>
+    <Reference Include="AODL.pdf.exporter">
+      <HintPath>References\AODL.pdf.exporter.dll</HintPath>
+    </Reference>
     <Reference Include="CapeOpen, Version=1.0.4118.14986, Culture=neutral, PublicKeyToken=100cc1b5ee8fe630, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\CapeOpen.dll</HintPath>
@@ -172,7 +179,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ExcelDna.Integration.0.33.9\lib\ExcelDna.Integration.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.6.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>

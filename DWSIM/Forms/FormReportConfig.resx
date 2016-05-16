@@ -163,21 +163,21 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Itens disponíveis</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ListView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="CheckBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 114</value>
+  </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 27</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="TreeViewObj.Nodes9" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
-        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
-        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAADENvbXByZXNzb3JlcwYEAAAAAAYFAAAABk5vZGVD
-        TwD/////CQQAAAD/////CQQAAAAAAAAACw==
-</value>
+  <data name="KButton5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 25</value>
   </data>
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -191,8 +191,8 @@
   <data name="&gt;&gt;CheckBox5.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;CheckBox4.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 2</value>
   </data>
   <data name="TreeViewObj.Size" type="System.Drawing.Size, System.Drawing">
     <value>199, 328</value>
@@ -212,18 +212,14 @@
   <data name="&gt;&gt;CheckBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CheckBox2.Text" xml:space="preserve">
-    <value>Incluir Composição Molar</value>
+  <data name="CheckBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 17</value>
   </data>
-  <data name="&gt;&gt;CheckBox7.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 213</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="KButton5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="CheckBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 17</value>
   </data>
   <data name="TreeViewObj.Nodes22" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -235,15 +231,11 @@
         AAAAAAYFAAAAB05vZGVSQkEA/////wkEAAAA/////wkEAAAAAAAAAAs=
 </value>
   </data>
-  <data name="TreeViewObj.Nodes17" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
-        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
-        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAADFJlYXRvcmVzIFBGUgYEAAAAAAYFAAAACE5vZGVS
-        UEZSAP////8JBAAAAP////8JBAAAAAAAAAAL
-</value>
+  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
+    <value>Button2</value>
+  </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
   </data>
   <data name="&gt;&gt;KButton4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -254,21 +246,14 @@
   <data name="KButton5.Text" xml:space="preserve">
     <value>Visualizar</value>
   </data>
-  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 2</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>FormReportConfig</value>
   </data>
   <data name="&gt;&gt;KButton5.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="TreeViewObj.Nodes21" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
-        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
-        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAFUNvbHVuYXMgZGUgQWJzb3LDp8OjbwYEAAAAAAYF
-        AAAABk5vZGVBQwD/////CQQAAAD/////CQQAAAAAAAAACw==
-</value>
+  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 19</value>
   </data>
   <data name="&gt;&gt;KButton7.Name" xml:space="preserve">
     <value>KButton7</value>
@@ -304,18 +289,14 @@
         AAZOb2RlSEUA/////wkEAAAA/////wkEAAAAAAAAAAs=
 </value>
   </data>
-  <data name="TreeViewObj.Nodes24" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
-        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
-        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAGlNlcGFyYWRvcmVzIGRlIENvbXBvbmVudGVzBgQA
-        AAAABgUAAAAGTm9kZUNTAP////8JBAAAAP////8JBAAAAAAAAAAL
-</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Opções - Correntes de Matéria</value>
   </data>
   <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
     <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;GroupBox5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBox8.Name" xml:space="preserve">
     <value>CheckBox8</value>
@@ -364,9 +345,6 @@
   <data name="Button2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="CheckBox6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="TreeViewObj.Nodes15" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
@@ -381,16 +359,16 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CheckBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 17</value>
+    <value>215, 17</value>
+  </data>
+  <data name="&gt;&gt;GroupBox5.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ListView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 274</value>
   </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 213</value>
+  <data name="Button1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="KButton4.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 25</value>
@@ -425,21 +403,17 @@
   <data name="&gt;&gt;CheckBox1.Name" xml:space="preserve">
     <value>CheckBox1</value>
   </data>
-  <data name="TreeViewObj.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
-        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
-        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAFUNvcnJlbnRlcyBkZSBNYXTDqXJpYQYEAAAAAAYF
-        AAAABk5vZGVNUwD/////CQQAAAD/////CQQAAAAAAAAACw==
-</value>
+  <data name="CheckBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 45</value>
   </data>
   <data name="&gt;&gt;CheckBox6.Name" xml:space="preserve">
     <value>CheckBox6</value>
   </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
   <data name="CheckBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 17</value>
+    <value>198, 17</value>
   </data>
   <data name="Button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -453,11 +427,14 @@
   <data name="KButton5.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="CheckBox6.Text" xml:space="preserve">
-    <value>Incluir Propriedades da Phase Líquida 1</value>
+  <data name="&gt;&gt;CheckBox2.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ListView1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="CheckBox2.Text" xml:space="preserve">
+    <value>Incluir Composição Molar</value>
   </data>
   <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -475,8 +452,8 @@
   <data name="&gt;&gt;CheckBox7.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ListView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="CheckBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;CheckBox4.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -484,11 +461,14 @@
   <data name="&gt;&gt;KButton5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;TreeViewObj.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="KButton5.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
   <data name="CheckBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 17</value>
+    <value>249, 17</value>
   </data>
   <data name="CheckBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 137</value>
@@ -503,14 +483,11 @@
         b2RlU0MA/////wkEAAAA/////wkEAAAAAAAAAAs=
 </value>
   </data>
-  <data name="&gt;&gt;GroupBox5.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;KButton7.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
   <data name="&gt;&gt;Button2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CheckBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
   </data>
   <data name="ListView1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 43</value>
@@ -518,23 +495,43 @@
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 128</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
+  <data name="&gt;&gt;CheckBox8.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
   </data>
   <data name="&gt;&gt;KButton4.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
+  <data name="TreeViewObj.Nodes21" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
+        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
+        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAFUNvbHVuYXMgZGUgQWJzb3LDp8OjbwYEAAAAAAYF
+        AAAABk5vZGVBQwD/////CQQAAAD/////CQQAAAAAAAAACw==
+</value>
+  </data>
   <data name="CheckBox8.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 183</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
   </data>
   <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="CheckBox8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="TreeViewObj.Nodes" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
+        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
+        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAFUNvcnJlbnRlcyBkZSBNYXTDqXJpYQYEAAAAAAYF
+        AAAABk5vZGVNUwD/////CQQAAAD/////CQQAAAAAAAAACw==
+</value>
   </data>
   <data name="TreeViewObj.Nodes3" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -568,9 +565,6 @@
   <data name="&gt;&gt;Button1.Name" xml:space="preserve">
     <value>Button1</value>
   </data>
-  <data name="CheckBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Itens selecionados</value>
   </data>
@@ -593,14 +587,14 @@
         WAD/////CQQAAAD/////CQQAAAAAAAAACw==
 </value>
   </data>
+  <data name="Button2.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Salvar Dados do Relatório</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>FormReportConfig</value>
   </data>
   <data name="CheckBox3.Text" xml:space="preserve">
     <value>Incluir Propriedades da Mistura</value>
@@ -617,17 +611,27 @@
   <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="TreeViewObj.Nodes24" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
+        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
+        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAGlNlcGFyYWRvcmVzIGRlIENvbXBvbmVudGVzBgQA
+        AAAABgUAAAAGTm9kZUNTAP////8JBAAAAP////8JBAAAAAAAAAAL
+</value>
+  </data>
+  <data name="&gt;&gt;KButton5.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>384, 221</value>
   </data>
   <data name="CheckBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>
   </data>
-  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
-    <value>Button2</value>
-  </data>
-  <data name="KButton4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;GroupBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -642,14 +646,14 @@
         ////CQQAAAD/////CQQAAAAAAAAACw==
 </value>
   </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 347</value>
+  </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Mover p/ baixo</value>
   </data>
   <data name="&gt;&gt;CheckBox2.Name" xml:space="preserve">
     <value>CheckBox2</value>
-  </data>
-  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 19</value>
   </data>
   <data name="&gt;&gt;CheckBox8.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -666,17 +670,14 @@
   <data name="ListView1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="&gt;&gt;KButton7.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
+  <data name="CheckBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 17</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormReportConfig</value>
+  <data name="KButton4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="KButton5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 25</value>
-  </data>
-  <data name="CheckBox1.Text" xml:space="preserve">
-    <value>Incluir Condições</value>
+  <data name="&gt;&gt;CheckBox7.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
   </data>
   <data name="TreeViewObj.Nodes4" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -701,17 +702,14 @@
         BAAAAAAGBQAAAAdOb2RlUkZBAP////8JBAAAAP////8JBAAAAAAAAAAL
 </value>
   </data>
-  <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>Arquivo XML (.xml)|*.xml|Arquivo de texto separado por vírgulas (.txt)|*.txt|Planilha do Microsoft Excel (.xls)|*.xls</value>
+  <data name="&gt;&gt;CheckBox3.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="CheckBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 114</value>
+  <data name="CheckBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;ListView1.Parent" xml:space="preserve">
     <value>GroupBox5</value>
-  </data>
-  <data name="CheckBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 45</value>
   </data>
   <data name="CheckBox5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -728,20 +726,14 @@
   <data name="&gt;&gt;CheckBox5.Name" xml:space="preserve">
     <value>CheckBox5</value>
   </data>
-  <data name="&gt;&gt;CheckBox8.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
-  </data>
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="&gt;&gt;KButton5.Name" xml:space="preserve">
     <value>KButton5</value>
   </data>
-  <data name="CheckBox7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;TreeViewObj.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CheckBox1.Text" xml:space="preserve">
+    <value>Incluir Condições</value>
   </data>
   <data name="TreeViewObj.Nodes7" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -756,12 +748,6 @@
   <data name="KButton7.Text" xml:space="preserve">
     <value>Salvar Dados</value>
   </data>
-  <data name="CheckBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Button1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <data name="TreeViewObj.Nodes10" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
@@ -775,14 +761,14 @@
   <data name="KButton4.Text" xml:space="preserve">
     <value>Imprimir</value>
   </data>
-  <data name="&gt;&gt;CheckBox3.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="SaveFileDialog1.Filter" xml:space="preserve">
+    <value>Arquivo XML (.xml)|*.xml|Arquivo de texto separado por vírgulas (.txt)|*.txt|Planilha do Microsoft Excel (.xls)|*.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 27</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="&gt;&gt;CheckBox4.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="TreeViewObj.Nodes6" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -794,21 +780,18 @@
         CQQAAAD/////CQQAAAAAAAAACw==
 </value>
   </data>
-  <data name="TreeViewObj.Nodes8" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 317</value>
+  </data>
+  <data name="TreeViewObj.Nodes17" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
         ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
-        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAC1NlcGFyYWRvcmVzBgQAAAAABgUAAAAGTm9kZVNF
-        AP////8JBAAAAP////8JBAAAAAAAAAAL
+        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAADFJlYXRvcmVzIFBGUgYEAAAAAAYFAAAACE5vZGVS
+        UEZSAP////8JBAAAAP////8JBAAAAAAAAAAL
 </value>
-  </data>
-  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 317</value>
-  </data>
-  <data name="CheckBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 17</value>
   </data>
   <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
     <value>GroupBox2</value>
@@ -816,8 +799,8 @@
   <data name="TreeViewObj.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;CheckBox3.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
+  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>217, 2</value>
   </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -831,11 +814,21 @@
   <data name="KButton4.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="&gt;&gt;GroupBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TreeViewObj.Nodes9" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
+        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
+        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAADENvbXByZXNzb3JlcwYEAAAAAAYFAAAABk5vZGVD
+        TwD/////CQQAAAD/////CQQAAAAAAAAACw==
+</value>
   </data>
-  <data name="&gt;&gt;GroupBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CheckBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 91</value>
+  </data>
+  <data name="&gt;&gt;CheckBox3.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
   </data>
   <data name="CheckBox7.Text" xml:space="preserve">
     <value>Incluir Propriedades da Phase Líquida 2</value>
@@ -846,26 +839,30 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>647, 354</value>
   </data>
-  <data name="&gt;&gt;KButton5.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="CheckBox8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;KButton7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CheckBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 91</value>
+  <data name="CheckBox4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="Button2.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="CheckBox6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="CheckBox8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="CheckBox6.Text" xml:space="preserve">
+    <value>Incluir Propriedades da Phase Líquida 1</value>
   </data>
-  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 2</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Opções - Correntes de Matéria</value>
+  <data name="TreeViewObj.Nodes8" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAAB1TeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5UcmVlTm9kZQkAAAAEVGV4dAtUb29sVGlwVGV4dAROYW1lCUlzQ2hlY2tl
+        ZApJbWFnZUluZGV4CEltYWdlS2V5ElNlbGVjdGVkSW1hZ2VJbmRleBBTZWxlY3RlZEltYWdlS2V5CkNo
+        aWxkQ291bnQBAQEAAAEAAQABCAgIAgAAAAYDAAAAC1NlcGFyYWRvcmVzBgQAAAAABgUAAAAGTm9kZVNF
+        AP////8JBAAAAP////8JBAAAAAAAAAAL
+</value>
   </data>
   <data name="&gt;&gt;CheckBox1.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -892,11 +889,14 @@
   <data name="CheckBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormReportConfig</value>
+  </data>
   <data name="CheckBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;CheckBox2.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="CheckBox7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="TreeViewObj.Nodes12" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -908,8 +908,8 @@
         //8JBAAAAP////8JBAAAAAAAAAAL
 </value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 347</value>
+  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 2</value>
@@ -923,13 +923,16 @@
   <data name="Button2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
-  </metadata>
   <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>68</value>
   </metadata>
 </root>

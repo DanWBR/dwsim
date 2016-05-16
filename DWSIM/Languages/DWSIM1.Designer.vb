@@ -6166,6 +6166,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Arquivo salvo com sucesso..
+        '''</summary>
+        Friend Shared ReadOnly Property FileSaved() As String
+            Get
+                Return ResourceManager.GetString("FileSaved", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Filtro.
         '''</summary>
         Friend Shared ReadOnly Property Filter() As String

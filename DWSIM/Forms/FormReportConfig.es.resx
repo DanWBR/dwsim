@@ -131,31 +131,31 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CheckBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 17</value>
+    <value>214, 17</value>
   </data>
   <data name="CheckBox8.Text" xml:space="preserve">
     <value>Incluir Propiedades de la Phase Acuosa</value>
   </data>
   <data name="CheckBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 17</value>
+    <value>212, 17</value>
   </data>
   <data name="CheckBox7.Text" xml:space="preserve">
     <value>Incluir Propiedades de Phase Líquida 2</value>
   </data>
   <data name="CheckBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 17</value>
+    <value>212, 17</value>
   </data>
   <data name="CheckBox6.Text" xml:space="preserve">
     <value>Incluir Propiedades de Phase Líquida 1</value>
   </data>
   <data name="CheckBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 17</value>
+    <value>242, 17</value>
   </data>
   <data name="CheckBox5.Text" xml:space="preserve">
     <value>Incluir Propiedades de Phase líquida (Mezcla)</value>
   </data>
   <data name="CheckBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 17</value>
+    <value>195, 17</value>
   </data>
   <data name="CheckBox4.Text" xml:space="preserve">
     <value>Incluir Propiedades de Phase Vapor</value>
@@ -173,7 +173,7 @@
     <value>Incluir condiciones</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>Archivo XML (.xml) | *.xml | Archivo texto (.txt) | *.txt | Hoja de cálculo de Microsoft Excel (.xls) | *.xls</value>
+    <value>Archivo XML (.xml) | *.xml | Archivo texto (.txt) | *.txt | Hoja de cálculo de Microsoft Excel (.xls) | *.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Guardar Datos de Informe</value>
