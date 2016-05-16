@@ -193,15 +193,10 @@ Public Class FormReportConfig
 
     End Sub
 
-    Private Sub FormReportConfig_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        e.Cancel = True
-        Me.Hide()
-    End Sub
-
     Private Sub FormReportConfig_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         frm = My.Application.ActiveSimulation
-        Me.Text = frm.Options.SimulationName & " - " & DWSIM.App.GetLocalString("RelatoriodaSimulacao")
+        Me.Text = DWSIM.App.GetLocalString("RelatoriodaSimulacao")
 
         Me.ListView1.Items.Clear()
 
@@ -464,7 +459,7 @@ Public Class FormReportConfig
                 Dim prevmat, actualmat As String
 
                 table = Content.Tables.TableBuilder.CreateTextDocumentTable(document, "table2", "table2", DT.Rows.Count + ListView1.Items.Count * 3, 3, 16.99, False, False)
-             
+
                 Do
                     actualmat = Me.DT.Rows(i).Item(0).ToString
                     prevmat = Me.DT.Rows(i).Item(0).ToString
@@ -525,12 +520,7 @@ Public Class FormReportConfig
 
         Finally
 
-            document.Dispose()
-            document = Nothing
-
         End Try
-
-
 
     End Sub
 
@@ -613,8 +603,6 @@ Public Class FormReportConfig
 
         Finally
 
-            sheetdoc.Dispose()
-            sheetdoc = Nothing
 
         End Try
 
