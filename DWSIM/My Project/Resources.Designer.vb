@@ -1143,6 +1143,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property DownloadFromAppStore() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("DownloadFromAppStore", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property DWSIM_branco() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("DWSIM-branco", resourceCulture)
@@ -1206,6 +1216,16 @@ Namespace My.Resources
         Friend ReadOnly Property emblem_symbolic_link() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("emblem-symbolic-link", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property En_play_badge() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("En-play-badge", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

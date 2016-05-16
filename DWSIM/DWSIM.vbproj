@@ -2103,6 +2103,8 @@
     <None Include="Resources\dwsim 3 bg.png" />
     <None Include="Resources\delete2.png" />
     <None Include="Resources\DWSIM4 icon.png" />
+    <None Include="Resources\DownloadFromAppStore.png" />
+    <None Include="Resources\En-play-badge.png" />
     <Content Include="Resources\es.png" />
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />

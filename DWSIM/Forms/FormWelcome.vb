@@ -210,4 +210,12 @@ Public Class FormWelcome
 
     End Sub
 
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        Process.Start("https://play.google.com/store/apps/developer?id=Daniel+Medeiros")
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Process.Start("https://itunes.apple.com/us/developer/daniel-medeiros/id1091004600")
+    End Sub
+
 End Class

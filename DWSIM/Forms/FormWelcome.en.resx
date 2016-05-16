@@ -118,11 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 357</value>
+  </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 13</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Opens a new Data Regression Utility window.</value>
+  </data>
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 334</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 17</value>
@@ -135,7 +141,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAVQBAAFUAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAWQBAAFkAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -206,11 +212,20 @@
         AQMBwAEDCP8L
 </value>
   </data>
+  <data name="lvlatest.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 62</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 405</value>
+  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>268, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Opens the 'Samples' folder located in DWSIM directory.</value>
+  </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 382</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 17</value>
@@ -218,11 +233,20 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>View Samples</value>
   </data>
+  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 380</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 312</value>
+  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>231, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Opens a new Compound Creator Utility window.</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 288</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 17</value>
@@ -230,11 +254,17 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Create New Compound</value>
   </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 311</value>
+  </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 13</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Creates a new steady-state simulation.</value>
+  </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 356</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>290, 13</value>
@@ -242,11 +272,17 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Opens an existing simulation, compound or regression study.</value>
   </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 287</value>
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 17</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Create New Simulation</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 333</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 17</value>
@@ -254,11 +290,20 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Open Simulation/Study</value>
   </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 332</value>
+  </data>
+  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 406</value>
+  </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>227, 13</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>DWSIM Documentation in Adobe PDF Format.</value>
+  </data>
+  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>448, 383</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 17</value>
@@ -266,11 +311,35 @@
   <data name="Label14.Text" xml:space="preserve">
     <value>View Documentation</value>
   </data>
+  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>400, 383</value>
+  </data>
+  <data name="LabelWithDivider12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 430</value>
+  </data>
   <data name="LabelWithDivider12.Text" xml:space="preserve">
     <value>Support the Project</value>
   </data>
+  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 454</value>
+  </data>
   <data name="Label15.Text" xml:space="preserve">
-    <value>DWSIM is an open source software and will always be. However, there are development (purchase of books and technical articles) and maintenance costs (web server taxes, hardware) necessary to keep the project alive and growing. If DWSIM was useful to you in any way, please consider making a donation using your PayPal account. Any amount will be very welcome.</value>
+    <value>Support the project by donating through PayPal or by downloading DWSIM-derived mobile apps.</value>
+  </data>
+  <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>567, 453</value>
+  </data>
+  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>400, 335</value>
+  </data>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>400, 287</value>
+  </data>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 286</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 263</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 19</value>
@@ -278,11 +347,17 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Tasks</value>
   </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 37</value>
+  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 19</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Recent Files</value>
+  </data>
+  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 37</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 19</value>
@@ -290,25 +365,27 @@
   <data name="Label16.Text" xml:space="preserve">
     <value>Recent Folders</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Button7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Button7.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="Button7.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <data name="lvlatestfolders.Location" type="System.Drawing.Point, System.Drawing">
+    <value>400, 62</value>
   </data>
   <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>686, 485</value>
+    <value>692, 497</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 23</value>
   </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Close</value>
+  </data>
+  <data name="Button9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>291, 453</value>
+  </data>
+  <data name="Button10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>432, 453</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Welcome to DWSIM</value>
