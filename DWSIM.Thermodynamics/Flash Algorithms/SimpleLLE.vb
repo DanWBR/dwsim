@@ -49,7 +49,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             n = Vz.Length - 1
 
             Dim Vx1(n), Vx2(n), Vy(n), Vn1(n), Vn2(n), Ki(n), fi1(n), fi2(n), gamma1(n), gamma2(n), Vp(n) As Double
-            Dim Vx1_ant(n), Vx2_ant(n) As Double
+            Dim Vx1_ant(n), Vx2_ant(n), Vn1_ant(n), Vn2_ant(n), L1_ant, L2_ant As Double
             Dim d1, d2 As Date, dt As TimeSpan
             Dim L1, L2, V, S As Double
             Dim e1, e2 As Double
@@ -133,10 +133,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Vx1_ant = Vx1.Clone
                 Vx2_ant = Vx2.Clone
 
-                For i = 0 To n
-                    Vx1(i) = Vn1(i) / L1
-                    Vx2(i) = Vn2(i) / L2
-                Next
+                Vn1_ant = Vn1.Clone
+                Vn2_ant = Vn2.Clone
+
+                Vx1 = Vn1.MultiplyConstY(1 / L1).NormalizeY
+                Vx2 = Vn2.MultiplyConstY(1 / L2).NormalizeY
 
                 fi1 = PP.DW_CalcFugCoeff(Vx1, T, P, State.Liquid)
                 fi2 = PP.DW_CalcFugCoeff(Vx2, T, P, State.Liquid)
@@ -169,7 +170,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Next
 
                 L1 = Vn1.Sum
-                L2 = Vn2.Sum
+                L2 = 1 - L1
+
+                If Abs(L1_ant - L2) < 0.0001 And Abs(L2_ant - L1) < 0.0001 Then 'detect oscilating condition
+                    'replace with average of both oscilating compositions to stabilise calculations
+                    Vn1 = Vn1.AddY(Vn1_ant).MultiplyConstY(0.5)
+                    Vn2 = Vz.SubtractY(Vn1)
+                    L1 = Vn1.SumY
+                    L2 = 1 - L1
+                End If
 
                 ecount += 1
 
