@@ -173,7 +173,7 @@
     <value>Incluir condiciones</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>Archivo XML (.xml) | *.xml | Archivo texto (.txt) | *.txt | Hoja de cálculo de Microsoft Excel (.xls) | *.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt|ODT/PDF (.pdf)|*.pdf</value>
+    <value>Archivo XML (.xml) | *.xml | Archivo texto (.txt) | *.txt | Hoja de cálculo de Microsoft Excel (.xls) | *.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Guardar Datos de Informe</value>

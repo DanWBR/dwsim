@@ -478,7 +478,7 @@
     <value>17, 17</value>
   </metadata>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>Arquivo XML (.xml)|*.xml|Arquivo de texto separado por vírgulas (.txt)|*.txt|Planilha do Microsoft Excel (.xls)|*.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt|ODT/PDF (.pdf)|*.pdf</value>
+    <value>Arquivo XML (.xml)|*.xml|Arquivo de texto separado por vírgulas (.txt)|*.txt|Planilha do Microsoft Excel (.xls)|*.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Salvar Dados do Relatório</value>
