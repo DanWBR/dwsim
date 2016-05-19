@@ -884,6 +884,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Assets\7zip\linux\7z" />
+    <None Include="Assets\7zip\linux\7z.so" />
+    <None Include="Assets\7zip\linux\7za" />
+    <None Include="Assets\7zip\linux\7zCon.sfx" />
+    <None Include="Assets\7zip\linux\7zr" />
     <None Include="Assets\default.ini" />
     <None Include="Assets\docs\cape_open_reference3.pdf" />
     <None Include="Assets\docs\command_line_mode.pdf" />
@@ -1047,6 +1052,10 @@
     <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
       <Name>DWSIM.UnitOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Updater\DWSIM.Apps.Updater.vbproj">
+      <Project>{f3be9782-dbf8-44ab-94df-1dde12d4208a}</Project>
+      <Name>DWSIM.Apps.Updater</Name>
     </ProjectReference>
     <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
       <Project>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</Project>
@@ -1530,6 +1539,14 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\7zip\linux\copying.txt" />
+    <Content Include="Assets\7zip\linux\License.txt" />
+    <Content Include="Assets\7zip\windows\7za.dll" />
+    <Content Include="Assets\7zip\windows\7za.exe" />
+    <Content Include="Assets\7zip\windows\7zxa.dll" />
+    <Content Include="Assets\7zip\windows\history.txt" />
+    <Content Include="Assets\7zip\windows\License.txt" />
+    <Content Include="Assets\7zip\windows\readme.txt" />
     <Content Include="Assets\data\unifac\1,2-Dimethylpiperidine.png" />
     <Content Include="Assets\data\unifac\1-1-1-Trifluoroethane.png" />
     <Content Include="Assets\data\unifac\1-1-Dichloroethane.png" />

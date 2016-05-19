@@ -199,4 +199,5 @@ TCPServer/bin/Debug/*
 /SwarmOps/bin/Debug
 /SwarmOps/bin/Release
 /DWSIM.ExtensionMethods/bin/Debug
+/DWSIM.Updater/bin/Debug
 /DWSIM.FileDownloader/bin/Debug
