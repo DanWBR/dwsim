@@ -1049,6 +1049,10 @@
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
       <Name>DWSIM.UnitOperations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Updater\DWSIM.Apps.Updater.vbproj">
+      <Project>{f3be9782-dbf8-44ab-94df-1dde12d4208a}</Project>
+      <Name>DWSIM.Apps.Updater</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
       <Project>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</Project>
       <Name>DWSIM.Controls.PropertyGridEx</Name>
