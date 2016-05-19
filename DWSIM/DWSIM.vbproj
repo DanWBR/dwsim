@@ -1016,6 +1016,10 @@
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
       <Name>DWSIM.ExtensionMethods</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FileDownloader\DWSIM.FileDownloader.csproj">
+      <Project>{a86c4bd5-88e7-4954-ae31-e4a597382b1a}</Project>
+      <Name>DWSIM.FileDownloader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
       <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>
       <Name>DWSIM.FlowsheetSolver</Name>
