@@ -2594,7 +2594,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
-    Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs) Handles tsbUndo.MouseEnter
+    Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs)
 
         Dim hovereditem As ToolStripSplitButton = DirectCast(sender, ToolStripSplitButton)
 
@@ -2609,7 +2609,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
-    Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs) Handles tsbRedo.MouseEnter
+    Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs)
 
         Dim hovereditem As ToolStripSplitButton = DirectCast(sender, ToolStripSplitButton)
 

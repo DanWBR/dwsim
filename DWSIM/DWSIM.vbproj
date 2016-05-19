@@ -147,9 +147,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\AODL.dll</HintPath>
     </Reference>
-    <Reference Include="AODL.pdf.exporter">
-      <HintPath>References\AODL.pdf.exporter.dll</HintPath>
-    </Reference>
     <Reference Include="CapeOpen, Version=1.0.4118.14986, Culture=neutral, PublicKeyToken=100cc1b5ee8fe630, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\CapeOpen.dll</HintPath>

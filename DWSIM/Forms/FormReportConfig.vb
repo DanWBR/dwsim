@@ -427,22 +427,32 @@ Public Class FormReportConfig
     Sub CreateAndSaveODTFile()
 
 
+        Dim fname = AODL.Document.Styles.FontFamilies.Arial
+        Dim fsize = "10pt"
+
         'Create a new text document
         Dim document As New TextDocuments.TextDocument()
         document.[New]()
+
         'Create a table for a text document using the TableBuilder
         Dim table As Content.Tables.Table = Content.Tables.TableBuilder.CreateTextDocumentTable(document, "table1", "table1", 3, 1, 16.99, False, False)
 
         Dim paragraph As Content.Text.Paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p0")
         paragraph.ParagraphStyle.TextProperties.Bold = "bold"
+        paragraph.ParagraphStyle.TextProperties.FontName = fname
+        paragraph.ParagraphStyle.TextProperties.FontSize = fsize
         paragraph.TextContent.Add(New Content.Text.SimpleText(document, "DWSIM Simulation Results Report"))
         table.Rows(0).Cells(0).Content.Add(paragraph)
 
-        paragraph = Content.Text.ParagraphBuilder.CreateStandardTextParagraph(document)
+        paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p1")
+        paragraph.ParagraphStyle.TextProperties.FontName = fname
+        paragraph.ParagraphStyle.TextProperties.FontSize = fsize
         paragraph.TextContent.Add(New Content.Text.SimpleText(document, "Simulation File: " & frm.FilePath))
         table.Rows(1).Cells(0).Content.Add(paragraph)
 
-        paragraph = Content.Text.ParagraphBuilder.CreateStandardTextParagraph(document)
+        paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p2")
+        paragraph.ParagraphStyle.TextProperties.FontName = fname
+        paragraph.ParagraphStyle.TextProperties.FontSize = fsize
         paragraph.TextContent.Add(New Content.Text.SimpleText(document, "Date created: " & Date.Now.ToString))
         table.Rows(2).Cells(0).Content.Add(paragraph)
 
@@ -466,6 +476,8 @@ Public Class FormReportConfig
 
                     'Create a standard paragraph
                     paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p" + i.ToString() + j.ToString())
+                    paragraph.ParagraphStyle.TextProperties.FontName = fname
+                    paragraph.ParagraphStyle.TextProperties.FontSize = fsize
                     paragraph.ParagraphStyle.TextProperties.Bold = "bold"
 
                     'Add some simple text
@@ -477,17 +489,23 @@ Public Class FormReportConfig
                     j = j + 1
                     Do
 
-                        paragraph = Content.Text.ParagraphBuilder.CreateStandardTextParagraph(document)
+                        paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p1" + i.ToString() + j.ToString())
+                        paragraph.ParagraphStyle.TextProperties.FontName = fname
+                        paragraph.ParagraphStyle.TextProperties.FontSize = fsize
                         paragraph.TextContent.Add(New Content.Text.SimpleText(document, Me.DT.Rows(i).Item(2)))
                         table.Rows(j + 1).Cells(0).Content.Add(paragraph)
 
                         paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p2" + i.ToString() + j.ToString())
                         paragraph.ParagraphStyle.ParagraphProperties.Alignment = "right"
+                        paragraph.ParagraphStyle.TextProperties.FontName = fname
+                        paragraph.ParagraphStyle.TextProperties.FontSize = fsize
                         paragraph.TextContent.Add(New Content.Text.SimpleText(document, Me.DT.Rows(i).Item(3)))
                         table.Rows(j + 1).Cells(1).Content.Add(paragraph)
 
                         paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p3" + i.ToString() + j.ToString())
                         paragraph.ParagraphStyle.ParagraphProperties.MarginLeft = "0.2cm"
+                        paragraph.ParagraphStyle.TextProperties.FontName = fname
+                        paragraph.ParagraphStyle.TextProperties.FontSize = fsize
                         paragraph.TextContent.Add(New Content.Text.SimpleText(document, Me.DT.Rows(i).Item(4)))
                         table.Rows(j + 1).Cells(2).Content.Add(paragraph)
 

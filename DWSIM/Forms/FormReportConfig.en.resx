@@ -124,7 +124,7 @@
     <value>View Report</value>
   </data>
   <data name="KButton7.Text" xml:space="preserve">
-    <value>Save Data to XLS, XML, TXT, ODS, ODT</value>
+    <value>Export Data to File</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Tasks</value>
