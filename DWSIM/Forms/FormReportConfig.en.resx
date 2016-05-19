@@ -182,7 +182,7 @@
     <value>Options - Material Streams</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>XML File (.xml)|*.xml|Text File (.txt)|*.txt|Microsoft Excel Spreadsheet (.xls)|*.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt</value>
+    <value>XML File (.xml)|*.xml|Text File (.txt)|*.txt|Microsoft Excel Spreadsheet (.xls)|*.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt|ODT/PDF (.pdf)|*.pdf</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Save Report Data</value>
@@ -458,5 +458,8 @@
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Selected Items</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>ll</value>
   </data>
 </root>

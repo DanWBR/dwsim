@@ -179,7 +179,7 @@
     <value>Bedingungen</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>XML-Datei (.xml)|*.xml|Text-Datei (.txt)|*.txt|Microsoft Excel (.xls)|*.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt</value>
+    <value>XML-Datei (.xml)|*.xml|Text-Datei (.txt)|*.txt|Microsoft Excel (.xls)|*.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt|ODT/PDF (.pdf)|*.pdf</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Berichtsdaten speichern</value>
