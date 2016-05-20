@@ -283,11 +283,14 @@
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Local Calculation Engine Settings</value>
   </data>
+  <data name="cbudb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>127, 252</value>
+  </data>
   <data name="cbudb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 17</value>
+    <value>207, 17</value>
   </data>
   <data name="cbudb.Text" xml:space="preserve">
-    <value>Replace components when loading user databases</value>
+    <value>Replace compounds with equal names</value>
   </data>
   <data name="DataGridViewCellStyle1.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -323,14 +326,26 @@
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
-  <data name="Button11.Text" xml:space="preserve">
-    <value>Add ChemSep™ Database</value>
+  <data name="dgvdb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 225</value>
+  </data>
+  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 248</value>
+  </data>
+  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 23</value>
   </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Add User Database</value>
   </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 283</value>
+  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Component Datasets</value>
+    <value>User Compound Datasets</value>
+  </data>
+  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 378</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Add user database</value>
@@ -351,6 +366,15 @@
         ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
+  </data>
+  <data name="dgvIPDB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 355</value>
+  </data>
+  <data name="GroupBox10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 295</value>
+  </data>
+  <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 407</value>
   </data>
   <data name="GroupBox10.Text" xml:space="preserve">
     <value>Interaction Parameter Datasets</value>
@@ -397,6 +421,30 @@
   <data name="FaTabStripItem2.Text" xml:space="preserve">
     <value>Backups</value>
   </data>
+  <data name="chkAutoUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 49</value>
+  </data>
+  <data name="chkAutoUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 17</value>
+  </data>
+  <data name="chkAutoUpdate.Text" xml:space="preserve">
+    <value>Enable automatic updates</value>
+  </data>
+  <data name="chkUpdates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 22</value>
+  </data>
+  <data name="chkUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 17</value>
+  </data>
+  <data name="chkUpdates.Text" xml:space="preserve">
+    <value>Check for updates on startup</value>
+  </data>
+  <data name="GroupBox13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 83</value>
+  </data>
+  <data name="GroupBox13.Text" xml:space="preserve">
+    <value>Updates</value>
+  </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 13</value>
   </data>
@@ -409,6 +457,9 @@
   <data name="chkCloseFormsOnDeselect.Text" xml:space="preserve">
     <value>Close editors on deselecting</value>
   </data>
+  <data name="GroupBox12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 388</value>
+  </data>
   <data name="GroupBox12.Text" xml:space="preserve">
     <value>Flowsheet Object Editors</value>
   </data>
@@ -417,6 +468,9 @@
   </data>
   <data name="CheckBoxUndoRedoRecalc.Text" xml:space="preserve">
     <value>Recalculate flowsheet when undoing/redoing actions</value>
+  </data>
+  <data name="GroupBox11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 328</value>
   </data>
   <data name="GroupBox11.Text" xml:space="preserve">
     <value>Undo/Redo</value>
@@ -445,6 +499,9 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Compounds</value>
   </data>
+  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 240</value>
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Cut/Copy/Paste Flowsheet Objects</value>
   </data>
@@ -454,8 +511,14 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 176</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>UI Language</value>
+  </data>
+  <data name="chkShowWhatsNew.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 50</value>
   </data>
   <data name="chkShowWhatsNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 17</value>
@@ -469,11 +532,8 @@
   <data name="KryptonCheckBox1.Text" xml:space="preserve">
     <value>Show tips</value>
   </data>
-  <data name="chkUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 17</value>
-  </data>
-  <data name="chkUpdates.Text" xml:space="preserve">
-    <value>Check for updates on startup</value>
+  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>340, 83</value>
   </data>
   <data name="GroupBox9.Text" xml:space="preserve">
     <value>Messages</value>
@@ -502,6 +562,9 @@
   <data name="chkconsole.Text" xml:space="preserve">
     <value>Redirect console output</value>
   </data>
+  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 92</value>
+  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Debug mode</value>
   </data>
@@ -513,7 +576,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAdwBBgHcAQYBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAewBBgHsAQYBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

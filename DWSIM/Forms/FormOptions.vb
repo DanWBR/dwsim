@@ -65,6 +65,7 @@ Public Class FormOptions
         Me.chkconsole.Checked = My.Settings.RedirectOutput
 
         Me.chkUpdates.Checked = My.Settings.CheckForUpdates
+        Me.chkAutoUpdate.Checked = My.Settings.AutomaticUpdates
 
         Me.chkShowWhatsNew.Checked = My.Settings.ShowWhatsNew
 
@@ -668,5 +669,9 @@ Public Class FormOptions
     Private Sub cbDefaultLocation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDefaultLocation.SelectedIndexChanged
         My.Settings.DefaultEditorLocation = cbDefaultLocation.SelectedIndex
         GlobalSettings.Settings.DefaultEditFormLocation = cbDefaultLocation.SelectedIndex
+    End Sub
+
+    Private Sub chkAutoUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoUpdate.CheckedChanged
+        My.Settings.AutomaticUpdates = chkAutoUpdate.Checked
     End Sub
 End Class

@@ -637,6 +637,30 @@ Namespace My
                 Me("DefaultEditorLocation") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property LaunchUpdater() As Boolean
+            Get
+                Return CType(Me("LaunchUpdater"),Boolean)
+            End Get
+            Set
+                Me("LaunchUpdater") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property AutomaticUpdates() As Boolean
+            Get
+                Return CType(Me("AutomaticUpdates"),Boolean)
+            End Get
+            Set
+                Me("AutomaticUpdates") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

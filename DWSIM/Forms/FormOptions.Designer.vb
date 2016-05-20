@@ -70,7 +70,6 @@ Partial Class FormOptions
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column13 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.BtnEdit = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.Button11 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -91,6 +90,9 @@ Partial Class FormOptions
         Me.KryptonLabel1 = New System.Windows.Forms.Label()
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem7 = New System.Windows.Forms.TabPage()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.chkAutoUpdate = New System.Windows.Forms.CheckBox()
+        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.cbDefaultLocation = New System.Windows.Forms.ComboBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -108,7 +110,6 @@ Partial Class FormOptions
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
         Me.chkShowWhatsNew = New System.Windows.Forms.CheckBox()
         Me.KryptonCheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.cbDebugLevel = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -134,6 +135,7 @@ Partial Class FormOptions
         Me.GroupBox3.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
+        Me.GroupBox13.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -378,7 +380,6 @@ Partial Class FormOptions
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.cbudb)
         Me.GroupBox4.Controls.Add(Me.dgvdb)
-        Me.GroupBox4.Controls.Add(Me.Button11)
         Me.GroupBox4.Controls.Add(Me.Button7)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
@@ -464,12 +465,6 @@ Partial Class FormOptions
         Me.BtnEdit.Name = "BtnEdit"
         Me.BtnEdit.ReadOnly = True
         Me.BtnEdit.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        '
-        'Button11
-        '
-        resources.ApplyResources(Me.Button11, "Button11")
-        Me.Button11.Name = "Button11"
-        Me.Button11.UseVisualStyleBackColor = True
         '
         'Button7
         '
@@ -627,6 +622,7 @@ Partial Class FormOptions
         'FaTabStripItem7
         '
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox13)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox12)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox11)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox5)
@@ -634,6 +630,24 @@ Partial Class FormOptions
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        '
+        'GroupBox13
+        '
+        resources.ApplyResources(Me.GroupBox13, "GroupBox13")
+        Me.GroupBox13.Controls.Add(Me.chkAutoUpdate)
+        Me.GroupBox13.Controls.Add(Me.chkUpdates)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.TabStop = False
+        '
+        'chkAutoUpdate
+        '
+        resources.ApplyResources(Me.chkAutoUpdate, "chkAutoUpdate")
+        Me.chkAutoUpdate.Name = "chkAutoUpdate"
+        '
+        'chkUpdates
+        '
+        resources.ApplyResources(Me.chkUpdates, "chkUpdates")
+        Me.chkUpdates.Name = "chkUpdates"
         '
         'GroupBox12
         '
@@ -736,7 +750,6 @@ Partial Class FormOptions
         resources.ApplyResources(Me.GroupBox9, "GroupBox9")
         Me.GroupBox9.Controls.Add(Me.chkShowWhatsNew)
         Me.GroupBox9.Controls.Add(Me.KryptonCheckBox1)
-        Me.GroupBox9.Controls.Add(Me.chkUpdates)
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.TabStop = False
         '
@@ -749,11 +762,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.KryptonCheckBox1, "KryptonCheckBox1")
         Me.KryptonCheckBox1.Name = "KryptonCheckBox1"
-        '
-        'chkUpdates
-        '
-        resources.ApplyResources(Me.chkUpdates, "chkUpdates")
-        Me.chkUpdates.Name = "chkUpdates"
         '
         'GroupBox6
         '
@@ -845,6 +853,8 @@ Partial Class FormOptions
         Me.GroupBox3.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem7.ResumeLayout(False)
+        Me.GroupBox13.ResumeLayout(False)
+        Me.GroupBox13.PerformLayout()
         Me.GroupBox12.ResumeLayout(False)
         Me.GroupBox12.PerformLayout()
         Me.GroupBox11.ResumeLayout(False)
@@ -875,7 +885,6 @@ Partial Class FormOptions
     Public WithEvents KryptonLabel2 As System.Windows.Forms.Label
     Public WithEvents FaTabStripItem3 As System.Windows.Forms.TabPage
     Public WithEvents cbudb As System.Windows.Forms.CheckBox
-    Public WithEvents Button11 As System.Windows.Forms.Button
     Public WithEvents Button7 As System.Windows.Forms.Button
     Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Public WithEvents dgvdb As System.Windows.Forms.DataGridView
@@ -885,7 +894,6 @@ Partial Class FormOptions
     Public WithEvents ImageList1 As System.Windows.Forms.ImageList
     Public WithEvents Label3 As System.Windows.Forms.Label
     Public WithEvents Button2 As System.Windows.Forms.Button
-    Public WithEvents chkUpdates As System.Windows.Forms.CheckBox
     Public WithEvents GroupBox7 As System.Windows.Forms.GroupBox
     Public WithEvents chkEnableParallelCalcs As System.Windows.Forms.CheckBox
     Friend WithEvents cbParallelism As System.Windows.Forms.ComboBox
@@ -950,4 +958,7 @@ Partial Class FormOptions
     Public WithEvents chkCloseFormsOnDeselect As System.Windows.Forms.CheckBox
     Friend WithEvents cbDefaultLocation As System.Windows.Forms.ComboBox
     Public WithEvents Label14 As System.Windows.Forms.Label
+    Public WithEvents GroupBox13 As System.Windows.Forms.GroupBox
+    Public WithEvents chkAutoUpdate As System.Windows.Forms.CheckBox
+    Public WithEvents chkUpdates As System.Windows.Forms.CheckBox
 End Class

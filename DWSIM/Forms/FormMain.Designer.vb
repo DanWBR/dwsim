@@ -105,10 +105,18 @@ Partial Class FormMain
         Me.SaveUnifacIPRegrDlg = New System.Windows.Forms.SaveFileDialog()
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.ButtonClose = New System.Windows.Forms.Button()
+        Me.UpdateBox_Panel = New System.Windows.Forms.Panel()
+        Me.UpdateBox_ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.UpdateBox_Button2 = New System.Windows.Forms.Button()
+        Me.UpdateBox_Button1 = New System.Windows.Forms.Button()
+        Me.UpdateBox_PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.UpdateBox_Label1 = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
+        Me.UpdateBox_Panel.SuspendLayout()
+        CType(Me.UpdateBox_PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -574,11 +582,56 @@ Partial Class FormMain
         Me.ButtonClose.Name = "ButtonClose"
         Me.ButtonClose.UseVisualStyleBackColor = True
         '
+        'UpdateBox_Panel
+        '
+        Me.UpdateBox_Panel.BackColor = System.Drawing.Color.DimGray
+        Me.UpdateBox_Panel.Controls.Add(Me.UpdateBox_ProgressBar1)
+        Me.UpdateBox_Panel.Controls.Add(Me.UpdateBox_Button2)
+        Me.UpdateBox_Panel.Controls.Add(Me.UpdateBox_Button1)
+        Me.UpdateBox_Panel.Controls.Add(Me.UpdateBox_PictureBox1)
+        Me.UpdateBox_Panel.Controls.Add(Me.UpdateBox_Label1)
+        resources.ApplyResources(Me.UpdateBox_Panel, "UpdateBox_Panel")
+        Me.UpdateBox_Panel.Name = "UpdateBox_Panel"
+        '
+        'UpdateBox_ProgressBar1
+        '
+        resources.ApplyResources(Me.UpdateBox_ProgressBar1, "UpdateBox_ProgressBar1")
+        Me.UpdateBox_ProgressBar1.Name = "UpdateBox_ProgressBar1"
+        Me.UpdateBox_ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        '
+        'UpdateBox_Button2
+        '
+        resources.ApplyResources(Me.UpdateBox_Button2, "UpdateBox_Button2")
+        Me.UpdateBox_Button2.DialogResult = System.Windows.Forms.DialogResult.No
+        Me.UpdateBox_Button2.Name = "UpdateBox_Button2"
+        Me.UpdateBox_Button2.UseVisualStyleBackColor = True
+        '
+        'UpdateBox_Button1
+        '
+        resources.ApplyResources(Me.UpdateBox_Button1, "UpdateBox_Button1")
+        Me.UpdateBox_Button1.DialogResult = System.Windows.Forms.DialogResult.Yes
+        Me.UpdateBox_Button1.Name = "UpdateBox_Button1"
+        Me.UpdateBox_Button1.UseVisualStyleBackColor = True
+        '
+        'UpdateBox_PictureBox1
+        '
+        Me.UpdateBox_PictureBox1.Image = Global.DWSIM.My.Resources.Resources.world_connect
+        resources.ApplyResources(Me.UpdateBox_PictureBox1, "UpdateBox_PictureBox1")
+        Me.UpdateBox_PictureBox1.Name = "UpdateBox_PictureBox1"
+        Me.UpdateBox_PictureBox1.TabStop = False
+        '
+        'UpdateBox_Label1
+        '
+        resources.ApplyResources(Me.UpdateBox_Label1, "UpdateBox_Label1")
+        Me.UpdateBox_Label1.ForeColor = System.Drawing.Color.White
+        Me.UpdateBox_Label1.Name = "UpdateBox_Label1"
+        '
         'FormMain
         '
         Me.AllowDrop = True
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UpdateBox_Panel)
         Me.Controls.Add(Me.SettingsPanel)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.ToolStrip1)
@@ -595,6 +648,9 @@ Partial Class FormMain
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.SettingsPanel.ResumeLayout(False)
+        Me.UpdateBox_Panel.ResumeLayout(False)
+        Me.UpdateBox_Panel.PerformLayout()
+        CType(Me.UpdateBox_PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -818,5 +874,11 @@ Partial Class FormMain
     Public WithEvents MostrarBarraDeFerramentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FerramentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DatabaseManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents UpdateBox_Panel As System.Windows.Forms.Panel
+    Friend WithEvents UpdateBox_Button2 As System.Windows.Forms.Button
+    Friend WithEvents UpdateBox_Button1 As System.Windows.Forms.Button
+    Friend WithEvents UpdateBox_PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents UpdateBox_Label1 As System.Windows.Forms.Label
+    Friend WithEvents UpdateBox_ProgressBar1 As System.Windows.Forms.ProgressBar
 
 End Class

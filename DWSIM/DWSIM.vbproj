@@ -2007,6 +2007,7 @@
     <Content Include="Assets\help\UT_Triangular_LLE.htm" />
     <Content Include="Assets\help\UT_TrueCriticalPoint.htm" />
     <Content Include="Assets\help\UT_VesselSizing.htm" />
+    <None Include="Resources\world_connect.png" />
     <None Include="Resources\shape_square_edit.png" />
     <None Include="Resources\shape_handles.png" />
     <None Include="Resources\table_lightning.png" />

@@ -4681,6 +4681,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Baixando atualizações.
+        '''</summary>
+        Friend Shared ReadOnly Property DownloadingUpdates() As String
+            Get
+                Return ResourceManager.GetString("DownloadingUpdates", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Deseja fazer o download da nova versão (após o download, feche o DWSIM e execute o arquivo de instalação para atualizar).
         '''</summary>
         Friend Shared ReadOnly Property DownloadQuestion() As String
