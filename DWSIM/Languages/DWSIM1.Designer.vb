@@ -14536,6 +14536,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to As atualizações estão prontas para serem instaladas. Clique em &apos;Reiniciar&apos; para reiniciar e atualizar o DWSIM..
+        '''</summary>
+        Friend Shared ReadOnly Property UpdateReady() As String
+            Get
+                Return ResourceManager.GetString("UpdateReady", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Usa Objeto como Referência?.
         '''</summary>
         Friend Shared ReadOnly Property UsaObjetocomoRefernc() As String

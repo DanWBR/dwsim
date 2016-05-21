@@ -584,7 +584,7 @@ Partial Class FormMain
         '
         'UpdateBox_Panel
         '
-        Me.UpdateBox_Panel.BackColor = System.Drawing.Color.DimGray
+        Me.UpdateBox_Panel.BackColor = System.Drawing.Color.SteelBlue
         Me.UpdateBox_Panel.Controls.Add(Me.UpdateBox_ProgressBar1)
         Me.UpdateBox_Panel.Controls.Add(Me.UpdateBox_Button2)
         Me.UpdateBox_Panel.Controls.Add(Me.UpdateBox_Button1)

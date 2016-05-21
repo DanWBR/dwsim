@@ -346,13 +346,13 @@
     <value>Documentação</value>
   </data>
   <data name="ManualTecnicoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
+    <value>158, 22</value>
   </data>
   <data name="ManualTecnicoToolStripMenuItem.Text" xml:space="preserve">
     <value>Manual Técnico</value>
   </data>
   <data name="GuiaDoUsuarioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
+    <value>158, 22</value>
   </data>
   <data name="GuiaDoUsuarioToolStripMenuItem.Text" xml:space="preserve">
     <value>Guia do Usuário</value>
@@ -388,7 +388,7 @@
 </value>
   </data>
   <data name="DownloadsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 22</value>
+    <value>408, 22</value>
   </data>
   <data name="DownloadsToolStripMenuItem.Text" xml:space="preserve">
     <value>Downloads</value>
@@ -415,13 +415,13 @@
 </value>
   </data>
   <data name="WikiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 22</value>
+    <value>408, 22</value>
   </data>
   <data name="WikiToolStripMenuItem.Text" xml:space="preserve">
     <value>Wiki</value>
   </data>
   <data name="ForumToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 22</value>
+    <value>408, 22</value>
   </data>
   <data name="ForumToolStripMenuItem.Text" xml:space="preserve">
     <value>Fórums</value>
@@ -448,7 +448,7 @@
 </value>
   </data>
   <data name="RastreamentoDeBugsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 22</value>
+    <value>408, 22</value>
   </data>
   <data name="RastreamentoDeBugsToolStripMenuItem.Text" xml:space="preserve">
     <value>Rastreamento de Bugs / Pedidos de Recursos e Suporte Técnico</value>
@@ -739,10 +739,10 @@
     <value>Top, Right</value>
   </data>
   <data name="UpdateBox_ProgressBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 7</value>
+    <value>392, 8</value>
   </data>
   <data name="UpdateBox_ProgressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 16</value>
+    <value>150, 13</value>
   </data>
   <data name="UpdateBox_ProgressBar1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -775,7 +775,7 @@
     <value>3</value>
   </data>
   <data name="UpdateBox_Button2.Text" xml:space="preserve">
-    <value>Atualizar</value>
+    <value>Reiniciar</value>
   </data>
   <data name="&gt;&gt;UpdateBox_Button2.Name" xml:space="preserve">
     <value>UpdateBox_Button2</value>

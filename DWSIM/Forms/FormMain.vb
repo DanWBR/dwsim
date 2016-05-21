@@ -69,6 +69,7 @@ Public Class FormMain
     Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
 
     Public COMonitoringObjects As New Dictionary(Of String, UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
+    Public WithEvents timer1 As New Timer
 
 #Region "    Form Events"
 
@@ -2776,34 +2777,40 @@ ruf:                Application.DoEvents()
                                 End Sub)
 
                     dlder.LocalDirectory = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update"
+                    dlder.DeleteCompletedFilesAfterCancel = True
 
-                    AddHandler dlder.ProgressChanged, Sub()
-                                                          Me.UIThread(Sub()
-                                                                          UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "... " &
-                                                                              dlder.CurrentFile.Name & " (" & FileDownloader.FormatSizeBinary(dlder.CurrentFileProgress) & "/" &
-                                                                              FileDownloader.FormatSizeBinary(dlder.CurrentFileSize) & ")" & ", " &
-                                                                              String.Format("{0}/s", FileDownloader.FormatSizeBinary(dlder.DownloadSpeed))
-                                                                          UpdateBox_ProgressBar1.Value = dlder.TotalPercentage
-                                                                      End Sub)
-                                                      End Sub
+                    Me.UIThread(Sub()
+                                    AddHandler timer1.Tick, Sub()
+                                                                Me.UIThread(Sub()
+                                                                                UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "... " &
+                                                                                    dlder.CurrentFile.Name & " (" & FileDownloader.FormatSizeBinary(dlder.CurrentFileProgress) & "/" &
+                                                                                    FileDownloader.FormatSizeBinary(dlder.CurrentFileSize) & ")" & ", " &
+                                                                                    String.Format("{0}/s", FileDownloader.FormatSizeBinary(dlder.DownloadSpeed))
+                                                                                UpdateBox_ProgressBar1.Value = dlder.TotalPercentage
+                                                                            End Sub)
+                                                            End Sub
+                                    timer1.Interval = 500
+                                    timer1.Start()
+                                End Sub)
 
-                    AddHandler dlder.Canceled, Sub()
-                                                   Me.UIThread(Sub()
-                                                                   UpdateBox_Panel.Visible = False
-                                                               End Sub)
-                                               End Sub
+                    AddHandler UpdateBox_Button1.Click, Sub() Me.UIThread(Sub()
+                                                                              dlder.Stop(True)
+                                                                              DeleteFilesAndHidePanel()
+                                                                          End Sub)
 
-                    AddHandler dlder.Completed, Sub()
-                                                    Me.UIThread(Sub()
-                                                                    UpdateBox_Panel.Visible = False
-                                                                End Sub)
-                                                End Sub
+                    AddHandler dlder.FileDownloadFailed, Sub() Me.UIThread(Sub() DeleteFilesAndHidePanel())
 
-                    dlder.Start()
+                    AddHandler dlder.Canceled, Sub() Me.UIThread(Sub() DeleteFilesAndHidePanel())
 
-                    While dlder.IsBusy
-                        Threading.Thread.Sleep(100)
-                    End While
+                    AddHandler dlder.Completed, Sub() Me.UIThread(Sub()
+                                                                      UpdateBox_Label1.Text = DWSIM.App.GetLocalString("UpdateReady")
+                                                                      UpdateBox_ProgressBar1.Visible = False
+                                                                      UpdateBox_Button1.Enabled = False
+                                                                      UpdateBox_Button2.Enabled = True
+                                                                      timer1.Stop()
+                                                                  End Sub)
+
+                    Me.UIThread(Sub() dlder.Start())
 
                 End If
 
@@ -2811,7 +2818,19 @@ ruf:                Application.DoEvents()
 
         End If
 
+    End Sub
 
+    Sub DeleteFilesAndHidePanel()
+
+        Dim files = Directory.GetFiles(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update")
+        For Each f In files
+            Try
+                File.Delete(f)
+            Catch ex As Exception
+            End Try
+        Next
+        UpdateBox_Panel.Visible = False
+        timer1.Stop()
 
     End Sub
 
@@ -2837,4 +2856,8 @@ ruf:                Application.DoEvents()
 
     End Function
 
+    Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs) Handles UpdateBox_Button2.Click
+        My.Settings.LaunchUpdater = True
+        Application.Restart()
+    End Sub
 End Class

@@ -241,12 +241,6 @@
   <data name="DatabaseManagerToolStripMenuItem.Text" xml:space="preserve">
     <value>User Database Manager</value>
   </data>
-  <data name="tsmiAdditionalConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 22</value>
-  </data>
-  <data name="tsmiAdditionalConfig.Text" xml:space="preserve">
-    <value>Additional File Tasks</value>
-  </data>
   <data name="CascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
   </data>
@@ -1241,5 +1235,15 @@
   </data>
   <data name="SaveUnifacIPRegrDlg.Title" xml:space="preserve">
     <value>Save Regression</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="UpdateBox_Button2.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="UpdateBox_Button2.Text" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="UpdateBox_Button1.Text" xml:space="preserve">
+    <value>Cancel</value>
   </data>
 </root>
