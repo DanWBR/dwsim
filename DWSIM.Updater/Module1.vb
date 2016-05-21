@@ -88,11 +88,18 @@ Module Module1
                 End If
 
                 Console.WriteLine()
-                Console.WriteLine("DWSIM was updated successfully. Press any key to close the updater and launch DWSIM.")
-                Console.ReadKey()
+
+                If RunningPlatform() = Platform.Windows Then
+                    Console.WriteLine("DWSIM was updated successfully. Press any key to close the updater and launch DWSIM.")
+                    Console.ReadKey(True)
+                Else
+                    Console.WriteLine("DWSIM was updated successfully. Now closing the updater and launching DWSIM.")
+                End If
 
                 If RunningPlatform() = Platform.Linux Then
-                    Process.Start("mono " & My.Application.Info.DirectoryPath & sep & "DWSIM.exe")
+                    Dim startInfo = New ProcessStartInfo("mono", My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "DWSIM.exe")
+                    startInfo.UseShellExecute = True
+                    Process.Start(startInfo)
                 Else
                     Process.Start(My.Application.Info.DirectoryPath & sep & "DWSIM.exe")
                 End If
@@ -102,8 +109,12 @@ Module Module1
                 Console.WriteLine()
                 Console.WriteLine("Update failed: " & ex.Message.ToString)
                 Console.WriteLine()
-                Console.WriteLine("DWSIM was not updated successfully. Press any key to close the updater.")
-                Console.ReadKey()
+                If RunningPlatform() = Platform.Windows Then
+                    Console.WriteLine("DWSIM was not updated successfully. Press any key to close the updater.")
+                    Console.ReadKey(True)
+                Else
+                    Console.WriteLine("DWSIM was not updated successfully. Closing the updater...")
+                End If
 
             Finally
 
@@ -113,6 +124,11 @@ Module Module1
                     Catch ex2 As Exception
                     End Try
                 Next
+
+                Try
+                    Directory.Delete(udir)
+                Catch ex As Exception
+                End Try
 
                 File.Delete(My.Application.Info.DirectoryPath & sep & "update.run")
 

@@ -44,7 +44,7 @@ public class FileDownloader : System.Object, IDisposable
         public FileInfo(String path)
         {
             this.Path = path;
-            this.Name = this.Path.Split("/"[0])[this.Path.Split("/"[0]).Length - 1];
+            this.Name = this.Path.Split(System.IO.Path.DirectorySeparatorChar)[this.Path.Split(System.IO.Path.DirectorySeparatorChar).Length - 1];
         }
 
     }
@@ -333,8 +333,8 @@ public class FileDownloader : System.Object, IDisposable
         System.Diagnostics.Stopwatch speedTimer = new System.Diagnostics.Stopwatch();
         Int32 readings = 0;
         Exception exc = null;
-            
-        FileStream writer = new FileStream(this.LocalDirectory + "\\" + file.Name, System.IO.FileMode.Create);
+
+        FileStream writer = new FileStream(this.LocalDirectory + System.IO.Path.DirectorySeparatorChar + file.Name, System.IO.FileMode.Create);
 
         HttpWebRequest webReq;
         HttpWebResponse webResp = null;
@@ -396,7 +396,7 @@ public class FileDownloader : System.Object, IDisposable
 
         for (Int32 fileNr = start; fileNr <= last; fileNr++)
         {
-            String fullPath = this.LocalDirectory + "\\" + this.Files[fileNr].Name;
+            String fullPath = this.LocalDirectory + System.IO.Path.DirectorySeparatorChar + this.Files[fileNr].Name;
             if (System.IO.File.Exists(fullPath)) { System.IO.File.Delete(fullPath); }
         }
     }

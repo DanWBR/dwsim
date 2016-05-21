@@ -280,6 +280,9 @@ Namespace DWSIM
 
             My.Settings.CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
 
+            My.Settings.AutomaticUpdates = source.Configs("Misc").GetBoolean("AutoUpdate", True)
+
+
         End Sub
 
         Shared Sub SaveSettings(Optional ByVal configfile As String = "")
@@ -345,6 +348,7 @@ Namespace DWSIM
             source.Configs("Misc").Set("TaskScheduler", My.Settings.TaskScheduler)
             source.Configs("Misc").Set("UseSIMDExtensions", My.Settings.UseSIMDExtensions)
             source.Configs("Misc").Set("CloseFormsOnDeselecting", My.Settings.CloseFormsOnDeselecting)
+            source.Configs("Misc").Set("AutoUpdate", My.Settings.AutomaticUpdates)
 
             source.Save(configfile)
 

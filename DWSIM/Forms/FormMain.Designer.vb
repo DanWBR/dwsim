@@ -704,7 +704,7 @@ Partial Class FormMain
         If File.Exists(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update.run") Then
             'launch updater
             If DWSIM.App.RunningPlatform = DWSIM.App.Platform.Linux Then
-                Dim startInfo = New ProcessStartInfo("mono " & My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "DWSIM.Updater.exe")
+                Dim startInfo = New ProcessStartInfo("mono", My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "DWSIM.Updater.exe")
                 startInfo.UseShellExecute = True
                 Process.Start(startInfo)
             Else

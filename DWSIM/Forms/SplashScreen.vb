@@ -1,4 +1,6 @@
-﻿'    Copyright 2008 Daniel Wagner O. de Medeiros
+﻿Imports System.IO
+
+'    Copyright 2008 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -36,11 +38,9 @@ Public NotInheritable Class SplashScreen
         '  String.Format() in Help for more information.
         '
         '    Version.Text = System.String.Format(Version.Text, My.Application.Info.Version.Major, My.Application.Info.Version.Minor, My.Application.Info.Version.Build, My.Application.Info.Version.Revision)
-        Dim dt As DateTime = CType("01/01/2000", DateTime). _
-                            AddDays(My.Application.Info.Version.Build). _
-                            AddSeconds(My.Application.Info.Version.Revision * 2)
-        Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & vbCrLf
-        Version.Text += "Build " & My.Application.Info.Version.Build & " (" & Format(dt, "dd/MM/yyyy") & ")"
+        Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
+        Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
+        If File.Exists(updfile) Then Version.Text += " Update " & File.ReadAllText(updfile)
 
         'Copyright info
         'Copyright.Text = My.Application.Info.Copyright
