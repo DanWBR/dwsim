@@ -13,9 +13,12 @@ Public Class AboutBoxMONO
 
     Private Sub AboutBox_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Dim dt As DateTime = CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)
-        Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & _
-        ", Build " & My.Application.Info.Version.Build & " (" & Format(dt, "dd/MM/yyyy HH:mm:ss") & ")"
+        Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
+
+        Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
+        If File.Exists(updfile) Then
+            Version.Text += " Update " & File.ReadAllText(updfile)
+        End If
 
         Copyright.Text = My.Application.Info.Copyright
 

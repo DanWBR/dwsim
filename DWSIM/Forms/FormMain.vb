@@ -2716,6 +2716,7 @@ ruf:                Application.DoEvents()
             End Try
 
             If create Then
+
                 Dim ok As Boolean = False
                 Dim updfile As String = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update" & Path.DirectorySeparatorChar & "update.txt"
                 Try
@@ -2735,8 +2736,8 @@ ruf:                Application.DoEvents()
                     Dim v As String, u As Integer, md5 As String, filep As String
 
                     Dim appu As Integer
-                    If File.Exists(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.inf") Then
-                        appu = Convert.ToInt32(File.ReadAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.inf"))
+                    If File.Exists(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info") Then
+                        appu = Convert.ToInt32(File.ReadAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"))
                     Else
                         appu = 0
                     End If
@@ -2762,55 +2763,61 @@ ruf:                Application.DoEvents()
                     Dim ftext As New StringBuilder
                     Dim i As Integer
                     If filelist.Count > 0 Then
+
                         For i = 0 To filelist.Count - 1
                             ftext.AppendLine(filelist(i) & vbTab & md5list(i))
                             dlder.Files.Add(New FileDownloader.FileInfo("http://dwsim.inforside.com.br/update/" & filelist(i)))
                         Next
+
                         File.WriteAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update" & Path.DirectorySeparatorChar & "filelist.txt", ftext.ToString)
+
+                        'download files
+
+                        Me.UIThread(Sub()
+                                        UpdateBox_Panel.Visible = True
+                                        UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "..."
+                                    End Sub)
+
+                        dlder.LocalDirectory = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update"
+                        dlder.DeleteCompletedFilesAfterCancel = True
+
+                        Me.UIThread(Sub()
+                                        AddHandler timer1.Tick, Sub()
+                                                                    Me.UIThread(Sub()
+                                                                                    Try
+                                                                                        UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "... " &
+                                                                                            dlder.CurrentFile.Name & " (" & FileDownloader.FormatSizeBinary(dlder.CurrentFileProgress) & "/" &
+                                                                                            FileDownloader.FormatSizeBinary(dlder.CurrentFileSize) & ")" & ", " &
+                                                                                            String.Format("{0}/s", FileDownloader.FormatSizeBinary(dlder.DownloadSpeed))
+                                                                                        UpdateBox_ProgressBar1.Value = dlder.TotalPercentage
+                                                                                    Catch ex As Exception
+                                                                                    End Try
+                                                                                End Sub)
+                                                                End Sub
+                                        timer1.Interval = 500
+                                        timer1.Start()
+                                    End Sub)
+
+                        AddHandler UpdateBox_Button1.Click, Sub() Me.UIThread(Sub()
+                                                                                  dlder.Stop(True)
+                                                                                  DeleteFilesAndHidePanel()
+                                                                              End Sub)
+
+                        AddHandler dlder.FileDownloadFailed, Sub() Me.UIThread(Sub() DeleteFilesAndHidePanel())
+
+                        AddHandler dlder.Canceled, Sub() Me.UIThread(Sub() DeleteFilesAndHidePanel())
+
+                        AddHandler dlder.Completed, Sub() Me.UIThread(Sub()
+                                                                          UpdateBox_Label1.Text = DWSIM.App.GetLocalString("UpdateReady")
+                                                                          UpdateBox_ProgressBar1.Visible = False
+                                                                          UpdateBox_Button1.Enabled = False
+                                                                          UpdateBox_Button2.Enabled = True
+                                                                          timer1.Stop()
+                                                                      End Sub)
+
+                        Me.UIThread(Sub() dlder.Start())
+
                     End If
-
-                    'download files
-
-                    Me.UIThread(Sub()
-                                    UpdateBox_Panel.Visible = True
-                                    UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "..."
-                                End Sub)
-
-                    dlder.LocalDirectory = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update"
-                    dlder.DeleteCompletedFilesAfterCancel = True
-
-                    Me.UIThread(Sub()
-                                    AddHandler timer1.Tick, Sub()
-                                                                Me.UIThread(Sub()
-                                                                                UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "... " &
-                                                                                    dlder.CurrentFile.Name & " (" & FileDownloader.FormatSizeBinary(dlder.CurrentFileProgress) & "/" &
-                                                                                    FileDownloader.FormatSizeBinary(dlder.CurrentFileSize) & ")" & ", " &
-                                                                                    String.Format("{0}/s", FileDownloader.FormatSizeBinary(dlder.DownloadSpeed))
-                                                                                UpdateBox_ProgressBar1.Value = dlder.TotalPercentage
-                                                                            End Sub)
-                                                            End Sub
-                                    timer1.Interval = 500
-                                    timer1.Start()
-                                End Sub)
-
-                    AddHandler UpdateBox_Button1.Click, Sub() Me.UIThread(Sub()
-                                                                              dlder.Stop(True)
-                                                                              DeleteFilesAndHidePanel()
-                                                                          End Sub)
-
-                    AddHandler dlder.FileDownloadFailed, Sub() Me.UIThread(Sub() DeleteFilesAndHidePanel())
-
-                    AddHandler dlder.Canceled, Sub() Me.UIThread(Sub() DeleteFilesAndHidePanel())
-
-                    AddHandler dlder.Completed, Sub() Me.UIThread(Sub()
-                                                                      UpdateBox_Label1.Text = DWSIM.App.GetLocalString("UpdateReady")
-                                                                      UpdateBox_ProgressBar1.Visible = False
-                                                                      UpdateBox_Button1.Enabled = False
-                                                                      UpdateBox_Button2.Enabled = True
-                                                                      timer1.Stop()
-                                                                  End Sub)
-
-                    Me.UIThread(Sub() dlder.Start())
 
                 End If
 
@@ -2857,7 +2864,7 @@ ruf:                Application.DoEvents()
     End Function
 
     Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs) Handles UpdateBox_Button2.Click
-        My.Settings.LaunchUpdater = True
+        File.WriteAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update.run", "")
         Application.Restart()
     End Sub
 End Class

@@ -701,6 +701,20 @@ Partial Class FormMain
 
     Public Sub New()
 
+        If File.Exists(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update.run") Then
+            'launch updater
+            If DWSIM.App.RunningPlatform = DWSIM.App.Platform.Linux Then
+                Dim startInfo = New ProcessStartInfo("mono " & My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "DWSIM.Updater.exe")
+                startInfo.UseShellExecute = True
+                Process.Start(startInfo)
+            Else
+                Dim startInfo = New ProcessStartInfo(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "DWSIM.Updater.exe")
+                startInfo.UseShellExecute = True
+                Process.Start(startInfo)
+            End If
+            Process.GetCurrentProcess().Kill()
+        End If
+
         If DWSIM.App.IsRunningOnMono() Then
 
             'handler for unhandled exceptions (!)
