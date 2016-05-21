@@ -44,7 +44,7 @@ public class FileDownloader : System.Object, IDisposable
         public FileInfo(String path)
         {
             this.Path = path;
-            this.Name = this.Path.Split(System.IO.Path.DirectorySeparatorChar)[this.Path.Split(System.IO.Path.DirectorySeparatorChar).Length - 1];
+            this.Name = this.Path.Split("/"[0])[this.Path.Split("/"[0]).Length - 1];
         }
 
     }
