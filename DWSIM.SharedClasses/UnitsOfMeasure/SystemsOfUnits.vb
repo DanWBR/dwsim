@@ -331,7 +331,7 @@ Namespace SystemsOfUnits
                 .heatflow = "kW"
                 .head = "m"
                 .deltaP = "Pa"
-                .deltaT = "K"
+                .deltaT = "K."
 
             End With
 

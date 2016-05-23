@@ -148,16 +148,14 @@ Public Class EditingForm_HeaterCooler
                 Dim uobj = DirectCast(SimObject, UnitOperations.Cooler)
 
                 Select Case uobj.CalcMode
-                    Case UnitOperations.Heater.CalculationMode.HeatAdded
+                    Case UnitOperations.Cooler.CalculationMode.HeatRemoved
                         cbCalcMode.SelectedIndex = 0
-                    Case UnitOperations.Heater.CalculationMode.TemperatureChange
+                    Case UnitOperations.Cooler.CalculationMode.TemperatureChange
                         cbCalcMode.SelectedIndex = 1
-                    Case UnitOperations.Heater.CalculationMode.OutletTemperature
+                    Case UnitOperations.Cooler.CalculationMode.OutletTemperature
                         cbCalcMode.SelectedIndex = 2
-                    Case UnitOperations.Heater.CalculationMode.OutletVaporFraction
+                    Case UnitOperations.Cooler.CalculationMode.OutletVaporFraction
                         cbCalcMode.SelectedIndex = 3
-                    Case UnitOperations.Heater.CalculationMode.EnergyStream
-                        cbCalcMode.SelectedIndex = 4
                 End Select
 
                 tbEfficiency.Text = uobj.Eficiencia.GetValueOrDefault.ToString(nf)
@@ -169,8 +167,9 @@ Public Class EditingForm_HeaterCooler
 
             End If
 
-
         End With
+
+        Loaded = True
 
     End Sub
 
@@ -235,26 +234,52 @@ Public Class EditingForm_HeaterCooler
                 tbOutletTemperature.Enabled = False
                 tbOutletVapFrac.Enabled = False
                 tbHeatingChange.Enabled = True
+                If TypeOf SimObject Is UnitOperations.Heater Then
+                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded
+                Else
+                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.HeatRemoved
+                End If
             Case 1
                 tbTemperatureChange.Enabled = True
                 tbOutletTemperature.Enabled = False
                 tbOutletVapFrac.Enabled = False
                 tbHeatingChange.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Heater Then
+                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
+                Else
+                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.TemperatureChange
+                End If
             Case 2
                 tbTemperatureChange.Enabled = False
                 tbOutletTemperature.Enabled = True
                 tbOutletVapFrac.Enabled = False
                 tbHeatingChange.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Heater Then
+                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
+                Else
+                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.OutletTemperature
+                End If
             Case 3
                 tbTemperatureChange.Enabled = False
                 tbOutletTemperature.Enabled = False
                 tbOutletVapFrac.Enabled = True
                 tbHeatingChange.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Heater Then
+                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.OutletVaporFraction
+                Else
+                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.OutletVaporFraction
+                End If
             Case 4
                 tbTemperatureChange.Enabled = False
                 tbOutletTemperature.Enabled = False
                 tbOutletVapFrac.Enabled = False
                 tbHeatingChange.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Heater Then
+                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.EnergyStream
+                Else
+                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.HeatRemoved
+                End If
+                If TypeOf SimObject Is UnitOperations.Cooler Then cbCalcMode.SelectedIndex = 0
         End Select
     End Sub
 
@@ -298,13 +323,13 @@ Public Class EditingForm_HeaterCooler
                 Case 0
                     uobj.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded
                 Case 1
-                    cbCalcMode.SelectedIndex = UnitOperations.Heater.CalculationMode.TemperatureChange
+                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
                 Case 2
-                    cbCalcMode.SelectedIndex = UnitOperations.Heater.CalculationMode.OutletTemperature
+                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
                 Case 3
-                    cbCalcMode.SelectedIndex = UnitOperations.Heater.CalculationMode.OutletVaporFraction
+                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.OutletVaporFraction
                 Case 4
-                    cbCalcMode.SelectedIndex = UnitOperations.Heater.CalculationMode.EnergyStream
+                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.EnergyStream
             End Select
 
             If sender Is tbEfficiency Then uobj.Eficiencia = Double.Parse(tbEfficiency.Text)
@@ -320,15 +345,13 @@ Public Class EditingForm_HeaterCooler
 
             Select Case cbCalcMode.SelectedIndex
                 Case 0
-                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded
+                    uobj.CalcMode = UnitOperations.Cooler.CalculationMode.HeatRemoved
                 Case 1
-                    cbCalcMode.SelectedIndex = UnitOperations.Heater.CalculationMode.TemperatureChange
+                    uobj.CalcMode = UnitOperations.Cooler.CalculationMode.TemperatureChange
                 Case 2
-                    cbCalcMode.SelectedIndex = UnitOperations.Heater.CalculationMode.OutletTemperature
+                    uobj.CalcMode = UnitOperations.Cooler.CalculationMode.OutletTemperature
                 Case 3
-                    cbCalcMode.SelectedIndex = UnitOperations.Heater.CalculationMode.OutletVaporFraction
-                Case 4
-                    cbCalcMode.SelectedIndex = UnitOperations.Heater.CalculationMode.EnergyStream
+                    uobj.CalcMode = UnitOperations.Cooler.CalculationMode.OutletVaporFraction
             End Select
 
             If sender Is tbEfficiency Then uobj.Eficiencia = Double.Parse(tbEfficiency.Text)
@@ -392,57 +415,13 @@ Public Class EditingForm_HeaterCooler
 
     Private Sub cbInlet1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbInlet1.SelectedIndexChanged
 
-        Dim text As String = cbInlet1.Text
+        If Loaded Then
 
-        If text <> "" Then
-
-            Dim index As Integer = 0
-
-            Dim gobj = SimObject.GraphicObject
-            Dim flowsheet = SimObject.FlowSheet
-
-            If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.OutputConnectors(0).IsAttached Then
-                MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Exit Sub
-            End If
-            If gobj.InputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(index).AttachedConnector.AttachedFrom, gobj)
-            flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, index)
-
-        End If
-
-    End Sub
-
-    Private Sub cbOutlet1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutlet1.SelectedIndexChanged
-
-        Dim text As String = cbOutlet1.Text
-
-        If text <> "" Then
-
-            Dim index As Integer = 0
-
-            Dim gobj = SimObject.GraphicObject
-            Dim flowsheet = SimObject.FlowSheet
-
-            If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(0).IsAttached Then
-                MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Exit Sub
-            End If
-            If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
-            flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
-
-        End If
-
-    End Sub
-
-    Private Sub cbEnergy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEnergy.SelectedIndexChanged
-
-        Dim text As String = cbEnergy.Text
-
-        If TypeOf SimObject Is UnitOperations.Heater Then
+            Dim text As String = cbInlet1.Text
 
             If text <> "" Then
 
-                Dim index As Integer = 1
+                Dim index As Integer = 0
 
                 Dim gobj = SimObject.GraphicObject
                 Dim flowsheet = SimObject.FlowSheet
@@ -456,7 +435,15 @@ Public Class EditingForm_HeaterCooler
 
             End If
 
-        Else
+        End If
+
+    End Sub
+
+    Private Sub cbOutlet1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutlet1.SelectedIndexChanged
+
+        If Loaded Then
+
+            Dim text As String = cbOutlet1.Text
 
             If text <> "" Then
 
@@ -469,9 +456,57 @@ Public Class EditingForm_HeaterCooler
                     MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End If
-
-                If gobj.EnergyConnector.IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.EnergyConnector.AttachedConnector.AttachedTo)
+                If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
                 flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub cbEnergy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEnergy.SelectedIndexChanged
+
+        If Loaded Then
+
+            Dim text As String = cbEnergy.Text
+
+            If TypeOf SimObject Is UnitOperations.Heater Then
+
+                If text <> "" Then
+
+                    Dim index As Integer = 1
+
+                    Dim gobj = SimObject.GraphicObject
+                    Dim flowsheet = SimObject.FlowSheet
+
+                    If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.OutputConnectors(0).IsAttached Then
+                        MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
+                    If gobj.InputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(index).AttachedConnector.AttachedFrom, gobj)
+                    flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, index)
+
+                End If
+
+            Else
+
+                If text <> "" Then
+
+                    Dim index As Integer = 0
+
+                    Dim gobj = SimObject.GraphicObject
+                    Dim flowsheet = SimObject.FlowSheet
+
+                    If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(0).IsAttached Then
+                        MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
+
+                    If gobj.EnergyConnector.IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.EnergyConnector.AttachedConnector.AttachedTo)
+                    flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+
+                End If
 
             End If
 

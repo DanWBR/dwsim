@@ -46,6 +46,7 @@ Namespace UnitOperations
             HeatRemoved = 0
             OutletTemperature = 1
             OutletVaporFraction = 2
+            TemperatureChange = 3
         End Enum
 
         Public Property OutletTemperature() As Nullable(Of Double)
@@ -189,6 +190,25 @@ Namespace UnitOperations
                     H2 = tmp.CalculatedEnthalpy
                     CheckSpec(H2, False, "outlet enthalpy")
                     Me.DeltaT = T2 - Ti
+                    Me.DeltaQ = -(H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
+
+                    'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
+                    With esout
+                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                        .GraphicObject.Calculated = True
+                    End With
+
+                Case CalculationMode.TemperatureChange
+
+                    T2 = Ti + Me.DeltaT.GetValueOrDefault
+
+                    Me.OutletTemperature = T2
+
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate outlet enthalpy... P = {0} Pa, T = {1} K", P2, T2))
+
+                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, P2, T2, 0)
+                    H2 = tmp.CalculatedEnthalpy
+                    CheckSpec(H2, False, "outlet enthalpy")
                     Me.DeltaQ = -(H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
 
                     'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
