@@ -931,7 +931,7 @@ Namespace SystemsOfUnits
 
     <System.Serializable()> Public Class Converter
 
-        Public Shared Function ConvertToSI(ByVal units As String, ByVal value As Double)
+        Public Shared Function ConvertToSI(ByVal units As String, ByVal value As Double) As Double
 
             Select Case units
 
@@ -1343,7 +1343,7 @@ Namespace SystemsOfUnits
 
         End Function
 
-        Public Shared Function ConvertFromSI(ByVal units As String, ByVal value As Double)
+        Public Shared Function ConvertFromSI(ByVal units As String, ByVal value As Double) As Double
 
             Select Case units
 

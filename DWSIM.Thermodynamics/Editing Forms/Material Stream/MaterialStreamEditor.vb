@@ -2,6 +2,7 @@
 Imports System.Windows.Forms
 Imports Converter = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports WeifenLuo.WinFormsUI.Docking
+Imports su = DWSIM.SharedClasses.SystemsOfUnits
 
 Public Class MaterialStreamEditor
 
@@ -79,7 +80,7 @@ Public Class MaterialStreamEditor
 
             cbUnitsT.Items.Clear()
             cbUnitsT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.temperature).ToArray)
-            cbUnitsT.SelectedItem = .FlowSheet.FlowsheetOptions.SelectedUnitSystem.temperature
+            cbUnitsT.SelectedItem = units.temperature
 
             cbUnitsP.Items.Clear()
             cbUnitsP.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
@@ -105,13 +106,13 @@ Public Class MaterialStreamEditor
             cbUnitsS.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.entropy).ToArray)
             cbUnitsS.SelectedItem = units.entropy
 
-            tbTemp.Text = .Phases(0).Properties.temperature.GetValueOrDefault.ToString(nf)
-            tbPressure.Text = .Phases(0).Properties.pressure.GetValueOrDefault.ToString(nf)
-            tbMassFlow.Text = .Phases(0).Properties.massflow.GetValueOrDefault.ToString(nf)
-            tbMoleFlow.Text = .Phases(0).Properties.molarflow.GetValueOrDefault.ToString(nf)
-            tbVolFlow.Text = .Phases(0).Properties.volumetric_flow.GetValueOrDefault.ToString(nf)
-            tbEnth.Text = .Phases(0).Properties.enthalpy.GetValueOrDefault.ToString(nf)
-            tbEntr.Text = .Phases(0).Properties.entropy.GetValueOrDefault.ToString(nf)
+            tbTemp.Text = su.Converter.ConvertFromSI(units.temperature, .Phases(0).Properties.temperature.GetValueOrDefault).ToString(nf)
+            tbPressure.Text = su.Converter.ConvertFromSI(units.pressure, .Phases(0).Properties.pressure.GetValueOrDefault).ToString(nf)
+            tbMassFlow.Text = su.Converter.ConvertFromSI(units.massflow, .Phases(0).Properties.massflow.GetValueOrDefault).ToString(nf)
+            tbMoleFlow.Text = su.Converter.ConvertFromSI(units.molarflow, .Phases(0).Properties.molarflow.GetValueOrDefault).ToString(nf)
+            tbVolFlow.Text = su.Converter.ConvertFromSI(units.volumetricFlow, .Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(nf)
+            tbEnth.Text = su.Converter.ConvertFromSI(units.enthalpy, .Phases(0).Properties.enthalpy.GetValueOrDefault).ToString(nf)
+            tbEntr.Text = su.Converter.ConvertFromSI(units.entropy, .Phases(0).Properties.entropy.GetValueOrDefault).ToString(nf)
 
             If rbSpecVapor.Checked Then
                 tbFracSpec.Text = .Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(nf)

@@ -117,6 +117,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\EditingForm_HeaterCooler.Designer.vb">
+      <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_HeaterCooler.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Mixer.Designer.vb">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </Compile>
@@ -194,6 +200,12 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\EditingForm_HeaterCooler.en.resx">
+      <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_HeaterCooler.resx">
+      <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.en.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </EmbeddedResource>
@@ -494,6 +506,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\uo_valve_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cog.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

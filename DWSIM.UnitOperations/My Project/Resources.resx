@@ -118,220 +118,223 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="disconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\disconnect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="bullet_tick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bullet_tick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_abs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_abs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_abs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_abs_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_dc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_dc_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_dc_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_dc_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_rebabs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_rebabs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_rebabs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_rebabs_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_rflabs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_rflabs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_rflabs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_rflabs_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_sc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_sc_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="col_sc_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_sc_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lo_adjust_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lo_adjust_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lo_adjust_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lo_adjust_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lo_enrecy_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lo_enrecy_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lo_enrecy_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lo_enrecy_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lo_recy_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lo_recy_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lo_recy_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lo_recy_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lo_spec_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lo_spec_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lo_spec_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lo_spec_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="re_conv_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_conv_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="re_conv_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_conv_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="re_cstr_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_cstr_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="re_cstr_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_cstr_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="re_equi_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_equi_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="re_equi_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_equi_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="re_gibbs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_gibbs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="re_gibbs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\re_gibbs_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="re_pfr_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_pfr_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="re_pfr_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_pfr_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="stream_en_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stream_en_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="stream_en_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stream_en_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_compr_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_compr_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_compr_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_compr_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_compsep_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_compsep_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_compsep_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_compsep_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_cooler_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_cooler_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_cooler_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_cooler_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_co_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_co_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_co_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_co_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_custom_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_custom_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_custom_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_custom_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_excel_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_excel_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_excel_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_excel_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_expan_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_expan_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_expan_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_expan_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_filter_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_filter_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_filter_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_filter_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="uo_flash_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_flash_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_flash_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_flash_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="uo_cooler_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_cooler_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_fs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_fs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_fs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_fs_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_heater_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_heater_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_heater_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_heater_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_hx_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_hx_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_hx_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_hx_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_mixer_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_mixer_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_mixer_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_mixer_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_orifice_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_orifice_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_orifice_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_orifice_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="uo_pipe_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_pipe_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="uo_custom_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_custom_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="uo_pipe_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_pipe_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_pump_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_pump_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="stream_en_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stream_en_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_pump_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_pump_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="uo_heater_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_heater_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_solidsep_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_solidsep_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lo_recy_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lo_recy_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_solidsep_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_solidsep_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="re_conv_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_conv_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_split_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_split_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lo_spec_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lo_spec_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_split_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_split_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="lo_enrecy_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lo_enrecy_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_tank_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_tank_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="uo_flash_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_flash_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uo_tank_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\uo_tank_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="uo_orifice_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_orifice_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="uo_valve_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_valve_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="uo_pipe_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_pipe_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_pump_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_pump_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_split_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_split_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_compsep_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_compsep_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="re_cstr_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_cstr_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_tank_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_tank_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_mixer_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_mixer_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_rflabs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_rflabs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_hx_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_hx_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="re_equi_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_equi_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="re_pfr_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_pfr_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_abs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_abs_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_co_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_co_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_filter_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_filter_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_split_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_split_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_cooler_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_cooler_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_compr_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_compr_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_solidsep_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_solidsep_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_custom_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_custom_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_sc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_sc_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_dc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_dc_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_hx_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_hx_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="re_equi_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_equi_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lo_recy_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lo_recy_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bullet_tick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bullet_tick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_compr_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_compr_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_orifice_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_orifice_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_excel_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_excel_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_dc_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_dc_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lo_adjust_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lo_adjust_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="re_cstr_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_cstr_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="re_gibbs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_gibbs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_solidsep_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_solidsep_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lo_adjust_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lo_adjust_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_expan_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_expan_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="uo_valve_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_valve_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="re_pfr_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_pfr_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_co_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_co_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_rebabs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_rebabs_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_compsep_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_compsep_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_expan_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_expan_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_excel_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_excel_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_tank_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_tank_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_rebabs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_rebabs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\disconnect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_sc_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_sc_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_mixer_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_mixer_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_pump_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_pump_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_abs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_abs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="col_rflabs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_rflabs_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lo_enrecy_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lo_enrecy_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stream_en_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stream_en_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_fs_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_fs_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_heater_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_heater_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="re_conv_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_conv_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lo_spec_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lo_spec_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_fs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_fs_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uo_filter_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uo_filter_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
