@@ -168,7 +168,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         If Not Me.m_IsLoadedFromFile Then
 
-            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).FirstOrDefault
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
             Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
 
             Dim aTypeList As New List(Of Type)

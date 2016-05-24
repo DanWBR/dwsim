@@ -129,6 +129,12 @@
     <Compile Include="Editing Forms\EditingForm_Mixer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_ComprExpndr.Designer.vb">
+      <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_ComprExpndr.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Other\Form_CapeOpenSelector.designer.vb">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </Compile>
@@ -211,6 +217,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ComprExpndr.en.resx">
+      <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ComprExpndr.resx">
+      <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.en.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>

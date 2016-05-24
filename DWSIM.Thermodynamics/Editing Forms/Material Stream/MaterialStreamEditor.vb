@@ -1034,4 +1034,8 @@ Public Class MaterialStreamEditor
 
     End Sub
 
+    Private Sub rtbAnnotations_RtfChanged(sender As Object, e As EventArgs) Handles rtbAnnotations.RtfChanged
+        If Loaded Then MatStream.Annotation = rtbAnnotations.Rtf
+    End Sub
+
 End Class

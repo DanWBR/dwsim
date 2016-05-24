@@ -13,7 +13,7 @@ Public Class SimulationObjectsPanel
         SplitContainer2.SplitterDistance = My.Settings.ObjectSelectorSplitterDistance2
         SplitContainer3.SplitterDistance = My.Settings.ObjectSelectorSplitterDistance3
 
-        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).FirstOrDefault
+        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
         Dim availableTypes As New List(Of Type)()
 

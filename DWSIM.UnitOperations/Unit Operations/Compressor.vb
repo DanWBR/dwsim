@@ -31,10 +31,13 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ComprExpndr
+
         Public Enum CalculationMode
             OutletPressure = 0
             Delta_P = 1
             EnergyStream = 2
+            PowerRequired = 3
         End Enum
 
         Protected m_dp As Nullable(Of Double)
@@ -47,6 +50,8 @@ Namespace UnitOperations
         Protected m_eta_p As Nullable(Of Double) = Nothing
 
         Protected m_ignorephase As Boolean = True
+
+        Public Property OutletTemperature As Double = 0.0#
 
         Public Property CalcMode() As CalculationMode
             Get
@@ -160,7 +165,7 @@ Namespace UnitOperations
 
             If FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name).GraphicObject.Active Then
 
-                If Me.CalcMode <> CalculationMode.EnergyStream And FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name).GraphicObject.InputConnectors(0).IsAttached = False Then GoTo fix
+                If Me.CalcMode = CalculationMode.Delta_P Or Me.CalcMode = CalculationMode.OutletPressure Then GoTo fix
 
                 Me.PropertyPackage.CurrentMaterialStream = msin
                 Ti = msin.Phases(0).Properties.temperature.GetValueOrDefault.ToString
@@ -182,11 +187,15 @@ Namespace UnitOperations
 
                 Dim energystream As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
 
-                With energystream
-                    Me.DeltaQ = .EnergyFlow.GetValueOrDefault 'Wi * (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100)
-                End With
-
-                If DebugMode Then AppendDebugLine(String.Format("Power from energy stream: {0} kW", DeltaQ))
+                Select Case Me.CalcMode
+                    Case CalculationMode.EnergyStream
+                        With energystream
+                            Me.DeltaQ = .EnergyFlow.GetValueOrDefault 'Wi * (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100)
+                        End With
+                        If DebugMode Then AppendDebugLine(String.Format("Power from energy stream: {0} kW", DeltaQ))
+                    Case CalculationMode.PowerRequired
+                        If DebugMode Then AppendDebugLine(String.Format("Power from definition: {0} kW", DeltaQ))
+                End Select
 
                 CheckSpec(Me.DeltaQ, True, "power")
 
@@ -226,6 +235,8 @@ Namespace UnitOperations
                 CheckSpec(T2, True, "outlet temperature")
 
                 Me.DeltaT = T2 - Ti
+
+                OutletTemperature = T2
 
                 If Not DebugMode Then
 
@@ -301,6 +312,8 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 CheckSpec(T2, True, "outlet temperature")
 
                 H2 = Hi + Me.DeltaQ.GetValueOrDefault / Wi
+
+                OutletTemperature = T2
 
                 If Not DebugMode Then
 
@@ -473,10 +486,28 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_ComprExpndr With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_ComprExpndr With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Select()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -500,8 +531,14 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace

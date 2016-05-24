@@ -10,7 +10,7 @@ Public Class FormAddFlowsheetObject
 
     Private Sub FormAddFlowsheetObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics")).FirstOrDefault
+        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
         Dim availableTypes As New List(Of Type)()
 

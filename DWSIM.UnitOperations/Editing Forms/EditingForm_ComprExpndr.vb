@@ -3,7 +3,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 
-Public Class EditingForm_HeaterCooler
+Public Class EditingForm_ComprExpndr
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
@@ -75,7 +75,7 @@ Public Class EditingForm_HeaterCooler
             cbEnergy.Items.Clear()
             cbEnergy.Items.AddRange(eslist)
 
-            If TypeOf SimObject Is UnitOperations.Heater Then
+            If TypeOf SimObject Is UnitOperations.Compressor Then
                 If .GraphicObject.InputConnectors(1).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
             Else
                 If .GraphicObject.EnergyConnector.IsAttached Then cbEnergy.SelectedItem = .GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Tag
@@ -103,67 +103,67 @@ Public Class EditingForm_HeaterCooler
 
             'parameters
 
-            cbTemp.Items.Clear()
-            cbTemp.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.temperature).ToArray)
-            cbTemp.SelectedItem = units.temperature
+            cbPress.Items.Clear()
+            cbPress.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
+            cbPress.SelectedItem = units.pressure
 
             cbPressureDropU.Items.Clear()
             cbPressureDropU.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
             cbPressureDropU.SelectedItem = units.deltaP
 
-            cbDeltaTemp.Items.Clear()
-            cbDeltaTemp.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
-            cbDeltaTemp.SelectedItem = units.deltaT
+            cbPower.Items.Clear()
+            cbPower.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.heatflow).ToArray)
+            cbPower.SelectedItem = units.heatflow
 
-            cbHeating.Items.Clear()
-            cbHeating.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.heatflow).ToArray)
-            cbHeating.SelectedItem = units.heatflow
+            cbTemp.Items.Clear()
+            cbTemp.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.temperature).ToArray)
+            cbTemp.SelectedItem = units.temperature
 
-            If TypeOf SimObject Is UnitOperations.Heater Then
+            cbDeltaT.Items.Clear()
+            cbDeltaT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
+            cbDeltaT.SelectedItem = units.deltaT
 
-                Dim uobj = DirectCast(SimObject, UnitOperations.Heater)
+            If TypeOf SimObject Is UnitOperations.Compressor Then
+
+                Dim uobj = DirectCast(SimObject, UnitOperations.Compressor)
 
                 Select Case uobj.CalcMode
-                    Case UnitOperations.Heater.CalculationMode.HeatAdded
+                    Case UnitOperations.Compressor.CalculationMode.OutletPressure
                         cbCalcMode.SelectedIndex = 0
-                    Case UnitOperations.Heater.CalculationMode.TemperatureChange
+                    Case UnitOperations.Compressor.CalculationMode.Delta_P
                         cbCalcMode.SelectedIndex = 1
-                    Case UnitOperations.Heater.CalculationMode.OutletTemperature
+                    Case UnitOperations.Compressor.CalculationMode.PowerRequired
                         cbCalcMode.SelectedIndex = 2
-                    Case UnitOperations.Heater.CalculationMode.OutletVaporFraction
+                    Case UnitOperations.Compressor.CalculationMode.EnergyStream
                         cbCalcMode.SelectedIndex = 3
-                    Case UnitOperations.Heater.CalculationMode.EnergyStream
-                        cbCalcMode.SelectedIndex = 4
                 End Select
 
-                tbEfficiency.Text = uobj.Eficiencia.GetValueOrDefault.ToString(nf)
-                tbHeatingChange.Text = su.Converter.ConvertFromSI(units.heatflow, uobj.DeltaQ.GetValueOrDefault).ToString(nf)
-                tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature.GetValueOrDefault).ToString(nf)
-                tbOutletVapFrac.Text = uobj.OutletVaporFraction.GetValueOrDefault.ToString(nf)
+                tbEfficiency.Text = uobj.EficienciaAdiabatica.GetValueOrDefault.ToString(nf)
+                tbPower.Text = su.Converter.ConvertFromSI(units.heatflow, uobj.DeltaQ.GetValueOrDefault).ToString(nf)
+                tbOutletPressure.Text = su.Converter.ConvertFromSI(units.temperature, uobj.POut.GetValueOrDefault).ToString(nf)
                 tbPressureDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP.GetValueOrDefault).ToString(nf)
-                tbTemperatureChange.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
+                tbTemp.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature).ToString(nf)
+                tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
 
             Else
 
-                Dim uobj = DirectCast(SimObject, UnitOperations.Cooler)
+                Dim uobj = DirectCast(SimObject, UnitOperations.Expander)
 
                 Select Case uobj.CalcMode
-                    Case UnitOperations.Cooler.CalculationMode.HeatRemoved
+                    Case UnitOperations.Expander.CalculationMode.OutletPressure
                         cbCalcMode.SelectedIndex = 0
-                    Case UnitOperations.Cooler.CalculationMode.TemperatureChange
+                    Case UnitOperations.Expander.CalculationMode.Delta_P
                         cbCalcMode.SelectedIndex = 1
-                    Case UnitOperations.Cooler.CalculationMode.OutletTemperature
+                    Case UnitOperations.Expander.CalculationMode.PowerGenerated
                         cbCalcMode.SelectedIndex = 2
-                    Case UnitOperations.Cooler.CalculationMode.OutletVaporFraction
-                        cbCalcMode.SelectedIndex = 3
                 End Select
 
-                tbEfficiency.Text = uobj.Eficiencia.GetValueOrDefault.ToString(nf)
-                tbHeatingChange.Text = su.Converter.ConvertFromSI(units.heatflow, uobj.DeltaQ.GetValueOrDefault).ToString(nf)
-                tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature.GetValueOrDefault).ToString(nf)
-                tbOutletVapFrac.Text = uobj.OutletVaporFraction.GetValueOrDefault.ToString(nf)
+                tbEfficiency.Text = uobj.EficienciaAdiabatica.GetValueOrDefault.ToString(nf)
+                tbPower.Text = su.Converter.ConvertFromSI(units.heatflow, uobj.DeltaQ.GetValueOrDefault).ToString(nf)
+                tbOutletPressure.Text = su.Converter.ConvertFromSI(units.temperature, uobj.POut.GetValueOrDefault).ToString(nf)
                 tbPressureDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP.GetValueOrDefault).ToString(nf)
-                tbTemperatureChange.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
+                tbTemp.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature).ToString(nf)
+                tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
 
             End If
 
@@ -223,87 +223,69 @@ Public Class EditingForm_HeaterCooler
     End Sub
 
     Private Sub cbCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalcMode.SelectedIndexChanged
-        '0 Calor Adicionado / Removido
-        '1 Variação de Temperatura
-        '2 Temperatura na Saída
-        '3 Fracao de Vapor na Saída
-        '4 Corrente de Energia
+        'Pressão na Saída
+        'Variação da Pressão
+        'Potência Fornecida / Produzida
+        'Corrente de Energia
         Select Case cbCalcMode.SelectedIndex
             Case 0
-                tbTemperatureChange.Enabled = False
-                tbOutletTemperature.Enabled = False
-                tbOutletVapFrac.Enabled = False
-                tbHeatingChange.Enabled = True
-                If TypeOf SimObject Is UnitOperations.Heater Then
-                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded
+                tbPressureDrop.Enabled = False
+                tbOutletPressure.Enabled = True
+                tbPower.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Compressor Then
+                    DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.OutletPressure
                 Else
-                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.HeatRemoved
+                    DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.OutletPressure
                 End If
             Case 1
-                tbTemperatureChange.Enabled = True
-                tbOutletTemperature.Enabled = False
-                tbOutletVapFrac.Enabled = False
-                tbHeatingChange.Enabled = False
-                If TypeOf SimObject Is UnitOperations.Heater Then
-                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
+                tbPressureDrop.Enabled = True
+                tbOutletPressure.Enabled = False
+                tbPower.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Compressor Then
+                    DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.Delta_P
                 Else
-                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.TemperatureChange
+                    DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.Delta_P
                 End If
             Case 2
-                tbTemperatureChange.Enabled = False
-                tbOutletTemperature.Enabled = True
-                tbOutletVapFrac.Enabled = False
-                tbHeatingChange.Enabled = False
-                If TypeOf SimObject Is UnitOperations.Heater Then
-                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
+                tbPressureDrop.Enabled = False
+                tbOutletPressure.Enabled = False
+                tbPower.Enabled = True
+                If TypeOf SimObject Is UnitOperations.Compressor Then
+                    DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.PowerRequired
                 Else
-                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.OutletTemperature
+                    DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.PowerGenerated
                 End If
             Case 3
-                tbTemperatureChange.Enabled = False
-                tbOutletTemperature.Enabled = False
-                tbOutletVapFrac.Enabled = True
-                tbHeatingChange.Enabled = False
-                If TypeOf SimObject Is UnitOperations.Heater Then
-                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.OutletVaporFraction
+                tbPressureDrop.Enabled = False
+                tbOutletPressure.Enabled = False
+                tbPower.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Compressor Then
+                    DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.EnergyStream
                 Else
-                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.OutletVaporFraction
+                    DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.PowerGenerated
                 End If
-            Case 4
-                tbTemperatureChange.Enabled = False
-                tbOutletTemperature.Enabled = False
-                tbOutletVapFrac.Enabled = False
-                tbHeatingChange.Enabled = False
-                If TypeOf SimObject Is UnitOperations.Heater Then
-                    DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.EnergyStream
-                Else
-                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.HeatRemoved
-                End If
-                If TypeOf SimObject Is UnitOperations.Cooler Then cbCalcMode.SelectedIndex = 0
+                If TypeOf SimObject Is UnitOperations.Expander Then cbCalcMode.SelectedIndex = 2
         End Select
     End Sub
 
-    Private Sub cb_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDeltaTemp.SelectedIndexChanged, cbPressureDropU.SelectedIndexChanged,
-                                                                                           cbTemp.SelectedIndexChanged, cbHeating.SelectedIndexChanged
+    Private Sub cb_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPressureDropU.SelectedIndexChanged,
+                                                                                  cbPress.SelectedIndexChanged,
+                                                                                  cbPower.SelectedIndexChanged
 
         If Loaded Then
             Try
-                If sender Is cbTemp Then
-                    tbOutletTemperature.Text = su.Converter.Convert(cbTemp.SelectedItem.ToString, units.temperature, Double.Parse(tbOutletTemperature.Text)).ToString(nf)
-                    cbTemp.SelectedItem = units.temperature
-                    UpdateProps(tbOutletTemperature)
-                ElseIf sender Is cbDeltaTemp Then
-                    tbTemperatureChange.Text = su.Converter.Convert(cbDeltaTemp.SelectedItem.ToString, units.deltaT, Double.Parse(tbTemperatureChange.Text)).ToString(nf)
-                    cbDeltaTemp.SelectedItem = units.deltaT
-                    UpdateProps(tbTemperatureChange)
+                If sender Is cbPress Then
+                    tbOutletPressure.Text = su.Converter.Convert(cbPress.SelectedItem.ToString, units.pressure, Double.Parse(tbOutletPressure.Text)).ToString(nf)
+                    cbPress.SelectedItem = units.pressure
+                    UpdateProps(tbOutletPressure)
                 ElseIf sender Is cbPressureDropU Then
                     tbPressureDrop.Text = su.Converter.Convert(cbPressureDropU.SelectedItem.ToString, units.deltaP, Double.Parse(tbPressureDrop.Text)).ToString(nf)
                     cbPressureDropU.SelectedItem = units.deltaP
                     UpdateProps(tbPressureDrop)
-                ElseIf sender Is cbHeating Then
-                    tbHeatingChange.Text = su.Converter.Convert(cbHeating.SelectedItem.ToString, units.heatflow, Double.Parse(tbHeatingChange.Text)).ToString(nf)
-                    cbHeating.SelectedItem = units.heatflow
-                    UpdateProps(tbHeatingChange)
+                ElseIf sender Is cbPower Then
+                    tbPower.Text = su.Converter.Convert(cbPower.SelectedItem.ToString, units.heatflow, Double.Parse(tbPower.Text)).ToString(nf)
+                    cbPower.SelectedItem = units.heatflow
+                    UpdateProps(tbPower)
                 End If
 
             Catch ex As Exception
@@ -315,51 +297,48 @@ Public Class EditingForm_HeaterCooler
 
     Sub UpdateProps(sender As Object)
 
-        If TypeOf SimObject Is UnitOperations.Heater Then
+        'Pressão na Saída
+        'Variação da Pressão
+        'Potência Fornecida / Produzida
+        'Corrente de Energia
 
-            Dim uobj = DirectCast(SimObject, UnitOperations.Heater)
+        If TypeOf SimObject Is UnitOperations.Compressor Then
+
+            Dim uobj = DirectCast(SimObject, UnitOperations.Compressor)
 
             Select Case cbCalcMode.SelectedIndex
                 Case 0
-                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.HeatAdded
+                    uobj.CalcMode = UnitOperations.Compressor.CalculationMode.OutletPressure
                 Case 1
-                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.TemperatureChange
+                    uobj.CalcMode = UnitOperations.Compressor.CalculationMode.Delta_P
                 Case 2
-                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.OutletTemperature
+                    uobj.CalcMode = UnitOperations.Compressor.CalculationMode.PowerRequired
                 Case 3
-                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.OutletVaporFraction
-                Case 4
-                    uobj.CalcMode = UnitOperations.Heater.CalculationMode.EnergyStream
+                    uobj.CalcMode = UnitOperations.Compressor.CalculationMode.EnergyStream
             End Select
 
-            If sender Is tbEfficiency Then uobj.Eficiencia = Double.Parse(tbEfficiency.Text)
-            If sender Is tbHeatingChange Then uobj.DeltaQ = su.Converter.ConvertToSI(cbHeating.SelectedItem.ToString, tbHeatingChange.Text)
-            If sender Is tbOutletTemperature Then uobj.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
-            If sender Is tbOutletVapFrac Then uobj.OutletVaporFraction = Double.Parse(tbOutletVapFrac.Text)
+            If sender Is tbEfficiency Then uobj.EficienciaAdiabatica = Double.Parse(tbEfficiency.Text)
+            If sender Is tbPower Then uobj.DeltaQ = su.Converter.ConvertToSI(cbPower.SelectedItem.ToString, tbPower.Text)
+            If sender Is tbOutletPressure Then uobj.POut = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbOutletPressure.Text)
             If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text)
-            If sender Is tbTemperatureChange Then uobj.DeltaT = su.Converter.ConvertToSI(cbDeltaTemp.SelectedItem.ToString, tbTemperatureChange.Text)
-
+      
         Else
 
-            Dim uobj = DirectCast(SimObject, UnitOperations.Cooler)
+            Dim uobj = DirectCast(SimObject, UnitOperations.Expander)
 
             Select Case cbCalcMode.SelectedIndex
                 Case 0
-                    uobj.CalcMode = UnitOperations.Cooler.CalculationMode.HeatRemoved
+                    uobj.CalcMode = UnitOperations.Expander.CalculationMode.OutletPressure
                 Case 1
-                    uobj.CalcMode = UnitOperations.Cooler.CalculationMode.TemperatureChange
+                    uobj.CalcMode = UnitOperations.Expander.CalculationMode.Delta_P
                 Case 2
-                    uobj.CalcMode = UnitOperations.Cooler.CalculationMode.OutletTemperature
-                Case 3
-                    uobj.CalcMode = UnitOperations.Cooler.CalculationMode.OutletVaporFraction
+                    uobj.CalcMode = UnitOperations.Expander.CalculationMode.PowerGenerated
             End Select
 
-            If sender Is tbEfficiency Then uobj.Eficiencia = Double.Parse(tbEfficiency.Text)
-            If sender Is tbHeatingChange Then uobj.DeltaQ = su.Converter.ConvertToSI(cbHeating.SelectedItem.ToString, tbHeatingChange.Text)
-            If sender Is tbOutletTemperature Then uobj.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
-            If sender Is tbOutletVapFrac Then uobj.OutletVaporFraction = Double.Parse(tbOutletVapFrac.Text)
+            If sender Is tbEfficiency Then uobj.EficienciaAdiabatica = Double.Parse(tbEfficiency.Text)
+            If sender Is tbPower Then uobj.DeltaQ = su.Converter.ConvertToSI(cbPower.SelectedItem.ToString, tbPower.Text)
+            If sender Is tbOutletPressure Then uobj.POut = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbOutletPressure.Text)
             If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text)
-            If sender Is tbTemperatureChange Then uobj.DeltaT = su.Converter.ConvertToSI(cbDeltaTemp.SelectedItem.ToString, tbTemperatureChange.Text)
 
         End If
 
@@ -373,8 +352,8 @@ Public Class EditingForm_HeaterCooler
 
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbTemperatureChange.TextChanged, tbPressureDrop.TextChanged, tbOutletVapFrac.TextChanged, tbOutletTemperature.TextChanged,
-                                                                        tbHeatingChange.TextChanged, tbEfficiency.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbPressureDrop.TextChanged, tbOutletPressure.TextChanged,
+                                                                        tbPower.TextChanged, tbEfficiency.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -386,8 +365,8 @@ Public Class EditingForm_HeaterCooler
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbTemperatureChange.KeyDown, tbPressureDrop.KeyDown, tbOutletVapFrac.KeyDown, tbOutletTemperature.KeyDown,
-                                                                         tbHeatingChange.KeyDown, tbEfficiency.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbPressureDrop.KeyDown, tbOutletPressure.KeyDown,
+                                                                         tbPower.KeyDown, tbEfficiency.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
@@ -471,7 +450,7 @@ Public Class EditingForm_HeaterCooler
 
             Dim text As String = cbEnergy.Text
 
-            If TypeOf SimObject Is UnitOperations.Heater Then
+            If TypeOf SimObject Is UnitOperations.Compressor Then
 
                 If text <> "" Then
 

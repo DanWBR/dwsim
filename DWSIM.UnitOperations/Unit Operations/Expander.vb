@@ -31,6 +31,8 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ComprExpndr
+
         Protected m_dp As Nullable(Of Double)
         Protected m_dt As Nullable(Of Double)
         Protected m_DQ As Nullable(Of Double)
@@ -44,6 +46,7 @@ Namespace UnitOperations
         Public Enum CalculationMode
             OutletPressure = 0
             Delta_P = 1
+            PowerGenerated = 2
         End Enum
 
         Protected m_cmode As CalculationMode = CalculationMode.Delta_P
@@ -56,6 +59,8 @@ Namespace UnitOperations
                 m_cmode = value
             End Set
         End Property
+
+        Public Property OutletTemperature As Double = 0.0#
 
         Public Property POut() As Nullable(Of Double)
             Get
@@ -143,7 +148,7 @@ Namespace UnitOperations
 
             ims.Validate()
 
-            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, P2, H2 As Double
+            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, P2, H2, cp, cv, mw As Double
 
             qli = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault.ToString
 
@@ -169,6 +174,9 @@ Namespace UnitOperations
             Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault.ToString
             ei = Hi * Wi
             ein = ei
+            cp = ims.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
+            cv = ims.Phases(0).Properties.heatCapacityCv.GetValueOrDefault
+            mw = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
             If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
             If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, S = {3} kJ/[kg.K], W = {4} kg/s", Ti, Pi, Hi, Si, Wi))
@@ -183,30 +191,62 @@ Namespace UnitOperations
             End Select
             CheckSpec(P2, True, "outlet pressure")
 
-            If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
+            Dim tmp As IFlashCalculationResult
 
-            Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
-            T2 = tmp.CalculatedTemperature
+            Select Case Me.CalcMode
+
+                Case CalculationMode.Delta_P, CalculationMode.OutletPressure
+
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
+
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
+                    T2 = tmp.CalculatedTemperature
+                    CheckSpec(T2, True, "outlet temperature")
+                    H2 = tmp.CalculatedEnthalpy
+                    CheckSpec(H2, False, "outlet enthalpy")
+
+                    If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
+
+                    Me.DeltaQ = -Wi * (H2 - Hi) * (Me.EficienciaAdiabatica.GetValueOrDefault / 100)
+
+                    If DebugMode Then AppendDebugLine(String.Format("Calculated real generated power = {0} kW", DeltaQ))
+
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ.GetValueOrDefault / Wi))
+
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi - Me.DeltaQ.GetValueOrDefault / Wi, T2)
+
+                    T2 = tmp.CalculatedTemperature
+
+                Case CalculationMode.PowerGenerated
+
+                    H2 = Hi - Me.DeltaQ / (Me.EficienciaAdiabatica.GetValueOrDefault / 100) / Wi
+
+                    CheckSpec(Me.DeltaQ, True, "power")
+
+                    Dim k As Double = cp / cv
+
+                    P2 = Pi * ((1 - DeltaQ.GetValueOrDefault * (Me.EficienciaAdiabatica.GetValueOrDefault / 100) / Wi * (k - 1) / k * mw / 8.314 / Ti)) ^ (k / (k - 1))
+
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ.GetValueOrDefault / Wi))
+
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, T2)
+
+                    T2 = tmp.CalculatedTemperature
+
+                    POut = P2
+                    DeltaP = Pi - P2
+
+            End Select
+
             CheckSpec(T2, True, "outlet temperature")
-            H2 = tmp.CalculatedEnthalpy
-            CheckSpec(H2, False, "outlet enthalpy")
 
-            If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
-
-            Me.DeltaQ = -Wi * (H2 - Hi) * (Me.EficienciaAdiabatica.GetValueOrDefault / 100)
-
-            If DebugMode Then AppendDebugLine(String.Format("Calculated real generated power = {0} kW", DeltaQ))
-
-            If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ.GetValueOrDefault / Wi))
-
-            tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi - Me.DeltaQ.GetValueOrDefault / Wi, T2)
-            T2 = tmp.CalculatedTemperature
-            CheckSpec(T2, True, "outlet temperature")
             Me.DeltaT = T2 - Ti
 
             If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
             H2 = Hi - Me.DeltaQ.GetValueOrDefault / Wi
+
+            OutletTemperature = T2
 
             If Not DebugMode Then
 
@@ -382,10 +422,28 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_ComprExpndr With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_ComprExpndr With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Select()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -409,8 +467,14 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace
