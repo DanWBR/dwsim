@@ -32,6 +32,8 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Separator
+
         Protected m_DQ As Nullable(Of Double)
 
         Protected m_overrideT As Boolean = False
@@ -540,10 +542,28 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_Separator With {.VesselObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_Separator With {.VesselObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Select()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -567,8 +587,14 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace

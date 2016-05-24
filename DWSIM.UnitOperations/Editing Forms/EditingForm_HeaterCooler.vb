@@ -16,6 +16,8 @@ Public Class EditingForm_HeaterCooler
 
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+
         units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
