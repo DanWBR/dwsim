@@ -552,7 +552,7 @@ Namespace UnitOperations
                     f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                     Me.FlowSheet.DisplayForm(f)
                 Else
-                    f.Select()
+                    f.Activate()
                 End If
             End If
 
