@@ -101,6 +101,9 @@
       <HintPath>..\DWSIM\References\VBIDEApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="ZedGraph">
+      <HintPath>..\DWSIM\References\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.DrawingTools" />
@@ -117,6 +120,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\EditingForm_Pump.Designer.vb">
+      <DependentUpon>EditingForm_Pump.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Pump.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Separator.Designer.vb">
       <DependentUpon>EditingForm_Separator.vb</DependentUpon>
     </Compile>
@@ -157,6 +166,12 @@
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </Compile>
     <Compile Include="Editing Forms\Other\Form_LoadSave.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Pump_Curves.designer.vb">
+      <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Pump_Curves.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
@@ -218,6 +233,12 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Pump.en.resx">
+      <DependentUpon>EditingForm_Pump.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Pump.resx">
+      <DependentUpon>EditingForm_Pump.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Separator.en.resx">
       <DependentUpon>EditingForm_Separator.vb</DependentUpon>
     </EmbeddedResource>
@@ -269,6 +290,18 @@
     <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.de.resx">
+      <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.en.resx">
+      <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.es.resx">
+      <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.resx">
+      <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -319,6 +352,10 @@
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TabStrip\DWSIM.Controls.TabStrip.csproj">
+      <Project>{f929ca6a-87bd-42c8-8d0a-6455db6f55dc}</Project>
+      <Name>DWSIM.Controls.TabStrip</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

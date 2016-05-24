@@ -26,7 +26,7 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.MathOps.MathEx.Interpolation
 
-Namespace UnitOperations.Auxiliary.PipingOps
+Namespace UnitOperations.Auxiliary.PumpOps
 
     Public Enum CurveType
         Head
@@ -167,6 +167,8 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Pump
+
         Public Enum CalculationMode
             Delta_P = 0
             OutletPressure = 1
@@ -188,7 +190,7 @@ Namespace UnitOperations
         Protected m_FixOnDeltaP As Boolean = True
         Protected m_cmode As CalculationMode = CalculationMode.Delta_P
 
-        Protected m_curves As New Dictionary(Of String, PipingOps.Curve)
+        Protected m_curves As New Dictionary(Of String, PumpOps.Curve)
 
         Protected _curvehead As Double
         Protected _curveeff As Double
@@ -197,14 +199,16 @@ Namespace UnitOperations
         Protected _curvesyshead As Double
         Protected _curveflow As Double
 
+        Property OutletTemperature As Double = 0.0#
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             MyBase.LoadData(data)
 
-            m_curves = New Dictionary(Of String, PipingOps.Curve)
+            m_curves = New Dictionary(Of String, PumpOps.Curve)
 
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Curves").Elements.ToList
-                Dim cv As New PipingOps.Curve()
+                Dim cv As New PumpOps.Curve()
                 cv.LoadData(xel.Elements.ToList)
                 m_curves.Add(cv.Name, cv)
             Next
@@ -220,7 +224,7 @@ Namespace UnitOperations
 
             With elements
                 .Add(New XElement("Curves"))
-                For Each kvp As KeyValuePair(Of String, PipingOps.Curve) In m_curves
+                For Each kvp As KeyValuePair(Of String, PumpOps.Curve) In m_curves
                     .Item(.Count - 1).Add(New XElement("Curve", New XAttribute("ID", kvp.Key), kvp.Value.SaveData.ToArray()))
                 Next
             End With
@@ -283,15 +287,15 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property Curves() As Dictionary(Of String, PipingOps.Curve)
+        Public Property Curves() As Dictionary(Of String, PumpOps.Curve)
             Get
                 If m_curves Is Nothing Then
-                    m_curves = New Dictionary(Of String, PipingOps.Curve)
+                    m_curves = New Dictionary(Of String, PumpOps.Curve)
                     CreateCurves()
                 End If
                 Return m_curves
             End Get
-            Set(ByVal value As Dictionary(Of String, PipingOps.Curve))
+            Set(ByVal value As Dictionary(Of String, PumpOps.Curve))
                 m_curves = value
             End Set
         End Property
@@ -393,19 +397,19 @@ Namespace UnitOperations
         Sub CreateCurves()
 
             If Not Me.Curves.ContainsKey("NPSH") Then
-                Me.Curves.Add("NPSH", New PipingOps.Curve(Guid.NewGuid().ToString, "NPSH", PipingOps.CurveType.NPSHr))
+                Me.Curves.Add("NPSH", New PumpOps.Curve(Guid.NewGuid().ToString, "NPSH", PumpOps.CurveType.NPSHr))
             End If
             If Not Me.Curves.ContainsKey("HEAD") Then
-                Me.Curves.Add("HEAD", New PipingOps.Curve(Guid.NewGuid().ToString, "HEAD", PipingOps.CurveType.Head))
+                Me.Curves.Add("HEAD", New PumpOps.Curve(Guid.NewGuid().ToString, "HEAD", PumpOps.CurveType.Head))
             End If
             If Not Me.Curves.ContainsKey("EFF") Then
-                Me.Curves.Add("EFF", New PipingOps.Curve(Guid.NewGuid().ToString, "EFF", PipingOps.CurveType.Efficiency))
+                Me.Curves.Add("EFF", New PumpOps.Curve(Guid.NewGuid().ToString, "EFF", PumpOps.CurveType.Efficiency))
             End If
             If Not Me.Curves.ContainsKey("POWER") Then
-                Me.Curves.Add("POWER", New PipingOps.Curve(Guid.NewGuid().ToString, "POWER", PipingOps.CurveType.Power))
+                Me.Curves.Add("POWER", New PumpOps.Curve(Guid.NewGuid().ToString, "POWER", PumpOps.CurveType.Power))
             End If
             If Not Me.Curves.ContainsKey("SYSTEM") Then
-                Me.Curves.Add("SYSTEM", New PipingOps.Curve(Guid.NewGuid().ToString, "SYSTEM", PipingOps.CurveType.SystemHead))
+                Me.Curves.Add("SYSTEM", New PumpOps.Curve(Guid.NewGuid().ToString, "SYSTEM", PumpOps.CurveType.SystemHead))
             End If
 
         End Sub
@@ -458,7 +462,7 @@ Namespace UnitOperations
 
                     Dim cv As New SystemsOfUnits.Converter
 
-                    Dim cnpsh, chead, ceff, cpower, csystem As PipingOps.Curve
+                    Dim cnpsh, chead, ceff, cpower, csystem As PumpOps.Curve
 
                     If DebugMode Then AppendDebugLine(String.Format("Creating curves..."))
 
@@ -783,6 +787,8 @@ Namespace UnitOperations
 
             End Select
 
+            OutletTemperature = T2
+
             If Not DebugMode Then
 
                 'Atribuir valores a corrente de materia conectada a jusante
@@ -946,10 +952,28 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_Pump With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_Pump With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Select()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -973,8 +997,14 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace
