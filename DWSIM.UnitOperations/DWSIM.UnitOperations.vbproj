@@ -117,6 +117,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\EditingForm_Valve.Designer.vb">
+      <DependentUpon>EditingForm_Valve.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Valve.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_HeaterCooler.Designer.vb">
       <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
     </Compile>
@@ -206,6 +212,12 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Valve.en.resx">
+      <DependentUpon>EditingForm_Valve.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Valve.resx">
+      <DependentUpon>EditingForm_Valve.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_HeaterCooler.en.resx">
       <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
     </EmbeddedResource>
