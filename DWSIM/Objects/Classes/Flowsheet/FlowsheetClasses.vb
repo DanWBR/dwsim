@@ -176,7 +176,7 @@ Namespace DWSIM.Flowsheet
                     Dim etype = [Enum].Parse(PropertyPackageFlashAlgorithm.GetType, xel2.@Value)
                     FlashSettings.Add(etype, New Dictionary(Of Interfaces.Enums.FlashSetting, String))
                     For Each xel3 In xel2.Elements
-                        Dim esname = [Enum].Parse(FlashSettings(etype).GetType, xel2.@Value)
+                        Dim esname = [Enum].Parse(Interfaces.Enums.Helpers.GetEnumType("DWSIM.Interfaces.Enums.FlashSetting"), xel3.@Name)
                         FlashSettings(etype).Add(esname, xel3.@Value)
                     Next
                 Next

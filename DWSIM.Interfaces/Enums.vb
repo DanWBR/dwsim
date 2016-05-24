@@ -1,5 +1,14 @@
 ﻿Namespace Enums
 
+    Public Class Helpers
+        Public Shared Function GetEnumType(typename As String) As Type
+
+            Return Reflection.Assembly.GetExecutingAssembly().GetType(typename)
+
+        End Function
+
+    End Class
+
     Public Enum FlowsheetUtility
         PhaseEnvelope = 0
         PhaseEnvelopeBinary = 1

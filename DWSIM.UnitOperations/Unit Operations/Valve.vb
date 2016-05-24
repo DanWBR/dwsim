@@ -133,7 +133,7 @@ Namespace UnitOperations
                 P2 = Pi - Me.DeltaP.GetValueOrDefault
             Else
                 P2 = Me.OutletPressure.GetValueOrDefault
-                Me.DeltaP = P2 - Pi
+                Me.DeltaP = Pi - P2
             End If
             CheckSpec(P2, True, "outlet pressure")
 

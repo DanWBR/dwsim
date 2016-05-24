@@ -1380,10 +1380,17 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                         End If
 
                     End If
+
+                    For Each obj In Me.SimulationObjects.Values
+                        obj.UpdateEditForm()
+                    Next
+
                 End If
+
             End If
 
         End If
+
     End Sub
 
     Public Sub DeleteObject(ByVal tag As String, Optional ByVal confirmation As Boolean = True)
