@@ -59,7 +59,7 @@ Namespace My
 
             If Not DWSIM.App.IsRunningOnMono Then
                 My.Settings.Save()
-                Calculator.RemoveLibraries()
+                Thermodynamics.NativeLibraries.Files.RemoveLibraries()
             End If
 
         End Sub
@@ -144,7 +144,7 @@ Namespace My
 
             If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
-            Calculator.InitLibraries()
+            Thermodynamics.NativeLibraries.Files.InitLibraries()
 
         End Sub
 

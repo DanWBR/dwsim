@@ -146,7 +146,7 @@ Public Class FormMain
             'Check if DWSIM is running in Portable/Mono mode, then save settings to file.
             If File.Exists(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "default.ini") Or DWSIM.App.IsRunningOnMono Then
                 DWSIM.App.SaveSettings()
-                If DWSIM.App.IsRunningOnMono Then Calculator.RemoveLibraries()
+                If DWSIM.App.IsRunningOnMono Then Thermodynamics.NativeLibraries.Files.RemoveLibraries()
             End If
             If Not DWSIM.App.IsRunningOnMono Then
                 My.Application.SaveMySettingsOnExit = True

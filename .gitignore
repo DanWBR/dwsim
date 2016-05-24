@@ -201,3 +201,4 @@ TCPServer/bin/Debug/*
 /DWSIM.ExtensionMethods/bin/Debug
 /DWSIM.Updater/bin/Debug
 /DWSIM.FileDownloader/bin/Debug
+/DWSIM.Thermodynamics.NativeLibraries/bin/Debug

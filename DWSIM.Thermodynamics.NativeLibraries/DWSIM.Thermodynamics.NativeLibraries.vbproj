@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{33336B05-116E-4582-896A-A3DFC796E0C3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DWSIM.Thermodynamics.NativeLibraries</RootNamespace>
+    <AssemblyName>DWSIM.Thermodynamics.NativeLibraries</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>DWSIM.Thermodynamics.NativeLibraries.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>DWSIM.Thermodynamics.NativeLibraries.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Files.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\32-bit\L32_libfprops_ascend.so" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\32-bit\L32_libipopt_mono_dwsim_ubuntu_11.10_32.tar.gz" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\32-bit\L32_liblpsolve55.so" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\32-bit\L32_libPC_SAFT_PROP.so" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libCoolProp.so" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libfprops_ascend.so" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libipopt_mono_dwsim_ubuntu_15.10_64.tar.gz" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_liblpsolve55.so" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libPC_SAFT_PROP.so" />
+    <None Include="Unmanaged Libraries\Linux\L_Cureos.Numerics.dll.config" />
+    <None Include="Unmanaged Libraries\Linux\L_DWSIM.exe.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_CoolProp.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_fprops_ascend.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_Ipopt39.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_IpOptFSS39.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_lpsolve55.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_PC_SAFT_PROP.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_PetAz.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_CoolProp.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_fprops_ascend.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_Ipopt39.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_IpOptFSS39.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_lpsolve55.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_PC_SAFT_PROP.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

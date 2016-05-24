@@ -142,7 +142,7 @@ Public Class CAPEOPENManager
         AddHandler Application.ThreadException, AddressOf UnhandledException
         AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
 
-        Dim exlist As List(Of Exception) = Calculator.InitLibraries()
+        Dim exlist As List(Of Exception) = Thermodynamics.NativeLibraries.Files.InitLibraries()
 
         'For Each ex In exlist
         'Throw New CapeFailedInitialisationException(ex.Message.ToString, ex)
@@ -185,7 +185,7 @@ Public Class CAPEOPENManager
 
     Public Sub Terminate() Implements ICapeUtilities.Terminate
 
-        Dim exlist As List(Of Exception) = Calculator.RemoveLibraries()
+        Dim exlist As List(Of Exception) = Thermodynamics.NativeLibraries.Files.RemoveLibraries()
 
         Me.Dispose()
 

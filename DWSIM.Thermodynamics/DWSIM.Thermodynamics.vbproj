@@ -438,18 +438,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <EmbeddedResource Include="Unmanaged Libraries\Linux\32-bit\L32_libfprops_ascend.so" />
-    <EmbeddedResource Include="Unmanaged Libraries\Linux\32-bit\L32_libipopt_mono_dwsim_ubuntu_11.10_32.tar.gz" />
-    <EmbeddedResource Include="Unmanaged Libraries\Linux\32-bit\L32_liblpsolve55.so" />
-    <EmbeddedResource Include="Unmanaged Libraries\Linux\32-bit\L32_libPC_SAFT_PROP.so" />
-    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libCoolProp.so" />
-    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libfprops_ascend.so" />
-    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libipopt_mono_dwsim_ubuntu_15.10_64.tar.gz" />
-    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_liblpsolve55.so" />
-    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libPC_SAFT_PROP.so" />
     <None Include="packages.config" />
-    <None Include="Unmanaged Libraries\Linux\L_Cureos.Numerics.dll.config" />
-    <None Include="Unmanaged Libraries\Linux\L_DWSIM.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj">
@@ -486,6 +475,10 @@
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.NativeLibraries\DWSIM.Thermodynamics.NativeLibraries.vbproj">
+      <Project>{33336b05-116e-4582-896a-a3dfc796e0c3}</Project>
+      <Name>DWSIM.Thermodynamics.NativeLibraries</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RandomOps\DWSIM.MathOps.RandomOps.csproj">
       <Project>{f5dfafed-c786-4dc3-9818-16c992de3990}</Project>
       <Name>DWSIM.MathOps.RandomOps</Name>
@@ -516,21 +509,6 @@
     <EmbeddedResource Include="Assets\unifac.txt" />
     <EmbeddedResource Include="Assets\unifac_ip.txt" />
     <EmbeddedResource Include="Assets\unifac_ll_ip.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_CoolProp.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_fprops_ascend.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_Ipopt39.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_IpOptFSS39.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_lpsolve55.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_PC_SAFT_PROP.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_PetAz.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_CoolProp.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_fprops_ascend.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_Ipopt39.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_IpOptFSS39.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_lpsolve55.dll" />
-    <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_PC_SAFT_PROP.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\stream_mat_16.png" />
