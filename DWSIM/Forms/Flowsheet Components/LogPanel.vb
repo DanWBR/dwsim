@@ -73,7 +73,7 @@ Public Class LogPanel
             .AutoIncrementStep = 1
             .Unique = True
         End With
-        Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+        Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 
     Private Sub Grid1_RowsAdded(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewRowsAddedEventArgs) Handles Grid1.RowsAdded
@@ -98,11 +98,10 @@ Public Class LogPanel
 
         If Me.Grid1.Rows.Count > 0 Then
             Me.Grid1.ClearSelection()
-            Me.Grid1.Rows(0).Selected = True
+            Me.Grid1.Rows(Me.Grid1.Rows.Count - 1).Selected = True
             Try
-                Me.Grid1.FirstDisplayedScrollingRowIndex = 0
+                Me.Grid1.FirstDisplayedScrollingRowIndex = Me.Grid1.Rows.Count - 1
             Catch ex As Exception
-
             End Try
         End If
 
@@ -114,7 +113,7 @@ Public Class LogPanel
         Catch ex As Exception
         End Try
 
-        If DWSIM.App.IsRunningOnMono Then Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+        Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
 
     End Sub
 
@@ -139,8 +138,11 @@ Public Class LogPanel
 
         If Me.Grid1.Rows.Count > 0 Then
             Me.Grid1.ClearSelection()
-            Me.Grid1.Rows(0).Selected = True
-            Me.Grid1.FirstDisplayedScrollingRowIndex = 0
+            Me.Grid1.Rows(Me.Grid1.Rows.Count - 1).Selected = True
+            Try
+                Me.Grid1.FirstDisplayedScrollingRowIndex = Me.Grid1.Rows.Count - 1
+            Catch ex As Exception
+            End Try
         End If
 
         Try
