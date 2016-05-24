@@ -132,6 +132,24 @@
     <Compile Include="Editing Forms\EditingForm_Separator.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_EnergyStream.Designer.vb">
+      <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_EnergyStream.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Tank.Designer.vb">
+      <DependentUpon>EditingForm_Tank.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Tank.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Splitter.Designer.vb">
+      <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Splitter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Valve.Designer.vb">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </Compile>
@@ -244,6 +262,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Separator.resx">
       <DependentUpon>EditingForm_Separator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.en.resx">
+      <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.resx">
+      <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Tank.en.resx">
+      <DependentUpon>EditingForm_Tank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Tank.resx">
+      <DependentUpon>EditingForm_Tank.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Splitter.en.resx">
+      <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Splitter.resx">
+      <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Valve.en.resx">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
