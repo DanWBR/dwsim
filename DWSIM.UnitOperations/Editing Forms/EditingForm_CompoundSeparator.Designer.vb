@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class EditingForm_Pump
+Partial Class EditingForm_CompoundSeparator
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,8 @@ Partial Class EditingForm_Pump
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Pump))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_CompoundSeparator))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -42,28 +43,13 @@ Partial Class EditingForm_Pump
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.cbPressure = New System.Windows.Forms.ComboBox()
-        Me.tbOutletPressure = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.btnCurves = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.cbHeating = New System.Windows.Forms.ComboBox()
-        Me.tbHeatingChange = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.cbDeltaTemp = New System.Windows.Forms.ComboBox()
-        Me.tbTemperatureChange = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.cbTemp = New System.Windows.Forms.ComboBox()
-        Me.tbOutletTemperature = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.tbEfficiency = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbPressureDropU = New System.Windows.Forms.ComboBox()
-        Me.tbPressureIncr = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.cbCalcMode = New System.Windows.Forms.ComboBox()
+        Me.rbStream2 = New System.Windows.Forms.RadioButton()
+        Me.rbStream1 = New System.Windows.Forms.RadioButton()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnDisconnectOutlet2 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbOutlet2 = New System.Windows.Forms.ComboBox()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.cbEnergy = New System.Windows.Forms.ComboBox()
@@ -74,11 +60,22 @@ Partial Class EditingForm_Pump
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -203,148 +200,25 @@ Partial Class EditingForm_Pump
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.cbPressure)
-        Me.GroupBox2.Controls.Add(Me.tbOutletPressure)
-        Me.GroupBox2.Controls.Add(Me.Label15)
-        Me.GroupBox2.Controls.Add(Me.btnCurves)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.cbHeating)
-        Me.GroupBox2.Controls.Add(Me.tbHeatingChange)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.cbDeltaTemp)
-        Me.GroupBox2.Controls.Add(Me.tbTemperatureChange)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.cbTemp)
-        Me.GroupBox2.Controls.Add(Me.tbOutletTemperature)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.tbEfficiency)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.cbPressureDropU)
-        Me.GroupBox2.Controls.Add(Me.tbPressureIncr)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.cbCalcMode)
+        Me.GroupBox2.Controls.Add(Me.rbStream2)
+        Me.GroupBox2.Controls.Add(Me.rbStream1)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
-        'cbPressure
+        'rbStream2
         '
-        resources.ApplyResources(Me.cbPressure, "cbPressure")
-        Me.cbPressure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPressure.FormattingEnabled = True
-        Me.cbPressure.Items.AddRange(New Object() {resources.GetString("cbPressure.Items"), resources.GetString("cbPressure.Items1"), resources.GetString("cbPressure.Items2")})
-        Me.cbPressure.Name = "cbPressure"
+        resources.ApplyResources(Me.rbStream2, "rbStream2")
+        Me.rbStream2.Name = "rbStream2"
+        Me.rbStream2.TabStop = True
+        Me.rbStream2.UseVisualStyleBackColor = True
         '
-        'tbOutletPressure
+        'rbStream1
         '
-        resources.ApplyResources(Me.tbOutletPressure, "tbOutletPressure")
-        Me.tbOutletPressure.Name = "tbOutletPressure"
-        '
-        'Label15
-        '
-        resources.ApplyResources(Me.Label15, "Label15")
-        Me.Label15.Name = "Label15"
-        '
-        'btnCurves
-        '
-        resources.ApplyResources(Me.btnCurves, "btnCurves")
-        Me.btnCurves.Name = "btnCurves"
-        Me.btnCurves.UseVisualStyleBackColor = True
-        '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
-        '
-        'cbHeating
-        '
-        resources.ApplyResources(Me.cbHeating, "cbHeating")
-        Me.cbHeating.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbHeating.FormattingEnabled = True
-        Me.cbHeating.Items.AddRange(New Object() {resources.GetString("cbHeating.Items"), resources.GetString("cbHeating.Items1"), resources.GetString("cbHeating.Items2")})
-        Me.cbHeating.Name = "cbHeating"
-        '
-        'tbHeatingChange
-        '
-        resources.ApplyResources(Me.tbHeatingChange, "tbHeatingChange")
-        Me.tbHeatingChange.Name = "tbHeatingChange"
-        '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
-        '
-        'cbDeltaTemp
-        '
-        resources.ApplyResources(Me.cbDeltaTemp, "cbDeltaTemp")
-        Me.cbDeltaTemp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDeltaTemp.FormattingEnabled = True
-        Me.cbDeltaTemp.Items.AddRange(New Object() {resources.GetString("cbDeltaTemp.Items"), resources.GetString("cbDeltaTemp.Items1"), resources.GetString("cbDeltaTemp.Items2")})
-        Me.cbDeltaTemp.Name = "cbDeltaTemp"
-        '
-        'tbTemperatureChange
-        '
-        resources.ApplyResources(Me.tbTemperatureChange, "tbTemperatureChange")
-        Me.tbTemperatureChange.Name = "tbTemperatureChange"
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        '
-        'cbTemp
-        '
-        resources.ApplyResources(Me.cbTemp, "cbTemp")
-        Me.cbTemp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTemp.FormattingEnabled = True
-        Me.cbTemp.Items.AddRange(New Object() {resources.GetString("cbTemp.Items"), resources.GetString("cbTemp.Items1"), resources.GetString("cbTemp.Items2")})
-        Me.cbTemp.Name = "cbTemp"
-        '
-        'tbOutletTemperature
-        '
-        resources.ApplyResources(Me.tbOutletTemperature, "tbOutletTemperature")
-        Me.tbOutletTemperature.Name = "tbOutletTemperature"
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        '
-        'tbEfficiency
-        '
-        resources.ApplyResources(Me.tbEfficiency, "tbEfficiency")
-        Me.tbEfficiency.Name = "tbEfficiency"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
-        'cbPressureDropU
-        '
-        resources.ApplyResources(Me.cbPressureDropU, "cbPressureDropU")
-        Me.cbPressureDropU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPressureDropU.FormattingEnabled = True
-        Me.cbPressureDropU.Items.AddRange(New Object() {resources.GetString("cbPressureDropU.Items"), resources.GetString("cbPressureDropU.Items1"), resources.GetString("cbPressureDropU.Items2")})
-        Me.cbPressureDropU.Name = "cbPressureDropU"
-        '
-        'tbPressureIncr
-        '
-        resources.ApplyResources(Me.tbPressureIncr, "tbPressureIncr")
-        Me.tbPressureIncr.Name = "tbPressureIncr"
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        '
-        'cbCalcMode
-        '
-        resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
-        Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCalcMode.FormattingEnabled = True
-        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4")})
-        Me.cbCalcMode.Name = "cbCalcMode"
+        resources.ApplyResources(Me.rbStream1, "rbStream1")
+        Me.rbStream1.Name = "rbStream1"
+        Me.rbStream1.TabStop = True
+        Me.rbStream1.UseVisualStyleBackColor = True
         '
         'Label8
         '
@@ -354,6 +228,9 @@ Partial Class EditingForm_Pump
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet2)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.cbOutlet2)
         Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.cbEnergy)
@@ -365,6 +242,26 @@ Partial Class EditingForm_Pump
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        '
+        'btnDisconnectOutlet2
+        '
+        resources.ApplyResources(Me.btnDisconnectOutlet2, "btnDisconnectOutlet2")
+        Me.btnDisconnectOutlet2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnectOutlet2.Name = "btnDisconnectOutlet2"
+        Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet2, resources.GetString("btnDisconnectOutlet2.ToolTip"))
+        Me.btnDisconnectOutlet2.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'cbOutlet2
+        '
+        resources.ApplyResources(Me.cbOutlet2, "cbOutlet2")
+        Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOutlet2.FormattingEnabled = True
+        Me.cbOutlet2.Name = "cbOutlet2"
         '
         'btnDisconnectEnergy
         '
@@ -426,16 +323,75 @@ Partial Class EditingForm_Pump
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
         '
-        'EditingForm_Pump
+        'GroupBox6
+        '
+        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
+        Me.GroupBox6.Controls.Add(Me.DataGridView1)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.TabStop = False
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.AllowUserToResizeColumns = False
+        Me.DataGridView1.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5})
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
+        Me.DataGridView1.MultiSelect = False
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersVisible = False
+        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        '
+        'Column1
+        '
+        resources.ApplyResources(Me.Column1, "Column1")
+        Me.Column1.Name = "Column1"
+        '
+        'Column2
+        '
+        resources.ApplyResources(Me.Column2, "Column2")
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
+        'Column3
+        '
+        resources.ApplyResources(Me.Column3, "Column3")
+        Me.Column3.Name = "Column3"
+        '
+        'Column4
+        '
+        resources.ApplyResources(Me.Column4, "Column4")
+        Me.Column4.Name = "Column4"
+        '
+        'Column5
+        '
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        '
+        'Panel1
+        '
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.GroupBox6)
+        Me.Panel1.Controls.Add(Me.GroupBox1)
+        Me.Panel1.Controls.Add(Me.GroupBox5)
+        Me.Panel1.Controls.Add(Me.GroupBox4)
+        Me.Panel1.Controls.Add(Me.GroupBox3)
+        Me.Panel1.Controls.Add(Me.GroupBox2)
+        Me.Panel1.Name = "Panel1"
+        '
+        'EditingForm_CompoundSeparator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Name = "EditingForm_Pump"
+        Me.Controls.Add(Me.Panel1)
+        Me.Name = "EditingForm_CompoundSeparator"
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -445,6 +401,9 @@ Partial Class EditingForm_Pump
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -463,24 +422,9 @@ Partial Class EditingForm_Pump
     Friend WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents cbCalcMode As System.Windows.Forms.ComboBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents cbPressureDropU As System.Windows.Forms.ComboBox
-    Friend WithEvents tbPressureIncr As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents btnConfigureFlashAlg As System.Windows.Forms.Button
     Friend WithEvents btnConfigurePP As System.Windows.Forms.Button
-    Friend WithEvents cbHeating As System.Windows.Forms.ComboBox
-    Friend WithEvents tbHeatingChange As System.Windows.Forms.TextBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents cbDeltaTemp As System.Windows.Forms.ComboBox
-    Friend WithEvents tbTemperatureChange As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents cbTemp As System.Windows.Forms.ComboBox
-    Friend WithEvents tbOutletTemperature As System.Windows.Forms.TextBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents tbEfficiency As System.Windows.Forms.TextBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnDisconnectEnergy As System.Windows.Forms.Button
     Friend WithEvents Label14 As System.Windows.Forms.Label
@@ -493,9 +437,17 @@ Partial Class EditingForm_Pump
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lblTag As System.Windows.Forms.TextBox
-    Friend WithEvents btnCurves As System.Windows.Forms.Button
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents cbPressure As System.Windows.Forms.ComboBox
-    Friend WithEvents tbOutletPressure As System.Windows.Forms.TextBox
-    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents rbStream2 As System.Windows.Forms.RadioButton
+    Friend WithEvents rbStream1 As System.Windows.Forms.RadioButton
+    Friend WithEvents btnDisconnectOutlet2 As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents cbOutlet2 As System.Windows.Forms.ComboBox
+    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Public WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class

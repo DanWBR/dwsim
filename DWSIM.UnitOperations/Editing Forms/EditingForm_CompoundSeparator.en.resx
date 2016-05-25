@@ -118,20 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 19</value>
-  </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 20</value>
+    <value>214, 20</value>
+  </data>
+  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 43</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
-  </data>
-  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 72</value>
-  </data>
-  <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 47</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -142,98 +136,89 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 98</value>
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
+  </data>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>348, 212</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>354, 231</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <data name="TrackBar2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 76</value>
+  <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 53</value>
   </data>
-  <data name="TrackBar2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 20</value>
+  <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
+    <value>Configure</value>
   </data>
-  <data name="TrackBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 50</value>
+  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 26</value>
   </data>
-  <data name="TrackBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 20</value>
+  <data name="btnConfigurePP.ToolTip" xml:space="preserve">
+    <value>Configure</value>
   </data>
-  <data name="tbFlowSpec2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 128</value>
+  <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 21</value>
   </data>
-  <data name="tbFlowSpec2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>Flash Algorithm</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
+  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 21</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Stream 2 Flow Spec</value>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
   </data>
-  <data name="tbFlowSpec1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 102</value>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Property Package</value>
   </data>
-  <data name="tbFlowSpec1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 88</value>
   </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Property Package Settings</value>
   </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Stream 1 Flow Spec</value>
+  <data name="rbStream2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 47</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
+  <data name="rbStream2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 17</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Stream 2 Split Ratio</value>
+  <data name="rbStream2.Text" xml:space="preserve">
+    <value>Outlet Stream 2</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
+  <data name="rbStream1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 24</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Stream 1 Split Ratio</value>
+  <data name="rbStream1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 17</value>
   </data>
-  <data name="cbCalcMode.Items" xml:space="preserve">
-    <value>Stream Split Ratios</value>
-  </data>
-  <data name="cbCalcMode.Items1" xml:space="preserve">
-    <value>Stream Mass Flow Specs</value>
-  </data>
-  <data name="cbCalcMode.Items2" xml:space="preserve">
-    <value>Stream Mole Flow Specs</value>
-  </data>
-  <data name="cbCalcMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 23</value>
-  </data>
-  <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 21</value>
+  <data name="rbStream1.Text" xml:space="preserve">
+    <value>Outlet Stream 1</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
+    <value>156, 13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
-    <value>Calculation Type</value>
+    <value>Separation Factors specified for</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 159</value>
+    <value>353, 78</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+  <data name="btnDisconnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 77</value>
   </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Outlet Stream 3</value>
-  </data>
-  <data name="cbOutlet3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 104</value>
-  </data>
-  <data name="cbOutlet3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 21</value>
+  <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -242,13 +227,31 @@
     <value>Outlet Stream 2</value>
   </data>
   <data name="cbOutlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 77</value>
+    <value>133, 77</value>
   </data>
-  <data name="cbOutlet2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 21</value>
+  <data name="btnDisconnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 104</value>
+  </data>
+  <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
+  </data>
+  <data name="Label14.Text" xml:space="preserve">
+    <value>Energy Stream</value>
+  </data>
+  <data name="cbEnergy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>133, 104</value>
+  </data>
+  <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 50</value>
   </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
+  </data>
+  <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>326, 23</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
@@ -260,16 +263,10 @@
     <value>Outlet Stream 1</value>
   </data>
   <data name="cbOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 50</value>
-  </data>
-  <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 21</value>
+    <value>133, 50</value>
   </data>
   <data name="cbInlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 23</value>
-  </data>
-  <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 21</value>
+    <value>133, 23</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -277,7 +274,44 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 139</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Compound</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Spec</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Column5.HeaderText" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>347, 243</value>
+  </data>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 262</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Separation Factors</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 920</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>369, 920</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>388, 882</value>
   </data>
 </root>

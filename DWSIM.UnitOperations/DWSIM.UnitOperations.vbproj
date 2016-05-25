@@ -120,6 +120,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\EditingForm_CompoundSeparator.Designer.vb">
+      <DependentUpon>EditingForm_CompoundSeparator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_CompoundSeparator.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Pump.Designer.vb">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </Compile>
@@ -136,6 +142,12 @@
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_EnergyStream.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_SolidsSep.Designer.vb">
+      <DependentUpon>EditingForm_SolidsSep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_SolidsSep.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_Tank.Designer.vb">
@@ -251,6 +263,12 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\EditingForm_CompoundSeparator.en.resx">
+      <DependentUpon>EditingForm_CompoundSeparator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_CompoundSeparator.resx">
+      <DependentUpon>EditingForm_CompoundSeparator.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Pump.en.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </EmbeddedResource>
@@ -268,6 +286,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.resx">
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_SolidsSep.en.resx">
+      <DependentUpon>EditingForm_SolidsSep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_SolidsSep.resx">
+      <DependentUpon>EditingForm_SolidsSep.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Tank.en.resx">
       <DependentUpon>EditingForm_Tank.vb</DependentUpon>

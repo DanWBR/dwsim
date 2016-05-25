@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class EditingForm_EnergyStream
+Partial Class EditingForm_SolidsSep
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class EditingForm_EnergyStream
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_EnergyStream))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_SolidsSep))
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -35,10 +35,16 @@ Partial Class EditingForm_EnergyStream
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.cbEnergyFlow = New System.Windows.Forms.ComboBox()
-        Me.tbEnergyFlow = New System.Windows.Forms.TextBox()
+        Me.lblRatio2 = New System.Windows.Forms.Label()
+        Me.lblRatio1 = New System.Windows.Forms.Label()
+        Me.TrackBar2 = New System.Windows.Forms.TrackBar()
+        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnDisconnectOutlet2 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbOutlet2 = New System.Windows.Forms.ComboBox()
         Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
         Me.btnDisconnect1 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -49,6 +55,8 @@ Partial Class EditingForm_EnergyStream
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -122,24 +130,43 @@ Partial Class EditingForm_EnergyStream
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.cbEnergyFlow)
-        Me.GroupBox2.Controls.Add(Me.tbEnergyFlow)
+        Me.GroupBox2.Controls.Add(Me.lblRatio2)
+        Me.GroupBox2.Controls.Add(Me.lblRatio1)
+        Me.GroupBox2.Controls.Add(Me.TrackBar2)
+        Me.GroupBox2.Controls.Add(Me.TrackBar1)
+        Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
-        'cbEnergyFlow
+        'lblRatio2
         '
-        resources.ApplyResources(Me.cbEnergyFlow, "cbEnergyFlow")
-        Me.cbEnergyFlow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEnergyFlow.FormattingEnabled = True
-        Me.cbEnergyFlow.Items.AddRange(New Object() {resources.GetString("cbEnergyFlow.Items"), resources.GetString("cbEnergyFlow.Items1"), resources.GetString("cbEnergyFlow.Items2")})
-        Me.cbEnergyFlow.Name = "cbEnergyFlow"
+        resources.ApplyResources(Me.lblRatio2, "lblRatio2")
+        Me.lblRatio2.Name = "lblRatio2"
         '
-        'tbEnergyFlow
+        'lblRatio1
         '
-        resources.ApplyResources(Me.tbEnergyFlow, "tbEnergyFlow")
-        Me.tbEnergyFlow.Name = "tbEnergyFlow"
+        resources.ApplyResources(Me.lblRatio1, "lblRatio1")
+        Me.lblRatio1.Name = "lblRatio1"
+        '
+        'TrackBar2
+        '
+        resources.ApplyResources(Me.TrackBar2, "TrackBar2")
+        Me.TrackBar2.Maximum = 100
+        Me.TrackBar2.Name = "TrackBar2"
+        Me.TrackBar2.TickFrequency = 5
+        '
+        'TrackBar1
+        '
+        resources.ApplyResources(Me.TrackBar1, "TrackBar1")
+        Me.TrackBar1.Maximum = 100
+        Me.TrackBar1.Name = "TrackBar1"
+        Me.TrackBar1.TickFrequency = 5
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
         '
         'Label3
         '
@@ -149,6 +176,9 @@ Partial Class EditingForm_EnergyStream
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet2)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.cbOutlet2)
         Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
         Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
         Me.GroupBox1.Controls.Add(Me.Label7)
@@ -157,6 +187,26 @@ Partial Class EditingForm_EnergyStream
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        '
+        'btnDisconnectOutlet2
+        '
+        resources.ApplyResources(Me.btnDisconnectOutlet2, "btnDisconnectOutlet2")
+        Me.btnDisconnectOutlet2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnectOutlet2.Name = "btnDisconnectOutlet2"
+        Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet2, resources.GetString("btnDisconnectOutlet2.ToolTip"))
+        Me.btnDisconnectOutlet2.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'cbOutlet2
+        '
+        resources.ApplyResources(Me.cbOutlet2, "cbOutlet2")
+        Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOutlet2.FormattingEnabled = True
+        Me.cbOutlet2.Name = "cbOutlet2"
         '
         'btnDisconnectOutlet1
         '
@@ -198,7 +248,7 @@ Partial Class EditingForm_EnergyStream
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
         '
-        'EditingForm_EnergyStream
+        'EditingForm_SolidsSep
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -206,12 +256,14 @@ Partial Class EditingForm_EnergyStream
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Name = "EditingForm_EnergyStream"
+        Me.Name = "EditingForm_SolidsSep"
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
@@ -227,9 +279,8 @@ Partial Class EditingForm_EnergyStream
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents cbEnergyFlow As System.Windows.Forms.ComboBox
-    Friend WithEvents tbEnergyFlow As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnDisconnectOutlet1 As System.Windows.Forms.Button
     Friend WithEvents btnDisconnect1 As System.Windows.Forms.Button
@@ -239,4 +290,11 @@ Partial Class EditingForm_EnergyStream
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lblTag As System.Windows.Forms.TextBox
+    Friend WithEvents lblRatio2 As System.Windows.Forms.Label
+    Friend WithEvents lblRatio1 As System.Windows.Forms.Label
+    Friend WithEvents TrackBar2 As System.Windows.Forms.TrackBar
+    Friend WithEvents TrackBar1 As System.Windows.Forms.TrackBar
+    Friend WithEvents btnDisconnectOutlet2 As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents cbOutlet2 As System.Windows.Forms.ComboBox
 End Class

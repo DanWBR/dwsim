@@ -333,7 +333,7 @@ Public Class EditingForm_Splitter
                     Exit Sub
                 End If
                 If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
-                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, index, 0)
 
             End If
 
@@ -345,7 +345,7 @@ Public Class EditingForm_Splitter
 
         If Loaded Then
 
-            Dim text As String = cbOutlet1.Text
+            Dim text As String = cbOutlet2.Text
 
             If text <> "" Then
 
@@ -359,7 +359,7 @@ Public Class EditingForm_Splitter
                     Exit Sub
                 End If
                 If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
-                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, index, 0)
 
             End If
 
@@ -371,7 +371,7 @@ Public Class EditingForm_Splitter
 
         If Loaded Then
 
-            Dim text As String = cbOutlet1.Text
+            Dim text As String = cbOutlet3.Text
 
             If text <> "" Then
 
@@ -385,7 +385,7 @@ Public Class EditingForm_Splitter
                     Exit Sub
                 End If
                 If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
-                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, index, 0)
 
             End If
 

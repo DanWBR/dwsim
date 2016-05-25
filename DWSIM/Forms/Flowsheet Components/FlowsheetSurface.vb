@@ -492,9 +492,8 @@ Public Class FlowsheetSurface
 
                         Else
 
-                            Me.m_qt.AdditionalInfo = Me.FlowsheetDesignSurface.Zoom
-
                             If Not Me.m_qt Is Nothing Then
+                                Me.m_qt.AdditionalInfo = Me.FlowsheetDesignSurface.Zoom
                                 If FlowsheetDesignSurface.AutoScrollPosition.X + px2.X * FlowsheetDesignSurface.Zoom + m_qt.Width * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Width Then
                                     px2.X -= 50 + m_qt.Width / FlowsheetDesignSurface.Zoom
                                 End If
