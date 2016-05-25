@@ -276,7 +276,7 @@ Public Class EditingForm_Separator
 
             If text <> "" Then
 
-                Dim index As Integer = 1
+                Dim index As Integer = 6
 
                 Dim gobj = VesselObject.GraphicObject
                 Dim flowsheet = VesselObject.FlowSheet
@@ -415,5 +415,87 @@ Public Class EditingForm_Separator
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
         If Loaded Then VesselObject.GraphicObject.Tag = lblTag.Text
     End Sub
+
+    Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectInlet2.Click,
+                                                                                btnCreateAndConnectInlet3.Click, btnCreateAndConnectInlet4.Click,
+                                                                                btnCreateAndConnectInlet5.Click, btnCreateAndConnectInlet6.Click,
+                                                                                btnCreateAndConnectOutlet1.Click, btnCreateAndConnectOutlet2.Click,
+                                                                                btnCreateAndConnectOutlet3.Click, btnCreateAndConnectEnergy.Click
+
+        Dim sgobj = VesselObject.GraphicObject
+        Dim fs = VesselObject.FlowSheet
+
+        Dim iidx As Integer = -1
+        Dim oidx As Integer = -1
+
+        If sender Is btnCreateAndConnectInlet1 Then
+
+            iidx = 0
+
+        ElseIf sender Is btnCreateAndConnectInlet2 Then
+
+            iidx = 1
+
+        ElseIf sender Is btnCreateAndConnectInlet3 Then
+
+            iidx = 2
+
+        ElseIf sender Is btnCreateAndConnectInlet4 Then
+
+            iidx = 3
+
+        ElseIf sender Is btnCreateAndConnectInlet5 Then
+
+            iidx = 4
+
+        ElseIf sender Is btnCreateAndConnectInlet6 Then
+
+            iidx = 5
+
+        ElseIf sender Is btnCreateAndConnectOutlet1 Then
+
+            oidx = 0
+
+        ElseIf sender Is btnCreateAndConnectOutlet2 Then
+
+            oidx = 1
+
+        ElseIf sender Is btnCreateAndConnectOutlet3 Then
+
+            oidx = 2
+
+
+        ElseIf sender Is btnCreateAndConnectEnergy Then
+
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
+
+            If sgobj.InputConnectors(6).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(6).AttachedConnector.AttachedFrom, sgobj)
+            fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 6)
+
+        End If
+
+        If iidx >= 0 Then
+
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.InputConnectors(iidx).Position.X - 50, sgobj.InputConnectors(iidx).Position.Y, "")
+
+            If sgobj.InputConnectors(iidx).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(iidx).AttachedConnector.AttachedFrom, sgobj)
+            fs.ConnectObjects(obj.GraphicObject, sgobj, 0, iidx)
+
+        End If
+
+        If oidx >= 0 Then
+
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(oidx).Position.X + 30, sgobj.OutputConnectors(oidx).Position.Y, "")
+
+            If sgobj.OutputConnectors(oidx).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(oidx).AttachedConnector.AttachedTo)
+            fs.ConnectObjects(sgobj, obj.GraphicObject, oidx, 0)
+
+        End If
+
+        UpdateInfo()
+        RequestCalc()
+
+    End Sub
+
 
 End Class

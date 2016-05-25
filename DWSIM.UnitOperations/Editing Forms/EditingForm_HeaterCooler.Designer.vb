@@ -61,8 +61,11 @@ Partial Class EditingForm_HeaterCooler
         Me.cbCalcMode = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnDisconnectEnergy = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
         Me.cbEnergy = New System.Windows.Forms.ComboBox()
         Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
         Me.btnDisconnect1 = New System.Windows.Forms.Button()
@@ -329,8 +332,11 @@ Partial Class EditingForm_HeaterCooler
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy)
         Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergy)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
         Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
         Me.GroupBox1.Controls.Add(Me.cbEnergy)
         Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
         Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
@@ -341,6 +347,14 @@ Partial Class EditingForm_HeaterCooler
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
+        'btnCreateAndConnectEnergy
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectEnergy, "btnCreateAndConnectEnergy")
+        Me.btnCreateAndConnectEnergy.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip"))
+        Me.btnCreateAndConnectEnergy.UseVisualStyleBackColor = True
+        '
         'btnDisconnectEnergy
         '
         resources.ApplyResources(Me.btnDisconnectEnergy, "btnDisconnectEnergy")
@@ -349,10 +363,26 @@ Partial Class EditingForm_HeaterCooler
         Me.ToolTip1.SetToolTip(Me.btnDisconnectEnergy, resources.GetString("btnDisconnectEnergy.ToolTip"))
         Me.btnDisconnectEnergy.UseVisualStyleBackColor = True
         '
+        'btnCreateAndConnectOutlet1
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectOutlet1, "btnCreateAndConnectOutlet1")
+        Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
+        '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
+        '
+        'btnCreateAndConnectInlet1
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet1, "btnCreateAndConnectInlet1")
+        Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'cbEnergy
         '
@@ -470,4 +500,7 @@ Partial Class EditingForm_HeaterCooler
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents lblTag As System.Windows.Forms.TextBox
+    Friend WithEvents btnCreateAndConnectEnergy As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
 End Class

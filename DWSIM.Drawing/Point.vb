@@ -1,4 +1,4 @@
-﻿Public Class Point
+﻿<System.Serializable> Public Class Point
 
     Implements Interfaces.IPoint
 

@@ -503,4 +503,46 @@ Public Class EditingForm_ComprExpndr
         If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
     End Sub
 
+    Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectEnergy.Click
+
+        Dim sgobj = SimObject.GraphicObject
+        Dim fs = SimObject.FlowSheet
+
+        If sender Is btnCreateAndConnectInlet1 Then
+
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.InputConnectors(0).Position.X - 50, sgobj.InputConnectors(0).Position.Y, "")
+
+            If sgobj.InputConnectors(0).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(0).AttachedConnector.AttachedFrom, sgobj)
+            fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 0)
+
+        ElseIf sender Is btnCreateAndConnectOutlet1 Then
+
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(0).Position.X + 30, sgobj.OutputConnectors(0).Position.Y, "")
+
+            If sgobj.OutputConnectors(0).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(0).AttachedConnector.AttachedTo)
+            fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
+
+        ElseIf sender Is btnCreateAndConnectEnergy Then
+
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
+
+            If TypeOf SimObject Is UnitOperations.Compressor Then
+
+                If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
+                fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
+
+            Else
+
+                If sgobj.EnergyConnector.IsAttached Then fs.DisconnectObjects(sgobj, sgobj.EnergyConnector.AttachedConnector.AttachedTo)
+                fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
+
+            End If
+
+        End If
+
+        UpdateInfo()
+        RequestCalc()
+
+    End Sub
+
 End Class

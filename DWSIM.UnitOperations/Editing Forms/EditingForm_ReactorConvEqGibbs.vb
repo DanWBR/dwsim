@@ -106,7 +106,10 @@ Public Class EditingForm_ReactorConvEqGibbs
             tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, .OutletTemperature).ToString(nf)
             tbPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf)
 
-            If TypeOf SimObject Is Reactors.Reactor_Gibbs Then cbGibbsMinMode.Enabled = True
+            If TypeOf SimObject Is Reactors.Reactor_Gibbs Then
+                cbGibbsMinMode.Enabled = True
+                cbGibbsMinMode.SelectedIndex = DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod
+            End If
 
             Dim rsets As String() = .FlowSheet.ReactionSets.Values.Select(Function(m) m.Name).ToArray
             cbReacSet.Items.Clear()
@@ -453,12 +456,53 @@ Public Class EditingForm_ReactorConvEqGibbs
     Private Sub cbGibbsMinMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGibbsMinMode.SelectedIndexChanged
         If Loaded Then
             Select Case cbGibbsMinMode.SelectedIndex
-                Case 0
-                    DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod = Reactors.Reactor_Gibbs.SolvingMethod.DirectMinimization
                 Case 1
+                    DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod = Reactors.Reactor_Gibbs.SolvingMethod.DirectMinimization
+                Case 0
                     DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod = Reactors.Reactor_Gibbs.SolvingMethod.ReactionExtents
             End Select
+            RequestCalc()
         End If
+    End Sub
+
+    Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectOutlet2.Click, btnCreateAndConnectEnergy.Click
+
+        Dim sgobj = SimObject.GraphicObject
+        Dim fs = SimObject.FlowSheet
+
+        If sender Is btnCreateAndConnectInlet1 Then
+
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.InputConnectors(0).Position.X - 50, sgobj.InputConnectors(0).Position.Y, "")
+
+            If sgobj.InputConnectors(0).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(0).AttachedConnector.AttachedFrom, sgobj)
+            fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 0)
+
+        ElseIf sender Is btnCreateAndConnectOutlet1 Then
+
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(0).Position.X + 30, sgobj.OutputConnectors(0).Position.Y, "")
+
+            If sgobj.OutputConnectors(0).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(0).AttachedConnector.AttachedTo)
+            fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
+
+        ElseIf sender Is btnCreateAndConnectOutlet2 Then
+
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(1).Position.X + 30, sgobj.OutputConnectors(1).Position.Y, "")
+
+            If sgobj.OutputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(1).AttachedConnector.AttachedTo)
+            fs.ConnectObjects(sgobj, obj.GraphicObject, 1, 0)
+
+        ElseIf sender Is btnCreateAndConnectEnergy Then
+
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
+
+            If sgobj.EnergyConnector.IsAttached Then fs.DisconnectObjects(sgobj, sgobj.EnergyConnector.AttachedConnector.AttachedTo)
+            fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
+
+        End If
+
+        UpdateInfo()
+        RequestCalc()
+
     End Sub
 
 End Class

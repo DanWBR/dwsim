@@ -42,6 +42,9 @@ Partial Class EditingForm_SolidsSep
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
         Me.btnDisconnectOutlet2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbOutlet2 = New System.Windows.Forms.ComboBox()
@@ -176,6 +179,9 @@ Partial Class EditingForm_SolidsSep
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet2)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
         Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.cbOutlet2)
@@ -187,6 +193,30 @@ Partial Class EditingForm_SolidsSep
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        '
+        'btnCreateAndConnectOutlet2
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectOutlet2, "btnCreateAndConnectOutlet2")
+        Me.btnCreateAndConnectOutlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectOutlet2.Name = "btnCreateAndConnectOutlet2"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet2, resources.GetString("btnCreateAndConnectOutlet2.ToolTip"))
+        Me.btnCreateAndConnectOutlet2.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectOutlet1
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectOutlet1, "btnCreateAndConnectOutlet1")
+        Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet1
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet1, "btnCreateAndConnectInlet1")
+        Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet2
         '
@@ -297,4 +327,7 @@ Partial Class EditingForm_SolidsSep
     Friend WithEvents btnDisconnectOutlet2 As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cbOutlet2 As System.Windows.Forms.ComboBox
+    Friend WithEvents btnCreateAndConnectOutlet2 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
 End Class

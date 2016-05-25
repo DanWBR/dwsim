@@ -25,6 +25,13 @@ Partial Class EditingForm_Mixer
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Mixer))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet6 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet5 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet4 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet3 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet2 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
         Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
         Me.btnDisconnect6 = New System.Windows.Forms.Button()
         Me.btnDisconnect5 = New System.Windows.Forms.Button()
@@ -79,6 +86,13 @@ Partial Class EditingForm_Mixer
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet6)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet5)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet4)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet3)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet2)
+        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet1)
         Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
         Me.GroupBox1.Controls.Add(Me.btnDisconnect6)
         Me.GroupBox1.Controls.Add(Me.btnDisconnect5)
@@ -102,6 +116,62 @@ Partial Class EditingForm_Mixer
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        '
+        'btnCreateAndConnectOutlet1
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectOutlet1, "btnCreateAndConnectOutlet1")
+        Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet6
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet6, "btnCreateAndConnectInlet6")
+        Me.btnCreateAndConnectInlet6.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet6.Name = "btnCreateAndConnectInlet6"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet6, resources.GetString("btnCreateAndConnectInlet6.ToolTip"))
+        Me.btnCreateAndConnectInlet6.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet5
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet5, "btnCreateAndConnectInlet5")
+        Me.btnCreateAndConnectInlet5.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet5.Name = "btnCreateAndConnectInlet5"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet5, resources.GetString("btnCreateAndConnectInlet5.ToolTip"))
+        Me.btnCreateAndConnectInlet5.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet4
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet4, "btnCreateAndConnectInlet4")
+        Me.btnCreateAndConnectInlet4.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet4.Name = "btnCreateAndConnectInlet4"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet4, resources.GetString("btnCreateAndConnectInlet4.ToolTip"))
+        Me.btnCreateAndConnectInlet4.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet3
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet3, "btnCreateAndConnectInlet3")
+        Me.btnCreateAndConnectInlet3.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet3.Name = "btnCreateAndConnectInlet3"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet3, resources.GetString("btnCreateAndConnectInlet3.ToolTip"))
+        Me.btnCreateAndConnectInlet3.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet2
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet2, "btnCreateAndConnectInlet2")
+        Me.btnCreateAndConnectInlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet2.Name = "btnCreateAndConnectInlet2"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet2, resources.GetString("btnCreateAndConnectInlet2.ToolTip"))
+        Me.btnCreateAndConnectInlet2.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet1
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet1, "btnCreateAndConnectInlet1")
+        Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet1
         '
@@ -455,4 +525,11 @@ Partial Class EditingForm_Mixer
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents btnConfigureFlashAlg As System.Windows.Forms.Button
     Friend WithEvents btnConfigurePP As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectInlet6 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectInlet5 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectInlet4 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectInlet3 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectInlet2 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
 End Class
