@@ -146,8 +146,10 @@ Public Class LogPanel
         End If
 
         Try
-            Dim currentrow As DataGridViewRow = Grid1.Rows(e.RowIndex)
-            currentrow.Cells(4).Style.ForeColor = dt.Rows.Find(currentrow.Cells(1).Value).Item("Cor")
+            If Grid1.Rows.Count > e.RowIndex Then
+                Dim currentrow As DataGridViewRow = Grid1.Rows(e.RowIndex)
+                currentrow.Cells(4).Style.ForeColor = dt.Rows.Find(currentrow.Cells(1).Value).Item("Cor")
+            End If
         Catch ex As Exception
 
         End Try

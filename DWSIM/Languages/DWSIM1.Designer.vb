@@ -11890,6 +11890,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Conversão.
+        '''</summary>
+        Friend Shared ReadOnly Property ReactionConversion() As String
+            Get
+                Return ResourceManager.GetString("ReactionConversion", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Coordenada.
+        '''</summary>
+        Friend Shared ReadOnly Property ReactionCoordinate() As String
+            Get
+                Return ResourceManager.GetString("ReactionCoordinate", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Coordenadas de Reação.
         '''</summary>
         Friend Shared ReadOnly Property ReactionExtents() As String

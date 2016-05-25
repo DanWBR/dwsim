@@ -66,10 +66,10 @@ Partial Class EditingForm_Separator
         Me.tbTemperature = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.lblConnectedTo = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
-        Me.lblObject = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -405,15 +405,20 @@ Partial Class EditingForm_Separator
         'GroupBox5
         '
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
+        Me.GroupBox5.Controls.Add(Me.lblTag)
         Me.GroupBox5.Controls.Add(Me.chkActive)
         Me.GroupBox5.Controls.Add(Me.lblConnectedTo)
         Me.GroupBox5.Controls.Add(Me.lblStatus)
-        Me.GroupBox5.Controls.Add(Me.lblObject)
         Me.GroupBox5.Controls.Add(Me.Label13)
         Me.GroupBox5.Controls.Add(Me.Label12)
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        '
+        'lblTag
+        '
+        resources.ApplyResources(Me.lblTag, "lblTag")
+        Me.lblTag.Name = "lblTag"
         '
         'chkActive
         '
@@ -432,11 +437,6 @@ Partial Class EditingForm_Separator
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
-        '
-        'lblObject
-        '
-        resources.ApplyResources(Me.lblObject, "lblObject")
-        Me.lblObject.Name = "lblObject"
         '
         'Label13
         '
@@ -565,7 +565,6 @@ Partial Class EditingForm_Separator
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents lblConnectedTo As System.Windows.Forms.Label
     Friend WithEvents lblStatus As System.Windows.Forms.Label
-    Friend WithEvents lblObject As System.Windows.Forms.Label
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
@@ -598,4 +597,5 @@ Partial Class EditingForm_Separator
     Friend WithEvents tbTemperature As System.Windows.Forms.TextBox
     Friend WithEvents cbPressureCalcMode As System.Windows.Forms.ComboBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents lblTag As System.Windows.Forms.TextBox
 End Class

@@ -120,6 +120,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\EditingForm_ReactorConvEqGibbs.Designer.vb">
+      <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_ReactorConvEqGibbs.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_CompoundSeparator.Designer.vb">
       <DependentUpon>EditingForm_CompoundSeparator.vb</DependentUpon>
     </Compile>
@@ -263,6 +269,12 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorConvEqGibbs.en.resx">
+      <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorConvEqGibbs.resx">
+      <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_CompoundSeparator.en.resx">
       <DependentUpon>EditingForm_CompoundSeparator.vb</DependentUpon>
     </EmbeddedResource>

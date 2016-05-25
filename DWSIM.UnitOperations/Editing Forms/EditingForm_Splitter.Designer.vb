@@ -83,11 +83,13 @@ Partial Class EditingForm_Splitter
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
         '
         'chkActive
         '
@@ -101,26 +103,31 @@ Partial Class EditingForm_Splitter
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'GroupBox4
         '
@@ -128,6 +135,7 @@ Partial Class EditingForm_Splitter
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
         '
         'rtbAnnotations
         '
@@ -137,6 +145,7 @@ Partial Class EditingForm_Splitter
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
+        Me.ToolTip1.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
         '
         'GroupBox2
         '
@@ -157,16 +166,19 @@ Partial Class EditingForm_Splitter
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'lblRatio2
         '
         resources.ApplyResources(Me.lblRatio2, "lblRatio2")
         Me.lblRatio2.Name = "lblRatio2"
+        Me.ToolTip1.SetToolTip(Me.lblRatio2, resources.GetString("lblRatio2.ToolTip"))
         '
         'lblRatio1
         '
         resources.ApplyResources(Me.lblRatio1, "lblRatio1")
         Me.lblRatio1.Name = "lblRatio1"
+        Me.ToolTip1.SetToolTip(Me.lblRatio1, resources.GetString("lblRatio1.ToolTip"))
         '
         'TrackBar2
         '
@@ -174,6 +186,7 @@ Partial Class EditingForm_Splitter
         Me.TrackBar2.Maximum = 100
         Me.TrackBar2.Name = "TrackBar2"
         Me.TrackBar2.TickFrequency = 5
+        Me.ToolTip1.SetToolTip(Me.TrackBar2, resources.GetString("TrackBar2.ToolTip"))
         '
         'TrackBar1
         '
@@ -181,6 +194,7 @@ Partial Class EditingForm_Splitter
         Me.TrackBar1.Maximum = 100
         Me.TrackBar1.Name = "TrackBar1"
         Me.TrackBar1.TickFrequency = 5
+        Me.ToolTip1.SetToolTip(Me.TrackBar1, resources.GetString("TrackBar1.ToolTip"))
         '
         'cbFlowSpec2
         '
@@ -189,16 +203,19 @@ Partial Class EditingForm_Splitter
         Me.cbFlowSpec2.FormattingEnabled = True
         Me.cbFlowSpec2.Items.AddRange(New Object() {resources.GetString("cbFlowSpec2.Items"), resources.GetString("cbFlowSpec2.Items1"), resources.GetString("cbFlowSpec2.Items2")})
         Me.cbFlowSpec2.Name = "cbFlowSpec2"
+        Me.ToolTip1.SetToolTip(Me.cbFlowSpec2, resources.GetString("cbFlowSpec2.ToolTip"))
         '
         'tbFlowSpec2
         '
         resources.ApplyResources(Me.tbFlowSpec2, "tbFlowSpec2")
         Me.tbFlowSpec2.Name = "tbFlowSpec2"
+        Me.ToolTip1.SetToolTip(Me.tbFlowSpec2, resources.GetString("tbFlowSpec2.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'cbFlowSpec1
         '
@@ -207,26 +224,31 @@ Partial Class EditingForm_Splitter
         Me.cbFlowSpec1.FormattingEnabled = True
         Me.cbFlowSpec1.Items.AddRange(New Object() {resources.GetString("cbFlowSpec1.Items"), resources.GetString("cbFlowSpec1.Items1"), resources.GetString("cbFlowSpec1.Items2")})
         Me.cbFlowSpec1.Name = "cbFlowSpec1"
+        Me.ToolTip1.SetToolTip(Me.cbFlowSpec1, resources.GetString("cbFlowSpec1.ToolTip"))
         '
         'tbFlowSpec1
         '
         resources.ApplyResources(Me.tbFlowSpec1, "tbFlowSpec1")
         Me.tbFlowSpec1.Name = "tbFlowSpec1"
+        Me.ToolTip1.SetToolTip(Me.tbFlowSpec1, resources.GetString("tbFlowSpec1.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'cbCalcMode
         '
@@ -235,11 +257,13 @@ Partial Class EditingForm_Splitter
         Me.cbCalcMode.FormattingEnabled = True
         Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2")})
         Me.cbCalcMode.Name = "cbCalcMode"
+        Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
         '
         'GroupBox1
         '
@@ -258,6 +282,7 @@ Partial Class EditingForm_Splitter
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'btnDisconnectOutlet3
         '
@@ -271,6 +296,7 @@ Partial Class EditingForm_Splitter
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'cbOutlet3
         '
@@ -278,6 +304,7 @@ Partial Class EditingForm_Splitter
         Me.cbOutlet3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet3.FormattingEnabled = True
         Me.cbOutlet3.Name = "cbOutlet3"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet3, resources.GetString("cbOutlet3.ToolTip"))
         '
         'btnDisconnectOutlet2
         '
@@ -291,6 +318,7 @@ Partial Class EditingForm_Splitter
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'cbOutlet2
         '
@@ -298,6 +326,7 @@ Partial Class EditingForm_Splitter
         Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet2.FormattingEnabled = True
         Me.cbOutlet2.Name = "cbOutlet2"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip"))
         '
         'btnDisconnectOutlet1
         '
@@ -319,6 +348,7 @@ Partial Class EditingForm_Splitter
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
         'cbOutlet1
         '
@@ -326,6 +356,7 @@ Partial Class EditingForm_Splitter
         Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Name = "cbOutlet1"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
         '
         'cbInlet1
         '
@@ -333,11 +364,13 @@ Partial Class EditingForm_Splitter
         Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Name = "cbInlet1"
+        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
         'EditingForm_Splitter
         '
@@ -348,6 +381,7 @@ Partial Class EditingForm_Splitter
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_Splitter"
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
