@@ -299,7 +299,7 @@ Namespace BaseClasses
 
         End Function
 
-        Public Property BaseReactant As String Implements Interfaces.IReaction.BaseReactant
+        Public Property BaseReactant As String = "" Implements Interfaces.IReaction.BaseReactant
 
         Public ReadOnly Property Components As Dictionary(Of String, Interfaces.IReactionStoichBase) Implements Interfaces.IReaction.Components
             Get
@@ -311,13 +311,13 @@ Namespace BaseClasses
             End Get
         End Property
 
-        Public Property Description As String Implements Interfaces.IReaction.Description
+        Public Property Description As String = "" Implements Interfaces.IReaction.Description
 
-        Public Property Equation As String Implements Interfaces.IReaction.Equation
+        Public Property Equation As String = "" Implements Interfaces.IReaction.Equation
 
-        Public Property ID As String Implements Interfaces.IReaction.ID
+        Public Property ID As String = "" Implements Interfaces.IReaction.ID
 
-        Public Property Name As String Implements Interfaces.IReaction.Name
+        Public Property Name As String = "" Implements Interfaces.IReaction.Name
 
         Public Property ReactionBasis As Interfaces.Enums.ReactionBasis Implements Interfaces.IReaction.ReactionBasis
 
@@ -337,7 +337,7 @@ Namespace BaseClasses
 
         Public Property Approach As Double Implements Interfaces.IReaction.Approach
 
-        Public Property ConcUnit As String Implements Interfaces.IReaction.ConcUnit
+        Public Property ConcUnit As String = "" Implements Interfaces.IReaction.ConcUnit
 
         Public Property ConstantKeqValue As Double Implements Interfaces.IReaction.ConstantKeqValue
 
@@ -345,7 +345,7 @@ Namespace BaseClasses
 
         Public Property E_Reverse As Double Implements Interfaces.IReaction.E_Reverse
 
-        Public Property Expression As String Implements Interfaces.IReaction.Expression
+        Public Property Expression As String = "" Implements Interfaces.IReaction.Expression
 
         Public Property KExprType As Interfaces.Enums.KOpt Implements Interfaces.IReaction.KExprType
 
@@ -353,9 +353,9 @@ Namespace BaseClasses
 
         Public Property Rate As Double Implements Interfaces.IReaction.Rate
 
-        Public Property RateEquationDenominator As String Implements Interfaces.IReaction.RateEquationDenominator
+        Public Property RateEquationDenominator As String = "" Implements Interfaces.IReaction.RateEquationDenominator
 
-        Public Property RateEquationNumerator As String Implements Interfaces.IReaction.RateEquationNumerator
+        Public Property RateEquationNumerator As String = "" Implements Interfaces.IReaction.RateEquationNumerator
 
         Public Property ReactionGibbsEnergy As Double Implements Interfaces.IReaction.ReactionGibbsEnergy
 
@@ -363,7 +363,7 @@ Namespace BaseClasses
 
         Public Property Tmin As Double Implements Interfaces.IReaction.Tmin
 
-        Public Property VelUnit As String Implements Interfaces.IReaction.VelUnit
+        Public Property VelUnit As String = "" Implements Interfaces.IReaction.VelUnit
 
         Public Property Expr1 As Object Implements Interfaces.IReaction.Expr
             Get
@@ -425,11 +425,11 @@ Namespace BaseClasses
             End Get
         End Property
 
-        Public Property ID() As String Implements Interfaces.IReactionSet.ID
+        Public Property ID() As String = "" Implements Interfaces.IReactionSet.ID
 
-        Public Property Name() As String Implements Interfaces.IReactionSet.Name
+        Public Property Name() As String = "" Implements Interfaces.IReactionSet.Name
 
-        Public Property Description() As String Implements Interfaces.IReactionSet.Description
+        Public Property Description() As String = "" Implements Interfaces.IReactionSet.Description
 
         Sub New()
             MyBase.New()
@@ -970,9 +970,9 @@ Namespace BaseClasses
             End If
         End Sub
 
-        Public Property ComponentDescription() As String Implements CapeOpen.ICapeIdentification.ComponentDescription
+        Public Property ComponentDescription() As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription
 
-        Public Property ComponentName() As String Implements CapeOpen.ICapeIdentification.ComponentName
+        Public Property ComponentName() As String = "" Implements CapeOpen.ICapeIdentification.ComponentName
 
         Public Sub SetMaterial1(ByVal material As Object) Implements CAPEOPEN110.ICapeThermoMaterialContext.SetMaterial
             If Not System.Runtime.InteropServices.Marshal.IsComObject(material) Then
@@ -1051,7 +1051,7 @@ Namespace BaseClasses
 
         Public Property Rank As Integer Implements Interfaces.IReactionSetBase.Rank
 
-        Public Property ReactionID As String Implements Interfaces.IReactionSetBase.ReactionID
+        Public Property ReactionID As String = "" Implements Interfaces.IReactionSetBase.ReactionID
 
     End Class
 
@@ -1067,7 +1067,7 @@ Namespace BaseClasses
             Me.ReverseOrder = reversorder
         End Sub
 
-        Public Property CompName As String Implements Interfaces.IReactionStoichBase.CompName
+        Public Property CompName As String = "" Implements Interfaces.IReactionStoichBase.CompName
 
         Public Property DirectOrder As Double Implements Interfaces.IReactionStoichBase.DirectOrder
 

@@ -106,6 +106,8 @@ Public Class EditingForm_ReactorConvEqGibbs
             tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, .OutletTemperature).ToString(nf)
             tbPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf)
 
+            If TypeOf SimObject Is Reactors.Reactor_Gibbs Then cbGibbsMinMode.Enabled = True
+
             Dim rsets As String() = .FlowSheet.ReactionSets.Values.Select(Function(m) m.Name).ToArray
             cbReacSet.Items.Clear()
             cbReacSet.Items.AddRange(rsets)
@@ -127,7 +129,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
                 gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGInitialG"), su.Converter.ConvertFromSI(units.molar_enthalpy, robj.InitialGibbsEnergy).ToString(nf), units.molar_enthalpy})
                 gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGFinalG"), su.Converter.ConvertFromSI(units.molar_enthalpy, robj.FinalGibbsEnergy).ToString(nf), units.molar_enthalpy})
-                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGElementBalance"), robj.ElementBalance.ToString(nf), ""})
+                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGElementBalance"), robj.ElementBalance.ToString("E"), ""})
 
             ElseIf TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
 
@@ -148,7 +150,7 @@ Public Class EditingForm_ReactorConvEqGibbs
                 If Not robj.Conversions Is Nothing Then
 
                     For Each dbl As KeyValuePair(Of String, Double) In robj.Conversions
-                        gridReactions.Rows.Add(New Object() {.FlowSheet.Reactions(dbl.Key).Name, .FlowSheet.GetTranslatedString("ReactionConversion"), dbl.Value.ToString(nf), "%"})
+                        gridReactions.Rows.Add(New Object() {.FlowSheet.Reactions(dbl.Key).Name, .FlowSheet.GetTranslatedString("ReactionConversion"), (dbl.Value * 100).ToString(nf), "%"})
                     Next
 
                 End If
@@ -446,6 +448,17 @@ Public Class EditingForm_ReactorConvEqGibbs
         End Select
         If Loaded Then RequestCalc()
 
+    End Sub
+
+    Private Sub cbGibbsMinMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGibbsMinMode.SelectedIndexChanged
+        If Loaded Then
+            Select Case cbGibbsMinMode.SelectedIndex
+                Case 0
+                    DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod = Reactors.Reactor_Gibbs.SolvingMethod.DirectMinimization
+                Case 1
+                    DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod = Reactors.Reactor_Gibbs.SolvingMethod.ReactionExtents
+            End Select
+        End If
     End Sub
 
 End Class

@@ -854,6 +854,7 @@ Public Class FormMain
 
         For Each xel As XElement In data
             Try
+                xel.Element("Type").Value = xel.Element("Type").Value.Replace("Microsoft.MSDN.Samples.GraphicObjects", "DWSIM.DrawingTools.GraphicObjects")
                 Dim obj As GraphicObject = Nothing
                 Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                 If Not t Is Nothing Then obj = Activator.CreateInstance(t)
@@ -1189,6 +1190,7 @@ Public Class FormMain
 
         For Each xel As XElement In data
             Try
+                xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
                 Dim obj As PropertyPackage = PropertyPackage.ReturnInstance(xel.Element("Type").Value)
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
