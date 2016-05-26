@@ -530,8 +530,10 @@ Namespace Streams
                     End If
                     If Me.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And Me.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
                         .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
+                        .DW_CalcLiqMixtureProps()
                     Else
                         .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
+                        .DW_CalcLiqMixtureProps()
                     End If
 
                     If DebugMode Then AppendDebugLine(String.Format("Phase properties calculated succesfully."))

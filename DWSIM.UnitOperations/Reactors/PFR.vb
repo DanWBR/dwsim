@@ -770,7 +770,7 @@ Namespace Reactors
                     q = .Phases(0).Properties.volumetric_flow.GetValueOrDefault
                     rho = .Phases(0).Properties.density.GetValueOrDefault
                     eta = .Phases(0).Properties.viscosity.GetValueOrDefault
-                    Qlin = .Phases(1).Properties.volumetric_flow.GetValueOrDefault
+                    Qlin = .Phases(3).Properties.volumetric_flow.GetValueOrDefault + .Phases(4).Properties.volumetric_flow.GetValueOrDefault
                     rho_l = .Phases(1).Properties.density.GetValueOrDefault
                     eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
                     tens = .Phases(0).Properties.surfaceTension.GetValueOrDefault
