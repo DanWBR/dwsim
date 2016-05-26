@@ -27,7 +27,7 @@ Public Class EditingForm_Mixer
 
             Me.Text = .GetDisplayName() & ": " & .GraphicObject.Tag
 
-            lblObject.Text = .GraphicObject.Tag & " (" & .FlowSheet.GetTranslatedString(.ComponentDescription) & ")"
+            lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
                 lblStatus.Text = .FlowSheet.GetTranslatedString("Calculado") & " (" & .LastUpdated.ToString & ")"
                 lblStatus.ForeColor = Drawing.Color.Blue
@@ -335,4 +335,8 @@ Public Class EditingForm_Mixer
 
     End Sub
 
+    Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
+        If Loaded Then MixerObject.GraphicObject.Tag = lblTag.Text
+        Me.Text = MixerObject.GetDisplayName() & ": " & MixerObject.GraphicObject.Tag
+    End Sub
 End Class

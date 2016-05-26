@@ -490,6 +490,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     End With
                 Next
             Next
+            DirectCast(MaterialStream, Streams.MaterialStream).EqualizeOverallComposition()
         End If
     End Sub
 

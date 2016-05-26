@@ -2601,6 +2601,10 @@ Public Class FlowsheetSurface
             For Each obj In Me.Flowsheet.SimulationObjects.Values
                 obj.UpdateEditForm()
             Next
+            If TypeOf gObj.Owner Is Thermodynamics.Streams.MaterialStream Then
+                gObj.CreateConnectors(1, 1)
+                FlowsheetSolver.FlowsheetSolver.CalculateObject(Me.Flowsheet, gObj.Name)
+            End If
             Application.DoEvents()
             If My.Application.PushUndoRedoAction Then Flowsheet.AddUndoRedoAction(New DWSIM.Flowsheet.UndoRedoAction() With {.AType = DWSIM.Flowsheet.UndoRedoActionType.ObjectAdded,
                                      .ObjID = gObj.Name,

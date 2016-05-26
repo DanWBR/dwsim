@@ -34,7 +34,7 @@ Public Class EditingForm_Separator
 
             Me.Text = .GetDisplayName() & ": " & .GraphicObject.Tag
 
-            lblTag.Text = .GraphicObject.Tag & " (" & .FlowSheet.GetTranslatedString(.ComponentDescription) & ")"
+            lblTag.Text = .GraphicObject.Tag
             If .Calculated Then
                 lblStatus.Text = .FlowSheet.GetTranslatedString("Calculado") & " (" & .LastUpdated.ToString & ")"
                 lblStatus.ForeColor = Drawing.Color.Blue
@@ -414,6 +414,7 @@ Public Class EditingForm_Separator
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
         If Loaded Then VesselObject.GraphicObject.Tag = lblTag.Text
+        Me.Text = VesselObject.GetDisplayName() & ": " & VesselObject.GraphicObject.Tag
     End Sub
 
     Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectInlet2.Click,

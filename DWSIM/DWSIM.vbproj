@@ -518,10 +518,10 @@
     <Compile Include="Forms\Flowsheet Components\FlowsheetSurface.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet.Designer.vb">
+    <Compile Include="Forms\Flowsheet\FormFlowsheet.Designer.vb">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormFlowsheet.vb">
+    <Compile Include="Forms\Flowsheet\FormFlowsheet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormMain.vb">
@@ -1177,7 +1177,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet.resx">
+    <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.resx">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -2221,13 +2221,13 @@
     <EmbeddedResource Include="Forms\FormCompoundCreator.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.de.resx">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.en.resx">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormFlowsheet.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.es.resx">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
