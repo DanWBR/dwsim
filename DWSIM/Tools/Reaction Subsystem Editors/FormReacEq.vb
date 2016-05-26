@@ -239,10 +239,10 @@ Public Class FormReacEq
             End If
 
             'Components and stoichiometry
-            rc.Components.Clear()
+            rc._Components.Clear()
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
                 If row.Cells(2).Value = True Then
-                    rc.Components.Add(row.Cells(5).Value, New ReactionStoichBase(row.Cells(5).Value, row.Cells(4).Value, row.Cells(3).Value, 0, 0))
+                    rc._Components.Add(row.Cells(5).Value, New ReactionStoichBase(row.Cells(5).Value, row.Cells(4).Value, row.Cells(3).Value, 0, 0))
                 End If
             Next
 

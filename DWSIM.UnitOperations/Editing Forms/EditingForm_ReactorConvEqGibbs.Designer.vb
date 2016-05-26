@@ -99,10 +99,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.gridConversions = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -333,10 +329,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.Button1)
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Controls.Add(Me.Button3)
-        Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergy)
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet2)
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
@@ -358,32 +350,32 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         'btnCreateAndConnectEnergy
         '
-        Me.btnCreateAndConnectEnergy.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         resources.ApplyResources(Me.btnCreateAndConnectEnergy, "btnCreateAndConnectEnergy")
+        Me.btnCreateAndConnectEnergy.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectEnergy.Name = "btnCreateAndConnectEnergy"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergy, resources.GetString("btnCreateAndConnectEnergy.ToolTip"))
         Me.btnCreateAndConnectEnergy.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet2
         '
-        Me.btnCreateAndConnectOutlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         resources.ApplyResources(Me.btnCreateAndConnectOutlet2, "btnCreateAndConnectOutlet2")
+        Me.btnCreateAndConnectOutlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet2.Name = "btnCreateAndConnectOutlet2"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet2, resources.GetString("btnCreateAndConnectOutlet2.ToolTip"))
         Me.btnCreateAndConnectOutlet2.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectOutlet1
         '
-        Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         resources.ApplyResources(Me.btnCreateAndConnectOutlet1, "btnCreateAndConnectOutlet1")
+        Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet1
         '
-        Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         resources.ApplyResources(Me.btnCreateAndConnectInlet1, "btnCreateAndConnectInlet1")
+        Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
         Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
@@ -619,38 +611,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
         Me.DataGridViewTextBoxColumn7.ReadOnly = True
         '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.Button1.Name = "Button1"
-        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.Button2.Name = "Button2"
-        Me.ToolTip1.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip"))
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.Button3.Name = "Button3"
-        Me.ToolTip1.SetToolTip(Me.Button3, resources.GetString("Button3.ToolTip"))
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.Button4.Name = "Button4"
-        Me.ToolTip1.SetToolTip(Me.Button4, resources.GetString("Button4.ToolTip"))
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'EditingForm_ReactorConvEqGibbs
         '
         resources.ApplyResources(Me, "$this")
@@ -747,8 +707,4 @@ Partial Class EditingForm_ReactorConvEqGibbs
     Friend WithEvents btnCreateAndConnectOutlet2 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
 End Class

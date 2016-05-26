@@ -207,10 +207,10 @@ Public Class FormReacKinetic
             MessageBox.Show(DWSIM.App.GetLocalString("VerifiqueEstequiometria"), DWSIM.App.GetLocalString("ErroAoAdicionarReacao"), MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             'Components, stoichiometry and reaction orders
-            rc.Components.Clear()
+            rc._Components.Clear()
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
                 If row.Cells(2).Value = True Then
-                    rc.Components.Add(row.Cells(7).Value, New ReactionStoichBase(row.Cells(7).Value, row.Cells(4).Value, row.Cells(3).Value, row.Cells(5).Value, row.Cells(6).Value))
+                    rc._Components.Add(row.Cells(7).Value, New ReactionStoichBase(row.Cells(7).Value, row.Cells(4).Value, row.Cells(3).Value, row.Cells(5).Value, row.Cells(6).Value))
                 End If
             Next
 

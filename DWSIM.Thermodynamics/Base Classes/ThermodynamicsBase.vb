@@ -116,7 +116,13 @@ Namespace BaseClasses
                 Me.Compounds.Add(s.Name, s)
             Next
 
-            XMLSerializer.XMLSerializer.Deserialize(Me.Properties, (From xel As XElement In data Select xel Where xel.Name = "Properties").Elements.ToList)
+            If (From xel As XElement In data Select xel Where xel.Name = "SPMProperties").Count > 0 Then
+                ' DWSIM 3
+                XMLSerializer.XMLSerializer.Deserialize(Me.Properties, (From xel As XElement In data Select xel Where xel.Name = "SPMProperties").Elements.ToList)
+            Else
+                ' DWSIM 4
+                XMLSerializer.XMLSerializer.Deserialize(Me.Properties, (From xel As XElement In data Select xel Where xel.Name = "Properties").Elements.ToList)
+            End If
 
         End Function
 
@@ -175,7 +181,7 @@ Namespace BaseClasses
 
         Implements Interfaces.IReaction
 
-        Protected m_Components_and_stoichcoeffs As Dictionary(Of String, ReactionStoichBase)
+        Public _Components As Dictionary(Of String, ReactionStoichBase)
 
         <XmlIgnore> Public Property ExpContext As Ciloci.Flee.ExpressionContext = New Ciloci.Flee.ExpressionContext
         <XmlIgnore> Public Property Expr As Ciloci.Flee.IGenericExpression(Of Double)
@@ -223,7 +229,7 @@ Namespace BaseClasses
         'Initializers
 
         Public Sub New()
-            Me.m_Components_and_stoichcoeffs = New Dictionary(Of String, ReactionStoichBase)
+            Me._Components = New Dictionary(Of String, ReactionStoichBase)
             ExpContext = New Ciloci.Flee.ExpressionContext
             ExpContext.Imports.AddType(GetType(System.Math))
             ExpContext.Variables.Add("T", 0.0#)
@@ -272,7 +278,7 @@ Namespace BaseClasses
 
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Compounds").Elements
-                Me.Components.Add(xel2.@Name, New ReactionStoichBase(xel2.@Name, Double.Parse(xel2.@StoichCoeff, ci), xel2.@IsBaseReactant, Double.Parse(xel2.@DirectOrder, ci), Double.Parse(xel2.@ReverseOrder, ci)))
+                Me._Components.Add(xel2.@Name, New ReactionStoichBase(xel2.@Name, Double.Parse(xel2.@StoichCoeff, ci), xel2.@IsBaseReactant, Double.Parse(xel2.@DirectOrder, ci), Double.Parse(xel2.@ReverseOrder, ci)))
             Next
 
         End Function
@@ -303,11 +309,7 @@ Namespace BaseClasses
 
         Public ReadOnly Property Components As Dictionary(Of String, Interfaces.IReactionStoichBase) Implements Interfaces.IReaction.Components
             Get
-                Dim dict As New Dictionary(Of String, Interfaces.IReactionStoichBase)
-                For Each item In m_Components_and_stoichcoeffs
-                    dict.Add(item.Key, item.Value)
-                Next
-                Return dict
+                Return _Components.ToDictionary(Of String, Interfaces.IReactionStoichBase)(Function(k) k.Key, Function(k) k.Value)
             End Get
         End Property
 
@@ -417,11 +419,7 @@ Namespace BaseClasses
 
         Public ReadOnly Property Reactions() As Dictionary(Of String, Interfaces.IReactionSetBase) Implements Interfaces.IReactionSet.Reactions
             Get
-                Dim dict As New Dictionary(Of String, Interfaces.IReactionSetBase)
-                For Each it In m_reactionset
-                    dict.Add(it.Key, it.Value)
-                Next
-                Return dict
+                Return m_reactionset.ToDictionary(Of String, Interfaces.IReactionSetBase)(Function(k) k.Key, Function(k) k.Value)
             End Get
         End Property
 
@@ -1000,7 +998,7 @@ Namespace BaseClasses
             Me.Description = (From xel As XElement In data Select xel Where xel.Name = "Description").SingleOrDefault.Value
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Reactions").Elements
-                Me.Reactions.Add(xel2.@Key, New ReactionSetBase(xel2.@ReactionID, xel2.@Rank, xel2.@IsActive))
+                Me.m_reactionset.Add(xel2.@Key, New ReactionSetBase(xel2.@ReactionID, xel2.@Rank, xel2.@IsActive))
             Next
 
         End Function
